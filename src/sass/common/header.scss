@@ -1,0 +1,184 @@
+/* Logo and top bar */
+
+#topbar {
+  width: 100%;
+  background: $BIN_DARK_BLUE;
+  color: $BIN_WHITE;
+  line-height: 1;
+  font-size: 70%;
+  text-align: right;
+  padding: 3px 0;
+  #topbar-info {
+    float: right;
+  }
+  #gmt-clock, #contact-us {
+      padding-top: 3px;
+  }
+  #virtualupgrade {
+    padding-top: 3px;
+    a {
+      @include link-button;
+      border-radius: 2px;
+      font-size: 90%;
+      padding: 2px 4px 2px 4px;
+      margin: 0 0 0 10px;
+    }
+  }
+
+  #language_select {
+      select {
+          padding: 0px;
+      }
+  }
+  a {
+    color: $BIN_WHITE;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  ul {
+    z-index: 999999;
+    position: absolute;
+    display: none;
+    background: $BIN_DARK_BLUE;
+    border-radius: 0 0 5px 5px;
+    margin: 1px 0 0 0;
+    padding: 5px 10px 10px 10px;
+    li {
+      margin: 0 0 0 10px;
+      border: 0;
+      position: relative;
+      white-space: nowrap;
+      border-radius: 0;
+      padding: 2px 5px 2px 5px;
+      display: block;
+      border-radius: 2px;
+      line-height: 1.5;
+      &:active > ul, &:focus, &:hover {
+        cursor: pointer;
+        background: white;
+        color: black;
+      }
+    }
+  }
+}
+
+#header {
+  background: $BIN_BLUE;
+  border-top: 2px solid $BIN_BLUE_SHADE;
+  border-bottom: 4px solid $BIN_ORANGE;
+  a {
+    color: $BIN_WHITE;
+    text-decoration: none;
+  }
+  #binary-logo-text {
+      margin-top: 10px;
+  }
+  #login-form {
+    text-align: right;
+    #login-links {
+      margin: 5px 0 0 0;
+      display: block;
+    }
+    input {
+      display: inline;
+      border-radius: 4px;
+      font-size: 11px;
+      margin: 0 0 0 5px;
+    }
+    input[type=text], input[type=password] {
+      background: #FEFEFE;
+      border: 0;
+      width: 50px;
+      color: #000000;
+      padding: 4px;
+    }
+    input[type=submit] {
+      @include link-button;
+      border: 0;
+      text-transform: uppercase;
+      padding: 5px 3px;
+      word-break: break-all;
+      white-space: pre-wrap;
+      max-width: 60px;
+    }
+  }
+  a#lost-password, a#register {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    line-height: 170%;
+    font-size: 70%;
+  }
+  #logout {
+    text-align: right;
+    color: $BIN_WHITE;
+    font-size: 70%;
+    margin-top: 10px;
+    a, a:visited {
+      &:hover, &:active {
+        text-decoration: underline;
+      }
+      &.logout {
+        @include link-button;
+        background-position: 104.6% 0.3%;
+        background-repeat: no-repeat;
+        padding: 6px;
+        font-weight: normal;
+        margin-left: 0.4em;
+      }
+    }
+  }
+  #mobile-menu-icon-container {
+    margin-top: 5px;
+    margin-right: 3px;
+  }
+  #menu-top {
+    text-align: center;
+    a:hover {
+      -moz-opacity: .75;
+      opacity: .75;
+    }
+    li {
+      line-height: 1;
+      display: inline-block;
+      text-align: center;
+      margin: 0;
+      &:last-child {
+        background: none;
+      }
+      a {
+        vertical-align: middle;
+        display: table-cell;
+        height: 50px;
+        max-width: 110px;
+        color: $BIN_WHITE;
+        text-decoration: none;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        font-size: 100%;
+        padding: 0px 5px;
+        word-wrap: break-word;
+      }
+    }
+    li.active {
+      a {
+        color: $BIN_ORANGE;
+      }
+    }
+  }
+}
+
+#appcache-reload-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $BIN_YELLOW;
+  z-index: 999;
+  text-align: center;
+  .message {
+    margin: 12px;
+    font-style: italic;
+    color: $BIN_RED;
+  }
+}
