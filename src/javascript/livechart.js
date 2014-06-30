@@ -26,8 +26,10 @@ var LiveChart = function(config) {
     if(typeof config !== 'undefined') {
         this.config = config;
         this.shift = false;
-        this.on_duration_change();
-        this.highlight_duration();
+        if (!config.trade_visualization) {
+            this.on_duration_change();
+            this.highlight_duration();
+        }
     }
 }
 
@@ -169,6 +171,9 @@ LiveChart.prototype = {
                 min: this.config.from * 1000,
             },
             yAxis: {
+                labels: {
+                    formatter: function() { return this.value; }
+                },
                 title: {
                     text: null
                 }

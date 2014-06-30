@@ -276,6 +276,17 @@ pjax_config_page('/why-us', function() {
     };
 });
 
+pjax_config_page('/smart-indices', function() {
+    return {
+        onLoad: function() {
+            sidebar_scroll($('.smart-indices'));
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
+
 pjax_config_page('/partnerapi', function() {
     return {
         onLoad: function() {

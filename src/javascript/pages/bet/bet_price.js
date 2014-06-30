@@ -178,7 +178,7 @@ var BetPrice = function() {
                 });
 
                 configure_livechart();
-                updateLiveChart(liveChartConfig);
+                updateTTChart(liveChartConfig);
             }
 
             con.show();
@@ -196,7 +196,7 @@ var BetPrice = function() {
         },
         clear_buy_results: function () {
             var con = this.buy_response_container();
-            if (typeof live_chart !== 'undefined' && live_chart) {
+            if (typeof tt_chart !== 'undefined' && tt_chart) {
                 TickTrade.reset();
             }
             con.hide().remove();

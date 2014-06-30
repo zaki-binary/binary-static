@@ -1,10 +1,23 @@
+var tt_chart;
+
+function updateTTChart(config) {
+    if (tt_chart) {
+        TickTrade.reset();
+        tt_chart.chart.destroy();
+        tt_chart = null;
+    }
+    config.trade_visualization = true;
+    tt_chart = new LiveChartTick(config);
+    tt_chart.show_chart();
+}
+
 var TickTrade = function() {
     return {
         client_prediction: function() {
             return $('#tick-prediction').data('prediction');
         },
         how_many_ticks: function() {
-            return live_chart.config.how_many_ticks;
+            return tt_chart.config.how_many_ticks;
         },
         process: function(current_tick) {
             var $self = this;
@@ -24,7 +37,7 @@ var TickTrade = function() {
                 } else if (tick_prediction === 'down') {
                     what_color = current_tick < $self.entry_spot ? win_pallet: lose_pallet;
                 }
-                live_chart.chart.chartBackground.css({color: what_color});
+                tt_chart.chart.chartBackground.css({color: what_color});
             }
 
             if ($self.how_many_ticks() && current_tick_count > $self.how_many_ticks()) {
@@ -35,7 +48,7 @@ var TickTrade = function() {
         set_entry_spot: function() {
             var $self = this;
             if (!$self.entry_spot && ticks_array.length > 0) {
-                var contract_start_epoch = live_chart.config.contract_start_time;
+                var contract_start_epoch = tt_chart.config.contract_start_time;
                 for (var i=0;i < ticks_array.length;i++) {
                     var data = ticks_array[i];
                     if (data.epoch > contract_start_epoch) {
@@ -45,18 +58,19 @@ var TickTrade = function() {
                 }
             }
 
-            if ($self.entry_spot && !live_chart.config.has_indicator('tick_barrier')) {
+            if ($self.entry_spot && !tt_chart.config.has_indicator('tick_barrier')) {
                 var barrier = new LiveChartIndicator.Barrier({
                     name: "tick_barrier",
                     value: $self.entry_spot,
                     color: 'green',
                     label: text.localize('Barrier')
                 });
-                live_chart.add_indicator(barrier);
+                tt_chart.add_indicator(barrier);
             }
         },
         reset: function() {
-            live_chart.ev.close();
+            if(tt_chart.ev)
+                tt_chart.ev.close();
             current_tick_count = 0;
             ticks_array = [];
             this.entry_spot = null;
@@ -78,10 +92,10 @@ var TickTrade = function() {
                     axis : 'x',
                     label: text.localize('tick') + ' ' + $self.how_many_ticks(),
                 });
-                live_chart.add_indicator(exit);
+                tt_chart.add_indicator(exit);
             }
 
-            if (live_chart.config.with_tick_config) {
+            if (tt_chart.config.with_tick_config) {
                 $('#bet-confirm-exp').hide();
                 $('#entry').text(': '+$self.entry_spot);
                 $('#exit').text(': '+$self.exit_spot);

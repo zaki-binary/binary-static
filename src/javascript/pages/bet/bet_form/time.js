@@ -203,7 +203,7 @@ BetForm.TradingTime.prototype = {
     },
     min_unit: function() {
         var units = this.configured_units_by_start_time();
-        var order = [ 'd', 'h', 'm', 's' ];
+        var order = [ 'd', 'h', 'm', 's' ,'t'];
         var checking = order.length;
         while(checking > 0) {
             checking--;
@@ -214,7 +214,7 @@ BetForm.TradingTime.prototype = {
     },
     max_unit: function() {
         var units = this.configured_units_by_start_time();
-        var order = [ 's', 'm', 'h', 'd' ];
+        var order = [ 's', 'm', 'h', 'd', 't'];
         var checking = order.length;
         while(checking > 0) {
             checking--;

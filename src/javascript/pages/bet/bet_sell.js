@@ -805,7 +805,7 @@ var BetSell = function() {
                         },
                     });
                     configure_livechart();
-                    updateLiveChart(liveChartConfig);
+                    updateTTChart(liveChartConfig);
 
                     var entry_indicator = new LiveChartIndicator.Barrier({
                         name: "entry_spot_time",
@@ -815,7 +815,7 @@ var BetSell = function() {
                         axis: 'x',
                         nomargin: true,
                     });
-                    live_chart.add_indicator(entry_indicator);
+                    tt_chart.add_indicator(entry_indicator);
 
                     var start = new Date(moment.utc(chart_params.start_time*1000));
                     var start_indicator = new LiveChartIndicator.Barrier({
@@ -826,7 +826,7 @@ var BetSell = function() {
                         axis: 'x',
                         nomargin: true,
                     });
-                    live_chart.add_indicator(start_indicator);
+                    tt_chart.add_indicator(start_indicator);
                 },
             })).always(function() {
                 that.enable_button($(element));
