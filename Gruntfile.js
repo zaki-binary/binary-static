@@ -51,6 +51,7 @@ module.exports = function(grunt) {
 		    'src/javascript/base/menu_content.js',
 		    'src/javascript/base/jquery_color_animation.js',
 		    'src/javascript/base/markets.js',
+		    'src/javascript/base/load_data.js',
 		    'src/javascript/base.js',
 		    'src/javascript/base/inpage_popup.js',
 		    'src/javascript/utility.js',
