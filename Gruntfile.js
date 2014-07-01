@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 	    dist: {
 		options: {
 		    sassDir: 'src/sass',
-		    cssDir: 'build/css',
+		    cssDir: 'dist/css',
 		    specify: 'src/sass/binary.scss',
 		    noLineComments: true,
 		    outputStyle: 'expanded',
@@ -16,8 +16,8 @@ module.exports = function(grunt) {
 	cssmin: {
 	    combine: {
 		files: {
-		    'build/css/bomredirect_<%= pkg.version %>.min.css': ['src/css/bomredirect.css'],
-		    'build/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'build/css/binary.css', ]
+		    'dist/css/bomredirect_<%= pkg.version %>.min.css': ['src/css/bomredirect.css'],
+		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary.css', ]
 		},
 	    },
 	},
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
 		    'src/javascript/livechart.js',
 		    'src/javascript/pages/livechart.js',
 		],
-		dest: 'build/js/binary.js',
+		dest: 'dist/js/binary.js',
 	    },
 	},
 	uglify: {
@@ -101,21 +101,22 @@ module.exports = function(grunt) {
 		    sourceMapIncludeSources: true,
 		},
 		files: {
-		    'build/js/binary_<%= pkg.version %>.min.js': ['build/js/binary.js'],
+		    'dist/js/binary_<%= pkg.version %>.min.js': ['dist/js/binary.js'],
 		},
 	    },
 	},
 	copy: {
 	    main: {
 		files: [
-		    {expand: true, src: ['package.json'], dest: 'build/js/',},
+		    {expand: true, src: ['package.json'], dest: 'dist/js/',},
+		    {expand: true, cwd: 'src/config/', src: ['CNAME'], dest: 'dist/', filter: 'isFile'},
 		],
 	    }
 	},
 	'gh-pages': {
 	    options: {
-		base: 'build',
-		add: true,
+		base: 'dist',
+		message: 'Auto-generated commit',
 	    },
 	    src: ['**'],
 	},
