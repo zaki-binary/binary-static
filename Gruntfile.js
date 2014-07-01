@@ -119,16 +119,6 @@ module.exports = function(grunt) {
 	    },
 	    src: ['**'],
 	},
-	watch: {
-	    scripts: {
-		files: ['src/javascript/*'],
-		tasks: ['uglify'],
-	    },
-	    css: {
-		files: ['src/sass/*'],
-		tasks: ['compass', 'cssmin'],
-	    },
-	},
     });
 
     // load the plugin that will complete the task
@@ -138,8 +128,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-gh-pages');
-    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Task to be performed
-    grunt.registerTask('default', ['compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('default', ['compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages']);
 };
