@@ -105,6 +105,13 @@ module.exports = function(grunt) {
 		},
 	    },
 	},
+	'gh-pages': {
+	    options: {
+		base: 'build',
+		add: true,
+	    },
+	    src: ['**'],
+	},
 	watch: {
 	    scripts: {
 		files: ['src/javascript/*'],
@@ -122,8 +129,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Task to be performed
-    grunt.registerTask('default', ['compass', 'cssmin', 'concat', 'uglify', 'watch']);
+    grunt.registerTask('default', ['compass', 'cssmin', 'concat', 'uglify', 'gh-pages', 'watch']);
 };
