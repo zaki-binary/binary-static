@@ -16,8 +16,8 @@ module.exports = function(grunt) {
 	cssmin: {
 	    combine: {
 		files: {
-		    'build/css/bomredirect.min.css': ['src/css/bomredirect.css'],
-		    'build/css/binary.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'build/css/binary.css', ]
+		    'build/css/bomredirect_<%= pkg.version %>.min.css': ['src/css/bomredirect.css'],
+		    'build/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'build/css/binary.css', ]
 		},
 	    },
 	},
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 		    sourceMapIncludeSources: true,
 		},
 		files: {
-		    'build/js/binary.min.js': ['build/js/binary.js'],
+		    'build/js/binary_<%= pkg.version %>.min.js': ['build/js/binary.js'],
 		},
 	    },
 	},
