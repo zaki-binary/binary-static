@@ -114,13 +114,13 @@ module.exports = function(grunt) {
 	    main: {
 		files: [
 		    {expand: true, src: ['package.json'], dest: 'dist/js/',},
-		    {expand: true, cwd: 'src/config/', src: ['CNAME'], dest: 'dist/', filter: 'isFile'},
 		],
 	    }
 	},
 	'gh-pages': {
 	    options: {
 		base: 'dist',
+		add: true,
 		message: 'Auto-generated commit',
 	    },
 	    src: ['**'],
