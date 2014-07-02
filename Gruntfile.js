@@ -116,6 +116,7 @@ module.exports = function(grunt) {
 		    {expand: true, src: ['package.json'], dest: 'dist/js/',},
 		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images',},
+		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts',},
 		],
 	    }
 	},
