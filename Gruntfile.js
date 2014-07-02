@@ -2,6 +2,11 @@ module.exports = function(grunt) {
     // Configurations
     grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
+	clean: {
+	    build: {
+		src: ['dist'],
+	    },
+	},
 	compass: {
 	    dist: {
 		options: {
@@ -123,13 +128,14 @@ module.exports = function(grunt) {
     });
 
     // load the plugin that will complete the task
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-gh-pages');
 
     // Task to be performed
-    grunt.registerTask('default', ['compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages']);
+    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages']);
 };
