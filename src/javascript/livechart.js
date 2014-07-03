@@ -1,6 +1,5 @@
 var live_chart;
 var chart_closed;
-var current_tick_count = 0;
 var ticks_array = [];
 
 
@@ -299,9 +298,8 @@ LiveChartTick.prototype.process_data = function(point) {
             );
             this.spot = tick.quote;
             // for tick trade charting purposes
-            if (this.config.ticktrade_chart && tick.epoch > this.config.contract_start_time && current_tick_count <= this.config.how_many_ticks) {
-                current_tick_count++;
-                ticks_array.push(tick);
+            if (tick.epoch > this.config.contract_start_time && ticks_array.length < this.config.how_many_ticks) {
+                    ticks_array.push(tick);
             }
         }
     } else if (point[0] == 'contract') {

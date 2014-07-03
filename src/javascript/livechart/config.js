@@ -10,6 +10,7 @@ var LiveChartConfig = function(params) {
     this.contract_start_time = typeof params['contract_start_time'] !== 'undefined' ? params['contract_start_time'] : 0;
     this.how_many_ticks = typeof params['how_many_ticks'] !== 'undefined' ? params['how_many_ticks'] : 0;
     this.with_tick_config = typeof params['with_tick_config'] !== 'undefined' ? params['with_tick_config'] : 0;
+    this.with_entry_spot = typeof params['with_entry_spot'] !== 'undefined' ? params['with_entry_spot'] : 0;
 
     this.indicators = [];
     this.resolutions = {

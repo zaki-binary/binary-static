@@ -487,9 +487,9 @@ BetForm.Time.Duration.prototype = {
             $('#expiry_type option[value="endtime"]').hide();
         } else {
             $('#expiry_type option[value="endtime"]').show();
+            $(this).trigger('change', [ this.trading_time.as_end_time().moment ]);
         }
 
-        $(this).trigger('change', [ this.trading_time.as_end_time().moment ]);
     },
     on_unit_change: function() {
         var that = this;

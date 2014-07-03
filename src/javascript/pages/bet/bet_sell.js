@@ -792,6 +792,7 @@ var BetSell = function() {
                         ticktrade_chart: 1,
                         contract_start_time: moment.utc(chart_params.start_time*1000).unix(),
                         how_many_ticks: how_many_ticks,
+                        with_entry_spot: chart_params.with_entry_spot,
                     });
 
                     var entry_spot_moment = moment.utc(chart_params.entry_spot_time*1000);
@@ -807,9 +808,10 @@ var BetSell = function() {
                     configure_livechart();
                     updateTTChart(liveChartConfig);
 
+                    var entry_spot_label = chart_params.with_entry_spot ? 'Entry Spot' : 'Tick 1';
                     var entry_indicator = new LiveChartIndicator.Barrier({
                         name: "entry_spot_time",
-                        label: text.localize('Entry Spot'),
+                        label: text.localize(entry_spot_label),
                         value: new Date(entry_spot_moment),
                         color: '#e98024',
                         axis: 'x',

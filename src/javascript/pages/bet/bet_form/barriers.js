@@ -149,22 +149,24 @@ BetForm.Barriers.Barrier.prototype = {
     value: function(value) {
         if(typeof value !== 'undefined') {
             var barrier_prefix = "";
-            if(this.barrier_type == 'relative') {
-                if(value > 0) {
-                    barrier_prefix = "+";
-                } else if(value == 0) {
-                    barrier_prefix = "+";
-                    value = this.min_value();
+            if (BetForm.attributes.form_name() != 'digits') {
+                if(this.barrier_type == 'relative') {
+                    if(value > 0) {
+                        barrier_prefix = "+";
+                    } else if(value == 0) {
+                        barrier_prefix = "+";
+                        value = this.min_value();
+                    }
+                } else {
+                    if(value < 0) {
+                        value = BetForm.spot.value();
+                    } else if(value == 0) {
+                        value = this.to_absolute_value(this.min_value());
+                    }
                 }
-            } else {
-                if(value < 0) {
-                    value = BetForm.spot.value();
-                } else if(value == 0) {
-                    value = this.to_absolute_value(this.min_value());
-                }
+                value = this.pipsized_value(value);
             }
 
-            value = this.pipsized_value(value);
             $('#' + this.component_id).val(barrier_prefix + value);
 
             this.update_calclulated_value(value);

@@ -287,6 +287,17 @@ pjax_config_page('/smart-indices', function() {
     };
 });
 
+pjax_config_page('/open-source-projects', function() {
+    return {
+        onLoad: function() {
+            sidebar_scroll($('.open-source-projects'));
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
+
 pjax_config_page('/partnerapi', function() {
     return {
         onLoad: function() {

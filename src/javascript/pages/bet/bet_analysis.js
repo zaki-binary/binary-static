@@ -28,13 +28,16 @@ var BetAnalysis = function () {
                     } else if(id == 'tab_intradayprices') {
                         that.tab_intradayprices.render(tab);
                         shown_some_tab = true;
+                    } else if(id == 'tab_last_digit') {
+                        that.tab_last_digit.render(tab);
+                        shown_some_tab = true;
                     } else if(id == 'tab_graph') {
                         that.tab_live_chart.render();
                         shown_some_tab = true;
-                    } else if(id == 'tab_pricing_table' && BetForm.attributes.show_pricing_table()) {
-			that.tab_pricing_table.render(tab);
-			shown_some_tab = true;
-		    }
+                    } else if(id == 'tab_pricing_table') {
+                        that.tab_pricing_table.render(tab);
+                        shown_some_tab = true;
+                    }
 
                     if(!shown_some_tab) {
                         that.tab_explanation.render(tab);
@@ -55,7 +58,7 @@ var BetAnalysis = function () {
             restored = true;
         },
         show_tab: function(tab) {
-            if(!tab || $('#' . tab).length == 0) {
+            if(!tab || !$('#' . tab)) {
                 tab = 'tab_explanation';
             }
 

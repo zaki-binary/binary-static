@@ -154,10 +154,11 @@ var BetPrice = function() {
             var con = this.buy_response_container();
             con.children('div').first().html(data);
 
+            var symbol = BetForm.attributes.underlying();
+            var start_moment = moment(start_epoch*1000).utc();
+            var how_many_ticks = $('#tick-count').data('count') + 1;
             if ($('#tick_chart').length > 0) {
-                var symbol = BetForm.attributes.underlying();
-                var start_moment = moment(start_epoch*1000).utc();
-                var liveChartConfig = new LiveChartConfig({
+                var chart_config = {
                     renderTo: 'tick_chart',
                     symbol: symbol,
                     with_trades: 0,
@@ -166,8 +167,11 @@ var BetPrice = function() {
                     with_markers: 1,
                     with_tick_config: 1,
                     contract_start_time: start_moment.unix(),
-                    how_many_ticks: $('#tick-count').data('count'),
-                });
+                    how_many_ticks: how_many_ticks,
+                    with_entry_spot: 1,
+                };
+
+                var liveChartConfig = new LiveChartConfig(chart_config);
                 var from = new Date(start_moment.add('seconds', 1));
                 var to = new Date(start_moment.add('minutes',3));
                 liveChartConfig.update({
@@ -181,10 +185,107 @@ var BetPrice = function() {
                 updateTTChart(liveChartConfig);
             }
 
+            if ($('#is-digit').data('is-digit')) {
+                that.digit.process(start_moment);
+            }
+
             con.show();
             var _clear_results = function () { that.clear_buy_results(); };
             con.find('a.close').on('click', _clear_results).css('cursor', 'pointer').addClass('unbind_later');
         },
+        digit: function() {
+            return {
+                reset: function() {
+                    var $self = this;
+
+                    $self.ev.close();
+                    $self.digit_tick_count = 0;
+                    $self.applicable_ticks = [];
+                },
+                process: function(start_moment) {
+                    var $self = this;
+
+                    $self.digit_tick_count = 0;
+                    $self.applicable_ticks = [];
+                    var symbol = BetForm.attributes.underlying();
+                    var how_many_ticks = $('#tick-count').data('count');
+                    var end = start_moment.clone().add('minutes',3);
+                    var stream_url = window.location.protocol + '//' + page.settings.get('streaming_server');
+                    stream_url += "/stream/ticks/" + symbol + "/" + start_moment.unix() + "/" + end.unix();
+                    $self.ev = new EventSource(stream_url, { withCredentials: true });
+
+                    $self.ev.onmessage = function(msg) {
+                        var data = JSON.parse(msg.data);
+                        if (data[0] === 'tick') {
+                            var tick = {
+                                epoch: data[1],
+                                quote: data[2],
+                            }
+                            if (tick.epoch >= start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
+                                $self.applicable_ticks.push(tick.quote);
+                                $self.digit_tick_count++;
+                                var last_digit = tick.quote.toString().substr(-1);
+                                if (!$('#digit-current').hasClass('flipper')) {
+                                    $('#digit-current').addClass('flipper focus');
+                                }
+                                $('#digit-current').text(last_digit);
+                                $('#digit-count').text($self.digit_tick_count);
+
+                                if ($('#digit-contract-details').css('display') === 'none') {
+                                    $('#digit-contract-details').show();
+                                }
+                            }
+
+                            if ($self.applicable_ticks.length === how_many_ticks) {
+                                $self.evaluate_digit_outcome();
+                                $self.reset();
+                            }
+                        }
+                    };
+                    $self.ev.onerror = function() { $self.ev.close() };
+                },
+                evaluate_digit_outcome: function() {
+                    var $self = this;
+
+                    var prediction = $('#tick-prediction').data('prediction');
+                    var client_prediction = $('#client-prediction').data('client-prediction');
+                    var last_tick = $self.applicable_ticks[$self.applicable_ticks.length-1];
+                    var last_digit = parseInt(last_tick.toString().substr(-1));
+                    var potential_payout = parseFloat($('#outcome-payout').data('payout').toString().replace(',',''));
+                    var cost = parseFloat($('#outcome-buyprice').data('buyprice').toString().replace(',',''));
+                    var final_price;
+
+                    if (prediction === 'match') {
+                        final_price = (last_digit === client_prediction) ? potential_payout : 0;
+                    } else if (prediction === 'differ') {
+                        final_price = (last_digit !== client_prediction) ? potential_payout : 0;
+                    }
+
+                    $('#contract-confirmation-details').hide();
+                    $('#contract-outcome-payout').text($self.round(final_price,2));
+
+                    if (final_price !== 0) {
+                        $('#bet-confirm-header').text(text.localize('This contract won'));
+                        $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
+                        $('#digit-current').addClass('win');
+                        $('#digit-prediction').addClass('win');
+                    } else {
+                        $('#bet-confirm-header').text(text.localize('This contract lost'));
+                        $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
+                        $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
+                        $('#digit-current').addClass('lose');
+                        $('#digit-prediction').addClass('lose');
+                    }
+
+                    $('#contract-outcome-details').show();
+                },
+                round: function(number,number_after_dec) {
+                    var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
+                    result = result.toFixed(number_after_dec);
+                    return result;
+                },
+            };
+        }(),
         display_buy_error: function (data) {
             var that = this;
             var con = this.buy_response_container();
@@ -198,6 +299,10 @@ var BetPrice = function() {
             var con = this.buy_response_container();
             if (typeof tt_chart !== 'undefined' && tt_chart) {
                 TickTrade.reset();
+            }
+
+            if ($('#is-digit').data('is-digit')) {
+                this.digit.reset();
             }
             con.hide().remove();
             _buy_response_container = null;
@@ -259,6 +364,7 @@ var BetPrice = function() {
                         var bet = JSON.parse(data);
                         BetForm.spot.update(bet.spot);
                         BetPrice.order_form.update_from_stream(bet.prices);
+                        BetAnalysis.tab_last_digit.update(BetForm.attributes.underlying(), bet.spot);
                     }
                 },
             }
@@ -393,7 +499,7 @@ var BetPrice = function() {
                         if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max
                            || prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
                             err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 + epsilon < bf_amount.payout_err) {
+                        } else if (prices[i].price.raw/100 + epsilon < bf_amount.payout_min) {
                             // You probably think there should be two conditions above, but too high stake just
                             // makes for "too high payout" or "no return" errors.
                             err = bf_amount.stake_err;

@@ -142,8 +142,8 @@ BetForm.attributes = function() {
             show_ohlc: function() {
                 return ($('input[name="showohlc"]', this.form_selector()).val() == "yes");
             },
-            show_pricing_table: function() {
-                return ($('input[name="showpricingtable"]', this.form_selector()).val() == "true");
+            extratab: function() {
+                return ($('input[name="extratab"]', this.form_selector()).val());
             },
             is_forward_starting: function() {
                 return (this.start_time() && this.start_time().match(/^\d+$/));

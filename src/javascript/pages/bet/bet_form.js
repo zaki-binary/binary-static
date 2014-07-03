@@ -233,21 +233,42 @@ var BetForm = function () {
                     }).addClass('unbind_later');
                 },
                 show_or_hide_analysis_tabs: function() {
-                    BetAnalysis.tab_ohlc.hide_tab();
                     if(BetForm.attributes.show_ohlc()) {
                         BetAnalysis.tab_ohlc.show_tab();
-                    } else if(BetAnalysis.was_showing_tab('tab_ohlc')) {
-                        BetAnalysis.show_tab(); //If the user was here, show him something else.
+                    } else {
+                        BetAnalysis.tab_ohlc.hide_tab();
+                        if(BetAnalysis.was_showing_tab('tab_ohlc')) {
+                            BetAnalysis.show_tab(); //If the user was here, show him something else.
+                        }
                     }
 
-                    BetAnalysis.tab_pricing_table.hide_tab();
-                    if(BetForm.attributes.show_pricing_table()) {
+                    var analysis_tab = BetForm.attributes.extratab();
+                    if(analysis_tab == 'pricing_table') {
+                        // We should show exactly one of these
                         BetAnalysis.tab_pricing_table.show_tab();
-                        BetAnalysis.tab_intradayprices.hide_tab(); // We should show one or the other of these.
-                    } else {
-                        BetAnalysis.tab_intradayprices.show_tab(); // We should show one or the other of these.
-                        if(BetAnalysis.was_showing_tab('tab_pricing_table')) {
-                            BetAnalysis.show_tab('tab_intradayprices'); // If the user was here, show him the new thing.
+                        BetAnalysis.tab_intradayprices.hide_tab();
+                        BetAnalysis.tab_last_digit.hide_tab();
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
+                         || BetAnalysis.was_showing_tab('tab_last_digit')) {
+                        BetAnalysis.show_tab('tab_pricing_table')
+                        }
+                    } else if(analysis_tab == 'last_digit') {
+                        // We should show exactly one of these
+                        BetAnalysis.tab_last_digit.show_tab();
+                        BetAnalysis.tab_pricing_table.hide_tab();
+                        BetAnalysis.tab_intradayprices.hide_tab();
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
+                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                        BetAnalysis.show_tab('tab_last_digit')
+                        }
+                    } else if(analysis_tab == 'intradayprices') {
+                        // We should show exactly one of these
+                        BetAnalysis.tab_intradayprices.show_tab();
+                        BetAnalysis.tab_pricing_table.hide_tab();
+                        BetAnalysis.tab_last_digit.hide_tab();
+                        if (BetAnalysis.was_showing_tab('tab_last_digit')
+                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                        BetAnalysis.show_tab('tab_intradayprices')
                         }
                     }
                 },
