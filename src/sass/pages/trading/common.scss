@@ -192,3 +192,33 @@
 .disabled {
   color: $BIN_GRAY_SHADE;
 }
+
+.flipper {
+    font-size: 45px !important;
+    padding: 15px !important;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, transparent, gainsboro);
+}
+
+.flipper.focus{
+    background: linear-gradient(to bottom, transparent, grey);
+}
+
+.flipper.focus.win, .flipper.win {
+    background: linear-gradient(to bottom, transparent, $BIN_GREEN);
+}
+
+.flipper.focus.lose, .flipper.lose {
+    background: linear-gradient(to bottom, transparent, $BIN_RED);
+}
+
+div.flipper {
+    margin: 5px 30px;
+    width: 85px;
+}
+
+#digit-contract-details{
+    .sign {
+        font-size: 30px !important;
+    }
+}
