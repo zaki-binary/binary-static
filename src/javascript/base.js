@@ -193,14 +193,6 @@ onLoad.queue(function () {
 });
 
 onLoad.queue(function () {
-    if (/livechart|portfolio|statement|f_manager_statement|f_manager_history|trade.cgi/.test(window.location.pathname)) {
-        if (typeof Highcharts === 'undefined') {
-            loadscript(document, "script", page.settings.get("javascripts")['highstock']);
-        }
-    }
-});
-
-onLoad.queue(function () {
     attach_date_picker('.has-date-picker');
     attach_time_picker('.has-time-picker');
     attach_inpage_popup('.has-inpage-popup');
