@@ -9069,14 +9069,6 @@ onLoad.queue(function () {
 });
 
 onLoad.queue(function () {
-    if (/livechart|portfolio|statement|f_manager_statement|f_manager_history|trade.cgi/.test(window.location.pathname)) {
-        if (typeof Highcharts === 'undefined') {
-            loadscript(document, "script", page.settings.get("javascripts")['highstock']);
-        }
-    }
-});
-
-onLoad.queue(function () {
     attach_date_picker('.has-date-picker');
     attach_time_picker('.has-time-picker');
     attach_inpage_popup('.has-inpage-popup');
@@ -15885,7 +15877,7 @@ a.exportSVGElements=[]);if(!1!==b.enabled){var p=b.theme,q=p.states,r=q&&q.hover
     // https://raw.github.com/highslide-software/highcharts.com/master/studies/csv-export/csv.php
     if (Highcharts.getOptions().exporting) {
         Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
-            text: text.localize('Save as CSV') || "Save as CSV",
+            text: "Save as CSV",
             onclick: function () {
                 Highcharts.post('http://www.highcharts.com/studies/csv-export/csv.php', {
                     csv: this.getCSV()
