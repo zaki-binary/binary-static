@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 		    'src/javascript/components/time_picker.js',
 		    'src/javascript/pages.js',
 		    'src/javascript/pages/bet/bet_form.js',
-		    'src/javascript/pages/bet/bet_form/attribut.js',
+		    'src/javascript/pages/bet/bet_form/attributes.js',
 		    'src/javascript/pages/bet/bet_form/barriers.js',
 		    'src/javascript/pages/bet/bet_form/time.js',
 		    'src/javascript/pages/bet/bet_analysis.js',
