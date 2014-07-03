@@ -1889,6 +1889,12 @@ abbr {
   padding: 0.7em 0 0.7em 4em;
   text-transform: capitalize;
 }
+#betpage #content-holder #content #bet_container #bet_calculation_container .rbox .rbox-wrap .rbox-heading .differs {
+  background: url("../images/trade/differs_1.svg") no-repeat 5% 75%;
+}
+#betpage #content-holder #content #bet_container #bet_calculation_container .rbox .rbox-wrap .rbox-heading .matches {
+  background: url("../images/trade/matches_1.svg") no-repeat 5% 75%;
+}
 #betpage #content-holder #content #bet_container #bet_calculation_container .rbox .rbox-wrap .rbox-heading .rises {
   background: url("../images/trade/rise_1.png") no-repeat 5% 75%;
 }
@@ -2606,6 +2612,34 @@ a.close:hover {
 
 .disabled {
   color: #c2c2c2;
+}
+
+.flipper {
+  font-size: 45px !important;
+  padding: 15px !important;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, transparent, #dcdcdc);
+}
+
+.flipper.focus {
+  background: linear-gradient(to bottom, transparent, #808080);
+}
+
+.flipper.focus.win, .flipper.win {
+  background: linear-gradient(to bottom, transparent, #2e8836);
+}
+
+.flipper.focus.lose, .flipper.lose {
+  background: linear-gradient(to bottom, transparent, #cc0000);
+}
+
+div.flipper {
+  margin: 5px 30px;
+  width: 85px;
+}
+
+#digit-contract-details .sign {
+  font-size: 30px !important;
 }
 
 #header_page #content {

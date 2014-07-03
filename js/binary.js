@@ -7873,7 +7873,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /\/$|\/login|\/home|\/smart-indices$/.test(window.location.pathname);
+            var is_mojo_page = /\/$|\/login|\/home|\/smart-indices|\/open-source-projects$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -10389,21 +10389,42 @@ onLoad.queue_for_url(function() {
                     }).addClass('unbind_later');
                 },
                 show_or_hide_analysis_tabs: function() {
-                    BetAnalysis.tab_ohlc.hide_tab();
                     if(BetForm.attributes.show_ohlc()) {
                         BetAnalysis.tab_ohlc.show_tab();
-                    } else if(BetAnalysis.was_showing_tab('tab_ohlc')) {
-                        BetAnalysis.show_tab(); //If the user was here, show him something else.
+                    } else {
+                        BetAnalysis.tab_ohlc.hide_tab();
+                        if(BetAnalysis.was_showing_tab('tab_ohlc')) {
+                            BetAnalysis.show_tab(); //If the user was here, show him something else.
+                        }
                     }
 
-                    BetAnalysis.tab_pricing_table.hide_tab();
-                    if(BetForm.attributes.show_pricing_table()) {
+                    var analysis_tab = BetForm.attributes.extratab();
+                    if(analysis_tab == 'pricing_table') {
+                        // We should show exactly one of these
                         BetAnalysis.tab_pricing_table.show_tab();
-                        BetAnalysis.tab_intradayprices.hide_tab(); // We should show one or the other of these.
-                    } else {
-                        BetAnalysis.tab_intradayprices.show_tab(); // We should show one or the other of these.
-                        if(BetAnalysis.was_showing_tab('tab_pricing_table')) {
-                            BetAnalysis.show_tab('tab_intradayprices'); // If the user was here, show him the new thing.
+                        BetAnalysis.tab_intradayprices.hide_tab();
+                        BetAnalysis.tab_last_digit.hide_tab();
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
+                         || BetAnalysis.was_showing_tab('tab_last_digit')) {
+                        BetAnalysis.show_tab('tab_pricing_table')
+                        }
+                    } else if(analysis_tab == 'last_digit') {
+                        // We should show exactly one of these
+                        BetAnalysis.tab_last_digit.show_tab();
+                        BetAnalysis.tab_pricing_table.hide_tab();
+                        BetAnalysis.tab_intradayprices.hide_tab();
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
+                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                        BetAnalysis.show_tab('tab_last_digit')
+                        }
+                    } else if(analysis_tab == 'intradayprices') {
+                        // We should show exactly one of these
+                        BetAnalysis.tab_intradayprices.show_tab();
+                        BetAnalysis.tab_pricing_table.hide_tab();
+                        BetAnalysis.tab_last_digit.hide_tab();
+                        if (BetAnalysis.was_showing_tab('tab_last_digit')
+                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                        BetAnalysis.show_tab('tab_intradayprices')
                         }
                     }
                 },
@@ -10835,8 +10856,8 @@ onLoad.queue_for_url(function() {
             show_ohlc: function() {
                 return ($('input[name="showohlc"]', this.form_selector()).val() == "yes");
             },
-            show_pricing_table: function() {
-                return ($('input[name="showpricingtable"]', this.form_selector()).val() == "true");
+            extratab: function() {
+                return ($('input[name="extratab"]', this.form_selector()).val());
             },
             is_forward_starting: function() {
                 return (this.start_time() && this.start_time().match(/^\d+$/));
@@ -11178,22 +11199,24 @@ BetForm.Barriers.Barrier.prototype = {
     value: function(value) {
         if(typeof value !== 'undefined') {
             var barrier_prefix = "";
-            if(this.barrier_type == 'relative') {
-                if(value > 0) {
-                    barrier_prefix = "+";
-                } else if(value == 0) {
-                    barrier_prefix = "+";
-                    value = this.min_value();
+            if (BetForm.attributes.form_name() != 'digits') {
+                if(this.barrier_type == 'relative') {
+                    if(value > 0) {
+                        barrier_prefix = "+";
+                    } else if(value == 0) {
+                        barrier_prefix = "+";
+                        value = this.min_value();
+                    }
+                } else {
+                    if(value < 0) {
+                        value = BetForm.spot.value();
+                    } else if(value == 0) {
+                        value = this.to_absolute_value(this.min_value());
+                    }
                 }
-            } else {
-                if(value < 0) {
-                    value = BetForm.spot.value();
-                } else if(value == 0) {
-                    value = this.to_absolute_value(this.min_value());
-                }
+                value = this.pipsized_value(value);
             }
 
-            value = this.pipsized_value(value);
             $('#' + this.component_id).val(barrier_prefix + value);
 
             this.update_calclulated_value(value);
@@ -11766,9 +11789,9 @@ BetForm.Time.Duration.prototype = {
             $('#expiry_type option[value="endtime"]').hide();
         } else {
             $('#expiry_type option[value="endtime"]').show();
+            $(this).trigger('change', [ this.trading_time.as_end_time().moment ]);
         }
 
-        $(this).trigger('change', [ this.trading_time.as_end_time().moment ]);
     },
     on_unit_change: function() {
         var that = this;
@@ -11951,13 +11974,16 @@ BetForm.Time.EndTime.prototype = {
                     } else if(id == 'tab_intradayprices') {
                         that.tab_intradayprices.render(tab);
                         shown_some_tab = true;
+                    } else if(id == 'tab_last_digit') {
+                        that.tab_last_digit.render(tab);
+                        shown_some_tab = true;
                     } else if(id == 'tab_graph') {
                         that.tab_live_chart.render();
                         shown_some_tab = true;
-                    } else if(id == 'tab_pricing_table' && BetForm.attributes.show_pricing_table()) {
-			that.tab_pricing_table.render(tab);
-			shown_some_tab = true;
-		    }
+                    } else if(id == 'tab_pricing_table') {
+                        that.tab_pricing_table.render(tab);
+                        shown_some_tab = true;
+                    }
 
                     if(!shown_some_tab) {
                         that.tab_explanation.render(tab);
@@ -11978,7 +12004,7 @@ BetForm.Time.EndTime.prototype = {
             restored = true;
         },
         show_tab: function(tab) {
-            if(!tab || $('#' . tab).length == 0) {
+            if(!tab || !$('#' . tab)) {
                 tab = 'tab_explanation';
             }
 
@@ -12482,10 +12508,11 @@ BetForm.Time.EndTime.prototype = {
             var con = this.buy_response_container();
             con.children('div').first().html(data);
 
+            var symbol = BetForm.attributes.underlying();
+            var start_moment = moment(start_epoch*1000).utc();
+            var how_many_ticks = $('#tick-count').data('count') + 1;
             if ($('#tick_chart').length > 0) {
-                var symbol = BetForm.attributes.underlying();
-                var start_moment = moment(start_epoch*1000).utc();
-                var liveChartConfig = new LiveChartConfig({
+                var chart_config = {
                     renderTo: 'tick_chart',
                     symbol: symbol,
                     with_trades: 0,
@@ -12494,8 +12521,11 @@ BetForm.Time.EndTime.prototype = {
                     with_markers: 1,
                     with_tick_config: 1,
                     contract_start_time: start_moment.unix(),
-                    how_many_ticks: $('#tick-count').data('count'),
-                });
+                    how_many_ticks: how_many_ticks,
+                    with_entry_spot: 1,
+                };
+
+                var liveChartConfig = new LiveChartConfig(chart_config);
                 var from = new Date(start_moment.add('seconds', 1));
                 var to = new Date(start_moment.add('minutes',3));
                 liveChartConfig.update({
@@ -12509,10 +12539,107 @@ BetForm.Time.EndTime.prototype = {
                 updateTTChart(liveChartConfig);
             }
 
+            if ($('#is-digit').data('is-digit')) {
+                that.digit.process(start_moment);
+            }
+
             con.show();
             var _clear_results = function () { that.clear_buy_results(); };
             con.find('a.close').on('click', _clear_results).css('cursor', 'pointer').addClass('unbind_later');
         },
+        digit: function() {
+            return {
+                reset: function() {
+                    var $self = this;
+
+                    $self.ev.close();
+                    $self.digit_tick_count = 0;
+                    $self.applicable_ticks = [];
+                },
+                process: function(start_moment) {
+                    var $self = this;
+
+                    $self.digit_tick_count = 0;
+                    $self.applicable_ticks = [];
+                    var symbol = BetForm.attributes.underlying();
+                    var how_many_ticks = $('#tick-count').data('count');
+                    var end = start_moment.clone().add('minutes',3);
+                    var stream_url = window.location.protocol + '//' + page.settings.get('streaming_server');
+                    stream_url += "/stream/ticks/" + symbol + "/" + start_moment.unix() + "/" + end.unix();
+                    $self.ev = new EventSource(stream_url, { withCredentials: true });
+
+                    $self.ev.onmessage = function(msg) {
+                        var data = JSON.parse(msg.data);
+                        if (data[0] === 'tick') {
+                            var tick = {
+                                epoch: data[1],
+                                quote: data[2],
+                            }
+                            if (tick.epoch >= start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
+                                $self.applicable_ticks.push(tick.quote);
+                                $self.digit_tick_count++;
+                                var last_digit = tick.quote.toString().substr(-1);
+                                if (!$('#digit-current').hasClass('flipper')) {
+                                    $('#digit-current').addClass('flipper focus');
+                                }
+                                $('#digit-current').text(last_digit);
+                                $('#digit-count').text($self.digit_tick_count);
+
+                                if ($('#digit-contract-details').css('display') === 'none') {
+                                    $('#digit-contract-details').show();
+                                }
+                            }
+
+                            if ($self.applicable_ticks.length === how_many_ticks) {
+                                $self.evaluate_digit_outcome();
+                                $self.reset();
+                            }
+                        }
+                    };
+                    $self.ev.onerror = function() { $self.ev.close() };
+                },
+                evaluate_digit_outcome: function() {
+                    var $self = this;
+
+                    var prediction = $('#tick-prediction').data('prediction');
+                    var client_prediction = $('#client-prediction').data('client-prediction');
+                    var last_tick = $self.applicable_ticks[$self.applicable_ticks.length-1];
+                    var last_digit = parseInt(last_tick.toString().substr(-1));
+                    var potential_payout = parseFloat($('#outcome-payout').data('payout').toString().replace(',',''));
+                    var cost = parseFloat($('#outcome-buyprice').data('buyprice').toString().replace(',',''));
+                    var final_price;
+
+                    if (prediction === 'match') {
+                        final_price = (last_digit === client_prediction) ? potential_payout : 0;
+                    } else if (prediction === 'differ') {
+                        final_price = (last_digit !== client_prediction) ? potential_payout : 0;
+                    }
+
+                    $('#contract-confirmation-details').hide();
+                    $('#contract-outcome-payout').text($self.round(final_price,2));
+
+                    if (final_price !== 0) {
+                        $('#bet-confirm-header').text(text.localize('This contract won'));
+                        $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
+                        $('#digit-current').addClass('win');
+                        $('#digit-prediction').addClass('win');
+                    } else {
+                        $('#bet-confirm-header').text(text.localize('This contract lost'));
+                        $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
+                        $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
+                        $('#digit-current').addClass('lose');
+                        $('#digit-prediction').addClass('lose');
+                    }
+
+                    $('#contract-outcome-details').show();
+                },
+                round: function(number,number_after_dec) {
+                    var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
+                    result = result.toFixed(number_after_dec);
+                    return result;
+                },
+            };
+        }(),
         display_buy_error: function (data) {
             var that = this;
             var con = this.buy_response_container();
@@ -12526,6 +12653,10 @@ BetForm.Time.EndTime.prototype = {
             var con = this.buy_response_container();
             if (typeof tt_chart !== 'undefined' && tt_chart) {
                 TickTrade.reset();
+            }
+
+            if ($('#is-digit').data('is-digit')) {
+                this.digit.reset();
             }
             con.hide().remove();
             _buy_response_container = null;
@@ -12587,6 +12718,7 @@ BetForm.Time.EndTime.prototype = {
                         var bet = JSON.parse(data);
                         BetForm.spot.update(bet.spot);
                         BetPrice.order_form.update_from_stream(bet.prices);
+                        BetAnalysis.tab_last_digit.update(BetForm.attributes.underlying(), bet.spot);
                     }
                 },
             }
@@ -12721,7 +12853,7 @@ BetForm.Time.EndTime.prototype = {
                         if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max
                            || prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
                             err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 + epsilon < bf_amount.payout_err) {
+                        } else if (prices[i].price.raw/100 + epsilon < bf_amount.payout_min) {
                             // You probably think there should be two conditions above, but too high stake just
                             // makes for "too high payout" or "no return" errors.
                             err = bf_amount.stake_err;
@@ -13698,6 +13830,7 @@ BetForm.Time.EndTime.prototype = {
                         ticktrade_chart: 1,
                         contract_start_time: moment.utc(chart_params.start_time*1000).unix(),
                         how_many_ticks: how_many_ticks,
+                        with_entry_spot: chart_params.with_entry_spot,
                     });
 
                     var entry_spot_moment = moment.utc(chart_params.entry_spot_time*1000);
@@ -13713,9 +13846,10 @@ BetForm.Time.EndTime.prototype = {
                     configure_livechart();
                     updateTTChart(liveChartConfig);
 
+                    var entry_spot_label = chart_params.with_entry_spot ? 'Entry Spot' : 'Tick 1';
                     var entry_indicator = new LiveChartIndicator.Barrier({
                         name: "entry_spot_time",
-                        label: text.localize('Entry Spot'),
+                        label: text.localize(entry_spot_label),
                         value: new Date(entry_spot_moment),
                         color: '#e98024',
                         axis: 'x',
@@ -14106,25 +14240,27 @@ var TickTrade = function() {
         process: function(current_tick) {
             var $self = this;
 
-            if (!$self.entry_spot) {
+            if (!$self.entry_spot && tt_chart.config.with_entry_spot) {
                 $self.set_entry_spot();
             }
 
             if (current_tick) {
-                var tick_prediction = $self.client_prediction();
-                var win_pallet = 'rgba(46,136,54,0.1)';
-                var lose_pallet = 'rgba(204,0,0,0.05)';
-                var what_color;
+                if (tt_chart.config.with_tick_config) {
+                    var tick_prediction = $self.client_prediction();
+                    var win_pallet = 'rgba(46,136,54,0.1)';
+                    var lose_pallet = 'rgba(204,0,0,0.05)';
+                    var what_color;
 
-                if (tick_prediction === 'up') {
-                    what_color = current_tick > $self.entry_spot ? win_pallet: lose_pallet;
-                } else if (tick_prediction === 'down') {
-                    what_color = current_tick < $self.entry_spot ? win_pallet: lose_pallet;
+                    if (tick_prediction === 'up') {
+                        what_color = current_tick > $self.entry_spot ? win_pallet: lose_pallet;
+                    } else if (tick_prediction === 'down') {
+                        what_color = current_tick < $self.entry_spot ? win_pallet: lose_pallet;
+                    }
+                    tt_chart.chart.chartBackground.css({color: what_color});
                 }
-                tt_chart.chart.chartBackground.css({color: what_color});
             }
 
-            if ($self.how_many_ticks() && current_tick_count > $self.how_many_ticks()) {
+            if ($self.how_many_ticks() && ticks_array.length == $self.how_many_ticks()) {
                 $self.process_tick_trade();
                 $self.reset();
             }
@@ -14162,11 +14298,13 @@ var TickTrade = function() {
         process_tick_trade: function() {
             var $self = this;
 
-            var exit_data = ticks_array[$self.how_many_ticks()];
+            var exit_data = ticks_array[ticks_array.length - 1];
 
             if (typeof exit_data !== 'undefined') {
                 $self.exit_spot = exit_data.quote;
             }
+
+            var last_tick_label = tt_chart.config.has_indicator('tick_barrier') ? $self.how_many_ticks() - 1 : $self.how_many_ticks();
 
             if ($self.exit_spot) {
                 var exit = new LiveChartIndicator.Barrier({
@@ -14174,41 +14312,46 @@ var TickTrade = function() {
                     value: new Date(exit_data.epoch*1000),
                     color: '#e98024',
                     axis : 'x',
-                    label: text.localize('tick') + ' ' + $self.how_many_ticks(),
+                    label: text.localize('tick') + ' ' + last_tick_label,
                 });
                 tt_chart.add_indicator(exit);
             }
 
             if (tt_chart.config.with_tick_config) {
-                $('#bet-confirm-exp').hide();
-                $('#entry').text(': '+$self.entry_spot);
-                $('#exit').text(': '+$self.exit_spot);
-
-                var potential_payout = parseFloat($('#outcome-payout').data('payout').toString().replace(',',''));
-                var cost = parseFloat($('#outcome-buyprice').data('buyprice').toString().replace(',',''));
-                var final_price;
-                $('#contract-confirmation-details').hide();
-
-                if ($self.client_prediction() === 'up') {
-                    final_price = ($self.exit_spot > $self.entry_spot) ? potential_payout : 0;
-                } else if ($self.client_prediction() === 'down') {
-                    final_price = ($self.exit_spot < $self.entry_spot) ? potential_payout : 0;
-                }
-
-                $('#contract-outcome-payout').text($self.round(final_price,2));
-
-                if (final_price !== 0) {
-                    $('#bet-confirm-header').text(text.localize('This contract won'));
-                    $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
-                } else {
-                    $('#bet-confirm-header').text(text.localize('This contract lost'));
-                    $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
-                    $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
-                }
-
-                $('#tick_info').show();
-                $('#contract-outcome-details').show();
+                $self.show_tick_expiry_outcome();
             }
+        },
+        show_tick_expiry_outcome: function() {
+            var $self = this;
+
+            $('#bet-confirm-exp').hide();
+            $('#entry').text(': '+$self.entry_spot);
+            $('#exit').text(': '+$self.exit_spot);
+
+            var potential_payout = parseFloat($('#outcome-payout').data('payout').toString().replace(',',''));
+            var cost = parseFloat($('#outcome-buyprice').data('buyprice').toString().replace(',',''));
+            var final_price;
+            $('#contract-confirmation-details').hide();
+
+            if ($self.client_prediction() === 'up') {
+                final_price = ($self.exit_spot > $self.entry_spot) ? potential_payout : 0;
+            } else if ($self.client_prediction() === 'down') {
+                final_price = ($self.exit_spot < $self.entry_spot) ? potential_payout : 0;
+            }
+
+            $('#contract-outcome-payout').text($self.round(final_price,2));
+
+            if (final_price !== 0) {
+                $('#bet-confirm-header').text(text.localize('This contract won'));
+                $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
+            } else {
+                $('#bet-confirm-header').text(text.localize('This contract lost'));
+                $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
+                $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
+            }
+
+            $('#tick_info').show();
+            $('#contract-outcome-details').show();
         },
         round: function(number,number_after_dec) {
             var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
@@ -15386,6 +15529,17 @@ pjax_config_page('/smart-indices', function() {
     };
 });
 
+pjax_config_page('/open-source-projects', function() {
+    return {
+        onLoad: function() {
+            sidebar_scroll($('.open-source-projects'));
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
+
 pjax_config_page('/partnerapi', function() {
     return {
         onLoad: function() {
@@ -16235,6 +16389,7 @@ a.exportSVGElements=[]);if(!1!==b.enabled){var p=b.theme,q=p.states,r=q&&q.hover
     this.contract_start_time = typeof params['contract_start_time'] !== 'undefined' ? params['contract_start_time'] : 0;
     this.how_many_ticks = typeof params['how_many_ticks'] !== 'undefined' ? params['how_many_ticks'] : 0;
     this.with_tick_config = typeof params['with_tick_config'] !== 'undefined' ? params['with_tick_config'] : 0;
+    this.with_entry_spot = typeof params['with_entry_spot'] !== 'undefined' ? params['with_entry_spot'] : 0;
 
     this.indicators = [];
     this.resolutions = {
@@ -16582,7 +16737,6 @@ LiveChartIndicator['Barrier'].prototype = {
 };
 ;var live_chart;
 var chart_closed;
-var current_tick_count = 0;
 var ticks_array = [];
 
 
@@ -16881,9 +17035,8 @@ LiveChartTick.prototype.process_data = function(point) {
             );
             this.spot = tick.quote;
             // for tick trade charting purposes
-            if (this.config.ticktrade_chart && tick.epoch > this.config.contract_start_time && current_tick_count <= this.config.how_many_ticks) {
-                current_tick_count++;
-                ticks_array.push(tick);
+            if (tick.epoch > this.config.contract_start_time && ticks_array.length < this.config.how_many_ticks) {
+                    ticks_array.push(tick);
             }
         }
     } else if (point[0] == 'contract') {
