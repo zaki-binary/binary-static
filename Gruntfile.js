@@ -71,6 +71,7 @@ module.exports = function(grunt) {
 		    'src/javascript/pages/bet/bet_form/time.js',
 		    'src/javascript/pages/bet/bet_analysis.js',
 		    'src/javascript/pages/bet/bet_analysis/live_chart.js',
+		    'src/javascript/pages/bet/bet_analysis/digit_info.js',
 		    'src/javascript/pages/bet/bet_price.js',
 		    'src/javascript/pages/bet/pricing_details.js',
 		    'src/javascript/pages/bet/bet_sell.js',
