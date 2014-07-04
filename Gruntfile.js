@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 	cssmin: {
 	    combine: {
 		files: {
-		    'dist/css/bomredirect_<%= pkg.version %>.min.css': ['src/css/bomredirect.css'],
+		    'dist/css/bomredirect.min.css': ['src/css/bomredirect.css'],
 		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary.css', ]
 		},
 	    },
