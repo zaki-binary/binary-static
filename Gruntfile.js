@@ -15,6 +15,16 @@ module.exports = function(grunt) {
 		    specify: 'src/sass/binary.scss',
 		    noLineComments: true,
 		    outputStyle: 'expanded',
+		    environment: 'production',
+		},
+	    },
+	    dev: {
+		options: {
+		    sassDir: 'src/sass',
+		    cssDir: 'dist/css/',
+		    specify: 'src/sass/external/grid.scss',
+		    noLineComments: true,
+		    outputStyle: 'expanded',
 		},
 	    },
 	},
@@ -22,6 +32,7 @@ module.exports = function(grunt) {
 	    combine: {
 		files: {
 		    'dist/css/bomredirect.min.css': ['src/css/bomredirect.css'],
+		    'dist/css/grid_<%= pkg.version %>.min.css': ['dist/css/external/grid.css'],
 		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary.css', ]
 		},
 	    },
@@ -117,6 +128,7 @@ module.exports = function(grunt) {
 		    {expand: true, src: ['package.json'], dest: 'dist/js/',},
 		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/css/',},
 		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts',},
 		],
 	    }
