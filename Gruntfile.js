@@ -130,6 +130,12 @@ module.exports = function(grunt) {
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/css/',},
 		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts',},
+		    {expand: true, cwd: 'dist/', src: ['**'], dest: 'dist/binary-static/',},
+		    {expand: true, src: ['package.json'], dest: 'dist/binary-static/js/',},
+		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/binary-static/css/fonts',},
+		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/binary-static/images/',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/binary-static/css/',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/binary-static/css/images',},
 		],
 	    }
 	},
@@ -145,7 +151,8 @@ module.exports = function(grunt) {
 	    server: {
 		options: {
 		    hostname: '127.0.0.1',
-		    port: 80,
+		    port: 443,
+		    protocol: 'https',
 		    base: 'dist',
 		},
 	    }
