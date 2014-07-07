@@ -141,17 +141,41 @@ module.exports = function(grunt) {
 	    },
 	    src: ['**'],
 	},
+	connect: {
+	    server: {
+		options: {
+		    hostname: '127.0.0.1',
+		    port: 80,
+		    base: 'dist',
+		},
+	    }
+	},
+	watch: {
+	    options: {
+		livereload: true,
+	    },
+	    scripts: {
+		files: ['src/javascript/*.js', 'src/javascript/**/*.js'],
+		tasks: ['concat', 'uglify'],
+	    },
+	    css: {
+		files: ['src/sass/*.scss', 'src/sass/**/*.scss'],
+		tasks: ['compass', 'cssmin'],
+	    },
+	},
     });
 
     // load the plugin that will complete the task
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
 
     // Task to be performed
-    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages']);
+    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'connect', 'watch']);
 };
