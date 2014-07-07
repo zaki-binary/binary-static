@@ -17,13 +17,14 @@ You will also need to install the following on your development machine:
 - Ruby, RubyGems
 - Node.js and NPM
 
-After you have made your code edits, you can run the Javascript and CSS minification by doing (as root):
+After you have made your code edits, you can run the Javascript and CSS minification by doing:
 
 - Go to project root
 - `gem install compass`
 - `npm install`
 - `npm install -g grunt-cli`
 - `grunt`
+- On separate terminal run `grunt connect` as root
 
 This will also automatically update the *gh-pages* branch containing the new minified deliverables.
 
