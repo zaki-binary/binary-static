@@ -496,10 +496,12 @@ var BetPrice = function() {
                         var epsilon = 0.001; // Outside the visible range of a price.
                         // We're intentionally making payout errors have highest priority
                         // it's something they can fix immediately on this web interface.
+
                         if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max
                            || prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
                             err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 + epsilon < bf_amount.payout_min) {
+                        } else if (prices[i].price.raw/100 + epsilon > bf_amount.stake_max
+                           || prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
                             // You probably think there should be two conditions above, but too high stake just
                             // makes for "too high payout" or "no return" errors.
                             err = bf_amount.stake_err;
