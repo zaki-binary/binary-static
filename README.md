@@ -28,7 +28,7 @@ After you have made your code edits, you can run the Javascript and CSS minifica
 
 This will also automatically update the *gh-pages* branch containing the new minified deliverables.
 
-Note: grunt is set up to serve the files on localhost:443 using *grunt-contrib-connect*.
+Note: grunt is set up to serve the files on https://localhost using *grunt-contrib-connect*.
 
 To view your work in action on the live [www.binary.com](http://www.binary.com) website, add the following line to your */etc/hosts*:
 
