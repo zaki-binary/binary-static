@@ -154,6 +154,7 @@ module.exports = function(grunt) {
 		    port: 443,
 		    protocol: 'https',
 		    base: 'dist',
+		    keepalive: true,
 		},
 	    }
 	},
@@ -184,5 +185,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
 
     // Task to be performed
-    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'connect', 'watch']);
+    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };
