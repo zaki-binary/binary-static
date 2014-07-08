@@ -221,7 +221,7 @@ var BetPrice = function() {
                                 epoch: data[1],
                                 quote: data[2],
                             }
-                            if (tick.epoch >= start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
+                            if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
                                 $self.applicable_ticks.push(tick.quote);
                                 $self.digit_tick_count++;
                                 var last_digit = tick.quote.toString().substr(-1);
