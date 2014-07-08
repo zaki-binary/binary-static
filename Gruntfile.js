@@ -171,6 +171,31 @@ module.exports = function(grunt) {
 		tasks: ['compass', 'cssmin'],
 	    },
 	},
+	jshint: {
+	    options: {
+		curly: true,
+		eqeqeq: true,
+		eqnull: true,
+		browser: true,
+		globals: {
+		    jQuery: true,
+		    $: true,
+		},
+		ignores: [
+		    'src/javascript/external/**/*.js',
+		    'src/javascript/t/**/*.js',
+		    'src/javascript/livechart/export-csv.js',
+		    'src/javascript/livechart/highstock-exporting.js',
+		    'src/javascript/livechart/highstock.js',
+		    'src/javascript/base/pjax-lib.js',
+		    'src/javascript/gtm.js'
+		],
+	    },
+	    all: [
+		'Gruntfile.js',
+		'src/javascript/**/*.js',
+	    ],
+	},
     });
 
     // load the plugin that will complete the task
@@ -180,6 +205,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
