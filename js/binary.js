@@ -10892,12 +10892,14 @@ onLoad.queue_for_url(function() {
                         return page.url.param_if_valid('market') || LocalStore.get('bet_page.market') || 'forex';
                     },
                     underlying: function(underlying) {
+                        var for_market = this.market();
                         if(underlying) {
-                            LocalStore.set('bet_page.underlying', underlying);
+                            for_market = markets.by_symbol(underlying).market.name;
+                            LocalStore.set('bet_page.underlying.'+for_market, underlying);
                             page.url.invalidate();
                         }
 
-                        return page.url.param_if_valid('underlying_symbol') || LocalStore.get('bet_page.underlying');
+                        return page.url.param_if_valid('underlying_symbol') || LocalStore.get('bet_page.underlying.'+for_market);
                     },
                     submarket: function(submarket) {
                         if(submarket) {
@@ -11786,9 +11788,9 @@ BetForm.Time.Duration.prototype = {
 
         var hidden_expiry_type;
         if (selected.units == 't') {
-            $('#expiry_type option[value="endtime"]').hide();
+            $('#expiry_type option[value="endtime"]').prop('disabled', true);
         } else {
-            $('#expiry_type option[value="endtime"]').show();
+            $('#expiry_type option[value="endtime"]').prop('disabled', false);
             $(this).trigger('change', [ this.trading_time.as_end_time().moment ]);
         }
 
