@@ -178,12 +178,14 @@ BetForm.attributes = function() {
                         return page.url.param_if_valid('market') || LocalStore.get('bet_page.market') || 'forex';
                     },
                     underlying: function(underlying) {
+                        var for_market = this.market();
                         if(underlying) {
-                            LocalStore.set('bet_page.underlying', underlying);
+                            for_market = markets.by_symbol(underlying).market.name;
+                            LocalStore.set('bet_page.underlying.'+for_market, underlying);
                             page.url.invalidate();
                         }
 
-                        return page.url.param_if_valid('underlying_symbol') || LocalStore.get('bet_page.underlying');
+                        return page.url.param_if_valid('underlying_symbol') || LocalStore.get('bet_page.underlying.'+for_market);
                     },
                     submarket: function(submarket) {
                         if(submarket) {
