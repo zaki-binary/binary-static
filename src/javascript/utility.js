@@ -293,7 +293,6 @@ function attach_date_picker(element, conf) {
     next_year.setDate(today.getDate() + 365);
     var options = {
       dateFormat: 'yy-mm-dd',
-      minDate: today,
       maxDate: next_year,
     }
     for (k in conf) {
