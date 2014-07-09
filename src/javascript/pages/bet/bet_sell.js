@@ -654,7 +654,7 @@ var BetSell = function() {
 
         },
         get_params: function (element) {
-            var params_arr = new Array();
+            var params_arr = [];
             if (!element) return '';
             var attr = element.attributes;
             var j=0;

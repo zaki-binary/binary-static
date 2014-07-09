@@ -136,7 +136,7 @@ URL.prototype = {
     params_hash_to_string: function(params) {
         var param_string = '';
 
-        var as_array = new Array();
+        var as_array = [];
         for(p_key in params) {
             as_array.push(p_key + '=' + params[p_key]);
         }

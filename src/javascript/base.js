@@ -47,15 +47,6 @@ onUnload.queue(function () {
 
 var bo_url;
 
-Array.prototype.exists = function (x) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == x) {
-            return true;
-        }
-    }
-    return false;
-};
-
 //////////////////////////////////////////////////////////////
 //Purpose: To solve cross domain logged out server problem.
 //Return: Hostname for this page

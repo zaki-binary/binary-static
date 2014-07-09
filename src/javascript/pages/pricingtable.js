@@ -25,7 +25,7 @@ var calculate_button_event = function() {
 var bet_type_select = function() {
     $('#pricing_table_input').find('select[name="bet_type"]').on('change', function() {
         var bet_type = $(this).val();
-        var double_barriers = new Array("RANGE", "UPORDOWN", "EXPIRYRANGE", "EXPIRYMISS");
+        var double_barriers = ["RANGE", "UPORDOWN", "EXPIRYRANGE", "EXPIRYMISS"];
         var is_double_barrier = 0;
 
         for (var i = 0; i < double_barriers.length; i++) {

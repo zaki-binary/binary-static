@@ -397,7 +397,7 @@ var BetPrice = function() {
                     this.update_ui(prices);
                 },
                 prices_from_stream: function(stream) {
-                    var prices = new Array();
+                    var prices = [];
                     for (var i = 0; i < stream.length; i++) {
                         var id = stream[i].id || undefined;
                         var prob = stream[i].prob || undefined;
@@ -411,7 +411,7 @@ var BetPrice = function() {
                     return prices;
                 },
                 prices_from_form: function() {
-                    var prices = new Array();
+                    var prices = [];
                     var order_forms = $('.orderform');
                     var order_forms_count = order_forms ? order_forms.length : 0;
                     if (order_forms_count > 0 ) {

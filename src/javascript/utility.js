@@ -18,7 +18,7 @@ function showLoadingImage(container)
 /////////////////////////////////////////////////////////////////
 function getFormParams(form_obj)
 {
-    var params_arr = new Array();
+    var params_arr = [];
     if (! form_obj) return '';
     var elem = form_obj.elements;
 
@@ -122,7 +122,7 @@ function get_highest_zindex(selector) {
     if (!selector) {
         selector = 'div,p,area,nav,section,header,canvas,aside,span';
     }
-    all = new Array();
+    var all = [];
     var _store_zindex = function () {
         if ($(this).is(':visible')) {
             var z = $(this).css("z-index");
@@ -246,7 +246,7 @@ function element_data_attrs(element) {
  */
 function element_data_attrs_as_form_params(element) {
     var data =  element_data_attrs(element);
-    var params = new Array();
+    var params = [];
     var key;
     var val;
     for (key in data) {
