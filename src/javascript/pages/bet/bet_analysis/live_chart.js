@@ -3,7 +3,7 @@ BetAnalysis.tab_live_chart = function () {
     return {
         reset: function() {
             if(typeof live_chart !== "undefined") {
-                if(live_chart != null) {
+                if(live_chart !== null) {
                     live_chart.close_chart();
                     live_chart = null;
                 }
@@ -106,7 +106,7 @@ BetAnalysis.tab_live_chart = function () {
             $('.live_charts_stream_button').each(function(){
                 available_hours.push(parseInt($(this).attr("id")));
             });
-            available_hours.sort(function(a,b){return a-b});
+            available_hours.sort(function(a,b) { return a - b; });
             for(hours in available_hours) {
                 if(chart_duration <= available_hours[hours]) {
                     return available_hours[hours];

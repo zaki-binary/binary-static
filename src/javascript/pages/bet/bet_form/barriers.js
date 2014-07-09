@@ -80,12 +80,12 @@ BetForm.Barriers.prototype = {
             $('.barrier_text_absolute').show();
             $('.barrier_text_relative').hide();
             $('[name=barrier_type]', BetForm.attributes.form_selector()).val('absolute');
-            this.each(function(barrier) { barrier.switch_to('absolute') });
+            this.each(function(barrier) { barrier.switch_to('absolute'); });
         } else if(barrier_type == 'relative') {
             $('.barrier_text_absolute').hide();
             $('.barrier_text_relative').show();
             $('[name=barrier_type]', BetForm.attributes.form_selector()).val('relative');
-            this.each(function(barrier) { barrier.switch_to('relative') });
+            this.each(function(barrier) { barrier.switch_to('relative'); });
         }
     },
     each: function(method) {
@@ -153,14 +153,14 @@ BetForm.Barriers.Barrier.prototype = {
                 if(this.barrier_type == 'relative') {
                     if(value > 0) {
                         barrier_prefix = "+";
-                    } else if(value == 0) {
+                    } else if(value === 0) {
                         barrier_prefix = "+";
                         value = this.min_value();
                     }
                 } else {
                     if(value < 0) {
                         value = BetForm.spot.value();
-                    } else if(value == 0) {
+                    } else if(value === 0) {
                         value = this.to_absolute_value(this.min_value());
                     }
                 }

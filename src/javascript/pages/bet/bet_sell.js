@@ -507,7 +507,7 @@ var BetSell = function() {
 
                         var duration = now_time_con.attr('duration'); // need now duration to subtract from end duration
                         if(parseInt(duration) > 0) { // if now duration is positive then start the timer for end date
-                            if(con.find('#end_time_container').attr('duration') != '') {
+                            if(con.find('#end_time_container').attr('duration') !== '') {
                                 duration = parseInt(con.find('#end_time_container').attr('duration')) - parseInt(duration);
                                 if (duration > 0) {
                                     that.start_end_timer(con, 'end_time_container', 'now_time_container', 'trade_date_end', duration); // end timer
@@ -598,7 +598,7 @@ var BetSell = function() {
                     second      : { value: time_obj.second, text: text_second, text_plural: text_seconds, interval: 1 },
                     is_inverse  : time_obj['is_inverse'],
                 };
-                that.create_timer(con.find('#' + container_id), timer_input)
+                that.create_timer(con.find('#' + container_id), timer_input);
 
             }
         },
@@ -765,7 +765,7 @@ var BetSell = function() {
                 } else {
                     that.sell_at_market(this);
                 }
-                that.enable_
+                that.enable_;
                 return false;
             });
         },
@@ -867,10 +867,10 @@ var BetSell = function() {
                     if (url && typeof (EventSource) !== "undefined") {
                         this._stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
-                        this._stream.onmessage = function (e) {
+                        this._stream.onmessage = function(e) {
                             that.process_message(e.data);
-                        }
-                        this._stream.addEventListener("ping", function(e) { return true });
+                        };
+                        this._stream.addEventListener("ping", function(e) { return true; });
                         return true;
                     } else {
                         var err_msg = "We are not able to stream live prices at the moment. To enjoy live streaming of prices try refreshing the page, if you get this issue after repeated attempts try a different browser";
@@ -937,7 +937,7 @@ var BetSell = function() {
                     var spark = $('<div id="sell_price_sparkline"></div>');
                     container.append(spark);
                     spark.show();
-                    $('#sell_price_container').on('mouseover', '#sell_price_sparkline canvas', function () { $('#jqstooltip').css('z-index', get_highest_zindex() + 100) });
+                    $('#sell_price_container').on('mouseover', '#sell_price_sparkline canvas', function () { $('#jqstooltip').css('z-index', get_highest_zindex() + 100); });
                 },
                 update: function(val) {
                     var that = this;
@@ -1038,7 +1038,7 @@ var BetSell = function() {
                         timestring += duration.seconds() + ' ' + input.second.text_plural;
                         count++;
                     }
-                    if (count == 0) {
+                    if (count === 0) {
                         that.resubmit_sell_at_market();
                     } else {
                         selector.html(timestring);

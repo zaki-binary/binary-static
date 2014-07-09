@@ -8,7 +8,7 @@ function currencyConvertorCalculator()
 
     var i=0;
     $('#currencyfrom').find('option').each(function(){
-        if (this.selected != true)
+        if (this.selected !== true)
         {
             currencyto.options[i] = new Option(this.value, this.text);
             i++;
@@ -26,7 +26,7 @@ function checkCurrencyAmountFormat(input_value)
     var displayerror = $('#currencyconverterror');
     var currencysubmit = $('#currencysubmit');
 
-    if (amount == '')
+    if (amount === '')
     {
         displayerror.addClass('invisible button-disabled');
         currencysubmit.attr('disabled', 'disabled').addClass('button-disabled').parents('.button').addClass('button-disabled');

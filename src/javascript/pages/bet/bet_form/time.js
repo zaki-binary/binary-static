@@ -244,10 +244,10 @@ BetForm.TradingTime.prototype = {
         } else if (start_time.utc().date() != time.utc().date()) {
             units = 'd';
             amount = time.diff(start_time, 'day');
-        } else if(diff % (60 * 60) == 0) {
+        } else if(diff % (60 * 60) === 0) {
             units = 'h';
             amount = Math.ceil(diff / (60 * 60 * 1000));
-        } else if(diff % 60 == 0) {
+        } else if(diff % 60 === 0) {
             units = 'm';
             amount = Math.ceil(diff / (60 * 1000));
         } else  {
@@ -620,7 +620,7 @@ BetForm.Time.EndTime.prototype = {
         //Add Today, to make it selectable.
         var min_unit = this.trading_time.min_unit();
         var dates = this.trading_time.trading_dates();
-        if(min_unit.units != "d" || min_unit.min == 0) {
+        if(min_unit.units !== "d" || min_unit.min === 0) {
             dates.push(now.format("YYYY-MM-DD"));
         }
         this.date_picker.show(dates);

@@ -131,10 +131,10 @@ BetForm.attributes = function() {
                 return amount;
             },
             is_amount_payout: function() {
-                return ($('#amount_type').val() == "payout")
+                return ($('#amount_type').val() == "payout");
             },
             is_amount_stake: function() {
-                return ($('#amount_type').val() == "stake")
+                return ($('#amount_type').val() == "stake");
             },
             amount_type: function() {
                 return $('#amount_type', this.form_selector()).val();

@@ -55,7 +55,7 @@ LiveChartIndicator['Barrier'].prototype = {
         if (this.axis == 'y') {
             that.chart.yAxis[0].addPlotLine(plot_option);
         } else {
-            that.chart.xAxis[0].addPlotLine(plot_option)
+            that.chart.xAxis[0].addPlotLine(plot_option);
         }
         this.painted = true;
     }

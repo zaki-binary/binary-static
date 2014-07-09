@@ -250,7 +250,7 @@ var BetForm = function () {
                         BetAnalysis.tab_last_digit.hide_tab();
                         if (BetAnalysis.was_showing_tab('tab_intradayprices')
                          || BetAnalysis.was_showing_tab('tab_last_digit')) {
-                        BetAnalysis.show_tab('tab_pricing_table')
+                            BetAnalysis.show_tab('tab_pricing_table');
                         }
                     } else if(analysis_tab == 'last_digit') {
                         // We should show exactly one of these
@@ -259,7 +259,7 @@ var BetForm = function () {
                         BetAnalysis.tab_intradayprices.hide_tab();
                         if (BetAnalysis.was_showing_tab('tab_intradayprices')
                          || BetAnalysis.was_showing_tab('tab_pricing_table')) {
-                        BetAnalysis.show_tab('tab_last_digit')
+                            BetAnalysis.show_tab('tab_last_digit');
                         }
                     } else if(analysis_tab == 'intradayprices') {
                         // We should show exactly one of these
@@ -268,7 +268,7 @@ var BetForm = function () {
                         BetAnalysis.tab_last_digit.hide_tab();
                         if (BetAnalysis.was_showing_tab('tab_last_digit')
                          || BetAnalysis.was_showing_tab('tab_pricing_table')) {
-                        BetAnalysis.show_tab('tab_intradayprices')
+                            BetAnalysis.show_tab('tab_intradayprices');
                         }
                     }
                 },
@@ -288,7 +288,7 @@ var BetForm = function () {
                     //Wrong tab selected? Select the right one.
                     //Whe wrong tab? Caching, we build the frame before we build the form and sometimes there is no formname attribute in the url.
                     var form_name = BetForm.attributes.form_name();
-                    if($('#bets_tab_' + form_name).length > 0 && $('#bets_tab_' + form_name + '.active.tm-li').length == 0) {
+                    if($('#bets_tab_' + form_name).length > 0 && $('#bets_tab_' + form_name + '.active.tm-li').length === 0) {
                         $('#betsTab .active.tm-li').removeClass('active');
                         $('#bets_tab_' + form_name + '.tm-li').addClass('active');
                     }
@@ -465,13 +465,13 @@ var BetForm = function () {
                         }
 
                         //If nothing was selected try to select the default from backend.
-                        if($('#bet_underlying').val() == null) {
+                        if($('#bet_underlying').val() === null) {
                             $('#bet_underlying').val(old_value);
                         }
                     }
 
                     //If nothing was sent selected by the backend then select the first one.
-                    if($('#bet_underlying').val() == null) {
+                    if($('#bet_underlying').val() === null) {
                         $('#bet_underlying').val($('#bet_underlying option:eq(0)').val());
                     }
                 },
@@ -518,7 +518,7 @@ var BetForm = function () {
                     var me = BetForm.amount;
                     me.update_calculation_value();
                     BetForm.attributes.model.amount(me.calculation_value);
-                    BetPrice.order_form.update()
+                    BetPrice.order_form.update();
                     //No need to panic unless the user actually entered a ','(188).
                     if(event.keyCode == 188) {
                         var amount = $(this).val();
@@ -529,7 +529,7 @@ var BetForm = function () {
                     var me = BetForm.amount;
                     me.update_calculation_value();
                     BetForm.attributes.model.amount(me.calculation_value);
-                    BetPrice.order_form.update()
+                    BetPrice.order_form.update();
                     $('#amount').val(me.calculation_value);
                 },
                 update_calculation_value: function() {

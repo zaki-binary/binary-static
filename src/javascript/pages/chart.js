@@ -15,7 +15,7 @@ var rearrange_compare_underlying_list = function () {
 
         li.removeClass().addClass('line_'+(index+1));
 
-        if (index == 0) {
+        if (index === 0) {
             instrument.attr('checked', 'checked');
         }
     });
@@ -260,7 +260,7 @@ function listen_to_chart_element () {
 }
 
 var draw_chart = function (callback_after_complete) {
-    if($("#chart_director_imageholder").length == 0){
+    if($("#chart_director_imageholder").length === 0){
         return;
     }
 

@@ -59,12 +59,12 @@ var sidebar_scroll = function(elm_selector) {
             sticky_navigation();
 
             for (var i = 0; i < length; i++) {
-                if ($(window).scrollTop() == 0 || $(this).scrollTop() >= $('.section:eq(' + i + ')').offset().top - 5) {
+                if ($(window).scrollTop() === 0 || $(this).scrollTop() >= $('.section:eq(' + i + ')').offset().top - 5) {
                     sidebar_nav.find('li').each(function() {
                         $(this).removeClass('selected');
                     });
 
-                    if ($(window).scrollTop() == 0) {
+                    if ($(window).scrollTop() === 0) {
                         // We're at the top of the screen, so highlight first nav item
                         sidebar_nav.find('li:first-child').addClass('selected');
                     } else if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -169,7 +169,7 @@ var home_bomoverlay = {
                 var regexS = "[\\?&]"+name+"=([^&#]*)";
                 var regex = new RegExp(regexS);
                 var results = regex.exec(window.location.href);
-                return (results == null)? null:results[1];
+                return (results === null)? null:results[1];
             }
         }
     },

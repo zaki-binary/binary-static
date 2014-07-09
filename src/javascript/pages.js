@@ -45,7 +45,7 @@ var asset_index_init = function() {
     var tabset_name = "#asset-tabs";
     // jQueryUI tabs
     $(tabset_name).tabs();
-}
+};
 
 function confirm_popup_action() {
     SpotLight.attach_click_event('a.tm-a-2', function (e){

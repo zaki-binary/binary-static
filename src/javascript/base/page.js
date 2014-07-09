@@ -34,7 +34,7 @@ var Client = function() {
     this.loginid =  $.cookie('loginid');
     this.is_logged_in = false;
     this.is_real = false;
-    if(this.loginid == null || typeof this.loginid == "undefined") {
+    if(this.loginid === null || typeof this.loginid === "undefined") {
         this.type = 'logged_out';
     } else if(/VRT/.test(this.loginid)) {
         this.type = 'virtual';
@@ -341,7 +341,7 @@ Header.prototype = {
                 }
             });
             $(input).blur(function() {
-                if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                if (input.val() === '' || input.val() == input.attr('placeholder')) {
                     input.val(input.attr('placeholder'));
                 }
             });
@@ -356,7 +356,7 @@ Header.prototype = {
     },
     start_clock: function() {
         var clock = $('#gmt-clock');
-        if (clock.length == 0) {
+        if (clock.length === 0) {
             return;
         }
 
@@ -403,7 +403,7 @@ Header.prototype = {
 var ToolTip = function() {
     this.tooltip = $('#tooltip');
 
-    if (this.tooltip.length == 0) {
+    if (this.tooltip.length === 0) {
         this.tooltip = $('<div id="tooltip"></div>');
         this.tooltip.css('display', 'none')
             .appendTo('body');
@@ -427,7 +427,7 @@ ToolTip.prototype = {
         targets.on('mouseenter', function(e) {
             tip         = $(this).attr( 'title' );
 
-            if( !tip || tip == '' )
+            if( !tip || tip === '' )
                 return false;
 
             that.showing.target = $(this);

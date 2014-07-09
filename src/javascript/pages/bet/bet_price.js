@@ -39,7 +39,7 @@ var BetPrice = function() {
                   url     : url,
                   dataType: 'html',
                   data    : this.params(),
-                  success : function(data) { that.price_update(data) },
+                  success : function(data) { that.price_update(data); },
                 })).fail(function ( jqXHR, textStatus ) {
                     that.error_handler();
                 });
@@ -96,8 +96,8 @@ var BetPrice = function() {
                 async   : true,
                 data    : data,
                 timeout : timeout,
-                success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR) },
-                error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp) },
+                success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR); },
+                error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp); },
             }));
             $('.price_box').fadeTo(200, 0.6);
         },
@@ -220,7 +220,7 @@ var BetPrice = function() {
                             var tick = {
                                 epoch: data[1],
                                 quote: data[2],
-                            }
+                            };
                             if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
                                 $self.applicable_ticks.push(tick.quote);
                                 $self.digit_tick_count++;
@@ -242,7 +242,7 @@ var BetPrice = function() {
                             }
                         }
                     };
-                    $self.ev.onerror = function() { $self.ev.close() };
+                    $self.ev.onerror = function() { $self.ev.close(); };
                 },
                 evaluate_digit_outcome: function() {
                     var $self = this;
@@ -333,16 +333,16 @@ var BetPrice = function() {
                     if(url && typeof (EventSource) !== "undefined") {
                         price_stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
-                        price_stream.onmessage = function (e) {
+                        price_stream.onmessage = function(e) {
                             that.process_message(e.data);
-                        }
-                        price_stream.addEventListener("ping", function(e) { return true });
+                        };
+                        price_stream.addEventListener("ping", function(e) { return true; });
                     } else {
                         $('#spot_spark').html("<span title=\"" + text.localize("We are not able to stream live prices at the moment. To enjoy live streaming of prices try refreshing the page, if you get this issue after repeated attempts try a different browser") + "\">" + text.localize("No Live price update") + "</span>");
                     }
                 },
                 stop: function() {
-                    if (price_stream != null) {
+                    if (price_stream !== null) {
                         price_stream.close();
                         price_stream = null;
                     }
@@ -367,7 +367,7 @@ var BetPrice = function() {
                         BetAnalysis.tab_last_digit.update(BetForm.attributes.underlying(), bet.spot);
                     }
                 },
-            }
+            };
         }(),
         order_form: function() {
             return {
@@ -536,7 +536,7 @@ var BetPrice = function() {
                 show_error: function(form, error) {
                     var buy_button= form.parent();
                     var error_box = buy_button.parents().siblings(".bet-error-box");
-                    if (error == null) {
+                    if (error === null) {
                         error_box.hide();
                         buy_button.show();
                     } else {
