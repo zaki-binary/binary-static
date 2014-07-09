@@ -108,7 +108,7 @@ module.exports = function(grunt) {
 		    'src/javascript/livechart.js',
 		    'src/javascript/pages/livechart.js',
 		],
-		dest: 'dist/js/binary.js',
+		dest: 'dist/js/binary_<%= pkg.version %>.js',
 	    },
 	},
 	uglify: {
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 		    sourceMapIncludeSources: true,
 		},
 		files: {
-		    'dist/js/binary_<%= pkg.version %>.min.js': ['dist/js/binary.js'],
+		    'dist/js/binary_<%= pkg.version %>.min.js': ['dist/js/binary_<%= pkg.version %>.js'],
 		},
 	    },
 	},
