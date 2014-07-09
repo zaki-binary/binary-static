@@ -142,7 +142,7 @@ function add_click_effect_to_button() {
         .delegate('.button', 'mouseout', function () {
             var class_name = prefix(this.className) + '-hover';
             remove_button_class($(this), class_name);
-        })
+        });
 }
 
 var make_mobile_menu = function () {

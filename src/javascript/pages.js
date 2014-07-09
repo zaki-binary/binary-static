@@ -36,7 +36,7 @@ var trading_times_init = function() {
                   error: function(xhr, textStatus, errorThrown){
                           trading_times.empty().append(textStatus);
                        },
-                })
+                });
          }
      });
 };

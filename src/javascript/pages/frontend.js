@@ -18,7 +18,7 @@ var slider = function() {
             $('.slides_control').css('min-height', '300px');
         }
     }
-}
+};
 
 
 var sidebar_scroll = function(elm_selector) {
@@ -127,21 +127,21 @@ var get_started_behaviour = function() {
     }
 
     var random_market = $('.random-markets');
-    if(random_market.length > 0) {
+    if (random_market.length > 0) {
         sidebar_scroll(random_market);
     }
-}
+};
 
 
 var get_ticker = function() {
     var ticker = $('#hometicker');
     if (ticker.size()) {
-        $.ajax({crossDomain:true, url: page.url.url_for('ticker'), async: true,  dataType: "html"}).done(function(ticks) {
+        $.ajax({ crossDomain: true, url: page.url.url_for('ticker'), async: true, dataType: "html" }).done(function(ticks) {
             ticker.html(ticks);
             ticker.find('ul').simplyScroll();
         });
     }
-}
+};
 
 
 var select_user_country = function() {
@@ -155,11 +155,11 @@ var select_user_country = function() {
             }
         });
     }
-}
+};
 
 var Charts = function(charts) {
     window.open(charts, 'DetWin', 'width=580,height=710,scrollbars=yes,location=no,status=no,menubar=no');
-}
+};
 
 var home_bomoverlay = {
     url : {
@@ -182,7 +182,7 @@ var home_bomoverlay = {
         obj.appendChild(div);
         div.addEventListener('click', function() { this.parentNode.removeChild(this); });
     }
-}
+};
 
 var get_random_download_symbols = function () {
     var indices = $('#random_download_indices');
@@ -206,7 +206,7 @@ var get_random_download_symbols = function () {
             }
         });
     }
-}
+};
 
 var random_symbol_change = function () {
     $('#section-5').on('change', '#random_download_indices', function () {
@@ -242,7 +242,7 @@ var random_symbol_change = function () {
             $('#download_random_data').hide();
         }
     });
-}
+};
 
 var random_download_data = function () {
     $('#section-5').on('click', '#download_random_data', function (e) {
@@ -251,7 +251,7 @@ var random_download_data = function () {
             $(this).attr('href', href);
         }
     });
-}
+};
 
 pjax_config_page('/$|/home', function() {
     return {

@@ -18,11 +18,11 @@ function updateLiveChart(config) {
     }
     live_chart.show_chart();
     chart_closed = false;
-};
+}
 
 var LiveChart = function(config) {
     //Required for inheritence.
-    if(typeof config !== 'undefined') {
+    if (typeof config !== 'undefined') {
         this.config = config;
         this.shift = false;
         if (!config.trade_visualization) {
@@ -30,7 +30,7 @@ var LiveChart = function(config) {
             this.highlight_duration();
         }
     }
-}
+};
 
 LiveChart.prototype = {
     show_chart: function() {
@@ -87,7 +87,7 @@ LiveChart.prototype = {
                 TickTrade.process($self.spot);
             }
         };
-        this.ev.onerror = function() { $self.ev.close() };
+        this.ev.onerror = function() { $self.ev.close(); };
     },
     process_contract: function(trade) {
         if (!this.tradeSeries) {
@@ -127,7 +127,7 @@ LiveChart.prototype = {
                 height: this.config.renderHeight,
                 renderTo: this.config.renderTo,
                 events: {
-                    load: function() { $self.connect_to_stream() }
+                    load: function() { $self.connect_to_stream(); }
                 }
             },
             credits: {
@@ -327,7 +327,7 @@ LiveChartOHLC.prototype.configure_series = function(chart_params) {
         id: 'primary_series',
         type: 'candlestick',
     }];
-}
+};
 
 LiveChartOHLC.prototype.process_data = function(point) {
     var type = point.shift();

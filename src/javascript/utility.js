@@ -106,7 +106,7 @@ function price_moved (item, old_val, new_val) {
        item.removeClass("price_moved_down");
        item.removeClass("price_moved_up");
     }
-};
+}
 
 
 /**
@@ -145,10 +145,10 @@ var get_user_country = function(callback) {
     if(user_country) {
             callback.call(user_country);
     } else {
-        $.ajax({crossDomain:true, url: page.url.url_for('country'), async: true, dataType: "json"}).done(function(response) {
+        $.ajax({ crossDomain: true, url: page.url.url_for('country'), async: true, dataType: "json" }).done(function(response) {
             user_country = response;
             callback.call(response);
-        })
+        });
     }
 };
 
@@ -292,10 +292,10 @@ function attach_date_picker(element, conf) {
     var next_year = new Date();
     next_year.setDate(today.getDate() + 365);
     var options = {
-      dateFormat: 'yy-mm-dd',
-      minDate: today,
-      maxDate: next_year,
-    }
+        dateFormat: 'yy-mm-dd',
+        minDate: today,
+        maxDate: next_year,
+    };
     for (k in conf) {
         options[k] = conf[k];
     }
@@ -321,7 +321,7 @@ function attach_time_picker(element, conf) {
         minuteText: text.localize("Minute"),
         minTime: {},
         maxTime: {},
-    }
+    };
     var data_attrs = element_data_attrs(target);
     var regex = /^time\:(.+)/;
     for (attr in data_attrs) {

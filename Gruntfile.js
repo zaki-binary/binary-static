@@ -181,7 +181,8 @@ module.exports = function (grunt) {
                     'src/javascript/livechart/highstock-exporting.js',
                     'src/javascript/livechart/highstock.js',
                     'src/javascript/base/pjax-lib.js',
-                    'src/javascript/gtm.js'
+                    'src/javascript/base/jquery_color_animation.js',
+                    'src/javascript/gtm.js'                    
                 ],
             },
             all: [

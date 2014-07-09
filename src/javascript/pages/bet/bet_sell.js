@@ -649,7 +649,7 @@ var BetSell = function() {
                     second      : { value: time_obj.second, text: text_second, text_plural: text_seconds, interval: 1 },
                     is_negative : time_obj['is_negative'],
                 };
-                that.create_timer(con.find('#' + container_id), timer_input)
+                that.create_timer(con.find('#' + container_id), timer_input);
             }
 
         },
@@ -717,10 +717,10 @@ var BetSell = function() {
                 data    : data,
                 timeout : timeout,
                 success : function (resp, resp_status, jqXHR) {
-                    that.on_sell_bet_success(resp, resp_status, jqXHR)
+                    that.on_sell_bet_success(resp, resp_status, jqXHR);
                 },
                 error   : function (jqXHR, resp_status, exp) {
-                    that.on_sell_bet_error(jqXHR, resp_status, exp)
+                    that.on_sell_bet_error(jqXHR, resp_status, exp);
                 },
             }));
         },
@@ -847,7 +847,7 @@ var BetSell = function() {
                     payout: function() { return dom_element.attr('payout'); },
                     sell_channel: function() { return dom_element.attr('sell_channel'); },
                     controller_action: function () { return dom_element.attr('controller_action'); },
-                    tick_expiry: function() {return dom_element.attr('tick_expiry') || 0},
+                    tick_expiry: function() { return dom_element.attr('tick_expiry') || 0; }
                 }, // data_attr.model
             };
         }, // data_attr

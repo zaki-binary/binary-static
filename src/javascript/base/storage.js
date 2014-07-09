@@ -11,7 +11,7 @@ var isStorageSupported = function(storage) {
     } catch(e) {
         return false;
     }
-}
+};
 
 var Store = function(storage) {
     this.storage = storage;

@@ -103,7 +103,7 @@ var Portfolio = function () {
             } else {
                 console.log(data);
                 var exception = new Error("Invalid server response: " + data);
-                Portfolio.on_price_request_error(jqXHR, resp_status, exception)
+                Portfolio.on_price_request_error(jqXHR, resp_status, exception);
             }
             Portfolio.set_contract_prices(prices);
         },
@@ -143,7 +143,7 @@ var Portfolio = function () {
                         $('p', el.parents('div').children('div')[2]).text(currency + ' ' + price);
                     }
                 }
-            }
+            };
             elements.each(_update_element_price);
         }
     };

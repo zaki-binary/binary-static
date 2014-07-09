@@ -49,7 +49,7 @@ var change_chat_icon = function () {
                   clearInterval(timer);
               }
           }
-      }
+      };
       timer = setInterval(updateIcon, 500);
   }
 };
@@ -94,11 +94,11 @@ var render_desk_widget = function() {
                         } 
                 } 
         }).render();
-}
+};
 
 var add_qq = function() {
     $('#live-help-button').html('<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2597352559&site=qq&menu=yes" id="qq_chat_icon"><span>Live Chat</span></a>');
-}
+};
 
 var show_live_chat_icon = function() {
     if(typeof DESK === 'undefined') {
@@ -137,7 +137,7 @@ var fill_contact_us = function(country) {
         if (!tel.val() || tel.val().length < 6) {
             var country = $(this).val();
             var idd_code = idd_codes[country];
-            tel.val(idd_code ? '+' + idd_code : '')
+            tel.val(idd_code ? '+' + idd_code : '');
         }
     });
 

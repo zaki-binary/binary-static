@@ -73,7 +73,7 @@ InPagePopup.prototype.find_element_popup_content = function(element) {
         }
     }
     return null;
-}
+};
 
 InPagePopup.prototype._ajax_request = function(callback, errback) {
     conf = {};
@@ -83,7 +83,7 @@ InPagePopup.prototype._ajax_request = function(callback, errback) {
     if (errback) conf.error = errback;
     $.ajax(conf);
     return this;
-}
+};
 
 /**
  * fetch contents of the inpage popup via AJAX.
@@ -101,7 +101,7 @@ InPagePopup.prototype.fetch_remote_content = function(show, before_show, after_s
     if (!errback) {
         errback = function(jqxhr, txt_status, err) {
             throw new Error("Failed to fetch contents of the popup: " + err);
-        }
+        };
     }
     var run_callbacks = function (data, txt_status, jqxhr) {
         if (before_show) {
@@ -114,13 +114,13 @@ InPagePopup.prototype.fetch_remote_content = function(show, before_show, after_s
     };
     this._ajax_request(run_callbacks, errback);
     return this;
-}
+};
 
 /**
  * Initialize the container, set the contents and return it.
  */
 InPagePopup.prototype._init_container = function() {
-    this.close()
+    this.close();
     var me = this;
     var container = $('<div class="inpage_popup_container"><a class="close">x</a></div>');
     var content = this.element ? this.find_element_popup_content(this.element) : null;
@@ -175,7 +175,7 @@ InPagePopup.prototype.container = function() {
 };
 
 InPagePopup.prototype.show = function() {
-    this.container().show()
+    this.container().show();
     return this;
 };
 

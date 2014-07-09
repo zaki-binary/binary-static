@@ -1,17 +1,17 @@
-var calculate_button_event = function () {
+var calculate_button_event = function() {
     $('#pricingtable_calculate').on('click', function(e) {
-	e.preventDefault();
+        e.preventDefault();
         var form = $('form[name=pricing_table_input]').get(0);
         var url = page.url.url_for('pricing_table.cgi', getFormParams(form));
-	$('#pricingtable_calculate').hide();
-	$('#pricingtable_calculating').show();
+        $('#pricingtable_calculate').hide();
+        $('#pricingtable_calculating').show();
         $('#pricing_table_prices_div').html('');
         $.ajax({
             url: url,
             data: {
-                    ajax_only: 1,
-                    prices_only:  1,
-                },
+                ajax_only: 1,
+                prices_only: 1,
+            },
         }).done(function(response) {
             $('#pricing_table_prices_div').html(response);
             page.url.update(url);
@@ -20,10 +20,10 @@ var calculate_button_event = function () {
             attach_tabs('#pricing_table_tabs');
         });
     });
-}
+};
 
-var bet_type_select = function () {
-    $('#pricing_table_input').find('select[name="bet_type"]').on('change', function () {
+var bet_type_select = function() {
+    $('#pricing_table_input').find('select[name="bet_type"]').on('change', function() {
         var bet_type = $(this).val();
         var double_barriers = new Array("RANGE", "UPORDOWN", "EXPIRYRANGE", "EXPIRYMISS");
         var is_double_barrier = 0;
@@ -68,9 +68,9 @@ var bet_type_select = function () {
             "html"
         );
     });
-}
+};
 
-var select_underlying_change = function () {
+var select_underlying_change = function() {
     $("#pricingtable_underlying").on("change", function() {
         var underlying = $(this).val();
         // change lower strike
@@ -88,9 +88,9 @@ var select_underlying_change = function () {
             "html"
         );
     });
-}
+};
 
-var select_strike_type = function () {
+var select_strike_type = function() {
     $("#strike_type").on('change', function() {
         var strike_type = $(this).val();
         if (strike_type == 'Moneyness terms') {
@@ -101,9 +101,9 @@ var select_strike_type = function () {
             $("#from_strike_label").show();
         }
     }).change();
-}
+};
 
-var expiry_date_picker = function () {
+var expiry_date_picker = function() {
     var today = new Date();
     var three_month = new Date();
     three_month.setDate(today.getDate() + 60);
@@ -112,16 +112,16 @@ var expiry_date_picker = function () {
     id.datepicker({
         dateFormat: 'yy-mm-dd',
         monthNames: [text.localize('January'), text.localize('February'), text.localize('March'), text.localize('April'), text.localize('May'), text.localize('June'),
-                     text.localize('July'), text.localize('August'), text.localize('September'), text.localize('October'), text.localize('November'), text.localize('December') ],
+            text.localize('July'), text.localize('August'), text.localize('September'), text.localize('October'), text.localize('November'), text.localize('December')],
         dayNamesShort: [text.localize('Su'), text.localize('Mo'), text.localize('Tu'), text.localize('We'),
-                        text.localize('Th'), text.localize('Fr'), text.localize('Sa')],
+            text.localize('Th'), text.localize('Fr'), text.localize('Sa')],
         minDate: today,
         maxDate: three_month,
         onSelect: function(dateText, inst) {
             id.attr("value", dateText);
         },
-    }).datepicker('setDate',"0");
-}
+    }).datepicker('setDate', "0");
+};
 
 function initialize_pricing_table() {
     calculate_button_event();

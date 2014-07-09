@@ -35,7 +35,7 @@ function DateTimePicker(params) {
             $self.setDateTime($self.maxDateTime);
         $self.onChange($self.getDateTime());
     });
-};
+}
 
 DateTimePicker.prototype = {
     getDateTime: function() {
