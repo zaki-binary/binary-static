@@ -134,8 +134,6 @@ URL.prototype = {
         return (this_pathname == url_pathname || '/' + this_pathname == url_pathname);
     },
     params_hash_to_string: function(params) {
-        var param_string = '';
-
         var as_array = [];
         for(var p_key in params) {
             as_array.push(p_key + '=' + params[p_key]);
@@ -317,7 +315,7 @@ Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
         this.update_urls();
-        this.clock_started || this.start_clock();
+        if (!this.clock_started) this.start_clock();
         this.simulate_input_placeholder_for_ie();
     },
     on_unload: function() {
@@ -425,7 +423,7 @@ ToolTip.prototype = {
             title   = false;
 
         targets.on('mouseenter', function(e) {
-            tip         = $(this).attr( 'title' );
+            tip = $(this).attr( 'title' );
 
             if( !tip || tip === '' )
                 return false;

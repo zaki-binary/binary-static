@@ -134,7 +134,9 @@ InPagePopup.prototype._init_container = function() {
     this._container = container;
     container.find('.close').on('click', function() { me.close(); });
     if (this.close_on_escape) {
-        $(document).on('keydown', function (e) { e.which == 27 && me.close(); });
+        $(document).on('keydown', function(e) {
+            if (e.which == 27) me.close();
+        });
     }
     if (this.draggable) {
         handle = this.drag_handle;

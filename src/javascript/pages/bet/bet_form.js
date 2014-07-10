@@ -54,7 +54,7 @@ var BetForm = function () {
 
 
                     var that = this;
-                    this.propagating_enter_pressed;
+
                     var when_enter_pressed = function() {
                         //This is required to avoid key bounce causing 3 different enter pressed event
                         if(!that.propagating_enter_pressed) {

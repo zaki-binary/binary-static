@@ -68,11 +68,11 @@ CookieStorage.prototype = {
         this.initialized = true;
     },
     get: function(key) {
-        this.initialized || this.read();
+        if (!this.initialized) this.read();
         return this.value[key];
     },
     set: function(key, value) {
-        this.initialized || this.read();
+        if (!this.initialized) this.read();
         this.value[key] = value;
         $.cookie(this.cookie_name, JSON.stringify(this.value), {
             expires: this.expires,

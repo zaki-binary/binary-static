@@ -769,7 +769,7 @@ var BetSell = function() {
                 } else {
                     that.sell_at_market(this);
                 }
-                that.enable_;
+                that.enable_button($this);
                 return false;
             });
         },

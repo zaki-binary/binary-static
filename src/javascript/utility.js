@@ -244,7 +244,7 @@ function element_data_attrs_as_form_params(element) {
     var data =  element_data_attrs(element);
     var params = [];
     var key;
-    for (key in data) {
+    for (key in data) if (data.hasOwnProperty(key)) {
         var val = data[key];
         if (val === undefined) continue;
         params.push( key + '=' + encodeURIComponent(val) );
@@ -291,7 +291,7 @@ function attach_date_picker(element, conf) {
         dateFormat: 'yy-mm-dd',
         maxDate: next_year,
     };
-    for (k in conf) {
+    for (k in conf) if (conf.hasOwnProperty(k)) {
         options[k] = conf[k];
     }
     return target.datepicker(options);
@@ -319,7 +319,7 @@ function attach_time_picker(element, conf) {
     };
     var data_attrs = element_data_attrs(target);
     var regex = /^time\:(.+)/;
-    for (attr in data_attrs) {
+    for (attr in data_attrs) if (data_attrs.hasOwnProperty(attr)) {
         var matched = attr.match(regex);
         if (matched) {
             var data = data_attrs[attr];
@@ -346,7 +346,7 @@ function attach_time_picker(element, conf) {
             }
         }
     }
-    for (k in conf) {
+    for (k in conf) if (conf.hasOwnProperty(k)) {
         opts[k] = conf[k];
     }
     return target.timepicker(opts);
@@ -366,7 +366,7 @@ function attach_inpage_popup(element) {
             matched,
             attrs = element_data_attrs(this),
             conf = {};
-        for (attr in attrs) {
+        for (attr in attrs) if (attrs.hasOwnProperty(attr)) {
             matched = attr.match(regx);
             if (matched) {
                 conf[matched[1]] = attrs[attr];
