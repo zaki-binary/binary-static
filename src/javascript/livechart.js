@@ -380,11 +380,11 @@ LiveChartOHLC.prototype.process_ohlc = function(ohlc) {
     this.accept_ticks = true;
 };
 
-LiveChartOHLC.prototype.process_tick = function(tick) {
+LiveChartOHLC.prototype.process_tick = function(tickInput) {
     var tick = {
-        epoch: parseInt(tick[0]) * 1000,
-        quote: parseFloat(tick[1]),
-        squote: tick[1]
+        epoch: parseInt(tickInput[0]) * 1000,
+        quote: parseFloat(tickInput[1]),
+        squote: tickInput[1]
     };
     this.spot = tick.quote;
 

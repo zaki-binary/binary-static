@@ -29,14 +29,15 @@ BetForm.Barriers.prototype = {
                 this.switch_to('absolute');
             }
         } else if (current_barrier_type == 'absolute' && page.settings.get('enable_relative_barrier')) {
-                this.switch_to('relative');
+            this.switch_to('relative');
         }
     },
     init: function() {
         this.barriers = [];
-        var barrier_type = BetForm.attributes.barrier_type();
+        var barrier,
+            barrier_type = BetForm.attributes.barrier_type();
         if($('#bet_H').length > 0) {
-            var barrier = new BetForm.Barriers.Barrier({
+            barrier = new BetForm.Barriers.Barrier({
                     component_id: 'bet_H',
                     calculated_barrier_id: 'betInputBox span.calculated_barrier_from_relative_high',
                     barrier_type: barrier_type,
@@ -47,7 +48,7 @@ BetForm.Barriers.prototype = {
         }
 
         if($('#bet_L').length > 0) {
-            var barrier = new BetForm.Barriers.Barrier({
+            barrier = new BetForm.Barriers.Barrier({
                     component_id: 'bet_L',
                     calculated_barrier_id: 'betInputBox span.calculated_barrier_from_relative_low',
                     barrier_type: barrier_type,
@@ -135,7 +136,7 @@ BetForm.Barriers.Barrier = function(args) {
     this.component_id = args.component_id;
     this.calculated_barrier_id = args.calculated_barrier_id;
     this.barrier_type = args.barrier_type;
-}
+};
 
 BetForm.Barriers.Barrier.prototype = {
     register: function() {

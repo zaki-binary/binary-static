@@ -1,5 +1,5 @@
 var LiveChartConfig = function(params) {
-    params = typeof params !== 'undefined' ? params : {};
+    params = params || {};
     this.renderTo = params['renderTo'] || 'live_chart_div';
     this.renderHeight = params['renderHeight'] || 450;
     this.shift = typeof params['shift'] !== 'undefined' ? params['shift'] : 1;
@@ -25,10 +25,12 @@ var LiveChartConfig = function(params) {
     this.resolution = 'tick';
     this.with_markers = typeof params['with_markers'] !== 'undefined' ? params['with_markers'] : false;
 
-    var res;
-    var hash = window.location.hash;
+    var res,
+        symbol,
+        hash = window.location.hash;
+    
     if (res = hash.match(/^#([A-Za-z0-9_]+):(10min|1h|1d|1w|1m|3m|1y)$/)) {
-        var symbol = markets.by_symbol(res[1]);
+        symbol = markets.by_symbol(res[1]);
         if (symbol) {
             this.symbol = symbol.underlying;
             this.market = symbol.market;
@@ -36,7 +38,7 @@ var LiveChartConfig = function(params) {
         }
     }
     else if (res = hash.match(/^#([A-Za-z0-9_]+):([0-9]+)-([0-9]+)$/)) {
-        var symbol = markets.by_symbol(res[1]);
+         symbol = markets.by_symbol(res[1]);
         if (symbol) {
             this.symbol = symbol.underlying;
             this.market = symbol.market;
@@ -45,7 +47,7 @@ var LiveChartConfig = function(params) {
             this.resolution = this.best_resolution(this.from, this.to);
         }
     } else {
-        var symbol =  markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('R_100');
+        symbol =  markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('R_100');
         this.symbol =  symbol.underlying;
         this.market =  symbol.market;
         var from = params['from'] || LocalStore.get('live_chart.from');

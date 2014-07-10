@@ -233,7 +233,8 @@ BetForm.TradingTime.prototype = {
         var units;
         var amount;
         var start_time = BetForm.attributes.start_time_moment();
-        var time = moment.utc(parseInt(time) * 1000);
+        
+        time = moment.utc(parseInt(time) * 1000);
 
         var diff = time.valueOf() - start_time.valueOf();
         var min_unit = this.min_unit();
@@ -401,8 +402,8 @@ BetForm.TradingTime.prototype = {
             this.trading_info[underlying_symbol][date] = { trading: 0 };
         }
 
-        if(typeof this.trading_info[underlying_symbol][date]['opening'] === "undefined"
-            || typeof this.trading_info[underlying_symbol][date]['closing'] === "undefined") {
+        if(typeof this.trading_info[underlying_symbol][date]['opening'] === "undefined" ||
+            typeof this.trading_info[underlying_symbol][date]['closing'] === "undefined") {
             $.ajax({
                 url: page.url.url_for('trade_get.cgi', '', 'cached'),
                 data: {

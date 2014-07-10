@@ -69,7 +69,7 @@ var Client = function() {
     }
 };
 
-var URL  = function(url) {
+var URL = function(url) {
     this.is_valid = true;
     this.history_supported = window.history && window.history.pushState;
     if(typeof url !== 'undefined') {
@@ -137,7 +137,7 @@ URL.prototype = {
         var param_string = '';
 
         var as_array = [];
-        for(p_key in params) {
+        for(var p_key in params) {
             as_array.push(p_key + '=' + params[p_key]);
         }
 
@@ -479,7 +479,7 @@ ToolTip.prototype = {
         this.tooltip.removeClass('invisible');
 
         var pos_left = target.offset().left + ( target.outerWidth() / 2 ) - ( this.tooltip.outerWidth() / 2 ),
-            pos_top      = target.offset().top - (this.tooltip.outerHeight() + 10);
+            pos_top = target.offset().top - (this.tooltip.outerHeight() + 10);
 
         this.tooltip.removeClass( 'left' );
         this.tooltip.removeClass( 'right' );
@@ -496,7 +496,7 @@ ToolTip.prototype = {
         }
 
         if( pos_top < 0 ) {
-            var pos_top  = target.offset().top + target.outerHeight() + 20;
+            pos_top  = target.offset().top + target.outerHeight() + 20;
             this.tooltip.addClass( 'top' );
         }
 

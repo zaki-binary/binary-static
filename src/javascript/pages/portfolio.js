@@ -115,7 +115,7 @@ var Portfolio = function () {
             var default_price = ((prices && prices['*']) ? prices['*'] : null);
             var _update_element_price = function() {
                 var el = $(this);
-                var price = default_price;
+                var price;
                 data = element_data_attrs(el);
                 var shortcode = data.shortcode;
                 var currency = data.currency;
@@ -129,7 +129,7 @@ var Portfolio = function () {
                 if (default_price !== null && prices[currency][shortcode] === undefined) {
                     prices[currency][shortcode] = default_price;
                 }
-                var price = prices[currency][shortcode];
+                price = prices[currency][shortcode];
                 if (price !== undefined) {
                     if (isNaN(price)) {
                         /* price is not a number, could be an error report. do not use currency nor update

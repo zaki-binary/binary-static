@@ -248,8 +248,8 @@ var BetForm = function () {
                         BetAnalysis.tab_pricing_table.show_tab();
                         BetAnalysis.tab_intradayprices.hide_tab();
                         BetAnalysis.tab_last_digit.hide_tab();
-                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
-                         || BetAnalysis.was_showing_tab('tab_last_digit')) {
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices') ||
+                            BetAnalysis.was_showing_tab('tab_last_digit')) {
                             BetAnalysis.show_tab('tab_pricing_table');
                         }
                     } else if(analysis_tab == 'last_digit') {
@@ -257,8 +257,8 @@ var BetForm = function () {
                         BetAnalysis.tab_last_digit.show_tab();
                         BetAnalysis.tab_pricing_table.hide_tab();
                         BetAnalysis.tab_intradayprices.hide_tab();
-                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
-                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices') ||
+                            BetAnalysis.was_showing_tab('tab_pricing_table')) {
                             BetAnalysis.show_tab('tab_last_digit');
                         }
                     } else if(analysis_tab == 'intradayprices') {
@@ -266,8 +266,8 @@ var BetForm = function () {
                         BetAnalysis.tab_intradayprices.show_tab();
                         BetAnalysis.tab_pricing_table.hide_tab();
                         BetAnalysis.tab_last_digit.hide_tab();
-                        if (BetAnalysis.was_showing_tab('tab_last_digit')
-                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                        if (BetAnalysis.was_showing_tab('tab_last_digit') ||
+                            BetAnalysis.was_showing_tab('tab_pricing_table')) {
                             BetAnalysis.show_tab('tab_intradayprices');
                         }
                     }
@@ -306,7 +306,7 @@ var BetForm = function () {
                     }
 
 
-                    var underlying_symbol = underlying_symbol ? underlying_symbol : BetForm.attributes.model.underlying();
+                    underlying_symbol = underlying_symbol || BetForm.attributes.model.underlying();
                     if (underlying_symbol && markets.by_symbol(underlying_symbol).market.name == market) {
                         params += '&underlying_symbol=' + underlying_symbol;
                     }
@@ -446,18 +446,20 @@ var BetForm = function () {
 
                     return false;
                 },
-                update_for_submarket: function(submarket) {
+                update_for_submarket: function (submarket) {
+                    var index;
+
                     if (submarket) {
                         var old_value = $('#bet_underlying').val();
                         this.clear();
                         if ( submarket == 'all' ) {
                             var len = underlyings_info.length;
-                            for ( var index = 0; index < len; index++ ) {
+                            for ( index = 0; index < len; index++ ) {
                                 this.add(underlyings_info[index]);
                             }
                         } else {
                             var regex_sub_market = new RegExp('\\b'+submarket+'\\b');
-                            for ( var index in underlyings_info ) {
+                            for ( index in underlyings_info ) {
                                 if ( regex_sub_market.test(underlyings_info[index].className) ) {
                                     this.add(underlyings_info[index]);
                                 }

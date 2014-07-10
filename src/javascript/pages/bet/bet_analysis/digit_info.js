@@ -2,8 +2,7 @@ BetAnalysis.DigitInfo = function() {
     this.chart_config = {
         chart: {
                 renderTo:'last_digit_histo',
-                defaultSeriesType:'column',
-                borderWidth:0,
+                defaultSeriesType:'column',                
                 backgroundColor:'#eee',
                 borderWidth:1,
                 borderColor:'#ccc',
@@ -28,7 +27,7 @@ BetAnalysis.DigitInfo = function() {
         plotOptions:{
             column:{
                 shadow:false,
-                borderWidth:.5,
+                borderWidth:0.5,
                 borderColor:'#666',
                 pointPadding:0,
                 groupPadding:0,

@@ -1,8 +1,10 @@
-{  
+{
     "browser": true, // Standard browser globals e.g. `window`, `document`.
-    "sub": true,  // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
+    "sub": true, // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
     "globals": {
         "jQuery": true,
-        "$": true
+        "$": true,
+        "moment": true,
+        "pjax_config_page": true // TODO: this should not be a global
     }
 }

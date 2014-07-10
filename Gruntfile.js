@@ -188,7 +188,7 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 'src/javascript/**/*.js'
-            ],
+            ]
         },
     });
 

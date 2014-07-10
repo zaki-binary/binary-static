@@ -42,7 +42,7 @@ var MenuContent = (function () {
 
                     if (!sub_menu_selected.length)
                     {
-                        var sub_menu_selected = menu_li.find('.tm-a-2:first').addClass('a-active');
+                        sub_menu_selected = menu_li.find('.tm-a-2:first').addClass('a-active');
 
                         if (sub_menu_selected.length)
                         {

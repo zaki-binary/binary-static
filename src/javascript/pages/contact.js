@@ -170,5 +170,7 @@ pjax_config_page('contact', function() {
 });
 
 onLoad.queue_if_id_present(function() {
-    cs_is_available() && show_live_chat_icon();
+    if (cs_is_available()) {
+        show_live_chat_icon();
+    }
 }, 'live-help-button');

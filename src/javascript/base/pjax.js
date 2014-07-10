@@ -92,8 +92,8 @@ PjaxExecQueue.prototype = {
 
 var pjax_config_page = function(url, exec_functions) {
     var functions = exec_functions();
-    functions.onLoad && onLoad.queue_for_url(functions.onLoad, url);
-    functions.onUnload && onUnload.queue_for_url(functions.onUnload, url);
+    if (functions.onLoad) onLoad.queue_for_url(functions.onLoad, url);
+    if (functions.onUnload) onUnload.queue_for_url(functions.onUnload, url);
 };
 
 var init_pjax = function () {

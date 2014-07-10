@@ -238,9 +238,9 @@ function listen_to_chart_element () {
 
                 overlays
                     .filter(':last').after(
-                        '<li><a href="#">'+
-                        chart_overlay_or_new.find('h4').html()
-                        +'</a><input type="checkbox" checked="checked" value="'+previous_selected_radio[chart_overlay_or_new.data('related_input_name')]+'" name="overlay"></li>'
+                        '<li><a href="#">' +
+                        chart_overlay_or_new.find('h4').html() +
+                        '</a><input type="checkbox" checked="checked" value="'+previous_selected_radio[chart_overlay_or_new.data('related_input_name')]+'" name="overlay"></li>'
                     );
 
                 chart_compare_underlying.find('li').each(function (index){

@@ -172,7 +172,7 @@ ClientForm.prototype = {
         var tel = $('#Tel');
         if (!tel.val() || tel.val().length < 6) {
             var idd_code = idd_codes[residence];
-            tel.val(idd_code ? '+' + idd_code : '')
+            tel.val(idd_code ? '+' + idd_code : '');
         }
     },
     on_residence_change: function() {

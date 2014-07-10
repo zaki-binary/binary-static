@@ -132,12 +132,8 @@ function get_highest_zindex(selector) {
         }
     };
     $(selector).each(_store_zindex);
-    if (all.length) {
-        highest = Math.max.apply(Math, all);
-    } else {
-        highest = null;
-    }
-    return highest;
+
+    return all.length ? Math.max.apply(Math, all) : null;
 }
 
 var user_country;
@@ -248,7 +244,6 @@ function element_data_attrs_as_form_params(element) {
     var data =  element_data_attrs(element);
     var params = [];
     var key;
-    var val;
     for (key in data) {
         var val = data[key];
         if (val === undefined) continue;
@@ -286,7 +281,8 @@ function snake_case_to_camel_case(snake, lower_case_first_char, chars) {
  * @param config custom configurations for the datepicker
  */
 function attach_date_picker(element, conf) {
-    var target = $(element);
+    var k,
+        target = $(element);
     if (!target || !target.length) return false;
     var today = new Date();
     var next_year = new Date();
@@ -311,7 +307,7 @@ function attach_date_picker(element, conf) {
  * @param config custom configurations for the timepicker
  */
 function attach_time_picker(element, conf) {
-    var target = $(element);
+    var attr, k, target = $(element);
     if (!target || !target.length) return false;
     var opts = {
         timeSeparator: ':',
@@ -367,8 +363,10 @@ function attach_inpage_popup(element) {
     var popups = [];
     var regx = /^popup-(.+)/;
     targets.each(function () {
-        var attrs = element_data_attrs(this);
-        var conf = {};
+        var attr,
+            matched,
+            attrs = element_data_attrs(this),
+            conf = {};
         for (attr in attrs) {
             matched = attr.match(regx);
             if (matched) {

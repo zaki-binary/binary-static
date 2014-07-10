@@ -410,21 +410,26 @@ var BetPrice = function() {
 
                     return prices;
                 },
-                prices_from_form: function() {
-                    var prices = [];
-                    var order_forms = $('.orderform');
-                    var order_forms_count = order_forms ? order_forms.length : 0;
+                prices_from_form: function () {
+                    
+                    var prices = [],
+                        order_forms = $('.orderform'),
+                        order_forms_count = order_forms ? order_forms.length : 0,
+                        i,
+                        id,
+                        prob,
+                        error;
+                    
                     if (order_forms_count > 0 ) {
-                        for (var i = 0; i < order_forms_count; i++) {
-                            var form = $(order_forms[i]);
-                            var id = $('input[name="display_id"]', form).val();
-                            var prob = $('input[name="prob"]', form).val();
-                            var error = undefined;
-                            var error_box_html = form.parent().parent().parents().siblings(".bet-error-box").html();
+                        for (i = 0; i < order_forms_count; i++) {
+                            id = $('input[name="display_id"]', form).val();
+                            prob = $('input[name="prob"]', form).val();
+                            var form = $(order_forms[i]),
+                                error_box_html = form.parent().parent().parents().siblings(".bet-error-box").html();
                             // We handle payout messages locally and after recalculation
-                            if ( error_box_html.length > 0
-                              && error_box_html != BetForm.amount.payout_err
-                              && error_box_html != BetForm.amount.stake_err) {
+                            if (error_box_html.length > 0 &&
+                                error_box_html != BetForm.amount.payout_err &&
+                                error_box_html != BetForm.amount.stake_err) {
                                 error = error_box.html();
                             }
                             prices.push(this.calculate_price(id, prob, error));
@@ -432,15 +437,14 @@ var BetPrice = function() {
                     } else {
                         var error_boxes = $('#bet_calculation_container').find('.bet-error-box');
                         var count = error_boxes.length;
-                        for (var i = 0; i < count; i++) {
+                        for (i = 0; i < count; i++) {
                             var error_box = $(error_boxes[i]);
-                            var id = error_box.find('#error_display_id').val();
+                            id = error_box.find('#error_display_id').val();
                             if(!id) {
                                 continue;
                             }
-                            var prob = error_box.find('#error_probability_' + id).val();
-
-                            var error = undefined;
+                            prob = error_box.find('#error_probability_' + id).val();
+                            error = undefined;
                             if(error_box.html().length > 0) {
                                 error = error_box.html();
                             }
@@ -497,11 +501,11 @@ var BetPrice = function() {
                         // We're intentionally making payout errors have highest priority
                         // it's something they can fix immediately on this web interface.
 
-                        if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max
-                           || prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
+                        if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
+                            prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
                             err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 + epsilon > bf_amount.stake_max
-                           || prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
+                        } else if (prices[i].price.raw/100 + epsilon > bf_amount.stake_max ||
+                            prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
                             // You probably think there should be two conditions above, but too high stake just
                             // makes for "too high payout" or "no return" errors.
                             err = bf_amount.stake_err;
