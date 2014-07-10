@@ -6,7 +6,7 @@ This repository contains the static Javascript and CSS content of the [Binary.co
 How to work with this project
 =============================
 
-As you can see by doing *View Source* on www.binary.com, the site's Javascript is served from https://binary-com.github.io/binary-static/js/binary_[VERSION].min.js and the CSS is served from https://binary-com.github.io/binary-static/css/binary_[VERSION].min.css
+As you can see by doing *View Source* on www.binary.com, the site's Javascript is served from https://static.binary.com/binary-static/js/binary_[VERSION].min.js and the CSS is served from https://static.binary.com/binary-static/css/binary_[VERSION].min.css (static.binary.com is a CNAME to binary-com.github.io).
 
 Note that the files are served using Github's [pages.github.io](https://pages.github.com/) facilities.
 
@@ -32,6 +32,6 @@ Note: grunt is set up to serve the files on https://localhost using *grunt-contr
 
 To view your work in action on the live [www.binary.com](http://www.binary.com) website, add the following line to your */etc/hosts*:
 
-127.0.0.1 localhost binary-com.github.io
+127.0.0.1 localhost static.binary.com
 
 

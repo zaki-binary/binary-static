@@ -108,7 +108,7 @@ module.exports = function (grunt) {
                     'src/javascript/livechart.js',
                     'src/javascript/pages/livechart.js'
                 ],
-                dest: 'dist/js/binary.js',
+                dest: 'dist/js/binary_<%= pkg.version %>.js'
             },
         },
         uglify: {
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
                     sourceMapIncludeSources: true,
                 },
                 files: {
-                    'dist/js/binary_<%= pkg.version %>.min.js': ['dist/js/binary.js'],
+                    'dist/js/binary_<%= pkg.version %>.min.js': ['dist/js/binary_<%= pkg.version %>.js'],
                 },
             },
         },
@@ -126,6 +126,7 @@ module.exports = function (grunt) {
             main: {
                 files: [
                     { expand: true, src: ['package.json'], dest: 'dist/js/', },
+                    { expand: true, cwd: 'src/config/', src: ['CNAME'], dest: 'dist/', filter: 'isFile' },
                     { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/', },
                     { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images', },
                     { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/css/', },
@@ -135,7 +136,7 @@ module.exports = function (grunt) {
                     { expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/binary-static/css/fonts', },
                     { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/binary-static/images/', },
                     { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/binary-static/css/', },
-                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/binary-static/css/images', }
+                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/binary-static/css/images' }
                 ],
             }
         },
@@ -182,14 +183,14 @@ module.exports = function (grunt) {
                     'src/javascript/livechart/highstock.js',
                     'src/javascript/base/pjax-lib.js',
                     'src/javascript/base/jquery_color_animation.js',
-                    'src/javascript/gtm.js'                    
+                    'src/javascript/gtm.js'
                 ],
             },
             all: [
                 'Gruntfile.js',
                 'src/javascript/**/*.js'
             ]
-        },
+        }
     });
 
     // load the plugin that will complete the task
