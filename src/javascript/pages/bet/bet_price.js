@@ -216,31 +216,36 @@ var BetPrice = function() {
 
                     $self.ev.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
-                        if (data[0] === 'tick') {
-                            var tick = {
-                                epoch: data[1],
-                                quote: data[2],
-                            }
-                            if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
-                                $self.applicable_ticks.push(tick.quote);
-                                $self.digit_tick_count++;
-                                var last_digit = tick.quote.toString().substr(-1);
-                                if (!$('#digit-current').hasClass('flipper')) {
-                                    $('#digit-current').addClass('flipper focus');
-                                }
-                                $('#digit-current').text(last_digit);
-                                $('#digit-count').text($self.digit_tick_count);
+			if (!(data[0] instanceof Array)) {
+			    data = [ data ];
+			}
+			for (var i = 0; i < data.length; i++) {
+			    if (data[i][0] === 'tick') {
+			        var tick = {
+					epoch: data[i][1],
+					quote: data[i][2],
+			        }
+			        if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
+					$self.applicable_ticks.push(tick.quote);
+					$self.digit_tick_count++;
+					var last_digit = tick.quote.toString().substr(-1);
+					if (!$('#digit-current').hasClass('flipper')) {
+					    $('#digit-current').addClass('flipper focus');
+					}
+					$('#digit-current').text(last_digit);
+					$('#digit-count').text($self.digit_tick_count);
 
-                                if ($('#digit-contract-details').css('display') === 'none') {
-                                    $('#digit-contract-details').show();
-                                }
-                            }
+					if ($('#digit-contract-details').css('display') === 'none') {
+					    $('#digit-contract-details').show();
+					}
+					}
 
-                            if ($self.applicable_ticks.length === how_many_ticks) {
-                                $self.evaluate_digit_outcome();
-                                $self.reset();
-                            }
-                        }
+					if ($self.applicable_ticks.length === how_many_ticks) {
+					$self.evaluate_digit_outcome();
+					$self.reset();
+			        }
+			    }
+			}
                     };
                     $self.ev.onerror = function() { $self.ev.close() };
                 },
