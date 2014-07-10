@@ -1,4 +1,4 @@
-Binary-Static
+Binary-Static [![Build Status](https://travis-ci.org/borisyankov/binary-static.png?branch=master)](https://travis-ci.org/borisyankov/binary-static)
 =============
 
 This repository contains the static Javascript and CSS content of the [Binary.com](http://www.binary.com) website.
