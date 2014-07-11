@@ -295,9 +295,13 @@ BetForm.TradingTime.prototype = {
         if(moment.utc().isSame(ms, 'day')) {
             expiry_time = ms.format('HH:mm');
         }
+        if(!moment.utc().isSame(ms, 'day')) {
+            var trading_times = this.get_trading_times(ms.format('YYYY-MM-DD'));
+            expiry_time = moment.utc(trading_times.closing);
+        }
         return {
             expiry_date: ms.format('YYYY-MM-DD'),
-            expiry_time: expiry_time,
+            expiry_time: expiry_time.format('HH:mm:ss'),
             moment: ms
         };
     },
