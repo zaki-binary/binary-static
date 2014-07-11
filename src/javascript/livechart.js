@@ -22,14 +22,14 @@ function updateLiveChart(config) {
 
 var LiveChart = function(config) {
     //Required for inheritence.
-    if (typeof config !== 'undefined') {
-        this.config = config;
-        this.shift = false;
-        if (!config.trade_visualization) {
-            this.on_duration_change();
-            this.highlight_duration();
-        }
-    }
+    if (!config) return;
+    
+    this.config = config;
+    this.shift = false;
+    if (!config.trade_visualization) {
+        this.on_duration_change();
+        this.highlight_duration();
+    }    
 };
 
 LiveChart.prototype = {
@@ -387,6 +387,11 @@ LiveChartOHLC.prototype.process_tick = function(tickInput) {
         squote: tickInput[1]
     };
     this.spot = tick.quote;
+
+    if (this.chart.series) {
+        Rollbar.error("this.chart.series is not initialized");
+        return;
+    }
 
     var data = this.chart.series[0].options.data;
     if (data.length > 0 && data[data.length - 1].x > (tick.epoch - this.candlestick.period)) {

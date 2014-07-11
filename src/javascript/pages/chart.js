@@ -227,8 +227,6 @@ function listen_to_chart_element () {
             $(event.target).removeClass('hover').parents('li').removeClass('hover');
         })
         .on('click', '#chart_overlay_or_new .draw-overlay', function (event){
-            var new_chart_compare_underlying_list = '';
-
             if (chart_overlay_or_new.find('input:checked').val() == 'overlay') {
                 var overlays = chart_compare_underlying.find('li');
 
@@ -246,9 +244,6 @@ function listen_to_chart_element () {
                 chart_compare_underlying.find('li').each(function (index){
                     this.className = 'line_'+(index+1);
                 });
-            }
-            else {
-
             }
         });
 

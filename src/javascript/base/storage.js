@@ -64,7 +64,11 @@ var CookieStorage = function (cookie_name) {
 CookieStorage.prototype = {
     read: function() {
         var cookie_value = $.cookie(this.cookie_name);
-        try { this.value = cookie_value ? JSON.parse(cookie_value) : {}; } finally {} //Expensive(~2 ms) but JSON Parse might fail
+        try {
+            this.value = cookie_value ? JSON.parse(cookie_value) : {};
+        } catch (e) {
+            this.value = {};
+        }
         this.initialized = true;
     },
     get: function(key) {

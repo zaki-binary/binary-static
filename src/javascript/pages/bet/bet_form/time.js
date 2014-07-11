@@ -229,12 +229,12 @@ BetForm.TradingTime.prototype = {
     time_is_duration: function(time) {
         return this.time_is_duration_regex.test(time);
     },
-    convert_to_duration: function(time) {
+    convert_to_duration: function(inputTime) {
         var units;
         var amount;
         var start_time = BetForm.attributes.start_time_moment();
         
-        time = moment.utc(parseInt(time) * 1000);
+        var time = moment.utc(parseInt(inputTime) * 1000);
 
         var diff = time.valueOf() - start_time.valueOf();
         var min_unit = this.min_unit();
@@ -288,20 +288,22 @@ BetForm.TradingTime.prototype = {
             amount: amount
         };
     },
-    virgule_end_time: function(time) {
-        time = parseInt(time) * 1000;
-        var ms = moment.utc(time);
-        var expiry_time = ms.format('HH:mm:ss');
+    virgule_end_time: function(inputTime) {
+        var time = parseInt(inputTime) * 1000,
+            ms = moment.utc(time),
+            expiry_time = ms.format('HH:mm:ss');
+        
         if(moment.utc().isSame(ms, 'day')) {
             expiry_time = ms.format('HH:mm');
         }
         if(!moment.utc().isSame(ms, 'day')) {
             var trading_times = this.get_trading_times(ms.format('YYYY-MM-DD'));
-            expiry_time = moment.utc(trading_times.closing);
+            expiry_time = moment.utc(trading_times.closing).format('HH:mm:ss');
         }
+        
         return {
             expiry_date: ms.format('YYYY-MM-DD'),
-            expiry_time: expiry_time.format('HH:mm:ss'),
+            expiry_time: expiry_time,
             moment: ms
         };
     },
@@ -385,7 +387,7 @@ BetForm.TradingTime.prototype = {
                 async: false
             }).done(function(trading_days) {
                 that.trading_info[underlying_symbol] = {};
-                for (var day in trading_days) {
+                for (var day in trading_days) if (trading_days.hasOwnProperty(day)) {
                     var day_arr = day.split('-');
                     day_arr[1] = parseInt(day_arr[1] - 1);
                     var date = moment.utc(day_arr).format("YYYY-MM-DD");
@@ -468,7 +470,7 @@ BetForm.Time.Duration.prototype = {
     update_units_select: function() {
         $('#duration_units option').remove();
         var configured_units = this.trading_time.configured_units_by_start_time();
-        for (var unit in configured_units) {
+        for (var unit in configured_units) if (configured_units.hasOwnProperty(unit)) {
             this.add_duration_unit(configured_units[unit]);
         }
     },

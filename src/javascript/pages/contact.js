@@ -33,7 +33,7 @@ var change_chat_icon = function () {
           var image_link = page.settings.get('image_link');
           var desk_widget = $('.a-desk-widget');
           var image_str = desk_widget.css('background-image');
-          if(image_str !== null) {
+          if(image_str) {
               desk_widget.css({
                   'background-image': 'url("' + image_link['livechaticon'] + '")',
                   'width': 146,

@@ -761,9 +761,10 @@ var BetSell = function() {
         register: function () {
             var that = this;
             $('#profit-table, #portfolio-table, #bet_container, #statement-table').on('click', '.open_contract_details', function (e) {
+                var $this = $(this);
                 e.preventDefault();
                 _previous_button_clicked = this;
-                that.disable_button($(this));
+                that.disable_button($this);
                 if (that.data_attr(this).model.tick_expiry()) {
                     that.only_show_chart(this);
                 } else {
