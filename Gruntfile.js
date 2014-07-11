@@ -200,5 +200,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
 
     // Task to be performed
+    grunt.registerTask('test', ['jshint']);
     grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };
