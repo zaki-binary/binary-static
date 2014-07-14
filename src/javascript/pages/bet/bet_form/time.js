@@ -14,7 +14,6 @@ BetForm.Time.prototype = {
         this.trading_time.init();
         this.duration.init();
         this.end_time.init();
-        
         $('#expiry_type').val(this.model.expiry_type);
         this.register();
         this.update_ui();
@@ -296,11 +295,11 @@ BetForm.TradingTime.prototype = {
         }
         if(!moment.utc().isSame(ms, 'day')) {
             var trading_times = this.get_trading_times(ms.format('YYYY-MM-DD'));
-            expiry_time = moment.utc(trading_times.closing);
+            expiry_time = moment.utc(trading_times.closing).format('HH:mm:ss');
         }
         return {
             expiry_date: ms.format('YYYY-MM-DD'),
-            expiry_time: expiry_time.format('HH:mm:ss'),
+            expiry_time: expiry_time,
             moment: ms
         };
     },
