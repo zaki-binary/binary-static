@@ -191,9 +191,21 @@ module.exports = function(grunt) {
 		'src/javascript/**/*.js',
 	    ],
 	},
+        bump: {
+           options: {
+                files: ['package.json'],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Release v%VERSION%',
+                commitFiles: ['package.json'],
+                createTag: false,
+                push: false,
+           },
+        },
     });
 
     // load the plugin that will complete the task
+    grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-concat');
