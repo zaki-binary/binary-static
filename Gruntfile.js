@@ -184,6 +184,24 @@ module.exports = function (grunt) {
             'Gruntfile.js',
             'src/javascript/**/*.js'
 	    ]
+	},
+	nightwatch: {
+	    options: {
+	        settings: {
+	            "src_folders": ["src/javascript/t/nightwatch/tests/"]
+	        },
+	        "selenium": {
+	            "start_process": false,
+	            "host": "hub.browserstack.com",
+	            "port": 80
+	        }
+	    }
+	},
+	shell: {                                
+	    nightwatch: {
+	        command: 'nightwatch -e chrome,firefox,ie',
+	        cwd: './src/javascript/t/'
+	    }
 	}
     });
 
@@ -198,6 +216,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-nightwatch');
+    grunt.loadNpmTasks('grunt-shell');
 
     // Task to be performed
     grunt.registerTask('test', ['jshint']);
