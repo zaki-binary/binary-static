@@ -184,28 +184,40 @@ module.exports = function (grunt) {
             'Gruntfile.js',
             'src/javascript/**/*.js'
 	    ]
-	},
-	nightwatch: {
-	    options: {
-	        settings: {
-	            "src_folders": ["src/javascript/t/nightwatch/tests/"]
-	        },
-	        "selenium": {
-	            "start_process": false,
-	            "host": "hub.browserstack.com",
-	            "port": 80
-	        }
-	    }
-	},
-	shell: {                                
-	    nightwatch: {
-	        command: 'nightwatch -e chrome,firefox,ie',
-	        cwd: './src/javascript/t/'
-	    }
-	}
+	},	
+        bump: {
+           options: {
+                files: ['package.json'],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Release v%VERSION%',
+                commitFiles: ['package.json'],
+                createTag: false,
+                push: false,
+           },
+        },
+        nightwatch: {
+            options: {
+                settings: {
+                    "src_folders": ["src/javascript/t/nightwatch/tests/"]
+                },
+                "selenium": {
+                    "start_process": false,
+                    "host": "hub.browserstack.com",
+                    "port": 80
+                }
+            }
+        },
+        shell: {
+            nightwatch: {
+                command: 'nightwatch -e chrome,firefox,ie',
+                cwd: './src/javascript/t/'
+            }
+        }
     });
 
     // load the plugin that will complete the task
+    grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-concat');
