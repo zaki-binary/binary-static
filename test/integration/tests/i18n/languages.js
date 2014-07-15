@@ -13,7 +13,7 @@
 languages.forEach(function(l) {
     module.exports[l.language] = function(browser) {
         browser
-            .url("https://www.binary-beta.com?l=" + l.code)
+            .url('https://www.binary-beta.com?l=' + l.code)
             .waitForElementVisible('body', 5000)
             .assert.containsText('body', l.translation)
         .end();

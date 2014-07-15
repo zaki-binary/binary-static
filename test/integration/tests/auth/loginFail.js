@@ -15,17 +15,5 @@ module.exports = {
             .pause(3000)
             .assert.containsText('body', 'Login ID not given.') 
         .end();
-    },
-    
-    "loginSuccess": function (browser) {
-        browser
-            .url("https://www.binary-beta.com")
-            .waitForElementVisible(loginForm, 5000)
-            .setValue(loginIdField, 'VRTC449697')
-            .setValue(passwordField, 'letmein')
-            .click(loginButton)
-            .pause(5000)
-            .assert.containsText('body', 'incorrect email')
-        .end();
-    }
+    }  
 };
