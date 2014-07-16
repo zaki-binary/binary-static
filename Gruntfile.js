@@ -28,12 +28,19 @@ module.exports = function (grunt) {
 		},
 	    },
 	},
+        rename: {
+            main: {
+                files: [
+                    { src: ['dist/css/binary.css'], dest: 'dist/css/binary_<%= pkg.version %>.css' },
+                ]
+            },
+        },
 	cssmin: {
 	    combine: {
 		files: {
 		    'dist/css/bomredirect.min.css': ['src/css/bomredirect.css'],
 		    'dist/css/grid_<%= pkg.version %>.min.css': ['dist/css/external/grid.css'],
-		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary.css', ]
+		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary_<%= pkg.version %>.css', ]
 		},
 	    },
 	},
@@ -128,6 +135,7 @@ module.exports = function (grunt) {
 		    {expand: true, src: ['package.json'], dest: 'dist/js/',},
 		    {expand: true, cwd: 'src/config/', src: ['CNAME'], dest: 'dist/', filter: 'isFile'},
 		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/',},
+		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/flash/',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/css/',},
 		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts',},
@@ -225,6 +233,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
@@ -233,5 +242,5 @@ module.exports = function (grunt) {
 
     // Task to be performed
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
-    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('default', ['clean', 'compass', 'rename', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };

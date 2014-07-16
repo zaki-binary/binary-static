@@ -14,7 +14,6 @@ BetForm.Time.prototype = {
         this.trading_time.init();
         this.duration.init();
         this.end_time.init();
-        
         $('#expiry_type').val(this.model.expiry_type);
         this.register();
         this.update_ui();
