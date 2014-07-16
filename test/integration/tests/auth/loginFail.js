@@ -3,17 +3,27 @@ var loginForm = '#login-form',
     passwordField = '#login-form input[type=password]',
     loginButton = '#login-form input[type=submit]';
 
+function loginWith(browser, login, password, containsText) {
+  
+    browser
+        .url(browser.globals.url)
+        .waitForElementVisible(loginForm, 5000)
+        .setValue(loginIdField, login)
+        .setValue(passwordField, password)
+        .click(loginButton)
+        .assert.containsText('body', containsText)
+    .end();
+}
+
 module.exports = {
-    
-    "loginFail": function (browser) {
-        browser
-            .url("https://www.binary-beta.com")
-            .waitForElementVisible(loginForm, 5000)
-            .setValue(loginIdField, 'VRTC449697')
-            .setValue(passwordField, 'wrongpassword')
-            .click(loginButton)
-            .pause(3000)
-            .assert.containsText('body', 'Login ID not given.') 
-        .end();
-    }  
+
+    "loginFailNoPassword": function (browser) {
+        loginWith(browser, 'VRTC449697', '', 'Password not given.');
+    },
+    "loginFailNoLogin": function (browser) {
+        loginWith(browser, '', '', 'Login ID not given.');
+    },
+    "loginFailAccountUnavailable": function (browser) {
+        loginWith(browser, 'VRTC449697', 'wrongpassword', 'account is unavailable');
+    }
 };

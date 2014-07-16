@@ -199,7 +199,7 @@ module.exports = function (grunt) {
         nightwatch: {
             options: {
                 settings: {
-                    "src_folders": ["src/javascript/t/nightwatch/tests/"]
+                    "src_folders": ["test/integration/tests/"]
                 },
                 "selenium": {
                     "start_process": false,
@@ -211,7 +211,7 @@ module.exports = function (grunt) {
         shell: {
             nightwatch: {
                 command: 'nightwatch -e chrome,firefox,ie',
-                cwd: './src/javascript/t/'
+                cwd: 'test/integration'
             }
         }
     });
@@ -232,6 +232,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
 
     // Task to be performed
-    grunt.registerTask('test', ['jshint']);
+    grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
     grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };

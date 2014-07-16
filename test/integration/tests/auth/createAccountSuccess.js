@@ -7,7 +7,7 @@ module.exports = {
     
     "createAccountSuccess": function (browser) {
         browser
-            .url('https://www.binary-beta.com')
+            .url(browser.globals.url)
             .waitForElementVisible(singinForm, 5000)
             .setValue(signinEmailField, 'binary-test@mailinator.com')
             .setValue(signinPasswordField, 'password123')

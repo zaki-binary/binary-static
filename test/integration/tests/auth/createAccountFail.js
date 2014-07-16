@@ -4,10 +4,10 @@ var singinForm = '#virtual-acc-form',
     signinButton = '#virtual-acc-form input[type=submit]';
 
 module.exports = {
-        
+
     "createAccountFail": function (browser) {
         browser
-            .url('https://www.binary-beta.com')
+            .url(browser.globals.url)
             .waitForElementVisible(singinForm, 5000)
             .setValue(signinEmailField, 'incorrect')
             .setValue(signinPasswordField, '')
@@ -15,5 +15,5 @@ module.exports = {
             .pause(5000)
             .assert.containsText('body', 'incorrect email')
         .end();
-    }    
+    }
 };

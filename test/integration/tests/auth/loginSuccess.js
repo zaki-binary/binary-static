@@ -7,7 +7,7 @@ module.exports = {
     
     "loginSuccess": function (browser) {
         browser
-            .url('https://www.binary-beta.com')
+            .url(browser.globals.url)
             .waitForElementVisible(loginForm, 5000)
             .setValue(loginIdField, 'VRTC449697')
             .setValue(passwordField, 'letmein')

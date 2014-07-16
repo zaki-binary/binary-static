@@ -2,7 +2,7 @@
 
     "checkRandomRates": function (browser) {
         browser
-            .url('https://www.binary-beta.com')
+            .url(browser.globals.url)
             .waitForElementVisible('body', 5000)
             .click('#trading_link a')
             .waitForElementVisible('body', 5000)
