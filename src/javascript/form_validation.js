@@ -54,7 +54,7 @@ function set_account_broker_code()
         var form_object = $('#openAccForm');
 
         // returned error message and redirect client back to account opening form page if there is connection error
-        if (form_object.length && broker_code != '')
+        if (form_object.length && broker_code !== '')
         {
             var hidden_broker = $('#broker');
             hidden_broker.attr('value', broker_code);

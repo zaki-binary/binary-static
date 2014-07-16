@@ -228,11 +228,12 @@ BetForm.TradingTime.prototype = {
     time_is_duration: function(time) {
         return this.time_is_duration_regex.test(time);
     },
-    convert_to_duration: function(time) {
+    convert_to_duration: function(inputTime) {
         var units;
         var amount;
         var start_time = BetForm.attributes.start_time_moment();
-        var time = moment.utc(parseInt(time) * 1000);
+        
+        var time = moment.utc(parseInt(inputTime) * 1000);
 
         var diff = time.valueOf() - start_time.valueOf();
         var min_unit = this.min_unit();
@@ -243,10 +244,10 @@ BetForm.TradingTime.prototype = {
         } else if (start_time.utc().date() != time.utc().date()) {
             units = 'd';
             amount = time.diff(start_time, 'day');
-        } else if(diff % (60 * 60) == 0) {
+        } else if(diff % (60 * 60) === 0) {
             units = 'h';
             amount = Math.ceil(diff / (60 * 60 * 1000));
-        } else if(diff % 60 == 0) {
+        } else if(diff % 60 === 0) {
             units = 'm';
             amount = Math.ceil(diff / (60 * 1000));
         } else  {
@@ -286,10 +287,11 @@ BetForm.TradingTime.prototype = {
             amount: amount
         };
     },
-    virgule_end_time: function(time) {
-        time = parseInt(time) * 1000;
-        var ms = moment.utc(time);
-        var expiry_time = ms.format('HH:mm:ss');
+    virgule_end_time: function(inputTime) {
+        var time = parseInt(inputTime) * 1000,
+            ms = moment.utc(time),
+            expiry_time = ms.format('HH:mm:ss');
+        
         if(moment.utc().isSame(ms, 'day')) {
             expiry_time = ms.format('HH:mm');
         }
@@ -297,6 +299,7 @@ BetForm.TradingTime.prototype = {
             var trading_times = this.get_trading_times(ms.format('YYYY-MM-DD'));
             expiry_time = moment.utc(trading_times.closing).format('HH:mm:ss');
         }
+        
         return {
             expiry_date: ms.format('YYYY-MM-DD'),
             expiry_time: expiry_time,
@@ -383,7 +386,7 @@ BetForm.TradingTime.prototype = {
                 async: false
             }).done(function(trading_days) {
                 that.trading_info[underlying_symbol] = {};
-                for (var day in trading_days) {
+                for (var day in trading_days) if (trading_days.hasOwnProperty(day)) {
                     var day_arr = day.split('-');
                     day_arr[1] = parseInt(day_arr[1] - 1);
                     var date = moment.utc(day_arr).format("YYYY-MM-DD");
@@ -404,8 +407,8 @@ BetForm.TradingTime.prototype = {
             this.trading_info[underlying_symbol][date] = { trading: 0 };
         }
 
-        if(typeof this.trading_info[underlying_symbol][date]['opening'] === "undefined"
-            || typeof this.trading_info[underlying_symbol][date]['closing'] === "undefined") {
+        if(typeof this.trading_info[underlying_symbol][date]['opening'] === "undefined" ||
+            typeof this.trading_info[underlying_symbol][date]['closing'] === "undefined") {
             $.ajax({
                 url: page.url.url_for('trade_get.cgi', '', 'cached'),
                 data: {
@@ -466,7 +469,7 @@ BetForm.Time.Duration.prototype = {
     update_units_select: function() {
         $('#duration_units option').remove();
         var configured_units = this.trading_time.configured_units_by_start_time();
-        for (var unit in configured_units) {
+        for (var unit in configured_units) if (configured_units.hasOwnProperty(unit)) {
             this.add_duration_unit(configured_units[unit]);
         }
     },
@@ -623,7 +626,7 @@ BetForm.Time.EndTime.prototype = {
         //Add Today, to make it selectable.
         var min_unit = this.trading_time.min_unit();
         var dates = this.trading_time.trading_dates();
-        if(min_unit.units != "d" || min_unit.min == 0) {
+        if(min_unit.units !== "d" || min_unit.min === 0) {
             dates.push(now.format("YYYY-MM-DD"));
         }
         this.date_picker.show(dates);

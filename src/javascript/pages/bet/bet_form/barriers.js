@@ -29,14 +29,15 @@ BetForm.Barriers.prototype = {
                 this.switch_to('absolute');
             }
         } else if (current_barrier_type == 'absolute' && page.settings.get('enable_relative_barrier')) {
-                this.switch_to('relative');
+            this.switch_to('relative');
         }
     },
     init: function() {
         this.barriers = [];
-        var barrier_type = BetForm.attributes.barrier_type();
+        var barrier,
+            barrier_type = BetForm.attributes.barrier_type();
         if($('#bet_H').length > 0) {
-            var barrier = new BetForm.Barriers.Barrier({
+            barrier = new BetForm.Barriers.Barrier({
                     component_id: 'bet_H',
                     calculated_barrier_id: 'betInputBox span.calculated_barrier_from_relative_high',
                     barrier_type: barrier_type,
@@ -47,7 +48,7 @@ BetForm.Barriers.prototype = {
         }
 
         if($('#bet_L').length > 0) {
-            var barrier = new BetForm.Barriers.Barrier({
+            barrier = new BetForm.Barriers.Barrier({
                     component_id: 'bet_L',
                     calculated_barrier_id: 'betInputBox span.calculated_barrier_from_relative_low',
                     barrier_type: barrier_type,
@@ -80,12 +81,12 @@ BetForm.Barriers.prototype = {
             $('.barrier_text_absolute').show();
             $('.barrier_text_relative').hide();
             $('[name=barrier_type]', BetForm.attributes.form_selector()).val('absolute');
-            this.each(function(barrier) { barrier.switch_to('absolute') });
+            this.each(function(barrier) { barrier.switch_to('absolute'); });
         } else if(barrier_type == 'relative') {
             $('.barrier_text_absolute').hide();
             $('.barrier_text_relative').show();
             $('[name=barrier_type]', BetForm.attributes.form_selector()).val('relative');
-            this.each(function(barrier) { barrier.switch_to('relative') });
+            this.each(function(barrier) { barrier.switch_to('relative'); });
         }
     },
     each: function(method) {
@@ -135,7 +136,7 @@ BetForm.Barriers.Barrier = function(args) {
     this.component_id = args.component_id;
     this.calculated_barrier_id = args.calculated_barrier_id;
     this.barrier_type = args.barrier_type;
-}
+};
 
 BetForm.Barriers.Barrier.prototype = {
     register: function() {
@@ -153,14 +154,14 @@ BetForm.Barriers.Barrier.prototype = {
                 if(this.barrier_type == 'relative') {
                     if(value > 0) {
                         barrier_prefix = "+";
-                    } else if(value == 0) {
+                    } else if(value === 0) {
                         barrier_prefix = "+";
                         value = this.min_value();
                     }
                 } else {
                     if(value < 0) {
                         value = BetForm.spot.value();
-                    } else if(value == 0) {
+                    } else if(value === 0) {
                         value = this.to_absolute_value(this.min_value());
                     }
                 }

@@ -36,7 +36,7 @@ var trading_times_init = function() {
                   error: function(xhr, textStatus, errorThrown){
                           trading_times.empty().append(textStatus);
                        },
-                })
+                });
          }
      });
 };
@@ -45,7 +45,7 @@ var asset_index_init = function() {
     var tabset_name = "#asset-tabs";
     // jQueryUI tabs
     $(tabset_name).tabs();
-}
+};
 
 function confirm_popup_action() {
     SpotLight.attach_click_event('a.tm-a-2', function (e){

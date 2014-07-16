@@ -18,7 +18,7 @@ var self_exclusion_date_picker = function () {
             id.attr("value", dateText);
         },
     });
-}
+};
 
 onLoad.queue_for_url(function () {
 // date picker for self exclusion

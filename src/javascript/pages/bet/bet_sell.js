@@ -88,20 +88,22 @@ var BetSell = function() {
                     }
                 };
                 con.find('a.close').on('click', function () { _on_close(); } );
-                $(document).on('keydown', function (e) { e.which == 27 && _on_close(); });
+                $(document).on('keydown', function(e) {
+                     if (e.which === 27) _on_close();
+                });
                 this._container = con;
             }
             return this._container;
         },
         clear_timers: function () {
-            for (var key in _timer_interval_obj) {
-                if (_timer_interval_obj.hasOwnProperty(key)) {
-                    window.clearInterval(_timer_interval_obj[key]);
+            for (var timerKey in _timer_interval_obj) {
+                if (_timer_interval_obj.hasOwnProperty(timerKey)) {
+                    window.clearInterval(_timer_interval_obj[timerKey]);
                 }
             }
-            for (var key in _timeout_variables) {
-                if (_timeout_variables.hasOwnProperty(key)) {
-                    window.clearTimeout(_timeout_variables[key]);
+            for (var timeoutKey in _timeout_variables) {
+                if (_timeout_variables.hasOwnProperty(timeoutKey)) {
+                    window.clearTimeout(_timeout_variables[timeoutKey]);
                 }
             }
         },
@@ -247,11 +249,11 @@ var BetSell = function() {
             }
 
             if (x === undefined) {
-                var x = Math.max(Math.floor((win_.width() - win_.scrollLeft() - con.width()) / 2), x_min) + win_.scrollLeft();
+                x = Math.max(Math.floor((win_.width() - win_.scrollLeft() - con.width()) / 2), x_min) + win_.scrollLeft();
             }
 
             if (y === undefined) {
-                var y = Math.min(Math.floor((win_.height() - con.height()) / 2), y_min) + win_.scrollTop();
+                y = Math.min(Math.floor((win_.height() - con.height()) / 2), y_min) + win_.scrollTop();
             }
 
             con.offset({left: x, top: y});
@@ -279,8 +281,9 @@ var BetSell = function() {
             // update returns
             this.update_return(price);
 
-            price = new String(parseFloat(price).toFixed(2));
-            var cur = this.model.currency();
+            price = parseFloat(price).toFixed(2);
+            var cur = this.model.currency(),
+                prev_price;
             var price_parts = stylized_price(price);
             var price_con = $('#sell_price_container', con);
 
@@ -290,7 +293,7 @@ var BetSell = function() {
                 $('.stylized_cents', stylized).html(price_parts.cents);
                 $('.stylized_currency', stylized).html(cur);
                 var price_field = $('input[name="price"]', price_con);
-                var prev_price = price_field.val();
+                prev_price = price_field.val();
                 price_field.val(price);
                 BetSell.sparkline.update(price);
                 if (!prev_price) {
@@ -310,7 +313,7 @@ var BetSell = function() {
             }
             var trade_price = $('#trade_details_price', con);
             if (trade_price.length > 0) {
-                var prev_price = parseFloat(trade_price.html());
+                prev_price = parseFloat(trade_price.html());
                 trade_price.html(price_parts.units + '' + price_parts.cents);
                 if (prev_price < price) {
                     trade_price.removeClass('price_moved_down');
@@ -329,7 +332,7 @@ var BetSell = function() {
             var con = this._container;
             var trade_return = $('#trade_details_return', con);
             if (trade_return.length > 0) {
-                var price = (((price - this.model.purchase_price()) / this.model.purchase_price()) * 100 ).toFixed(2);
+                price = (((price - this.model.purchase_price()) / this.model.purchase_price()) * 100 ).toFixed(2);
                 trade_return.html(price + '%');
             }
         },
@@ -409,7 +412,7 @@ var BetSell = function() {
             $('#reload_sell_container').on('click', '#reload_sell', function () {
                 that.close_container();
                 _timeout_variables[Object.keys(_timeout_variables).length] = setTimeout(function() {
-                    that.sell_at_market(_previous_button_clicked)
+                    that.sell_at_market(_previous_button_clicked);
                 }, 2000);
                 // invoke submit after 2 seconds so settlement time differ from expiry date
             });
@@ -466,26 +469,27 @@ var BetSell = function() {
                                }
                                configure_livechart();
                                updateLiveChart(liveChartConfig);
-                               var purchase_time = $('#trade_details_purchase_date').attr('epoch_time');
+                               var barrier,
+                                   purchase_time = $('#trade_details_purchase_date').attr('epoch_time');
                                if (!purchase_time) { // dont add barrier if its forward starting
                                    if(server_data.barrier && server_data.barrier2) {
                                        if (liveChartConfig.has_indicator('high')) {
                                            live_chart.remove_indicator('high');
                                        }
-                                       var barrier = new LiveChartIndicator.Barrier({ name: "high", value: server_data.barrier, color: 'green', label: text.localize('High Barrier')});
+                                       barrier = new LiveChartIndicator.Barrier({ name: "high", value: server_data.barrier, color: 'green', label: text.localize('High Barrier')});
                                        live_chart.add_indicator(barrier);
 
                                        if (liveChartConfig.has_indicator('low')) {
                                            live_chart.remove_indicator('low');
                                        }
-                                       var barrier = new LiveChartIndicator.Barrier({ name: "low", value: server_data.barrier2, color: 'red', label: text.localize('Low Barrier')});
+                                       barrier = new LiveChartIndicator.Barrier({ name: "low", value: server_data.barrier2, color: 'red', label: text.localize('Low Barrier')});
                                        live_chart.add_indicator(barrier);
 
                                    } else {
                                        if (liveChartConfig.has_indicator('barrier')) {
                                            live_chart.remove_indicator('barrier');
                                        }
-                                       var barrier = new LiveChartIndicator.Barrier({ name: "barrier", value: server_data.barrier, color: 'green', label: text.localize('Barrier')});
+                                       barrier = new LiveChartIndicator.Barrier({ name: "barrier", value: server_data.barrier, color: 'green', label: text.localize('Barrier')});
                                        live_chart.add_indicator(barrier);
                                    }
                                }
@@ -507,7 +511,7 @@ var BetSell = function() {
 
                         var duration = now_time_con.attr('duration'); // need now duration to subtract from end duration
                         if(parseInt(duration) > 0) { // if now duration is positive then start the timer for end date
-                            if(con.find('#end_time_container').attr('duration') != '') {
+                            if(con.find('#end_time_container').attr('duration') !== '') {
                                 duration = parseInt(con.find('#end_time_container').attr('duration')) - parseInt(duration);
                                 if (duration > 0) {
                                     that.start_end_timer(con, 'end_time_container', 'now_time_container', 'trade_date_end', duration); // end timer
@@ -598,7 +602,7 @@ var BetSell = function() {
                     second      : { value: time_obj.second, text: text_second, text_plural: text_seconds, interval: 1 },
                     is_inverse  : time_obj['is_inverse'],
                 };
-                that.create_timer(con.find('#' + container_id), timer_input)
+                that.create_timer(con.find('#' + container_id), timer_input);
 
             }
         },
@@ -649,12 +653,12 @@ var BetSell = function() {
                     second      : { value: time_obj.second, text: text_second, text_plural: text_seconds, interval: 1 },
                     is_negative : time_obj['is_negative'],
                 };
-                that.create_timer(con.find('#' + container_id), timer_input)
+                that.create_timer(con.find('#' + container_id), timer_input);
             }
 
         },
         get_params: function (element) {
-            var params_arr = new Array();
+            var params_arr = [];
             if (!element) return '';
             var attr = element.attributes;
             var j=0;
@@ -717,10 +721,10 @@ var BetSell = function() {
                 data    : data,
                 timeout : timeout,
                 success : function (resp, resp_status, jqXHR) {
-                    that.on_sell_bet_success(resp, resp_status, jqXHR)
+                    that.on_sell_bet_success(resp, resp_status, jqXHR);
                 },
                 error   : function (jqXHR, resp_status, exp) {
-                    that.on_sell_bet_error(jqXHR, resp_status, exp)
+                    that.on_sell_bet_error(jqXHR, resp_status, exp);
                 },
             }));
         },
@@ -757,15 +761,16 @@ var BetSell = function() {
         register: function () {
             var that = this;
             $('#profit-table, #portfolio-table, #bet_container, #statement-table').on('click', '.open_contract_details', function (e) {
+                var $this = $(this);
                 e.preventDefault();
                 _previous_button_clicked = this;
-                that.disable_button($(this));
+                that.disable_button($this);
                 if (that.data_attr(this).model.tick_expiry()) {
                     that.only_show_chart(this);
                 } else {
                     that.sell_at_market(this);
                 }
-                that.enable_
+                that.enable_button($this);
                 return false;
             });
         },
@@ -847,7 +852,7 @@ var BetSell = function() {
                     payout: function() { return dom_element.attr('payout'); },
                     sell_channel: function() { return dom_element.attr('sell_channel'); },
                     controller_action: function () { return dom_element.attr('controller_action'); },
-                    tick_expiry: function() {return dom_element.attr('tick_expiry') || 0},
+                    tick_expiry: function() { return dom_element.attr('tick_expiry') || 0; }
                 }, // data_attr.model
             };
         }, // data_attr
@@ -867,10 +872,10 @@ var BetSell = function() {
                     if (url && typeof (EventSource) !== "undefined") {
                         this._stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
-                        this._stream.onmessage = function (e) {
+                        this._stream.onmessage = function(e) {
                             that.process_message(e.data);
-                        }
-                        this._stream.addEventListener("ping", function(e) { return true });
+                        };
+                        this._stream.addEventListener("ping", function(e) { return true; });
                         return true;
                     } else {
                         var err_msg = "We are not able to stream live prices at the moment. To enjoy live streaming of prices try refreshing the page, if you get this issue after repeated attempts try a different browser";
@@ -937,7 +942,7 @@ var BetSell = function() {
                     var spark = $('<div id="sell_price_sparkline"></div>');
                     container.append(spark);
                     spark.show();
-                    $('#sell_price_container').on('mouseover', '#sell_price_sparkline canvas', function () { $('#jqstooltip').css('z-index', get_highest_zindex() + 100) });
+                    $('#sell_price_container').on('mouseover', '#sell_price_sparkline canvas', function () { $('#jqstooltip').css('z-index', get_highest_zindex() + 100); });
                 },
                 update: function(val) {
                     var that = this;
@@ -1038,7 +1043,7 @@ var BetSell = function() {
                         timestring += duration.seconds() + ' ' + input.second.text_plural;
                         count++;
                     }
-                    if (count == 0) {
+                    if (count === 0) {
                         that.resubmit_sell_at_market();
                     } else {
                         selector.html(timestring);
@@ -1115,7 +1120,8 @@ var BetSell = function() {
             return time_obj;
         },
         add_time_indicators: function(liveChartConfig) {
-            var that = this;
+            var that = this,
+                indicator;
             var start_time = $('#trade_details_start_date').attr('epoch_time');
             var purchase_time = $('#trade_details_purchase_date').attr('epoch_time');
             var sold_time = $('#trade_details_sold_date').attr('epoch_time');
@@ -1125,7 +1131,7 @@ var BetSell = function() {
                 if (liveChartConfig.has_indicator('purchase_time')) {
                     live_chart.remove_indicator('purchase_time');
                 }
-                var indicator = new LiveChartIndicator.Barrier({ name: "purchase_time", label: 'Purchase Time', value: that.get_date_from_seconds(parseInt(purchase_time)), color: '#e98024', axis: 'x'});
+                indicator = new LiveChartIndicator.Barrier({ name: "purchase_time", label: 'Purchase Time', value: that.get_date_from_seconds(parseInt(purchase_time)), color: '#e98024', axis: 'x'});
                 live_chart.add_indicator(indicator);
             }
 
@@ -1133,7 +1139,7 @@ var BetSell = function() {
                 if (liveChartConfig.has_indicator('start_time')) {
                     live_chart.remove_indicator('start_time');
                 }
-                var indicator = new LiveChartIndicator.Barrier({ name: "start_time", label: 'Start Time', value: that.get_date_from_seconds(parseInt(start_time)), color: '#e98024', axis: 'x'});
+                indicator = new LiveChartIndicator.Barrier({ name: "start_time", label: 'Start Time', value: that.get_date_from_seconds(parseInt(start_time)), color: '#e98024', axis: 'x'});
                 live_chart.add_indicator(indicator);
             }
 
@@ -1141,7 +1147,7 @@ var BetSell = function() {
                 if (liveChartConfig.has_indicator('entry_spot_time')) {
                     live_chart.remove_indicator('entry_spot_time');
                 }
-                var indicator;
+                
                 if (start_time && entry_spot_time < start_time) {
                     indicator = new LiveChartIndicator.Barrier({ name: "entry_spot_time", label: 'Entry Spot', value: that.get_date_from_seconds(parseInt(entry_spot_time)), color: '#e98024', axis: 'x'});
                 } else {
@@ -1155,7 +1161,7 @@ var BetSell = function() {
                     live_chart.remove_indicator('end_time');
                 }
 
-                var indicator = new LiveChartIndicator.Barrier({ name: "end_time", label: 'End Time', value: that.get_date_from_seconds(parseInt(end_time)), color: '#e98024', axis: 'x'});
+                indicator = new LiveChartIndicator.Barrier({ name: "end_time", label: 'End Time', value: that.get_date_from_seconds(parseInt(end_time)), color: '#e98024', axis: 'x'});
                 live_chart.add_indicator(indicator);
             }
             if(sold_time) {
@@ -1163,7 +1169,7 @@ var BetSell = function() {
                     live_chart.remove_indicator('sold_time');
                 }
 
-                var indicator = new LiveChartIndicator.Barrier({ name: "sold_time", label: 'Sell Time', value: that.get_date_from_seconds(parseInt(sold_time)), color: '#e98024', axis: 'x'});
+                indicator = new LiveChartIndicator.Barrier({ name: "sold_time", label: 'Sell Time', value: that.get_date_from_seconds(parseInt(sold_time)), color: '#e98024', axis: 'x'});
                 live_chart.add_indicator(indicator);
             }
 

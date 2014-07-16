@@ -54,7 +54,7 @@ var BetForm = function () {
 
 
                     var that = this;
-                    this.propagating_enter_pressed;
+
                     var when_enter_pressed = function() {
                         //This is required to avoid key bounce causing 3 different enter pressed event
                         if(!that.propagating_enter_pressed) {
@@ -248,27 +248,27 @@ var BetForm = function () {
                         BetAnalysis.tab_pricing_table.show_tab();
                         BetAnalysis.tab_intradayprices.hide_tab();
                         BetAnalysis.tab_last_digit.hide_tab();
-                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
-                         || BetAnalysis.was_showing_tab('tab_last_digit')) {
-                        BetAnalysis.show_tab('tab_pricing_table')
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices') ||
+                            BetAnalysis.was_showing_tab('tab_last_digit')) {
+                            BetAnalysis.show_tab('tab_pricing_table');
                         }
                     } else if(analysis_tab == 'last_digit') {
                         // We should show exactly one of these
                         BetAnalysis.tab_last_digit.show_tab();
                         BetAnalysis.tab_pricing_table.hide_tab();
                         BetAnalysis.tab_intradayprices.hide_tab();
-                        if (BetAnalysis.was_showing_tab('tab_intradayprices')
-                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
-                        BetAnalysis.show_tab('tab_last_digit')
+                        if (BetAnalysis.was_showing_tab('tab_intradayprices') ||
+                            BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                            BetAnalysis.show_tab('tab_last_digit');
                         }
                     } else if(analysis_tab == 'intradayprices') {
                         // We should show exactly one of these
                         BetAnalysis.tab_intradayprices.show_tab();
                         BetAnalysis.tab_pricing_table.hide_tab();
                         BetAnalysis.tab_last_digit.hide_tab();
-                        if (BetAnalysis.was_showing_tab('tab_last_digit')
-                         || BetAnalysis.was_showing_tab('tab_pricing_table')) {
-                        BetAnalysis.show_tab('tab_intradayprices')
+                        if (BetAnalysis.was_showing_tab('tab_last_digit') ||
+                            BetAnalysis.was_showing_tab('tab_pricing_table')) {
+                            BetAnalysis.show_tab('tab_intradayprices');
                         }
                     }
                 },
@@ -288,7 +288,7 @@ var BetForm = function () {
                     //Wrong tab selected? Select the right one.
                     //Whe wrong tab? Caching, we build the frame before we build the form and sometimes there is no formname attribute in the url.
                     var form_name = BetForm.attributes.form_name();
-                    if($('#bets_tab_' + form_name).length > 0 && $('#bets_tab_' + form_name + '.active.tm-li').length == 0) {
+                    if($('#bets_tab_' + form_name).length > 0 && $('#bets_tab_' + form_name + '.active.tm-li').length === 0) {
                         $('#betsTab .active.tm-li').removeClass('active');
                         $('#bets_tab_' + form_name + '.tm-li').addClass('active');
                     }
@@ -306,7 +306,7 @@ var BetForm = function () {
                     }
 
 
-                    var underlying_symbol = underlying_symbol ? underlying_symbol : BetForm.attributes.model.underlying();
+                    underlying_symbol = underlying_symbol || BetForm.attributes.model.underlying();
                     if (underlying_symbol && markets.by_symbol(underlying_symbol).market.name == market) {
                         params += '&underlying_symbol=' + underlying_symbol;
                     }
@@ -446,18 +446,20 @@ var BetForm = function () {
 
                     return false;
                 },
-                update_for_submarket: function(submarket) {
+                update_for_submarket: function (submarket) {
+                    var index;
+
                     if (submarket) {
                         var old_value = $('#bet_underlying').val();
                         this.clear();
                         if ( submarket == 'all' ) {
                             var len = underlyings_info.length;
-                            for ( var index = 0; index < len; index++ ) {
+                            for ( index = 0; index < len; index++ ) {
                                 this.add(underlyings_info[index]);
                             }
                         } else {
                             var regex_sub_market = new RegExp('\\b'+submarket+'\\b');
-                            for ( var index in underlyings_info ) {
+                            for ( index in underlyings_info ) {
                                 if ( regex_sub_market.test(underlyings_info[index].className) ) {
                                     this.add(underlyings_info[index]);
                                 }
@@ -465,13 +467,13 @@ var BetForm = function () {
                         }
 
                         //If nothing was selected try to select the default from backend.
-                        if($('#bet_underlying').val() == null) {
+                        if($('#bet_underlying').val() === null) {
                             $('#bet_underlying').val(old_value);
                         }
                     }
 
                     //If nothing was sent selected by the backend then select the first one.
-                    if($('#bet_underlying').val() == null) {
+                    if($('#bet_underlying').val() === null) {
                         $('#bet_underlying').val($('#bet_underlying option:eq(0)').val());
                     }
                 },
@@ -518,7 +520,7 @@ var BetForm = function () {
                     var me = BetForm.amount;
                     me.update_calculation_value();
                     BetForm.attributes.model.amount(me.calculation_value);
-                    BetPrice.order_form.update()
+                    BetPrice.order_form.update();
                     //No need to panic unless the user actually entered a ','(188).
                     if(event.keyCode == 188) {
                         var amount = $(this).val();
@@ -529,7 +531,7 @@ var BetForm = function () {
                     var me = BetForm.amount;
                     me.update_calculation_value();
                     BetForm.attributes.model.amount(me.calculation_value);
-                    BetPrice.order_form.update()
+                    BetPrice.order_form.update();
                     $('#amount').val(me.calculation_value);
                 },
                 update_calculation_value: function() {

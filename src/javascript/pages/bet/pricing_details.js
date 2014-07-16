@@ -95,7 +95,7 @@ var PricingDetails = function() {
 
                             tds.find('a').html( function() {
                                 var td = $(this).parent('td');
-                                var weight = td.attr("class").match('\\d\\.?\\d?\\d?')[0]
+                                var weight = td.attr("class").match('\\d\\.?\\d?\\d?')[0];
                                 return weight;
                             });
                         },

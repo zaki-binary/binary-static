@@ -128,7 +128,7 @@ var BetAnalysis = function () {
                 return false;
            });
            submit_button.on('click', function () {
-               that.get_price_data($(this).closest('form')[0], div, id)
+               that.get_price_data($(this).closest('form')[0], div, id);
            });
         },
         tab_explanation: function() {

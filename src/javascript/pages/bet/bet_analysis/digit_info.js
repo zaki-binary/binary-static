@@ -2,8 +2,7 @@ BetAnalysis.DigitInfo = function() {
     this.chart_config = {
         chart: {
                 renderTo:'last_digit_histo',
-                defaultSeriesType:'column',
-                borderWidth:0,
+                defaultSeriesType:'column',                
                 backgroundColor:'#eee',
                 borderWidth:1,
                 borderColor:'#ccc',
@@ -28,7 +27,7 @@ BetAnalysis.DigitInfo = function() {
         plotOptions:{
             column:{
                 shadow:false,
-                borderWidth:.5,
+                borderWidth:0.5,
                 borderColor:'#666',
                 pointPadding:0,
                 groupPadding:0,
@@ -98,7 +97,7 @@ BetAnalysis.DigitInfo.prototype = {
                     that.show_chart(underlying);
                 }
             });
-        }
+        };
         $('[name=underlying]', form).on('change',  get_latest ).addClass('unbind_later');
         $('[name=tick_count]', form).on('change',  get_latest ).addClass('unbind_later');
     },
@@ -134,7 +133,7 @@ BetAnalysis.DigitInfo.prototype = {
         var filtered_spots = [];
         var digit = 10;
         while(digit--) {
-            filtered_spots[digit] = this.spots.filter(function(el) { return el == digit }).length;
+            filtered_spots[digit] = this.spots.filter(function(el) { return el == digit; }).length;
         }
         return series.setData(filtered_spots);
     },

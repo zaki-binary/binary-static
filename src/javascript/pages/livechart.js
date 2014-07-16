@@ -42,7 +42,7 @@ var build_markets_select = function() {
     build_instrument_select();
 
     $("#market_select").change(build_instrument_select);
-}
+};
 
 var build_instrument_select = function() {
     var instrument_select = $("#instrument_select");
@@ -65,12 +65,12 @@ var build_instrument_select = function() {
 var init_live_chart = function () {
     liveChartsFromDT = new DateTimePicker({
         id: "live_charts_from",
-        onChange: function(date) { liveChartsToDT.setMinDateTime(date) }
+        onChange: function(date) { liveChartsToDT.setMinDateTime(date); }
     });
 
     liveChartsToDT = new DateTimePicker({
         id: "live_charts_to",
-        onChange: function(date) { liveChartsFromDT.setMaxDateTime(date) }
+        onChange: function(date) { liveChartsFromDT.setMaxDateTime(date); }
     });
 
 

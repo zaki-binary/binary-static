@@ -8,7 +8,7 @@ function currencyConvertorCalculator()
 
     var i=0;
     $('#currencyfrom').find('option').each(function(){
-        if (this.selected != true)
+        if (this.selected !== true)
         {
             currencyto.options[i] = new Option(this.value, this.text);
             i++;
@@ -26,7 +26,7 @@ function checkCurrencyAmountFormat(input_value)
     var displayerror = $('#currencyconverterror');
     var currencysubmit = $('#currencysubmit');
 
-    if (amount == '')
+    if (amount === '')
     {
         displayerror.addClass('invisible button-disabled');
         currencysubmit.attr('disabled', 'disabled').addClass('button-disabled').parents('.button').addClass('button-disabled');
@@ -103,7 +103,7 @@ var Portfolio = function () {
             } else {
                 console.log(data);
                 var exception = new Error("Invalid server response: " + data);
-                Portfolio.on_price_request_error(jqXHR, resp_status, exception)
+                Portfolio.on_price_request_error(jqXHR, resp_status, exception);
             }
             Portfolio.set_contract_prices(prices);
         },
@@ -115,7 +115,7 @@ var Portfolio = function () {
             var default_price = ((prices && prices['*']) ? prices['*'] : null);
             var _update_element_price = function() {
                 var el = $(this);
-                var price = default_price;
+                var price;
                 data = element_data_attrs(el);
                 var shortcode = data.shortcode;
                 var currency = data.currency;
@@ -129,7 +129,7 @@ var Portfolio = function () {
                 if (default_price !== null && prices[currency][shortcode] === undefined) {
                     prices[currency][shortcode] = default_price;
                 }
-                var price = prices[currency][shortcode];
+                price = prices[currency][shortcode];
                 if (price !== undefined) {
                     if (isNaN(price)) {
                         /* price is not a number, could be an error report. do not use currency nor update
@@ -143,7 +143,7 @@ var Portfolio = function () {
                         $('p', el.parents('div').children('div')[2]).text(currency + ' ' + price);
                     }
                 }
-            }
+            };
             elements.each(_update_element_price);
         }
     };

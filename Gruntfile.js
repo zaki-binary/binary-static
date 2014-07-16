@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     // Configurations
     grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
@@ -176,29 +176,23 @@ module.exports = function(grunt) {
 	},
 	jshint: {
 	    options: {
-		curly: true,
-		eqeqeq: true,
-		eqnull: true,
-		browser: true,
-		globals: {
-		    jQuery: true,
-		    $: true,
-		},
-		ignores: [
-		    'src/javascript/external/**/*.js',
-		    'src/javascript/t/**/*.js',
-		    'src/javascript/livechart/export-csv.js',
-		    'src/javascript/livechart/highstock-exporting.js',
-		    'src/javascript/livechart/highstock.js',
-		    'src/javascript/base/pjax-lib.js',
-		    'src/javascript/gtm.js'
-		],
+	        jshintrc: true,
+	        ignores: [
+                'src/javascript/external/**/*.js',
+                'src/javascript/t/**/*.js',
+                'src/javascript/livechart/export-csv.js',
+                'src/javascript/livechart/highstock-exporting.js',
+                'src/javascript/livechart/highstock.js',
+                'src/javascript/base/pjax-lib.js',
+                'src/javascript/base/jquery_color_animation.js',
+                'src/javascript/gtm.js'
+	        ],
 	    },
 	    all: [
-		'Gruntfile.js',
-		'src/javascript/**/*.js',
-	    ],
-	},
+            'Gruntfile.js',
+            'src/javascript/**/*.js'
+	    ]
+	},	
         bump: {
            options: {
                 files: ['package.json'],
@@ -210,6 +204,24 @@ module.exports = function(grunt) {
                 push: false,
            },
         },
+        nightwatch: {
+            options: {
+                settings: {
+                    "src_folders": ["src/javascript/t/nightwatch/tests/"]
+                },
+                "selenium": {
+                    "start_process": false,
+                    "host": "hub.browserstack.com",
+                    "port": 80
+                }
+            }
+        },
+        shell: {
+            nightwatch: {
+                command: 'nightwatch -e chrome,firefox,ie',
+                cwd: './src/javascript/t/'
+            }
+        }
     });
 
     // load the plugin that will complete the task
@@ -225,7 +237,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-nightwatch');
+    grunt.loadNpmTasks('grunt-shell');
 
     // Task to be performed
+    grunt.registerTask('test', ['jshint']);
     grunt.registerTask('default', ['clean', 'compass', 'rename', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };
