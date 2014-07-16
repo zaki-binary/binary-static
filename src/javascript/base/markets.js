@@ -91,7 +91,11 @@ var SubMarket = function(name, display_name, underlyings) {
     var underlying_count = underlyings.length;
     while(underlying_count--) {
         var underlying = underlyings[underlying_count];
-        var underlying_object = { name: underlying['label'], symbol: underlying['value'], translated_display_name: function() { return text.localize(this.name); } };
+        var underlying_object = {
+            name: underlying['label'],
+            symbol: underlying['value'],
+            translated_display_name: function () { return text.localize(this.name); }
+        };
         this.underlyings.push(underlying_object);
     }
 };

@@ -11,9 +11,9 @@ var toggleStreaming = function() {
    if (document.hidden || document.webkitHidden) {
        BetForm.spot.clear();
        BetPrice.streaming.stop();
-       BetPrice.order_form.hide_buy_button()
+       BetPrice.order_form.hide_buy_button();
    } else {
-       BetPrice.streaming.start()
+       BetPrice.streaming.start();
    }
 };
 

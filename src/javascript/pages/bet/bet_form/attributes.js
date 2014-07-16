@@ -131,10 +131,10 @@ BetForm.attributes = function() {
                 return amount;
             },
             is_amount_payout: function() {
-                return ($('#amount_type').val() == "payout")
+                return ($('#amount_type').val() == "payout");
             },
             is_amount_stake: function() {
-                return ($('#amount_type').val() == "stake")
+                return ($('#amount_type').val() == "stake");
             },
             amount_type: function() {
                 return $('#amount_type', this.form_selector()).val();
@@ -163,7 +163,7 @@ BetForm.attributes = function() {
                             LocalStore.set('bet_page.form_name', form_name);
                         }
 
-                        var form_name = this.get_setting_or_param('bet_page.form_name', 'form_name') || fallback;
+                        form_name = this.get_setting_or_param('bet_page.form_name', 'form_name') || fallback;
                         if(!$('#' + form_name).length) {
                             form_name = fallback;
                         }

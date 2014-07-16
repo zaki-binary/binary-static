@@ -77,7 +77,7 @@ ClientForm.prototype = {
             var input_tnc = document.getElementById('tnc');
             var error_tnc = clearInputErrorField('errortnc');
             if (input_tnc && error_tnc) {
-                    if (input_tnc.checked == false)
+                    if (input_tnc.checked === false)
                     {
                             error_tnc.innerHTML = text.localize('You must accept the terms and conditions to open an account.');
                             return false;
@@ -172,7 +172,7 @@ ClientForm.prototype = {
         var tel = $('#Tel');
         if (!tel.val() || tel.val().length < 6) {
             var idd_code = idd_codes[residence];
-            tel.val(idd_code ? '+' + idd_code : '')
+            tel.val(idd_code ? '+' + idd_code : '');
         }
     },
     on_residence_change: function() {

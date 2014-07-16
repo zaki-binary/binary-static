@@ -15,7 +15,7 @@ var rearrange_compare_underlying_list = function () {
 
         li.removeClass().addClass('line_'+(index+1));
 
-        if (index == 0) {
+        if (index === 0) {
             instrument.attr('checked', 'checked');
         }
     });
@@ -227,8 +227,6 @@ function listen_to_chart_element () {
             $(event.target).removeClass('hover').parents('li').removeClass('hover');
         })
         .on('click', '#chart_overlay_or_new .draw-overlay', function (event){
-            var new_chart_compare_underlying_list = '';
-
             if (chart_overlay_or_new.find('input:checked').val() == 'overlay') {
                 var overlays = chart_compare_underlying.find('li');
 
@@ -238,17 +236,14 @@ function listen_to_chart_element () {
 
                 overlays
                     .filter(':last').after(
-                        '<li><a href="#">'+
-                        chart_overlay_or_new.find('h4').html()
-                        +'</a><input type="checkbox" checked="checked" value="'+previous_selected_radio[chart_overlay_or_new.data('related_input_name')]+'" name="overlay"></li>'
+                        '<li><a href="#">' +
+                        chart_overlay_or_new.find('h4').html() +
+                        '</a><input type="checkbox" checked="checked" value="'+previous_selected_radio[chart_overlay_or_new.data('related_input_name')]+'" name="overlay"></li>'
                     );
 
                 chart_compare_underlying.find('li').each(function (index){
                     this.className = 'line_'+(index+1);
                 });
-            }
-            else {
-
             }
         });
 
@@ -260,7 +255,7 @@ function listen_to_chart_element () {
 }
 
 var draw_chart = function (callback_after_complete) {
-    if($("#chart_director_imageholder").length == 0){
+    if($("#chart_director_imageholder").length === 0){
         return;
     }
 

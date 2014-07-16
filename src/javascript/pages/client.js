@@ -10,7 +10,7 @@ var togglePromoCodeTnC = function(event)
 {
     var o = $(event.target);
 
-    if (o.val() != '')
+    if (o.val() !== '')
     {
         $('#formlayout').find('#comment').find('span').removeClass('invisible');
     }

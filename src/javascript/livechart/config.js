@@ -1,5 +1,5 @@
 var LiveChartConfig = function(params) {
-    params = typeof params !== 'undefined' ? params : {};
+    params = params || {};
     this.renderTo = params['renderTo'] || 'live_chart_div';
     this.renderHeight = params['renderHeight'] || 450;
     this.shift = typeof params['shift'] !== 'undefined' ? params['shift'] : 1;
@@ -25,37 +25,42 @@ var LiveChartConfig = function(params) {
     this.resolution = 'tick';
     this.with_markers = typeof params['with_markers'] !== 'undefined' ? params['with_markers'] : false;
 
-    var res;
-    var hash = window.location.hash;
-    if (res = hash.match(/^#([A-Za-z0-9_]+):(10min|1h|1d|1w|1m|3m|1y)$/)) {
-        var symbol = markets.by_symbol(res[1]);
+    var res,
+        symbol,
+        hash = window.location.hash;
+
+    res = hash.match(/^#([A-Za-z0-9_]+):(10min|1h|1d|1w|1m|3m|1y)$/);
+    if (res) {
+        symbol = markets.by_symbol(res[1]);
         if (symbol) {
             this.symbol = symbol.underlying;
             this.market = symbol.market;
             this.live = res[2];
         }
-    }
-    else if (res = hash.match(/^#([A-Za-z0-9_]+):([0-9]+)-([0-9]+)$/)) {
-        var symbol = markets.by_symbol(res[1]);
-        if (symbol) {
+    } else {
+        res = hash.match(/^#([A-Za-z0-9_]+):([0-9]+)-([0-9]+)$/);
+        if (res) {
+            symbol = markets.by_symbol(res[1]);
+            if (symbol) {
+                this.symbol = symbol.underlying;
+                this.market = symbol.market;
+                this.from = parseInt(res[2]);
+                this.to = parseInt(res[3]);
+                this.resolution = this.best_resolution(this.from, this.to);
+            }
+        } else {
+            symbol = markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('R_100');
             this.symbol = symbol.underlying;
             this.market = symbol.market;
-            this.from = parseInt(res[2]);
-            this.to = parseInt(res[3]);
-            this.resolution = this.best_resolution(this.from, this.to);
-        }
-    } else {
-        var symbol =  markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('R_100');
-        this.symbol =  symbol.underlying;
-        this.market =  symbol.market;
-        var from = params['from'] || LocalStore.get('live_chart.from');
-        var to = params['to'] || LocalStore.get('live_chart.to');
-        if (from && to && from != 'null' && to != 'null') {
-            this.from = from;
-            this.to = to;
-            this.resolution = this.best_resolution(this.from, this.to);
-        } else {
-            this.live = params['live'] || LocalStore.get('live_chart.live') || '10min';
+            var from = params['from'] || LocalStore.get('live_chart.from');
+            var to = params['to'] || LocalStore.get('live_chart.to');
+            if (from && to && from != 'null' && to != 'null') {
+                this.from = from;
+                this.to = to;
+                this.resolution = this.best_resolution(this.from, this.to);
+            } else {
+                this.live = params['live'] || LocalStore.get('live_chart.live') || '10min';
+            }
         }
     }
 
@@ -99,12 +104,9 @@ LiveChartConfig.prototype = {
         var now = new Date();
         var epoch = Math.floor(now.getTime() / 1000);
         var units = { min: 60, h: 3600, d: 86400, w: 86400 * 7, m: 86400 * 31, y: 86400 * 366 };
-        var from;
-        var res;
-        if (res = len.match(/^([0-9]+)([hdwmy]|min)$/)) {
-            from = epoch - parseInt(res[1]) * units[res[2]];
-        }
-        return from;
+        var res = len.match(/^([0-9]+)([hdwmy]|min)$/);
+        
+        return res ? epoch - parseInt(res[1]) * units[res[2]] : undefined;
     },
     update: function(opts) {
         if (opts.interval) {

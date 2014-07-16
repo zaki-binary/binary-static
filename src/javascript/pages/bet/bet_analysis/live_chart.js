@@ -3,7 +3,7 @@ BetAnalysis.tab_live_chart = function () {
     return {
         reset: function() {
             if(typeof live_chart !== "undefined") {
-                if(live_chart != null) {
+                if(live_chart !== null) {
                     live_chart.close_chart();
                     live_chart = null;
                 }
@@ -94,7 +94,7 @@ BetAnalysis.tab_live_chart = function () {
                 live_chart.remove_indicator(barrier.component_id);
             }
 
-            var barrier = new LiveChartIndicator.Barrier({ name: barrier.component_id, value: barrier.value(), color: 'green'});
+            barrier = new LiveChartIndicator.Barrier({ name: barrier.component_id, value: barrier.value(), color: 'green'});
             live_chart.add_indicator(barrier);
         },
         get_duration: function () {
@@ -102,11 +102,11 @@ BetAnalysis.tab_live_chart = function () {
             return $('#live_chart_duration').find('#' + this.corrected_hours_to_chart(duration_in_seconds)).data('live');
         },
         corrected_hours_to_chart: function(chart_duration) {
-            var available_hours = [];
+            var hours, available_hours = [];
             $('.live_charts_stream_button').each(function(){
                 available_hours.push(parseInt($(this).attr("id")));
             });
-            available_hours.sort(function(a,b){return a-b});
+            available_hours.sort(function(a,b) { return a - b; });
             for(hours in available_hours) {
                 if(chart_duration <= available_hours[hours]) {
                     return available_hours[hours];

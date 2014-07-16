@@ -39,7 +39,7 @@ var BetPrice = function() {
                   url     : url,
                   dataType: 'html',
                   data    : this.params(),
-                  success : function(data) { that.price_update(data) },
+                  success : function(data) { that.price_update(data); },
                 })).fail(function ( jqXHR, textStatus ) {
                     that.error_handler();
                 });
@@ -96,8 +96,8 @@ var BetPrice = function() {
                 async   : true,
                 data    : data,
                 timeout : timeout,
-                success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR) },
-                error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp) },
+                success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR); },
+                error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp); },
             }));
             $('.price_box').fadeTo(200, 0.6);
         },
@@ -216,38 +216,38 @@ var BetPrice = function() {
 
                     $self.ev.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
-			if (!(data[0] instanceof Array)) {
-			    data = [ data ];
-			}
-			for (var i = 0; i < data.length; i++) {
-			    if (data[i][0] === 'tick') {
-			        var tick = {
-					epoch: data[i][1],
-					quote: data[i][2],
-			        }
-			        if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
-					$self.applicable_ticks.push(tick.quote);
-					$self.digit_tick_count++;
-					var last_digit = tick.quote.toString().substr(-1);
-					if (!$('#digit-current').hasClass('flipper')) {
-					    $('#digit-current').addClass('flipper focus');
-					}
-					$('#digit-current').text(last_digit);
-					$('#digit-count').text($self.digit_tick_count);
+			            if (!(data[0] instanceof Array)) {
+			                data = [ data ];
+			            }
+			            for (var i = 0; i < data.length; i++) {
+			                if (data[i][0] === 'tick') {
+			                    var tick = {
+			                        epoch: data[i][1],
+			                        quote: data[i][2]
+			                    };
+			                    if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
+					                $self.applicable_ticks.push(tick.quote);
+					                $self.digit_tick_count++;
+					                var last_digit = tick.quote.toString().substr(-1);
+					                if (!$('#digit-current').hasClass('flipper')) {
+					                    $('#digit-current').addClass('flipper focus');
+					                }
+					                $('#digit-current').text(last_digit);
+					                $('#digit-count').text($self.digit_tick_count);
 
-					if ($('#digit-contract-details').css('display') === 'none') {
-					    $('#digit-contract-details').show();
-					}
-					}
+					                if ($('#digit-contract-details').css('display') === 'none') {
+					                    $('#digit-contract-details').show();
+					                }
+					            }
 
-					if ($self.applicable_ticks.length === how_many_ticks) {
-					$self.evaluate_digit_outcome();
-					$self.reset();
-			        }
-			    }
-			}
+					            if ($self.applicable_ticks.length === how_many_ticks) {
+					                $self.evaluate_digit_outcome();
+					                $self.reset();
+			                    }
+			                }
+			            }
                     };
-                    $self.ev.onerror = function() { $self.ev.close() };
+                    $self.ev.onerror = function() { $self.ev.close(); };
                 },
                 evaluate_digit_outcome: function() {
                     var $self = this;
@@ -338,16 +338,16 @@ var BetPrice = function() {
                     if(url && typeof (EventSource) !== "undefined") {
                         price_stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
-                        price_stream.onmessage = function (e) {
+                        price_stream.onmessage = function(e) {
                             that.process_message(e.data);
-                        }
-                        price_stream.addEventListener("ping", function(e) { return true });
+                        };
+                        price_stream.addEventListener("ping", function(e) { return true; });
                     } else {
                         $('#spot_spark').html("<span title=\"" + text.localize("We are not able to stream live prices at the moment. To enjoy live streaming of prices try refreshing the page, if you get this issue after repeated attempts try a different browser") + "\">" + text.localize("No Live price update") + "</span>");
                     }
                 },
                 stop: function() {
-                    if (price_stream != null) {
+                    if (price_stream !== null) {
                         price_stream.close();
                         price_stream = null;
                     }
@@ -372,7 +372,7 @@ var BetPrice = function() {
                         BetAnalysis.tab_last_digit.update(BetForm.attributes.underlying(), bet.spot);
                     }
                 },
-            }
+            };
         }(),
         order_form: function() {
             return {
@@ -402,7 +402,7 @@ var BetPrice = function() {
                     this.update_ui(prices);
                 },
                 prices_from_stream: function(stream) {
-                    var prices = new Array();
+                    var prices = [];
                     for (var i = 0; i < stream.length; i++) {
                         var id = stream[i].id || undefined;
                         var prob = stream[i].prob || undefined;
@@ -415,21 +415,26 @@ var BetPrice = function() {
 
                     return prices;
                 },
-                prices_from_form: function() {
-                    var prices = new Array();
-                    var order_forms = $('.orderform');
-                    var order_forms_count = order_forms ? order_forms.length : 0;
+                prices_from_form: function () {
+                    
+                    var prices = [],
+                        order_forms = $('.orderform'),
+                        order_forms_count = order_forms ? order_forms.length : 0,
+                        i,
+                        id,
+                        prob,
+                        error;
+                    
                     if (order_forms_count > 0 ) {
-                        for (var i = 0; i < order_forms_count; i++) {
-                            var form = $(order_forms[i]);
-                            var id = $('input[name="display_id"]', form).val();
-                            var prob = $('input[name="prob"]', form).val();
-                            var error = undefined;
-                            var error_box_html = form.parent().parent().parents().siblings(".bet-error-box").html();
+                        for (i = 0; i < order_forms_count; i++) {
+                            id = $('input[name="display_id"]', form).val();
+                            prob = $('input[name="prob"]', form).val();
+                            var form = $(order_forms[i]),
+                                error_box_html = form.parent().parent().parents().siblings(".bet-error-box").html();
                             // We handle payout messages locally and after recalculation
-                            if ( error_box_html.length > 0
-                              && error_box_html != BetForm.amount.payout_err
-                              && error_box_html != BetForm.amount.stake_err) {
+                            if (error_box_html.length > 0 &&
+                                error_box_html != BetForm.amount.payout_err &&
+                                error_box_html != BetForm.amount.stake_err) {
                                 error = error_box.html();
                             }
                             prices.push(this.calculate_price(id, prob, error));
@@ -437,15 +442,14 @@ var BetPrice = function() {
                     } else {
                         var error_boxes = $('#bet_calculation_container').find('.bet-error-box');
                         var count = error_boxes.length;
-                        for (var i = 0; i < count; i++) {
+                        for (i = 0; i < count; i++) {
                             var error_box = $(error_boxes[i]);
-                            var id = error_box.find('#error_display_id').val();
+                            id = error_box.find('#error_display_id').val();
                             if(!id) {
                                 continue;
                             }
-                            var prob = error_box.find('#error_probability_' + id).val();
-
-                            var error = undefined;
+                            prob = error_box.find('#error_probability_' + id).val();
+                            error = undefined;
                             if(error_box.html().length > 0) {
                                 error = error_box.html();
                             }
@@ -502,11 +506,11 @@ var BetPrice = function() {
                         // We're intentionally making payout errors have highest priority
                         // it's something they can fix immediately on this web interface.
 
-                        if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max
-                           || prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
+                        if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
+                            prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
                             err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 + epsilon > bf_amount.stake_max
-                           || prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
+                        } else if (prices[i].price.raw/100 + epsilon > bf_amount.stake_max ||
+                            prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
                             // You probably think there should be two conditions above, but too high stake just
                             // makes for "too high payout" or "no return" errors.
                             err = bf_amount.stake_err;
@@ -541,7 +545,7 @@ var BetPrice = function() {
                 show_error: function(form, error) {
                     var buy_button= form.parent();
                     var error_box = buy_button.parents().siblings(".bet-error-box");
-                    if (error == null) {
+                    if (error === null) {
                         error_box.hide();
                         buy_button.show();
                     } else {

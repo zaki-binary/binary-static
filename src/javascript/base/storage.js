@@ -11,7 +11,7 @@ var isStorageSupported = function(storage) {
     } catch(e) {
         return false;
     }
-}
+};
 
 var Store = function(storage) {
     this.storage = storage;
@@ -64,15 +64,19 @@ var CookieStorage = function (cookie_name) {
 CookieStorage.prototype = {
     read: function() {
         var cookie_value = $.cookie(this.cookie_name);
-        try { this.value = cookie_value ? JSON.parse(cookie_value) : {}; } finally {}; //Expensive(~2 ms) but JSON Parse might fail
+        try {
+            this.value = cookie_value ? JSON.parse(cookie_value) : {};
+        } catch (e) {
+            this.value = {};
+        }
         this.initialized = true;
     },
     get: function(key) {
-        this.initialized || this.read();
+        if (!this.initialized) this.read();
         return this.value[key];
     },
     set: function(key, value) {
-        this.initialized || this.read();
+        if (!this.initialized) this.read();
         this.value[key] = value;
         $.cookie(this.cookie_name, JSON.stringify(this.value), {
             expires: this.expires,

@@ -18,7 +18,7 @@ function showLoadingImage(container)
 /////////////////////////////////////////////////////////////////
 function getFormParams(form_obj)
 {
-    var params_arr = new Array();
+    var params_arr = [];
     if (! form_obj) return '';
     var elem = form_obj.elements;
 
@@ -106,7 +106,7 @@ function price_moved (item, old_val, new_val) {
        item.removeClass("price_moved_down");
        item.removeClass("price_moved_up");
     }
-};
+}
 
 
 /**
@@ -122,7 +122,7 @@ function get_highest_zindex(selector) {
     if (!selector) {
         selector = 'div,p,area,nav,section,header,canvas,aside,span';
     }
-    all = new Array();
+    var all = [];
     var _store_zindex = function () {
         if ($(this).is(':visible')) {
             var z = $(this).css("z-index");
@@ -132,12 +132,8 @@ function get_highest_zindex(selector) {
         }
     };
     $(selector).each(_store_zindex);
-    if (all.length) {
-        highest = Math.max.apply(Math, all);
-    } else {
-        highest = null;
-    }
-    return highest;
+
+    return all.length ? Math.max.apply(Math, all) : null;
 }
 
 var user_country;
@@ -145,10 +141,10 @@ var get_user_country = function(callback) {
     if(user_country) {
             callback.call(user_country);
     } else {
-        $.ajax({crossDomain:true, url: page.url.url_for('country'), async: true, dataType: "json"}).done(function(response) {
+        $.ajax({ crossDomain: true, url: page.url.url_for('country'), async: true, dataType: "json" }).done(function(response) {
             user_country = response;
             callback.call(response);
-        })
+        });
     }
 };
 
@@ -246,10 +242,9 @@ function element_data_attrs(element) {
  */
 function element_data_attrs_as_form_params(element) {
     var data =  element_data_attrs(element);
-    var params = new Array();
+    var params = [];
     var key;
-    var val;
-    for (key in data) {
+    for (key in data) if (data.hasOwnProperty(key)) {
         var val = data[key];
         if (val === undefined) continue;
         params.push( key + '=' + encodeURIComponent(val) );
@@ -286,16 +281,17 @@ function snake_case_to_camel_case(snake, lower_case_first_char, chars) {
  * @param config custom configurations for the datepicker
  */
 function attach_date_picker(element, conf) {
-    var target = $(element);
+    var k,
+        target = $(element);
     if (!target || !target.length) return false;
     var today = new Date();
     var next_year = new Date();
     next_year.setDate(today.getDate() + 365);
     var options = {
-      dateFormat: 'yy-mm-dd',
-      maxDate: next_year,
-    }
-    for (k in conf) {
+        dateFormat: 'yy-mm-dd',
+        maxDate: next_year,
+    };
+    for (k in conf) if (conf.hasOwnProperty(k)) {
         options[k] = conf[k];
     }
     return target.datepicker(options);
@@ -310,7 +306,7 @@ function attach_date_picker(element, conf) {
  * @param config custom configurations for the timepicker
  */
 function attach_time_picker(element, conf) {
-    var target = $(element);
+    var attr, k, target = $(element);
     if (!target || !target.length) return false;
     var opts = {
         timeSeparator: ':',
@@ -320,10 +316,10 @@ function attach_time_picker(element, conf) {
         minuteText: text.localize("Minute"),
         minTime: {},
         maxTime: {},
-    }
+    };
     var data_attrs = element_data_attrs(target);
     var regex = /^time\:(.+)/;
-    for (attr in data_attrs) {
+    for (attr in data_attrs) if (data_attrs.hasOwnProperty(attr)) {
         var matched = attr.match(regex);
         if (matched) {
             var data = data_attrs[attr];
@@ -350,7 +346,7 @@ function attach_time_picker(element, conf) {
             }
         }
     }
-    for (k in conf) {
+    for (k in conf) if (conf.hasOwnProperty(k)) {
         opts[k] = conf[k];
     }
     return target.timepicker(opts);
@@ -366,9 +362,11 @@ function attach_inpage_popup(element) {
     var popups = [];
     var regx = /^popup-(.+)/;
     targets.each(function () {
-        var attrs = element_data_attrs(this);
-        var conf = {};
-        for (attr in attrs) {
+        var attr,
+            matched,
+            attrs = element_data_attrs(this),
+            conf = {};
+        for (attr in attrs) if (attrs.hasOwnProperty(attr)) {
             matched = attr.match(regx);
             if (matched) {
                 conf[matched[1]] = attrs[attr];
