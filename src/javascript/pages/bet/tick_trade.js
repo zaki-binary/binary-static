@@ -14,7 +14,7 @@ function updateTTChart(config) {
 var TickTrade = function() {
     return {
         client_prediction: function() {
-            return $('#tick-prediction').data('prediction');
+            return $('#contract-sentiment').data('contract-sentiment');
         },
         how_many_ticks: function() {
             return tt_chart.config.how_many_ticks;

@@ -252,7 +252,7 @@ var BetPrice = function() {
                 evaluate_digit_outcome: function() {
                     var $self = this;
 
-                    var prediction = $('#tick-prediction').data('prediction');
+                    var prediction = $('#contract-sentiment').data('contract-sentiment');
                     var client_prediction = $('#client-prediction').data('client-prediction');
                     var last_tick = $self.applicable_ticks[$self.applicable_ticks.length-1];
                     var last_digit = parseInt(last_tick.toString().substr(-1));
