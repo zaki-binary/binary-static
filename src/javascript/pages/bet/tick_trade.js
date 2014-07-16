@@ -14,7 +14,15 @@ function updateTTChart(config) {
 var TickTrade = function() {
     return {
         client_prediction: function() {
-            return $('#tick-prediction').data('prediction');
+            return $('#contract-sentiment').data('contract-sentiment');
+        },
+        asian_barrier: function() {
+            var total = 0;
+
+            for (var i=0; i < ticks_array.length; i++) {
+                total += ticks_array[i].quote;
+            }
+            return total/ticks_array.length;
         },
         how_many_ticks: function() {
             return tt_chart.config.how_many_ticks;
@@ -22,8 +30,24 @@ var TickTrade = function() {
         process: function(current_tick) {
             var $self = this;
 
+            $self.contract_type = $('#contract-type').data('contract-type');
+            $self.contract_barrier = ($self.contract_type.match('FLASH')) ? $self.entry_spot : $self.asian_barrier();
+
             if (!$self.entry_spot && tt_chart.config.with_entry_spot) {
                 $self.set_entry_spot();
+            }
+
+            if ($self.contract_type.match('ASIAN')) {
+                if (tt_chart.config.has_indicator('tick_barrier')) {
+                    tt_chart.remove_indicator('tick_barrier');
+                }
+                var barrier = new LiveChartIndicator.Barrier({
+                    name: "tick_barrier",
+                    value: $self.contract_barrier,
+                    color: 'green',
+                    label: text.localize('Barrier 2')
+                });
+                tt_chart.add_indicator(barrier);
             }
 
             if (current_tick) {
@@ -34,9 +58,9 @@ var TickTrade = function() {
                     var what_color;
 
                     if (tick_prediction === 'up') {
-                        what_color = current_tick > $self.entry_spot ? win_pallet: lose_pallet;
+                        what_color = current_tick > $self.contract_barrier ? win_pallet: lose_pallet;
                     } else if (tick_prediction === 'down') {
-                        what_color = current_tick < $self.entry_spot ? win_pallet: lose_pallet;
+                        what_color = current_tick < $self.contract_barrier ? win_pallet: lose_pallet;
                     }
                     tt_chart.chart.chartBackground.css({color: what_color});
                 }
@@ -49,25 +73,42 @@ var TickTrade = function() {
         },
         set_entry_spot: function() {
             var $self = this;
+
+            var entry_data;
             if (!$self.entry_spot && ticks_array.length > 0) {
                 var contract_start_epoch = tt_chart.config.contract_start_time;
                 for (var i=0;i < ticks_array.length;i++) {
                     var data = ticks_array[i];
                     if (data.epoch > contract_start_epoch) {
-                        $self.entry_spot = data.quote;
+                        entry_data = data;
                         break;
                     }
                 }
             }
 
-            if ($self.entry_spot && !tt_chart.config.has_indicator('tick_barrier')) {
-                var barrier = new LiveChartIndicator.Barrier({
-                    name: "tick_barrier",
-                    value: $self.entry_spot,
-                    color: 'green',
-                    label: text.localize('Barrier')
-                });
-                tt_chart.add_indicator(barrier);
+            if (typeof entry_data !== 'undefined') {
+                $self.entry_spot = entry_data.quote;
+                if ($self.entry_spot && !tt_chart.config.has_indicator('tick_barrier')) {
+                    var barrier = new LiveChartIndicator.Barrier({
+                        name: "tick_barrier",
+                        value: $self.entry_spot,
+                        color: 'green',
+                        label: text.localize('Barrier')
+                    });
+                    tt_chart.add_indicator(barrier);
+                }
+
+                if ($self.contract_type.match('ASIAN')) {
+                    var entry_time = new LiveChartIndicator.Barrier({
+                        name: 'contract_entry_time',
+                        label: text.localize('tick 1'),
+                        value: new Date(entry_data.epoch*1000),
+                        color: '#e98024',
+                        axis: 'x',
+                        nomargin: true,
+                    });
+                    tt_chart.add_indicator(entry_time);
+                }
             }
         },
         reset: function() {
@@ -86,7 +127,7 @@ var TickTrade = function() {
                 $self.exit_spot = exit_data.quote;
             }
 
-            var last_tick_label = tt_chart.config.has_indicator('tick_barrier') ? $self.how_many_ticks() - 1 : $self.how_many_ticks();
+            var last_tick_label = $self.contract_type.match('FLASH') ? $self.how_many_ticks() - 1 : $self.how_many_ticks();
 
             if ($self.exit_spot) {
                 var exit = new LiveChartIndicator.Barrier({
@@ -116,9 +157,9 @@ var TickTrade = function() {
             $('#contract-confirmation-details').hide();
 
             if ($self.client_prediction() === 'up') {
-                final_price = ($self.exit_spot > $self.entry_spot) ? potential_payout : 0;
+                final_price = ($self.exit_spot > $self.contract_barrier) ? potential_payout : 0;
             } else if ($self.client_prediction() === 'down') {
-                final_price = ($self.exit_spot < $self.entry_spot) ? potential_payout : 0;
+                final_price = ($self.exit_spot < $self.contract_barrier) ? potential_payout : 0;
             }
 
             $('#contract-outcome-payout').text($self.round(final_price,2));

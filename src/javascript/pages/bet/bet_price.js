@@ -120,7 +120,7 @@ var BetPrice = function() {
                 var width = this.container().width(); // since the error message could be any size, set the continer size to a good value
                 this.display_buy_error(data.error);
             } else if (data.display) {
-                this.display_buy_results(data.display, data.contract_start);
+                this.display_buy_results(data);
             } else {
                 throw new Error("Invalid server response: " + data);
             }
@@ -149,10 +149,13 @@ var BetPrice = function() {
             }
             return _buy_response_container;
         },
-        display_buy_results: function (data, start_epoch) {
+        display_buy_results: function (data) {
             var that = this;
+
+            var display_html = data.display;
+            var start_epoch = data.contract_start;
             var con = this.buy_response_container();
-            con.children('div').first().html(data);
+            con.children('div').first().html(display_html);
 
             var symbol = BetForm.attributes.underlying();
             var start_moment = moment(start_epoch*1000).utc();
@@ -216,43 +219,43 @@ var BetPrice = function() {
 
                     $self.ev.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
-			            if (!(data[0] instanceof Array)) {
-			                data = [ data ];
-			            }
-			            for (var i = 0; i < data.length; i++) {
-			                if (data[i][0] === 'tick') {
-			                    var tick = {
-			                        epoch: data[i][1],
-			                        quote: data[i][2]
-			                    };
-			                    if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
-					                $self.applicable_ticks.push(tick.quote);
-					                $self.digit_tick_count++;
-					                var last_digit = tick.quote.toString().substr(-1);
-					                if (!$('#digit-current').hasClass('flipper')) {
-					                    $('#digit-current').addClass('flipper focus');
-					                }
-					                $('#digit-current').text(last_digit);
-					                $('#digit-count').text($self.digit_tick_count);
+                                if (!(data[0] instanceof Array)) {
+                                    data = [ data ];
+                                }
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i][0] === 'tick') {
+                                        var tick = {
+                                            epoch: data[i][1],
+                                            quote: data[i][2]
+                                        };
+                                        if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
+                                                    $self.applicable_ticks.push(tick.quote);
+                                                    $self.digit_tick_count++;
+                                                    var last_digit = tick.quote.toString().substr(-1);
+                                                    if (!$('#digit-current').hasClass('flipper')) {
+                                                        $('#digit-current').addClass('flipper focus');
+                                                    }
+                                                    $('#digit-current').text(last_digit);
+                                                    $('#digit-count').text($self.digit_tick_count);
 
-					                if ($('#digit-contract-details').css('display') === 'none') {
-					                    $('#digit-contract-details').show();
-					                }
-					            }
+                                                    if ($('#digit-contract-details').css('display') === 'none') {
+                                                        $('#digit-contract-details').show();
+                                                    }
+                                                }
 
-					            if ($self.applicable_ticks.length === how_many_ticks) {
-					                $self.evaluate_digit_outcome();
-					                $self.reset();
-			                    }
-			                }
-			            }
+                                                if ($self.applicable_ticks.length === how_many_ticks) {
+                                                    $self.evaluate_digit_outcome();
+                                                    $self.reset();
+                                        }
+                                    }
+                                }
                     };
                     $self.ev.onerror = function() { $self.ev.close(); };
                 },
                 evaluate_digit_outcome: function() {
                     var $self = this;
 
-                    var prediction = $('#tick-prediction').data('prediction');
+                    var prediction = $('#contract-sentiment').data('contract-sentiment');
                     var client_prediction = $('#client-prediction').data('client-prediction');
                     var last_tick = $self.applicable_ticks[$self.applicable_ticks.length-1];
                     var last_digit = parseInt(last_tick.toString().substr(-1));
