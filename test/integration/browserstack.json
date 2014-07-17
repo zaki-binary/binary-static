@@ -1,0 +1,61 @@
+{
+    "src_folders": [ "tests/" ],
+    "globals_path": "globals.js",
+    "custom_commands_path": "commands/",
+    "test_settings": {
+        "default": {
+            "launch_url": "http://hub.browserstack.com",
+            "selenium_port": 80,
+            "selenium_host": "hub.browserstack.com",
+            "silent": true,
+            "desiredCapabilities": {
+                "name": "test-example",
+                "browserName": "firefox",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true,
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        },
+        "chrome": {
+            "desiredCapabilities": {
+                "browserName": "chrome",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true,
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        },
+        "firefox": {
+            "desiredCapabilities": {
+                "browserName": "firefox",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true,
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        },
+        "ie": {
+            "desiredCapabilities": {
+                "browserName": "internet explorer",
+                "version": "9",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true,
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        }
+    },
+    "phantomjs": {
+        "desiredCapabilities": {
+            "browserName": "phantomjs",
+            "javascriptEnabled": true,
+            "acceptSslCerts": true,
+            "phantomjs.binary.path": "/path/to/phantomjs"
+        }
+    }
+}

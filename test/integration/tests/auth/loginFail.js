@@ -1,9 +1,9 @@
 var formId = '#login-form',
     element = {
-        form: '#login-form',
-        loginIdInput: '#login-form input[type=text]',
-        passwordInput: '#login-form input[type=password]',
-        loginButton: '#login-form input[type=submit]'
+        form: formId,
+        loginIdInput: formId + ' input[type=text]',
+        passwordInput: formId + ' input[type=password]',
+        loginButton: formId + ' input[type=submit]'
     };
 
 function loginWith(browser, login, password, containsText) {

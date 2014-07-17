@@ -1,0 +1,74 @@
+{
+    "src_folders": [ "tests/" ],
+    "globals_path": "globals.js",
+    "custom_commands_path": "commands/",
+    "selenium": {
+        "start_process": true,
+        "server_path": "lib/selenium-server-standalone.jar",
+        "log_path": "tests_output",
+        "host": "127.0.0.1",
+        "port": 4444,
+        "cli_args": {
+            "webdriver.chrome.driver": "",
+            "webdriver.ie.driver": ""
+        }
+    },
+    "test_settings": {
+        "default": {
+            "launch_url": "http://",
+            "selenium_host": "127.0.0.1",
+            "selenium_port": 4444,
+            "silent": true,
+            "disable_colors": false,
+            "screenshots": {
+                "enabled": false,
+                "path": ""
+            },
+            "desiredCapabilities": {
+                "browserName": "firefox",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true
+            }
+        }
+    },
+    "browserstack": {
+        "default": {
+            "launch_url": "http://hub.browserstack.com",
+            "selenium_port": 80,
+            "selenium_host": "hub.browserstack.com",
+            "silent": true,
+            "desiredCapabilities": {
+                "name": "test-example",
+                "browserName": "firefox",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true,
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        },
+        "chrome": {
+            "desiredCapabilities": {
+                "browserName": "chrome"
+            }
+        },
+        "firefox": {
+            "desiredCapabilities": {
+                "browserName": "firefox"
+            }
+        },
+        "ie": {
+            "desiredCapabilities": {
+                "browserName": "internet explorer"
+            }
+        }
+    },
+    "phantomjs": {
+        "desiredCapabilities": {
+            "browserName": "phantomjs",
+            "javascriptEnabled": true,
+            "acceptSslCerts": true,
+            "phantomjs.binary.path": "/path/to/phantomjs"
+        }
+    }
+}
