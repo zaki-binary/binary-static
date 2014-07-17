@@ -1,7 +1,9 @@
 var singinForm = '#virtual-acc-form',
     signinEmailField = '#virtual-acc-form input[type=email]',
     signinPasswordField = '#virtual-acc-form input[type=password]',
-    signinButton = '#virtual-acc-form input[type=submit]';
+    signinButton = '#virtual-acc-form input[type=submit]',
+    randomStr = browser.globals.randomStr(5),
+    randomEmail = 'binary-' + randomEmail + '@mailinator.com';
 
 module.exports = {
     
@@ -9,7 +11,7 @@ module.exports = {
         browser
             .url(browser.globals.url)
             .waitForElementVisible(singinForm, 5000)
-            .setValue(signinEmailField, 'binary-test@mailinator.com')
+            .setValue(signinEmailField, randomEmail)
             .setValue(signinPasswordField, 'password123')
             .click(signinButton)
             .pause(5000)

@@ -1,16 +1,19 @@
-var loginForm = '#login-form',
-    loginIdField = '#login-form input[type=text]',
-    passwordField = '#login-form input[type=password]',
-    loginButton = '#login-form input[type=submit]';
+var formId = '#login-form',
+    element = {
+        form: '#login-form',
+        loginIdInput: '#login-form input[type=text]',
+        passwordInput: '#login-form input[type=password]',
+        loginButton: '#login-form input[type=submit]'
+    };
 
 function loginWith(browser, login, password, containsText) {
   
     browser
         .url(browser.globals.url)
-        .waitForElementVisible(loginForm, 5000)
-        .setValue(loginIdField, login)
-        .setValue(passwordField, password)
-        .click(loginButton)
+        .waitForElementVisible(element.form, 5000)
+        .setValue(element.loginIdInput, login)
+        .setValue(element.passwordInput, password)
+        .click(element.loginButton)
         .assert.containsText('body', containsText)
     .end();
 }

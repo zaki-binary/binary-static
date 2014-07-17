@@ -1,19 +1,22 @@
-var loginForm = '#login-form',
-    loginIdField = '#login-form input[type=text]',
-    passwordField = '#login-form input[type=password]',
-    loginButton = '#login-form input[type=submit]';
-
+var fomId = '#login-form',
+    element = {
+        form: formId,
+        loginIdInput: formId + ' input[type=text]',
+        passwordInput: formId + ' input[type=password]',
+        loginButton: formId + ' input[type=submit]'
+    };
+    
 module.exports = {
     
     "loginSuccess": function (browser) {
         browser
             .url(browser.globals.url)
-            .waitForElementVisible(loginForm, 5000)
-            .setValue(loginIdField, 'VRTC449697')
-            .setValue(passwordField, 'letmein')
-            .click(loginButton)
+            .waitForElementVisible(element.form, 5000)
+            .setValue(element.loginIdInput, 'VRTC449697')
+            .setValue(element.passwordInput, 'letmein')
+            .click(element.loginButton)
             .pause(5000)
-            .assert.containsText('body', 'incorrect email')
+            .assert.containsText('body', 'welcome')
         .end();
     }
 };

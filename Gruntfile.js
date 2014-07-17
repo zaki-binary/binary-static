@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         rename: {
             main: {
                 files: [
-                    { src: ['dist/css/binary.css'], dest: 'dist/css/binary_<%= pkg.version %>.css' },
+                    { src: ['dist/css/binary.css'], dest: 'dist/css/binary_<%= pkg.version %>.css' }
                 ]
             },
         },
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 		files: {
 		    'dist/css/bomredirect.min.css': ['src/css/bomredirect.css'],
 		    'dist/css/grid_<%= pkg.version %>.min.css': ['dist/css/external/grid.css'],
-		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary_<%= pkg.version %>.css', ]
+		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary_<%= pkg.version %>.css']
 		},
 	    },
 	},
@@ -113,7 +113,7 @@ module.exports = function (grunt) {
 		    'src/javascript/livechart/datetime_picker.js',
 		    'src/javascript/livechart/indicator.js',
 		    'src/javascript/livechart.js',
-		    'src/javascript/pages/livechart.js',
+		    'src/javascript/pages/livechart.js'
 		],
 		dest: 'dist/js/binary_<%= pkg.version %>.js',
 	    },
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
 		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/flash/',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images',},
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/css/',},
-		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts',},
+		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts'}
 		],
 	    }
 	},
@@ -179,7 +179,6 @@ module.exports = function (grunt) {
 	        jshintrc: true,
 	        ignores: [
                 'src/javascript/external/**/*.js',
-                'src/javascript/t/**/*.js',
                 'src/javascript/livechart/export-csv.js',
                 'src/javascript/livechart/highstock-exporting.js',
                 'src/javascript/livechart/highstock.js',
