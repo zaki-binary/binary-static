@@ -11,7 +11,7 @@ module.exports = {
     "createAccountSuccess": function (browser) {
 
         var randomStr = browser.globals.randomStr(5),
-            randomEmail = 'binary-' + randomStr + '@mailinator.com';
+            randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
             .url(browser.globals.url)

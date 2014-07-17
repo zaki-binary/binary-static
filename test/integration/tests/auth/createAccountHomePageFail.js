@@ -9,6 +9,7 @@ var formId = '#virtual-acc-form',
 module.exports = {
 
     "createAccountFail": function (browser) {
+        
         browser
             .url(browser.globals.url)
             .waitForElementVisible(element.form, 5000)

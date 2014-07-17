@@ -1,6 +1,7 @@
 ﻿module.exports = {
 
     "checkRandomRates": function (browser) {
+        
         browser
             .url(browser.globals.url + '/c/trade.cgi?l=EN&market=random')
             .waitForElementVisible('body', 5000)

@@ -9,6 +9,7 @@ var fomId = '#login-form',
 module.exports = {
     
     "loginSuccess": function (browser) {
+        
         browser
             .url(browser.globals.url)
             .waitForElementVisible(element.form, 5000)

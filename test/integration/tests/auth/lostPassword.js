@@ -7,6 +7,7 @@ var element = {
 module.exports = {
 
     "loginSuccess": function (browser) {
+        
         browser
             .url(browser.globals.url + '/d/lost_password.cgi')
             .waitForElementVisible('body', 5000)
