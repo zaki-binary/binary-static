@@ -1,0 +1,150 @@
+<script>
+function copy_auth(from, to)
+{
+  var elSel_to = document.getElementById(to);
+  var elSel_from = document.getElementById(from);
+
+  var i;
+  for (i = elSel_from.length - 1; i>=0; i--) {
+    if (elSel_from.options[i].selected) {
+        try {
+          elSel_to.add(elSel_from.options[i], null);
+        }
+        catch(ex) { 
+          elSel_to.add(elSel_from.options[i]);
+        } 
+    }
+  }
+}
+function populate_auths()
+{
+    var auths = '';
+    var elSel_from = document.getElementById('authorisations');
+
+    for (i = elSel_from.length - 1; i>=0; i--) {
+        auths = auths + ';' + elSel_from.options[i].value;
+    }
+
+    var auths_in = document.getElementById('auths');
+    auths_in.value = auths;
+}
+</script>
+<table class="BlackCandy" rules="all" frame="void" border="1" cellpadding="1" cellspacing="2" width="94%">
+    <tbody>
+        <tr class="Blacklabel">
+            <td class="whitelabel" colspan="2">
+                [% IF operation == 'create' %]
+                    CREATE STAFF
+                [% ELSIF operation == 'edit' %]
+                    EDIT STAFF / UPDATE AUTHORISATION
+                [% ELSE %]
+                    VIEW STAFF INFORMATION
+                [% END %]
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding-left: 10px;">
+            [% IF operation == 'create' %]
+                <p> Create a new staff. <b>This can only be done by 'admin' user.<i> The UID number is selected for you. You have to select the GidNumber based on which group he/she primarily falls onto. </i></b></p>
+            [% END %]
+            <FORM ACTION='[% submit %]' METHOD="POST" onSubmit="populate_auths();">
+                <CENTER>
+                    <P>
+                        <TABLE BORDER=1>
+
+                        [% IF operation == 'create' %]
+
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> username </FONT> </CENTER> </TD>
+                                <TD> <input type=text size=30 name='uid' value='' /> </TD>
+                            </TR>
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> password </FONT> </CENTER> </TD>
+                                <TD> <input type=password size=30 name='password' /> </TD>
+                            </TR>
+
+                        [% ELSE %]
+
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> username </FONT> </CENTER> </TD>
+                                <TD> 
+                                    <FONT size=1> [% uid %] </FONT> 
+                                    <input type=hidden name=uid value='[% uid %]' />
+                                </TD>
+                            </TR>
+
+                        [% END %]
+
+
+                        [% FOREACH attr = edit_values.keys %]
+                            [% IF operation == 'view' %]
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> [% attr %] </FONT> </CENTER> </TD>
+                                <TD> [% edit_values.$attr %] </TD>
+                            </TR>
+                            [% ELSE %]
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> [% attr %] </FONT> </CENTER> </TD>
+                                <TD> <input type=text size=30 name='[% attr %]' value='[% edit_values.$attr %]' /> </TD>
+                            </TR>
+                            [% END %]
+                        [% END %]
+
+                        [% FOREACH attr = special_values.keys %]
+                            [% IF operation == 'view' OR NOT can_edit_all %]
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> [% attr %] </FONT> </CENTER> </TD>
+                                <TD> [% special_values.$attr %] </TD>
+                            </TR>
+                            [% ELSE %]
+                            <TR>
+                                <TD> <CENTER> <FONT size=1> [% attr %] </FONT> </CENTER> </TD>
+                                <TD> <input type=text size=30 name='[% attr %]' value='[% special_values.$attr %]' /> </TD>
+                            </TR>
+                            [% END %]
+                        [% END %]
+                        </TABLE>
+
+                        <p>Authorisations</p>
+                        <CENTER>
+                        <TABLE><TR>
+
+                        [% IF operation != 'view' AND can_edit_all %]
+                            <TD style='background-color:red;'>
+
+                            <p>Unselected Authorisations</p>
+                            <select multiple style="width:350px;height:230px" name="all_auth" id="all_auth">
+                            [% FOREACH auth IN unselected_auths %]
+                                <option>[% auth %]</option>
+                            [% END %]
+                            </select>
+
+                            </TD><TD>
+
+                            <input type="Button" value="<<" onClick="copy_auth('authorisations','all_auth');" />
+                            <input type="Button" value=">>" onClick="copy_auth('all_auth','authorisations');" />
+                        [% END %]
+
+                        </TD><TD style='background-color:green;'>
+
+                        <p>Selected Authorisations</p>
+                        <select multiple style="width:350px;height:230px" name="authorisations" id="authorisations">
+                        [% FOREACH auth IN staff_auths %]
+                            <option>[% auth %]</option>
+                        [% END %]
+                        </select>
+
+                        </TD></TR></TABLE>
+                        </CENTER>
+                        <input type=hidden id='auths' name='auths' value='' />
+                    </p>
+
+                    [% IF operation != 'view' %]
+                        <INPUT type="submit" value="[% button_str %]" [% submit_disabled %]/>
+                    [% END %]
+
+                </CENTER>
+            </FORM>
+        </tr>
+    </tbody>
+</table>

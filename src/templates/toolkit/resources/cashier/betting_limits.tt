@@ -1,0 +1,41 @@
+<div class='grd-grid-12 grd-row-padding'>
+    <h2>[% l("[_1] - Trading Limits", client.loginid) %]</h2>
+</div>
+<div class='grd-grid-12'>
+    [% WRAPPER 'container/full_table.tt' table_id='client-limits' %]
+        <tr class="rbox-table-heading">
+            <th class="first">[% l('Item') %]</th>
+            <th colspan="[% all_currencies.size %]">[% l('Limit</strong><br>(per currency)') %]</th>
+        </tr>
+        <tr class="odd rbox-sub-header">
+            <th class="first">[% l('Currency') %]</td>
+            [% FOREACH currency IN all_currencies %]
+                <th>[% currency %]</th>
+            [% END %]
+        </tr>
+        <tr class="even">
+            <td class="first">[% l('Maximum number of open positions') %] [% tooltip_for.max_open_pos %]</td>
+            [% FOREACH currency IN all_currencies %]
+                <td class="num">[% max_open_pos %]</td>
+            [% END %]
+        </tr>
+        <tr class="odd">
+            <td class="first">[% l('Maximum account cash balance') %] [% tooltip_for.account_balance %]</td>
+            [% FOREACH currency IN all_currencies %]
+                <td class="num">[% limit.account_balance.$currency %]</td>
+            [% END %]
+        </tr>
+        <tr class="even">
+            <td class="first">[% l('Maximum daily turnover') %] [% tooltip_for.daily_turnover %]</td>
+            [% FOREACH currency IN all_currencies %]
+                <td class="num">[% limit.daily_turnover.$currency %]</td>
+            [% END %]
+        </tr>
+        <tr class="odd">
+            <td class="first">[% l('Maximum aggregate payouts on open positions') %] [% tooltip_for.payout %]</td>
+            [% FOREACH currency IN all_currencies %]
+                <td class="num">[% limit.payout.$currency %]</td>
+            [% END %]
+        </tr>
+    [% END %]
+</div>

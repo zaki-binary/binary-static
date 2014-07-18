@@ -1,0 +1,19 @@
+<div class="grd-grid-4 grd-grid-mobile-12">
+    <img src="[% request.url_for('/pages/contact/main-icon_1.png') %]">
+</div>
+<div class="grd-grid-8 grd-grid-mobile-12">
+
+    <h1>[% l('Contact Us') %]</h1>
+    <p>[% l('Please read our <a href="[_1]" target="_blank">FAQs</a> for answers to common questions. If you still require assistance, please contact us by clicking live chat, or via email, or phone as per below.', faqurl) %]</p>
+
+    <div class="live-help invisible">
+        <h2>[% l('Live Help') %]</h2>
+        <p class="live-help-description">[% CONTACTUS_LIVECHATHOURS %]</p>
+        <div id="live-help-button"></div>
+    </div>
+
+</div>
+
+<div class="clear">
+    [% menu_content %]
+</div>

@@ -1,0 +1,36 @@
+[% WRAPPER 'container/full_table.tt' extra_class="smaller-font left-align" %]
+    <tr>
+        [% FOREACH header = headers %]
+            <th [% IF header.title %] title='[% header.title %]' [% END %]>[% header.text %]</th>
+        [% END %]
+    </tr>
+
+    [% keys = ['vol', 'pk', 'pkewma', 'gk', 'rs', 'yang'] %]
+    [% FOREACH day IN vols.keys.nsort %]
+        <tr>
+            <td style="font-weight:bold;">[% day %]</td>
+            [% FOREACH key IN keys %]
+                <td>[% vols.$day.$key %]</td>
+            [% END %]
+        </tr>
+    [% END %]
+
+    <tr>
+        <td colspan=8 style="padding:10px; border-width:1px; text-align:center; font-weight:bold;">
+            --- VALUES FROM 10-MIN INTRADAY PRICES ([% tenmin %] points/day) ---
+            [% IF tenmin <= 100 %]
+                [% red = 'color:red;' %]
+                <span style="[% red %]">not enough ticks in each 10-min interval for these estimators?</span>
+            [% END %]
+        </td>
+    </tr>
+
+    [% FOREACH day IN vols_hourly.keys.nsort %]
+        <tr>
+            <td style="font-weight:bold;">[% day %]</td>
+            [% FOREACH key IN keys %]
+                <td [% IF red %] style="[% red %] [% END %]>[% vols_hourly.$day.$key %]</td>
+            [% END %]
+        </tr>
+    [% END %]
+[% END %]
