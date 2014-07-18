@@ -69,7 +69,7 @@ var Client = function() {
     }
 };
 
-var URL = function(url) {
+var URL = function (url) { // jshint ignore:line
     this.is_valid = true;
     this.history_supported = window.history && window.history.pushState;
     if(typeof url !== 'undefined') {
@@ -77,7 +77,7 @@ var URL = function(url) {
     } else {
         this.location = window.location;
     }
-};
+}; 
 
 URL.prototype = {
     url_for: function(path, params, type) {

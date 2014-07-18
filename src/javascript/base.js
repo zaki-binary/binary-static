@@ -96,15 +96,16 @@ function formEffects() {
 function add_click_effect_to_button() {
     var prefix = function (class_name) {
         var class_names = class_name.split(/\s+/);
-
-        var cn = '';
+        
         var _prefix = 'button';
+        var cn = class_names.shift();
 
-        while (cn = class_names.shift()) {
+        while (cn) {
             if (cn && cn != _prefix && !cn.match(/-focus|-hover/)) {
                 _prefix = cn;
                 break;
             }
+            cn = class_names.shift();
         }
 
         return _prefix;

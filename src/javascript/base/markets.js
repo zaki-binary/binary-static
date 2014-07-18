@@ -84,6 +84,10 @@ Market.prototype = {
     }
 };
 
+function localizeName() {
+    return text.localize(this.name);
+}
+
 var SubMarket = function(name, display_name, underlyings) {
     this.name = name;
     this.display_name = display_name;
@@ -94,7 +98,7 @@ var SubMarket = function(name, display_name, underlyings) {
         var underlying_object = {
             name: underlying['label'],
             symbol: underlying['value'],
-            translated_display_name: function () { return text.localize(this.name); }
+            translated_display_name: localizeName
         };
         this.underlyings.push(underlying_object);
     }
