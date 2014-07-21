@@ -203,22 +203,24 @@ module.exports = function (grunt) {
                 push: false,
            },
         },
-        nightwatch: {
-            options: {
-                settings: {
-                    "src_folders": ["test/integration/tests/"]
-                },
-                "selenium": {
-                    "start_process": false,
-                    "host": "hub.browserstack.com",
-                    "port": 80
-                }
-            }
-        },
         shell: {
             nightwatch: {
-                command: 'nightwatch -e chrome,firefox,ie',
-                cwd: 'test/integration'
+                command: 'nightwatch',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/integration'
+                    }
+                }                
+            },
+            browserstack: {
+                command: 'nightwatch -c browserstack-ff.json',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/integration'
+                    }
+                }
             }
         }
     });
@@ -236,7 +238,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
-    grunt.loadNpmTasks('grunt-nightwatch');
     grunt.loadNpmTasks('grunt-shell');
 
     // Task to be performed

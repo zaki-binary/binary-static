@@ -7,7 +7,10 @@
         "server_path": "lib/selenium-server-standalone.jar",
         "log_path": "tests_output",
         "host": "127.0.0.1",
-        "port": 4444
+        "port": 4444,
+        "cli_args": {
+            "webdriver.log.file" : "console.log"
+        }
     },
     "test_settings": {
         "default": {
@@ -25,14 +28,6 @@
                 "javascriptEnabled": true,
                 "acceptSslCerts": true
             }
-        }
-    },
-    "phantomjs": {
-        "desiredCapabilities": {
-            "browserName": "phantomjs",
-            "javascriptEnabled": true,
-            "acceptSslCerts": true,
-            "phantomjs.binary.path": "/path/to/phantomjs"
         }
     }
 }
