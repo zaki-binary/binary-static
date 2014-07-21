@@ -7,11 +7,7 @@
         "server_path": "lib/selenium-server-standalone.jar",
         "log_path": "tests_output",
         "host": "127.0.0.1",
-        "port": 4444,
-        "cli_args": {
-            "webdriver.chrome.driver": "",
-            "webdriver.ie.driver": ""
-        }
+        "port": 4444
     },
     "test_settings": {
         "default": {
@@ -28,38 +24,6 @@
                 "browserName": "firefox",
                 "javascriptEnabled": true,
                 "acceptSslCerts": true
-            }
-        }
-    },
-    "browserstack": {
-        "default": {
-            "launch_url": "http://hub.browserstack.com",
-            "selenium_port": 80,
-            "selenium_host": "hub.browserstack.com",
-            "silent": true,
-            "desiredCapabilities": {
-                "name": "test-example",
-                "browserName": "firefox",
-                "javascriptEnabled": true,
-                "acceptSslCerts": true,
-                "browserstack.user": "BorisYankov",
-                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
-                "browserstack.debug": true
-            }
-        },
-        "chrome": {
-            "desiredCapabilities": {
-                "browserName": "chrome"
-            }
-        },
-        "firefox": {
-            "desiredCapabilities": {
-                "browserName": "firefox"
-            }
-        },
-        "ie": {
-            "desiredCapabilities": {
-                "browserName": "internet explorer"
             }
         }
     },

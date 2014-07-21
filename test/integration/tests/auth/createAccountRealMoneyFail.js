@@ -15,10 +15,7 @@ var element = {
 
 module.exports = {
 
-    "createAccountSuccess": function (browser) {
-
-        var randomStr = browser.globals.randomStr(5),
-            randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
+    "createAccountRealMoneyFail": function (browser) {
 
         browser
             .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=real')
@@ -34,8 +31,6 @@ module.exports = {
             .assert.containsText('body', 'nvalid telephone number')
             .assert.containsText('body', 'enter a password')
             .assert.containsText('body', 'secret answer is too short')
-            .assert.containsText('body', 'must accept the terms and conditions')
-            .assert.containsText('body', 'information is incomplete or incorrect')
         .end();
     }
 };

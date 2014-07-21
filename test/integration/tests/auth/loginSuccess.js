@@ -1,4 +1,4 @@
-var fomId = '#login-form',
+var formId = '#login-form',
     element = {
         form: formId,
         loginIdInput: formId + ' input[type=text]',
@@ -13,11 +13,11 @@ module.exports = {
         browser
             .url(browser.globals.url)
             .waitForElementVisible(element.form, 5000)
-            .setValue(element.loginIdInput, 'VRTC449697')
+            .setValue(element.loginIdInput, 'CB10010')
             .setValue(element.passwordInput, 'letmein')
             .click(element.loginButton)
             .pause(5000)
-            .assert.containsText('body', 'welcome')
+            .assert.containsText('body', 'Welcome')
         .end();
     }
 };

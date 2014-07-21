@@ -6,7 +6,7 @@ var element = {
 
 module.exports = {
 
-    "loginSuccess": function (browser) {
+    "loginPassword": function (browser) {
         
         browser
             .url(browser.globals.url + '/d/lost_password.cgi')

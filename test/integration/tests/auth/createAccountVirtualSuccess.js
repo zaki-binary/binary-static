@@ -1,3 +1,5 @@
+var utils = require('../../utils');
+
 var formId = '#openAccForm',
     element = {
         form: formId,
@@ -8,9 +10,9 @@ var formId = '#openAccForm',
 
 module.exports = {
     
-    "createAccountSuccess": function (browser) {
+    "createAccountVirtualSuccess": function (browser) {
 
-        var randomStr = browser.globals.randomStr(5),
+        var randomStr = utils.randomStr(5),
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
