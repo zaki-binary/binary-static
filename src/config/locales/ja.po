@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 1.5\n"
 
-#: cgi/top_up_virtual.cgi:83
+#: cgi/top_up_virtual.cgi:78
 #, fuzzy
 #| msgid "has been credited to your Virtual money account"
 msgid " has been credited to your Virtual money account"
@@ -120,8 +120,8 @@ msgid "%1 Period"
 msgstr "期間"
 
 #. (localize('Tick Trades')
-#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:129 cgi/tick_trades.cgi:133
-#: cgi/tick_trades.cgi:283 cgi/tick_trades.cgi:299
+#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:103 cgi/tick_trades.cgi:107
+#: cgi/tick_trades.cgi:257 cgi/tick_trades.cgi:273
 msgid "%1 Up/Down"
 msgstr "ダブル"
 
@@ -243,7 +243,7 @@ msgid "%1 minute quotes"
 msgstr "%1 minute quotes"
 
 #. (localize('Tick Trades')
-#: cgi/tick_trades.cgi:156
+#: cgi/tick_trades.cgi:130
 msgid "%1 offer you the chance to trade on a very short-term event and make money in seconds!"
 msgstr "%1では極短期間で利益を得られるトレード機会も提供しています。"
 
@@ -316,11 +316,6 @@ msgstr "%1では各種取引の自己制限、及び"
 #| msgid "%1 supports <a href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare has a commitment to promote responsible attitudes to gambling and to work for the provision of proper care for those who have been harmed by gambling dependency. Other websites that provide information about gambling or gambling addiction are:"
 msgid "%1 supports <a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare has a commitment to promote responsible attitudes to gambling and to work for the provision of proper care for those who have been harmed by gambling dependency. Other websites that provide information about gambling or gambling addiction are:"
 msgstr "%1は<a href=\"http://www.gamcare.org.uk\">GamCare</a>をサポートしています。GamCareはギャンブルの適切な普及を目指し、ギャンブルへの依存により様々な問題を抱えてしまっている人々に対する適切なサポートを行っています。ギャンブルやギャンブル依存に関するウェブサイトを下記からご参照頂けます。"
-
-#. ("$currencyfrom $currencyfromvalue", "$currencyto $res")
-#: cgi/currency_converter.cgi:209
-msgid "%1 was converted to %2."
-msgstr "%1は%2に両替されました。"
 
 #. ('ACCESS_TOKEN')
 #: frontend/templates/static/devguide.html.haml:1
@@ -431,10 +426,6 @@ msgstr "* 非課税対象：多くの国では、当社サービスから得た�
 msgid "1. Choose the Underlying"
 msgstr ""
 
-#: cgi/subs/subs_clientdetails.pm:115
-msgid "1. Verification of identity"
-msgstr "1. 身分証明について"
-
 #: frontend/templates/home/index.html.haml:1
 msgid "10 seconds to 365 days..."
 msgstr "10秒から365日でのバイナリー取引！"
@@ -479,10 +470,6 @@ msgstr "両方のポジション価格を明示"
 msgid "2. Choose the Duration of the Trade"
 msgstr "\"In / Out\" トレードを選びましょう。"
 
-#: cgi/subs/subs_clientdetails.pm:128
-msgid "2. Proof of address"
-msgstr "2. 居住地の証明について"
-
 #: cgi/templates/default/charting/livechart_duration.tt:19
 msgid "2d"
 msgstr "２日間"
@@ -526,18 +513,6 @@ msgstr "６時間"
 #: cgi/subs/subs_forms.pm:1742
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>キャッシャーと各種設定ページをロックのリクエストを承りました。</strong>ロックを解除されたい場合はパスワードをご入力下さい。"
-
-#: cgi/subs/subs_clientdetails.pm:131
-msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
-msgstr "<li>公共料金の支払い通知票の原本（３ヶ月以内に発行されたもの）、若しくは</li><li>銀行口座の残高証明、信用金庫の残高証明、住宅金融組合の残高証明、クレジットカードの支払い通知、デビットカードの支払い通知、通帳の原本、または住民票(３ヶ月以内に発行されたもの)</li>"
-
-#: cgi/subs/subs_clientdetails.pm:119
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
-msgstr "<li>有効期限内のパスポートのスキャン、</li><li>有効期限内の運転免許証のスキャン、または</li><li>住民基本台帳カードのスキャン</li>"
-
-#: cgi/subs/subs_clientdetails.pm:122
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
-msgstr "<li>有効期限内のパスポートのスキャン、</li><li>有効期限内の運転免許証のスキャン</li>"
 
 #: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
 #: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2291
@@ -720,7 +695,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>ベンチマーク価格</strong>：%1では銀行間でのデリバティブ市場の価格を慎重にベンチマークし、ベストな価格を提供しています。"
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:1970
+#: cgi/oop/Controller/Bet.pm:1969
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>価格条件が有利になりました！</strong><br />価格が%1から%2に変化しました。"
 
@@ -827,11 +802,11 @@ msgstr "<strong>全てが明瞭</strong>：\"マージンコール\",  \"ギャ�
 msgid "<strong>No surprises</strong> - you will never have margin calls, gap risk, slippage costs, hidden fees or commissions."
 msgstr "<strong>全てが明確</strong>：\"マージンコール\",  \"ギャップリスク\", \"スリップページ\"は一切存在しません。もちろん、不明瞭なその他の料金や手数料も発生しません。"
 
-#: cgi/tick_trades.cgi:190 cgi/tick_trades.cgi:196
+#: cgi/tick_trades.cgi:164 cgi/tick_trades.cgi:170
 msgid "<strong>Note:</strong> There is a 1.5% commission on any payout."
 msgstr "<strong>補足：</strong>　1.5%の手数料を徴収させて頂きます。"
 
-#: cgi/tick_trades.cgi:201 cgi/tick_trades.cgi:205
+#: cgi/tick_trades.cgi:175 cgi/tick_trades.cgi:179
 msgid "<strong>Note:</strong> There is no commission on any winnings."
 msgstr "<strong>補足：</strong>　払い戻し金額に対して手数料は一切発生いたしません。"
 
@@ -1128,7 +1103,7 @@ msgstr "カスタマーサポートのスタッフより早急にご連絡いた
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "モメンタム系の指標であり、３倍指数平滑移動平均の移動平均の変化の割合を示します。他のオシレーターと同様にトリックスでは0ライン近辺の値を示します。"
 
-#: cgi/tick_trades.cgi:466
+#: cgi/tick_trades.cgi:441
 msgid "A much more flexible version of Tick Trades is available on the "
 msgstr ""
 
@@ -1153,9 +1128,19 @@ msgstr "問題が発生しました。"
 msgid "A problem occurred while connecting to the server. Please try again later."
 msgstr "サーバーに接続時に問題が発生しました。後ほど改めてアクセスして下さい。"
 
+#: cgi/subs/subs_clientdetails.pm:118
+msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
+msgstr ""
+
 #: cgi/templates/default/email/bonus_reject.tt:19
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr ""
+
+#: cgi/subs/subs_clientdetails.pm:116
+#, fuzzy
+#| msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
+msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
+msgstr "<li>有効期限内のパスポートのスキャン、</li><li>有効期限内の運転免許証のスキャン、または</li><li>住民基本台帳カードのスキャン</li>"
 
 #: cgi/templates/default/email/bonus_reject.tt:18
 msgid "A scanned copy of your passport or driver's licence."
@@ -1270,11 +1255,11 @@ msgstr "Accumulation/Distribution：A/D"
 msgid "Accuracy of Information"
 msgstr "情報の精度"
 
-#: cgi/paymentagent_transfer.cgi:261
+#: cgi/paymentagent_transfer.cgi:262
 msgid "Acknowledgement of Money Transfer"
 msgstr "Acknowledgement of Money Transfer"
 
-#: cgi/paymentagent_withdraw.cgi:393
+#: cgi/paymentagent_withdraw.cgi:403
 msgid "Acknowledgement of Withdrawal Request"
 msgstr "ご出金リクエストを承りました。"
 
@@ -1286,7 +1271,7 @@ msgstr "取得"
 msgid "Acquisition of financial contracts through this site must be effected in accordance with the terms and conditions presented on the pages of this site. Acquisition of a financial contract is completed when the financial contract has been customised, the premium (or the payout, as the case may be) has been calculated and payment has been verified."
 msgstr "当社サービスでの金融トレードの購入は、当サイトに記載されているご利用規約に従って取り扱われます。金融トレードのご購入は、トレード内容のカスタマイズ、価値（または場合によっては払い戻し金額）が算出され、支払いが認証された時点で成立します。"
 
-#: cgi/templates/default/account/statement.tt:109
+#: cgi/templates/default/account/statement.tt:114
 msgid "Action"
 msgstr "アクション"
 
@@ -1352,7 +1337,7 @@ msgstr "当社サイトに掲載されている意見、ニュース、リサー
 msgid "All the times on the website and contract settlements are according to GMT (Greenwich Mean Time)."
 msgstr "当社サイトの時間表示、及びトレード実施時間はGMT（グリニッジ標準時）に基づきますので、日本時刻より９時間前の時間が採用されています。"
 
-#: cgi/paymentagent_withdraw.cgi:198 cgi/subs/subs_forms.pm:3805
+#: cgi/paymentagent_withdraw.cgi:209 cgi/subs/subs_forms.pm:3805
 #: cgi/subs/subs_forms.pm:4006
 msgid "Amount"
 msgstr "金額"
@@ -1363,7 +1348,7 @@ msgstr "金額"
 msgid "Amount must be a positive number."
 msgstr "ご出金金額は正の値である必要があります。"
 
-#: cgi/tick_trades.cgi:247
+#: cgi/tick_trades.cgi:221
 msgid "Amount you wish to trade:"
 msgstr "希望トレード額"
 
@@ -1387,17 +1372,11 @@ msgstr "自動で作成される<a href=\"https://apigee.com/resources/binary1\"
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "エラー発生につき、(2)へのログインが不可能です。"
 
-#: cgi/paymentagent_transfer.cgi:118 cgi/paymentagent_transfer.cgi:124
-#: cgi/paymentagent_withdraw.cgi:208 cgi/paymentagent_withdraw.cgi:213
+#: cgi/paymentagent_transfer.cgi:120 cgi/paymentagent_transfer.cgi:126
+#: cgi/paymentagent_withdraw.cgi:219 cgi/paymentagent_withdraw.cgi:224
 #, fuzzy
 #| msgid "Sorry, your account has got stuck in a previous transaction that did not complete.  If this error persists, please email %1 quoting your loginID"
 msgid "An error occurred while processing request. If this error persists, please contact customer support"
-msgstr "申し訳ございませんが、お客様のご口座での最近の処理に遅延が発生し完了しませんでした。もし、エラーが解消されない場合はログインIDと共に%1までご連絡下さい。"
-
-#: cgi/currency_converter.cgi:172
-#, fuzzy
-#| msgid "Sorry, your account has got stuck in a previous transaction that did not complete.  If this error persists, please email %1 quoting your loginID"
-msgid "An error occurred while processing request. If this error persists, please contact customer support."
 msgstr "申し訳ございませんが、お客様のご口座での最近の処理に遅延が発生し完了しませんでした。もし、エラーが解消されない場合はログインIDと共に%1までご連絡下さい。"
 
 #: cgi/subs/subs_BOMFeed_history.pm:553
@@ -1468,35 +1447,10 @@ msgstr "12.4 本契約に基いた全ての当社への通知は事項はメー�
 msgid "Anyone over the age 18 [who has read and agreed to the %1 terms and conditions], and who is not resident in one of the 'closed countries' can trade on the %1 platform."
 msgstr "１８歳以上で %1のご利用規約に同意された方、かつ当社がサービスを提供していない国に居住していない方であればどなたでも、%1のプラットフォームでトレードをして頂けます。"
 
-#. ($display_name)
-#: cgi/register-api.cgi:196
-msgid "Application %1 has been registered.  Your new OAuth credentials are shown below"
-msgstr ""
-
 #: cgi/templates/default/api/register.tt:7
 #, fuzzy
 #| msgid "Application error"
 msgid "Application Name"
-msgstr "アプリケーション・エラー"
-
-#: cgi/register-api.cgi:112
-msgid "Application Name data is invalid"
-msgstr ""
-
-#: cgi/register-api.cgi:193
-msgid "Application cannot be registered.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:92
-#, fuzzy
-#| msgid "Application error"
-msgid "Application not currently authorized"
-msgstr "アプリケーション・エラー"
-
-#: cgi/register-api.cgi:76
-#, fuzzy
-#| msgid "Application error"
-msgid "Application not yet registered"
 msgstr "アプリケーション・エラー"
 
 #: frontend/templates/static/partner_api.html.haml:1
@@ -1652,7 +1606,7 @@ msgstr "Avg Directional Index：ADX"
 msgid "Avg True Range"
 msgstr "Avg True Range：ATR"
 
-#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:85
+#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:59
 msgid "Awaiting market ticks...."
 msgstr "Tickを検出中です・・・"
 
@@ -1668,7 +1622,7 @@ msgstr "ホームページへ戻る"
 msgid "BOM Charts Workspace"
 msgstr "チャート・ワークスペース"
 
-#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:235
+#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:209
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 #: lib/BOM/View/Form.pm:402
@@ -1680,13 +1634,14 @@ msgstr "戻る"
 msgid "Bad input %1"
 msgstr "誤った入力値%1"
 
-#: cgi/templates/default/account/statement.tt:153
-#: cgi/templates/default/account/statement.tt:66
-#: cgi/templates/default/account/statement.tt:90
+#: cgi/templates/default/account/statement.tt:120
+#: cgi/templates/default/account/statement.tt:158
+#: cgi/templates/default/account/statement.tt:68
+#: cgi/templates/default/account/statement.tt:92
 msgid "Balance"
 msgstr "残高"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:444
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
 msgid "Bank Wire"
 msgstr "銀行送金"
 
@@ -1728,7 +1683,7 @@ msgstr "Bar HLCチャート"
 msgid "Bar OHLC Chart"
 msgstr "Bar OHLCチャート"
 
-#: cgi/oop/Controller/Bet.pm:2194 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/resources/pricing_table_form.tt:59
 msgid "Barrier"
 msgstr "バリア"
@@ -1746,7 +1701,7 @@ msgstr "バリアを適応させることはできません。"
 msgid "Barrier must be at least "
 msgstr "バリアの最小値"
 
-#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2192 cgi/templates/default/bet/form/barrier.tt:15
 msgid "Barrier offset"
 msgstr "追加バリア値"
 
@@ -1974,7 +1929,7 @@ msgstr "トレード条件は束縛されません。長期間の取引期間を
 msgid "But we’re picky. We only select people with special qualities: serious professionals, who have high moral standards, and thrive in an honest, collaborative environment."
 msgstr ""
 
-#: cgi/templates/default/account/statement.tt:76
+#: cgi/templates/default/account/statement.tt:78
 #: cgi/templates/default/backoffice/account/statement.tt:62
 msgid "Buy"
 msgstr ""
@@ -2020,18 +1975,6 @@ msgstr "お電話"
 msgid "Callback URL"
 msgstr "お電話リクエスト"
 
-#: cgi/register-api.cgi:115
-#, fuzzy
-#| msgid "This URL is invalid."
-msgid "Callback URL data is invalid"
-msgstr "このURLは無効です。"
-
-#: cgi/register-api.cgi:121
-#, fuzzy
-#| msgid "This URL is invalid."
-msgid "Callback URL format is invalid"
-msgstr "このURLは無効です。"
-
 #: cgi/subs/subs_forms_output.pm:99
 msgid "Callback services"
 msgstr "お電話リクエスト"
@@ -2069,16 +2012,6 @@ msgstr "キャンセル"
 msgid "Cancel Registration"
 msgstr ""
 
-#: cgi/register-api.cgi:213
-#, fuzzy
-#| msgid "Authentication failure"
-msgid "Cancellation failed"
-msgstr "認証失敗"
-
-#: cgi/register-api.cgi:216
-msgid "Cancellation successful"
-msgstr ""
-
 #: cgi/subs/subs_BOMFeed_history.pm:347
 msgid "Candlestick Chart"
 msgstr "ローソク足チャート"
@@ -2096,10 +2029,6 @@ msgstr ""
 #: cgi/subs/subs_BOMFeed_history.pm:336
 msgid "Cascade"
 msgstr "複数表示"
-
-#: cgi/templates/default/account/statement.tt:115
-msgid "Cash Balance"
-msgstr "残高"
 
 #: lib/BOM/Feed/DataSource/BBDL/CSVParser/CorporateAction.pm:204
 msgid "Cash Dividend"
@@ -2160,7 +2089,7 @@ msgstr "パスワードのご変更"
 msgid "Change in account settings"
 msgstr "ご口座の設定内容の変更"
 
-#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1999
+#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1998
 msgid "Chart"
 msgstr "チャート"
 
@@ -2437,7 +2366,7 @@ msgstr ""
 msgid "Confirm"
 msgstr "決定"
 
-#: cgi/tick_trades.cgi:215
+#: cgi/tick_trades.cgi:189
 msgid "Congratulations"
 msgstr "おめでとうございます"
 
@@ -2445,7 +2374,7 @@ msgstr "おめでとうございます"
 msgid "Congratulations! <br /> You have won the contract!"
 msgstr "おめでとうございます！<br />トレードに勝ちました！"
 
-#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:332
+#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:306
 msgid "Connection failure. Please try again later."
 msgstr "接続に失敗しました。後ほど再度お試し下さい。"
 
@@ -2591,20 +2520,6 @@ msgstr "取引対象の市場価格が日中の高値または低値を示して
 msgid "Controlled risk"
 msgstr "万全なリスク管理"
 
-#: cgi/templates/default/account/currency_converter.tt:13
-msgid "Convert"
-msgstr "両替"
-
-#. ('<select name="currencyfrom" id="currencyfrom">' . $currency_options . '</select>',            '<input type="text" size="7" name="currencyfromvalue" id="currencyfromvalue" value="">',            '<select name="currencyto" id="currencyto">' . $options_for_currencyto . '</select>')
-#: cgi/subs/subs_account_history.pm:212
-msgid "Convert %1%2 to %3"
-msgstr "%1%2から%3へ両替"
-
-#: cgi/templates/default/account/currency_converter.tt:10
-#: cgi/templates/default/account/currency_converter.tt:6
-msgid "Convert between your currency segment accounts"
-msgstr "ご口座内の通貨間両替"
-
 #: cgi/templates/default/legal/privacy.tt:23
 msgid "Cookies"
 msgstr "Cookie（クッキー）のお取り扱いについて"
@@ -2630,13 +2545,13 @@ msgstr "国名："
 msgid "Create free account"
 msgstr "ご口座開設はこちらから"
 
-#: cgi/templates/default/account/statement.tt:114
+#: cgi/templates/default/account/statement.tt:119
 #, fuzzy
 #| msgid "Credit/Debit Card"
 msgid "Credit/<wbr/>Debit"
 msgstr "クレジット・デビットカード"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:426
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: cgi/templates/default/cashier/available_payment_methods.tt:175
 msgid "Credit/Debit Card"
 msgstr "クレジット・デビットカード"
@@ -2649,7 +2564,7 @@ msgstr "Crosshair"
 msgid "Currencies"
 msgstr "対応通貨"
 
-#: cgi/templates/default/cashier/betting_limits.tt:11 cgi/tick_trades.cgi:279
+#: cgi/tick_trades.cgi:253
 msgid "Currency"
 msgstr "通貨"
 
@@ -2689,7 +2604,7 @@ msgstr "現在の市場価格は０です。"
 msgid "Current password"
 msgstr "現在のパスワード"
 
-#: cgi/subs/subs_clientdetails.pm:160 cgi/subs/subs_forms_output.pm:287
+#: cgi/subs/subs_clientdetails.pm:136 cgi/subs/subs_forms_output.pm:287
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "有効期限内の写真付き運転免許証"
 
@@ -2697,7 +2612,7 @@ msgstr "有効期限内の写真付き運転免許証"
 msgid "Current signed Passport"
 msgstr "有効期限内の署名付きパスポート"
 
-#: cgi/subs/subs_clientdetails.pm:159
+#: cgi/subs/subs_clientdetails.pm:135
 msgid "Current signed Passport OR"
 msgstr "有効期限内の署名付きパスポート、または"
 
@@ -2705,7 +2620,7 @@ msgstr "有効期限内の署名付きパスポート、または"
 msgid "Customer Support has been informed of your Lost Login ID / Password request and will be contacting you soon. Thank you for your patience."
 msgstr "カスタマーサポートにてお客様のログインID/パスワード再発行リクエストを承りました。なるべく早急にご連絡いたします。"
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "DOWN"
 msgstr "DOWN"
 
@@ -2715,7 +2630,7 @@ msgstr "DOWN"
 msgid "Daily"
 msgstr "日毎"
 
-#: cgi/oop/Controller/Bet.pm:2022
+#: cgi/oop/Controller/Bet.pm:2021
 #: cgi/templates/default/charting/daily_ohlc.tt:11
 msgid "Daily Prices"
 msgstr "日毎価格データ"
@@ -2745,7 +2660,7 @@ msgstr "データフィード"
 msgid "Data will be available after market close"
 msgstr "閉場後にデータが確定"
 
-#: cgi/templates/default/account/statement.tt:105
+#: cgi/templates/default/account/statement.tt:110
 #: cgi/templates/default/charting/daily_ohlc.tt:16
 #: cgi/templates/default/charting/legacy_chart_table.tt:10
 #: cgi/templates/default/resources/trading_times_header.tt:3
@@ -2772,23 +2687,23 @@ msgstr "表示日数"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:249
-#: cgi/paymentagent_withdraw.cgi:377
+#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_withdraw.cgi:387
 msgid "Dear %1 %2 %3,"
 msgstr "%1 %2 %3様"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr "%1 %2 %3様へ：お客様のご入金リクエスト（%5）を承りました。当社サービスをご利用頂きましてありがとうございます。%4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:464
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:471
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr "%1 %2 %3様へ：お客様のご出金リクエスト（%5）を承りました。当社サービスをご利用頂きましてありがとうございます。%4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:466
 msgid "Dear %1 %2 %3, We would like to inform you that your Western Union withdrawal has been processed. <strong>%5</strong> You can then go to any Western Union agent, provide the MTCN number and claim your funds. You can find the Western Union agent which is closest to you on their <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a>. Kind Regards, %4"
 msgstr "%1 %2 %3様へ：お客様のウェスタン・ユニオンへのご出金リクエスト（<strong>%5</strong>）を承りました。ウェスタン・ユニオンの取扱店にて、MTCN番号をご提示して頂くことでご出金が完了します。お近くのウェスタン・ユニオンに関する情報は、こちらのリンクからご確認して頂けます。<a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\"></a> 当社サービスをご利用頂きましてありがとうございます。%4"
 
@@ -2937,9 +2852,9 @@ msgstr "全て消去してもよろしいですか？"
 msgid "Depo./With. commission"
 msgstr "Depo./With. commission"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
-#: cgi/templates/default/account/statement.tt:138
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/templates/default/account/statement.tt:143
 #: cgi/templates/default/cashier/available_payment_methods.tt:16
 #: cgi/templates/default/homepage/deposit_alert.tt:1
 #: cgi/templates/default/homepage/deposit_alert.tt:5
@@ -2965,7 +2880,7 @@ msgstr "Deposit to Payment Agent"
 msgid "Deposit using legacy method: %1"
 msgstr "egacy method: %1経由でのご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Deposit via BACS"
 msgstr "BACS経由でのご入金"
@@ -2974,7 +2889,7 @@ msgstr "BACS経由でのご入金"
 msgid "Deposit via Bank Transfer"
 msgstr "銀行振込経由でのご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Deposit via Credit/Debit card"
 msgstr "クレジット・デビッドカードでのご入金"
@@ -2983,7 +2898,7 @@ msgstr "クレジット・デビッドカードでのご入金"
 msgid "Deposit via DoughFlow"
 msgstr "DoughFlow経由でのご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Deposit via Western Union"
 msgstr "ウェスタン・ユニオン経由でのご入金"
 
@@ -2992,7 +2907,7 @@ msgstr "ウェスタン・ユニオン経由でのご入金"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "ウェスタン・ユニオン経由でのご入金(MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "銀行振込経由でのご入金"
@@ -3079,7 +2994,7 @@ msgstr "ご入金、及びご出金について"
 msgid "Derivative"
 msgstr "デリバティブ"
 
-#: cgi/templates/default/account/statement.tt:110
+#: cgi/templates/default/account/statement.tt:115
 #, fuzzy
 #| msgid "Direction"
 msgid "Description"
@@ -3093,14 +3008,6 @@ msgstr "Detrended Price Osc：DPO"
 #: cgi/subs/subs_BOMFeed_history.pm:414
 msgid "Detrended Price Oscillator (DPO)"
 msgstr "Detrended Price Osc：DPO"
-
-#: cgi/register-api.cgi:171
-msgid "Developer cannot be registered.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:66
-msgid "Developer not yet registered"
-msgstr ""
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Developer's Guide"
@@ -3194,7 +3101,7 @@ msgstr ""
 msgid "Documents are required to verify your identity"
 msgstr ""
 
-#: lib/BOM/Product/Transaction.pm:858
+#: lib/BOM/Product/Transaction.pm:857
 msgid "Don't buy contract using master password!"
 msgstr ""
 
@@ -3220,11 +3127,11 @@ msgstr ""
 msgid "Dot Chart"
 msgstr "ドットチャート"
 
-#: cgi/tick_trades.cgi:161
+#: cgi/tick_trades.cgi:135
 msgid "Double your stake if you can predict whether the market will move UP or DOWN after 5 ticks."
 msgstr "5tick後に市場価格が上昇するか下降するかを正しく予想できれば２倍の利益を得ることができます。"
 
-#: cgi/tick_trades.cgi:165
+#: cgi/tick_trades.cgi:139
 msgid "Double your stake!"
 msgstr "２倍の利益を得ましょう！"
 
@@ -3280,7 +3187,7 @@ msgstr "Dr"
 msgid "Draw Chart"
 msgstr "チャートを表示"
 
-#: cgi/tick_trades.cgi:323
+#: cgi/tick_trades.cgi:297
 msgid "Draw a pie chart of the most recent ticks!"
 msgstr "末尾の値のチャートを表示する"
 
@@ -3288,7 +3195,7 @@ msgstr "末尾の値のチャートを表示する"
 msgid "Due to new gaming regulations recently promulgated in Malta, we are required to obtain your residential address details.  We would be grateful if you could update your"
 msgstr "マルタ共和国にて発令された新たな規制により、お客様の居住情報のご登録が必須となりました。ご協力のほど宜しくお願い致します。"
 
-#: lib/BOM/Product/Transaction.pm:816
+#: lib/BOM/Product/Transaction.pm:815
 msgid "Due to regulatory requirements, you are required to authenticate your account in order to continue trading."
 msgstr "ライセンス監督機関からの取り決めに基づき、トレードを続けるためにはご口座のアップグレードが必要です。"
 
@@ -3422,7 +3329,7 @@ msgstr "3.1.6 １８歳以下の者を対象とするようなメッセージと
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "スポット価格に差異を付加する目的でバリア値を設定しましょう。もしバリア値として+0.005を設定した場合はスポット価格より0.005高値のバリアが設定されたトレードを購入することになります。尚、スポット価格は注文を受けた次のTickが採用されます。"
 
-#: cgi/oop/Controller/Bet.pm:2197
+#: cgi/oop/Controller/Bet.pm:2196
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "スポット価格に差異を付加する目的でバリア値を設定しましょう。もしバリア値として+0.005を設定した場合はスポット価格より0.005高値のバリアが設定されたトレードを購入することになります。尚、スポット価格は注文を受けた次のTickが採用されます。"
 
@@ -3456,14 +3363,6 @@ msgstr "エラー：パスワードが未入力です。"
 #: cgi/templates/default/charting/light_chart.tt:2
 msgid "Error with input field %1: should contain only digits."
 msgstr "エラー：%1には数値のみ入力して下さい。"
-
-#: cgi/currency_converter.cgi:33
-msgid "Error: Both currencies are the same!  You must convert from one currency to another."
-msgstr "エラー：同じ通貨を指定することはできません。両替は異なる通貨へのみ行って頂けます。"
-
-#: cgi/currency_converter.cgi:72
-msgid "Error: The exchange rate for"
-msgstr "エラー：両替手数料"
 
 #: cgi/subs/subs_runbets_execute.pm:894
 msgid "Error: There was a timeout or an unspecified error. The cost of the contract has been refunded to you."
@@ -3724,7 +3623,7 @@ msgstr ""
 msgid "For affiliates who offer a trading advisory service based on the %1 platform, we offer specialized payout structures. <a href=\"mailto:%2\">Contact our affiliate manager, Karen Yap for details</a>."
 msgstr "%1のプラットフォームの利用に基づいたアドバイスサービスを展開しているアフィリエイト様に対しては、特別な報酬体系も提供することが可能ですので、<a href=\"mailto:%2\">アフィリエイトチームまで、ご連絡下さい。</a>"
 
-#: cgi/tick_trades.cgi:537
+#: cgi/tick_trades.cgi:512
 msgid "For any other queries, please feel free to contact us."
 msgstr "他に何かご不明な点がございましたら、お気軽にご連絡下さい。"
 
@@ -3783,7 +3682,7 @@ msgstr "%1の種類によっては、取引時間中の予約トレード、及�
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr ""
 
-#: cgi/subs/subs_homepage.pm:174
+#: cgi/subs/subs_homepage.pm:138
 msgid "Free Contract Bonus"
 msgstr "無料トレードボーナス"
 
@@ -3834,7 +3733,7 @@ msgid "Further information"
 msgstr "Further information"
 
 #. (300)
-#: cgi/paymentagent_withdraw.cgi:158 cgi/subs/subs_forms.pm:4065
+#: cgi/paymentagent_withdraw.cgi:169 cgi/subs/subs_forms.pm:4065
 msgid "Further instructions must not exceed %1 characters."
 msgstr "詳細説明は%1文字以内でご入力下さい。"
 
@@ -3870,9 +3769,8 @@ msgstr "総則"
 msgid "Generous Commission Structure"
 msgstr "優れた報酬体系"
 
-#. ($promocode_amount, $min_deposit)
-#. ($promocode_currency . $promocode_amount,                $promocode_currency . $min_deposit)
-#: cgi/subs/subs_homepage.pm:130 cgi/subs/subs_homepage.pm:149
+#. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
+#: cgi/subs/subs_homepage.pm:114
 #, fuzzy
 #| msgid "Get %1 when you deposit %2 Bonus."
 msgid "Get %1 when you deposit %2."
@@ -3908,15 +3806,15 @@ msgstr "価格を確認"
 msgid "Getting Started"
 msgstr "ご口座開設"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:438
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
 msgid "Gift Certificate"
 msgstr "Gift Certificate"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Deposit"
 msgstr "Gift Certificate Deposit"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Withdrawal"
 msgstr "Gift Certificate Withdrawal"
 
@@ -3930,7 +3828,7 @@ msgstr "もっと利益を得たい！"
 msgid "Glossary"
 msgstr "用語集"
 
-#: cgi/templates/default/account/statement.tt:17 cgi/tick_trades.cgi:271
+#: cgi/templates/default/account/statement.tt:18 cgi/tick_trades.cgi:245
 msgid "Go"
 msgstr "Go"
 
@@ -3998,13 +3896,13 @@ msgstr "最終スポット価格を隠す"
 msgid "High"
 msgstr "High"
 
-#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/charting/livechart.tt:43
 #: cgi/templates/default/resources/pricing_table_form.tt:60
 msgid "High barrier"
 msgstr "上限バリア"
 
-#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2187 cgi/templates/default/bet/form/barrier.tt:15
 msgid "High barrier offset"
 msgstr "上限追加バリア値"
 
@@ -4051,7 +3949,7 @@ msgstr "Higher/Lowerトレード："
 msgid "Highlights the relationship between volume and price changes and is particularly useful for assessing the strength of a trend."
 msgstr "量と価格の変動との間の関連性を強調し、トレンドの強さを分析するのに適した指標です。"
 
-#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:295
+#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:269
 msgid "Home"
 msgstr "ホーム"
 
@@ -4120,7 +4018,7 @@ msgstr "ランダム指数市場とは？"
 msgid "How to transfer money to the Agent."
 msgstr "How to transfer money to the Agent."
 
-#: cgi/subs/subs_clientdetails.pm:153
+#: cgi/subs/subs_clientdetails.pm:129
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
 msgstr "ご出金可能な上限金額を増やして頂くためには、下記のお手続きを完了して頂きますようお願い申し上げます。"
 
@@ -4137,7 +4035,7 @@ msgstr "パスワードを忘れてしまいました。再発行の方法につ
 msgid "I have read and agree to the <a target=\"_blank\" href=\"%1\">terms and conditions</a> of the site."
 msgstr "このウェブサイトの<a target=\"_blank\" href=\"%1\">ご利用規約</a>に同意いたします。"
 
-#: cgi/tick_trades.cgi:267
+#: cgi/tick_trades.cgi:241
 msgid "I predict that the last decimal of the 5th tick will not be:"
 msgstr "価格の末尾に含まれない数字の予想値："
 
@@ -4182,11 +4080,11 @@ msgid "If applicable, to expedite the processing of your query please include a 
 msgstr "【スクリーンショットご提出のお願い】スクリーンショットをご提出頂くことで、より正確かつ迅速な調査を進めさせて頂くことが可能になります。"
 
 #. (request()
-#: cgi/tick_trades.cgi:535
+#: cgi/tick_trades.cgi:510
 msgid "If the connection problem persists, you can try to <a href=\"%1\">reload the application</a>."
 msgstr "接続の問題が解消されない場合は、<a href=\"%1\">アプリケーションを再読み込み</a>して下さい。"
 
-#: cgi/tick_trades.cgi:527
+#: cgi/tick_trades.cgi:502
 msgid "If the trading page is closed or internet access is terminated, the outcome of your contract won&rsquo;t be affected. You can then access your account statement to view the outcome of the contract."
 msgstr "トレード画面が閉じられたり、インターネットのアクセスが中断されてしまった場合はトレード結果にも影響を及ぼす場合があります。そのような場合は、取引履歴からトレードの結果をご確認下さい。"
 
@@ -4321,7 +4219,7 @@ msgstr "もし特定の<strong>終了時間</strong>を選択した場合は、�
 msgid "If you wish to raise these limits, please <a href=\"%1\">authenticate</a> your account."
 msgstr "お取り引きの上限をアップしたい場合は、<a href=\"%1\">ご口座アップグレード</a>を完了して下さい。"
 
-#: lib/BOM/Product/Transaction.pm:1114
+#: lib/BOM/Product/Transaction.pm:1113
 #, fuzzy
 #| msgid "If you wish to raise these limits, please <a href=\"%1\">authenticate</a> your account."
 msgid "If you wish to raise these limits, please authenticate your account."
@@ -4348,7 +4246,7 @@ msgstr ""
 msgid "Illegal contract type %1"
 msgstr "トレードの種類が無効です：%1"
 
-#: lib/BOM/Product/Transaction.pm:474
+#: lib/BOM/Product/Transaction.pm:481
 msgid "Illegal currency $currency for $broker"
 msgstr ""
 
@@ -4392,7 +4290,7 @@ msgstr ""
 msgid "In foreign exchange markets, traders can enter contracts based on the change in price of one currency as it relates to another currency. For example if a trader selects Rise in the EUR/USD market, they are predicting that the value of the Euro will rise in relation to the value of the US dollar."
 msgstr "外国為替市場では、任意の通貨が特定の通貨に対する価格の変化に基づいたトレードを実施できます。例えば、EUR/USD市場にてRiseを選んだ場合は、米ドルに対してユーロの価値が上がると予想したことになります。"
 
-#: lib/BOM/Product/Transaction.pm:880
+#: lib/BOM/Product/Transaction.pm:879
 #, fuzzy
 #| msgid "Important notice: In order for you to place contracts, we need to know your Residence (Country). Please set this on the <a href=\"%1\">Settings page</a>."
 msgid "In order for you to place contracts, we need to know your Residence (Country). Please update your settings."
@@ -4551,7 +4449,7 @@ msgstr "日中"
 msgid "Intraday contracts may not cross market open."
 msgstr ""
 
-#: cgi/oop/Controller/Bet.pm:2034
+#: cgi/oop/Controller/Bet.pm:2033
 msgid "Intraday prices"
 msgstr "本日の価格データ"
 
@@ -4685,7 +4583,7 @@ msgstr "Javaチャート"
 msgid "Join our analysts LIVE twice a week for a comprehensive analysis of recent developments and trends in the global financial markets."
 msgstr ""
 
-#: cgi/templates/default/account/statement.tt:12
+#: cgi/templates/default/account/statement.tt:13
 #, fuzzy
 #| msgid "Up to"
 msgid "Jump to"
@@ -4695,7 +4593,7 @@ msgstr "最大で"
 msgid "Keep this value secure"
 msgstr ""
 
-#: cgi/paymentagent_withdraw.cgi:386
+#: cgi/paymentagent_withdraw.cgi:396
 msgid "Kind Regards,"
 msgstr "敬具"
 
@@ -4712,7 +4610,7 @@ msgstr "大"
 msgid "Last"
 msgstr "Last"
 
-#: cgi/oop/Controller/Bet.pm:2051
+#: cgi/oop/Controller/Bet.pm:2050
 #, fuzzy
 #| msgid "Last digit"
 msgid "Last Digit Stats"
@@ -4769,7 +4667,7 @@ msgstr "トレードを実践してみる"
 msgid "Learning to trade online"
 msgstr "オンライン・トレードの習得"
 
-#: cgi/statement.cgi:161 cgi/subs/subs_account_history.pm:157
+#: cgi/statement.cgi:137 cgi/subs/subs_account_history.pm:161
 msgid "Legacy Contract"
 msgstr "レガシートレード"
 
@@ -4797,8 +4695,8 @@ msgid "Like %2, %1 reset back to a price of 1000 each day. The difference is tha
 msgstr "%1もまた、毎日価格が１０００にリセットされますが、%2が毎日00:00:00 GMT（日本時間・午前９時）に価格がリセットされるのに対し、%1は12:00 GMT、すなわち日本時間の２１時にリセットされます。"
 
 #: cgi/templates/default/cashier/betting_limits.tt:8
-msgid "Limit</strong><br>(per currency)"
-msgstr "限度額</strong><br>（通貨毎）"
+msgid "Limit"
+msgstr "制限"
 
 #: cgi/subs/subs_BOMFeed_history.pm:338
 msgid "Line"
@@ -4936,13 +4834,13 @@ msgstr "Low"
 msgid "Low Barrier should be number only"
 msgstr "下限バリアは数値で設定して下さい"
 
-#: cgi/oop/Controller/Bet.pm:2191 cgi/templates/default/bet/form/barrier.tt:37
+#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:37
 #: cgi/templates/default/charting/livechart.tt:47
 #: cgi/templates/default/resources/pricing_table_form.tt:46
 msgid "Low barrier"
 msgstr "下限バリア"
 
-#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:34
+#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:34
 msgid "Low barrier offset"
 msgstr "下限追加バリア値"
 
@@ -4954,11 +4852,11 @@ msgstr "ロワーバンド"
 msgid "Lower Band = Average - 0.5 * Std Deviation"
 msgstr "Lower Band = Average - 0.5 * Std Deviation"
 
-#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:303
+#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:277
 msgid "Lucky 10 Digits"
 msgstr "ラッキー１０"
 
-#: cgi/tick_trades.cgi:137 cgi/tick_trades.cgi:141 cgi/tick_trades.cgi:287
+#: cgi/tick_trades.cgi:111 cgi/tick_trades.cgi:115 cgi/tick_trades.cgi:261
 msgid "Lucky 10 Digits Trade"
 msgstr "ラッキー１０"
 
@@ -4979,19 +4877,19 @@ msgstr "MACDシグナル"
 msgid "Maintain your Site and promote %1 in an appropriate manner and contact us if you are changing design or layout or adding material that may influence our opinion as to whether you are a suitable affiliate partner."
 msgstr "3.1.3 プロモーションサイトの管理、及び%1のプロモーションを適切な方法で行って頂きます。尚、アフィリエイトとして適切かどうかの判断を仰ぐ必要がありそうなデザインやレイアウトの変更、及び素材を追加される場合は、当社までご連絡下さい。"
 
-#: cgi/tick_trades.cgi:170
+#: cgi/tick_trades.cgi:144
 msgid "Make 10 times your money if you predict the last decimal digit of the market after 5 ticks."
 msgstr "5tick後の市場価格の末尾の数を正しく予想できれば１０倍の利益を得ることができます。"
 
-#: cgi/tick_trades.cgi:174
+#: cgi/tick_trades.cgi:148
 msgid "Make 10 times your money!"
 msgstr "１０倍の利益を得ましょう！"
 
-#: cgi/tick_trades.cgi:179
+#: cgi/tick_trades.cgi:153
 msgid "Make a 10% profit if you manage to predict that the last decimal digit of the 5th tick will *not* be the number selected."
 msgstr "5tick後の市場価格の末尾に「来ない」数値を正しく予想できれば１０％の利益を得ることができます。"
 
-#: cgi/tick_trades.cgi:183
+#: cgi/tick_trades.cgi:157
 msgid "Make a 10% profit!"
 msgstr "１０％の利益を得ましょう！"
 
@@ -5011,7 +4909,7 @@ msgid "Make your trade"
 msgstr "トレードを決定"
 
 #: cgi/templates/default/resources/pricing_table_form.tt:19
-#: cgi/tick_trades.cgi:251
+#: cgi/tick_trades.cgi:225
 msgid "Market"
 msgstr "マーケット"
 
@@ -5068,7 +4966,7 @@ msgstr "マーケット"
 msgid "Mass Index"
 msgstr "マスインデックス"
 
-#: cgi/subs/subs_homepage.pm:162
+#: cgi/subs/subs_homepage.pm:126
 msgid "Matched Contract Bonus"
 msgstr "合致するトレードボーナス"
 
@@ -5081,7 +4979,7 @@ msgid "Maximum"
 msgstr "最大値"
 
 #: cgi/subs/subs_forms.pm:3466
-#: cgi/templates/default/cashier/betting_limits.tt:23
+#: cgi/templates/default/cashier/betting_limits.tt:15
 msgid "Maximum account cash balance"
 msgstr "ご口座上限金額"
 
@@ -5096,16 +4994,16 @@ msgstr "現在のご口座上限金額は、<strong>%1 %2</strong>です。"
 msgid "Maximum aggregate contract purchases per day."
 msgstr "一日あたりで購入可能なトレードの最高総額"
 
-#: cgi/templates/default/cashier/betting_limits.tt:35
+#: cgi/templates/default/cashier/betting_limits.tt:23
 msgid "Maximum aggregate payouts on open positions"
 msgstr "オープン中ポジションに対する払い戻し金額の最高総額"
 
-#: cgi/templates/default/cashier/betting_limits.tt:29
+#: cgi/templates/default/cashier/betting_limits.tt:19
 msgid "Maximum daily turnover"
 msgstr "１日あたりのトレード購入可能金額"
 
 #: cgi/subs/subs_forms.pm:3516
-#: cgi/templates/default/cashier/betting_limits.tt:17
+#: cgi/templates/default/cashier/betting_limits.tt:11
 msgid "Maximum number of open positions"
 msgstr "保有可能なオープンポジションの総数"
 
@@ -5115,7 +5013,7 @@ msgstr "保有可能なオープンポジションの総数"
 msgid "Maximum number of open positions is currently set to <strong>%1</strong>"
 msgstr "現在、保有可能なオープン中ポジションの総数は<strong>%1</strong>件です。"
 
-#: cgi/subs/subs_payments_withdrawals.pm:110
+#: cgi/subs/subs_payments_withdrawals.pm:102
 msgid "Maximum withdrawal by all other means:"
 msgstr "他の全ての方法での出金最大金額："
 
@@ -5203,19 +5101,19 @@ msgstr "Tickデータをダウンロード"
 msgid "Momentum"
 msgstr "モメンタム"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:435
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
 msgid "Moneta"
 msgstr "Moneta"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
 msgid "Moneybookers"
 msgstr "Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Deposit"
 msgstr "Moneybookersによるご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Withdrawal"
 msgstr "Moneybookersによるご出金"
 
@@ -5314,7 +5212,7 @@ msgstr "多言語、及び複数の通貨によるサポート"
 msgid "Must be in a valid URI format"
 msgstr ""
 
-#: cgi/my_account.cgi:73 lib/BOM/View/Menu.pm:56
+#: cgi/my_account.cgi:72 lib/BOM/View/Menu.pm:56
 msgid "My Account"
 msgstr "口座情報"
 
@@ -5386,7 +5284,7 @@ msgstr ""
 msgid "Next"
 msgstr "次"
 
-#: cgi/tick_trades.cgi:227
+#: cgi/tick_trades.cgi:201
 msgid "Next Page"
 msgstr "次のページ"
 
@@ -5451,10 +5349,6 @@ msgstr "１万ドル分のデモ口座を試す"
 msgid "No. There's no cost to sign up to the %1 affiliate program."
 msgstr "%1のアフィリエイトプログラムへのご参加費用は一切発生しません。"
 
-#: cgi/templates/default/account/currency_converter.tt:15
-msgid "Note:"
-msgstr "注意："
-
 #: cgi/templates/default/portfolio/contract_details.tt:31
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "注意：当社のサーバへリクエストが受理された際の優勢な市場価格にてトレードを売ることが可能です。この価格は示唆された価格により異なる場合があります。"
@@ -5483,8 +5377,8 @@ msgstr "注意：当社は２年以上請求がなされなかったアフィリ
 
 #. ($currency,            $withdrawal_limits->{'frozen_free_gift'},            $withdrawal_limits->{'free_gift_turnover_limit'},            virgule($withdrawal_limits->{'aggregate_buys_for_currency'})
 #. ($self->currency,                    $limits->{frozen_free_gift},                    $limits->{free_gift_turnover_limit},                    virgule($limits->{aggregate_buys_for_currency})
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:161
-#: cgi/subs/subs_payments_withdrawals.pm:129
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:153
+#: cgi/subs/subs_payments_withdrawals.pm:121
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
 msgstr "注意：付与されたボーナス（%1%2）は、%1%3以上のトレードを行った時点でご出金可能になります。現在のトレード総額は%1%4です。この制限はボーナス該当金額にのみ適用されますので、実際にご入金された資金、及びその資金から生じた利益はいつでもご出金頂くことが可能です。"
 
@@ -5557,11 +5451,11 @@ msgstr "OAuth2.0とはこの目的で用いられる最新の基準です。正�
 msgid "OK"
 msgstr "OK"
 
-#: cgi/subs/subs_clientdetails.pm:164
+#: cgi/subs/subs_clientdetails.pm:140
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "銀行口座の残高証明、信用金庫の残高証明、住宅金融組合の残高証明、クレジットカードの支払い通知、デビットカードの支払い通知、通帳、または住民票の原本(３ヶ月以内に発行されたもの)"
 
-#: cgi/subs/subs_clientdetails.pm:163
+#: cgi/subs/subs_clientdetails.pm:139
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "公共料金の支払い通知票の原本（３ヶ月以内に発行されたもの）、若しくは"
 
@@ -5573,7 +5467,7 @@ msgstr "接続先オフィス"
 msgid "Old password is wrong."
 msgstr "旧パスワードの値が不正です。"
 
-#: cgi/templates/default/account/statement.tt:24
+#: cgi/templates/default/account/statement.tt:26
 msgid "Older"
 msgstr ""
 
@@ -5710,7 +5604,7 @@ msgstr "その他の問い合わせ先"
 msgid "Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list."
 msgstr "当社のアフィリエイトプログラムは、ご自身のウェブサイト、ニュースレター、メーリングリストを管理しているプロの投資家などに向けてサービスを提供します。"
 
-#: cgi/tick_trades.cgi:531
+#: cgi/tick_trades.cgi:506
 msgid "Our application uses ports 8080 and 843. For connection difficulties, please contact your System Administrator and request your firewall to be updated accordingly."
 msgstr "当社のアプリケーションはポート8080と843を採用しています。接続に問題がある場合は、お客様のシステム管理者にファイヤーウォールが適切に更新するように依頼して下さい。"
 
@@ -5748,8 +5642,8 @@ msgstr "当社のデータフィードにはトレードにご活用頂ける、
 msgid "Our data feed may at times differ slightly from other data feeds found on the internet (who may themselves differ between each other). Reasons for differences in feed providers include:"
 msgstr "当社が提供するデータフィードと他の機関がインターネット上で提供しているデータフィードには若干の違いが見受けられる場合があります。また、それらの他の機関のデータの間でも違いが見受けられる場合もあります。このような相違点が生じる理由を下記に記します。"
 
-#. (BOM::Platform::Runtime->instance->app_config->cs->email)
-#: cgi/subs/subs_clientdetails.pm:166
+#. ($cs_email)
+#: cgi/subs/subs_clientdetails.pm:142
 msgid "Our email address is %1."
 msgstr "当社のメールアドレスは%1です。"
 
@@ -5803,7 +5697,7 @@ msgstr "3.12 アフィリエイト会員は、自身が保有するプロモー�
 msgid "P.O. Box is not accepted"
 msgstr "私書箱でのご登録は受け付けておりません。"
 
-#: cgi/templates/default/account/statement.tt:57
+#: cgi/templates/default/account/statement.tt:59
 #, fuzzy
 #| msgid "GBP/BRL"
 msgid "P/L"
@@ -5814,7 +5708,7 @@ msgid "PLEASE CONTACT CUSTOMER SUPPORT."
 msgstr "カスタマーサポートまでご連絡下さい。"
 
 #. ($page_num, $total_pages)
-#: cgi/subs/subs_account_history.pm:242
+#: cgi/subs/subs_account_history.pm:196
 msgid "Page %1 of %2"
 msgstr "%2ページ中%1ページ目"
 
@@ -5844,7 +5738,7 @@ msgstr "外国為替、株式、コモディティ市場でのトレード"
 msgid "Partner API"
 msgstr "パートナーAPI"
 
-#: cgi/register-api.cgi:31
+#: cgi/register-api.cgi:27
 #, fuzzy
 #| msgid "Partner API"
 msgid "Partner API Registration"
@@ -5955,7 +5849,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "払い戻し金額は、<strong>%1</strong>と<strong>%2</strong>間で指定して下さい。"
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: cgi/subs/subs_homepage.pm:125
+#: cgi/subs/subs_homepage.pm:106
 msgid "Pending Bonus: %1"
 msgstr "審査中ボーナス：%1"
 
@@ -5999,7 +5893,7 @@ msgstr "ランダム指数をトレード開始"
 msgid "Platform Tour"
 msgstr "ご利用ガイド"
 
-#: cgi/tick_trades.cgi:239
+#: cgi/tick_trades.cgi:213
 msgid "Play Again"
 msgstr "再トレード"
 
@@ -6015,7 +5909,7 @@ msgstr "「戻る」をクリックし、再入力して下さい。"
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "上記画像をクリックし解説動画を再生して下さい。"
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:193
+#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:204
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "Please confirm the transaction details in order to complete the transfer:"
 
@@ -6047,9 +5941,8 @@ msgstr "パスワードをご入力して下さい。"
 msgid "Please enter a town or city."
 msgstr "都市または街の名前をご入力して下さい。"
 
-#: cgi/paymentagent_transfer.cgi:101 cgi/subs/subs_forms.pm:3822
+#: cgi/paymentagent_transfer.cgi:103 cgi/subs/subs_forms.pm:3822
 #: cgi/subs/subs_forms.pm:4023
-#: cgi/templates/default/account/currency_converter.tt:11
 msgid "Please enter a valid amount."
 msgstr "有効な値をご入力して下さい。"
 
@@ -6096,7 +5989,7 @@ msgstr "姓をご入力して下さい。"
 msgid "Please enter your secret answer"
 msgstr "秘密のご質問をご入力して下さい。"
 
-#: cgi/paymentagent_transfer.cgi:271
+#: cgi/paymentagent_transfer.cgi:272
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 
@@ -6119,11 +6012,11 @@ msgstr "この機能をご利用頂くためにはログインが必要です。
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 
-#: cgi/subs/subs_payments_withdrawals.pm:100
+#: cgi/subs/subs_payments_withdrawals.pm:92
 msgid "Please note that if you have deposited at least once by credit/debit card, you may find that you are restricted in the amount you may convert into other currencies."
 msgstr "クレジット・デビットカードからご入金をされた金額は他の通貨への両替を承ることは致しかねます。"
 
-#: cgi/subs/subs_clientdetails.pm:134 cgi/subs/subs_forms_output.pm:299
+#: cgi/subs/subs_forms_output.pm:299
 msgid "Please note that mobile telephone bills are not acceptable as evidence of address"
 msgstr "携帯電話のお支払い通知票は居住地証明の書類として提出することはできません。"
 
@@ -6155,7 +6048,7 @@ msgstr "お客様の個人情報はいつでも各種設定ページから変更
 msgid "Please note that your settings have been updated as follows:"
 msgstr "下記の内容で設定内容の更新を承りました。"
 
-#: cgi/subs/subs_clientdetails.pm:138 cgi/subs/subs_forms_output.pm:304
+#: cgi/subs/subs_forms_output.pm:304
 msgid "Please post the documents to:"
 msgstr "以下の住所へ書類をご郵送して下さい。："
 
@@ -6163,7 +6056,7 @@ msgstr "以下の住所へ書類をご郵送して下さい。："
 msgid "Please provide at least one self-exclusion setting."
 msgstr "ご希望される自己制限の対象を少なくとも１点選択して下さい。"
 
-#: cgi/oop/Controller/Bet.pm:1525 cgi/oop/Controller/Bet.pm:1802
+#: cgi/oop/Controller/Bet.pm:1527 cgi/oop/Controller/Bet.pm:1804
 msgid "Please provide granter id(s)."
 msgstr "granter idを入力して下さい。"
 
@@ -6202,9 +6095,14 @@ msgstr "選択して下さい"
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "マーケットを選択して下さい："
 
-#: cgi/tick_trades.cgi:327
+#: cgi/tick_trades.cgi:301
 msgid "Please select market:"
 msgstr "マーケットを選択して下さい："
+
+#. (qq(<a href="mailto:$cs_email">$cs_email</a>)
+#: cgi/subs/subs_clientdetails.pm:120
+msgid "Please send this email to %1."
+msgstr ""
 
 #: cgi/subs/subs_forms.pm:1197 cgi/subs/subs_forms.pm:405
 #: cgi/subs/subs_presentation.pm:102
@@ -6228,11 +6126,11 @@ msgstr "半角英数字、またはスペースのみご入力して下さい。
 msgid "Please use only letters, spaces, hyphens, full-stops or apostrophes."
 msgstr "文字、スペース、句読点のみでご入力下さい。"
 
-#: cgi/tick_trades.cgi:83
+#: cgi/tick_trades.cgi:57
 msgid "Please wait.<br />Your request is being processed."
 msgstr "少々お待ち下さい。<br />リクエストを処理中です。"
 
-#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:81 cgi/portfolio.cgi:83
+#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:79 cgi/portfolio.cgi:81
 #: cgi/templates/default/homepage/logged_in.tt:46 lib/BOM/View/Menu.pm:67
 msgid "Portfolio"
 msgstr "資産情報"
@@ -6273,7 +6171,7 @@ msgstr "簡単なのにパワフル"
 msgid "Prediction"
 msgstr "予想値"
 
-#: cgi/limits.cgi:54
+#: cgi/limits.cgi:44
 msgid "Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions."
 msgstr "資産情報ページ内に存在する未決済分トレードに対する払い戻し金額の最高総額を示します。最高総額を超えた場合、オープン中のトレードを閉じて頂くことで新たなトレードの購入が可能になります。"
 
@@ -6318,7 +6216,7 @@ msgstr "反対ポジションの価格"
 msgid "Prices"
 msgstr "価格"
 
-#: cgi/oop/Controller/Bet.pm:2040 cgi/pricing_table.cgi:166
+#: cgi/oop/Controller/Bet.pm:2039 cgi/pricing_table.cgi:166
 #: cgi/templates/default/global/footer.tt:51
 #: cgi/templates/default/resources/pricing_table_form.tt:2
 #: frontend/templates/layouts/default/footer.html.haml:1
@@ -6350,13 +6248,13 @@ msgstr "利益"
 #: cgi/create_account.cgi:113 cgi/create_account.cgi:196
 #: cgi/create_account.cgi:73 cgi/create_account.cgi:80
 #: cgi/create_account.cgi:96 cgi/oop/Controller/Bet.pm:1367
-#: cgi/oop/Controller/Bet.pm:1514 cgi/oop/Controller/Bet.pm:1755
-#: cgi/oop/Controller/Bet.pm:1794 cgi/oop/Controller/Bet.pm:2209
+#: cgi/oop/Controller/Bet.pm:1516 cgi/oop/Controller/Bet.pm:1757
+#: cgi/oop/Controller/Bet.pm:1796 cgi/oop/Controller/Bet.pm:2208
 #: cgi/oop/Controller/Bet.pm:760 cgi/oop/Controller/Bet.pm:866
 msgid "Profit from your Predictions"
 msgstr "予想して利益を得る"
 
-#: cgi/templates/default/account/statement.tt:113
+#: cgi/templates/default/account/statement.tt:118
 #, fuzzy
 #| msgid "Profit/<wbr/>Loss"
 msgid "Profit/<wbr/>Loss"
@@ -6418,7 +6316,7 @@ msgstr "購入価格"
 
 #. ($currency, $max_daily_turnover_limit)
 #. ($currency, $max_daily_turnover)
-#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1112
+#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1111
 msgid "Purchase of this contract would cause you to exceed your daily turnover limit of %1%2."
 msgstr "このトレード購入により１日あたりのトレード購入可能金額%1%2を超過します。"
 
@@ -6426,11 +6324,11 @@ msgstr "このトレード購入により１日あたりのトレード購入可
 msgid "Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money."
 msgstr "資金管理も万全のものとしましょう。目標の利益を達成したら一旦、トレードを休止されることをお勧めします。"
 
-#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:307
+#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:281
 msgid "Quick 10%"
 msgstr "クイック10%"
 
-#: cgi/tick_trades.cgi:145 cgi/tick_trades.cgi:149 cgi/tick_trades.cgi:291
+#: cgi/tick_trades.cgi:119 cgi/tick_trades.cgi:123 cgi/tick_trades.cgi:265
 msgid "Quick 10% Trade"
 msgstr "クイック１０％"
 
@@ -6568,8 +6466,8 @@ msgid "Reap the rewards of trading binaries, knowing your funds are always safe.
 msgstr ""
 
 #: cgi/templates/default/account/portfolio.tt:12
-#: cgi/templates/default/account/statement.tt:106
-#: cgi/templates/default/account/statement.tt:125
+#: cgi/templates/default/account/statement.tt:111
+#: cgi/templates/default/account/statement.tt:130
 msgid "Ref."
 msgstr "参照番号"
 
@@ -6666,15 +6564,15 @@ msgstr "ページの再読込"
 msgid "Remove Overlay"
 msgstr "オーバレイを削除"
 
-#: cgi/limits.cgi:46
+#: cgi/limits.cgi:36
 msgid "Represents the maximum amount of cash that you may hold in your account.  If the maximum is reached, you will be asked to withdraw funds."
 msgstr "ご口座で保有可能なご口座残高の最高金額を示します。最高金額を超えた場合はご出金をお願いいたします。"
 
-#: cgi/limits.cgi:59
+#: cgi/limits.cgi:49
 msgid "Represents the maximum number of outstanding contracts in your portfolio. Each line in your portfolio counts for one open position. Once the maximum is reached, you will not be able to open new positions without closing an existing position first."
 msgstr "未決済分のトレード総数を示し、各行を１件分の未決済分のオープン中のポジションとしてカウントします。最高件数を超えた場合、オープン中のトレードを閉じて頂くことで新たなトレードの購入が可能になります。"
 
-#: cgi/limits.cgi:51
+#: cgi/limits.cgi:41
 msgid "Represents the maximum volume of contracts that you may purchase in any given trading day."
 msgstr "購入可能な１日あたりのトレードの総額を示します。"
 
@@ -6837,10 +6735,6 @@ msgstr "免責事項"
 msgid "Russia"
 msgstr "ロシア"
 
-#: cgi/oop/Controller/Bet.pm:1933
-msgid "SOLD"
-msgstr "SOLD"
-
 #: cgi/templates/default/bet/sell_success_ajax.tt:11
 msgid "Sale Price"
 msgstr "決済価格"
@@ -6907,7 +6801,7 @@ msgstr "Select the payment method that you would like to use and contact the Pay
 msgid "Self-Exclusion Facilities"
 msgstr "お取り引き上限のご設定"
 
-#: cgi/templates/default/account/statement.tt:40
+#: cgi/templates/default/account/statement.tt:42
 #: cgi/templates/default/backoffice/account/statement.tt:45
 msgid "Sell"
 msgstr "Sell"
@@ -7110,9 +7004,21 @@ msgstr "より精度の高いデータを供給"
 msgid "Sorry you cannot buy/sell contracts"
 msgstr "申し訳ございませんが、お客様はトレードを売買することができません。"
 
+#. ($client_to->loginid)
+#: cgi/paymentagent_transfer.cgi:99
+msgid "Sorry, $currency is not default currency for client "
+msgstr ""
+
+#. ($client_fm->loginid)
+#: cgi/paymentagent_transfer.cgi:98
+#, fuzzy
+#| msgid "Sorry, broker %1 does not allow transfers from payment agents."
+msgid "Sorry, $currency is not default currency for payment agent "
+msgstr "Sorry, broker %1 does not allow transfers from payment agents."
+
 #. (localize('Tick Trades')
 #. (BOM::Platform::Context::localize('Tick Trades')
-#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:451
+#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:426
 msgid "Sorry, %1 are currently suspended"
 msgstr "申し訳ございませんが現在、%1はサービス提供を一時的に停止しております。"
 
@@ -7210,8 +7116,15 @@ msgstr "Sorry, the Payment Agent is either unavailable or does not exist."
 msgid "Sorry, the Payment Agent is unavailable for your region."
 msgstr "Sorry, the Payment Agent is either unavailable or does not exist."
 
+#. ($pa_client->currency . " is unavailable for Payment Agent Withdrawal")
+#: cgi/paymentagent_withdraw.cgi:145
+#, fuzzy
+#| msgid "Sorry, the Payment Agent is either unavailable or does not exist."
+msgid "Sorry, the Payment Agent's currency "
+msgstr "Sorry, the Payment Agent is either unavailable or does not exist."
+
 #. ($max_payout_limit, $currency, $client_agg_payouts, $payout)
-#: lib/BOM/Product/Transaction.pm:1033
+#: lib/BOM/Product/Transaction.pm:1032
 #, fuzzy
 #| msgid "Sorry, the aggregate payouts of contracts on your account cannot exceed %1. The current aggregate payout of contracts on your account is %2%3 therefore you cannot buy a contract that would pay out an additional %2%4."
 msgid "Sorry, the aggregate payouts of contracts on your account cannot exceed %2%1. The current aggregate payout of contracts on your account is %2%3 therefore you cannot buy a contract that would pay out an additional %2%4."
@@ -7220,14 +7133,6 @@ msgstr "申し訳ございませんが、お客様のご口座での総合払い
 #: cgi/subs/subs_runbets_execute.pm:523
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "申し訳ございませんが、トレード・セッションの終了直前のトレード購入は不可能です。"
-
-#: cgi/currency_converter.cgi:37
-msgid "Sorry, the currency amount to convert is incorrect."
-msgstr "申し訳ございませんが、ご指定頂いた両替の対象金額の値が正しくありません。"
-
-#: cgi/currency_converter.cgi:41 cgi/currency_converter.cgi:92
-msgid "Sorry, the currency amount to convert is too small."
-msgstr "申し訳ございませんが、ご指定頂いたリクエスト金額が小額につき両替を承ることができません。"
 
 #: cgi/paymentagent_transfer.cgi:96
 msgid "Sorry, the currency format is incorrect."
@@ -7246,11 +7151,7 @@ msgstr "申し訳ございませんが、ご指定頂いた市場は休日 (%1)�
 msgid "Sorry, the market is currently closed."
 msgstr "申し訳ございませんが、ご指定して頂いた市場は現在閉場しております。"
 
-#: cgi/currency_converter.cgi:159
-msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
-msgstr "申し訳ございませんが、１日あたりでの両替回数は３回まで承っております。お客様は既に所定回数をリクエストされています。"
-
-#: cgi/subs/subs_payments_withdrawals.pm:95
+#: cgi/subs/subs_payments_withdrawals.pm:87
 msgid "Sorry, the maximum amount you can convert is"
 msgstr "申し訳ございませんが、お客様が両替して頂ける最大金額をご確認下さい："
 
@@ -7258,7 +7159,7 @@ msgstr "申し訳ございませんが、お客様が両替して頂ける最大
 msgid "Sorry, the page cannot be found."
 msgstr "申し訳ございませんが、ページが見つかりませんでした。"
 
-#: lib/BOM/Product/Transaction.pm:999
+#: lib/BOM/Product/Transaction.pm:998
 #, fuzzy
 #| msgid "Sorry, the same contract cannot be purchased more than once.  You already have an identical contract in your account."
 msgid "Sorry, the same contract cannot be purchased more than once. You already have an identical contract in your account."
@@ -7272,11 +7173,6 @@ msgstr "申し訳ございませんが、ご指定頂いたデータが多過ぎ
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "申し訳ございませんが、決済処理の際にお客様の個人情報認証に問題が発生しました。カスタマーサポートまでご連絡下さい。"
 
-#. ('10,000')
-#: cgi/currency_converter.cgi:47
-msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
-msgstr "申し訳ございませんが、この通貨での両替金額の上限を上回っております。１回あたりの両替上限金額は%1です。"
-
 #: cgi/top_up_virtual.cgi:25
 msgid "Sorry, this feature is available to virtual accounts only"
 msgstr "申し訳ございませんが、この機能はデモ口座のみでご利用頂けます。"
@@ -7285,7 +7181,7 @@ msgstr "申し訳ございませんが、この機能はデモ口座のみでご
 msgid "Sorry, this page cannot be refreshed."
 msgstr "申し訳ございませんが、このページを再読込みすることはできません。"
 
-#: cgi/subs/subs_payments_withdrawals.pm:82
+#: cgi/subs/subs_payments_withdrawals.pm:74
 msgid "Sorry, withdrawals cannot be made on the day of your account opening. Please wait until tomorrow to make a withdrawal."
 msgstr "申し訳ございませんが、ご口座を開設された当日にご出金リクエストを承ることはできません。明日、改めてご出金をリクエストして下さい。"
 
@@ -7293,19 +7189,15 @@ msgstr "申し訳ございませんが、ご口座を開設された当日にご
 msgid "Sorry, you are too young to open an account."
 msgstr "当社サービスの年齢制限の基準に満たないためご口座を開設することができません。"
 
-#: cgi/currency_converter.cgi:128
-msgid "Sorry, you cannot convert"
-msgstr "申し訳ございませんが、両替不可能です。"
-
 #. ($max_open_positions_limit)
-#: lib/BOM/Product/Transaction.pm:1017
+#: lib/BOM/Product/Transaction.pm:1016
 #, fuzzy
 #| msgid "Sorry, you cannot hold more than %1 contracts at a given time.  Please sell some of your existing contracts before buying any more."
 msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please sell some of your existing contracts before buying any more."
 msgstr "申し訳ございませんが、%1件以上のポジションを現在保有することはできませので、新たなトレードをご購入された場合はオープン中のポジションをお売り下さい。"
 
-#: cgi/subs/subs_payments_withdrawals.pm:104
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:96
 msgid "Sorry, you cannot withdraw."
 msgstr "申し訳ございませんが、ご出金リクエストを承ることができません。"
 
@@ -7325,30 +7217,30 @@ msgid "Sorry, you have entered an incorrect email address."
 msgstr "申し訳ございませんが、入力されたメールアドレスに誤りがあります。"
 
 #. (to_monetary_number_format($limits->daily->payout_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1201
+#: lib/BOM/Product/Transaction.pm:1200
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 on %2 which is the maximum daily PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "申し訳ございませんが、%2での１日あたりの最大払い戻し金額：USD%1を超過してしまいました。"
 
 #. (to_monetary_number_format($limits->daily->payout)
-#: lib/BOM/Product/Transaction.pm:1225
+#: lib/BOM/Product/Transaction.pm:1224
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 which is the maximum daily PAYOUT allowed. Please choose on a different type of contract or lower your stake."
 msgstr "申し訳ございませんが、１日あたりの最大払い戻し金額：USD%1を超過してしまいました。異なるトレードタイプをお選び頂くか、購入金額が低くなるようにトレードを設定して下さい。"
 
 #. (to_monetary_number_format($limits->daily->turnover_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1190
+#: lib/BOM/Product/Transaction.pm:1189
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 on %2 which is the maximum daily turnover allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "申し訳ございませんが、%2での１日あたりの最大払い戻し金額：USD%1を超過してしまいました。異なるトレードタイプをお選び頂くか、購入金額が低くなるようにトレードを設定して下さい。"
 
 #. (to_monetary_number_format($limits->daily->turnover)
-#: lib/BOM/Product/Transaction.pm:1215
+#: lib/BOM/Product/Transaction.pm:1214
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 which is the maximum daily turnover allowed. Please choose on a different type of contract or lower your stake."
 msgstr "申し訳ございませんが、１日あたりの最大払い戻し金額：USD%1を超過してしまいました。異なるトレードタイプをお選び頂くか、購入金額が低くなるようにトレードを設定して下さい。"
 
-#: cgi/paymentagent_transfer.cgi:159 cgi/paymentagent_withdraw.cgi:276
+#: cgi/paymentagent_transfer.cgi:160 cgi/paymentagent_withdraw.cgi:286
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "申し訳ございませんが、本日のお取り引き上限金額を超えてしまいまいた。"
 
-#: cgi/paymentagent_transfer.cgi:151 cgi/paymentagent_withdraw.cgi:248
+#: cgi/paymentagent_transfer.cgi:152 cgi/paymentagent_withdraw.cgi:258
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "Sorry, you have exceeded the maximum allowable transfer amount for today."
 
@@ -7358,16 +7250,16 @@ msgstr "Sorry, you have exceeded the maximum allowable transfer amount for today
 msgid "Sorry, you have excluded yourself from the website until %1."
 msgstr "申し訳ございませんが、お客様は%1まで自己制限として弊社へのアクセスを制限されています。"
 
-#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:219
+#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:193
 msgid "Sorry, you have lost the contract."
 msgstr "残念！負け判定です。"
 
-#: cgi/top_up_virtual.cgi:64
+#: cgi/top_up_virtual.cgi:59
 msgid "Sorry, you have open positions. Please close out all open positions before requesting additional funds."
 msgstr "申し訳ございませんが、オープン中のポジションが存在します。全てのオープン中のポジションを閉じて頂いた上でバーチャルマネーの追加をリクエストして下さい。"
 
 #. ($min_with_currency)
-#: cgi/top_up_virtual.cgi:52
+#: cgi/top_up_virtual.cgi:47
 msgid "Sorry, your account balance is more than %1. You may not claim extra funds until such time as your account balance drops under %1."
 msgstr "申し訳ございませんが、ご口座残高が%1を超えています。バーチャルマネーの追加はご口座残高が%1を下回った際にリクエストして頂けます。"
 
@@ -7377,7 +7269,7 @@ msgid "Sorry, your account balance of %1 %2 is insufficient"
 msgstr "申し訳ございませんが、ご口座残高が%1 %2であり不足していることをご確認下さい。"
 
 #. ("$currency$balance",                to_monetary_number_format($account_balance_limit, 1)
-#: lib/BOM/Product/Transaction.pm:941
+#: lib/BOM/Product/Transaction.pm:940
 #, fuzzy
 #| msgid "Sorry, your account cash balance is too high (%1). <B>We do not accept accounts over  %2 </b>.  Please withdraw money from your account to bring down your cash balance under that amount.  You may not trade until you do so."
 msgid "Sorry, your account cash balance is too high (%1). <B>Your maximum account balance is %2 </b>. Please withdraw money from your account to bring down your cash balance under that amount. You may not trade until you do so."
@@ -7395,9 +7287,16 @@ msgstr "申し訳ございませんが、お客様のご口座での最近の処
 msgid "Sorry, your account has got stuck in a previous transaction that did not complete. If this error persists, please contact customer support."
 msgstr "申し訳ございませんが、お客様のご口座での最近の処理に遅延が発生し完了しませんでした。もし、エラーが解消されない場合はログインIDと共に%1までご連絡下さい。"
 
-#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:902
+#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:901
 msgid "Sorry, your account is not authorised for any further contract purchases."
 msgstr "申し訳ございませんが、これ以上のトレードの購入を可能にする権限がお客様のご口座に存在しておりません。"
+
+#. ($client->currency . ' is unavailable for Payment Agent Withdrawal')
+#: cgi/paymentagent_withdraw.cgi:139
+#, fuzzy
+#| msgid "Sorry, you cannot sell"
+msgid "Sorry, your currency of "
+msgstr "申し訳ございませんが、お売り頂くことはできません。"
 
 #: cgi/emailus.cgi:142
 msgid "Sorry, your file is too large. The maximum file size is 1 Megabyte (1MB)."
@@ -7427,7 +7326,7 @@ msgstr "スポット価格"
 msgid "Spread"
 msgstr "Spread"
 
-#: cgi/tick_trades.cgi:275 frontend/templates/get_started/glossary.html.haml:1
+#: cgi/tick_trades.cgi:249 frontend/templates/get_started/glossary.html.haml:1
 #: lib/BOM/Product/Model/ContractForm.pm:652
 msgid "Stake"
 msgstr "購入価格"
@@ -7494,7 +7393,8 @@ msgstr "トレード開始"
 msgid "State/Province"
 msgstr "都道府県"
 
-#: cgi/statement.cgi:18 cgi/statement.cgi:88 cgi/statement.cgi:90
+#: cgi/statement.cgi:18 cgi/statement.cgi:86
+#: cgi/templates/default/account/statement.tt:101
 #: cgi/templates/default/homepage/logged_in.tt:61 lib/BOM/View/Menu.pm:75
 msgid "Statement"
 msgstr "取引履歴"
@@ -7509,15 +7409,15 @@ msgstr "取引履歴"
 msgid "Statistic"
 msgstr "統計"
 
-#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:315
+#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:289
 msgid "Statistics"
 msgstr "過去データ"
 
-#: cgi/tick_trades.cgi:209 cgi/tick_trades.cgi:319
+#: cgi/tick_trades.cgi:183 cgi/tick_trades.cgi:293
 msgid "Statistics that help."
 msgstr "過去データを活用して下さい"
 
-#: cgi/tick_trades.cgi:311
+#: cgi/tick_trades.cgi:285
 msgid "Stats"
 msgstr "分析"
 
@@ -7631,10 +7531,6 @@ msgstr "5.2 プロモーションサイトに掲載したアフィリエイト�
 #: cgi/subs/subs_forms.pm:4076
 msgid "Submit"
 msgstr "送信"
-
-#: cgi/currency_converter.cgi:208
-msgid "Success"
-msgstr "成功"
 
 #: cgi/templates/default/legal/copyright.tt:12
 #, fuzzy
@@ -7825,7 +7721,7 @@ msgstr "%1では、日中の時間が経つにつれて市場動向が活発に�
 
 #. ($website->display_name)
 #. (request()
-#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:388
+#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:398
 msgid "The %1 team."
 msgstr "The %1 team."
 
@@ -8175,7 +8071,7 @@ msgstr "当社は２４ヶ月以上お取り引きの無いご口座に対し、
 msgid "The content on this website is subject to change at any time without notice and is provided for the sole purpose of assisting traders in making independent investment decisions.  %1 has taken reasonable measures to ensure the accuracy of the information on the website, however, the company does not guarantee its accuracy and will not accept liability for any loss or damage which may arise directly or indirectly from the content or your inability to access the website, for any delay in or failure of the transmission or the receipt of any instruction or notification sent through this website."
 msgstr "当社サイトのコンテンツは予告無しに変更される場合があり、トレーダー個人の判断に基づく判断をアシストする目的で存在しています。%1では、当社サイトに掲載されている情報の精度を確証するために適切な指標を用いていますが、完璧に精度が保証されるとは限りません。また、直接的間接的を問わず、コンテンツ、当社サイトへのアクセス失敗、当社ウェブサイトから送信された指示・通知の受信や通信の失敗に起因し得る損失や損害に対し責任を負うことはありません。"
 
-#: lib/BOM/Product/Transaction.pm:644
+#: lib/BOM/Product/Transaction.pm:651
 msgid "The contract has expired"
 msgstr "このトレードは終了しました。"
 
@@ -8191,7 +8087,7 @@ msgid "The contract must expire on a trading day."
 msgstr "トレードはトレード可能日に終了する必要があります。"
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:687
+#: lib/BOM/Product/Transaction.pm:694
 msgid "The contract payout has changed from %1%2 to %1%3."
 msgstr ""
 
@@ -8200,7 +8096,7 @@ msgid "The contract period is the timeframe of a trade. It is also called the du
 msgstr ""
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:680
+#: lib/BOM/Product/Transaction.pm:687
 #, fuzzy
 #| msgid "The price has moved in your favour from %1 to %2."
 msgid "The contract price has changed from %1%2 to %1%3."
@@ -8210,7 +8106,7 @@ msgstr "価格が%1から%2に変化しました。"
 msgid "The cost of your open positions"
 msgstr "オープン中のポジションの総購入額"
 
-#: cgi/subs/subs_homepage.pm:142 cgi/subs/subs_homepage.pm:171
+#: cgi/subs/subs_homepage.pm:135
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "ボーナスの通貨は、お客様が初めてご入金された通貨と同じになります。"
 
@@ -8419,8 +8315,13 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "勝ちトレードでの払い戻し金額と購入価格の差額のことです。"
 
 #. ($currency)
-#: lib/BOM/Product/Transaction.pm:466
+#: lib/BOM/Product/Transaction.pm:473
 msgid "The provided currency %1 is invalid."
+msgstr ""
+
+#. ($currency)
+#: lib/BOM/Product/Transaction.pm:465
+msgid "The provided currency %1 is not the default currency"
 msgstr ""
 
 #. ($email)
@@ -8488,7 +8389,7 @@ msgstr "当社サイトにて行われた場合場とお客様と当社の関係
 msgid "The two passwords that you entered do not match."
 msgstr "ご入力頂いた各パスワードが合致しません。"
 
-#: lib/BOM/Product/Transaction.pm:674
+#: lib/BOM/Product/Transaction.pm:681
 #, fuzzy
 #| msgid "The underlying market has moved too much since you priced the contract"
 msgid "The underlying market has moved too much since you priced the contract. "
@@ -8519,7 +8420,13 @@ msgstr "There are no Payment Agents in your country."
 msgid "There are no available Payment Agents."
 msgstr "There are no available Payment Agents."
 
-#: cgi/templates/default/account/statement.tt:101
+#: cgi/templates/default/backoffice/account/profit_table.tt:71
+#, fuzzy
+#| msgid "There are no items during this period"
+msgid "There are no contracts during this period"
+msgstr "この期間でのデータは存在しません。"
+
+#: cgi/templates/default/account/statement.tt:106
 #: cgi/templates/default/backoffice/account/statement.tt:21
 msgid "There are no items during this period"
 msgstr "この期間でのデータは存在しません。"
@@ -8555,8 +8462,8 @@ msgstr "お客様のご住所の認証プロセスにて問題が発生しまし
 msgid "There was an error and we were unable to process your request."
 msgstr "エラーが発生につき、お客様のリクエストを処理することができませんでした。"
 
-#: cgi/paymentagent_transfer.cgi:108 cgi/paymentagent_transfer.cgi:112
-#: cgi/paymentagent_withdraw.cgi:144 cgi/paymentagent_withdraw.cgi:172
+#: cgi/paymentagent_transfer.cgi:110 cgi/paymentagent_transfer.cgi:114
+#: cgi/paymentagent_withdraw.cgi:155 cgi/paymentagent_withdraw.cgi:183
 msgid "There was an error processing the request."
 msgstr "リクエスト処理時にエラーが発生しました。"
 
@@ -8631,11 +8538,11 @@ msgstr "11.1 本契約は当社がアフィリエイトプログラムへの参�
 msgid "This Document"
 msgstr "当文書"
 
-#: cgi/paymentagent_withdraw.cgi:184
+#: cgi/paymentagent_withdraw.cgi:195
 msgid "This Payment Agent cashier section is locked."
 msgstr "This Payment Agent cashier section is locked."
 
-#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:73
+#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:68
 msgid "This URL is invalid."
 msgstr "このURLは無効です。"
 
@@ -8656,11 +8563,11 @@ msgstr "このボーナスコードは無効です。"
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr ""
 
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:110
 msgid "This client cashier section is locked."
 msgstr "この顧客のキャッシャーはロックされています。"
 
-#: lib/BOM/Product/Transaction.pm:759
+#: lib/BOM/Product/Transaction.pm:766
 msgid "This contract cannot be properly validated at this time."
 msgstr "現在、このトレードを適切に確証することができません。"
 
@@ -8687,7 +8594,7 @@ msgid "This contract has expired."
 msgstr "このトレードは終了しました。"
 
 #. (to_monetary_number_format($custom_limit)
-#: lib/BOM/Product/Transaction.pm:844
+#: lib/BOM/Product/Transaction.pm:843
 #, fuzzy
 #| msgid "The contract has expired"
 msgid "This contract is limited to "
@@ -8697,7 +8604,7 @@ msgstr "このトレードは終了しました。"
 msgid "This contract is no longer offered."
 msgstr "このトレードが今後提供されることはありません。"
 
-#: lib/BOM/Product/Transaction.pm:842
+#: lib/BOM/Product/Transaction.pm:841
 #, fuzzy
 #| msgid "There are no contracts available on this market right now."
 msgid "This contract is unavailable on this account."
@@ -8709,7 +8616,7 @@ msgstr "現在、この市場でお取り引き可能なトレードが存在し
 msgid "This contract offers no return."
 msgstr "このトレード条件での払い戻しは不可能です。"
 
-#: lib/BOM/Product/Transaction.pm:1445
+#: lib/BOM/Product/Transaction.pm:1444
 msgid "This contract was not found among your open positions."
 msgstr "このトレードは、オープン中のポジション内に存在しませんでした。"
 
@@ -8744,7 +8651,7 @@ msgstr "こちらはデモ口座です。<a class=\"pjaxload\" href=\"%1\">こ�
 msgid "This is an automated message to alert you to the fact that there was a failed attempt to unlock the Cashier/Settings section of your account %1 from IP address %2"
 msgstr "警告！お客様のご口座%1に対しIPアドレス%2から、キャッシャーの設定ページを解除しようとした事象が検出されました。"
 
-#: cgi/oop/Controller/Bet.pm:2201 cgi/templates/default/bet/form/barrier.tt:23
+#: cgi/oop/Controller/Bet.pm:2200 cgi/templates/default/bet/form/barrier.tt:23
 #: cgi/templates/default/bet/form/barrier.tt:42
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "このバリアは予想値です。実際のバリア値はスポット価格にバリア値を差し引いたものになります。"
@@ -8849,7 +8756,7 @@ msgstr "Tickデータ早見"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:78
-#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:448
+#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:423
 #: frontend/templates/get_started/types_of_trades.html.haml:1
 #: frontend/templates/layouts/default/footer.html.haml:1
 #: lib/BOM/View/Menu.pm:220
@@ -8873,9 +8780,9 @@ msgid "Tick trades"
 msgstr "Tickトレード"
 
 #: cgi/oop/Controller/Bet.pm:1124 cgi/oop/Controller/Bet.pm:1131
-#: cgi/templates/default/account/statement.tt:45
+#: cgi/templates/default/account/statement.tt:47
 #: cgi/templates/default/backoffice/account/statement.tt:49
-#: cgi/tick_trades.cgi:255
+#: cgi/tick_trades.cgi:229
 msgid "Ticks"
 msgstr "Tick"
 
@@ -8921,15 +8828,11 @@ msgstr "氏名、生年月日、及び居住国の変更をご希望される場
 msgid "To continue using our cashier system, please try accessing it again:"
 msgstr "キャッシャーを引き続きご利用するには、また改めてアクセスして下さい："
 
-#: cgi/templates/default/account/currency_converter.tt:9
-msgid "To convert money between the different currencies in your account, please use the form below."
-msgstr "下記のフォームから、ご口座内の通貨両替を申請して下さい。"
-
 #: cgi/templates/default/misc/logintrouble.tt:6
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "ご利用中のブラウザのバージョンの指示に従ってクッキーを有効化して下さい。"
 
-#: cgi/subs/subs_clientdetails.pm:157
+#: cgi/subs/subs_clientdetails.pm:133
 msgid "To fully authenticate your account, please email scanned copies of the document listed below."
 msgstr "ご口座アップグレードのお手続きを進めて頂くには、以下のリストに記す文書のスキャン（明瞭かつ、全体像が写っているもの）をメールにてご送信して下さい。尚、インターネット経由でダウンロードして得られた文書での申請は不可能とさせて頂きます。"
 
@@ -9190,7 +9093,7 @@ msgstr "Transfer from account %1"
 msgid "Transfer from another account"
 msgstr "Transfer from another account"
 
-#: cgi/paymentagent_withdraw.cgi:195
+#: cgi/paymentagent_withdraw.cgi:206
 msgid "Transfer to"
 msgstr "Transfer to"
 
@@ -9235,7 +9138,7 @@ msgstr "三角移動平均"
 msgid "Triangular moving averages place the majority of the weight on the middle portion of the price series. They are actually double-smoothed simple moving averages. The periods used in the simple moving averages varies depending on if you specify an odd or even number of time periods."
 msgstr "三角移動平均線では中央の値により大きい重みをかけ中央部分を重視しており、単純移動平均を2回適用したものになります。単純移動平均で用いる期間は、選択した期間が奇数であるか偶数であるかによって異なってきます。"
 
-#: cgi/tick_trades.cgi:525
+#: cgi/tick_trades.cgi:500
 msgid "Troubleshooting"
 msgstr "トラブルシューティング"
 
@@ -9279,7 +9182,7 @@ msgstr "イギリス株式"
 msgid "UK and Manx residents will have their account opened with Regent Markets (IOM) Ltd."
 msgstr "イギリス及びマン島に居住のお客様のご口座は、Regent Markets (C.R.) S.A.の下に開設されます。"
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "UP"
 msgstr "UP"
 
@@ -9351,14 +9254,6 @@ msgstr ""
 #: cgi/subs/subs_forms.pm:3627
 msgid "Update Settings"
 msgstr "設定内容を更新"
-
-#: cgi/register-api.cgi:146
-msgid "Update failed.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:149
-msgid "Update successful"
-msgstr ""
 
 #: cgi/templates/default/global/header.tt:9
 #: frontend/templates/layouts/default/topbar.html.haml:1
@@ -9449,11 +9344,11 @@ msgstr "バリアと取引期間に基づくトレード価格を確認する。
 msgid "View Trading Times"
 msgstr "トレード対応時間"
 
-#: cgi/top_up_virtual.cgi:94 cgi/top_up_virtual.cgi:95
+#: cgi/top_up_virtual.cgi:89 cgi/top_up_virtual.cgi:90
 msgid "View Updated Portfolio"
 msgstr "更新された資産情報を表示する"
 
-#: cgi/subs/subs_payments_withdrawals.pm:114
+#: cgi/subs/subs_payments_withdrawals.pm:106
 msgid "View and increase your"
 msgstr "確認＆追加："
 
@@ -9491,11 +9386,7 @@ msgstr "価格を確認"
 msgid "View result"
 msgstr "価格を確認"
 
-#: cgi/currency_converter.cgi:221
-msgid "View statement"
-msgstr "取引履歴を表示する"
-
-#: cgi/tick_trades.cgi:243
+#: cgi/tick_trades.cgi:217
 msgid "View statement."
 msgstr "取引履歴を表示する"
 
@@ -9520,7 +9411,7 @@ msgstr "取引履歴を表示する"
 msgid "View your open positions."
 msgstr "現在、オープン中のポジションはございません。"
 
-#: cgi/paymentagent_transfer.cgi:244 cgi/paymentagent_withdraw.cgi:367
+#: cgi/paymentagent_transfer.cgi:245 cgi/paymentagent_withdraw.cgi:377
 #, fuzzy
 #| msgid "View statement"
 msgid "View your statement"
@@ -9583,10 +9474,6 @@ msgstr "ブリテン諸島、及びマルタ共和国発行のライセンスを
 #: cgi/subs/subs_forms.pm:410
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "現在、当社はこの国の居住者からのご口座開設を承ることができません。"
-
-#: cgi/currency_converter.cgi:107
-msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
-msgstr "申し訳ございませんが、クレジットカードまたはデビットカードでご入金をされたことのある場合は両替を承ることができません。"
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:176
@@ -9662,7 +9549,9 @@ msgid "We were unable to recover your Login ID or Password with the provided inf
 msgstr "ログインIDまたはパスワードを復旧することができませんでした。恐れ入りますが、<a href=\"%1\" target=\"_blank\">こちらから改めてパスワードを再発行</a>して頂くか、<a href=\"%2\" target=\"_blank\"><strong>カスタマーサポート</strong></a>までお問い合わせ下さい。 "
 
 #: cgi/subs/subs_clientdetails.pm:112
-msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+#, fuzzy
+#| msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
 msgstr "お客様の身分と居住情報をオンライン上の認証手続きシステムにて完了することができませんでしたが、下記の書類を郵送して頂くことで認証手続きを申請することができます。"
 
 #. (site_name)
@@ -9682,7 +9571,7 @@ msgid "We will send you an e-mail asking you to verify your identity. If you don
 msgstr "認証手続きメールを送信いたします。もし、数分以内にメールの受信をご確認頂けない場合は迷惑メールフォルダもご確認下さい。"
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_transfer.cgi:251
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -9699,7 +9588,7 @@ msgstr ""
 "The %4 team."
 
 #. ($currency, $amount, $client_name, $client_loginid, $paymentagent_loginid, $website->display_name)
-#: cgi/paymentagent_withdraw.cgi:382
+#: cgi/paymentagent_withdraw.cgi:392
 #, fuzzy
 #| msgid "We would like to inform you that the withdrawal request of %1%2 by %3 has been processed. The funds have been credited into your account %4 at %5."
 msgid "We would like to inform you that the withdrawal request of %1%2 by %3 %4 has been processed. The funds have been credited into your account %5 at %6."
@@ -9775,7 +9664,7 @@ msgstr "一日の価格変動を日毎の変化で割る指標であり、価格
 msgid "Welcome!"
 msgstr "%1へようこそ"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:441
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
 msgid "Western Union"
 msgstr "ウェスタン・ユニオン"
 
@@ -10042,7 +9931,7 @@ msgstr ""
 msgid "With payouts from $1 to $100,000, we have you covered."
 msgstr "払い戻し金額は１ドルから10万ドル"
 
-#: cgi/templates/default/account/statement.tt:140
+#: cgi/templates/default/account/statement.tt:145
 #: cgi/templates/default/cashier/available_payment_methods.tt:19
 msgid "Withdraw"
 msgstr "ご出金"
@@ -10120,8 +10009,8 @@ msgstr "ご出金: %1営業日"
 msgid "Withdraw: Not applicable"
 msgstr "不適切"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
 #: lib/BOM/Platform/Model/Payment.pm:155
 msgid "Withdrawal"
 msgstr "ご出金"
@@ -10131,7 +10020,7 @@ msgstr "ご出金"
 msgid "Withdrawal amount (%1 %2) is greater than your balance (%3 %4)."
 msgstr "ご出金希望金額が(%1 %2)ご口座残高(%3 %4)を上回っています。"
 
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:144
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:136
 #: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:94
 msgid "Withdrawal amount exceeds your limits."
 msgstr ""
@@ -10152,7 +10041,7 @@ msgstr "ご出金限度額"
 msgid "Withdrawal using legacy method: %1"
 msgstr "legacy methodでのご出金: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Withdrawal via BACS"
 msgstr "BACS経由でのご出金"
@@ -10161,7 +10050,7 @@ msgstr "BACS経由でのご出金"
 msgid "Withdrawal via Bank Transfer"
 msgstr "銀行口座経由でのご出金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Withdrawal via Credit/Debit card"
 msgstr "クレジット・デビットカード経由でのご出金"
@@ -10170,7 +10059,7 @@ msgstr "クレジット・デビットカード経由でのご出金"
 msgid "Withdrawal via DoughFlow"
 msgstr "DoughFlow経由でのご出金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Withdrawal via Western Union"
 msgstr "ウェスタン・ユニオン経由でのご出金"
 
@@ -10179,7 +10068,7 @@ msgstr "ウェスタン・ユニオン経由でのご出金"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "ウェスタン・ユニオン (MTCN: %1)経由でのご出金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "銀行口座経由でのご出金"
@@ -10235,7 +10124,7 @@ msgstr "またお客様には、当社にて処理する個人情報を通知す
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "4.3 アフィリエイト会員は当社の間で独立請負人として当社との関係が発生し、パートナーシップ、ジョイントベンチャー、エージェンシー、フランチャイズ、セールス代理または雇用としての関係性が発生することはありません。アフィリエイト会員は、当社としてのオファーを提供したり代表として行動することはできません。アフィリエイト会員は、プロモーションサイトにこの条項での記述と矛盾するような記述を掲載することはできません。"
 
-#: cgi/oop/Controller/Bet.pm:1973
+#: cgi/oop/Controller/Bet.pm:1972
 msgid "You are being given the better price."
 msgstr "より有利な価格が提供されつつあります。"
 
@@ -10300,6 +10189,12 @@ msgstr "トレード条件は束縛されません。長期間の取引期間を
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "<strong>幅広い取引期間</strong>：10秒から365日での取引期間のご指定が可能です。"
 
+#: cgi/subs/subs_clientdetails.pm:114
+#, fuzzy
+#| msgid "To fully authenticate your account, please email scanned copies of the document listed below."
+msgid "You can still authenticate your account by sending us scans of the following documents by email"
+msgstr "ご口座アップグレードのお手続きを進めて頂くには、以下のリストに記す文書のスキャン（明瞭かつ、全体像が写っているもの）をメールにてご送信して下さい。尚、インターネット経由でダウンロードして得られた文書での申請は不可能とさせて頂きます。"
+
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You can trade a range of markets, timescales and indices – 24/7."
 msgstr ""
@@ -10310,7 +10205,7 @@ msgid "You can try another <a href=\"%1\">payment option</a> or for additional a
 msgstr "恐れ入りますが、他の<a href=\"%1\">決済方法</a>をお選び頂くか、 カスタマーサポートまでご相談下さい。"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:105
+#: cgi/paymentagent_transfer.cgi:107
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "You cannot transfer to account %1, as their account is currently disabled."
 
@@ -10375,11 +10270,7 @@ msgstr "ご口座を開設されて以来、累計%1と同等な金額を既に�
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "累計%1と同等な金額を既にご出金されました。"
 
-#: cgi/subs/subs_homepage.pm:139
-msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
-msgstr "ボーナス該当金額の５倍以上の額に相当するトレードをご購入されました。"
-
-#: cgi/subs/subs_homepage.pm:158
+#: cgi/subs/subs_homepage.pm:123
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "ボーナス該当金額の５倍以上の額に相当するトレードをご購入されました。"
 
@@ -10393,8 +10284,8 @@ msgstr "無効なIPアドレスをご入力されました。"
 msgid "You have entered an invalid login ID"
 msgstr "無効なログインIDがご入力されました"
 
-#: lib/BOM/Product/Transaction.pm:1087 lib/BOM/Product/Transaction.pm:1354
-#: lib/BOM/Product/Transaction.pm:1382 lib/BOM/Product/Transaction.pm:1416
+#: lib/BOM/Product/Transaction.pm:1086 lib/BOM/Product/Transaction.pm:1353
+#: lib/BOM/Product/Transaction.pm:1381 lib/BOM/Product/Transaction.pm:1415
 msgid "You have exceeded the daily limit for contracts of this type."
 msgstr "この種類のトレードにおける１日あたりの上限を超えてしまいました。"
 
@@ -10450,10 +10341,6 @@ msgstr "3.5 検索エンジン、ポータルサイト、スポンサーを持�
 msgid "You may only open an account at this site on condition that:"
 msgstr "お客様は以下の条件を満たす場合にのみ、ご口座を開設することができます。"
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "You may purchase contracts in any of these currencies."
-msgstr "お客様は、これらの任意の通貨にてトレードを購入することができます。"
-
 #: cgi/templates/default/legal/promocode.tt:25
 msgid "You may withdraw the Y deposited to claim the bonus and any winnings generated by the bonus at any time."
 msgstr "デポジットされたYドルは、ボーナスの申請とボーナスから得られたトレード利益と共にいつでもご出金できます。"
@@ -10472,7 +10359,7 @@ msgstr "お客様は既に弊社サービスにご口座をお持ちのようで
 msgid "You must be logged in to use the workspace feature.Account opening is free and takes only 30 seconds."
 msgstr "このワークスペースをご利用するには、ログインが必須となります。ご口座の開設は無料かつ、わずか３０秒で済みます。"
 
-#: cgi/register-api.cgi:40
+#: cgi/register-api.cgi:36
 msgid "You must have a valid 'real' money account before registering as an API Developer"
 msgstr ""
 
@@ -10584,13 +10471,8 @@ msgstr "お客様のご口座はデモ口座です。"
 msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 in other currency)."
 msgstr "お客様の%1日でのご出金上限は現在<strong>%2</strong>です。（他の通貨では%3です。）"
 
-#. ($min_deposit)
-#: cgi/subs/subs_homepage.pm:137
-msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
-msgstr "お客様の<strong>初めての</strong>ご入金はどの通貨でも%1である必要があります。そして、"
-
 #. ($currency_label, $min_deposit)
-#: cgi/subs/subs_homepage.pm:156
+#: cgi/subs/subs_homepage.pm:121
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "お客様の<strong>初めての</strong>ご入金は%1%2である必要があり、"
 
@@ -10623,17 +10505,17 @@ msgstr "ログインIDにはスペースを含めないで下さい。"
 msgid "Your Public Key"
 msgstr ""
 
-#: cgi/currency_converter.cgi:131 cgi/subs/subs_payments_withdrawals.pm:107
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:99
 msgid "Your account balance"
 msgstr "ご口座残高"
 
 #. ($currency,                to_monetary_number_format($balance)
-#: lib/BOM/Product/Transaction.pm:952
+#: lib/BOM/Product/Transaction.pm:951
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "ご口座残高が(%1%2)ですので、このトレード(%1%3)のご購入は不可能です。"
 
-#: cgi/subs/subs_clientdetails.pm:168
+#: cgi/subs/subs_clientdetails.pm:144
 msgid "Your account does not require authentication at this time."
 msgstr "現在、ご口座のアップグレードを完了して頂く必要はありませんが、場合によってはご口座のアップグレードが必須になります。"
 
@@ -10649,7 +10531,7 @@ msgstr "お客様のご口座に<strong>%1 %2</strong>が勝ち金として付�
 msgid "Your account has been debited with %1 %2"
 msgstr "お客様のご口座から%1 %2が引き落とされました。"
 
-#: lib/BOM/Product/Transaction.pm:1326
+#: lib/BOM/Product/Transaction.pm:1325
 #, fuzzy
 #| msgid "Your account has exceeded the trading limit with free promo code, please <a href=\"%1\">deposit</a> if you wish to continue trading."
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
@@ -10675,11 +10557,11 @@ msgid "Your account is fully authenticated and your withdrawal limit of EUR %1 h
 msgstr "お客様のご口座はアップグレード済みですので、ご出金制限の%1は引き上げられました。"
 
 #. (request()
-#: cgi/subs/subs_clientdetails.pm:83
+#: cgi/subs/subs_clientdetails.pm:84
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
 msgstr "お客様のご口座はアップグレード済みです。トレードの上限の条件を<a href=\"%1\">こちらからご確認頂けます。</a>"
 
-#: cgi/subs/subs_clientdetails.pm:151
+#: cgi/subs/subs_clientdetails.pm:127
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
 msgstr "お客様のご口座はご利用可能な状態です。ご入金、及びトレードの購入を開始して頂けます。"
 
@@ -10701,14 +10583,6 @@ msgstr "Your account is registered as a Payment Agent."
 msgid "Your account is restricted to withdrawals only."
 msgstr "お客様のご口座では現在ご出金機能のみご利用頂くことが可能です。"
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "Your account may hold the following currencies"
-msgstr "以下の通貨をご口座でご利用頂けます"
-
-#: cgi/currency_converter.cgi:210
-msgid "Your account statement has been updated accordingly."
-msgstr "お客様のご口座の取引履歴が正しく更新されました。"
-
 #: cgi/oop/Validation/Transaction/Payment/Deposit.pm:45
 #, fuzzy
 #| msgid "We've noticed that the balance of your account is over your allowed limit:"
@@ -10724,15 +10598,15 @@ msgstr ""
 msgid "Your bonus request - %1"
 msgstr "ボーナスリクエスト：%1"
 
-#: cgi/subs/subs_homepage.pm:133 cgi/subs/subs_homepage.pm:152
+#: cgi/subs/subs_homepage.pm:117
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "ボーナスは以下の条件を達成した後、お客様のご口座に３営業日以内に付与されます。"
 
-#: cgi/subs/subs_homepage.pm:166
+#: cgi/subs/subs_homepage.pm:130
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "ボーナスはボーナス該当金額と同等、またはそれ以上の額に該当するトレードをご購入された後に、お客様のご口座に３営業日以内に付与されます。"
 
-#: cgi/subs/subs_homepage.pm:175
+#: cgi/subs/subs_homepage.pm:139
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "ボーナスはお客様のご口座に３営業日以内に付与されます。"
 
@@ -10752,7 +10626,7 @@ msgstr "この顧客のキャッシャーはロックされています。"
 msgid "Your cashier is locked."
 msgstr "この顧客のキャッシャーはロックされています。"
 
-#: cgi/paymentagent_transfer.cgi:112
+#: cgi/paymentagent_transfer.cgi:114
 #, fuzzy
 #| msgid "This client cashier section is locked."
 msgid "Your cashier section is locked."
@@ -10811,7 +10685,7 @@ msgstr "ご氏名"
 msgid "Your name/company"
 msgstr "お名前／会社名"
 
-#: cgi/oop/Controller/Bet.pm:1930
+#: cgi/oop/Controller/Bet.pm:1932
 msgid "Your new account balance is %s %s"
 msgstr "最新のご口座残高は%s %sです"
 
@@ -10820,7 +10694,7 @@ msgid "Your old password is incorrect"
 msgstr "旧パスワードの値が不正です。"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:1978
+#: cgi/oop/Controller/Bet.pm:1977
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "お客様のご注文 (Reference # <span id=\"reference_no\">%1</span>)は%2に処理されました。"
 
@@ -10872,11 +10746,11 @@ msgstr "お客様の個人情報の利用の第一義は、当社サービスの
 msgid "Your phone number"
 msgstr "お客様のお電話番号"
 
-#: cgi/tick_trades.cgi:259
+#: cgi/tick_trades.cgi:233
 msgid "Your prediction"
 msgstr "予想値"
 
-#: cgi/tick_trades.cgi:263
+#: cgi/tick_trades.cgi:237
 msgid "Your prediction, the market will move :"
 msgstr "予想する市場動向："
 
@@ -10885,12 +10759,12 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "Your request to revoke the Power of Attorney has been received. Please allow 2 working days for us to process this request."
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:239
+#: cgi/paymentagent_transfer.cgi:240
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 
 #. ($currency, $amount, $client_loginid, $paymentagent->payment_agent_name)
-#: cgi/paymentagent_withdraw.cgi:362
+#: cgi/paymentagent_withdraw.cgi:372
 msgid "Your request to withdraw %1 %2 from your account %3 to Payment Agent %4 account has been successfully processed."
 msgstr "Your request to withdraw %1 %2 from your account %3 to Payment Agent %4 account has been successfully processed."
 
@@ -10907,7 +10781,7 @@ msgid "Your settings have been updated successfully."
 msgstr "設定が正しく更新されました。"
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1937
+#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1936
 msgid "Your transaction reference number is %1"
 msgstr "決済の参照番号は%1です"
 
@@ -10949,7 +10823,7 @@ msgstr "特定の期間内でのトレード可能な上限"
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "特定の期間内での損失の範囲"
 
-#: cgi/subs/subs_clientdetails.pm:125 cgi/subs/subs_clientdetails.pm:161
+#: cgi/subs/subs_clientdetails.pm:137
 msgid "and"
 msgstr "かつ"
 
@@ -11008,10 +10882,6 @@ msgstr "お問い合わせ"
 msgid "contract start time"
 msgstr "トレード開始時間"
 
-#: cgi/currency_converter.cgi:161
-msgid "conversions today.  Please try again tomorrow"
-msgstr "本日の両替：恐れ入りますが、明日に改めてお手続きをお願いします"
-
 #: cgi/subs/subs_BOMFeed_history.pm:384
 #: lib/BOM/Product/Model/ContractForm.pm:740
 msgid "days"
@@ -11045,11 +10915,11 @@ msgstr "エントリー価格プラス%1"
 msgid "entry spot plus %plural(%1,1 pip, %d pips)"
 msgstr "エントリー価格プラス %plural(%1,1 pip, %d pips)"
 
-#: cgi/limits.cgi:128 cgi/limits.cgi:90 cgi/limits.cgi:95
+#: cgi/limits.cgi:109 cgi/limits.cgi:79 cgi/limits.cgi:84
 msgid "equivalent"
 msgstr "等価"
 
-#: cgi/oop/Controller/Bet.pm:2010
+#: cgi/oop/Controller/Bet.pm:2009
 msgid "explanation"
 msgstr "取引概要"
 
@@ -11089,10 +10959,6 @@ msgstr "時間"
 msgid "hours"
 msgstr "時間"
 
-#: cgi/currency_converter.cgi:75
-msgid "is not available.  If this error persists, please email"
-msgstr "のご利用は不可能です。エラーが続く場合はメールにてご連絡下さい"
-
 #: cgi/templates/default/charting/light_chart.tt:7
 msgid "less"
 msgstr "Less"
@@ -11111,7 +10977,7 @@ msgstr "下限バリア"
 msgid "lower"
 msgstr "Lower"
 
-#: cgi/tick_trades.cgi:469
+#: cgi/tick_trades.cgi:444
 #, fuzzy
 #| msgid "Multi award-winning platform"
 msgid "main trading platform"
@@ -11150,12 +11016,6 @@ msgstr "分"
 #: cgi/smartchart.cgi:304 cgi/subs/subs_BOMFeed_history.pm:433
 msgid "minutes"
 msgstr "分"
-
-#: cgi/register-api.cgi:105
-#, fuzzy
-#| msgid "Scope(s) missing"
-msgid "missing"
-msgstr "Scope(s)がありません"
 
 #: cgi/templates/default/charting/light_chart.tt:8
 msgid "more"
@@ -11265,7 +11125,7 @@ msgstr "Touch/No-Touch"
 msgid "trades"
 msgstr "トレード"
 
-#: cgi/tick_trades.cgi:455
+#: cgi/tick_trades.cgi:430
 msgid "trading is suspended at the moment."
 msgstr "現在一時的にトレードを中止しております。"
 
@@ -11294,7 +11154,7 @@ msgstr "バイナリー業界のリーダー"
 msgid "with this HTTP header"
 msgstr "バイナリー業界のリーダー"
 
-#: cgi/subs/subs_payments_withdrawals.pm:117
+#: cgi/subs/subs_payments_withdrawals.pm:109
 msgid "withdrawal limits"
 msgstr "ご出金限度額"
 
@@ -13224,6 +13084,131 @@ msgstr "申し訳ございませんが、このIPネットワークは無効で�
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "所定回数以上、不正なデータを入力されてしまいました。５分後に改めてお手続きを行って下さい。"
 
+#~ msgid "%1 was converted to %2."
+#~ msgstr "%1は%2に両替されました。"
+
+#~ msgid "1. Verification of identity"
+#~ msgstr "1. 身分証明について"
+
+#~ msgid "2. Proof of address"
+#~ msgstr "2. 居住地の証明について"
+
+#~ msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
+#~ msgstr "<li>公共料金の支払い通知票の原本（３ヶ月以内に発行されたもの）、若しくは</li><li>銀行口座の残高証明、信用金庫の残高証明、住宅金融組合の残高証明、クレジットカードの支払い通知、デビットカードの支払い通知、通帳の原本、または住民票(３ヶ月以内に発行されたもの)</li>"
+
+#~ msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
+#~ msgstr "<li>有効期限内のパスポートのスキャン、</li><li>有効期限内の運転免許証のスキャン</li>"
+
+#, fuzzy
+#~| msgid "Sorry, your account has got stuck in a previous transaction that did not complete.  If this error persists, please email %1 quoting your loginID"
+#~ msgid "An error occurred while processing request. If this error persists, please contact customer support."
+#~ msgstr "申し訳ございませんが、お客様のご口座での最近の処理に遅延が発生し完了しませんでした。もし、エラーが解消されない場合はログインIDと共に%1までご連絡下さい。"
+
+#, fuzzy
+#~| msgid "Application error"
+#~ msgid "Application not currently authorized"
+#~ msgstr "アプリケーション・エラー"
+
+#, fuzzy
+#~| msgid "Application error"
+#~ msgid "Application not yet registered"
+#~ msgstr "アプリケーション・エラー"
+
+#, fuzzy
+#~| msgid "This URL is invalid."
+#~ msgid "Callback URL data is invalid"
+#~ msgstr "このURLは無効です。"
+
+#, fuzzy
+#~| msgid "This URL is invalid."
+#~ msgid "Callback URL format is invalid"
+#~ msgstr "このURLは無効です。"
+
+#, fuzzy
+#~| msgid "Authentication failure"
+#~ msgid "Cancellation failed"
+#~ msgstr "認証失敗"
+
+#~ msgid "Cash Balance"
+#~ msgstr "残高"
+
+#~ msgid "Convert"
+#~ msgstr "両替"
+
+#~ msgid "Convert %1%2 to %3"
+#~ msgstr "%1%2から%3へ両替"
+
+#~ msgid "Convert between your currency segment accounts"
+#~ msgstr "ご口座内の通貨間両替"
+
+#~ msgid "Error: Both currencies are the same!  You must convert from one currency to another."
+#~ msgstr "エラー：同じ通貨を指定することはできません。両替は異なる通貨へのみ行って頂けます。"
+
+#~ msgid "Error: The exchange rate for"
+#~ msgstr "エラー：両替手数料"
+
+#~ msgid "Limit</strong><br>(per currency)"
+#~ msgstr "限度額</strong><br>（通貨毎）"
+
+#~ msgid "Note:"
+#~ msgstr "注意："
+
+#~ msgid "SOLD"
+#~ msgstr "SOLD"
+
+#~ msgid "Sorry, the currency amount to convert is incorrect."
+#~ msgstr "申し訳ございませんが、ご指定頂いた両替の対象金額の値が正しくありません。"
+
+#~ msgid "Sorry, the currency amount to convert is too small."
+#~ msgstr "申し訳ございませんが、ご指定頂いたリクエスト金額が小額につき両替を承ることができません。"
+
+#~ msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
+#~ msgstr "申し訳ございませんが、１日あたりでの両替回数は３回まで承っております。お客様は既に所定回数をリクエストされています。"
+
+#~ msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
+#~ msgstr "申し訳ございませんが、この通貨での両替金額の上限を上回っております。１回あたりの両替上限金額は%1です。"
+
+#~ msgid "Sorry, you cannot convert"
+#~ msgstr "申し訳ございませんが、両替不可能です。"
+
+#~ msgid "Success"
+#~ msgstr "成功"
+
+#~ msgid "To convert money between the different currencies in your account, please use the form below."
+#~ msgstr "下記のフォームから、ご口座内の通貨両替を申請して下さい。"
+
+#~ msgid "View statement"
+#~ msgstr "取引履歴を表示する"
+
+#~ msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
+#~ msgstr "申し訳ございませんが、クレジットカードまたはデビットカードでご入金をされたことのある場合は両替を承ることができません。"
+
+#~ msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
+#~ msgstr "ボーナス該当金額の５倍以上の額に相当するトレードをご購入されました。"
+
+#~ msgid "You may purchase contracts in any of these currencies."
+#~ msgstr "お客様は、これらの任意の通貨にてトレードを購入することができます。"
+
+#~ msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
+#~ msgstr "お客様の<strong>初めての</strong>ご入金はどの通貨でも%1である必要があります。そして、"
+
+#~ msgid "Your account may hold the following currencies"
+#~ msgstr "以下の通貨をご口座でご利用頂けます"
+
+#~ msgid "Your account statement has been updated accordingly."
+#~ msgstr "お客様のご口座の取引履歴が正しく更新されました。"
+
+#~ msgid "conversions today.  Please try again tomorrow"
+#~ msgstr "本日の両替：恐れ入りますが、明日に改めてお手続きをお願いします"
+
+#~ msgid "is not available.  If this error persists, please email"
+#~ msgstr "のご利用は不可能です。エラーが続く場合はメールにてご連絡下さい"
+
+#, fuzzy
+#~| msgid "Scope(s) missing"
+#~ msgid "missing"
+#~ msgstr "Scope(s)がありません"
+
 #~ msgid "%1 Tools"
 #~ msgstr "%1ツール"
 
@@ -13480,9 +13465,6 @@ msgstr "所定回数以上、不正なデータを入力されてしまいまし
 #~ msgid "Select a lower payout"
 #~ msgstr "より低い値を選択して下さい"
 
-#~ msgid "Sorry, you cannot sell"
-#~ msgstr "申し訳ございませんが、お売り頂くことはできません。"
-
 #~ msgid "Sorry, you have exceeded a BOUNDARY contract weekly PAYOUT of USD%1 on %2 which is the maximum weekly PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 #~ msgstr "申し訳ございませんが、%2での週あたりの最大払い戻し金額：USD%1を超過してしまいました。異なるトレードタイプをお選び頂くか、購入金額が低くなるようにトレードを設定して下さい。"
 
@@ -13541,9 +13523,6 @@ msgstr "所定回数以上、不正なデータを入力されてしまいまし
 
 #~ msgid "In order to continue trading or deposit, you must either complete all of our <a href=\"%1\">authentication procedures</a> which will increase your account limits or <a href=\"%2\">withdraw</a> some funds."
 #~ msgstr "トレード、及びご入金のために、お客様のご口座をアップグレードする必要があります。<a href=\"%1\">こちらからお手続きをお願い致します。</a>ご口座アップグレード完了後、トレードの上限額及び、<a href=\"%2\">ご出金</a>可能金額の上限がアップします。"
-
-#~ msgid "Limit"
-#~ msgstr "制限"
 
 #~ msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is"
 #~ msgstr "ゆえに、現在即座にご出金頂ける金額（ただし、ご口座残高が不足していない場合）は次のとおりです。"

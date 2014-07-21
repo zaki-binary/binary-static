@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Weblate 1.5\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: cgi/top_up_virtual.cgi:83
+#: cgi/top_up_virtual.cgi:78
 msgid " has been credited to your Virtual money account"
 msgstr "已记入您的虚拟货币帐户"
 
@@ -111,8 +111,8 @@ msgid "%1 Period"
 msgstr "%1期间"
 
 #. (localize('Tick Trades')
-#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:129 cgi/tick_trades.cgi:133
-#: cgi/tick_trades.cgi:283 cgi/tick_trades.cgi:299
+#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:103 cgi/tick_trades.cgi:107
+#: cgi/tick_trades.cgi:257 cgi/tick_trades.cgi:273
 msgid "%1 Up/Down"
 msgstr "%1涨/跌"
 
@@ -224,7 +224,7 @@ msgid "%1 minute quotes"
 msgstr "%1 分钟行情"
 
 #. (localize('Tick Trades')
-#: cgi/tick_trades.cgi:156
+#: cgi/tick_trades.cgi:130
 msgid "%1 offer you the chance to trade on a very short-term event and make money in seconds!"
 msgstr "%1为您提供短期事件交易的机会，实现数秒之内赚钱。"
 
@@ -287,11 +287,6 @@ msgstr "%1为您提供自行排除的机会或"
 #: frontend/templates/static/responsible_trading.html.haml:1
 msgid "%1 supports <a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare has a commitment to promote responsible attitudes to gambling and to work for the provision of proper care for those who have been harmed by gambling dependency. Other websites that provide information about gambling or gambling addiction are:"
 msgstr "%1 支持<a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>。GamCare 致力于促进投机交易的责任态度，努力为深受投机成瘾之苦的人们提供适当关怀。提供与投机或投机成瘾相关信息的其他网站如下："
-
-#. ("$currencyfrom $currencyfromvalue", "$currencyto $res")
-#: cgi/currency_converter.cgi:209
-msgid "%1 was converted to %2."
-msgstr "%1 转换成%2。"
 
 #. ('ACCESS_TOKEN')
 #: frontend/templates/static/devguide.html.haml:1
@@ -394,10 +389,6 @@ msgstr "*免税：在很多国家，但请始终咨询专业税务顾问。"
 msgid "1. Choose the Underlying"
 msgstr "1. 选择基础"
 
-#: cgi/subs/subs_clientdetails.pm:115
-msgid "1. Verification of identity"
-msgstr "1. 身份验证"
-
 #: frontend/templates/home/index.html.haml:1
 msgid "10 seconds to 365 days..."
 msgstr "10 秒至 365 天..."
@@ -438,10 +429,6 @@ msgstr "双边报价"
 msgid "2. Choose the Duration of the Trade"
 msgstr "2.选择交易时段"
 
-#: cgi/subs/subs_clientdetails.pm:128
-msgid "2. Proof of address"
-msgstr "2. 地址证明"
-
 #: cgi/templates/default/charting/livechart_duration.tt:19
 msgid "2d"
 msgstr "2天"
@@ -481,18 +468,6 @@ msgstr "6小时"
 #: cgi/subs/subs_forms.pm:1742
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>根据您的请求，您的出纳和设置部分已被锁定</strong> - 如需解除锁定，请输入密码。"
-
-#: cgi/subs/subs_clientdetails.pm:131
-msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
-msgstr "<li>原始物业账单(最近3个月内) ; 或</li><li>原始银行/信用社/建筑协会/信用卡/借记卡对账单或存折（最近 3 个月内）。</li>"
-
-#: cgi/subs/subs_clientdetails.pm:119
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
-msgstr "<li>当前有效通行证的副本; or</li><li>当前驾照副本(临时或永久); 或</li><li>身份证</li>"
-
-#: cgi/subs/subs_clientdetails.pm:122
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
-msgstr "<li>最新有效护照复印件; or</li><li>最新驾照复印件 (临时或永久)</li>"
 
 #: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
 #: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2291
@@ -624,7 +599,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>基准价格</strong> - %1 每日都对比银行间衍生品市场来制定基准价格。"
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:1970
+#: cgi/oop/Controller/Bet.pm:1969
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>更好的成交价！</strong><br />  该价格变动对您有利，从 %1 变为 %2。"
 
@@ -701,11 +676,11 @@ msgstr "<strong>无惊无险</strong> -您永远无需 \"追加保证金\"，\"�
 
 # 95%
 # 87%
-#: cgi/tick_trades.cgi:190 cgi/tick_trades.cgi:196
+#: cgi/tick_trades.cgi:164 cgi/tick_trades.cgi:170
 msgid "<strong>Note:</strong> There is a 1.5% commission on any payout."
 msgstr "<strong>注意:</strong> 任何收益都会收取1.5% 的佣金。"
 
-#: cgi/tick_trades.cgi:201 cgi/tick_trades.cgi:205
+#: cgi/tick_trades.cgi:175 cgi/tick_trades.cgi:179
 msgid "<strong>Note:</strong> There is no commission on any winnings."
 msgstr "<strong>注意:</strong> 所有收益都不收取佣金。"
 
@@ -930,7 +905,7 @@ msgstr "我们的客户支持团队成员稍后将联系您。"
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "一个动量指标，指示三重指数平滑移动平均数的百分比变动率。如同其它摆动指标，TRIX 在基准线周围摆动。"
 
-#: cgi/tick_trades.cgi:466
+#: cgi/tick_trades.cgi:441
 msgid "A much more flexible version of Tick Trades is available on the "
 msgstr ""
 
@@ -955,9 +930,19 @@ msgstr "出现一个问题"
 msgid "A problem occurred while connecting to the server. Please try again later."
 msgstr "连接到服务器时出现问题。请稍后重新尝试。"
 
+#: cgi/subs/subs_clientdetails.pm:118
+msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
+msgstr ""
+
 #: cgi/templates/default/email/bonus_reject.tt:19
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr "显示您目前的居住地址的公共设施费帐单之扫描件（公共设施费帐单不得超过3个月）。"
+
+#: cgi/subs/subs_clientdetails.pm:116
+#, fuzzy
+#| msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
+msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
+msgstr "<li>当前有效通行证的副本; or</li><li>当前驾照副本(临时或永久); 或</li><li>身份证</li>"
 
 #: cgi/templates/default/email/bonus_reject.tt:18
 msgid "A scanned copy of your passport or driver's licence."
@@ -1066,11 +1051,11 @@ msgstr "累积/分配"
 msgid "Accuracy of Information"
 msgstr "信息的精确性"
 
-#: cgi/paymentagent_transfer.cgi:261
+#: cgi/paymentagent_transfer.cgi:262
 msgid "Acknowledgement of Money Transfer"
 msgstr "确认转帐"
 
-#: cgi/paymentagent_withdraw.cgi:393
+#: cgi/paymentagent_withdraw.cgi:403
 msgid "Acknowledgement of Withdrawal Request"
 msgstr "确认提款请求"
 
@@ -1082,7 +1067,7 @@ msgstr "购买"
 msgid "Acquisition of financial contracts through this site must be effected in accordance with the terms and conditions presented on the pages of this site. Acquisition of a financial contract is completed when the financial contract has been customised, the premium (or the payout, as the case may be) has been calculated and payment has been verified."
 msgstr "通过本网站获得财务交易 合同必须按照网站页面上的条款和条件生效。财务交易 合同进行定制，并且溢价（或支付，视情况而定）计算完毕且支付得到确认时，财务交易 合同的获得完成。"
 
-#: cgi/templates/default/account/statement.tt:109
+#: cgi/templates/default/account/statement.tt:114
 msgid "Action"
 msgstr "行动"
 
@@ -1148,7 +1133,7 @@ msgstr "网站所载的一切意见、新闻、研究、分析、价格或其他
 msgid "All the times on the website and contract settlements are according to GMT (Greenwich Mean Time)."
 msgstr "本网站上的所有时间和 [contract] 结算均采用 <acronym title=\"格林威治标准时间\">GMT</acronym> ，其等于 <acronym title=\"中国标准时间\">CST</acronym>-8"
 
-#: cgi/paymentagent_withdraw.cgi:198 cgi/subs/subs_forms.pm:3805
+#: cgi/paymentagent_withdraw.cgi:209 cgi/subs/subs_forms.pm:3805
 #: cgi/subs/subs_forms.pm:4006
 msgid "Amount"
 msgstr "金额"
@@ -1157,7 +1142,7 @@ msgstr "金额"
 msgid "Amount must be a positive number."
 msgstr "金额须为正数。"
 
-#: cgi/tick_trades.cgi:247
+#: cgi/tick_trades.cgi:221
 msgid "Amount you wish to trade:"
 msgstr "您要提取的金额。"
 
@@ -1177,14 +1162,10 @@ msgstr "也有提供自动生成的 <a href=\"https://apigee.com/rmg/resources/b
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "出现错误：系统无法让您登入 (2)。"
 
-#: cgi/paymentagent_transfer.cgi:118 cgi/paymentagent_transfer.cgi:124
-#: cgi/paymentagent_withdraw.cgi:208 cgi/paymentagent_withdraw.cgi:213
+#: cgi/paymentagent_transfer.cgi:120 cgi/paymentagent_transfer.cgi:126
+#: cgi/paymentagent_withdraw.cgi:219 cgi/paymentagent_withdraw.cgi:224
 msgid "An error occurred while processing request. If this error persists, please contact customer support"
 msgstr "处理申请时发生错误。如果问题持续出现，请联系客服支援部"
-
-#: cgi/currency_converter.cgi:172
-msgid "An error occurred while processing request. If this error persists, please contact customer support."
-msgstr "处理申请时发生错误。如果问题持续出现，请联系客服支援部。"
 
 #: cgi/subs/subs_BOMFeed_history.pm:553
 #: cgi/subs/subs_graphs_chartdirector.pm:384
@@ -1250,30 +1231,9 @@ msgstr "本协议项下对公司发出或作出的任何通知均应通过电子
 msgid "Anyone over the age 18 [who has read and agreed to the %1 terms and conditions], and who is not resident in one of the 'closed countries' can trade on the %1 platform."
 msgstr "任何年满18 岁 [已阅读并同意 %1 条款和条件]，且非居住在“封闭国家”之一的人士可在 %1 平台进行交易。"
 
-#. ($display_name)
-#: cgi/register-api.cgi:196
-msgid "Application %1 has been registered.  Your new OAuth credentials are shown below"
-msgstr "%1应用程序已经注册。您的新OAuth凭证显示如下"
-
 #: cgi/templates/default/api/register.tt:7
 msgid "Application Name"
 msgstr "应用程序名称"
-
-#: cgi/register-api.cgi:112
-msgid "Application Name data is invalid"
-msgstr "应用程序名称信息无效"
-
-#: cgi/register-api.cgi:193
-msgid "Application cannot be registered.  Request support."
-msgstr "应用程序无法注册。请求支援。"
-
-#: cgi/register-api.cgi:92
-msgid "Application not currently authorized"
-msgstr "应用程序现时没权限进行活动"
-
-#: cgi/register-api.cgi:76
-msgid "Application not yet registered"
-msgstr "应用程序未注册"
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Apply for access"
@@ -1422,7 +1382,7 @@ msgstr "平均方向性指数"
 msgid "Avg True Range"
 msgstr "平均真实摆幅"
 
-#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:85
+#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:59
 msgid "Awaiting market ticks...."
 msgstr "正在等待市场跳动点..."
 
@@ -1438,7 +1398,7 @@ msgstr "返回首页"
 msgid "BOM Charts Workspace"
 msgstr "BOM 图表工作空间"
 
-#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:235
+#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:209
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 #: lib/BOM/View/Form.pm:402
@@ -1450,13 +1410,14 @@ msgstr "返回"
 msgid "Bad input %1"
 msgstr "无效输入%1"
 
-#: cgi/templates/default/account/statement.tt:153
-#: cgi/templates/default/account/statement.tt:66
-#: cgi/templates/default/account/statement.tt:90
+#: cgi/templates/default/account/statement.tt:120
+#: cgi/templates/default/account/statement.tt:158
+#: cgi/templates/default/account/statement.tt:68
+#: cgi/templates/default/account/statement.tt:92
 msgid "Balance"
 msgstr "余额"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:444
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
 msgid "Bank Wire"
 msgstr "银行电汇"
 
@@ -1494,7 +1455,7 @@ msgstr "条形 HLC 图"
 msgid "Bar OHLC Chart"
 msgstr "条形 OHLC 图"
 
-#: cgi/oop/Controller/Bet.pm:2194 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/resources/pricing_table_form.tt:59
 msgid "Barrier"
 msgstr "目标"
@@ -1512,7 +1473,7 @@ msgstr "障碍可能无法调整。"
 msgid "Barrier must be at least "
 msgstr "障碍至少必须"
 
-#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2192 cgi/templates/default/bet/form/barrier.tt:15
 msgid "Barrier offset"
 msgstr "目标位移"
 
@@ -1722,7 +1683,7 @@ msgstr "但您不需要等到合约到期。可以在任何时间内卖出您的
 msgid "But we’re picky. We only select people with special qualities: serious professionals, who have high moral standards, and thrive in an honest, collaborative environment."
 msgstr "但是我们挑剔。我们只选择有特殊品质，认真的专业人士。必须拥有很高的道德标准，并在诚实，协作的环境中蓬勃发展。"
 
-#: cgi/templates/default/account/statement.tt:76
+#: cgi/templates/default/account/statement.tt:78
 #: cgi/templates/default/backoffice/account/statement.tt:62
 msgid "Buy"
 msgstr "购买"
@@ -1764,14 +1725,6 @@ msgstr "打电话给我们"
 msgid "Callback URL"
 msgstr "回电网址"
 
-#: cgi/register-api.cgi:115
-msgid "Callback URL data is invalid"
-msgstr "回电网址信息无效"
-
-#: cgi/register-api.cgi:121
-msgid "Callback URL format is invalid"
-msgstr "回电网址格式无效"
-
 #: cgi/subs/subs_forms_output.pm:99
 msgid "Callback services"
 msgstr "回电服务"
@@ -1807,14 +1760,6 @@ msgstr "取消"
 msgid "Cancel Registration"
 msgstr "取消注册"
 
-#: cgi/register-api.cgi:213
-msgid "Cancellation failed"
-msgstr "取消失败"
-
-#: cgi/register-api.cgi:216
-msgid "Cancellation successful"
-msgstr "取消成功"
-
 #: cgi/subs/subs_BOMFeed_history.pm:347
 msgid "Candlestick Chart"
 msgstr "烛形图"
@@ -1832,10 +1777,6 @@ msgstr "工作机会"
 #: cgi/subs/subs_BOMFeed_history.pm:336
 msgid "Cascade"
 msgstr "重叠显示"
-
-#: cgi/templates/default/account/statement.tt:115
-msgid "Cash Balance"
-msgstr "现金余额"
 
 #: lib/BOM/Feed/DataSource/BBDL/CSVParser/CorporateAction.pm:204
 msgid "Cash Dividend"
@@ -1896,7 +1837,7 @@ msgstr "更改密码"
 msgid "Change in account settings"
 msgstr "帐户设置变更"
 
-#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1999
+#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1998
 msgid "Chart"
 msgstr "图表"
 
@@ -2125,7 +2066,7 @@ msgstr "公司旅游，前往泰国普吉岛"
 msgid "Confirm"
 msgstr "确认"
 
-#: cgi/tick_trades.cgi:215
+#: cgi/tick_trades.cgi:189
 msgid "Congratulations"
 msgstr "祝贺您"
 
@@ -2133,7 +2074,7 @@ msgstr "祝贺您"
 msgid "Congratulations! <br /> You have won the contract!"
 msgstr "恭喜! <br /> 你已赢得 %交易(s单数)!"
 
-#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:332
+#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:306
 msgid "Connection failure. Please try again later."
 msgstr "连接失败。请稍后重新尝试。"
 
@@ -2271,20 +2212,6 @@ msgstr "当标的市场处于日内最高或最低时通常不会提供合同。
 msgid "Controlled risk"
 msgstr "有限风险"
 
-#: cgi/templates/default/account/currency_converter.tt:13
-msgid "Convert"
-msgstr "转换"
-
-#. ('<select name="currencyfrom" id="currencyfrom">' . $currency_options . '</select>',            '<input type="text" size="7" name="currencyfromvalue" id="currencyfromvalue" value="">',            '<select name="currencyto" id="currencyto">' . $options_for_currencyto . '</select>')
-#: cgi/subs/subs_account_history.pm:212
-msgid "Convert %1%2 to %3"
-msgstr "转换 %1%2 为 %3"
-
-#: cgi/templates/default/account/currency_converter.tt:10
-#: cgi/templates/default/account/currency_converter.tt:6
-msgid "Convert between your currency segment accounts"
-msgstr "在您的货币段帐户之间转换"
-
 #: cgi/templates/default/legal/privacy.tt:23
 msgid "Cookies"
 msgstr "网络跟踪"
@@ -2310,11 +2237,11 @@ msgstr "国家："
 msgid "Create free account"
 msgstr "开设免费帐户"
 
-#: cgi/templates/default/account/statement.tt:114
+#: cgi/templates/default/account/statement.tt:119
 msgid "Credit/<wbr/>Debit"
 msgstr "信用卡/<wbr/>借记卡"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:426
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: cgi/templates/default/cashier/available_payment_methods.tt:175
 msgid "Credit/Debit Card"
 msgstr "信用卡/借记卡"
@@ -2327,7 +2254,7 @@ msgstr "十字线 （Crosshair）"
 msgid "Currencies"
 msgstr "货币"
 
-#: cgi/templates/default/cashier/betting_limits.tt:11 cgi/tick_trades.cgi:279
+#: cgi/tick_trades.cgi:253
 msgid "Currency"
 msgstr "货币"
 
@@ -2365,7 +2292,7 @@ msgstr "当前市场价格是 0 。"
 msgid "Current password"
 msgstr "当前密码"
 
-#: cgi/subs/subs_clientdetails.pm:160 cgi/subs/subs_forms_output.pm:287
+#: cgi/subs/subs_clientdetails.pm:136 cgi/subs/subs_forms_output.pm:287
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "当前照片卡驾照（临时的或正式的）"
 
@@ -2373,7 +2300,7 @@ msgstr "当前照片卡驾照（临时的或正式的）"
 msgid "Current signed Passport"
 msgstr "当前签字护照"
 
-#: cgi/subs/subs_clientdetails.pm:159
+#: cgi/subs/subs_clientdetails.pm:135
 msgid "Current signed Passport OR"
 msgstr "当前签名护照或"
 
@@ -2381,7 +2308,7 @@ msgstr "当前签名护照或"
 msgid "Customer Support has been informed of your Lost Login ID / Password request and will be contacting you soon. Thank you for your patience."
 msgstr "客户支持已收到了您丢失登录ID/密码的请求，并将尽快与您联系。非常感谢您的耐心等待。"
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "DOWN"
 msgstr "下跌"
 
@@ -2391,7 +2318,7 @@ msgstr "下跌"
 msgid "Daily"
 msgstr "毎日"
 
-#: cgi/oop/Controller/Bet.pm:2022
+#: cgi/oop/Controller/Bet.pm:2021
 #: cgi/templates/default/charting/daily_ohlc.tt:11
 msgid "Daily Prices"
 msgstr "每日价格"
@@ -2419,7 +2346,7 @@ msgstr "数据源"
 msgid "Data will be available after market close"
 msgstr "收市后数据可用"
 
-#: cgi/templates/default/account/statement.tt:105
+#: cgi/templates/default/account/statement.tt:110
 #: cgi/templates/default/charting/daily_ohlc.tt:16
 #: cgi/templates/default/charting/legacy_chart_table.tt:10
 #: cgi/templates/default/resources/trading_times_header.tt:3
@@ -2446,13 +2373,13 @@ msgstr "要显示的日期"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:249
-#: cgi/paymentagent_withdraw.cgi:377
+#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_withdraw.cgi:387
 msgid "Dear %1 %2 %3,"
 msgstr "尊敬的 %1 %2 %3,"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr ""
 "尊敬的 %1 %2 %3, ,\n"
@@ -2464,7 +2391,7 @@ msgstr ""
 "%4\n"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:464
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:471
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr ""
 "尊敬的 %1 %2 %3, ,\n"
@@ -2476,7 +2403,7 @@ msgstr ""
 "%4\n"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:466
 msgid "Dear %1 %2 %3, We would like to inform you that your Western Union withdrawal has been processed. <strong>%5</strong> You can then go to any Western Union agent, provide the MTCN number and claim your funds. You can find the Western Union agent which is closest to you on their <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a>. Kind Regards, %4"
 msgstr "然后您可以前往任何西联汇款代理人处，提供 MTCN 号码即可提款。您可在西联汇款的 <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\" target = \"_blank\">website</a> 上找到离您最近的西联快汇代理人。"
 
@@ -2614,9 +2541,9 @@ msgstr "删除所有线？"
 msgid "Depo./With. commission"
 msgstr "存款/带佣金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
-#: cgi/templates/default/account/statement.tt:138
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/templates/default/account/statement.tt:143
 #: cgi/templates/default/cashier/available_payment_methods.tt:16
 #: cgi/templates/default/homepage/deposit_alert.tt:1
 #: cgi/templates/default/homepage/deposit_alert.tt:5
@@ -2642,7 +2569,7 @@ msgstr "转到支付代理人"
 msgid "Deposit using legacy method: %1"
 msgstr "使用传统方法充值：%1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Deposit via BACS"
 msgstr "通过BACS的存款"
@@ -2651,7 +2578,7 @@ msgstr "通过BACS的存款"
 msgid "Deposit via Bank Transfer"
 msgstr "通过银行转账方式的存款"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Deposit via Credit/Debit card"
 msgstr "通过信用卡/借记卡方式存款"
@@ -2660,7 +2587,7 @@ msgstr "通过信用卡/借记卡方式存款"
 msgid "Deposit via DoughFlow"
 msgstr "通过DoughFlow的存款"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Deposit via Western Union"
 msgstr "通过西联汇款的存款（MTCN: %1）"
 
@@ -2669,7 +2596,7 @@ msgstr "通过西联汇款的存款（MTCN: %1）"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "通过西联汇款的存款（MTCN: %1）"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "通过银行电汇的存款"
@@ -2752,7 +2679,7 @@ msgstr "存款及取款"
 msgid "Derivative"
 msgstr "衍生工具"
 
-#: cgi/templates/default/account/statement.tt:110
+#: cgi/templates/default/account/statement.tt:115
 msgid "Description"
 msgstr "描述"
 
@@ -2764,14 +2691,6 @@ msgstr "非趋势价格摆动指标"
 #: cgi/subs/subs_BOMFeed_history.pm:414
 msgid "Detrended Price Oscillator (DPO)"
 msgstr "非趋势价格摆动指标 (DPO)"
-
-#: cgi/register-api.cgi:171
-msgid "Developer cannot be registered.  Request support."
-msgstr "开发者无法注册。请求支援。"
-
-#: cgi/register-api.cgi:66
-msgid "Developer not yet registered"
-msgstr "开发者还未注册"
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Developer's Guide"
@@ -2857,7 +2776,7 @@ msgstr "是否要以其他语言开启Binary.com，或想对我们目前译文�
 msgid "Documents are required to verify your identity"
 msgstr "需要文件验证您的身份"
 
-#: lib/BOM/Product/Transaction.pm:858
+#: lib/BOM/Product/Transaction.pm:857
 msgid "Don't buy contract using master password!"
 msgstr "不要使用主密码购买合同！"
 
@@ -2883,11 +2802,11 @@ msgstr "别让它的名词吓退。Quotidian 即日常所发生的事。"
 msgid "Dot Chart"
 msgstr "点图"
 
-#: cgi/tick_trades.cgi:161
+#: cgi/tick_trades.cgi:135
 msgid "Double your stake if you can predict whether the market will move UP or DOWN after 5 ticks."
 msgstr "如果您能预测到市场在 5 个价位后是否会向上或向下变动，那么请将您的交易翻翻。"
 
-#: cgi/tick_trades.cgi:165
+#: cgi/tick_trades.cgi:139
 msgid "Double your stake!"
 msgstr "双倍下注！"
 
@@ -2935,7 +2854,7 @@ msgstr "博士"
 msgid "Draw Chart"
 msgstr "绘制图表"
 
-#: cgi/tick_trades.cgi:323
+#: cgi/tick_trades.cgi:297
 msgid "Draw a pie chart of the most recent ticks!"
 msgstr "绘制最后跳动点的圆形分析图！"
 
@@ -2943,7 +2862,7 @@ msgstr "绘制最后跳动点的圆形分析图！"
 msgid "Due to new gaming regulations recently promulgated in Malta, we are required to obtain your residential address details.  We would be grateful if you could update your"
 msgstr "由于马尔他最近颁布新的条例，我们需要获得您的居住地址详情。如果您能更新您的"
 
-#: lib/BOM/Product/Transaction.pm:816
+#: lib/BOM/Product/Transaction.pm:815
 msgid "Due to regulatory requirements, you are required to authenticate your account in order to continue trading."
 msgstr "根据管理要求，您必须证明账户的真实性才能继续交易。"
 
@@ -3057,7 +2976,7 @@ msgstr "确保您不会通过针对18周岁以下人士的信息来推广%1 。"
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "输入以与现货价格差额为计的障碍。如果您输入 +0.005 ，那么您将以高于入市现价 0.005 的障碍水平购买交易。入市现价在收到您的订购之后将是下一个高频"
 
-#: cgi/oop/Controller/Bet.pm:2197
+#: cgi/oop/Controller/Bet.pm:2196
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "输入以与现货价格差额为计的障碍。如果您输入 +0.005 ，那么您将以高于入市现价 0.005 的障碍水平购买交易。入市现价在收到您的订购之后将是下一个高频。"
 
@@ -3089,14 +3008,6 @@ msgstr "错误：密码字段为空！"
 #: cgi/templates/default/charting/light_chart.tt:2
 msgid "Error with input field %1: should contain only digits."
 msgstr "输入栏 %1 错误：只能是数字。"
-
-#: cgi/currency_converter.cgi:33
-msgid "Error: Both currencies are the same!  You must convert from one currency to another."
-msgstr "错误：两种货币相同！您必须从一种货币转换为另一种货币。"
-
-#: cgi/currency_converter.cgi:72
-msgid "Error: The exchange rate for"
-msgstr "错误：...的汇率"
 
 #: cgi/subs/subs_runbets_execute.pm:894
 msgid "Error: There was a timeout or an unspecified error. The cost of the contract has been refunded to you."
@@ -3323,7 +3234,7 @@ msgstr "二元期权交易简单的逐步指南。"
 msgid "For affiliates who offer a trading advisory service based on the %1 platform, we offer specialized payout structures. <a href=\"mailto:%2\">Contact our affiliate manager, Karen Yap for details</a>."
 msgstr "对于基于 %1 平台提供交易顾问服务的联盟，我们将提供专门的支付结构。<a href=\"mailto:%2\">请联系我们的联盟经理 Karen Yap 了解详情</a>。"
 
-#: cgi/tick_trades.cgi:537
+#: cgi/tick_trades.cgi:512
 msgid "For any other queries, please feel free to contact us."
 msgstr "如有任何其他疑问，请随时联系我们。"
 
@@ -3385,7 +3296,7 @@ msgstr "一些 %1 提供预远期启动的一日间合约和每日合约"
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr "使用 %1 的强大实时图表设定您的交易策略。立时观察外汇兑换，指数，期货商品和股票的交易格局。"
 
-#: cgi/subs/subs_homepage.pm:174
+#: cgi/subs/subs_homepage.pm:138
 msgid "Free Contract Bonus"
 msgstr "免费合约红利"
 
@@ -3434,7 +3345,7 @@ msgid "Further information"
 msgstr "更多信息"
 
 #. (300)
-#: cgi/paymentagent_withdraw.cgi:158 cgi/subs/subs_forms.pm:4065
+#: cgi/paymentagent_withdraw.cgi:169 cgi/subs/subs_forms.pm:4065
 msgid "Further instructions must not exceed %1 characters."
 msgstr "详细说明必须不超过 %1 字符。"
 
@@ -3468,9 +3379,8 @@ msgstr "普通"
 msgid "Generous Commission Structure"
 msgstr "优厚的佣金结构"
 
-#. ($promocode_amount, $min_deposit)
-#. ($promocode_currency . $promocode_amount,                $promocode_currency . $min_deposit)
-#: cgi/subs/subs_homepage.pm:130 cgi/subs/subs_homepage.pm:149
+#. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
+#: cgi/subs/subs_homepage.pm:114
 msgid "Get %1 when you deposit %2."
 msgstr "当您存入 %2 时，将获得 %1。"
 
@@ -3504,15 +3414,15 @@ msgstr "获得报价"
 msgid "Getting Started"
 msgstr "开始"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:438
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
 msgid "Gift Certificate"
 msgstr "礼品券"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Deposit"
 msgstr "礼品券存款"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Withdrawal"
 msgstr "礼品券提款"
 
@@ -3526,7 +3436,7 @@ msgstr "我要赚更多！"
 msgid "Glossary"
 msgstr "词汇"
 
-#: cgi/templates/default/account/statement.tt:17 cgi/tick_trades.cgi:271
+#: cgi/templates/default/account/statement.tt:18 cgi/tick_trades.cgi:245
 msgid "Go"
 msgstr "开始"
 
@@ -3594,13 +3504,13 @@ msgstr "隐藏最后点"
 msgid "High"
 msgstr "高"
 
-#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/charting/livechart.tt:43
 #: cgi/templates/default/resources/pricing_table_form.tt:60
 msgid "High barrier"
 msgstr "价格上限"
 
-#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2187 cgi/templates/default/bet/form/barrier.tt:15
 msgid "High barrier offset"
 msgstr "价格上限位移"
 
@@ -3639,7 +3549,7 @@ msgstr "高于/低于交易："
 msgid "Highlights the relationship between volume and price changes and is particularly useful for assessing the strength of a trend."
 msgstr "反映交易量与价格变动之间的关系，对于评估趋势强度尤其有用。"
 
-#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:295
+#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:269
 msgid "Home"
 msgstr "首页"
 
@@ -3702,7 +3612,7 @@ msgstr "随机市场有哪些?"
 msgid "How to transfer money to the Agent."
 msgstr "如何转帐到代理人。"
 
-#: cgi/subs/subs_clientdetails.pm:153
+#: cgi/subs/subs_clientdetails.pm:129
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
 msgstr "但是，为了增加您的提款限额，您会被友善地要求遵照以下指令行事。"
 
@@ -3719,7 +3629,7 @@ msgstr "我忘记了密码，该怎么办？"
 msgid "I have read and agree to the <a target=\"_blank\" href=\"%1\">terms and conditions</a> of the site."
 msgstr "我已阅读并同意本网站的<a target=\"_blank\" href=\"%1\">条款和条件</a>。"
 
-#: cgi/tick_trades.cgi:267
+#: cgi/tick_trades.cgi:241
 msgid "I predict that the last decimal of the 5th tick will not be:"
 msgstr "我预测第 5 个跳动点的最后十进位数不是："
 
@@ -3760,11 +3670,11 @@ msgid "If applicable, to expedite the processing of your query please include a 
 msgstr "如适用，要加快处理您的请求，请附上需要帮助处理的问题页面的截图。可使用截图软"
 
 #. (request()
-#: cgi/tick_trades.cgi:535
+#: cgi/tick_trades.cgi:510
 msgid "If the connection problem persists, you can try to <a href=\"%1\">reload the application</a>."
 msgstr "如果连接问题仍然存在，请尝试<a href=\"%1\">重新载入应用程序</a>。"
 
-#: cgi/tick_trades.cgi:527
+#: cgi/tick_trades.cgi:502
 msgid "If the trading page is closed or internet access is terminated, the outcome of your contract won&rsquo;t be affected. You can then access your account statement to view the outcome of the contract."
 msgstr "如果交易页面关闭了或者互联网访问被终止，您的交易结果不会受到影响。您可在随后进入您的账单，查看交易的结果。"
 
@@ -3879,7 +3789,7 @@ msgstr "如果你选择了特定的<strong>结束时间</strong>，交易<strong
 msgid "If you wish to raise these limits, please <a href=\"%1\">authenticate</a> your account."
 msgstr "如果您想提高这些限额，请<a href=\"%1\">验证</a>您的账户。"
 
-#: lib/BOM/Product/Transaction.pm:1114
+#: lib/BOM/Product/Transaction.pm:1113
 msgid "If you wish to raise these limits, please authenticate your account."
 msgstr "如果您想提高这些限额，请验证您的账户。"
 
@@ -3902,7 +3812,7 @@ msgstr "如果你想成就一番事业，而不是一份简历，请跟我们Bin
 msgid "Illegal contract type %1"
 msgstr "非法交易类型%1"
 
-#: lib/BOM/Product/Transaction.pm:474
+#: lib/BOM/Product/Transaction.pm:481
 msgid "Illegal currency $currency for $broker"
 msgstr "非法货币$货币$经纪人"
 
@@ -3946,7 +3856,7 @@ msgstr ""
 msgid "In foreign exchange markets, traders can enter contracts based on the change in price of one currency as it relates to another currency. For example if a trader selects Rise in the EUR/USD market, they are predicting that the value of the Euro will rise in relation to the value of the US dollar."
 msgstr "在外汇市场中，交易者可以根据一个货币对另一个货币的价格变动进入交易合约。例如，如果交易者选择欧元/美元「上涨」，即预测欧元的价值相对美元的价值将会上涨。"
 
-#: lib/BOM/Product/Transaction.pm:880
+#: lib/BOM/Product/Transaction.pm:879
 msgid "In order for you to place contracts, we need to know your Residence (Country). Please update your settings."
 msgstr "为了让您能够制订交易，我们需要知道您的居住地（国家）。请更新您的设定。"
 
@@ -4095,7 +4005,7 @@ msgstr "当日"
 msgid "Intraday contracts may not cross market open."
 msgstr "盘中合同可能不能跨越市场开放。"
 
-#: cgi/oop/Controller/Bet.pm:2034
+#: cgi/oop/Controller/Bet.pm:2033
 msgid "Intraday prices"
 msgstr "当天价格"
 
@@ -4223,7 +4133,7 @@ msgstr "Java 图表"
 msgid "Join our analysts LIVE twice a week for a comprehensive analysis of recent developments and trends in the global financial markets."
 msgstr "加入我们每周两次的分析师「实时在线分析」(LIVE)，对全球金融市场的最新发展和趋势作全面分析。"
 
-#: cgi/templates/default/account/statement.tt:12
+#: cgi/templates/default/account/statement.tt:13
 msgid "Jump to"
 msgstr "跳至"
 
@@ -4231,7 +4141,7 @@ msgstr "跳至"
 msgid "Keep this value secure"
 msgstr "保障此值安全"
 
-#: cgi/paymentagent_withdraw.cgi:386
+#: cgi/paymentagent_withdraw.cgi:396
 msgid "Kind Regards,"
 msgstr "谨致问候，"
 
@@ -4248,7 +4158,7 @@ msgstr "大"
 msgid "Last"
 msgstr "最近"
 
-#: cgi/oop/Controller/Bet.pm:2051
+#: cgi/oop/Controller/Bet.pm:2050
 msgid "Last Digit Stats"
 msgstr "最后的数字统计"
 
@@ -4297,7 +4207,7 @@ msgstr "学习交易"
 msgid "Learning to trade online"
 msgstr "了解在线交易"
 
-#: cgi/statement.cgi:161 cgi/subs/subs_account_history.pm:157
+#: cgi/statement.cgi:137 cgi/subs/subs_account_history.pm:161
 msgid "Legacy Contract"
 msgstr "预先存在的合同"
 
@@ -4323,8 +4233,8 @@ msgid "Like %2, %1 reset back to a price of 1000 each day. The difference is tha
 msgstr "就像%2,%1也是每天重新设定价格返回到1000。差别是%1每天于格林威治標準時間(GMT)中午12:00点重新设定，(而%2每天于格林威治標準時間(GMT) 00:00:00点重新设定)。"
 
 #: cgi/templates/default/cashier/betting_limits.tt:8
-msgid "Limit</strong><br>(per currency)"
-msgstr "限制</strong><br>（按货币）"
+msgid "Limit"
+msgstr "限制"
 
 #: cgi/subs/subs_BOMFeed_history.pm:338
 msgid "Line"
@@ -4454,13 +4364,13 @@ msgstr "低"
 msgid "Low Barrier should be number only"
 msgstr "低门槛只应为数字"
 
-#: cgi/oop/Controller/Bet.pm:2191 cgi/templates/default/bet/form/barrier.tt:37
+#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:37
 #: cgi/templates/default/charting/livechart.tt:47
 #: cgi/templates/default/resources/pricing_table_form.tt:46
 msgid "Low barrier"
 msgstr "价格下限"
 
-#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:34
+#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:34
 msgid "Low barrier offset"
 msgstr "价格下限位移"
 
@@ -4472,11 +4382,11 @@ msgstr "下方带"
 msgid "Lower Band = Average - 0.5 * Std Deviation"
 msgstr "下方带 = 平均线 - 0.5 * 标准偏差"
 
-#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:303
+#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:277
 msgid "Lucky 10 Digits"
 msgstr "10位数"
 
-#: cgi/tick_trades.cgi:137 cgi/tick_trades.cgi:141 cgi/tick_trades.cgi:287
+#: cgi/tick_trades.cgi:111 cgi/tick_trades.cgi:115 cgi/tick_trades.cgi:261
 msgid "Lucky 10 Digits Trade"
 msgstr "10位数"
 
@@ -4495,19 +4405,19 @@ msgstr "MACD（平滑异同移动平均线）信号"
 msgid "Maintain your Site and promote %1 in an appropriate manner and contact us if you are changing design or layout or adding material that may influence our opinion as to whether you are a suitable affiliate partner."
 msgstr "以合适的方式维护您的网站并推广%1 ；如果您改变设计或版面或增加材料可能影响我们判断您是否为合适的联盟伙伴时，请与我们联系。"
 
-#: cgi/tick_trades.cgi:170
+#: cgi/tick_trades.cgi:144
 msgid "Make 10 times your money if you predict the last decimal digit of the market after 5 ticks."
 msgstr "如果您预测到了市场5个价位后的最后一位十进制数，那么您可以赚取 10 倍收益。"
 
-#: cgi/tick_trades.cgi:174
+#: cgi/tick_trades.cgi:148
 msgid "Make 10 times your money!"
 msgstr "赚取 10 倍交易额！"
 
-#: cgi/tick_trades.cgi:179
+#: cgi/tick_trades.cgi:153
 msgid "Make a 10% profit if you manage to predict that the last decimal digit of the 5th tick will *not* be the number selected."
 msgstr "如果您预测到了第 5 个价位的最后一位十进制数*不是*所选数字，那么您可以获得 10% 收益。"
 
-#: cgi/tick_trades.cgi:183
+#: cgi/tick_trades.cgi:157
 msgid "Make a 10% profit!"
 msgstr "赚取 10% 的收益！"
 
@@ -4525,7 +4435,7 @@ msgid "Make your trade"
 msgstr "执行交易"
 
 #: cgi/templates/default/resources/pricing_table_form.tt:19
-#: cgi/tick_trades.cgi:251
+#: cgi/tick_trades.cgi:225
 msgid "Market"
 msgstr "市场"
 
@@ -4580,7 +4490,7 @@ msgstr "市场"
 msgid "Mass Index"
 msgstr "梅斯指数"
 
-#: cgi/subs/subs_homepage.pm:162
+#: cgi/subs/subs_homepage.pm:126
 msgid "Matched Contract Bonus"
 msgstr "匹配交易红利"
 
@@ -4593,7 +4503,7 @@ msgid "Maximum"
 msgstr "最大额度"
 
 #: cgi/subs/subs_forms.pm:3466
-#: cgi/templates/default/cashier/betting_limits.tt:23
+#: cgi/templates/default/cashier/betting_limits.tt:15
 msgid "Maximum account cash balance"
 msgstr "最大帐户现金余额"
 
@@ -4608,16 +4518,16 @@ msgstr "最大帐户现金余额当前设置为  <strong>%1 %2</strong>"
 msgid "Maximum aggregate contract purchases per day."
 msgstr "交易的每日最大购买量。"
 
-#: cgi/templates/default/cashier/betting_limits.tt:35
+#: cgi/templates/default/cashier/betting_limits.tt:23
 msgid "Maximum aggregate payouts on open positions"
 msgstr "敞口头寸的最大支付总额"
 
-#: cgi/templates/default/cashier/betting_limits.tt:29
+#: cgi/templates/default/cashier/betting_limits.tt:19
 msgid "Maximum daily turnover"
 msgstr "最大日成交量"
 
 #: cgi/subs/subs_forms.pm:3516
-#: cgi/templates/default/cashier/betting_limits.tt:17
+#: cgi/templates/default/cashier/betting_limits.tt:11
 msgid "Maximum number of open positions"
 msgstr "最大敞口头寸数目"
 
@@ -4627,7 +4537,7 @@ msgstr "最大敞口头寸数目"
 msgid "Maximum number of open positions is currently set to <strong>%1</strong>"
 msgstr "最大敞口头寸数目当前设置为 <strong>%1</strong>"
 
-#: cgi/subs/subs_payments_withdrawals.pm:110
+#: cgi/subs/subs_payments_withdrawals.pm:102
 msgid "Maximum withdrawal by all other means:"
 msgstr "通过其它方式的最大提款金额："
 
@@ -4709,19 +4619,19 @@ msgstr "移动应用"
 msgid "Momentum"
 msgstr "动量"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:435
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
 msgid "Moneta"
 msgstr "Moneta"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
 msgid "Moneybookers"
 msgstr "Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Deposit"
 msgstr "Moneybookers 存款"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Withdrawal"
 msgstr "Moneybookers 提款"
 
@@ -4814,7 +4724,7 @@ msgstr "多语言、多货币支持"
 msgid "Must be in a valid URI format"
 msgstr "必需是有效的网址格式"
 
-#: cgi/my_account.cgi:73 lib/BOM/View/Menu.pm:56
+#: cgi/my_account.cgi:72 lib/BOM/View/Menu.pm:56
 msgid "My Account"
 msgstr "我的帐户"
 
@@ -4886,7 +4796,7 @@ msgstr "较新"
 msgid "Next"
 msgstr "下一页"
 
-#: cgi/tick_trades.cgi:227
+#: cgi/tick_trades.cgi:201
 msgid "Next Page"
 msgstr "下一页"
 
@@ -4943,10 +4853,6 @@ msgstr "无任何风险，获得一万美元虚拟资金帐户"
 msgid "No. There's no cost to sign up to the %1 affiliate program."
 msgstr "不，加入%1 联盟计划无需任何成本！"
 
-#: cgi/templates/default/account/currency_converter.tt:15
-msgid "Note:"
-msgstr "附注："
-
 #: cgi/templates/default/portfolio/contract_details.tt:31
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "注释：合同将在我们的服务器收到请求时以当时的市场价格出售。此价格可能会与指定的价格有差异。"
@@ -4975,8 +4881,8 @@ msgstr "注意：公司有权撤销逾期两年未要求的佣金。请阅读附
 
 #. ($currency,            $withdrawal_limits->{'frozen_free_gift'},            $withdrawal_limits->{'free_gift_turnover_limit'},            virgule($withdrawal_limits->{'aggregate_buys_for_currency'})
 #. ($self->currency,                    $limits->{frozen_free_gift},                    $limits->{free_gift_turnover_limit},                    virgule($limits->{aggregate_buys_for_currency})
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:161
-#: cgi/subs/subs_payments_withdrawals.pm:129
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:153
+#: cgi/subs/subs_payments_withdrawals.pm:121
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
 msgstr "附注：仅当您的交易总额超过 %1%3（目前其仅有%1%4）时，您才能够提取您的奖金  %1%2。此限制仅适用于由此产生的奖金和收益。由此产生的所有其它存款和收益可随时提取。"
 
@@ -5041,11 +4947,11 @@ msgstr "OAuth2.0 是为达此目的而新兴的互联网标准。正式的定义
 msgid "OK"
 msgstr "确定"
 
-#: cgi/subs/subs_clientdetails.pm:164
+#: cgi/subs/subs_clientdetails.pm:140
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "原始的银行/信用社/建筑协会/信用卡/借记卡对账单或存折（最近 3 个月内）。"
 
-#: cgi/subs/subs_clientdetails.pm:163
+#: cgi/subs/subs_clientdetails.pm:139
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "原始费用单（最近 3 个月内）；或"
 
@@ -5057,7 +4963,7 @@ msgstr "处理电话的办公室"
 msgid "Old password is wrong."
 msgstr "旧密码不正确。"
 
-#: cgi/templates/default/account/statement.tt:24
+#: cgi/templates/default/account/statement.tt:26
 msgid "Older"
 msgstr "较老旧"
 
@@ -5188,7 +5094,7 @@ msgstr "其它联系号码"
 msgid "Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list."
 msgstr "我们的联盟计划面向专业投资人士和管理自己网站、新闻通讯或邮件列表的网站管理员。"
 
-#: cgi/tick_trades.cgi:531
+#: cgi/tick_trades.cgi:506
 msgid "Our application uses ports 8080 and 843. For connection difficulties, please contact your System Administrator and request your firewall to be updated accordingly."
 msgstr "我们的应用程序使用8080 和 843 端口，如果遇到任何连接问题，请联系您的系统管理员并请求对您的防火墙进行相应更新。"
 
@@ -5234,8 +5140,8 @@ msgstr "我们的数据源是可用于交易环境最好的最稳定的之一。
 msgid "Our data feed may at times differ slightly from other data feeds found on the internet (who may themselves differ between each other). Reasons for differences in feed providers include:"
 msgstr "我们的数据源有时可能与互联网上其他数据源（它们本身之间就有差异）有所差异。数据源提供商之间差异的原因包括："
 
-#. (BOM::Platform::Runtime->instance->app_config->cs->email)
-#: cgi/subs/subs_clientdetails.pm:166
+#. ($cs_email)
+#: cgi/subs/subs_clientdetails.pm:142
 msgid "Our email address is %1."
 msgstr "我们的电子邮件地址为%1。"
 
@@ -5281,7 +5187,7 @@ msgstr "联盟站点的所有权、内容和法律责任均有联盟全权负责
 msgid "P.O. Box is not accepted"
 msgstr "不接受邮政信箱"
 
-#: cgi/templates/default/account/statement.tt:57
+#: cgi/templates/default/account/statement.tt:59
 msgid "P/L"
 msgstr "P/L"
 
@@ -5290,7 +5196,7 @@ msgid "PLEASE CONTACT CUSTOMER SUPPORT."
 msgstr "请联系客户支持。"
 
 #. ($page_num, $total_pages)
-#: cgi/subs/subs_account_history.pm:242
+#: cgi/subs/subs_account_history.pm:196
 msgid "Page %1 of %2"
 msgstr "第%1页，共%2页"
 
@@ -5320,7 +5226,7 @@ msgstr "参与外汇、股票或商品市场"
 msgid "Partner API"
 msgstr "应用程序编程界面(API)伙伴"
 
-#: cgi/register-api.cgi:31
+#: cgi/register-api.cgi:27
 msgid "Partner API Registration"
 msgstr "应用程序编程界面(API)伙伴注册"
 
@@ -5425,7 +5331,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "最高获利必须介于 <strong>%1</strong> 和 <strong>%2</strong>之间。"
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: cgi/subs/subs_homepage.pm:125
+#: cgi/subs/subs_homepage.pm:106
 msgid "Pending Bonus: %1"
 msgstr "待定奖金：%1"
 
@@ -5467,7 +5373,7 @@ msgstr "制定随机交易"
 msgid "Platform Tour"
 msgstr "平台之旅"
 
-#: cgi/tick_trades.cgi:239
+#: cgi/tick_trades.cgi:213
 msgid "Play Again"
 msgstr "再玩"
 
@@ -5483,7 +5389,7 @@ msgstr "请点击“后退”并再次输入。"
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "请点击“播放”键播放视频。"
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:193
+#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:204
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "请确认交易详情以完成转帐："
 
@@ -5513,9 +5419,8 @@ msgstr "请输入密码。"
 msgid "Please enter a town or city."
 msgstr "请输入城镇或城市。"
 
-#: cgi/paymentagent_transfer.cgi:101 cgi/subs/subs_forms.pm:3822
+#: cgi/paymentagent_transfer.cgi:103 cgi/subs/subs_forms.pm:3822
 #: cgi/subs/subs_forms.pm:4023
-#: cgi/templates/default/account/currency_converter.tt:11
 msgid "Please enter a valid amount."
 msgstr "请输入有效金额。"
 
@@ -5562,7 +5467,7 @@ msgstr "请输入您的姓。"
 msgid "Please enter your secret answer"
 msgstr "请输入您的密码保护问题答案"
 
-#: cgi/paymentagent_transfer.cgi:271
+#: cgi/paymentagent_transfer.cgi:272
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "请在下表填写登录 ID 以及您要转给您的客户的金额："
 
@@ -5585,11 +5490,11 @@ msgstr "要使用该功能请登入"
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "在提交请求前，请确保您首先同意代理人的支付条款。"
 
-#: cgi/subs/subs_payments_withdrawals.pm:100
+#: cgi/subs/subs_payments_withdrawals.pm:92
 msgid "Please note that if you have deposited at least once by credit/debit card, you may find that you are restricted in the amount you may convert into other currencies."
 msgstr "请注意，如果您至少一次通过信用卡/借记卡存款，您将发现您可转换为其它货币的金额会受到限制。"
 
-#: cgi/subs/subs_clientdetails.pm:134 cgi/subs/subs_forms_output.pm:299
+#: cgi/subs/subs_forms_output.pm:299
 msgid "Please note that mobile telephone bills are not acceptable as evidence of address"
 msgstr "请注意，不接受手机帐单作为地址证明"
 
@@ -5621,7 +5526,7 @@ msgstr "请注意，你可以随时登录账户的“设置”部分更新你的
 msgid "Please note that your settings have been updated as follows:"
 msgstr "请注意，您的设置已更新如下："
 
-#: cgi/subs/subs_clientdetails.pm:138 cgi/subs/subs_forms_output.pm:304
+#: cgi/subs/subs_forms_output.pm:304
 msgid "Please post the documents to:"
 msgstr "请将文件邮寄至："
 
@@ -5629,7 +5534,7 @@ msgstr "请将文件邮寄至："
 msgid "Please provide at least one self-exclusion setting."
 msgstr "请提供至少一个自我排除设置。"
 
-#: cgi/oop/Controller/Bet.pm:1525 cgi/oop/Controller/Bet.pm:1802
+#: cgi/oop/Controller/Bet.pm:1527 cgi/oop/Controller/Bet.pm:1804
 msgid "Please provide granter id(s)."
 msgstr "请提供授权人 ID 。"
 
@@ -5666,9 +5571,14 @@ msgstr "请选择"
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "请选择「支付」或「成本」选项。"
 
-#: cgi/tick_trades.cgi:327
+#: cgi/tick_trades.cgi:301
 msgid "Please select market:"
 msgstr "请选择市场："
+
+#. (qq(<a href="mailto:$cs_email">$cs_email</a>)
+#: cgi/subs/subs_clientdetails.pm:120
+msgid "Please send this email to %1."
+msgstr ""
 
 #: cgi/subs/subs_forms.pm:1197 cgi/subs/subs_forms.pm:405
 #: cgi/subs/subs_presentation.pm:102
@@ -5692,11 +5602,11 @@ msgstr "请仅使用字母数字或空格。"
 msgid "Please use only letters, spaces, hyphens, full-stops or apostrophes."
 msgstr "请仅使用字母、空格、连字符、句号或省略号。"
 
-#: cgi/tick_trades.cgi:83
+#: cgi/tick_trades.cgi:57
 msgid "Please wait.<br />Your request is being processed."
 msgstr "请稍候。<br />您的请求正在处理中。"
 
-#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:81 cgi/portfolio.cgi:83
+#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:79 cgi/portfolio.cgi:81
 #: cgi/templates/default/homepage/logged_in.tt:46 lib/BOM/View/Menu.pm:67
 msgid "Portfolio"
 msgstr "组合"
@@ -5733,7 +5643,7 @@ msgstr "强大而简单"
 msgid "Prediction"
 msgstr "预测"
 
-#: cgi/limits.cgi:54
+#: cgi/limits.cgi:44
 msgid "Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions."
 msgstr "在您的证券组合中给出未清偿合约的最大总交易额。如果达到了该最大值，那么您在追加购买交易之前需要先对现有头寸进行平仓。"
 
@@ -5774,7 +5684,7 @@ msgstr "对交易进行报价。"
 msgid "Prices"
 msgstr "价格"
 
-#: cgi/oop/Controller/Bet.pm:2040 cgi/pricing_table.cgi:166
+#: cgi/oop/Controller/Bet.pm:2039 cgi/pricing_table.cgi:166
 #: cgi/templates/default/global/footer.tt:51
 #: cgi/templates/default/resources/pricing_table_form.tt:2
 #: frontend/templates/layouts/default/footer.html.haml:1
@@ -5806,13 +5716,13 @@ msgstr "利润"
 #: cgi/create_account.cgi:113 cgi/create_account.cgi:196
 #: cgi/create_account.cgi:73 cgi/create_account.cgi:80
 #: cgi/create_account.cgi:96 cgi/oop/Controller/Bet.pm:1367
-#: cgi/oop/Controller/Bet.pm:1514 cgi/oop/Controller/Bet.pm:1755
-#: cgi/oop/Controller/Bet.pm:1794 cgi/oop/Controller/Bet.pm:2209
+#: cgi/oop/Controller/Bet.pm:1516 cgi/oop/Controller/Bet.pm:1757
+#: cgi/oop/Controller/Bet.pm:1796 cgi/oop/Controller/Bet.pm:2208
 #: cgi/oop/Controller/Bet.pm:760 cgi/oop/Controller/Bet.pm:866
 msgid "Profit from your Predictions"
 msgstr "预测的收益"
 
-#: cgi/templates/default/account/statement.tt:113
+#: cgi/templates/default/account/statement.tt:118
 msgid "Profit/<wbr/>Loss"
 msgstr "益/<wbr/>损"
 
@@ -5864,7 +5774,7 @@ msgstr "购买时间"
 
 #. ($currency, $max_daily_turnover_limit)
 #. ($currency, $max_daily_turnover)
-#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1112
+#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1111
 msgid "Purchase of this contract would cause you to exceed your daily turnover limit of %1%2."
 msgstr "采购此交易将使您超出了%1%2的每日交易额。"
 
@@ -5872,11 +5782,11 @@ msgstr "采购此交易将使您超出了%1%2的每日交易额。"
 msgid "Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money."
 msgstr "对您的盈利设置限额。一旦达到了限额就将部分金额存起来，用剩余的资金继续操作。"
 
-#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:307
+#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:281
 msgid "Quick 10%"
 msgstr "快速 10%"
 
-#: cgi/tick_trades.cgi:145 cgi/tick_trades.cgi:149 cgi/tick_trades.cgi:291
+#: cgi/tick_trades.cgi:119 cgi/tick_trades.cgi:123 cgi/tick_trades.cgi:265
 msgid "Quick 10% Trade"
 msgstr "快速 10%"
 
@@ -5998,8 +5908,8 @@ msgid "Reap the rewards of trading binaries, knowing your funds are always safe.
 msgstr "在知晓资金肯定安全之同时牟取二元期权交易回报。"
 
 #: cgi/templates/default/account/portfolio.tt:12
-#: cgi/templates/default/account/statement.tt:106
-#: cgi/templates/default/account/statement.tt:125
+#: cgi/templates/default/account/statement.tt:111
+#: cgi/templates/default/account/statement.tt:130
 msgid "Ref."
 msgstr "参考"
 
@@ -6092,15 +6002,15 @@ msgstr "重新加载页面"
 msgid "Remove Overlay"
 msgstr "删除覆盖"
 
-#: cgi/limits.cgi:46
+#: cgi/limits.cgi:36
 msgid "Represents the maximum amount of cash that you may hold in your account.  If the maximum is reached, you will be asked to withdraw funds."
 msgstr "表示您的账户中可持有的最高现金额度。如果达到该最高额度，将会要求您提取资金。"
 
-#: cgi/limits.cgi:59
+#: cgi/limits.cgi:49
 msgid "Represents the maximum number of outstanding contracts in your portfolio. Each line in your portfolio counts for one open position. Once the maximum is reached, you will not be able to open new positions without closing an existing position first."
 msgstr "表示您的投资组合中未清偿合约的最大数量。您投资组合中的每一行都算作是一个敞口头寸。一旦达到该最大值，在开设新的头寸之前您需要先结束一个现有头寸。"
 
-#: cgi/limits.cgi:51
+#: cgi/limits.cgi:41
 msgid "Represents the maximum volume of contracts that you may purchase in any given trading day."
 msgstr "表示任一给定交易日您可以购买的交易的最大数量。"
 
@@ -6249,10 +6159,6 @@ msgstr "风险免责声明"
 msgid "Russia"
 msgstr "俄罗斯"
 
-#: cgi/oop/Controller/Bet.pm:1933
-msgid "SOLD"
-msgstr "已售出"
-
 #: cgi/templates/default/bet/sell_success_ajax.tt:11
 msgid "Sale Price"
 msgstr "销售价格"
@@ -6317,7 +6223,7 @@ msgstr "选择要使用的支付方式，直接联系支付代理人了解关于
 msgid "Self-Exclusion Facilities"
 msgstr "自我排除工具"
 
-#: cgi/templates/default/account/statement.tt:40
+#: cgi/templates/default/account/statement.tt:42
 #: cgi/templates/default/backoffice/account/statement.tt:45
 msgid "Sell"
 msgstr "出售"
@@ -6498,9 +6404,21 @@ msgstr "消除随机噪声"
 msgid "Sorry you cannot buy/sell contracts"
 msgstr "抱歉您不能购买/出售合约。"
 
+#. ($client_to->loginid)
+#: cgi/paymentagent_transfer.cgi:99
+msgid "Sorry, $currency is not default currency for client "
+msgstr ""
+
+#. ($client_fm->loginid)
+#: cgi/paymentagent_transfer.cgi:98
+#, fuzzy
+#| msgid "Sorry, broker %1 does not allow transfers from payment agents."
+msgid "Sorry, $currency is not default currency for payment agent "
+msgstr "抱歉，经纪商 %1 不允许从付款代理处进行转账。"
+
 #. (localize('Tick Trades')
 #. (BOM::Platform::Context::localize('Tick Trades')
-#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:451
+#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:426
 msgid "Sorry, %1 are currently suspended"
 msgstr "抱歉，%1当前已暂停"
 
@@ -6586,22 +6504,21 @@ msgstr "对不起，该支付代理人不存在。"
 msgid "Sorry, the Payment Agent is unavailable for your region."
 msgstr "对不起，该支付代理人在您的区域不可用。"
 
+#. ($pa_client->currency . " is unavailable for Payment Agent Withdrawal")
+#: cgi/paymentagent_withdraw.cgi:145
+#, fuzzy
+#| msgid "Sorry, the Payment Agent does not exist."
+msgid "Sorry, the Payment Agent's currency "
+msgstr "对不起，该支付代理人不存在。"
+
 #. ($max_payout_limit, $currency, $client_agg_payouts, $payout)
-#: lib/BOM/Product/Transaction.pm:1033
+#: lib/BOM/Product/Transaction.pm:1032
 msgid "Sorry, the aggregate payouts of contracts on your account cannot exceed %2%1. The current aggregate payout of contracts on your account is %2%3 therefore you cannot buy a contract that would pay out an additional %2%4."
 msgstr "抱歉，您账户的%合约(复数）总交易额不能超过%2%1。您账户当前的%合约总交易额为%2%3所以您不能购买一份会购买交易额%2%4的%合约(单数) 。"
 
 #: cgi/subs/subs_runbets_execute.pm:523
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "抱歉，在交易时段最后一分钟内不能购买该 交易。"
-
-#: cgi/currency_converter.cgi:37
-msgid "Sorry, the currency amount to convert is incorrect."
-msgstr "对不起，要转换的货币金额不正确。"
-
-#: cgi/currency_converter.cgi:41 cgi/currency_converter.cgi:92
-msgid "Sorry, the currency amount to convert is too small."
-msgstr "对不起，要转换的货币金额过低。"
 
 #: cgi/paymentagent_transfer.cgi:96
 msgid "Sorry, the currency format is incorrect."
@@ -6620,11 +6537,7 @@ msgstr "抱歉，市场因假期关闭(%1)。"
 msgid "Sorry, the market is currently closed."
 msgstr "很抱歉，市场目前已经关闭。"
 
-#: cgi/currency_converter.cgi:159
-msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
-msgstr "对不起，每天最多允许进行 3 次货币转换。今天您已进行了"
-
-#: cgi/subs/subs_payments_withdrawals.pm:95
+#: cgi/subs/subs_payments_withdrawals.pm:87
 msgid "Sorry, the maximum amount you can convert is"
 msgstr "对不起，您可转换的最大金额为"
 
@@ -6632,7 +6545,7 @@ msgstr "对不起，您可转换的最大金额为"
 msgid "Sorry, the page cannot be found."
 msgstr "抱歉，无法找到页面。"
 
-#: lib/BOM/Product/Transaction.pm:999
+#: lib/BOM/Product/Transaction.pm:998
 msgid "Sorry, the same contract cannot be purchased more than once. You already have an identical contract in your account."
 msgstr "对不起，对同一合约的购买不能超过一次。您的帐户中已有相同合约。"
 
@@ -6644,11 +6557,6 @@ msgstr "对不起，要显示的数据太多，请选择较短的间隔时间"
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "很抱歉，我们的支付处理器在验证你的个人信息时出现了问题，请联系我们的客户服务。"
 
-#. ('10,000')
-#: cgi/currency_converter.cgi:47
-msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
-msgstr "对不起，要转换的货币金额过高。每个交易的最大金额为 %1"
-
 #: cgi/top_up_virtual.cgi:25
 msgid "Sorry, this feature is available to virtual accounts only"
 msgstr "对不起，此功能仅对虚拟帐户可用。"
@@ -6657,7 +6565,7 @@ msgstr "对不起，此功能仅对虚拟帐户可用。"
 msgid "Sorry, this page cannot be refreshed."
 msgstr "对不起，此页不能刷新。"
 
-#: cgi/subs/subs_payments_withdrawals.pm:82
+#: cgi/subs/subs_payments_withdrawals.pm:74
 msgid "Sorry, withdrawals cannot be made on the day of your account opening. Please wait until tomorrow to make a withdrawal."
 msgstr "对不起，在您开户当日不能提款。请明天再提款。"
 
@@ -6665,17 +6573,13 @@ msgstr "对不起，在您开户当日不能提款。请明天再提款。"
 msgid "Sorry, you are too young to open an account."
 msgstr "对不起，您的年龄太小，不可以开设帐户。"
 
-#: cgi/currency_converter.cgi:128
-msgid "Sorry, you cannot convert"
-msgstr "对不起，您不能转换"
-
 #. ($max_open_positions_limit)
-#: lib/BOM/Product/Transaction.pm:1017
+#: lib/BOM/Product/Transaction.pm:1016
 msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please sell some of your existing contracts before buying any more."
 msgstr "对不起，在给定时间内您不可持有超过 %1 的合约。请在购买更多合约之前出售一些现有合约。"
 
-#: cgi/subs/subs_payments_withdrawals.pm:104
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:96
 msgid "Sorry, you cannot withdraw."
 msgstr "对不起，您不能提款。"
 
@@ -6695,30 +6599,30 @@ msgid "Sorry, you have entered an incorrect email address."
 msgstr "对不起，您输入的电邮地址不正确。"
 
 #. (to_monetary_number_format($limits->daily->payout_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1201
+#: lib/BOM/Product/Transaction.pm:1200
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 on %2 which is the maximum daily PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "很抱歉，您已经超出了 %2 的边界交易每日收益额%1美元，其为每日最大允许收益额。请制订标的不同的交易或降低您的交易额。"
 
 #. (to_monetary_number_format($limits->daily->payout)
-#: lib/BOM/Product/Transaction.pm:1225
+#: lib/BOM/Product/Transaction.pm:1224
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 which is the maximum daily PAYOUT allowed. Please choose on a different type of contract or lower your stake."
 msgstr "很抱歉，您已经超出了边界交易每日收益额%美元，其为每日最大允许收益额。请选择一种不同类型的交易或降低您的交易额。"
 
 #. (to_monetary_number_format($limits->daily->turnover_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1190
+#: lib/BOM/Product/Transaction.pm:1189
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 on %2 which is the maximum daily turnover allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "很抱歉，您已经超出了 %2 的边界交易每日交易额%1美元，其为每日最大允许交易额。请制订标的不同的交易或降低您的交易额。"
 
 #. (to_monetary_number_format($limits->daily->turnover)
-#: lib/BOM/Product/Transaction.pm:1215
+#: lib/BOM/Product/Transaction.pm:1214
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 which is the maximum daily turnover allowed. Please choose on a different type of contract or lower your stake."
 msgstr "很抱歉，您已经超出了边界交易每日交易额%1美元 ，其为每日最大允许交易额。请选择一种不同类型的交易或降低您的交易额。"
 
-#: cgi/paymentagent_transfer.cgi:159 cgi/paymentagent_withdraw.cgi:276
+#: cgi/paymentagent_transfer.cgi:160 cgi/paymentagent_withdraw.cgi:286
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "对不起，您已超过今日允许的最大交易。"
 
-#: cgi/paymentagent_transfer.cgi:151 cgi/paymentagent_withdraw.cgi:248
+#: cgi/paymentagent_transfer.cgi:152 cgi/paymentagent_withdraw.cgi:258
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "对不起，您已超过今日允许的最大转帐金额。"
 
@@ -6728,16 +6632,16 @@ msgstr "对不起，您已超过今日允许的最大转帐金额。"
 msgid "Sorry, you have excluded yourself from the website until %1."
 msgstr "对不起，网页拒绝您的访问，除非%1。"
 
-#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:219
+#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:193
 msgid "Sorry, you have lost the contract."
 msgstr "很抱歉，您已输掉该交易。"
 
-#: cgi/top_up_virtual.cgi:64
+#: cgi/top_up_virtual.cgi:59
 msgid "Sorry, you have open positions. Please close out all open positions before requesting additional funds."
 msgstr "在请求额外资金前，请关闭所有敞口头寸。"
 
 #. ($min_with_currency)
-#: cgi/top_up_virtual.cgi:52
+#: cgi/top_up_virtual.cgi:47
 msgid "Sorry, your account balance is more than %1. You may not claim extra funds until such time as your account balance drops under %1."
 msgstr "在您的帐户余额低于下列金额之前，您不可要求额外资金："
 
@@ -6747,7 +6651,7 @@ msgid "Sorry, your account balance of %1 %2 is insufficient"
 msgstr "很抱歉，您的 %2  账户余额 %1 不足。"
 
 #. ("$currency$balance",                to_monetary_number_format($account_balance_limit, 1)
-#: lib/BOM/Product/Transaction.pm:941
+#: lib/BOM/Product/Transaction.pm:940
 msgid "Sorry, your account cash balance is too high (%1). <B>Your maximum account balance is %2 </b>. Please withdraw money from your account to bring down your cash balance under that amount. You may not trade until you do so."
 msgstr "对不起，您的帐户现金余额过高 (%1)。<B>您帐户最大余额是%2</b>。请从您的帐户中提款以使现金余额降至该金额以下。在此之前您不能交易。"
 
@@ -6759,9 +6663,16 @@ msgstr "对不起，您的帐户正在进行上次未完成的交易。如果此
 msgid "Sorry, your account has got stuck in a previous transaction that did not complete. If this error persists, please contact customer support."
 msgstr "对不起，您的帐户正在进行上次未完成的交易。如果此错误持续出现，请联系客服支援部。"
 
-#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:902
+#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:901
 msgid "Sorry, your account is not authorised for any further contract purchases."
 msgstr "很抱歉，您的账户未授权进一步购买任何合约。"
+
+#. ($client->currency . ' is unavailable for Payment Agent Withdrawal')
+#: cgi/paymentagent_withdraw.cgi:139
+#, fuzzy
+#| msgid "Sorry, you cannot sell"
+msgid "Sorry, your currency of "
+msgstr "对不起，您不能出售"
 
 #: cgi/emailus.cgi:142
 msgid "Sorry, your file is too large. The maximum file size is 1 Megabyte (1MB)."
@@ -6791,7 +6702,7 @@ msgstr "现货价格"
 msgid "Spread"
 msgstr "差价"
 
-#: cgi/tick_trades.cgi:275 frontend/templates/get_started/glossary.html.haml:1
+#: cgi/tick_trades.cgi:249 frontend/templates/get_started/glossary.html.haml:1
 #: lib/BOM/Product/Model/ContractForm.pm:652
 msgid "Stake"
 msgstr "资金"
@@ -6854,7 +6765,8 @@ msgstr "（开始时间）"
 msgid "State/Province"
 msgstr "州/省"
 
-#: cgi/statement.cgi:18 cgi/statement.cgi:88 cgi/statement.cgi:90
+#: cgi/statement.cgi:18 cgi/statement.cgi:86
+#: cgi/templates/default/account/statement.tt:101
 #: cgi/templates/default/homepage/logged_in.tt:61 lib/BOM/View/Menu.pm:75
 msgid "Statement"
 msgstr "报表"
@@ -6867,15 +6779,15 @@ msgstr "静态内容"
 msgid "Statistic"
 msgstr "统计"
 
-#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:315
+#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:289
 msgid "Statistics"
 msgstr "统计"
 
-#: cgi/tick_trades.cgi:209 cgi/tick_trades.cgi:319
+#: cgi/tick_trades.cgi:183 cgi/tick_trades.cgi:293
 msgid "Statistics that help."
 msgstr "有帮助的统计。"
 
-#: cgi/tick_trades.cgi:311
+#: cgi/tick_trades.cgi:285
 msgid "Stats"
 msgstr "统计"
 
@@ -6975,10 +6887,6 @@ msgstr "在您遵守公司指示的前提下，对于通过您网站链接或在
 #: cgi/subs/subs_forms.pm:4076
 msgid "Submit"
 msgstr "提交"
-
-#: cgi/currency_converter.cgi:208
-msgid "Success"
-msgstr "成功"
 
 #: cgi/templates/default/legal/copyright.tt:12
 msgid "Such materials may be copied and distributed on a limited basis for noncommercial purposes only, provided that any material copied remains intact and that all copies include the following notice in a clearly visible position: &ldquo;Copyright 1999-2014 Regent Markets Group. All rights reserved.&rdquo;"
@@ -7155,7 +7063,7 @@ msgstr "％1 所模拟的市场，在白天很活跃（但在晚间较稳定）�
 
 #. ($website->display_name)
 #. (request()
-#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:388
+#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:398
 msgid "The %1 team."
 msgstr "%1 团队。"
 
@@ -7467,7 +7375,7 @@ msgstr "对于超过 24 个月无交易记录的所有客户账户，本公司�
 msgid "The content on this website is subject to change at any time without notice and is provided for the sole purpose of assisting traders in making independent investment decisions.  %1 has taken reasonable measures to ensure the accuracy of the information on the website, however, the company does not guarantee its accuracy and will not accept liability for any loss or damage which may arise directly or indirectly from the content or your inability to access the website, for any delay in or failure of the transmission or the receipt of any instruction or notification sent through this website."
 msgstr "网站上的内容可在任何时候不经通知发生改变，仅为了帮助交易员做出独立的投资决策的目的。%1 采取了合理措施确保网站信息的准确性，但是公司并不保证准确性，也不为因网站内容及你无法登陆网站导致的任何直接或间接损失或损害或延迟或未能通过网站传输或收到任何指示和通知而承担责任。"
 
-#: lib/BOM/Product/Transaction.pm:644
+#: lib/BOM/Product/Transaction.pm:651
 msgid "The contract has expired"
 msgstr "该交易已失效"
 
@@ -7481,7 +7389,7 @@ msgid "The contract must expire on a trading day."
 msgstr "该合约必须在交易日失效。"
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:687
+#: lib/BOM/Product/Transaction.pm:694
 msgid "The contract payout has changed from %1%2 to %1%3."
 msgstr "合同支出已从%1%2 改成 %1%3。"
 
@@ -7490,7 +7398,7 @@ msgid "The contract period is the timeframe of a trade. It is also called the du
 msgstr "合约时期是一个交易的时间框位。也称为期间。"
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:680
+#: lib/BOM/Product/Transaction.pm:687
 msgid "The contract price has changed from %1%2 to %1%3."
 msgstr "合同价格已从从 %1%2 变为 %1%3。"
 
@@ -7498,7 +7406,7 @@ msgstr "合同价格已从从 %1%2 变为 %1%3。"
 msgid "The cost of your open positions"
 msgstr "您的敞口头寸成本"
 
-#: cgi/subs/subs_homepage.pm:142 cgi/subs/subs_homepage.pm:171
+#: cgi/subs/subs_homepage.pm:135
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "您奖金的货币类型将与您首次存款的货币类型相同。"
 
@@ -7687,8 +7595,15 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "利润即赢利交易中所得之获利和购买价格（成本）之间的差别。"
 
 #. ($currency)
-#: lib/BOM/Product/Transaction.pm:466
+#: lib/BOM/Product/Transaction.pm:473
 msgid "The provided currency %1 is invalid."
+msgstr "所提供的货币%1无效。"
+
+#. ($currency)
+#: lib/BOM/Product/Transaction.pm:465
+#, fuzzy
+#| msgid "The provided currency %1 is invalid."
+msgid "The provided currency %1 is not the default currency"
 msgstr "所提供的货币%1无效。"
 
 #. ($email)
@@ -7748,7 +7663,7 @@ msgstr "通过本网站完成的交易以及客户和本公司之间的关系由
 msgid "The two passwords that you entered do not match."
 msgstr "两次输入的密码不匹配。"
 
-#: lib/BOM/Product/Transaction.pm:674
+#: lib/BOM/Product/Transaction.pm:681
 msgid "The underlying market has moved too much since you priced the contract. "
 msgstr "自从您为交易定价后，标的市场已发生太大变化。"
 
@@ -7773,7 +7688,13 @@ msgstr "您的国家(%1)无可用支付代理人。"
 msgid "There are no available Payment Agents."
 msgstr "无可用支付代理人。"
 
-#: cgi/templates/default/account/statement.tt:101
+#: cgi/templates/default/backoffice/account/profit_table.tt:71
+#, fuzzy
+#| msgid "There are no items during this period"
+msgid "There are no contracts during this period"
+msgstr "此期间内无项目"
+
+#: cgi/templates/default/account/statement.tt:106
 #: cgi/templates/default/backoffice/account/statement.tt:21
 msgid "There are no items during this period"
 msgstr "此期间内无项目"
@@ -7805,8 +7726,8 @@ msgstr "在验证您地址的时候出现了问题。请修改提示字段。如
 msgid "There was an error and we were unable to process your request."
 msgstr "出现错误，我们无法处理您的请求。"
 
-#: cgi/paymentagent_transfer.cgi:108 cgi/paymentagent_transfer.cgi:112
-#: cgi/paymentagent_withdraw.cgi:144 cgi/paymentagent_withdraw.cgi:172
+#: cgi/paymentagent_transfer.cgi:110 cgi/paymentagent_transfer.cgi:114
+#: cgi/paymentagent_withdraw.cgi:155 cgi/paymentagent_withdraw.cgi:183
 msgid "There was an error processing the request."
 msgstr "处理请求时出错。"
 
@@ -7863,11 +7784,11 @@ msgstr "本协议从公司通知您加入公司联盟项目的申请成功时起
 msgid "This Document"
 msgstr "本文档"
 
-#: cgi/paymentagent_withdraw.cgi:184
+#: cgi/paymentagent_withdraw.cgi:195
 msgid "This Payment Agent cashier section is locked."
 msgstr "此支付代理人的出纳部分已锁定。"
 
-#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:73
+#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:68
 msgid "This URL is invalid."
 msgstr "此 URL 无效。"
 
@@ -7888,11 +7809,11 @@ msgstr "此奖金代码不可用。"
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr "这个调用会返回相同的JSON结构，可以从API控制台设备进行预览。"
 
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:110
 msgid "This client cashier section is locked."
 msgstr "此客户的出纳部分已锁定。"
 
-#: lib/BOM/Product/Transaction.pm:759
+#: lib/BOM/Product/Transaction.pm:766
 msgid "This contract cannot be properly validated at this time."
 msgstr "此时该  交易 无法正确生效。"
 
@@ -7913,7 +7834,7 @@ msgid "This contract has expired."
 msgstr "此交易已失效。"
 
 #. (to_monetary_number_format($custom_limit)
-#: lib/BOM/Product/Transaction.pm:844
+#: lib/BOM/Product/Transaction.pm:843
 msgid "This contract is limited to "
 msgstr "此交易只限于"
 
@@ -7921,7 +7842,7 @@ msgstr "此交易只限于"
 msgid "This contract is no longer offered."
 msgstr "该合约不再出售。 "
 
-#: lib/BOM/Product/Transaction.pm:842
+#: lib/BOM/Product/Transaction.pm:841
 msgid "This contract is unavailable on this account."
 msgstr "此帐户不可使用该交易。"
 
@@ -7929,7 +7850,7 @@ msgstr "此帐户不可使用该交易。"
 msgid "This contract offers no return."
 msgstr "该合约没有回利。 "
 
-#: lib/BOM/Product/Transaction.pm:1445
+#: lib/BOM/Product/Transaction.pm:1444
 msgid "This contract was not found among your open positions."
 msgstr "在您的敞口头寸中未找到该交易。"
 
@@ -7960,7 +7881,7 @@ msgstr "这是虚拟货币帐户。请点击 <a class=\"pjaxload\" href=\"%1\">�
 msgid "This is an automated message to alert you to the fact that there was a failed attempt to unlock the Cashier/Settings section of your account %1 from IP address %2"
 msgstr "这是一个自动消息，提醒您下列情况：有一个来自 IP 地址 %2 的失败尝试，试图解除您帐户 %1的出纳/设置部分锁定"
 
-#: cgi/oop/Controller/Bet.pm:2201 cgi/templates/default/bet/form/barrier.tt:23
+#: cgi/oop/Controller/Bet.pm:2200 cgi/templates/default/bet/form/barrier.tt:23
 #: cgi/templates/default/bet/form/barrier.tt:42
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "这是一个指示性的界线。实际的界线将是进入点加界线抵消。"
@@ -8059,7 +7980,7 @@ msgstr "计价中枢"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:78
-#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:448
+#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:423
 #: frontend/templates/get_started/types_of_trades.html.haml:1
 #: frontend/templates/layouts/default/footer.html.haml:1
 #: lib/BOM/View/Menu.pm:220
@@ -8081,9 +8002,9 @@ msgid "Tick trades"
 msgstr "Tick 交易"
 
 #: cgi/oop/Controller/Bet.pm:1124 cgi/oop/Controller/Bet.pm:1131
-#: cgi/templates/default/account/statement.tt:45
+#: cgi/templates/default/account/statement.tt:47
 #: cgi/templates/default/backoffice/account/statement.tt:49
-#: cgi/tick_trades.cgi:255
+#: cgi/tick_trades.cgi:229
 msgid "Ticks"
 msgstr "跳动点"
 
@@ -8129,15 +8050,11 @@ msgstr "如需更改姓名、生日或居住国，请与客户支持部门联系
 msgid "To continue using our cashier system, please try accessing it again:"
 msgstr "继续使用我们的收银系统，请再次访问："
 
-#: cgi/templates/default/account/currency_converter.tt:9
-msgid "To convert money between the different currencies in your account, please use the form below."
-msgstr "要在您帐户中的不同货币之间进行转换，请使用下表。"
-
 #: cgi/templates/default/misc/logintrouble.tt:6
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "要启用 cookie，请按下面符合您浏览器版本的指示说明进行操作。"
 
-#: cgi/subs/subs_clientdetails.pm:157
+#: cgi/subs/subs_clientdetails.pm:133
 msgid "To fully authenticate your account, please email scanned copies of the document listed below."
 msgstr "为了充分验证您的账户，请将下面列示的文件扫描件以电子邮件发送过来。"
 
@@ -8376,7 +8293,7 @@ msgstr "账户转账%1"
 msgid "Transfer from another account"
 msgstr "从其他账户转账"
 
-#: cgi/paymentagent_withdraw.cgi:195
+#: cgi/paymentagent_withdraw.cgi:206
 msgid "Transfer to"
 msgstr "转到："
 
@@ -8419,7 +8336,7 @@ msgstr "三角"
 msgid "Triangular moving averages place the majority of the weight on the middle portion of the price series. They are actually double-smoothed simple moving averages. The periods used in the simple moving averages varies depending on if you specify an odd or even number of time periods."
 msgstr "三重移动平均数主要着重价格系列的中间部分。它们实际是双重平滑简单移动平均数。取决于您指定的期间是奇数数量还是偶数数量，简单移动平均数中使用的期间各不相同。"
 
-#: cgi/tick_trades.cgi:525
+#: cgi/tick_trades.cgi:500
 msgid "Troubleshooting"
 msgstr "故障排除"
 
@@ -8459,7 +8376,7 @@ msgstr "英国股票"
 msgid "UK and Manx residents will have their account opened with Regent Markets (IOM) Ltd."
 msgstr "英国和曼岛居民在Regent Markets (IOM) 有限责任公司开设账户。"
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "UP"
 msgstr "上升"
 
@@ -8531,14 +8448,6 @@ msgstr "更新"
 #: cgi/subs/subs_forms.pm:3627
 msgid "Update Settings"
 msgstr "更新设置"
-
-#: cgi/register-api.cgi:146
-msgid "Update failed.  Request support."
-msgstr "更新失败。请求支援。"
-
-#: cgi/register-api.cgi:149
-msgid "Update successful"
-msgstr "更新成功"
 
 #: cgi/templates/default/global/header.tt:9
 #: frontend/templates/layouts/default/topbar.html.haml:1
@@ -8623,11 +8532,11 @@ msgstr "在一系列的市场中查看上升/下跌合同价格。"
 msgid "View Trading Times"
 msgstr "查看交易时间"
 
-#: cgi/top_up_virtual.cgi:94 cgi/top_up_virtual.cgi:95
+#: cgi/top_up_virtual.cgi:89 cgi/top_up_virtual.cgi:90
 msgid "View Updated Portfolio"
 msgstr "查看更新的组合"
 
-#: cgi/subs/subs_payments_withdrawals.pm:114
+#: cgi/subs/subs_payments_withdrawals.pm:106
 msgid "View and increase your"
 msgstr "查看和增加您的"
 
@@ -8659,11 +8568,7 @@ msgstr "查看进展"
 msgid "View result"
 msgstr "查看结果"
 
-#: cgi/currency_converter.cgi:221
-msgid "View statement"
-msgstr "查看报表。"
-
-#: cgi/tick_trades.cgi:243
+#: cgi/tick_trades.cgi:217
 msgid "View statement."
 msgstr "查看报表。"
 
@@ -8684,7 +8589,7 @@ msgstr "查看您的交易历史纪录。"
 msgid "View your open positions."
 msgstr "查看您的敞口头寸。"
 
-#: cgi/paymentagent_transfer.cgi:244 cgi/paymentagent_withdraw.cgi:367
+#: cgi/paymentagent_transfer.cgi:245 cgi/paymentagent_withdraw.cgi:377
 msgid "View your statement"
 msgstr "查看您的报表。"
 
@@ -8739,10 +8644,6 @@ msgstr "我们在不列颠群岛及马耳他已获得全面授权。"
 #: cgi/subs/subs_forms.pm:410
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "目前不接受来自该国居民的帐户。"
-
-#: cgi/currency_converter.cgi:107
-msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
-msgstr "对不起，如果您曾使用信用卡/借记卡存钱到您的帐户段，我们不允许转换。"
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:176
@@ -8814,7 +8715,9 @@ msgid "We were unable to recover your Login ID or Password with the provided inf
 msgstr "我们无法根据您提供的信息找回您的登录 ID 或密码。<a href=\"%1\">返回“找回密码”页面</a>，或<a href=\"%2\"><strong>联系我们</strong></a>获取进一步帮助。"
 
 #: cgi/subs/subs_clientdetails.pm:112
-msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+#, fuzzy
+#| msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
 msgstr "我们未能通过在线验证程序验证您的身份和您的住址。然而，您仍可将下列文件邮寄给我们以验证您的帐户。"
 
 #. (site_name)
@@ -8832,7 +8735,7 @@ msgid "We will send you an e-mail asking you to verify your identity. If you don
 msgstr "我们将发送一封电子邮件给您，要求您验证身份。如果在几分钟内您未收到我们要求您重新设置的电子邮件，请检查您的垃圾/广告邮件夹。"
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_transfer.cgi:251
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -8851,7 +8754,7 @@ msgstr ""
 "%7队"
 
 #. ($currency, $amount, $client_name, $client_loginid, $paymentagent_loginid, $website->display_name)
-#: cgi/paymentagent_withdraw.cgi:382
+#: cgi/paymentagent_withdraw.cgi:392
 msgid "We would like to inform you that the withdrawal request of %1%2 by %3 %4 has been processed. The funds have been credited into your account %5 at %6."
 msgstr "我们向您通知，您%3%4作出的%1%2提款请求已经得到处理。资金已经计入您在%6的%5账户。"
 
@@ -8921,7 +8824,7 @@ msgstr "基于一天价格变动除以当天范围计算加权交易量指标。
 msgid "Welcome!"
 msgstr "欢迎!"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:441
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
 msgid "Western Union"
 msgstr "西联快汇"
 
@@ -9164,7 +9067,7 @@ msgstr "有了当前的ACCESS_TOKEN，现在可以调用API服务。此调用看
 msgid "With payouts from $1 to $100,000, we have you covered."
 msgstr "目标收入介于 1 美元至 100,000 美元。"
 
-#: cgi/templates/default/account/statement.tt:140
+#: cgi/templates/default/account/statement.tt:145
 #: cgi/templates/default/cashier/available_payment_methods.tt:19
 msgid "Withdraw"
 msgstr "提款"
@@ -9236,8 +9139,8 @@ msgstr "提款：%1工作日内"
 msgid "Withdraw: Not applicable"
 msgstr "提款 : 不适用"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
 #: lib/BOM/Platform/Model/Payment.pm:155
 msgid "Withdrawal"
 msgstr "提款"
@@ -9247,7 +9150,7 @@ msgstr "提款"
 msgid "Withdrawal amount (%1 %2) is greater than your balance (%3 %4)."
 msgstr "提款金额 (%1 %2) 大于您的余额 (%3 %4)。"
 
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:144
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:136
 #: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:94
 msgid "Withdrawal amount exceeds your limits."
 msgstr "提款金额超出您的极限。"
@@ -9266,7 +9169,7 @@ msgstr "提款限额"
 msgid "Withdrawal using legacy method: %1"
 msgstr "使用传统方法提款: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Withdrawal via BACS"
 msgstr "通过BACS提款"
@@ -9275,7 +9178,7 @@ msgstr "通过BACS提款"
 msgid "Withdrawal via Bank Transfer"
 msgstr "通过银行转账提款"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Withdrawal via Credit/Debit card"
 msgstr "信用卡/借记卡提款"
@@ -9284,7 +9187,7 @@ msgstr "信用卡/借记卡提款"
 msgid "Withdrawal via DoughFlow"
 msgstr "通过DoughFlow提款"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Withdrawal via Western Union"
 msgstr "通过西联汇款提款(MTCN: %1)"
 
@@ -9293,7 +9196,7 @@ msgstr "通过西联汇款提款(MTCN: %1)"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "通过西联汇款提款(MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "通过银行电汇提款"
@@ -9345,7 +9248,7 @@ msgstr "您还有权要求我们告知您我们处理的有关您的个人信息
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "您与我们都为独立订约人，本协议的任何规定均不得建立双方之间任何合作伙伴关系、合资、代理、特许经营、销售代表或雇佣关系。您无权代表我方做出或接受任何要约或陈述。您不得作出有理由认为与本条内容不一致的声明（无论在您的网站上）。"
 
-#: cgi/oop/Controller/Bet.pm:1973
+#: cgi/oop/Controller/Bet.pm:1972
 msgid "You are being given the better price."
 msgstr "正在为您获取更好的价格。"
 
@@ -9394,6 +9297,12 @@ msgstr "您可以在任何时间卖出您的长线交易合约，根据市场变
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "您可设定交易期，从10 秒至 365 天。"
 
+#: cgi/subs/subs_clientdetails.pm:114
+#, fuzzy
+#| msgid "To fully authenticate your account, please email scanned copies of the document listed below."
+msgid "You can still authenticate your account by sending us scans of the following documents by email"
+msgstr "为了充分验证您的账户，请将下面列示的文件扫描件以电子邮件发送过来。"
+
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You can trade a range of markets, timescales and indices – 24/7."
 msgstr "您可全天候参与广泛市场，时间层次和指数的交易。"
@@ -9404,7 +9313,7 @@ msgid "You can try another <a href=\"%1\">payment option</a> or for additional a
 msgstr "您可尝试其它 <a href=\"[%1\">支付选项</a>，或寻求其它帮助："
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:105
+#: cgi/paymentagent_transfer.cgi:107
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "您不能转帐至帐户%1，因为此帐户目前禁用。"
 
@@ -9453,11 +9362,7 @@ msgstr "自您开账户以来，您已经提取的金额总计相等于EUR %1。
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "您已经提取的金额相等于EUR %1。"
 
-#: cgi/subs/subs_homepage.pm:139
-msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
-msgstr "您已经购入了总买价为红利额五倍的交易。"
-
-#: cgi/subs/subs_homepage.pm:158
+#: cgi/subs/subs_homepage.pm:123
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "您已经购入了总买价为红利额五倍的交易。"
 
@@ -9471,8 +9376,8 @@ msgstr "您已输入一个无效 IP 地址。"
 msgid "You have entered an invalid login ID"
 msgstr "您已输入一个无效登录 ID"
 
-#: lib/BOM/Product/Transaction.pm:1087 lib/BOM/Product/Transaction.pm:1354
-#: lib/BOM/Product/Transaction.pm:1382 lib/BOM/Product/Transaction.pm:1416
+#: lib/BOM/Product/Transaction.pm:1086 lib/BOM/Product/Transaction.pm:1353
+#: lib/BOM/Product/Transaction.pm:1381 lib/BOM/Product/Transaction.pm:1415
 msgid "You have exceeded the daily limit for contracts of this type."
 msgstr "您没有以本货币购买任何交易。"
 
@@ -9522,10 +9427,6 @@ msgstr "您不得购买或注册关键词、搜索字词或与公司任何商标
 msgid "You may only open an account at this site on condition that:"
 msgstr "您只能在下列条件下在本网站开设账户："
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "You may purchase contracts in any of these currencies."
-msgstr "您可以这些货币的任何之一购买交易。"
-
 #: cgi/templates/default/legal/promocode.tt:25
 msgid "You may withdraw the Y deposited to claim the bonus and any winnings generated by the bonus at any time."
 msgstr "您可以随时提取存入的Y，用于请求红利以及由该红利在任何时间产生的赢款。"
@@ -9542,7 +9443,7 @@ msgstr "您必须已经在 Binary.com 拥有有效的“真实金钱帐户”。
 msgid "You must be logged in to use the workspace feature.Account opening is free and takes only 30 seconds."
 msgstr "你必须登录后使用工作区功能。账户将免费打开，只需要30秒。"
 
-#: cgi/register-api.cgi:40
+#: cgi/register-api.cgi:36
 msgid "You must have a valid 'real' money account before registering as an API Developer"
 msgstr "注册为API开发者前，您必须已经拥有有效的“真实”金钱帐户"
 
@@ -9630,13 +9531,8 @@ msgstr "您正在使用虚拟账户。"
 msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 in other currency)."
 msgstr "您的%1天提款限额目前为<strong>EUR %2</strong>（或其他货币为 %3）。"
 
-#. ($min_deposit)
-#: cgi/subs/subs_homepage.pm:137
-msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
-msgstr "您的<strong>首次</strong>充值额都等于或高于以任何货币表示的%1，且"
-
 #. ($currency_label, $min_deposit)
-#: cgi/subs/subs_homepage.pm:156
+#: cgi/subs/subs_homepage.pm:121
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "您的<strong>首次</strong>充值额等于或高于%1%2，且"
 
@@ -9669,17 +9565,17 @@ msgstr "您的登录 ID 不应包含空格。"
 msgid "Your Public Key"
 msgstr "您的公众钥匙"
 
-#: cgi/currency_converter.cgi:131 cgi/subs/subs_payments_withdrawals.pm:107
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:99
 msgid "Your account balance"
 msgstr "您的帐户余额"
 
 #. ($currency,                to_monetary_number_format($balance)
-#: lib/BOM/Product/Transaction.pm:952
+#: lib/BOM/Product/Transaction.pm:951
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "您的账户余额(%1%2)不足以买入该交易 (%1%3)。"
 
-#: cgi/subs/subs_clientdetails.pm:168
+#: cgi/subs/subs_clientdetails.pm:144
 msgid "Your account does not require authentication at this time."
 msgstr "现时您的账户不需要认证。"
 
@@ -9695,7 +9591,7 @@ msgstr "您的账户已被计入<strong>%1 %2</strong>"
 msgid "Your account has been debited with %1 %2"
 msgstr "您的帐户已借记了 %1 %2"
 
-#: lib/BOM/Product/Transaction.pm:1326
+#: lib/BOM/Product/Transaction.pm:1325
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
 msgstr "您的帐户已超过免费推广代码的交易限制，如果要继续交易，请存款。"
 
@@ -9713,11 +9609,11 @@ msgid "Your account is fully authenticated and your withdrawal limit of EUR %1 h
 msgstr "您的账户已经得到完全验证，且您EUR %1 的取款限额已经取消。"
 
 #. (request()
-#: cgi/subs/subs_clientdetails.pm:83
+#: cgi/subs/subs_clientdetails.pm:84
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
 msgstr "您的账户已经得到完全验证，且您 <a href=\"%1\">% 的取款限额已经取消</a>。"
 
-#: cgi/subs/subs_clientdetails.pm:151
+#: cgi/subs/subs_clientdetails.pm:127
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
 msgstr "您的账户完全可用，您可以开始充值并买入交易。"
 
@@ -9739,14 +9635,6 @@ msgstr "您的帐户于%1下注册。"
 msgid "Your account is restricted to withdrawals only."
 msgstr "您的帐户只限于提款。"
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "Your account may hold the following currencies"
-msgstr "帐户可持有下列货币"
-
-#: cgi/currency_converter.cgi:210
-msgid "Your account statement has been updated accordingly."
-msgstr "您的帐户报表已相应更新。"
-
 #: cgi/oop/Validation/Transaction/Payment/Deposit.pm:45
 msgid "Your balance is over your allowed limit."
 msgstr "您的余额已超过允许的限制。"
@@ -9760,15 +9648,15 @@ msgstr "您对所有API来电的基本网址"
 msgid "Your bonus request - %1"
 msgstr "您的奖励要求- %1"
 
-#: cgi/subs/subs_homepage.pm:133 cgi/subs/subs_homepage.pm:152
+#: cgi/subs/subs_homepage.pm:117
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "您的奖金将在满足下列条件后的 3 个工作日内计入您的帐户："
 
-#: cgi/subs/subs_homepage.pm:166
+#: cgi/subs/subs_homepage.pm:130
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "您的奖金将在您以等于或大于奖金额的总买价买入交易后的3个工作日内贷记到您的账户。"
 
-#: cgi/subs/subs_homepage.pm:175
+#: cgi/subs/subs_homepage.pm:139
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "您的奖金将在3个工作日内贷记至您的账户。"
 
@@ -9784,7 +9672,7 @@ msgstr "您的出纳已被密码锁定。"
 msgid "Your cashier is locked."
 msgstr "您的出纳已被锁定。"
 
-#: cgi/paymentagent_transfer.cgi:112
+#: cgi/paymentagent_transfer.cgi:114
 msgid "Your cashier section is locked."
 msgstr "您的出纳部分已被锁定。"
 
@@ -9839,7 +9727,7 @@ msgstr "您的姓名"
 msgid "Your name/company"
 msgstr "您的姓名/公司"
 
-#: cgi/oop/Controller/Bet.pm:1930
+#: cgi/oop/Controller/Bet.pm:1932
 msgid "Your new account balance is %s %s"
 msgstr "您的新帐户余额为 %s %s"
 
@@ -9848,7 +9736,7 @@ msgid "Your old password is incorrect"
 msgstr "您的旧密码不正确"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:1978
+#: cgi/oop/Controller/Bet.pm:1977
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "您的订单 (参考 # <span id=\"参考_编号\">%1</span>)已经于%2生效。"
 
@@ -9898,11 +9786,11 @@ msgstr "您的个人信息主要用于确认您是账户的合法所有人和提
 msgid "Your phone number"
 msgstr "您的电话号码"
 
-#: cgi/tick_trades.cgi:259
+#: cgi/tick_trades.cgi:233
 msgid "Your prediction"
 msgstr "您的预测"
 
-#: cgi/tick_trades.cgi:263
+#: cgi/tick_trades.cgi:237
 msgid "Your prediction, the market will move :"
 msgstr "您的预测，市场将会变动："
 
@@ -9911,12 +9799,12 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "您撤消委托书的请求已收到。请等待 2 个工作日让我们处理此请求。"
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:239
+#: cgi/paymentagent_transfer.cgi:240
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "您从 %3 转帐%1%2到 %4 的请求已成功处理。"
 
 #. ($currency, $amount, $client_loginid, $paymentagent->payment_agent_name)
-#: cgi/paymentagent_withdraw.cgi:362
+#: cgi/paymentagent_withdraw.cgi:372
 msgid "Your request to withdraw %1 %2 from your account %3 to Payment Agent %4 account has been successfully processed."
 msgstr "您从 %3 帐户提取 %1 %2 到支付代理人 %4帐户的请求已成功处理。"
 
@@ -9933,7 +9821,7 @@ msgid "Your settings have been updated successfully."
 msgstr "您的设置已成功更新。"
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1937
+#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1936
 msgid "Your transaction reference number is %1"
 msgstr "您的交易参考号是%1"
 
@@ -9971,7 +9859,7 @@ msgstr "限制您在特定时期内交易的金额。"
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "您可能在某一给定时间期限内遭受的损失限额;"
 
-#: cgi/subs/subs_clientdetails.pm:125 cgi/subs/subs_clientdetails.pm:161
+#: cgi/subs/subs_clientdetails.pm:137
 msgid "and"
 msgstr "以及"
 
@@ -10024,10 +9912,6 @@ msgstr "请与我们联系"
 msgid "contract start time"
 msgstr "合约开始时间"
 
-#: cgi/currency_converter.cgi:161
-msgid "conversions today.  Please try again tomorrow"
-msgstr "次转换。请明天重新尝试"
-
 #: cgi/subs/subs_BOMFeed_history.pm:384
 #: lib/BOM/Product/Model/ContractForm.pm:740
 msgid "days"
@@ -10061,11 +9945,11 @@ msgstr "入市现价加上%1"
 msgid "entry spot plus %plural(%1,1 pip, %d pips)"
 msgstr "入市现价加上%plural(%1,1 点, %d 点)"
 
-#: cgi/limits.cgi:128 cgi/limits.cgi:90 cgi/limits.cgi:95
+#: cgi/limits.cgi:109 cgi/limits.cgi:79 cgi/limits.cgi:84
 msgid "equivalent"
 msgstr "相当于"
 
-#: cgi/oop/Controller/Bet.pm:2010
+#: cgi/oop/Controller/Bet.pm:2009
 msgid "explanation"
 msgstr "说明"
 
@@ -10101,10 +9985,6 @@ msgstr "小时"
 msgid "hours"
 msgstr "小时"
 
-#: cgi/currency_converter.cgi:75
-msgid "is not available.  If this error persists, please email"
-msgstr "不可用。若此错误持续存在，请发送电子邮件至"
-
 #: cgi/templates/default/charting/light_chart.tt:7
 msgid "less"
 msgstr "减"
@@ -10121,7 +10001,7 @@ msgstr "价格下限"
 msgid "lower"
 msgstr "低于"
 
-#: cgi/tick_trades.cgi:469
+#: cgi/tick_trades.cgi:444
 #, fuzzy
 #| msgid "Multi award-winning trading platform."
 msgid "main trading platform"
@@ -10158,10 +10038,6 @@ msgstr "分钟"
 #: cgi/smartchart.cgi:304 cgi/subs/subs_BOMFeed_history.pm:433
 msgid "minutes"
 msgstr "分钟"
-
-#: cgi/register-api.cgi:105
-msgid "missing"
-msgstr "遗失的"
 
 #: cgi/templates/default/charting/light_chart.tt:8
 msgid "more"
@@ -10267,7 +10143,7 @@ msgstr "触及/未触及"
 msgid "trades"
 msgstr "交易"
 
-#: cgi/tick_trades.cgi:455
+#: cgi/tick_trades.cgi:430
 msgid "trading is suspended at the moment."
 msgstr "当前交易暂停。"
 
@@ -10292,7 +10168,7 @@ msgstr "此%1数据:"
 msgid "with this HTTP header"
 msgstr "此HTTP标题"
 
-#: cgi/subs/subs_payments_withdrawals.pm:117
+#: cgi/subs/subs_payments_withdrawals.pm:109
 msgid "withdrawal limits"
 msgstr "提款限额"
 
@@ -12111,6 +11987,141 @@ msgstr "对不起，通过此 IP 网络的访问已禁用，请联系「客户�
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "对不起，您的失败尝试次数过多。请5分钟后再尝试。"
 
+#~ msgid "%1 was converted to %2."
+#~ msgstr "%1 转换成%2。"
+
+#~ msgid "1. Verification of identity"
+#~ msgstr "1. 身份验证"
+
+#~ msgid "2. Proof of address"
+#~ msgstr "2. 地址证明"
+
+#~ msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
+#~ msgstr "<li>原始物业账单(最近3个月内) ; 或</li><li>原始银行/信用社/建筑协会/信用卡/借记卡对账单或存折（最近 3 个月内）。</li>"
+
+#~ msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
+#~ msgstr "<li>最新有效护照复印件; or</li><li>最新驾照复印件 (临时或永久)</li>"
+
+#~ msgid "An error occurred while processing request. If this error persists, please contact customer support."
+#~ msgstr "处理申请时发生错误。如果问题持续出现，请联系客服支援部。"
+
+#~ msgid "Application %1 has been registered.  Your new OAuth credentials are shown below"
+#~ msgstr "%1应用程序已经注册。您的新OAuth凭证显示如下"
+
+#~ msgid "Application Name data is invalid"
+#~ msgstr "应用程序名称信息无效"
+
+#~ msgid "Application cannot be registered.  Request support."
+#~ msgstr "应用程序无法注册。请求支援。"
+
+#~ msgid "Application not currently authorized"
+#~ msgstr "应用程序现时没权限进行活动"
+
+#~ msgid "Application not yet registered"
+#~ msgstr "应用程序未注册"
+
+#~ msgid "Callback URL data is invalid"
+#~ msgstr "回电网址信息无效"
+
+#~ msgid "Callback URL format is invalid"
+#~ msgstr "回电网址格式无效"
+
+#~ msgid "Cancellation failed"
+#~ msgstr "取消失败"
+
+#~ msgid "Cancellation successful"
+#~ msgstr "取消成功"
+
+#~ msgid "Cash Balance"
+#~ msgstr "现金余额"
+
+#~ msgid "Convert"
+#~ msgstr "转换"
+
+#~ msgid "Convert %1%2 to %3"
+#~ msgstr "转换 %1%2 为 %3"
+
+#~ msgid "Convert between your currency segment accounts"
+#~ msgstr "在您的货币段帐户之间转换"
+
+#~ msgid "Developer cannot be registered.  Request support."
+#~ msgstr "开发者无法注册。请求支援。"
+
+#~ msgid "Developer not yet registered"
+#~ msgstr "开发者还未注册"
+
+#~ msgid "Error: Both currencies are the same!  You must convert from one currency to another."
+#~ msgstr "错误：两种货币相同！您必须从一种货币转换为另一种货币。"
+
+#~ msgid "Error: The exchange rate for"
+#~ msgstr "错误：...的汇率"
+
+#~ msgid "Limit</strong><br>(per currency)"
+#~ msgstr "限制</strong><br>（按货币）"
+
+#~ msgid "Note:"
+#~ msgstr "附注："
+
+#~ msgid "SOLD"
+#~ msgstr "已售出"
+
+#~ msgid "Sorry, the currency amount to convert is incorrect."
+#~ msgstr "对不起，要转换的货币金额不正确。"
+
+#~ msgid "Sorry, the currency amount to convert is too small."
+#~ msgstr "对不起，要转换的货币金额过低。"
+
+#~ msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
+#~ msgstr "对不起，每天最多允许进行 3 次货币转换。今天您已进行了"
+
+#~ msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
+#~ msgstr "对不起，要转换的货币金额过高。每个交易的最大金额为 %1"
+
+#~ msgid "Sorry, you cannot convert"
+#~ msgstr "对不起，您不能转换"
+
+#~ msgid "Success"
+#~ msgstr "成功"
+
+#~ msgid "To convert money between the different currencies in your account, please use the form below."
+#~ msgstr "要在您帐户中的不同货币之间进行转换，请使用下表。"
+
+#~ msgid "Update failed.  Request support."
+#~ msgstr "更新失败。请求支援。"
+
+#~ msgid "Update successful"
+#~ msgstr "更新成功"
+
+#~ msgid "View statement"
+#~ msgstr "查看报表。"
+
+#~ msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
+#~ msgstr "对不起，如果您曾使用信用卡/借记卡存钱到您的帐户段，我们不允许转换。"
+
+#~ msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
+#~ msgstr "您已经购入了总买价为红利额五倍的交易。"
+
+#~ msgid "You may purchase contracts in any of these currencies."
+#~ msgstr "您可以这些货币的任何之一购买交易。"
+
+#~ msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
+#~ msgstr "您的<strong>首次</strong>充值额都等于或高于以任何货币表示的%1，且"
+
+#~ msgid "Your account may hold the following currencies"
+#~ msgstr "帐户可持有下列货币"
+
+#~ msgid "Your account statement has been updated accordingly."
+#~ msgstr "您的帐户报表已相应更新。"
+
+#~ msgid "conversions today.  Please try again tomorrow"
+#~ msgstr "次转换。请明天重新尝试"
+
+#~ msgid "is not available.  If this error persists, please email"
+#~ msgstr "不可用。若此错误持续存在，请发送电子邮件至"
+
+#~ msgid "missing"
+#~ msgstr "遗失的"
+
 #~ msgid "%1 Tools"
 #~ msgstr "%1 工具"
 
@@ -12355,9 +12366,6 @@ msgstr "对不起，您的失败尝试次数过多。请5分钟后再尝试。"
 #~ msgid "Select a lower payout"
 #~ msgstr "请选择较低交易额"
 
-#~ msgid "Sorry, you cannot sell"
-#~ msgstr "对不起，您不能出售"
-
 #~ msgid "Sorry, you have exceeded a BOUNDARY contract weekly PAYOUT of USD%1 on %2 which is the maximum weekly PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 #~ msgstr "很抱歉，您已经超出了 %2 的边界交易每周收益额%1美元，其为每周最大允许收益额。请制订标的不同的交易或降低您的交易额。"
 
@@ -12423,9 +12431,6 @@ msgstr "对不起，您的失败尝试次数过多。请5分钟后再尝试。"
 
 #~ msgid "In order to continue trading or deposit, you must either complete all of our <a href=\"%1\">authentication procedures</a> which will increase your account limits or <a href=\"%2\">withdraw</a> some funds."
 #~ msgstr "要继续交易或存款，您必须完成我们所有的 <a href=\"%1\">验证程序</a>以提高您的提款限额，或者<a href=\"%2\">提取</a>部分资金。"
-
-#~ msgid "Limit"
-#~ msgstr "限制"
 
 #~ msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is"
 #~ msgstr "因此，您当前可即时提取的最大金额为（前提是您的帐户有足够资金）"

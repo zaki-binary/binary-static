@@ -89,7 +89,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 1.5\n"
 
-#: cgi/top_up_virtual.cgi:83
+#: cgi/top_up_virtual.cgi:78
 msgid " has been credited to your Virtual money account"
 msgstr " a été crédité sur votre Compte d'argent virtuel"
 
@@ -182,8 +182,8 @@ msgid "%1 Period"
 msgstr "%1 Période"
 
 #. (localize('Tick Trades')
-#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:129 cgi/tick_trades.cgi:133
-#: cgi/tick_trades.cgi:283 cgi/tick_trades.cgi:299
+#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:103 cgi/tick_trades.cgi:107
+#: cgi/tick_trades.cgi:257 cgi/tick_trades.cgi:273
 msgid "%1 Up/Down"
 msgstr "%1 Hausse/Baisse"
 
@@ -295,7 +295,7 @@ msgid "%1 minute quotes"
 msgstr "%1 cours minute"
 
 #. (localize('Tick Trades')
-#: cgi/tick_trades.cgi:156
+#: cgi/tick_trades.cgi:130
 msgid "%1 offer you the chance to trade on a very short-term event and make money in seconds!"
 msgstr "%1 offrez-vous une chance de trader sur un événement à très court terme et de gagner de l'argent en quelques secondes !"
 
@@ -358,11 +358,6 @@ msgstr "%1 vous offre l'opportunité de vous exclure vous-mêmes ou"
 #: frontend/templates/static/responsible_trading.html.haml:1
 msgid "%1 supports <a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare has a commitment to promote responsible attitudes to gambling and to work for the provision of proper care for those who have been harmed by gambling dependency. Other websites that provide information about gambling or gambling addiction are:"
 msgstr "%1 supporte <a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare s'engage à promouvoir des attitudes responsables en matière de paris et à travailler pour fournir une aide appropriée aux personnes ayant été affectées par la dépendance aux jeux de hasard. D'autres sites web fournissant des informations sur le jeu d'argent ou l'addiction au jeu d'argent sont:"
-
-#. ("$currencyfrom $currencyfromvalue", "$currencyto $res")
-#: cgi/currency_converter.cgi:209
-msgid "%1 was converted to %2."
-msgstr "%1 a été converti en %2."
 
 #. ('ACCESS_TOKEN')
 #: frontend/templates/static/devguide.html.haml:1
@@ -465,10 +460,6 @@ msgstr "* Exempté d'impôts : dans de nombreux pays, mais consultez toujours un
 msgid "1. Choose the Underlying"
 msgstr "1. Choisissez le Sous-jacent"
 
-#: cgi/subs/subs_clientdetails.pm:115
-msgid "1. Verification of identity"
-msgstr "1. Vérification de l'identité"
-
 #: frontend/templates/home/index.html.haml:1
 msgid "10 seconds to 365 days..."
 msgstr "10 secondes à 365 jours..."
@@ -509,10 +500,6 @@ msgstr "Tarification à 2 voies"
 msgid "2. Choose the Duration of the Trade"
 msgstr "2. Choisissez la Durée du Trade"
 
-#: cgi/subs/subs_clientdetails.pm:128
-msgid "2. Proof of address"
-msgstr "2. Preuve d'adresse"
-
 #: cgi/templates/default/charting/livechart_duration.tt:19
 msgid "2d"
 msgstr "2j"
@@ -552,18 +539,6 @@ msgstr "6h"
 #: cgi/subs/subs_forms.pm:1742
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>Vos sections de Caisse et de Configuration sont verrouillées selon votre demande</strong> - si vous souhaitez les déverrouiller, veuillez entrer le mot de passe."
-
-#: cgi/subs/subs_clientdetails.pm:131
-msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
-msgstr "<li>ORIGINAL d'une Facture de services publics (dans les 3 derniers mois) ; ou</li><li>ORIGINAL du relevé de la carte de crédit/débit ou du livret d'épargne de la Banque/Caisse d'épargne/Société de crédit immobilier (dans les 3 derniers mois)</li>"
-
-#: cgi/subs/subs_clientdetails.pm:119
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
-msgstr "<li>copie du passeport en cours de validité ; ou</li><li>copie du Permis de conduire en cours de validité (provisoire ou normal) ; ou</li><li>Carte d'identité</li>"
-
-#: cgi/subs/subs_clientdetails.pm:122
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
-msgstr "<li>copie du passeport en cours de validité ; ou</li><li>copie du Permis de conduire en cours de validité (provisoire ou normal)</li>"
 
 #: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
 #: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2291
@@ -695,7 +670,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>Prix de référence</strong> - %1 référence ses prix quotidiennement par rapport aux marchés interbancaires des produits dérivés."
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:1970
+#: cgi/oop/Controller/Bet.pm:1969
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>Meilleur prix d'exécution!</strong><br /> Le prix a évolué en votre faveur de %1 à %2."
 
@@ -770,11 +745,11 @@ msgstr "<strong>Pas de surprises</strong> - pas de \"dérapage\", pas \"d'appels
 msgid "<strong>No surprises</strong> - you will never have margin calls, gap risk, slippage costs, hidden fees or commissions."
 msgstr "<strong>Pas de surprises</strong> - vous n'aurez jamais d'appels de marge, de risque d'écart, de coûts de dérapage ou de taxes ou commissions cachées."
 
-#: cgi/tick_trades.cgi:190 cgi/tick_trades.cgi:196
+#: cgi/tick_trades.cgi:164 cgi/tick_trades.cgi:170
 msgid "<strong>Note:</strong> There is a 1.5% commission on any payout."
 msgstr "<strong>Remarque :</strong> Il y a une commission de 1.5% sur tout versement."
 
-#: cgi/tick_trades.cgi:201 cgi/tick_trades.cgi:205
+#: cgi/tick_trades.cgi:175 cgi/tick_trades.cgi:179
 msgid "<strong>Note:</strong> There is no commission on any winnings."
 msgstr "<strong>Remarque :</strong> Il n'y a pas de commission sur un quelconque gain."
 
@@ -999,7 +974,7 @@ msgstr "Un membre de notre Equipe de Service Clientèle va vous contacter rapide
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "Un indicateur dynamique montrant le pourcentage de taux de variation d'une moyenne mobile triple lissée de façon exponentielle. Comme les autres oscillateurs, TRIX oscille autour d'une ligne zéro."
 
-#: cgi/tick_trades.cgi:466
+#: cgi/tick_trades.cgi:441
 msgid "A much more flexible version of Tick Trades is available on the "
 msgstr ""
 
@@ -1024,9 +999,19 @@ msgstr "Un problème est survenu"
 msgid "A problem occurred while connecting to the server. Please try again later."
 msgstr "Un problème est survenu lors de la connexion avec le serveur. Veuillez réessayer ultérieurement."
 
+#: cgi/subs/subs_clientdetails.pm:118
+msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
+msgstr ""
+
 #: cgi/templates/default/email/bonus_reject.tt:19
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr "Une copie scannée d'une facture de services publics qui montre votre adresse actuelle (facture de services ne peut pas dater d'il y a plus de 3 mois)."
+
+#: cgi/subs/subs_clientdetails.pm:116
+#, fuzzy
+#| msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
+msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
+msgstr "<li>copie du passeport en cours de validité ; ou</li><li>copie du Permis de conduire en cours de validité (provisoire ou normal) ; ou</li><li>Carte d'identité</li>"
 
 #: cgi/templates/default/email/bonus_reject.tt:18
 msgid "A scanned copy of your passport or driver's licence."
@@ -1135,11 +1120,11 @@ msgstr "Accumulation/Distribution"
 msgid "Accuracy of Information"
 msgstr "Exactitude des informations"
 
-#: cgi/paymentagent_transfer.cgi:261
+#: cgi/paymentagent_transfer.cgi:262
 msgid "Acknowledgement of Money Transfer"
 msgstr "Attestation du transfert d'argent"
 
-#: cgi/paymentagent_withdraw.cgi:393
+#: cgi/paymentagent_withdraw.cgi:403
 msgid "Acknowledgement of Withdrawal Request"
 msgstr "Attestation de la demande de retrait"
 
@@ -1151,7 +1136,7 @@ msgstr "Acquisition"
 msgid "Acquisition of financial contracts through this site must be effected in accordance with the terms and conditions presented on the pages of this site. Acquisition of a financial contract is completed when the financial contract has been customised, the premium (or the payout, as the case may be) has been calculated and payment has been verified."
 msgstr "L'acquisition de contrats financiers par l'intermédiaire de ce site doit être effectuée en accord avec les conditions générales présentées sur les pages de ce site. L'acquisition d'un contrat financier est effectuée lorsque le contrat financier a été personnalisé, la prime (ou le gain, selon le cas) ayant été calculée et le paiement ayant été vérifié."
 
-#: cgi/templates/default/account/statement.tt:109
+#: cgi/templates/default/account/statement.tt:114
 msgid "Action"
 msgstr "Action"
 
@@ -1217,7 +1202,7 @@ msgstr "Toutes les opinions, actualités, recherches, analyses, prix ou autres i
 msgid "All the times on the website and contract settlements are according to GMT (Greenwich Mean Time)."
 msgstr "Toutes les heures figurant sur ce site web et les paramètres de contrat correspondent au GMT (Greenwich Mean Time)."
 
-#: cgi/paymentagent_withdraw.cgi:198 cgi/subs/subs_forms.pm:3805
+#: cgi/paymentagent_withdraw.cgi:209 cgi/subs/subs_forms.pm:3805
 #: cgi/subs/subs_forms.pm:4006
 msgid "Amount"
 msgstr "Montant"
@@ -1226,7 +1211,7 @@ msgstr "Montant"
 msgid "Amount must be a positive number."
 msgstr "Le montant doit être un nombre positif."
 
-#: cgi/tick_trades.cgi:247
+#: cgi/tick_trades.cgi:221
 msgid "Amount you wish to trade:"
 msgstr "Montant que vous souhaitez trader:"
 
@@ -1246,13 +1231,9 @@ msgstr "Un <a href=\"https://apigee.com/rmg/resources/binary1\" target=\"_blank\
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "Une erreur est survenue : le système ne peut pas vous connecter (2)."
 
-#: cgi/paymentagent_transfer.cgi:118 cgi/paymentagent_transfer.cgi:124
-#: cgi/paymentagent_withdraw.cgi:208 cgi/paymentagent_withdraw.cgi:213
+#: cgi/paymentagent_transfer.cgi:120 cgi/paymentagent_transfer.cgi:126
+#: cgi/paymentagent_withdraw.cgi:219 cgi/paymentagent_withdraw.cgi:224
 msgid "An error occurred while processing request. If this error persists, please contact customer support"
-msgstr "Une erreur s'est produite durant le traitement de la demande. Si l'erreur persiste, veuillez contacter le support clientèle"
-
-#: cgi/currency_converter.cgi:172
-msgid "An error occurred while processing request. If this error persists, please contact customer support."
 msgstr "Une erreur s'est produite durant le traitement de la demande. Si l'erreur persiste, veuillez contacter le support clientèle"
 
 #: cgi/subs/subs_BOMFeed_history.pm:553
@@ -1319,35 +1300,10 @@ msgstr "Toute notification donnée ou faite à la Société dans le cadre de cet
 msgid "Anyone over the age 18 [who has read and agreed to the %1 terms and conditions], and who is not resident in one of the 'closed countries' can trade on the %1 platform."
 msgstr "Toute personne âgée de plus de 18 ans [ayant lu et accepté les conditions générales de %1], et n'habitant pas dans l'un des \"pays fermés\", peut trader sur la plate-forme %1."
 
-#. ($display_name)
-#: cgi/register-api.cgi:196
-msgid "Application %1 has been registered.  Your new OAuth credentials are shown below"
-msgstr ""
-
 #: cgi/templates/default/api/register.tt:7
 #, fuzzy
 #| msgid "Application error"
 msgid "Application Name"
-msgstr "Erreur de l'application"
-
-#: cgi/register-api.cgi:112
-msgid "Application Name data is invalid"
-msgstr ""
-
-#: cgi/register-api.cgi:193
-msgid "Application cannot be registered.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:92
-#, fuzzy
-#| msgid "Payment Agent activity not currently authorized"
-msgid "Application not currently authorized"
-msgstr "Paiement de l'activité d'Agent n'est pas autorisé pour l'instant"
-
-#: cgi/register-api.cgi:76
-#, fuzzy
-#| msgid "Application error"
-msgid "Application not yet registered"
 msgstr "Erreur de l'application"
 
 #: frontend/templates/static/partner_api.html.haml:1
@@ -1497,7 +1453,7 @@ msgstr "Indice directionnel moyen"
 msgid "Avg True Range"
 msgstr "Véritable plage de valeurs moyenne"
 
-#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:85
+#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:59
 msgid "Awaiting market ticks...."
 msgstr "Intervalles de marché en attente..."
 
@@ -1513,7 +1469,7 @@ msgstr "RETOUR A LA PAGE D'ACCUEIL"
 msgid "BOM Charts Workspace"
 msgstr "Espace de travail Graphiques BOM"
 
-#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:235
+#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:209
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 #: lib/BOM/View/Form.pm:402
@@ -1525,13 +1481,14 @@ msgstr "Retour"
 msgid "Bad input %1"
 msgstr "Entrée incorrecte %1"
 
-#: cgi/templates/default/account/statement.tt:153
-#: cgi/templates/default/account/statement.tt:66
-#: cgi/templates/default/account/statement.tt:90
+#: cgi/templates/default/account/statement.tt:120
+#: cgi/templates/default/account/statement.tt:158
+#: cgi/templates/default/account/statement.tt:68
+#: cgi/templates/default/account/statement.tt:92
 msgid "Balance"
 msgstr "Solde"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:444
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
 msgid "Bank Wire"
 msgstr "Virement bancaire"
 
@@ -1569,7 +1526,7 @@ msgstr "Graphique en barres HLC"
 msgid "Bar OHLC Chart"
 msgstr "Graphique en barres OHLC"
 
-#: cgi/oop/Controller/Bet.pm:2194 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/resources/pricing_table_form.tt:59
 msgid "Barrier"
 msgstr "Barrière"
@@ -1587,7 +1544,7 @@ msgstr "Barrière ne peut pas être ajustée."
 msgid "Barrier must be at least "
 msgstr "Barrière doit être au moins"
 
-#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2192 cgi/templates/default/bet/form/barrier.tt:15
 msgid "Barrier offset"
 msgstr "Compensation Barrière"
 
@@ -1797,7 +1754,7 @@ msgstr "Mais il ne faut pas attendre jusqu'à l'expiration. Vous pouvez revendre
 msgid "But we’re picky. We only select people with special qualities: serious professionals, who have high moral standards, and thrive in an honest, collaborative environment."
 msgstr "Mais nous sommes difficiles. Nous sélectionnons seulement des personnes avec des qualités spéciales: professionnels sérieux, qui ont des standards moraux élevés, et s'épanouissent dans un environnement honnête et collaboratif."
 
-#: cgi/templates/default/account/statement.tt:76
+#: cgi/templates/default/account/statement.tt:78
 #: cgi/templates/default/backoffice/account/statement.tt:62
 msgid "Buy"
 msgstr "Achetez"
@@ -1841,18 +1798,6 @@ msgstr "Appelez-nous"
 msgid "Callback URL"
 msgstr "Services de rappel"
 
-#: cgi/register-api.cgi:115
-#, fuzzy
-#| msgid "This URL is invalid."
-msgid "Callback URL data is invalid"
-msgstr "Cet URL est invalide."
-
-#: cgi/register-api.cgi:121
-#, fuzzy
-#| msgid "This URL is invalid."
-msgid "Callback URL format is invalid"
-msgstr "Cet URL est invalide."
-
 #: cgi/subs/subs_forms_output.pm:99
 msgid "Callback services"
 msgstr "Services de rappel"
@@ -1888,16 +1833,6 @@ msgstr "Annuler"
 msgid "Cancel Registration"
 msgstr ""
 
-#: cgi/register-api.cgi:213
-#, fuzzy
-#| msgid "Authentication failure"
-msgid "Cancellation failed"
-msgstr "Echec de l'authentification"
-
-#: cgi/register-api.cgi:216
-msgid "Cancellation successful"
-msgstr ""
-
 #: cgi/subs/subs_BOMFeed_history.pm:347
 msgid "Candlestick Chart"
 msgstr "Graphique en Chandelier"
@@ -1915,10 +1850,6 @@ msgstr "Carrières"
 #: cgi/subs/subs_BOMFeed_history.pm:336
 msgid "Cascade"
 msgstr "Cascade"
-
-#: cgi/templates/default/account/statement.tt:115
-msgid "Cash Balance"
-msgstr "Solde de trésorerie"
 
 #: lib/BOM/Feed/DataSource/BBDL/CSVParser/CorporateAction.pm:204
 msgid "Cash Dividend"
@@ -1979,7 +1910,7 @@ msgstr "Changer de mot de passe"
 msgid "Change in account settings"
 msgstr "Changement dans les paramètres du compte"
 
-#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1999
+#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1998
 msgid "Chart"
 msgstr "Graphique"
 
@@ -2208,7 +2139,7 @@ msgstr "Voyage de société à Phuket, Thaïlande"
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: cgi/tick_trades.cgi:215
+#: cgi/tick_trades.cgi:189
 msgid "Congratulations"
 msgstr "Félicitations"
 
@@ -2216,7 +2147,7 @@ msgstr "Félicitations"
 msgid "Congratulations! <br /> You have won the contract!"
 msgstr "Félicitations ! <br /> Vous avez gagné le contrat !"
 
-#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:332
+#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:306
 msgid "Connection failure. Please try again later."
 msgstr "Echec de la connexion. Veuillez réessayer ultérieurement."
 
@@ -2354,20 +2285,6 @@ msgstr "Les contrats ne seront habituellement pas proposés lorsque le marché s
 msgid "Controlled risk"
 msgstr "Risque contrôlé"
 
-#: cgi/templates/default/account/currency_converter.tt:13
-msgid "Convert"
-msgstr "Convertir"
-
-#. ('<select name="currencyfrom" id="currencyfrom">' . $currency_options . '</select>',            '<input type="text" size="7" name="currencyfromvalue" id="currencyfromvalue" value="">',            '<select name="currencyto" id="currencyto">' . $options_for_currencyto . '</select>')
-#: cgi/subs/subs_account_history.pm:212
-msgid "Convert %1%2 to %3"
-msgstr "Convertir %1%2 en %3"
-
-#: cgi/templates/default/account/currency_converter.tt:10
-#: cgi/templates/default/account/currency_converter.tt:6
-msgid "Convert between your currency segment accounts"
-msgstr "Convertir entre les segments monétaires de votre compte"
-
 #: cgi/templates/default/legal/privacy.tt:23
 msgid "Cookies"
 msgstr "Cookies"
@@ -2393,11 +2310,11 @@ msgstr "Pays:"
 msgid "Create free account"
 msgstr "Créer un compte gratuit"
 
-#: cgi/templates/default/account/statement.tt:114
+#: cgi/templates/default/account/statement.tt:119
 msgid "Credit/<wbr/>Debit"
 msgstr "Crédit/<wbr/>Débit"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:426
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: cgi/templates/default/cashier/available_payment_methods.tt:175
 msgid "Credit/Debit Card"
 msgstr "Carte de Crédit/de Débit"
@@ -2410,7 +2327,7 @@ msgstr "Réticule"
 msgid "Currencies"
 msgstr "Devises"
 
-#: cgi/templates/default/cashier/betting_limits.tt:11 cgi/tick_trades.cgi:279
+#: cgi/tick_trades.cgi:253
 msgid "Currency"
 msgstr "Devise"
 
@@ -2448,7 +2365,7 @@ msgstr "Prix du marché actuel est 0."
 msgid "Current password"
 msgstr "Mot de passe actuel"
 
-#: cgi/subs/subs_clientdetails.pm:160 cgi/subs/subs_forms_output.pm:287
+#: cgi/subs/subs_clientdetails.pm:136 cgi/subs/subs_forms_output.pm:287
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "Permis de conduire en cours de validité avec photo (provisoire ou normal)"
 
@@ -2456,7 +2373,7 @@ msgstr "Permis de conduire en cours de validité avec photo (provisoire ou norma
 msgid "Current signed Passport"
 msgstr "Passeport signé en cours de validité"
 
-#: cgi/subs/subs_clientdetails.pm:159
+#: cgi/subs/subs_clientdetails.pm:135
 msgid "Current signed Passport OR"
 msgstr "Passeport signé en cours de validité OU"
 
@@ -2464,7 +2381,7 @@ msgstr "Passeport signé en cours de validité OU"
 msgid "Customer Support has been informed of your Lost Login ID / Password request and will be contacting you soon. Thank you for your patience."
 msgstr "Le Service Clientèle a été informé de votre demande suite à la perte de votre identifiant de connexion / mot de passe et nous vous contacterons bientôt. Nous vous remercions de votre patience."
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "DOWN"
 msgstr "INFERIEUR"
 
@@ -2474,7 +2391,7 @@ msgstr "INFERIEUR"
 msgid "Daily"
 msgstr "Journalier"
 
-#: cgi/oop/Controller/Bet.pm:2022
+#: cgi/oop/Controller/Bet.pm:2021
 #: cgi/templates/default/charting/daily_ohlc.tt:11
 msgid "Daily Prices"
 msgstr "Prix journaliers"
@@ -2502,7 +2419,7 @@ msgstr "Source de Données"
 msgid "Data will be available after market close"
 msgstr "Des données seront disponibles après la clôture du marché"
 
-#: cgi/templates/default/account/statement.tt:105
+#: cgi/templates/default/account/statement.tt:110
 #: cgi/templates/default/charting/daily_ohlc.tt:16
 #: cgi/templates/default/charting/legacy_chart_table.tt:10
 #: cgi/templates/default/resources/trading_times_header.tt:3
@@ -2529,23 +2446,23 @@ msgstr "Jours à afficher"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:249
-#: cgi/paymentagent_withdraw.cgi:377
+#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_withdraw.cgi:387
 msgid "Dear %1 %2 %3,"
 msgstr "Cher/Chère %1 %2 %3,"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr "Cher/Chère %1 %2 %3, Nous aimerions vous informer que votre Dépôt %5 a été traité. Cordialement, %4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:464
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:471
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr "Cher/Chère %1 %2 %3, Nous aimerions vous informer que votre Retrait %5 a été traité. Cordialement, %4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:466
 msgid "Dear %1 %2 %3, We would like to inform you that your Western Union withdrawal has been processed. <strong>%5</strong> You can then go to any Western Union agent, provide the MTCN number and claim your funds. You can find the Western Union agent which is closest to you on their <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a>. Kind Regards, %4"
 msgstr "Cher/Chère %1 %2 %3, Nous aimerions vous informer que votre retrait Wester Union a été traité. <strong>%5</strong> Vous pouvez ensuite joindre tout agent Wester Union, donner le numéro MTCN et demander vos fonds. Vous pouvez trouver l'agent Western Union le plus proche de chez vous sur leur site web <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\"></a>. Cordialement, %4"
 
@@ -2693,9 +2610,9 @@ msgstr "Supprimer toutes les lignes ?"
 msgid "Depo./With. commission"
 msgstr "Commission de dépôt/retrait"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
-#: cgi/templates/default/account/statement.tt:138
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/templates/default/account/statement.tt:143
 #: cgi/templates/default/cashier/available_payment_methods.tt:16
 #: cgi/templates/default/homepage/deposit_alert.tt:1
 #: cgi/templates/default/homepage/deposit_alert.tt:5
@@ -2721,7 +2638,7 @@ msgstr "Dépôt à un Agent de Paiement"
 msgid "Deposit using legacy method: %1"
 msgstr "Dépôt au moyen de la méthode de legs : %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Deposit via BACS"
 msgstr "Dépôt via BACS"
@@ -2730,7 +2647,7 @@ msgstr "Dépôt via BACS"
 msgid "Deposit via Bank Transfer"
 msgstr "Dépôt via Transfert Bancaire"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Deposit via Credit/Debit card"
 msgstr "Dépôt via Carte de Crédit/de Débit"
@@ -2739,7 +2656,7 @@ msgstr "Dépôt via Carte de Crédit/de Débit"
 msgid "Deposit via DoughFlow"
 msgstr "Dépôt via DoughFlow"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Deposit via Western Union"
 msgstr "Dépôt via Western Union"
 
@@ -2748,7 +2665,7 @@ msgstr "Dépôt via Western Union"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "Dépôt via Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "Dépôt via virement bancaire"
@@ -2831,7 +2748,7 @@ msgstr "Dépôt et retrait de fonds"
 msgid "Derivative"
 msgstr "Produits dérivés"
 
-#: cgi/templates/default/account/statement.tt:110
+#: cgi/templates/default/account/statement.tt:115
 msgid "Description"
 msgstr "Description"
 
@@ -2843,14 +2760,6 @@ msgstr "Detrended Price Osc"
 #: cgi/subs/subs_BOMFeed_history.pm:414
 msgid "Detrended Price Oscillator (DPO)"
 msgstr "Detrended Price Oscillator (DPO)"
-
-#: cgi/register-api.cgi:171
-msgid "Developer cannot be registered.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:66
-msgid "Developer not yet registered"
-msgstr ""
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Developer's Guide"
@@ -2936,7 +2845,7 @@ msgstr "Vous désirez voir Binary.com en d'autres langues, ou vous pouvez suggé
 msgid "Documents are required to verify your identity"
 msgstr "Documents sont nécessaires afin de vérifier votre identité"
 
-#: lib/BOM/Product/Transaction.pm:858
+#: lib/BOM/Product/Transaction.pm:857
 msgid "Don't buy contract using master password!"
 msgstr "N'achetez pas un contrat en utilisant un mot de passe principal!"
 
@@ -2962,11 +2871,11 @@ msgstr "Ne soyez pas dissuadés par le nom. Quotidien indique seulement quelque 
 msgid "Dot Chart"
 msgstr "Graphique en points"
 
-#: cgi/tick_trades.cgi:161
+#: cgi/tick_trades.cgi:135
 msgid "Double your stake if you can predict whether the market will move UP or DOWN after 5 ticks."
 msgstr "Doublez votre mise si vous pouvez prédire si le marché va MONTER ou BAISSER après 5 intervalles."
 
-#: cgi/tick_trades.cgi:165
+#: cgi/tick_trades.cgi:139
 msgid "Double your stake!"
 msgstr "Doublez votre mise !"
 
@@ -3014,7 +2923,7 @@ msgstr "Dr"
 msgid "Draw Chart"
 msgstr "Dessiner Graphique"
 
-#: cgi/tick_trades.cgi:323
+#: cgi/tick_trades.cgi:297
 msgid "Draw a pie chart of the most recent ticks!"
 msgstr "Dessiner un diagramme circulaire des plus récents intervalles !"
 
@@ -3022,7 +2931,7 @@ msgstr "Dessiner un diagramme circulaire des plus récents intervalles !"
 msgid "Due to new gaming regulations recently promulgated in Malta, we are required to obtain your residential address details.  We would be grateful if you could update your"
 msgstr "En raison des nouveaux règlements relatifs aux jeux ayant récemment entré en vigueur à Malte, nous sommes dans l'obligation d'obtenir les détails de votre adresse de résidence. Nous vous serions reconnaissants de bien vouloir la mettre à jour"
 
-#: lib/BOM/Product/Transaction.pm:816
+#: lib/BOM/Product/Transaction.pm:815
 msgid "Due to regulatory requirements, you are required to authenticate your account in order to continue trading."
 msgstr "En raison des dispositions réglementaires, vous êtes dans l'obligation d'authentifier votre compte afin que vous puissiez continuer à trader."
 
@@ -3136,7 +3045,7 @@ msgstr "Veillez à ne pas faire de la promotion pour %1 avec des messages ciblan
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "Entrez la barrière sous forme de différence avec le prix ponctuel. Si vous entrez +0,005, vous achèterez un contrat avec une barrière supérieure de 0,005 au prix d'entrée. Le prix d'entrée sera celui du prochain intervalle après que votre ordre a été reçue"
 
-#: cgi/oop/Controller/Bet.pm:2197
+#: cgi/oop/Controller/Bet.pm:2196
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "Entrez la barrière sous forme de différence avec le prix ponctuel. Si vous entrez +0,005, vous achèterez un contrat avec une barrière supérieure de 0,005 au prix d'entrée. Le prix d'entrée sera celui du prochain intervalle après que votre ordre a été reçue."
 
@@ -3168,14 +3077,6 @@ msgstr "Erreur : le champ du mot de passe est vide !"
 #: cgi/templates/default/charting/light_chart.tt:2
 msgid "Error with input field %1: should contain only digits."
 msgstr "Erreur avec le champ d'entrée %1 : ne doit contenir que des chiffres."
-
-#: cgi/currency_converter.cgi:33
-msgid "Error: Both currencies are the same!  You must convert from one currency to another."
-msgstr "Erreur: les deux devises sont identiques! Vous devez convertir une devise vers une autre."
-
-#: cgi/currency_converter.cgi:72
-msgid "Error: The exchange rate for"
-msgstr "Erreur : le taux d'échange pour"
 
 #: cgi/subs/subs_runbets_execute.pm:894
 msgid "Error: There was a timeout or an unspecified error. The cost of the contract has been refunded to you."
@@ -3402,7 +3303,7 @@ msgstr "Suivez un guide simple étape-par-étape du trading binaire."
 msgid "For affiliates who offer a trading advisory service based on the %1 platform, we offer specialized payout structures. <a href=\"mailto:%2\">Contact our affiliate manager, Karen Yap for details</a>."
 msgstr "Pour les affiliés proposant un service de conseils de trading basé sur la plate-forme %1, nous offrons des structures de paiement spécialisées. <a href=\"mailto:%2\">Contactez notre manager d'affiliés Karen Yap pour plus de détails</a>."
 
-#: cgi/tick_trades.cgi:537
+#: cgi/tick_trades.cgi:512
 msgid "For any other queries, please feel free to contact us."
 msgstr "Pour toute autre demande, n'hésitez pas à nous contacter."
 
@@ -3464,7 +3365,7 @@ msgstr "Des contrats intrajournaliers démarrant à terme et des contrats journa
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr "Formulez votre stratégie de trade en utilisant les graphiques en direct puissants de %1. Visionnez instantanément les tendances de trade de forex, d'indices, de matières premières et d'actions."
 
-#: cgi/subs/subs_homepage.pm:174
+#: cgi/subs/subs_homepage.pm:138
 msgid "Free Contract Bonus"
 msgstr "Bonus de contrat gratuit"
 
@@ -3513,7 +3414,7 @@ msgid "Further information"
 msgstr "Informations supplémentaires"
 
 #. (300)
-#: cgi/paymentagent_withdraw.cgi:158 cgi/subs/subs_forms.pm:4065
+#: cgi/paymentagent_withdraw.cgi:169 cgi/subs/subs_forms.pm:4065
 msgid "Further instructions must not exceed %1 characters."
 msgstr "Les instructions supplémentaires ne doivent pas dépasser %1 caractères."
 
@@ -3547,9 +3448,8 @@ msgstr "Généralités"
 msgid "Generous Commission Structure"
 msgstr "Structure de Commission généreuse"
 
-#. ($promocode_amount, $min_deposit)
-#. ($promocode_currency . $promocode_amount,                $promocode_currency . $min_deposit)
-#: cgi/subs/subs_homepage.pm:130 cgi/subs/subs_homepage.pm:149
+#. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
+#: cgi/subs/subs_homepage.pm:114
 msgid "Get %1 when you deposit %2."
 msgstr "Obtenez %1 lorsque vous déposez %2."
 
@@ -3583,15 +3483,15 @@ msgstr "Obtenez votre prix"
 msgid "Getting Started"
 msgstr "Comment Commencer"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:438
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
 msgid "Gift Certificate"
 msgstr "Certificat de Cadeau"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Deposit"
 msgstr "Dépôt de Certificat de Cadeau"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Withdrawal"
 msgstr "Retrait de Certificat de Cadeau"
 
@@ -3605,7 +3505,7 @@ msgstr "Donnez-moi plus d'Argent !"
 msgid "Glossary"
 msgstr "Glossaire"
 
-#: cgi/templates/default/account/statement.tt:17 cgi/tick_trades.cgi:271
+#: cgi/templates/default/account/statement.tt:18 cgi/tick_trades.cgi:245
 msgid "Go"
 msgstr "Aller"
 
@@ -3673,13 +3573,13 @@ msgstr "Cache dernier intervalle"
 msgid "High"
 msgstr "Supérieur"
 
-#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/charting/livechart.tt:43
 #: cgi/templates/default/resources/pricing_table_form.tt:60
 msgid "High barrier"
 msgstr "Barrière supérieure"
 
-#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2187 cgi/templates/default/bet/form/barrier.tt:15
 msgid "High barrier offset"
 msgstr "Compensation barrière supérieure"
 
@@ -3718,7 +3618,7 @@ msgstr "Trades Supérieur/Inférieur"
 msgid "Highlights the relationship between volume and price changes and is particularly useful for assessing the strength of a trend."
 msgstr "Met en avant le lien entre le volume et les changements de prix et est particulièrement utile pour évaluer l'ampleur d'une tendance."
 
-#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:295
+#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:269
 msgid "Home"
 msgstr "Accueil"
 
@@ -3781,7 +3681,7 @@ msgstr "Que sont les marchés aléatoires?"
 msgid "How to transfer money to the Agent."
 msgstr "Comment transférer de l'argent vers l'Agent."
 
-#: cgi/subs/subs_clientdetails.pm:153
+#: cgi/subs/subs_clientdetails.pm:129
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
 msgstr "Cependant, afin d'augmenter vos limites de retrait, vous êtes priés de suivre les instructions ci-dessous."
 
@@ -3798,7 +3698,7 @@ msgstr "J'ai oublié mon mot de passe, que dois-je faire ?"
 msgid "I have read and agree to the <a target=\"_blank\" href=\"%1\">terms and conditions</a> of the site."
 msgstr "J'ai lu et j'approuve les <a target=\"_blank\" href=\"%1\">conditions générales</a> du site."
 
-#: cgi/tick_trades.cgi:267
+#: cgi/tick_trades.cgi:241
 msgid "I predict that the last decimal of the 5th tick will not be:"
 msgstr "Je prédis que la dernière décimale du 5ème intervalle ne sera pas:"
 
@@ -3839,11 +3739,11 @@ msgid "If applicable, to expedite the processing of your query please include a 
 msgstr "Si possible, pour accélérer le traitement de votre demande, veuillez joindre une capture d'écran de la page qui requiert notre attention."
 
 #. (request()
-#: cgi/tick_trades.cgi:535
+#: cgi/tick_trades.cgi:510
 msgid "If the connection problem persists, you can try to <a href=\"%1\">reload the application</a>."
 msgstr "Si le problème de connexion persiste, vous pouvez essayer de <a href=\"%1\">recharger l'application</a>."
 
-#: cgi/tick_trades.cgi:527
+#: cgi/tick_trades.cgi:502
 msgid "If the trading page is closed or internet access is terminated, the outcome of your contract won&rsquo;t be affected. You can then access your account statement to view the outcome of the contract."
 msgstr "Si la page de trading est fermée ou que votre accès Internet est interrompu, le résultat de votre contrat ne sera pas affecté. Vous pouvez ensuite accéder au relevé de votre compte pour voir le résultat du contrat."
 
@@ -3958,7 +3858,7 @@ msgstr "Si vous sélectionnez un <strong>moment final</strong> spécifique, le <
 msgid "If you wish to raise these limits, please <a href=\"%1\">authenticate</a> your account."
 msgstr "Si vous souhaitez augmenter ces limites, veuillez <a href=\"%1\">authentifier</a> votre compte."
 
-#: lib/BOM/Product/Transaction.pm:1114
+#: lib/BOM/Product/Transaction.pm:1113
 msgid "If you wish to raise these limits, please authenticate your account."
 msgstr "Si vous souhaitez augmenter ces limites, veuillez authentifier votre compte."
 
@@ -3981,7 +3881,7 @@ msgstr "Si vous voulez construire une carrière, et pas un résumé, parlez-nous
 msgid "Illegal contract type %1"
 msgstr "Type de contrat illégal %1"
 
-#: lib/BOM/Product/Transaction.pm:474
+#: lib/BOM/Product/Transaction.pm:481
 msgid "Illegal currency $currency for $broker"
 msgstr "Devise illégale $devise pour $courtier"
 
@@ -4021,7 +3921,7 @@ msgstr "Dans le style classique de Silicon Valley, le gestionnaire de fonds spé
 msgid "In foreign exchange markets, traders can enter contracts based on the change in price of one currency as it relates to another currency. For example if a trader selects Rise in the EUR/USD market, they are predicting that the value of the Euro will rise in relation to the value of the US dollar."
 msgstr "Dans les marchés de change étrangers, les traders pouvez introduire des contrats sur la base du taux de change d'une devise par rapport à une autre devise. Par exemple, si un trader sélectionne hausse pour le marché EUR/USD, ils prédisent que la valeur de l'Euro va augmenter par rapport à la valeur du dollar US."
 
-#: lib/BOM/Product/Transaction.pm:880
+#: lib/BOM/Product/Transaction.pm:879
 msgid "In order for you to place contracts, we need to know your Residence (Country). Please update your settings."
 msgstr "Afin que vous puissiez placer des contrats, nous devons connaître votre lieu de Résidence (Pays). Veuillez mettre à jour vos paramètres."
 
@@ -4170,7 +4070,7 @@ msgstr "Intrajournalier"
 msgid "Intraday contracts may not cross market open."
 msgstr "Contrats intrajournalier ne peuvent pas croiser un marché ouvert."
 
-#: cgi/oop/Controller/Bet.pm:2034
+#: cgi/oop/Controller/Bet.pm:2033
 msgid "Intraday prices"
 msgstr "Prix Intrajournaliers"
 
@@ -4298,7 +4198,7 @@ msgstr "Graphiques Java"
 msgid "Join our analysts LIVE twice a week for a comprehensive analysis of recent developments and trends in the global financial markets."
 msgstr "Rejoignez nos analystes EN DIRECT deux fois par semaine pour une analyse approfondie des développements récents et des tendances des marchés financiers globaux."
 
-#: cgi/templates/default/account/statement.tt:12
+#: cgi/templates/default/account/statement.tt:13
 msgid "Jump to"
 msgstr "Allez sur"
 
@@ -4306,7 +4206,7 @@ msgstr "Allez sur"
 msgid "Keep this value secure"
 msgstr ""
 
-#: cgi/paymentagent_withdraw.cgi:386
+#: cgi/paymentagent_withdraw.cgi:396
 msgid "Kind Regards,"
 msgstr "Cordialement,"
 
@@ -4323,7 +4223,7 @@ msgstr "Large"
 msgid "Last"
 msgstr "Dernier"
 
-#: cgi/oop/Controller/Bet.pm:2051
+#: cgi/oop/Controller/Bet.pm:2050
 msgid "Last Digit Stats"
 msgstr "Stats du Dernier Chiffre"
 
@@ -4372,7 +4272,7 @@ msgstr "Apprendre à trader"
 msgid "Learning to trade online"
 msgstr "Apprendre à trader en ligne"
 
-#: cgi/statement.cgi:161 cgi/subs/subs_account_history.pm:157
+#: cgi/statement.cgi:137 cgi/subs/subs_account_history.pm:161
 msgid "Legacy Contract"
 msgstr "Contrat antérieur"
 
@@ -4398,8 +4298,8 @@ msgid "Like %2, %1 reset back to a price of 1000 each day. The difference is tha
 msgstr "Comme %2, %1 est réinitialisé à un prix de 1000 tous les jours. La différence est que %1 se réinitialise à 12PM GMT, (%2 se réinitialise à 00:00:00 GMT)."
 
 #: cgi/templates/default/cashier/betting_limits.tt:8
-msgid "Limit</strong><br>(per currency)"
-msgstr "Limite</strong><br>(par devise)"
+msgid "Limit"
+msgstr "Limite"
 
 #: cgi/subs/subs_BOMFeed_history.pm:338
 msgid "Line"
@@ -4529,13 +4429,13 @@ msgstr "Inférieur"
 msgid "Low Barrier should be number only"
 msgstr "La barrière inférieur doit être seulement un nombre"
 
-#: cgi/oop/Controller/Bet.pm:2191 cgi/templates/default/bet/form/barrier.tt:37
+#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:37
 #: cgi/templates/default/charting/livechart.tt:47
 #: cgi/templates/default/resources/pricing_table_form.tt:46
 msgid "Low barrier"
 msgstr "Barrière inférieure"
 
-#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:34
+#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:34
 msgid "Low barrier offset"
 msgstr "Compensation barrière inférieure"
 
@@ -4547,11 +4447,11 @@ msgstr "Bande Inférieure"
 msgid "Lower Band = Average - 0.5 * Std Deviation"
 msgstr "Bande Inférieure = Moyenne - 0,5 * Déviation std"
 
-#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:303
+#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:277
 msgid "Lucky 10 Digits"
 msgstr "10 Chiffres Chanceux"
 
-#: cgi/tick_trades.cgi:137 cgi/tick_trades.cgi:141 cgi/tick_trades.cgi:287
+#: cgi/tick_trades.cgi:111 cgi/tick_trades.cgi:115 cgi/tick_trades.cgi:261
 msgid "Lucky 10 Digits Trade"
 msgstr "Trade de 10 Chiffres Chanceux"
 
@@ -4570,19 +4470,19 @@ msgstr "Signal MACD"
 msgid "Maintain your Site and promote %1 in an appropriate manner and contact us if you are changing design or layout or adding material that may influence our opinion as to whether you are a suitable affiliate partner."
 msgstr "Maintenez votre Site et faites de la promotion pour %1 de manière appropriée, et nous contacter si vous modifiez le design ou l'apparence graphique ou ajoutez du matériel susceptible d'influencer notre avis sur votre capacité à constituer pour nous un partenaire adapté."
 
-#: cgi/tick_trades.cgi:170
+#: cgi/tick_trades.cgi:144
 msgid "Make 10 times your money if you predict the last decimal digit of the market after 5 ticks."
 msgstr "Remportez 10 fois votre argent si vous prédisez le dernier chiffre décimal du marché après 5 intervalles."
 
-#: cgi/tick_trades.cgi:174
+#: cgi/tick_trades.cgi:148
 msgid "Make 10 times your money!"
 msgstr "Remportez 10 fois votre argent !"
 
-#: cgi/tick_trades.cgi:179
+#: cgi/tick_trades.cgi:153
 msgid "Make a 10% profit if you manage to predict that the last decimal digit of the 5th tick will *not* be the number selected."
 msgstr "Faites un bénéfice de 10% si vous arrivez à prévoir que le dernier chiffre décimal du 5ème intervalle ne sera *pas* le numéro sélectionné."
 
-#: cgi/tick_trades.cgi:183
+#: cgi/tick_trades.cgi:157
 msgid "Make a 10% profit!"
 msgstr "Faites un bénéfice de 10% !"
 
@@ -4600,7 +4500,7 @@ msgid "Make your trade"
 msgstr "Faites votre trade"
 
 #: cgi/templates/default/resources/pricing_table_form.tt:19
-#: cgi/tick_trades.cgi:251
+#: cgi/tick_trades.cgi:225
 msgid "Market"
 msgstr "Marché"
 
@@ -4655,7 +4555,7 @@ msgstr "Marchés"
 msgid "Mass Index"
 msgstr "Indice de masse"
 
-#: cgi/subs/subs_homepage.pm:162
+#: cgi/subs/subs_homepage.pm:126
 msgid "Matched Contract Bonus"
 msgstr "Bonus de contrat atteint"
 
@@ -4668,7 +4568,7 @@ msgid "Maximum"
 msgstr "Maximum"
 
 #: cgi/subs/subs_forms.pm:3466
-#: cgi/templates/default/cashier/betting_limits.tt:23
+#: cgi/templates/default/cashier/betting_limits.tt:15
 msgid "Maximum account cash balance"
 msgstr "Solde de trésorerie maximal du compte"
 
@@ -4683,16 +4583,16 @@ msgstr "Le solde de trésorerie maximal du compte est actuellement défini sur <
 msgid "Maximum aggregate contract purchases per day."
 msgstr "Maximum cumulé d'achats de contrats par jour."
 
-#: cgi/templates/default/cashier/betting_limits.tt:35
+#: cgi/templates/default/cashier/betting_limits.tt:23
 msgid "Maximum aggregate payouts on open positions"
 msgstr "Maximum de versements cumulés sur les positions ouvertes"
 
-#: cgi/templates/default/cashier/betting_limits.tt:29
+#: cgi/templates/default/cashier/betting_limits.tt:19
 msgid "Maximum daily turnover"
 msgstr "Chiffre d'affaires maximal journalier"
 
 #: cgi/subs/subs_forms.pm:3516
-#: cgi/templates/default/cashier/betting_limits.tt:17
+#: cgi/templates/default/cashier/betting_limits.tt:11
 msgid "Maximum number of open positions"
 msgstr "Nombre maximal de positions ouvertes"
 
@@ -4702,7 +4602,7 @@ msgstr "Nombre maximal de positions ouvertes"
 msgid "Maximum number of open positions is currently set to <strong>%1</strong>"
 msgstr "Le nombre maximal de positions ouvertes est actuellement défini sur <strong>%1</strong>"
 
-#: cgi/subs/subs_payments_withdrawals.pm:110
+#: cgi/subs/subs_payments_withdrawals.pm:102
 msgid "Maximum withdrawal by all other means:"
 msgstr "Retrait maximal par tous les autres moyens:"
 
@@ -4784,19 +4684,19 @@ msgstr "Application mobile"
 msgid "Momentum"
 msgstr "Quantité de mouvement"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:435
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
 msgid "Moneta"
 msgstr "Moneta"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
 msgid "Moneybookers"
 msgstr "Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Deposit"
 msgstr "Dépôt Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Withdrawal"
 msgstr "Retrait Moneybookers"
 
@@ -4889,7 +4789,7 @@ msgstr "Support multilingue et multi-devises"
 msgid "Must be in a valid URI format"
 msgstr ""
 
-#: cgi/my_account.cgi:73 lib/BOM/View/Menu.pm:56
+#: cgi/my_account.cgi:72 lib/BOM/View/Menu.pm:56
 msgid "My Account"
 msgstr "Mon Compte"
 
@@ -4959,7 +4859,7 @@ msgstr "Plus nouveau"
 msgid "Next"
 msgstr "Suivant"
 
-#: cgi/tick_trades.cgi:227
+#: cgi/tick_trades.cgi:201
 msgid "Next Page"
 msgstr "Page suivante"
 
@@ -5016,10 +4916,6 @@ msgstr "Aucun risque, compte d'argent virtuel $10K"
 msgid "No. There's no cost to sign up to the %1 affiliate program."
 msgstr "Non. Il n'y a pas de frais pour rejoindre le programme affilié de %1."
 
-#: cgi/templates/default/account/currency_converter.tt:15
-msgid "Note:"
-msgstr "Remarque:"
-
 #: cgi/templates/default/portfolio/contract_details.tt:31
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "Note: Contrat sera vendu au prix prévalant sur le marché lorsque la demande est reçue par nos serveurs. Ce prix peut différer du prix indiqué."
@@ -5048,8 +4944,8 @@ msgstr "Remarque : la société se réserve le droit de mettre fin à des commis
 
 #. ($currency,            $withdrawal_limits->{'frozen_free_gift'},            $withdrawal_limits->{'free_gift_turnover_limit'},            virgule($withdrawal_limits->{'aggregate_buys_for_currency'})
 #. ($self->currency,                    $limits->{frozen_free_gift},                    $limits->{free_gift_turnover_limit},                    virgule($limits->{aggregate_buys_for_currency})
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:161
-#: cgi/subs/subs_payments_withdrawals.pm:129
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:153
+#: cgi/subs/subs_payments_withdrawals.pm:121
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
 msgstr "Remarque : vous serez en mesure de prélever votre bonus de %1%2 uniquement une fois que le volume groupé de vos trades dépassera %1%3 (actuellement, il est seulement de %1%4). Cette restriction s'applique uniquement au bonus et aux bénéfices qui en sont dérivés. Tous les autres dépôts et les bénéfices dérivés de ces dépôts peuvent être prélevés à tout moment."
 
@@ -5114,11 +5010,11 @@ msgstr "OAuth2.0 est le standard d'internet émergeant pour ce but. Dirigez-vous
 msgid "OK"
 msgstr "OK"
 
-#: cgi/subs/subs_clientdetails.pm:164
+#: cgi/subs/subs_clientdetails.pm:140
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "Relevé ORIGINAL du livret Bancaire/de la Caisse d'Épargne/de la Société de crédit immobilier/de la Carte de crédit/débit(dans les 3 derniers mois)"
 
-#: cgi/subs/subs_clientdetails.pm:163
+#: cgi/subs/subs_clientdetails.pm:139
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "L'ORIGINAL d'une facture de services publics (dans les 3 derniers mois) ; ou"
 
@@ -5130,7 +5026,7 @@ msgstr "Bureau où l'appel est reçu"
 msgid "Old password is wrong."
 msgstr "Ancien mot de passe est faux."
 
-#: cgi/templates/default/account/statement.tt:24
+#: cgi/templates/default/account/statement.tt:26
 msgid "Older"
 msgstr "Plus vieux"
 
@@ -5261,7 +5157,7 @@ msgstr "Autres numéros de contact"
 msgid "Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list."
 msgstr "Notre programme affilié est destiné aux professionnels de l'investissement et aux webmasters gérant leur propre site web, actualités ou liste de diffusion."
 
-#: cgi/tick_trades.cgi:531
+#: cgi/tick_trades.cgi:506
 msgid "Our application uses ports 8080 and 843. For connection difficulties, please contact your System Administrator and request your firewall to be updated accordingly."
 msgstr "Notre application utilise les ports 8080 et 843. En cas de difficultés de connexion, veuillez contacter votre Administrateur de Système et demandez d'actualiser votre pare-feu en conséquence."
 
@@ -5307,8 +5203,8 @@ msgstr "Notre source de données est conçu afin d'être l'une des meilleures et
 msgid "Our data feed may at times differ slightly from other data feeds found on the internet (who may themselves differ between each other). Reasons for differences in feed providers include:"
 msgstr "Notre source de données peut parfois varier légèrement des autres sources de données, trouvées sur Internet (qui peuvent elles-mêmes varier l'une par rapport à l'autre). Les raisons des différences entre les sources de données comprennent:"
 
-#. (BOM::Platform::Runtime->instance->app_config->cs->email)
-#: cgi/subs/subs_clientdetails.pm:166
+#. ($cs_email)
+#: cgi/subs/subs_clientdetails.pm:142
 msgid "Our email address is %1."
 msgstr "Notre adresse email est %1."
 
@@ -5354,7 +5250,7 @@ msgstr "L'affilié est le seul responsable pour la propriété, le contenu et le
 msgid "P.O. Box is not accepted"
 msgstr "La Boîte P.O. n'est pas acceptée"
 
-#: cgi/templates/default/account/statement.tt:57
+#: cgi/templates/default/account/statement.tt:59
 msgid "P/L"
 msgstr "P/L"
 
@@ -5363,7 +5259,7 @@ msgid "PLEASE CONTACT CUSTOMER SUPPORT."
 msgstr "VEUILLEZ CONTACTER LE SERVICE CLIENTELE."
 
 #. ($page_num, $total_pages)
-#: cgi/subs/subs_account_history.pm:242
+#: cgi/subs/subs_account_history.pm:196
 msgid "Page %1 of %2"
 msgstr "Page %1 de %2"
 
@@ -5393,7 +5289,7 @@ msgstr "Participer aux marchés forex, actions ou matières premières"
 msgid "Partner API"
 msgstr "Partenaire API"
 
-#: cgi/register-api.cgi:31
+#: cgi/register-api.cgi:27
 #, fuzzy
 #| msgid "Partner API"
 msgid "Partner API Registration"
@@ -5500,7 +5396,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "La mise doit se situer entre <strong>%1</strong> et <strong>%2</strong>."
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: cgi/subs/subs_homepage.pm:125
+#: cgi/subs/subs_homepage.pm:106
 msgid "Pending Bonus: %1"
 msgstr "Bonus en attente : %1"
 
@@ -5542,7 +5438,7 @@ msgstr "Placer un trade aléatoire"
 msgid "Platform Tour"
 msgstr "Tour de plate-forme"
 
-#: cgi/tick_trades.cgi:239
+#: cgi/tick_trades.cgi:213
 msgid "Play Again"
 msgstr "Rejouer"
 
@@ -5558,7 +5454,7 @@ msgstr "Veuillez cliquer sur Retour et entrer à nouveau."
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "Veuillez cliquer sur le bouton \"Lire\" pour démarrer la vidéo."
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:193
+#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:204
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "Veuillez confirmer les détails de la transaction afin de compléter le transfert:"
 
@@ -5588,9 +5484,8 @@ msgstr "Veuillez entrer un mot de passe."
 msgid "Please enter a town or city."
 msgstr "Veuillez entrer une ville ou une commune."
 
-#: cgi/paymentagent_transfer.cgi:101 cgi/subs/subs_forms.pm:3822
+#: cgi/paymentagent_transfer.cgi:103 cgi/subs/subs_forms.pm:3822
 #: cgi/subs/subs_forms.pm:4023
-#: cgi/templates/default/account/currency_converter.tt:11
 msgid "Please enter a valid amount."
 msgstr "Veuillez entrer un montant valide."
 
@@ -5637,7 +5532,7 @@ msgstr "Veuillez entrer votre nom de famille."
 msgid "Please enter your secret answer"
 msgstr "Veuillez entrer votre réponse secrète"
 
-#: cgi/paymentagent_transfer.cgi:271
+#: cgi/paymentagent_transfer.cgi:272
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "Veuillez compléter votre Identifiant de connexion et le Montant que vous souhaitez transférer à votre Client dans le formulaire ci-dessous:"
 
@@ -5660,11 +5555,11 @@ msgstr "Veuillez vous connecter pour utiliser cette fonctionnalité"
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "Veuillez vous assurer d'abord que vous êtes d'accord avec l'Agent sur les délais de paiement avant de soumettre votre demande."
 
-#: cgi/subs/subs_payments_withdrawals.pm:100
+#: cgi/subs/subs_payments_withdrawals.pm:92
 msgid "Please note that if you have deposited at least once by credit/debit card, you may find that you are restricted in the amount you may convert into other currencies."
 msgstr "Veuillez noter que si vous avez fait un dépôt au moins une fois par carte de crédit/débit, vous pouvez réaliser que le montant que vous pouvez convertir dans d'autres devises est restreint."
 
-#: cgi/subs/subs_clientdetails.pm:134 cgi/subs/subs_forms_output.pm:299
+#: cgi/subs/subs_forms_output.pm:299
 msgid "Please note that mobile telephone bills are not acceptable as evidence of address"
 msgstr "Veuillez noter que les factures de téléphone portable ne sont pas acceptées en tant que justificatif d'adresse"
 
@@ -5696,7 +5591,7 @@ msgstr "Veuillez noter que vous pouvez actualiser vos informations personnelles 
 msgid "Please note that your settings have been updated as follows:"
 msgstr "Veuillez noter que vos paramètres ont été actualisés de la manière suivante:"
 
-#: cgi/subs/subs_clientdetails.pm:138 cgi/subs/subs_forms_output.pm:304
+#: cgi/subs/subs_forms_output.pm:304
 msgid "Please post the documents to:"
 msgstr "Veuillez poster les documents à:"
 
@@ -5704,7 +5599,7 @@ msgstr "Veuillez poster les documents à:"
 msgid "Please provide at least one self-exclusion setting."
 msgstr "Veuillez donner au moins un paramètre d'auto-exclusion."
 
-#: cgi/oop/Controller/Bet.pm:1525 cgi/oop/Controller/Bet.pm:1802
+#: cgi/oop/Controller/Bet.pm:1527 cgi/oop/Controller/Bet.pm:1804
 msgid "Please provide granter id(s)."
 msgstr "Veuillez fournir le(s) identité(s) du concédant(s)."
 
@@ -5741,9 +5636,14 @@ msgstr "Veuillez sélectionner"
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "Veuillez sélectionner l'option \"Gain\" ou \"Mise\"."
 
-#: cgi/tick_trades.cgi:327
+#: cgi/tick_trades.cgi:301
 msgid "Please select market:"
 msgstr "Veuillez sélectionner le marché:"
+
+#. (qq(<a href="mailto:$cs_email">$cs_email</a>)
+#: cgi/subs/subs_clientdetails.pm:120
+msgid "Please send this email to %1."
+msgstr ""
 
 #: cgi/subs/subs_forms.pm:1197 cgi/subs/subs_forms.pm:405
 #: cgi/subs/subs_presentation.pm:102
@@ -5767,11 +5667,11 @@ msgstr "Veuillez utiliser uniquement des caractères alphanumériques ou des esp
 msgid "Please use only letters, spaces, hyphens, full-stops or apostrophes."
 msgstr "Veuillez utiliser uniquement des lettres, espaces, traits d'union, points ou apostrophes."
 
-#: cgi/tick_trades.cgi:83
+#: cgi/tick_trades.cgi:57
 msgid "Please wait.<br />Your request is being processed."
 msgstr "Veuillez patienter.<br />Votre demande est en cours de traitement."
 
-#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:81 cgi/portfolio.cgi:83
+#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:79 cgi/portfolio.cgi:81
 #: cgi/templates/default/homepage/logged_in.tt:46 lib/BOM/View/Menu.pm:67
 msgid "Portfolio"
 msgstr "Portefeuille"
@@ -5808,7 +5708,7 @@ msgstr "Puissance & simplicité"
 msgid "Prediction"
 msgstr "Prédiction"
 
-#: cgi/limits.cgi:54
+#: cgi/limits.cgi:44
 msgid "Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions."
 msgstr "Présente les gains cumulés maximaux sur les contrats actifs dans votre portefeuille. Si le maximum est atteint, vous ne pouvez pas acheter de contrats supplémentaires sans fermer d'abord des positions existantes."
 
@@ -5849,7 +5749,7 @@ msgstr "Donnez le prix du trade."
 msgid "Prices"
 msgstr "Prix"
 
-#: cgi/oop/Controller/Bet.pm:2040 cgi/pricing_table.cgi:166
+#: cgi/oop/Controller/Bet.pm:2039 cgi/pricing_table.cgi:166
 #: cgi/templates/default/global/footer.tt:51
 #: cgi/templates/default/resources/pricing_table_form.tt:2
 #: frontend/templates/layouts/default/footer.html.haml:1
@@ -5881,13 +5781,13 @@ msgstr "Bénéfice"
 #: cgi/create_account.cgi:113 cgi/create_account.cgi:196
 #: cgi/create_account.cgi:73 cgi/create_account.cgi:80
 #: cgi/create_account.cgi:96 cgi/oop/Controller/Bet.pm:1367
-#: cgi/oop/Controller/Bet.pm:1514 cgi/oop/Controller/Bet.pm:1755
-#: cgi/oop/Controller/Bet.pm:1794 cgi/oop/Controller/Bet.pm:2209
+#: cgi/oop/Controller/Bet.pm:1516 cgi/oop/Controller/Bet.pm:1757
+#: cgi/oop/Controller/Bet.pm:1796 cgi/oop/Controller/Bet.pm:2208
 #: cgi/oop/Controller/Bet.pm:760 cgi/oop/Controller/Bet.pm:866
 msgid "Profit from your Predictions"
 msgstr "Bénéfice à partir de vos Prédictions"
 
-#: cgi/templates/default/account/statement.tt:113
+#: cgi/templates/default/account/statement.tt:118
 msgid "Profit/<wbr/>Loss"
 msgstr "Bénéfice/<wbr/>Perte"
 
@@ -5939,7 +5839,7 @@ msgstr "Heure d'Achat"
 
 #. ($currency, $max_daily_turnover_limit)
 #. ($currency, $max_daily_turnover)
-#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1112
+#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1111
 msgid "Purchase of this contract would cause you to exceed your daily turnover limit of %1%2."
 msgstr "Avec l'achat de ce contrat, vous auriez dépassé votre limite de chiffre d'affaires quotidienne de %1%2."
 
@@ -5947,11 +5847,11 @@ msgstr "Avec l'achat de ce contrat, vous auriez dépassé votre limite de chiffr
 msgid "Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money."
 msgstr "Mettez une limite sur vos gains. Une fois que vous avez atteint cette limite, mettez de l'argent de côté et jouez avec le reste de l'argent."
 
-#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:307
+#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:281
 msgid "Quick 10%"
 msgstr "10% Rapide"
 
-#: cgi/tick_trades.cgi:145 cgi/tick_trades.cgi:149 cgi/tick_trades.cgi:291
+#: cgi/tick_trades.cgi:119 cgi/tick_trades.cgi:123 cgi/tick_trades.cgi:265
 msgid "Quick 10% Trade"
 msgstr "Trade 10% Rapide"
 
@@ -6073,8 +5973,8 @@ msgid "Reap the rewards of trading binaries, knowing your funds are always safe.
 msgstr "Profitez des avantages du trades d'options binaires, en sachant que vos fonds sont toujours en sécurité."
 
 #: cgi/templates/default/account/portfolio.tt:12
-#: cgi/templates/default/account/statement.tt:106
-#: cgi/templates/default/account/statement.tt:125
+#: cgi/templates/default/account/statement.tt:111
+#: cgi/templates/default/account/statement.tt:130
 msgid "Ref."
 msgstr "Réf."
 
@@ -6169,15 +6069,15 @@ msgstr "Recharger la page"
 msgid "Remove Overlay"
 msgstr "Retirer Superposition"
 
-#: cgi/limits.cgi:46
+#: cgi/limits.cgi:36
 msgid "Represents the maximum amount of cash that you may hold in your account.  If the maximum is reached, you will be asked to withdraw funds."
 msgstr "Représente le montant d'argent maximal que vous pouvez garder sur votre compte.  Si le maximum est atteint, il vous sera demandé de retirer des fonds."
 
-#: cgi/limits.cgi:59
+#: cgi/limits.cgi:49
 msgid "Represents the maximum number of outstanding contracts in your portfolio. Each line in your portfolio counts for one open position. Once the maximum is reached, you will not be able to open new positions without closing an existing position first."
 msgstr "Représente le nombre maximal de contrats actifs dans votre portefeuille. Chaque ligne dans votre portefeuille compte pour une position ouverte. Une fois le maximum atteint, vous ne serez pas en mesure d'ouvrir de nouvelles positions sans d'abord fermer une position existante."
 
-#: cgi/limits.cgi:51
+#: cgi/limits.cgi:41
 msgid "Represents the maximum volume of contracts that you may purchase in any given trading day."
 msgstr "Représente le volume maximal de contrats que vous pouvez acheter au cours d'une journée de trading donnée."
 
@@ -6326,10 +6226,6 @@ msgstr "Décharge de Responsabilité"
 msgid "Russia"
 msgstr "Russie"
 
-#: cgi/oop/Controller/Bet.pm:1933
-msgid "SOLD"
-msgstr "VENDU"
-
 #: cgi/templates/default/bet/sell_success_ajax.tt:11
 msgid "Sale Price"
 msgstr "Prix de vente"
@@ -6394,7 +6290,7 @@ msgstr "Sélectionnez la méthode de paiement que vous voudriez utiliser et cont
 msgid "Self-Exclusion Facilities"
 msgstr "Fonctionnalités d'auto-exclusion"
 
-#: cgi/templates/default/account/statement.tt:40
+#: cgi/templates/default/account/statement.tt:42
 #: cgi/templates/default/backoffice/account/statement.tt:45
 msgid "Sell"
 msgstr "Vendre"
@@ -6575,9 +6471,21 @@ msgstr "Lissage du bruit aléatoire"
 msgid "Sorry you cannot buy/sell contracts"
 msgstr "Désolé, vous ne pouvez pas acheter/vendre de contrats"
 
+#. ($client_to->loginid)
+#: cgi/paymentagent_transfer.cgi:99
+msgid "Sorry, $currency is not default currency for client "
+msgstr ""
+
+#. ($client_fm->loginid)
+#: cgi/paymentagent_transfer.cgi:98
+#, fuzzy
+#| msgid "Sorry, broker %1 does not allow transfers from payment agents."
+msgid "Sorry, $currency is not default currency for payment agent "
+msgstr "Désolé, le broker %1 n'autorise pas les transferts depuis les agents de paiement."
+
 #. (localize('Tick Trades')
 #. (BOM::Platform::Context::localize('Tick Trades')
-#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:451
+#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:426
 msgid "Sorry, %1 are currently suspended"
 msgstr "Désolé, %1 sont actuellement suspendus"
 
@@ -6663,22 +6571,21 @@ msgstr "Désolé, l'Agent de Paiement n'existe pas."
 msgid "Sorry, the Payment Agent is unavailable for your region."
 msgstr "Désolé, l'Agent de Paiement n'est pas indisponible pour votre région."
 
+#. ($pa_client->currency . " is unavailable for Payment Agent Withdrawal")
+#: cgi/paymentagent_withdraw.cgi:145
+#, fuzzy
+#| msgid "Sorry, the Payment Agent does not exist."
+msgid "Sorry, the Payment Agent's currency "
+msgstr "Désolé, l'Agent de Paiement n'existe pas."
+
 #. ($max_payout_limit, $currency, $client_agg_payouts, $payout)
-#: lib/BOM/Product/Transaction.pm:1033
+#: lib/BOM/Product/Transaction.pm:1032
 msgid "Sorry, the aggregate payouts of contracts on your account cannot exceed %2%1. The current aggregate payout of contracts on your account is %2%3 therefore you cannot buy a contract that would pay out an additional %2%4."
 msgstr "Désolé, les gains cumulés des contrats sur votre comptes ne peuvent pas dépasser %2%1. Le gain cumulé actuel des contrats sur votre compte est de %2%3, par conséquent, vous ne pouvez pas acheter de contrat entraînant un gain supplémentaire de %2%4."
 
 #: cgi/subs/subs_runbets_execute.pm:523
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "Désolé, le contrat ne peut pas être acheté au cours de la dernière minute de la session de trading."
-
-#: cgi/currency_converter.cgi:37
-msgid "Sorry, the currency amount to convert is incorrect."
-msgstr "Désolé, le montant de la devise à convertir est incorrect."
-
-#: cgi/currency_converter.cgi:41 cgi/currency_converter.cgi:92
-msgid "Sorry, the currency amount to convert is too small."
-msgstr "Désolé, le montant de la devise à convertir est trop petit."
 
 #: cgi/paymentagent_transfer.cgi:96
 msgid "Sorry, the currency format is incorrect."
@@ -6697,11 +6604,7 @@ msgstr "Désolé, le marché est fermé pour cause de jour férié (%1)."
 msgid "Sorry, the market is currently closed."
 msgstr "Désolé, le marché est actuellement fermé."
 
-#: cgi/currency_converter.cgi:159
-msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
-msgstr "Désolé, le montant maximal des conversions de devises autorisé par jour est de 3.  Vous l'avez déjà atteint"
-
-#: cgi/subs/subs_payments_withdrawals.pm:95
+#: cgi/subs/subs_payments_withdrawals.pm:87
 msgid "Sorry, the maximum amount you can convert is"
 msgstr "Désolé, le montant maximal que vous pouvez convertir est"
 
@@ -6709,7 +6612,7 @@ msgstr "Désolé, le montant maximal que vous pouvez convertir est"
 msgid "Sorry, the page cannot be found."
 msgstr "Désolé, cette page est introuvable."
 
-#: lib/BOM/Product/Transaction.pm:999
+#: lib/BOM/Product/Transaction.pm:998
 msgid "Sorry, the same contract cannot be purchased more than once. You already have an identical contract in your account."
 msgstr "Désolé, le même contrat ne peut pas être acheté plus d'une fois.  Vous possédez déjà un contrat identique dans votre compte."
 
@@ -6721,11 +6624,6 @@ msgstr "Désolé, il y a trop de données à afficher, veuillez sélectionner un
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "Désolé, un problème est survenu pour valider vos informations personnelles avec notre processeur de paiement. Veuillez contacter notre Service Clientèle."
 
-#. ('10,000')
-#: cgi/currency_converter.cgi:47
-msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
-msgstr "Désolé, le montant de la devise à convertir est trop élevé. Le maximum par transaction est de %1"
-
 #: cgi/top_up_virtual.cgi:25
 msgid "Sorry, this feature is available to virtual accounts only"
 msgstr "Désolé, cette fonctionnalité est disponible uniquement pour les comptes virtuels"
@@ -6734,7 +6632,7 @@ msgstr "Désolé, cette fonctionnalité est disponible uniquement pour les compt
 msgid "Sorry, this page cannot be refreshed."
 msgstr "Désolé, cette page ne peut pas être actualisée."
 
-#: cgi/subs/subs_payments_withdrawals.pm:82
+#: cgi/subs/subs_payments_withdrawals.pm:74
 msgid "Sorry, withdrawals cannot be made on the day of your account opening. Please wait until tomorrow to make a withdrawal."
 msgstr "Désolé, il est impossible d'effectuer des retraits le jour de l'ouverture de votre compte. Veuillez patienter jusqu'à demain pour faire un retrait."
 
@@ -6742,17 +6640,13 @@ msgstr "Désolé, il est impossible d'effectuer des retraits le jour de l'ouvert
 msgid "Sorry, you are too young to open an account."
 msgstr "Désolé, vous êtes trop jeune pour ouvrir un compte."
 
-#: cgi/currency_converter.cgi:128
-msgid "Sorry, you cannot convert"
-msgstr "Désolé, vous ne pouvez pas convertir"
-
 #. ($max_open_positions_limit)
-#: lib/BOM/Product/Transaction.pm:1017
+#: lib/BOM/Product/Transaction.pm:1016
 msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please sell some of your existing contracts before buying any more."
 msgstr "Désolé, vous ne pouvez pas posséder plus de %1 contrats simultanément. Veuillez vendre certains de vos contrats en cours avant d'en acheter d'autres."
 
-#: cgi/subs/subs_payments_withdrawals.pm:104
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:96
 msgid "Sorry, you cannot withdraw."
 msgstr "Désolé, vous ne pouvez pas retirer."
 
@@ -6772,30 +6666,30 @@ msgid "Sorry, you have entered an incorrect email address."
 msgstr "Désolé, vous avez entré une adresse email incorrecte."
 
 #. (to_monetary_number_format($limits->daily->payout_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1201
+#: lib/BOM/Product/Transaction.pm:1200
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 on %2 which is the maximum daily PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "Désolé, vous avez dépassé une LIMITE de contrat de GAINS quotidiens de USD%1 sur %2 qui est le GAIN quotidien maximal autorisé. Veuillez placer un contrat sur un sous-jacent différent, ou réduisez votre mise."
 
 #. (to_monetary_number_format($limits->daily->payout)
-#: lib/BOM/Product/Transaction.pm:1225
+#: lib/BOM/Product/Transaction.pm:1224
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 which is the maximum daily PAYOUT allowed. Please choose on a different type of contract or lower your stake."
 msgstr "Désolé, vous avez dépassé une LIMITE de contrat de GAINS quotidiens de USD%1 qui est le GAIN quotidien maximal autorisé. Veuillez choisir un autre type de contrat, ou réduisez votre mise."
 
 #. (to_monetary_number_format($limits->daily->turnover_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1190
+#: lib/BOM/Product/Transaction.pm:1189
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 on %2 which is the maximum daily turnover allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "Désolé, vous avez dépassé une LIMITE de chiffre d'affaires quotidien de contrat de USD%1 sur %2 qui est le chiffre d'affaires quotidien maximal autorisé. Veuillez placer un contrat sur un sous-jacent différent, ou réduisez votre mise."
 
 #. (to_monetary_number_format($limits->daily->turnover)
-#: lib/BOM/Product/Transaction.pm:1215
+#: lib/BOM/Product/Transaction.pm:1214
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 which is the maximum daily turnover allowed. Please choose on a different type of contract or lower your stake."
 msgstr "Désolé, vous avez dépassé une LIMITE de chiffre d'affaires quotidien de contrat de USD%1 qui est le chiffre d'affaires quotidien maximal autorisé. Veuillez choisir un autre type de contrat, ou réduisez votre mise."
 
-#: cgi/paymentagent_transfer.cgi:159 cgi/paymentagent_withdraw.cgi:276
+#: cgi/paymentagent_transfer.cgi:160 cgi/paymentagent_withdraw.cgi:286
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "Désolé, vous avez dépassé le maximum de transactions autorisées aujourd'hui."
 
-#: cgi/paymentagent_transfer.cgi:151 cgi/paymentagent_withdraw.cgi:248
+#: cgi/paymentagent_transfer.cgi:152 cgi/paymentagent_withdraw.cgi:258
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "Désolé, vous avez dépassé le montant de transfert maximal autorisé pour aujourd'hui."
 
@@ -6805,16 +6699,16 @@ msgstr "Désolé, vous avez dépassé le montant de transfert maximal autorisé 
 msgid "Sorry, you have excluded yourself from the website until %1."
 msgstr "Désolé, vous vous êtes vous-même exclu du site web jusqu'au %1."
 
-#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:219
+#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:193
 msgid "Sorry, you have lost the contract."
 msgstr "Désolé, vous avez perdu le contrat."
 
-#: cgi/top_up_virtual.cgi:64
+#: cgi/top_up_virtual.cgi:59
 msgid "Sorry, you have open positions. Please close out all open positions before requesting additional funds."
 msgstr "Désolé, vous avez des positions ouvertes. Veuillez fermer toutes les positions ouvertes avant de demander des fonds supplémentaires."
 
 #. ($min_with_currency)
-#: cgi/top_up_virtual.cgi:52
+#: cgi/top_up_virtual.cgi:47
 msgid "Sorry, your account balance is more than %1. You may not claim extra funds until such time as your account balance drops under %1."
 msgstr "Désolé, le solde de votre compte est supérieur à %1. Vous ne pouvez pas demander de fonds supplémentaires tant que le solde de votre compte n'aura pas baissé sous %1."
 
@@ -6824,7 +6718,7 @@ msgid "Sorry, your account balance of %1 %2 is insufficient"
 msgstr "Désolé, le solde de votre compte de %1 %2 est insuffisant"
 
 #. ("$currency$balance",                to_monetary_number_format($account_balance_limit, 1)
-#: lib/BOM/Product/Transaction.pm:941
+#: lib/BOM/Product/Transaction.pm:940
 msgid "Sorry, your account cash balance is too high (%1). <B>Your maximum account balance is %2 </b>. Please withdraw money from your account to bring down your cash balance under that amount. You may not trade until you do so."
 msgstr "Désolé, le solde monétaire de votre compte est trop élevé (%1). <B>Le solde maximal de votre compte est de %2 </b>.  Veuillez retirer de l'argent de votre compte pour réduire le solde monétaire de votre compte sous ce montant. Vous ne pouvez pas trader avant d'avoir fait cela."
 
@@ -6836,9 +6730,16 @@ msgstr "Désolé, votre compte a été bloqué dans une précédente transaction
 msgid "Sorry, your account has got stuck in a previous transaction that did not complete. If this error persists, please contact customer support."
 msgstr "Désolé, votre compte a été bloqué dans une précédente transaction qui n'a pas été terminée. Si cette erreur persiste, veuillez contacter notre service clientèle."
 
-#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:902
+#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:901
 msgid "Sorry, your account is not authorised for any further contract purchases."
 msgstr "Désolé, votre compte n'est autorisé pour aucun achat supplémentaire de contrat."
+
+#. ($client->currency . ' is unavailable for Payment Agent Withdrawal')
+#: cgi/paymentagent_withdraw.cgi:139
+#, fuzzy
+#| msgid "Sorry, you cannot sell"
+msgid "Sorry, your currency of "
+msgstr "Désolé, vous ne pouvez pas vendre"
 
 #: cgi/emailus.cgi:142
 msgid "Sorry, your file is too large. The maximum file size is 1 Megabyte (1MB)."
@@ -6868,7 +6769,7 @@ msgstr "Prix d'entrée"
 msgid "Spread"
 msgstr "Ecart"
 
-#: cgi/tick_trades.cgi:275 frontend/templates/get_started/glossary.html.haml:1
+#: cgi/tick_trades.cgi:249 frontend/templates/get_started/glossary.html.haml:1
 #: lib/BOM/Product/Model/ContractForm.pm:652
 msgid "Stake"
 msgstr "Gain"
@@ -6931,7 +6832,8 @@ msgstr "Commencer le trading"
 msgid "State/Province"
 msgstr "Etat/Province"
 
-#: cgi/statement.cgi:18 cgi/statement.cgi:88 cgi/statement.cgi:90
+#: cgi/statement.cgi:18 cgi/statement.cgi:86
+#: cgi/templates/default/account/statement.tt:101
 #: cgi/templates/default/homepage/logged_in.tt:61 lib/BOM/View/Menu.pm:75
 msgid "Statement"
 msgstr "Relevé"
@@ -6944,15 +6846,15 @@ msgstr "Contenu Statique"
 msgid "Statistic"
 msgstr "Statistique"
 
-#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:315
+#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:289
 msgid "Statistics"
 msgstr "Statistiques"
 
-#: cgi/tick_trades.cgi:209 cgi/tick_trades.cgi:319
+#: cgi/tick_trades.cgi:183 cgi/tick_trades.cgi:293
 msgid "Statistics that help."
 msgstr "Statistiques qui aident."
 
-#: cgi/tick_trades.cgi:311
+#: cgi/tick_trades.cgi:285
 msgid "Stats"
 msgstr "Stats"
 
@@ -7052,10 +6954,6 @@ msgstr "Sous réserve de votre respect des instructions de la Société, en tena
 #: cgi/subs/subs_forms.pm:4076
 msgid "Submit"
 msgstr "Envoyer"
-
-#: cgi/currency_converter.cgi:208
-msgid "Success"
-msgstr "Succès"
 
 #: cgi/templates/default/legal/copyright.tt:12
 msgid "Such materials may be copied and distributed on a limited basis for noncommercial purposes only, provided that any material copied remains intact and that all copies include the following notice in a clearly visible position: &ldquo;Copyright 1999-2014 Regent Markets Group. All rights reserved.&rdquo;"
@@ -7232,7 +7130,7 @@ msgstr "Le %1 simule un marché qui est actif durant la journée (et qui devient
 
 #. ($website->display_name)
 #. (request()
-#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:388
+#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:398
 msgid "The %1 team."
 msgstr "L'équipe %1."
 
@@ -7544,7 +7442,7 @@ msgstr "La société se réserve le droit de facturer une taxe dormante maximale
 msgid "The content on this website is subject to change at any time without notice and is provided for the sole purpose of assisting traders in making independent investment decisions.  %1 has taken reasonable measures to ensure the accuracy of the information on the website, however, the company does not guarantee its accuracy and will not accept liability for any loss or damage which may arise directly or indirectly from the content or your inability to access the website, for any delay in or failure of the transmission or the receipt of any instruction or notification sent through this website."
 msgstr "Le contenu de ce site web peut être amené à changer à tout moment sans avertissement préalable et est destiné uniquement à assister les traders pour leur permettre de faire des décisions d'investissement indépendantes. %1 a pris des mesures raisonnables pour assurer la précision des informations fournies sur le site web, cependant, la société ne garantit pas cette précision et ne peut être tenue pour responsable des éventuelles pertes ou préjudices découlant directement ou indirectement du contenu ou de votre incapacité à accéder au site web, pour tout retard ou échec de transmission ou de réception de toute instruction ou notification envoyée par ce site web."
 
-#: lib/BOM/Product/Transaction.pm:644
+#: lib/BOM/Product/Transaction.pm:651
 msgid "The contract has expired"
 msgstr "Le contrat a expiré"
 
@@ -7558,7 +7456,7 @@ msgid "The contract must expire on a trading day."
 msgstr "Le contrat doit expirer un jour de trading."
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:687
+#: lib/BOM/Product/Transaction.pm:694
 msgid "The contract payout has changed from %1%2 to %1%3."
 msgstr "Le gain du contrat a changé de %1%2 à %1%3."
 
@@ -7567,7 +7465,7 @@ msgid "The contract period is the timeframe of a trade. It is also called the du
 msgstr "La période du contrat est la période d'un trade. C'est également appelé la durée."
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:680
+#: lib/BOM/Product/Transaction.pm:687
 msgid "The contract price has changed from %1%2 to %1%3."
 msgstr "Le prix du contrat a changé de %1%2 à %1%3."
 
@@ -7575,7 +7473,7 @@ msgstr "Le prix du contrat a changé de %1%2 à %1%3."
 msgid "The cost of your open positions"
 msgstr "Le coût de vos positions ouvertes"
 
-#: cgi/subs/subs_homepage.pm:142 cgi/subs/subs_homepage.pm:171
+#: cgi/subs/subs_homepage.pm:135
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "La devise de votre bonus sera la même que la devise de votre premier dépôt."
 
@@ -7764,8 +7662,15 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "Le profit est la différence entre le prix d'achat (la mise) et le gain d'un trade gagnant."
 
 #. ($currency)
-#: lib/BOM/Product/Transaction.pm:466
+#: lib/BOM/Product/Transaction.pm:473
 msgid "The provided currency %1 is invalid."
+msgstr "La devise fournie %1 est non valide."
+
+#. ($currency)
+#: lib/BOM/Product/Transaction.pm:465
+#, fuzzy
+#| msgid "The provided currency %1 is invalid."
+msgid "The provided currency %1 is not the default currency"
 msgstr "La devise fournie %1 est non valide."
 
 #. ($email)
@@ -7825,7 +7730,7 @@ msgstr "Les transactions effectuées sur ce site et les relations entre les Clie
 msgid "The two passwords that you entered do not match."
 msgstr "Les deux mots de passe que vous avez entrés ne correspondent pas."
 
-#: lib/BOM/Product/Transaction.pm:674
+#: lib/BOM/Product/Transaction.pm:681
 msgid "The underlying market has moved too much since you priced the contract. "
 msgstr "Le marché sous-jacent a varié excessivement depuis que vous avez tarifié le contrat."
 
@@ -7850,7 +7755,13 @@ msgstr "Il n'y a pas d'Agents de Paiement dans votre pays (%1)."
 msgid "There are no available Payment Agents."
 msgstr "Il n'y a pas d'Agents de Paiement disponibles."
 
-#: cgi/templates/default/account/statement.tt:101
+#: cgi/templates/default/backoffice/account/profit_table.tt:71
+#, fuzzy
+#| msgid "There are no items during this period"
+msgid "There are no contracts during this period"
+msgstr "Il n'y a pas d'élément au cours de cette période"
+
+#: cgi/templates/default/account/statement.tt:106
 #: cgi/templates/default/backoffice/account/statement.tt:21
 msgid "There are no items during this period"
 msgstr "Il n'y a pas d'élément au cours de cette période"
@@ -7882,8 +7793,8 @@ msgstr "Un problème est survenu lors de la validation de votre adresse. Veuille
 msgid "There was an error and we were unable to process your request."
 msgstr "Le serveur n'a pas été en mesure de traiter votre demande pour le moment."
 
-#: cgi/paymentagent_transfer.cgi:108 cgi/paymentagent_transfer.cgi:112
-#: cgi/paymentagent_withdraw.cgi:144 cgi/paymentagent_withdraw.cgi:172
+#: cgi/paymentagent_transfer.cgi:110 cgi/paymentagent_transfer.cgi:114
+#: cgi/paymentagent_withdraw.cgi:155 cgi/paymentagent_withdraw.cgi:183
 msgid "There was an error processing the request."
 msgstr "Une erreur est survenue pendant le traitement de votre demande."
 
@@ -7940,11 +7851,11 @@ msgstr "Le présent Accord entrera en vigueur à la date où la Société vous a
 msgid "This Document"
 msgstr "Ce Document"
 
-#: cgi/paymentagent_withdraw.cgi:184
+#: cgi/paymentagent_withdraw.cgi:195
 msgid "This Payment Agent cashier section is locked."
 msgstr "La section caisse de cet Agent de Paiement est verrouillée."
 
-#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:73
+#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:68
 msgid "This URL is invalid."
 msgstr "Cet URL est invalide."
 
@@ -7965,11 +7876,11 @@ msgstr "Ce code bonus est indisponible."
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr "Cet appel rendra la même structure JSON qui peut être prévisualisée de la fonction API console."
 
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:110
 msgid "This client cashier section is locked."
 msgstr "La section caisse de ce client est verrouillée."
 
-#: lib/BOM/Product/Transaction.pm:759
+#: lib/BOM/Product/Transaction.pm:766
 msgid "This contract cannot be properly validated at this time."
 msgstr "Ce contrat ne peut pas être correctement validé pour le moment."
 
@@ -7990,7 +7901,7 @@ msgid "This contract has expired."
 msgstr "Ce contrat est arrivé à échéance."
 
 #. (to_monetary_number_format($custom_limit)
-#: lib/BOM/Product/Transaction.pm:844
+#: lib/BOM/Product/Transaction.pm:843
 msgid "This contract is limited to "
 msgstr "Ce contrat est limité à "
 
@@ -7998,7 +7909,7 @@ msgstr "Ce contrat est limité à "
 msgid "This contract is no longer offered."
 msgstr "Ce contrat n'est plus proposé."
 
-#: lib/BOM/Product/Transaction.pm:842
+#: lib/BOM/Product/Transaction.pm:841
 msgid "This contract is unavailable on this account."
 msgstr "Ce contrat est indisponible sur ce compte."
 
@@ -8006,7 +7917,7 @@ msgstr "Ce contrat est indisponible sur ce compte."
 msgid "This contract offers no return."
 msgstr "Ce contrat n'offre pas de retour."
 
-#: lib/BOM/Product/Transaction.pm:1445
+#: lib/BOM/Product/Transaction.pm:1444
 msgid "This contract was not found among your open positions."
 msgstr "Ce contrat n'a pas été trouvé parmi vos positions ouvertes."
 
@@ -8037,7 +7948,7 @@ msgstr "Ceci est un compte d'argent virtuel. Veuillez cliquer <a class=\"pjaxloa
 msgid "This is an automated message to alert you to the fact that there was a failed attempt to unlock the Cashier/Settings section of your account %1 from IP address %2"
 msgstr "Ceci est un message automatique vous alertant du fait qu'une tentative infructueuse pour débloquer votre section Caisse/Paramètres a été effectuée sur votre compte %1 depuis l'adresse IP %2"
 
-#: cgi/oop/Controller/Bet.pm:2201 cgi/templates/default/bet/form/barrier.tt:23
+#: cgi/oop/Controller/Bet.pm:2200 cgi/templates/default/bet/form/barrier.tt:23
 #: cgi/templates/default/bet/form/barrier.tt:42
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "Ceci est une barrière indicative. La véritable barrière sera le point d'entrée plus la compensation de la barrière."
@@ -8136,7 +8047,7 @@ msgstr "Tick Brain"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:78
-#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:448
+#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:423
 #: frontend/templates/get_started/types_of_trades.html.haml:1
 #: frontend/templates/layouts/default/footer.html.haml:1
 #: lib/BOM/View/Menu.pm:220
@@ -8158,9 +8069,9 @@ msgid "Tick trades"
 msgstr "Trades ponctuels"
 
 #: cgi/oop/Controller/Bet.pm:1124 cgi/oop/Controller/Bet.pm:1131
-#: cgi/templates/default/account/statement.tt:45
+#: cgi/templates/default/account/statement.tt:47
 #: cgi/templates/default/backoffice/account/statement.tt:49
-#: cgi/tick_trades.cgi:255
+#: cgi/tick_trades.cgi:229
 msgid "Ticks"
 msgstr "Intervalles"
 
@@ -8206,15 +8117,11 @@ msgstr "Pour changer votre nom, date de naissance ou pays de résidence, veuille
 msgid "To continue using our cashier system, please try accessing it again:"
 msgstr "Pour continuer à utiliser notre système de caisse, veuillez réessayer d'y accéder:"
 
-#: cgi/templates/default/account/currency_converter.tt:9
-msgid "To convert money between the different currencies in your account, please use the form below."
-msgstr "Pour convertir l'argent entre les différentes devises sur votre compte, veuillez utiliser le formulaire ci-dessous."
-
 #: cgi/templates/default/misc/logintrouble.tt:6
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "Pour activer les cookies, suivez les instructions ci-dessous pour la version du navigateur que vous utilisez."
 
-#: cgi/subs/subs_clientdetails.pm:157
+#: cgi/subs/subs_clientdetails.pm:133
 msgid "To fully authenticate your account, please email scanned copies of the document listed below."
 msgstr "Pour authentifier complètement votre compte, veuillez envoyer par émail des copies numérisées du document mentionné ci-dessous."
 
@@ -8453,7 +8360,7 @@ msgstr "Transfert depuis le compte %1"
 msgid "Transfer from another account"
 msgstr "Transfert depuis un autre compte"
 
-#: cgi/paymentagent_withdraw.cgi:195
+#: cgi/paymentagent_withdraw.cgi:206
 msgid "Transfer to"
 msgstr "Transfert à"
 
@@ -8496,7 +8403,7 @@ msgstr "Triangulaire"
 msgid "Triangular moving averages place the majority of the weight on the middle portion of the price series. They are actually double-smoothed simple moving averages. The periods used in the simple moving averages varies depending on if you specify an odd or even number of time periods."
 msgstr "Les moyennes mobiles triangulaires placent la majorité du poids sur la portion intermédiaire de la série de prix. Il s'agit en réalité de moyennes mobiles simples doublement lissées. Les périodes utilisées pour les moyennes mobiles simples varient selon que vous spécifiez un nombre pair ou impair de périodes de temps."
 
-#: cgi/tick_trades.cgi:525
+#: cgi/tick_trades.cgi:500
 msgid "Troubleshooting"
 msgstr "Problèmes et solutions"
 
@@ -8536,7 +8443,7 @@ msgstr "Actions de GB"
 msgid "UK and Manx residents will have their account opened with Regent Markets (IOM) Ltd."
 msgstr "Les résidents du RU et Manx auront leur compte ouvert avec Regent Markets (IOM) Ltd."
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "UP"
 msgstr "HAUT"
 
@@ -8608,14 +8515,6 @@ msgstr "Mise à Jour"
 #: cgi/subs/subs_forms.pm:3627
 msgid "Update Settings"
 msgstr "Mise à jour des paramètres"
-
-#: cgi/register-api.cgi:146
-msgid "Update failed.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:149
-msgid "Update successful"
-msgstr ""
 
 #: cgi/templates/default/global/header.tt:9
 #: frontend/templates/layouts/default/topbar.html.haml:1
@@ -8700,11 +8599,11 @@ msgstr "Voir les prix de contrats Hausse/Baisse sur différents marchés."
 msgid "View Trading Times"
 msgstr "Voir heures de Trading"
 
-#: cgi/top_up_virtual.cgi:94 cgi/top_up_virtual.cgi:95
+#: cgi/top_up_virtual.cgi:89 cgi/top_up_virtual.cgi:90
 msgid "View Updated Portfolio"
 msgstr "Vue du Portefeuille Actualisé"
 
-#: cgi/subs/subs_payments_withdrawals.pm:114
+#: cgi/subs/subs_payments_withdrawals.pm:106
 msgid "View and increase your"
 msgstr "Visualisez et augmentez votre"
 
@@ -8736,11 +8635,7 @@ msgstr "Voir progrès"
 msgid "View result"
 msgstr "Voir résultat"
 
-#: cgi/currency_converter.cgi:221
-msgid "View statement"
-msgstr "Voir la déclaration"
-
-#: cgi/tick_trades.cgi:243
+#: cgi/tick_trades.cgi:217
 msgid "View statement."
 msgstr "Voir le relevé."
 
@@ -8761,7 +8656,7 @@ msgstr "Voir vos transactions historiques."
 msgid "View your open positions."
 msgstr "Voir vos positions ouvertes."
 
-#: cgi/paymentagent_transfer.cgi:244 cgi/paymentagent_withdraw.cgi:367
+#: cgi/paymentagent_transfer.cgi:245 cgi/paymentagent_withdraw.cgi:377
 msgid "View your statement"
 msgstr "Voir votre extrait"
 
@@ -8816,10 +8711,6 @@ msgstr "Nous sommes pleinement agréés sur les Iles Britanniques et à Malte."
 #: cgi/subs/subs_forms.pm:410
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "Nous n'acceptions pas de comptes de résidents de ce pays pour le moment."
-
-#: cgi/currency_converter.cgi:107
-msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
-msgstr "Nous sommes désolés, nous n'autorisons pas la conversion si vous avez déjà utilisé une carte de crédit/de débit pour faire un dépôt sur le segment de votre compte."
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:176
@@ -8891,7 +8782,9 @@ msgid "We were unable to recover your Login ID or Password with the provided inf
 msgstr "Nous n'avons pas été en mesure de récupérer votre Identifiant de connexion ou Mot de passe à partir des informations fournies. <a href=\"%1\">Retournez à la Récupération de Mot de Passe</a>, ou <a href=\"%2\"><strong>contactez-nous</strong></a> si vous avez besoin d'aide."
 
 #: cgi/subs/subs_clientdetails.pm:112
-msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+#, fuzzy
+#| msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
 msgstr "Nous n'avons pas été en mesure de vérifier votre identité et de confirmer votre adresse de résidence en utilisant notre procédure de vérification en ligne. Cependant, vous pouvez toujours authentifier votre compte en nous envoyant les documents suivants par courrier."
 
 #. (site_name)
@@ -8909,7 +8802,7 @@ msgid "We will send you an e-mail asking you to verify your identity. If you don
 msgstr "Nous vous enverrons un émail vous demandant de vérifier votre identité. Si vous ne recevez pas d’émail de notre part dans les minutes qui suivent votre demande de réinitialisation, veuillez vérifier votre dossier spam/courrier indésirable."
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_transfer.cgi:251
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -8926,7 +8819,7 @@ msgstr ""
 "L'équipe %4."
 
 #. ($currency, $amount, $client_name, $client_loginid, $paymentagent_loginid, $website->display_name)
-#: cgi/paymentagent_withdraw.cgi:382
+#: cgi/paymentagent_withdraw.cgi:392
 msgid "We would like to inform you that the withdrawal request of %1%2 by %3 %4 has been processed. The funds have been credited into your account %5 at %6."
 msgstr "Nous aimerions vous informer que la demande de retrait de %1%2 par %3 %4 a été prise en charge. Les fonds ont été crédités sur votre compte %5 à %6."
 
@@ -8996,7 +8889,7 @@ msgstr "Indicateur de volume pondéré basé sur la variation d'une journée du 
 msgid "Welcome!"
 msgstr "Bienvenue!"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:441
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
 msgid "Western Union"
 msgstr "Western Union"
 
@@ -9235,7 +9128,7 @@ msgstr "Avec un access_token actuel il est maintenant possible d'effectuer des a
 msgid "With payouts from $1 to $100,000, we have you covered."
 msgstr "Avec des montants de $1 à $100,000, chacun trouvera sa place."
 
-#: cgi/templates/default/account/statement.tt:140
+#: cgi/templates/default/account/statement.tt:145
 #: cgi/templates/default/cashier/available_payment_methods.tt:19
 msgid "Withdraw"
 msgstr "Retrait"
@@ -9307,8 +9200,8 @@ msgstr "Retrait : %1 jour ouvrable"
 msgid "Withdraw: Not applicable"
 msgstr "Retrait: Non applicable"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
 #: lib/BOM/Platform/Model/Payment.pm:155
 msgid "Withdrawal"
 msgstr "Retrait"
@@ -9318,7 +9211,7 @@ msgstr "Retrait"
 msgid "Withdrawal amount (%1 %2) is greater than your balance (%3 %4)."
 msgstr "Le montant de retrait (%1 %2) est supérieur à votre solde (%3 %4)."
 
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:144
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:136
 #: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:94
 msgid "Withdrawal amount exceeds your limits."
 msgstr "Le montant du retrait dépasse vos limites."
@@ -9337,7 +9230,7 @@ msgstr "Limites de prélèvement"
 msgid "Withdrawal using legacy method: %1"
 msgstr "Retrait au moyen d'une méthode de legs : %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Withdrawal via BACS"
 msgstr "Retrait via BACS"
@@ -9346,7 +9239,7 @@ msgstr "Retrait via BACS"
 msgid "Withdrawal via Bank Transfer"
 msgstr "Retrait via Transfert Bancaire"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Withdrawal via Credit/Debit card"
 msgstr "Retrait via carte de crédit/débit"
@@ -9355,7 +9248,7 @@ msgstr "Retrait via carte de crédit/débit"
 msgid "Withdrawal via DoughFlow"
 msgstr "Retrait via DoughFlow"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Withdrawal via Western Union"
 msgstr "Retrait via Western Union"
 
@@ -9364,7 +9257,7 @@ msgstr "Retrait via Western Union"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "Retrait via Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "Retrait via virement bancaire"
@@ -9416,7 +9309,7 @@ msgstr "Vous avez également le droit de nous demander de vous informer des donn
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "Vous et nous sommes des contractants indépendants, et rien dans cet Accord ne créera un quelconque partenariat, une coentreprise, une agence, une franchise, un représentant des ventes ou une relation d'emploi entre les parties. Vous ne disposerez d'aucune autorité pour faire ou accepter toute offre ou représentation en notre nom. Vous n'émettrez aucune déclaration, sur votre site ou ailleurs, contredisant clairement le contenu de ce paragraphe."
 
-#: cgi/oop/Controller/Bet.pm:1973
+#: cgi/oop/Controller/Bet.pm:1972
 msgid "You are being given the better price."
 msgstr "Les meilleurs prix vous sont donnés."
 
@@ -9467,6 +9360,12 @@ msgstr "Vous pouvez revendre les trades à long terme à n'importe quel moment a
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "Vous pouvez déterminer la durée de votre trade, de 10 secondes à 365 jours."
 
+#: cgi/subs/subs_clientdetails.pm:114
+#, fuzzy
+#| msgid "To fully authenticate your account, please email scanned copies of the document listed below."
+msgid "You can still authenticate your account by sending us scans of the following documents by email"
+msgstr "Pour authentifier complètement votre compte, veuillez envoyer par émail des copies numérisées du document mentionné ci-dessous."
+
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You can trade a range of markets, timescales and indices – 24/7."
 msgstr "Vous pouvez trader avec un assortiment de marchés, de durées et d'indices - 24/7."
@@ -9477,7 +9376,7 @@ msgid "You can try another <a href=\"%1\">payment option</a> or for additional a
 msgstr "Vous pouvez essayer une autre <a href=\"%1\">option de paiement</a> ou pour plus d'aide:"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:105
+#: cgi/paymentagent_transfer.cgi:107
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "Vous ne pouvez pas faire de transfert vers le compte %1, étant donné que leur compte est actuellement désactivé."
 
@@ -9526,11 +9425,7 @@ msgstr "Vous avez déjà retiré l'équivalent de EUR %1 en cumulé au cours de 
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "Vous avez déjà retiré l'équivalent de EUR %1."
 
-#: cgi/subs/subs_homepage.pm:139
-msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
-msgstr "Vous avez acheté des contrats avec un prix d'achat combiné égal à cinq fois le montant du bonus."
-
-#: cgi/subs/subs_homepage.pm:158
+#: cgi/subs/subs_homepage.pm:123
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "Vous avez acheté des contrats avec un prix d'achat combiné égal à cinq fois le montant du bonus."
 
@@ -9544,8 +9439,8 @@ msgstr "Vous avez entré une adresse IP non valide."
 msgid "You have entered an invalid login ID"
 msgstr "Vous avez entré un Identifiant de connexion non valide"
 
-#: lib/BOM/Product/Transaction.pm:1087 lib/BOM/Product/Transaction.pm:1354
-#: lib/BOM/Product/Transaction.pm:1382 lib/BOM/Product/Transaction.pm:1416
+#: lib/BOM/Product/Transaction.pm:1086 lib/BOM/Product/Transaction.pm:1353
+#: lib/BOM/Product/Transaction.pm:1381 lib/BOM/Product/Transaction.pm:1415
 msgid "You have exceeded the daily limit for contracts of this type."
 msgstr "Vous avez dépassé la limite quotidienne pour les contrats de ce type."
 
@@ -9595,10 +9490,6 @@ msgstr "Vous ne devez pas acheter ou enregistrer des mots-clés, termes de reche
 msgid "You may only open an account at this site on condition that:"
 msgstr "Vous pouvez uniquement ouvrir un compte sur ce site à condition de:"
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "You may purchase contracts in any of these currencies."
-msgstr "Vous pouvez acheter des contrats dans l'une de ces devises."
-
 #: cgi/templates/default/legal/promocode.tt:25
 msgid "You may withdraw the Y deposited to claim the bonus and any winnings generated by the bonus at any time."
 msgstr "Vous pouvez retirer le Y déposé pour revendiquer le bonus et tout gain généré par le bonus à tout moment."
@@ -9617,7 +9508,7 @@ msgstr "Vous avez peut-être un compte déjà ouvert dans le système."
 msgid "You must be logged in to use the workspace feature.Account opening is free and takes only 30 seconds."
 msgstr "Vous devez être connecté pour utiliser la fonctionnalité d'espace de travail. L'ouverture d'un compte est gratuite et ne prend que 30 secondes."
 
-#: cgi/register-api.cgi:40
+#: cgi/register-api.cgi:36
 msgid "You must have a valid 'real' money account before registering as an API Developer"
 msgstr ""
 
@@ -9707,13 +9598,8 @@ msgstr "Vous utilisez un compte d'argent virtuel."
 msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 in other currency)."
 msgstr "Votre limite de retrait quotidien %1 est actuellement de <strong>EUR %2</strong> (ou %3 dans une autre devise)."
 
-#. ($min_deposit)
-#: cgi/subs/subs_homepage.pm:137
-msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
-msgstr "Votre <strong>premier</strong> dépôt est égal ou supérieur à %1 dans toute devise, et"
-
 #. ($currency_label, $min_deposit)
-#: cgi/subs/subs_homepage.pm:156
+#: cgi/subs/subs_homepage.pm:121
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "Votre <strong>premier</strong> dépôt est égale ou supérieur à %1%2, et"
 
@@ -9746,17 +9632,17 @@ msgstr "Votre Identifiant de connexion ne doit pas contenir d'espaces."
 msgid "Your Public Key"
 msgstr ""
 
-#: cgi/currency_converter.cgi:131 cgi/subs/subs_payments_withdrawals.pm:107
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:99
 msgid "Your account balance"
 msgstr "Le solde de votre compte"
 
 #. ($currency,                to_monetary_number_format($balance)
-#: lib/BOM/Product/Transaction.pm:952
+#: lib/BOM/Product/Transaction.pm:951
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "Le solde de votre compte (%1%2) est insuffisant pour acheter ce contrat (%1%3)."
 
-#: cgi/subs/subs_clientdetails.pm:168
+#: cgi/subs/subs_clientdetails.pm:144
 msgid "Your account does not require authentication at this time."
 msgstr "Votre compte ne doit pas être authentifié en ce moment."
 
@@ -9772,7 +9658,7 @@ msgstr "Votre compte a été crédité de <strong>%1 %2</strong>"
 msgid "Your account has been debited with %1 %2"
 msgstr "Votre compte a été débité de %1 %2"
 
-#: lib/BOM/Product/Transaction.pm:1326
+#: lib/BOM/Product/Transaction.pm:1325
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
 msgstr "Votre compte a dépassé la limite de trading avec code promotionnel gratuit, veuillez faire un dépôt si vous voulez continuer à trader."
 
@@ -9790,11 +9676,11 @@ msgid "Your account is fully authenticated and your withdrawal limit of EUR %1 h
 msgstr "Votre compte est entièrement authentifié et votre limite de retrait de EUR %1 a été levée."
 
 #. (request()
-#: cgi/subs/subs_clientdetails.pm:83
+#: cgi/subs/subs_clientdetails.pm:84
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
 msgstr "Votre compte est entièrement authentifié. Vous pouvez voir vos <a href=\"%1\">%limites de trading ici</a>."
 
-#: cgi/subs/subs_clientdetails.pm:151
+#: cgi/subs/subs_clientdetails.pm:127
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
 msgstr "Votre compte est complètement opérationnel et vous pouvez commencer à déposer de l'argent et à acheter des contrats."
 
@@ -9816,14 +9702,6 @@ msgstr "Votre compte est enregistré en tant qu'Agent de Paiement."
 msgid "Your account is restricted to withdrawals only."
 msgstr "Vous pouvez seulement effectuer des retraits sur votre compte."
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "Your account may hold the following currencies"
-msgstr "Votre compte peut accueillir les devises suivantes"
-
-#: cgi/currency_converter.cgi:210
-msgid "Your account statement has been updated accordingly."
-msgstr "Votre relevé de compte vient d'être mis à jour en conséquence."
-
 #: cgi/oop/Validation/Transaction/Payment/Deposit.pm:45
 msgid "Your balance is over your allowed limit."
 msgstr "Votre solde dépasse votre limite permise."
@@ -9837,15 +9715,15 @@ msgstr ""
 msgid "Your bonus request - %1"
 msgstr "Votre demande de bonus - %1"
 
-#: cgi/subs/subs_homepage.pm:133 cgi/subs/subs_homepage.pm:152
+#: cgi/subs/subs_homepage.pm:117
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "Votre bonus sera crédité sur votre compte endéans les 3 jours ouvrables une fois que les conditions suivantes auront été satisfaites:"
 
-#: cgi/subs/subs_homepage.pm:166
+#: cgi/subs/subs_homepage.pm:130
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "Votre bonus sera crédité sur votre compte dans un délai de 3 jours ouvrables après que vous ayez acheté des contrats avec un prix d'achat combiné égal ou supérieur au montant du bonus."
 
-#: cgi/subs/subs_homepage.pm:175
+#: cgi/subs/subs_homepage.pm:139
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "Votre bonus sera crédité sur votre compte dans un délai de 3 jours ouvrables."
 
@@ -9861,7 +9739,7 @@ msgstr "Votre caisse est verrouillée par un mot de passe."
 msgid "Your cashier is locked."
 msgstr "Votre caisse est verrouillée."
 
-#: cgi/paymentagent_transfer.cgi:112
+#: cgi/paymentagent_transfer.cgi:114
 msgid "Your cashier section is locked."
 msgstr "Votre section caisse est verrouillée."
 
@@ -9916,7 +9794,7 @@ msgstr "Votre nom"
 msgid "Your name/company"
 msgstr "Votre nom/entreprise"
 
-#: cgi/oop/Controller/Bet.pm:1930
+#: cgi/oop/Controller/Bet.pm:1932
 msgid "Your new account balance is %s %s"
 msgstr "Le nouveau solde de votre compte est %s %s"
 
@@ -9925,7 +9803,7 @@ msgid "Your old password is incorrect"
 msgstr "Votre ancien mot de passe est incorrect"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:1978
+#: cgi/oop/Controller/Bet.pm:1977
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "Votre instruction (Référence # <span id=\"reference_no\">%1</span>) a été exécutée à %2."
 
@@ -9975,11 +9853,11 @@ msgstr "Vos informations personnelles sont utilisées avant tout comme un moyen 
 msgid "Your phone number"
 msgstr "Votre numéro de téléphone"
 
-#: cgi/tick_trades.cgi:259
+#: cgi/tick_trades.cgi:233
 msgid "Your prediction"
 msgstr "Votre prédiction"
 
-#: cgi/tick_trades.cgi:263
+#: cgi/tick_trades.cgi:237
 msgid "Your prediction, the market will move :"
 msgstr "Votre prédiction, le marché va bouger:"
 
@@ -9988,12 +9866,12 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "Votre demande de révocation de la procuration a été reçue. Veuillez nous donner 2 jours ouvrables pour nous permettre de traiter cette demande."
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:239
+#: cgi/paymentagent_transfer.cgi:240
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "Votre demande de transférer %1 %2 de %3 à %4 a été traitée avec succès."
 
 #. ($currency, $amount, $client_loginid, $paymentagent->payment_agent_name)
-#: cgi/paymentagent_withdraw.cgi:362
+#: cgi/paymentagent_withdraw.cgi:372
 msgid "Your request to withdraw %1 %2 from your account %3 to Payment Agent %4 account has been successfully processed."
 msgstr "Votre demande de retirer %1 %2 de votre compte %3 pour le compte de l'Agent de Paiement %4 a été traitée avec succès."
 
@@ -10010,7 +9888,7 @@ msgid "Your settings have been updated successfully."
 msgstr "Vos paramètres ont été actualisés avec succès."
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1937
+#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1936
 msgid "Your transaction reference number is %1"
 msgstr "Le numéro de référence de votre transaction est %1"
 
@@ -10048,7 +9926,7 @@ msgstr "une limite sur le montant que vous pouvez parier dans une période de te
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "une limite sur les pertes que vous pouvez subir dans une période de temps spécifiée;"
 
-#: cgi/subs/subs_clientdetails.pm:125 cgi/subs/subs_clientdetails.pm:161
+#: cgi/subs/subs_clientdetails.pm:137
 msgid "and"
 msgstr "et"
 
@@ -10101,10 +9979,6 @@ msgstr "contactez nous"
 msgid "contract start time"
 msgstr "moment de début du contrat"
 
-#: cgi/currency_converter.cgi:161
-msgid "conversions today.  Please try again tomorrow"
-msgstr "conversions aujourd'hui.  Veuillez réessayer demain"
-
 #: cgi/subs/subs_BOMFeed_history.pm:384
 #: lib/BOM/Product/Model/ContractForm.pm:740
 msgid "days"
@@ -10138,11 +10012,11 @@ msgstr "le point d'entrée plus %1"
 msgid "entry spot plus %plural(%1,1 pip, %d pips)"
 msgstr "le point d'entrée plus %plural(%1,1 pip, %d pips)"
 
-#: cgi/limits.cgi:128 cgi/limits.cgi:90 cgi/limits.cgi:95
+#: cgi/limits.cgi:109 cgi/limits.cgi:79 cgi/limits.cgi:84
 msgid "equivalent"
 msgstr "équivalent"
 
-#: cgi/oop/Controller/Bet.pm:2010
+#: cgi/oop/Controller/Bet.pm:2009
 msgid "explanation"
 msgstr "explication"
 
@@ -10180,10 +10054,6 @@ msgstr "heure"
 msgid "hours"
 msgstr "heures"
 
-#: cgi/currency_converter.cgi:75
-msgid "is not available.  If this error persists, please email"
-msgstr "n'est pas disponible.  Si cette erreur persiste, veuillez envoyer un email"
-
 #: cgi/templates/default/charting/light_chart.tt:7
 msgid "less"
 msgstr "moins"
@@ -10200,7 +10070,7 @@ msgstr "barrière inférieure"
 msgid "lower"
 msgstr "inférieur"
 
-#: cgi/tick_trades.cgi:469
+#: cgi/tick_trades.cgi:444
 #, fuzzy
 #| msgid "Multi award-winning trading platform."
 msgid "main trading platform"
@@ -10237,12 +10107,6 @@ msgstr "minute"
 #: cgi/smartchart.cgi:304 cgi/subs/subs_BOMFeed_history.pm:433
 msgid "minutes"
 msgstr "minutes"
-
-#: cgi/register-api.cgi:105
-#, fuzzy
-#| msgid "Scope(s) missing"
-msgid "missing"
-msgstr "Portée(s) manquante(s)"
 
 #: cgi/templates/default/charting/light_chart.tt:8
 msgid "more"
@@ -10346,7 +10210,7 @@ msgstr "touche/ne touche pas"
 msgid "trades"
 msgstr "trades"
 
-#: cgi/tick_trades.cgi:455
+#: cgi/tick_trades.cgi:430
 msgid "trading is suspended at the moment."
 msgstr "le trading est suspendu pour le moment."
 
@@ -10371,7 +10235,7 @@ msgstr "avec cette donnée %1:"
 msgid "with this HTTP header"
 msgstr "avec cet en-tête HTTP"
 
-#: cgi/subs/subs_payments_withdrawals.pm:117
+#: cgi/subs/subs_payments_withdrawals.pm:109
 msgid "withdrawal limits"
 msgstr "limites de prélèvement"
 
@@ -12187,6 +12051,129 @@ msgstr "Désolé, l'accès par le biais de ce réseau IP a été désactivé. ve
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Désolé, vous avez déjà effectué trop de tentatives infructueuses. Veuillez réessayer dans 5 minutes."
 
+#~ msgid "%1 was converted to %2."
+#~ msgstr "%1 a été converti en %2."
+
+#~ msgid "1. Verification of identity"
+#~ msgstr "1. Vérification de l'identité"
+
+#~ msgid "2. Proof of address"
+#~ msgstr "2. Preuve d'adresse"
+
+#~ msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
+#~ msgstr "<li>ORIGINAL d'une Facture de services publics (dans les 3 derniers mois) ; ou</li><li>ORIGINAL du relevé de la carte de crédit/débit ou du livret d'épargne de la Banque/Caisse d'épargne/Société de crédit immobilier (dans les 3 derniers mois)</li>"
+
+#~ msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
+#~ msgstr "<li>copie du passeport en cours de validité ; ou</li><li>copie du Permis de conduire en cours de validité (provisoire ou normal)</li>"
+
+#~ msgid "An error occurred while processing request. If this error persists, please contact customer support."
+#~ msgstr "Une erreur s'est produite durant le traitement de la demande. Si l'erreur persiste, veuillez contacter le support clientèle"
+
+#, fuzzy
+#~| msgid "Payment Agent activity not currently authorized"
+#~ msgid "Application not currently authorized"
+#~ msgstr "Paiement de l'activité d'Agent n'est pas autorisé pour l'instant"
+
+#, fuzzy
+#~| msgid "Application error"
+#~ msgid "Application not yet registered"
+#~ msgstr "Erreur de l'application"
+
+#, fuzzy
+#~| msgid "This URL is invalid."
+#~ msgid "Callback URL data is invalid"
+#~ msgstr "Cet URL est invalide."
+
+#, fuzzy
+#~| msgid "This URL is invalid."
+#~ msgid "Callback URL format is invalid"
+#~ msgstr "Cet URL est invalide."
+
+#, fuzzy
+#~| msgid "Authentication failure"
+#~ msgid "Cancellation failed"
+#~ msgstr "Echec de l'authentification"
+
+#~ msgid "Cash Balance"
+#~ msgstr "Solde de trésorerie"
+
+#~ msgid "Convert"
+#~ msgstr "Convertir"
+
+#~ msgid "Convert %1%2 to %3"
+#~ msgstr "Convertir %1%2 en %3"
+
+#~ msgid "Convert between your currency segment accounts"
+#~ msgstr "Convertir entre les segments monétaires de votre compte"
+
+#~ msgid "Error: Both currencies are the same!  You must convert from one currency to another."
+#~ msgstr "Erreur: les deux devises sont identiques! Vous devez convertir une devise vers une autre."
+
+#~ msgid "Error: The exchange rate for"
+#~ msgstr "Erreur : le taux d'échange pour"
+
+#~ msgid "Limit</strong><br>(per currency)"
+#~ msgstr "Limite</strong><br>(par devise)"
+
+#~ msgid "Note:"
+#~ msgstr "Remarque:"
+
+#~ msgid "SOLD"
+#~ msgstr "VENDU"
+
+#~ msgid "Sorry, the currency amount to convert is incorrect."
+#~ msgstr "Désolé, le montant de la devise à convertir est incorrect."
+
+#~ msgid "Sorry, the currency amount to convert is too small."
+#~ msgstr "Désolé, le montant de la devise à convertir est trop petit."
+
+#~ msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
+#~ msgstr "Désolé, le montant maximal des conversions de devises autorisé par jour est de 3.  Vous l'avez déjà atteint"
+
+#~ msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
+#~ msgstr "Désolé, le montant de la devise à convertir est trop élevé. Le maximum par transaction est de %1"
+
+#~ msgid "Sorry, you cannot convert"
+#~ msgstr "Désolé, vous ne pouvez pas convertir"
+
+#~ msgid "Success"
+#~ msgstr "Succès"
+
+#~ msgid "To convert money between the different currencies in your account, please use the form below."
+#~ msgstr "Pour convertir l'argent entre les différentes devises sur votre compte, veuillez utiliser le formulaire ci-dessous."
+
+#~ msgid "View statement"
+#~ msgstr "Voir la déclaration"
+
+#~ msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
+#~ msgstr "Nous sommes désolés, nous n'autorisons pas la conversion si vous avez déjà utilisé une carte de crédit/de débit pour faire un dépôt sur le segment de votre compte."
+
+#~ msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
+#~ msgstr "Vous avez acheté des contrats avec un prix d'achat combiné égal à cinq fois le montant du bonus."
+
+#~ msgid "You may purchase contracts in any of these currencies."
+#~ msgstr "Vous pouvez acheter des contrats dans l'une de ces devises."
+
+#~ msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
+#~ msgstr "Votre <strong>premier</strong> dépôt est égal ou supérieur à %1 dans toute devise, et"
+
+#~ msgid "Your account may hold the following currencies"
+#~ msgstr "Votre compte peut accueillir les devises suivantes"
+
+#~ msgid "Your account statement has been updated accordingly."
+#~ msgstr "Votre relevé de compte vient d'être mis à jour en conséquence."
+
+#~ msgid "conversions today.  Please try again tomorrow"
+#~ msgstr "conversions aujourd'hui.  Veuillez réessayer demain"
+
+#~ msgid "is not available.  If this error persists, please email"
+#~ msgstr "n'est pas disponible.  Si cette erreur persiste, veuillez envoyer un email"
+
+#, fuzzy
+#~| msgid "Scope(s) missing"
+#~ msgid "missing"
+#~ msgstr "Portée(s) manquante(s)"
+
 #~ msgid "%1 Tools"
 #~ msgstr "Outils de %1"
 
@@ -12431,9 +12418,6 @@ msgstr "Désolé, vous avez déjà effectué trop de tentatives infructueuses. V
 #~ msgid "Select a lower payout"
 #~ msgstr "Sélectionnez une mise inférieur"
 
-#~ msgid "Sorry, you cannot sell"
-#~ msgstr "Désolé, vous ne pouvez pas vendre"
-
 #~ msgid "Sorry, you have exceeded a BOUNDARY contract weekly PAYOUT of USD%1 on %2 which is the maximum weekly PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 #~ msgstr "Désolé, vous avez dépassé une LIMITE de contrat de GAINS hebdomadaires de USD%1 sur %2 qui est le GAIN hebdomadaire maximal autorisé. Veuillez placer un contrat sur un sous-jacent différent, ou réduisez votre mise."
 
@@ -12496,9 +12480,6 @@ msgstr "Désolé, vous avez déjà effectué trop de tentatives infructueuses. V
 
 #~ msgid "In order to continue trading or deposit, you must either complete all of our <a href=\"%1\">authentication procedures</a> which will increase your account limits or <a href=\"%2\">withdraw</a> some funds."
 #~ msgstr "Afin de continuer à trader ou à faire des dépôts, vous devez compléter l'ensemble de nos <a href=\"%1\">procédures d'authentification</a> qui augmenteront les limites de votre compte, ou bien <a href=\"%2\">prélever</a> des fonds."
-
-#~ msgid "Limit"
-#~ msgstr "Limite"
 
 #~ msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is"
 #~ msgstr "Par conséquent, votre retrait maximal immédiat (à condition que votre compte soit suffisamment approvisionné) est actuellement de"

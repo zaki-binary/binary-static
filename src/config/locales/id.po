@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: I 18N\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2014-07-17 09:12+0000\n"
+"PO-Revision-Date: 2014-07-18 02:57+0000\n"
 "Last-Translator: Putri Kumala <putri@binary.com>\n"
 "Language-Team: Indonesian <http://example.com/projects/bom/currenttranslations/id/>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 1.5\n"
 
-#: cgi/top_up_virtual.cgi:83
+#: cgi/top_up_virtual.cgi:78
 msgid " has been credited to your Virtual money account"
 msgstr " telah dikreditkan kedalam akun uang virtual anda"
 
@@ -110,8 +110,8 @@ msgid "%1 Period"
 msgstr "%1 Periode"
 
 #. (localize('Tick Trades')
-#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:129 cgi/tick_trades.cgi:133
-#: cgi/tick_trades.cgi:283 cgi/tick_trades.cgi:299
+#: cgi/contract_demo.cgi:99 cgi/tick_trades.cgi:103 cgi/tick_trades.cgi:107
+#: cgi/tick_trades.cgi:257 cgi/tick_trades.cgi:273
 msgid "%1 Up/Down"
 msgstr "%1 Naik/Turun"
 
@@ -223,7 +223,7 @@ msgid "%1 minute quotes"
 msgstr "%1 menit kutipan"
 
 #. (localize('Tick Trades')
-#: cgi/tick_trades.cgi:156
+#: cgi/tick_trades.cgi:130
 msgid "%1 offer you the chance to trade on a very short-term event and make money in seconds!"
 msgstr "%1 menawarkan kontrak dalam waktu singkat dan menghasilkan untung dalam hitungan detik!"
 
@@ -286,11 +286,6 @@ msgstr "%1 menyediakan fasilitas pengecualian diri atau"
 #: frontend/templates/static/responsible_trading.html.haml:1
 msgid "%1 supports <a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare has a commitment to promote responsible attitudes to gambling and to work for the provision of proper care for those who have been harmed by gambling dependency. Other websites that provide information about gambling or gambling addiction are:"
 msgstr "%1 mendukung <a target=\"_blank\" href=\"http://www.gamcare.org.uk\">GamCare</a>. GamCare memiliki komitmen untuk mempromosikan sikap bertanggung jawab pada trading dan bekerja untuk penyediaan perawatan yang tepat bagi mereka yang telah dirugikan oleh ketergantungan trading. Situs lain yang memberikan informasi tentang trading atau kecanduan trading adalah:"
-
-#. ("$currencyfrom $currencyfromvalue", "$currencyto $res")
-#: cgi/currency_converter.cgi:209
-msgid "%1 was converted to %2."
-msgstr "%1 telah dikonversi ke %2."
 
 #. ('ACCESS_TOKEN')
 #: frontend/templates/static/devguide.html.haml:1
@@ -393,10 +388,6 @@ msgstr "* Bebas Pajak: Pada umumnya, silakan berkonsultasi dengan penasihat paja
 msgid "1. Choose the Underlying"
 msgstr "1. Pilih Jenis Market"
 
-#: cgi/subs/subs_clientdetails.pm:115
-msgid "1. Verification of identity"
-msgstr "1. Pembuktian identitas"
-
 #: frontend/templates/home/index.html.haml:1
 msgid "10 seconds to 365 days..."
 msgstr "10 detik hingga 365 hari..."
@@ -437,10 +428,6 @@ msgstr "Harga 2-arah"
 msgid "2. Choose the Duration of the Trade"
 msgstr "2. Pilih Durasi Kontrak"
 
-#: cgi/subs/subs_clientdetails.pm:128
-msgid "2. Proof of address"
-msgstr "2. Bukti alamat"
-
 #: cgi/templates/default/charting/livechart_duration.tt:19
 msgid "2d"
 msgstr "2hari"
@@ -480,18 +467,6 @@ msgstr "6jam"
 #: cgi/subs/subs_forms.pm:1742
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>Bagian kasir dan pengaturan akun anda sudah dikunci</strong> - jika anda ingin membukanya, silakan masukkan kata sandi."
-
-#: cgi/subs/subs_clientdetails.pm:131
-msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
-msgstr "<li>Bukti tagihan ASLI (dalam tempo 3 bulan) ; atau</li><li>Dokumen asli tagihan kartu kredit/debit/rekening koran (dalam tempo 3 bulan)</li>"
-
-#: cgi/subs/subs_clientdetails.pm:119
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
-msgstr "<li>Salinan paspor atau</li><li>Salinan SIM atau</li><li>KTP</li>"
-
-#: cgi/subs/subs_clientdetails.pm:122
-msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
-msgstr "<li>Salinan paspor atau</li><li>Salinan SIM</li>"
 
 #: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
 #: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2291
@@ -623,7 +598,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>Harga diacukan</strong> - %1 mengacu harga harian sesuai dengan market derivatif antar bank."
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:1970
+#: cgi/oop/Controller/Bet.pm:1969
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>Harga eksekusi lebih baik!</strong><br /> Harga telah bergerak dari %1 ke %2."
 
@@ -699,11 +674,11 @@ msgid "<strong>No surprises</strong> - you will never have margin calls, gap ris
 msgstr "<strong>Tanpa kejutan</strong> - anda tidak akan dikenakan margin call, resiko gap, biaya slippage, komisi tambahan."
 
 # 82%
-#: cgi/tick_trades.cgi:190 cgi/tick_trades.cgi:196
+#: cgi/tick_trades.cgi:164 cgi/tick_trades.cgi:170
 msgid "<strong>Note:</strong> There is a 1.5% commission on any payout."
 msgstr "<strong>Nota:</strong> Terdapat komisi 1.5% pada semua hasil."
 
-#: cgi/tick_trades.cgi:201 cgi/tick_trades.cgi:205
+#: cgi/tick_trades.cgi:175 cgi/tick_trades.cgi:179
 msgid "<strong>Note:</strong> There is no commission on any winnings."
 msgstr "<strong>Nota:</strong> Tidak terdapat komisi pada setiap keuntungan."
 
@@ -928,7 +903,7 @@ msgstr "Anggota Tim Customer Support kami akan menghubungi anda sebentar lagi."
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "Sebuah indikator mementum yang memperlihatkan perubahan harga persen pada pergerakan rata-rata  triple exponentially smoothed. Seperti oscillator lainnya, TRIX bergerak mengelilingi baris nol."
 
-#: cgi/tick_trades.cgi:466
+#: cgi/tick_trades.cgi:441
 msgid "A much more flexible version of Tick Trades is available on the "
 msgstr ""
 
@@ -953,9 +928,19 @@ msgstr "Masalah terjadi"
 msgid "A problem occurred while connecting to the server. Please try again later."
 msgstr "Masalah terdeteksi pada saat menghubungi server. Silakan coba kembali sebentar lagi."
 
+#: cgi/subs/subs_clientdetails.pm:118
+msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
+msgstr ""
+
 #: cgi/templates/default/email/bonus_reject.tt:19
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr "Salinan scan dari tagihan utilitas yang menunjukkan alamat tempat tinggal anda saat ini (tagihan utilitas tidak boleh lebih dari 3 bulan)."
+
+#: cgi/subs/subs_clientdetails.pm:116
+#, fuzzy
+#| msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
+msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
+msgstr "<li>Salinan paspor atau</li><li>Salinan SIM atau</li><li>KTP</li>"
 
 #: cgi/templates/default/email/bonus_reject.tt:18
 msgid "A scanned copy of your passport or driver's licence."
@@ -1064,11 +1049,11 @@ msgstr "Akumulasi/Distribusi"
 msgid "Accuracy of Information"
 msgstr "Akurasi Informasi"
 
-#: cgi/paymentagent_transfer.cgi:261
+#: cgi/paymentagent_transfer.cgi:262
 msgid "Acknowledgement of Money Transfer"
 msgstr "Pemberitahuan Transfer Dana"
 
-#: cgi/paymentagent_withdraw.cgi:393
+#: cgi/paymentagent_withdraw.cgi:403
 msgid "Acknowledgement of Withdrawal Request"
 msgstr "Pemberitahuan Permohonan Penarikan Dana"
 
@@ -1080,7 +1065,7 @@ msgstr "Perolehan"
 msgid "Acquisition of financial contracts through this site must be effected in accordance with the terms and conditions presented on the pages of this site. Acquisition of a financial contract is completed when the financial contract has been customised, the premium (or the payout, as the case may be) has been calculated and payment has been verified."
 msgstr "Akusisi kontrak trading finansial pada situs ini harus disesuaikan dengan terma dan kondisi yang dinyatakan pada halaman situs ini. Akusisi kontrak trading finansial adalah lengkap jika kontrak trading finansial telah ditetapkan, modal (atau hasil) telah dihitung dan pembayaran telah diverifikasi."
 
-#: cgi/templates/default/account/statement.tt:109
+#: cgi/templates/default/account/statement.tt:114
 msgid "Action"
 msgstr "Aksi"
 
@@ -1146,7 +1131,7 @@ msgstr "Semua opini, berita, penelitian, analisis, harga atau informasi lain yan
 msgid "All the times on the website and contract settlements are according to GMT (Greenwich Mean Time)."
 msgstr "Seluruh waktu dan penyelesaian kontrak adalah dalam waktu GMT (Greenwich Mean Time)."
 
-#: cgi/paymentagent_withdraw.cgi:198 cgi/subs/subs_forms.pm:3805
+#: cgi/paymentagent_withdraw.cgi:209 cgi/subs/subs_forms.pm:3805
 #: cgi/subs/subs_forms.pm:4006
 msgid "Amount"
 msgstr "Jumlah"
@@ -1155,7 +1140,7 @@ msgstr "Jumlah"
 msgid "Amount must be a positive number."
 msgstr "Jumlah harus angka positif."
 
-#: cgi/tick_trades.cgi:247
+#: cgi/tick_trades.cgi:221
 msgid "Amount you wish to trade:"
 msgstr "Jumlah yang ingin anda tradingkan:"
 
@@ -1175,14 +1160,10 @@ msgstr "Juga tersedia penyediaan otomatis <a href=\"https://apigee.com/rmg/resou
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "Terjadi kesalahan: Sistem tidak dapat memasukkan anda (2)."
 
-#: cgi/paymentagent_transfer.cgi:118 cgi/paymentagent_transfer.cgi:124
-#: cgi/paymentagent_withdraw.cgi:208 cgi/paymentagent_withdraw.cgi:213
+#: cgi/paymentagent_transfer.cgi:120 cgi/paymentagent_transfer.cgi:126
+#: cgi/paymentagent_withdraw.cgi:219 cgi/paymentagent_withdraw.cgi:224
 msgid "An error occurred while processing request. If this error persists, please contact customer support"
 msgstr "Telah terjadi error pada saat memproses permintaan. Jika error ini masih terjadi, silahkan hubungi customer support"
-
-#: cgi/currency_converter.cgi:172
-msgid "An error occurred while processing request. If this error persists, please contact customer support."
-msgstr "Telah terjadi error pada saat memproses permintaan. Jika error ini masih terjadi, silahkan hubungi customer support."
 
 #: cgi/subs/subs_BOMFeed_history.pm:553
 #: cgi/subs/subs_graphs_chartdirector.pm:384
@@ -1248,30 +1229,9 @@ msgstr "Setiap pemberitahuan yang diberikan atau dibuat berdasarkan Perjanjian i
 msgid "Anyone over the age 18 [who has read and agreed to the %1 terms and conditions], and who is not resident in one of the 'closed countries' can trade on the %1 platform."
 msgstr "Siapa saja yang berumur 18 tahun keatas [dan sudah membaca dan mengetahui terma dan syarat %1] dan tidak bertempat tinggal di negara 'tertentu' pada platform %1."
 
-#. ($display_name)
-#: cgi/register-api.cgi:196
-msgid "Application %1 has been registered.  Your new OAuth credentials are shown below"
-msgstr "Aplikasi % telah terdaftar. Kredensial OAuth baru anda ditampilkan berikut ini"
-
 #: cgi/templates/default/api/register.tt:7
 msgid "Application Name"
 msgstr "Nama aplikasi"
-
-#: cgi/register-api.cgi:112
-msgid "Application Name data is invalid"
-msgstr "Data nama aplikasi tidak berlaku"
-
-#: cgi/register-api.cgi:193
-msgid "Application cannot be registered.  Request support."
-msgstr "Aplikasi tidak dapat didaftarkan. Minta bantuan."
-
-#: cgi/register-api.cgi:92
-msgid "Application not currently authorized"
-msgstr "Aplikasi tidak dapat diluluskan"
-
-#: cgi/register-api.cgi:76
-msgid "Application not yet registered"
-msgstr "Aplikasi belum didaftarkan"
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Apply for access"
@@ -1420,7 +1380,7 @@ msgstr "Indeks Rata-Rata Direksi"
 msgid "Avg True Range"
 msgstr "Jarak Rata-Rata"
 
-#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:85
+#: cgi/subs/subs_runbets_execute.pm:560 cgi/tick_trades.cgi:59
 msgid "Awaiting market ticks...."
 msgstr "Menunggu tik market..."
 
@@ -1436,7 +1396,7 @@ msgstr "KEMBALI KE HALAMAN DEPAN"
 msgid "BOM Charts Workspace"
 msgstr "Lembar kerja grafik BOM"
 
-#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:235
+#: cgi/emailus.cgi:193 cgi/tick_trades.cgi:209
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 #: lib/BOM/View/Form.pm:402
@@ -1448,13 +1408,14 @@ msgstr "Kembali"
 msgid "Bad input %1"
 msgstr "Input salah %1"
 
-#: cgi/templates/default/account/statement.tt:153
-#: cgi/templates/default/account/statement.tt:66
-#: cgi/templates/default/account/statement.tt:90
+#: cgi/templates/default/account/statement.tt:120
+#: cgi/templates/default/account/statement.tt:158
+#: cgi/templates/default/account/statement.tt:68
+#: cgi/templates/default/account/statement.tt:92
 msgid "Balance"
 msgstr "Saldo %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:444
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
 msgid "Bank Wire"
 msgstr "bank wire"
 
@@ -1492,7 +1453,7 @@ msgstr "Chart Bar HLC"
 msgid "Bar OHLC Chart"
 msgstr "Chart Bar OHLC"
 
-#: cgi/oop/Controller/Bet.pm:2194 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/resources/pricing_table_form.tt:59
 msgid "Barrier"
 msgstr "Batasan"
@@ -1510,7 +1471,7 @@ msgstr "Batasan tidak dapat dirubah."
 msgid "Barrier must be at least "
 msgstr "Batasan setidaknya "
 
-#: cgi/oop/Controller/Bet.pm:2193 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2192 cgi/templates/default/bet/form/barrier.tt:15
 msgid "Barrier offset"
 msgstr "Batasan offset"
 
@@ -1720,7 +1681,7 @@ msgstr "Namun anda tidak perlu menunggu hingga kontrak berakhir. Anda dapat menj
 msgid "But we’re picky. We only select people with special qualities: serious professionals, who have high moral standards, and thrive in an honest, collaborative environment."
 msgstr "Namun kami agak memilih. Kami hanya memilih orang-orang dengan kualitas khusus: profesional yang serius, memiliki standar moral tinggi, berkembang secara jujur dan memberi lingkungan kolaboratif."
 
-#: cgi/templates/default/account/statement.tt:76
+#: cgi/templates/default/account/statement.tt:78
 #: cgi/templates/default/backoffice/account/statement.tt:62
 msgid "Buy"
 msgstr "Beli"
@@ -1762,16 +1723,6 @@ msgstr "Hubungi Kami"
 msgid "Callback URL"
 msgstr "URL callback"
 
-#: cgi/register-api.cgi:115
-msgid "Callback URL data is invalid"
-msgstr "Data URL Callback tidak berlaku"
-
-#: cgi/register-api.cgi:121
-#, fuzzy
-#| msgid "This URL is invalid."
-msgid "Callback URL format is invalid"
-msgstr "URL ini tidak berlaku."
-
 #: cgi/subs/subs_forms_output.pm:99
 msgid "Callback services"
 msgstr "Layanan Callback"
@@ -1805,17 +1756,7 @@ msgstr "Membatalkan"
 
 #: cgi/templates/default/api/register.tt:27
 msgid "Cancel Registration"
-msgstr ""
-
-#: cgi/register-api.cgi:213
-#, fuzzy
-#| msgid "Authentication failure"
-msgid "Cancellation failed"
-msgstr "Otentikasi gagal"
-
-#: cgi/register-api.cgi:216
-msgid "Cancellation successful"
-msgstr ""
+msgstr "Batalkan Registrasi"
 
 #: cgi/subs/subs_BOMFeed_history.pm:347
 msgid "Candlestick Chart"
@@ -1834,10 +1775,6 @@ msgstr "Karir"
 #: cgi/subs/subs_BOMFeed_history.pm:336
 msgid "Cascade"
 msgstr "Riam"
-
-#: cgi/templates/default/account/statement.tt:115
-msgid "Cash Balance"
-msgstr "Saldo Tunai"
 
 #: lib/BOM/Feed/DataSource/BBDL/CSVParser/CorporateAction.pm:204
 msgid "Cash Dividend"
@@ -1898,7 +1835,7 @@ msgstr "Ubah Kata Sandi"
 msgid "Change in account settings"
 msgstr "Perubahan pengaturan akun"
 
-#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1999
+#: cgi/analyse_contract.cgi:295 cgi/oop/Controller/Bet.pm:1998
 msgid "Chart"
 msgstr "Grafik"
 
@@ -2127,7 +2064,7 @@ msgstr "Perjalanan wisata ke Phuket, Thailand"
 msgid "Confirm"
 msgstr "Lanjutkan"
 
-#: cgi/tick_trades.cgi:215
+#: cgi/tick_trades.cgi:189
 msgid "Congratulations"
 msgstr "Selamat"
 
@@ -2135,7 +2072,7 @@ msgstr "Selamat"
 msgid "Congratulations! <br /> You have won the contract!"
 msgstr "Selamat! <br /> Anda telah memperoleh laba pada kontrak!"
 
-#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:332
+#: cgi/subs/subs_BOMFeed_history.pm:341 cgi/tick_trades.cgi:306
 msgid "Connection failure. Please try again later."
 msgstr "Sambungan gagal. Silakan coba beberapa saat lagi."
 
@@ -2273,20 +2210,6 @@ msgstr "Kontrak tidak dapat ditawarkan jika market berada pada intraday tinggi a
 msgid "Controlled risk"
 msgstr "Resiko terkendali"
 
-#: cgi/templates/default/account/currency_converter.tt:13
-msgid "Convert"
-msgstr "Menukar"
-
-#. ('<select name="currencyfrom" id="currencyfrom">' . $currency_options . '</select>',            '<input type="text" size="7" name="currencyfromvalue" id="currencyfromvalue" value="">',            '<select name="currencyto" id="currencyto">' . $options_for_currencyto . '</select>')
-#: cgi/subs/subs_account_history.pm:212
-msgid "Convert %1%2 to %3"
-msgstr "Menukar %1%2 ke %3"
-
-#: cgi/templates/default/account/currency_converter.tt:10
-#: cgi/templates/default/account/currency_converter.tt:6
-msgid "Convert between your currency segment accounts"
-msgstr "Menukar antara bagian mata uang rekening Anda"
-
 #: cgi/templates/default/legal/privacy.tt:23
 msgid "Cookies"
 msgstr "Cookies"
@@ -2312,11 +2235,11 @@ msgstr "Negara:"
 msgid "Create free account"
 msgstr "Daftar gratis"
 
-#: cgi/templates/default/account/statement.tt:114
+#: cgi/templates/default/account/statement.tt:119
 msgid "Credit/<wbr/>Debit"
 msgstr "Kredit/<wbr/>Debit"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:426
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: cgi/templates/default/cashier/available_payment_methods.tt:175
 msgid "Credit/Debit Card"
 msgstr "Kartu Kredit/Debit"
@@ -2329,7 +2252,7 @@ msgstr "Crosshair"
 msgid "Currencies"
 msgstr "Mata uang"
 
-#: cgi/templates/default/cashier/betting_limits.tt:11 cgi/tick_trades.cgi:279
+#: cgi/tick_trades.cgi:253
 msgid "Currency"
 msgstr "Mata uang"
 
@@ -2367,7 +2290,7 @@ msgstr "Harga terkini market adalah 0."
 msgid "Current password"
 msgstr "Kata sandi saat ini"
 
-#: cgi/subs/subs_clientdetails.pm:160 cgi/subs/subs_forms_output.pm:287
+#: cgi/subs/subs_clientdetails.pm:136 cgi/subs/subs_forms_output.pm:287
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "SIM (Surat Ijin Mengemudi) yang masih berlaku"
 
@@ -2375,7 +2298,7 @@ msgstr "SIM (Surat Ijin Mengemudi) yang masih berlaku"
 msgid "Current signed Passport"
 msgstr "Paspor terkini"
 
-#: cgi/subs/subs_clientdetails.pm:159
+#: cgi/subs/subs_clientdetails.pm:135
 msgid "Current signed Passport OR"
 msgstr "KTP atau Paspor yang masih berlaku"
 
@@ -2383,7 +2306,7 @@ msgstr "KTP atau Paspor yang masih berlaku"
 msgid "Customer Support has been informed of your Lost Login ID / Password request and will be contacting you soon. Thank you for your patience."
 msgstr "Customer Support telah diberitahu mengenai permintaan lupa Login ID/Kata sandi anda dan akan menghubungi anda sesegera mungkin. Terima kasih atas kesabaran anda."
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "DOWN"
 msgstr "TURUN"
 
@@ -2393,7 +2316,7 @@ msgstr "TURUN"
 msgid "Daily"
 msgstr "Harian"
 
-#: cgi/oop/Controller/Bet.pm:2022
+#: cgi/oop/Controller/Bet.pm:2021
 #: cgi/templates/default/charting/daily_ohlc.tt:11
 msgid "Daily Prices"
 msgstr "Harga Harian"
@@ -2421,7 +2344,7 @@ msgstr "Layanan Data"
 msgid "Data will be available after market close"
 msgstr "Data akan tersedia setelah market ditutup"
 
-#: cgi/templates/default/account/statement.tt:105
+#: cgi/templates/default/account/statement.tt:110
 #: cgi/templates/default/charting/daily_ohlc.tt:16
 #: cgi/templates/default/charting/legacy_chart_table.tt:10
 #: cgi/templates/default/resources/trading_times_header.tt:3
@@ -2448,23 +2371,23 @@ msgstr "Tampilan harian"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:249
-#: cgi/paymentagent_withdraw.cgi:377
+#: cgi/f_writepartics.cgi:204 cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_withdraw.cgi:387
 msgid "Dear %1 %2 %3,"
 msgstr "Kepada Yth. %1 %2 %3,"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr "Dear Yth. Bapak/Ibu/Sdr. %2 %3, Kami ingin menginformasikan bahwa deposit %5 anda telah terproses. Salam Hormat, %4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:464
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:471
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr "Dear Yth. Bapak/Ibu/Sdr. %2 %3, Kami ingin menginformasikan bahwa penarikan %5 anda telah terproses. Salam Hormat, %4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:466
 msgid "Dear %1 %2 %3, We would like to inform you that your Western Union withdrawal has been processed. <strong>%5</strong> You can then go to any Western Union agent, provide the MTCN number and claim your funds. You can find the Western Union agent which is closest to you on their <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a>. Kind Regards, %4"
 msgstr "Kepada Yth. Bapak/Ibu/Sdr. %2 %3, Kami ingin menginformasikan bahwa penarikan Western Union Anda telah diproses. <strong>%5</strong> Anda kemudian dapat mengunjungi agen Western Union, menyediakan nomor MTCN dan mengklaim dana Anda. Anda dapat menemukan agen Western Union terdekat di tempat Anda melalui <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a> mereka. Hormat Kami, %4"
 
@@ -2610,9 +2533,9 @@ msgstr "Hapus semua garis?"
 msgid "Depo./With. commission"
 msgstr "Depo./Dengan. komisi"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
-#: cgi/templates/default/account/statement.tt:138
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/templates/default/account/statement.tt:143
 #: cgi/templates/default/cashier/available_payment_methods.tt:16
 #: cgi/templates/default/homepage/deposit_alert.tt:1
 #: cgi/templates/default/homepage/deposit_alert.tt:5
@@ -2638,7 +2561,7 @@ msgstr "Deposit Agen Pembayaran"
 msgid "Deposit using legacy method: %1"
 msgstr "Deposit menggunakan metode: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Deposit via BACS"
 msgstr "Deposit melalui BACS"
@@ -2647,7 +2570,7 @@ msgstr "Deposit melalui BACS"
 msgid "Deposit via Bank Transfer"
 msgstr "Deposit via Transfer Bank"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Deposit via Credit/Debit card"
 msgstr "Deposit via Kartu Kredit/Debit"
@@ -2656,7 +2579,7 @@ msgstr "Deposit via Kartu Kredit/Debit"
 msgid "Deposit via DoughFlow"
 msgstr "Deposit melalui DoughFlow"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Deposit via Western Union"
 msgstr "Deposit via Western Union (MTCN: %1)"
 
@@ -2665,7 +2588,7 @@ msgstr "Deposit via Western Union (MTCN: %1)"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "Deposit melalui Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "Deposit via transfer bank"
@@ -2748,7 +2671,7 @@ msgstr "Penyetoran dan penarikan dana"
 msgid "Derivative"
 msgstr "Derivatif"
 
-#: cgi/templates/default/account/statement.tt:110
+#: cgi/templates/default/account/statement.tt:115
 msgid "Description"
 msgstr "Deskripsi"
 
@@ -2760,14 +2683,6 @@ msgstr "Detrended Price Osc"
 #: cgi/subs/subs_BOMFeed_history.pm:414
 msgid "Detrended Price Oscillator (DPO)"
 msgstr "% Oskilator Harga"
-
-#: cgi/register-api.cgi:171
-msgid "Developer cannot be registered.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:66
-msgid "Developer not yet registered"
-msgstr ""
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Developer's Guide"
@@ -2853,7 +2768,7 @@ msgstr "Apakah anda ingin melihat Binary.com dalam bahasa lain, atau anda dapat 
 msgid "Documents are required to verify your identity"
 msgstr "Dokumen yang diperlukan untuk memverifikasi identitas anda"
 
-#: lib/BOM/Product/Transaction.pm:858
+#: lib/BOM/Product/Transaction.pm:857
 msgid "Don't buy contract using master password!"
 msgstr "Jangan membeli kontrak menggunakan master password!"
 
@@ -2879,11 +2794,11 @@ msgstr "Jangan menyerah karena nama. Quotidian hanya berarti sesuatu yang biasa 
 msgid "Dot Chart"
 msgstr "Diagram titik"
 
-#: cgi/tick_trades.cgi:161
+#: cgi/tick_trades.cgi:135
 msgid "Double your stake if you can predict whether the market will move UP or DOWN after 5 ticks."
 msgstr "Gandakan modal Anda dengan menganalisa market akan bergerak NAIK atau TURUN setelah tik ke 5."
 
-#: cgi/tick_trades.cgi:165
+#: cgi/tick_trades.cgi:139
 msgid "Double your stake!"
 msgstr "Gandakan modal anda!"
 
@@ -2931,7 +2846,7 @@ msgstr "Dr"
 msgid "Draw Chart"
 msgstr "Gambar Grafik"
 
-#: cgi/tick_trades.cgi:323
+#: cgi/tick_trades.cgi:297
 msgid "Draw a pie chart of the most recent ticks!"
 msgstr "Gambar chart pie berdasarkan tik terakhir!"
 
@@ -2939,7 +2854,7 @@ msgstr "Gambar chart pie berdasarkan tik terakhir!"
 msgid "Due to new gaming regulations recently promulgated in Malta, we are required to obtain your residential address details.  We would be grateful if you could update your"
 msgstr "Berhubung peraturan baru bertransaksi Malta, kami diminta untuk mendapatkan alamat lengkap anda. Kami sangat menghargai jika anda dapat memperbaharui"
 
-#: lib/BOM/Product/Transaction.pm:816
+#: lib/BOM/Product/Transaction.pm:815
 msgid "Due to regulatory requirements, you are required to authenticate your account in order to continue trading."
 msgstr "Sesuai dengan peraturan yang berlaku, Anda diminta untuk membuktikan kebenaran akun Anda sebelum melanjutkan trading."
 
@@ -3053,7 +2968,7 @@ msgstr "Pastikan anda tidak mempromosikan %1 kepada pihak dibawah umur 18 tahun.
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "Masukan batasan yang merupakan selisih harga spot. Jika Anda memasukan +0.005, maka Anda akan membeli kontrak dengan batasan 0.005 lebih tinggi dari spot masuk. Spot masuk adalah tik setelah kontrak Anda diproses"
 
-#: cgi/oop/Controller/Bet.pm:2197
+#: cgi/oop/Controller/Bet.pm:2196
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "Masukan batasan yang merupakan selisih harga spot. Jika Anda memasukan +0.005, maka Anda akan membeli kontrak dengan batasan 0.005 lebih tinggi dari spot masuk. Spot masuk adalah tik setelah kontrak Anda diproses."
 
@@ -3085,14 +3000,6 @@ msgstr "Error : kolom password kosong !"
 #: cgi/templates/default/charting/light_chart.tt:2
 msgid "Error with input field %1: should contain only digits."
 msgstr "Error pada %1: harus berisi angka saja."
-
-#: cgi/currency_converter.cgi:33
-msgid "Error: Both currencies are the same!  You must convert from one currency to another."
-msgstr "Error: keduanya mata uang yang sama!  Anda harus convert dari satu mata uang ke yang lain."
-
-#: cgi/currency_converter.cgi:72
-msgid "Error: The exchange rate for"
-msgstr "Error: Nilai tukar untuk"
 
 #: cgi/subs/subs_runbets_execute.pm:894
 msgid "Error: There was a timeout or an unspecified error. The cost of the contract has been refunded to you."
@@ -3319,7 +3226,7 @@ msgstr "Ikuti panduan langkah demi langkah trading binary."
 msgid "For affiliates who offer a trading advisory service based on the %1 platform, we offer specialized payout structures. <a href=\"mailto:%2\">Contact our affiliate manager, Karen Yap for details</a>."
 msgstr "Bagi Anda yang menawarkan konsultasi trading menggunakan platform %1, kami menawarkan struktur komisi khusus. <a href=\"mailto:%2\">Silakan hubungi Tim Affiliasi kami, Putri Kumala untuk keterangan lebih lanjut</a>."
 
-#: cgi/tick_trades.cgi:537
+#: cgi/tick_trades.cgi:512
 msgid "For any other queries, please feel free to contact us."
 msgstr "Untuk pertanyaan lainnya, silahkan hubungi kami."
 
@@ -3381,7 +3288,7 @@ msgstr "Intraday dengan waktu mulai di hadapan tersedia pada beberapa %1"
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr "Tentukan strategi trading anda menggunakan chart live %1. Secara langsung lihat pola trading pada forex, index, komoditas dan bursa saham."
 
-#: cgi/subs/subs_homepage.pm:174
+#: cgi/subs/subs_homepage.pm:138
 msgid "Free Contract Bonus"
 msgstr "Bonus Gratis Kontrak"
 
@@ -3430,7 +3337,7 @@ msgid "Further information"
 msgstr "Informasi selanjutnya"
 
 #. (300)
-#: cgi/paymentagent_withdraw.cgi:158 cgi/subs/subs_forms.pm:4065
+#: cgi/paymentagent_withdraw.cgi:169 cgi/subs/subs_forms.pm:4065
 msgid "Further instructions must not exceed %1 characters."
 msgstr "Instruksi Tambahan tidak boleh melebihi %1 perkataan."
 
@@ -3464,9 +3371,8 @@ msgstr "Umum"
 msgid "Generous Commission Structure"
 msgstr "Struktur Persentasi Komisi"
 
-#. ($promocode_amount, $min_deposit)
-#. ($promocode_currency . $promocode_amount,                $promocode_currency . $min_deposit)
-#: cgi/subs/subs_homepage.pm:130 cgi/subs/subs_homepage.pm:149
+#. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
+#: cgi/subs/subs_homepage.pm:114
 msgid "Get %1 when you deposit %2."
 msgstr "Dapat %1 jika anda mendeposit %2."
 
@@ -3500,15 +3406,15 @@ msgstr "Dapatkan harga"
 msgid "Getting Started"
 msgstr "Langkah Memulai"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:438
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
 msgid "Gift Certificate"
 msgstr "Gift Certificate"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Deposit"
 msgstr "Deposit Gift Certificate"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
 msgid "Gift Certificate Withdrawal"
 msgstr "Pencairan Gift Certificate"
 
@@ -3522,7 +3428,7 @@ msgstr "Berikan saya uang lebih banyak lagi!"
 msgid "Glossary"
 msgstr "Glosarium"
 
-#: cgi/templates/default/account/statement.tt:17 cgi/tick_trades.cgi:271
+#: cgi/templates/default/account/statement.tt:18 cgi/tick_trades.cgi:245
 msgid "Go"
 msgstr "Mulai"
 
@@ -3590,13 +3496,13 @@ msgstr "Tutup spot akhir"
 msgid "High"
 msgstr "Tinggi"
 
-#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:18
+#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:18
 #: cgi/templates/default/charting/livechart.tt:43
 #: cgi/templates/default/resources/pricing_table_form.tt:60
 msgid "High barrier"
 msgstr "Batasan Tinggi"
 
-#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:15
+#: cgi/oop/Controller/Bet.pm:2187 cgi/templates/default/bet/form/barrier.tt:15
 msgid "High barrier offset"
 msgstr "Batasan offset tinggi"
 
@@ -3637,7 +3543,7 @@ msgstr "Kontrak Lebih Tinggi/Rendah"
 msgid "Highlights the relationship between volume and price changes and is particularly useful for assessing the strength of a trend."
 msgstr "Memperlihatkan hubungan antara volume dan perubahan harga dimana biasanya digunakan untuk menaksir kekuatan trend."
 
-#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:295
+#: cgi/paymentagent_application.cgi:73 cgi/tick_trades.cgi:269
 msgid "Home"
 msgstr "Home"
 
@@ -3700,7 +3606,7 @@ msgstr "Bagaimana cara bertrading market random?"
 msgid "How to transfer money to the Agent."
 msgstr "Cara mentransfer dana ke agen."
 
-#: cgi/subs/subs_clientdetails.pm:153
+#: cgi/subs/subs_clientdetails.pm:129
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
 msgstr "Namun, untuk meningkatkan batasan penarikan dana silahkan ikuti instruksi berikut ini."
 
@@ -3717,7 +3623,7 @@ msgstr "Saya lupa kata sandi, apa yang harus saya lakukan?"
 msgid "I have read and agree to the <a target=\"_blank\" href=\"%1\">terms and conditions</a> of the site."
 msgstr "Saya telah membaca dan menyetujui <a href=\"javascript: Win_commentary('%1')\">syarat dan kondisi</a> situs ini."
 
-#: cgi/tick_trades.cgi:267
+#: cgi/tick_trades.cgi:241
 msgid "I predict that the last decimal of the 5th tick will not be:"
 msgstr "Saya menganalisa angka desimal terakhir dari tik ke5 adalah bukan:"
 
@@ -3758,11 +3664,11 @@ msgid "If applicable, to expedite the processing of your query please include a 
 msgstr "Jika memungkinkan, untuk mempercepat proses pertanyaan anda silahkan lampirkan tampilan halaman permasalahan yang anda maksudkan."
 
 #. (request()
-#: cgi/tick_trades.cgi:535
+#: cgi/tick_trades.cgi:510
 msgid "If the connection problem persists, you can try to <a href=\"%1\">reload the application</a>."
 msgstr "Jika terjadi masalah koneksi, anda dapat mencoba untuk <a href=\"%1\">mengulang aplikasi</a>."
 
-#: cgi/tick_trades.cgi:527
+#: cgi/tick_trades.cgi:502
 msgid "If the trading page is closed or internet access is terminated, the outcome of your contract won&rsquo;t be affected. You can then access your account statement to view the outcome of the contract."
 msgstr "Jika halaman trading tertutup atau akses internet terputus, hasil kontrak anda tidak akan terpengaruh. Anda dapat mengunjungi bagian pernyataan untuk melihat hasil kontrak tersebut."
 
@@ -3877,7 +3783,7 @@ msgstr "Jika anda memilih <strong>waktu berakhir</strong> tertentu, maka <strong
 msgid "If you wish to raise these limits, please <a href=\"%1\">authenticate</a> your account."
 msgstr "Untuk meningkatkan batasan ini, silahkan <a href=\"%1\">buktikan</a> akun anda."
 
-#: lib/BOM/Product/Transaction.pm:1114
+#: lib/BOM/Product/Transaction.pm:1113
 msgid "If you wish to raise these limits, please authenticate your account."
 msgstr "Jika anda ingin meningkatkan batasan ini, silahkan otentikasi akun anda."
 
@@ -3900,7 +3806,7 @@ msgstr "Jika anda mencari tempat untuk membangun karir dan bukan hanya sekedar m
 msgid "Illegal contract type %1"
 msgstr "Jenis kontrak salah %1"
 
-#: lib/BOM/Product/Transaction.pm:474
+#: lib/BOM/Product/Transaction.pm:481
 msgid "Illegal currency $currency for $broker"
 msgstr "Mata uang ilegal $currency untuk $broker"
 
@@ -3940,7 +3846,7 @@ msgstr "Dengan gaya klasik Silicon Valley, seorang manager pengelola dana berjiw
 msgid "In foreign exchange markets, traders can enter contracts based on the change in price of one currency as it relates to another currency. For example if a trader selects Rise in the EUR/USD market, they are predicting that the value of the Euro will rise in relation to the value of the US dollar."
 msgstr "Pada market valuta asing, para trader dapat membeli kontrak berdasarkan pertukaran harga dari satu mata uang ke mata uang lainnya. Sebagai conth jika trader memilih kontrak Naik pada market EUR/USD, hal ini berarti mereka menganalisa nilai mata uang Euro akan lebih tinggi dari harga mata uang dolar AS."
 
-#: lib/BOM/Product/Transaction.pm:880
+#: lib/BOM/Product/Transaction.pm:879
 msgid "In order for you to place contracts, we need to know your Residence (Country). Please update your settings."
 msgstr "Untuk melakukan pembelian kontrak, kami perlu mengetahui domisili (Negara) anda. Silahkan perbarui bagian pengaturan."
 
@@ -4089,7 +3995,7 @@ msgstr "Intraday"
 msgid "Intraday contracts may not cross market open."
 msgstr "Kontrak intraday mungkin tidak melewati pembukaan market."
 
-#: cgi/oop/Controller/Bet.pm:2034
+#: cgi/oop/Controller/Bet.pm:2033
 msgid "Intraday prices"
 msgstr "Harga-harga Intraday"
 
@@ -4179,7 +4085,7 @@ msgstr "Adalah penting bagi anda untuk membaca dan memahami isi dari terma dan k
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "It is not necessary to actually trade or to deposit funds to your account."
-msgstr ""
+msgstr "Anda tidak diharuskan bertrading atau mendeposit dana kedalam akun anda."
 
 #: frontend/templates/get_started/glossary.html.haml:1
 msgid "It is sometimes possible to sell an option before the expiry of a trade, but only if a fair price can be determined. If this option is available, you will see a blue 'Sell' button next to your trade in the portfolio."
@@ -4217,15 +4123,15 @@ msgstr "Chart Java"
 msgid "Join our analysts LIVE twice a week for a comprehensive analysis of recent developments and trends in the global financial markets."
 msgstr "Ikuti analis kami secara LIVE dua kali seminggu untuk memperoleh analisa menyeluruh pada perkembangan dan trend terbaru di dunia market financial."
 
-#: cgi/templates/default/account/statement.tt:12
+#: cgi/templates/default/account/statement.tt:13
 msgid "Jump to"
 msgstr "Langsung ke"
 
 #: cgi/templates/default/api/register.tt:19
 msgid "Keep this value secure"
-msgstr ""
+msgstr "Jaga keamanan data ini"
 
-#: cgi/paymentagent_withdraw.cgi:386
+#: cgi/paymentagent_withdraw.cgi:396
 msgid "Kind Regards,"
 msgstr "Salam Hormat,"
 
@@ -4242,7 +4148,7 @@ msgstr "besar"
 msgid "Last"
 msgstr "Akhir"
 
-#: cgi/oop/Controller/Bet.pm:2051
+#: cgi/oop/Controller/Bet.pm:2050
 msgid "Last Digit Stats"
 msgstr "Statistik Digit Terakhir"
 
@@ -4291,7 +4197,7 @@ msgstr "Belajar trading"
 msgid "Learning to trade online"
 msgstr "Belajar trading online"
 
-#: cgi/statement.cgi:161 cgi/subs/subs_account_history.pm:157
+#: cgi/statement.cgi:137 cgi/subs/subs_account_history.pm:161
 msgid "Legacy Contract"
 msgstr "Kontrak Legacy"
 
@@ -4317,8 +4223,8 @@ msgid "Like %2, %1 reset back to a price of 1000 each day. The difference is tha
 msgstr "Seperti %2, %1 direset ulang ke harga 1000 setiap hari. Bedanya adalah %1 direset pada jam 12SIANG GMT, (%2 direset pada 00:00:00 GMT)."
 
 #: cgi/templates/default/cashier/betting_limits.tt:8
-msgid "Limit</strong><br>(per currency)"
-msgstr "Batasan</strong><br>(per mata uang)"
+msgid "Limit"
+msgstr "Batas"
 
 #: cgi/subs/subs_BOMFeed_history.pm:338
 msgid "Line"
@@ -4448,13 +4354,13 @@ msgstr "Rendah"
 msgid "Low Barrier should be number only"
 msgstr "Batasan rendah hanya terdiri dari angka"
 
-#: cgi/oop/Controller/Bet.pm:2191 cgi/templates/default/bet/form/barrier.tt:37
+#: cgi/oop/Controller/Bet.pm:2190 cgi/templates/default/bet/form/barrier.tt:37
 #: cgi/templates/default/charting/livechart.tt:47
 #: cgi/templates/default/resources/pricing_table_form.tt:46
 msgid "Low barrier"
 msgstr "Batasan rendah"
 
-#: cgi/oop/Controller/Bet.pm:2189 cgi/templates/default/bet/form/barrier.tt:34
+#: cgi/oop/Controller/Bet.pm:2188 cgi/templates/default/bet/form/barrier.tt:34
 msgid "Low barrier offset"
 msgstr "Batasan offset rendah"
 
@@ -4466,11 +4372,11 @@ msgstr "Garis Bawah"
 msgid "Lower Band = Average - 0.5 * Std Deviation"
 msgstr "Garis Bawah = Rata-rata - 0.5 Std Deviasi"
 
-#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:303
+#: cgi/contract_demo.cgi:106 cgi/tick_trades.cgi:277
 msgid "Lucky 10 Digits"
 msgstr "10 Kali Lipat"
 
-#: cgi/tick_trades.cgi:137 cgi/tick_trades.cgi:141 cgi/tick_trades.cgi:287
+#: cgi/tick_trades.cgi:111 cgi/tick_trades.cgi:115 cgi/tick_trades.cgi:261
 msgid "Lucky 10 Digits Trade"
 msgstr "10 Kali Lipat"
 
@@ -4489,19 +4395,19 @@ msgstr "Signal MACD"
 msgid "Maintain your Site and promote %1 in an appropriate manner and contact us if you are changing design or layout or adding material that may influence our opinion as to whether you are a suitable affiliate partner."
 msgstr "Menjaga situs anda dan mempromosikan %1 dengan cara yang tepat dan hubungi kami jika anda mengubah desain atau tata letak atau menambah materi yang mungkin mempengaruhi pendapat kami tentang apakah anda merupakan mitra afiliasi yang sesuai."
 
-#: cgi/tick_trades.cgi:170
+#: cgi/tick_trades.cgi:144
 msgid "Make 10 times your money if you predict the last decimal digit of the market after 5 ticks."
 msgstr "Gandakan 10 kali modal dengan menganalisa angka desimal terakhir pasar setelah 5 tik."
 
-#: cgi/tick_trades.cgi:174
+#: cgi/tick_trades.cgi:148
 msgid "Make 10 times your money!"
 msgstr "Untung 10 kali lipat!"
 
-#: cgi/tick_trades.cgi:179
+#: cgi/tick_trades.cgi:153
 msgid "Make a 10% profit if you manage to predict that the last decimal digit of the 5th tick will *not* be the number selected."
 msgstr "Dapatkan 10% profit jika angka desimal terakhir pada tik ke 5 adalah *bukan* angka yang anda pilih."
 
-#: cgi/tick_trades.cgi:183
+#: cgi/tick_trades.cgi:157
 msgid "Make a 10% profit!"
 msgstr "Untung 10%!"
 
@@ -4519,7 +4425,7 @@ msgid "Make your trade"
 msgstr "Lakukan trading anda"
 
 #: cgi/templates/default/resources/pricing_table_form.tt:19
-#: cgi/tick_trades.cgi:251
+#: cgi/tick_trades.cgi:225
 msgid "Market"
 msgstr "Market"
 
@@ -4575,7 +4481,7 @@ msgstr "Berbagai Market"
 msgid "Mass Index"
 msgstr "Indeks Massa"
 
-#: cgi/subs/subs_homepage.pm:162
+#: cgi/subs/subs_homepage.pm:126
 msgid "Matched Contract Bonus"
 msgstr "Bonus Kontrak Cocok"
 
@@ -4588,7 +4494,7 @@ msgid "Maximum"
 msgstr "Maksimal"
 
 #: cgi/subs/subs_forms.pm:3466
-#: cgi/templates/default/cashier/betting_limits.tt:23
+#: cgi/templates/default/cashier/betting_limits.tt:15
 msgid "Maximum account cash balance"
 msgstr "Maksimum saldo tunai"
 
@@ -4603,16 +4509,16 @@ msgstr "Saldo tunai maksimal saat ini adalah <strong>%1 %2</strong>"
 msgid "Maximum aggregate contract purchases per day."
 msgstr "Jumlah maksimum pembelian kontrak per hari."
 
-#: cgi/templates/default/cashier/betting_limits.tt:35
+#: cgi/templates/default/cashier/betting_limits.tt:23
 msgid "Maximum aggregate payouts on open positions"
 msgstr "Jumlah maksimal rata-rata hasil pada posisi terbuka"
 
-#: cgi/templates/default/cashier/betting_limits.tt:29
+#: cgi/templates/default/cashier/betting_limits.tt:19
 msgid "Maximum daily turnover"
 msgstr "Maksimum turnover harian"
 
 #: cgi/subs/subs_forms.pm:3516
-#: cgi/templates/default/cashier/betting_limits.tt:17
+#: cgi/templates/default/cashier/betting_limits.tt:11
 msgid "Maximum number of open positions"
 msgstr "Maksimal jumlah posisi terbuka"
 
@@ -4622,7 +4528,7 @@ msgstr "Maksimal jumlah posisi terbuka"
 msgid "Maximum number of open positions is currently set to <strong>%1</strong>"
 msgstr "Maksimum jumlah kontrak yang ditampilkan pada portofolio adalah <strong>%1</strong>"
 
-#: cgi/subs/subs_payments_withdrawals.pm:110
+#: cgi/subs/subs_payments_withdrawals.pm:102
 msgid "Maximum withdrawal by all other means:"
 msgstr "Maksimum jumlah penarikan:"
 
@@ -4704,19 +4610,19 @@ msgstr "Aplikasi mobile"
 msgid "Momentum"
 msgstr "Momentum"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:435
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
 msgid "Moneta"
 msgstr "Moneta"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
 msgid "Moneybookers"
 msgstr "Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Deposit"
 msgstr "Deposit Moneybooker"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 msgid "Moneybookers Withdrawal"
 msgstr "Pencairan Moneybooker"
 
@@ -4807,9 +4713,9 @@ msgstr "Memiliki pilihan bahasa dan mata uang"
 
 #: cgi/templates/default/api/register.tt:15
 msgid "Must be in a valid URI format"
-msgstr ""
+msgstr "Harus dalam format URI yang benar"
 
-#: cgi/my_account.cgi:73 lib/BOM/View/Menu.pm:56
+#: cgi/my_account.cgi:72 lib/BOM/View/Menu.pm:56
 msgid "My Account"
 msgstr "Akun Saya"
 
@@ -4880,7 +4786,7 @@ msgstr "Terbaru"
 msgid "Next"
 msgstr "Lanjutkan"
 
-#: cgi/tick_trades.cgi:227
+#: cgi/tick_trades.cgi:201
 msgid "Next Page"
 msgstr "Halaman Berikutnya"
 
@@ -4937,10 +4843,6 @@ msgstr "Bebas resiko, $10K akun uang virtual"
 msgid "No. There's no cost to sign up to the %1 affiliate program."
 msgstr "Tidak. Pendaftaran program afiliasi %1 adalah gratis."
 
-#: cgi/templates/default/account/currency_converter.tt:15
-msgid "Note:"
-msgstr "Nota:"
-
 #: cgi/templates/default/portfolio/contract_details.tt:31
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "Nota: Kontrak akan dijual pada harga terkini market ketika permintaan diterima oleh server kami. Harga ini mungkin berbeda dari harga yang diindikasikan."
@@ -4969,8 +4871,8 @@ msgstr "Nota: Perusahaan berhak untuk membatalkan komisi yang tidak diambil mele
 
 #. ($currency,            $withdrawal_limits->{'frozen_free_gift'},            $withdrawal_limits->{'free_gift_turnover_limit'},            virgule($withdrawal_limits->{'aggregate_buys_for_currency'})
 #. ($self->currency,                    $limits->{frozen_free_gift},                    $limits->{free_gift_turnover_limit},                    virgule($limits->{aggregate_buys_for_currency})
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:161
-#: cgi/subs/subs_payments_withdrawals.pm:129
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:153
+#: cgi/subs/subs_payments_withdrawals.pm:121
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
 msgstr "Nota: Anda dapat mencairkan bonus sejumlah %1%2 jika volume trading melebihi %1%3 (dimana saat ini volume trading anda adalah %1%4). Aturan ini hanya berlaku bagi nominal bonus dan profit yang dihasilkannya, jika ada dana diluar bonus dan profit yang dihasilkannya maka anda bisa mencairkannya kapan saja."
 
@@ -5035,11 +4937,11 @@ msgstr "OAuth2.0 adalah internet standard untuk tujuan ini. Lihat <a href=\"http
 msgid "OK"
 msgstr "OK"
 
-#: cgi/subs/subs_clientdetails.pm:164
+#: cgi/subs/subs_clientdetails.pm:140
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "Kartu Keluarga/Tagihan/Rekening Koran yang mencantumkan nama dan alamat anda (tidak melebihi tempo 3 bulan setelah tanggal pengeluaran)"
 
-#: cgi/subs/subs_clientdetails.pm:163
+#: cgi/subs/subs_clientdetails.pm:139
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "Tagihan utilitas ASLI (dalam tempo 3 bulan) atau"
 
@@ -5051,7 +4953,7 @@ msgstr "Kantor dimana telepon ditanggani"
 msgid "Old password is wrong."
 msgstr "Kata sandi lama salah."
 
-#: cgi/templates/default/account/statement.tt:24
+#: cgi/templates/default/account/statement.tt:26
 msgid "Older"
 msgstr "Sebelumnya"
 
@@ -5182,7 +5084,7 @@ msgstr "Nomor kontrak lainnya contact numbers"
 msgid "Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list."
 msgstr "Program afiliasi kami khusus untuk para investor profesional dan webmaster yang mengelola website pribadi, newsletter atau mailing list."
 
-#: cgi/tick_trades.cgi:531
+#: cgi/tick_trades.cgi:506
 msgid "Our application uses ports 8080 and 843. For connection difficulties, please contact your System Administrator and request your firewall to be updated accordingly."
 msgstr "Aplikasi kami menggunakan port 8080 dan 843. Untuk masalah koneksi, silahkan hubungi sistem administrasi anda dan minta agar firewall anda diperbarui."
 
@@ -5228,8 +5130,8 @@ msgstr "Data feed kami dirancang untuk menjadi salah satu yang terbaik dan palin
 msgid "Our data feed may at times differ slightly from other data feeds found on the internet (who may themselves differ between each other). Reasons for differences in feed providers include:"
 msgstr "Kutipan data kami mungkin akan mengalami sedikit perbedaan dibandingkan dengan kutipan data yang tersedia pada internet. Mengapa demikian:"
 
-#. (BOM::Platform::Runtime->instance->app_config->cs->email)
-#: cgi/subs/subs_clientdetails.pm:166
+#. ($cs_email)
+#: cgi/subs/subs_clientdetails.pm:142
 msgid "Our email address is %1."
 msgstr "Alamat email kami adalah %1."
 
@@ -5275,7 +5177,7 @@ msgstr "Kepemilikan, konten dan kewajiban untuk situs afiliasi merupakan tanggun
 msgid "P.O. Box is not accepted"
 msgstr "Tidak menerima P.O. Box"
 
-#: cgi/templates/default/account/statement.tt:57
+#: cgi/templates/default/account/statement.tt:59
 msgid "P/L"
 msgstr "P/L"
 
@@ -5284,7 +5186,7 @@ msgid "PLEASE CONTACT CUSTOMER SUPPORT."
 msgstr "SILAHKAN HUBUNGI CUSTOMER SUPPORT."
 
 #. ($page_num, $total_pages)
-#: cgi/subs/subs_account_history.pm:242
+#: cgi/subs/subs_account_history.pm:196
 msgid "Page %1 of %2"
 msgstr "Halaman %1 dari %2"
 
@@ -5314,15 +5216,13 @@ msgstr "Berpartisipasi dalam market forex, saham atau komoditas"
 msgid "Partner API"
 msgstr "Pasangan API"
 
-#: cgi/register-api.cgi:31
-#, fuzzy
-#| msgid "Partner API"
+#: cgi/register-api.cgi:27
 msgid "Partner API Registration"
-msgstr "Pasangan API"
+msgstr "Pendaftaran Mitra API"
 
 #: cgi/templates/default/api/register.tt:2
 msgid "Partner API Registration for"
-msgstr ""
+msgstr "Pendaftaran Mitra API untuk"
 
 #: cgi/subs/subs_forms.pm:564 cgi/templates/default/global/header.tt:67
 #: frontend/templates/home/login.html.haml:1
@@ -5421,7 +5321,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Hasil harus diantara <strong>%1</strong> hingga <strong>%2</strong>."
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: cgi/subs/subs_homepage.pm:125
+#: cgi/subs/subs_homepage.pm:106
 msgid "Pending Bonus: %1"
 msgstr "Bonus Belum Disetujui: %1"
 
@@ -5463,7 +5363,7 @@ msgstr "Membeli kontrak random"
 msgid "Platform Tour"
 msgstr "Panduan Platform"
 
-#: cgi/tick_trades.cgi:239
+#: cgi/tick_trades.cgi:213
 msgid "Play Again"
 msgstr "Beli Lagi"
 
@@ -5479,7 +5379,7 @@ msgstr "Silahkan klik Back dan ulangi sekali lagi."
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "Silahkan klik pada tombol \"Play\" untuk melihat video."
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:193
+#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:204
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "Pastikan anda telah memilih Agen Pembayaran yang benar, salah transfer adalah diluar tanggungjawab kami:"
 
@@ -5509,9 +5409,8 @@ msgstr "Silakan masukkan password."
 msgid "Please enter a town or city."
 msgstr "Silakan masukkan nama kota atau daerah."
 
-#: cgi/paymentagent_transfer.cgi:101 cgi/subs/subs_forms.pm:3822
+#: cgi/paymentagent_transfer.cgi:103 cgi/subs/subs_forms.pm:3822
 #: cgi/subs/subs_forms.pm:4023
-#: cgi/templates/default/account/currency_converter.tt:11
 msgid "Please enter a valid amount."
 msgstr "Tolong masukan jumlah yang benar."
 
@@ -5558,7 +5457,7 @@ msgstr "Silahkan masukkan nama akhir Anda."
 msgid "Please enter your secret answer"
 msgstr "Silakan masukkan jawaban rahasia anda"
 
-#: cgi/paymentagent_transfer.cgi:271
+#: cgi/paymentagent_transfer.cgi:272
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "Silahkan isi Login ID dan jumlah yang ingin Anda transfer ke klien Anda dalam formulir di bawah ini:"
 
@@ -5581,11 +5480,11 @@ msgstr "Silahkan login untuk menggunakan fitur ini"
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "Pastikan anda telah setuju dengan Agen mengenai terma pembayaran sebelum mengajukan permohonan Anda."
 
-#: cgi/subs/subs_payments_withdrawals.pm:100
+#: cgi/subs/subs_payments_withdrawals.pm:92
 msgid "Please note that if you have deposited at least once by credit/debit card, you may find that you are restricted in the amount you may convert into other currencies."
 msgstr "Mohon diperhatikan bahwa jika anda pernah setidaknya satu kali mendeposit menggunakan kartu kredit / debit maka anda mungkin akan menemukan anda dibatasi di dalam menukarkan dana anda kedalam valuta asing lainnya."
 
-#: cgi/subs/subs_clientdetails.pm:134 cgi/subs/subs_forms_output.pm:299
+#: cgi/subs/subs_forms_output.pm:299
 msgid "Please note that mobile telephone bills are not acceptable as evidence of address"
 msgstr "Mohon diketahui bahwa bukti tagihan handphone dapat diterima sebagai bukti alamat"
 
@@ -5617,7 +5516,7 @@ msgstr "Anda dapat melakukan perbaikan data dengan mengakses bagian \"Pengaturan
 msgid "Please note that your settings have been updated as follows:"
 msgstr "Mohon diketahui bahwa pengaturan anda telah diperbarui sebagai berikut:"
 
-#: cgi/subs/subs_clientdetails.pm:138 cgi/subs/subs_forms_output.pm:304
+#: cgi/subs/subs_forms_output.pm:304
 msgid "Please post the documents to:"
 msgstr "Silakan hantar melalui pos dokumen tersebut ke:"
 
@@ -5625,7 +5524,7 @@ msgstr "Silakan hantar melalui pos dokumen tersebut ke:"
 msgid "Please provide at least one self-exclusion setting."
 msgstr "Silakan sediakan setidaknya satu susunan pengecualian diri."
 
-#: cgi/oop/Controller/Bet.pm:1525 cgi/oop/Controller/Bet.pm:1802
+#: cgi/oop/Controller/Bet.pm:1527 cgi/oop/Controller/Bet.pm:1804
 msgid "Please provide granter id(s)."
 msgstr "Mohon informasian ID granter."
 
@@ -5662,9 +5561,14 @@ msgstr "Tolong pilih"
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "Pilih \"Hasil\" atau \"Modal\"."
 
-#: cgi/tick_trades.cgi:327
+#: cgi/tick_trades.cgi:301
 msgid "Please select market:"
 msgstr "Silakan pilih market:"
+
+#. (qq(<a href="mailto:$cs_email">$cs_email</a>)
+#: cgi/subs/subs_clientdetails.pm:120
+msgid "Please send this email to %1."
+msgstr ""
 
 #: cgi/subs/subs_forms.pm:1197 cgi/subs/subs_forms.pm:405
 #: cgi/subs/subs_presentation.pm:102
@@ -5688,11 +5592,11 @@ msgstr "Silakan hanya pergunakan gabungan angka dan huruf atau spasi."
 msgid "Please use only letters, spaces, hyphens, full-stops or apostrophes."
 msgstr "Silahkan pergunakan huruf, spasi, tanda penghubung, titik atau tanda apostrof."
 
-#: cgi/tick_trades.cgi:83
+#: cgi/tick_trades.cgi:57
 msgid "Please wait.<br />Your request is being processed."
 msgstr "Silahkan tunggu.<br />Permohonan anda sedang diproses."
 
-#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:81 cgi/portfolio.cgi:83
+#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:79 cgi/portfolio.cgi:81
 #: cgi/templates/default/homepage/logged_in.tt:46 lib/BOM/View/Menu.pm:67
 msgid "Portfolio"
 msgstr "Portopolio"
@@ -5729,7 +5633,7 @@ msgstr "Kuat & sederhana"
 msgid "Prediction"
 msgstr "Analisa"
 
-#: cgi/limits.cgi:54
+#: cgi/limits.cgi:44
 msgid "Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions."
 msgstr "Mewakili jumlah maksimum hasil kontrak pada portopolio Anda. Jika jumlah maksimum tercapai maka Anda tidak dapat membeli kontrak baru tanpa menyelesaikan salah satu posisi Anda."
 
@@ -5770,7 +5674,7 @@ msgstr "Tentukan harga kontrak."
 msgid "Prices"
 msgstr "OHLC"
 
-#: cgi/oop/Controller/Bet.pm:2040 cgi/pricing_table.cgi:166
+#: cgi/oop/Controller/Bet.pm:2039 cgi/pricing_table.cgi:166
 #: cgi/templates/default/global/footer.tt:51
 #: cgi/templates/default/resources/pricing_table_form.tt:2
 #: frontend/templates/layouts/default/footer.html.haml:1
@@ -5802,13 +5706,13 @@ msgstr "Keuntungan"
 #: cgi/create_account.cgi:113 cgi/create_account.cgi:196
 #: cgi/create_account.cgi:73 cgi/create_account.cgi:80
 #: cgi/create_account.cgi:96 cgi/oop/Controller/Bet.pm:1367
-#: cgi/oop/Controller/Bet.pm:1514 cgi/oop/Controller/Bet.pm:1755
-#: cgi/oop/Controller/Bet.pm:1794 cgi/oop/Controller/Bet.pm:2209
+#: cgi/oop/Controller/Bet.pm:1516 cgi/oop/Controller/Bet.pm:1757
+#: cgi/oop/Controller/Bet.pm:1796 cgi/oop/Controller/Bet.pm:2208
 #: cgi/oop/Controller/Bet.pm:760 cgi/oop/Controller/Bet.pm:866
 msgid "Profit from your Predictions"
 msgstr "Keuntungan dari prediksi Anda"
 
-#: cgi/templates/default/account/statement.tt:113
+#: cgi/templates/default/account/statement.tt:118
 msgid "Profit/<wbr/>Loss"
 msgstr "Untung/<wbr/>Rugi"
 
@@ -5860,7 +5764,7 @@ msgstr "Waktu Beli"
 
 #. ($currency, $max_daily_turnover_limit)
 #. ($currency, $max_daily_turnover)
-#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1112
+#: cgi/subs/subs_runbets_execute.pm:313 lib/BOM/Product/Transaction.pm:1111
 msgid "Purchase of this contract would cause you to exceed your daily turnover limit of %1%2."
 msgstr "Dengan membeli kontrak ini maka Anda akan melebihi batasan pembelian kontrak harian yaitu %1%2."
 
@@ -5868,11 +5772,11 @@ msgstr "Dengan membeli kontrak ini maka Anda akan melebihi batasan pembelian kon
 msgid "Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money."
 msgstr "Batasi keuntungan anda. Setelah anda mencapai target, sisihkan dan bertrading menggunakan sisa dana yang ada."
 
-#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:307
+#: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:281
 msgid "Quick 10%"
 msgstr "Untung 10%"
 
-#: cgi/tick_trades.cgi:145 cgi/tick_trades.cgi:149 cgi/tick_trades.cgi:291
+#: cgi/tick_trades.cgi:119 cgi/tick_trades.cgi:123 cgi/tick_trades.cgi:265
 msgid "Quick 10% Trade"
 msgstr "Untung 10%"
 
@@ -5994,8 +5898,8 @@ msgid "Reap the rewards of trading binaries, knowing your funds are always safe.
 msgstr "Dapatkan imbalan dari trading binary, dana anda akan selalu aman."
 
 #: cgi/templates/default/account/portfolio.tt:12
-#: cgi/templates/default/account/statement.tt:106
-#: cgi/templates/default/account/statement.tt:125
+#: cgi/templates/default/account/statement.tt:111
+#: cgi/templates/default/account/statement.tt:130
 msgid "Ref."
 msgstr "Ref."
 
@@ -6062,10 +5966,8 @@ msgid "Register"
 msgstr "Daftar"
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "Register"
 msgid "Registration"
-msgstr "Daftar"
+msgstr "Pendaftaran"
 
 #: cgi/templates/default/charting/daily_ohlc.tt:24
 #: cgi/templates/default/charting/daily_ohlc.tt:52
@@ -6090,15 +5992,15 @@ msgstr "Reload halaman"
 msgid "Remove Overlay"
 msgstr "Memindahkan Arsiran"
 
-#: cgi/limits.cgi:46
+#: cgi/limits.cgi:36
 msgid "Represents the maximum amount of cash that you may hold in your account.  If the maximum is reached, you will be asked to withdraw funds."
 msgstr "Mewakili jumlah maksimum saldo tunai pada akun anda. Jika jumlah maksimum tercapai, maka anda perlu menarik dana anda."
 
-#: cgi/limits.cgi:59
+#: cgi/limits.cgi:49
 msgid "Represents the maximum number of outstanding contracts in your portfolio. Each line in your portfolio counts for one open position. Once the maximum is reached, you will not be able to open new positions without closing an existing position first."
 msgstr "Mewakili jumlah kontrak pada portopolio Anda. Setiap baris pada portopolio Anda dihitung sebagai satu posisi. Jika jumlah maksimum tercapai maka Anda perlu menutup salah satu posisi untuk membeli kontrak atau posisi lainnya."
 
-#: cgi/limits.cgi:51
+#: cgi/limits.cgi:41
 msgid "Represents the maximum volume of contracts that you may purchase in any given trading day."
 msgstr "Mewakili jumlah maksimum pembelian kontrak dalam satu hari trading."
 
@@ -6247,10 +6149,6 @@ msgstr "Sanggahan Resiko"
 msgid "Russia"
 msgstr "Rusia"
 
-#: cgi/oop/Controller/Bet.pm:1933
-msgid "SOLD"
-msgstr "TERJUAL"
-
 #: cgi/templates/default/bet/sell_success_ajax.tt:11
 msgid "Sale Price"
 msgstr "Harga Jual"
@@ -6315,7 +6213,7 @@ msgstr "Pilih metode pembayaran yang Anda ingin gunakan dan hubungi agen pembaya
 msgid "Self-Exclusion Facilities"
 msgstr "Fasilitas Pengecualian Diri"
 
-#: cgi/templates/default/account/statement.tt:40
+#: cgi/templates/default/account/statement.tt:42
 #: cgi/templates/default/backoffice/account/statement.tt:45
 msgid "Sell"
 msgstr "Jual"
@@ -6496,9 +6394,21 @@ msgstr "Menghaluskan data random"
 msgid "Sorry you cannot buy/sell contracts"
 msgstr "Maaf anda tidak dapat membeli/menjual kontrak"
 
+#. ($client_to->loginid)
+#: cgi/paymentagent_transfer.cgi:99
+msgid "Sorry, $currency is not default currency for client "
+msgstr ""
+
+#. ($client_fm->loginid)
+#: cgi/paymentagent_transfer.cgi:98
+#, fuzzy
+#| msgid "Sorry, broker %1 does not allow transfers from payment agents."
+msgid "Sorry, $currency is not default currency for payment agent "
+msgstr "Maaf, akun %1 tidak menyediakan layanan transfer agen pembayaran."
+
 #. (localize('Tick Trades')
 #. (BOM::Platform::Context::localize('Tick Trades')
-#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:451
+#: cgi/subs/subs_runbets_execute.pm:393 cgi/tick_trades.cgi:426
 msgid "Sorry, %1 are currently suspended"
 msgstr "Maaf, %1 dihentikan sementara"
 
@@ -6584,22 +6494,21 @@ msgstr "Maaf, Agen Pembayaran tidak tersedia."
 msgid "Sorry, the Payment Agent is unavailable for your region."
 msgstr "Maaf, Agen Pembayaran tidak tersedia untuk negara anda."
 
+#. ($pa_client->currency . " is unavailable for Payment Agent Withdrawal")
+#: cgi/paymentagent_withdraw.cgi:145
+#, fuzzy
+#| msgid "Sorry, the Payment Agent does not exist."
+msgid "Sorry, the Payment Agent's currency "
+msgstr "Maaf, Agen Pembayaran tidak tersedia."
+
 #. ($max_payout_limit, $currency, $client_agg_payouts, $payout)
-#: lib/BOM/Product/Transaction.pm:1033
+#: lib/BOM/Product/Transaction.pm:1032
 msgid "Sorry, the aggregate payouts of contracts on your account cannot exceed %2%1. The current aggregate payout of contracts on your account is %2%3 therefore you cannot buy a contract that would pay out an additional %2%4."
 msgstr "Maaf, jumlah rata-rata hasil kontrak pada akun anda tidak dapat melebihi %2%1. Jumlah rata-rata hasil kontrak pada akun anda saat ini adalah %2%3 maka anda tidak dapat membeli kontrak dengan hasil melebihi %2%4."
 
 #: cgi/subs/subs_runbets_execute.pm:523
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "Maaf, kontrak tidak dapat dibeli pada menit terakhir sesi trading."
-
-#: cgi/currency_converter.cgi:37
-msgid "Sorry, the currency amount to convert is incorrect."
-msgstr "Maaf, nilai mata uang untuk dikonversi salah."
-
-#: cgi/currency_converter.cgi:41 cgi/currency_converter.cgi:92
-msgid "Sorry, the currency amount to convert is too small."
-msgstr "Maaf, nilai mata uang untuk dikonversi terlalu kecil."
 
 #: cgi/paymentagent_transfer.cgi:96
 msgid "Sorry, the currency format is incorrect."
@@ -6618,11 +6527,7 @@ msgstr "Maaf, market ditutup berhubung libur (%1)."
 msgid "Sorry, the market is currently closed."
 msgstr "Maaf, market sudah ditutup."
 
-#: cgi/currency_converter.cgi:159
-msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
-msgstr "Maaf, jumlah penukaran maksimal adalah 3 kali per hari. Anda telah melakukan"
-
-#: cgi/subs/subs_payments_withdrawals.pm:95
+#: cgi/subs/subs_payments_withdrawals.pm:87
 msgid "Sorry, the maximum amount you can convert is"
 msgstr "Maaf, jumlah maksimum yang anda bisa konversikan adalah"
 
@@ -6630,7 +6535,7 @@ msgstr "Maaf, jumlah maksimum yang anda bisa konversikan adalah"
 msgid "Sorry, the page cannot be found."
 msgstr "Maaf, halaman tidak ditemukan."
 
-#: lib/BOM/Product/Transaction.pm:999
+#: lib/BOM/Product/Transaction.pm:998
 msgid "Sorry, the same contract cannot be purchased more than once. You already have an identical contract in your account."
 msgstr "Maaf, anda tidak dapat membeli kontrak yang sama. Anda telah membeli kontrak tersebut sebelumnya."
 
@@ -6642,11 +6547,6 @@ msgstr "Maaf, terlalu  banyak data yang ditampilkan, Silahkan pilih interval yan
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "Maaf, telah terjadi masalah pada saat mengesahkan data pribadi anda melalui prosesor pembayaran kami. Silakan hubungi Customer Service kami."
 
-#. ('10,000')
-#: cgi/currency_converter.cgi:47
-msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
-msgstr "Maaf, jumlah terlalu tinggi untuk ditukarkan. Batasan maksimum per transaksi adalah %1"
-
 #: cgi/top_up_virtual.cgi:25
 msgid "Sorry, this feature is available to virtual accounts only"
 msgstr "Maaf, bentuk ini hanya tersedia untuk rekening virtual saja"
@@ -6655,7 +6555,7 @@ msgstr "Maaf, bentuk ini hanya tersedia untuk rekening virtual saja"
 msgid "Sorry, this page cannot be refreshed."
 msgstr "Maaf, halaman ini tidak dapat direfreshkan."
 
-#: cgi/subs/subs_payments_withdrawals.pm:82
+#: cgi/subs/subs_payments_withdrawals.pm:74
 msgid "Sorry, withdrawals cannot be made on the day of your account opening. Please wait until tomorrow to make a withdrawal."
 msgstr "Maaf, anda tidak dapat melakukan penarikan dana pada hari yang sama dengan hari pendaftaran akun. Silakan coba kembali besok."
 
@@ -6663,17 +6563,13 @@ msgstr "Maaf, anda tidak dapat melakukan penarikan dana pada hari yang sama deng
 msgid "Sorry, you are too young to open an account."
 msgstr "Maaf, anda dibawah umur untuk mendaftar akun."
 
-#: cgi/currency_converter.cgi:128
-msgid "Sorry, you cannot convert"
-msgstr "Maaf, anda tidak dapat mengkonversi"
-
 #. ($max_open_positions_limit)
-#: lib/BOM/Product/Transaction.pm:1017
+#: lib/BOM/Product/Transaction.pm:1016
 msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please sell some of your existing contracts before buying any more."
 msgstr "Maaf, anda tidak dapat memiliki lebih dari %1 kontrak dalam jangka waktu yang diberikan. Silahkan jual beberapa kontrak yang telah kadaluarsa sebelum membeli kontrak baru lagi."
 
-#: cgi/subs/subs_payments_withdrawals.pm:104
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:96
 msgid "Sorry, you cannot withdraw."
 msgstr "Maaf, anda tidak dapat mencairkan."
 
@@ -6693,30 +6589,30 @@ msgid "Sorry, you have entered an incorrect email address."
 msgstr "Maaf, Anda telah memasukkan alamat email yang salah."
 
 #. (to_monetary_number_format($limits->daily->payout_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1201
+#: lib/BOM/Product/Transaction.pm:1200
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 on %2 which is the maximum daily PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "Maaf, anda telah melebihi batasan maksimum HASIL harian sebesar USD%1 dimana jumlah maksimum yang dibenarkan adalah %2 untuk kontrak ini. Silahkan pilih kontrak pada market lain atau kurangi modal anda."
 
 #. (to_monetary_number_format($limits->daily->payout)
-#: lib/BOM/Product/Transaction.pm:1225
+#: lib/BOM/Product/Transaction.pm:1224
 msgid "Sorry, you have exceeded a BOUNDARY contract daily PAYOUT of USD%1 which is the maximum daily PAYOUT allowed. Please choose on a different type of contract or lower your stake."
 msgstr "Maaf, anda telah melebihi batasan maksimum HASIL harian sebesar USD%1 untuk kontrak ini. Pilih jenis kontrak lain atau kurangi modal anda."
 
 #. (to_monetary_number_format($limits->daily->turnover_per_underlying)
-#: lib/BOM/Product/Transaction.pm:1190
+#: lib/BOM/Product/Transaction.pm:1189
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 on %2 which is the maximum daily turnover allowed. Please place a contract on a different underlying or lower your stake."
 msgstr "Maaf, anda telah melebihi batasan maksimum HASIL harian sebesar USD%1 dimana jumlah maksimum yang dibenarkan adalah %2 untuk kontrak ini. Silahkan pilih kontrak pada market lain atau kurangi modal anda."
 
 #. (to_monetary_number_format($limits->daily->turnover)
-#: lib/BOM/Product/Transaction.pm:1215
+#: lib/BOM/Product/Transaction.pm:1214
 msgid "Sorry, you have exceeded a BOUNDARY contract daily turnover of USD%1 which is the maximum daily turnover allowed. Please choose on a different type of contract or lower your stake."
 msgstr "Maaf, anda telah melebihi batasan maksimum HASIL harian sebesar USD%1 untuk kontrak ini. Pilih jenis kontrak lain atau kurangi modal anda."
 
-#: cgi/paymentagent_transfer.cgi:159 cgi/paymentagent_withdraw.cgi:276
+#: cgi/paymentagent_transfer.cgi:160 cgi/paymentagent_withdraw.cgi:286
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "Maaf, Anda telah melebihi maksimum transaksi yang diperbolehkan untuk hari ini."
 
-#: cgi/paymentagent_transfer.cgi:151 cgi/paymentagent_withdraw.cgi:248
+#: cgi/paymentagent_transfer.cgi:152 cgi/paymentagent_withdraw.cgi:258
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "Maaf, Anda telah melebihi jumlah transfer maksimum yang diperbolehkan untuk hari ini."
 
@@ -6726,16 +6622,16 @@ msgstr "Maaf, Anda telah melebihi jumlah transfer maksimum yang diperbolehkan un
 msgid "Sorry, you have excluded yourself from the website until %1."
 msgstr "Maaf, anda telah mengecualikan diri dari website hingga %1."
 
-#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:219
+#: cgi/subs/subs_runbets_execute.pm:718 cgi/tick_trades.cgi:193
 msgid "Sorry, you have lost the contract."
 msgstr "Maaf, kontrak anda rugi."
 
-#: cgi/top_up_virtual.cgi:64
+#: cgi/top_up_virtual.cgi:59
 msgid "Sorry, you have open positions. Please close out all open positions before requesting additional funds."
 msgstr "Silahkan jual semua posisi terbuka anda sebelum meminta dana tambahan."
 
 #. ($min_with_currency)
-#: cgi/top_up_virtual.cgi:52
+#: cgi/top_up_virtual.cgi:47
 msgid "Sorry, your account balance is more than %1. You may not claim extra funds until such time as your account balance drops under %1."
 msgstr "Maaf, sisa dana tunai anda lebih dari %1. Anda tidak dapat mengisi dana tambahan hingga saldo akun anda kurang dari %1."
 
@@ -6745,7 +6641,7 @@ msgid "Sorry, your account balance of %1 %2 is insufficient"
 msgstr "Maaf, saldo tunai akun anda %1 %2 tidak mencukupi"
 
 #. ("$currency$balance",                to_monetary_number_format($account_balance_limit, 1)
-#: lib/BOM/Product/Transaction.pm:941
+#: lib/BOM/Product/Transaction.pm:940
 msgid "Sorry, your account cash balance is too high (%1). <B>Your maximum account balance is %2 </b>. Please withdraw money from your account to bring down your cash balance under that amount. You may not trade until you do so."
 msgstr "Maaf, saldo Anda melebihi (%1). <B>Saldo maksimum Anda adalah %2 </b>. Silahkan lakukan penarikan untuk mengurangi saldo Anda. Anda tidak dapat melanjutkan trading sebelum melakukan hal tersebut."
 
@@ -6757,9 +6653,16 @@ msgstr "Maaf, akun anda telah terperangkap berhubung transaksi sebelumnya tidak 
 msgid "Sorry, your account has got stuck in a previous transaction that did not complete. If this error persists, please contact customer support."
 msgstr "Maaf, akun anda telah terperangkap berhubung transaksi sebelumnya tidak terselesaikan. Jika pesan error ini terus berlangsung, silahkan hubungi customer support."
 
-#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:902
+#: cgi/subs/subs_runbets_execute.pm:287 lib/BOM/Product/Transaction.pm:901
 msgid "Sorry, your account is not authorised for any further contract purchases."
 msgstr "Maaf, akun anda tidak dapat membeli kontrak selanjutnya."
+
+#. ($client->currency . ' is unavailable for Payment Agent Withdrawal')
+#: cgi/paymentagent_withdraw.cgi:139
+#, fuzzy
+#| msgid "Sorry, you cannot sell"
+msgid "Sorry, your currency of "
+msgstr "Maaf, anda tidak dapat menjual"
 
 #: cgi/emailus.cgi:142
 msgid "Sorry, your file is too large. The maximum file size is 1 Megabyte (1MB)."
@@ -6789,7 +6692,7 @@ msgstr "Harga spot"
 msgid "Spread"
 msgstr "Spread"
 
-#: cgi/tick_trades.cgi:275 frontend/templates/get_started/glossary.html.haml:1
+#: cgi/tick_trades.cgi:249 frontend/templates/get_started/glossary.html.haml:1
 #: lib/BOM/Product/Model/ContractForm.pm:652
 msgid "Stake"
 msgstr "Modal"
@@ -6852,7 +6755,8 @@ msgstr "Mulai trading"
 msgid "State/Province"
 msgstr "Provinsi"
 
-#: cgi/statement.cgi:18 cgi/statement.cgi:88 cgi/statement.cgi:90
+#: cgi/statement.cgi:18 cgi/statement.cgi:86
+#: cgi/templates/default/account/statement.tt:101
 #: cgi/templates/default/homepage/logged_in.tt:61 lib/BOM/View/Menu.pm:75
 msgid "Statement"
 msgstr "Pernyataan"
@@ -6865,15 +6769,15 @@ msgstr "Konten Statik"
 msgid "Statistic"
 msgstr "Statistik"
 
-#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:315
+#: cgi/subs/subs_BOMFeed_history.pm:403 cgi/tick_trades.cgi:289
 msgid "Statistics"
 msgstr "Statistik"
 
-#: cgi/tick_trades.cgi:209 cgi/tick_trades.cgi:319
+#: cgi/tick_trades.cgi:183 cgi/tick_trades.cgi:293
 msgid "Statistics that help."
 msgstr "Statistik yang membantu."
 
-#: cgi/tick_trades.cgi:311
+#: cgi/tick_trades.cgi:285
 msgid "Stats"
 msgstr "Data"
 
@@ -6973,10 +6877,6 @@ msgstr "Untuk mengikuti arahan Perusahaan mengenai pelacakan klien yang mengakse
 #: cgi/subs/subs_forms.pm:4076
 msgid "Submit"
 msgstr "Mengajukan"
-
-#: cgi/currency_converter.cgi:208
-msgid "Success"
-msgstr "Sukses"
 
 #: cgi/templates/default/legal/copyright.tt:12
 msgid "Such materials may be copied and distributed on a limited basis for noncommercial purposes only, provided that any material copied remains intact and that all copies include the following notice in a clearly visible position: &ldquo;Copyright 1999-2014 Regent Markets Group. All rights reserved.&rdquo;"
@@ -7155,7 +7055,7 @@ msgstr "%1 mensimulasikan market yang aktif pada siang hari (namun kurang aktif 
 
 #. ($website->display_name)
 #. (request()
-#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:388
+#: cgi/f_writepartics.cgi:238 cgi/paymentagent_withdraw.cgi:398
 msgid "The %1 team."
 msgstr "Tim %1."
 
@@ -7467,7 +7367,7 @@ msgstr "Perusahaan berhak untuk mengenakan biaya tidak aktif sebesar USD/EUR/AUD
 msgid "The content on this website is subject to change at any time without notice and is provided for the sole purpose of assisting traders in making independent investment decisions.  %1 has taken reasonable measures to ensure the accuracy of the information on the website, however, the company does not guarantee its accuracy and will not accept liability for any loss or damage which may arise directly or indirectly from the content or your inability to access the website, for any delay in or failure of the transmission or the receipt of any instruction or notification sent through this website."
 msgstr "Isi dari website ini dapat dirubah sewaktu waktu tanpa pemberitahuan dan hanya disediakan untuk membantu para trader untuk mengambil keputusan melakukan investasi. %1 akan memastikan keakuratan informasi yang terdapat pada website namun demikian Perusahaan tidak menjamin keakuratan tersebut dan tidak akan menanggung kerugian atau kerusakan yang ditimbulkan oleh informasi tersebut atau jika anda mengalami masalah didalam mengakses website baik itu berhubung penundaan atau keterlambatan transmisi atau penerimaan berita atau instruksi yang dikirimkan melalui website ini."
 
-#: lib/BOM/Product/Transaction.pm:644
+#: lib/BOM/Product/Transaction.pm:651
 msgid "The contract has expired"
 msgstr "Kontrak telah berakhir"
 
@@ -7481,7 +7381,7 @@ msgid "The contract must expire on a trading day."
 msgstr "Kontrak harus berakhir pada hari trading."
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:687
+#: lib/BOM/Product/Transaction.pm:694
 msgid "The contract payout has changed from %1%2 to %1%3."
 msgstr "Hasil kontrak telah berubah dari %1%2 ke %1%3."
 
@@ -7490,7 +7390,7 @@ msgid "The contract period is the timeframe of a trade. It is also called the du
 msgstr "Periode kontrak adalah jangka waktu trading. Yang juga disebut sebagai durasi."
 
 #. ($currency,                        to_monetary_number_format($amount)
-#: lib/BOM/Product/Transaction.pm:680
+#: lib/BOM/Product/Transaction.pm:687
 msgid "The contract price has changed from %1%2 to %1%3."
 msgstr "Harga kontrak telah berubah dari %1%2 ke %1%3."
 
@@ -7498,7 +7398,7 @@ msgstr "Harga kontrak telah berubah dari %1%2 ke %1%3."
 msgid "The cost of your open positions"
 msgstr "Jumlah biaya kontrak"
 
-#: cgi/subs/subs_homepage.pm:142 cgi/subs/subs_homepage.pm:171
+#: cgi/subs/subs_homepage.pm:135
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "Mata uang bonus anda akan sama dengan mata uang deposit pertama anda."
 
@@ -7687,8 +7587,15 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "Keuntungan adalah selisih antara harga beli (modal) dengan hasil pada kontrak yang memberi untung."
 
 #. ($currency)
-#: lib/BOM/Product/Transaction.pm:466
+#: lib/BOM/Product/Transaction.pm:473
 msgid "The provided currency %1 is invalid."
+msgstr "Mata uang yang disediakan %1 tidak berlaku."
+
+#. ($currency)
+#: lib/BOM/Product/Transaction.pm:465
+#, fuzzy
+#| msgid "The provided currency %1 is invalid."
+msgid "The provided currency %1 is not the default currency"
 msgstr "Mata uang yang disediakan %1 tidak berlaku."
 
 #. ($email)
@@ -7748,7 +7655,7 @@ msgstr "Transaksi yang dilakukan di situs ini dan hubungan antara Klien dan Peru
 msgid "The two passwords that you entered do not match."
 msgstr "Kedua-dua password yang Anda masukkan tidak cocok."
 
-#: lib/BOM/Product/Transaction.pm:674
+#: lib/BOM/Product/Transaction.pm:681
 msgid "The underlying market has moved too much since you priced the contract. "
 msgstr "Market dasar telah bergerak terlalu banyak setelah anda menghitung harga. "
 
@@ -7773,7 +7680,13 @@ msgstr "Tidak tersedia Agen Pembayaran di negara anda (%1)."
 msgid "There are no available Payment Agents."
 msgstr "Agen Pembayaran tidak tersedia."
 
-#: cgi/templates/default/account/statement.tt:101
+#: cgi/templates/default/backoffice/account/profit_table.tt:71
+#, fuzzy
+#| msgid "There are no items during this period"
+msgid "There are no contracts during this period"
+msgstr "Tidak terdapat transaksi selama periode ini"
+
+#: cgi/templates/default/account/statement.tt:106
 #: cgi/templates/default/backoffice/account/statement.tt:21
 msgid "There are no items during this period"
 msgstr "Tidak terdapat transaksi selama periode ini"
@@ -7805,8 +7718,8 @@ msgstr "Terdapat masalah pada saat mengesahkan alamat anda. Silahkan periksa bag
 msgid "There was an error and we were unable to process your request."
 msgstr "Telah terjadi error dan kami tidak dapat memproses permohonan anda."
 
-#: cgi/paymentagent_transfer.cgi:108 cgi/paymentagent_transfer.cgi:112
-#: cgi/paymentagent_withdraw.cgi:144 cgi/paymentagent_withdraw.cgi:172
+#: cgi/paymentagent_transfer.cgi:110 cgi/paymentagent_transfer.cgi:114
+#: cgi/paymentagent_withdraw.cgi:155 cgi/paymentagent_withdraw.cgi:183
 msgid "There was an error processing the request."
 msgstr "Transaksi tidak terproses."
 
@@ -7863,11 +7776,11 @@ msgstr "Perjanjian ini akan dimulai pada tanggal dimana Perusahaan telah melulus
 msgid "This Document"
 msgstr "Dokumen ini"
 
-#: cgi/paymentagent_withdraw.cgi:184
+#: cgi/paymentagent_withdraw.cgi:195
 msgid "This Payment Agent cashier section is locked."
 msgstr "Bagian kasir Agen Pembayaran ini terkunci."
 
-#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:73
+#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:68
 msgid "This URL is invalid."
 msgstr "URL ini tidak berlaku."
 
@@ -7888,11 +7801,11 @@ msgstr "Kode bonus ini tidak tersedia."
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr "Panggilan ini akan memberi struktur JSON yang sama yang bisa dilihat pada Konsul Fasilitas API."
 
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:110
 msgid "This client cashier section is locked."
 msgstr "Bagian kasir akun ini dibatalkan."
 
-#: lib/BOM/Product/Transaction.pm:759
+#: lib/BOM/Product/Transaction.pm:766
 msgid "This contract cannot be properly validated at this time."
 msgstr "Kontrak tidak dapat divalidasi untuk saat ini."
 
@@ -7913,7 +7826,7 @@ msgid "This contract has expired."
 msgstr "Kontrak berikut telah berakhir."
 
 #. (to_monetary_number_format($custom_limit)
-#: lib/BOM/Product/Transaction.pm:844
+#: lib/BOM/Product/Transaction.pm:843
 msgid "This contract is limited to "
 msgstr "Kontrak ini terbatas ke "
 
@@ -7921,7 +7834,7 @@ msgstr "Kontrak ini terbatas ke "
 msgid "This contract is no longer offered."
 msgstr "Kontrak ini sudah tidak ditawarkan."
 
-#: lib/BOM/Product/Transaction.pm:842
+#: lib/BOM/Product/Transaction.pm:841
 msgid "This contract is unavailable on this account."
 msgstr "Kontrak ini tidak tersedia pada akun ini."
 
@@ -7929,7 +7842,7 @@ msgstr "Kontrak ini tidak tersedia pada akun ini."
 msgid "This contract offers no return."
 msgstr "Kontrak ini tidak memberi hasil."
 
-#: lib/BOM/Product/Transaction.pm:1445
+#: lib/BOM/Product/Transaction.pm:1444
 msgid "This contract was not found among your open positions."
 msgstr "Kontrak tidak ditemukan pada posisi yang masih berjalan."
 
@@ -7960,7 +7873,7 @@ msgstr "Ini adalah akun uang virtual. Silakan klik <a class=\"pjaxload\" href=\"
 msgid "This is an automated message to alert you to the fact that there was a failed attempt to unlock the Cashier/Settings section of your account %1 from IP address %2"
 msgstr "Ini adalah pesan otomatis untuk mengingatkan Anda bahwa telah terjadi kegagalan pada pengaksesan bagian Kasir/Pengaturan account Anda %1 dari alamat IP %2"
 
-#: cgi/oop/Controller/Bet.pm:2201 cgi/templates/default/bet/form/barrier.tt:23
+#: cgi/oop/Controller/Bet.pm:2200 cgi/templates/default/bet/form/barrier.tt:23
 #: cgi/templates/default/bet/form/barrier.tt:42
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "Ini adalah batasan indikatif. Batasan aktual adalah spot masuk ditambah batasan offset."
@@ -7979,7 +7892,7 @@ msgstr "Ini adalah peralatan charting 'generasi baru' kami."
 
 #: cgi/templates/default/api/register.tt:14
 msgid "This is the Callback URL required by the 3-legged authentication procedure as described in the "
-msgstr ""
+msgstr "Ini adalah URL Callback yang diperlukan bagi prosedur autentikasi 3 kaki seperti yang dijelaskan pada "
 
 #: frontend/templates/get_started/glossary.html.haml:1
 msgid "This is the current price at which an underlying can be bought or sold at a particular time."
@@ -8012,7 +7925,7 @@ msgstr "Metode ini cocok untuk JavaScript saja (pada dasarnya aplikasi mobile). 
 
 #: cgi/templates/default/api/register.tt:9
 msgid "This name will appear to your end-users when they authenticate at binary.com.  Use between 5 and 30 alphanumeric chars."
-msgstr ""
+msgstr "Nama ini akan muncul pada pengguna anda ketika mereka mencoba mengotentikasi pada binary.com.  Gunakan 5 hingga 30 karakter alfanumerik."
 
 #: cgi/templates/default/legal/promocode.tt:19
 #: cgi/templates/default/legal/promocode.tt:47
@@ -8059,7 +7972,7 @@ msgstr "Tik Brain"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:78
-#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:448
+#: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:423
 #: frontend/templates/get_started/types_of_trades.html.haml:1
 #: frontend/templates/layouts/default/footer.html.haml:1
 #: lib/BOM/View/Menu.pm:220
@@ -8081,9 +7994,9 @@ msgid "Tick trades"
 msgstr "Trading tik"
 
 #: cgi/oop/Controller/Bet.pm:1124 cgi/oop/Controller/Bet.pm:1131
-#: cgi/templates/default/account/statement.tt:45
+#: cgi/templates/default/account/statement.tt:47
 #: cgi/templates/default/backoffice/account/statement.tt:49
-#: cgi/tick_trades.cgi:255
+#: cgi/tick_trades.cgi:229
 msgid "Ticks"
 msgstr "Hasil Tik"
 
@@ -8131,15 +8044,11 @@ msgstr ""
 msgid "To continue using our cashier system, please try accessing it again:"
 msgstr "Untuk terus menggunakan sistem kasir kami, silahkan coba untuk mengakses kembali:"
 
-#: cgi/templates/default/account/currency_converter.tt:9
-msgid "To convert money between the different currencies in your account, please use the form below."
-msgstr "Untuk menukar uang antara mata uang yang berbeda di dalam rekening Anda, silakan pergunakan formulir dibawah ini."
-
 #: cgi/templates/default/misc/logintrouble.tt:6
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "Untuk mengaktifkan cookie, ikuti petunjuk di bawah ini untuk versi browser yang anda gunakan."
 
-#: cgi/subs/subs_clientdetails.pm:157
+#: cgi/subs/subs_clientdetails.pm:133
 msgid "To fully authenticate your account, please email scanned copies of the document listed below."
 msgstr "Untuk membuktikan kebenaran akun Anda, silahkan email scan copy dokumen berikut ini."
 
@@ -8378,7 +8287,7 @@ msgstr "Transfer dari akun %1"
 msgid "Transfer from another account"
 msgstr "Transfer dari akun lainnya"
 
-#: cgi/paymentagent_withdraw.cgi:195
+#: cgi/paymentagent_withdraw.cgi:206
 msgid "Transfer to"
 msgstr "Kirim ke"
 
@@ -8421,7 +8330,7 @@ msgstr "3 Sudut"
 msgid "Triangular moving averages place the majority of the weight on the middle portion of the price series. They are actually double-smoothed simple moving averages. The periods used in the simple moving averages varies depending on if you specify an odd or even number of time periods."
 msgstr "Moving average Triangular penekanan pemberatnya ada pada tengah-tengah periode. Mereka sebenarnya mengalami dua kali pelicinan moving average sederhana. Periode  yang digunakan pada moving average sederhana adalah tergantung pada jika merincikan angka ganjil atau genap dari periode waktu."
 
-#: cgi/tick_trades.cgi:525
+#: cgi/tick_trades.cgi:500
 msgid "Troubleshooting"
 msgstr "Penyelesaian"
 
@@ -8461,7 +8370,7 @@ msgstr "Saham UK"
 msgid "UK and Manx residents will have their account opened with Regent Markets (IOM) Ltd."
 msgstr "Warga Inggris dan Manx akan memiliki akun mereka didaftar dengan Regent Markets (IOM) Ltd."
 
-#: cgi/tick_trades.cgi:65
+#: cgi/tick_trades.cgi:39
 msgid "UP"
 msgstr "NAIK"
 
@@ -8533,14 +8442,6 @@ msgstr "Memperbarui"
 #: cgi/subs/subs_forms.pm:3627
 msgid "Update Settings"
 msgstr "Perbaru Pengaturan"
-
-#: cgi/register-api.cgi:146
-msgid "Update failed.  Request support."
-msgstr ""
-
-#: cgi/register-api.cgi:149
-msgid "Update successful"
-msgstr ""
 
 #: cgi/templates/default/global/header.tt:9
 #: frontend/templates/layouts/default/topbar.html.haml:1
@@ -8625,11 +8526,11 @@ msgstr "Lihat harga kontrak Naik/Turun pada berbagai pilihan market."
 msgid "View Trading Times"
 msgstr "Lihat Waktu Trading"
 
-#: cgi/top_up_virtual.cgi:94 cgi/top_up_virtual.cgi:95
+#: cgi/top_up_virtual.cgi:89 cgi/top_up_virtual.cgi:90
 msgid "View Updated Portfolio"
 msgstr "Lihat portopolio terbaru"
 
-#: cgi/subs/subs_payments_withdrawals.pm:114
+#: cgi/subs/subs_payments_withdrawals.pm:106
 msgid "View and increase your"
 msgstr "Lihat dan tingkatkan milik anda"
 
@@ -8661,11 +8562,7 @@ msgstr "Lihat prestasi"
 msgid "View result"
 msgstr "Lihat hasil"
 
-#: cgi/currency_converter.cgi:221
-msgid "View statement"
-msgstr "Lihat pernyataan"
-
-#: cgi/tick_trades.cgi:243
+#: cgi/tick_trades.cgi:217
 msgid "View statement."
 msgstr "Lihat pernyataan."
 
@@ -8686,7 +8583,7 @@ msgstr "Lihat transaksi historis anda."
 msgid "View your open positions."
 msgstr "Lihat posisi kontrak."
 
-#: cgi/paymentagent_transfer.cgi:244 cgi/paymentagent_withdraw.cgi:367
+#: cgi/paymentagent_transfer.cgi:245 cgi/paymentagent_withdraw.cgi:377
 msgid "View your statement"
 msgstr "Lihat pernyataan anda"
 
@@ -8741,10 +8638,6 @@ msgstr "Kami sepenuhnya memiliki ijin dari British Isles dan Malta."
 #: cgi/subs/subs_forms.pm:410
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "Saat ini kami tidak menerima pembukaan account dari penduduk negara berikut."
-
-#: cgi/currency_converter.cgi:107
-msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
-msgstr "Kami mohon maaf karena tidak dapat memproses penukaran kedalam bentuk valuta asing lainnya jika rekening anda pernah mendeposit dana menggunakan kartu kredit / debit."
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:176
@@ -8816,7 +8709,9 @@ msgid "We were unable to recover your Login ID or Password with the provided inf
 msgstr "Kami tidak dapat memulihkan Login ID atau kata sandi menggunakan informasi yang anda berikan. <a href=\"%1\">Kembali ke Pemulihan Kata Sandi</a>, atau <a href=\"%2\"><strong>hubungi kami</strong></a> jika anda memerlukan bantuan lebih lanjut."
 
 #: cgi/subs/subs_clientdetails.pm:112
-msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+#, fuzzy
+#| msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
+msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
 msgstr "Kami tidak dapat membuktikan identitas dan alamat anda secara online. Meskipun demikian, anda masih bisa melakukan pembuktian dengan mengirimkan copy dokumen yang dilegalisir baik itu identitas dan pembuktian alamat melalui pos."
 
 #. (site_name)
@@ -8834,7 +8729,7 @@ msgid "We will send you an e-mail asking you to verify your identity. If you don
 msgstr "Kami akan langsung mengirimkan e-mail untuk membuktikan identitas Anda. Jika Anda tidak menerima e-mail kami beberapa menit yang akan datang, silakan periksa bagian junk/spam email Anda."
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:250
+#: cgi/paymentagent_transfer.cgi:251
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -8851,7 +8746,7 @@ msgstr ""
 "Tim %4."
 
 #. ($currency, $amount, $client_name, $client_loginid, $paymentagent_loginid, $website->display_name)
-#: cgi/paymentagent_withdraw.cgi:382
+#: cgi/paymentagent_withdraw.cgi:392
 msgid "We would like to inform you that the withdrawal request of %1%2 by %3 %4 has been processed. The funds have been credited into your account %5 at %6."
 msgstr "Email berikut adalah untuk menginformasikan mengenai permohonan penarikan dana sebesar %1%2 oleh %3 dari akun %4 sudah berhasil diproses. Jumlah dana tersebut telah dikreditkan kedalam akun %5 anda yaitu %6."
 
@@ -8921,7 +8816,7 @@ msgstr "Volume indikator Weighted adalah berdasarkan pada perubahan satu hari vo
 msgid "Welcome!"
 msgstr "Selamat datang!"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:441
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
 msgid "Western Union"
 msgstr "Western Union"
 
@@ -9160,7 +9055,7 @@ msgstr "Dengan akses_token terkini dapat memanggil layanan API. Panggilan terseb
 msgid "With payouts from $1 to $100,000, we have you covered."
 msgstr "Dengan hasil dari $1 hingga $100,000, hanya untuk anda."
 
-#: cgi/templates/default/account/statement.tt:140
+#: cgi/templates/default/account/statement.tt:145
 #: cgi/templates/default/cashier/available_payment_methods.tt:19
 msgid "Withdraw"
 msgstr "Pencairan"
@@ -9232,8 +9127,8 @@ msgstr "Penarikan: %1 hari kerja"
 msgid "Withdraw: Not applicable"
 msgstr "Penarikan: Tidak tersedia"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:422
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:423
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
 #: lib/BOM/Platform/Model/Payment.pm:155
 msgid "Withdrawal"
 msgstr "Penarikan"
@@ -9243,7 +9138,7 @@ msgstr "Penarikan"
 msgid "Withdrawal amount (%1 %2) is greater than your balance (%3 %4)."
 msgstr "Jumlah penarikan (%1 %2) lebih besar dari saldo anda (%3 %4)."
 
-#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:144
+#: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:136
 #: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:94
 msgid "Withdrawal amount exceeds your limits."
 msgstr "Jumlah penarikan melebihi batasan anda."
@@ -9262,7 +9157,7 @@ msgstr "Batas penarikan"
 msgid "Withdrawal using legacy method: %1"
 msgstr "Penarikan menggunakan metode: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Withdrawal via BACS"
 msgstr "Penarikan melalui BACS"
@@ -9271,7 +9166,7 @@ msgstr "Penarikan melalui BACS"
 msgid "Withdrawal via Bank Transfer"
 msgstr "Penarikan melalui Bank Transfer"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:427
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Withdrawal via Credit/Debit card"
 msgstr "Penarikan melalui Kartu Kredit/Debit"
@@ -9280,7 +9175,7 @@ msgstr "Penarikan melalui Kartu Kredit/Debit"
 msgid "Withdrawal via DoughFlow"
 msgstr "Penarikan melalui DoughFlow"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Withdrawal via Western Union"
 msgstr "Penarikan melalui Western Union (MTCN: %1)"
 
@@ -9289,7 +9184,7 @@ msgstr "Penarikan melalui Western Union (MTCN: %1)"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "Penarikan melalui Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "Penarikan melalui bank transfer"
@@ -9341,7 +9236,7 @@ msgstr "Anda juga berhak untuk memperoleh data pribadi yang telah anda ajukan ke
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "Anda dan kami merupakan kontraktor bebas dan tidak terdapat dalam perjanjian ini yang akan membuat satu kemitraan, usaha patungan, agen, waralaba, perwakilan penjualan, atau hubungan kerja antara kedua belah pihak. Anda tidak akan memiliki otoritas untuk membuat atau menerima tawaran atau mengatas namakan kami."
 
-#: cgi/oop/Controller/Bet.pm:1973
+#: cgi/oop/Controller/Bet.pm:1972
 msgid "You are being given the better price."
 msgstr "Anda diberikan harga yang lebih baik."
 
@@ -9379,10 +9274,8 @@ msgid "You can fund your account with a minimum of &#36;/&pound;/&euro; 5 via an
 msgstr "Anda dapat mendanai akun anda dari serendah &#36; 5 menggunakan metode berikut ini."
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "Funding your Account"
 msgid "You can open your account"
-msgstr "Danai Akun Anda"
+msgstr "Anda dapat mendaftar akun anda"
 
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 msgid "You can sell back long-term trades at any time to profit from changing market conditions."
@@ -9391,6 +9284,12 @@ msgstr "Anda dapat menjual kembali kontrak jangka panjang untuk profit dari peru
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "Anda dapat menentukan lama kontrak, dari 10 detik hingga 365 hari."
+
+#: cgi/subs/subs_clientdetails.pm:114
+#, fuzzy
+#| msgid "To fully authenticate your account, please email scanned copies of the document listed below."
+msgid "You can still authenticate your account by sending us scans of the following documents by email"
+msgstr "Untuk membuktikan kebenaran akun Anda, silahkan email scan copy dokumen berikut ini."
 
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You can trade a range of markets, timescales and indices – 24/7."
@@ -9402,7 +9301,7 @@ msgid "You can try another <a href=\"%1\">payment option</a> or for additional a
 msgstr "Anda dapat mencoba <a href=\"%1\">metode pembayaran</a> lainnya atau untuk bantuan:"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:105
+#: cgi/paymentagent_transfer.cgi:107
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "Anda tidak dapat mentransfer ke account %1, berhubung akun ini dibatalkan untuk sementara."
 
@@ -9451,11 +9350,7 @@ msgstr "Anda telah melakukan penarikan dana sejumlah EUR %1 akumulasi sepanjang 
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "Anda telah melakukan penarikan sebesar EUR %1."
 
-#: cgi/subs/subs_homepage.pm:139
-msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
-msgstr "Anda telah membeli kontrak dengan harga total lima kali jumlah bonus."
-
-#: cgi/subs/subs_homepage.pm:158
+#: cgi/subs/subs_homepage.pm:123
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "Anda telah membeli kontrak dengan harga total lima kali jumlah bonus."
 
@@ -9469,8 +9364,8 @@ msgstr "Alamat IP yang anda masukkan salah."
 msgid "You have entered an invalid login ID"
 msgstr "Anda telah memasukkan login ID yang salah"
 
-#: lib/BOM/Product/Transaction.pm:1087 lib/BOM/Product/Transaction.pm:1354
-#: lib/BOM/Product/Transaction.pm:1382 lib/BOM/Product/Transaction.pm:1416
+#: lib/BOM/Product/Transaction.pm:1086 lib/BOM/Product/Transaction.pm:1353
+#: lib/BOM/Product/Transaction.pm:1381 lib/BOM/Product/Transaction.pm:1415
 msgid "You have exceeded the daily limit for contracts of this type."
 msgstr "Anda telah melebihi batasan harian kontrak untuk jenis ini."
 
@@ -9520,10 +9415,6 @@ msgstr "Anda tidak dapat membeli atau mendaftar kata kunci, istilah pencarian at
 msgid "You may only open an account at this site on condition that:"
 msgstr "Anda hanya dapat mendaftar akun di situs ini dengan syarat bahwa:"
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "You may purchase contracts in any of these currencies."
-msgstr "Anda hanya dapat membeli kontrak pada jenis mata uang berikut."
-
 #: cgi/templates/default/legal/promocode.tt:25
 msgid "You may withdraw the Y deposited to claim the bonus and any winnings generated by the bonus at any time."
 msgstr "Anda dapat menarik dana Y yang anda depositkan untuk memperoleh bonus dan keuntungan yang dihasilkan kapan saja."
@@ -9533,18 +9424,16 @@ msgid "You may withdraw the bonus amount once you have exceeded an account turno
 msgstr "Bonus hanya dapat dicairkan jika anda telah melebihi total pembelian kontrak sebesar 25 kali jumlah bonus."
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "You may already have an account opened in the system."
 msgid "You must already have a valid \"Real money account\" with Binary.com."
-msgstr "<P>Anda mungkin telah mendaftar akun sebelumnya."
+msgstr "Anda perlu memiliki \"Akun Uang Riil\" pada Binary.com."
 
 #: cgi/subs/subs_BOMFeed_history.pm:450
 msgid "You must be logged in to use the workspace feature.Account opening is free and takes only 30 seconds."
 msgstr "Anda perlu masuk untuk mengakses fasilitas workspace. Pendaftaran akun adalah gratis dan hanya memerlukan waktu 30 detik."
 
-#: cgi/register-api.cgi:40
+#: cgi/register-api.cgi:36
 msgid "You must have a valid 'real' money account before registering as an API Developer"
-msgstr ""
+msgstr "Anda perlu memiliki akun uang 'riil' sebelum mendaftar sebagai Developer API"
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "You must now strip ACCESSTOKEN from the redirection URL as described in the literature for Implicit Grants."
@@ -9630,13 +9519,8 @@ msgstr "Anda menggunakan akun uang virtual."
 msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 in other currency)."
 msgstr "Batas penarikan %1 hari anda adalah <strong>EUR %2</strong> (atau %3 pada mata uang lainnya)."
 
-#. ($min_deposit)
-#: cgi/subs/subs_homepage.pm:137
-msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
-msgstr "Deposit <strong>perdana</strong> anda adalah senilai atau lebih dari %1 dan"
-
 #. ($currency_label, $min_deposit)
-#: cgi/subs/subs_homepage.pm:156
+#: cgi/subs/subs_homepage.pm:121
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "Deposit <strong>pertama</strong> anda adalah senilai atau lebih dari %1%2 dan"
 
@@ -9667,19 +9551,19 @@ msgstr "Login ID tidak boleh mengandungi spasi."
 
 #: cgi/templates/default/api/register.tt:18
 msgid "Your Public Key"
-msgstr ""
+msgstr "Kunci Publik Anda"
 
-#: cgi/currency_converter.cgi:131 cgi/subs/subs_payments_withdrawals.pm:107
-#: cgi/subs/subs_payments_withdrawals.pm:75
+#: cgi/subs/subs_payments_withdrawals.pm:67
+#: cgi/subs/subs_payments_withdrawals.pm:99
 msgid "Your account balance"
 msgstr "Saldo akun Anda"
 
 #. ($currency,                to_monetary_number_format($balance)
-#: lib/BOM/Product/Transaction.pm:952
+#: lib/BOM/Product/Transaction.pm:951
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "Saldo anda (%1%2) tidak mencukupi untuk membeli kontrak (%1%3) ini."
 
-#: cgi/subs/subs_clientdetails.pm:168
+#: cgi/subs/subs_clientdetails.pm:144
 msgid "Your account does not require authentication at this time."
 msgstr "Akun Anda tidak memerlukan otentikasi untuk saat ini."
 
@@ -9695,7 +9579,7 @@ msgstr "Akun anda telah dikreditkan dengan <strong>%1 %2</strong>"
 msgid "Your account has been debited with %1 %2"
 msgstr "Akun anda telah didebit sebanyak %1 %2"
 
-#: lib/BOM/Product/Transaction.pm:1326
+#: lib/BOM/Product/Transaction.pm:1325
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
 msgstr "Akun anda telah melebihi batasan trading menggunakan kode bonus, silakan mendeposit untuk melanjutkan trading."
 
@@ -9713,11 +9597,11 @@ msgid "Your account is fully authenticated and your withdrawal limit of EUR %1 h
 msgstr "Akun anda telah terbukti dan batasan penarikan sebesar EUR %1 telah dihapuskan."
 
 #. (request()
-#: cgi/subs/subs_clientdetails.pm:83
+#: cgi/subs/subs_clientdetails.pm:84
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
 msgstr "Akun anda telah melengkapi proses pembuktian. Anda dapat melihat <a href=\"%1\">batasan trading disini</a>."
 
-#: cgi/subs/subs_clientdetails.pm:151
+#: cgi/subs/subs_clientdetails.pm:127
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
 msgstr "Akun anda saat ini sepenuhnya aktif, anda dapat mulai melakukan deposit, trading dan melakukan penarikan dana."
 
@@ -9739,36 +9623,28 @@ msgstr "Akun Anda terdaftar sebagai Agen Pembayaran."
 msgid "Your account is restricted to withdrawals only."
 msgstr "Akun Anda hanya dapat melakukan penarikan saja."
 
-#: cgi/templates/default/account/currency_converter.tt:8
-msgid "Your account may hold the following currencies"
-msgstr "Anda dapat menggunakan jenis mata uang berikut ini"
-
-#: cgi/currency_converter.cgi:210
-msgid "Your account statement has been updated accordingly."
-msgstr "Pernyataan akun anda telah diperbarui."
-
 #: cgi/oop/Validation/Transaction/Payment/Deposit.pm:45
 msgid "Your balance is over your allowed limit."
 msgstr "Saldo anda melebihi batasan yang dibenarkan."
 
 #: cgi/templates/default/api/register.tt:20
 msgid "Your base url for all API calls"
-msgstr ""
+msgstr "Url dasar anda untuk panggilan API"
 
 #. ($loginid)
 #: cgi/f_brokercgi/f_promotional_processing.cgi:37
 msgid "Your bonus request - %1"
 msgstr "Permohonan bonus anda - %1"
 
-#: cgi/subs/subs_homepage.pm:133 cgi/subs/subs_homepage.pm:152
+#: cgi/subs/subs_homepage.pm:117
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "Bonus Anda akan dikreditkan ke account Anda dalam waktu 3 hari kerja setelah kondisi berikut telah terpenuhi:"
 
-#: cgi/subs/subs_homepage.pm:166
+#: cgi/subs/subs_homepage.pm:130
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "Anda akan segera menerima email konfirmasi mengenai bonus setelah pembelian kontrak setara atau lebih besar dengan jumlah bonus anda."
 
-#: cgi/subs/subs_homepage.pm:175
+#: cgi/subs/subs_homepage.pm:139
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "Anda akan segera menerima email konfirmasi mengenai bonus anda."
 
@@ -9784,7 +9660,7 @@ msgstr "Bagian kasir terkunci dengan kata sandi."
 msgid "Your cashier is locked."
 msgstr "Bagian kasir terkunci."
 
-#: cgi/paymentagent_transfer.cgi:112
+#: cgi/paymentagent_transfer.cgi:114
 msgid "Your cashier section is locked."
 msgstr "Bagian kasir anda dibatalkan."
 
@@ -9839,7 +9715,7 @@ msgstr "Nama anda"
 msgid "Your name/company"
 msgstr "Nama anda/perusahaan"
 
-#: cgi/oop/Controller/Bet.pm:1930
+#: cgi/oop/Controller/Bet.pm:1932
 msgid "Your new account balance is %s %s"
 msgstr "Saldo akun Anda adalah %s %s"
 
@@ -9848,7 +9724,7 @@ msgid "Your old password is incorrect"
 msgstr "Password lama anda salah"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:1978
+#: cgi/oop/Controller/Bet.pm:1977
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "Order anda (referensi # <span id=\"reference_no\">%1</span>) telah terproses pada %2."
 
@@ -9898,11 +9774,11 @@ msgstr "Data pribadi anda digunakan untuk membuktikan bahwa anda adalah pemilik 
 msgid "Your phone number"
 msgstr "Nomor telepon anda"
 
-#: cgi/tick_trades.cgi:259
+#: cgi/tick_trades.cgi:233
 msgid "Your prediction"
 msgstr "Prediksi anda"
 
-#: cgi/tick_trades.cgi:263
+#: cgi/tick_trades.cgi:237
 msgid "Your prediction, the market will move :"
 msgstr "Prediksi anda, market akan bergerak:"
 
@@ -9911,12 +9787,12 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "Permohonan anda untuk membatalkan surat kuasa telah kami terima. Mohon ijinkan 2 hari kerja pada kami untuk memproses permohonan tersebut."
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:239
+#: cgi/paymentagent_transfer.cgi:240
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "Permintaan Anda untuk mentransfer %1 %2 dari %3 ke %4 berhasil diproses."
 
 #. ($currency, $amount, $client_loginid, $paymentagent->payment_agent_name)
-#: cgi/paymentagent_withdraw.cgi:362
+#: cgi/paymentagent_withdraw.cgi:372
 msgid "Your request to withdraw %1 %2 from your account %3 to Payment Agent %4 account has been successfully processed."
 msgstr "Permohonan penarikan Anda %1 %2 dari account %3 ke Agen Pembayaran %4 telah diproses."
 
@@ -9933,7 +9809,7 @@ msgid "Your settings have been updated successfully."
 msgstr "Pengaturan anda telah sukses diperbarui."
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1937
+#: cgi/oop/Controller/Bet.pm:1419 cgi/oop/Controller/Bet.pm:1936
 msgid "Your transaction reference number is %1"
 msgstr "Nomor referensi transaksi Anda adalah %1"
 
@@ -9971,7 +9847,7 @@ msgstr "batas jumlah yang dapat anda tradingkan dalam periode waktu tertentu."
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "batas kerugian yang mungkin akan anda alami dalam periode waktu tertentu,"
 
-#: cgi/subs/subs_clientdetails.pm:125 cgi/subs/subs_clientdetails.pm:161
+#: cgi/subs/subs_clientdetails.pm:137
 msgid "and"
 msgstr "dan"
 
@@ -10024,10 +9900,6 @@ msgstr "hubungi kami"
 msgid "contract start time"
 msgstr "waktu mulai kontrak"
 
-#: cgi/currency_converter.cgi:161
-msgid "conversions today.  Please try again tomorrow"
-msgstr "penukaran hari ini.  Silahkan coba kembali besok"
-
 #: cgi/subs/subs_BOMFeed_history.pm:384
 #: lib/BOM/Product/Model/ContractForm.pm:740
 msgid "days"
@@ -10061,11 +9933,11 @@ msgstr "spot masuk ditambah %1"
 msgid "entry spot plus %plural(%1,1 pip, %d pips)"
 msgstr "spot masuk ditambah %1 pip"
 
-#: cgi/limits.cgi:128 cgi/limits.cgi:90 cgi/limits.cgi:95
+#: cgi/limits.cgi:109 cgi/limits.cgi:79 cgi/limits.cgi:84
 msgid "equivalent"
 msgstr "setara"
 
-#: cgi/oop/Controller/Bet.pm:2010
+#: cgi/oop/Controller/Bet.pm:2009
 msgid "explanation"
 msgstr "penjelasan"
 
@@ -10078,10 +9950,8 @@ msgid "for detailed coding instructions."
 msgstr "untuk instruksi lengkap coding."
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "where"
 msgid "here"
-msgstr "dimana"
+msgstr "di sini"
 
 #: lib/BOM/Product/Contract.pm:2122
 msgid "high barrier"
@@ -10103,10 +9973,6 @@ msgstr "jam"
 msgid "hours"
 msgstr "jam"
 
-#: cgi/currency_converter.cgi:75
-msgid "is not available.  If this error persists, please email"
-msgstr "tidak berfungsi.  jika error ini tetap ada, Silahkan email"
-
 #: cgi/templates/default/charting/light_chart.tt:7
 msgid "less"
 msgstr "kurang"
@@ -10123,7 +9989,7 @@ msgstr "batasan rendah"
 msgid "lower"
 msgstr "lebih rendah"
 
-#: cgi/tick_trades.cgi:469
+#: cgi/tick_trades.cgi:444
 #, fuzzy
 #| msgid "Multi award-winning trading platform."
 msgid "main trading platform"
@@ -10160,12 +10026,6 @@ msgstr "menit"
 #: cgi/smartchart.cgi:304 cgi/subs/subs_BOMFeed_history.pm:433
 msgid "minutes"
 msgstr "menit"
-
-#: cgi/register-api.cgi:105
-#, fuzzy
-#| msgid "Scope(s) missing"
-msgid "missing"
-msgstr "Cangkupan hilang"
 
 #: cgi/templates/default/charting/light_chart.tt:8
 msgid "more"
@@ -10269,7 +10129,7 @@ msgstr "menyentuh/tidak"
 msgid "trades"
 msgstr "target harga"
 
-#: cgi/tick_trades.cgi:455
+#: cgi/tick_trades.cgi:430
 msgid "trading is suspended at the moment."
 msgstr "Trading dihentikan untuk sementara."
 
@@ -10294,7 +10154,7 @@ msgstr "dengan %1 data ini:"
 msgid "with this HTTP header"
 msgstr "dengan header HTTP ini"
 
-#: cgi/subs/subs_payments_withdrawals.pm:117
+#: cgi/subs/subs_payments_withdrawals.pm:109
 msgid "withdrawal limits"
 msgstr "pencairan terkini anda"
 
@@ -12109,6 +11969,144 @@ msgstr "Maaf, pengaksesan menggunakan alamat IP jaringan ini telah dibatalkan."
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Maaf, Anda telah gagal mengakses beberapa kali. Silakan coba kembali dalam waktu 5 menit lagi."
 
+#~ msgid "%1 was converted to %2."
+#~ msgstr "%1 telah dikonversi ke %2."
+
+#~ msgid "1. Verification of identity"
+#~ msgstr "1. Pembuktian identitas"
+
+#~ msgid "2. Proof of address"
+#~ msgstr "2. Bukti alamat"
+
+#~ msgid "<li>ORIGINAL Utility bill (within last 3 months) ; or</li><li>ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)</li>"
+#~ msgstr "<li>Bukti tagihan ASLI (dalam tempo 3 bulan) ; atau</li><li>Dokumen asli tagihan kartu kredit/debit/rekening koran (dalam tempo 3 bulan)</li>"
+
+#~ msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full)</li>"
+#~ msgstr "<li>Salinan paspor atau</li><li>Salinan SIM</li>"
+
+#~ msgid "An error occurred while processing request. If this error persists, please contact customer support."
+#~ msgstr "Telah terjadi error pada saat memproses permintaan. Jika error ini masih terjadi, silahkan hubungi customer support."
+
+#~ msgid "Application %1 has been registered.  Your new OAuth credentials are shown below"
+#~ msgstr "Aplikasi % telah terdaftar. Kredensial OAuth baru anda ditampilkan berikut ini"
+
+#~ msgid "Application Name data is invalid"
+#~ msgstr "Data nama aplikasi tidak berlaku"
+
+#~ msgid "Application cannot be registered.  Request support."
+#~ msgstr "Aplikasi tidak dapat didaftarkan. Minta bantuan."
+
+#~ msgid "Application not currently authorized"
+#~ msgstr "Aplikasi tidak dapat diluluskan"
+
+#~ msgid "Application not yet registered"
+#~ msgstr "Aplikasi belum didaftarkan"
+
+#~ msgid "Callback URL data is invalid"
+#~ msgstr "Data URL Callback tidak berlaku"
+
+#~| msgid "This URL is invalid."
+#~ msgid "Callback URL format is invalid"
+#~ msgstr "Format URL callback tidak berlaku"
+
+#~| msgid "Authentication failure"
+#~ msgid "Cancellation failed"
+#~ msgstr "Pembatalan gagal"
+
+#~ msgid "Cancellation successful"
+#~ msgstr "Pembatalan sukses"
+
+#~ msgid "Cash Balance"
+#~ msgstr "Saldo Tunai"
+
+#~ msgid "Convert"
+#~ msgstr "Menukar"
+
+#~ msgid "Convert %1%2 to %3"
+#~ msgstr "Menukar %1%2 ke %3"
+
+#~ msgid "Convert between your currency segment accounts"
+#~ msgstr "Menukar antara bagian mata uang rekening Anda"
+
+#~ msgid "Developer cannot be registered.  Request support."
+#~ msgstr "Developer tidak dapat didaftarkan.  Mohon bantuan."
+
+#~ msgid "Developer not yet registered"
+#~ msgstr "Developer belum terdaftar"
+
+#~ msgid "Error: Both currencies are the same!  You must convert from one currency to another."
+#~ msgstr "Error: keduanya mata uang yang sama!  Anda harus convert dari satu mata uang ke yang lain."
+
+#~ msgid "Error: The exchange rate for"
+#~ msgstr "Error: Nilai tukar untuk"
+
+#~ msgid "Limit</strong><br>(per currency)"
+#~ msgstr "Batasan</strong><br>(per mata uang)"
+
+#~ msgid "Note:"
+#~ msgstr "Nota:"
+
+#~ msgid "SOLD"
+#~ msgstr "TERJUAL"
+
+#~ msgid "Sorry, the currency amount to convert is incorrect."
+#~ msgstr "Maaf, nilai mata uang untuk dikonversi salah."
+
+#~ msgid "Sorry, the currency amount to convert is too small."
+#~ msgstr "Maaf, nilai mata uang untuk dikonversi terlalu kecil."
+
+#~ msgid "Sorry, the maximum amount of currency conversions allowed per day is 3.  You have already performed"
+#~ msgstr "Maaf, jumlah penukaran maksimal adalah 3 kali per hari. Anda telah melakukan"
+
+#~ msgid "Sorry, this currency amount to convert is too high. The maximum per transaction is %1"
+#~ msgstr "Maaf, jumlah terlalu tinggi untuk ditukarkan. Batasan maksimum per transaksi adalah %1"
+
+#~ msgid "Sorry, you cannot convert"
+#~ msgstr "Maaf, anda tidak dapat mengkonversi"
+
+#~ msgid "Success"
+#~ msgstr "Sukses"
+
+#~ msgid "To convert money between the different currencies in your account, please use the form below."
+#~ msgstr "Untuk menukar uang antara mata uang yang berbeda di dalam rekening Anda, silakan pergunakan formulir dibawah ini."
+
+#~ msgid "Update failed.  Request support."
+#~ msgstr "Pembaruan gagal.  Mohon bantuan."
+
+#~ msgid "Update successful"
+#~ msgstr "Pembaruan sukses"
+
+#~ msgid "View statement"
+#~ msgstr "Lihat pernyataan"
+
+#~ msgid "We are sorry, we do not allow conversion if you ever used a credit/debit card to deposit to your account segment."
+#~ msgstr "Kami mohon maaf karena tidak dapat memproses penukaran kedalam bentuk valuta asing lainnya jika rekening anda pernah mendeposit dana menggunakan kartu kredit / debit."
+
+#~ msgid "You have bought contractis with a combined purchase price of five times the bonus amount."
+#~ msgstr "Anda telah membeli kontrak dengan harga total lima kali jumlah bonus."
+
+#~ msgid "You may purchase contracts in any of these currencies."
+#~ msgstr "Anda hanya dapat membeli kontrak pada jenis mata uang berikut."
+
+#~ msgid "Your <strong>first</strong> deposit is equal to or more than %1 in any currency, and"
+#~ msgstr "Deposit <strong>perdana</strong> anda adalah senilai atau lebih dari %1 dan"
+
+#~ msgid "Your account may hold the following currencies"
+#~ msgstr "Anda dapat menggunakan jenis mata uang berikut ini"
+
+#~ msgid "Your account statement has been updated accordingly."
+#~ msgstr "Pernyataan akun anda telah diperbarui."
+
+#~ msgid "conversions today.  Please try again tomorrow"
+#~ msgstr "penukaran hari ini.  Silahkan coba kembali besok"
+
+#~ msgid "is not available.  If this error persists, please email"
+#~ msgstr "tidak berfungsi.  jika error ini tetap ada, Silahkan email"
+
+#~| msgid "Scope(s) missing"
+#~ msgid "missing"
+#~ msgstr "hilang"
+
 #~ msgid "%1 Tools"
 #~ msgstr "Peralatan %1"
 
@@ -12354,9 +12352,6 @@ msgstr "Maaf, Anda telah gagal mengakses beberapa kali. Silakan coba kembali dal
 #~ msgid "Select a lower payout"
 #~ msgstr "Pilih hasil yang lebih rendah"
 
-#~ msgid "Sorry, you cannot sell"
-#~ msgstr "Maaf, anda tidak dapat menjual"
-
 #~ msgid "Sorry, you have exceeded a BOUNDARY contract weekly PAYOUT of USD%1 on %2 which is the maximum weekly PAYOUT allowed. Please place a contract on a different underlying or lower your stake."
 #~ msgstr "Maaf, anda telah melebihi batasan maksimum HASIL harian sebesar USD%1 dimana jumlah maksimum yang dibenarkan adalah %2 untuk kontrak ini. Silahkan pilih kontrak pada market lain atau kurangi modal anda."
 
@@ -12419,9 +12414,6 @@ msgstr "Maaf, Anda telah gagal mengakses beberapa kali. Silakan coba kembali dal
 
 #~ msgid "In order to continue trading or deposit, you must either complete all of our <a href=\"%1\">authentication procedures</a> which will increase your account limits or <a href=\"%2\">withdraw</a> some funds."
 #~ msgstr "Untuk melanjutkan trading atau deposit, anda harus melengkapi semua <a href=\"%1\">prosedur pembuktian</a> kami dimana hal tersebut akan meningkatkan batasan rekening atau <a href=\"%2\">pencairan</a> dana."
-
-#~ msgid "Limit"
-#~ msgstr "Batas"
 
 #~ msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is"
 #~ msgstr "Maka untuk saat ini jumlah total yang dapat anda tarik (tergantung pada jumlah saldo yang tersedia) adalah"
