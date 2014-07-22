@@ -9,8 +9,8 @@ var formId = '#openAccForm',
     };
 
 module.exports = {
-    
-    "createAccountVirtualSuccess": function (browser) {
+
+    "createAccountVirtualSuccess": function (browser, doNotEnd) {
 
         var randomStr = utils.randomStr(5),
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
@@ -22,7 +22,8 @@ module.exports = {
             .setValue(element.passwordInput, 'password123')
             .click(element.openAccountButton)
             .pause(5000)
-            .assert.containsText('body', 'Welcome')
-        .end();
-    }  
+            .assert.containsText('body', 'Welcome');
+
+        if (!doNotEnd) browser.end();
+    }
 };

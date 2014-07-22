@@ -26,8 +26,8 @@ module.exports.init = function (browser) {
 };
 
 errorList.forEach(function (str) {
-    module.exports[str] = function (browser) {
-        browser.assert.containsText('body', str, "Checking for " + str);
+    module.exports["Checking for " + str] = function (browser) {
+        browser.assert.containsText(element.form, str);
     };
 });
 
