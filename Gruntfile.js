@@ -221,7 +221,16 @@ module.exports = function (grunt) {
                         cwd: 'test/integration'
                     }
                 }
-            }
+            },
+            smoke: {
+                command: 'nightwatch -g tests/smoke-tests',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/integration'
+                    }
+                }
+            }            
         }
     });
 
