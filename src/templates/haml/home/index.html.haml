@@ -66,11 +66,11 @@
                 %select#residence{:name => 'residence'}
                   %option{:value=>'default'}= l('Select Country')
                   - foreach my $country (countries_options()) {
-                    - my ($broker, $country_code, $country_name) = ($country->{virtual_broker}, $country->{code}, $country->{name});
+                    - my ($country_code, $country_name) = ($country->{code}, $country->{name});
                     - if($country->{restricted}) {
-                      %option{:class => $broker, :value => $country_code, :disabled => 1}= $country_name
+                      %option{:value => $country_code, :disabled => 1}= $country_name
                     - } else {
-                      %option{:class => $broker, :value => $country_code}= $country_name
+                      %option{:value => $country_code}= $country_name
                     - }
                   - }
             %span.acc-input
@@ -79,7 +79,6 @@
                 %input#chooseapassword{:name => 'chooseapassword', :type => 'password', :maxlength => '25', :required => true}
           %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
           %input{:type => 'hidden', :name => 'l', :value => $lang}
-          %input#broker{:type => 'hidden', :name => 'broker', :value => 'VRTC'}
           %input.button{:id => 'btn_registration',:type => 'submit', :value => stash('createacc')}
       .grd-with-padding.grd-grid-6.grd-hide-mobile.grd-hide-phablet
         %img.responsive{:src => url_for('/pages/why-us/why-us-proven-record_1.svg')}

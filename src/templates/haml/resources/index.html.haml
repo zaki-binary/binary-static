@@ -4,7 +4,7 @@
 
 .grd-grid-12
   %h1= l('Resources')
-  %p= l('Looking to learn more about the markets or financial trading? Check out the resources below!')
+  %p= l('Do you want to learn more about the markets and how to trade them? Check out the resources below.')
 .grd-grid-6.grd-grid-mobile-12.grd-parent
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
@@ -13,7 +13,7 @@
     .grd-grid-12
       %h4
         %a.pjaxload{:href => url_for('asset_index.cgi')}= l('Asset Index')
-      %p= l('View full list of assets, contract types and available durations.')
+      %p= l('View the full list of assets, contract types and durations.')
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
       %a.pjaxload{:href => url_for('trading_times.cgi'),:id => 'trading-times'}
@@ -21,7 +21,7 @@
     .grd-grid-12
       %h4
         %a.pjaxload{:href => url_for('trading_times.cgi')}= l('Trading Times')
-      %p= l('View operating hours for the markets on which contracts can be placed.')
+      %p= l('View the operating hours of the markets you can trade.')
 .grd-grid-6.grd-grid-mobile-12.grd-parent
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
@@ -29,8 +29,8 @@
         %img#charting_icon.responsive.charting-page-icon{:src => url_for('pages/resources/contract-guide.svg')}
     .grd-grid-12
       %h4
-        %a.pjaxload{:href => url_for('contract_guide.cgi')}= l('Contract Guide')
-      %p= l('Learn about the types of contracts available.')
+        %a.pjaxload{:href => url_for('contract_guide.cgi')}= l('Trading Guide')
+      %p= l('Learn about the different ways to trade on the markets.')
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
       %a.pjaxload{:href => url_for('pricing_table.cgi'),:id => 'pricing-table'}
