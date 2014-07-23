@@ -1,31 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Michael Borkovec <MBO>, 2013.
-# Paddy <emanuelpatrick>, 2013.
-# Paddy <emanuelpatrick>, 2013.
-# Paddy <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
-# Patrick <emanuelpatrick>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: BOM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2014-07-09 10:14+0000\n"
+"PO-Revision-Date: 2014-07-22 17:54+0000\n"
 "Last-Translator: Camilas Souza <camilassouza@hotmail.com>\n"
 "Language-Team: Portuguese <http://example.com/projects/bom/currenttranslations/pt/>\n"
 "Language: pt\n"
@@ -149,7 +131,7 @@ msgid "%1 assumes ownership of the customer at point of first contact with the v
 msgstr "A %1 assume a propriedade do cliente no momento do primeiro contato com o visitante. Como afiliado, você atua como agente referenciador da %1. Reservamo-nos o direito de recusar clientes (ou de fechar as suas contas) se necessário para cumprir quaisquer requisitos que possamos estabelecer periodicamente."
 
 #. ($home_website)
-#: cgi/subs/subs_cashier.pm:184 cgi/subs/subs_cashier.pm:202
+#: cgi/subs/subs_cashier.pm:183 cgi/subs/subs_cashier.pm:201
 msgid "%1 does not charge any transfer fees."
 msgstr "A %1 não cobra taxas de transferência."
 
@@ -159,6 +141,13 @@ msgstr "A %1 não cobra taxas de transferência."
 #: frontend/templates/layouts/default/head.html.haml:1
 msgid "%1 gives everyone an easy and exciting way to participate in the financial markets. Trade with as little as $1 USD on major currencies, indices, commodities and stocks."
 msgstr "A %1 oferece a todos uma forma fácil e estimulante de participar nos mercados financeiros. Negocie com apenas $1 nas principais moedas mundiais, índices, commodities e ações."
+
+#. (broker_name)
+#: cgi/templates/default/resources/contract_guide.tt:3
+#, fuzzy
+#| msgid "%1 offers a variety of contract types, giving you many different ways to trade on the markets. Learn more about each contract type below."
+msgid "%1 gives you many different ways to trade on the markets. Learn more about each contract type by clicking on the links below."
+msgstr "A %1 disponibiliza uma série de tipos de contratos, dando-lhe muitas formas diferentes de negociar nos mercados. Saiba mais sobre cada tipo de contrato em baixo."
 
 #. (stash->{website_name})
 #: frontend/templates/get_started/random_markets.html.haml:1
@@ -223,7 +212,7 @@ msgstr "% 1 é a página em seu aplicativo que vai lidar com a etapa de retorno.
 #. ('CALLBACK_URL')
 #: frontend/templates/static/devguide.html.haml:1
 msgid "%1 is the page in your application that will handle the return step.  This URL must be registered with us in advance.  For mobile apps, this could for example use a custom URI scheme."
-msgstr ""
+msgstr "%1 é a pagina no seu aplicativo que vai lidar com o passo de retorno. Essa URL deve ser registrada conosco com antecedência. Para aplicação online, isso pode por exemplo usar um esquema de URI customizado."
 
 #. ('PROXY_ENDPOINT')
 #: frontend/templates/static/devguide.html.haml:1
@@ -249,11 +238,6 @@ msgstr "A %1 dá-lhe a oportunidade de negociar num evento a muito curto prazo e
 #: frontend/templates/get_started/beginners_faq.html.haml:1
 msgid "%1 offers a range of common deposit and withdrawal methods, from credit and debit cards to bank wires, e-cash and e-wallets."
 msgstr "A %1 oferece uma gama de métodos normais de depósito e retirada, desde os cartões de crédito e débito até às transferências bancárias, dinheiro eletrônico e carteiras eletrônicas."
-
-#. (broker_name)
-#: cgi/templates/default/resources/contract_guide.tt:3
-msgid "%1 offers a variety of contract types, giving you many different ways to trade on the markets. Learn more about each contract type below."
-msgstr "A %1 disponibiliza uma série de tipos de contratos, dando-lhe muitas formas diferentes de negociar nos mercados. Saiba mais sobre cada tipo de contrato em baixo."
 
 #. (stash->{website_name})
 #: frontend/templates/get_started/binary_options_basics.html.haml:1
@@ -454,7 +438,7 @@ msgstr "2 dias"
 msgid "2w"
 msgstr "2 semanas"
 
-#: cgi/subs/subs_forms.pm:1377
+#: cgi/subs/subs_forms.pm:1344
 msgid "3 - 30 characters and alphanumeric only."
 msgstr "Apenas 3 - 30 caracteres e alfanuméricos."
 
@@ -470,7 +454,7 @@ msgstr "3 m"
 msgid "4. Choose your Payout"
 msgstr "4. Escolha o seu Pagamento"
 
-#: cgi/subs/subs_forms.pm:581
+#: cgi/subs/subs_forms.pm:578
 msgid "5 - 25 characters and alphanumeric only."
 msgstr "Apenas 5 - 25 caracteres e alfanuméricos."
 
@@ -482,16 +466,16 @@ msgstr "5 dias"
 msgid "6h"
 msgstr "6h"
 
-#: cgi/subs/subs_forms.pm:1742
+#: cgi/subs/subs_forms.pm:1709
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>As suas seções do Caixa e de Definições estão bloqueadas conforme seu pedido</strong> - se pretende desbloqueá-las, introduza a senha."
 
 #: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
-#: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2291
+#: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2258
 msgid "<option value=\"\"></option><option value=\"01\">Jan</option><option value=\"02\">Feb</option><option value=\"03\">Mar</option><option value=\"04\">Apr</option><option value=\"05\">May</option><option value=\"06\">Jun</option><option value=\"07\">Jul</option><option value=\"08\">Aug</option><option value=\"09\">Sep</option><option value=\"10\">Oct</option><option value=\"11\">Nov</option><option value=\"12\">Dec</option>"
 msgstr "<option value=\"\"></option><option value=\"01\">Jan</option><option value=\"02\">Fev</option><option value=\"03\">Mar</option><option value=\"04\">Abr</option><option value=\"05\">Mai</option><option value=\"06\">Jun</option><option value=\"07\">Jul</option><option value=\"08\">Ago</option><option value=\"09\">Set</option><option value=\"10\">Out</option><option value=\"11\">Nov</option><option value=\"12\">Dez</option>"
 
-#: cgi/lost_password.cgi:514
+#: cgi/lost_password.cgi:504
 msgid "<p style='color: red'> For security reasons this link will be invalidated after this.</p>Please confirm for which of these accounts you want to reset your password:"
 msgstr "<p style='color: red'>Por razões de segurança, este link será invalidado depois desta ação.</p>Por favor, confirme  qual destas contas você pretende restabelecer a sua senha:"
 
@@ -533,7 +517,7 @@ msgstr ""
 "<p>Em apenas um curto espaço de tempo desde a sua criação, as opções binárias estão rapidamente a tornar-se um produto de negociação corrente. As numerosas plataformas de negociação de opções binárias posteriormente criadas apoiam esta tendência crescente. Ao tornar-se afiliado agora pode beneficiar do rápido aumento de interesse por esta nova indústria.</p> \n"
 "  <p>A negociação de opções binárias é um mercado com lucro elevado, onde há espaço para todos [incluindo você] tirarem a sua parte!</p>"
 
-#: cgi/lost_password.cgi:598
+#: cgi/lost_password.cgi:588
 msgid "<p>Please take a moment to verify your identity by providing us with the correct answer to your secret question and date of birth, below.</p>"
 msgstr "<p>Por favor dedique algum do seu tempo para verificar a sua identidade, fornecendo-nos a resposta correta à sua pergunta secreta e data de nascimento, em baixo.</p>"
 
@@ -543,7 +527,7 @@ msgid "<p>Sorry, an error has occurred. Please <a href=\"%1\">try accessing our 
 msgstr "<p>Desculpe, ocorreu um erro. Por favor, contate o<a href=\"%1\">Suporte ao Cliente</a>para receber assistência.</p>"
 
 #. (localize('New Password Request')
-#: cgi/lost_password.cgi:277 cgi/lost_password.cgi:454
+#: cgi/lost_password.cgi:267 cgi/lost_password.cgi:444
 msgid "<p>Thank you. You're one step closer to being done!</p><p>All you need to do is follow the instructions in the email we just sent you.<br /> The e-mail subject-line reads, <strong>\"%1\"</strong>.</p><p>Remember, if you don't receive an email from us in the next few minutes, please check your junk/spam mail folder or <a href=\"%2\"><strong>contact us</strong></a> should you need further assistance.</p>"
 msgstr "<p>Obrigado. Você está um passo mais próximo de finalizar!</p><p>Tudo o que tem de fazer é seguir as instruções contidas no e-mail que lhe enviamos.<br />O assunto do e-mail é: <strong>\"%1\"</strong>.</p><p>Lembre-se, se não receber um e-mail nosso nos próximos minutos, verifique a sua pasta de spam ou<a href=\"%2\"><strong>contate-nos</strong></a> se precisar de mais assistência.</p>"
 
@@ -647,9 +631,15 @@ msgid "<strong>Higher/Lower</strong> - where you can profit from the market endi
 msgstr "<strong>Alta/Baixa</strong> - onde você pode lucrar quando o mercado terminar mais alto ou mais baixo do que um preço alvo."
 
 #. ($website->display_name)
-#: cgi/paymentagent_list.cgi:69 cgi/paymentagent_withdraw.cgi:111
-#: cgi/paymentagent_withdraw.cgi:96
+#: cgi/paymentagent_withdraw.cgi:111 cgi/paymentagent_withdraw.cgi:96
 msgid "<strong>IMPORTANT DISCLAIMER</strong> - %1 is not affiliated with any of the Payment Agents listed above. Each Payment Agent operates as an independent service provider and is not endorsed, guaranteed or otherwise approved by %1. CUSTOMERS DEAL WITH PAYMENT AGENTS AT THEIR SOLE RISK AND PERIL. Customers are advised to check the credentials of Payment Agents before sending them any money. %1 shall not in any circumstance be held responsible for transactions made between customers and Payment Agents."
+msgstr "<strong>EXCLUSÃO DE RESPONSABILIDADE IMPORTANTE</strong> - a %1 não está afiliada em nenhum dos Agentes de Pagamentos acima referidos. Cada Agente de Pagamentos opera como prestador de serviços independente e não é endossado, garantido ou de outra forma aprovado pela %1. OS CLIENTES LIDAM COM OS AGENTES DE PAGAMENTOS POR SUA PRÓPRIA CONTA E RISCO. Os clientes são aconselhados a verificar as credenciais dos agentes de pagamentos antes de lhes enviar algum dinheiro. A %1 não deve, em nenhuma circunstância, ser responsabilizada por operações realizadas entre clientes e Agentes de Pagamentos."
+
+#. ($website->display_name)
+#: cgi/paymentagent_list.cgi:66
+#, fuzzy
+#| msgid "<strong>IMPORTANT DISCLAIMER</strong> - %1 is not affiliated with any of the Payment Agents listed above. Each Payment Agent operates as an independent service provider and is not endorsed, guaranteed or otherwise approved by %1. CUSTOMERS DEAL WITH PAYMENT AGENTS AT THEIR SOLE RISK AND PERIL. Customers are advised to check the credentials of Payment Agents before sending them any money. %1 shall not in any circumstance be held responsible for transactions made between customers and Payment Agents."
+msgid "<strong>IMPORTANT DISCLAIMER</strong> - %1 is not affiliated with any of the payment agents listed above. Each payment agent operates as an independent service provider and is not endorsed, guaranteed or otherwise approved by %1. CUSTOMERS DEAL WITH PAYMENT AGENTS AT THEIR SOLE RISK AND PERIL. Customers are advised to check the credentials of payment agents before sending them any money. %1 shall not in any circumstance be held responsible for transactions made between customers and payment agents."
 msgstr "<strong>EXCLUSÃO DE RESPONSABILIDADE IMPORTANTE</strong> - a %1 não está afiliada em nenhum dos Agentes de Pagamentos acima referidos. Cada Agente de Pagamentos opera como prestador de serviços independente e não é endossado, garantido ou de outra forma aprovado pela %1. OS CLIENTES LIDAM COM OS AGENTES DE PAGAMENTOS POR SUA PRÓPRIA CONTA E RISCO. Os clientes são aconselhados a verificar as credenciais dos agentes de pagamentos antes de lhes enviar algum dinheiro. A %1 não deve, em nenhuma circunstância, ser responsabilizada por operações realizadas entre clientes e Agentes de Pagamentos."
 
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
@@ -700,7 +690,7 @@ msgstr "<strong>Nota:</strong> Existe uma comissão de 1,5% sobre cada pagamento
 msgid "<strong>Note:</strong> There is no commission on any winnings."
 msgstr "<strong>Nota:</strong> Não existe comissão sobre quaisquer ganhos."
 
-#: cgi/subs/subs_forms.pm:2775
+#: cgi/subs/subs_forms.pm:2742
 msgid "<strong>Note:</strong> to minimize the file size, please save the image in PNG or JPEG format."
 msgstr "<strong>Nota:</strong> para minimizar o tamanho do ficheiro, guarde por favor a imagem em formato PNG ou JPEG."
 
@@ -867,18 +857,13 @@ msgstr "<ul><li>Vá para\"<strong>Personalizar e controlar Google Chrome</strong
 msgid "<ul><li>Go to the <strong>Tools</strong> menu and select <strong>Options</strong>.</li><li>Click on the <strong>Privacy</strong> tab.</li><li>Set \"<strong>Firefox will</strong>\" to \"<strong>Remember history</strong>\".</li><li>Click on the <strong>OK</strong> button to save your settings.</li></ul>"
 msgstr "<ul><li>Vá para o menu <strong>Ferramentas</strong> e selecione <strong>Opções</strong>.</li><li>Clique no link <strong>Privacidade</strong>.</li><li> Mude \"<strong>Definições do Firefox</strong>\" para \"<strong>Lembrar histórico</strong>\".</li><li>Clique no botão <strong>OK</strong> para guardar as suas definições.</li></ul>"
 
-#. ($website->display_name)
-#: cgi/paymentagent_list.cgi:43
-msgid "A Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-cash methods or local currencies not offered by default on %1."
-msgstr "Um Agente de Pagamentos processa depósitos e retiradas para os Clientes que desejam usar métodos específicos de dinheiro eletrônico ou moedas locais não oferecidas por defeito em %1."
-
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "A Phonegap mobile application for Binary.com"
-msgstr ""
+msgstr "Um aplicativo para celular Phonegap para a Binary.com"
 
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "A Selenium test suite for Binary.com"
-msgstr ""
+msgstr "Um conjunto de testes Selenium para Binary.com"
 
 #: cgi/subs/subs_BOMFeed_history.pm:565
 #: cgi/subs/subs_graphs_chartdirector.pm:498
@@ -924,7 +909,7 @@ msgstr "Um indicador de dinâmica que mostra a velocidade de mudança percentual
 
 #: cgi/tick_trades.cgi:441
 msgid "A much more flexible version of Tick Trades is available on the "
-msgstr ""
+msgstr "Uma versão muito mais flexível de Negociações Tick está disponível no "
 
 #: cgi/templates/default/global/footer.tt:200
 #: frontend/templates/layouts/default/footer.html.haml:1
@@ -949,17 +934,15 @@ msgstr "Ocorreu um problema durante a ligação ao servidor. Tente novamente mai
 
 #: cgi/subs/subs_clientdetails.pm:118
 msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
-msgstr ""
+msgstr "Um cópia digitalizada de sua conta de luz recente (menos de 3 meses), ou uma conta do seu banco, cooperativa de crédito, sociedade de crédito ou fatura de cartão de débito ou caderneta"
 
 #: cgi/templates/default/email/bonus_reject.tt:19
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr "Cópia escaneada de uma conta de eletricidade recente mostrando o seu atual endereço (a fatura não deve ter mais de três meses."
 
-#: cgi/subs/subs_clientdetails.pm:116
-#, fuzzy
-#| msgid "<li>copy of current valid passport; or</li><li>copy of current Driving Licence (Provisional or Full); or</li><li>Identity card</li>"
+#: cgi/subs/subs_clientdetails.pm:115
 msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
-msgstr "<li>cópia de passaporte atual válido; ou</li><li>cópia de Carteira de Habilitação atual (Provisória ou Definitiva); ou</li><li>Carteira de Identidade/Cartão de Cidadão</li>"
+msgstr "Uma cópia escaneada do seu passaporte atual válido, ou uma cópia de Carteira de Habilitação atual (Provisória ou Definitiva), ou Carteira de Identidade/Cartão de Cidadão"
 
 #: cgi/templates/default/email/bonus_reject.tt:18
 msgid "A scanned copy of your passport or driver's licence."
@@ -982,7 +965,7 @@ msgstr "API"
 msgid "API Developer Guide"
 msgstr "Guia do programador API"
 
-#: cgi/subs/subs_forms.pm:3347
+#: cgi/subs/subs_forms.pm:3314
 msgid "AUTHORISED PAYMENT AGENT? (this field visible from office only)"
 msgstr "AGENTE DE PAGAMENTOS AUTORIZADO?(este campo apenas é visível a partir do escritório)"
 
@@ -1005,7 +988,7 @@ msgid "Acceptance"
 msgstr "Aceitação"
 
 #. (request()
-#: cgi/create_account.cgi:120
+#: cgi/create_account.cgi:113
 msgid "According to our terms and conditions, you may only register for one real money account through our site. If you have forgotten the Login ID or password of your existing account, please <a href=\"%1\">try our password recovery tool</a> or contact customer service."
 msgstr "De acordo com os nossos termos e condições, você deve registrar apenas uma conta real no nosso site. Se tiver esquecido o seu ID de Início de Sessão ou senha da sua conta existente, por favor,<a href=\"%1\">use a nossa ferramenta de recuperação de senha</a> ou contate o nosso serviço de atendimento ao cliente."
 
@@ -1026,9 +1009,8 @@ msgstr "Limites da Conta"
 msgid "Account Management and Tracking"
 msgstr "Gestão e Acompanhamento de Contas"
 
-#: cgi/create_account.cgi:237 cgi/open_account.cgi:11
+#: cgi/create_account.cgi:211 cgi/open_account.cgi:11
 #: cgi/subs/subs_forms_output.pm:23
-#: cgi/templates/default/account/open_account.tt:2
 msgid "Account Opening"
 msgstr "Abertura de Conta"
 
@@ -1053,10 +1035,6 @@ msgstr "Recursos de gestão de conta (em desenvolvimento)"
 #: frontend/templates/layouts/default/footer.html.haml:1
 msgid "Accounts"
 msgstr "Contas"
-
-#: cgi/templates/default/account/open_account.tt:13
-msgid "Accounts are available in dollars, pounds and euros."
-msgstr "As contas estão disponíveis em dólares, libras e euros."
 
 #: cgi/smartchart.cgi:13 cgi/subs/subs_BOMFeed_history.pm:329
 #: cgi/subs/subs_BOMFeed_history.pm:513
@@ -1096,8 +1074,8 @@ msgstr "Adicionar Linhas"
 msgid "Add Overlay"
 msgstr "Adicionar Sobreposição"
 
-#: cgi/f_writepartics.cgi:214 cgi/subs/subs_forms.pm:1509
-#: cgi/subs/subs_forms.pm:752
+#: cgi/f_writepartics.cgi:214 cgi/subs/subs_forms.pm:1476
+#: cgi/subs/subs_forms.pm:722
 msgid "Address"
 msgstr "Endereço"
 
@@ -1118,7 +1096,7 @@ msgstr "Recompensa de afiliado para o período entre %1 e %2"
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "After logging into binary.com, you can register as an API Developer"
-msgstr ""
+msgstr "Depois de se conectar à Binary.com, você pode se registrar como um programador API"
 
 #. (stash->{website_name})
 #: frontend/templates/static/devguide.html.haml:1
@@ -1133,10 +1111,6 @@ msgstr "Tudo"
 msgid "All credit card details are submitted directly to the Visa/Mastercard network using the latest SSL encryption technology, in accordance with bank policies."
 msgstr "Todas as informações de cartões de crédito são enviadas diretamente para a rede Visa/Mastercard, utilizando a mais recente tecnologia de encriptação SSL, de acordo com as políticas do banco."
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:624
-msgid "All credit/debit card transactions are protected by"
-msgstr "Todas as transações de crédito/débito estão protegidas por"
-
 #: cgi/subs/subs_forms_output.pm:83
 msgid "All email inquiries will be responded to within 2 business days whenever possible."
 msgstr "Todas as questões enviadas por e-mail terão resposta num período de 2 dias úteis, sempre que possível."
@@ -1147,11 +1121,13 @@ msgid "All opinions, news, research, analysis, prices or other information conta
 msgstr "Todas as opiniões, notícias, pesquisas, análises, preços ou outras informações contidas nesta página Web são disponibilizadas como comentários gerais do mercado, não constituindo recomendações de investimento. A %1 não se responsabilizará por quaisquer perdas ou danos, incluindo, mas não só, quaisquer perdas de lucros que possam resultar direta ou indiretamente da utilização ou confiança depositada em tais informações."
 
 #: cgi/templates/default/resources/trading_times_header.tt:4
-msgid "All the times on the website and contract settlements are according to GMT (Greenwich Mean Time)."
+#, fuzzy
+#| msgid "All the times on the website and contract settlements are according to GMT (Greenwich Mean Time)."
+msgid "All times are in GMT (Greenwich Mean Time)."
 msgstr "Todas as horas da página Web e das liquidações de contratos estão de acordo com o fuso horário GMT (Greenwich Mean Time)."
 
-#: cgi/paymentagent_withdraw.cgi:209 cgi/subs/subs_forms.pm:3805
-#: cgi/subs/subs_forms.pm:4006
+#: cgi/paymentagent_withdraw.cgi:209 cgi/subs/subs_forms.pm:3772
+#: cgi/subs/subs_forms.pm:3973
 msgid "Amount"
 msgstr "Quantia"
 
@@ -1167,7 +1143,7 @@ msgstr "Quantia que pretende negociar:"
 msgid "An Ends Between trade pays out if the market exit price is strictly higher than the low price target AND strictly lower than the high price target. An Ends Outside binary pays out if the market exit price is EITHER strictly higher than the high price target OR strictly lower than the low price target."
 msgstr "Uma Negociação Termina entre remunera se o preço de saída do mercado for estritamente mais alto do que a barreira de preço baixa, OU estritamente mais baixo do que a barreira de preço \"baixa\"."
 
-#: cgi/subs/subs_forms.pm:1541
+#: cgi/subs/subs_forms.pm:1508
 msgid "An additional password can be used to restrict access to the Cashier and Settings areas."
 msgstr "Uma senha adicional pode ser usada para restringir acesso às sessões Caixa e Definições."
 
@@ -1217,7 +1193,7 @@ msgstr "E os seus fins de semana podem levá-lo a alguns dos lugares mais exóti
 msgid "Another major award. This time we’re nominated by the online readers of Global Banking and Finance Review and judged by a panel of industry experts and analysts who recognise our 13 years of platform reliability, range of trades, pricing, customer service and extensive knowledge."
 msgstr "Outro grande prêmio. Dessa vez nós fomos nominados pelos leitores online da Global Banking and Finance Review e julgados pelos especialistas da indústria e analistas que reconheceram os nossos 13 anos de uma plataforma confiável, com grande variedade de negociações, preço, serviço de atendimento ao cliente e grande conhecimento."
 
-#: cgi/subs/subs_forms.pm:515
+#: cgi/subs/subs_forms.pm:512
 msgid "Answer to secret question"
 msgstr "Resposta à pergunta secreta"
 
@@ -1249,10 +1225,8 @@ msgid "Anyone over the age 18 [who has read and agreed to the %1 terms and condi
 msgstr "Qualquer pessoa com idade superior a 18 anos (que tenha lido e aceitado os termos e condições da 1%) e que não seja residente em nenhum dos \"países fechados\" pode negociar na plataforma da 1%."
 
 #: cgi/templates/default/api/register.tt:7
-#, fuzzy
-#| msgid "Application error"
 msgid "Application Name"
-msgstr "Problema na aplicação"
+msgstr "Nome do Aplicativo"
 
 #: frontend/templates/static/partner_api.html.haml:1
 msgid "Apply for access"
@@ -1264,8 +1238,10 @@ msgid "Apply to become Payment Agent"
 msgstr "Candidate-se para se tornar um Agente de Pagamentos"
 
 #. ($website->display_name, $apply_payment_agent_url)
-#: cgi/paymentagent_list.cgi:64
-msgid "Apply to become a %1 <a class=\"pjaxload\" href=\"%2\">Payment Agent</a>."
+#: cgi/paymentagent_list.cgi:61
+#, fuzzy
+#| msgid "Apply to become a %1 <a class=\"pjaxload\" href=\"%2\">Payment Agent</a>."
+msgid "Apply to become a %1 <a class=\"pjaxload\" href=\"%2\">payment agent</a>."
 msgstr "Inscreva-se para se tornar um <a class=\"pjaxload\" href=\"%2\">Agente de Pagamentos</a> da %1."
 
 #: frontend/templates/static/careers.html.haml:1
@@ -1343,7 +1319,7 @@ msgstr "Em um determinado momento na sua aplicação, quando a autorização pel
 msgid "Australia"
 msgstr "Austrália"
 
-#: cgi/f_onlineid.cgi:179 cgi/f_onlineid.cgi:187 cgi/subs/subs_forms.pm:3039
+#: cgi/f_onlineid.cgi:179 cgi/f_onlineid.cgi:187 cgi/subs/subs_forms.pm:3006
 #: lib/BOM/View/Menu.pm:107
 msgid "Authenticate"
 msgstr "Autenticar"
@@ -1356,7 +1332,7 @@ msgstr "Autenticar para fazer a retirada"
 msgid "Authenticate your Account"
 msgstr "Autenticar a sua Conta"
 
-#: cgi/subs/subs_forms.pm:994
+#: cgi/subs/subs_forms.pm:961
 msgid "Authenticated"
 msgstr "Autenticado"
 
@@ -1373,10 +1349,6 @@ msgstr "Autorização: Básico %1"
 #: frontend/templates/static/devguide.html.haml:1
 msgid "Authorization: Bearer %1"
 msgstr "Autorização: Portador% 1"
-
-#: cgi/templates/default/cashier/available_payment_methods.tt:3
-msgid "Available Payment Methods"
-msgstr "Métodos de Pagamento Disponíves"
 
 #: cgi/templates/default/charting/daily_ohlc.tt:55
 msgid "Average"
@@ -1440,7 +1412,7 @@ msgstr "Saldo"
 msgid "Bank Wire"
 msgstr "Transferência Bancária"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:54
+#: cgi/templates/default/cashier/available_payment_methods.tt:50
 msgid "Bank wire/Money transfer"
 msgstr "Transferência Bancária/Transferência de Dinheiro"
 
@@ -1628,7 +1600,7 @@ msgstr "A Binary.com é defensora ativa do movimento open-source e está em proc
 #. ('https://www.browserstack.com/automate','https://github.com/binary-com/selenium')
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "Binary.com is developing a Selenium test suite designed to run against <a target=\"_blank\" href=\"%1\">BrowserStack Automate</a>. To participate in this project, please fork the project on <a target=\"_blank\" href=\"%2\">github</a> and submit a pull-request of your work."
-msgstr ""
+msgstr "A Binary.com está desenvolvendo um conjunto de testes Selenium projetado para ser executado contra <a target=\"_blank\" href=\"%1\">BrowserStack Automate</a>. Para participar deste projeto, por favor selecione o projeto em <a target=\"_blank\" href=\"%2\">github</a> e envie um pedido para o seu trabalho."
 
 #: frontend/templates/static/group_history.html.haml:1
 msgid "Binary.com offers new ways to trade"
@@ -1678,11 +1650,11 @@ msgstr "Bandas de Bollinger Superiores"
 msgid "Bollinger Bands are lines displayed around a simple moving average line (default set to 20 periods). The upper line is displayed 2 standard deviations above the moving average, and the lower line is displayed 2 standard deviations below the moving average.By definition prices are high at the upper band and low at the lower band. This definition can aid in rigorous pattern recognition and is useful in comparing price action to the action of indicators to arrive at systematic trading decisions."
 msgstr "As Bandas de Bollinger são linhas exibidas em torno de uma linha média móvel simples (predefinida para 20 períodos). A linha superior é exibida 2 desvios-padrão acima da média móvel, e a linha inferior é exibida 2 desvios-padrão abaixo da média móvel. Por definição, os preços são elevados na banda superior e baixos na banda inferior. Esta definição pode auxiliar no reconhecimento de padrões rigorosos e é útil na comparação da ação do preço com a ação dos indicadores, de forma a alcançar decisões de negociação sistemáticas."
 
-#: cgi/c_template.cgi:58 cgi/subs/subs_forms.pm:595
+#: cgi/c_template.cgi:58 cgi/subs/subs_forms.pm:592
 msgid "Bonus Code"
 msgstr "Código de Bónus"
 
-#: cgi/subs/subs_forms.pm:486
+#: cgi/subs/subs_forms.pm:483
 msgid "Brand of first car"
 msgstr "Marca do primeiro carro"
 
@@ -1690,7 +1662,7 @@ msgstr "Marca do primeiro carro"
 msgid "Browse"
 msgstr "Navegar"
 
-#: cgi/subs/subs_forms.pm:3011
+#: cgi/subs/subs_forms.pm:2978
 msgid "Building Number"
 msgstr "Número do Edifício"
 
@@ -1731,8 +1703,8 @@ msgstr "Calcular"
 msgid "Calculating"
 msgstr "A Calcular"
 
-#: cgi/subs/subs_cashier.pm:170 cgi/subs/subs_cashier.pm:171
-#: cgi/subs/subs_forms.pm:2712
+#: cgi/subs/subs_cashier.pm:169 cgi/subs/subs_cashier.pm:170
+#: cgi/subs/subs_forms.pm:2679
 msgid "Call me now"
 msgstr "Contatem-me agora"
 
@@ -1741,10 +1713,8 @@ msgid "Call us"
 msgstr "Contate-nos"
 
 #: cgi/templates/default/api/register.tt:12
-#, fuzzy
-#| msgid "Callback services"
 msgid "Callback URL"
-msgstr "Serviços de Retribuição de Chamadas"
+msgstr "Retribuição de Chamadas URL"
 
 #: cgi/subs/subs_forms_output.pm:99
 msgid "Callback services"
@@ -1779,7 +1749,7 @@ msgstr "Cancelar"
 
 #: cgi/templates/default/api/register.tt:27
 msgid "Cancel Registration"
-msgstr ""
+msgstr "Cancele o Registro"
 
 #: cgi/subs/subs_BOMFeed_history.pm:347
 msgid "Candlestick Chart"
@@ -1809,7 +1779,7 @@ msgstr "Dividendo (Lucro)"
 msgid "Cashier"
 msgstr "Caixa"
 
-#: cgi/subs/subs_forms.pm:1643
+#: cgi/subs/subs_forms.pm:1610
 msgid "Cashier/Settings password"
 msgstr "Senha do Caixa/Definições"
 
@@ -1850,7 +1820,7 @@ msgstr "Alterar Informações da Conta"
 #: cgi/change_password.cgi:10 cgi/change_password.cgi:14
 #: cgi/change_password.cgi:26 cgi/save_password.cgi:32
 #: cgi/save_password.cgi:38 cgi/save_password.cgi:43
-#: cgi/subs/subs_forms.pm:1908 cgi/subs/subs_forms.pm:2088
+#: cgi/subs/subs_forms.pm:1875 cgi/subs/subs_forms.pm:2055
 msgid "Change Password"
 msgstr "Alterar Senha"
 
@@ -1897,7 +1867,9 @@ msgid "Check out some technical terms before you start."
 msgstr "Veja alguns termos técnicos antes de começar."
 
 #: cgi/paymentagent_list.cgi:45
-msgid "Check out the payment methods accepted by the Payment Agents in the list below."
+#, fuzzy
+#| msgid "Check out the payment methods accepted by the Payment Agents in the list below."
+msgid "Check out the payment methods accepted by the payment agents in the list below."
 msgstr "Consulte na lista abaixo os métodos de pagamento aceites pelos Agentes de Pagamentos."
 
 #: frontend/templates/get_started/types_of_trades.html.haml:1
@@ -1963,6 +1935,10 @@ msgstr "Escolha o mercado, os objetivos de preço, o período de tempo, e quanto
 #: frontend/templates/get_started/types_of_trades.html.haml:1
 msgid "Choose the market, the time period, and how much you wish to win."
 msgstr "Escolha o mercado, o período de tempo e quanto deseja ganhar."
+
+#: cgi/paymentagent_list.cgi:46
+msgid "Choose the payment method you'd like to use."
+msgstr ""
 
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 msgid "Choose the payout"
@@ -2035,15 +2011,15 @@ msgid "Closing Price"
 msgstr "Preço de Fecho"
 
 #. (2000)
-#: cgi/subs/subs_forms.pm:3306
+#: cgi/subs/subs_forms.pm:3273
 msgid "Comment must not exceed %1 characters. Please resubmit."
 msgstr "O comentário não pode exceder os %1 caracteres. Por favor, submeta novamente."
 
-#: cgi/subs/subs_forms.pm:3249
+#: cgi/subs/subs_forms.pm:3216
 msgid "Commission (%) you want to take on deposits"
 msgstr "(%) de comissão que pretende retirar em depósitos"
 
-#: cgi/subs/subs_forms.pm:3267
+#: cgi/subs/subs_forms.pm:3234
 msgid "Commission (%) you want to take on withdrawals"
 msgstr "(%) de comissão que pretende retirar em transferências"
 
@@ -2107,7 +2083,7 @@ msgstr "Instalação do Console"
 msgid "Contact"
 msgstr "Contato"
 
-#: cgi/contact.cgi:12 cgi/emailus.cgi:182 cgi/subs/subs_cashier.pm:94
+#: cgi/contact.cgi:12 cgi/emailus.cgi:182 cgi/subs/subs_cashier.pm:93
 #: cgi/templates/default/global/footer.tt:153
 #: cgi/templates/default/global/header.tt:14
 #: cgi/templates/default/misc/contact_us.tt:6
@@ -2117,23 +2093,21 @@ msgstr "Contato"
 msgid "Contact Us"
 msgstr "Contate-Nos"
 
+#: cgi/paymentagent_list.cgi:47
+msgid "Contact the payment agent directly for more information on how to transfer money to them."
+msgstr ""
+
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "Contact us"
 msgstr "Entre em contato conosco"
 
-#: cgi/subs/subs_forms.pm:2384 cgi/subs/subs_forms.pm:2428
+#: cgi/subs/subs_forms.pm:2351 cgi/subs/subs_forms.pm:2395
 msgid "Continue"
 msgstr "Continuar"
 
 #: cgi/templates/default/account/portfolio.tt:13
 msgid "Contract Details"
 msgstr "Detalhes do Contrato"
-
-#: cgi/contract_guide.cgi:21
-#: cgi/templates/default/resources/contract_guide.tt:2
-#: frontend/templates/resources/index.html.haml:1 lib/BOM/View/Menu.pm:151
-msgid "Contract Guide"
-msgstr "Guia de Contratos"
 
 #: cgi/templates/default/legal/risk_disclaimer.tt:3
 msgid "Contract Risks"
@@ -2245,8 +2219,8 @@ msgstr "Direitos de Autor"
 msgid "Country"
 msgstr "País"
 
-#: cgi/f_writepartics.cgi:212 cgi/subs/subs_forms.pm:1025
-#: cgi/subs/subs_forms.pm:388
+#: cgi/f_writepartics.cgi:212 cgi/subs/subs_forms.pm:385
+#: cgi/subs/subs_forms.pm:992
 msgid "Country of Residence"
 msgstr "País de Residência"
 
@@ -2263,7 +2237,7 @@ msgid "Credit/<wbr/>Debit"
 msgstr "Crédito/<wbr/>Débito"
 
 #: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
-#: cgi/templates/default/cashier/available_payment_methods.tt:175
+#: cgi/templates/default/cashier/available_payment_methods.tt:151
 msgid "Credit/Debit Card"
 msgstr "Cartão de Crédito/Débito"
 
@@ -2309,11 +2283,11 @@ msgstr "Preço Atual de Mercado"
 msgid "Current market price is 0."
 msgstr "O preço do mercado é 0."
 
-#: cgi/subs/subs_forms.pm:1810
+#: cgi/subs/subs_forms.pm:1777
 msgid "Current password"
 msgstr "Senha atual"
 
-#: cgi/subs/subs_clientdetails.pm:136 cgi/subs/subs_forms_output.pm:287
+#: cgi/subs/subs_clientdetails.pm:135 cgi/subs/subs_forms_output.pm:287
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "Carteira de habilitação com fotografia atual (Provisória ou Definitiva)"
 
@@ -2321,11 +2295,11 @@ msgstr "Carteira de habilitação com fotografia atual (Provisória ou Definitiv
 msgid "Current signed Passport"
 msgstr "Passaporte atual assinado"
 
-#: cgi/subs/subs_clientdetails.pm:135
+#: cgi/subs/subs_clientdetails.pm:134
 msgid "Current signed Passport OR"
 msgstr "Passaporte atual assinado OU"
 
-#: cgi/lost_password.cgi:345
+#: cgi/lost_password.cgi:335
 msgid "Customer Support has been informed of your Lost Login ID / Password request and will be contacting you soon. Thank you for your patience."
 msgstr "O Serviço de Atendimento ao Cliente foi informado de que você perdeu o seu ID de Início de Sessão/Senha e entrará em contato em breve. Agradecemos a sua paciência."
 
@@ -2344,7 +2318,7 @@ msgstr "Diariamente"
 msgid "Daily Prices"
 msgstr "Cotações diárias"
 
-#: cgi/subs/subs_forms.pm:3491
+#: cgi/subs/subs_forms.pm:3458
 msgid "Daily Turnover limit"
 msgstr "Limite do Volume de Negócios Diário"
 
@@ -2374,8 +2348,8 @@ msgstr "Os dados estarão disponíveis após o fechamento do mercado"
 msgid "Date"
 msgstr "Data"
 
-#: cgi/subs/subs_forms.pm:1016 cgi/subs/subs_forms.pm:177
-#: cgi/subs/subs_forms.pm:2304
+#: cgi/subs/subs_forms.pm:177 cgi/subs/subs_forms.pm:2271
+#: cgi/subs/subs_forms.pm:983
 msgid "Date of birth"
 msgstr "Data de nascimento"
 
@@ -2518,10 +2492,17 @@ msgstr "Prezado Cliente,"
 
 #. (link)
 #: cgi/templates/default/email/lost_password.tt:1
+#, fuzzy
+#| msgid ""
+#| "Dear Valued Customer,\n"
+#| "\n"
+#| "Further to your request to change your password, please help us to verify your identity by clicking on the link below:\n"
+#| "\n"
+#| "%1"
 msgid ""
 "Dear Valued Customer,\n"
 "\n"
-"Further to your request to change your password, please help us to verify your identity by clicking on the link below:\n"
+"Before we can help you change your password, please help us to verify your identity by clicking on the link below:\n"
 "\n"
 "%1"
 msgstr ""
@@ -2578,7 +2559,7 @@ msgstr "Deposite %1 em dinheiro virtual na sua conta"
 msgid "Deposit Y or more and we will add an additional X to your account after five times X in trading volume is made. By way of example, if you claim a \"Deposit $100, get $20 bonus\" offer, then the $20 bonus will be credited as \"pending\" to your account once you deposit $100. Once you reach (5 * $20 = $100) in trading volume, the $20 bonus will be released to your account upon approval."
 msgstr "Deposite Y ou mais e nós acrescentaremos um X adicional na sua conta depois de ser realizado, cinco vezes, um volume de negociação de X. A título de exemplo, se solicitar um \"Depósito de $100, obterá um bônus de $20\"; em seguida, o bônus de $20 será creditado na sua conta como \"pendente\" quando fizer depósitos de $100. Quando atingir um volume de negociação de (5 * $20 = $100), o bônus de $20 será lançado na sua conta após aprovação."
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:613
+#: cgi/templates/default/cashier/available_payment_methods.tt:518
 msgid "Deposit to Payment Agent"
 msgstr "Depositar em Agente de Pagamentos"
 
@@ -2619,25 +2600,7 @@ msgstr "Depositar via Western Union (MTCN: %1)"
 msgid "Deposit via bank wire"
 msgstr "Depositar via transferência bancária"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:104
-#: cgi/templates/default/cashier/available_payment_methods.tt:133
-#: cgi/templates/default/cashier/available_payment_methods.tt:162
-#: cgi/templates/default/cashier/available_payment_methods.tt:196
-#: cgi/templates/default/cashier/available_payment_methods.tt:224
-#: cgi/templates/default/cashier/available_payment_methods.tt:252
-#: cgi/templates/default/cashier/available_payment_methods.tt:285
-#: cgi/templates/default/cashier/available_payment_methods.tt:312
-#: cgi/templates/default/cashier/available_payment_methods.tt:338
-#: cgi/templates/default/cashier/available_payment_methods.tt:366
-#: cgi/templates/default/cashier/available_payment_methods.tt:395
-#: cgi/templates/default/cashier/available_payment_methods.tt:424
-#: cgi/templates/default/cashier/available_payment_methods.tt:452
-#: cgi/templates/default/cashier/available_payment_methods.tt:480
-#: cgi/templates/default/cashier/available_payment_methods.tt:513
-#: cgi/templates/default/cashier/available_payment_methods.tt:543
-#: cgi/templates/default/cashier/available_payment_methods.tt:570
-#: cgi/templates/default/cashier/available_payment_methods.tt:595
-#: cgi/templates/default/cashier/available_payment_methods.tt:75
+#: cgi/templates/default/cashier/available_payment_methods.tt:290
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/bank_wire.tt:8
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:102
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:19
@@ -2651,34 +2614,33 @@ msgid "Deposit: %1"
 msgstr "Depósito: %1"
 
 #. (1)
-#: cgi/templates/default/cashier/available_payment_methods.tt:548
+#: cgi/templates/default/cashier/available_payment_methods.tt:461
 msgid "Deposit: %1 working day"
 msgstr "Depósito: %1 dia útil"
 
 #. (1)
 #. (5)
-#: cgi/templates/default/cashier/available_payment_methods.tt:109
-#: cgi/templates/default/cashier/available_payment_methods.tt:138
-#: cgi/templates/default/cashier/available_payment_methods.tt:167
-#: cgi/templates/default/cashier/available_payment_methods.tt:80
+#: cgi/templates/default/cashier/available_payment_methods.tt:119
+#: cgi/templates/default/cashier/available_payment_methods.tt:143
+#: cgi/templates/default/cashier/available_payment_methods.tt:71
+#: cgi/templates/default/cashier/available_payment_methods.tt:95
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/bank_wire.tt:9
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:76
 msgid "Deposit: %1 working days"
 msgstr "Depósito: %1 dias úteis"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:229
-#: cgi/templates/default/cashier/available_payment_methods.tt:257
-#: cgi/templates/default/cashier/available_payment_methods.tt:290
-#: cgi/templates/default/cashier/available_payment_methods.tt:316
-#: cgi/templates/default/cashier/available_payment_methods.tt:343
-#: cgi/templates/default/cashier/available_payment_methods.tt:371
-#: cgi/templates/default/cashier/available_payment_methods.tt:400
-#: cgi/templates/default/cashier/available_payment_methods.tt:429
-#: cgi/templates/default/cashier/available_payment_methods.tt:457
-#: cgi/templates/default/cashier/available_payment_methods.tt:485
-#: cgi/templates/default/cashier/available_payment_methods.tt:518
-#: cgi/templates/default/cashier/available_payment_methods.tt:574
-#: cgi/templates/default/cashier/available_payment_methods.tt:599
+#: cgi/templates/default/cashier/available_payment_methods.tt:195
+#: cgi/templates/default/cashier/available_payment_methods.tt:218
+#: cgi/templates/default/cashier/available_payment_methods.tt:246
+#: cgi/templates/default/cashier/available_payment_methods.tt:268
+#: cgi/templates/default/cashier/available_payment_methods.tt:314
+#: cgi/templates/default/cashier/available_payment_methods.tt:338
+#: cgi/templates/default/cashier/available_payment_methods.tt:362
+#: cgi/templates/default/cashier/available_payment_methods.tt:385
+#: cgi/templates/default/cashier/available_payment_methods.tt:408
+#: cgi/templates/default/cashier/available_payment_methods.tt:436
+#: cgi/templates/default/cashier/available_payment_methods.tt:483
+#: cgi/templates/default/cashier/available_payment_methods.tt:504
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:103
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:20
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:31
@@ -2781,6 +2743,12 @@ msgstr "Pretende diminuir o período de tempo?"
 #: cgi/subs/subs_BOMFeed_history.pm:438
 msgid "Do you want to increase the timescale?"
 msgstr "Pretende aumentar o período de tempo?"
+
+#: frontend/templates/resources/index.html.haml:1
+#, fuzzy
+#| msgid "Looking to learn more about the markets or financial trading? Check out the resources below!"
+msgid "Do you want to learn more about the markets and how to trade them? Check out the resources below."
+msgstr "Pretende saber mais sobre os mercados ou negociação financeira? Verifique os recursos abaixo!"
 
 #: frontend/templates/static/tour.html.haml:1
 msgid "Do you want to lock in profits?"
@@ -2903,6 +2871,10 @@ msgstr "Durante os fast markets (mercados com negociação rápida -isto é, per
 msgid "During the term of this Agreement, you may be entrusted with confidential information relating to the business, operations, or underlying technology of the Company and/or the the Company's affiliate program. You agree to avoid disclosure or unauthorised use of the confidential information to third persons or outside parties unless you have the Company's prior written consent and that you will use the Confidential Information only for purposes necessary to further the purposes of this Agreement. Your obligations with regards to confidential information shall survive the termination of this Agreement."
 msgstr "Durante a vigência do presente Acordo, podem ser-lhe confiadas informações confidenciais relacionadas ao negócio, operações ou tecnologia subjacente da Empresa e/ou do programa de afiliados da Empresa. Você aceita evitar a divulgação ou utilização não autorizada das informações confidenciais a terceiros ou partes externas, exceto se tiver escrito previamente pedindo o consentimento à Empresa, e usar a Informação Confidencial apenas para fins necessários para efeitos do presente Acordo. As suas obrigações relativamente às informações confidenciais sobreviverão à rescisão/término do presente Acordo."
 
+#: cgi/templates/default/cashier/available_payment_methods.tt:226
+msgid "E-cash"
+msgstr ""
+
 #: cgi/templates/default/legal/terms_and_conditions.tt:56
 msgid "Each Client agrees to be fully and personally liable for the due settlement of every transaction entered into under his account with the Company. This includes any transactions entered into by members of the Client's family or entourage who have gained access to the account. The Client is responsible for ensuring that he alone controls access to the account, and that no minors are granted access to trading on the website. In any case, the Client remains fully liable for any and all positions traded on his account, and for any credit card transactions entered into the site for his account. Each Client also indemnifies the Company in respect to all costs and losses of any kind, whatsoever as may be incurred by the Company as a result, direct or indirect, of the Client's failure to perform or settle such a transaction. Online Gambling debts are enforceable in law in the Isle of Man."
 msgstr "Cada cliente aceita ser plena e pessoalmente responsável pela devida liquidação de todas as transações realizadas ao abrigo da sua conta na Empresa. Isto inclui quaisquer transações realizadas por membros da família ou círculo pessoal do Cliente que tenham adquirido acesso à conta. O Cliente é responsável por assegurar que o acesso à conta é controlado apenas por si e que nenhum menor de idade tem acesso à negociação na página Web. Em qualquer caso, o Cliente permanece totalmente responsável por quaisquer e todas as posições negociadas a partir da sua conta, e por todas as transações de cartão de crédito que derem entrada no site referentes à sua conta. Cada Cliente deverá também indenizar a Empresa relativamente a todos os custos e perdas de qualquer tipo, quaisquer que possam ser, incorridos pela Empresa, resultantes direta ou indiretamente, da não execução ou liquidação por parte do Cliente de uma operação deste tipo. As dívidas de jogo on-line são juridicamente vinculativas na Ilha de Man."
@@ -2963,8 +2935,8 @@ msgid "Email Us"
 msgstr "Envie-nos um e-mail"
 
 #: cgi/f_writepartics.cgi:202 cgi/f_writepartics.cgi:211
-#: cgi/subs/subs_forms.pm:1038 cgi/subs/subs_forms.pm:2156
-#: cgi/subs/subs_forms.pm:418
+#: cgi/subs/subs_forms.pm:1005 cgi/subs/subs_forms.pm:2123
+#: cgi/subs/subs_forms.pm:415
 msgid "Email address"
 msgstr "Endereço de e-mail"
 
@@ -3019,7 +2991,7 @@ msgstr "Envelope (SMA 20 +/- 10%)"
 msgid "Equity Offering"
 msgstr "Oferta de Ações"
 
-#: cgi/create_account.cgi:128
+#: cgi/create_account.cgi:121
 msgid "Error : password field is blank !"
 msgstr "Erro : campo da senha está em branco !"
 
@@ -3039,27 +3011,23 @@ msgstr "Europa"
 msgid "European Union residents with the exception of the UK will have their account opened with Regent Markets (Malta) Ltd."
 msgstr "Os residentes na União Europeia, com excepção para o Reino Unido, terão a sua conta aberta na Regent Markets (Malta) Ltd."
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:265
-msgid "Ewallet"
-msgstr "Porta-moedas eletrónico"
-
 #: lib/BOM/Feed/DataSource/BBDL/CSVParser/CorporateAction.pm:214
 msgid "Exchange Offering"
 msgstr "Oferta de Câmbio"
 
-#: cgi/subs/subs_forms.pm:3563
+#: cgi/subs/subs_forms.pm:3530
 msgid "Exclude me from the website until"
 msgstr "Excluir-me da página Web até"
 
-#: cgi/subs/subs_forms.pm:3733
+#: cgi/subs/subs_forms.pm:3700
 msgid "Exclude time cannot be for more than one year."
 msgstr "O tempo de exclusão não pode ser superior a um ano."
 
-#: cgi/subs/subs_forms.pm:3729
+#: cgi/subs/subs_forms.pm:3696
 msgid "Exclude time cannot be less than 6 months."
 msgstr "O tempo de exclusão não pode ser inferior a seis meses."
 
-#: cgi/subs/subs_forms.pm:3725
+#: cgi/subs/subs_forms.pm:3692
 msgid "Exclude time must be after today."
 msgstr "A hora da exclusão tem de ser depois de hoje."
 
@@ -3156,15 +3124,15 @@ msgstr "Apelido"
 msgid "Fast Stochastic"
 msgstr "Estocástico Rápido"
 
-#: cgi/subs/subs_forms.pm:486
+#: cgi/subs/subs_forms.pm:483
 msgid "Favourite artist"
 msgstr "Artista favorito"
 
-#: cgi/subs/subs_forms.pm:486
+#: cgi/subs/subs_forms.pm:483
 msgid "Favourite dish"
 msgstr "Prato favorito"
 
-#: cgi/f_writepartics.cgi:223 cgi/subs/subs_forms.pm:1269
+#: cgi/f_writepartics.cgi:223 cgi/subs/subs_forms.pm:1236
 #: cgi/subs/subs_presentation.pm:72 cgi/subs/subs_presentation.pm:76
 msgid "Fax"
 msgstr "Fax"
@@ -3177,10 +3145,6 @@ msgstr "Taxa para a transação %1"
 #: frontend/templates/static/tour.html.haml:1
 msgid "Feel free to contact our friendly and helpful customer service experts. They're always available to answer your questions. You can contact us via live chat, email and telephone."
 msgstr "Não hesite em contactar os nossos especialistas pelo atendimento ao cliente. Eles estão sempre à disposição para responder suas perguntas. Você pode nos contatar por meio de chat, e-mail e telefone."
-
-#: cgi/templates/default/cashier/available_payment_methods.tt:43
-msgid "Fees"
-msgstr "Taxas"
 
 #: cgi/subs/subs_BOMFeed_history.pm:358
 msgid "Fibonacci Fan"
@@ -3219,7 +3183,7 @@ msgstr "Encontre a negociação certa para todas as condições de mercado."
 msgid "First Name"
 msgstr "Primeiro Nome"
 
-#: cgi/subs/subs_forms.pm:1080 cgi/subs/subs_forms.pm:227
+#: cgi/subs/subs_forms.pm:1047 cgi/subs/subs_forms.pm:227
 msgid "First line of home address"
 msgstr "Primeira linha de endereço residencial"
 
@@ -3279,7 +3243,7 @@ msgstr ""
 msgid "For security reasons, please note that Payment Agent accounts will only be able to deposit via Bank Wire."
 msgstr "Por motivos de segurança, tenha em consideração que apenas são possíveis depósitos nas contas do Agente de Pagamentos através de Transferência Bancária."
 
-#: cgi/lost_password.cgi:51
+#: cgi/lost_password.cgi:47
 msgid "For security reasons, please start the 'Lost Password' procedure again."
 msgstr "Por motivos de segurança, reinicie o procedimento 'Perdi a Senha'."
 
@@ -3296,10 +3260,6 @@ msgstr "Gráfico de Histograma"
 msgid "Forex"
 msgstr "Forex (Mercado de Câmbio)"
 
-#: cgi/lost_password.cgi:31 cgi/lost_password.cgi:34
-msgid "Forgot Login ID / Password"
-msgstr "Esqueci o ID de Início de Sessão/Senha"
-
 #: frontend/templates/home/login.html.haml:1
 msgid "Forgot Login ID or Password?"
 msgstr "Esqueceu-se do ID de Iniciar Sessão ou Senha?"
@@ -3314,7 +3274,7 @@ msgstr "Contratos com datas de início avançada e contratos diários estão dis
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr "Formate a sua estratégia de negociação usando os poderosos gráficos ao vivo da %1. Veja instantaneamente os padrões de negociação de mercados, índices, commodities e ações."
 
-#: cgi/subs/subs_homepage.pm:138
+#: cgi/subs/subs_homepage.pm:133
 msgid "Free Contract Bonus"
 msgstr "Bónus de Contrato Gratuito"
 
@@ -3348,7 +3308,7 @@ msgstr "De data de expiração fora do limite"
 msgid "From:"
 msgstr "De:"
 
-#: cgi/subs/subs_forms.pm:4042
+#: cgi/subs/subs_forms.pm:4009
 msgid "Further Instructions"
 msgstr "Outras Instruções"
 
@@ -3363,7 +3323,7 @@ msgid "Further information"
 msgstr "Outras informações"
 
 #. (300)
-#: cgi/paymentagent_withdraw.cgi:169 cgi/subs/subs_forms.pm:4065
+#: cgi/paymentagent_withdraw.cgi:169 cgi/subs/subs_forms.pm:4032
 msgid "Further instructions must not exceed %1 characters."
 msgstr "As 'outras instruções' não devem exceder os %1 caracteres."
 
@@ -3398,7 +3358,7 @@ msgid "Generous Commission Structure"
 msgstr "Comissões Generosas"
 
 #. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
-#: cgi/subs/subs_homepage.pm:114
+#: cgi/subs/subs_homepage.pm:109
 msgid "Get %1 when you deposit %2."
 msgstr "Obtenha %1 ao depositar %2."
 
@@ -3548,7 +3508,7 @@ msgstr "Alta/Queda"
 msgid "Higher / Lower"
 msgstr "Mais Alto / Mais Baixo"
 
-#: cgi/contract_demo.cgi:44 cgi/contract_demo.cgi:45 cgi/contract_guide.cgi:39
+#: cgi/contract_demo.cgi:44 cgi/contract_demo.cgi:45 cgi/contract_guide.cgi:29
 #: cgi/oop/Controller/Bet.pm:1141 cgi/oop/Controller/Bet.pm:1148
 #: frontend/templates/get_started/random_markets.html.haml:1
 msgid "Higher/Lower"
@@ -3614,6 +3574,12 @@ msgstr "Que segurança tem o meu dinheiro com a %1?"
 msgid "How soon can I start trading?"
 msgstr "Quando posso começar a negociar?"
 
+#: cgi/templates/default/account/open_account.tt:2
+#, fuzzy
+#| msgid "Open an account"
+msgid "How to open an account"
+msgstr "Abrir uma conta"
+
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 #: frontend/templates/get_started/index.html.haml:1
 #: frontend/templates/layouts/get_started/nav.html.haml:1
@@ -3626,9 +3592,11 @@ msgstr "Como negociar binários?"
 msgid "How to trade the random markets?"
 msgstr "Como negociar os mercados aleatórios?"
 
-#: cgi/paymentagent_list.cgi:48
-msgid "How to transfer money to the Agent."
-msgstr "Como transferir dinheiro para um Agente."
+#: cgi/paymentagent_list.cgi:39
+#, fuzzy
+#| msgid "You are not a Payment Agent"
+msgid "How to use a payment agent"
+msgstr "Você não é um Agente de Pagamento"
 
 #: cgi/subs/subs_clientdetails.pm:129
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
@@ -3643,7 +3611,7 @@ msgid "I forgot my password, what should I do?"
 msgstr "Esqueci a minha senha, o que devo fazer?"
 
 #. ($tac_url)
-#: cgi/subs/subs_forms.pm:711
+#: cgi/subs/subs_forms.pm:681
 msgid "I have read and agree to the <a target=\"_blank\" href=\"%1\">terms and conditions</a> of the site."
 msgstr "Li e aceitei os <a target=\"_blank\" href=\"%1\">termos e condições</a> do site."
 
@@ -3655,15 +3623,15 @@ msgstr "Prevejo que o último decimal do 5º movimento mínimo não será:"
 msgid "I'm new to binaries, where do I start?"
 msgstr "Sou iniciante em binários, como começo?"
 
-#: cgi/subs/subs_forms.pm:996
+#: cgi/subs/subs_forms.pm:963
 msgid "ID scans submitted"
 msgstr "Digitalizações de documento de identificação submetidas"
 
-#: cgi/subs/subs_forms.pm:1295
+#: cgi/subs/subs_forms.pm:1262
 msgid "IP Address"
 msgstr "Endereço IP"
 
-#: cgi/f_writepartics.cgi:224 cgi/subs/subs_forms.pm:1526
+#: cgi/f_writepartics.cgi:224 cgi/subs/subs_forms.pm:1493
 msgid "IP Security"
 msgstr "Segurança de IPs"
 
@@ -3683,7 +3651,7 @@ msgstr "Caso seja cometido um erro no cálculo da sua parte da parcela de receit
 msgid "If any provision of this Agreement is held to be void or unenforceable in whole or part, the impugned provision (or part thereof) shall be deemed to be deleted from this Agreement and the remaining provisions (including the remainder of the affected provision) shall continue to be valid and applicable."
 msgstr "Caso alguma disposição do presente Acordo seja considerada nula ou inexigível no todo ou em parte, a disposição impugnada (ou parte dela) será considerada eliminada do presente Acordo e as restantes disposições (incluindo o restante da disposição afetada) continuarão a ser válidas e aplicáveis."
 
-#: cgi/subs/subs_forms.pm:2772
+#: cgi/subs/subs_forms.pm:2739
 msgid "If applicable, to expedite the processing of your query please include a screen capture of the page that requires our attention."
 msgstr "Se for o caso, para agilizar o processamento da sua questão inclua uma captura de ecrã da página que requer a nossa atenção."
 
@@ -3719,6 +3687,13 @@ msgstr "Se você pensa que nenhuma dessas razões se aplicam ao seu caso e você
 #: frontend/templates/static/careers.html.haml:1
 msgid "If you meet our basic requirements, we’ll send you a talent test."
 msgstr "Se você preenche os nossos requisitos básicos, nos te enviaremos um teste de conhecimento."
+
+#. (helpdesk)
+#: cgi/templates/default/email/lost_password.tt:7
+#, fuzzy
+#| msgid "Should you require further assistance, feel free to contact our customer support team at %1"
+msgid "If you need help, please contact our customer support team at %1"
+msgstr "Caso necessite de mais assistência, por favor contate o nosso atendimento ao cliente através da %1"
 
 #: cgi/templates/default/bet/explanation/winning/digits.tt:2
 msgid "If you select \"Differs\", you win the payout if the market price does not end in the digit you have selected."
@@ -3882,7 +3857,7 @@ msgstr "Para concluir a sua retirada, você deve autenticar a sua conta. Depois 
 msgid "In such an event, the Company may at its sole discretion (with or without notice) close out Clients' open financial contracts at prices it considers fair and reasonable at such a time and no claims may be entertained against the Company in connection thereto."
 msgstr "Neste caso, a Empresa poderá, a seu exclusivo critério, (com ou sem aviso prévio) fechar os contratos financeiros em aberto dos Clientes a preços que considere justos e razoáveis nesse momento, não sendo possível a recepção de qualquer reclamação contra a Empresa relativamente aos mesmos."
 
-#: cgi/subs/subs_cashier.pm:204
+#: cgi/subs/subs_cashier.pm:203
 msgid "In the 'Further Instructions' field please specify the payment method and account number to which the Agent will send the funds to."
 msgstr "No campo 'Outras Instruções' especifique o método de pagamento e número de conta para a qual o Agente fará o envio dos fundos."
 
@@ -3898,11 +3873,11 @@ msgstr "Entretanto, esperamos que tenha considerado o site como informativo e qu
 msgid "In these terms and conditions, Y represents the amount of funds that you must deposit and X represents the bonus amount that you will receive."
 msgstr "Nos presentes termos e condições, Y representa a quantia dos fundos que deve depositar e X representa a quantia do bônus que vai receber."
 
-#: cgi/subs/subs_forms.pm:3112
+#: cgi/subs/subs_forms.pm:3079
 msgid "In what country do you want to offer your service"
 msgstr "Em que país pretende prestar o seu serviço"
 
-#: cgi/contract_demo.cgi:73 cgi/contract_demo.cgi:86 cgi/contract_guide.cgi:65
+#: cgi/contract_demo.cgi:73 cgi/contract_demo.cgi:86 cgi/contract_guide.cgi:55
 #: cgi/oop/Controller/Bet.pm:1192
 msgid "In/Out"
 msgstr "Dentro/Fora"
@@ -3978,7 +3953,7 @@ msgstr "Informações sobre os feeds de dados utilizados pela nossa empresa, e s
 msgid "Input error."
 msgstr "Erro de introdução."
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:201
+#: cgi/templates/default/cashier/available_payment_methods.tt:172
 msgid "Instant"
 msgstr "Instante"
 
@@ -4023,7 +3998,7 @@ msgstr "Contratos intra-diários podem não cruzar com mercados abertos."
 msgid "Intraday prices"
 msgstr "Preços Intradiários"
 
-#: cgi/subs/subs_forms.pm:3028
+#: cgi/subs/subs_forms.pm:2995
 msgid "Invalid Building No./Name"
 msgstr "Nº/Nome de Edifício Inválido"
 
@@ -4033,8 +4008,8 @@ msgstr "Nº/Nome de Edifício Inválido"
 msgid "Invalid Input"
 msgstr "Introdução Inválida"
 
-#: cgi/subs/subs_forms.pm:3828 cgi/subs/subs_forms.pm:3834
-#: cgi/subs/subs_forms.pm:4029 cgi/subs/subs_forms.pm:4035
+#: cgi/subs/subs_forms.pm:3795 cgi/subs/subs_forms.pm:3801
+#: cgi/subs/subs_forms.pm:3996 cgi/subs/subs_forms.pm:4002
 #: lib/BOM/View/Form/Validation.pm:106 lib/BOM/View/Form/Validation.pm:114
 msgid "Invalid amount"
 msgstr "Montante inválido"
@@ -4048,7 +4023,7 @@ msgstr "Moeda %1 inválida"
 msgid "Invalid data"
 msgstr "Dado inválido"
 
-#: cgi/subs/subs_forms.pm:1287
+#: cgi/subs/subs_forms.pm:1254
 msgid "Invalid fax number."
 msgstr "Número de fax inválido."
 
@@ -4069,20 +4044,20 @@ msgstr "Aposta inválida"
 msgid "Invalid stake %1. Please try again."
 msgstr "Aposta de %1 inválida. Tente novamente."
 
-#: cgi/subs/subs_forms.pm:1251 cgi/subs/subs_forms.pm:2591
-#: cgi/subs/subs_forms.pm:3206 cgi/subs/subs_forms.pm:472
+#: cgi/subs/subs_forms.pm:1218 cgi/subs/subs_forms.pm:2558
+#: cgi/subs/subs_forms.pm:3173 cgi/subs/subs_forms.pm:469
 #: cgi/subs/subs_telephone.pm:126
 msgid "Invalid telephone number (too long)."
 msgstr "Número de telefone inválido (demasiado extenso)."
 
-#: cgi/subs/subs_forms.pm:1245 cgi/subs/subs_forms.pm:2585
-#: cgi/subs/subs_forms.pm:3200 cgi/subs/subs_forms.pm:466
+#: cgi/subs/subs_forms.pm:1212 cgi/subs/subs_forms.pm:2552
+#: cgi/subs/subs_forms.pm:3167 cgi/subs/subs_forms.pm:463
 #: cgi/subs/subs_telephone.pm:123
 msgid "Invalid telephone number (too short)."
 msgstr "Número de telefone inválido (demasiado curto)."
 
-#: cgi/subs/subs_forms.pm:1256 cgi/subs/subs_forms.pm:2579
-#: cgi/subs/subs_forms.pm:3211 cgi/subs/subs_forms.pm:477
+#: cgi/subs/subs_forms.pm:1223 cgi/subs/subs_forms.pm:2546
+#: cgi/subs/subs_forms.pm:3178 cgi/subs/subs_forms.pm:474
 msgid "Invalid telephone number."
 msgstr "Número de telefone inválido."
 
@@ -4109,7 +4084,7 @@ msgstr "É importante que você leia e compreenda o conteúdo dos presentes term
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "It is not necessary to actually trade or to deposit funds to your account."
-msgstr ""
+msgstr "Não é necessário realizar negociações ou depositar fundos na sua conta. "
 
 #: frontend/templates/get_started/glossary.html.haml:1
 msgid "It is sometimes possible to sell an option before the expiry of a trade, but only if a fair price can be determined. If this option is available, you will see a blue 'Sell' button next to your trade in the portfolio."
@@ -4148,14 +4123,12 @@ msgid "Join our analysts LIVE twice a week for a comprehensive analysis of recen
 msgstr "Junte-se as nossas análises AO VIVO duas vezes por semana para uma visão compreensiva das tendências nos mercados financeiros."
 
 #: cgi/templates/default/account/statement.tt:13
-#, fuzzy
-#| msgid "Up to"
 msgid "Jump to"
-msgstr "Até"
+msgstr "Salte até"
 
 #: cgi/templates/default/api/register.tt:19
 msgid "Keep this value secure"
-msgstr ""
+msgstr "Mantenha este valor seguro"
 
 #: cgi/paymentagent_withdraw.cgi:396
 msgid "Kind Regards,"
@@ -4199,13 +4172,15 @@ msgstr "Saber Mais"
 msgid "Learn about one of the fastest growing sectors of the finance industry."
 msgstr "Saiba mais sobre um dos setores de crescimento mais rápido da indústria financeira."
 
+#: frontend/templates/resources/index.html.haml:1
+#, fuzzy
+#| msgid "Read about the five types of trade offered by %1."
+msgid "Learn about the different ways to trade on the markets."
+msgstr "Saiba mais sobre os cinco tipos de negociação oferecidos pela %1."
+
 #: frontend/templates/get_started/index.html.haml:1
 msgid "Learn about the simplicity, transparency and flexibility of binary trading."
 msgstr "Saiba mais sobre a simplicidade, transparência e flexibilidade das negociações binárias."
-
-#: frontend/templates/resources/index.html.haml:1
-msgid "Learn about the types of contracts available."
-msgstr "Aprenda sobre os tipos de contratos disponíveis."
 
 #: frontend/templates/static/tour.html.haml:1
 msgid "Learn from us"
@@ -4223,7 +4198,7 @@ msgstr "Aprender a negociar"
 msgid "Learning to trade online"
 msgstr "Aprender a negociar online"
 
-#: cgi/statement.cgi:137 cgi/subs/subs_account_history.pm:161
+#: cgi/statement.cgi:135 cgi/subs/subs_account_history.pm:161
 msgid "Legacy Contract"
 msgstr "Contrato de Patrimônio"
 
@@ -4269,7 +4244,7 @@ msgid "Links"
 msgstr "Links"
 
 #. (BOM::Platform::Runtime->instance->countries->localized_code2country($target_country, request()
-#: cgi/subs/subs_forms.pm:3985
+#: cgi/subs/subs_forms.pm:3952
 msgid "Listing only Payment Agents in %1."
 msgstr "Apresentar lista apenas dos Agentes de Pagamentos em %1."
 
@@ -4289,7 +4264,7 @@ msgstr "Gráfico ao Vivo"
 msgid "Live Help"
 msgstr "Ajuda em Tempo Real"
 
-#: cgi/subs/subs_forms.pm:1540
+#: cgi/subs/subs_forms.pm:1507
 msgid "Lock Cashier and Settings sections"
 msgstr "Bloquear seções do Caixa e de Definições"
 
@@ -4329,7 +4304,7 @@ msgstr "Escala Logarítmica"
 msgid "Login"
 msgstr "Iniciar Sessão"
 
-#: cgi/subs/subs_forms.pm:2657 cgi/subs/subs_forms.pm:2785
+#: cgi/subs/subs_forms.pm:2624 cgi/subs/subs_forms.pm:2752
 #: cgi/templates/default/global/header.tt:66
 #: frontend/templates/home/login.html.haml:1
 #: frontend/templates/layouts/default/header.html.haml:1
@@ -4358,10 +4333,6 @@ msgstr "Problemas com o Início de Sessão"
 #: cgi/templates/default/affiliates/main.tt:45
 msgid "Long-term partnership with the leading financial trading service"
 msgstr "Parceria a longo prazo com o serviço líder de negociação financeira"
-
-#: frontend/templates/resources/index.html.haml:1
-msgid "Looking to learn more about the markets or financial trading? Check out the resources below!"
-msgstr "Pretende saber mais sobre os mercados ou negociação financeira? Verifique os recursos abaixo!"
 
 #: cgi/templates/default/global/header.tt:72
 #: frontend/templates/layouts/default/header.html.haml:1
@@ -4506,11 +4477,11 @@ msgstr "Mercados"
 msgid "Mass Index"
 msgstr "Índice de Massa (Mass Index)"
 
-#: cgi/subs/subs_homepage.pm:126
+#: cgi/subs/subs_homepage.pm:121
 msgid "Matched Contract Bonus"
 msgstr "Bônus de Contrato Correspondido"
 
-#: cgi/subs/subs_forms.pm:3801 cgi/subs/subs_forms.pm:4002
+#: cgi/subs/subs_forms.pm:3768 cgi/subs/subs_forms.pm:3969
 msgid "Max"
 msgstr "Máx"
 
@@ -4518,7 +4489,7 @@ msgstr "Máx"
 msgid "Maximum"
 msgstr "Máximo"
 
-#: cgi/subs/subs_forms.pm:3466
+#: cgi/subs/subs_forms.pm:3433
 #: cgi/templates/default/cashier/betting_limits.tt:15
 msgid "Maximum account cash balance"
 msgstr "Saldo máximo de numerário em conta"
@@ -4530,7 +4501,7 @@ msgstr "Saldo máximo de numerário em conta"
 msgid "Maximum account cash balance is currently set to <strong>%1 %2</strong>"
 msgstr "O saldo máximo de numerário em conta está atualmente definido como <strong>%1 %2</strong>"
 
-#: cgi/subs/subs_forms.pm:3511
+#: cgi/subs/subs_forms.pm:3478
 msgid "Maximum aggregate contract purchases per day."
 msgstr "Compras máximas de contratos agregados por dia."
 
@@ -4542,7 +4513,7 @@ msgstr "Pagamentos máximos de agregados sobre posições em aberto"
 msgid "Maximum daily turnover"
 msgstr "Volume de negócios máximo diário"
 
-#: cgi/subs/subs_forms.pm:3516
+#: cgi/subs/subs_forms.pm:3483
 #: cgi/templates/default/cashier/betting_limits.tt:11
 msgid "Maximum number of open positions"
 msgstr "Número máximo de posições em aberto"
@@ -4565,24 +4536,24 @@ msgstr "Preço Médio"
 msgid "Medium"
 msgstr "Médio"
 
-#: cgi/subs/subs_forms.pm:486
+#: cgi/subs/subs_forms.pm:483
 msgid "Memorable date"
 msgstr "Data memorizável"
 
-#: cgi/subs/subs_forms.pm:485
+#: cgi/subs/subs_forms.pm:482
 msgid "Memorable town/city"
 msgstr "Localidade/cidade memorizável"
 
 #. ($error_code)
-#: cgi/subs/subs_cashier.pm:100
+#: cgi/subs/subs_cashier.pm:99
 msgid "Mentioning error code %1 in any correspondence may help us resolve the issue more quickly."
 msgstr "Referir o código de erro %1 em toda a correspondência pode ajudar-nos a resolver o assunto mais rapidamente."
 
-#: cgi/subs/subs_forms.pm:2882
+#: cgi/subs/subs_forms.pm:2849
 msgid "Message"
 msgstr "Mensagem"
 
-#: cgi/subs/subs_forms.pm:2903
+#: cgi/subs/subs_forms.pm:2870
 msgid "Message is too short."
 msgstr "Mensagem demasiado curta."
 
@@ -4594,7 +4565,7 @@ msgstr "Método"
 msgid "Mid"
 msgstr "Média"
 
-#: cgi/subs/subs_forms.pm:3801 cgi/subs/subs_forms.pm:4002
+#: cgi/subs/subs_forms.pm:3768 cgi/subs/subs_forms.pm:3969
 msgid "Min"
 msgstr "Mín"
 
@@ -4627,10 +4598,8 @@ msgid "Missing market data for exit spot."
 msgstr "Falta de informações do Mercado para o valor final."
 
 #: frontend/templates/static/open_source_projects.html.haml:1
-#, fuzzy
-#| msgid "Downloadable application"
 msgid "Mobile application"
-msgstr "Baixe o aplicativo"
+msgstr "Aplicativo para celular"
 
 #: cgi/smartchart.cgi:30 cgi/subs/subs_BOMFeed_history.pm:359
 #: cgi/subs/subs_BOMFeed_history.pm:494
@@ -4691,7 +4660,7 @@ msgstr "Mais benefícios"
 msgid "More than %1 trades available"
 msgstr "Mais de %1 das negociações disponíveis"
 
-#: cgi/subs/subs_forms.pm:485
+#: cgi/subs/subs_forms.pm:482
 msgid "Mother's maiden name"
 msgstr "Nome de solteira da mãe"
 
@@ -4740,27 +4709,27 @@ msgstr "Apoio multi-idiomas e multi-moedas"
 
 #: cgi/templates/default/api/register.tt:15
 msgid "Must be in a valid URI format"
-msgstr ""
+msgstr "Deve ser em um formato URI válido"
 
 #: cgi/my_account.cgi:72 lib/BOM/View/Menu.pm:56
 msgid "My Account"
 msgstr "Minha Conta"
 
-#: cgi/subs/subs_forms.pm:1006
+#: cgi/subs/subs_forms.pm:973
 #: cgi/templates/default/cashier/available_payment_agents_list.tt:2
 #: cgi/templates/default/cashier/payment_agent_further_info.tt:3
 msgid "Name"
 msgstr "Nome"
 
-#: cgi/subs/subs_forms.pm:2616 cgi/subs/subs_forms.pm:2841
+#: cgi/subs/subs_forms.pm:2583 cgi/subs/subs_forms.pm:2808
 msgid "Name is too short."
 msgstr "Nome demasiado curto."
 
-#: cgi/subs/subs_forms.pm:485
+#: cgi/subs/subs_forms.pm:482
 msgid "Name of first love"
 msgstr "Nome do primeiro amor"
 
-#: cgi/subs/subs_forms.pm:485
+#: cgi/subs/subs_forms.pm:482
 msgid "Name of your pet"
 msgstr "Nome do seu animal de estimação"
 
@@ -4781,17 +4750,17 @@ msgstr "Estado da rede"
 msgid "New"
 msgstr "Novo"
 
-#: cgi/subs/subs_forms.pm:1358
+#: cgi/subs/subs_forms.pm:1325
 msgid "New Cashier/Settings password"
 msgstr "Nova senha do Caixa/Definições"
 
-#: cgi/subs/subs_forms.pm:1834 cgi/subs/subs_forms.pm:1992
+#: cgi/subs/subs_forms.pm:1801 cgi/subs/subs_forms.pm:1959
 msgid "New Password"
 msgstr "Nova Senha"
 
 #: cgi/f_brokercgi/f_clientloginid_newpassword.cgi:73
-#: cgi/lost_password.cgi:269 cgi/lost_password.cgi:294
-#: cgi/lost_password.cgi:342 cgi/lost_password.cgi:409
+#: cgi/lost_password.cgi:259 cgi/lost_password.cgi:284
+#: cgi/lost_password.cgi:332 cgi/lost_password.cgi:399
 msgid "New Password Request"
 msgstr "Pedido de Nova Senha"
 
@@ -4799,7 +4768,7 @@ msgstr "Pedido de Nova Senha"
 msgid "New To Trading?"
 msgstr "Negociar é Novidade para você?"
 
-#: cgi/create_account.cgi:197
+#: cgi/create_account.cgi:190
 msgid "New account registration fail."
 msgstr "Registro de nova conta falhou."
 
@@ -4816,8 +4785,8 @@ msgstr "Próximo"
 msgid "Next Page"
 msgstr "Página Seguinte"
 
-#: cgi/subs/subs_BOMFeed_history.pm:328 cgi/subs/subs_forms.pm:3343
-#: cgi/subs/subs_forms.pm:989
+#: cgi/subs/subs_BOMFeed_history.pm:328 cgi/subs/subs_forms.pm:3310
+#: cgi/subs/subs_forms.pm:956
 #: cgi/templates/default/container/confirm_box_popup.tt:7
 msgid "No"
 msgstr "Não"
@@ -4906,7 +4875,7 @@ msgstr "Nota: Vai poder levantar o seu bônus de %1%2 apenas quando o seu volume
 msgid "Note: limits will apply to all currency segments on your account individually."
 msgstr "Nota: os limites serão individualmente aplicáveis a todos os segmentos de moedas na sua conta."
 
-#: cgi/subs/subs_cashier.pm:182 cgi/subs/subs_cashier.pm:200
+#: cgi/subs/subs_cashier.pm:181 cgi/subs/subs_cashier.pm:199
 #: cgi/subs/subs_forms_output.pm:273
 #: cgi/templates/default/resources/pricing_table.tt:69
 msgid "Notes:"
@@ -4963,11 +4932,11 @@ msgstr "OAuth2.0 é o padrão emergente da internet para essa finalidade. Veja <
 msgid "OK"
 msgstr "OK"
 
-#: cgi/subs/subs_clientdetails.pm:140
+#: cgi/subs/subs_clientdetails.pm:139
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "Extrato ORIGINAL de Banco/Cooperativa de Crédito/Instituição Financeira/Cartão de Crédito/Débito ou caderneta (dos últimos 3 meses)"
 
-#: cgi/subs/subs_clientdetails.pm:139
+#: cgi/subs/subs_clientdetails.pm:138
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "Fatura ORIGINAL de serviços públicos (dos últimos 3 meses); ou"
 
@@ -4991,16 +4960,16 @@ msgstr "Pontualidade no Pagamento"
 msgid "Once stray ticks have been removed, a very short-term smoothing algorithm is applied to the data feed. This smoothing algorithm removes a little of the \"random noise\" surrounding the data feed, and ensures that clients who buy path-dependent contracts (such as the one-touch or barrier-range contracts) will not have their contracts knocked-in or knocked-out by random short-term market noise that does not reflect the true market price."
 msgstr "Após a remoção dos ticks extraviados, é aplicado ao feed de dados um algoritmo de suavização a muito curto prazo. Este algoritmo de suavização remove um pouco do \"ruído aleatório\" em torno do feed de dados e garante que os clientes que compram contratos dependentes dos percursos (como os contratos de Um-Toque ou de intervalo de barreira) não verão os seus contratos serem ativados ou desativados por ruídos de mercado de curto prazo aleatórios, que não reflitam o verdadeiro preço de mercado."
 
-#: cgi/subs/subs_forms.pm:3486
+#: cgi/subs/subs_forms.pm:3453
 msgid "Once this limit is reached, you may no longer deposit."
 msgstr "Depois de alcançado este limite, deixará de poder fazer depósitos."
 
-#: cgi/subs/subs_cashier.pm:208
+#: cgi/subs/subs_cashier.pm:207
 msgid "Once you click the 'Submit' button the funds will be withdrawn from your account and will be sent to the Payment Agent you have chosen."
 msgstr "Depois de clicar no botão 'Submeter' os fundos serão retirados da sua conta e enviados para a Agência de Pagamentos que escolheu."
 
 #. ($home_website)
-#: cgi/subs/subs_cashier.pm:187
+#: cgi/subs/subs_cashier.pm:186
 msgid "Once you click the 'Submit' button, the funds will be withdrawn from your account and transferred to your Client's %1 account."
 msgstr "Depois de clicar no botão 'Submeter' os fundos serão retirados da sua conta e transferidos para a conta %1 do seu Cliente."
 
@@ -5027,7 +4996,7 @@ msgstr "Só um cliente devidamente etiquetado pode ser atribuído a um afiliado.
 msgid "Open"
 msgstr "Abrir"
 
-#: cgi/subs/subs_forms.pm:672
+#: cgi/subs/subs_forms.pm:644
 msgid "Open Account"
 msgstr "Abrir Conta"
 
@@ -5040,7 +5009,7 @@ msgid "Open New Account"
 msgstr "Abrir uma Conta Nova"
 
 #: cgi/templates/default/account/open_account.tt:15
-#: cgi/templates/default/account/open_account.tt:27
+#: cgi/templates/default/account/open_account.tt:29
 msgid "Open Now"
 msgstr "Abrir Agora"
 
@@ -5053,24 +5022,10 @@ msgstr "Abrir Conta Real"
 msgid "Open Source"
 msgstr "Código aberto"
 
-#. (request()
-#: cgi/open_account.cgi:25
-msgid "Open a <a class=\"pjaxload\" href=\"%1\">virtual money</a> account now, all you need to provide is your email and password."
-msgstr "Abra uma conta de <a class=\"pjaxload\" href=\"%1\">dinheiro virtual</a> agora; apenas tem de fornecer o seu e-mail e senha."
-
-#. (request()
-#: cgi/open_account.cgi:21
-msgid "Open a <class=\"pjaxload\" a href=\"%1\">real money</a> account and make a deposit using credit card, bank wire, cheque or e-cash."
-msgstr "Abra uma conta de <class=\"pjaxload\" a href=\"%1\">dinheiro real</a> e faça um depósito por cartão de crédito, transferência bancária, cheque ou dinheiro eletrônico."
-
 #: frontend/templates/layouts/get_started/more.html.haml:1
 #: frontend/templates/static/why_us.html.haml:1
 msgid "Open a Free account"
 msgstr "Abra uma conta gratuita"
-
-#: cgi/templates/default/account/open_account.tt:3
-msgid "Open either a Real Money or Virtual Money account and get started."
-msgstr "Abra uma conta de Dinheiro Real ou Dinheiro Virtual e comece."
 
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "Open-Source Projects"
@@ -5157,7 +5112,7 @@ msgid "Our data feed may at times differ slightly from other data feeds found on
 msgstr "O nosso feed de dados por vezes difere ligeiramente de outros feeds de dados encontrados na Internet (os quais podem diferir uns dos outros). Os motivos para as diferenças nos fornecedores de feeds incluem:"
 
 #. ($cs_email)
-#: cgi/subs/subs_clientdetails.pm:142
+#: cgi/subs/subs_clientdetails.pm:141
 msgid "Our email address is %1."
 msgstr "O nosso endereço de e-mail é %1."
 
@@ -5199,7 +5154,7 @@ msgid "Ownership, content and liability for affiliate sites are the sole respons
 msgstr "A propriedade, conteúdo e responsabilidade pelos sites afiliados são da exclusiva responsabilidade do afiliado. Você será o único responsável pelo desenvolvimento, operação, e manutenção do seu site e por todos os materiais que aparecem no seu site. Irá indemnizar e isentar-nos de responsabilidades por todas as reclamações, danos e despesas (incluindo, mas não exclusivamente, honorários de advogados) relativamente ao desenvolvimento, operação, manutenção, e conteúdo do seu site."
 
 #: cgi/subs/subs_forms.pm:221 cgi/subs/subs_forms.pm:264
-#: cgi/subs/subs_forms.pm:914 cgi/subs/subs_forms.pm:917
+#: cgi/subs/subs_forms.pm:882 cgi/subs/subs_forms.pm:885
 msgid "P.O. Box is not accepted"
 msgstr "Apartado não aceite"
 
@@ -5210,11 +5165,6 @@ msgstr "P/L"
 #: cgi/subs/subs_runbets.pm:297 cgi/subs/subs_runbets.pm:312
 msgid "PLEASE CONTACT CUSTOMER SUPPORT."
 msgstr "CONTATE O ATENDIMENTO AO CLIENTE."
-
-#. ($page_num, $total_pages)
-#: cgi/subs/subs_account_history.pm:196
-msgid "Page %1 of %2"
-msgstr "Página %1 de %2"
 
 #: frontend/templates/not_found.html.haml:1
 msgid "Page not found"
@@ -5242,28 +5192,26 @@ msgstr "Participar em mercados forex, de ações ou de commodities"
 msgid "Partner API"
 msgstr "Parceiro API"
 
-#: cgi/register-api.cgi:27
-#, fuzzy
-#| msgid "Partner API"
+#: cgi/register-api.cgi:24
 msgid "Partner API Registration"
-msgstr "Parceiro API"
+msgstr "Parceiro de Registro API"
 
 #: cgi/templates/default/api/register.tt:2
 msgid "Partner API Registration for"
-msgstr ""
+msgstr "Registro da Parceiro da API para"
 
-#: cgi/subs/subs_forms.pm:564 cgi/templates/default/global/header.tt:67
+#: cgi/subs/subs_forms.pm:561 cgi/templates/default/global/header.tt:67
 #: frontend/templates/home/login.html.haml:1
 #: frontend/templates/layouts/default/header.html.haml:1
 #: lib/BOM/View/Menu.pm:83
 msgid "Password"
 msgstr "Senha"
 
-#: cgi/subs/subs_forms.pm:1352 cgi/subs/subs_forms.pm:1678
+#: cgi/subs/subs_forms.pm:1319 cgi/subs/subs_forms.pm:1645
 msgid "Password is too long, please enter at most 30 characters."
 msgstr "A senha é muito longa, introduza no máximo 30 caracteres."
 
-#: cgi/subs/subs_forms.pm:1346 cgi/subs/subs_forms.pm:1672
+#: cgi/subs/subs_forms.pm:1313 cgi/subs/subs_forms.pm:1639
 msgid "Password is too short, please enter at least 3 characters."
 msgstr "A senha é muito curta, introduza pelo menos 30 caracteres."
 
@@ -5271,11 +5219,17 @@ msgstr "A senha é muito curta, introduza pelo menos 30 caracteres."
 msgid "Password not given."
 msgstr "Senha não dada."
 
+#: cgi/lost_password.cgi:31 cgi/lost_password.cgi:34
+#, fuzzy
+#| msgid "Password"
+msgid "Password reset"
+msgstr "Senha"
+
 #: frontend/templates/home/index.html.haml:1
 msgid "Password:"
 msgstr "Senha:"
 
-#: cgi/paymentagent_list.cgi:12 cgi/paymentagent_list.cgi:39
+#: cgi/paymentagent_list.cgi:12
 msgid "Payment Agent Deposit"
 msgstr "Depósito no Agente de Pagamentos"
 
@@ -5302,18 +5256,20 @@ msgstr "Não há Agentes de Pagamentos disponíveis para a sua conta."
 msgid "Payment Agents are not available on this site."
 msgstr "Não há Agentes de Pagamentos disponíveis neste site."
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:607
-msgid "Payment Agents process deposits and withdrawals for Clients who wish to use e-cash methods or local currencies not supported by"
-msgstr "Os Agentes de Pagamentos processam os depósitos e retiradas dos Clientes que pretendem usar métodos de dinheiro eletrônico ou moedas locais não suportados por"
-
 #: cgi/templates/default/global/footer.tt:70
 #: frontend/templates/layouts/default/footer.html.haml:1
 msgid "Payment Methods"
 msgstr "Métodos de Pagamento"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:605
+#: cgi/templates/default/cashier/available_payment_methods.tt:510
 msgid "Payment agents"
 msgstr "Agentes de pagamentos"
+
+#: cgi/templates/default/cashier/available_payment_methods.tt:3
+#, fuzzy
+#| msgid "Payment Methods"
+msgid "Payment methods"
+msgstr "Métodos de Pagamento"
 
 #. (site_name)
 #: cgi/templates/default/misc/affiliate_tac_tab.tt:75
@@ -5349,7 +5305,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "O pagamento deve estar entre <strong>%1</strong> e <strong>%2</strong>."
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: cgi/subs/subs_homepage.pm:106
+#: cgi/subs/subs_homepage.pm:101
 msgid "Pending Bonus: %1"
 msgstr "Bónus Pendente: %1"
 
@@ -5424,52 +5380,52 @@ msgstr "Contate-nos para expor as suas questões, quaisquer que sejam, pelo <a h
 msgid "Please do not click more than once and please allow 15 seconds for processing."
 msgstr "Por favor, não clique mais de uma vez e aguarde 15 segundos para o processamento."
 
-#: cgi/subs/subs_forms.pm:3579
+#: cgi/subs/subs_forms.pm:3546
 msgid "Please enter a date that is at least 6 months from now."
 msgstr "Por favor, introduza uma data que seja, no mínimo, seis meses a partir de agora."
 
-#: cgi/subs/subs_forms.pm:1661 cgi/subs/subs_forms.pm:1786
-#: cgi/subs/subs_forms.pm:1966 cgi/subs/subs_forms.pm:540
+#: cgi/subs/subs_forms.pm:1628 cgi/subs/subs_forms.pm:1753
+#: cgi/subs/subs_forms.pm:1933 cgi/subs/subs_forms.pm:537
 msgid "Please enter a password."
 msgstr "Introduza uma senha."
 
-#: cgi/subs/subs_forms.pm:1119 cgi/subs/subs_forms.pm:289
+#: cgi/subs/subs_forms.pm:1086 cgi/subs/subs_forms.pm:289
 msgid "Please enter a town or city."
 msgstr "Introduza uma vila ou cidade."
 
-#: cgi/paymentagent_transfer.cgi:103 cgi/subs/subs_forms.pm:3822
-#: cgi/subs/subs_forms.pm:4023
+#: cgi/paymentagent_transfer.cgi:103 cgi/subs/subs_forms.pm:3789
+#: cgi/subs/subs_forms.pm:3990
 msgid "Please enter a valid amount."
 msgstr "Introduza uma quantia válida."
 
-#: cgi/subs/subs_forms.pm:3099
+#: cgi/subs/subs_forms.pm:3066
 msgid "Please enter a valid name."
 msgstr "Introduza um nome válido."
 
-#: cgi/subs/subs_forms.pm:3477 cgi/subs/subs_forms.pm:3502
-#: cgi/subs/subs_forms.pm:3527 cgi/subs/subs_forms.pm:3549
+#: cgi/subs/subs_forms.pm:3444 cgi/subs/subs_forms.pm:3469
+#: cgi/subs/subs_forms.pm:3494 cgi/subs/subs_forms.pm:3516
 msgid "Please enter an integer value."
 msgstr "Introduza um valor inteiro."
 
-#: cgi/subs/subs_forms.pm:3574 cgi/subs/subs_forms.pm:3588
+#: cgi/subs/subs_forms.pm:3541 cgi/subs/subs_forms.pm:3555
 msgid "Please enter date in the format YYYY-MM-DD."
 msgstr "Por favor, introduza a data no formato AAAA-MM-DD."
 
-#: cgi/subs/subs_forms.pm:3774
+#: cgi/subs/subs_forms.pm:3741
 msgid "Please enter the Login ID to transfer funds."
 msgstr "Introduza o ID de Início de Sessão para transferir os fundos."
 
-#: cgi/subs/subs_forms.pm:3129
+#: cgi/subs/subs_forms.pm:3096
 msgid "Please enter the country where you want to offer your service"
 msgstr "Introduza o país onde pretende prestar o seu serviço"
 
-#: cgi/subs/subs_forms.pm:1073 cgi/subs/subs_forms.pm:216
+#: cgi/subs/subs_forms.pm:1040 cgi/subs/subs_forms.pm:216
 msgid "Please enter the first line of your home address."
 msgstr "Introduza a primeira linha do seu endereço residencial."
 
-#: cgi/subs/subs_forms.pm:1057 cgi/subs/subs_forms.pm:2175
-#: cgi/subs/subs_forms.pm:2646 cgi/subs/subs_forms.pm:2871
-#: cgi/subs/subs_forms.pm:3170 cgi/subs/subs_forms.pm:435
+#: cgi/subs/subs_forms.pm:1024 cgi/subs/subs_forms.pm:2142
+#: cgi/subs/subs_forms.pm:2613 cgi/subs/subs_forms.pm:2838
+#: cgi/subs/subs_forms.pm:3137 cgi/subs/subs_forms.pm:432
 msgid "Please enter your email address."
 msgstr "Introduza o seu endereço de e-mail."
 
@@ -5481,7 +5437,7 @@ msgstr "Introduza o seu nome próprio."
 msgid "Please enter your last name."
 msgstr "Introduza os seus apelidos."
 
-#: cgi/subs/subs_forms.pm:2275
+#: cgi/subs/subs_forms.pm:2242
 msgid "Please enter your secret answer"
 msgstr "Introduza a sua resposta secreta"
 
@@ -5491,12 +5447,12 @@ msgstr "Preencha o ID de Início de Sessão e a Quantia que pretende transferir 
 
 #: cgi/subs/subs_forms.pm:191 cgi/subs/subs_forms.pm:197
 #: cgi/subs/subs_forms.pm:203 cgi/subs/subs_forms.pm:208
-#: cgi/subs/subs_forms.pm:2318 cgi/subs/subs_forms.pm:2324
-#: cgi/subs/subs_forms.pm:2330 cgi/subs/subs_forms.pm:893
+#: cgi/subs/subs_forms.pm:2285 cgi/subs/subs_forms.pm:2291
+#: cgi/subs/subs_forms.pm:2297 cgi/subs/subs_forms.pm:862
 msgid "Please input a valid date."
 msgstr "Introduza uma data válida."
 
-#: cgi/subs/subs_forms.pm:1394
+#: cgi/subs/subs_forms.pm:1361
 msgid "Please input it again to confirm"
 msgstr "Introduza novamente e confirme"
 
@@ -5504,7 +5460,7 @@ msgstr "Introduza novamente e confirme"
 msgid "Please log in to use this feature"
 msgstr "Inicie sessão para utilizar esta função"
 
-#: cgi/subs/subs_cashier.pm:206
+#: cgi/subs/subs_cashier.pm:205
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "Certifique-se de que aceita as condições de pagamento do Agente antes de submeter o seu pedido."
 
@@ -5526,7 +5482,7 @@ msgid "Please note that to apply to become a Payment Agent, you must <a href=\"%
 msgstr "Por favor, note que para se candidatar a Agente de Pagamentos, você tem de <a href=\"%1\">Autenticar a sua conta</a>primeiro."
 
 #. ($contact_url)
-#: cgi/lost_password.cgi:299
+#: cgi/lost_password.cgi:289
 msgid "Please note that we have found no accounts registered with this e-mail address. If you can't recall the e-mail address used during account registration, please <a class=\"pjaxload\" href=\"%1\" target=\"_blank\"><strong>contact us</strong></a>."
 msgstr "Por favor note que não encontramos nenhuma conta registrada com este endereço de e-mail. Se esqueceu do endereço de e-mail usado durante o registro da conta, por favor <a class=\"pjaxload\" href=\"%1\" target=\"_blank\"><strong>entre em contato conosco</strong></a>."
 
@@ -5548,7 +5504,7 @@ msgstr "Por favor, note que as suas definições foram atualizadas da seguinte f
 msgid "Please post the documents to:"
 msgstr "Por favor, publique os documentos em:"
 
-#: cgi/subs/subs_forms.pm:3617 cgi/subs/subs_forms.pm:3742
+#: cgi/subs/subs_forms.pm:3584 cgi/subs/subs_forms.pm:3709
 msgid "Please provide at least one self-exclusion setting."
 msgstr "Forneça pelo menos uma definição de auto-exclusão."
 
@@ -5556,7 +5512,7 @@ msgstr "Forneça pelo menos uma definição de auto-exclusão."
 msgid "Please provide granter id(s)."
 msgstr "Por favor forneça uma identificação segura."
 
-#: cgi/subs/subs_forms.pm:3285
+#: cgi/subs/subs_forms.pm:3252
 msgid "Please provide some information about yourself and your proposed services"
 msgstr "Forneça algumas informações sobre si próprio e sobre os serviços que propõe"
 
@@ -5594,29 +5550,29 @@ msgid "Please select market:"
 msgstr "Selecione o mercado:"
 
 #. (qq(<a href="mailto:$cs_email">$cs_email</a>)
-#: cgi/subs/subs_clientdetails.pm:120
+#: cgi/subs/subs_clientdetails.pm:121
 msgid "Please send this email to %1."
-msgstr ""
+msgstr "Por favor mande este e-mail para %1."
 
-#: cgi/subs/subs_forms.pm:1197 cgi/subs/subs_forms.pm:405
+#: cgi/subs/subs_forms.pm:1164 cgi/subs/subs_forms.pm:402
 #: cgi/subs/subs_presentation.pm:102
 msgid "Please specify your country."
 msgstr "Especifique o seu país."
 
-#: cgi/lost_password.cgi:695 cgi/lost_password.cgi:831
+#: cgi/lost_password.cgi:685 cgi/lost_password.cgi:818
 msgid "Please type your chosen password twice into the fields below:"
 msgstr "Digite duas vezes a senha que escolheu nos campos abaixo:"
 
-#: cgi/subs/subs_forms.pm:2927 cgi/subs/subs_forms.pm:2965
+#: cgi/subs/subs_forms.pm:2894 cgi/subs/subs_forms.pm:2932
 msgid "Please upload image (*.jpg, *.jpeg, *.png) only."
 msgstr "Carregue apenas imagens (*.jpg, *.jpeg, *.png)."
 
-#: cgi/subs/subs_forms.pm:1163
+#: cgi/subs/subs_forms.pm:1130
 msgid "Please use only alphanumeric characters or spaces."
 msgstr "Utilize apenas caracteres alfanuméricos ou espaços."
 
 #: cgi/subs/subs_forms.pm:118 cgi/subs/subs_forms.pm:126
-#: cgi/subs/subs_forms.pm:2621 cgi/subs/subs_forms.pm:2846
+#: cgi/subs/subs_forms.pm:2588 cgi/subs/subs_forms.pm:2813
 msgid "Please use only letters, spaces, hyphens, full-stops or apostrophes."
 msgstr "Utilize apenas letras, espaços, hífenes, pontos finais ou apóstrofes."
 
@@ -5624,20 +5580,20 @@ msgstr "Utilize apenas letras, espaços, hífenes, pontos finais ou apóstrofes.
 msgid "Please wait.<br />Your request is being processed."
 msgstr "Por favor aguarde.<br />O seu pedido está a ser processado."
 
-#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:79 cgi/portfolio.cgi:81
+#: cgi/portfolio.cgi:19 cgi/portfolio.cgi:77 cgi/portfolio.cgi:79
 #: cgi/templates/default/homepage/logged_in.tt:46 lib/BOM/View/Menu.pm:67
 msgid "Portfolio"
 msgstr "Portfólio"
 
-#: cgi/subs/subs_forms.pm:1170 cgi/subs/subs_forms.pm:322
+#: cgi/subs/subs_forms.pm:1137 cgi/subs/subs_forms.pm:322
 msgid "Postal Code / ZIP"
 msgstr "Código Postal"
 
-#: cgi/subs/subs_forms.pm:1152 cgi/subs/subs_forms.pm:1158
+#: cgi/subs/subs_forms.pm:1119 cgi/subs/subs_forms.pm:1125
 msgid "Postcode is invalid."
 msgstr "Código postal inválido."
 
-#: cgi/subs/subs_forms.pm:344 cgi/subs/subs_forms.pm:944
+#: cgi/subs/subs_forms.pm:344 cgi/subs/subs_forms.pm:911
 msgid "Postcode is required for UK residents."
 msgstr "O código postal é exigido para moradores do Reino Unido."
 
@@ -5661,7 +5617,7 @@ msgstr "Potência e simplicidade"
 msgid "Prediction"
 msgstr "Previsão"
 
-#: cgi/limits.cgi:44
+#: cgi/limits.cgi:41
 msgid "Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions."
 msgstr "Apresenta os pagamentos agregados máximos referentes aos contratos pendente do seu portfólio. Se o máximo for atingido, você não poderá comprar contratos adicionais sem primeiro fechar as posições existentes."
 
@@ -5718,7 +5674,7 @@ msgstr "Imprimir"
 msgid "Privacy & Security"
 msgstr "Privacidade e Segurança"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:47
+#: cgi/templates/default/cashier/available_payment_methods.tt:43
 msgid "Processing Time"
 msgstr "Hora de Processamento"
 
@@ -5731,9 +5687,9 @@ msgstr "Lucro"
 msgid "Profit"
 msgstr "Lucro"
 
-#: cgi/create_account.cgi:113 cgi/create_account.cgi:196
-#: cgi/create_account.cgi:73 cgi/create_account.cgi:80
-#: cgi/create_account.cgi:96 cgi/oop/Controller/Bet.pm:1367
+#: cgi/create_account.cgi:106 cgi/create_account.cgi:189
+#: cgi/create_account.cgi:66 cgi/create_account.cgi:73
+#: cgi/create_account.cgi:89 cgi/oop/Controller/Bet.pm:1367
 #: cgi/oop/Controller/Bet.pm:1516 cgi/oop/Controller/Bet.pm:1757
 #: cgi/oop/Controller/Bet.pm:1796 cgi/oop/Controller/Bet.pm:2208
 #: cgi/oop/Controller/Bet.pm:760 cgi/oop/Controller/Bet.pm:866
@@ -5753,7 +5709,7 @@ msgstr "Incorporar com destaque e exibir de forma permanente os Links mais atuai
 msgid "Promoting the %1 Site"
 msgstr "Promover o Site da %1"
 
-#: cgi/subs/subs_forms.pm:785
+#: cgi/subs/subs_forms.pm:755
 msgid "Promotional"
 msgstr "Promocional"
 
@@ -5905,7 +5861,7 @@ msgstr "Saiba mais sobre os cinco tipos de negociação oferecidos pela %1."
 msgid "Read the answers to some common questions."
 msgstr "Leia as respostas às pergunta frequentes."
 
-#: cgi/lost_password.cgi:537 cgi/templates/default/account/open_account.tt:12
+#: cgi/lost_password.cgi:527 cgi/templates/default/account/open_account.tt:12
 msgid "Real money account"
 msgstr "Conta de dinheiro real"
 
@@ -5945,10 +5901,8 @@ msgstr "Regent Markets (Malta) Ltd, Mompalao Building, Suite 2, Tower Road, Msid
 
 #. ("<a target='_blank' href='http://www.regentpac.com/'>Regent Pacific Group Limited</a>", "<a target='_blank' href='https://www.google.com/finance?q=HKG%3A0575'>(share price)
 #: frontend/templates/about/index.html.haml:1
-#, fuzzy
-#| msgid "Regent Markets Group Limited, with registered office address situated at <span itemprop=\"location\">47 Esplanade, St. Helier, Jersey, JE 0BD Channel Islands</span>, is partly owned by the <a target=\"_blank\" href=\"http://www.regentpac.com/\">Regent Pacific Group Limited</a>, a diversified mining group focused on the Asian Pacific region and listed on the Hong Kong exchange <a target=\"_blank\" href=\"https://www.google.com/finance?q=HKG%3A0575\">(share price)</a>."
 msgid "Regent Markets Group Limited, with registered office address situated at <span itemprop='location'>47 Esplanade, St. Helier, Jersey, JE 0BD Channel Islands</span>, is partly owned by the %1, a diversified mining group focused on the Asian Pacific region and listed on the Hong Kong exchange %2."
-msgstr "A Regent Markets Group Limited, com endereço de sede social registrado, situado na <span itemprop=\"location\">47 Esplanade, St. Helier, Jersey, JE 0BD Channel Islands</span>, é parcialmente detida pelo <a target=\"_blank\" href=\"http://www.regentpac.com/\">Regent Pacific Group Limited</a>, um grupo de mineração diversificado, concentrado na região da Ásia-Pacífico e cotado na Bolsa de Valores de Hong Kong <a target=\"_blank\" href=\"https://www.google.com/finance?q=HKG%3A0575\">(share price)</a>."
+msgstr "A Regent Markets Group Limited, com endereço de sede social registrado, situado na <span itemprop='location'>47 Esplanade, St. Helier, Jersey, JE 0BD Channel Islands</span>, é parcialmente detida pelo %1, um grupo de mineração diversificado, concentrado na região da Ásia-Pacífico e cotado na Bolsa de Valores de Hong Kong %2."
 
 #: frontend/templates/static/group_history.html.haml:1
 msgid "Regent Markets acquires BetsForTraders client base"
@@ -5996,10 +5950,8 @@ msgid "Register"
 msgstr "Cadastrar"
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "Register"
 msgid "Registration"
-msgstr "Cadastrar"
+msgstr "Cadastramento"
 
 #: cgi/templates/default/charting/daily_ohlc.tt:24
 #: cgi/templates/default/charting/daily_ohlc.tt:52
@@ -6024,19 +5976,19 @@ msgstr "Recarregar página"
 msgid "Remove Overlay"
 msgstr "Remover Sobreposição"
 
-#: cgi/limits.cgi:36
+#: cgi/limits.cgi:33
 msgid "Represents the maximum amount of cash that you may hold in your account.  If the maximum is reached, you will be asked to withdraw funds."
 msgstr "Representa a quantia máxima de dinheiro que pode manter na sua conta. Se o máximo for atingido, vamos solicitar-lhe a retirada dos fundos."
 
-#: cgi/limits.cgi:49
+#: cgi/limits.cgi:46
 msgid "Represents the maximum number of outstanding contracts in your portfolio. Each line in your portfolio counts for one open position. Once the maximum is reached, you will not be able to open new positions without closing an existing position first."
 msgstr "Representa o número máximo de contratos pendentes no seu portfólio. Cada linha do seu portfólio conta para uma posição em aberto. Depois de atingido o máximo, não poderá abrir novas posições sem fechar primeiro uma posição existente."
 
-#: cgi/limits.cgi:41
+#: cgi/limits.cgi:38
 msgid "Represents the maximum volume of contracts that you may purchase in any given trading day."
 msgstr "Representa o volume máximo de contratos que pode comprar em qualquer dia de negociações."
 
-#: cgi/subs/subs_cashier.pm:154
+#: cgi/subs/subs_cashier.pm:153
 msgid "Request a call back. Enter your contact number and click \"call me now\""
 msgstr "Solicite uma retribuição de chamada. Introduza o seu número e clique em 'liguem-me agora'"
 
@@ -6071,7 +6023,7 @@ msgstr "A revenda deste contrato não é mais oferecida."
 msgid "Resale price"
 msgstr "Preço de revenda"
 
-#: cgi/subs/subs_forms.pm:2219
+#: cgi/subs/subs_forms.pm:2186
 msgid "Reset password"
 msgstr "Redefinir a senha"
 
@@ -6149,7 +6101,7 @@ msgstr "Retorno de Contrato de Alta"
 msgid "Rise Contract Return (%)"
 msgstr "Retorno de Contrato de Alta (%)"
 
-#: cgi/contract_demo.cgi:31 cgi/contract_guide.cgi:26
+#: cgi/contract_demo.cgi:31 cgi/contract_guide.cgi:16
 #: cgi/oop/Controller/Bet.pm:1109 cgi/oop/Controller/Bet.pm:1116
 #: frontend/templates/get_started/random_markets.html.haml:1
 msgid "Rise/Fall"
@@ -6189,19 +6141,19 @@ msgstr "Preço de Venda"
 msgid "Save"
 msgstr "Guardar"
 
-#: cgi/subs/subs_forms.pm:2909
+#: cgi/subs/subs_forms.pm:2876
 msgid "Screenshot"
 msgstr "Captura de ecrã"
 
-#: cgi/subs/subs_forms.pm:1102 cgi/subs/subs_forms.pm:247
+#: cgi/subs/subs_forms.pm:1069 cgi/subs/subs_forms.pm:247
 msgid "Second line of home address"
 msgstr "Segunda linha de endereço residencial"
 
-#: cgi/subs/subs_forms.pm:495
+#: cgi/subs/subs_forms.pm:492
 msgid "Secret question"
 msgstr "Pergunta secreta"
 
-#: cgi/subs/subs_forms.pm:766 cgi/subs/subs_forms_output.pm:220
+#: cgi/subs/subs_forms.pm:736 cgi/subs/subs_forms_output.pm:220
 #: frontend/templates/static/partner_api.html.haml:1
 #: frontend/templates/static/why_us.html.haml:1
 msgid "Security"
@@ -6216,7 +6168,7 @@ msgstr "Declaração de Segurança"
 msgid "Security and Privacy"
 msgstr "Segurança e Privacidade"
 
-#: cgi/subs/subs_forms.pm:598
+#: cgi/subs/subs_forms.pm:595
 msgid "See Terms"
 msgstr "Ver Termos"
 
@@ -6228,17 +6180,13 @@ msgstr "Ver demonstração"
 msgid "See our "
 msgstr "Veja o seu "
 
-#: cgi/subs/subs_forms.pm:381 frontend/templates/home/index.html.haml:1
+#: cgi/subs/subs_forms.pm:378 frontend/templates/home/index.html.haml:1
 msgid "Select Country"
 msgstr "Selecionar País"
 
 #: frontend/templates/get_started/random_markets.html.haml:1
 msgid "Select indices"
 msgstr "Selecione os índices"
-
-#: cgi/paymentagent_list.cgi:46
-msgid "Select the payment method that you would like to use and contact the Payment Agent directly for more information on:"
-msgstr "Selecione o método de pagamento que gostaria de usar e entre em contato diretamente com o Agente de Pagamentos para obter mais informações sobre:"
 
 #: cgi/f_brokercgi/f_setting_selfexclusion.cgi:20
 #: cgi/subs/subs_forms_output.pm:326
@@ -6274,23 +6222,25 @@ msgstr "Venda os seus contratos a preços de mercado."
 msgid "Sell option"
 msgstr "Vender opção"
 
-#: cgi/subs/subs_forms.pm:2946
+#: cgi/subs/subs_forms.pm:2913
 msgid "Send"
 msgstr "Enviar"
-
-#: cgi/paymentagent_list.cgi:50
-msgid "Send the funds to the Payment Agent."
-msgstr "Envie os fundos para o Agente de Pagamentos."
 
 #: frontend/templates/static/careers.html.haml:1
 msgid "Send us a CV and a covering letter that describes your career interests."
 msgstr "Envie-nos um currículo e uma carta de apresentação que descreve os seus interesses profissionais."
 
+#: cgi/paymentagent_list.cgi:48
+#, fuzzy
+#| msgid "The deposit amount, less the commission charged by the Agent will then show in your %1 account."
+msgid "Send your funds to the payment agent. The deposited funds, less the agent's commission, will show up in your %1 account."
+msgstr "A quantia do depósito menos a comissão cobrada pelo Agente será depois mostrada na sua conta %1."
+
 #: cgi/templates/default/cashier/payment_agent_further_info.tt:11
 msgid "Service summary"
 msgstr "Resumo de Serviços"
 
-#: cgi/subs/subs_forms.pm:3715
+#: cgi/subs/subs_forms.pm:3682
 msgid "Session duration limit cannot be more than 1440 minutes."
 msgstr "O limite de duração da sessão não pode ser superior a 1440 minutos."
 
@@ -6300,7 +6250,7 @@ msgstr "O limite de duração da sessão não pode ser superior a 1440 minutos."
 msgid "Session duration limit is currently set to <strong>%1 minutes.</strong>"
 msgstr "O limite de duração da sessão encontra-se atualmente definido para <strong>%1 minutos.</strong>"
 
-#: cgi/subs/subs_forms.pm:3538
+#: cgi/subs/subs_forms.pm:3505
 msgid "Session duration limit, in minutes"
 msgstr "Limite de duração da sessão, em minutos"
 
@@ -6323,7 +6273,7 @@ msgstr "Liquida"
 msgid "Sharp prices"
 msgstr "Preços nítidos"
 
-#: cgi/subs/subs_forms.pm:3135
+#: cgi/subs/subs_forms.pm:3102
 msgid "Short summary of your Payment Agent service"
 msgstr "Breve resumo do seu serviço de Agente de Pagamentos"
 
@@ -6344,11 +6294,6 @@ msgstr "Caso necessite de mais assistência, não hesite em enviar um e-mail"
 msgid "Should you need help or support, please contact our <a href=\"%1\">Customer Service department</a> and one of our representatives will assist you as soon as possible."
 msgstr "Caso precise de ajuda ou suporte, por favor contate o nosso <a href=\"%1\">Departamento de Assistência ao Cliente</a> e um dos nossos representantes irá atendê-lo o mais rápido possível."
 
-#. (helpdesk)
-#: cgi/templates/default/email/lost_password.tt:7
-msgid "Should you require further assistance, feel free to contact our customer support team at %1"
-msgstr "Caso necessite de mais assistência, por favor contate o nosso atendimento ao cliente através da %1"
-
 #: cgi/templates/default/legal/trading_agent.tt:9
 msgid "Should you wish to proceed with appointing a Trading Agent you must read and agree to the following."
 msgstr "Se pretender prosseguir com a indicação de um Agente de Negociação, deve ler e aceitar o seguinte."
@@ -6356,10 +6301,6 @@ msgstr "Se pretender prosseguir com a indicação de um Agente de Negociação, 
 #: cgi/templates/default/charting/livechart.tt:35
 msgid "Show"
 msgstr "Exibir"
-
-#: cgi/paymentagent_list.cgi:57
-msgid "Show Payment Agents for:"
-msgstr "Exibir Agentes de Pagamentos para:"
 
 #: cgi/templates/default/charting/livechart.tt:35
 msgid "Show chart for the given dates"
@@ -6372,6 +6313,12 @@ msgstr "Mostrar opções estendidas"
 #: cgi/templates/default/charting/livechart.tt:51
 msgid "Show last spot"
 msgstr "Mostrar o último ponto"
+
+#: cgi/paymentagent_list.cgi:54
+#, fuzzy
+#| msgid "Show Payment Agents for:"
+msgid "Show payment agents for:"
+msgstr "Exibir Agentes de Pagamentos para:"
 
 #: cgi/templates/default/affiliates/main.tt:11
 #: cgi/templates/default/affiliates/main.tt:35
@@ -6429,14 +6376,12 @@ msgstr "Lamentamos, mas não pode comprar/vender contratos"
 #. ($client_to->loginid)
 #: cgi/paymentagent_transfer.cgi:99
 msgid "Sorry, $currency is not default currency for client "
-msgstr ""
+msgstr "Desculpe, $moeda não é a moeda padrão para o cliente "
 
 #. ($client_fm->loginid)
 #: cgi/paymentagent_transfer.cgi:98
-#, fuzzy
-#| msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgid "Sorry, $currency is not default currency for payment agent "
-msgstr "Desculpe, o corretor %1 não permite a transferência de agentes de pagamento."
+msgstr "Desculpe, $moeda não é a moeda padrão para esse agente de pagamento"
 
 #. (localize('Tick Trades')
 #. (BOM::Platform::Context::localize('Tick Trades')
@@ -6479,7 +6424,7 @@ msgstr "Lamentamos, ocorreu um erro durante o processamento da sua conta."
 msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgstr "Desculpe, o corretor %1 não permite a transferência de agentes de pagamento."
 
-#: cgi/create_account.cgi:81
+#: cgi/create_account.cgi:74
 msgid "Sorry, new account opening is suspended for the time being."
 msgstr "Lamentamos, a abertura de novas contas está de momento indisponível."
 
@@ -6505,12 +6450,12 @@ msgid "Sorry, payments are suspended due to system maintenance.  Please try agai
 msgstr "Lamentamos, os pagamentos estão suspensos devido à manutenção do sistema. Tente novamente em 30 minutos."
 
 #. ($ip_security,                    $ENV{'REMOTE_ADDR'})
-#: cgi/subs/subs_forms.pm:1603
+#: cgi/subs/subs_forms.pm:1570
 msgid "Sorry, the IP Security field you specified (%1) wouldn't let you in from your current IP address %2."
 msgstr "Lamentamos, o campo de Segurança de IPs que especificou (%1) não o deixará entrar a partir do seu endereço IP atual %2."
 
 #. ($transfer_form->get_field_value('transfer_to')
-#: cgi/subs/subs_forms.pm:3890
+#: cgi/subs/subs_forms.pm:3857
 msgid "Sorry, the Login ID (%1) does not exist."
 msgstr "Lamentamos, o ID de Início de Sessão (%1) não existe."
 
@@ -6528,10 +6473,8 @@ msgstr "Lamentamos, o Agente de Pagamentos está indisponível para a sua regiã
 
 #. ($pa_client->currency . " is unavailable for Payment Agent Withdrawal")
 #: cgi/paymentagent_withdraw.cgi:145
-#, fuzzy
-#| msgid "Sorry, the Payment Agent does not exist."
 msgid "Sorry, the Payment Agent's currency "
-msgstr "Lamentamos, o Agente de Pagamentos não existe."
+msgstr "Lamentamos, a moeda do Agente de Pagamento"
 
 #. ($max_payout_limit, $currency, $client_agg_payouts, $payout)
 #: lib/BOM/Product/Transaction.pm:1032
@@ -6591,7 +6534,7 @@ msgstr "Lamentamos, esta página não pode ser atualizada."
 msgid "Sorry, withdrawals cannot be made on the day of your account opening. Please wait until tomorrow to make a withdrawal."
 msgstr "Lamentamos, não é possível realizar transferência de fundos no dia de abertura da sua conta. Aguarde até amanhã para fazer uma retirada."
 
-#: cgi/subs/subs_forms.pm:895
+#: cgi/subs/subs_forms.pm:864
 msgid "Sorry, you are too young to open an account."
 msgstr "Desculpe, mas você é muito jovem para abrir uma conta."
 
@@ -6605,18 +6548,18 @@ msgstr "Lamentamos, não pode deter mais de %1 contratos num momento específico
 msgid "Sorry, you cannot withdraw."
 msgstr "Lamentamos, não pode fazer a retirada."
 
-#: cgi/lost_password.cgi:45
+#: cgi/lost_password.cgi:41
 msgid "Sorry, you have already had too many unsuccessful attempts.<br>Please contact Customer Support."
 msgstr "Lamentamos, já teve demasiadas tentativas sem êxito. <br>Contate o Apoio ao Ciente."
 
-#: cgi/subs/subs_forms.pm:1757
+#: cgi/subs/subs_forms.pm:1724
 msgid "Sorry, you have entered an incorrect cashier password"
 msgstr "Lamentamos, introduziu uma senha de caixa incorreta"
 
-#: cgi/subs/subs_forms.pm:1062 cgi/subs/subs_forms.pm:1595
-#: cgi/subs/subs_forms.pm:2180 cgi/subs/subs_forms.pm:2651
-#: cgi/subs/subs_forms.pm:2876 cgi/subs/subs_forms.pm:3175
-#: cgi/subs/subs_forms.pm:440 cgi/subs/subs_forms.pm:869
+#: cgi/subs/subs_forms.pm:1029 cgi/subs/subs_forms.pm:1562
+#: cgi/subs/subs_forms.pm:2147 cgi/subs/subs_forms.pm:2618
+#: cgi/subs/subs_forms.pm:2843 cgi/subs/subs_forms.pm:3142
+#: cgi/subs/subs_forms.pm:437 cgi/subs/subs_forms.pm:838
 msgid "Sorry, you have entered an incorrect email address."
 msgstr "Lamentamos, introduziu um endereço de e-mail incorreto."
 
@@ -6691,10 +6634,8 @@ msgstr "Lamentamos, a sua conta não está autorizada a mais compras de contrato
 
 #. ($client->currency . ' is unavailable for Payment Agent Withdrawal')
 #: cgi/paymentagent_withdraw.cgi:139
-#, fuzzy
-#| msgid "Sorry, you cannot sell"
 msgid "Sorry, your currency of "
-msgstr "Lamentamos, não pode vender"
+msgstr "Lamentamos, a sua moeda de"
 
 #: cgi/emailus.cgi:142
 msgid "Sorry, your file is too large. The maximum file size is 1 Megabyte (1MB)."
@@ -6783,11 +6724,11 @@ msgstr "O período de inicio de contratos com início avançado deve ser mais de
 msgid "Start trading"
 msgstr "Começar a Negociar"
 
-#: cgi/subs/subs_forms.pm:1206 cgi/subs/subs_forms.pm:297
+#: cgi/subs/subs_forms.pm:1173 cgi/subs/subs_forms.pm:297
 msgid "State/Province"
 msgstr "Estado/Província"
 
-#: cgi/statement.cgi:18 cgi/statement.cgi:86
+#: cgi/statement.cgi:18 cgi/statement.cgi:84
 #: cgi/templates/default/account/statement.tt:101
 #: cgi/templates/default/homepage/logged_in.tt:61 lib/BOM/View/Menu.pm:75
 msgid "Statement"
@@ -6905,8 +6846,8 @@ msgstr "Conheça os nossos gráficos ao vivo"
 msgid "Subject to your complying with the Company's instructions, with regards to tracking Clients accessing %1 via the Links on your Site or by quoting your affiliate Ids during signup, the Company shall use all reasonable endeavours to ensure that whenever a Client links to %1 through these Links or affiliate Ids and they subsequently place a contract or otherwise transact with the Company, the relevant Client is identified as originating from you or your Site. However, the Company shall not be liable to you in any way if the Company is unable to identify a Client as originating from you or your Site."
 msgstr "Dependendo do cumprimento por si das instruções da Empresa no que respeita ao acompanhamento de Clientes que acedem à %1 através dos links no seu Site, ou citando os IDs dos seus afiliados durante a inscrição, a Empresa envidará todos os esforços razoáveis para assegurar que sempre que um Cliente se liga à %1 através desses Links ou de IDs de afiliados e que, posteriormente, celebra um contrato, ou de outra forma transaciona com a Empresa, o cliente em questão é identificado como sendo proveniente de você ou do seu site. No entanto, a empresa não será responsável perante si de forma nenhuma caso a Empresa seja incapaz de identificar um Cliente como sendo proveniente de si ou do seu site."
 
-#: cgi/subs/subs_forms.pm:3386 cgi/subs/subs_forms.pm:3845
-#: cgi/subs/subs_forms.pm:4076
+#: cgi/subs/subs_forms.pm:3353 cgi/subs/subs_forms.pm:3812
+#: cgi/subs/subs_forms.pm:4043
 msgid "Submit"
 msgstr "Submeter"
 
@@ -6923,11 +6864,11 @@ msgstr "Resumo"
 msgid "Support Times"
 msgstr "Horas de Suporte"
 
-#: cgi/subs/subs_forms.pm:3317
+#: cgi/subs/subs_forms.pm:3284
 msgid "Supported banks (this field visible from office only) **"
 msgstr "Bancos suportados (este campo só é visível a partir do escritório) **"
 
-#: cgi/subs/subs_forms.pm:3333
+#: cgi/subs/subs_forms.pm:3300
 msgid "Supported banks list is invalid"
 msgstr "A lista de bancos suportados é inválida"
 
@@ -6985,8 +6926,8 @@ msgstr "Líder em tecnologia com mais de 10 anos de experiência..."
 msgid "Tel"
 msgstr "Tel"
 
-#: cgi/f_writepartics.cgi:222 cgi/subs/subs_forms.pm:1225
-#: cgi/subs/subs_forms.pm:447
+#: cgi/f_writepartics.cgi:222 cgi/subs/subs_forms.pm:1192
+#: cgi/subs/subs_forms.pm:444
 msgid "Telephone"
 msgstr "Telefone"
 
@@ -7007,7 +6948,7 @@ msgstr "Termos e Condições"
 
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "Test Suite"
-msgstr ""
+msgstr "Conjunto de Teste"
 
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 msgid "Test-run %1, and sharpen your trading skills, with a no-risk, no-commitment, virtual account."
@@ -7136,7 +7077,7 @@ msgstr "A <strong>hora de início</strong> é quando o contrato é processado pe
 msgid "The AUD Index is a weighted Index, measuring the Australian Dollar’s value against a basket of 5 global currencies (USD, EUR, GBP, JPY, CAD), each weighted by 20%."
 msgstr "O Indice AUD é um índice ponderado, a mensuração do valor do dólar australiano é feita em relação a uma variedade de 5 moedas globais (USD, EUR, GBP, JPY, CAD), cada um ponderado em 20%."
 
-#: cgi/subs/subs_cashier.pm:210
+#: cgi/subs/subs_cashier.pm:209
 msgid "The Agent will send you the withdrawal amount (minus the commission) via your preferred payment method."
 msgstr "O Agente irá enviar-lhe a quantia de retirada (menos a comissão) através do seu método de pagamento preferido."
 
@@ -7144,7 +7085,7 @@ msgstr "O Agente irá enviar-lhe a quantia de retirada (menos a comissão) atrav
 msgid "The Ask price represents the price at which the contract may be purchased at the present time."
 msgstr "O preço de Venda representa o preço a que o contrato pode ser comprado no momento presente."
 
-#: cgi/subs/subs_forms.pm:2993
+#: cgi/subs/subs_forms.pm:2960
 msgid "The Authentication process verifies the information you have provided us during account registration. It will increase your trading limits and enable you to register more than one credit card.<br/><br/>In order to facilitate the process, please confirm your building no./name before clicking \"Authenticate\".<br/>"
 msgstr "O processo de Autenticação verifica as informações que nos forneceu durante o registro da conta. Este processo vai aumentar os seus limites de negociação e permitir-lhe registrar mais do que um cartão de crédito.<br/><br/>Com vista a facilitar o processo, confirme por favor o seu N.º de edifício/nome antes de clicar em \"Autenticar\".<br/>"
 
@@ -7155,7 +7096,7 @@ msgstr "O preço de Compra representa o preço de revenda do contrato assim que 
 #. ('http://phonegap.com/', 'https://github.com/binary-com/client-app')
 #: frontend/templates/static/open_source_projects.html.haml:1
 msgid "The Binary.com mobile application is developed with <a target=\"_blank\" href=\"%1\">Phonegap</a> and is open-sourced as <a target=\"_blank\" href=\"%2\">client-app</a> on github. Phonegap developers are invited to participate in this project by forking the repository."
-msgstr ""
+msgstr "O aplicativo para celular Binary.com é desenvolvido com <a target=\"_blank\" href=\"%1\">Phonegap</a> e é open-sourced como <a target=\"_blank\" href=\"%2\">client-app</a> no github. Os programadores Phonegap são convidados a participar deste projeto pela bifurcação do repositório."
 
 #. ('https://github.com/binary-com/binary-static')
 #: frontend/templates/static/open_source_projects.html.haml:1
@@ -7371,10 +7312,6 @@ msgstr "O bónus só será pago de acordo com a quantia do primeiro depósito, e
 msgid "The calculation of the price to be paid (or the payout to be received) for financial contracts on this site at the time the financial contract is purchased or sold will be based on the Company's best estimate of market price movements and the expected level of interest rates, implied volatilities and other market conditions during the life of the financial contract, and is based on complex mathematics. The calculation will include a bias in favour of the Company. The financial contract prices (or the payout amounts) offered to Clients speculating on market or index prices may differ substantially from prices available in the primary markets where stock indices or commodities or contracts thereupon are traded, due to the bias favouring the Company in the price calculation system referred to above. The charting data made available to Clients by the Company is indicative only and may at times differ from the real market values. The Company's decision as to the calculation of a financial contract price will be final and binding. The Company allows the option to sell contracts before expiry time of some contracts but will not be obliged to do so and can suspend this option depending on the current market conditions. Contracts may be amended when the underlying asset value is adjusted by corporate actions during the contract period."
 msgstr "O cálculo do preço a ser pago (ou pagamento a ser recebido) para contratos financeiros neste site no momento em que o contrato financeiro é comprado ou vendido será baseado na melhor estimativa dos movimentos de preços de mercado e no nível esperado de taxas de juros, volatilidade implícita e outras condições ao longo da duração do contrato financeiro e baseia-se em matemática complexa. O cálculo incluirá uma inclinação a favor da Empresa. Os preços de contratos financeiros (ou as quantias de pagamentos) oferecidos aos Clientes que especulam no mercado ou sobre preços de índices podem diferir substancialmente dos preços disponíveis nos mercados primários, onde são negociados índices de ações, commodities ou contratos, devido à inclinação que favorece a Empresa no sistema de cálculo de preço acima referido. Os dados de mapeamento disponibilizados aos Clientes pela Empresa são apenas indicativos e podem por vezes diferir dos valores reais do mercado. A decisão da Empresa relativamente ao cálculo de um contrato financeiro será definitiva e vinculativa. A Empresa permite a opção de vender contratos antes do termo de alguns contratos, mas não será obrigada a fazer isso e pode suspender esta opção, dependendo das condições atuais do mercado. Os contratos podem ser alterados quando o valor do ativo básico é ajustado por ações corporativas durante o período do contrato."
 
-#: cgi/paymentagent_list.cgi:49
-msgid "The commission fees that the Agent will charge."
-msgstr "As taxas de comissão que o Agente vai cobrar."
-
 #: cgi/templates/default/legal/betting_rules.tt:40
 msgid "The company does not guarantee the ability to sell a contract prior to its expiration time."
 msgstr "A Empresa não garante a capacidade de vender um contrato antes do seu termo."
@@ -7428,18 +7365,13 @@ msgstr "O preço do contrato mudou a seu favor de %1%2 para %1%3."
 msgid "The cost of your open positions"
 msgstr "O custo das suas posições em aberto"
 
-#: cgi/subs/subs_homepage.pm:135
+#: cgi/subs/subs_homepage.pm:130
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "A moeda do seu bônus será a mesma que a moeda do seu primeiro depósito."
 
 #: lib/BOM/Product/Contract.pm:961
 msgid "The database is not yet updated with settlement data."
 msgstr "A base de dados ainda não está atualizada com os dados de liquidação."
-
-#. ($website->display_name)
-#: cgi/paymentagent_list.cgi:51
-msgid "The deposit amount, less the commission charged by the Agent will then show in your %1 account."
-msgstr "A quantia do depósito menos a comissão cobrada pelo Agente será depois mostrada na sua conta %1."
 
 #: cgi/subs/subs_graphs_chartdirector.pm:312
 #: cgi/subs/subs_graphs_chartdirector.pm:411
@@ -7516,10 +7448,6 @@ msgstr "Os materiais que compõem o site da %1 (incluindo, sem limitação, todo
 #: cgi/templates/default/legal/terms_and_conditions.tt:24
 msgid "The maximum loss that may be incurred by any Client is the amount of money paid by him to the Company."
 msgstr "A perda máxima que pode ocorrer a qualquer Cliente é a quantia de dinheiro que ele pagou à Empresa."
-
-#: cgi/templates/default/account/open_account.tt:13
-msgid "The minimum deposit is ($/&pound;/&euro;) 5 and the maximum account is ($/&pound;/&euro;) 150,000."
-msgstr "O depósito mínimo é ($/&pound;/&euro;) 5 e o máximo da conta é ($/&pound;/&euro;)  150.000."
 
 #. (stash->{website_name})
 #: frontend/templates/static/partner_api.html.haml:1
@@ -7623,14 +7551,12 @@ msgstr "A moeda providenciada %1 é inválida."
 
 #. ($currency)
 #: lib/BOM/Product/Transaction.pm:465
-#, fuzzy
-#| msgid "The provided currency %1 is invalid."
 msgid "The provided currency %1 is not the default currency"
-msgstr "A moeda providenciada %1 é inválida."
+msgstr "A moeda providenciada %1 não é a moeda padrão"
 
 #. ($email)
 #. ($new_email)
-#: cgi/create_account.cgi:116 cgi/f_writepartics.cgi:111
+#: cgi/create_account.cgi:109 cgi/f_writepartics.cgi:111
 msgid "The provided email address %1 is already in use by another Login ID."
 msgstr "O endereço de e-mail fornecido %1 já está sendo usado por outro ID de Início de Sessão."
 
@@ -7679,9 +7605,9 @@ msgstr "A hora é agora %1 %2 e as horas de abertura do mercado (para a %3) são
 msgid "The transactions performed on this site and the relationship between Clients and the Company are to be governed by and construed in accordance with the laws of the country of incorporation of the Company (the \"Jurisdiction\"), which shall be either of the Isle of Man, Malta, or Costa Rica. You agree that the Jurisdiction's courts will have sole jurisdiction to settle any disputes that may arise in relation thereto. For such purposes, you irrevocably submit to the jurisdiction of the courts of the Jurisdiction in relation to any such dispute and you agree that any claim you might have against the Company shall only be brought before the courts of the Jurisdiction. Disputes must be lodged within seven (7) days from the date the contract in question has been decided. No claims will be honored after this period. The client is solely responsible for their account transactions. You can raise any unresolved disputes you might have with Regent Markets (Malta) Ltd with the Lotteries and Gaming Authority at complaints@lga.com.mt and any disputes with Regent Markets (IOM) Ltd with the Isle of Man Gambling Supervision Commission at gaming@gov.im. In the event of any differences between the English version of this website and any other language, the English version shall prevail."
 msgstr "As operações realizadas neste site e o relacionamento entre clientes e a Empresa devem ser regidos e interpretados de acordo com as leis do país onde foi constituída a Empresa (a \"Jurisdição\"), que devem ser tanto da Ilha de Man, Malta, ou Costa Rica. Você concorda que os tribunais da jurisdição terão competência exclusiva para dirimir as controvérsias que possam surgir. Para tal, você submete-se irrevogavelmente à competência dos tribunais da jurisdição em relação a qualquer controvérsia e concorda que qualquer reivindicação que possa ter contra a Companhia só será levado perante os tribunais da Jurisdição. Você pode desistir de quaisquer litígios não resolvidos que possa ter com a Regent Markets (Malta) Ltd junto da Lotteries and Gaming Authority (Autoridade das Loterias e do Jogo) de Malta através de complaints@lga.com.mt e quaisquer litígios com a Regent Markets (IOM) Ltd junto da Comissão de Supervisão de Jogo da Ilha de Man através de gaming@gov.im. Em caso de quaisquer diferenças entre a versão em Inglês desta página Web e qualquer outro idioma, prevalecerá a versão em Inglês."
 
-#: cgi/subs/subs_forms.pm:1389 cgi/subs/subs_forms.pm:1581
-#: cgi/subs/subs_forms.pm:1862 cgi/subs/subs_forms.pm:1945
-#: cgi/subs/subs_forms.pm:2020 cgi/subs/subs_forms.pm:2118
+#: cgi/subs/subs_forms.pm:1356 cgi/subs/subs_forms.pm:1548
+#: cgi/subs/subs_forms.pm:1829 cgi/subs/subs_forms.pm:1912
+#: cgi/subs/subs_forms.pm:1987 cgi/subs/subs_forms.pm:2085
 msgid "The two passwords that you entered do not match."
 msgstr "As palavras-chave que introduziu não coincidem."
 
@@ -7710,11 +7636,9 @@ msgstr "Não existem Agentes de Pagamentos no seu país (%1)."
 msgid "There are no available Payment Agents."
 msgstr "Não existem Agentes de Pagamentos disponíveis."
 
-#: cgi/templates/default/backoffice/account/profit_table.tt:71
-#, fuzzy
-#| msgid "There are no items during this period"
+#: cgi/templates/default/backoffice/account/profit_table.tt:110
 msgid "There are no contracts during this period"
-msgstr "Não há itens durante este período"
+msgstr "Não há itens no contratp durante este período"
 
 #: cgi/templates/default/account/statement.tt:106
 #: cgi/templates/default/backoffice/account/statement.tt:21
@@ -7810,7 +7734,7 @@ msgstr "Este Documento"
 msgid "This Payment Agent cashier section is locked."
 msgstr "A seção do caixa deste Agente de Pagamentos está bloqueada."
 
-#: cgi/subs/subs_forms.pm:3235 cgi/top_up_virtual.cgi:68
+#: cgi/subs/subs_forms.pm:3202 cgi/top_up_virtual.cgi:68
 msgid "This URL is invalid."
 msgstr "Este URL não é válido."
 
@@ -7819,11 +7743,11 @@ msgstr "Este URL não é válido."
 msgid "This account is unavailable. For any questions please contact <a href=\"%1\">Customer Support</a>."
 msgstr "Esta conta está indisponível. Para qualquer questão, contate por favor o <a href=\"%1\">Atendimento ao Cliente</a>."
 
-#: cgi/subs/subs_forms.pm:623
+#: cgi/subs/subs_forms.pm:620
 msgid "This bonus code has expired."
 msgstr "Este código de bónus expirou."
 
-#: cgi/subs/subs_forms.pm:618
+#: cgi/subs/subs_forms.pm:615
 msgid "This bonus code is not available."
 msgstr "Este código de bónus não está disponível."
 
@@ -7922,7 +7846,7 @@ msgstr "Essa é a nossa 'nova geração' de gráficos."
 
 #: cgi/templates/default/api/register.tt:14
 msgid "This is the Callback URL required by the 3-legged authentication procedure as described in the "
-msgstr ""
+msgstr "Essa é a pagina URL de retorno de chamada pelo procedimento de autenticação 3-legged como descrito no "
 
 #: frontend/templates/get_started/glossary.html.haml:1
 msgid "This is the current price at which an underlying can be bought or sold at a particular time."
@@ -7947,15 +7871,15 @@ msgstr "Este mercado abre hoje mais tarde, às"
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "This method is for web applications which are hosted on their own web-server. It is the most secure way of protecting your organisation's identity as the owner of your application."
-msgstr ""
+msgstr "Esse método é para aplicativos internet que estão hospedados nos seus próprios servidores web. Essa é a forma mais segura de proteger a identidade da sua organização como o proprietário de sua aplicação."
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "This method is suited to JavaScript-only (typically mobile-embedded) applications. Use this method when you do not have your own application server."
-msgstr ""
+msgstr "Este método é adequado para JavaScript-only aplicativos (normalmente celular embutido). Utilize este método quando você não tiver o seu próprio servidor de aplicativos."
 
 #: cgi/templates/default/api/register.tt:9
 msgid "This name will appear to your end-users when they authenticate at binary.com.  Use between 5 and 30 alphanumeric chars."
-msgstr ""
+msgstr "Esse nome vai aparecer para os seus usuários finais quando eles se conectarem à Binary.com. Use entre 5 e 30 caracteres alfanuméricos."
 
 #: cgi/templates/default/legal/promocode.tt:19
 #: cgi/templates/default/legal/promocode.tt:47
@@ -8001,7 +7925,7 @@ msgid "Tick Brain"
 msgstr "Tick Brain (Cérebro de Movimento Mínimo)"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
-#: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:78
+#: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:68
 #: cgi/templates/default/global/footer.tt:46 cgi/tick_trades.cgi:423
 #: frontend/templates/get_started/types_of_trades.html.haml:1
 #: frontend/templates/layouts/default/footer.html.haml:1
@@ -8094,8 +8018,10 @@ msgstr "Para assegurar que consegue receber uma resposta, acrescente o domínio 
 msgid "To promote transparency and third-party analysis of our %1 time series, %2 provides access to tick-by-tick data for all the %1."
 msgstr "Para promover transparência e uma análise externa da nossa série histórica %1, %2 oferece acesso a todos os dados instantâneos para todos os %1."
 
-#: cgi/lost_password.cgi:80
-msgid "To reset your password, please enter the e-mail address you registered in the field below and click \"Reset password\"."
+#: cgi/lost_password.cgi:76
+#, fuzzy
+#| msgid "To reset your password, please enter the e-mail address you registered in the field below and click \"Reset password\"."
+msgid "To reset your password, enter the e-mail address you registered in the field below and click \"RESET PASSWORD\"."
 msgstr "Para redefinir o seu ID de início de sessão ou senha, por favor introduza o endereço de e-mail com o qual você se registrou no campo abaixo e clique em \"Redefinir a senha\"."
 
 #: cgi/subs/subs_forms_output.pm:69
@@ -8131,7 +8057,7 @@ msgstr "Total de Receitas Líquidas por Mês"
 msgid "Touch / No Touch"
 msgstr "Toca / Não Toca"
 
-#: cgi/contract_demo.cgi:58 cgi/contract_demo.cgi:59 cgi/contract_guide.cgi:52
+#: cgi/contract_demo.cgi:58 cgi/contract_demo.cgi:59 cgi/contract_guide.cgi:42
 #: cgi/oop/Controller/Bet.pm:1156 cgi/oop/Controller/Bet.pm:1163
 #: frontend/templates/get_started/random_markets.html.haml:1
 msgid "Touch/No Touch"
@@ -8149,7 +8075,7 @@ msgstr "Negociações Toca / Não Toca"
 msgid "Tour"
 msgstr "Tour"
 
-#: cgi/subs/subs_forms.pm:1127 cgi/subs/subs_forms.pm:272
+#: cgi/subs/subs_forms.pm:1094 cgi/subs/subs_forms.pm:272
 msgid "Town/City"
 msgstr "Vila/Cidade"
 
@@ -8175,23 +8101,23 @@ msgstr "Negocie todas as principais moedas, índices, bolsas e commodities."
 msgid "Trade all market conditions"
 msgstr "Negocie em todas as condições de mercado"
 
-#: cgi/contract_guide.cgi:79
+#: cgi/contract_guide.cgi:69
 msgid "Trade on the market action during the next few seconds of trade."
 msgstr "Negoceie sobre a atuação do mercado durante os próximos segundos da negociação."
 
-#: cgi/contract_guide.cgi:27
+#: cgi/contract_guide.cgi:17
 msgid "Trade on whether a market will RISE or FALL from its current spot price."
 msgstr "Negoceie se um mercado vai SUBIR ou DESCER do seu preço atual do mercado."
 
-#: cgi/contract_guide.cgi:66
+#: cgi/contract_guide.cgi:56
 msgid "Trade on whether a market will STAY BETWEEN or GO OUTSIDE two price targets."
 msgstr "Negoceie se um mercado vai FICAR-ENTRE ou SAIR de dois alvos de preços."
 
-#: cgi/contract_guide.cgi:53
+#: cgi/contract_guide.cgi:43
 msgid "Trade on whether a market will TOUCH or NOT TOUCH a predetermined price target anytime during the contract period."
 msgstr "Negoceie se um mercado vai TOCAR ou NÃO TOCAR um alvo de preço predeterminado em qualquer momento durante o período do contrato."
 
-#: cgi/contract_guide.cgi:40
+#: cgi/contract_guide.cgi:30
 msgid "Trade on whether a market will finish HIGHER or LOWER than a predetermined price target."
 msgstr "Negocie se um mercado vai terminar ACIMA ou ABAIXO de preço-alvo pré-determinado."
 
@@ -8234,6 +8160,12 @@ msgstr "Conta para Negociação"
 #: cgi/c_template.cgi:108 cgi/templates/default/legal/trading_agent.tt:3
 msgid "Trading Agent"
 msgstr "Agente de Negociação"
+
+#: cgi/contract_guide.cgi:11
+#: cgi/templates/default/resources/contract_guide.tt:2
+#: frontend/templates/resources/index.html.haml:1 lib/BOM/View/Menu.pm:151
+msgid "Trading Guide"
+msgstr "Guia de Negociação"
 
 #: cgi/c_template.cgi:47
 msgid "Trading Rules"
@@ -8302,7 +8234,7 @@ msgstr "A negociação está suspensa até ao menos %1 da sessão."
 msgid "Trading the financial markets can become addictive. Fill in the form below to limit your participation on the website or send a signed letter or fax to our customer support team. Limits will only be removed or altered after 7 days."
 msgstr "A negociação em mercados financeiros pode criar dependência. Preencha o formulário abaixo para limitar a sua participação na nossa página Web ou envie uma carta ou fax assinados para a nossa equipe de atendimento ao cliente. Os limites só serão removidos ou alterados após 7 dias."
 
-#: cgi/subs/subs_forms.pm:2411
+#: cgi/subs/subs_forms.pm:2378
 msgid "Transact in"
 msgstr "Transacionar em"
 
@@ -8319,11 +8251,11 @@ msgstr "Transferir a partir de outra conta"
 msgid "Transfer to"
 msgstr "Transferir para"
 
-#: cgi/subs/subs_forms.pm:3757
+#: cgi/subs/subs_forms.pm:3724
 msgid "Transfer to Login ID"
 msgstr "Transferir para ID de Início de Sessão"
 
-#: cgi/subs/subs_forms.pm:3973
+#: cgi/subs/subs_forms.pm:3940
 msgid "Transfer to Payment Agent"
 msgstr "Transferir para Agente de Pagamentos"
 
@@ -8426,7 +8358,7 @@ msgstr "Impossível contatar o servidor"
 msgid "Unable to process your request"
 msgstr "Não é possível processar o seu pedido"
 
-#: cgi/subs/subs_forms.pm:996 cgi/subs/subs_forms.pm:998
+#: cgi/subs/subs_forms.pm:963 cgi/subs/subs_forms.pm:965
 msgid "Unauthenticated"
 msgstr "Não autenticado"
 
@@ -8447,7 +8379,7 @@ msgstr "Resposta inesperada"
 msgid "Unknown error while saving workspace '#1'."
 msgstr "Erro desconhecido ao guardar área de trabalho: '#1'."
 
-#: cgi/subs/subs_forms.pm:1725
+#: cgi/subs/subs_forms.pm:1692
 msgid "Unlock Cashier/Settings sections"
 msgstr "Desbloquear seções do Caixa/Definições"
 
@@ -8463,11 +8395,11 @@ msgstr "Até"
 msgid "Upcoming Events"
 msgstr "Próximos Eventos"
 
-#: cgi/subs/subs_forms.pm:1420 cgi/templates/default/api/register.tt:25
+#: cgi/subs/subs_forms.pm:1387 cgi/templates/default/api/register.tt:25
 msgid "Update"
 msgstr "Atualização"
 
-#: cgi/subs/subs_forms.pm:3627
+#: cgi/subs/subs_forms.pm:3594
 msgid "Update Settings"
 msgstr "Atualizar Definições"
 
@@ -8500,7 +8432,7 @@ msgstr "Utilização de preços de compra/venda: quando o mercado estiver sem li
 msgid "Use the opportunity provided by our website to practice for free with our virtual money account facility. This will enable you to get used to the functionalities and rules of the website."
 msgstr "Use a oportunidade dada pelo nosso site de praticar gratuitamente as negociações por meio da nossa função de conta de dinheiro virtual. Isto irá permitir que você se familiarize com as funcionalidades e regras do site."
 
-#: cgi/subs/subs_forms.pm:1528
+#: cgi/subs/subs_forms.pm:1495
 msgid "Use this feature to restrict access to your account from a specific IP address, or range of IP addresses.  For example, if you are certain that your IP address will always be in the range 213.45.0.0 - 213.45.255.255 then you would input 213.45.*.* into the IP address field.  This would ensure that persons outside of that IP network cannot access your account (even if they have the correct password)."
 msgstr "Utilize esta função para restringir os acessos à sua conta a partir de um endereço IP específico, ou intervalo de endereços IP. Por exemplo, se estiver seguro de que o seu endereço IP estará sempre num intervalo entre 213.45.0.0 e 213.45.255.255, poderá introduzir 213.45.*.* no campo do endereço IP. Isto vai assegurar que não será possível o acesso à sua conta por parte de pessoas que se encontrem fora dessa rede de IPs (mesmo que tenham a senha correta)."
 
@@ -8524,7 +8456,7 @@ msgstr "Retorno variável"
 msgid "Verification of identity"
 msgstr "Verificação da identidade"
 
-#: cgi/subs/subs_forms.pm:1867 cgi/subs/subs_forms.pm:2025
+#: cgi/subs/subs_forms.pm:1834 cgi/subs/subs_forms.pm:1992
 msgid "Verify new password"
 msgstr "Verifique a nova senha"
 
@@ -8566,14 +8498,6 @@ msgstr "Ver e aumentar o seu"
 msgid "View contract prices across a range of barriers and durations."
 msgstr "Veja o preço dos contratos através de uma variedade de barreiras e durações."
 
-#: frontend/templates/resources/index.html.haml:1
-msgid "View full list of assets, contract types and available durations."
-msgstr "Veja a lista completa de ativos, tipos de contratos e durações disponíveis."
-
-#: frontend/templates/resources/index.html.haml:1
-msgid "View operating hours for the markets on which contracts can be placed."
-msgstr "Ver horários de funcionamento dos mercados nos quais é possível concluir contratos."
-
 #: frontend/templates/static/tour.html.haml:1
 msgid "View payment methods"
 msgstr "Veja os métodos de pagamento"
@@ -8597,6 +8521,18 @@ msgstr "Ver declaração."
 #: frontend/templates/layouts/get_started/more.html.haml:1
 msgid "View the Tour"
 msgstr "Ver a Digressão"
+
+#: frontend/templates/resources/index.html.haml:1
+#, fuzzy
+#| msgid "View full list of assets, contract types and available durations."
+msgid "View the full list of assets, contract types and durations."
+msgstr "Veja a lista completa de ativos, tipos de contratos e durações disponíveis."
+
+#: frontend/templates/resources/index.html.haml:1
+#, fuzzy
+#| msgid "View operating hours for the markets on which contracts can be placed."
+msgid "View the operating hours of the markets you can trade."
+msgstr "Ver horários de funcionamento dos mercados nos quais é possível concluir contratos."
 
 #. (request()
 #: cgi/subs/subs_clientdetails.pm:34
@@ -8624,7 +8560,7 @@ msgstr "Conta Virtual"
 msgid "Virtual Money Account Opening"
 msgstr "Abertura de Conta de Dinheiro Virtual"
 
-#: cgi/lost_password.cgi:535 cgi/subs/subs_forms.pm:992
+#: cgi/lost_password.cgi:525 cgi/subs/subs_forms.pm:959
 #: cgi/subs/subs_homepage.pm:31
 #: cgi/templates/default/account/open_account.tt:24
 msgid "Virtual money account"
@@ -8663,7 +8599,7 @@ msgstr "Estamos empenhados em garantir que os seus dados pessoais e as suas tran
 msgid "We are fully licensed in the British Isles and Malta."
 msgstr "Nós somos integralmente licenciada nas Ilhas Britânicas e em Malta."
 
-#: cgi/subs/subs_forms.pm:410
+#: cgi/subs/subs_forms.pm:407
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "Não aceitamos atualmente contas de residentes deste país."
 
@@ -8732,15 +8668,13 @@ msgid "We want to make it as easy as possible for you to bring us prospects. And
 msgstr "Queremos facilitar-lhe tanto quanto possível a conquista de novos potenciais clientes. E assim que os tenha apresentado à %1, a nossa equipe trabalhará para os converter em clientes, e fazê-los regressar com webinários gratuitos, ferramentas de mapeamento e de negociação, concursos e promoções, e a formação cada vez maior de mercados e contratos disponíveis."
 
 #. ($forgot_pass_url, $contact_url)
-#: cgi/lost_password.cgi:447
+#: cgi/lost_password.cgi:437
 msgid "We were unable to recover your Login ID or Password with the provided information. <a href=\"%1\">Return to Password Recovery</a>, or <a href=\"%2\"><strong>contact us</strong></a> should you need further assistance."
 msgstr "Não nos foi possível recuperar o seu ID de Início de Sessão ou Senha com a informação fornecida. <a href=\"%1\">Regresse à Recuperação da Senha</a>, ou <a href=\"%2\"><strong>contate-nos</strong></a> caso necessite de mais assistência."
 
 #: cgi/subs/subs_clientdetails.pm:112
-#, fuzzy
-#| msgid "We were unable to verify your identity and prove your residential address using our online verification procedure. However you can still authenticate your account by sending us the following documents by post."
 msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
-msgstr "Não nos foi possível verificar a sua identidade e comprovar o endereço da sua residência através do nosso procedimento de verificação online. No entanto, ainda pode autenticar a sua conta, enviando-nos os seguintes documentos por correio."
+msgstr "Não foi possível verificar a sua identidade e comprovar o endereço da sua residência através do nosso procedimento de verificação automático."
 
 #. (site_name)
 #: cgi/templates/default/misc/affiliate_tac_tab.tt:21
@@ -8751,10 +8685,6 @@ msgstr "Iremos fornecer-lhe os links para incluir no seu Site (caso promova a %1
 #: cgi/templates/default/affiliates/main.tt:52
 msgid "We will provide you with all the tools to turn your traffic into a lucrative revenue stream"
 msgstr "Iremos fornecer-lhe todas as ferramentas para transformar o seu tráfego numa corrente de receitas lucrativas"
-
-#: cgi/lost_password.cgi:86
-msgid "We will send you an e-mail asking you to verify your identity. If you don't receive an e-mail from us within a few minutes of requesting a reset, please check your junk/spam mail folder."
-msgstr "Nós lhe enviaremos um e-mail pedindo que verifique a sua identidade. Se você não receber um e-mail nosso nos minutos seguintes ao seu pedido, verifique por favor a sua pasta de correio lixo/spam."
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
 #: cgi/paymentagent_transfer.cgi:251
@@ -8777,6 +8707,12 @@ msgstr ""
 #: cgi/paymentagent_withdraw.cgi:392
 msgid "We would like to inform you that the withdrawal request of %1%2 by %3 %4 has been processed. The funds have been credited into your account %5 at %6."
 msgstr "Gostaríamos de informar que o pedido de retirada de %1%2 por %3%4 foi processado. Os fundos foram creditados na sua conta %5 em %6."
+
+#: cgi/lost_password.cgi:82
+#, fuzzy
+#| msgid "We will send you an e-mail asking you to verify your identity. If you don't receive an e-mail from us within a few minutes of requesting a reset, please check your junk/spam mail folder."
+msgid "We'll then send you an e-mail asking you to verify your identity. If you don't receive the e-mail within a few minutes, please check your junk/spam mail folder."
+msgstr "Nós lhe enviaremos um e-mail pedindo que verifique a sua identidade. Se você não receber um e-mail nosso nos minutos seguintes ao seu pedido, verifique por favor a sua pasta de correio lixo/spam."
 
 #: cgi/f_brokercgi/f_setting_selfexclusion.cgi:21
 msgid "We're sorry but the Self Exclusion facility is not available for Virtual Accounts."
@@ -9088,26 +9024,11 @@ msgstr "Com pagamentos desde $1 até $100.000, você está coberto por nós."
 msgid "Withdraw"
 msgstr "Retirada"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:618
+#: cgi/templates/default/cashier/available_payment_methods.tt:523
 msgid "Withdraw via Payment Agent"
 msgstr "Retirada via Agente de Pagamentos"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:105
-#: cgi/templates/default/cashier/available_payment_methods.tt:134
-#: cgi/templates/default/cashier/available_payment_methods.tt:163
-#: cgi/templates/default/cashier/available_payment_methods.tt:197
-#: cgi/templates/default/cashier/available_payment_methods.tt:225
-#: cgi/templates/default/cashier/available_payment_methods.tt:253
-#: cgi/templates/default/cashier/available_payment_methods.tt:286
-#: cgi/templates/default/cashier/available_payment_methods.tt:339
-#: cgi/templates/default/cashier/available_payment_methods.tt:367
-#: cgi/templates/default/cashier/available_payment_methods.tt:396
-#: cgi/templates/default/cashier/available_payment_methods.tt:425
-#: cgi/templates/default/cashier/available_payment_methods.tt:453
-#: cgi/templates/default/cashier/available_payment_methods.tt:481
-#: cgi/templates/default/cashier/available_payment_methods.tt:514
-#: cgi/templates/default/cashier/available_payment_methods.tt:544
-#: cgi/templates/default/cashier/available_payment_methods.tt:76
+#: cgi/templates/default/cashier/available_payment_methods.tt:291
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/bank_wire.tt:8
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:19
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:30
@@ -9119,15 +9040,14 @@ msgid "Withdraw: %1"
 msgstr "Retirada: %1"
 
 #. (1)
-#: cgi/templates/default/cashier/available_payment_methods.tt:291
-#: cgi/templates/default/cashier/available_payment_methods.tt:344
-#: cgi/templates/default/cashier/available_payment_methods.tt:372
-#: cgi/templates/default/cashier/available_payment_methods.tt:401
-#: cgi/templates/default/cashier/available_payment_methods.tt:430
-#: cgi/templates/default/cashier/available_payment_methods.tt:458
-#: cgi/templates/default/cashier/available_payment_methods.tt:486
-#: cgi/templates/default/cashier/available_payment_methods.tt:519
-#: cgi/templates/default/cashier/available_payment_methods.tt:549
+#: cgi/templates/default/cashier/available_payment_methods.tt:247
+#: cgi/templates/default/cashier/available_payment_methods.tt:315
+#: cgi/templates/default/cashier/available_payment_methods.tt:339
+#: cgi/templates/default/cashier/available_payment_methods.tt:363
+#: cgi/templates/default/cashier/available_payment_methods.tt:386
+#: cgi/templates/default/cashier/available_payment_methods.tt:409
+#: cgi/templates/default/cashier/available_payment_methods.tt:437
+#: cgi/templates/default/cashier/available_payment_methods.tt:462
 msgid "Withdraw: %1 working day"
 msgstr "Retirada: %1 dia útil"
 
@@ -9135,12 +9055,12 @@ msgstr "Retirada: %1 dia útil"
 #. (5)
 #. (2)
 #. (3)
-#: cgi/templates/default/cashier/available_payment_methods.tt:110
-#: cgi/templates/default/cashier/available_payment_methods.tt:139
-#: cgi/templates/default/cashier/available_payment_methods.tt:168
-#: cgi/templates/default/cashier/available_payment_methods.tt:201
-#: cgi/templates/default/cashier/available_payment_methods.tt:230
-#: cgi/templates/default/cashier/available_payment_methods.tt:81
+#: cgi/templates/default/cashier/available_payment_methods.tt:120
+#: cgi/templates/default/cashier/available_payment_methods.tt:144
+#: cgi/templates/default/cashier/available_payment_methods.tt:172
+#: cgi/templates/default/cashier/available_payment_methods.tt:196
+#: cgi/templates/default/cashier/available_payment_methods.tt:72
+#: cgi/templates/default/cashier/available_payment_methods.tt:96
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/bank_wire.tt:9
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:20
 #: cgi/templates/website_specific/Binary/cashier/available_payment_methods/ewallet.tt:31
@@ -9151,7 +9071,7 @@ msgstr "Retirada: %1 dia útil"
 msgid "Withdraw: %1 working days"
 msgstr "Retirada: %1 dias úteis"
 
-#: cgi/templates/default/cashier/available_payment_methods.tt:258
+#: cgi/templates/default/cashier/available_payment_methods.tt:219
 msgid "Withdraw: Not applicable"
 msgstr "Retirada: Não aplicável"
 
@@ -9241,8 +9161,8 @@ msgstr "Índices Mundiais"
 msgid "Written limits"
 msgstr "Limites escritos"
 
-#: cgi/subs/subs_BOMFeed_history.pm:390 cgi/subs/subs_forms.pm:3342
-#: cgi/subs/subs_forms.pm:988
+#: cgi/subs/subs_BOMFeed_history.pm:390 cgi/subs/subs_forms.pm:3309
+#: cgi/subs/subs_forms.pm:955
 #: cgi/templates/default/container/confirm_box_popup.tt:5
 msgid "Yes"
 msgstr "Sim"
@@ -9301,11 +9221,22 @@ msgstr "Você pode fechar o seu contrato antes da data de vencimento para bloque
 msgid "You can fund your account with a minimum of &#36;/&pound;/&euro; 5 via any of the methods."
 msgstr "Você pode financiar a sua conta com um mínimo de &#36;/&pound;/&euro; 5 por meio de qualquer um dos métodos."
 
-#: frontend/templates/static/devguide.html.haml:1
+#. (request.url_for("linkto_acopening.cgi", { 'actype' => 'real'  }))
+#: cgi/templates/default/account/open_account.tt:13
 #, fuzzy
-#| msgid "Funding your Account"
+#| msgid "Open a <class=\"pjaxload\" a href=\"%1\">real money</a> account and make a deposit using credit card, bank wire, cheque or e-cash."
+msgid "You can open a <a class =\"pjaxload\" href=\"%1\">real money</a> account using dollars, pounds or euros. Simply make a deposit using your credit card, bank wire or e-cash. You can deposit between 5 and 150,000 USD, GBP, EUR and AUD."
+msgstr "Abra uma conta de <class=\"pjaxload\" a href=\"%1\">dinheiro real</a> e faça um depósito por cartão de crédito, transferência bancária, cheque ou dinheiro eletrônico."
+
+#: cgi/templates/default/account/open_account.tt:3
+#, fuzzy
+#| msgid "Your account is a virtual money account."
+msgid "You can open two types of account: a real money account and a virtual money account."
+msgstr "A sua conta é uma conta de dinheiro virtual."
+
+#: frontend/templates/static/devguide.html.haml:1
 msgid "You can open your account"
-msgstr "Depositar fundos na sua conta"
+msgstr "Você pode abrir a sua conta"
 
 #: frontend/templates/get_started/how_to_trade_binaries.html.haml:1
 msgid "You can sell back long-term trades at any time to profit from changing market conditions."
@@ -9315,11 +9246,9 @@ msgstr "Você pode vender contratos a longo prazo a qualquer momento a fim de ap
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "Você pode definir o a duração da sua negociação, desde 10 segundos até 365 dias."
 
-#: cgi/subs/subs_clientdetails.pm:114
-#, fuzzy
-#| msgid "To fully authenticate your account, please email scanned copies of the document listed below."
+#: cgi/subs/subs_clientdetails.pm:113
 msgid "You can still authenticate your account by sending us scans of the following documents by email"
-msgstr "Para autenticar integralmente a sua conta, envie um e-mail com as cópias digitalizadas dos documentos referidos abaixo."
+msgstr "Você ainda pode autenticar a sua conta nos enviando por e-mail as cópias digitalizadas dos seguintes documentos"
 
 #: frontend/templates/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You can trade a range of markets, timescales and indices – 24/7."
@@ -9330,18 +9259,31 @@ msgstr "Você pode negociar em uma variedade de mercados, prazos e índices - 24
 msgid "You can try another <a href=\"%1\">payment option</a> or for additional assistance:"
 msgstr "Pode tentar outra <a href=\"%1\">opção de pagamento</a> ou pedir assistência adicional:"
 
+#: cgi/templates/default/cashier/available_payment_methods.tt:512
+#, fuzzy
+#| msgid "Payment Agents process deposits and withdrawals for Clients who wish to use e-cash methods or local currencies not supported by"
+msgid "You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by"
+msgstr "Os Agentes de Pagamentos processam os depósitos e retiradas dos Clientes que pretendem usar métodos de dinheiro eletrônico ou moedas locais não suportados por"
+
+#. ($website->display_name)
+#: cgi/paymentagent_list.cgi:43
+#, fuzzy
+#| msgid "Payment Agents process deposits and withdrawals for Clients who wish to use e-cash methods or local currencies not supported by"
+msgid "You can use an authorized payment agent to process deposits and withdrawals for payment methods or local currencies not supported by %1. It's easy to do."
+msgstr "Os Agentes de Pagamentos processam os depósitos e retiradas dos Clientes que pretendem usar métodos de dinheiro eletrônico ou moedas locais não suportados por"
+
 #. ($loginid_to)
 #: cgi/paymentagent_transfer.cgi:107
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "Não pode transferir para a conta %1, porque essa conta está de momento desativada."
 
 #. ($contact_url)
-#: cgi/lost_password.cgi:482
+#: cgi/lost_password.cgi:472
 msgid "You clicked on an expired link. If you have already clicked on this link, it has been <b>disabled for security reasons</b>. Please re request change of password.<br /><br /> Your account is important to us. If you require further assistance, please contact our <a href=\"%1\" target=\"_blank\"><strong>Customer Support</strong></a>."
 msgstr "você clicou  em um link que expirou. Se já tiver clicado neste link, o mesmo foi <b>desativado por motivos de segurança</b>. Por favor, peça novamente a alteração da senha.<br /><br />A sua conta é importante para nós. Se precisar de mais ajuda, entre em contato com o nosso <a href=\"%1\" target=\"_blank\"><strong>Atendimento ao Cliente</strong></a>."
 
 #. ($contact_url)
-#: cgi/lost_password.cgi:563
+#: cgi/lost_password.cgi:553
 msgid "You clicked on an expired link. Please refer to the email with the subject line <strong>New Password Request</strong> and click on the link provided.<br /><br /> Your account is important to us. If you require further assistance, please contact our <a href=\"%1\" target=\"_blank\"><strong>Customer Support</strong></a>."
 msgstr "Clicou num link que expirou. Por favor, consulte o e-mail com o assunto <strong>Solicitação de Nova Senha</strong> e clique no link fornecido.<br /><br /> A sua conta é importante para nós. Se precisar de mais ajuda, entre em contacto com o nosso <a href=\"%1\" target=\"_blank\"><strong>Atendimento ao Cliente</strong></a>."
 
@@ -9380,17 +9322,17 @@ msgstr "Você já retirou o equivalente a EUR %1 do total ao longo da vida útil
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "Já levantou o equivalente a EUR %1."
 
-#: cgi/subs/subs_homepage.pm:123
+#: cgi/subs/subs_homepage.pm:118
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "Comprou contratos com um preço de compra combinado de cinco vezes o montante do bónus."
 
-#: cgi/subs/subs_forms.pm:1314 cgi/subs/subs_forms.pm:1320
-#: cgi/subs/subs_forms.pm:1325
+#: cgi/subs/subs_forms.pm:1281 cgi/subs/subs_forms.pm:1287
+#: cgi/subs/subs_forms.pm:1292
 msgid "You have entered an invalid IP address."
 msgstr "Introduziu um endereço IP inválido."
 
-#: cgi/subs/subs_forms.pm:2681 cgi/subs/subs_forms.pm:2810
-#: cgi/subs/subs_forms.pm:3784
+#: cgi/subs/subs_forms.pm:2648 cgi/subs/subs_forms.pm:2777
+#: cgi/subs/subs_forms.pm:3751
 msgid "You have entered an invalid login ID"
 msgstr "Introduziu um ID de início de sessão inválido"
 
@@ -9445,6 +9387,13 @@ msgstr "Você não pode comprar ou registar palavras-chave, pesquisar termos ou 
 msgid "You may only open an account at this site on condition that:"
 msgstr "Apenas pode abrir uma conta neste site se:"
 
+#. (request.url_for("linkto_acopening.cgi", { 'actype' => 'virtual'  }))
+#: cgi/templates/default/account/open_account.tt:26
+#, fuzzy
+#| msgid "Open a <a class=\"pjaxload\" href=\"%1\">virtual money</a> account now, all you need to provide is your email and password."
+msgid "You may prefer to open a <a class=\"pjaxload\" href=\"%1\">virtual money</a> account to practice trading. It's free, and will give you experience and confidence in trading strategies."
+msgstr "Abra uma conta de <a class=\"pjaxload\" href=\"%1\">dinheiro virtual</a> agora; apenas tem de fornecer o seu e-mail e senha."
+
 #: cgi/templates/default/legal/promocode.tt:25
 msgid "You may withdraw the Y deposited to claim the bonus and any winnings generated by the bonus at any time."
 msgstr "Pode levantar em qualquer momento o Y depositado para solicitar o bónus e todos os ganhos gerados pelo bónus."
@@ -9454,22 +9403,20 @@ msgid "You may withdraw the bonus amount once you have exceeded an account turno
 msgstr "Pode levantar a quantia do bónus depois de exceder um volume de negócios da conta de 25 vezes o valor da quantia do bónus."
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "You may already have an account opened in the system."
 msgid "You must already have a valid \"Real money account\" with Binary.com."
-msgstr "Pode já ter uma conta aberta no sistema."
+msgstr "Você já deve ter uma \"Conta Real\" válida aberta com a Binary.com."
 
 #: cgi/subs/subs_BOMFeed_history.pm:450
 msgid "You must be logged in to use the workspace feature.Account opening is free and takes only 30 seconds."
 msgstr "Tem de inciar sessão para utilizar a função da área de trabalho. A abertura da conta é gratuita e demora apenas 30 segundos."
 
-#: cgi/register-api.cgi:36
+#: cgi/register-api.cgi:33
 msgid "You must have a valid 'real' money account before registering as an API Developer"
-msgstr ""
+msgstr "Você deve ter uma conta de dinheiro \"real\" antes de se registrar como Programador API"
 
 #: frontend/templates/static/devguide.html.haml:1
 msgid "You must now strip ACCESSTOKEN from the redirection URL as described in the literature for Implicit Grants."
-msgstr ""
+msgstr "Agora você deve retirar o ACCESSTOKEN do redirecionamento de URL, como descrito na literatura por Implicit Grants."
 
 #: frontend/templates/get_started/binary_options_basics.html.haml:1
 msgid "You only need to make four decisions to execute a binary contract."
@@ -9508,7 +9455,7 @@ msgstr "Deverá indemnizar a Empresa a pedido e isentar a Empresa de responsabil
 msgid "You shall not hold or pool client funds or third party funds into your own account held with %1."
 msgstr "Você não deve deter ou reunir fundos de clientes ou fundos de terceiros na sua própria conta detida na %1."
 
-#: cgi/subs/subs_forms.pm:3558
+#: cgi/subs/subs_forms.pm:3525
 msgid "You will be automatically logged out after such time."
 msgstr "A sua sessão será terminada automaticamente após esse tempo."
 
@@ -9552,11 +9499,11 @@ msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 
 msgstr "O seu limite de retirada diário da %1 é atualmente <strong>EUR %2</strong> (ou %3 em outra moeda)."
 
 #. ($currency_label, $min_deposit)
-#: cgi/subs/subs_homepage.pm:121
+#: cgi/subs/subs_homepage.pm:116
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "O seu <strong>primeiro</strong> depósito é igual ou superior a %1%2, e"
 
-#: cgi/subs/subs_cashier.pm:189
+#: cgi/subs/subs_cashier.pm:188
 msgid "Your Client will receive an email notification informing him/her that the transfer has been processed."
 msgstr "O seu Cliente receberá uma notificação por e-mail com a informação de que a transferência foi processada."
 
@@ -9564,7 +9511,7 @@ msgstr "O seu Cliente receberá uma notificação por e-mail com a informação 
 msgid "Your Email:"
 msgstr "O seu e-mail:"
 
-#: cgi/lost_password.cgi:49
+#: cgi/lost_password.cgi:45
 msgid "Your IP address appears to have changed.  This could be because you recently disconnected and then reconnected to your ISP."
 msgstr "O seu endereço IP parece ter mudado. Isto pode ter acontecido por se ter recentemente desligado e ligado novamente ao seu ISP."
 
@@ -9572,18 +9519,18 @@ msgstr "O seu endereço IP parece ter mudado. Isto pode ter acontecido por se te
 msgid "Your Login ID"
 msgstr "O seu ID de Início de Sessão"
 
-#: cgi/subs/subs_forms.pm:2686 cgi/subs/subs_forms.pm:2815
+#: cgi/subs/subs_forms.pm:2653 cgi/subs/subs_forms.pm:2782
 msgid "Your Login ID must start with either of the following:"
 msgstr "O seu ID de Início de Sessão tem de começar por um dos que se seguem:"
 
-#: cgi/subs/subs_forms.pm:2676 cgi/subs/subs_forms.pm:2805
-#: cgi/subs/subs_forms.pm:3779
+#: cgi/subs/subs_forms.pm:2643 cgi/subs/subs_forms.pm:2772
+#: cgi/subs/subs_forms.pm:3746
 msgid "Your Login ID should not contain spaces."
 msgstr "O seu ID de Início de Sessão não pode conter espaços."
 
 #: cgi/templates/default/api/register.tt:18
 msgid "Your Public Key"
-msgstr ""
+msgstr "A sua Chave Pública"
 
 #: cgi/subs/subs_payments_withdrawals.pm:67
 #: cgi/subs/subs_payments_withdrawals.pm:99
@@ -9595,7 +9542,7 @@ msgstr "O seu saldo de conta"
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "O seu saldo de conta (%1%2) é insuficiente para comprar este contrato (%1%3)."
 
-#: cgi/subs/subs_clientdetails.pm:144
+#: cgi/subs/subs_clientdetails.pm:143
 msgid "Your account does not require authentication at this time."
 msgstr "A sua conta não precisa de autenticação no momento."
 
@@ -9638,12 +9585,7 @@ msgid "Your account is fully operational and you may begin depositing money and 
 msgstr "A sua conta está totalmente operacional e pode começar a depositar dinheiro e a comprar contratos."
 
 #. (request()
-#: cgi/lost_password.cgi:91
-msgid "Your account is important to us. Please <a class=\"pjaxload\" href=\"%1\">contact us</a> should you need further assistance."
-msgstr "A sua conta é importante para nós. Por favor, <a class=\"pjaxload\" href=\"%1\">contate-nos</a> se precisar de mais assistência."
-
-#. (request()
-#: cgi/lost_password.cgi:699 cgi/lost_password.cgi:892
+#: cgi/lost_password.cgi:689 cgi/lost_password.cgi:879
 msgid "Your account is important to us. Please <a href=\"%1\">contact us</a> should you need further assistance."
 msgstr "A sua conta é importante para nós. Por favor, <a href=\"%1\">contate-nos</a> se precisar de mais assistência."
 
@@ -9661,22 +9603,22 @@ msgstr "O saldo da sua conta está acima do seu limite permitido."
 
 #: cgi/templates/default/api/register.tt:20
 msgid "Your base url for all API calls"
-msgstr ""
+msgstr "A sua base url para todas as ligações API"
 
 #. ($loginid)
 #: cgi/f_brokercgi/f_promotional_processing.cgi:37
 msgid "Your bonus request - %1"
 msgstr "O seu pedido de bônus - %1"
 
-#: cgi/subs/subs_homepage.pm:117
+#: cgi/subs/subs_homepage.pm:112
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "O seu bónus será creditado na sua conta num espaço de 3 dias úteis após as condições que se seguem serem cumpridas:"
 
-#: cgi/subs/subs_homepage.pm:130
+#: cgi/subs/subs_homepage.pm:125
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "O seu bónus será creditado na sua conta dentro de 3 dias úteis depois de ter comprado contratos com um preço de compra combinado igual ou maior do que a quantia de bónus."
 
-#: cgi/subs/subs_homepage.pm:139
+#: cgi/subs/subs_homepage.pm:134
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "O seu bónus será creditado na sua conta dentro de 3 dias úteis."
 
@@ -9700,7 +9642,7 @@ msgstr "A sua seção do caixa está bloqueada."
 msgid "Your cashier session has expired"
 msgstr "A sua sessão do caixa expirou"
 
-#: cgi/subs/subs_forms.pm:2538
+#: cgi/subs/subs_forms.pm:2505
 msgid "Your country"
 msgstr "O seu país"
 
@@ -9716,8 +9658,8 @@ msgstr "Os seus detalhes"
 msgid "Your documents are expired."
 msgstr "Os seus documentos expiraram."
 
-#: cgi/subs/subs_forms.pm:2627 cgi/subs/subs_forms.pm:2852
-#: cgi/subs/subs_forms.pm:3153
+#: cgi/subs/subs_forms.pm:2594 cgi/subs/subs_forms.pm:2819
+#: cgi/subs/subs_forms.pm:3120
 msgid "Your email address"
 msgstr "O seu endereço de e-mail"
 
@@ -9729,8 +9671,8 @@ msgstr "O seu formulário foi enviado."
 msgid "Your funds are safe"
 msgstr "Os seus fundos estão seguros"
 
-#: cgi/subs/subs_forms.pm:1430 cgi/subs/subs_forms.pm:677
-#: cgi/subs/subs_forms.pm:951
+#: cgi/subs/subs_forms.pm:1397 cgi/subs/subs_forms.pm:649
+#: cgi/subs/subs_forms.pm:918
 msgid "Your information is incomplete or incorrect. Please correct the fields highlighted above."
 msgstr "As suas informações estão incompletas ou incorretas. Corrija por favor os campos destacados  acima."
 
@@ -9739,11 +9681,11 @@ msgstr "As suas informações estão incompletas ou incorretas. Corrija por favo
 msgid "Your money is always safe with %1. At all times, it is held in segregated AAA-rated banks, which is a condition of our trading licenses."
 msgstr "O seu dinheiro está sempre seguro com a %1. O tempo todo, ele é guardado em bancos de classificação AAA, que é uma condição de nossas licenças comerciais."
 
-#: cgi/subs/subs_forms.pm:2597 cgi/subs/subs_forms.pm:2822
+#: cgi/subs/subs_forms.pm:2564 cgi/subs/subs_forms.pm:2789
 msgid "Your name"
 msgstr "O seu nome"
 
-#: cgi/subs/subs_forms.pm:3080
+#: cgi/subs/subs_forms.pm:3047
 msgid "Your name/company"
 msgstr "O seu nome/empresa"
 
@@ -9751,7 +9693,7 @@ msgstr "O seu nome/empresa"
 msgid "Your new account balance is %s %s"
 msgstr "O seu novo saldo de conta é %s %s"
 
-#: cgi/subs/subs_forms.pm:1936
+#: cgi/subs/subs_forms.pm:1903
 msgid "Your old password is incorrect"
 msgstr "A sua senha antiga está errada"
 
@@ -9770,31 +9712,31 @@ msgid "Your password has been changed."
 msgstr "A sua senha foi alterada."
 
 #. ($client->loginid)
-#: cgi/lost_password.cgi:921
+#: cgi/lost_password.cgi:908
 msgid "Your password has been successfully reset. Your login ID is <strong>%1</strong>.  Please log into your account using your new password."
 msgstr "A sua senha foi reposta com sucesso. O seu ID de início de sessão é <strong>%1</strong>.  Por favor inicie sessão na sua conta, usando a sua nova senha."
 
 #. ($contact_url)
 #. ($forgot_pass_url,                        $contact_url)
 #. ($forgot_pass_url,                            $contact_url)
-#: cgi/lost_password.cgi:155 cgi/lost_password.cgi:202
-#: cgi/lost_password.cgi:415
+#: cgi/lost_password.cgi:145 cgi/lost_password.cgi:192
+#: cgi/lost_password.cgi:405
 msgid "Your password recovery token has expired. Please click <a href=\"%1\"><strong>here</strong></a> to restart the password recovery process.<br /><br /> Your account is important to us. If you require further assistance, please contact our <a href=\"%2\"><strong>Customer Support</strong></a>."
 msgstr "O seu token de recuperação de senha expirou. Por favor clique <a href=\"%1\"><strong>aqui</strong></a> para reiniciar o processo de recuperação da senha.<br /><br />A sua conta é importante para nós. Se precisar de mais assistência, contate por favor o nosso <a href=\"%2\"><strong>Atendimento ao Cliente</strong></a>."
 
-#: cgi/subs/subs_forms.pm:1797 cgi/subs/subs_forms.pm:1977
-#: cgi/subs/subs_forms.pm:551
+#: cgi/subs/subs_forms.pm:1764 cgi/subs/subs_forms.pm:1944
+#: cgi/subs/subs_forms.pm:548
 msgid "Your password should be at least 5 characters."
 msgstr "A sua senha deve ter pelo menos 5 caracteres."
 
-#: cgi/subs/subs_forms.pm:1339 cgi/subs/subs_forms.pm:1666
-#: cgi/subs/subs_forms.pm:1791 cgi/subs/subs_forms.pm:1971
-#: cgi/subs/subs_forms.pm:545
+#: cgi/subs/subs_forms.pm:1306 cgi/subs/subs_forms.pm:1633
+#: cgi/subs/subs_forms.pm:1758 cgi/subs/subs_forms.pm:1938
+#: cgi/subs/subs_forms.pm:542
 msgid "Your password should contain only characters and digits."
 msgstr "A sua senha deve conter apenas caracteres e números."
 
-#: cgi/subs/subs_forms.pm:1803 cgi/subs/subs_forms.pm:1983
-#: cgi/subs/subs_forms.pm:557
+#: cgi/subs/subs_forms.pm:1770 cgi/subs/subs_forms.pm:1950
+#: cgi/subs/subs_forms.pm:554
 msgid "Your password should not be more then 25 characters."
 msgstr "A sua senha não deve ter mais de 25 caracteres."
 
@@ -9802,7 +9744,7 @@ msgstr "A sua senha não deve ter mais de 25 caracteres."
 msgid "Your personal information is used primarily as a way of authenticating you as the proper owner of your account and as the person to whom withdrawal payments may be made. We collect personal data relating to you directly from you when you fill in the account opening form. In the event of any doubt as to the authenticity of your account details or of any withdrawal request, the company reserves the right to request further authentication information as may be deemed appropriate under the circumstances."
 msgstr "As suas informações pessoais são usadas principalmente como forma de o autenticar como devido proprietário da sua conta e como pessoa a quem podem ser feitos os pagamentos de retiradas. Recolhemos diretamente de si dados pessoais relacionados consigo quando você preenche o formulário de abertura de conta. No caso de qualquer dúvida relativamente à autenticidade dos detalhes da sua conta ou de algum pedido de retirada, a empresa reserva-se o direito de solicitar mais informações para autenticação, as quais podem ser consideradas como adequadas nessas circunstâncias."
 
-#: cgi/subs/subs_forms.pm:2560 cgi/subs/subs_forms.pm:3182
+#: cgi/subs/subs_forms.pm:2527 cgi/subs/subs_forms.pm:3149
 msgid "Your phone number"
 msgstr "O seu número de telefone"
 
@@ -9832,7 +9774,7 @@ msgstr "O seu pedido para levantar %1 %2 da sua conta %3 para a conta %4 do Agen
 msgid "Your risks are known"
 msgstr "Seus riscos são conhecidos"
 
-#: cgi/subs/subs_forms.pm:532
+#: cgi/subs/subs_forms.pm:529
 msgid "Your secret answer is too short.  Please enter at least 4 characters."
 msgstr "A sua resposta secreta é muito curta. Por favor insira ao menos 4 caracteres."
 
@@ -9845,7 +9787,7 @@ msgstr "As suas definições foram atualizadas com sucesso."
 msgid "Your transaction reference number is %1"
 msgstr "O número de referência da sua transação é %1"
 
-#: cgi/subs/subs_forms.pm:3219
+#: cgi/subs/subs_forms.pm:3186
 msgid "Your website URL"
 msgstr "O URL da sua página Web"
 
@@ -9879,7 +9821,7 @@ msgstr "um limite na quantia que você pode apostar dentro de um período de tem
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "um limite sobre as perdas em que pode incorrer dentro de um período de tempo específico;"
 
-#: cgi/subs/subs_clientdetails.pm:137
+#: cgi/subs/subs_clientdetails.pm:136
 msgid "and"
 msgstr "e"
 
@@ -9937,7 +9879,7 @@ msgstr "hora de início do contrato"
 msgid "days"
 msgstr "dias"
 
-#: cgi/subs/subs_forms.pm:1483 cgi/subs/subs_forms.pm:739
+#: cgi/subs/subs_forms.pm:1450 cgi/subs/subs_forms.pm:709
 msgid "details"
 msgstr "detalhes"
 
@@ -9965,7 +9907,7 @@ msgstr "preço inicial do contrato comprado mais %1"
 msgid "entry spot plus %plural(%1,1 pip, %d pips)"
 msgstr "preço inicial do contrato comprado mais %plural(%1,1 pip, %d pips)"
 
-#: cgi/limits.cgi:109 cgi/limits.cgi:79 cgi/limits.cgi:84
+#: cgi/limits.cgi:106 cgi/limits.cgi:76 cgi/limits.cgi:81
 msgid "equivalent"
 msgstr "equivalente"
 
@@ -9982,10 +9924,8 @@ msgid "for detailed coding instructions."
 msgstr "para instruções de código detalhadas."
 
 #: frontend/templates/static/devguide.html.haml:1
-#, fuzzy
-#| msgid "where"
 msgid "here"
-msgstr "onde"
+msgstr "aqui"
 
 #: lib/BOM/Product/Contract.pm:2122
 msgid "high barrier"
@@ -10024,12 +9964,10 @@ msgid "lower"
 msgstr "inferior"
 
 #: cgi/tick_trades.cgi:444
-#, fuzzy
-#| msgid "Multi award-winning trading platform."
 msgid "main trading platform"
-msgstr "Plataforma de negociação multi-premiada."
+msgstr "principal plataforma de negociação"
 
-#: cgi/subs/subs_forms.pm:3834 cgi/subs/subs_forms.pm:4035
+#: cgi/subs/subs_forms.pm:3801 cgi/subs/subs_forms.pm:4002
 msgid "maximum is"
 msgstr "o máximo é"
 
@@ -10045,7 +9983,7 @@ msgstr "min"
 msgid "minimum available duration"
 msgstr "duração mínima disponível"
 
-#: cgi/subs/subs_forms.pm:3828 cgi/subs/subs_forms.pm:4029
+#: cgi/subs/subs_forms.pm:3795 cgi/subs/subs_forms.pm:3996
 msgid "minimum is"
 msgstr "o mínimo é"
 
@@ -12003,6 +11941,57 @@ msgstr "Lamentamos, o acesso através desta rede de IP foi desativado. Contate o
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Lamentamos, você já teve muitas tentativas sem êxito. Por favor, tente novamente em 5 minutos."
+
+#~ msgid "A Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-cash methods or local currencies not offered by default on %1."
+#~ msgstr "Um Agente de Pagamentos processa depósitos e retiradas para os Clientes que desejam usar métodos específicos de dinheiro eletrônico ou moedas locais não oferecidas por defeito em %1."
+
+#~ msgid "Accounts are available in dollars, pounds and euros."
+#~ msgstr "As contas estão disponíveis em dólares, libras e euros."
+
+#~ msgid "All credit/debit card transactions are protected by"
+#~ msgstr "Todas as transações de crédito/débito estão protegidas por"
+
+#~ msgid "Available Payment Methods"
+#~ msgstr "Métodos de Pagamento Disponíves"
+
+#~ msgid "Contract Guide"
+#~ msgstr "Guia de Contratos"
+
+#~ msgid "Ewallet"
+#~ msgstr "Porta-moedas eletrónico"
+
+#~ msgid "Fees"
+#~ msgstr "Taxas"
+
+#~ msgid "Forgot Login ID / Password"
+#~ msgstr "Esqueci o ID de Início de Sessão/Senha"
+
+#~ msgid "How to transfer money to the Agent."
+#~ msgstr "Como transferir dinheiro para um Agente."
+
+#~ msgid "Learn about the types of contracts available."
+#~ msgstr "Aprenda sobre os tipos de contratos disponíveis."
+
+#~ msgid "Open either a Real Money or Virtual Money account and get started."
+#~ msgstr "Abra uma conta de Dinheiro Real ou Dinheiro Virtual e comece."
+
+#~ msgid "Page %1 of %2"
+#~ msgstr "Página %1 de %2"
+
+#~ msgid "Select the payment method that you would like to use and contact the Payment Agent directly for more information on:"
+#~ msgstr "Selecione o método de pagamento que gostaria de usar e entre em contato diretamente com o Agente de Pagamentos para obter mais informações sobre:"
+
+#~ msgid "Send the funds to the Payment Agent."
+#~ msgstr "Envie os fundos para o Agente de Pagamentos."
+
+#~ msgid "The commission fees that the Agent will charge."
+#~ msgstr "As taxas de comissão que o Agente vai cobrar."
+
+#~ msgid "The minimum deposit is ($/&pound;/&euro;) 5 and the maximum account is ($/&pound;/&euro;) 150,000."
+#~ msgstr "O depósito mínimo é ($/&pound;/&euro;) 5 e o máximo da conta é ($/&pound;/&euro;)  150.000."
+
+#~ msgid "Your account is important to us. Please <a class=\"pjaxload\" href=\"%1\">contact us</a> should you need further assistance."
+#~ msgstr "A sua conta é importante para nós. Por favor, <a class=\"pjaxload\" href=\"%1\">contate-nos</a> se precisar de mais assistência."
 
 #~ msgid "%1 was converted to %2."
 #~ msgstr "%1 foi convertido para %2."
@@ -13983,9 +13972,6 @@ msgstr "Lamentamos, você já teve muitas tentativas sem êxito. Por favor, tent
 #~ msgid "You have entered an invalid login ID."
 #~ msgstr "Introduziu um ID de início de sessão inválido."
 
-#~ msgid "Your account is a virtual money account."
-#~ msgstr "A sua conta é uma conta de dinheiro virtual."
-
 #~ msgid "and quote your loginID"
 #~ msgstr "e refira o seu ID de início de sessão"
 
@@ -15309,9 +15295,6 @@ msgstr "Lamentamos, você já teve muitas tentativas sem êxito. Por favor, tent
 #~ msgid "Open a free virtual account or get started from just $5, with bonuses for larger deposits."
 #~ msgstr "Abra uma conta virtual gratuita ou comece a negociar a partir de $5 com bônus para depósitos maiores."
 
-#~ msgid "Open an account"
-#~ msgstr "Abrir uma conta"
-
 #~ msgid "The Premier Platform For Online"
 #~ msgstr "A Principal Plataforma Online"
 
@@ -15766,9 +15749,6 @@ msgstr "Lamentamos, você já teve muitas tentativas sem êxito. Por favor, tent
 
 #~ msgid "Proceed to cashier"
 #~ msgstr "Avance para o caixa"
-
-#~ msgid "Trading Guide"
-#~ msgstr "Guia de Negociação"
 
 #~ msgid "Trading Responsibly"
 #~ msgstr "Responsabilidade de Negociação"
