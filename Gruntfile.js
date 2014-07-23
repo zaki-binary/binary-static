@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 	    dist: {
 		options: {
 		    sassDir: 'src/sass',
-		    cssDir: 'dist/css',
+		    cssDir: 'dist/<%= pkg.version %>/css',
 		    specify: 'src/sass/binary.scss',
 		    noLineComments: true,
 		    outputStyle: 'expanded',
@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 	    dev: {
 		options: {
 		    sassDir: 'src/sass',
-		    cssDir: 'dist/css/',
+		    cssDir: 'dist/<%= pkg.version %>/css/',
 		    specify: 'src/sass/external/grid.scss',
 		    noLineComments: true,
 		    outputStyle: 'expanded',
@@ -31,9 +31,9 @@ module.exports = function (grunt) {
 	cssmin: {
 	    combine: {
 		files: {
-		    'dist/css/bomredirect.min.css': ['src/css/bomredirect.css'],
-		    'dist/css/grid_<%= pkg.version %>.min.css': ['dist/css/external/grid.css'],
-		    'dist/css/binary_<%= pkg.version %>.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/css/binary_<%= pkg.version %>.css']
+		    'dist/<%= pkg.version %>/css/bomredirect.min.css': ['src/css/bomredirect.css'],
+		    'dist/<%= pkg.version %>/css/grid.min.css': ['dist/<%= pkg.version %>/css/external/grid.css'],
+		    'dist/<%= pkg.version %>/css/binary.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/<%= pkg.version %>/css/binary.css']
 		},
 	    },
 	},
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
 		    'src/javascript/livechart.js',
 		    'src/javascript/pages/livechart.js'
 		],
-		dest: 'dist/js/binary_<%= pkg.version %>.js',
+		dest: 'dist/<%= pkg.version %>/js/binary.js',
 	    },
 	},
 	uglify: {
@@ -118,22 +118,28 @@ module.exports = function (grunt) {
 		    sourceMapIncludeSources: true,
 		},
 		files: {
-		    'dist/js/binary_<%= pkg.version %>.min.js': ['dist/js/binary_<%= pkg.version %>.js'],
+		    'dist/<%= pkg.version %>/js/binary.min.js': ['dist/<%= pkg.version %>/js/binary.js'],
 		},
 	    },
 	},
 	copy: {
 	    main: {
 		files: [
-		    {expand: true, src: ['package.json'], dest: 'dist/js/',},
-		    {expand: true, cwd: 'src/config/', src: ['CNAME'], dest: 'dist/', filter: 'isFile'},
-                    {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/config/locales/'},
-		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/',},
-		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/flash/',},
-                    {expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/templates/',},
-		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images',},
-		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/css/',},
-		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts'}
+                    {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/<%= pkg.version %>/config/locales/'},
+                    {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/0.0.0/config/locales/'},
+		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/<%= pkg.version %>/images/',},
+		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/0.0.0/images/',},
+		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/<%= pkg.version %>/flash/',},
+		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/0.0.0/flash/',},
+                    {expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/<%= pkg.version %>/templates/',},
+                    {expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/0.0.0/templates/',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/<%= pkg.version %>/css/images',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/0.0.0/css/images',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/<%= pkg.version %>/css/',},
+		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/0.0.0/css/',},
+		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/<%= pkg.version %>/css/fonts'},
+		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/0.0.0/css/fonts'},
+                    {expand: true, cwd: 'dist/<%= pkg.version %>/', src: ['**'], dest: 'dist/0.0.0/',}
 		],
 	    }
 	},
