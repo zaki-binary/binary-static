@@ -7,7 +7,7 @@ module.exports.randomStr = function (length, initChars) {
     return str;
 };
 
-module.exports.openUrls = function (browser, urls) {
+module.exports.openUrlsOld = function (browser, urls) {
 
     urls.forEach(function (url) {
 
@@ -17,7 +17,36 @@ module.exports.openUrls = function (browser, urls) {
             .url(visitUrl, function () {
                 console.log("Opening ", visitUrl);
             })
-            .waitForElementVisible('body', 5000);
+            .waitForElementVisible('body', 5000)
+            .pause(2000);
     });
+    
     browser.end();
 };
+
+module.exports.smoteTestUrls = function (urls) {
+
+    var testSteps = {};
+
+    urls.forEach(function (url) {
+
+        var testName = 'Smoke test: "' + url.page + '"';
+
+        testSteps[testName] = function (browser) {
+
+            var visitUrl = browser.globals.url + url.path;
+
+            browser
+                .url(visitUrl)
+                .waitForElementVisible('body', 5000)
+                .pause(2000);
+        };
+    });
+
+    testSteps.end = function (browser) {
+        browser.end();
+    };
+
+    return testSteps;
+};
+

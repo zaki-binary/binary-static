@@ -1,12 +1,9 @@
 ﻿var utils = require('../../utils');
 
 var urls = [
-    '/charting',
-    '/c/chart_application.cgi',
-    '/d/smartchart.cgi',
-    '/c/livechart.cgi'
+    { page: 'Java Charts', path: '/c/chart_application.cgi' },
+    { page: 'Light Charts', path: '/d/smartchart.cgi' },
+    { page: 'Live Charts', path: '/c/livechart.cgi' }
 ];
 
-module.exports.smokeBasic = function (browser) {
-    utils.openUrls(browser, urls);
-};
+module.exports = utils.smoteTestUrls(urls);

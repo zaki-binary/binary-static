@@ -1,16 +1,14 @@
 ﻿var utils = require('../../utils');
 
 var urls = [
-    '/c/trade.cgi?market=forex',    
-    '/c/trade.cgi?market=indices',
-    '/c/trade.cgi?market=stocks',
-    '/c/trade.cgi?market=commodities',
-    '/c/trade.cgi?market=sectors',
-    '/c/trade.cgi?market=random',
-    '/c/trade.cgi?market=smarties',
-    '/d/tick_trades.cgi'
+    { page: 'Forex', path: '/c/trade.cgi?market=forex' },
+    { page: 'Indices', path: '/c/trade.cgi?market=indices' },
+    { page: 'Stocks', path: '/c/trade.cgi?market=stocks' },
+    { page: 'Commodities', path: '/c/trade.cgi?market=commodities' },
+    { page: 'Sectors', path: '/c/trade.cgi?market=sectors' },
+    { page: 'Randoms', path: '/c/trade.cgi?market=random' },
+    { page: 'Smart Indices', path: '/c/trade.cgi?market=smarties' },
+    { page: 'Tick Trades', path: '/d/tick_trades.cgi' }
 ];
 
-module.exports.smokeBasic = function (browser) {
-    utils.openUrls(browser, urls);
-};
+module.exports = utils.smoteTestUrls(urls);
