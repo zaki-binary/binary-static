@@ -28,13 +28,6 @@ module.exports = function (grunt) {
 		},
 	    },
 	},
-        rename: {
-            main: {
-                files: [
-                    { src: ['dist/css/binary.css'], dest: 'dist/css/binary_<%= pkg.version %>.css' }
-                ]
-            },
-        },
 	cssmin: {
 	    combine: {
 		files: {
@@ -234,7 +227,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
@@ -243,5 +235,5 @@ module.exports = function (grunt) {
 
     // Task to be performed
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
-    grunt.registerTask('default', ['clean', 'compass', 'rename', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };
