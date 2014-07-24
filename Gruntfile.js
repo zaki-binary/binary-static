@@ -130,7 +130,7 @@ module.exports = function (grunt) {
 		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/<%= pkg.version %>/images/',},
 		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/0.0.0/images/',},
 		    {expand: true, cwd: 'src/downloads/', src: ['**'], dest: 'dist/<%= pkg.version %>/downloads/',},
-		    {expand: true, cwd: 'src/downloads/', src: ['**'], dest: 'dist/<%= pkg.version %>/downloads/',},
+		    {expand: true, cwd: 'src/downloads/', src: ['**'], dest: 'dist/0.0.0/downloads/',},
 		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/<%= pkg.version %>/flash/',},
 		    {expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/0.0.0/flash/',},
                     {expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/<%= pkg.version %>/templates/',},
