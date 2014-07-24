@@ -30,7 +30,7 @@
               %li= l('Account management facilities (under development)')
               %li= l('Trading facilities (under development)')
           .grd-grid-4.grd-grid-mobile-12
-              %img.responsive{:src => url_for('pages/partnerapi/api.svg')}
+              %img.responsive{:src => url_for('images/pages/partnerapi/api.svg')}
     .section
       %a#api-rest
       .section-content
@@ -42,7 +42,7 @@
             %div#rest-main
               %p= l('Calls which invoke the API are simple, recognizable and can be negotiated from all popular web programming technologies in use today. For example, to get a list of "marketplaces" currently available at [_1]:',  stash->{website_name})
           .grd-grid-4.grd-grid-mobile-12
-            %img.responsive{:src => url_for('pages/partnerapi/rest.svg')}
+            %img.responsive{:src => url_for('images/pages/partnerapi/rest.svg')}
           .grd-grid-12
             %ul
               %li GET /markets
@@ -61,7 +61,7 @@
               %p!= l('OAuth2.0 is the emerging internet standard for this purpose. See <a href="http://oauth.net/2" target="_blank">http://oauth.net/2</a> for a formal definition, although we will guide you through the steps relevant to your platform.')
               %p= l('The most important benefit of using OAuth2.0 is that the end-users, who already have valid logins at [_1], are able to leverage new applications to execute various trading activities, without these applications needing to know or "see" the end-users security credentials.', stash->{website_name})
           .grd-grid-5.grd-grid-mobile-12
-            %img.responsive{:src => url_for('pages/partnerapi/security.svg')}
+            %img.responsive{:src => url_for('images/pages/partnerapi/security.svg')}
           .grd-grid-12
             %p!= l('Further to this, the API interface is hosted by an API Proxy management provider, namely <a href="http://apigee.com" target="_blank">Apigee</a>. This service applies several services of benefit both to the application developer and to the API provider.')
     .section
@@ -71,7 +71,7 @@
           .grd-grid-12.grd-with-padding
             %h1= l('Console Facility')
           .grd-grid-4.grd-grid-mobile-12
-            %img.responsive{:src => url_for('pages/partnerapi/console-facility.svg')}
+            %img.responsive{:src => url_for('images/pages/partnerapi/console-facility.svg')}
           .grd-grid-8.grd-grid-mobile-12
             %ul#console-main
               %li.image
@@ -91,4 +91,4 @@
                 %a{:href => url_for('/devguide')}= l('Developer\'s Guide')
                 = l('for detailed coding instructions.')
           .grd-grid-4.grd-grid-mobile-12
-            %img.responsive{:src => url_for('pages/partnerapi/developer-guide.svg')}
+            %img.responsive{:src => url_for('images/pages/partnerapi/developer-guide.svg')}
