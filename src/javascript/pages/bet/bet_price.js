@@ -545,7 +545,7 @@ var BetPrice = function() {
                 show_error: function(form, error) {
                     var buy_button= form.parent();
                     var error_box = buy_button.parents().siblings(".bet-error-box");
-                    if (error === null || typeof error === 'undefined') {
+                    if (!error) {
                         error_box.hide();
                         buy_button.show();
                     } else {
