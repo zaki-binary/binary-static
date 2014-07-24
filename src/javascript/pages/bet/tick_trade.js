@@ -13,7 +13,130 @@ function updateTTChart(config) {
 
 var TickTrade = function() {
     return {
-        client_prediction: function() {
+        initialize_chart: function(config) {
+            var $self = this;
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    type: 'line',
+                    renderTo: config.render_to,
+                    width: 401,
+                    height: 90,
+                    backgroundColor: null,
+                    events: { load: $self.plot(config.plot_from, config.plot_to, config.contract_start) },
+                },
+                xAxis: {
+                    type: 'datetime',
+                    min: parseInt(config['plot_from']),
+                    max: parseInt(config['plot_to']),
+                    labels: {
+                        enabled: false,
+                    }
+                },
+                yAxis: {
+                    title: '',
+                    //min: config['y_range']['min'],
+                    //max: config['y_range']['max'],
+                },
+                series: [{
+                    data: [],
+                }],
+                title: '',
+                exporting: {enabled: false, enableImages: false},
+                legend: {enabled: false},
+            });
+
+            if (typeof config.x_indicators !== 'undefined') {
+                $self.x_indicators = config.x_indicators;
+            }
+
+            if (typeof config.decimal !== 'undefined') {
+                $self.decimal = config.decimal;
+            }
+
+            $self.chart = chart;
+        },
+        plot: function(plot_from, plot_to, contract_start) {
+            var $self = this;
+
+            var plot_from_moment = moment(plot_from).utc();
+            var plot_to_moment = moment(plot_to).utc();
+            var contract_start_moment = moment(contract_start).utc();
+            var ticks_needed = $('#tick-count').data('count') + 1;
+            $self.applicable_ticks = [];
+
+            var symbol = BetForm.attributes.underlying();
+            var stream_url = window.location.protocol + '//' + page.settings.get('streaming_server');
+            stream_url += "/stream/ticks/" + symbol + "/" + plot_from_moment.unix() + "/" + plot_to_moment.unix();
+            $self.ev = new EventSource(stream_url, { withCredentials: true });
+
+            var counter=0;
+            $self.ev.onmessage = function(msg) {
+                if ($self.applicable_ticks.length >= ticks_needed) {
+                    $self.ev.close();
+                    return;
+                    // evaluate conteact
+                }
+
+                var data = JSON.parse(msg.data);
+                if (!(data[0] instanceof Array)) {
+                    data = [ data ];
+                }
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i][0] === 'tick') {
+                        var tick = {
+                            epoch: parseInt(data[i][1]),
+                            quote: parseFloat(data[i][2])
+                        };
+                        $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
+
+                        if (tick.epoch > contract_start_moment.unix()) {
+                            $self.applicable_ticks.push(tick);
+
+                            var tick_index = $self.applicable_ticks.length - 1;
+                            var indicator_key = '_' + tick_index;
+
+                            if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
+                                $self.x_indicators[indicator_key]['index'] = tick_index;
+                                $self.add($self.x_indicators[indicator_key]);
+                                delete $self.x_indicators[indicator_key];
+                            }
+                            var total = 0;
+                            for (var i=0; i < $self.applicable_ticks.length; i++) {
+                                total += parseFloat($self.applicable_ticks[i].quote);
+                            }
+                            var calc_barrier =  total/$self.applicable_ticks.length;
+                            calc_barrier = calc_barrier.toFixed($self.decimal); // round calculated barrier
+
+                            $self.chart.yAxis[0].removePlotLine('tick-barrier');
+                            $self.chart.yAxis[0].addPlotLine({
+                                id: 'tick-barrier',
+                                value: calc_barrier,
+                                color: 'green',
+                                label: {
+                                    text: 'barrier('+calc_barrier+')',
+                                    align: 'center'
+                                },
+                                width: 2,
+                            });
+                        }
+                    }
+                }
+            };
+            $self.ev.onerror = function(e) {$self.ev.close(); };
+        },
+        add: function(indicator) {
+            var $self = this;
+
+            $self.chart.xAxis[0].addPlotLine({
+               value: $self.applicable_ticks[indicator.index].epoch * 1000,
+               id: indicator.id,
+               label: {text: indicator.label},
+               color: '#e98024',
+               width: 2,
+            });
+        },
+        /*client_prediction: function() {
             return $('#contract-sentiment').data('contract-sentiment');
         },
         asian_barrier: function() {
@@ -180,6 +303,6 @@ var TickTrade = function() {
             var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
             result = result.toFixed(number_after_dec);
             return result;
-        },
+        },*/
     };
 }();

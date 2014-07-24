@@ -153,40 +153,45 @@ var BetPrice = function() {
             var that = this;
 
             var display_html = data.display;
-            var start_epoch = data.contract_start;
             var con = this.buy_response_container();
             con.children('div').first().html(display_html);
 
-            var symbol = BetForm.attributes.underlying();
-            var start_moment = moment(start_epoch*1000).utc();
-            var how_many_ticks = $('#tick-count').data('count') + 1;
-            if ($('#tick_chart').length > 0) {
-                var chart_config = {
-                    renderTo: 'tick_chart',
-                    symbol: symbol,
-                    with_trades: 0,
-                    shift: 0,
-                    ticktrade_chart: 1,
-                    with_markers: 1,
-                    with_tick_config: 1,
-                    contract_start_time: start_moment.unix(),
-                    how_many_ticks: how_many_ticks,
-                    with_entry_spot: 1,
-                };
+            //calculated barrier is rounded to one more decimal place
+            var decimal = parseInt(data.decimal)+1;
+            var how_many_ticks = $('#tick-count').data('count');
+            var end = new Date((parseInt(data.contract_start) + parseInt((how_many_ticks+2)*2)) * 1000).getTime();
+            var last_tick_index = parseInt(how_many_ticks) - 1;
+            var last_tick_key = '_'+ last_tick_index;
 
-                var liveChartConfig = new LiveChartConfig(chart_config);
-                var from = new Date(start_moment.add('seconds', 1));
-                var to = new Date(start_moment.add('minutes',3));
-                liveChartConfig.update({
-                    interval: {
-                        from: from,
-                        to: to
-                    },
-                });
+            var exit_tick_key = '_'+how_many_ticks;
+            var x_indicators = {};
+            x_indicators['_0'] = {
+                label: 'Tick 1',
+                id: 'start_tick',
+            };
+            x_indicators[last_tick_key] = {
+                label: 'Tick '+how_many_ticks,
+                id: 'last_tick',
+            };
+            x_indicators[exit_tick_key] = {
+                label: 'Exit Spot',
+                id: 'exit_tick',
+            };
 
-                configure_livechart();
-                updateTTChart(liveChartConfig);
-            }
+            var y_range = {
+                'min': parseFloat(data.previous_tick) - parseFloat(data.max_dev),
+                'max': parseFloat(data.previous_tick) + parseFloat(data.max_dev),
+            };
+
+            TickTrade.initialize_chart({
+                render_to: 'tick_chart',
+                plot_from: data.previous_tick_epoch * 1000,
+                plot_to: end,
+                contract_start: data.contract_start * 1000,
+                x_indicators: x_indicators,
+                y_range: y_range,
+                decimal: decimal,
+            });
 
             if ($('#is-digit').data('is-digit')) {
                 that.digit.process(start_moment);
@@ -229,23 +234,23 @@ var BetPrice = function() {
                                             quote: data[i][2]
                                         };
                                         if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
-                                                    $self.applicable_ticks.push(tick.quote);
-                                                    $self.digit_tick_count++;
-                                                    var last_digit = tick.quote.toString().substr(-1);
-                                                    if (!$('#digit-current').hasClass('flipper')) {
-                                                        $('#digit-current').addClass('flipper focus');
-                                                    }
-                                                    $('#digit-current').text(last_digit);
-                                                    $('#digit-count').text($self.digit_tick_count);
+                                            $self.applicable_ticks.push(tick.quote);
+                                            $self.digit_tick_count++;
+                                            var last_digit = tick.quote.toString().substr(-1);
+                                            if (!$('#digit-current').hasClass('flipper')) {
+                                                $('#digit-current').addClass('flipper focus');
+                                            }
+                                            $('#digit-current').text(last_digit);
+                                            $('#digit-count').text($self.digit_tick_count);
 
-                                                    if ($('#digit-contract-details').css('display') === 'none') {
-                                                        $('#digit-contract-details').show();
-                                                    }
-                                                }
+                                            if ($('#digit-contract-details').css('display') === 'none') {
+                                                $('#digit-contract-details').show();
+                                            }
+                                        }
 
-                                                if ($self.applicable_ticks.length === how_many_ticks) {
-                                                    $self.evaluate_digit_outcome();
-                                                    $self.reset();
+                                        if ($self.applicable_ticks.length === how_many_ticks) {
+                                            $self.evaluate_digit_outcome();
+                                            $self.reset();
                                         }
                                     }
                                 }
