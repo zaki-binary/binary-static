@@ -10,8 +10,10 @@ var element = {
         month: '#dobmm',
         year: '#dobyy'
     },
+    countryOfResidenceInput: '#residence',
     firstLineAddressInput: '#Address1',
     townCityInput: '#AddressTown',
+    stateProvincyInput: '#AddressState',
     telephoneInput: '#Tel',
     passwordInput: '#chooseapassword',
     secretAnswerInput: '#secretanswer',
@@ -35,8 +37,10 @@ module.exports = {
             .setValue(element.dateofBirthSelects.day, '1')
             .setValue(element.dateofBirthSelects.month, 'Jan')
             .setValue(element.dateofBirthSelects.year, '1950')
+            .setValue(element.countryOfResidenceInput, 'Austria')
             .setValue(element.firstLineAddressInput, randomStr)
             .setValue(element.townCityInput, randomStr)
+            .setValue(element.stateProvincyInput, 'Other')
             .setValue(element.telephoneInput, '123123')
             .setValue(element.passwordInput, randomStr)
             .setValue(element.secretAnswerInput, randomStr)

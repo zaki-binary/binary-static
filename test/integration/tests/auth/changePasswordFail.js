@@ -20,6 +20,7 @@ module.exports = {
             .url(browser.globals.url + '/d/change_password.cgi')
             .waitForElementVisible(element.form, 5000)
             .click(element.changePasswordButton)
+            .pause(5000)
             .assert.containsText('body', 'enter a password')
         .end();
     }

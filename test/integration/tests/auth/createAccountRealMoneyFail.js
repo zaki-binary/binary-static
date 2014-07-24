@@ -9,6 +9,7 @@ var element = {
         'use only letters',
         'enter your email address',
         'input a valid date',
+        'specify your country',
         'enter the first line of your home address',
         'enter a town or city',
         'nvalid telephone number',
