@@ -17,8 +17,6 @@
             %a{:href => "#translations"}= l('Translations')
           %li#sidebar-link-section-6
             %a{:href => "#mobile-application"}= l('Mobile application')
-          %li#sidebar-link-section-7
-            %a{:href => "#test-suite"}= l('Test Suite')
         .sidebar-button
           %a.pjaxload{:href => url_for('contact.cgi')}= l('Contact us')
     .grd-grid-9.grd-grid-mobile-12.grd-parent
@@ -115,18 +113,3 @@
               .grd-grid-12.grd-row-padding
               .grd-grid-12
                 %img.responsive{:src => url_for('pages/open-source-projects/open-source-projects-6.svg')}
-      .section
-        %a#test-suite
-        .section-content
-          #section-7
-            .grd-grid-12
-              %h1= l('Test Suite')
-            .grd-grid-12
-              %h4= l('A Selenium test suite for Binary.com')
-            .grd-grid-12.grd-row-padding
-            .grd-grid-4.grd-parent.grd-grid-mobile-6.grd-centered-mobile
-              .grd-grid-9
-                %img.responsive{:src => url_for('pages/open-source-projects/open-source-projects-7.svg')}
-            .grd-grid-8.grd-grid-mobile-12.grd-parent
-              .grd-grid-12
-                %p!= l('Binary.com is developing a Selenium test suite designed to run against <a target="_blank" href="[_1]">BrowserStack Automate</a>. To participate in this project, please fork the project on <a target="_blank" href="[_2]">github</a> and submit a pull-request of your work.', 'https://www.browserstack.com/automate','https://github.com/binary-com/selenium')
