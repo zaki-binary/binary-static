@@ -28,5 +28,5 @@ module.exports = {
     },
     "loginFailAccountUnavailable": function (browser) {
         loginWith(browser, 'VRTC449697', 'wrongpassword', 'account is unavailable');
-    }
+    }    
 };

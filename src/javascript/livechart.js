@@ -388,8 +388,8 @@ LiveChartOHLC.prototype.process_tick = function(tickInput) {
     };
     this.spot = tick.quote;
 
-    if (this.chart.series) {
-        return;
+    if (!this.chart.series) {
+        return; 
     }
 
     var data = this.chart.series[0].options.data;

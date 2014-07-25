@@ -8,7 +8,7 @@ var formId = '#virtual-acc-form',
 
 module.exports = {
 
-    "createAccountFail": function (browser) {
+    "createAccountHomePageFail": function (browser) {
         
         browser
             .url(browser.globals.url)
@@ -17,7 +17,7 @@ module.exports = {
             .setValue(element.passwordInput, '1')
             .click(element.signinButton)
             .pause(5000)
-            .assert.containsText('body', 'incorrect email')
+            .assert.containsText('body', 'information is incomplete or incorrect')
         .end();
     }
 };

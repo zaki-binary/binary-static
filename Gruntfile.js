@@ -64,6 +64,7 @@ module.exports = function (grunt) {
 		    'src/javascript/external/jstree/jquery.jstree.js',
 		    'src/javascript/external/jquery-ui-timepicker/jquery.ui.timepicker.js',
 		    'src/javascript/external/eventsource.js',
+		    'src/javascript/base/onerror.js',
 		    'src/javascript/base/pjax-lib.js',
 		    'src/javascript/external/mmenu/jquery.mmenu.min.all.js',
 		    'src/javascript/form_validation.js',
@@ -203,23 +204,34 @@ module.exports = function (grunt) {
                 push: false,
            },
         },
-        nightwatch: {
-            options: {
-                settings: {
-                    "src_folders": ["test/integration/tests/"]
-                },
-                "selenium": {
-                    "start_process": false,
-                    "host": "hub.browserstack.com",
-                    "port": 80
-                }
-            }
-        },
         shell: {
             nightwatch: {
-                command: 'nightwatch -e chrome,firefox,ie',
-                cwd: 'test/integration'
-            }
+                command: 'nightwatch',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/integration'
+                    }
+                }                
+            },
+            browserstack: {
+                command: 'nightwatch -c browserstack-ff.json',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/integration'
+                    }
+                }
+            },
+            smoke: {
+                command: 'nightwatch -g tests/smoke-tests',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/integration'
+                    }
+                }
+            }            
         }
     });
 
@@ -236,7 +248,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-gh-pages');
-    grunt.loadNpmTasks('grunt-nightwatch');
     grunt.loadNpmTasks('grunt-shell');
 
     // Task to be performed

@@ -131,9 +131,10 @@ BetAnalysis.DigitInfo.prototype = {
         // Always recompute and draw, even if theres no new data.
         // This is especially useful on first reuqest, but maybe in other ways.
         var filtered_spots = [];
-        var digit = 10;
+        var digit = 10,
+            filterFunc = function (el) { return el == digit; };
         while(digit--) {
-            filtered_spots[digit] = this.spots.filter(function(el) { return el == digit; }).length;
+            filtered_spots[digit] = this.spots.filter(filterFunc).length;
         }
         return series.setData(filtered_spots);
     },
