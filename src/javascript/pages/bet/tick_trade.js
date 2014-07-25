@@ -2,7 +2,7 @@ var tt_chart;
 
 function updateTTChart(config) {
     if (tt_chart) {
-        TickTrade.reset();
+        TickDisplay.reset();
         tt_chart.chart.destroy();
         tt_chart = null;
     }
@@ -11,32 +11,94 @@ function updateTTChart(config) {
     tt_chart.show_chart();
 }
 
-var TickTrade = function() {
+var TickDisplay = function() {
     return {
+        reset: function() {
+            var $self = this;
+            $self.contract_barrier = null;
+            $self.applicable_ticks = [];
+            $self.chart.destroy();
+        },
+        initialize: function(data) {
+            var $self = this;
+
+            var previous_tick = parseFloat(data.previous_tick);
+            var max_deviation = parseFloat(data.max_dev);
+            var y_range = {
+                'min': previous_tick - max_deviation,
+                'max': previous_tick + max_deviation,
+            };
+
+            // setting up globals
+            $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
+            $self.number_of_ticks = parseInt(data.number_of_ticks);
+            $self.contract_start_ms = parseInt(data.contract_start * 1000);
+            $self.contract_type = data.contract_type;
+            $self.contract_sentiment = data.contract_sentiment;
+            $self.price = parseFloat(data.price);
+            $self.payout = parseFloat(data.payout);
+            $self.set_barrier = true;
+
+            $self.set_x_indicators();
+
+            $self.initialize_chart({
+                plot_from: data.previous_tick_epoch * 1000,
+                plot_to: new Date((parseInt(data.contract_start) + parseInt(($self.number_of_ticks+2)*2)) * 1000).getTime(),
+                y_range: y_range,
+            });
+        },
+        set_x_indicators: function() {
+            var $self = this;
+
+            if ($self.contract_type.match('ASIAN')) {
+                var last_tick_index = $self.number_of_ticks - 1;
+
+                $self.x_indicators = {
+                    '_0': { label: 'Tick 1', id: 'start_tick'},
+                };
+                $self.x_indicators['_' + last_tick_index] = {
+                    label: 'Tick ' + $self.number_of_ticks,
+                    id: 'last_tick',
+                };
+                $self.x_indicators['_' + $self.number_of_ticks] = {
+                    label: 'Exit Tick',
+                    id: 'exit_tick',
+                };
+            } else if ($self.contract_type.match('FLASH')) {
+                $self.x_indicators = {
+                    '_1': { label: 'Tick 1', id: 'start_tick'},
+                };
+                $self.x_indicators['_' + $self.number_of_ticks] = {
+                    label: 'Exit Tick',
+                    id: 'exit_tick',
+                };
+            } else {
+                $self.x_indicators = {};
+            }
+
+        },
         initialize_chart: function(config) {
             var $self = this;
 
-            var chart = new Highcharts.Chart({
+            $self.chart = new Highcharts.Chart({
                 chart: {
                     type: 'line',
-                    renderTo: config.render_to,
-                    width: 401,
-                    height: 90,
+                    renderTo: 'tick_chart',
+                    width: 394,
+                    height: 125,
                     backgroundColor: null,
-                    events: { load: $self.plot(config.plot_from, config.plot_to, config.contract_start) },
+                    events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
                 xAxis: {
                     type: 'datetime',
                     min: parseInt(config['plot_from']),
                     max: parseInt(config['plot_to']),
-                    labels: {
-                        enabled: false,
-                    }
+                    labels: { enabled: false, }
                 },
                 yAxis: {
                     title: '',
-                    //min: config['y_range']['min'],
-                    //max: config['y_range']['max'],
+                    min: config['y_range']['min'],
+                    max: config['y_range']['max'],
                 },
                 series: [{
                     data: [],
@@ -45,24 +107,14 @@ var TickTrade = function() {
                 exporting: {enabled: false, enableImages: false},
                 legend: {enabled: false},
             });
-
-            if (typeof config.x_indicators !== 'undefined') {
-                $self.x_indicators = config.x_indicators;
-            }
-
-            if (typeof config.decimal !== 'undefined') {
-                $self.decimal = config.decimal;
-            }
-
-            $self.chart = chart;
         },
-        plot: function(plot_from, plot_to, contract_start) {
+        plot: function(plot_from, plot_to) {
             var $self = this;
 
             var plot_from_moment = moment(plot_from).utc();
             var plot_to_moment = moment(plot_to).utc();
-            var contract_start_moment = moment(contract_start).utc();
-            var ticks_needed = $('#tick-count').data('count') + 1;
+            var contract_start_moment = moment($self.contract_start_ms).utc();
+            var ticks_needed = $self.number_of_ticks + 1;
             $self.applicable_ticks = [];
 
             var symbol = BetForm.attributes.underlying();
@@ -70,12 +122,11 @@ var TickTrade = function() {
             stream_url += "/stream/ticks/" + symbol + "/" + plot_from_moment.unix() + "/" + plot_to_moment.unix();
             $self.ev = new EventSource(stream_url, { withCredentials: true });
 
-            var counter=0;
             $self.ev.onmessage = function(msg) {
                 if ($self.applicable_ticks.length >= ticks_needed) {
                     $self.ev.close();
+                    $self.evaluate_contract_outcome();
                     return;
-                    // evaluate conteact
                 }
 
                 var data = JSON.parse(msg.data);
@@ -99,31 +150,58 @@ var TickTrade = function() {
                             if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
                                 $self.x_indicators[indicator_key]['index'] = tick_index;
                                 $self.add($self.x_indicators[indicator_key]);
-                                delete $self.x_indicators[indicator_key];
                             }
-                            var total = 0;
-                            for (var i=0; i < $self.applicable_ticks.length; i++) {
-                                total += parseFloat($self.applicable_ticks[i].quote);
-                            }
-                            var calc_barrier =  total/$self.applicable_ticks.length;
-                            calc_barrier = calc_barrier.toFixed($self.decimal); // round calculated barrier
 
-                            $self.chart.yAxis[0].removePlotLine('tick-barrier');
-                            $self.chart.yAxis[0].addPlotLine({
-                                id: 'tick-barrier',
-                                value: calc_barrier,
-                                color: 'green',
-                                label: {
-                                    text: 'barrier('+calc_barrier+')',
-                                    align: 'center'
-                                },
-                                width: 2,
-                            });
+                            $self.add_barrier();
                         }
                     }
                 }
             };
             $self.ev.onerror = function(e) {$self.ev.close(); };
+        },
+        add_barrier: function() {
+            var $self = this;
+
+            if (!$self.set_barrier) {
+                return;
+            }
+
+            var barrier_type = $self.contract_type.match('ASIAN') ? 'asian' : 'static';
+
+            if (barrier_type === 'static') {
+                var barrier_tick = $self.applicable_ticks[0];
+                $self.chart.yAxis[0].addPlotLine({
+                    id: 'tick-barrier',
+                    value: barrier_tick.quote,
+                    label: {text: 'Barrier('+barrier_tick.quote+')', align: 'center'},
+                    color: 'green',
+                    width: 2,
+                });
+                $self.contract_barrier = barrier_tick.quote;
+                $self.set_barrier = false;
+            }
+
+            if (barrier_type === 'asian') {
+                var total = 0;
+                for (var i=0; i < $self.applicable_ticks.length; i++) {
+                    total += parseFloat($self.applicable_ticks[i].quote);
+                }
+                var calc_barrier =  total/$self.applicable_ticks.length;
+                calc_barrier = calc_barrier.toFixed($self.number_of_decimal); // round calculated barrier
+
+                $self.chart.yAxis[0].removePlotLine('tick-barrier');
+                $self.chart.yAxis[0].addPlotLine({
+                    id: 'tick-barrier',
+                    value: calc_barrier,
+                    color: 'green',
+                    label: {
+                        text: 'Barrier('+calc_barrier+')',
+                        align: 'center'
+                    },
+                    width: 2,
+                });
+                $self.contract_barrier = calc_barrier;
+            }
         },
         add: function(indicator) {
             var $self = this;
@@ -136,173 +214,60 @@ var TickTrade = function() {
                width: 2,
             });
         },
-        /*client_prediction: function() {
-            return $('#contract-sentiment').data('contract-sentiment');
-        },
-        asian_barrier: function() {
-            var total = 0;
-
-            for (var i=0; i < ticks_array.length; i++) {
-                total += ticks_array[i].quote;
-            }
-            return total/ticks_array.length;
-        },
-        how_many_ticks: function() {
-            return tt_chart.config.how_many_ticks;
-        },
-        process: function(current_tick) {
+        evaluate_contract_outcome: function() {
             var $self = this;
 
-            $self.contract_type = $('#contract-type').data('contract-type');
-            $self.contract_barrier = ($self.contract_type.match('FLASH')) ? $self.entry_spot : $self.asian_barrier();
-
-            if (!$self.entry_spot && tt_chart.config.with_entry_spot) {
-                $self.set_entry_spot();
+            if (!$self.contract_barrier) {
+                return; // can't do anything without barrier
             }
 
-            if ($self.contract_type.match('ASIAN')) {
-                if (tt_chart.config.has_indicator('tick_barrier')) {
-                    tt_chart.remove_indicator('tick_barrier');
+            var exit_tick_index = $self.applicable_ticks.length - 1;
+            var exit_spot = $self.applicable_ticks[exit_tick_index].quote;
+
+            if ($self.contract_sentiment === 'up') {
+                if (exit_spot > $self.contract_barrier) {
+                    $self.win();
+                } else {
+                    $self.lose();
                 }
-                var barrier = new LiveChartIndicator.Barrier({
-                    name: "tick_barrier",
-                    value: $self.contract_barrier,
-                    color: 'green',
-                    label: text.localize('Barrier 2')
-                });
-                tt_chart.add_indicator(barrier);
-            }
-
-            if (current_tick) {
-                if (tt_chart.config.with_tick_config) {
-                    var tick_prediction = $self.client_prediction();
-                    var win_pallet = 'rgba(46,136,54,0.1)';
-                    var lose_pallet = 'rgba(204,0,0,0.05)';
-                    var what_color;
-
-                    if (tick_prediction === 'up') {
-                        what_color = current_tick > $self.contract_barrier ? win_pallet: lose_pallet;
-                    } else if (tick_prediction === 'down') {
-                        what_color = current_tick < $self.contract_barrier ? win_pallet: lose_pallet;
-                    }
-                    tt_chart.chart.chartBackground.css({color: what_color});
+            } else if ($self.contract_sentiment === 'down') {
+                if (exit_spot < $self.contract_barrier) {
+                    $self.win();
+                } else {
+                    $self.lose();
                 }
             }
 
-            if ($self.how_many_ticks() && ticks_array.length == $self.how_many_ticks()) {
-                $self.process_tick_trade();
-                $self.reset();
-            }
         },
-        set_entry_spot: function() {
+        win: function() {
             var $self = this;
 
-            var entry_data;
-            if (!$self.entry_spot && ticks_array.length > 0) {
-                var contract_start_epoch = tt_chart.config.contract_start_time;
-                for (var i=0;i < ticks_array.length;i++) {
-                    var data = ticks_array[i];
-                    if (data.epoch > contract_start_epoch) {
-                        entry_data = data;
-                        break;
-                    }
-                }
-            }
-
-            if (typeof entry_data !== 'undefined') {
-                $self.entry_spot = entry_data.quote;
-                if ($self.entry_spot && !tt_chart.config.has_indicator('tick_barrier')) {
-                    var barrier = new LiveChartIndicator.Barrier({
-                        name: "tick_barrier",
-                        value: $self.entry_spot,
-                        color: 'green',
-                        label: text.localize('Barrier')
-                    });
-                    tt_chart.add_indicator(barrier);
-                }
-
-                if ($self.contract_type.match('ASIAN')) {
-                    var entry_time = new LiveChartIndicator.Barrier({
-                        name: 'contract_entry_time',
-                        label: text.localize('tick 1'),
-                        value: new Date(entry_data.epoch*1000),
-                        color: '#e98024',
-                        axis: 'x',
-                        nomargin: true,
-                    });
-                    tt_chart.add_indicator(entry_time);
-                }
-            }
+            var profit = $self.payout - $self.price;
+            $self.update_ui($self.payout, profit, 'This contract won');
         },
-        reset: function() {
-            if(tt_chart.ev)
-                tt_chart.ev.close();
-            current_tick_count = 0;
-            ticks_array = [];
-            this.entry_spot = null;
+        lose: function() {
+            var $self = this;
+            $self.update_ui(0, -$self.price, 'This contract lost');
         },
-        process_tick_trade: function() {
+        update_ui: function(final_price, pnl, contract_status) {
             var $self = this;
 
-            var exit_data = ticks_array[ticks_array.length - 1];
+            $('#bet-confirm-header').text(text.localize(contract_status));
+            $('#contract-outcome-buyprice').text($self.to_monetary_format($self.price));
+            $('#contract-outcome-payout').text($self.to_monetary_format(final_price));
 
-            if (typeof exit_data !== 'undefined') {
-                $self.exit_spot = exit_data.quote;
-            }
-
-            var last_tick_label = $self.contract_type.match('FLASH') ? $self.how_many_ticks() - 1 : $self.how_many_ticks();
-
-            if ($self.exit_spot) {
-                var exit = new LiveChartIndicator.Barrier({
-                    name: "exit_spot",
-                    value: new Date(exit_data.epoch*1000),
-                    color: '#e98024',
-                    axis : 'x',
-                    label: text.localize('tick') + ' ' + last_tick_label,
-                });
-                tt_chart.add_indicator(exit);
-            }
-
-            if (tt_chart.config.with_tick_config) {
-                $self.show_tick_expiry_outcome();
-            }
-        },
-        show_tick_expiry_outcome: function() {
-            var $self = this;
-
-            $('#bet-confirm-exp').hide();
-            $('#entry').text(': '+$self.entry_spot);
-            $('#exit').text(': '+$self.exit_spot);
-
-            var potential_payout = parseFloat($('#outcome-payout').data('payout').toString().replace(',',''));
-            var cost = parseFloat($('#outcome-buyprice').data('buyprice').toString().replace(',',''));
-            var final_price;
-            $('#contract-confirmation-details').hide();
-
-            if ($self.client_prediction() === 'up') {
-                final_price = ($self.exit_spot > $self.contract_barrier) ? potential_payout : 0;
-            } else if ($self.client_prediction() === 'down') {
-                final_price = ($self.exit_spot < $self.contract_barrier) ? potential_payout : 0;
-            }
-
-            $('#contract-outcome-payout').text($self.round(final_price,2));
-
-            if (final_price !== 0) {
-                $('#bet-confirm-header').text(text.localize('This contract won'));
-                $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
+            if (pnl > 0) {
+                $('#contract-outcome-label').text(text.localize('Profit'));
+                $('#contract-outcome-profit').addClass('profit').text($self.to_monetary_format(pnl));
             } else {
-                $('#bet-confirm-header').text(text.localize('This contract lost'));
                 $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
-                $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
+                $('#contract-outcome-profit').addClass('loss').text($self.to_monetary_format(pnl));
             }
-
-            $('#tick_info').show();
+            $('#contract-confirmation-details').hide();
             $('#contract-outcome-details').show();
         },
-        round: function(number,number_after_dec) {
-            var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
-            result = result.toFixed(number_after_dec);
-            return result;
-        },*/
+        to_monetary_format: function(number) {
+            return number.toFixed(2);
+        }
     };
 }();
