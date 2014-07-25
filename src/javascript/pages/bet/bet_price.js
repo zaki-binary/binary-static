@@ -156,42 +156,9 @@ var BetPrice = function() {
             var con = this.buy_response_container();
             con.children('div').first().html(display_html);
 
-            //calculated barrier is rounded to one more decimal place
-            var decimal = parseInt(data.decimal)+1;
-            var how_many_ticks = $('#tick-count').data('count');
-            var end = new Date((parseInt(data.contract_start) + parseInt((how_many_ticks+2)*2)) * 1000).getTime();
-            var last_tick_index = parseInt(how_many_ticks) - 1;
-            var last_tick_key = '_'+ last_tick_index;
-
-            var exit_tick_key = '_'+how_many_ticks;
-            var x_indicators = {};
-            x_indicators['_0'] = {
-                label: 'Tick 1',
-                id: 'start_tick',
-            };
-            x_indicators[last_tick_key] = {
-                label: 'Tick '+how_many_ticks,
-                id: 'last_tick',
-            };
-            x_indicators[exit_tick_key] = {
-                label: 'Exit Spot',
-                id: 'exit_tick',
-            };
-
-            var y_range = {
-                'min': parseFloat(data.previous_tick) - parseFloat(data.max_dev),
-                'max': parseFloat(data.previous_tick) + parseFloat(data.max_dev),
-            };
-
-            TickTrade.initialize_chart({
-                render_to: 'tick_chart',
-                plot_from: data.previous_tick_epoch * 1000,
-                plot_to: end,
-                contract_start: data.contract_start * 1000,
-                x_indicators: x_indicators,
-                y_range: y_range,
-                decimal: decimal,
-            });
+            if ($('#tick_chart').length > 0) {
+                TickDisplay.initialize(data);
+            }
 
             if ($('#is-digit').data('is-digit')) {
                 that.digit.process(start_moment);
@@ -310,8 +277,8 @@ var BetPrice = function() {
         },
         clear_buy_results: function () {
             var con = this.buy_response_container();
-            if (typeof tt_chart !== 'undefined' && tt_chart) {
-                TickTrade.reset();
+            if ($('#tick_chart').length > 0) {
+                TickDisplay.reset();
             }
 
             if ($('#is-digit').data('is-digit')) {
