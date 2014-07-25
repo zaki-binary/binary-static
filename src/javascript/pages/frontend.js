@@ -1,5 +1,3 @@
-"use strict";
-
 var slider = function() {
     var slider = $('#slider');
     if (slider.size()) {
@@ -60,9 +58,7 @@ var sidebar_scroll = function(elm_selector) {
 
             for (var i = 0; i < length; i++) {
                 if ($(window).scrollTop() === 0 || $(this).scrollTop() >= $('.section:eq(' + i + ')').offset().top - 5) {
-                    sidebar_nav.find('li').each(function() {
-                        $(this).removeClass('selected');
-                    });
+                    sidebar_nav.find('li').removeClass('selected');
 
                     if ($(window).scrollTop() === 0) {
                         // We're at the top of the screen, so highlight first nav item
@@ -117,8 +113,8 @@ var get_started_behaviour = function() {
                 return false;
             }
             var now_showing = $('.subsection:not(.hidden)');
-            var to_show = button.hasClass('next') ? now_showing.next('.subsection') : now_showing.prev('.subsection');
-            return update_active_subsection(to_show);
+            var show = button.hasClass('next') ? now_showing.next('.subsection') : now_showing.prev('.subsection');
+            return update_active_subsection(show);
         });
 
         fragment = (location.href.split('#'))[1];
@@ -165,7 +161,7 @@ var home_bomoverlay = {
     url : {
 	    param : {
             get : function(name) {
-                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                name = name.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
                 var regexS = "[\\?&]"+name+"=([^&#]*)";
                 var regex = new RegExp(regexS);
                 var results = regex.exec(window.location.href);
@@ -245,7 +241,7 @@ var random_symbol_change = function () {
 };
 
 var random_download_data = function () {
-    $('#section-5').on('click', '#download_random_data', function (e) {
+    $('#section-5').on('click', '#download_random_data', function () {
         var href = $('#random_download_week').find(':selected').attr('link');
         if(typeof href != 'undefined') {
             $(this).attr('href', href);

@@ -1,41 +1,36 @@
+var utils = require('../../utils');
+
 var element = {
     form: '#openAccForm',
-    firstNameInput: '#fname',
-    familyNameInput: '#lname',
-    emailInput: '#Email',
-    dateofBirthInputs: '???',
-    firstLineAddressInput: '#Address1',
-    townCityInput: '#AddressTown',
-    telephoneInput: '#Tel',
-    passwordInput: '#chooseapassword',
-    secretAnswerInput: '#secretanswer',
-    agreeToTermsCheckbox: '#tnc',
     openAccountButton: '#submit'
+},
+    errorList = [
+        'enter your first name',
+        'use only letters',
+        'enter your email address',
+        'input a valid date',
+        'enter the first line of your home address',
+        'enter a town or city',
+        'nvalid telephone number',
+        'enter a password',
+        'secret answer is too short',
+        'must accept the terms and conditions'
+    ];
+
+module.exports.init = function (browser) {
+    browser
+        .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=real')
+        .waitForElementVisible(element.form, 5000)
+        .click(element.openAccountButton)
+        .pause(5000);
 };
 
-module.exports = {
+errorList.forEach(function (str) {
+    module.exports["Checking for " + str] = function (browser) {
+        browser.assert.containsText(element.form, str);
+    };
+});
 
-    "createAccountSuccess": function (browser) {
-
-        var randomStr = browser.globals.randomStr(5),
-            randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
-
-        browser
-            .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=real')
-            .waitForElementVisible(element.form, 5000)
-            .click(element.openAccountButton)
-            .pause(5000)
-            .assert.containsText('body', 'enter your first name')
-            .assert.containsText('body', 'use only letters')
-            .assert.containsText('body', 'enter your email address')
-            .assert.containsText('body', 'input a valid date')
-            .assert.containsText('body', 'enter the first line of your home address')
-            .assert.containsText('body', 'enter a town or city')
-            .assert.containsText('body', 'nvalid telephone number')
-            .assert.containsText('body', 'enter a password')
-            .assert.containsText('body', 'secret answer is too short')
-            .assert.containsText('body', 'must accept the terms and conditions')
-            .assert.containsText('body', 'information is incomplete or incorrect')
-        .end();
-    }
+module.exports.end = function (browser) {
+    browser.end();
 };

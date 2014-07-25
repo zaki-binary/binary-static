@@ -509,7 +509,7 @@ var BetPrice = function() {
                         if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
                             prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
                             err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 + epsilon > bf_amount.stake_max ||
+                        } else if (prices[i].price.raw/100 - epsilon > bf_amount.stake_max ||
                             prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
                             // You probably think there should be two conditions above, but too high stake just
                             // makes for "too high payout" or "no return" errors.
@@ -545,7 +545,7 @@ var BetPrice = function() {
                 show_error: function(form, error) {
                     var buy_button= form.parent();
                     var error_box = buy_button.parents().siblings(".bet-error-box");
-                    if (error === null) {
+                    if (!error) {
                         error_box.hide();
                         buy_button.show();
                     } else {
