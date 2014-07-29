@@ -1,4 +1,4 @@
-﻿module.exports.command = function (path, callback) {
+﻿exports.command = function (path, callback) {
 
     var self = this,
         goToUrl = self.globals.url + path;

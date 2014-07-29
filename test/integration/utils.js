@@ -39,7 +39,8 @@ module.exports.smoteTestUrls = function (urls) {
             browser
                 .url(visitUrl)
                 .waitForElementVisible('body', 5000)
-                .pause(2000);
+                .pause(2000)
+                .assert.noJsErrors();
         };
     });
 
