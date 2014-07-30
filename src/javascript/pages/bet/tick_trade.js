@@ -24,6 +24,7 @@ var TickDisplay = function() {
 
             // setting up globals
             $self.number_of_ticks = parseInt(data.number_of_ticks);
+            $self.symbol = data.symbol;
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_type = data.contract_type;
             $self.set_barrier = true;
@@ -39,11 +40,13 @@ var TickDisplay = function() {
                 $self.payout = parseFloat(data.payout);
             }
 
+            var minimize = data.show_contract_result;
             $self.set_x_indicators();
 
             $self.initialize_chart({
                 plot_from: data.previous_tick_epoch * 1000,
                 plot_to: new Date((parseInt(data.contract_start) + parseInt(($self.number_of_ticks+2)*2)) * 1000).getTime(),
+                minimize: minimize,
             });
         },
         set_x_indicators: function() {
@@ -91,8 +94,8 @@ var TickDisplay = function() {
                 chart: {
                     type: 'line',
                     renderTo: 'tick_chart',
-                    width: 394,
-                    height: 125,
+                    width: config.minimize ? 394 : null,
+                    height: config.minimize ? 125 : null,
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
@@ -122,7 +125,7 @@ var TickDisplay = function() {
             var ticks_needed = $self.number_of_ticks + 1;
             $self.applicable_ticks = [];
 
-            var symbol = BetForm.attributes.underlying();
+            var symbol = $self.symbol;
             var stream_url = window.location.protocol + '//' + page.settings.get('streaming_server');
             stream_url += "/stream/ticks/" + symbol + "/" + plot_from_moment.unix() + "/" + plot_to_moment.unix();
             $self.ev = new EventSource(stream_url, { withCredentials: true });
