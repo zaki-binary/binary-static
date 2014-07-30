@@ -23,11 +23,6 @@ var TickDisplay = function() {
             var $self = this;
 
             var previous_tick = parseFloat(data.previous_tick);
-            var max_deviation = parseFloat(data.max_dev);
-            var y_range = {
-                'min': previous_tick - max_deviation,
-                'max': previous_tick + max_deviation,
-            };
 
             // setting up globals
             $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
@@ -97,8 +92,6 @@ var TickDisplay = function() {
                 },
                 yAxis: {
                     title: '',
-                    min: config['y_range']['min'],
-                    max: config['y_range']['max'],
                 },
                 series: [{
                     data: [],
