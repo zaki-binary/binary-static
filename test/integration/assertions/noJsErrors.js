@@ -6,12 +6,12 @@
 
     this.pass = function (result) {
 
-        return result && result.length === 0;
+        return !result.value && result.length === 0;
     };
 
     this.failure = function (result) {
         
-        var failed = result.value.length > 0;
+        var failed = result.value && result.value.length > 0;
         if (failed) {
             this.message = result.value;
         }
@@ -20,7 +20,7 @@
     };
 
     this.value = function (result) {
-        return result.value;
+        return result ? result.value : [];
     };
 
     this.command = function (callback) {
