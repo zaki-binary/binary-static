@@ -17,6 +17,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 1.5\n"
 
+#: cgi/tick_trades.cgi:446
+msgid " and "
+msgstr ""
+
 #: cgi/top_up_virtual.cgi:78
 msgid " has been credited to your Virtual money account"
 msgstr " telah dikreditkan kedalam akun uang virtual anda"
@@ -468,7 +472,7 @@ msgstr "6jam"
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>Bagian kasir dan pengaturan akun anda sudah dikunci</strong> - jika anda ingin membukanya, silakan masukkan kata sandi."
 
-#: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
+#: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:26
 #: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2258
 msgid "<option value=\"\"></option><option value=\"01\">Jan</option><option value=\"02\">Feb</option><option value=\"03\">Mar</option><option value=\"04\">Apr</option><option value=\"05\">May</option><option value=\"06\">Jun</option><option value=\"07\">Jul</option><option value=\"08\">Aug</option><option value=\"09\">Sep</option><option value=\"10\">Oct</option><option value=\"11\">Nov</option><option value=\"12\">Dec</option>"
 msgstr "<option value=\"\"></option><option value=\"01\">Jan</option><option value=\"02\">Feb</option><option value=\"03\">Mar</option><option value=\"04\">Apr</option><option value=\"05\">Mei</option><option value=\"06\">Jun</option><option value=\"07\">Jul</option><option value=\"08\">Ags</option><option value=\"09\">Sep</option><option value=\"10\">Okt</option><option value=\"11\">Nop</option><option value=\"12\">Des</option>"
@@ -902,10 +906,6 @@ msgstr "Anggota Tim Customer Support kami akan menghubungi anda sebentar lagi."
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "Sebuah indikator mementum yang memperlihatkan perubahan harga persen pada pergerakan rata-rata  triple exponentially smoothed. Seperti oscillator lainnya, TRIX bergerak mengelilingi baris nol."
 
-#: cgi/tick_trades.cgi:441
-msgid "A much more flexible version of Tick Trades is available on the "
-msgstr "Tersedia versi terbaru kontrak trading tik pada"
-
 #: cgi/templates/default/global/footer.tt:200
 #: frontend/templates/layouts/default/footer.html.haml:1
 msgid "A new version of the interface is available. Please refresh this page to try again."
@@ -1295,7 +1295,7 @@ msgstr "Aset"
 #: cgi/templates/default/global/footer.tt:60
 #: frontend/templates/layouts/default/footer.html.haml:1
 #: frontend/templates/resources/index.html.haml:1
-#: lib/BOM/Product/Contract.pm:2695 lib/BOM/Product/Contract.pm:2734
+#: lib/BOM/Product/Contract.pm:2701 lib/BOM/Product/Contract.pm:2740
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:139
 msgid "Asset Index"
@@ -1399,7 +1399,7 @@ msgstr "Input salah %1"
 msgid "Balance"
 msgstr "Saldo %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:454
 msgid "Bank Wire"
 msgstr "bank wire"
 
@@ -1446,12 +1446,12 @@ msgstr "Batasan"
 msgid "Barrier Step (%) out of limit"
 msgstr "Batasan (%) diluar batas"
 
-#: lib/BOM/Product/Contract.pm:2455
+#: lib/BOM/Product/Contract.pm:2461
 msgid "Barrier may not be adjusted."
 msgstr "Batasan tidak dapat dirubah."
 
 #. ($min_pips . ' pips away from the spot.')
-#: lib/BOM/Product/Contract.pm:2421
+#: lib/BOM/Product/Contract.pm:2427
 msgid "Barrier must be at least "
 msgstr "Batasan setidaknya "
 
@@ -1471,7 +1471,7 @@ msgstr "Terma Batasan"
 msgid "Barrier(s)"
 msgstr "Batas"
 
-#: lib/BOM/Product/Contract.pm:2446
+#: lib/BOM/Product/Contract.pm:2452
 msgid "Barriers must be on either side of the spot."
 msgstr "Batasan harus berada di kedua sisi spot."
 
@@ -2111,7 +2111,7 @@ msgid "Contract barrier must be positive."
 msgstr "Batasan kontrak harus bernilai positif."
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2809
+#: lib/BOM/Product/Contract.pm:2815
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "Kontrak tidak dapat berakhir pada periode liburan. Pilih waktu berakhir setelah %1."
 
@@ -2127,20 +2127,20 @@ msgstr "Penemuan kontrak dan harga"
 msgid "Contract expired"
 msgstr "Kontrak berakhir"
 
-#: lib/BOM/Product/Contract.pm:2580
+#: lib/BOM/Product/Contract.pm:2586
 msgid "Contract has already expired."
 msgstr "Kontrak telah berakhir."
 
-#: lib/BOM/Product/Contract.pm:1751
+#: lib/BOM/Product/Contract.pm:1752
 msgid "Contract market price is too close to final payout."
 msgstr "Harga kontrak berbeda tipis dengan hasil akhir."
 
 #. ($eod_blackout_expiry->display_string)
-#: lib/BOM/Product/Contract.pm:2619
+#: lib/BOM/Product/Contract.pm:2625
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "Kontrak tidak dapat berakhir dalam %1 terakhir trading."
 
-#: lib/BOM/Product/Contract.pm:2589
+#: lib/BOM/Product/Contract.pm:2595
 msgid "Contract must expire during trading hours."
 msgstr "Kontrak hanya dapat berakhir selama waktu trading."
 
@@ -2176,7 +2176,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "Kontrak pada %1 yang dimulai dan berakhir antara %2 hingga %3 pada hari yang sama adalah tidak tersedia."
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2605
+#: lib/BOM/Product/Contract.pm:2611
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "Kontrak pada %1 dengan durasi kurang dari 24 jam harus berakhir pada hari trading yang sama."
 
@@ -2225,7 +2225,7 @@ msgstr "Daftar gratis"
 msgid "Credit/<wbr/>Debit"
 msgstr "Kredit/<wbr/>Debit"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:436
 #: cgi/templates/default/cashier/available_payment_methods.tt:151
 msgid "Credit/Debit Card"
 msgstr "Kartu Kredit/Debit"
@@ -2268,7 +2268,7 @@ msgstr "Saat ini"
 msgid "Current Spot"
 msgstr "Spot saat ini"
 
-#: lib/BOM/Product/Contract.pm:2321
+#: lib/BOM/Product/Contract.pm:2327
 msgid "Current market price is 0."
 msgstr "Harga terkini market adalah 0."
 
@@ -2363,17 +2363,17 @@ msgid "Dear %1 %2 %3,"
 msgstr "Kepada Yth. %1 %2 %3,"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:462
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr "Dear Yth. Bapak/Ibu/Sdr. %2 %3, Kami ingin menginformasikan bahwa deposit %5 anda telah terproses. Salam Hormat, %4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:471
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:474
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr "Dear Yth. Bapak/Ibu/Sdr. %2 %3, Kami ingin menginformasikan bahwa penarikan %5 anda telah terproses. Salam Hormat, %4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:466
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:469
 msgid "Dear %1 %2 %3, We would like to inform you that your Western Union withdrawal has been processed. <strong>%5</strong> You can then go to any Western Union agent, provide the MTCN number and claim your funds. You can find the Western Union agent which is closest to you on their <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a>. Kind Regards, %4"
 msgstr "Kepada Yth. Bapak/Ibu/Sdr. %2 %3, Kami ingin menginformasikan bahwa penarikan Western Union Anda telah diproses. <strong>%5</strong> Anda kemudian dapat mengunjungi agen Western Union, menyediakan nomor MTCN dan mengklaim dana Anda. Anda dapat menemukan agen Western Union terdekat di tempat Anda melalui <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a> mereka. Hormat Kami, %4"
 
@@ -2519,8 +2519,8 @@ msgstr "Hapus semua garis?"
 msgid "Depo./With. commission"
 msgstr "Depo./Dengan. komisi"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: cgi/templates/default/account/statement.tt:143
 #: cgi/templates/default/cashier/available_payment_methods.tt:16
 #: cgi/templates/default/homepage/deposit_alert.tt:1
@@ -2547,7 +2547,7 @@ msgstr "Deposit Agen Pembayaran"
 msgid "Deposit using legacy method: %1"
 msgstr "Deposit menggunakan metode: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Deposit via BACS"
 msgstr "Deposit melalui BACS"
@@ -2556,7 +2556,7 @@ msgstr "Deposit melalui BACS"
 msgid "Deposit via Bank Transfer"
 msgstr "Deposit via Transfer Bank"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Deposit via Credit/Debit card"
 msgstr "Deposit via Kartu Kredit/Debit"
@@ -2565,7 +2565,7 @@ msgstr "Deposit via Kartu Kredit/Debit"
 msgid "Deposit via DoughFlow"
 msgstr "Deposit melalui DoughFlow"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 msgid "Deposit via Western Union"
 msgstr "Deposit via Western Union (MTCN: %1)"
 
@@ -2574,7 +2574,7 @@ msgstr "Deposit via Western Union (MTCN: %1)"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "Deposit melalui Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:455
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "Deposit via transfer bank"
@@ -2836,7 +2836,7 @@ msgid "Duration"
 msgstr "Durasi"
 
 #. ($shortest->display_string, $longest->display_string)
-#: lib/BOM/Product/Contract.pm:2701
+#: lib/BOM/Product/Contract.pm:2707
 msgid "Duration must be between %1 and %2."
 msgstr "Durasi harus antara %1 dan %2."
 
@@ -3193,7 +3193,7 @@ msgstr "Ikuti panduan langkah demi langkah trading binary."
 msgid "For affiliates who offer a trading advisory service based on the %1 platform, we offer specialized payout structures. <a href=\"mailto:%2\">Contact our affiliate manager, Karen Yap for details</a>."
 msgstr "Bagi Anda yang menawarkan konsultasi trading menggunakan platform %1, kami menawarkan struktur komisi khusus. <a href=\"mailto:%2\">Silakan hubungi Tim Affiliasi kami, Putri Kumala untuk keterangan lebih lanjut</a>."
 
-#: cgi/tick_trades.cgi:512
+#: cgi/tick_trades.cgi:517
 msgid "For any other queries, please feel free to contact us."
 msgstr "Untuk pertanyaan lainnya, silahkan hubungi kami."
 
@@ -3369,15 +3369,15 @@ msgstr "Dapatkan harga"
 msgid "Getting Started"
 msgstr "Langkah Memulai"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
 msgid "Gift Certificate"
 msgstr "Gift Certificate"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Gift Certificate Deposit"
 msgstr "Deposit Gift Certificate"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Gift Certificate Withdrawal"
 msgstr "Pencairan Gift Certificate"
 
@@ -3631,11 +3631,11 @@ msgid "If applicable, to expedite the processing of your query please include a 
 msgstr "Jika memungkinkan, untuk mempercepat proses pertanyaan anda silahkan lampirkan tampilan halaman permasalahan yang anda maksudkan."
 
 #. (request()
-#: cgi/tick_trades.cgi:510
+#: cgi/tick_trades.cgi:515
 msgid "If the connection problem persists, you can try to <a href=\"%1\">reload the application</a>."
 msgstr "Jika terjadi masalah koneksi, anda dapat mencoba untuk <a href=\"%1\">mengulang aplikasi</a>."
 
-#: cgi/tick_trades.cgi:502
+#: cgi/tick_trades.cgi:507
 msgid "If the trading page is closed or internet access is terminated, the outcome of your contract won&rsquo;t be affected. You can then access your account statement to view the outcome of the contract."
 msgstr "Jika halaman trading tertutup atau akses internet terputus, hasil kontrak anda tidak akan terpengaruh. Anda dapat mengunjungi bagian pernyataan untuk melihat hasil kontrak tersebut."
 
@@ -4000,7 +4000,7 @@ msgstr "Data tidak valid"
 msgid "Invalid fax number."
 msgstr "Nomor fax tidak berlaku."
 
-#: lib/BOM/Product/Contract.pm:2258
+#: lib/BOM/Product/Contract.pm:2263
 msgid "Invalid payout currency."
 msgstr "Mata uang hasil tidak berlaku."
 
@@ -4008,7 +4008,7 @@ msgstr "Mata uang hasil tidak berlaku."
 msgid "Invalid period input! Please input the period between 0 and #1"
 msgstr "Data untuk periode salah! Tolong masukan data di antara 0 dan 1"
 
-#: lib/BOM/Product/Contract.pm:2306
+#: lib/BOM/Product/Contract.pm:2312
 msgid "Invalid stake"
 msgstr "Modal salah"
 
@@ -4420,7 +4420,7 @@ msgid "Market exit price"
 msgstr "Harga akhir market"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2761
+#: lib/BOM/Product/Contract.pm:2767
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "Terdapat hari libur selama periode kontrak. Pilih tanggal berakhir setelah %1."
 
@@ -4578,19 +4578,19 @@ msgstr "Aplikasi mobile"
 msgid "Momentum"
 msgstr "Momentum"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
 msgid "Moneta"
 msgstr "Moneta"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
 msgid "Moneybookers"
 msgstr "Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:443
 msgid "Moneybookers Deposit"
 msgstr "Deposit Moneybooker"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:443
 msgid "Moneybookers Withdrawal"
 msgstr "Pencairan Moneybooker"
 
@@ -4885,7 +4885,7 @@ msgid "Number of ticks"
 msgstr "Jumlah tik"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2654
+#: lib/BOM/Product/Contract.pm:2660
 msgid "Number of ticks must be between %1 and %2"
 msgstr "Durasi harus antara %1 hingga %2"
 
@@ -5038,7 +5038,7 @@ msgstr "Nomor kontrak lainnya contact numbers"
 msgid "Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list."
 msgstr "Program afiliasi kami khusus untuk para investor profesional dan webmaster yang mengelola website pribadi, newsletter atau mailing list."
 
-#: cgi/tick_trades.cgi:506
+#: cgi/tick_trades.cgi:511
 msgid "Our application uses ports 8080 and 843. For connection difficulties, please contact your System Administrator and request your firewall to be updated accordingly."
 msgstr "Aplikasi kami menggunakan port 8080 dan 843. Untuk masalah koneksi, silahkan hubungi sistem administrasi anda dan minta agar firewall anda diperbarui."
 
@@ -5264,12 +5264,12 @@ msgstr "Mata uang hasil"
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "Harga telah berubah dari %1 ke %2."
 
-#: lib/BOM/Product/Contract.pm:2280
+#: lib/BOM/Product/Contract.pm:2285
 msgid "Payout may not have more than two decimal places."
 msgstr "Hasil tidak dapat lebih dari dua desimal."
 
 #. (to_monetary_number_format($payout_min, 1)
-#: lib/BOM/Product/Contract.pm:1759
+#: lib/BOM/Product/Contract.pm:1764
 msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Hasil harus diantara <strong>%1</strong> hingga <strong>%2</strong>."
 
@@ -5594,7 +5594,7 @@ msgstr "Mewakili jumlah maksimum hasil kontrak pada portopolio Anda. Jika jumlah
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "Harga market terkini tidak dapat ditentukan pada saat ini."
 
-#: lib/BOM/Product/Contract.pm:1433 lib/BOM/Product/Contract.pm:2835
+#: lib/BOM/Product/Contract.pm:1433 lib/BOM/Product/Contract.pm:2841
 msgid "Prevailing market price cannot be determined."
 msgstr "Harga terkini market tidak dapat ditentukan."
 
@@ -5686,7 +5686,7 @@ msgstr "Promosi"
 msgid "Proof of address"
 msgstr "Bukti alamat"
 
-#: lib/BOM/Product/Contract.pm:2437
+#: lib/BOM/Product/Contract.pm:2443
 msgid "Proper barriers could not be determined."
 msgstr "Batasan tepat tidak dapat ditentukan."
 
@@ -5724,6 +5724,12 @@ msgstr "Dengan membeli kontrak ini maka Anda akan melebihi batasan pembelian kon
 #: frontend/templates/static/responsible_trading.html.haml:1
 msgid "Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money."
 msgstr "Batasi keuntungan anda. Setelah anda mencapai target, sisihkan dan bertrading menggunakan sisa dana yang ada."
+
+#: cgi/tick_trades.cgi:449
+#, fuzzy
+#| msgid "Tick Trade Lucky 10 Digits"
+msgid "Quick 10 Digits/Lucky 10 Digits"
+msgstr "Trading Tik 10Kali Lipat"
 
 #: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:281
 msgid "Quick 10%"
@@ -5965,25 +5971,25 @@ msgstr "Permintaan panggilan kembali. Masukkan nomor kontak Anda dan klik \"hubu
 msgid "Required"
 msgstr "Harus diisi"
 
-#: lib/BOM/Product/Contract.pm:2808
+#: lib/BOM/Product/Contract.pm:2814
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "Penjualan kembali untuk kontrak ini tidak ditawarkan berhubung liburan market akhir tahun."
 
-#: lib/BOM/Product/Contract.pm:2760
+#: lib/BOM/Product/Contract.pm:2766
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "Penjualan kembali untuk kontrak ini tidak ditawarkan berhubung liburan market selama kontrak berlangsung."
 
-#: lib/BOM/Product/Contract.pm:2781
+#: lib/BOM/Product/Contract.pm:2787
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "Penjualan kembali untuk kontrak ini tidak ditawarkan berhubung liburan selama periode kontrak."
 
 #. ($shortest->display_string)
-#: lib/BOM/Product/Contract.pm:2691
+#: lib/BOM/Product/Contract.pm:2697
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "Penjualan kembali untuk kontrak ini ditawarkan kurang dari %1 hari."
 
-#: lib/BOM/Product/Contract.pm:2221 lib/BOM/Product/Contract.pm:2685
-#: lib/BOM/Product/Contract.pm:2732
+#: lib/BOM/Product/Contract.pm:2226 lib/BOM/Product/Contract.pm:2691
+#: lib/BOM/Product/Contract.pm:2738
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "Penjualan kembali untuk kontrak ini tidak ditawarkan."
@@ -6646,9 +6652,11 @@ msgid "Stake %1 is too small"
 msgstr "Modal %1 terlalu rendah"
 
 #. (to_monetary_number_format($stake_min, 1)
-#: lib/BOM/Product/Contract.pm:1752
-msgid "Stake must be at least <strong>%1</strong>."
-msgstr "Modal minimal harus <strong>%1</strong>."
+#: lib/BOM/Product/Contract.pm:1755
+#, fuzzy
+#| msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
+msgid "Stake must be between <strong>%1</strong> and <strong>%2</strong>."
+msgstr "Hasil harus diantara <strong>%1</strong> hingga <strong>%2</strong>."
 
 #: lib/BOM/Product/Helper/PricingTableParameters.pm:212
 msgid "Standard expiry"
@@ -6668,20 +6676,20 @@ msgstr "Mulai Trading"
 msgid "Start time"
 msgstr "Waktu mulai"
 
-#: lib/BOM/Product/Contract.pm:2504 lib/BOM/Product/Transaction.pm:361
+#: lib/BOM/Product/Contract.pm:2510 lib/BOM/Product/Transaction.pm:361
 msgid "Start time is in the past"
 msgstr "Waktu mulai adalah dimasa lalu"
 
-#: lib/BOM/Product/Contract.pm:2494
+#: lib/BOM/Product/Contract.pm:2500
 msgid "Start time is invalid."
 msgstr "Waktu mulai salah."
 
-#: lib/BOM/Product/Contract.pm:2484
+#: lib/BOM/Product/Contract.pm:2490
 msgid "Start time must be before expiry time."
 msgstr "Waktu mulai harus sebelum waktu berakhir."
 
 #. ($forward_starting_blackout->display_string)
-#: lib/BOM/Product/Contract.pm:2537
+#: lib/BOM/Product/Contract.pm:2543
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "Waktu mulai pada kontrak mendatang harus lebih dari %1 dari sekarang."
 
@@ -7403,7 +7411,7 @@ msgstr "Angka desimal terakhir pada tik %1 adalah '%2'."
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "Harga akhir market adalah harga pada akhir periode kontrak."
 
-#: lib/BOM/Product/Contract.pm:2510
+#: lib/BOM/Product/Contract.pm:2516
 msgid "The market must be open at the start time."
 msgstr "Market harus dibuka pada waktu mulai."
 
@@ -7759,7 +7767,7 @@ msgstr "Kontrak ini sudah tidak ditawarkan."
 msgid "This contract is unavailable on this account."
 msgstr "Kontrak ini tidak tersedia pada akun ini."
 
-#: lib/BOM/Product/Contract.pm:2321
+#: lib/BOM/Product/Contract.pm:2327
 msgid "This contract offers no return."
 msgstr "Kontrak ini tidak memberi hasil."
 
@@ -7828,7 +7836,7 @@ msgstr "Ini adalah untuk mengkonfirmasi bahwa alamat email Anda untuk %1 pada %2
 msgid "This market closes early today at"
 msgstr "Market ini ditutup awal pada"
 
-#: lib/BOM/Product/Contract.pm:2510
+#: lib/BOM/Product/Contract.pm:2516
 msgid "This market is presently closed."
 msgstr "Market ini sedang ditutup."
 
@@ -7858,7 +7866,7 @@ msgstr "Penawaran ini tidak dapat digunakan bersamaan pada penawaran lainnya."
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgstr "Promosi ini hanya berlaku untuk pembukaan akun baru. Dan hanya dapat diperoleh sekali saja untuk setiap Pelanggan."
 
-#: lib/BOM/Product/Contract.pm:2222
+#: lib/BOM/Product/Contract.pm:2227
 msgid "This trade is not offered."
 msgstr "Kontrak ini tidak ditawarkan."
 
@@ -7890,6 +7898,10 @@ msgstr "Tik"
 #: cgi/runbet_tickbrain.cgi:20
 msgid "Tick Brain"
 msgstr "Tik Brain"
+
+#: cgi/tick_trades.cgi:444
+msgid "Tick Trade Up/Down"
+msgstr "Trading Tik Naik/Turun"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:68
@@ -8008,7 +8020,7 @@ msgid "Toll-Free number"
 msgstr "Nomor bebas pulsa"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2782
+#: lib/BOM/Product/Contract.pm:2788
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "Terlalu banyak hari libur selama periode kontrak. Silahkan pilih waktu berakhir setelah %1."
 
@@ -8140,8 +8152,8 @@ msgstr "Rencana Trading"
 
 #: cgi/templates/default/legal/datafeed.tt:29 cgi/trading_times.cgi:14
 #: frontend/templates/resources/index.html.haml:1
-#: lib/BOM/Product/Contract.pm:2190 lib/BOM/Product/Contract.pm:2557
-#: lib/BOM/Product/Contract.pm:2572 lib/BOM/Product/Contract.pm:2751
+#: lib/BOM/Product/Contract.pm:2195 lib/BOM/Product/Contract.pm:2563
+#: lib/BOM/Product/Contract.pm:2578 lib/BOM/Product/Contract.pm:2757
 #: lib/BOM/View/Menu.pm:145
 msgid "Trading Times"
 msgstr "Waktu Trading"
@@ -8163,37 +8175,37 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "Kontrak trading finansial memiliki resiko tinggi dan mungkin tidak cocok bagi semua orang. Sebelum memutuskan untuk melakukan pembelian kontrak finansial, anda perlu mengetahui resiko yang akan anda alami. Anda harus mengetahui semua resiko yang terlibat pada trading finansial dan meminta saran pada penyedia konsultasi bebas jika anda memiliki keraguan."
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2525
+#: lib/BOM/Product/Contract.pm:2531
 msgid "Trading is available after the first %1 of the session."
 msgstr "Trading hanya tersedia setelah %1 sesi pertama."
 
-#: lib/BOM/Product/Contract.pm:2733
+#: lib/BOM/Product/Contract.pm:2739
 msgid "Trading is not offered for this duration."
 msgstr "Trading tidak ditawarkan untuk durasi ini."
 
 #: cgi/oop/Controller/Bet.pm:671 cgi/subs/subs_runbets_execute.pm:402
-#: lib/BOM/Product/Contract.pm:2143 lib/BOM/Product/Contract.pm:2209
+#: lib/BOM/Product/Contract.pm:2148 lib/BOM/Product/Contract.pm:2214
 msgid "Trading is suspended at the moment."
 msgstr "Trading dihentikan untuk sementara."
 
 #. ($translated_name)
 #. ($underlying->translated_display_name()
-#: cgi/analyse_contract.cgi:69 lib/BOM/Product/Contract.pm:2151
-#: lib/BOM/Product/Contract.pm:2160 lib/BOM/Product/Contract.pm:2188
+#: cgi/analyse_contract.cgi:69 lib/BOM/Product/Contract.pm:2156
+#: lib/BOM/Product/Contract.pm:2165 lib/BOM/Product/Contract.pm:2193
 msgid "Trading on %1 is suspended at the moment."
 msgstr "Trading pada %1 dihentikan untuk sementara."
 
 #. ($translated_name)
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2171 lib/BOM/Product/Contract.pm:2178
-#: lib/BOM/Product/Contract.pm:2843
+#: lib/BOM/Product/Contract.pm:2176 lib/BOM/Product/Contract.pm:2183
+#: lib/BOM/Product/Contract.pm:2849
 #: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:797
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "Trading pada %1 dihentikan sementara berhubung gangguan data market."
 
 #. ($eod_blackout_start->display_string)
-#: lib/BOM/Product/Contract.pm:2555
+#: lib/BOM/Product/Contract.pm:2561
 msgid "Trading suspended for the last %1 of the session."
 msgstr "Trading dihentikan hingga sedi terakhir %1."
 
@@ -8257,7 +8269,7 @@ msgstr "3 Sudut"
 msgid "Triangular moving averages place the majority of the weight on the middle portion of the price series. They are actually double-smoothed simple moving averages. The periods used in the simple moving averages varies depending on if you specify an odd or even number of time periods."
 msgstr "Moving average Triangular penekanan pemberatnya ada pada tengah-tengah periode. Mereka sebenarnya mengalami dua kali pelicinan moving average sederhana. Periode  yang digunakan pada moving average sederhana adalah tergantung pada jika merincikan angka ganjil atau genap dari periode waktu."
 
-#: cgi/tick_trades.cgi:500
+#: cgi/tick_trades.cgi:505
 msgid "Troubleshooting"
 msgstr "Penyelesaian"
 
@@ -8274,6 +8286,10 @@ msgstr "Coba sekarang"
 #: frontend/templates/charting/index.html.haml:1
 msgid "Try our downloadable charting application with an extensive range of indicators."
 msgstr "Coba aplikasi charting terbaru kami yang memiliki berbagai pilihan indikator."
+
+#: cgi/tick_trades.cgi:441
+msgid "Try the new flexible version of "
+msgstr ""
 
 #: frontend/templates/get_started/index.html.haml:1
 #: frontend/templates/get_started/types_of_trades.html.haml:1
@@ -8449,7 +8465,7 @@ msgstr "Lihat"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "Lihat harga kontrak Naik/Turun pada berbagai pilihan market."
 
-#: lib/BOM/Product/Contract.pm:2517 lib/BOM/Product/Contract.pm:2527
+#: lib/BOM/Product/Contract.pm:2523 lib/BOM/Product/Contract.pm:2533
 msgid "View Trading Times"
 msgstr "Lihat Waktu Trading"
 
@@ -8741,7 +8757,7 @@ msgstr "Volume indikator Weighted adalah berdasarkan pada perubahan satu hari vo
 msgid "Welcome!"
 msgstr "Selamat datang!"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
 msgid "Western Union"
 msgstr "Western Union"
 
@@ -9036,8 +9052,8 @@ msgstr "Penarikan: %1 hari kerja"
 msgid "Withdraw: Not applicable"
 msgstr "Penarikan: Tidak tersedia"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: lib/BOM/Platform/Model/Payment.pm:155
 msgid "Withdrawal"
 msgstr "Penarikan"
@@ -9066,7 +9082,7 @@ msgstr "Batas penarikan"
 msgid "Withdrawal using legacy method: %1"
 msgstr "Penarikan menggunakan metode: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Withdrawal via BACS"
 msgstr "Penarikan melalui BACS"
@@ -9075,7 +9091,7 @@ msgstr "Penarikan melalui BACS"
 msgid "Withdrawal via Bank Transfer"
 msgstr "Penarikan melalui Bank Transfer"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Withdrawal via Credit/Debit card"
 msgstr "Penarikan melalui Kartu Kredit/Debit"
@@ -9084,7 +9100,7 @@ msgstr "Penarikan melalui Kartu Kredit/Debit"
 msgid "Withdrawal via DoughFlow"
 msgstr "Penarikan melalui DoughFlow"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 msgid "Withdrawal via Western Union"
 msgstr "Penarikan melalui Western Union (MTCN: %1)"
 
@@ -9093,7 +9109,7 @@ msgstr "Penarikan melalui Western Union (MTCN: %1)"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "Penarikan melalui Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:455
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "Penarikan melalui bank transfer"
@@ -9801,7 +9817,7 @@ msgstr "contohnya Perusahaan mungkin menderita kerugian berupa uang, fiskal atau
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "batasan manapun pada klien dari membeli kontrak selama jam-jam tertentu."
 
-#: lib/BOM/Product/Contract.pm:2122
+#: lib/BOM/Product/Contract.pm:2127
 msgid "barrier"
 msgstr "batasan"
 
@@ -9878,7 +9894,7 @@ msgstr "untuk instruksi lengkap coding."
 msgid "here"
 msgstr "di sini"
 
-#: lib/BOM/Product/Contract.pm:2122
+#: lib/BOM/Product/Contract.pm:2127
 msgid "high barrier"
 msgstr "batasan tinggi"
 
@@ -9906,17 +9922,13 @@ msgstr "kurang"
 msgid "loading..."
 msgstr "pemuatan..."
 
-#: lib/BOM/Product/Contract.pm:2122
+#: lib/BOM/Product/Contract.pm:2127
 msgid "low barrier"
 msgstr "batasan rendah"
 
 #: cgi/subs/subs_runbets.pm:258
 msgid "lower"
 msgstr "lebih rendah"
-
-#: cgi/tick_trades.cgi:444
-msgid "main trading platform"
-msgstr "halaman utama trading"
 
 #: cgi/subs/subs_forms.pm:3801 cgi/subs/subs_forms.pm:4002
 msgid "maximum is"
@@ -9938,7 +9950,7 @@ msgstr "durasi minimal yang tersedia"
 msgid "minimum is"
 msgstr "minimum adalah"
 
-#: lib/BOM/Product/Contract.pm:2119
+#: lib/BOM/Product/Contract.pm:2124
 msgid "minus"
 msgstr "berkurang"
 
@@ -9979,7 +9991,7 @@ msgstr "atau silahkan coba peta situs berikut"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr "halaman untuk waktu tepat penyelesaian seluruh kontrak. Website lain mungkin menggunakan konvensi berbeda (sebagai contoh beberapa website menggunakan jam 4 waktu New York atau jam 5 waktu London). Hal ini menyebabkan harga open, high, low dan close pada website kami akan mengalami perbedaan dengan website lainnya berhubung konvensi waktu penutupan market."
 
-#: lib/BOM/Product/Contract.pm:2119
+#: lib/BOM/Product/Contract.pm:2124
 msgid "plus"
 msgstr "ditambah"
 
@@ -11892,6 +11904,15 @@ msgstr "Maaf, pengaksesan menggunakan alamat IP jaringan ini telah dibatalkan."
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Maaf, Anda telah gagal mengakses beberapa kali. Silakan coba kembali dalam waktu 5 menit lagi."
 
+#~ msgid "A much more flexible version of Tick Trades is available on the "
+#~ msgstr "Tersedia versi terbaru kontrak trading tik pada"
+
+#~ msgid "Stake must be at least <strong>%1</strong>."
+#~ msgstr "Modal minimal harus <strong>%1</strong>."
+
+#~ msgid "main trading platform"
+#~ msgstr "halaman utama trading"
+
 #~ msgid "A Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-cash methods or local currencies not offered by default on %1."
 #~ msgstr "Agen Pembayaran memproses deposit dan penarikan bagi klien yang ingin menggunakan metode pembayaran khusus yang tidak ditawarkan oleh %1."
 
@@ -12906,14 +12927,8 @@ msgstr "Maaf, Anda telah gagal mengakses beberapa kali. Silakan coba kembali dal
 #~ msgid "The current price of a particular market."
 #~ msgstr "Harga terkini dari market tertentu."
 
-#~ msgid "Tick Trade Lucky 10 Digits"
-#~ msgstr "Trading Tik 10Kali Lipat"
-
 #~ msgid "Tick Trade Quick 10%"
 #~ msgstr "Trading Tik Untung 10%"
-
-#~ msgid "Tick Trade Up/Down"
-#~ msgstr "Trading Tik Naik/Turun"
 
 #~ msgid "Trades available around the clock, even on weekends."
 #~ msgstr "Trading tersedia setiap saat, meskipun akhir pekan."

@@ -17,6 +17,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 1.5\n"
 
+#: cgi/tick_trades.cgi:446
+msgid " and "
+msgstr ""
+
 #: cgi/top_up_virtual.cgi:78
 #, fuzzy
 #| msgid "has been credited to your Virtual money account"
@@ -516,7 +520,7 @@ msgstr "６時間"
 msgid "<br>Your Cashier and Settings sections are locked as per your request</strong> - if you wish to unlock them, please enter the password."
 msgstr "<br>キャッシャーと各種設定ページをロックのリクエストを承りました。</strong>ロックを解除されたい場合はパスワードをご入力下さい。"
 
-#: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:27
+#: cgi/f_brokercgi/subs/subs_backoffice_clientdetails.pm:26
 #: cgi/subs/subs_forms.pm:164 cgi/subs/subs_forms.pm:2258
 msgid "<option value=\"\"></option><option value=\"01\">Jan</option><option value=\"02\">Feb</option><option value=\"03\">Mar</option><option value=\"04\">Apr</option><option value=\"05\">May</option><option value=\"06\">Jun</option><option value=\"07\">Jul</option><option value=\"08\">Aug</option><option value=\"09\">Sep</option><option value=\"10\">Oct</option><option value=\"11\">Nov</option><option value=\"12\">Dec</option>"
 msgstr "<option value=\"\"></option><option value=\"01\">１月</option><option value=\"02\">２月</option><option value=\"03\">３月</option><option value=\"04\">４月</option><option value=\"05\">５月</option><option value=\"06\">６月</option><option value=\"07\">７月</option><option value=\"08\">８月</option><option value=\"09\">９月</option><option value=\"10\">１０月</option><option value=\"11\">１１月</option><option value=\"12\">１２月</option>"
@@ -1106,10 +1110,6 @@ msgstr "カスタマーサポートのスタッフより早急にご連絡いた
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "モメンタム系の指標であり、３倍指数平滑移動平均の移動平均の変化の割合を示します。他のオシレーターと同様にトリックスでは0ライン近辺の値を示します。"
 
-#: cgi/tick_trades.cgi:441
-msgid "A much more flexible version of Tick Trades is available on the "
-msgstr ""
-
 #: cgi/templates/default/global/footer.tt:200
 #: frontend/templates/layouts/default/footer.html.haml:1
 msgid "A new version of the interface is available. Please refresh this page to try again."
@@ -1527,7 +1527,7 @@ msgstr "取引対象"
 #: cgi/templates/default/global/footer.tt:60
 #: frontend/templates/layouts/default/footer.html.haml:1
 #: frontend/templates/resources/index.html.haml:1
-#: lib/BOM/Product/Contract.pm:2695 lib/BOM/Product/Contract.pm:2734
+#: lib/BOM/Product/Contract.pm:2701 lib/BOM/Product/Contract.pm:2740
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:139
 msgid "Asset Index"
@@ -1635,7 +1635,7 @@ msgstr "誤った入力値%1"
 msgid "Balance"
 msgstr "残高"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:454
 msgid "Bank Wire"
 msgstr "銀行送金"
 
@@ -1686,12 +1686,12 @@ msgstr "バリア"
 msgid "Barrier Step (%) out of limit"
 msgstr "バリア（%）の制限外"
 
-#: lib/BOM/Product/Contract.pm:2455
+#: lib/BOM/Product/Contract.pm:2461
 msgid "Barrier may not be adjusted."
 msgstr "バリアを適応させることはできません。"
 
 #. ($min_pips . ' pips away from the spot.')
-#: lib/BOM/Product/Contract.pm:2421
+#: lib/BOM/Product/Contract.pm:2427
 msgid "Barrier must be at least "
 msgstr "バリアの最小値"
 
@@ -1711,7 +1711,7 @@ msgstr "バリア検索"
 msgid "Barrier(s)"
 msgstr "バリア"
 
-#: lib/BOM/Product/Contract.pm:2446
+#: lib/BOM/Product/Contract.pm:2452
 msgid "Barriers must be on either side of the spot."
 msgstr "バリアの値は両方のスポット価格をカバーするように指定して下さい。"
 
@@ -2427,7 +2427,7 @@ msgid "Contract barrier must be positive."
 msgstr "バリアは正の値を指定して下さい。"
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2809
+#: lib/BOM/Product/Contract.pm:2815
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "トレードは年末の祭日に終了することはできませんので、%1より後の日付を選択して下さい。"
 
@@ -2445,20 +2445,20 @@ msgstr "トレード開示と価格設定"
 msgid "Contract expired"
 msgstr "取引期間"
 
-#: lib/BOM/Product/Contract.pm:2580
+#: lib/BOM/Product/Contract.pm:2586
 msgid "Contract has already expired."
 msgstr "トレードは既に終了しました。"
 
-#: lib/BOM/Product/Contract.pm:1751
+#: lib/BOM/Product/Contract.pm:1752
 msgid "Contract market price is too close to final payout."
 msgstr ""
 
 #. ($eod_blackout_expiry->display_string)
-#: lib/BOM/Product/Contract.pm:2619
+#: lib/BOM/Product/Contract.pm:2625
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "トレード終了時間%1以内にトレードを終了させることはできません。"
 
-#: lib/BOM/Product/Contract.pm:2589
+#: lib/BOM/Product/Contract.pm:2595
 msgid "Contract must expire during trading hours."
 msgstr "トレードはトレード可能時間内に終了する必要があります。"
 
@@ -2496,7 +2496,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "同一日の%2と%3の期間内で開始・終了する条件で%1をトレードすることはできません。"
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2605
+#: lib/BOM/Product/Contract.pm:2611
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "取引期間を２４時間以下と指定した%1でのトレードは、購入日と同日に終了します。"
 
@@ -2549,7 +2549,7 @@ msgstr "ご口座開設はこちらから"
 msgid "Credit/<wbr/>Debit"
 msgstr "クレジット・デビットカード"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:436
 #: cgi/templates/default/cashier/available_payment_methods.tt:151
 msgid "Credit/Debit Card"
 msgstr "クレジット・デビットカード"
@@ -2594,7 +2594,7 @@ msgstr "通貨"
 msgid "Current Spot"
 msgstr "現在のスポット価格"
 
-#: lib/BOM/Product/Contract.pm:2321
+#: lib/BOM/Product/Contract.pm:2327
 msgid "Current market price is 0."
 msgstr "現在の市場価格は０です。"
 
@@ -2691,17 +2691,17 @@ msgid "Dear %1 %2 %3,"
 msgstr "%1 %2 %3様"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:459
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:462
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr "%1 %2 %3様へ：お客様のご入金リクエスト（%5）を承りました。当社サービスをご利用頂きましてありがとうございます。%4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:471
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:474
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr "%1 %2 %3様へ：お客様のご出金リクエスト（%5）を承りました。当社サービスをご利用頂きましてありがとうございます。%4"
 
 #. (translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:466
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:469
 msgid "Dear %1 %2 %3, We would like to inform you that your Western Union withdrawal has been processed. <strong>%5</strong> You can then go to any Western Union agent, provide the MTCN number and claim your funds. You can find the Western Union agent which is closest to you on their <a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\">website</a>. Kind Regards, %4"
 msgstr "%1 %2 %3様へ：お客様のウェスタン・ユニオンへのご出金リクエスト（<strong>%5</strong>）を承りました。ウェスタン・ユニオンの取扱店にて、MTCN番号をご提示して頂くことでご出金が完了します。お近くのウェスタン・ユニオンに関する情報は、こちらのリンクからご確認して頂けます。<a href=\"http://www.westernunion.com/info/agentLocator.asp?country=global\"></a> 当社サービスをご利用頂きましてありがとうございます。%4"
 
@@ -2850,8 +2850,8 @@ msgstr "全て消去してもよろしいですか？"
 msgid "Depo./With. commission"
 msgstr "Depo./With. commission"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: cgi/templates/default/account/statement.tt:143
 #: cgi/templates/default/cashier/available_payment_methods.tt:16
 #: cgi/templates/default/homepage/deposit_alert.tt:1
@@ -2878,7 +2878,7 @@ msgstr "Deposit to Payment Agent"
 msgid "Deposit using legacy method: %1"
 msgstr "egacy method: %1経由でのご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Deposit via BACS"
 msgstr "BACS経由でのご入金"
@@ -2887,7 +2887,7 @@ msgstr "BACS経由でのご入金"
 msgid "Deposit via Bank Transfer"
 msgstr "銀行振込経由でのご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Deposit via Credit/Debit card"
 msgstr "クレジット・デビッドカードでのご入金"
@@ -2896,7 +2896,7 @@ msgstr "クレジット・デビッドカードでのご入金"
 msgid "Deposit via DoughFlow"
 msgstr "DoughFlow経由でのご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 msgid "Deposit via Western Union"
 msgstr "ウェスタン・ユニオン経由でのご入金"
 
@@ -2905,7 +2905,7 @@ msgstr "ウェスタン・ユニオン経由でのご入金"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "ウェスタン・ユニオン経由でのご入金(MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:455
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "銀行振込経由でのご入金"
@@ -3191,7 +3191,7 @@ msgid "Duration"
 msgstr "取引期間"
 
 #. ($shortest->display_string, $longest->display_string)
-#: lib/BOM/Product/Contract.pm:2701
+#: lib/BOM/Product/Contract.pm:2707
 msgid "Duration must be between %1 and %2."
 msgstr "有効な取引期間は、%1から%2の間です。"
 
@@ -3604,7 +3604,7 @@ msgstr ""
 msgid "For affiliates who offer a trading advisory service based on the %1 platform, we offer specialized payout structures. <a href=\"mailto:%2\">Contact our affiliate manager, Karen Yap for details</a>."
 msgstr "%1のプラットフォームの利用に基づいたアドバイスサービスを展開しているアフィリエイト様に対しては、特別な報酬体系も提供することが可能ですので、<a href=\"mailto:%2\">アフィリエイトチームまで、ご連絡下さい。</a>"
 
-#: cgi/tick_trades.cgi:512
+#: cgi/tick_trades.cgi:517
 msgid "For any other queries, please feel free to contact us."
 msgstr "他に何かご不明な点がございましたら、お気軽にご連絡下さい。"
 
@@ -3783,15 +3783,15 @@ msgstr "価格を確認"
 msgid "Getting Started"
 msgstr "ご口座開設"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
 msgid "Gift Certificate"
 msgstr "Gift Certificate"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Gift Certificate Deposit"
 msgstr "Gift Certificate Deposit"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:446
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
 msgid "Gift Certificate Withdrawal"
 msgstr "Gift Certificate Withdrawal"
 
@@ -4065,11 +4065,11 @@ msgid "If applicable, to expedite the processing of your query please include a 
 msgstr "【スクリーンショットご提出のお願い】スクリーンショットをご提出頂くことで、より正確かつ迅速な調査を進めさせて頂くことが可能になります。"
 
 #. (request()
-#: cgi/tick_trades.cgi:510
+#: cgi/tick_trades.cgi:515
 msgid "If the connection problem persists, you can try to <a href=\"%1\">reload the application</a>."
 msgstr "接続の問題が解消されない場合は、<a href=\"%1\">アプリケーションを再読み込み</a>して下さい。"
 
-#: cgi/tick_trades.cgi:502
+#: cgi/tick_trades.cgi:507
 msgid "If the trading page is closed or internet access is terminated, the outcome of your contract won&rsquo;t be affected. You can then access your account statement to view the outcome of the contract."
 msgstr "トレード画面が閉じられたり、インターネットのアクセスが中断されてしまった場合はトレード結果にも影響を及ぼす場合があります。そのような場合は、取引履歴からトレードの結果をご確認下さい。"
 
@@ -4476,7 +4476,7 @@ msgstr "無効なデータ"
 msgid "Invalid fax number."
 msgstr "Fax番号が不適切です。"
 
-#: lib/BOM/Product/Contract.pm:2258
+#: lib/BOM/Product/Contract.pm:2263
 msgid "Invalid payout currency."
 msgstr "払戻し通貨の種類が無効です。"
 
@@ -4484,7 +4484,7 @@ msgstr "払戻し通貨の種類が無効です。"
 msgid "Invalid period input! Please input the period between 0 and #1"
 msgstr "期間の指定が不適切です。期間は0と#1の間でご指定下さい。"
 
-#: lib/BOM/Product/Contract.pm:2306
+#: lib/BOM/Product/Contract.pm:2312
 #, fuzzy
 #| msgid "Invalid data"
 msgid "Invalid stake"
@@ -4927,7 +4927,7 @@ msgid "Market exit price"
 msgstr "市場出口価格（トレード終了価格）"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2761
+#: lib/BOM/Product/Contract.pm:2767
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "トレードの取引期間に市場の休日が存在します。トレード終了日を%1以降に設定して下さい。"
 
@@ -5091,19 +5091,19 @@ msgstr "Tickデータをダウンロード"
 msgid "Momentum"
 msgstr "モメンタム"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:445
 msgid "Moneta"
 msgstr "Moneta"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:439
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:442
 msgid "Moneybookers"
 msgstr "Moneybookers"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:443
 msgid "Moneybookers Deposit"
 msgstr "Moneybookersによるご入金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:443
 msgid "Moneybookers Withdrawal"
 msgstr "Moneybookersによるご出金"
 
@@ -5419,7 +5419,7 @@ msgid "Number of ticks"
 msgstr "分析されたのTickの総数："
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2654
+#: lib/BOM/Product/Contract.pm:2660
 #, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Number of ticks must be between %1 and %2"
@@ -5580,7 +5580,7 @@ msgstr "その他の問い合わせ先"
 msgid "Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list."
 msgstr "当社のアフィリエイトプログラムは、ご自身のウェブサイト、ニュースレター、メーリングリストを管理しているプロの投資家などに向けてサービスを提供します。"
 
-#: cgi/tick_trades.cgi:506
+#: cgi/tick_trades.cgi:511
 msgid "Our application uses ports 8080 and 843. For connection difficulties, please contact your System Administrator and request your firewall to be updated accordingly."
 msgstr "当社のアプリケーションはポート8080と843を採用しています。接続に問題がある場合は、お客様のシステム管理者にファイヤーウォールが適切に更新するように依頼して下さい。"
 
@@ -5818,12 +5818,12 @@ msgstr "払い戻し通貨"
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "価格が%1から%2に変化しました。"
 
-#: lib/BOM/Product/Contract.pm:2280
+#: lib/BOM/Product/Contract.pm:2285
 msgid "Payout may not have more than two decimal places."
 msgstr ""
 
 #. (to_monetary_number_format($payout_min, 1)
-#: lib/BOM/Product/Contract.pm:1759
+#: lib/BOM/Product/Contract.pm:1764
 msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "払い戻し金額は、<strong>%1</strong>と<strong>%2</strong>間で指定して下さい。"
 
@@ -6158,7 +6158,7 @@ msgstr "資産情報ページ内に存在する未決済分トレードに対す
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "現在、このトレードの優勢価格を決定することができません。"
 
-#: lib/BOM/Product/Contract.pm:1433 lib/BOM/Product/Contract.pm:2835
+#: lib/BOM/Product/Contract.pm:1433 lib/BOM/Product/Contract.pm:2841
 msgid "Prevailing market price cannot be determined."
 msgstr "優勢価格を定めることができません。"
 
@@ -6258,7 +6258,7 @@ msgstr "プロモーション情報"
 msgid "Proof of address"
 msgstr "居住地の証明について"
 
-#: lib/BOM/Product/Contract.pm:2437
+#: lib/BOM/Product/Contract.pm:2443
 msgid "Proper barriers could not be determined."
 msgstr "適切なバリア値が決定されませんでした。"
 
@@ -6302,6 +6302,12 @@ msgstr "このトレード購入により１日あたりのトレード購入可
 #: frontend/templates/static/responsible_trading.html.haml:1
 msgid "Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money."
 msgstr "資金管理も万全のものとしましょう。目標の利益を達成したら一旦、トレードを休止されることをお勧めします。"
+
+#: cgi/tick_trades.cgi:449
+#, fuzzy
+#| msgid "Tick Trade Lucky 10 Digits"
+msgid "Quick 10 Digits/Lucky 10 Digits"
+msgstr "Tickトレード・ラッキー１０"
 
 #: cgi/contract_demo.cgi:113 cgi/tick_trades.cgi:281
 msgid "Quick 10%"
@@ -6563,25 +6569,25 @@ msgstr "お電話リクエストを完了して下さい。お客様のお電話
 msgid "Required"
 msgstr "入力必須項目"
 
-#: lib/BOM/Product/Contract.pm:2808
+#: lib/BOM/Product/Contract.pm:2814
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "年末年始の市場スケージュルの都合上、このトレードを売ることは不可能です。"
 
-#: lib/BOM/Product/Contract.pm:2760
+#: lib/BOM/Product/Contract.pm:2766
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "市場の休場スケジュールの都合につき、このトレードの取引期間中にトレードを売ることは不可能です。"
 
-#: lib/BOM/Product/Contract.pm:2781
+#: lib/BOM/Product/Contract.pm:2787
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "市場の休場スケジュールの都合につき、このトレードの取引期間中にトレードを売ることは不可能です。"
 
 #. ($shortest->display_string)
-#: lib/BOM/Product/Contract.pm:2691
+#: lib/BOM/Product/Contract.pm:2697
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "残りの取引期間が%1未満のトレードを売ることはできません。"
 
-#: lib/BOM/Product/Contract.pm:2221 lib/BOM/Product/Contract.pm:2685
-#: lib/BOM/Product/Contract.pm:2732
+#: lib/BOM/Product/Contract.pm:2226 lib/BOM/Product/Contract.pm:2691
+#: lib/BOM/Product/Contract.pm:2738
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "このトレードを売ることは不可能です。"
@@ -7314,11 +7320,11 @@ msgid "Stake %1 is too small"
 msgstr "購入価格%1は低過ぎます"
 
 #. (to_monetary_number_format($stake_min, 1)
-#: lib/BOM/Product/Contract.pm:1752
+#: lib/BOM/Product/Contract.pm:1755
 #, fuzzy
-#| msgid "Settlement: %1.<strong>*</strong>"
-msgid "Stake must be at least <strong>%1</strong>."
-msgstr "Settlement: %1.<strong>*</strong>"
+#| msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
+msgid "Stake must be between <strong>%1</strong> and <strong>%2</strong>."
+msgstr "払い戻し金額は、<strong>%1</strong>と<strong>%2</strong>間で指定して下さい。"
 
 #: lib/BOM/Product/Helper/PricingTableParameters.pm:212
 msgid "Standard expiry"
@@ -7340,20 +7346,20 @@ msgstr "トレード開始"
 msgid "Start time"
 msgstr "開始時間"
 
-#: lib/BOM/Product/Contract.pm:2504 lib/BOM/Product/Transaction.pm:361
+#: lib/BOM/Product/Contract.pm:2510 lib/BOM/Product/Transaction.pm:361
 msgid "Start time is in the past"
 msgstr "開始時間が過去に値になっています"
 
-#: lib/BOM/Product/Contract.pm:2494
+#: lib/BOM/Product/Contract.pm:2500
 msgid "Start time is invalid."
 msgstr "開始時間が正しくありません。"
 
-#: lib/BOM/Product/Contract.pm:2484
+#: lib/BOM/Product/Contract.pm:2490
 msgid "Start time must be before expiry time."
 msgstr "トレードの開始時間は、終了時間より以前の時間でなければなりません。"
 
 #. ($forward_starting_blackout->display_string)
-#: lib/BOM/Product/Contract.pm:2537
+#: lib/BOM/Product/Contract.pm:2543
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "予約指定トレードは現在時間より%1後にスタートしなければなりません。"
 
@@ -8155,7 +8161,7 @@ msgstr "%1後の最後の桁数は'%2'でした。"
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "市場出口価格は、バイナリー取引の終了時間に影響を及ぼすデータのことです。"
 
-#: lib/BOM/Product/Contract.pm:2510
+#: lib/BOM/Product/Contract.pm:2516
 #, fuzzy
 #| msgid "Market must be open at start time."
 msgid "The market must be open at the start time."
@@ -8569,7 +8575,7 @@ msgstr "このトレードが今後提供されることはありません。"
 msgid "This contract is unavailable on this account."
 msgstr "現在、この市場でお取り引き可能なトレードが存在しません。"
 
-#: lib/BOM/Product/Contract.pm:2321
+#: lib/BOM/Product/Contract.pm:2327
 #, fuzzy
 #| msgid "This contract offers no return over payout."
 msgid "This contract offers no return."
@@ -8646,7 +8652,7 @@ msgstr "お客様の%2のご口座%1のメールアドレスは、%3から%4へ�
 msgid "This market closes early today at"
 msgstr "この市場は本日早めに閉場します。閉場時間："
 
-#: lib/BOM/Product/Contract.pm:2510
+#: lib/BOM/Product/Contract.pm:2516
 #, fuzzy
 #| msgid "Sorry, the market is currently closed."
 msgid "This market is presently closed."
@@ -8678,7 +8684,7 @@ msgstr "このボーナス特典は他の特典との併用は不可能です。
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgstr "このプロモーションは、新たなお客様に限り有効です。すでにご口座をお持ちのお客様には適用されません。"
 
-#: lib/BOM/Product/Contract.pm:2222
+#: lib/BOM/Product/Contract.pm:2227
 msgid "This trade is not offered."
 msgstr "このトレードの提供は不可能です。"
 
@@ -8712,6 +8718,10 @@ msgstr "Tick"
 #: cgi/runbet_tickbrain.cgi:20
 msgid "Tick Brain"
 msgstr "Tickデータ早見"
+
+#: cgi/tick_trades.cgi:444
+msgid "Tick Trade Up/Down"
+msgstr "Tickトレード・Up/Down"
 
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:68
@@ -8832,7 +8842,7 @@ msgid "Toll-Free number"
 msgstr "フリーダイヤル番号"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2782
+#: lib/BOM/Product/Contract.pm:2788
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "このトレードの取引期間中に多くの祭日が存在しますので、トレード終了日を%1以降に設定して下さい。"
 
@@ -8986,8 +8996,8 @@ msgstr "取引ルール"
 
 #: cgi/templates/default/legal/datafeed.tt:29 cgi/trading_times.cgi:14
 #: frontend/templates/resources/index.html.haml:1
-#: lib/BOM/Product/Contract.pm:2190 lib/BOM/Product/Contract.pm:2557
-#: lib/BOM/Product/Contract.pm:2572 lib/BOM/Product/Contract.pm:2751
+#: lib/BOM/Product/Contract.pm:2195 lib/BOM/Product/Contract.pm:2563
+#: lib/BOM/Product/Contract.pm:2578 lib/BOM/Product/Contract.pm:2757
 #: lib/BOM/View/Menu.pm:145
 msgid "Trading Times"
 msgstr "トレード対応時間"
@@ -9009,39 +9019,39 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "金融トレードは高いリスクを伴うため、全ての方が売買に適しているとは限りません。金融トレードの売買を決定される前に、ご自身の目的、経験値、そしてリスクの許容範囲を十分にご考慮下さい。金融トレードに関する全てのリスクを認識し、もし不明な点がある際は専門家の助言を求めるべきであるということもご留意下さい。"
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2525
+#: lib/BOM/Product/Contract.pm:2531
 #, fuzzy
 #| msgid "Trading available after the first %1 of the session."
 msgid "Trading is available after the first %1 of the session."
 msgstr "トレード・セッション開始後%1にてトレードが可能です。"
 
-#: lib/BOM/Product/Contract.pm:2733
+#: lib/BOM/Product/Contract.pm:2739
 msgid "Trading is not offered for this duration."
 msgstr "この取引期間のトレードは不可能です。"
 
 #: cgi/oop/Controller/Bet.pm:671 cgi/subs/subs_runbets_execute.pm:402
-#: lib/BOM/Product/Contract.pm:2143 lib/BOM/Product/Contract.pm:2209
+#: lib/BOM/Product/Contract.pm:2148 lib/BOM/Product/Contract.pm:2214
 msgid "Trading is suspended at the moment."
 msgstr "現在、トレードの提供を一時的に停止しております。"
 
 #. ($translated_name)
 #. ($underlying->translated_display_name()
-#: cgi/analyse_contract.cgi:69 lib/BOM/Product/Contract.pm:2151
-#: lib/BOM/Product/Contract.pm:2160 lib/BOM/Product/Contract.pm:2188
+#: cgi/analyse_contract.cgi:69 lib/BOM/Product/Contract.pm:2156
+#: lib/BOM/Product/Contract.pm:2165 lib/BOM/Product/Contract.pm:2193
 msgid "Trading on %1 is suspended at the moment."
 msgstr "現在、%1でのトレード提供を一時的に停止しております。"
 
 #. ($translated_name)
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2171 lib/BOM/Product/Contract.pm:2178
-#: lib/BOM/Product/Contract.pm:2843
+#: lib/BOM/Product/Contract.pm:2176 lib/BOM/Product/Contract.pm:2183
+#: lib/BOM/Product/Contract.pm:2849
 #: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:797
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "市場価格の入手が不可能なため、%1でのトレード提供を一時的に停止しております。"
 
 #. ($eod_blackout_start->display_string)
-#: lib/BOM/Product/Contract.pm:2555
+#: lib/BOM/Product/Contract.pm:2561
 msgid "Trading suspended for the last %1 of the session."
 msgstr "セッション最後の%1でのトレードのお取り扱いを中止しております。"
 
@@ -9107,7 +9117,7 @@ msgstr "三角移動平均"
 msgid "Triangular moving averages place the majority of the weight on the middle portion of the price series. They are actually double-smoothed simple moving averages. The periods used in the simple moving averages varies depending on if you specify an odd or even number of time periods."
 msgstr "三角移動平均線では中央の値により大きい重みをかけ中央部分を重視しており、単純移動平均を2回適用したものになります。単純移動平均で用いる期間は、選択した期間が奇数であるか偶数であるかによって異なってきます。"
 
-#: cgi/tick_trades.cgi:500
+#: cgi/tick_trades.cgi:505
 msgid "Troubleshooting"
 msgstr "トラブルシューティング"
 
@@ -9126,6 +9136,10 @@ msgstr "今すぐ試す"
 #| msgid "Easy to use charting application with an extensive range of indicators, price bands, overlays and your own customizable workspace!"
 msgid "Try our downloadable charting application with an extensive range of indicators."
 msgstr "各種指標、価格情報、オーバーレイなどでカスタマイズしたチャートデータを参照でき、各種設定をワークスペースに保存できます。"
+
+#: cgi/tick_trades.cgi:441
+msgid "Try the new flexible version of "
+msgstr ""
 
 #: frontend/templates/get_started/index.html.haml:1
 #: frontend/templates/get_started/types_of_trades.html.haml:1
@@ -9307,7 +9321,7 @@ msgstr "表示"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "バリアと取引期間に基づくトレード価格を確認する。"
 
-#: lib/BOM/Product/Contract.pm:2517 lib/BOM/Product/Contract.pm:2527
+#: lib/BOM/Product/Contract.pm:2523 lib/BOM/Product/Contract.pm:2533
 #, fuzzy
 #| msgid "Trading Times"
 msgid "View Trading Times"
@@ -9639,7 +9653,7 @@ msgstr "一日の価格変動を日毎の変化で割る指標であり、価格
 msgid "Welcome!"
 msgstr "%1へようこそ"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:448
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:451
 msgid "Western Union"
 msgstr "ウェスタン・ユニオン"
 
@@ -9968,8 +9982,8 @@ msgstr "ご出金: %1営業日"
 msgid "Withdraw: Not applicable"
 msgstr "不適切"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:429
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:430
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:432
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:433
 #: lib/BOM/Platform/Model/Payment.pm:155
 msgid "Withdrawal"
 msgstr "ご出金"
@@ -10000,7 +10014,7 @@ msgstr "ご出金限度額"
 msgid "Withdrawal using legacy method: %1"
 msgstr "legacy methodでのご出金: %1"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:440
 #: lib/BOM/Platform/Model/Payment.pm:149
 msgid "Withdrawal via BACS"
 msgstr "BACS経由でのご出金"
@@ -10009,7 +10023,7 @@ msgstr "BACS経由でのご出金"
 msgid "Withdrawal via Bank Transfer"
 msgstr "銀行口座経由でのご出金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:434
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:437
 #: lib/BOM/Platform/Model/Payment.pm:146
 msgid "Withdrawal via Credit/Debit card"
 msgstr "クレジット・デビットカード経由でのご出金"
@@ -10018,7 +10032,7 @@ msgstr "クレジット・デビットカード経由でのご出金"
 msgid "Withdrawal via DoughFlow"
 msgstr "DoughFlow経由でのご出金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:449
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
 msgid "Withdrawal via Western Union"
 msgstr "ウェスタン・ユニオン経由でのご出金"
 
@@ -10027,7 +10041,7 @@ msgstr "ウェスタン・ユニオン経由でのご出金"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "ウェスタン・ユニオン (MTCN: %1)経由でのご出金"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:452
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:455
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "銀行口座経由でのご出金"
@@ -10841,7 +10855,7 @@ msgstr "当社のサイトでのお客様の非道徳的行為が当社の財政
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "取引が提供されていない特定の時間帯におけるトレードの購入を希望された場合"
 
-#: lib/BOM/Product/Contract.pm:2122
+#: lib/BOM/Product/Contract.pm:2127
 #, fuzzy
 #| msgid "Barrier"
 msgid "barrier"
@@ -10924,7 +10938,7 @@ msgstr ""
 msgid "here"
 msgstr ""
 
-#: lib/BOM/Product/Contract.pm:2122
+#: lib/BOM/Product/Contract.pm:2127
 #, fuzzy
 #| msgid "High barrier"
 msgid "high barrier"
@@ -10954,7 +10968,7 @@ msgstr "Less"
 msgid "loading..."
 msgstr "読み込み中です"
 
-#: lib/BOM/Product/Contract.pm:2122
+#: lib/BOM/Product/Contract.pm:2127
 #, fuzzy
 #| msgid "Low barrier"
 msgid "low barrier"
@@ -10963,12 +10977,6 @@ msgstr "下限バリア"
 #: cgi/subs/subs_runbets.pm:258
 msgid "lower"
 msgstr "Lower"
-
-#: cgi/tick_trades.cgi:444
-#, fuzzy
-#| msgid "Multi award-winning platform"
-msgid "main trading platform"
-msgstr "様々な受賞履歴を誇るプラットフォーム"
 
 #: cgi/subs/subs_forms.pm:3801 cgi/subs/subs_forms.pm:4002
 msgid "maximum is"
@@ -10990,7 +10998,7 @@ msgstr "最小取引期間"
 msgid "minimum is"
 msgstr "最小値は"
 
-#: lib/BOM/Product/Contract.pm:2119
+#: lib/BOM/Product/Contract.pm:2124
 #, fuzzy
 #| msgid "minutes"
 msgid "minus"
@@ -11035,7 +11043,7 @@ msgstr "または下記のサイトマップをご確認下さい"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr "から、全てのトレードに関する正確な市場閉場の適用時間をご確認下さい。他のウェブサイトでは、異なるデータを採用している可能性があります。（例：ニューヨーク時間・午前４時、ロンドン時間・午前５時など）ゆえに、当社が公表しているオープン価格、最高価格、最低価格、及び市場閉場価格は、他のウェブサイトで公表している価格と異なる可能性があります。"
 
-#: lib/BOM/Product/Contract.pm:2119
+#: lib/BOM/Product/Contract.pm:2124
 msgid "plus"
 msgstr ""
 
@@ -13071,6 +13079,16 @@ msgstr "申し訳ございませんが、このIPネットワークは無効で�
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "所定回数以上、不正なデータを入力されてしまいました。５分後に改めてお手続きを行って下さい。"
 
+#, fuzzy
+#~| msgid "Settlement: %1.<strong>*</strong>"
+#~ msgid "Stake must be at least <strong>%1</strong>."
+#~ msgstr "Settlement: %1.<strong>*</strong>"
+
+#, fuzzy
+#~| msgid "Multi award-winning platform"
+#~ msgid "main trading platform"
+#~ msgstr "様々な受賞履歴を誇るプラットフォーム"
+
 #~ msgid "A Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-cash methods or local currencies not offered by default on %1."
 #~ msgstr "A Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-cash methods or local currencies not offered by default on %1."
 
@@ -14062,14 +14080,8 @@ msgstr "所定回数以上、不正なデータを入力されてしまいまし
 #~ msgid "The current price of a particular market."
 #~ msgstr "とあるマーケットでの現在の価格のことです。"
 
-#~ msgid "Tick Trade Lucky 10 Digits"
-#~ msgstr "Tickトレード・ラッキー１０"
-
 #~ msgid "Tick Trade Quick 10%"
 #~ msgstr "Tickトレード・クイック10%"
-
-#~ msgid "Tick Trade Up/Down"
-#~ msgstr "Tickトレード・Up/Down"
 
 #~ msgid "Trades available around the clock, even on weekends."
 #~ msgstr "週末も含み２４時間、トレードを行って頂けます。"
