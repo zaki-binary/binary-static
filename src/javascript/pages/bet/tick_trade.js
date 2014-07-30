@@ -22,24 +22,28 @@ var TickDisplay = function() {
         initialize: function(data) {
             var $self = this;
 
-            var previous_tick = parseFloat(data.previous_tick);
-
             // setting up globals
-            $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
             $self.number_of_ticks = parseInt(data.number_of_ticks);
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_type = data.contract_type;
-            $self.contract_sentiment = data.contract_sentiment;
-            $self.price = parseFloat(data.price);
-            $self.payout = parseFloat(data.payout);
             $self.set_barrier = true;
+
+            if (typeof data.decimal !== 'undefined') {
+                $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
+            }
+
+            if (data.show_contract_result) {
+                $self.show_contract_result = true;
+                $self.contract_sentiment = data.contract_sentiment;
+                $self.price = parseFloat(data.price);
+                $self.payout = parseFloat(data.payout);
+            }
 
             $self.set_x_indicators();
 
             $self.initialize_chart({
                 plot_from: data.previous_tick_epoch * 1000,
                 plot_to: new Date((parseInt(data.contract_start) + parseInt(($self.number_of_ticks+2)*2)) * 1000).getTime(),
-                y_range: y_range,
             });
         },
         set_x_indicators: function() {
@@ -66,6 +70,14 @@ var TickDisplay = function() {
                 $self.x_indicators['_' + $self.number_of_ticks] = {
                     label: 'Exit Tick',
                     id: 'exit_tick',
+                };
+            } else if ($self.contract_type.match('DIGIT')) {
+                $self.x_indicators = {
+                    '_0': { label: 'Tick 1', id: 'start_tick'},
+                };
+                $self.x_indicator['_' + $self.number_of_ticks - 1] = {
+                    label:  'Tick ' + $self.number_of_ticks,
+                    id: 'last_tick',
                 };
             } else {
                 $self.x_indicators = {};

@@ -784,56 +784,11 @@ var BetSell = function() {
                 type    : 'POST',
                 async   : true,
                 data    : params,
-                success : function (data) {
-                    var chart_params = data;
-                    that.show_inpage_popup('<div class="inpage_popup_content_box"><div class="popup_bet_desc drag-handle">'+chart_params.long_code+'</div><div id="tick_chart"></div></div>');
-                    var how_many_ticks = chart_params.how_many_ticks;
-                    var liveChartConfig = new LiveChartConfig({
-                        renderTo: 'tick_chart',
-                        symbol: chart_params.symbol,
-                        with_trades: 0,
-                        shift: 0,
-                        with_markers: 1,
-                        ticktrade_chart: 1,
-                        contract_start_time: moment.utc(chart_params.start_time*1000).unix(),
-                        how_many_ticks: how_many_ticks,
-                        with_entry_spot: chart_params.with_entry_spot,
-                    });
-
-                    var entry_spot_moment = moment.utc(chart_params.entry_spot_time*1000);
-                    var estimated_end_time = entry_spot_moment.clone().add('minutes',3);
-                    var to = chart_params.exit_spot_time ? new Date(chart_params.exit_spot_time*1000) : new Date(estimated_end_time);
-
-                    liveChartConfig.update({
-                        interval: {
-                            from: new Date(moment.utc(chart_params.ticktime_before_entry*1000)),
-                            to:  to, // 3 minutes cutoff for tick trade
-                        },
-                    });
-                    configure_livechart();
-                    updateTTChart(liveChartConfig);
-
-                    var entry_spot_label = chart_params.with_entry_spot ? 'Entry Spot' : 'Tick 1';
-                    var entry_indicator = new LiveChartIndicator.Barrier({
-                        name: "entry_spot_time",
-                        label: text.localize(entry_spot_label),
-                        value: new Date(entry_spot_moment),
-                        color: '#e98024',
-                        axis: 'x',
-                        nomargin: true,
-                    });
-                    tt_chart.add_indicator(entry_indicator);
-
-                    var start = new Date(moment.utc(chart_params.start_time*1000));
-                    var start_indicator = new LiveChartIndicator.Barrier({
-                        name: "start_time",
-                        label: text.localize('Start Time'),
-                        value: start,
-                        color: '#e98024',
-                        axis: 'x',
-                        nomargin: true,
-                    });
-                    tt_chart.add_indicator(start_indicator);
+                success : function (ajax_data) {
+                    var data = ajax_data;
+                    console.log(data);
+                    that.show_inpage_popup('<div class="inpage_popup_content_box"><div class="popup_bet_desc drag-handle">'+data.longcode+'</div><div id="tick_chart"></div></div>');
+                    TickDisplay.initialize(data);
                 },
             })).always(function() {
                 that.enable_button($(element));
