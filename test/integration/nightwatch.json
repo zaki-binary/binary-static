@@ -15,7 +15,23 @@
     },
     "test_settings": {
         "default": {
-            "launch_url": "http://",
+            "launch_url": "http://www.binary-beta.com",
+            "selenium_host": "127.0.0.1",
+            "selenium_port": 4444,
+            "silent": true,
+            "disable_colors": false,
+            "screenshots": {
+                "enabled": false,
+                "path": ""
+            },
+            "desiredCapabilities": {
+                "browserName": "firefox",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true
+            }
+        },
+        "production": {
+            "launch_url": "http://www.binary.com",
             "selenium_host": "127.0.0.1",
             "selenium_port": 4444,
             "silent": true,

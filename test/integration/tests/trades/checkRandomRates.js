@@ -7,7 +7,7 @@ module.exports = {
 
     "checkRandomRates": function (browser) {
         browser
-            .url(browser.globals.url + '/c/trade.cgi?market=random')
+            .url(browser.launch_url + '/c/trade.cgi?market=random')
             .waitForElementVisible(element.amountFor10, 5000)
             .assert.containsText(element.unitsFor10, '50')
         .end();

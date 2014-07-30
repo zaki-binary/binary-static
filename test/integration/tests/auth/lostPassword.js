@@ -9,7 +9,7 @@ module.exports = {
     "loginPassword": function (browser) {
         
         browser
-            .url(browser.globals.url + '/d/lost_password.cgi')
+            .url(browser.launch_url + '/d/lost_password.cgi')
             .waitForElementVisible('body', 5000)
             .setValue(element.emailInput, 'binary-test@mailinator.com')
             .click(element.resetPasswordButton)

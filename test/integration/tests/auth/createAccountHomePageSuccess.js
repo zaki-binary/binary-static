@@ -16,7 +16,7 @@ module.exports = {
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
-            .url(browser.globals.url)
+            .url(browser.launch_url)
             .waitForElementVisible(element.form, 5000)
             .setValue(element.emailInput, randomEmail)
             .setValue(element.passwordInput, randomStr)

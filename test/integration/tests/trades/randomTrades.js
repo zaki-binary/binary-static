@@ -15,7 +15,7 @@ module.exports = {
 
     "randomTrades": function (browser) {
         browser
-            .url(browser.globals.url + '/c/trade.cgi?market=random')
+            .url(browser.launch_url + '/c/trade.cgi?market=random')
             .waitForElementVisible(element.amountFor10, 5000)
             .setValue(element.durationInput, 5)
             .setValue(element.durationUnitsSelect, 'ticks')

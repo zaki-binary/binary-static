@@ -215,7 +215,7 @@ module.exports = function (grunt) {
                 }                
             },
             browserstack: {
-                command: 'nightwatch -c browserstack-ff.json',
+                command: 'nightwatch -c browserstack.json',
                 options: {
                     stderr: false,
                     execOptions: {

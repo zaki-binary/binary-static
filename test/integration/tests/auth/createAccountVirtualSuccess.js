@@ -17,7 +17,7 @@ module.exports = {
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
-            .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=virtual')
+            .url(browser.launch_url + '/c/linkto_acopening.cgi?actype=virtual')
             .waitForElementVisible(element.form, 5000)
             .setValue(element.emailInput, randomEmail)
             .setValue(element.countryOfResidenceInput, 'Austria')        

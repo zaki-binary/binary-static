@@ -6,7 +6,7 @@
 
         urls.forEach(function (url) {
             browser
-                .url(browser.globals.url + url.path)
+                .url(browser.launch_url + url.path)
                 .waitForElementVisible('body', 5000)
                 .pause(2000);
         });

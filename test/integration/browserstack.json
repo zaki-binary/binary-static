@@ -16,13 +16,25 @@
                 "browserstack.debug": true
             }
         },
-        "production": {
-            "launch_url": "http://www.binary.com",
+        "chrome": {
+            "launch_url": "http://www.binary-beta.com",
             "selenium_port": 80,
             "selenium_host": "hub.browserstack.com",
             "silent": true,
             "desiredCapabilities": {
-                "browserName": "firefox",
+                "browserName": "chrome",
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        },
+        "ie": {
+            "launch_url": "http://www.binary-beta.com",
+            "selenium_port": 80,
+            "selenium_host": "hub.browserstack.com",
+            "silent": true,
+            "desiredCapabilities": {
+                "browserName": "internet explorer",
                 "browserstack.user": "BorisYankov",
                 "browserstack.key": "RLpblHGObo8kqtQWLjT4",
                 "browserstack.debug": true

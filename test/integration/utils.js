@@ -11,7 +11,7 @@ module.exports.openUrlsOld = function (browser, urls) {
 
     urls.forEach(function (url) {
 
-        var visitUrl = browser.globals.url + url;
+        var visitUrl = browser.launch_url + url;
 
         browser
             .url(visitUrl, function () {
@@ -34,7 +34,7 @@ module.exports.smoteTestUrls = function (urls) {
 
         testSteps[testName] = function (browser) {
 
-            var visitUrl = browser.globals.url + url.path;
+            var visitUrl = browser.launch_url + url.path;
 
             browser
                 .url(visitUrl)

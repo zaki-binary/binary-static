@@ -5,7 +5,19 @@
     "custom_assertions_path" : "assertions/",
     "test_settings": {
         "default": {
-            "launch_url": "http://hub.browserstack.com",
+            "launch_url": "http://www.binary-beta.com",
+            "selenium_port": 80,
+            "selenium_host": "hub.browserstack.com",
+            "silent": true,
+            "desiredCapabilities": {
+                "browserName": "chrome",
+                "browserstack.user": "BorisYankov",
+                "browserstack.key": "RLpblHGObo8kqtQWLjT4",
+                "browserstack.debug": true
+            }
+        },
+        "production": {
+            "launch_url": "http://www.binary.com",
             "selenium_port": 80,
             "selenium_host": "hub.browserstack.com",
             "silent": true,

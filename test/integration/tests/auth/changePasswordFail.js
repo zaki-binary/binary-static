@@ -17,7 +17,7 @@ module.exports = {
         createAccountVirtualSuccess(browser, true);
 
         browser
-            .url(browser.globals.url + '/d/change_password.cgi')
+            .url(browser.launch_url + '/d/change_password.cgi')
             .waitForElementVisible(element.form, 5000)
             .click(element.changePasswordButton)
             .pause(5000)

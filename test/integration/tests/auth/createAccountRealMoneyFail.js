@@ -20,7 +20,7 @@ var element = {
 
 module.exports.init = function (browser) {
     browser
-        .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=real')
+        .url(browser.launch_url + '/c/linkto_acopening.cgi?actype=real')
         .waitForElementVisible(element.form, 5000)
         .click(element.openAccountButton)
         .pause(5000);
