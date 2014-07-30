@@ -157,6 +157,7 @@ var BetPrice = function() {
             con.children('div').first().html(display_html);
 
             if ($('#tick_chart').length > 0) {
+                data['show_contract_result'] = 1;
                 TickDisplay.initialize(data);
             }
 
