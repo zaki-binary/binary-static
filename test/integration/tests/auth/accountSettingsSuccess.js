@@ -1,4 +1,3 @@
-var utils = require('../../utils');
 var createAccountVirtualSuccess = require('./createAccountVirtualSuccess').createAccountVirtualSuccess;
 
 var element = {

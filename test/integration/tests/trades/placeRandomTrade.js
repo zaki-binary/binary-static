@@ -13,7 +13,7 @@
 
 module.exports = {
 
-    "randomTrades": function (browser) {
+    "placeRandomTrade": function (browser) {
         browser
             .url(browser.globals.url + '/c/trade.cgi?market=random')
             .waitForElementVisible(element.amountFor10, 5000)

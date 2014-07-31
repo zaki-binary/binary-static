@@ -15,7 +15,7 @@
 
 module.exports = {
 
-    "randomTrade2": function (browser) {
+    "palceRandomTrade2": function (browser) {
         browser
             .url(browser.launch_url + '/c/trade.cgi?market=random')
             .click(element.riseFallTab)

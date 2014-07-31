@@ -1,5 +1,3 @@
-var utils = require('../../utils');
-
 var element = {
     form: '#openAccForm',
     openAccountButton: '#submit'
