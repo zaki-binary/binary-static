@@ -23,7 +23,7 @@ module.exports = {
 
         browser
             .url(browser.launch_url + '/d/my_account.cgi')
-            .waitForElementVisible('', 5000)
+            .waitForElementVisible('body', 5000)
             .assert.containsText('body', 'USD 20.00 payout if Random 25 Index')            
         .end();
     }
