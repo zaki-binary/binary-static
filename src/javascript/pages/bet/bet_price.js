@@ -162,6 +162,7 @@ var BetPrice = function() {
             }
 
             if ($('#is-digit').data('is-digit')) {
+                var start_moment = moment(data.contract_start*1000).utc();
                 that.digit.process(start_moment);
             }
 
