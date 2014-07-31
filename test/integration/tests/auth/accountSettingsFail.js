@@ -1,3 +1,4 @@
+var URL = require('../../url');
 var createAccountVirtualSuccess = require('./createAccountVirtualSuccess').createAccountVirtualSuccess;
 
 var element = {

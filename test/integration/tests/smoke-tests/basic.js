@@ -1,12 +1,13 @@
 ﻿var utils = require('../../utils');
+var URL = require('../../url');
 
 var urls = [
-    { page: 'Home', path: '/' },
-    { page: 'Why Us', path: '/why-us' },
-    { page: 'Get Started', path: '/get-started' },
-    { page: 'Tour', path: '/tour' },
-    { page: 'Trade', path: '/c/trade.cgi' },
-    { page: 'Contact Us', path: '/c/contact.cgi' }
+    { page: 'Home', path: URL.HOME },
+    { page: 'Why Us', path: URL.WHY_US },
+    { page: 'Get Started', path: URL.GET_STARTED },
+    { page: 'Tour', path: URL.TOUR },
+    { page: 'Trade', path: URL.TRADE },
+    { page: 'Contact Us', path: URL.CONTACT_US }
 ];
 
 module.exports = utils.smoteTestUrls(urls);
