@@ -83,9 +83,6 @@ LiveChart.prototype = {
         this.ev = new EventSource(url, { withCredentials: true });
         this.ev.onmessage = function(msg) {
             $self.process_message(msg);
-            if ($self.config.ticktrade_chart) {
-                TickTrade.process($self.spot);
-            }
         };
         this.ev.onerror = function() { $self.ev.close(); };
     },
@@ -189,16 +186,6 @@ LiveChart.prototype = {
             chart_params.plotOptions.line = {marker: {enabled: true}};
         }
 
-        if (this.config.with_tick_config) {
-            chart_params.chart.width = 401;
-            chart_params.chart.height = 112;
-            chart_params.navigator = {enabled: false};
-            chart_params.scrollbar = {enabled: false};
-            chart_params.title = '';
-            chart_params.exporting.enabled = false;
-            chart_params.exporting.enableImages = false;
-        }
-
         this.configure_series(chart_params);
         return chart_params;
     },
@@ -224,7 +211,7 @@ LiveChart.prototype = {
         if (data_length > 0 && this.spot) {
             this.config.repaint_indicators(this);
             this.chart.redraw();
-            if (!this.config.ticktrade_chart && !this.navigator_initialized) {
+            if (!this.navigator_initialized) {
                 this.navigator_initialized = true;
                 var xData = this.chart.series[0].xData;
                 var xDataLen = xData.length;
@@ -267,11 +254,7 @@ LiveChartTick.prototype = new LiveChart();
 LiveChartTick.prototype.constructor = LiveChartTick;
 LiveChartTick.prototype.configure_series = function(chart_params) {
         chart_params.chart.type = 'line';
-        if (this.config.with_tick_config) {
-            chart_params.xAxis.labels = {enabled: false};
-        } else {
-            chart_params.xAxis.labels = { format: "{value:%H:%M:%S}" };
-        }
+        chart_params.xAxis.labels = { format: "{value:%H:%M:%S}" };
         chart_params.series = [{
             name: this.config.symbol.translated_display_name(),
             data: [],
