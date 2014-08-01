@@ -3,10 +3,7 @@ module.exports = {
     WHY_US: '/why-us',
     GET_STARTED: '/get-started',
     TOUR: '/tour',
-    TRADE: '/c/trade.cgi',
     CONTACT_US: '/c/contact.cgi',
-
-
 
     PORTFOLIO: '/d/portfolio.cgi',
     STATEMENT: '/d/statement.cgi',
@@ -14,15 +11,6 @@ module.exports = {
     SETTINGS: '/d/settings.cgi?o=settings',
     AFFILIATE: '/c/affiliate_signup.cgi',
     PAYMENT_METHODS: '/c/available_payment_methods.cgi',
-
-    FOREX: '/c/trade.cgi?market=forex',
-    INDICES: '/c/trade.cgi?market=indices',
-    STOCKS: '/c/trade.cgi?market=stocks',
-    COMMODITIES: '/c/trade.cgi?market=commodities',
-    SECTORS: '/c/trade.cgi?market=sectors',
-    RANDOMS: '/c/trade.cgi?market=random',
-    SMART_INDICES: '/c/trade.cgi?market=smarties',
-    TICK_TRADES: '/d/tick_trades.cgi',
 
     WHY_CHOOSE_BINARY_TRADING: '/get-started/what-is-binary-trading',
     TYPES_OF_TRADES: '/get-started/types-of-trades',
@@ -33,7 +21,7 @@ module.exports = {
     WHAT_ARE_THE_SMART_INDICES: '/smart-indices',
     FAQ: '/get-started/beginners-faq',
     GLOSSARY: '/get-started/glossary',
-    
+
     TRADING_ACCOUNT_REAL: '/c/linkto_acopening.cgi?actype=real',
     TRADING_ACCOUNT_VIRTUAL: '/c/linkto_acopening.cgi?actype=virtual',
     AFFILIATE_PROGRAM: '/c/affiliate_signup.cgi',
@@ -53,7 +41,19 @@ module.exports = {
     PARTNER_API: '/partnerapi',
     US_PATENTS: '/c/us_patents.cgi',
     OPEN_SOURCE: '/open-source-projects',
-    
+
+    TRADE: {
+        INDEX: '/c/trade.cgi',
+        FOREX: '/c/trade.cgi?market=forex',
+        INDICES: '/c/trade.cgi?market=indices',
+        STOCKS: '/c/trade.cgi?market=stocks',
+        COMMODITIES: '/c/trade.cgi?market=commodities',
+        SECTORS: '/c/trade.cgi?market=sectors',
+        RANDOMS: '/c/trade.cgi?market=random',
+        SMART_INDICES: '/c/trade.cgi?market=smarties',
+        TICK_TRADES: '/d/tick_trades.cgi',
+    },
+
     RESOURCES: {
         INDEX: '/resources',
         ASSET_INDEX: '/c/asset_index.cgi',
@@ -71,10 +71,11 @@ module.exports = {
     },
 
     ACCOUNT: {
+        MY_ACCOUNT: '/d/my_account.cgi',
         CHANGE_SETTINGS: '/d/f_writepartics.cgi',
         CHANGE_PASSWORD: '/d/change_password.cgi',
         LOST_PASSWORD: '/d/lost_password.cgi',
         CREATE_VIRTUAL: '/c/linkto_acopening.cgi?actype=virtual',
         REAL_MONEY: '/c/linkto_acopening.cgi?actype=real'
-    }   
+    }
 };

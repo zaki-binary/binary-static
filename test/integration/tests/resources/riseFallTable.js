@@ -1,4 +1,6 @@
-﻿var element = {
+﻿var URL = require('../../url');
+
+var element = {
     startTimeSelect: '#atleast',
     durationAmountInput: '#duration_amount',
     durationUnitsSelect: '#duration_units',
@@ -11,7 +13,7 @@ module.exports = {
 
     "palceRandomTrade2": function (browser) {
         browser
-            .url(browser.launch_url + '/c/rise_fall_table.cgi')
+            .url(browser.launch_url + URL.RESOURCES.RISE_FALL_TABLE)
             .click(element.calculateButton)
             .pause(5000)
             .assert.visible(element.pricingTable)

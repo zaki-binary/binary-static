@@ -1,4 +1,6 @@
-﻿var element = {
+﻿var URL = require('../../url');
+
+var element = {
     amountFor10: '#amount_for_10',
     durationInput: '#duration_amount',
     durationUnitsSelect: '#duration_units',
@@ -17,7 +19,7 @@ module.exports = {
 
     "palceRandomTrade2": function (browser) {
         browser
-            .url(browser.launch_url + '/c/trade.cgi?market=random')
+            .url(browser.launch_url + URL.TRADE.RANDOM)
             .click(element.riseFallTab)
             .pause(1000)
             .setValue(element.underlyingSymbolSelect, 'R_25')

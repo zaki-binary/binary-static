@@ -1,4 +1,6 @@
-﻿var element = {
+﻿var URL = require('../../url');
+
+var element = {
     contractTypeSelect: '#pricingtable_bet_type',
     marketSelect: '#pricingtable_underlying',
     payoutCurrencySelect: '#pricingtable_currency',
@@ -15,7 +17,7 @@ module.exports = {
 
     "palceRandomTrade2": function (browser) {
         browser
-            .url(browser.launch_url + '/c/pricing_table.cgi')
+            .url(browser.launch_url + URL.RESOURCES.PRICING_TABLE)
             .click(element.calculateButton)
             .pause(5000)
             .assert.visible(element.pricingTable)

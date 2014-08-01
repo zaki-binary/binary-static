@@ -1,4 +1,6 @@
-﻿var element = {
+﻿var URL = require('../../url');
+
+var element = {
     riseFallSeeDemoLink: '.bet_demo_link:nth-child(1)',
     higherLowerSeeDemoLink: '.bet_demo_link:nth-child(2)',
     touchNoTouchSeeDemoLink: '.bet_demo_link:nth-child(3)',
@@ -13,7 +15,7 @@ module.exports = {
     "tradingGuide": function (browser) {
 
         browser
-            .url(browser.launch_url + '/c/contract_guide.cgi')
+            .url(browser.launch_url + URL.RESOURCES.TRADING_GUIDE)
             .waitForElementVisible('body', 5000)
         
             .click(element.riseFallSeeDemoLink)

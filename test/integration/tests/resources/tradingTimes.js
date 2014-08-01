@@ -1,4 +1,5 @@
-﻿var placeRandomTrade = require('./placeRandomTrade').placeRandomTrade;
+﻿var URL = require('../../url');
+var placeRandomTrade = require('./placeRandomTrade').placeRandomTrade;
 
 var element = {
     forexTab: 'a[href="#tradingtimes-forex"]',
@@ -15,7 +16,7 @@ module.exports = {
     "tradingTimes": function (browser) {       
 
         browser
-            .url(browser.launch_url + '/c/trading_times.cgi')
+            .url(browser.launch_url + URL.RESOURCES.TRADING_TIMES)
             .waitForElementVisible('body', 5000)
             .click(forexTab)
             .pause(1000)

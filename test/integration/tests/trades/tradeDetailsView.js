@@ -14,7 +14,7 @@ module.exports = {
         placeRandomTrade(browser);
 
         browser
-            .url(browser.launch_url + '/d/my_account.cgi')
+            .url(browser.launch_url + URL.ACCOUNT.MY_ACCOUNT)
             .waitForElementVisible(element.portfolioTable, 5000)
             .click(element.viewButtons)
             .pause(2000)
