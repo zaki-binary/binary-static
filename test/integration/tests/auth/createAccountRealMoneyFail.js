@@ -1,3 +1,5 @@
+var URL = require('../../url');
+
 var element = {
     form: '#openAccForm',
     openAccountButton: '#submit'
@@ -18,7 +20,7 @@ var element = {
 
 module.exports.init = function (browser) {
     browser
-        .url(browser.launch_url + '/c/linkto_acopening.cgi?actype=real')
+        .url(browser.launch_url + URL.ACCOUNT.REAL_MONEY)
         .waitForElementVisible(element.form, 5000)
         .click(element.openAccountButton)
         .pause(5000);

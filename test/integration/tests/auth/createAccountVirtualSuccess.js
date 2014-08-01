@@ -1,4 +1,5 @@
 var utils = require('../../utils');
+var URL = require('../../url');
 
 var formId = '#openAccForm',
     element = {
@@ -17,7 +18,7 @@ module.exports = {
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
-            .url(browser.launch_url + '/c/linkto_acopening.cgi?actype=virtual')
+            .url(browser.launch_url + URL.ACCOUNT.CREATE_VIRTUAL)
             .waitForElementVisible(element.form, 5000)
             .setValue(element.emailInput, randomEmail)
             .setValue(element.countryOfResidenceInput, 'Austria')        

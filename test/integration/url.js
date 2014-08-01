@@ -60,5 +60,13 @@ module.exports = {
     CAREERS: '/careers',
     PARTNER_API: '/partnerapi',
     US_PATENTS: '/c/us_patents.cgi',
-    OPEN_SOURCE: '/open-source-projects'
+    OPEN_SOURCE: '/open-source-projects',
+    
+    ACCOUNT: {
+        CHANGE_SETTINGS: '/d/f_writepartics.cgi',
+        CHANGE_PASSWORD: '/d/change_password.cgi',
+        LOST_PASSWORD: '/d/lost_password.cgi',
+        CREATE_VIRTUAL: '/c/linkto_acopening.cgi?actype=virtual',
+        REAL_MONEY: '/c/linkto_acopening.cgi?actype=real'
+    }
 };
