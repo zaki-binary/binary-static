@@ -1,0 +1,100 @@
+#footer
+  #footer-menu
+    .grd-container.grd-default-container
+      .grd-grid-6.grd-grid-mobile-12.grd-parent
+        .grd-grid-4
+          %h1= l('Accounts')
+          %ul
+            %li.by_client_type.client_logged_out.client_virtual
+              %a.pjaxload{:href=>url_for("linkto_acopening.cgi?actype=real")}= l('Trading Account')
+            %li.by_client_type.client_logged_out
+              %a.pjaxload{:href=>url_for("linkto_acopening.cgi?actype=virtual")}= l('Virtual Account')
+            %li.affiliate
+              %a.pjaxload{:href=>url_for("affiliate_signup.cgi")}= l('Affiliate Program')
+            %li
+              %a.pjaxload{:href=>url_for("responsible-trading"), :class => 'pjaxload'}= l('Responsible Trading')
+            %li
+              %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal")}= l('Terms and Conditions')
+        .grd-grid-4
+          %h1= l('Trading')
+          %ul
+            %li
+              %a.pjaxload.with_login_cookies{:href=>url_for("tick_trades.cgi")}= l('Tick Trades')
+            %li
+              %a.pjaxload{:href=>url_for("pricing_table.cgi")}= l('Pricing Table')
+            %li
+              %a.pjaxload{:href=>url_for("rise_fall_table.cgi")}= l('Rise/Fall Table')
+            %li
+              %a.pjaxload{:href=>url_for("asset_index.cgi")}= l('Asset Index')
+        .grd-grid-4
+          %h1= l('Banking & Security')
+          %ul
+            %li
+              %a.pjaxload{:href=>url_for("available_payment_methods.cgi")}= l('Payment Methods')
+            %li
+              %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal#privacy-tab")}= l('Security and Privacy')
+      .grd-grid-6.grd-grid-mobile-12.grd-parent
+        .grd-grid-4
+          %h1= l('Education')
+          %ul
+            %li
+              %a.pjaxload{:href=>url_for("/why-us"), :class => 'pjaxload'}= l('Why Us?')
+            %li
+              %a.pjaxload{:href=>url_for("/get-started"), :class => 'pjaxload'}= l('Getting Started')
+            %li
+              %a.pjaxload{:href=>url_for("/tour"), :class => 'pjaxload'}= l('Platform Tour')
+            %li
+              %a{:href=>"http://www.gamcare.org.uk/", :target => "_blank"}= l('GamCare')
+            %li
+              %a{:href=>"http://blog.binary.com/webinar.html", :target => "_blank"}= l('Webinars')
+        .grd-grid-4
+          %h1= l('Market Data')
+          %ul
+            %li
+              %a.pjaxload{:href=>url_for("chart_application.cgi")}= l('Java Charts')
+            %li
+              %a.pjaxload{:href=>url_for("smartchart.cgi")}= l('Light Charts')
+            %li
+              %a.pjaxload{:href=>url_for("livechart.cgi")}= l('Live Charts')
+        .grd-grid-4
+          %h1= l('About Us')
+          %ul
+            %li
+              %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('Group Information')
+            %li
+              %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
+            %li
+              %a.pjaxload{:href=>url_for("careers")}= l('Careers')
+            %li
+              %a.pjaxload{:href=>url_for("partnerapi"), :class => 'pjaxload'}= l('Partner API')
+            %li.blog
+              %a{:href=>"http://blog.binary.com", :target => '_blank'}= l('Blog')
+            %li
+              %a{:href=>"http://binarycom.statuspage.io", :target => "_blank"}= l('Network Status')
+            %li
+              %a.pjaxload{:href=>url_for("contact.cgi")}= l('Contact Us')
+            %li
+              %a.pjaxload{:href=>url_for("us_patents.cgi"), :class=>"us_patent_link"}= l('US Patents')
+            %li
+              %a.pjaxload{:href=>url_for("open-source-projects"), }= l('Open Source')
+  #footer-regulatory
+    .grd-container.grd-default-container
+      .grd-parent.grd-grid-4.grd-grid-phablet-3.grd-grid-mobile-12
+        .grd-grid-12.grd-hide-mobile
+        .grd-grid-12.grd-hide-mobile
+        .grd-grid-12.grd-hide-mobile
+        .grd-grid-4.grd-grid-phablet-12
+          %a{:href => "http://www.gov.im/gambling/", :target => "_blank"}
+            %img.responsive#iom_icon_footer{:src => url_for('images/pages/footer/isle-of-man.png')}
+        .grd-grid-6.grd-grid-phablet-12.grd-no-gutter-left
+          %a{:href => "http://www.lga.org.mt/lga/home.aspx", :target => "_blank"}
+            %img.responsive#lga_icon_footer{:src => url_for('images/pages/footer/authority-malta.svg')}
+        .grd-grid-2.grd-grid-phablet-12.grd-no-gutter
+          %img.responsive#eighteen_plus{:src => url_for('images/pages/footer/eighteen-plus.svg')}
+      .grd-grid-6.grd-grid-phablet-7.grd-grid-mobile-12
+        #regulatory-text= l("This website is marketed in the UK and Isle of Man by Regent Markets (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and in the rest of the EU by Regent Markets (Malta) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by the Lotteries and Gaming Authority in Malta, licence no LGA/CL2/118/2000, 26th May 2010. This website\'s services are not made available in the USA, Japan or Hong Kong.")
+      .grd-grid-2.grd-grid-mobile-12.grd-centered-mobile
+        #social-networks
+          = include('layouts/default/social')
+    #appcache-reload-message
+      .message= l("A new version of the interface is available. Please refresh this page to try again.")
