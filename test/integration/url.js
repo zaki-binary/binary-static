@@ -6,15 +6,7 @@ module.exports = {
     TRADE: '/c/trade.cgi',
     CONTACT_US: '/c/contact.cgi',
 
-    JAVA_CHARTS: '/c/chart_application.cgi',
-    LIGHT_CHARTS: '/d/smartchart.cgi',
-    LIVE_CHARTS: '/c/livechart.cgi',
 
-    ASSET_INDEX: '/c/asset_index.cgi',
-    TRADING_TIMES: '/c/trading_times.cgi',
-    TRADING_GUIDE: '/c/contract_guide.cgi',
-    PRICING_TABLE: '/c/pricing_table.cgi',
-    RISE_FALL_TABLE: '/c/rise_fall_table.cgi',
 
     PORTFOLIO: '/d/portfolio.cgi',
     STATEMENT: '/d/statement.cgi',
@@ -62,11 +54,27 @@ module.exports = {
     US_PATENTS: '/c/us_patents.cgi',
     OPEN_SOURCE: '/open-source-projects',
     
+    RESOURCES: {
+        INDEX: '/resources',
+        ASSET_INDEX: '/c/asset_index.cgi',
+        TRADING_TIMES: '/c/trading_times.cgi',
+        TRADING_GUIDE: '/c/contract_guide.cgi',
+        PRICING_TABLE: '/c/pricing_table.cgi',
+        RISE_FALL_TABLE: '/c/rise_fall_table.cgi'
+    },
+
+    CHARTS: {
+        INDEX: '/charting',
+        JAVA_CHARTS: '/c/chart_application.cgi',
+        LIGHT_CHARTS: '/d/smartchart.cgi',
+        LIVE_CHARTS: '/c/livechart.cgi'
+    },
+
     ACCOUNT: {
         CHANGE_SETTINGS: '/d/f_writepartics.cgi',
         CHANGE_PASSWORD: '/d/change_password.cgi',
         LOST_PASSWORD: '/d/lost_password.cgi',
         CREATE_VIRTUAL: '/c/linkto_acopening.cgi?actype=virtual',
         REAL_MONEY: '/c/linkto_acopening.cgi?actype=real'
-    }
+    }   
 };
