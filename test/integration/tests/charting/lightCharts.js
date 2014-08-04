@@ -2,7 +2,7 @@
 
 module.exports = {
 
-    "assetIndex": function (browser) {
+    "lightCharts": function (browser) {
         browser
             .url(browser.launch_url + URL.CHARTS.LIGHT_CHARTS)
             .waitForElementVisible('body', 5000)
