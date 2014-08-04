@@ -9,4 +9,4 @@ var urls = [
     { page: 'Rise / Fall Table', path: URL.RESOURCES.RISE_FALL_TABLE }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

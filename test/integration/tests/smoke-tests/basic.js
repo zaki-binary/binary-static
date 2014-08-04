@@ -10,4 +10,4 @@ var urls = [
     { page: 'Contact Us', path: URL.CONTACT_US }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

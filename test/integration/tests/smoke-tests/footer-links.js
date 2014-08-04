@@ -33,4 +33,4 @@ var urls = [
     { page: 'Open Source', path: URL.OPEN_SOURCE }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

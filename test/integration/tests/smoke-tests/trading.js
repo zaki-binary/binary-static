@@ -12,4 +12,4 @@ var urls = [
     { page: 'Tick Trades', path: URL.TICK_TRADES }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

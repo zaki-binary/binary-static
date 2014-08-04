@@ -10,4 +10,4 @@ var urls = [
     { page: 'Payment methods', path: URL.PAYMENT_METHODS }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

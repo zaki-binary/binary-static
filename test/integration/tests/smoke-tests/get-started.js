@@ -14,4 +14,4 @@ var urls = [
     { page: 'Tour', path: URL.TOUR }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

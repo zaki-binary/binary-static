@@ -7,4 +7,4 @@ var urls = [
     { page: 'Live Charts', path: URL.CHARTS.LIVE_CHARTS }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

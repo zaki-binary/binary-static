@@ -24,7 +24,7 @@ module.exports.openUrlsOld = function (browser, urls) {
     browser.end();
 };
 
-module.exports.smoteTestUrls = function (urls) {
+module.exports.smokeTestUrls = function (urls, domain) {
 
     var testSteps = {};
 
@@ -34,7 +34,7 @@ module.exports.smoteTestUrls = function (urls) {
 
         testSteps[testName] = function (browser) {
 
-            var visitUrl = browser.launch_url + url.path;
+            var visitUrl = domain || browser.launch_url + url.path;
 
             browser
                 .url(visitUrl)
