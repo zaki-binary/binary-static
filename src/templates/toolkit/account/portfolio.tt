@@ -1,5 +1,16 @@
-<div class="grd-grid-12 grd-row-padding">
+<div class="grd-parent grd-grid-12 grd-row-padding">
+        <div class="grd-grid-6 grd-hide-mobile grd-hide-phablet left-aligned">
         [% l("Account balance : [_1] [_2]", currency, to_monetary_number_format(balance)) %]
+        </div>
+
+        [% IF balance == 0 %]
+        <div class="grd-grid-6 grd-hide-mobile grd-hide-phablet right-aligned">
+            <a href="[% deposit_url %]" class="button button_large by_client_type client_real with_login_cookies">
+            <span>[% l('Make a Deposit') %]</span>
+            </a>
+        </div>
+        [% END %]
+
 </div>
 
 [% IF open_bets.size == 0 %]

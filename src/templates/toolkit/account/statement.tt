@@ -100,6 +100,14 @@
 <div class="grd-grid-12">
     <h1>[% l('Statement') %]</h1><br>
 
+    [% IF balance.amount == 0 %]
+        <div class="grd-grid-12 grd-hide-mobile grd-hide-phablet right-aligned">
+            <a href="[% deposit_url %]" class="button button_large by_client_type client_real with_login_cookies">
+            <span>[% l('Make a Deposit') %]</span>
+            </a>
+        </div>
+    [% END %]
+
     <div id="statement-table">
     [% pagination_links(position='top') %]
     [% IF transactions.size == 0 %]
