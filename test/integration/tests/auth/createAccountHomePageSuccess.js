@@ -1,4 +1,4 @@
-var utils = require('../../utils');
+var utils = require('../../../utils');
 
 var formId = '#virtual-acc-form',
     element = {

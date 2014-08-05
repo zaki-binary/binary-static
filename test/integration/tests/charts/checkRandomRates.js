@@ -1,4 +1,4 @@
-﻿var URL = require('../../url');
+﻿var URL = require('../../../url');
 var utils = require('../../utils');
 
 module.exports = {

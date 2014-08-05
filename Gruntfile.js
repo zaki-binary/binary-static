@@ -234,7 +234,16 @@ module.exports = function (grunt) {
                         cwd: 'test/integration'
                     }
                 }
-            }            
+            },
+            continuous: {
+                command: 'nightwatch -t test',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/continuous'
+                    }
+                }
+            },
         }
     });
 

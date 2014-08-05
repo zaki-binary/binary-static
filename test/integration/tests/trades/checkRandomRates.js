@@ -1,5 +1,5 @@
-﻿var URL = require('../../url');
-var utils = require('../../utils');
+﻿var utils = require('../../../utils');
+var URL = require('../../url');
 
 var element = {
     amountFor10: '#amount_for_10',

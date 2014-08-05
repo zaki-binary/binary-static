@@ -1,6 +1,6 @@
-﻿var utils = require('../../utils');
+﻿var utils = require('../utils');
 
-var fullUrlList = require('../../url-list.json').urls;
+var fullUrlList = require('./url-list.json').urls;
 
 var urls = fullUrlList.map(function (url, idx) {
     return {
