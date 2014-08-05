@@ -34,13 +34,14 @@ module.exports.smokeTestUrls = function (urls, domain) {
 
         testSteps[testName] = function (browser) {
 
-            var visitUrl = domain || browser.launch_url + url.path;
+            var visitUrl = (domain || browser.launch_url) + url.path;
 
             browser
                 .url(visitUrl)
                 .waitForElementVisible('body', 5000)
-                .pause(2000)
-                .assert.noJsErrors();
+                .pause(5000)
+                .verify.noJsErrors()
+            .end();
         };
     });
 
