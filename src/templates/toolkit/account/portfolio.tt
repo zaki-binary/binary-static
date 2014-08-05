@@ -31,12 +31,13 @@
         [% total_in = 0; total_value_now = 0; %]
         [% FOREACH open_bet IN open_bets %]
                 [%
+                        contract_info = bet_info(open_bet, currency);
                         total_in = total_in + open_bet.buy_price;
-                        total_value_now = total_value_now + open_bet.indicative_price;
+                        total_value_now = total_value_now + contract_info.indicative_price;
                 %]
                 <div class="grd-parent grd-grid-12 grd-row-padding table-body table-body-lines">
                         <div class="grd-grid-2 grd-hide-mobile grd-grid-phablet-2">[% open_bet.buy_id %]</div>
-                        <div class="grd-grid-5 grd-grid-mobile-7 grd-grid-phablet-6">[% open_bet.description %]</div>
+                        <div class="grd-grid-5 grd-grid-mobile-7 grd-grid-phablet-6">[% contract_info.longcode %]</div>
                         <div class="grd-grid-5 grd-grid-mobile-5 grd-grid-phablet-4">
                                 <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                                         [% currency %] <strong>[% to_monetary_number_format(open_bet.buy_price) %]</strong>
@@ -46,13 +47,13 @@
                                 </div>
                                 [% IF open_bet.indicative_price.defined %]
                                         <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                                                [% currency %] [% to_monetary_number_format(open_bet.indicative_price) %]
+                                                [% currency %] [% to_monetary_number_format(contract_info.indicative_price) %]
                                         </div>
                                 [% ELSE %]
                                         <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">--</div>
                                 [% END %]
                                 <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12"><br /></div>
-                                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 center-aligned">[% open_bet.analyse_link %]</div>
+                                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 center-aligned">[% contract_info.analyse_link %]</div>
                         </div>
                 </div>
         [% END %]

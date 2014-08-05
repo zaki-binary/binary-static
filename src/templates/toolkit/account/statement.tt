@@ -1,6 +1,6 @@
 [%- MACRO pagination_links BLOCK -%]
 <div class="grd-grid-12 grd-row-padding">
-        <div class="grd-grid-2 left-aligned">
+        <div class="grd-grid-2 grd-grid-mobile-6 grd-grid-phablet-6 left-aligned">
                 [% IF has_newer %]
                 <a class="pjaxload button" href="[% request.url_for('statement.cgi', { after => transactions.first.transaction_time, currency => currency }) %]"><span>&laquo;[% l('Newer') %]</span></a>
                 [% END %]
@@ -21,7 +21,7 @@
             </span>
         [% END %]
 
-        <div class="grd-grid-2 right-aligned">
+        <div class="grd-grid-2 grd-grid-mobile-6 grd-grid-phablet-6 right-aligned">
                 [% IF has_older %]
                 <a class="pjaxload button" href="[% request.url_for('statement.cgi', { before => transactions.last.transaction_time, currency => currency }) %]"><span>[% l('Older') %]&raquo;</span></a>
                 [% END %]
@@ -41,17 +41,7 @@
         <div class="grd-grid-4 grd-grid-mobile-8 grd-grid-phablet-6">
                 <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Sell') %]</div>
                 <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
-                        [% transaction.description | replace('\s+:\s+', ': ') %]
-                        <br/>
-                        [% IF transaction.runbet_ticks.defined %]
-                                [% l('Ticks') %]:
-                                [% last_tick = transaction.runbet_ticks.pop %]
-                                <strong>[%- transaction.runbet_ticks.shift -%]</strong>, 
-                                [%- transaction.runbet_ticks.join(', ') -%],
-                                <strong>[%- last_tick -%]</strong>
-                        [% ELSE %]
-                                [% transaction.analyse_link %]
-                        [% END %]
+                        [% bet_info(transaction, currency).description %]
                 </div>
         </div>
         <div class="grd-grid-5 grd-grid-mobile-4 grd-grid-phablet-3">
@@ -77,9 +67,12 @@
 <div class="grd-grid-4 grd-grid-mobile-8 grd-grid-phablet-6">
         <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Buy') %]</div>
         <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
-                [% transaction.description | replace('\s+:\s+', ': ') %]
-                <br/>
-                [% transaction.analyse_link %]
+                [% info = bet_info(transaction, currency) %]
+                [% IF info.longcode.defined %]
+                        [% info.longcode %]<br />[% info.analyse_link %]
+                [% ELSE %]
+                        [% l('Legacy Contract') %]
+                [% END %]
         </div>
 </div>
 <div class="grd-grid-5 grd-grid-mobile-4 grd-grid-phablet-3">
