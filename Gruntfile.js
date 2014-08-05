@@ -94,6 +94,7 @@ module.exports = function (grunt) {
 		    'src/javascript/pages/chart.js',
 		    'src/javascript/pages/pricingtable.js',
 		    'src/javascript/pages/statement.js',
+                    'src/javascript/pages/profit_table.js',
 		    'src/javascript/pages/selfexclusion.js',
 		    'src/javascript/pages/frontend.js',
 		    'src/javascript/pages/portfolio.js',
