@@ -94,7 +94,7 @@ module.exports = function (grunt) {
 		    'src/javascript/pages/chart.js',
 		    'src/javascript/pages/pricingtable.js',
 		    'src/javascript/pages/statement.js',
-                    'src/javascript/pages/profit_table.js',
+		    'src/javascript/pages/profit_table.js',
 		    'src/javascript/pages/selfexclusion.js',
 		    'src/javascript/pages/frontend.js',
 		    'src/javascript/pages/portfolio.js',
@@ -156,15 +156,26 @@ module.exports = function (grunt) {
 	    src: ['**'],
 	},
 	connect: {
-	    server: {
-		options: {
-		    hostname: '127.0.0.1',
-		    port: 443,
-		    protocol: 'https',
-		    base: 'dist',
-		    keepalive: true,
-		},
-	    }
+            github: {
+                options: {
+                    hostname: '127.0.0.1',
+                    port: 443,
+                    protocol: 'https',
+                    base: 'dist',
+                    keepalive: true
+                },
+            },
+            dev: {
+                options: {
+                    hostname: '*',
+                    port: 8443,
+                    protocol: 'https',
+                    base: 'dist',
+                    keepalive: true,
+                    key: grunt.file.read('/etc/rmg/ssl/key/devbin.io.key').toString(),
+                    cert: grunt.file.read('/etc/rmg/ssl/crt/devbin.io.crt').toString()
+                },
+            }
 	},
 	watch: {
 	    options: {
@@ -256,4 +267,5 @@ module.exports = function (grunt) {
     // Task to be performed
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
     grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('dev', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'connect:dev']);
 };
