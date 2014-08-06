@@ -9,12 +9,13 @@
             </tr>
             [% END %]
     </div>
+
     <div class="bet_confirm_desc">
         [% longcode %]
     </div>
-    <div>
-        <div id='contract-confirmation-details'>
-            [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+
+    <div id='contract-confirmation-details'>
+        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
             <tr>
                 <th class="standin with_right_border">[% l('Potential Payout') %]</th>
                 <th class="standout with_right_border">[% l('Total Cost') %]</th>
@@ -34,69 +35,34 @@
                 </td>
             </tr>
             [% END %]
-            [% END %]
-        </div>
-        <div id='contract-outcome-details' style="display:none">
-            [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+        [% END %]
+    </div>
+    <div id='contract-outcome-details' style="display:none">
+        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
             <tr>
                 <th class="standin with_right_border">[% l('Buy Price') %]</th>
                 <th class="standin with_right_border">[% l('Final Price') %]</th>
-                <th id='contract-outcome-label' class="standout">[% l('Profit') %]</th>
+                <th id='contract-outcome-label' class="standout"></th>
             </tr>
             <tr>
                 <td class="standin with_right_border" id='contract-outcome-buyprice'>[% price %]</td>
                 <td class="standin with_right_border" id='contract-outcome-payout'></td>
                 <td class="standout" id='contract-outcome-profit'></td>
             </tr>
-            [% END %]
-        </div>
-        <div id='digit-display' style='display:none'></div>
-    </div>
-
-[% IF transaction_msg %]
-    <p class="trade_ref">[% transaction_msg %]</p>
-[% END %]
-
-[% IF is_digit %]
-    <div id='digit-contract-details' style="display:none">
-        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
-        <tr>
-            <th class='standin'>[% l('Prediction') %]   </th>
-            <th class='standin'></th>
-            <th class='standin'>[% l('Current') %]</th>
-        </tr>
-        <tr>
-            <td><div id='digit-prediction' class='flipper'>[% client_prediction %]</div></td>
-            <td><div class='sign'>[% IF prediction == 'match' %]=[% ELSIF prediction == 'differ' %]≠[% END %]</div></td>
-            <td><div id='digit-current'></div></td>
-        </tr>
         [% END %]
-        Tick count: <span id='digit-count'></span>
     </div>
-[% END %]
 
-[% IF analyse_link %]
-    [% analyse_link %]
-[% END %]
-
-[% IF how_many_ticks %]
-    [% IF is_digit %]
-        <span id='is-digit' data-is-digit="[% is_digit %]"></span>
-        <span id='client-prediction' data-client-prediction="[% client_prediction %]"></span>
-    [% ELSE %]
-        <div id='tick_chart'></div>
+    [% IF contract_visualization %]
+        [% contract_visualization %]
+    [% ELSIF transaction_msg %]
+        <p class="trade_ref">[% transaction_msg%]</p>
     [% END %]
-    <span id='tick-prediction' data-prediction="[% prediction %]"></span>
-    <span id='tick-count' data-count="[% how_many_ticks %]"></span>
-    <span id='outcome-buyprice' data-buyprice="[% price %]"></span>
-    <span id='outcome-payout' data-payout="[% payout %]"></span>
-[% END %]
 
-[% IF google_tag_manager %]
-    [% google_tag_manager %]
-[% END %]
+    [% IF google_tag_manager %]
+        [% google_tag_manager %]
+    [% END %]
 
-[% IF balance_amount %]
-    <div class="account_balance">[% l('Account balance: ') %][% currency %] [% balance_amount %]</div>
-[% END %]
+    [% IF balance_amount %]
+        <div class="account_balance">[% l('Account balance: ') %][% currency %] [% balance_amount %]</div>
+    [% END %]
 </div>
