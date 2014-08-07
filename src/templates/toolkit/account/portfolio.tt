@@ -45,7 +45,7 @@
                                 <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
                                         <br />[% l('Indicative') %] :
                                 </div>
-                                [% IF open_bet.indicative_price.defined %]
+                                [% IF contract_info.indicative_price.defined %]
                                         <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                                                 [% currency %] [% to_monetary_number_format(contract_info.indicative_price) %]
                                         </div>
