@@ -9,7 +9,7 @@
       .grd-grid-4.form_label
         %label{:for => "loginid"}= l('Login ID')
       .grd-grid-8
-        %input#loginid{:type => 'text', :name => 'loginid', :value => "#{stash('loginid')}", :placeholder => "#{l('Login ID')}"}
+        %input#loginid{:type => 'text', :name => 'loginid', :placeholder => "#{l('Login ID')}"}
         - if (flash('error') and flash('error')->{loginid}) {
           %p.errorfield= flash('error')->{loginid}
         - }
