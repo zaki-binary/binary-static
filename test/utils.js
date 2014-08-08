@@ -11,7 +11,7 @@ module.exports.openUrlsOld = function (browser, urls) {
 
     urls.forEach(function (url) {
 
-        var visitUrl = browser.globals.url + url;
+        var visitUrl = browser.launch_url + url;
 
         browser
             .url(visitUrl, function () {
@@ -24,7 +24,7 @@ module.exports.openUrlsOld = function (browser, urls) {
     browser.end();
 };
 
-module.exports.smoteTestUrls = function (urls) {
+module.exports.smokeTestUrls = function (urls, domain) {
 
     var testSteps = {};
 
@@ -34,12 +34,14 @@ module.exports.smoteTestUrls = function (urls) {
 
         testSteps[testName] = function (browser) {
 
-            var visitUrl = browser.globals.url + url.path;
+            var visitUrl = (domain || browser.launch_url) + url.path;
 
             browser
                 .url(visitUrl)
                 .waitForElementVisible('body', 5000)
-                .pause(2000);
+                .pause(5000)
+                .verify.noJsErrors()
+            .end();
         };
     });
 

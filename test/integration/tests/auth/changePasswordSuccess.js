@@ -1,4 +1,4 @@
-var utils = require('../../utils');
+var URL = require('../../url');
 var createAccountVirtualSuccess = require('./createAccountVirtualSuccess').createAccountVirtualSuccess;
 
 var formId = '#changePasswordForm',
@@ -17,7 +17,7 @@ module.exports = {
         createAccountVirtualSuccess(browser, true);
 
         browser
-            .url(browser.globals.url + '/d/change_password.cgi')
+            .url(browser.launch_url + URL.ACCOUNT.CHANGE_PASSWORD)
             .waitForElementVisible(element.form, 5000)
             .setValue(element.currentPasswordInput, 'password123')
             .setValue(element.newPasswordInput, 'password123')
