@@ -9,7 +9,7 @@ var formId = '#login-form',
 function loginWith(browser, login, password, containsText) {
   
     browser
-        .url(browser.globals.url)
+        .url(browser.launch_url)
         .waitForElementVisible(element.form, 5000)
         .setValue(element.loginIdInput, login)
         .setValue(element.passwordInput, password)

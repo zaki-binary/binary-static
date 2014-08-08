@@ -1,14 +1,15 @@
-﻿var utils = require('../../utils');
+﻿var utils = require('../../../utils');
+var URL = require('../../url');
 
 var urls = [
-    { page: 'Forex', path: '/c/trade.cgi?market=forex' },
-    { page: 'Indices', path: '/c/trade.cgi?market=indices' },
-    { page: 'Stocks', path: '/c/trade.cgi?market=stocks' },
-    { page: 'Commodities', path: '/c/trade.cgi?market=commodities' },
-    { page: 'Sectors', path: '/c/trade.cgi?market=sectors' },
-    { page: 'Randoms', path: '/c/trade.cgi?market=random' },
-    { page: 'Smart Indices', path: '/c/trade.cgi?market=smarties' },
-    { page: 'Tick Trades', path: '/d/tick_trades.cgi' }
+    { page: 'Forex', path: URL.FOREX },
+    { page: 'Indices', path: URL.INDICES },
+    { page: 'Stocks', path: URL.STOCKS },
+    { page: 'Commodities', path: URL.COMMODITIES },
+    { page: 'Sectors', path: URL.SECTORS },
+    { page: 'Randoms', path: URL.RANDOMS },
+    { page: 'Smart Indices', path: URL.SMART_INDICES },
+    { page: 'Tick Trades', path: URL.TICK_TRADES }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

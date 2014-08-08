@@ -57,6 +57,7 @@ module.exports = function (grunt) {
 		    'src/javascript/external/jstree/jquery.jstree.js',
 		    'src/javascript/external/jquery-ui-timepicker/jquery.ui.timepicker.js',
 		    'src/javascript/external/eventsource.js',
+		    'src/javascript/external/deployJava.js',
 		    'src/javascript/base/onerror.js',
 		    'src/javascript/base/pjax-lib.js',
 		    'src/javascript/external/mmenu/jquery.mmenu.min.all.js',
@@ -218,7 +219,7 @@ module.exports = function (grunt) {
                 }                
             },
             browserstack: {
-                command: 'nightwatch -c browserstack-ff.json',
+                command: 'nightwatch -c browserstack.json',
                 options: {
                     stderr: false,
                     execOptions: {
@@ -234,7 +235,16 @@ module.exports = function (grunt) {
                         cwd: 'test/integration'
                     }
                 }
-            }            
+            },
+            continuous: {
+                command: 'nightwatch -t test',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'test/continuous'
+                    }
+                }
+            },
         }
     });
 

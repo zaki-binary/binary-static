@@ -1,11 +1,12 @@
-﻿var utils = require('../../utils');
+﻿var utils = require('../../../utils');
+var URL = require('../../url');
 
 var urls = [
-    { page: 'Asset Index', path: '/c/asset_index.cgi' },
-    { page: 'Trading Times', path: '/c/trading_times.cgi' },
-    { page: 'Trading Guide', path: '/c/contract_guide.cgi' },
-    { page: 'Pricing Table', path: '/c/pricing_table.cgi' },
-    { page: 'Rise / Fall Table', path: '/c/rise_fall_table.cgi' }
+    { page: 'Asset Index', path: URL.RESOURCES.ASSET_INDEX },
+    { page: 'Trading Times', path: URL.RESOURCES.TRADING_TIMES },
+    { page: 'Trading Guide', path: URL.RESOURCES.TRADING_GUIDE },
+    { page: 'Pricing Table', path: URL.RESOURCES.PRICING_TABLE },
+    { page: 'Rise / Fall Table', path: URL.RESOURCES.RISE_FALL_TABLE }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

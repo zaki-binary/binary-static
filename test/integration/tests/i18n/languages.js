@@ -13,7 +13,7 @@
 languages.forEach(function(l) {
     module.exports[l.language] = function(browser) {
         browser
-            .url(browser.globals.url + '?l=' + l.code)
+            .url(browser.launch_url + '?l=' + l.code)
             .waitForElementVisible('body', 5000)
             .assert.containsText('body', l.translation)
         .end();

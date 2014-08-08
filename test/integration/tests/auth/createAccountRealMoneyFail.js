@@ -1,4 +1,4 @@
-var utils = require('../../utils');
+var URL = require('../../url');
 
 var element = {
     form: '#openAccForm',
@@ -9,6 +9,7 @@ var element = {
         'use only letters',
         'enter your email address',
         'input a valid date',
+        'specify your country',
         'enter the first line of your home address',
         'enter a town or city',
         'nvalid telephone number',
@@ -19,7 +20,7 @@ var element = {
 
 module.exports.init = function (browser) {
     browser
-        .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=real')
+        .url(browser.launch_url + URL.ACCOUNT.REAL_MONEY)
         .waitForElementVisible(element.form, 5000)
         .click(element.openAccountButton)
         .pause(5000);

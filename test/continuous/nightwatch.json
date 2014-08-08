@@ -1,8 +1,7 @@
 {
-    "src_folders": [ "tests/" ],
-    "globals_path": "globals.js",
-    "custom_commands_path": "commands/",
-    "custom_assertions_path" : "assertions/",
+    "src_folders": [ "./" ],
+    "custom_commands_path": "../integration/commands/",
+    "custom_assertions_path": "../integration/assertions/",
     "selenium": {
         "start_process": true,
         "server_path": "../lib/selenium-server-standalone.jar",
@@ -10,27 +9,11 @@
         "host": "127.0.0.1",
         "port": 4444,
         "cli_args": {
-            "webdriver.log.file" : "console.log"
+            "webdriver.log.file": "console.log"
         }
     },
     "test_settings": {
         "default": {
-            "launch_url": "http://www.binary-beta.com",
-            "selenium_host": "127.0.0.1",
-            "selenium_port": 4444,
-            "silent": true,
-            "disable_colors": false,
-            "screenshots": {
-                "enabled": false,
-                "path": ""
-            },
-            "desiredCapabilities": {
-                "browserName": "firefox",
-                "javascriptEnabled": true,
-                "acceptSslCerts": true
-            }
-        },
-        "production": {
             "launch_url": "http://www.binary.com",
             "selenium_host": "127.0.0.1",
             "selenium_port": 4444,
