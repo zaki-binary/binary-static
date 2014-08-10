@@ -2,6 +2,7 @@ module.exports = function (grunt) {
     // Configurations
     grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
+	javascripts: grunt.file.readJSON('javascript.json'),
 	clean: {
 	    build: {
 		src: ['dist'],
@@ -37,82 +38,9 @@ module.exports = function (grunt) {
 		},
 	    },
 	},
-	concat: {
-	    options: {
-		separator: ';',
-	    },
-	    dist: {
-		src: [
-		    'src/javascript/external/jquery-2.0.3.min.js',
-		    'src/javascript/external/jQuery.XDomainRequest.js',
-		    'src/javascript/external/jquery.cookie.js',
-		    'src/javascript/external/json2.min.js',
-		    'src/javascript/external/moment-2.5.0.min.js',
-		    'src/javascript/external/moment-lang-2.5.0.min.js',
-		    'src/javascript/external/jquery-ui-1.10.2.min.js',
-		    'src/javascript/external/jquery.sparkline.min.js',
-		    'src/javascript/external/jquery-simplyscroll-2.0.5.min.js',
-		    'src/javascript/external/jquery-scrollto-1.4.3.1-min.js',
-		    'src/javascript/external/jquery-slides-1.2.min.js',
-		    'src/javascript/external/jstree/jquery.jstree.js',
-		    'src/javascript/external/jquery-ui-timepicker/jquery.ui.timepicker.js',
-		    'src/javascript/external/eventsource.js',
-		    'src/javascript/external/deployJava.js',
-		    'src/javascript/base/onerror.js',
-		    'src/javascript/base/pjax-lib.js',
-		    'src/javascript/external/mmenu/jquery.mmenu.min.all.js',
-		    'src/javascript/form_validation.js',
-		    'src/javascript/base/storage.js',
-		    'src/javascript/base/pjax.js',
-		    'src/javascript/base/page.js',
-		    'src/javascript/base/spot_light.js',
-		    'src/javascript/base/menu_content.js',
-		    'src/javascript/base/jquery_color_animation.js',
-		    'src/javascript/base/markets.js',
-		    'src/javascript/base/load_data.js',
-		    'src/javascript/base.js',
-		    'src/javascript/base/inpage_popup.js',
-		    'src/javascript/utility.js',
-		    'src/javascript/gtm.js',
-		    'src/javascript/components/date_picker.js',
-		    'src/javascript/components/date_picker/selected_dates.js',
-		    'src/javascript/components/time_picker.js',
-		    'src/javascript/pages.js',
-		    'src/javascript/pages/bet/bet_form.js',
-		    'src/javascript/pages/bet/bet_form/attributes.js',
-		    'src/javascript/pages/bet/bet_form/barriers.js',
-		    'src/javascript/pages/bet/bet_form/time.js',
-		    'src/javascript/pages/bet/bet_analysis.js',
-		    'src/javascript/pages/bet/bet_analysis/live_chart.js',
-		    'src/javascript/pages/bet/bet_analysis/digit_info.js',
-		    'src/javascript/pages/bet/bet_price.js',
-		    'src/javascript/pages/bet/pricing_details.js',
-		    'src/javascript/pages/bet/bet_sell.js',
-		    'src/javascript/pages/bet/tick_trade.js',
-		    'src/javascript/pages/bet.js',
-		    'src/javascript/pages/client/form.js',
-		    'src/javascript/pages/client.js',
-		    'src/javascript/pages/chart.js',
-		    'src/javascript/pages/pricingtable.js',
-		    'src/javascript/pages/statement.js',
-		    'src/javascript/pages/selfexclusion.js',
-		    'src/javascript/pages/frontend.js',
-		    'src/javascript/pages/portfolio.js',
-		    'src/javascript/pages/contact.js',
-		    'src/javascript/base/on_complete.js',
-		    'src/javascript/base/appcache_check.js',
-		    'src/javascript/livechart/highstock.js',
-		    'src/javascript/livechart/highstock-exporting.js',
-		    'src/javascript/livechart/export-csv.js',
-		    'src/javascript/livechart/config.js',
-		    'src/javascript/livechart/datetime_picker.js',
-		    'src/javascript/livechart/indicator.js',
-		    'src/javascript/livechart.js',
-		    'src/javascript/pages/livechart.js'
-		],
-		dest: 'dist/<%= pkg.version %>/js/binary.js',
-	    },
-	},
+        concat: {
+            // will be populated in createJavascriptArray function
+        },
 	uglify: {
 	    my_target: {
 		options: {
@@ -127,6 +55,8 @@ module.exports = function (grunt) {
 	copy: {
 	    main: {
 		files: [
+		    {expand: true, src: ['javascript.json'], dest: 'dist/<%= pkg.version %>/',},
+		    {expand: true, src: ['javascript.json'], dest: 'dist/0.0.0/',},
                     {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/<%= pkg.version %>/config/locales/'},
                     {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/0.0.0/config/locales/'},
 		    {expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/<%= pkg.version %>/images/',},
@@ -247,6 +177,22 @@ module.exports = function (grunt) {
             },
         }
     });
+    function createJavascriptArray() {
+        var jsJson = grunt.file.readJSON('javascript.json');
+        var jsFiles = jsJson.files.map(function (path) {
+            return 'src/' + path;
+        });
+        grunt.config('concat', {
+            options: {
+                separator: ';',
+            },
+            dist: {
+                src: jsFiles,
+                dest: 'dist/<%= pkg.version %>/js/binary.js',
+            },
+        });
+    }
+    createJavascriptArray();
 
     // load the plugin that will complete the task
     grunt.loadNpmTasks('grunt-bump');
