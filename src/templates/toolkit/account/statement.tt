@@ -37,57 +37,37 @@
         [% END %]
 [%- END -%]
 
-[%- MACRO display_sell_transaction(transaction) BLOCK -%]
-        <div class="grd-grid-4 grd-grid-mobile-8 grd-grid-phablet-6">
+[%- MACRO describe_contract(transaction) BLOCK;
+    contract_info = bet_info(transaction, currency);
+    IF transaction.action_type == 'sell';
+        contract_info.description;
+    ELSE;
+        IF contract_info.longcode.defined %]
+            [% contract_info.longcode %]<br />[% contract_info.analyse_link %]
+        [% ELSE %]
+            [% l('Legacy Contract') %]
+        [% END;
+    END;
+END -%]
+
+[%- MACRO display_contract(transaction) BLOCK -%]
+        <div class="grd-grid-5 grd-grid-mobile-8 grd-grid-phablet-6">
                 <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Sell') %]</div>
                 <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
-                        [% bet_info(transaction, currency).description %]
+                        [% describe_contract(transaction) %]
                 </div>
         </div>
-        <div class="grd-grid-5 grd-grid-mobile-4 grd-grid-phablet-3">
-                <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
-                        <br/>[% l('P/L'); %]:
-                </div>
-                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                        [% display_amount(transaction.sell_price - transaction.buy_price) %]
-                </div>
-                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+        <div class="grd-grid-4 grd-grid-mobile-4 grd-grid-phablet-3">
+                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                         [% display_amount(transaction.amount) %]
                 </div>
                 <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
                         <br/>[% l('Balance'); %]:
                 </div>
-                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                         [% to_monetary_number_format(transaction.balance) %]
                 </div>
         </div>
-[%- END -%]
-
-[%- MACRO display_buy_transaction(transaction) BLOCK -%]
-<div class="grd-grid-4 grd-grid-mobile-8 grd-grid-phablet-6">
-        <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Buy') %]</div>
-        <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
-                [% info = bet_info(transaction, currency) %]
-                [% IF info.longcode.defined %]
-                        [% info.longcode %]<br />[% info.analyse_link %]
-                [% ELSE %]
-                        [% l('Legacy Contract') %]
-                [% END %]
-        </div>
-</div>
-<div class="grd-grid-5 grd-grid-mobile-4 grd-grid-phablet-3">
-        <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-        </div>
-        <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                [% display_amount(transaction.amount) %]
-        </div>
-        <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
-                <br/>[% l('Balance'); %]:
-        </div>
-        <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                [% to_monetary_number_format(transaction.balance) %]
-        </div>
-</div>
 [%- END -%]
 
 <div class="grd-grid-12">
@@ -111,14 +91,13 @@
                     <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12">[% l('Date'); %]</div>
                     <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12">[% l('Ref.'); %]</div>
             </div>
-            <div class="grd-grid-4 grd-grid-mobile-8 grd-grid-phablet-6">
+            <div class="grd-grid-5 grd-grid-mobile-8 grd-grid-phablet-6">
                     <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Action'); %]</div>
                     <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Description'); %]</div>
             </div>
-            <div class="grd-grid-5 grd-grid-mobile-4 grd-grid-phablet-3">
-                    <div class="grd-grid-4 grd-hide-mobile grd-hide-phablet right-aligned">[% l('Profit/<wbr/>Loss'); %]</div>
-                    <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">[% l('Credit/<wbr/>Debit'); %]</div>
-                    <div class="grd-grid-4 grd-hide-mobile grd-hide-phablet right-aligned">[% l('Balance'); %] ([% currency %])</div>
+            <div class="grd-grid-4 grd-grid-mobile-4 grd-grid-phablet-3">
+                    <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">[% l('Credit/<wbr/>Debit'); %]</div>
+                    <div class="grd-grid-6 grd-hide-mobile grd-hide-phablet right-aligned">[% l('Balance'); %] ([% currency %])</div>
             </div>
         </div>
         [% FOREACH transaction IN transactions %]
@@ -133,13 +112,9 @@
                         <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12">[% transaction.id %]</div>
                 </div>
                 [% IF transaction.financial_market_bet_id.defined;
-                        IF transaction.action_type == 'sell';
-                                display_sell_transaction(transaction);
-                        ELSE;
-                                display_buy_transaction(transaction);
-                        END;
+                        display_contract(transaction);
                 ELSE %]
-                        <div class="grd-grid-4 grd-grid-mobile-8 grd-grid-phablet-6">
+                        <div class="grd-grid-5 grd-grid-mobile-8 grd-grid-phablet-6">
                         [% IF transaction.action_type == 'deposit' %]
                                 <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Deposit') %]</div>
                         [% ELSE %]
@@ -149,16 +124,14 @@
                                         [% transaction.payment_remark | replace('\s+:\s+', ': ') %]
                                 </div>
                         </div>
-                        <div class="grd-grid-5 grd-grid-mobile-4 grd-grid-phablet-3">
-                                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                                </div>
-                                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+                        <div class="grd-grid-4 grd-grid-mobile-4 grd-grid-phablet-3">
+                                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                                         [% display_amount(transaction.amount) %]
                                 </div>
                                 <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
                                         <br/>[% l('Balance'); %]:
                                 </div>
-                                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+                                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                                         [% to_monetary_number_format(transaction.balance) %]
                                 </div>
                         </div>
@@ -167,17 +140,14 @@
         [% END %]
     [% END %]
     <div class="grd-parent grd-grid-12 table-header grd-row-padding">
-            <div class="grd-grid-7 grd-grid-mobile-7 grd-grid-phablet-7">
+            <div class="grd-grid-8 grd-grid-mobile-7 grd-grid-phablet-7">
                 [% balance.date.date %]
             </div>
-            <div class="grd-grid-5 grd-grid-mobile-5 grd-grid-phablet-5 right-aligned">
-                <div class="grd-grid-4 grd-hide-mobile grd-hide-phablet right-aligned">
-                        [% to_monetary_number_format(total_pl) %]
-                </div>
-                <div class="grd-grid-4 grd-hide-mobile grd-hide-phablet right-aligned">
+            <div class="grd-grid-4 grd-grid-mobile-5 grd-grid-phablet-5 right-aligned">
+                <div class="grd-grid-6 grd-hide-mobile grd-hide-phablet right-aligned">
                         [% to_monetary_number_format(total_credit_debit) %]
                 </div>
-                <div class="grd-grid-4 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
                         [% to_monetary_number_format(balance.amount) %]
                 </div>
             </div>
