@@ -1050,8 +1050,11 @@ var BetSell = function() {
 
                     if (count === 0) {
                         that.resubmit_sell_at_market();
+                    } else if (duration.seconds() !== 0) {
+                        selector.html(timestring);
                     } else {
                         selector.html(timestring);
+                        that.basic_cleanup();
                     }
                     return anonymous;
             }(), Math.abs(interval) * 1000);
