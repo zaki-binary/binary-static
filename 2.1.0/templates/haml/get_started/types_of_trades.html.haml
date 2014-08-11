@@ -1,0 +1,94 @@
+- stash(title => l('Types of trades'));
+.section-content.section-5
+  .grd-grid-12
+    %h1= stash->{title}
+    %p= l('Whatever your market view or strategy, [_1] provides you with the right trade to profit from your prediction. Choose from five ways to trade:', stash->{website_name})
+    %ul.bullet
+      %li= l('Rise/fall trades')
+      %li= l('Higher/lower trades')
+      %li= l('Touch/no touch trades')
+      %li= l('In/out trades')
+      %li= l('Tick trades')
+
+  .subsection
+    .grd-grid-12
+      %h2
+        %a.pjaxload{:href => url_for('trade.cgi?market=forex&form_name=risefall')}= l('Rise / Fall')
+      %p= l('Choose Rise/Fall when you want to profit from the market rising or falling from its current level.')
+      %ol
+        %li= l('Choose the market, the time period, and how much you wish to win.')
+        %li= l('Price the trade.')
+        %li= l('Win 80-100% on your stake if you are correct.')
+      .trade-type-flash
+        %object{:height => "226", :width => "350", :type => "application/x-shockwave-flash", :data => url_for('flash/betguide-risefall.swf')}
+          %param{:name => "movie", :value => url_for('flash/betguide-risefall.swf')}
+          %param{:name => "menu", :value => "false"}
+          %param{:name => "quality", :value => "high"}
+          %param{:name => "bgcolor", :value => "#FFFFFF"}
+          %param{:name => "wMode", :value => "transparent"}
+  .subsection
+    .grd-grid-12
+      %h2
+        %a.pjaxload{:href => url_for('trade.cgi?market=forex&form_name=higherlower')}= l('Higher / Lower')
+      %p= l('Choose Higher/Lower when you want to profit from the market ending higher or lower than a price target.')
+      %ol
+        %li= l('Choose the market, the price target, the time period, and how much you wish to win.')
+        %li= l('Price the trade.')
+        %li= l('Win 10-1000% on your stake if you are correct. Increase your winning return by choosing a price target farther away from the current price.')
+      .trade-type-flash
+        %object{:height => "226", :width => "350", :type => "application/x-shockwave-flash", :data => url_for('flash/betguide-higherlower.swf')}
+          %param{:name => "movie", :value => url_for('flash/betguide-higherlower.swf')}
+          %param{:name => "menu", :value => "false"}
+          %param{:name => "quality", :value => "high"}
+          %param{:name => "bgcolor", :value => "#FFFFFF"}
+          %param{:name => "wMode", :value => "transparent"}
+  .subsection
+    .grd-grid-12
+      %h2
+        %a.pjaxload{:href => url_for('trade.cgi?market=forex&form_name=touchnotouch')}= l('Touch / No Touch')
+      %p= l('Choose Touch / No Touch when you want to profit from the market touching or not touching a target any time during the contract period.')
+      %ol
+        %li= l('Choose the market, the price target, the time period, and how much you wish to win.')
+        %li= l('Price the trade.')
+        %li= l('Win 10-1000% on your stake if you are correct. Increase your winning return by choosing a "Touch" trade, with a price target farther away from the current price.')
+      .trade-type-flash
+        %object{:height => "226", :width => "350", :type => "application/x-shockwave-flash", :data => url_for('flash/betguide-touchnotouch.swf')}
+          %param{:name => "movie", :value => url_for('flash/betguide-touchnotouch.swf')}
+          %param{:name => "menu", :value => "false"}
+          %param{:name => "quality", :value => "high"}
+          %param{:name => "bgcolor", :value => "#FFFFFF"}
+          %param{:name => "wMode", :value => "transparent"}
+  .subsection
+    .grd-grid-12
+      %h2
+        %a.pjaxload{:href => url_for('trade.cgi?market=forex&form_name=staysinout')}= l('In / Out')
+      %p= l('Choose Stays In/Out to profit from the market staying inside or going outside two price targets any time during the contract period.')
+      %p= l('Choose Ends In/Out to profit from the market stopping inside or outside two price targets at the end of the time period.')
+      %ol
+        %li= l('Choose the market, the price targets, the time period, and how much you wish to win.')
+        %li= l('Price the trade.')
+        %li= l('Win 10-1000% on your stake if you are correct. Increase your winning return by choosing "Stays In" with a narrow price target.')
+      .trade-type-flash
+        %object{:height => "226", :width => "350", :type => "application/x-shockwave-flash", :data => url_for('flash/betguide-staysinout.swf')}
+          %param{:name => "movie", :value => url_for('flash/betguide-staysinout.swf')}
+          %param{:name => "menu", :value => "false"}
+          %param{:name => "quality", :value => "high"}
+          %param{:name => "bgcolor", :value => "#FFFFFF"}
+          %param{:name => "wMode", :value => "transparent"}
+  .subsection.last
+    .grd-grid-12
+      %h2
+        %a.pjaxload{:href => url_for('tick_trades.cgi')}= l('Tick Trades')
+      %p= l('Choose Tick Trades when you want to profit from very short-term market movements over the next 5 ticks.')
+      %p.highlight= l('There are 3 types of tick trades:')
+      %ol
+        %li= l('"Tick Trades Up/Down" - you win when you correctly predict if the market will rise or fall over the next 5 ticks.')
+        %li= l('"Lucky 10 Digits" - you win when you correctly predict the last decimal digit of the 5th tick.')
+        %li= l('"Quick 10%" - you win when you correctly predict what the last decimal digit of the 5th tick will not be.')
+      .trade-type-flash
+        %object{:height => "226", :width => "350", :type => "application/x-shockwave-flash", :data => url_for('flash/betguide-runbet-updown.swf')}
+          %param{:name => "movie", :value => url_for('flash/betguide-runbet-updown.swf')}
+          %param{:name => "menu", :value => "false"}
+          %param{:name => "quality", :value => "high"}
+          %param{:name => "bgcolor", :value => "#FFFFFF"}
+          %param{:name => "wMode", :value => "transparent"}
