@@ -73,7 +73,9 @@ module.exports = function (grunt) {
 		    {expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/0.0.0/css/',},
 		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/<%= pkg.version %>/css/fonts'},
 		    {expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/0.0.0/css/fonts'},
-                    {expand: true, cwd: 'dist/<%= pkg.version %>/', src: ['**'], dest: 'dist/0.0.0/',}
+                    {expand: true, cwd: 'dist/<%= pkg.version %>/', src: ['**'], dest: 'dist/0.0.0/',},
+		    {expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/<%= pkg.version %>/dev/javascript/',},
+		    {expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/0.0.0/dev/javascript/',}
 		],
 	    }
 	},
