@@ -129,3 +129,15 @@ pjax_config_page('portfolio|trade.cgi|statement|f_manager_statement|f_manager_hi
         }
     };
 });
+
+pjax_config_page('tick_trades', function() {
+    return {
+        onLoad: function() {
+            $('#show-new').on('click', function(){
+                $('#ticktrade-new').hide();
+                $('#ticktrade-new-msg').hide();
+                $('#ticktrade-flash').show();
+            });
+        },
+    };
+});

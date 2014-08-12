@@ -991,17 +991,25 @@ var BetSell = function() {
                         timestring += duration.minutes() + ' ' + input.minute.text_plural + ' ';
                         count++;
                     }
+
                     if (duration.seconds() == 1 && count < 2) {
                         timestring += duration.seconds() + ' ' + input.second.text;
                         count++;
                     } else if (duration.seconds() > 1 && count < 2) {
                         timestring += duration.seconds() + ' ' + input.second.text_plural;
                         count++;
+                    } else if (duration.seconds() == 0 && count < 2) {
+                        timestring += duration.seconds() + ' ' + input.second.text;
+                        count++;
                     }
+
                     if (count === 0) {
                         that.resubmit_sell_at_market();
+                    } else if (duration.seconds() !== 0) {
+                        selector.html(timestring);
                     } else {
                         selector.html(timestring);
+                        that.basic_cleanup();
                     }
                     return anonymous;
             }(), Math.abs(interval) * 1000);
@@ -1009,7 +1017,7 @@ var BetSell = function() {
         create_date_timer: function(selector) {
             var interval = 1;
             var that = this;
-            var epoch_time = parseInt(selector.attr('epoch_time'));
+            var epoch_time = parseInt(selector.attr('epoch_time')) + 1;
             _timer_interval_obj[Object.keys(_timer_interval_obj).length] = setInterval(function anonymous() {
                 epoch_time += interval;
                 var date = that.get_date_from_seconds(epoch_time);
