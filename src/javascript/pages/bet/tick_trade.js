@@ -1,16 +1,3 @@
-var tt_chart;
-
-function updateTTChart(config) {
-    if (tt_chart) {
-        TickDisplay.reset();
-        tt_chart.chart.destroy();
-        tt_chart = null;
-    }
-    config.trade_visualization = true;
-    tt_chart = new LiveChartTick(config);
-    tt_chart.show_chart();
-}
-
 var TickDisplay = function() {
     return {
         reset: function() {
