@@ -97,7 +97,7 @@ var TickDisplay = function() {
                         var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
                         return mom + "<br/>" + symbol + " " + new_y;
                     },
-                };
+                },
                 xAxis: {
                     type: 'datetime',
                     min: parseInt(config['plot_from']),
