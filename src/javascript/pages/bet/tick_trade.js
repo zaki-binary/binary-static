@@ -12,6 +12,7 @@ var TickDisplay = function() {
             // setting up globals
             $self.number_of_ticks = parseInt(data.number_of_ticks);
             $self.symbol = data.symbol;
+            $self.display_symbol = data.display_symbol;
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_type = data.contract_type;
             $self.set_barrier = true;
@@ -95,7 +96,7 @@ var TickDisplay = function() {
                         $self.display_decimal = decimal_places;
                         var new_y = that.y.toFixed(decimal_places);
                         var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
-                        return mom + "<br/>" + symbol + " " + new_y;
+                        return mom + "<br/>" + $self.display_symbol + " " + new_y;
                     },
                 },
                 xAxis: {
