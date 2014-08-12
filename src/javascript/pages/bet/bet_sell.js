@@ -1043,7 +1043,7 @@ var BetSell = function() {
                     } else if (duration.seconds() > 1 && count < 2) {
                         timestring += duration.seconds() + ' ' + input.second.text_plural;
                         count++;
-                    } else if (duration.seconds() == 0 && count < 2) {
+                    } else if (duration.seconds() === 0 && count < 2) {
                         timestring += duration.seconds() + ' ' + input.second.text;
                         count++;
                     }
