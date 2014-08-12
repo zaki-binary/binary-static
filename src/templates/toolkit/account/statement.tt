@@ -49,10 +49,25 @@
         [% END;
     END;
 END -%]
+[% MACRO transaction_type(transaction)
+        IF transaction.financial_market_bet_id.defined %]
+                [% IF transaction.action_type == 'sell' %]
+                        [% l('Sell') %]
+                [% ELSE %]
+                        [% l('Buy') %]
+                [% END %]
+        [% ELSE;
+                IF transaction.action_type == 'deposit' %]
+                        [% l('Deposit') %]
+                [% ELSE %]
+                        [% l('Withdraw') %]
+                [% END %]
+[% END %]
+
 
 [%- MACRO display_contract(transaction) BLOCK -%]
         <div class="grd-grid-5 grd-grid-mobile-8 grd-grid-phablet-6">
-                <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Sell') %]</div>
+                <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% transaction_type(transaction) %]</div>
                 <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
                         [% describe_contract(transaction) %]
                 </div>
@@ -69,6 +84,26 @@ END -%]
                 </div>
         </div>
 [%- END -%]
+
+[%- MACRO display_payment(transaction) BLOCK -%]
+        <div class="grd-grid-5 grd-grid-mobile-8 grd-grid-phablet-6">
+                <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% transaction_type(transaction) %]</div>
+                <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
+                        [% transaction.payment_remark | replace('\s+:\s+', ': ') %]
+                </div>
+        </div>
+        <div class="grd-grid-4 grd-grid-mobile-4 grd-grid-phablet-3">
+                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+                        [% display_amount(transaction.amount) %]
+                </div>
+                <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
+                        <br/>[% l('Balance'); %]:
+                </div>
+                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
+                        [% to_monetary_number_format(transaction.balance) %]
+                </div>
+        </div>
+[% END %]
 
 <div class="grd-grid-12">
     <h1>[% l('Statement') %]</h1><br>
@@ -113,29 +148,9 @@ END -%]
                 </div>
                 [% IF transaction.financial_market_bet_id.defined;
                         display_contract(transaction);
-                ELSE %]
-                        <div class="grd-grid-5 grd-grid-mobile-8 grd-grid-phablet-6">
-                        [% IF transaction.action_type == 'deposit' %]
-                                <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Deposit') %]</div>
-                        [% ELSE %]
-                                <div class="grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">[% l('Withdraw') %]</div>
-                        [% END %]
-                                <div class="grd-grid-9 grd-grid-mobile-12 grd-grid-phablet-12 grd-grid-tablet-12">
-                                        [% transaction.payment_remark | replace('\s+:\s+', ': ') %]
-                                </div>
-                        </div>
-                        <div class="grd-grid-4 grd-grid-mobile-4 grd-grid-phablet-3">
-                                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                                        [% display_amount(transaction.amount) %]
-                                </div>
-                                <div class="grd-hide grd-show-mobile grd-grid-mobile-12 grd-show-phablet grd-grid-phablet-12">
-                                        <br/>[% l('Balance'); %]:
-                                </div>
-                                <div class="grd-grid-6 grd-grid-mobile-12 grd-grid-phablet-12 right-aligned">
-                                        [% to_monetary_number_format(transaction.balance) %]
-                                </div>
-                        </div>
-                [% END %]
+                ELSE;
+                        display_payment(transaction);
+                END; %]
             </div>
         [% END %]
     [% END %]
