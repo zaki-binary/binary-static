@@ -172,8 +172,8 @@ module.exports = function (grunt) {
                     protocol: 'https',
                     base: 'dist',
                     keepalive: true,
-                    key: grunt.file.read('/etc/rmg/ssl/key/devbin.io.key').toString(),
-                    cert: grunt.file.read('/etc/rmg/ssl/crt/devbin.io.crt').toString()
+                    key: grunt.file.read('src/certificates/key/devbin.io.key').toString(),
+                    cert: grunt.file.read('src/certificates/crt/devbin.io.crt').toString()
                 },
             }
 	},
