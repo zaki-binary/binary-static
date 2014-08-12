@@ -13679,11 +13679,8 @@ BetForm.Time.EndTime.prototype = {
         tooltip:{
             borderWidth:1,
             formatter:function() {
-                var that = this;
-                var total = $("select[name='tick_count']").val();
-                var percentage = that.y/total*100;
-                return '<b>Digit:</b> '+ that.x +'<br/>'+
-                '<b>Percentage:</b> '+ percentage.toFixed(2) + " %";
+                return '<b>Digit:</b> '+ this.x +'<br/>'+
+                '<b>Count:</b> '+ this.y;
             }
         },
         plotOptions:{
@@ -13713,13 +13710,6 @@ BetForm.Time.EndTime.prototype = {
             tickColor:'#ccc',
             lineColor:'#ccc',
             endOnTick:true,
-            labels: {
-                formatter: function() {
-                    var total = $("select[name='tick_count']").val();
-                    var percentage = parseInt(this.value/total*100);
-                    return percentage + " %";
-                },
-            },
         },
     };
 
@@ -13775,6 +13765,7 @@ BetAnalysis.DigitInfo.prototype = {
             text: $('#last_digit_title').html(),
         };
         this.spots = $.parseJSON($('#last_digit_data').html());
+        this.chart_config.yAxis.tickInterval = this.spots.length / 10;
         this.chart = new Highcharts.Chart(this.chart_config);
         this.chart.addSeries({name : underlying, data: []});
 
@@ -15561,25 +15552,17 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                         timestring += duration.minutes() + ' ' + input.minute.text_plural + ' ';
                         count++;
                     }
-
                     if (duration.seconds() == 1 && count < 2) {
                         timestring += duration.seconds() + ' ' + input.second.text;
                         count++;
                     } else if (duration.seconds() > 1 && count < 2) {
                         timestring += duration.seconds() + ' ' + input.second.text_plural;
                         count++;
-                    } else if (duration.seconds() == 0 && count < 2) {
-                        timestring += duration.seconds() + ' ' + input.second.text;
-                        count++;
                     }
-
                     if (count === 0) {
                         that.resubmit_sell_at_market();
-                    } else if (duration.seconds() !== 0) {
-                        selector.html(timestring);
                     } else {
                         selector.html(timestring);
-                        that.basic_cleanup();
                     }
                     return anonymous;
             }(), Math.abs(interval) * 1000);
@@ -15587,7 +15570,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
         create_date_timer: function(selector) {
             var interval = 1;
             var that = this;
-            var epoch_time = parseInt(selector.attr('epoch_time')) + 1;
+            var epoch_time = parseInt(selector.attr('epoch_time'));
             _timer_interval_obj[Object.keys(_timer_interval_obj).length] = setInterval(function anonymous() {
                 epoch_time += interval;
                 var date = that.get_date_from_seconds(epoch_time);
@@ -15990,20 +15973,6 @@ pjax_config_page('portfolio|trade.cgi|statement|f_manager_statement|f_manager_hi
         onUnload: function() {
             BetSell.cleanup();
         }
-    };
-});
-
-pjax_config_page('tick_trades', function() {
-    return {
-        onLoad: function() {
-            $('#show-new').on('click', function(){
-                $('#ticktrade-updown').hide();
-                $('#ticktrade-digit').hide();
-                $('#ticktrade-new-msg').hide();
-                $('#runbet_tools_container').show();
-                $('#ticktrade-flash').show();
-            });
-        },
     };
 });
 ;var ClientForm = function(init_params) {
@@ -18520,20 +18489,6 @@ LiveChartTick.prototype = new LiveChart();
 LiveChartTick.prototype.constructor = LiveChartTick;
 LiveChartTick.prototype.configure_series = function(chart_params) {
         chart_params.chart.type = 'line';
-        var symbol = this.config.symbol.translated_display_name();
-        var old_decimal = 0;
-        chart_params.tooltip = {
-            formatter: function () {
-                var that = this;
-                var new_decimal = that.y.toString().split('.')[1].length;
-                var decimal_places = Math.max( old_decimal, new_decimal);
-                old_decimal = decimal_places;
-                var new_y = that.y.toFixed(decimal_places);
-                var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
-                return mom + "<br/>" + symbol + " " + new_y;
-            },
-        };
-
         if (this.config.with_tick_config) {
             chart_params.xAxis.labels = {enabled: false};
         } else {
