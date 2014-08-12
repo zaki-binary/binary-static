@@ -33,4 +33,3 @@ To view your work in action on the live [www.binary.com](http://www.binary.com) 
 
 127.0.0.1 localhost static.binary.com
 
-
