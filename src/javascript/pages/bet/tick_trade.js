@@ -15,6 +15,7 @@ var TickDisplay = function() {
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_type = data.contract_type;
             $self.set_barrier = true;
+            $self.display_decimal = 0;
 
             if (typeof data.decimal !== 'undefined') {
                 $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
@@ -86,6 +87,17 @@ var TickDisplay = function() {
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
+                tooltip: {
+                    formatter: function () {
+                        var that = this;
+                        var new_decimal = that.y.toString().split('.')[1].length;
+                        var decimal_places = Math.max( $self.display_decimal, new_decimal);
+                        $self.display_decimal = decimal_places;
+                        var new_y = that.y.toFixed(decimal_places);
+                        var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
+                        return mom + "<br/>" + symbol + " " + new_y;
+                    },
+                };
                 xAxis: {
                     type: 'datetime',
                     min: parseInt(config['plot_from']),
