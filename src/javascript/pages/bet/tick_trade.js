@@ -181,7 +181,7 @@ var TickDisplay = function() {
                 $self.chart.yAxis[0].addPlotLine({
                     id: 'tick-barrier',
                     value: barrier_tick.quote,
-                    label: {text: 'Barrier('+barrier_tick.quote+')', align: 'center'},
+                    label: {text: 'Barrier ('+barrier_tick.quote+')', align: 'center'},
                     color: 'green',
                     width: 2,
                 });
@@ -203,7 +203,7 @@ var TickDisplay = function() {
                     value: calc_barrier,
                     color: 'green',
                     label: {
-                        text: 'Barrier('+calc_barrier+')',
+                        text: 'Average ('+calc_barrier+')',
                         align: 'center'
                     },
                     width: 2,
