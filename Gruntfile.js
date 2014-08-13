@@ -33,7 +33,7 @@ module.exports = function (grunt) {
             combine: {
                 files: {
                     'dist/<%= pkg.version %>/css/grid.min.css': ['dist/<%= pkg.version %>/css/external/grid.css'],
-                    'dist/<%= pkg.version %>/css/binary.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui-1.10.2.custom.css', 'dist/<%= pkg.version %>/css/binary.css']
+                    'dist/<%= pkg.version %>/css/binary.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui.theme.css', 'dist/<%= pkg.version %>/css/binary.css']
                 },
             },
         },
