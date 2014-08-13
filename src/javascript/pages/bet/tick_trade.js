@@ -150,18 +150,25 @@ var TickDisplay = function() {
                         $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
 
                         if (tick.epoch > contract_start_moment.unix()) {
-                            $self.applicable_ticks.push(tick);
+                            if ($self.applicable_ticks.length >= ticks_needed) {
+                                $self.ev.close();
+                                $self.evaluate_contract_outcome();
+                                return;
+                            } else {
+                                $self.applicable_ticks.push(tick);
 
-                            var tick_index = $self.applicable_ticks.length - 1;
-                            var indicator_key = '_' + tick_index;
+                                var tick_index = $self.applicable_ticks.length - 1;
+                                var indicator_key = '_' + tick_index;
 
-                            if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
-                                $self.x_indicators[indicator_key]['index'] = tick_index;
-                                $self.add($self.x_indicators[indicator_key]);
+                                if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
+                                    $self.x_indicators[indicator_key]['index'] = tick_index;
+                                    $self.add($self.x_indicators[indicator_key]);
+                                }
+
+                                $self.add_barrier();
                             }
-
-                            $self.add_barrier();
                         }
+
                     }
                 }
             };
