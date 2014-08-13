@@ -52,7 +52,7 @@ var TickDisplay = function() {
                     id: 'last_tick',
                 };
                 $self.x_indicators['_' + $self.number_of_ticks] = {
-                    label: 'Exit Tick',
+                    label: 'Exit Spot',
                     id: 'exit_tick',
                 };
             } else if ($self.contract_type.match('FLASH')) {
@@ -60,7 +60,7 @@ var TickDisplay = function() {
                     '_1': { label: 'Tick 1', id: 'start_tick'},
                 };
                 $self.x_indicators['_' + $self.number_of_ticks] = {
-                    label: 'Exit Tick',
+                    label: 'Exit Spot',
                     id: 'exit_tick',
                 };
             } else if ($self.contract_type.match('DIGIT')) {
