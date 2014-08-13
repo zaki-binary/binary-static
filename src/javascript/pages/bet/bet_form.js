@@ -275,6 +275,7 @@ var BetForm = function () {
                         MenuContent.hide_tab($('#tab_intradayprices'));
                         MenuContent.hide_tab($('#tab_pricing_table'));
                         MenuContent.hide_tab($('#tab_last_digit'));
+                        MenuContent.trigger({'tab_id': 'tab_explanation'});
                     }
                 },
                 on_amount_change: function() {
