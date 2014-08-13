@@ -1,9 +1,11 @@
-var utils = require('../../utils');
+var utils = require('../../../utils');
+var URL = require('../../url');
 
 var formId = '#openAccForm',
     element = {
         form: formId,
-        emailInput: formId + ' #Email', // should be input[type=email] but form needs fixing
+        emailInput: '#Email', // should be input[type=email] but form needs fixing
+        countryOfResidenceInput: '#residence',
         passwordInput: formId + ' input[type=password]',
         openAccountButton: '#submit'
     };
@@ -16,9 +18,10 @@ module.exports = {
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
-            .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=virtual')
+            .url(browser.launch_url + URL.ACCOUNT.CREATE_VIRTUAL)
             .waitForElementVisible(element.form, 5000)
             .setValue(element.emailInput, randomEmail)
+            .setValue(element.countryOfResidenceInput, 'Austria')        
             .setValue(element.passwordInput, 'password123')
             .click(element.openAccountButton)
             .pause(5000)

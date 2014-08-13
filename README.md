@@ -1,36 +1,21 @@
-Binary-Static [![Build Status](https://travis-ci.org/binary-com/binary-static.svg?branch=master)](https://travis-ci.org/binary-com/binary-static)  [![Code Climate](https://codeclimate.com/github/binary-com/binary-static.png)](https://codeclimate.com/github/binary-com/binary-static)
+Binary-Static
+=============
 
-This repository contains the static Javascript and CSS content of the [Binary.com](http://www.binary.com) website.
+[![Build Status](https://travis-ci.org/binary-com/binary-static.svg?branch=master)](https://travis-ci.org/binary-com/binary-static)  [![Code Climate](https://codeclimate.com/github/binary-com/binary-static.png)](https://codeclimate.com/github/binary-com/binary-static)  [![Gitter chat](https://badges.gitter.im/binary-com/binary-static.png)](https://gitter.im/binary-com/binary-static)
+
+This repository contains the static HTML/HAML, Javascript, CSS, and images content of the [Binary.com](http://www.binary.com) website.
 
 How to work with this project
 =============================
 
-As you can see by doing *View Source* on www.binary.com, the site's Javascript is served from https://static.binary.com/binary-static/js/binary_[VERSION].min.js and the CSS is served from https://static.binary.com/binary-static/css/binary_[VERSION].min.css (static.binary.com is a CNAME to binary-com.github.io).
+1. Learn how to setup the project:
+[Initial Project Setup](https://github.com/binary-com/binary-static/wiki/Initial-Project-Setup)
 
-Note that the files are served using Github's [pages.github.io](https://pages.github.com/) facilities.
+2. Follow these rules:
+[Coding Guidelines](https://github.com/binary-com/binary-static/wiki/Coding-Guidelines)
 
-In order to work on your own version of the Binary.com Javascript and CSS, please **fork this project**.
+3. Test thoroughly:
+[Automated Testing](https://github.com/binary-com/binary-static/wiki/Automated-Testing)
 
-You will also need to install the following on your development machine:
-
-- Ruby, RubyGems
-- Node.js and NPM
-
-After you have made your code edits, you can run the Javascript and CSS minification by doing:
-
-- Go to project root
-- `gem install compass`
-- `npm install`
-- `npm install -g grunt-cli`
-- `grunt`
-- On separate terminal run `grunt connect` as root
-
-This will also automatically update the *gh-pages* branch containing the new minified deliverables.
-
-Note: grunt is set up to serve the files on https://localhost using *grunt-contrib-connect*.
-
-To view your work in action on the live [www.binary.com](http://www.binary.com) website, add the following line to your */etc/hosts*:
-
-127.0.0.1 localhost static.binary.com
-
-
+4. Get your code to our repo:
+[Contributing Guide](https://github.com/binary-com/binary-static/wiki/Contributing-Guide)

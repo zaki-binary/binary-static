@@ -12,19 +12,13 @@
             <div id="screenshotContainer" class="grd-grid-6 grd-centered">
                 <img class='responsive' src="[% request.url_for('images/pages/charting/chart-screenshot.png') %]"/>
             </div>
-            <div id="downloadWindowsVersion" class='grd-grid-6 grd-grid-mobile-12 grd-with-padding'>
-                <div class="center">
-                    <a class="button" href="[% request.url_for('downloads/binary-charts-setup-1.0.exe') %]">
-                        <span>[% l('Download for Windows')%]</span>
-                    </a>
-                </div>
-            </div>
-            <div id="downloadMacVersion" class='grd-grid-6 grd-grid-mobile-12 grd-with-padding'>
-                <div class="center">
-                    <a class="button" href="[% request.url_for('downloads/binary-charts-1.0.dmg') %]">
-                        <span>[% l('Download for Mac')%]</span>
-                    </a>
-                </div>
+            <div class="grd-with-padding grd-centered center">
+                <a id="download-app" class="button" href="https://downloads.binary.com/binary-charts.jnlp">
+                    <span>[% l('Download')%]</span>
+                </a>
+                <a id="install-java" class="button" href="#" style="display: none">
+                    <span>[% l('Install Java')%]</span>
+                </a>
             </div>
         </fieldset>
     </div>
