@@ -42,6 +42,7 @@ var TickDisplay = function() {
             var $self = this;
 
             if ($self.contract_type.match('ASIAN')) {
+                $self.ticks_needed = $self.number_of_ticks;
                 var exit_tick_index = $self.number_of_ticks - 1;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
@@ -51,6 +52,7 @@ var TickDisplay = function() {
                     id: 'exit_tick',
                 };
             } else if ($self.contract_type.match('FLASH')) {
+                $self.ticks_needed = $self.number_of_ticks + 1;
                 $self.x_indicators = {
                     '_1': { label: 'Tick 1', id: 'start_tick'},
                 };
@@ -59,10 +61,12 @@ var TickDisplay = function() {
                     id: 'exit_tick',
                 };
             } else if ($self.contract_type.match('DIGIT')) {
+                $self.ticks_needed = $self.number_of_ticks;
+                var exit_tick_index = $self.number_of_ticks - 1;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
                 };
-                $self.x_indicator['_' + $self.number_of_ticks - 1] = {
+                $self.x_indicators['_' + exit_tick_index] = {
                     label:  'Tick ' + $self.number_of_ticks,
                     id: 'last_tick',
                 };
@@ -117,7 +121,6 @@ var TickDisplay = function() {
             var plot_from_moment = moment(plot_from).utc();
             var plot_to_moment = moment(plot_to).utc();
             var contract_start_moment = moment($self.contract_start_ms).utc();
-            var ticks_needed = $self.number_of_ticks;
             $self.applicable_ticks = [];
 
             var symbol = $self.symbol;
@@ -126,7 +129,7 @@ var TickDisplay = function() {
             $self.ev = new EventSource(stream_url, { withCredentials: true });
 
             $self.ev.onmessage = function(msg) {
-                if ($self.applicable_ticks.length >= ticks_needed) {
+                if ($self.applicable_ticks.length >= $self.ticks_needed) {
                     $self.ev.close();
                     $self.evaluate_contract_outcome();
                     return;
@@ -143,12 +146,12 @@ var TickDisplay = function() {
                             quote: parseFloat(data[i][2])
                         };
 
-                        if ($self.applicable_ticks.length < ticks_needed) {
+                        if ($self.applicable_ticks.length < $self.ticks_needed) {
                             $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
                         }
 
                         if (tick.epoch > contract_start_moment.unix()) {
-                            if ($self.applicable_ticks.length >= ticks_needed) {
+                            if ($self.applicable_ticks.length >= $self.ticks_needed) {
                                 $self.ev.close();
                                 $self.evaluate_contract_outcome();
                                 return;
