@@ -52,10 +52,11 @@
         [% END %]
     </div>
 
+    [% IF transaction_msg %]
+        <p class="trade_ref">[% transaction_msg%]</p>
+    [% END %]
     [% IF contract_visualization %]
         [% contract_visualization %]
-    [% ELSIF transaction_msg %]
-        <p class="trade_ref">[% transaction_msg%]</p>
     [% END %]
 
     [% IF google_tag_manager %]
