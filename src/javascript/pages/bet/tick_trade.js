@@ -42,16 +42,11 @@ var TickDisplay = function() {
             var $self = this;
 
             if ($self.contract_type.match('ASIAN')) {
-                var last_tick_index = $self.number_of_ticks - 1;
-
+                var exit_tick_index = $self.number_of_ticks - 1;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
                 };
-                $self.x_indicators['_' + last_tick_index] = {
-                    label: 'Tick ' + $self.number_of_ticks,
-                    id: 'last_tick',
-                };
-                $self.x_indicators['_' + $self.number_of_ticks] = {
+                $self.x_indicators['_' + exit_tick_index] = {
                     label: 'Exit Spot',
                     id: 'exit_tick',
                 };
@@ -122,7 +117,7 @@ var TickDisplay = function() {
             var plot_from_moment = moment(plot_from).utc();
             var plot_to_moment = moment(plot_to).utc();
             var contract_start_moment = moment($self.contract_start_ms).utc();
-            var ticks_needed = $self.number_of_ticks + 1;
+            var ticks_needed = $self.number_of_ticks;
             $self.applicable_ticks = [];
 
             var symbol = $self.symbol;
@@ -147,7 +142,10 @@ var TickDisplay = function() {
                             epoch: parseInt(data[i][1]),
                             quote: parseFloat(data[i][2])
                         };
-                        $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
+
+                        if ($self.applicable_ticks.length < ticks_needed) {
+                            $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
+                        }
 
                         if (tick.epoch > contract_start_moment.unix()) {
                             if ($self.applicable_ticks.length >= ticks_needed) {
