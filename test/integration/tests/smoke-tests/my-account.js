@@ -1,12 +1,13 @@
-﻿var utils = require('../../utils');
+﻿var utils = require('../../../utils');
+var URL = require('../../url');
 
 var urls = [
-    { page: 'Portfolio', path: '/d/portfolio.cgi' },
-    { page: 'Statement', path: '/d/statement.cgi' },
-    { page: 'Password', path: '/d/change_password.cgi' },
-    { page: 'Settings', path: '/d/settings.cgi?o=settings' },
-    { page: 'Affiliate', path: '/c/affiliate_signup.cgi' },
-    { page: 'Payment methods', path: '/c/available_payment_methods.cgi' }
+    { page: 'Portfolio', path: URL.PORTFOLIO },
+    { page: 'Statement', path: URL.STATEMENT },
+    { page: 'Password', path: URL.PASSWORD },
+    { page: 'Settings', path: URL.SETTINGS },
+    { page: 'Affiliate', path: URL.AFFILIATE },
+    { page: 'Payment methods', path: URL.PAYMENT_METHODS }
 ];
 
-module.exports = utils.smoteTestUrls(urls);
+module.exports = utils.smokeTestUrls(urls);

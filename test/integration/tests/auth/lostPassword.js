@@ -1,3 +1,5 @@
+var URL = require('../../url');
+
 var element = {
         emailInput: '#lp_email',
         resetPasswordButton: '#submit'
@@ -9,7 +11,7 @@ module.exports = {
     "loginPassword": function (browser) {
         
         browser
-            .url(browser.globals.url + '/d/lost_password.cgi')
+            .url(browser.launch_url + URL.ACCOUNT.LOST_PASSWORD)
             .waitForElementVisible('body', 5000)
             .setValue(element.emailInput, 'binary-test@mailinator.com')
             .click(element.resetPasswordButton)

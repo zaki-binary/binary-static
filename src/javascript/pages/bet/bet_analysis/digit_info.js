@@ -20,8 +20,11 @@ BetAnalysis.DigitInfo = function() {
         tooltip:{
             borderWidth:1,
             formatter:function() {
-                return '<b>Digit:</b> '+ this.x +'<br/>'+
-                '<b>Count:</b> '+ this.y;
+                var that = this;
+                var total = $("select[name='tick_count']").val();
+                var percentage = that.y/total*100;
+                return '<b>Digit:</b> '+ that.x +'<br/>'+
+                '<b>Percentage:</b> '+ percentage.toFixed(2) + " %";
             }
         },
         plotOptions:{
@@ -51,6 +54,13 @@ BetAnalysis.DigitInfo = function() {
             tickColor:'#ccc',
             lineColor:'#ccc',
             endOnTick:true,
+            labels: {
+                formatter: function() {
+                    var total = $("select[name='tick_count']").val();
+                    var percentage = parseInt(this.value/total*100);
+                    return percentage + " %";
+                },
+            },
         },
     };
 
@@ -106,7 +116,6 @@ BetAnalysis.DigitInfo.prototype = {
             text: $('#last_digit_title').html(),
         };
         this.spots = $.parseJSON($('#last_digit_data').html());
-        this.chart_config.yAxis.tickInterval = this.spots.length / 10;
         this.chart = new Highcharts.Chart(this.chart_config);
         this.chart.addSeries({name : underlying, data: []});
 

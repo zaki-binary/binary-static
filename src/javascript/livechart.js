@@ -267,6 +267,20 @@ LiveChartTick.prototype = new LiveChart();
 LiveChartTick.prototype.constructor = LiveChartTick;
 LiveChartTick.prototype.configure_series = function(chart_params) {
         chart_params.chart.type = 'line';
+        var symbol = this.config.symbol.translated_display_name();
+        var old_decimal = 0;
+        chart_params.tooltip = {
+            formatter: function () {
+                var that = this;
+                var new_decimal = that.y.toString().split('.')[1].length;
+                var decimal_places = Math.max( old_decimal, new_decimal);
+                old_decimal = decimal_places;
+                var new_y = that.y.toFixed(decimal_places);
+                var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
+                return mom + "<br/>" + symbol + " " + new_y;
+            },
+        };
+
         if (this.config.with_tick_config) {
             chart_params.xAxis.labels = {enabled: false};
         } else {

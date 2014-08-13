@@ -1,4 +1,4 @@
-var utils = require('../../utils');
+var URL = require('../../url');
 var createAccountVirtualSuccess = require('./createAccountVirtualSuccess').createAccountVirtualSuccess;
 
 var element = {
@@ -16,7 +16,7 @@ module.exports = {
         createAccountVirtualSuccess(browser, true);
 
         browser
-            .url(browser.globals.url + '/d/f_writepartics.cgi')
+            .url(browser.launch_url + URL.ACCOUNT.CHANGE_SETTINGS)
             .waitForElementVisible(element.emailAddressInput, 5000)
             .setValue(element.emailAddressInput, '')
             .click(element.updateButton)
@@ -30,7 +30,7 @@ module.exports = {
         createAccountVirtualSuccess(browser, true);
 
         browser
-            .url(browser.globals.url + '/d/f_writepartics.cgi')
+            .url(browser.launch_url + URL.ACCOUNT.CHANGE_SETTINGS)
             .waitForElementVisible(element.securityTab, 5000)
             .click(element.securityTab)
             .setValue(element.ipAddressInput, 'Invalid IP')
@@ -44,7 +44,7 @@ module.exports = {
         createAccountVirtualSuccess(browser, true);
 
         browser
-            .url(browser.globals.url + '/d/f_writepartics.cgi')
+            .url(browser.launch_url + URL.ACCOUNT.CHANGE_SETTINGS)
             .waitForElementVisible(element.securityTab, 5000)
             .click(element.securityTab)
             .setValue(element.ipAddressInput, '1.1.1.1')

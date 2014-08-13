@@ -1,4 +1,5 @@
-var utils = require('../../utils');
+var utils = require('../../../utils');
+var URL = require('../../url');
 
 var element = {
     form: '#openAccForm',
@@ -10,8 +11,10 @@ var element = {
         month: '#dobmm',
         year: '#dobyy'
     },
+    countryOfResidenceInput: '#residence',
     firstLineAddressInput: '#Address1',
     townCityInput: '#AddressTown',
+    stateProvincyInput: '#AddressState',
     telephoneInput: '#Tel',
     passwordInput: '#chooseapassword',
     secretAnswerInput: '#secretanswer',
@@ -27,7 +30,7 @@ module.exports = {
             randomEmail = 'binarytest-' + randomStr + '@mailinator.com';
 
         browser
-            .url(browser.globals.url + '/c/linkto_acopening.cgi?actype=real')
+            .url(browser.launch_url + URL.ACCOUNT.REAL_MONEY)
             .waitForElementVisible(element.form, 5000)
             .setValue(element.firstNameInput, randomStr)
             .setValue(element.familyNameInput, randomStr)
@@ -35,8 +38,10 @@ module.exports = {
             .setValue(element.dateofBirthSelects.day, '1')
             .setValue(element.dateofBirthSelects.month, 'Jan')
             .setValue(element.dateofBirthSelects.year, '1950')
+            .setValue(element.countryOfResidenceInput, 'Austria')
             .setValue(element.firstLineAddressInput, randomStr)
             .setValue(element.townCityInput, randomStr)
+            .setValue(element.stateProvincyInput, 'Other')
             .setValue(element.telephoneInput, '123123')
             .setValue(element.passwordInput, randomStr)
             .setValue(element.secretAnswerInput, randomStr)
