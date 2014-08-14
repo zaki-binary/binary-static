@@ -87,6 +87,7 @@ var TickDisplay = function() {
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
+                credits: {enabled: false},
                 tooltip: {
                     formatter: function () {
                         var that = this;
