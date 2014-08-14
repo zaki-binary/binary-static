@@ -15,7 +15,7 @@ var TickDisplay = function() {
             $self.display_symbol = data.display_symbol;
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_type = data.contract_type;
-            $self.set_barrier = true;
+            $self.set_barrier = ($self.contract_type.match('DIGIT')) ? false : true;
             $self.display_decimal = 0;
 
             if (typeof data.decimal !== 'undefined') {
