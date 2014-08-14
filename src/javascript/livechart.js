@@ -265,7 +265,7 @@ LiveChartTick.prototype.configure_series = function(chart_params) {
                 var decimal_places = Math.max( old_decimal, new_decimal);
                 old_decimal = decimal_places;
                 var new_y = that.y.toFixed(decimal_places);
-                var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
+                var mom = moment.utc(that.x).format("dddd, MMM D, HH:mm:ss");
                 return mom + "<br/>" + symbol + " " + new_y;
             },
         };

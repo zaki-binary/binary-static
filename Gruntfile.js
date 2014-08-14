@@ -88,15 +88,26 @@ module.exports = function (grunt) {
 	    src: ['**'],
 	},
 	connect: {
-	    server: {
-		options: {
-		    hostname: '127.0.0.1',
-		    port: 443,
-		    protocol: 'https',
-		    base: 'dist',
-		    keepalive: true,
-		},
-	    }
+            github: {
+                options: {
+                    hostname: '127.0.0.1',
+                    port: 443,
+                    protocol: 'https',
+                    base: 'dist',
+                    keepalive: true
+                },
+            },
+            dev: {
+                options: {
+                    hostname: '*',
+                    port: 8443,
+                    protocol: 'https',
+                    base: 'dist',
+                    keepalive: true,
+                    key: grunt.file.read('src/certificates/key/devbin.io.key').toString(),
+                    cert: grunt.file.read('src/certificates/crt/devbin.io.crt').toString()
+                },
+            }
 	},
 	watch: {
 	    options: {
@@ -213,4 +224,5 @@ module.exports = function (grunt) {
     // Task to be performed
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
     grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('dev', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'connect:dev']);
 };
