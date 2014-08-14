@@ -176,16 +176,18 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            autoprefixer: {
-                options: {
-                    browsers: ['last 2 version', 'ie 9']
-                },
-                your_target: {
-                    // Target-specific file lists and/or options go here.
-                },
+        },
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions']
+            },
+            single_file: {
+                src: 'dist/<%= pkg.version %>/css/binary.css'
             },
         }
     });
+
+
     function createJavascriptArray() {
         var jsJson = grunt.file.readJSON('javascript.json');
         var jsFiles = jsJson.files.map(function (path) {
@@ -220,5 +222,5 @@ module.exports = function (grunt) {
 
     // Task to be performed
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
-    grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
 };
