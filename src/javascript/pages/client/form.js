@@ -1,16 +1,9 @@
 var ClientForm = function(init_params) {
     this.restricted_countries = new RegExp(init_params['restricted_countries']);
     this.valid_loginids = new RegExp(init_params['valid_loginids']);
-    this.address_regex = /p[\\.\\s]+o[\\.\\s]+box/i;
 };
 
 ClientForm.prototype = {
-    check_po_box: function(selected_broker, address) {
-        if (selected_broker == 'MLT' && this.address_regex.test(address)) {
-                return false;
-        }
-        return true;
-    },
     validate_post_code: function() {
         var residence = $( 'select[name=residence]').val();
         var postcode = $( 'input[name=AddressPostcode]').val();
@@ -34,7 +27,6 @@ ClientForm.prototype = {
     },
     validate_promo_code_expiry: function() {
         var has_expired = $('#promo_code_expired').val();
-        console.log("HAs expired " + has_expired);
         if(has_expired == "true") {
             return false;
         }

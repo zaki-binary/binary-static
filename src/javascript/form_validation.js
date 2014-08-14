@@ -21,47 +21,6 @@ function clearInputErrorField(id) {
     }
 }
 
-function set_account_broker_code()
-{
-    // for auth account, we do not reset the broker
-    var actype = $('#actype');
-    if (actype && (actype.attr('value') == 'authaccount' || actype.attr('value') == 'virtual'))
-    {
-        return false;
-    }
-
-    var residence = $('#residence');
-    if (residence.length)
-    {
-        var broker_code;
-        var linkfrom = document.getElementById('linkfrom');
-
-        var regexp_affiliate = new RegExp('^\\D+\\d+$');
-        if (linkfrom && regexp_affiliate.test(linkfrom.value))
-        {
-            linkfrom.value = linkfrom.value.replace(/\s+/g,'');
-
-            var grep_affiliate = new RegExp('^\\D+');
-            broker_code = grep_affiliate.exec(linkfrom.value);
-        }
-        else
-        {
-            //get the broker value from the selection residence's option
-            broker_code = $('#residence').find('option:selected').attr('class');
-        }
-
-        // after we get the broker code correctly then we assign the open account server and the hidden broker value
-        var form_object = $('#openAccForm');
-
-        // returned error message and redirect client back to account opening form page if there is connection error
-        if (form_object.length && broker_code !== '')
-        {
-            var hidden_broker = $('#broker');
-            hidden_broker.attr('value', broker_code);
-        }
-    }
-}
-
 function swithTabIfError(IsErrorFound)
 {
     if (IsErrorFound)
