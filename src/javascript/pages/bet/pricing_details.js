@@ -20,11 +20,6 @@ var PricingDetails = function() {
                     that.vcal_datepicker_handler.init();
                 }).addClass('unbind_later');
 
-                $("#buildask50", popup).jstree({
-                    "themes" :  { theme: "bom", "dots" : false, "icons" : false },
-                    "plugins" : [ "themes", "html_data" ]
-                });
-
                 event.preventDefault();
             }).addClass('unbind_later');
         },
