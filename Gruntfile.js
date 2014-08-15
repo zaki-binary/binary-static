@@ -1,45 +1,54 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     // Configurations
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         javascripts: grunt.file.readJSON('javascript.json'),
         clean: {
             build: {
-                src: ['dist'],
-            },
+                src: 'dist',
+            }
         },
         compass: {
             dist: {
                 options: {
                     sassDir: 'src/sass',
-                    cssDir: 'dist/<%= pkg.version %>/css',
+                    cssDir: 'dist/css',
                     specify: 'src/sass/binary.scss',
                     noLineComments: true,
                     outputStyle: 'expanded',
-                    environment: 'production',
+                    environment: 'production'
                 },
             },
             dev: {
                 options: {
                     sassDir: 'src/sass',
-                    cssDir: 'dist/<%= pkg.version %>/css/',
+                    cssDir: 'dist/css',
                     specify: 'src/sass/external/grid.scss',
                     noLineComments: true,
-                    outputStyle: 'expanded',
+                    outputStyle: 'expanded'
                 },
             },
         },
         cssmin: {
             combine: {
                 files: {
-                    'dist/<%= pkg.version %>/css/grid.min.css': ['dist/<%= pkg.version %>/css/external/grid.css'],
-                    'dist/<%= pkg.version %>/css/binary.min.css': ['src/css/external/jquery-simplyscroll.css', 'src/css/external/jquery-ui-custom-theme/jquery-ui.custom.css', 'dist/<%= pkg.version %>/css/binary.css']
+                    'dist/css/grid.min.css': ['dist/css/external/grid.css'],
+                    'dist/css/binary.min.css': ['src/css/external/**/*.css', 'dist/css/binary.css']
                 },
             },
         },
         concat: {
-            // will be populated in createJavascriptArray function
-            
+            options: {
+                separator: ';',
+            },
+            lib: {
+                src: ['src/javascript/external/**/*.js'],
+                dest: 'dist/js/lib.js'
+            },
+            app: {
+                src: ['src/javascript/**/*.js', '!src/javascript/external/**/*.js'],
+                dest: 'dist/js/binary.js'
+            }
         },
         uglify: {
             my_target: {
@@ -48,34 +57,24 @@ module.exports = function(grunt) {
                     sourceMapIncludeSources: true,
                 },
                 files: {
-                    'dist/<%= pkg.version %>/js/binary.min.js': ['dist/<%= pkg.version %>/js/binary.js'],
-                },
-            },
+                    'dist/js/lib.min.js': ['dist/js/lib.js'],
+                    'dist/js/binary.min.js': ['dist/js/binary.js']
+                }
+            }
         },
         copy: {
             main: {
                 files: [
-                    { expand: true, src: ['javascript.json'], dest: 'dist/<%= pkg.version %>/', },
-                    { expand: true, src: ['javascript.json'], dest: 'dist/0.0.0/', },
-                    { expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/<%= pkg.version %>/config/locales/' },
-                    { expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/0.0.0/config/locales/' },
-                    { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/<%= pkg.version %>/images/', },
-                    { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/0.0.0/images/', },
-                    { expand: true, cwd: 'src/downloads/', src: ['**'], dest: 'dist/<%= pkg.version %>/downloads/', },
-                    { expand: true, cwd: 'src/downloads/', src: ['**'], dest: 'dist/0.0.0/downloads/', },
-                    { expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/<%= pkg.version %>/flash/', },
-                    { expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/0.0.0/flash/', },
-                    { expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/<%= pkg.version %>/templates/', },
-                    { expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/0.0.0/templates/', },
-                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/<%= pkg.version %>/css/images', },
-                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/0.0.0/css/images', },
-                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/<%= pkg.version %>/css/', },
-                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['jquery-ui-1.10.2.custom.css'], dest: 'dist/0.0.0/css/', },
-                    { expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/<%= pkg.version %>/css/fonts' },
-                    { expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/0.0.0/css/fonts' },
-                    { expand: true, cwd: 'dist/<%= pkg.version %>/', src: ['**'], dest: 'dist/0.0.0/', },
-                    { expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/<%= pkg.version %>/dev/javascript/', },
-                    { expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/0.0.0/dev/javascript/', }
+                    { expand: true, src: ['javascript.json'], dest: 'dist' },
+                    { expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/config/locales/' },
+                    { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/', },
+                    { expand: true, cwd: 'src/downloads/', src: ['**'], dest: 'dist/downloads/' },
+                    { expand: true, cwd: 'src/flash/', src: ['**'], dest: 'dist/flash/' },
+                    { expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/templates/' },
+                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images' },
+                    { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['*.css'], dest: 'dist/css/' },
+                    { expand: true, cwd: 'src/css/fonts/', src: ['**'], dest: 'dist/css/fonts' },
+                    { expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/dev/javascript/' }
                 ],
             }
         },
@@ -114,31 +113,20 @@ module.exports = function(grunt) {
                 livereload: true,
             },
             scripts: {
-                files: ['src/javascript/*.js', 'src/javascript/**/*.js'],
+                files: ['javascript/**/*.js'],
                 tasks: ['concat', 'uglify'],
             },
             css: {
-                files: ['src/sass/*.scss', 'src/sass/**/*.scss'],
-                tasks: ['compass', 'cssmin'],
-            },
+                files: ['src/sass/**/*.scss'],
+                tasks: ['compass', 'cssmin']
+            }
         },
         jshint: {
             options: {
                 jshintrc: true,
-                ignores: [
-                    'src/javascript/external/**/*.js',
-                    'src/javascript/livechart/export-csv.js',
-                    'src/javascript/livechart/highstock-exporting.js',
-                    'src/javascript/livechart/highstock.js',
-                    'src/javascript/base/pjax-lib.js',
-                    'src/javascript/base/jquery_color_animation.js',
-                    'src/javascript/gtm.js'
-                ],
+                ignores: 'javascript/external/**/*.js',
             },
-            all: [
-                'Gruntfile.js',
-                'src/javascript/**/*.js'
-            ]
+            all: 'javascript/**/*.js'
         },
         bump: {
             options: {
@@ -148,8 +136,8 @@ module.exports = function(grunt) {
                 commitMessage: 'Release v%VERSION%',
                 commitFiles: ['package.json'],
                 createTag: false,
-                push: false,
-            },
+                push: false
+            }
         },
         shell: {
             nightwatch: {
@@ -194,29 +182,10 @@ module.exports = function(grunt) {
                 browsers: ['last 2 versions']
             },
             single_file: {
-                src: 'dist/<%= pkg.version %>/css/binary.css'
-            },
+                src: 'dist/css/binary.css'
+            }
         }
     });
-
-
-    function createJavascriptArray() {
-        var jsJson = grunt.file.readJSON('javascript.json');
-        var jsFiles = jsJson.files.map(function(path) {
-            return 'src/' + path;
-        });
-        grunt.config('concat', {
-            options: {
-                separator: ';',
-            },
-            dist: {
-                src: jsFiles,
-                dest: 'dist/<%= pkg.version %>/js/binary.js',
-            },
-        });
-    }
-
-    createJavascriptArray();
 
     // load the plugin that will complete the task
     grunt.loadNpmTasks('grunt-bump');
@@ -233,8 +202,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-autoprefixer');
 
-    // Task to be performed
-    grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
-    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
-    grunt.registerTask('dev', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'connect:dev']);
+    // Tasks to be performed
+    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('dev', ['default', 'connect:dev']);
+    grunt.registerTask('deploy', ['default', 'gh-pages', 'watch']);
+    grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local    
 };
