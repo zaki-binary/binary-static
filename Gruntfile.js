@@ -55,6 +55,8 @@ module.exports = function (grunt) {
 	copy: {
 	    main: {
 		files: [
+		    {expand: true, src: ['config.json'], dest: 'dist/<%= pkg.version %>/',},
+		    {expand: true, src: ['config.json'], dest: 'dist/0.0.0/',},
 		    {expand: true, src: ['javascript.json'], dest: 'dist/<%= pkg.version %>/',},
 		    {expand: true, src: ['javascript.json'], dest: 'dist/0.0.0/',},
                     {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/<%= pkg.version %>/config/locales/'},
