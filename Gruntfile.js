@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // Configurations
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -39,6 +39,7 @@ module.exports = function (grunt) {
         },
         concat: {
             // will be populated in createJavascriptArray function
+            
         },
         uglify: {
             my_target: {
@@ -87,13 +88,24 @@ module.exports = function (grunt) {
             src: ['**'],
         },
         connect: {
-            server: {
+            github: {
                 options: {
                     hostname: '127.0.0.1',
                     port: 443,
                     protocol: 'https',
                     base: 'dist',
+                    keepalive: true
+                },
+            },
+            dev: {
+                options: {
+                    hostname: '*',
+                    port: 8443,
+                    protocol: 'https',
+                    base: 'dist',
                     keepalive: true,
+                    key: grunt.file.read('src/certificates/key/devbin.io.key').toString(),
+                    cert: grunt.file.read('src/certificates/crt/devbin.io.crt').toString()
                 },
             }
         },
@@ -190,7 +202,7 @@ module.exports = function (grunt) {
 
     function createJavascriptArray() {
         var jsJson = grunt.file.readJSON('javascript.json');
-        var jsFiles = jsJson.files.map(function (path) {
+        var jsFiles = jsJson.files.map(function(path) {
             return 'src/' + path;
         });
         grunt.config('concat', {
@@ -203,6 +215,7 @@ module.exports = function (grunt) {
             },
         });
     }
+
     createJavascriptArray();
 
     // load the plugin that will complete the task
@@ -223,4 +236,5 @@ module.exports = function (grunt) {
     // Task to be performed
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local
     grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'gh-pages', 'watch']);
+    grunt.registerTask('dev', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'connect:dev']);
 };
