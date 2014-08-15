@@ -1,0 +1,41 @@
+- stash(
+-   keyword => l('binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex stocks, binary trading, binary bet, binary online bet, binary options trading platform, digital options, trading stocks.'),
+-   description => l('[_1] gives everyone an easy and exciting way to participate in the financial markets. Trade with as little as $1 USD on major currencies, indices, commodities and stocks.',stash('website_name')),
+- );
+
+%head
+  %meta{:charset => "utf-8"}
+  %meta{:name => "description", :content => stash('description')}
+  %meta{:name => "keywords" :content => encode_html_text(stash('keyword'))}
+  %meta{:name => "author", :content => stash('website_name')}
+  %meta{:name => "dcterms.rightsHolder" :content => stash('website_name')}
+  %meta{:name => "dcterms.rights", :content => stash('website_name')}
+  %meta{:name => "google-site-verification", :content => "roReCEK-wNa1EMA6ZM9a4zCOQOMqxfJjvfsZMC9qh_k"}
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+
+  %title= stash('website_name') . (stash('title') ? " : ".stash('title'): '')
+
+  %link{:rel=>"icon" :type=>"image/png" :href=>url_for('images/common/favicon_1.ico')}
+  /[if IE]
+    %link{:rel=>"shortcut icon" :href=>url_for('images/common/favicon_1.ico')}
+  %link{:rel=>"apple-touch-icon" :href=>url_for('images/common/apple-touch-icon-57x57_1.png')}
+  %link{:rel=>"apple-touch-icon" :sizes=>"72x72" :href=>url_for('images/common/apple-touch-icon-72x72_1.png')}
+  %link{:rel=>"apple-touch-icon" :sizes=>"114x114" :href=>url_for('images/common/apple-touch-icon-114x114_1.png')}
+
+  = include('layouts/default/javascripts')
+  %script{:type => "text/javascript"}
+    :plain
+      function loadCss(url, absolute) {
+          var link = document.createElement("link");
+          link.type = "text/css";
+          link.rel = "stylesheet";
+          if(absolute) {
+            link.href = url;
+          } else {
+            link.href = '#{stash('other_static_cdn')}/'+url;
+          }
+          document.getElementsByTagName("head")[0].appendChild(link);
+      }
+    - foreach my $css (css()->files) {
+      != "loadCss('" .  $css . "', true)"
+    - }
