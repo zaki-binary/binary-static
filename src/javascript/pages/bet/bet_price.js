@@ -57,7 +57,6 @@ var BetPrice = function() {
             var price_container = BetPrice.container().find('div.rbox-lowpad:first');
             price_container.hide().html(data);
             this.on_buy();
-            PricingDetails.register();
             var sendBetUrl = $('#sendBetUrlLink').attr('href');
             if (sendBetUrl){
                 page.url.update(sendBetUrl);
