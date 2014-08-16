@@ -184,6 +184,25 @@ module.exports = function (grunt) {
             single_file: {
                 src: 'dist/css/binary.css'
             }
+        },
+        uncss: {
+            dist: {
+                options: {
+                    ignore: ['#added_at_runtime', /test\-[0-9]+/],
+                    media: ['(min-width: 700px) handheld and (orientation: landscape)'],
+                    csspath: '../public/css/',
+                    raw: 'h1 { color: green }',
+                    stylesheets: ['lib/bootstrap/dist/css/bootstrap.css', 'src/public/css/main.css'],
+                    ignoreSheets: [/fonts.googleapis/],
+                    urls: ['http://localhost:3000/mypage', '...'], // Deprecated
+                    timeout: 1000,
+                    htmlroot: 'public',
+                    report: 'min'
+                },
+                files: {
+                    'dist/css/binary.css': ['app/index.html', 'app/about.html']
+                }
+            }
         }
     });
 
@@ -201,6 +220,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-uncss');
 
     // Tasks to be performed
     grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy']);
