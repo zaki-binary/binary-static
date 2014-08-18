@@ -131,7 +131,7 @@ var pjax_config = function() {
         },
         'useClass': 'pjaxload',
     };
-}
+};
 
 var init_pjax = function () {
     var document_location = document.URL;
