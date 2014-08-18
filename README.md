@@ -8,6 +8,8 @@ Binary-Static
 
 [![Gitter chat](https://badges.gitter.im/binary-com/binary-static.png)](https://gitter.im/binary-com/binary-static)
 
+[![Bountysource](https://www.bountysource.com/badge/issue?issue_id=3774909)](https://www.bountysource.com/issues/3774909-simple-webserver?utm_source=3774909&utm_medium=shield&utm_campaign=ISSUE_BADGE)
+
 This repository contains the static HTML/HAML, Javascript, CSS, and images content of the [Binary.com](http://www.binary.com) website.
 
 How to work with this project
