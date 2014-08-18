@@ -289,18 +289,31 @@ Menu.prototype = {
 
         return { item: item, subitem: subitem };
     },
-    update_trade_urls: function() {
+    register_dynamic_links: function() {
         var stored_market = page.url.param('market') || LocalStore.get('bet_page.market');
+        var start_trading = $('#topMenuStartBetting a:first');
+        var trade_url = start_trading.attr("href");
         if(stored_market) {
-            var trade_url = $('#topMenuStartBetting a:first').attr("href");
             if(/market=/.test(trade_url)) {
                 trade_url = trade_url.replace(/market=\w+/, 'market=' + stored_market);
             } else {
                 trade_url += '&market=' + stored_market;
             }
-            $('#topMenuStartBetting a:first').attr("href", trade_url);
+            start_trading.attr("href", trade_url);
+
             $('#menu-top li:eq(3) a').attr('href', trade_url);
         }
+
+        start_trading.on('click', function(event) {
+            event.preventDefault();
+            load_with_pjax(trade_url);
+        }).addClass('unbind_later');
+
+        $('#menu-top li:eq(3) a').on('click', function(event) {
+            event.preventDefault();
+            load_with_pjax(trade_url);
+        }).addClass('unbind_later');
+
     }
 };
 
@@ -314,7 +327,7 @@ var Header = function(params) {
 Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
-        this.update_urls();
+        this.register_dynamic_links();
         if (!this.clock_started) this.start_clock();
         this.simulate_input_placeholder_for_ie();
     },
@@ -345,12 +358,18 @@ Header.prototype = {
             });
         });
     },
-    update_urls: function() {
+    register_dynamic_links: function() {
+        var logged_in_url = page.url.url_for('');
         if(this.client.is_logged_in) {
-            $('#logo').attr('href', page.url.url_for('my_account.cgi'));
+            logged_in_url = page.url.url_for('my_account.cgi');
         }
 
-        this.menu.update_trade_urls();
+        $('#logo').attr('href', logged_in_url).on('click', function(event) {
+            event.preventDefault();
+            load_with_pjax(logged_in_url);
+        }).addClass('unbind_later');
+
+        this.menu.register_dynamic_links();
     },
     start_clock: function() {
         var clock = $('#gmt-clock');

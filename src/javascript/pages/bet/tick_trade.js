@@ -15,7 +15,7 @@ var TickDisplay = function() {
             $self.display_symbol = data.display_symbol;
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_type = data.contract_type;
-            $self.set_barrier = true;
+            $self.set_barrier = ($self.contract_type.match('DIGIT')) ? false : true;
             $self.display_decimal = 0;
 
             if (typeof data.decimal !== 'undefined') {
@@ -41,33 +41,31 @@ var TickDisplay = function() {
         set_x_indicators: function() {
             var $self = this;
 
+            var exit_tick_index = $self.number_of_ticks - 1;
             if ($self.contract_type.match('ASIAN')) {
-                var last_tick_index = $self.number_of_ticks - 1;
-
+                $self.ticks_needed = $self.number_of_ticks;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
                 };
-                $self.x_indicators['_' + last_tick_index] = {
-                    label: 'Tick ' + $self.number_of_ticks,
-                    id: 'last_tick',
-                };
-                $self.x_indicators['_' + $self.number_of_ticks] = {
-                    label: 'Exit Tick',
+                $self.x_indicators['_' + exit_tick_index] = {
+                    label: 'Exit Spot',
                     id: 'exit_tick',
                 };
             } else if ($self.contract_type.match('FLASH')) {
+                $self.ticks_needed = $self.number_of_ticks + 1;
                 $self.x_indicators = {
                     '_1': { label: 'Tick 1', id: 'start_tick'},
                 };
                 $self.x_indicators['_' + $self.number_of_ticks] = {
-                    label: 'Exit Tick',
+                    label: 'Exit Spot',
                     id: 'exit_tick',
                 };
             } else if ($self.contract_type.match('DIGIT')) {
+                $self.ticks_needed = $self.number_of_ticks;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
                 };
-                $self.x_indicator['_' + $self.number_of_ticks - 1] = {
+                $self.x_indicators['_' + exit_tick_index] = {
                     label:  'Tick ' + $self.number_of_ticks,
                     id: 'last_tick',
                 };
@@ -88,6 +86,7 @@ var TickDisplay = function() {
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
+                credits: {enabled: false},
                 tooltip: {
                     formatter: function () {
                         var that = this;
@@ -122,7 +121,6 @@ var TickDisplay = function() {
             var plot_from_moment = moment(plot_from).utc();
             var plot_to_moment = moment(plot_to).utc();
             var contract_start_moment = moment($self.contract_start_ms).utc();
-            var ticks_needed = $self.number_of_ticks + 1;
             $self.applicable_ticks = [];
 
             var symbol = $self.symbol;
@@ -131,7 +129,7 @@ var TickDisplay = function() {
             $self.ev = new EventSource(stream_url, { withCredentials: true });
 
             $self.ev.onmessage = function(msg) {
-                if ($self.applicable_ticks.length >= ticks_needed) {
+                if ($self.applicable_ticks.length >= $self.ticks_needed) {
                     $self.ev.close();
                     $self.evaluate_contract_outcome();
                     return;
@@ -147,21 +145,31 @@ var TickDisplay = function() {
                             epoch: parseInt(data[i][1]),
                             quote: parseFloat(data[i][2])
                         };
-                        $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
+
+                        if ($self.applicable_ticks.length < $self.ticks_needed) {
+                            $self.chart.series[0].addPoint([tick.epoch*1000, tick.quote], true, false);
+                        }
 
                         if (tick.epoch > contract_start_moment.unix()) {
-                            $self.applicable_ticks.push(tick);
+                            if ($self.applicable_ticks.length >= $self.ticks_needed) {
+                                $self.ev.close();
+                                $self.evaluate_contract_outcome();
+                                return;
+                            } else {
+                                $self.applicable_ticks.push(tick);
 
-                            var tick_index = $self.applicable_ticks.length - 1;
-                            var indicator_key = '_' + tick_index;
+                                var tick_index = $self.applicable_ticks.length - 1;
+                                var indicator_key = '_' + tick_index;
 
-                            if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
-                                $self.x_indicators[indicator_key]['index'] = tick_index;
-                                $self.add($self.x_indicators[indicator_key]);
+                                if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
+                                    $self.x_indicators[indicator_key]['index'] = tick_index;
+                                    $self.add($self.x_indicators[indicator_key]);
+                                }
+
+                                $self.add_barrier();
                             }
-
-                            $self.add_barrier();
                         }
+
                     }
                 }
             };
@@ -181,7 +189,7 @@ var TickDisplay = function() {
                 $self.chart.yAxis[0].addPlotLine({
                     id: 'tick-barrier',
                     value: barrier_tick.quote,
-                    label: {text: 'Barrier('+barrier_tick.quote+')', align: 'center'},
+                    label: {text: 'Barrier ('+barrier_tick.quote+')', align: 'center'},
                     color: 'green',
                     width: 2,
                 });
@@ -203,7 +211,7 @@ var TickDisplay = function() {
                     value: calc_barrier,
                     color: 'green',
                     label: {
-                        text: 'Barrier('+calc_barrier+')',
+                        text: 'Average ('+calc_barrier+')',
                         align: 'center'
                     },
                     width: 2,

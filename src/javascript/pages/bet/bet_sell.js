@@ -786,7 +786,6 @@ var BetSell = function() {
                 data    : params,
                 success : function (ajax_data) {
                     var data = ajax_data;
-                    console.log(data);
                     that.show_inpage_popup('<div class="inpage_popup_content_box"><div class="popup_bet_desc drag-handle">'+data.longcode+'</div><div id="tick_chart"></div></div>');
                     TickDisplay.initialize(data);
                 },

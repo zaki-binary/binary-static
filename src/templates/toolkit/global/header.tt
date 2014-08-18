@@ -27,7 +27,7 @@
         <div class='grd-container'>
             <div class='grd-row-padding'>
                 <div class='grd-grid-3 grd-grid-mobile-2 grd-grid-phablet-1'>
-                    <a class="pjaxload" id="logo" href="[% request.url_for('/') %]"[% target %]>
+                    <a id="logo" href="[% request.url_for('/') %]"[% target %]>
                         <div class='grd-grid-3 grd-grid-mobile-12 grd-grid-phablet-12 grd-no-gutter'>
                             <img class='responsive' src="[% request.url_for('images/pages/binary-symbol-logo.svg') %]"/>
                         </div>
@@ -49,7 +49,7 @@
                                 <a class="pjaxload" href="[% request.url_for('tour') %]"[% target %]>[% l("Tour") %]</a>
                             </li>
                             <li id="trading_link">
-                                <a class="pjaxload" href="[% request.url_for('trade.cgi') %]"[% target %]>[% l("Trade") %]</a>
+                                <a href="[% request.url_for('trade.cgi') %]"[% target %]>[% l("Trade") %]</a>
                             </li>
                         </ul>
                     </div>
