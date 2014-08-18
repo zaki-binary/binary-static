@@ -1,0 +1,38 @@
+- stash(
+-   title => l('Responsible Trading')
+- );
+#responsible-trading
+  .grd-container
+    %h1= l('Responsible Trading')
+    %p
+      = l('Please remember at all times that trading binary options can be an exciting activity, but we have a moral duty to remind you of the risks you may run.')
+      = l('Options trading can become a real addiction, as can any other activity pushed to its limits.')
+      = l('We kindly ask you to engage in a careful self-analysis to check if you are at risk.')
+      = l('To avoid the danger of such an addiction, it is important that you follow some basic principles and guidelines.')
+    %ol
+      %li= l('Use the opportunity provided by our website to practice for free with our virtual money account facility. This will enable you to get used to the functionalities and rules of the website.')
+      %li= l('Do not trade more than you can afford.')
+      %li= l('Do not trade when you are tired or are under the influence of alcohol.')
+      %li= l('Put a limit on your winnings. Once you have reached it put some aside and trade with the rest of the money.')
+      %li= l('Trade only with money you can afford to lose. Do not trade with borrowed money.')
+    %p
+      != l('[_1] supports <a target="_blank" href="http://www.gamcare.org.uk">GamCare</a>. GamCare has a commitment to promote responsible attitudes to gambling and to work for the provision of proper care for those who have been harmed by gambling dependency. Other websites that provide information about gambling or gambling addiction are:', stash->{website_name})
+      %ul
+        %li
+          %a{:target => '_blank', :href => 'http://www.gamblersanonymous.org.uk'}= 'http://www.gamblersanonymous.org.uk/'
+        %li
+          %a{:target => '_blank', :href => 'http://www.gov.im/gambling/'}= 'http://www.gov.im/gambling/'
+    %h2= l('Written limits')
+    %p
+      = l('[_1] provides you with the opportunity to either self exclude or', stash->{website_name})
+      %a{:href => url_for('self_exclusion.cgi')}= l('set limits on your trading activities')
+      = l('on this website. You may also')
+      %a.pjaxload{:href => url_for('contact.cgi')}= l('contact us')
+      = l('to state the limits you wish to set via live chat, email or phone. Available limits are:')
+      %ol
+        %li= l('a limit on the amount you may trade within a specified period of time;')
+        %li= l('a limit on the losses you may incur within a specified period of time;')
+        %li= l('a limit on the amount of time you may trade in any given online session;')
+        %li= l('a definite or indefinite period during which you wish to exclude yourself from the website.')
+    %p
+      = l('Any limits set may only be changed or increased after 7 days notice.')
