@@ -41,9 +41,9 @@ var TickDisplay = function() {
         set_x_indicators: function() {
             var $self = this;
 
+            var exit_tick_index = $self.number_of_ticks - 1;
             if ($self.contract_type.match('ASIAN')) {
                 $self.ticks_needed = $self.number_of_ticks;
-                var exit_tick_index = $self.number_of_ticks - 1;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
                 };
@@ -62,7 +62,6 @@ var TickDisplay = function() {
                 };
             } else if ($self.contract_type.match('DIGIT')) {
                 $self.ticks_needed = $self.number_of_ticks;
-                var exit_tick_index = $self.number_of_ticks - 1;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
                 };
