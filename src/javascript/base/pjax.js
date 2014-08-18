@@ -96,42 +96,58 @@ var pjax_config_page = function(url, exec_functions) {
     if (functions.onUnload) onUnload.queue_for_url(functions.onUnload, url);
 };
 
+var pjax_config = function() {
+    return {
+        'container': 'content',
+        'beforeSend': function() {
+            onLoad.loading();
+            onUnload.fire();
+        },
+        'complete': function() {
+            onLoad.fire();
+            onUnload.reset();
+        },
+        'error': function(event) {
+            var error_text = SessionStore.get('errors.500');
+            if(error_text) {
+                $('#content').html(error_text);
+            } else {
+                $.get('/errors/500.html').always(function(content) {
+                    var tmp = document.createElement('div');
+                    tmp.innerHTML = content;
+                    tmpNodes = tmp.getElementsByTagName('div');
+                    for(var i=0,l=tmpNodes.length;i<l;i++){
+                        if(tmpNodes[i].id == 'content') {
+                            SessionStore.set('errors.500', tmpNodes[i].innerHTML);
+                            $('#content').html(tmpNodes[i].innerHTML);
+                            break;
+                        }
+                    }
+                });
+            }
+
+            $('#server_clock').html('GMT Time: ' + moment(page.header.time_now).utc().format("YYYY-MM-DD HH:mm"));
+
+        },
+        'useClass': 'pjaxload',
+    };
+};
+
 var init_pjax = function () {
     var document_location = document.URL;
     if(!/f_brokercgi/.test(document_location)) { //No Pjax for backoffice.
-        pjax.connect({
-            'container': 'content',
-            'beforeSend': function() {
-                onLoad.loading();
-                onUnload.fire();
-            },
-            'complete': function() {
-                onLoad.fire();
-                onUnload.reset();
-            },
-            'error': function(event) {
-                var error_text = SessionStore.get('errors.500');
-                if(error_text) {
-                    $('#content').html(error_text);
-                } else {
-                    $.get('/errors/500.html').always(function(content) {
-                        var tmp = document.createElement('div');
-                        tmp.innerHTML = content;
-                        tmpNodes = tmp.getElementsByTagName('div');
-                        for(var i=0,l=tmpNodes.length;i<l;i++){
-                            if(tmpNodes[i].id == 'content') {
-                                SessionStore.set('errors.500', tmpNodes[i].innerHTML);
-                                $('#content').html(tmpNodes[i].innerHTML);
-                                break;
-                            }
-                        }
-                    });
-                }
-
-                $('#server_clock').html('GMT Time: ' + moment(page.header.time_now).utc().format("YYYY-MM-DD HH:mm"));
-
-            },
-            'useClass': 'pjaxload',
-        });
+        pjax.connect(pjax_config());
     }
+};
+
+var load_with_pjax = function(url) {
+        if(page.url.is_in(new URL(url))) {
+            return;
+        }
+
+        var config = pjax_config();
+        config.url = url;
+        config.update_url = url;
+        config.history = true;
+        pjax.invoke(config);
 };

@@ -270,6 +270,12 @@ var BetForm = function () {
                             BetAnalysis.was_showing_tab('tab_pricing_table')) {
                             BetAnalysis.show_tab('tab_intradayprices');
                         }
+                    } else {
+                        // Hide them all if none selected
+                        MenuContent.hide_tab($('#tab_intradayprices'));
+                        MenuContent.hide_tab($('#tab_pricing_table'));
+                        MenuContent.hide_tab($('#tab_last_digit'));
+                        MenuContent.trigger({'tab_id': 'tab_explanation'});
                     }
                 },
                 on_amount_change: function() {
