@@ -6,20 +6,18 @@
                 [% END %]
         </div>
 
-        [% IF transactions.size > 0 %]
-            <span class="grd-grid-8 grd-hide-mobile grd-hide-phablet center-aligned" [% IF position != 'top' %] style="visibility:hidden" [% END %]>
-                <form action="[% request.url_for('statement.cgi') %]">
-                    <div class="grd-row-padding grd-parent grd-grid-7 right-aligned">
-                        <label for='before' class='left-aligned'>[% l('Jump to') %]</label>
-                        <input id='statement-date' class='has-date-picker' name='before' value='[% before %]'/>
-                        <input type='hidden' name='jump_to' value='1'/>
-                    </div>
-                    <span id="submit-date" class="invisible button grd-grid-5 left-aligned">
-                        <button class="button">[% l('Go') %]</button>
-                    </span>
-                </form>
-            </span>
-        [% END %]
+        <span class="grd-grid-8 grd-hide-mobile grd-hide-phablet center-aligned" [% IF position != 'top' %] style="visibility:hidden" [% END %]>
+            <form action="[% request.url_for('statement.cgi') %]">
+                <div class="grd-row-padding grd-parent grd-grid-7 right-aligned">
+                    <label for='before' class='left-aligned'>[% l('Jump to') %]</label>
+                    <input id='statement-date' class='has-date-picker' name='before' value='[% before %]'/>
+                    <input type='hidden' name='jump_to' value='1'/>
+                </div>
+                <span id="submit-date" class="invisible button grd-grid-5 left-aligned">
+                    <button class="button">[% l('Go') %]</button>
+                </span>
+            </form>
+        </span>
 
         <div class="grd-grid-2 grd-grid-mobile-6 grd-grid-phablet-6 right-aligned">
                 [% IF has_older %]
