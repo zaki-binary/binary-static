@@ -203,6 +203,26 @@ module.exports = function (grunt) {
                     'dist/css/binary.css': ['app/index.html', 'app/about.html']
                 }
             }
+        },
+        hash: {
+            options: {
+                mapping: 'dist/hashed.json',
+                srcBasePath: 'src/',
+                destBasePath: 'dist/',
+                flatten: false,
+                hashLength: 8,
+                hashFunction: function(source, encoding) {
+                    return require('crypto').createHash('sha1').update(source, encoding).digest('hex');
+                }
+            },
+            js: {
+                src: 'dist/js/*.min.js',
+                dest: 'dist/js/'
+            },
+            css: {
+                src: 'dist/css/*.min.css',
+                dest: 'dist/css/'
+            }
         }
     });
 
@@ -221,9 +241,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-uncss');
+    grunt.loadNpmTasks('grunt-hash');
 
     // Tasks to be performed
-    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'hash']);
     grunt.registerTask('dev', ['default', 'connect:dev']);
     grunt.registerTask('deploy', ['default', 'gh-pages', 'watch']);
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local    
