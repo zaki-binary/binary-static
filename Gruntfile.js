@@ -223,6 +223,18 @@ module.exports = function (grunt) {
                 src: 'dist/css/*.min.css',
                 dest: 'dist/css/'
             }
+        },
+        fileindex: {
+            javascript: {
+                options: {
+                    format: 'json_flat',
+                    pretty: true
+                },
+                files: [
+                    { dest: 'dist/app.json', src: ['src/javascript/**/*.js', '!src/javascript/external/**/*.js'] },
+                    { dest: 'dist/lib.json', src: ['src/javascript/external/**/*.js'] }
+                ]
+            }
         }
     });
 
@@ -242,9 +254,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-hash');
+    grunt.loadNpmTasks('grunt-fileindex');
 
     // Tasks to be performed
-    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'hash']);
+    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'hash', 'fileindex']);
     grunt.registerTask('dev', ['default', 'connect:dev']);
     grunt.registerTask('deploy', ['default', 'gh-pages', 'watch']);
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local    
