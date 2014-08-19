@@ -5,12 +5,7 @@ var LiveChartConfig = function(params) {
     this.shift = typeof params['shift'] !== 'undefined' ? params['shift'] : 1;
     this.with_trades = typeof params['with_trades'] !== 'undefined' ? params['with_trades'] : 1;
     this.streaming_server = page.settings.get('streaming_server');
-    this.ticktrade_chart = typeof params['ticktrade_chart'] !== 'undefined' ? params['ticktrade_chart'] : 0;
     this.with_marker = typeof params['with_marker'] !== 'undefined' ? params['with_marker'] : 0;
-    this.contract_start_time = typeof params['contract_start_time'] !== 'undefined' ? params['contract_start_time'] : 0;
-    this.how_many_ticks = typeof params['how_many_ticks'] !== 'undefined' ? params['how_many_ticks'] : 0;
-    this.with_tick_config = typeof params['with_tick_config'] !== 'undefined' ? params['with_tick_config'] : 0;
-    this.with_entry_spot = typeof params['with_entry_spot'] !== 'undefined' ? params['with_entry_spot'] : 0;
 
     this.indicators = [];
     this.resolutions = {
