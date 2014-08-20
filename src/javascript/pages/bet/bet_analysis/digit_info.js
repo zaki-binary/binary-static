@@ -39,7 +39,6 @@ BetAnalysis.DigitInfo = function() {
         },
         xAxis:{
             categories: ['0','1','2','3','4','5','6','7','8','9'],
-            labels:{ enabled:false},
             lineWidth:0,
             lineColor:'#999',
             tickLength:10,
