@@ -26,7 +26,6 @@ External tools
 **Kanban issue board** with waffle: [![Stories in Ready](https://badge.waffle.io/binary-com/binary-static.svg?label=ready&title=Ready)](http://waffle.io/binary-com/binary-static)
 
 **Discuss the project on IRC** with gitter: [![Gitter chat](https://badges.gitter.im/binary-com/binary-static.png)](https://gitter.im/binary-com/binary-static)
-or **email collaborator group** at x-binary-static [at] binary .com
 
 **Automated code review**: [![Code Climate](https://codeclimate.com/github/binary-com/binary-static.png)](https://codeclimate.com/github/binary-com/binary-static)
 
