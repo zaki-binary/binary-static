@@ -4,9 +4,9 @@ var self_exclusion_date_picker = function () {
     var start_date = new Date();
     start_date.setMonth(start_date.getMonth() + 6);
 
-    // 1 year from now
+    // 5 years from now
     var end_date = new Date();
-    end_date.setFullYear(end_date.getFullYear() + 1);
+    end_date.setFullYear(end_date.getFullYear() + 5);
 
     var id = $('#EXCLUDEUNTIL');
 
