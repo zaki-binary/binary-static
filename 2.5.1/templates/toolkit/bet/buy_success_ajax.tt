@@ -1,0 +1,69 @@
+<div class="bet_confirm_wrapper">
+    <h4 id="bet-confirm-header">[% l('Trade Confirmation') %]</h4>
+    <p id="bet-confirm-exp">[% l('You have purchased the following contract:') %]</p>
+    <div id='tick_info' style="display:none">
+            [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+            <tr>
+                <th>[% l('Entry spot') %]</th><td id='entry'></td>
+                <th>[% l('Exit spot') %]</th><td id='exit'></td>
+            </tr>
+            [% END %]
+    </div>
+
+    <div class="bet_confirm_desc">
+        [% longcode %]
+    </div>
+
+    <div id='contract-confirmation-details'>
+        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+            <tr>
+                <th class="standin with_right_border">[% l('Potential Payout') %]</th>
+                <th class="standout with_right_border">[% l('Total Cost') %]</th>
+                <th class="standin">[% l('Potential Profit') %]</th>
+            </tr>
+            <tr>
+                <td class="standin with_right_border">[% payout %]</td>
+                <td class="standout with_right_border"><span class="price">[% price %]</span></td>
+                <td>[% win %]</td>
+            </tr>
+            [% IF notes %]
+            <tr class="notes">
+                <td class="notes" colspan="3">
+                [% FOREACH note IN notes %]
+                    [% l(note) %]<br>
+                [% END %]
+                </td>
+            </tr>
+            [% END %]
+        [% END %]
+    </div>
+    <div id='contract-outcome-details' style="display:none">
+        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+            <tr>
+                <th class="standin with_right_border">[% l('Buy Price') %]</th>
+                <th class="standin with_right_border">[% l('Final Price') %]</th>
+                <th id='contract-outcome-label' class="standout"></th>
+            </tr>
+            <tr>
+                <td class="standin with_right_border" id='contract-outcome-buyprice'>[% price %]</td>
+                <td class="standin with_right_border" id='contract-outcome-payout'></td>
+                <td class="standout" id='contract-outcome-profit'></td>
+            </tr>
+        [% END %]
+    </div>
+
+    [% IF transaction_msg %]
+        <p class="trade_ref">[% transaction_msg%]</p>
+    [% END %]
+    [% IF contract_visualization %]
+        [% contract_visualization %]
+    [% END %]
+
+    [% IF google_tag_manager %]
+        [% google_tag_manager %]
+    [% END %]
+
+    [% IF balance_amount %]
+        <div class="account_balance">[% l('Account balance: ') %][% currency %] [% balance_amount %]</div>
+    [% END %]
+</div>
