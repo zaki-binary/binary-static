@@ -261,8 +261,18 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-fileindex');
 
     // Tasks to be performed
-    grunt.registerTask('default', ['clean', 'compass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'copy', 'hash', 'fileindex']);
+    
+    grunt.registerTask('css', ['compass', 'autoprefixer', 'cssmin', 'uncss']);
+    
+    grunt.registerTask('js', ['concat', 'uglify']);
+    
+    grunt.registerTask('default', ['clean', 'css', 'js', 'hash', 'fileindex', 'copy']);
+    
     grunt.registerTask('dev', ['default', 'connect:dev']);
+    
     grunt.registerTask('deploy', ['default', 'gh-pages', 'watch']);
+    
+    grunt.registerTask('custom', ['default', 'connect:dev']);
+    
     grunt.registerTask('test', ['jshint']); // + unit tests + nightwatch local    
 };
