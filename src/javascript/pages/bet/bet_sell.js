@@ -1006,7 +1006,7 @@ var BetSell = function() {
                         that.resubmit_sell_at_market();
                     } else if (full_count_days === 0 && duration.hours() === 0 && duration.minutes() === 0 && duration.seconds() === 0) {
                         selector.html(timestring);
-                        that.basic_cleanup();
+                        that.resubmit_sell_at_market();
                     } else {
                         selector.html(timestring);
                     }
