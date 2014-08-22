@@ -183,6 +183,7 @@ var BetPrice = function() {
 
                     $self.digit_tick_count = 0;
                     $self.applicable_ticks = [];
+                    $self.info_for_display = [];
                     var symbol = BetForm.attributes.underlying();
                     var how_many_ticks = $('#tick-count').data('count');
                     var end = start_moment.clone().add('minutes',3);
@@ -204,12 +205,12 @@ var BetPrice = function() {
                                         if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
                                             $self.applicable_ticks.push(tick.quote);
                                             $self.digit_tick_count++;
+                                            $self.info_for_display.push([$self.digit_tick_count,tick.epoch,tick.quote]);
                                             var last_digit = tick.quote.toString().substr(-1);
                                             if (!$('#digit-current').hasClass('flipper')) {
                                                 $('#digit-current').addClass('flipper focus');
                                             }
-                                            $('#digit-current').text(last_digit);
-                                            $('#digit-count').text($self.digit_tick_count);
+                                            $self.update_display();
 
                                             if ($('#digit-contract-details').css('display') === 'none') {
                                                 $('#digit-contract-details').show();
@@ -224,6 +225,24 @@ var BetPrice = function() {
                                 }
                     };
                     $self.ev.onerror = function() { $self.ev.close(); };
+                },
+                update_display: function(data) {
+                    var $self = this;
+
+                    var ticks_to_display = $self.info_for_display.slice(-5);
+                    for (var i=0;i<5;i++) {
+                        if (typeof ticks_to_display[i] !== 'undefined') {
+                            var tick_number = ticks_to_display[i][0];
+                            var tick_time = moment.utc(ticks_to_display[i][1]*1000).format("hh:mm:ss");
+                            var tick_string = ticks_to_display[i][2].toString();
+                            $('#count-'+i).text('Tick '+tick_number);
+                            $('#time-'+i).text(tick_time);
+                            var shorten = tick_string.substr(0,tick_string.length-1);
+                            var last = tick_string.substr(-1);
+                            $('#tick-'+i+' span#latest-shorten').text(shorten);
+                            $('#tick-'+i+' span#latest-last').text(last);
+                        }
+                    }
                 },
                 evaluate_digit_outcome: function() {
                     var $self = this;
@@ -248,14 +267,12 @@ var BetPrice = function() {
                     if (final_price !== 0) {
                         $('#bet-confirm-header').text(text.localize('This contract won'));
                         $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
-                        $('#digit-current').addClass('win');
-                        $('#digit-prediction').addClass('win');
+                        $('#digit-contract-details').css('background', 'rgba(46,136,54,0.198039)');
                     } else {
                         $('#bet-confirm-header').text(text.localize('This contract lost'));
                         $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
                         $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
-                        $('#digit-current').addClass('lose');
-                        $('#digit-prediction').addClass('lose');
+                        $('#digit-contract-details').css('background', 'rgba(204,0,0,0.098039)');
                     }
 
                     $('#contract-outcome-details').show();

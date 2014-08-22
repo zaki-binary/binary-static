@@ -3,20 +3,31 @@
 [% END %]
 
 [% IF display_digits %]
-    <div id='digit-contract-details' style="display:none">
-        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
-        <tr>
-            <th class='standin'>[% l('Prediction') %]   </th>
-            <th class='standin'></th>
-            <th class='standin'>[% l('Current') %]</th>
-        </tr>
-        <tr>
-            <td><div id='digit-prediction' class='flipper'>[% client_prediction %]</div></td>
-            <td><div class='sign'>[% IF contract_sentiment == 'match' %]=[% ELSIF contract_sentiment == 'differ' %]≠[% END %]</div></td>
-            <td><div id='digit-current'></div></td>
-        </tr>
-        [% END %]
-        Tick count: <span id='digit-count'></span>
+    <div id='digit-contract-details' style="display:none" class="grd-parent grd-grid-12 digit-container">
+        <span class="grd-grid-4">
+            <span>Tick Count</span>
+            <span id="count-0" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"> </span>
+            <span id="count-1" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"> </span>
+            <span id="count-2" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"> </span>
+            <span id="count-3" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"> </span>
+            <span id="count-4" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"> </span>
+        </span>
+        <span class="grd-grid-4">
+            <span>Time (GMT)</span>
+            <span id="time-0" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"></span>
+            <span id="time-1" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"></span>
+            <span id="time-2" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"></span>
+            <span id="time-3" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"></span>
+            <span id="time-4" class="grd-no-col-padding left-aligned grd-with-top-padding grd-grid-8 grd-centered"></span>
+        </span>
+        <span class="grd-grid-4">
+            <span>Spot</span>
+            <span id="tick-0" class="grd-no-col-padding right-aligned grd-with-top-padding grd-grid-8 grd-centered"><span id='latest-shorten'></span><span class="bigger" id='latest-last'></span></span>
+            <span id="tick-1" class="grd-no-col-padding right-aligned grd-with-top-padding grd-grid-8 grd-centered"><span id='latest-shorten'></span><span class="bigger" id='latest-last'></span></span>
+            <span id="tick-2" class="grd-no-col-padding right-aligned grd-with-top-padding grd-grid-8 grd-centered"><span id='latest-shorten'></span><span class="bigger" id='latest-last'></span></span>
+            <span id="tick-3" class="grd-no-col-padding right-aligned grd-with-top-padding grd-grid-8 grd-centered"><span id='latest-shorten'></span><span class="bigger" id='latest-last'></span></span>
+            <span id="tick-4" class="grd-no-col-padding right-aligned grd-with-top-padding grd-grid-8 grd-centered"><span id='latest-shorten'></span><span class="bigger" id='latest-last'></span></span>
+        </span>
         <span id='is-digit' data-is-digit=1></span>
         <span id='client-prediction' data-client-prediction="[% client_prediction %]"></span>
     </div>

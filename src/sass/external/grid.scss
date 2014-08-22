@@ -41,11 +41,22 @@ body {
     overflow: hidden;
 }
 
+.grd-no-col-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow: hidden;
+}
+
 // this provides padding to individual grid element whereas grd-row-padding
 // provides padding for the container
 .grd-with-padding {
     padding-top: $gridle-gutter-height;
     padding-bottom: $gridle-gutter-height;
+}
+
+.grd-with-top-padding {
+    padding-top: $gridle-gutter-height;
+    padding-bottom: 0px;
 }
 
 // Default container with default padding for naive flat containers (Like footer and footer regulatory).
