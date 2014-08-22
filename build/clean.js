@@ -1,6 +1,7 @@
 module.exports = {
-    
-    build: {
-        src: 'dist',
+    all: {
+        build: {
+            src: 'dist'
+        }
     }
 };

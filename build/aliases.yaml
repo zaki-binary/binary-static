@@ -1,0 +1,33 @@
+css:
+  - 'compass'
+  - 'autoprefixer'
+  - 'cssmin'
+  - 'uncss'
+
+js:
+  - 'concat'
+  - 'uglify'
+
+dev:
+  - 'default'
+  - 'connect:dev'
+
+deploy:
+  - 'default'
+  - 'gh-pages'
+  - 'watch'
+
+custom:
+  - 'default'
+  - 'connect:dev'
+
+test:
+  - 'jshint'
+
+default:
+  - 'clean'
+  - 'css'
+  - 'js'
+  - 'hash'
+  - 'fileindex'
+  - 'copy'
