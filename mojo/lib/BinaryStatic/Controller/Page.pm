@@ -6,13 +6,12 @@ sub toolkit {
     my $c = shift;
 
     my %file_map = (
-        '/' => 'misc/contact_us'
+        '/c/contact.cgi' => 'misc/contact_us'
     );
 
     $c->render(
         template => 'misc/contact_us',
-        handler => 'tt',
-        l => sub { $c->l(@_); }
+        handler => 'tt'
     );
 }
 
@@ -26,7 +25,7 @@ sub haml {
     $c->render(
         template => 'home/index',
         handler => 'haml',
-        # layout   => $self->layout('full_width'),
+        layout   => $self->layout('full_width'),
     );
 }
 

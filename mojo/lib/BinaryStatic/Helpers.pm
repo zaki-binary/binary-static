@@ -7,6 +7,8 @@ use base 'Mojolicious::Plugin';
 use Text::Haml;
 use Mojo::ByteStream;
 use HTML::Entities qw( encode_entities );
+use JSON qw(to_json decode_json);
+use BinaryStatic::Consts;
 
 sub register {
     my ($self, $app) = @_;
@@ -87,37 +89,54 @@ sub register {
     $app->helper(
         is_virtual => sub {
             my $c = shift;
-            return $c->stash('request')->broker->is_virtual;
+            return 0; # $c->stash('request')->broker->is_virtual;
         });
 
     $app->renderer->add_helper(
         js_configs => sub {
             my ($c) = @_;
+            my %setting = (
+                enable_relative_barrier => 'true',
+                image_link              => {
+                    hourglass     => $c->url_for('images/common/hourglass_1.gif')->to_string,
+                    up            => $c->url_for('images/javascript/up_arrow_1.gif')->to_string,
+                    down          => $c->url_for('images/javascript/down_arrow_1.gif')->to_string,
+                    calendar_icon => $c->url_for('images/common/calendar_icon_1.png')->to_string,
+                    livechaticon  => $c->url_for('images/javascript/live-chat-icon_1.png')->to_string,
+                },
+                broker               => 'CR',
+                restricted_countries => 'cr|hk|ir|my|mt|us|vi|um|jp|bs|je|gg',
+                valid_loginids       => "MX|VRTC|MLT|CR|FOG|BFT|VRTM|VRTU|WS'",
+                streaming_server => 'stream.binary.com',
+                cs_times         => [{"end" => 15, "start" => 0}, {"end" => 23, "start" => 14}],
+                arr_all_currencies => ["USD","EUR","GBP","AUD"],
+            );
+
+            return {
+                libs           => [
+                    'https://www.binary.com/cdn/compressed_binary.9fb5fc413e777c4ff16738799074a63f.js',
+                    'https://static.binary.com/2.5.1/js/binary.min.js'
+                ],
+                settings       => to_json(\%setting),
+                head_js_inline => '',
+            };
         });
 
     $app->renderer->add_helper(
         menu => sub {
             my ($c) = @_;
+            return BinaryStatic::Helpers::Menu->new(c => $c);
         });
 
     $app->renderer->add_helper(
         css => sub {
             my ($c) = @_;
+            return BinaryStatic::Helpers::CSS->new;
         });
 
     $app->renderer->add_helper(
         available_languages => sub {
-            return {
-                'DE' => 'Deutsch',
-                'ID' => 'Bahasa Indonesia',
-                'ZH_CN' => '简体中文',
-                'PL' => 'Polish',
-                'RU' => 'Русский',
-                'PT' => 'Português',
-                'ES' => 'Español',
-                'FR' => 'Français',
-                'EN' => 'English',
-            };
+            return BinaryStatic::Consts::languages();
         });
 
     $app->renderer->add_helper(
@@ -134,257 +153,269 @@ sub register {
 
     $app->helper(
         countries_options => sub {
-            return (
-                { name => 'Afghanistan', code => 'af' },
-                { name => 'Aland Islands', code => 'ax' },
-                { name => 'Albania', code => 'al' },
-                { name => 'Algeria', code => 'dz' },
-                { name => 'American Samoa', code => 'as' },
-                { name => 'Andorra', code => 'ad' },
-                { name => 'Angola', code => 'ao' },
-                { name => 'Anguilla', code => 'ai' },
-                { name => 'Antarctica', code => 'aq' },
-                { name => 'Antigua and Barbuda', code => 'ag' },
-                { name => 'Argentina', code => 'ar' },
-                { name => 'Armenia', code => 'am' },
-                { name => 'Aruba', code => 'aw' },
-                { name => 'Australia', code => 'au' },
-                { name => 'Austria', code => 'at' },
-                { name => 'Azerbaijan', code => 'az' },
-                { name => 'Bahamas', code => 'bs', restricted => 1 },
-                { name => 'Bahrain', code => 'bh' },
-                { name => 'Bangladesh', code => 'bd' },
-                { name => 'Barbados', code => 'bb' },
-                { name => 'Belarus', code => 'by' },
-                { name => 'Belgium', code => 'be' },
-                { name => 'Belize', code => 'bz' },
-                { name => 'Benin', code => 'bj' },
-                { name => 'Bermuda', code => 'bm' },
-                { name => 'Bhutan', code => 'bt' },
-                { name => 'Bolivia', code => 'bo' },
-                { name => 'Bosnia and Herzegovina', code => 'ba' },
-                { name => 'Botswana', code => 'bw' },
-                { name => 'Bouvet Island', code => 'bv' },
-                { name => 'Brazil', code => 'br' },
-                { name => 'British Indian Ocean Territory', code => 'io' },
-                { name => 'Brunei Darussalam', code => 'bn' },
-                { name => 'Bulgaria', code => 'bg' },
-                { name => 'Burkina Faso', code => 'bf' },
-                { name => 'Burundi', code => 'bi' },
-                { name => 'Cambodia', code => 'kh' },
-                { name => 'Cameroon', code => 'cm' },
-                { name => 'Canada', code => 'ca' },
-                { name => 'Cape Verde', code => 'cv' },
-                { name => 'Cayman Islands', code => 'ky' },
-                { name => 'Central African Republic', code => 'cf' },
-                { name => 'Chad', code => 'td' },
-                { name => 'Chile', code => 'cl' },
-                { name => 'China', code => 'cn' },
-                { name => 'Christmas Island', code => 'cx' },
-                { name => 'Cocos (Keeling) Islands', code => 'cc' },
-                { name => 'Colombia', code => 'co' },
-                { name => 'Comoros', code => 'km' },
-                { name => 'Congo', code => 'cg' },
-                { name => 'Congo, The Democratic Republic of the', code => 'cd' },
-                { name => 'Cook Islands', code => 'ck' },
-                { name => 'Costa Rica', code => 'cr', restricted => 1 },
-                { name => 'Cote D&#39;Ivoire', code => 'ci' },
-                { name => 'Croatia', code => 'hr' },
-                { name => 'Cuba', code => 'cu' },
-                { name => 'Cyprus', code => 'cy' },
-                { name => 'Czech Republic', code => 'cz' },
-                { name => 'Denmark', code => 'dk' },
-                { name => 'Djibouti', code => 'dj' },
-                { name => 'Dominica', code => 'dm' },
-                { name => 'Dominican Republic', code => 'do' },
-                { name => 'Ecuador', code => 'ec' },
-                { name => 'Egypt', code => 'eg' },
-                { name => 'El Salvador', code => 'sv' },
-                { name => 'Equatorial Guinea', code => 'gq' },
-                { name => 'Eritrea', code => 'er' },
-                { name => 'Estonia', code => 'ee' },
-                { name => 'Ethiopia', code => 'et' },
-                { name => 'Falkland Islands (Malvinas)', code => 'fk' },
-                { name => 'Faroe Islands', code => 'fo' },
-                { name => 'Fiji', code => 'fj' },
-                { name => 'Finland', code => 'fi' },
-                { name => 'France', code => 'fr' },
-                { name => 'French Guiana', code => 'gf' },
-                { name => 'French Polynesia', code => 'pf' },
-                { name => 'French Southern Territories', code => 'tf' },
-                { name => 'Gabon', code => 'ga' },
-                { name => 'Gambia', code => 'gm' },
-                { name => 'Georgia', code => 'ge' },
-                { name => 'Germany', code => 'de' },
-                { name => 'Ghana', code => 'gh' },
-                { name => 'Gibraltar', code => 'gi' },
-                { name => 'Greece', code => 'gr' },
-                { name => 'Greenland', code => 'gl' },
-                { name => 'Grenada', code => 'gd' },
-                { name => 'Guadeloupe', code => 'gp' },
-                { name => 'Guam', code => 'gu' },
-                { name => 'Guatemala', code => 'gt' },
-                { name => 'Guernsey', code => 'gg', restricted => 1 },
-                { name => 'Guinea', code => 'gn' },
-                { name => 'Guinea-Bissau', code => 'gw' },
-                { name => 'Guyana', code => 'gy' },
-                { name => 'Haiti', code => 'ht' },
-                { name => 'Heard Island and McDonald Islands', code => 'hm' },
-                { name => 'Holy See (Vatican City State)', code => 'va' },
-                { name => 'Honduras', code => 'hn' },
-                { name => 'Hong Kong', code => 'hk', restricted => 1 },
-                { name => 'Hungary', code => 'hu' },
-                { name => 'Iceland', code => 'is' },
-                { name => 'India', code => 'in' },
-                { name => 'Indonesia', code => 'id' },
-                { name => 'Iran, Islamic Republic of', code => 'ir', restricted => 1 },
-                { name => 'Iraq', code => 'iq' },
-                { name => 'Ireland', code => 'ie' },
-                { name => 'Isle of Man', code => 'im' },
-                { name => 'Israel', code => 'il' },
-                { name => 'Italy', code => 'it' },
-                { name => 'Jamaica', code => 'jm' },
-                { name => 'Japan', code => 'jp', restricted => 1 },
-                { name => 'Jersey', code => 'je', restricted => 1 },
-                { name => 'Jordan', code => 'jo' },
-                { name => 'Kazakhstan', code => 'kz' },
-                { name => 'Kenya', code => 'ke' },
-                { name => 'Kiribati', code => 'ki' },
-                { name => 'Korea, Democratic People&#39;s Republic of', code => 'kp' },
-                { name => 'Korea, Republic of', code => 'kr' },
-                { name => 'Kuwait', code => 'kw' },
-                { name => 'Kyrgyzstan', code => 'kg' },
-                { name => 'Lao People&#39;s Democratic Republic', code => 'la' },
-                { name => 'Latvia', code => 'lv' },
-                { name => 'Lebanon', code => 'lb' },
-                { name => 'Lesotho', code => 'ls' },
-                { name => 'Liberia', code => 'lr' },
-                { name => 'Libyan Arab Jamahiriya', code => 'ly' },
-                { name => 'Liechtenstein', code => 'li' },
-                { name => 'Lithuania', code => 'lt' },
-                { name => 'Luxembourg', code => 'lu' },
-                { name => 'Macao', code => 'mo' },
-                { name => 'Macedonia', code => 'mk' },
-                { name => 'Madagascar', code => 'mg' },
-                { name => 'Malawi', code => 'mw' },
-                { name => 'Malaysia', code => 'my', restricted => 1 },
-                { name => 'Maldives', code => 'mv' },
-                { name => 'Mali', code => 'ml' },
-                { name => 'Malta', code => 'mt', restricted => 1 },
-                { name => 'Marshall Islands', code => 'mh' },
-                { name => 'Martinique', code => 'mq' },
-                { name => 'Mauritania', code => 'mr' },
-                { name => 'Mauritius', code => 'mu' },
-                { name => 'Mayotte', code => 'yt' },
-                { name => 'Mexico', code => 'mx' },
-                { name => 'Micronesia, Federated States of', code => 'fm' },
-                { name => 'Moldova, Republic of', code => 'md' },
-                { name => 'Monaco', code => 'mc' },
-                { name => 'Mongolia', code => 'mn' },
-                { name => 'Montenegro', code => 'me' },
-                { name => 'Montserrat', code => 'ms' },
-                { name => 'Morocco', code => 'ma' },
-                { name => 'Mozambique', code => 'mz' },
-                { name => 'Myanmar', code => 'mm' },
-                { name => 'Namibia', code => 'na' },
-                { name => 'Nauru', code => 'nr' },
-                { name => 'Nepal', code => 'np' },
-                { name => 'Netherlands', code => 'nl' },
-                { name => 'Netherlands Antilles', code => 'an' },
-                { name => 'New Caledonia', code => 'nc' },
-                { name => 'New Zealand', code => 'nz' },
-                { name => 'Nicaragua', code => 'ni' },
-                { name => 'Niger', code => 'ne' },
-                { name => 'Nigeria', code => 'ng' },
-                { name => 'Niue', code => 'nu' },
-                { name => 'Norfolk Island', code => 'nf' },
-                { name => 'Northern Mariana Islands', code => 'mp' },
-                { name => 'Norway', code => 'no' },
-                { name => 'Oman', code => 'om' },
-                { name => 'Pakistan', code => 'pk' },
-                { name => 'Palau', code => 'pw' },
-                { name => 'Palestinian Territory, Occupied', code => 'ps' },
-                { name => 'Panama', code => 'pa' },
-                { name => 'Papua New Guinea', code => 'pg' },
-                { name => 'Paraguay', code => 'py' },
-                { name => 'Peru', code => 'pe' },
-                { name => 'Philippines', code => 'ph' },
-                { name => 'Pitcairn', code => 'pn' },
-                { name => 'Poland', code => 'pl' },
-                { name => 'Portugal', code => 'pt' },
-                { name => 'Puerto Rico', code => 'pr' },
-                { name => 'Qatar', code => 'qa' },
-                { name => 'Reunion', code => 're' },
-                { name => 'Romania', code => 'ro' },
-                { name => 'Russian Federation', code => 'ru' },
-                { name => 'Rwanda', code => 'rw' },
-                { name => 'Saint Helena', code => 'sh' },
-                { name => 'Saint Kitts and Nevis', code => 'kn' },
-                { name => 'Saint Lucia', code => 'lc' },
-                { name => 'Saint Pierre and Miquelon', code => 'pm' },
-                { name => 'Saint Vincent and the Grenadines', code => 'vc' },
-                { name => 'Saint-Barthélemy', code => 'bl' },
-                { name => 'Saint-Martin (French part)', code => 'mf' },
-                { name => 'Samoa', code => 'ws' },
-                { name => 'San Marino', code => 'sm' },
-                { name => 'Sao Tome and Principe', code => 'st' },
-                { name => 'Saudi Arabia', code => 'sa' },
-                { name => 'Senegal', code => 'sn' },
-                { name => 'Serbia', code => 'rs' },
-                { name => 'Seychelles', code => 'sc' },
-                { name => 'Sierra Leone', code => 'sl' },
-                { name => 'Singapore', code => 'sg' },
-                { name => 'Slovakia', code => 'sk' },
-                { name => 'Slovenia', code => 'si' },
-                { name => 'Solomon Islands', code => 'sb' },
-                { name => 'Somalia', code => 'so' },
-                { name => 'South Africa', code => 'za' },
-                { name => 'South Georgia and the South Sandwich Islands', code => 'gs' },
-                { name => 'Spain', code => 'es' },
-                { name => 'Sri Lanka', code => 'lk' },
-                { name => 'Sudan', code => 'sd' },
-                { name => 'Suriname', code => 'sr' },
-                { name => 'Svalbard and Jan Mayen', code => 'sj' },
-                { name => 'Swaziland', code => 'sz' },
-                { name => 'Sweden', code => 'se' },
-                { name => 'Switzerland', code => 'ch' },
-                { name => 'Syrian Arab Republic', code => 'sy' },
-                { name => 'Taiwan, Province of China', code => 'tw' },
-                { name => 'Tajikistan', code => 'tj' },
-                { name => 'Tanzania, United Republic of', code => 'tz' },
-                { name => 'Thailand', code => 'th' },
-                { name => 'Timor-Leste', code => 'tl' },
-                { name => 'Togo', code => 'tg' },
-                { name => 'Tokelau', code => 'tk' },
-                { name => 'Tonga', code => 'to' },
-                { name => 'Trinidad and Tobago', code => 'tt' },
-                { name => 'Tunisia', code => 'tn' },
-                { name => 'Turkey', code => 'tr' },
-                { name => 'Turkmenistan', code => 'tm' },
-                { name => 'Turks and Caicos Islands', code => 'tc' },
-                { name => 'Tuvalu', code => 'tv' },
-                { name => 'Uganda', code => 'ug' },
-                { name => 'Ukraine', code => 'ua' },
-                { name => 'United Arab Emirates', code => 'ae' },
-                { name => 'United Kingdom', code => 'gb' },
-                { name => 'United States', code => 'us', restricted => 1 },
-                { name => 'United States Minor Outlying Islands', code => 'um', restricted => 1 },
-                { name => 'Uruguay', code => 'uy' },
-                { name => 'Uzbekistan', code => 'uz' },
-                { name => 'Vanuatu', code => 'vu' },
-                { name => 'Venezuela', code => 've' },
-                { name => 'Vietnam', code => 'vn' },
-                { name => 'Virgin Islands, British', code => 'vg' },
-                { name => 'Virgin Islands, U.S.', code => 'vi', restricted => 1 },
-                { name => 'Wallis and Futuna', code => 'wf' },
-                { name => 'Western Sahara', code => 'eh' },
-                { name => 'Yemen', code => 'ye' },
-                { name => 'Zambia', code => 'zm' },
-                { name => 'Zimbabwe', code => 'zw' }
-            );
+            return BinaryStatic::Consts::countries();
         });
 
     return 1;
+}
+
+package
+    BinaryStatic::Helpers::CSS;
+
+use Mojo::Base -base;
+
+sub files {
+    ('https://static.binary.com/2.5.1/css/binary.min.css')
+}
+
+package
+    BinaryStatic::Helpers::Menu;
+
+use Mojo::Base -base;
+use BinaryStatic::Utils qw/today_yyyymmdd/;
+
+has 'c';
+
+sub main_menu {
+    my $self = shift;
+
+    my $menu = [];
+    push @{$menu}, $self->_main_menu_trading();
+    push @{$menu}, $self->_main_menu_myaccount();
+    push @{$menu}, $self->_main_menu_cashier();
+    push @{$menu}, $self->_main_menu_resources();
+    push @{$menu}, $self->_main_menu_charting();
+    push @{$menu}, $self->_main_menu_ticktrades();
+
+    return $menu;
+}
+
+sub _main_menu_trading {
+    my $self         = shift;
+    my $trading_menu = {
+        id        => 'topMenuStartBetting',
+        url       => $self->c->url_for('trade.cgi'),
+        text      => $self->c->l("Start Trading"),
+        sub_items => [],
+    };
+
+    my %translated_display_name = (
+        forex => 'Forex',
+        indices => 'Indices',
+        stocks => 'Stocks',
+        commodities => 'Commodities',
+        sectors => 'Sectors',
+        random  => 'Randoms',
+        smarties => 'Smart Indices',
+    );
+    foreach my $market ('forex', 'indices', 'stocks', 'commodities', 'sectors', 'random') {
+        push @{$trading_menu->{sub_items}}, {
+            id         => 'topMenuMarket_' . $market,
+            url        => $self->c->url_for('trade.cgi')->query({market => $market}),
+            link_class => 'pjaxload',
+            text       => $translated_display_name{$market},
+        };
+    }
+
+    return $trading_menu;
+
+}
+
+sub _main_menu_myaccount {
+    my $self = shift;
+
+    my $my_account_ref = {
+        id         => 'topMenuMyAccount',
+        url        => $self->c->url_for('my_account.cgi'),
+        text       => $self->c->l('My Account'),
+        class      => 'by_client_type client_real client_virtual',
+        link_class => 'with_login_cookies pjaxload',
+        sub_items  => [],
+    };
+
+    # Portfolio
+    push @{$my_account_ref->{sub_items}},
+      {
+        id         => 'topMenuPortfolio',
+        url        => $self->c->url_for('portfolio.cgi'),
+        text       => $self->c->l('Portfolio'),
+        link_class => 'with_login_cookies pjaxload',
+      };
+
+    push @{$my_account_ref->{sub_items}},
+      {
+        id         => 'topMenuProfitTable',
+        url        => $self->c->url_for('profit_table.cgi'),
+        text       => $self->c->l('Profit Table'),
+        link_class => 'with_login_cookies pjaxload',
+      };
+
+    push @{$my_account_ref->{sub_items}},
+      {
+        id         => 'topMenuStatement',
+        url        => $self->c->url_for('statement.cgi'),
+        text       => $self->c->l('Statement'),
+        link_class => 'with_login_cookies pjaxload',
+      };
+
+    push @{$my_account_ref->{sub_items}},
+      {
+        id         => 'topMenuChangePassword',
+        url        => $self->c->url_for('change_password.cgi'),
+        text       => $self->c->l('Password'),
+        link_class => 'with_login_cookies pjaxload',
+      };
+
+    push @{$my_account_ref->{sub_items}},
+      {
+        id         => 'topMenuAccountSettings',
+        url        => $self->c->url_for('settings.cgi')->query({o => 'settings'}),
+        text       => $self->c->l('Settings'),
+        id         => 'top_Settings',
+        link_class => 'with_login_cookies pjaxload',
+      };
+
+    push @{$my_account_ref->{sub_items}},
+      {
+        id   => 'topMenuBecomeAffiliate',
+        url  => $self->c->url_for('affiliate_signup.cgi'),
+        text => $self->c->l('Affiliate'),
+      };
+
+    push @{$my_account_ref->{sub_items}},
+      {
+        id         => 'topMenuAuthenticateAccount',
+        url        => $self->c->url_for('authenticate.cgi')->query({o => 'id'}),
+        text       => $self->c->l('Authenticate'),
+        class      => 'by_client_type client_real',
+        link_class => 'with_login_cookies pjaxload',
+      };
+
+    return $my_account_ref;
+}
+
+sub _main_menu_cashier {
+    my $self = shift;
+
+    my $cashier_items_ref = {
+        id         => 'topMenuCashier',
+        url        => $self->c->url_for('available_payment_methods.cgi'),
+        text       => $self->c->l('Cashier'),
+        link_class => 'pjaxload',
+    };
+
+    return $cashier_items_ref;
+}
+
+sub _main_menu_resources {
+    my $self = shift;
+
+    my $resources_items_ref = {
+        id         => 'topMenuResources',
+        url        => $self->c->url_for('/resources'),
+        text       => $self->c->l('Resources'),
+        link_class => 'pjaxload',
+    };
+
+    my $asset_index_ref = {
+        id         => 'topMenuAssetIndex',
+        url        => $self->c->url_for('asset_index.cgi'),
+        text       => $self->c->l('Asset Index'),
+        link_class => 'pjaxload',
+    };
+
+    my $trading_times_ref = {
+        id         => 'topMenuTradingTimes',
+        url        => $self->c->url_for('trading_times.cgi')->query({date => today_yyyymmdd()}),
+        text       => $self->c->l('Trading Times'),
+        link_class => 'pjaxload',
+    };
+
+    my $bet_guide_ref = {
+        id         => 'topMenuContractGuide',
+        url        => $self->c->url_for('contract_guide.cgi'),
+        text       => $self->c->l('Trading Guide'),
+        link_class => 'pjaxload',
+    };
+
+    my $pricing_table_ref = {
+        id         => 'topMenuPricingTable',
+        url        => $self->c->url_for('pricing_table.cgi'),
+        text       => $self->c->l('Pricing Table'),
+        link_class => 'pjaxload',
+        id         => 'pricing_table_lnk',
+    };
+
+    my $forward_start_ref = {
+        id         => 'topMenuRiseFallTable',
+        url        => $self->c->url_for('rise_fall_table.cgi'),
+        text       => $self->c->l('Rise / Fall Table'),
+        link_class => 'pjaxload',
+        id         => 'risefall_table_lnk',
+    };
+
+    $resources_items_ref->{'sub_items'} = [$asset_index_ref, $trading_times_ref, $bet_guide_ref, $pricing_table_ref, $forward_start_ref];
+
+    return $resources_items_ref;
+}
+
+sub _main_menu_charting {
+    my $self = shift;
+
+    my $charting_items_ref = {
+        url        => $self->c->url_for('/charting'),
+        text       => $self->c->l('Charting'),
+        id         => 'topMenuCharting',
+        link_class => 'pjaxload',
+    };
+
+    my $bomchart_ref = {
+        url        => $self->c->url_for('chart_application.cgi'),
+        text       => $self->c->l('Java Charts'),
+        id         => 'topMenuInteractiveChartid',
+        link_class => 'pjaxload',
+    };
+
+    # chart director
+    my $charts_director_ref = {
+        id  => 'topMenuLightCharts',
+        url => $self->c->url_for('smartchart.cgi')->query(
+            {
+                market            => 'forex',
+                underlying_symbol => 'frxAUDJPY',
+                chart_type        => 'CANDLESTICK'
+            }
+        ),
+        link_class => 'pjaxload',
+        text       => $self->c->l('Light Charts'),
+    };
+
+    # live charts
+    my $live_charts_ref = {
+        id         => 'topMenuLiveCharts',
+        url        => $self->c->url_for('livechart.cgi'),
+        text       => $self->c->l('Live Charts'),
+        link_class => 'pjaxload',
+    };
+
+    $charting_items_ref->{'sub_items'} = [$bomchart_ref, $charts_director_ref, $live_charts_ref,];
+
+    return $charting_items_ref;
+}
+
+sub _main_menu_ticktrades {
+    my $self = shift;
+
+    if (1) {
+        return {
+            url        => $self->c->url_for('tick_trades.cgi'),
+            text       => $self->c->l('Tick Trades'),
+            id         => 'topMenuRunbets',
+            link_class => 'with_login_cookies pjaxload',
+        };
+    }
+
+    return;
 }
 
 1;

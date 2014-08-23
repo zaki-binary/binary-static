@@ -20,7 +20,7 @@ sub startup {
         template_options => {}
     });
     $self->renderer->default_handler( 'haml' );
-    # $self->defaults(layout => 'default');
+    $self->defaults(layout => 'default');
 
     # translation
     $self->plugin('I18N', { default => 'en' });
