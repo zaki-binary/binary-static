@@ -58,6 +58,13 @@ sub startup {
 
     $r->get('/tour')->to('page#haml');
     $r->get('/responsible-trading')->to('page#haml');
+    $r->get('/careers')->to('page#haml');
+    $r->get('/group-history')->to('page#haml');
+    $r->get('/smart-indices')->to('page#haml');
+    $r->get('/open-source-projects')->to('page#haml');
+    $r->get('/resources')->to('page#haml');
+    $r->get('/charting')->to('page#haml');
+    $r->get('/about-us')->to('page#haml');
 
     $r->any('/c/contact.cgi')->to('page#toolkit');
 

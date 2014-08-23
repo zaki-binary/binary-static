@@ -33,6 +33,14 @@ sub haml {
         'devguide' => ['static/partner_api', 'full_width'],
         'tour' => ['static/tour', 'full_width'],
         'responsible-trading' => ['static/responsible_trading', 'full_width'],
+        'careers' => ['static/careers', 'full_width'],
+        'group-history' => ['static/group_history', 'full_width'],
+        'smart-indices' => ['static/smart_indices', 'full_width'],
+        'open-source-projects' => ['static/open_source_projects', 'full_width'],
+
+        'resources' => ['resources/index', $c->layout],
+        'charting'  => ['charting/index', $c->layout],
+        'about-us'  => ['about/index', $c->layout],
 
         'not_found' => ['not_found', '', 404],
         'exception' => ['exception', 'exception', 500]
