@@ -98,11 +98,11 @@ sub register {
             my %setting = (
                 enable_relative_barrier => 'true',
                 image_link              => {
-                    hourglass     => $c->url_for('images/common/hourglass_1.gif')->to_string,
-                    up            => $c->url_for('images/javascript/up_arrow_1.gif')->to_string,
-                    down          => $c->url_for('images/javascript/down_arrow_1.gif')->to_string,
-                    calendar_icon => $c->url_for('images/common/calendar_icon_1.png')->to_string,
-                    livechaticon  => $c->url_for('images/javascript/live-chat-icon_1.png')->to_string,
+                    hourglass     => $c->url_for('/images/common/hourglass_1.gif')->to_string,
+                    up            => $c->url_for('/images/javascript/up_arrow_1.gif')->to_string,
+                    down          => $c->url_for('/images/javascript/down_arrow_1.gif')->to_string,
+                    calendar_icon => $c->url_for('/images/common/calendar_icon_1.png')->to_string,
+                    livechaticon  => $c->url_for('/images/javascript/live-chat-icon_1.png')->to_string,
                 },
                 broker               => 'CR',
                 restricted_countries => 'cr|hk|ir|my|mt|us|vi|um|jp|bs|je|gg',
@@ -194,7 +194,7 @@ sub _main_menu_trading {
     my $self         = shift;
     my $trading_menu = {
         id        => 'topMenuStartBetting',
-        url       => $self->c->url_for('trade.cgi'),
+        url       => $self->c->url_for('/trade.cgi'),
         text      => $self->c->l("Start Trading"),
         sub_items => [],
     };
@@ -211,7 +211,7 @@ sub _main_menu_trading {
     foreach my $market ('forex', 'indices', 'stocks', 'commodities', 'sectors', 'random') {
         push @{$trading_menu->{sub_items}}, {
             id         => 'topMenuMarket_' . $market,
-            url        => $self->c->url_for('trade.cgi')->query({market => $market}),
+            url        => $self->c->url_for('/trade.cgi')->query({market => $market}),
             link_class => 'pjaxload',
             text       => $translated_display_name{$market},
         };
@@ -226,7 +226,7 @@ sub _main_menu_myaccount {
 
     my $my_account_ref = {
         id         => 'topMenuMyAccount',
-        url        => $self->c->url_for('my_account.cgi'),
+        url        => $self->c->url_for('/my_account.cgi'),
         text       => $self->c->l('My Account'),
         class      => 'by_client_type client_real client_virtual',
         link_class => 'with_login_cookies pjaxload',
@@ -237,7 +237,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuPortfolio',
-        url        => $self->c->url_for('portfolio.cgi'),
+        url        => $self->c->url_for('/portfolio.cgi'),
         text       => $self->c->l('Portfolio'),
         link_class => 'with_login_cookies pjaxload',
       };
@@ -245,7 +245,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuProfitTable',
-        url        => $self->c->url_for('profit_table.cgi'),
+        url        => $self->c->url_for('/profit_table.cgi'),
         text       => $self->c->l('Profit Table'),
         link_class => 'with_login_cookies pjaxload',
       };
@@ -253,7 +253,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuStatement',
-        url        => $self->c->url_for('statement.cgi'),
+        url        => $self->c->url_for('/statement.cgi'),
         text       => $self->c->l('Statement'),
         link_class => 'with_login_cookies pjaxload',
       };
@@ -261,7 +261,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuChangePassword',
-        url        => $self->c->url_for('change_password.cgi'),
+        url        => $self->c->url_for('/change_password.cgi'),
         text       => $self->c->l('Password'),
         link_class => 'with_login_cookies pjaxload',
       };
@@ -269,7 +269,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuAccountSettings',
-        url        => $self->c->url_for('settings.cgi')->query({o => 'settings'}),
+        url        => $self->c->url_for('/settings.cgi')->query({o => 'settings'}),
         text       => $self->c->l('Settings'),
         id         => 'top_Settings',
         link_class => 'with_login_cookies pjaxload',
@@ -278,14 +278,14 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id   => 'topMenuBecomeAffiliate',
-        url  => $self->c->url_for('affiliate_signup.cgi'),
+        url  => $self->c->url_for('/affiliate_signup.cgi'),
         text => $self->c->l('Affiliate'),
       };
 
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuAuthenticateAccount',
-        url        => $self->c->url_for('authenticate.cgi')->query({o => 'id'}),
+        url        => $self->c->url_for('/authenticate.cgi')->query({o => 'id'}),
         text       => $self->c->l('Authenticate'),
         class      => 'by_client_type client_real',
         link_class => 'with_login_cookies pjaxload',
@@ -299,7 +299,7 @@ sub _main_menu_cashier {
 
     my $cashier_items_ref = {
         id         => 'topMenuCashier',
-        url        => $self->c->url_for('available_payment_methods.cgi'),
+        url        => $self->c->url_for('/available_payment_methods.cgi'),
         text       => $self->c->l('Cashier'),
         link_class => 'pjaxload',
     };
@@ -319,28 +319,28 @@ sub _main_menu_resources {
 
     my $asset_index_ref = {
         id         => 'topMenuAssetIndex',
-        url        => $self->c->url_for('asset_index.cgi'),
+        url        => $self->c->url_for('/asset_index.cgi'),
         text       => $self->c->l('Asset Index'),
         link_class => 'pjaxload',
     };
 
     my $trading_times_ref = {
         id         => 'topMenuTradingTimes',
-        url        => $self->c->url_for('trading_times.cgi')->query({date => today_yyyymmdd()}),
+        url        => $self->c->url_for('/trading_times.cgi')->query({date => today_yyyymmdd()}),
         text       => $self->c->l('Trading Times'),
         link_class => 'pjaxload',
     };
 
     my $bet_guide_ref = {
         id         => 'topMenuContractGuide',
-        url        => $self->c->url_for('contract_guide.cgi'),
+        url        => $self->c->url_for('/contract_guide.cgi'),
         text       => $self->c->l('Trading Guide'),
         link_class => 'pjaxload',
     };
 
     my $pricing_table_ref = {
         id         => 'topMenuPricingTable',
-        url        => $self->c->url_for('pricing_table.cgi'),
+        url        => $self->c->url_for('/pricing_table.cgi'),
         text       => $self->c->l('Pricing Table'),
         link_class => 'pjaxload',
         id         => 'pricing_table_lnk',
@@ -348,7 +348,7 @@ sub _main_menu_resources {
 
     my $forward_start_ref = {
         id         => 'topMenuRiseFallTable',
-        url        => $self->c->url_for('rise_fall_table.cgi'),
+        url        => $self->c->url_for('/rise_fall_table.cgi'),
         text       => $self->c->l('Rise / Fall Table'),
         link_class => 'pjaxload',
         id         => 'risefall_table_lnk',
@@ -370,7 +370,7 @@ sub _main_menu_charting {
     };
 
     my $bomchart_ref = {
-        url        => $self->c->url_for('chart_application.cgi'),
+        url        => $self->c->url_for('/chart_application.cgi'),
         text       => $self->c->l('Java Charts'),
         id         => 'topMenuInteractiveChartid',
         link_class => 'pjaxload',
@@ -379,7 +379,7 @@ sub _main_menu_charting {
     # chart director
     my $charts_director_ref = {
         id  => 'topMenuLightCharts',
-        url => $self->c->url_for('smartchart.cgi')->query(
+        url => $self->c->url_for('/smartchart.cgi')->query(
             {
                 market            => 'forex',
                 underlying_symbol => 'frxAUDJPY',
@@ -393,7 +393,7 @@ sub _main_menu_charting {
     # live charts
     my $live_charts_ref = {
         id         => 'topMenuLiveCharts',
-        url        => $self->c->url_for('livechart.cgi'),
+        url        => $self->c->url_for('/livechart.cgi'),
         text       => $self->c->l('Live Charts'),
         link_class => 'pjaxload',
     };
@@ -408,7 +408,7 @@ sub _main_menu_ticktrades {
 
     if (1) {
         return {
-            url        => $self->c->url_for('tick_trades.cgi'),
+            url        => $self->c->url_for('/tick_trades.cgi'),
             text       => $self->c->l('Tick Trades'),
             id         => 'topMenuRunbets',
             link_class => 'with_login_cookies pjaxload',
