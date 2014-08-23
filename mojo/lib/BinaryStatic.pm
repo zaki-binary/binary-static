@@ -5,15 +5,14 @@ use Mojo::Base 'Mojolicious';
 sub startup {
     my $self = shift;
 
-    print STDERR Dumper(\$self); use Data::Dumper;
-
     $self->plugin(charset => {charset => 'utf-8'});
     $self->plugin('DefaultHelpers');
     $self->plugin('TagHelpers');
 
-    # extra paths
+    # fix paths
     unshift @{$self->renderer->paths}, $self->home->rel_dir('../src/templates/toolkit');
     unshift @{$self->renderer->paths}, $self->home->rel_dir('../src/templates/haml');
+    unshift @{$self->static->paths}, $self->home->rel_dir('../src');
 
     $self->plugin('haml_renderer');
     $self->plugin('tt_renderer' => {
