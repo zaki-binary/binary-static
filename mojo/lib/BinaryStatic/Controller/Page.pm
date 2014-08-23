@@ -10,11 +10,26 @@ sub toolkit {
         '/c/contact.cgi' => 'misc/contact_us'
     );
 
+    ## get all render helpers and register them
+    # my $helpers = $c->app->renderer->helpers;
+    # foreach my $helper (keys %$helpers) {
+    foreach my $helper ('l', 'menu') {
+        $c->stash($helper => sub {
+            $c->app->$helper(@_);
+        });
+    }
+
     $c->render(
         template => 'misc/contact_us',
         handler => 'tt',
-        l => sub { $c->l(@_) },
-        layout => '', # not default
+        layout => 'default', # not default
+
+        ## fix subs for TT2 call
+        javascript => $c->app->js_configs,
+        css_files  => $c->app->css->files,
+        request => {
+            url_for => sub { $c->app->url_for(@_); } # use the helper
+        },
     );
 }
 
