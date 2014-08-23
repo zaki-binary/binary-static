@@ -46,12 +46,18 @@ sub startup {
     $r->get('/home')->to('page#haml');
     $r->get('/promo/:promo')->to('page#open_account_with_promocode');
     $r->get('/ticker')->to('page#haml');
-    # $r->get('/helloworld')->to('home#helloworld');
-    # $r->get('/timestamp')->to('home#timestamp');
-    # $r->get('/country')->to('home#country');
-    # $r->get('/why-us')->to('static#why_us')->name('why-us');
-    # $r->get('/partnerapi')->to('static#partner_api')->name('partnerapi');
-    # $r->get('/devguide')->to('static#devguide')->name('devguide');
+    $r->get('/timestamp')->to('page#timestamp');
+    $r->get('/country')->to('page#country');
+    $r->get('/why-us')->to('page#haml');
+    $r->get('/partnerapi')->to('page#haml');
+    $r->get('/devguide')->to('page#haml');
+
+    # Routing for this rather than adding the file to public/ as everything
+    # in public/ will be served by our CDN. We want this served by Mojo.
+    $r->get('/robots.txt')->to('page#robots_txt');
+
+    $r->get('/tour')->to('page#haml');
+    $r->get('/responsible-trading')->to('page#haml');
 
     $r->any('/c/contact.cgi')->to('page#toolkit');
 

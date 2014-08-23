@@ -28,6 +28,12 @@ sub haml {
         'home' => ['home/index', 'full_width'],
         'ticker' => ['home/ticker', ''],
 
+        'why-us' => ['static/why_us', 'full_width'],
+        'partnerapi' => ['static/devguide', 'full_width'],
+        'devguide' => ['static/partner_api', 'full_width'],
+        'tour' => ['static/tour', 'full_width'],
+        'responsible-trading' => ['static/responsible_trading', 'full_width'],
+
         'not_found' => ['not_found', '', 404],
         'exception' => ['exception', 'exception', 500]
     );
@@ -45,6 +51,30 @@ sub haml {
         defined $m->[1] ? (layout => $m->[1] ? $c->layout($m->[1]) : '') : (),
         $m->[2] ? (status => $m->[2]) : (),
         @extra_stash
+    );
+}
+
+sub timestamp {
+    my $self = shift;
+    return $self->render(json => {timestamp => time});
+}
+
+sub country {
+    my $self = shift;
+    return $self->render(
+        json => {
+            country => 'cn',
+            ip      => '60.180.68.53'
+        },
+        status => 200,
+    );
+}
+
+sub robots_txt {
+    my $self = shift;
+    return $self->render(
+        data   => "User-agent: *\nDisallow",
+        format => 'txt',
     );
 }
 
