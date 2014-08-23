@@ -1,7 +1,7 @@
-requires 'Template::Toolkit', '2.24';
+requires 'Template::Toolkit';
 requires 'Text::Haml';
 requires 'Locale::Maketext::Lexicon';
-requires 'Mojolicious', '5.32';
+requires 'Mojolicious';
 requires 'Mojolicious::Plugin::TtRenderer';
 requires 'Mojolicious::Plugin::HamlRenderer';
 requires 'Mojolicious::Plugin::I18N';
