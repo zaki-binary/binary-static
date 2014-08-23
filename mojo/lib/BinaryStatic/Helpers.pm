@@ -83,6 +83,8 @@ sub register {
     $app->renderer->add_helper(
         url_for => sub {
             my ($c, @args) = @_;
+            return unless @args;
+            $args[0] = '/' . $args[0] if $args[0] !~ /^\//; # Mojolicious url_for is a bit different
             return encode_entities($c->url_for(@args), '&');
         });
 

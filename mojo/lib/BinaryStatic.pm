@@ -37,6 +37,9 @@ sub startup {
             $c->session(__lang => lc $lang);
         }
         $c->stash(language => uc($c->session('__lang') || 'en'));
+
+        # other common variables
+        $c->stash(website_name => 'Binary.com');
     });
 
     # Router
