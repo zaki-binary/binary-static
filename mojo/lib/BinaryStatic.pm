@@ -66,6 +66,11 @@ sub startup {
     $r->get('/charting')->to('page#haml');
     $r->get('/about-us')->to('page#haml');
 
+    # Display to clients from AppCache when they are offline.
+    $r->get('/offline')->to('page#offline');
+
+    $r->get('/styles')->to('page#haml');
+
     $r->any('/c/contact.cgi')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');

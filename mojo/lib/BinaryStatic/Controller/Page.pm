@@ -22,10 +22,12 @@ sub haml {
     my $curr_path = $c->req->url->path->to_string;
     $curr_path =~ s/^\/|\/$//g;
 
-    # template, layout, code
+    $curr_path = '/' if $curr_path eq '';
+
+    # template, layout, code, renderSkin
     my %url_map = (
-        '' => ['home/index', 'full_width'],
-        'home' => ['home/index', 'full_width'],
+        '/' => ['home/index', 'full_width', '', 1],
+        'home' => ['home/index', 'full_width', '', 1],
         'ticker' => ['home/ticker', ''],
 
         'why-us' => ['static/why_us', 'full_width'],
@@ -42,6 +44,8 @@ sub haml {
         'charting'  => ['charting/index', $c->layout],
         'about-us'  => ['about/index', $c->layout],
 
+        'styles' => ['home/styles', 'full_width', '', 1],
+
         'not_found' => ['not_found', '', 404],
         'exception' => ['exception', 'exception', 500]
     );
@@ -53,13 +57,23 @@ sub haml {
         push @extra_stash, (rows => [ BinaryStatic::Consts::ticker() ]);
     }
 
-    $c->render(
-        template => $m->[0],
-        handler => 'haml',
-        defined $m->[1] ? (layout => $m->[1] ? $c->layout($m->[1]) : '') : (),
-        $m->[2] ? (status => $m->[2]) : (),
-        @extra_stash
-    );
+    if ($m->[3]) {
+        $c->renderSkin(
+            template => $m->[0],
+            handler => 'haml',
+            defined $m->[1] ? (layout => $m->[1] ? $c->layout($m->[1]) : '') : (),
+            $m->[2] ? (status => $m->[2]) : (),
+            @extra_stash
+        );
+    } else {
+        $c->render(
+            template => $m->[0],
+            handler => 'haml',
+            defined $m->[1] ? (layout => $m->[1] ? $c->layout($m->[1]) : '') : (),
+            $m->[2] ? (status => $m->[2]) : (),
+            @extra_stash
+        );
+    }
 }
 
 sub timestamp {
@@ -83,6 +97,14 @@ sub robots_txt {
     return $self->render(
         data   => "User-agent: *\nDisallow",
         format => 'txt',
+    );
+}
+
+sub offline {
+    my $self = shift;
+    return $self->render(
+        text   => '<div class="center">' . $self->l('Unable to contact the server') . '</div>',
+        status => 200,
     );
 }
 
