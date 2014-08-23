@@ -39,18 +39,24 @@ sub startup {
         $c->stash(language => uc($c->session('__lang') || 'en'));
     });
 
-    $self->renderer->add_helper(countries_options => sub {
-        return (
-            { code => 'af', name => 'Afghanistan' }
-        );
-    });
-
     # Router
     my $r = $self->routes;
 
-    $r->any('/')->to('page#haml');
+    $r->get('/')->to('page#haml');
+    $r->get('/home')->to('page#haml');
+    $r->get('/promo/:promo')->to('page#open_account_with_promocode');
+    $r->get('/ticker')->to('page#haml');
+    # $r->get('/helloworld')->to('home#helloworld');
+    # $r->get('/timestamp')->to('home#timestamp');
+    # $r->get('/country')->to('home#country');
+    # $r->get('/why-us')->to('static#why_us')->name('why-us');
+    # $r->get('/partnerapi')->to('static#partner_api')->name('partnerapi');
+    # $r->get('/devguide')->to('static#devguide')->name('devguide');
 
     $r->any('/c/contact.cgi')->to('page#toolkit');
+
+    $r->route('/exception')->to('page#exception');
+    $r->route('/*')->to('page#not_found');
 }
 
 1;
