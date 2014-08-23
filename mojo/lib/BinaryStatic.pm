@@ -71,6 +71,17 @@ sub startup {
 
     $r->get('/styles')->to('page#haml');
 
+    my $get_started = $r->get('/get-started');
+    $get_started->get('/')->to('page#haml');
+    $get_started->get('/what-is-binary-trading')->to('page#haml');
+    $get_started->get('/binary-options-basics')->to('page#haml');
+    $get_started->get('/benefits-of-trading-binaries')->to('page#haml');
+    $get_started->get('/how-to-trade-binaries')->to('page#haml');
+    $get_started->get('/types-of-trades')->to('page#haml');
+    $get_started->get('/beginners-faq')->to('page#haml');
+    $get_started->get('/glossary')->to('page#haml');
+    $get_started->get('/random-markets')->to('page#haml');
+
     $r->any('/c/contact.cgi')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');

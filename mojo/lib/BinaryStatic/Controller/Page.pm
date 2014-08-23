@@ -46,6 +46,16 @@ sub haml {
 
         'styles' => ['home/styles', 'full_width', '', 1],
 
+        'get-started' => ['get_started/index', 'get_started'],
+        'get-started/what-is-binary-trading' => ['get_started/what_is_binary_trading', 'get_started'],
+        'get-started/binary-options-basics' => ['get_started/binary_options_basics', 'get_started'],
+        'get-started/benefits-of-trading-binaries' => ['get_started/benefits_of_trading_binaries', 'get_started'],
+        'get-started/how-to-trade-binaries' => ['get_started/how_to_trade_binaries', 'get_started'],
+        'get-started/types-of-trades' => ['get_started/types_of_trades', 'get_started'],
+        'get-started/beginners-faq' => ['get_started/beginners_faq', 'get_started'],
+        'get-started/glossary' => ['get_started/glossary', 'get_started'],
+        'get-started/random-markets' => ['get_started/random_markets', 'full_width'],
+
         'not_found' => ['not_found', '', 404],
         'exception' => ['exception', 'exception', 500]
     );
