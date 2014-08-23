@@ -25,7 +25,7 @@ sub haml {
     $c->render(
         template => 'home/index',
         handler => 'haml',
-        layout   => $self->layout('full_width'),
+        layout   => $c->layout('full_width'),
     );
 }
 
