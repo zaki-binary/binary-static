@@ -8,17 +8,16 @@ sub startup {
     $self->plugin(charset => {charset => 'utf-8'});
     $self->plugin('DefaultHelpers');
     $self->plugin('TagHelpers');
+    $self->plugin('BinaryStatic::Helpers');
 
     # fix paths
     unshift @{$self->renderer->paths}, $self->home->rel_dir('../src/templates/toolkit');
     unshift @{$self->renderer->paths}, $self->home->rel_dir('../src/templates/haml');
     unshift @{$self->static->paths}, $self->home->rel_dir('../src');
 
-    $self->plugin('haml_renderer');
+    $self->plugin('haml_renderer', { cache => 0 });
     $self->plugin('tt_renderer' => {
-        template_options => {
-
-        }
+        template_options => {}
     });
     $self->renderer->default_handler( 'haml' );
     # $self->defaults(layout => 'default');
