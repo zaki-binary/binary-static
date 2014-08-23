@@ -2,6 +2,7 @@ package BinaryStatic::Consts;
 
 use strict;
 use warnings;
+use Encode;
 
 sub ticker {
     (
@@ -36,12 +37,12 @@ sub languages {
     {
         'DE' => 'Deutsch',
         'ID' => 'Bahasa Indonesia',
-        'ZH_CN' => '简体中文',
+        'ZH_CN' => decode_utf8('简体中文'),
         'PL' => 'Polish',
-        'RU' => 'Русский',
-        'PT' => 'Português',
-        'ES' => 'Español',
-        'FR' => 'Français',
+        'RU' => decode_utf8('Русский'),
+        'PT' => decode_utf8('Português'),
+        'ES' => decode_utf8('Español'),
+        'FR' => decode_utf8('Français'),
         'EN' => 'English',
     }
 }
