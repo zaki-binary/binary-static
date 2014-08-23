@@ -11,9 +11,13 @@ sub startup {
     $self->plugin('BinaryStatic::Helpers');
 
     # fix paths
-    unshift @{$self->renderer->paths}, $self->home->rel_dir('../src/templates/toolkit');
-    unshift @{$self->renderer->paths}, $self->home->rel_dir('../src/templates/haml');
-    unshift @{$self->static->paths}, $self->home->rel_dir('../src');
+    $self->renderer->paths([
+        $self->home->rel_dir('../src/templates/haml'),
+        $self->home->rel_dir('../src/templates/toolkit')
+    ]);
+    $self->static->paths([
+        $self->home->rel_dir('../src')
+    ]);
 
     $self->plugin('haml_renderer', { cache => 0 });
     $self->plugin('tt_renderer' => {
@@ -27,9 +31,12 @@ sub startup {
     $self->hook(before_dispatch => sub {
         my $c = shift;
 
+        ## language
         if (my $lang = $c->req->param('l')) {
-            $c->languages(lc $lang);
+            $c->languages(lc $lang); # I18N
+            $c->session(__lang => lc $lang);
         }
+        $c->stash(language => uc($c->session('__lang') || 'en'));
     });
 
     $self->renderer->add_helper(countries_options => sub {
