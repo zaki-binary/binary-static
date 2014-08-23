@@ -1,3 +1,5 @@
+requires 'HTML::Entities';
+requires 'JSON';
 requires 'Mojolicious';
 requires 'Mojolicious::Plugin::TtRenderer';
 requires 'Mojolicious::Plugin::HamlRenderer';
