@@ -12,7 +12,7 @@ my $app = sub {
 };
 
 builder {
-    enable 'Debug', panels => [ qw(Environment Parameters Response Timer Memory) ];
-    enable 'Debug::DBITrace', level => 2;
+    enable 'Debug', panels => [ qw(Environment Parameters Response Timer Memory) ]
+        if $ENV{DEBUG_BINARYSTATIC};
     $app->();
 };

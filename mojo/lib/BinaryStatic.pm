@@ -85,7 +85,7 @@ sub startup {
     $get_started->get('/glossary')->to('page#haml');
     $get_started->get('/random-markets')->to('page#haml');
 
-    $r->any('/c/contact.cgi')->to('page#toolkit');
+    $r->get('/c/contact.cgi')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');
     $r->route('/*')->to('page#not_found');

@@ -12,7 +12,9 @@ sub toolkit {
 
     $c->render(
         template => 'misc/contact_us',
-        handler => 'tt'
+        handler => 'tt',
+        l => sub { $c->l(@_) },
+        layout => '', # not default
     );
 }
 
