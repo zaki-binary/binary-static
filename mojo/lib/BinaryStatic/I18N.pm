@@ -1,4 +1,4 @@
-package BinaryStaticServer::I18N;
+package BinaryStatic::I18N;
 
 use base 'Locale::Maketext';
 use File::Basename qw/dirname/;
