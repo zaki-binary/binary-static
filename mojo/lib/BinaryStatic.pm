@@ -1,9 +1,13 @@
 package BinaryStatic;
 
 use Mojo::Base 'Mojolicious';
+use Mojo::Util qw/slurp/;
+use JSON;
 
 sub startup {
     my $self = shift;
+
+    $self->config(decode_json(slurp $self->home->rel_dir('../config.json')));
 
     $self->plugin(charset => {charset => 'utf-8'});
     $self->plugin('DefaultHelpers');

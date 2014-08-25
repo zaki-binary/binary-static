@@ -107,6 +107,9 @@ sub register {
     $app->renderer->add_helper(
         js_configs => sub {
             my ($c) = @_;
+
+            my $config = $c->config;
+
             my %setting = (
                 enable_relative_barrier => 'true',
                 image_link              => {
@@ -127,7 +130,7 @@ sub register {
             return {
                 libs           => [
                     'https://www.binary.com/cdn/compressed_binary.9fb5fc413e777c4ff16738799074a63f.js',
-                    'https://static.binary.com/2.5.1/js/binary.min.js'
+                    $config->{static}->{url} . $config->{static}->{version} . '/js/binary.min.js'
                 ],
                 settings       => to_json(\%setting),
                 head_js_inline => '',
@@ -143,7 +146,7 @@ sub register {
     $app->renderer->add_helper(
         css => sub {
             my ($c) = @_;
-            return BinaryStatic::Helpers::CSS->new;
+            return BinaryStatic::Helpers::CSS->new(c => $c);
         });
 
     $app->renderer->add_helper(
@@ -176,8 +179,12 @@ package
 
 use Mojo::Base -base;
 
+has 'c';
+
 sub files {
-    ('https://static.binary.com/2.5.1/css/binary.min.css')
+    my $self = shift;
+    my $config = $self->c->config;
+    ($config->{static}->{url} . $config->{static}->{version} . '/css/binary.min.css')
 }
 
 package
