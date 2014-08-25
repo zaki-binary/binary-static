@@ -279,7 +279,7 @@ var TickDisplay = function() {
                 $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
                 $('#contract-outcome-profit').addClass('loss').text($self.to_monetary_format(pnl));
             }
-            $('#contract-confirmation-details').hide();
+            $('#confirmation_table').hide();
             $('#contract-outcome-details').show();
         },
         to_monetary_format: function(number) {

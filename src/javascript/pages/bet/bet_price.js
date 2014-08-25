@@ -261,17 +261,17 @@ var BetPrice = function() {
                         final_price = (last_digit !== client_prediction) ? potential_payout : 0;
                     }
 
-                    $('#contract-confirmation-details').hide();
+                    $('#confirmation_table').hide();
                     $('#contract-outcome-payout').text($self.round(final_price,2));
 
                     if (final_price !== 0) {
                         $('#bet-confirm-header').text(text.localize('This contract won'));
-                        $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
+                        $('#contract-outcome-profit').html('<span class="profit">'+$self.round(potential_payout - cost,2)+'</span>');//addClass('profit').text($self.round(potential_payout - cost,2));
                         $('#digit-contract-details').css('background', 'rgba(46,136,54,0.198039)');
                     } else {
                         $('#bet-confirm-header').text(text.localize('This contract lost'));
                         $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
-                        $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
+                        $('#contract-outcome-profit').html('<span class="loss">'+$self.round(cost,2)+'</span>');//.addClass('loss').text($self.round(cost,2));
                         $('#digit-contract-details').css('background', 'rgba(204,0,0,0.098039)');
                     }
 
