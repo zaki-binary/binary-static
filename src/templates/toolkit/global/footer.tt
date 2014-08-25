@@ -22,18 +22,51 @@
                             %]
                             target="[% target %]"[% END %]>[% l('Virtual Account') %]</a>
                         </li>
-                        <li class="affiliate">
-                            <a class="pjaxload" href="[% request.url_for('affiliate_signup.cgi') %]"[% IF target %]
-                            target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
+                    </ul>
+                    <div class='grd-row-padding'>
+                        <h1>[% l('Partners') %]</h1>
+                        <ul>
+                            <li class="affiliate">
+                                <a class="pjaxload" href="[% request.url_for('affiliate_signup.cgi') %]"[% IF target %]
+                                target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
+                            </li>
+                            <li>
+                                <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
+                            </li>
+                            <li>
+                                <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
+                                target
+                                %]"[% END %]>[% l('Partner API') %]</a>
+                            </li>
+                            <li>
+                                <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="grd-grid-4">
+                    <h1>[% l('Education') %]</h1>
+                    <ul>
+                        <li>
+                            <a class="pjaxload" href="[% request.url_for('why-us') %]"[% IF target %] target="[% target
+                            %]"[% END %]>[% l('Why Us?') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('responsible-trading') %]"[% IF target %]
-                            target="[% target %]"[% END %]>[% l('Responsible Trading') %]</a>
+                            <a class="pjaxload" href="[% request.url_for('get-started') %]"[% IF target %] target="[%
+                            target
+                            %]"[% END %]>[% l('Getting Started') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('c_template.cgi', {filecode => 'legal'}) %]"[%
-                            IF
-                            target %] target="[% target %]"[% END %]>[% l('Terms and Conditions') %]</a>
+                            <a class="pjaxload" href="[% request.url_for('tour') %]"[% IF target %] target="[% target
+                            %]"[%
+                            END %]>[% l('Platform Tour') %]</a>
+                        </li>
+                        <li>
+                            <a href="http://www.gamcare.org.uk/" target="_blank">[% l('GamCare') %]</a>
+                        </li>
+                        <li>
+                            <a href="http://blog.binary.com/webinar.html" target="_blank">[% l('Webinars') %]</a>
                         </li>
                     </ul>
                 </div>
@@ -61,48 +94,37 @@
                         </li>
                     </ul>
                 </div>
-                <div class="grd-grid-4">
-                    <h1>[% l('Banking & Security') %]</h1>
+            </div>
+            <div class="grd-grid-6 grd-grid-mobile-12 grd-parent">
+                 <div class="grd-grid-4">
+                    <h1>[% l('Banking') %]</h1>
                     <ul>
                         <li>
                             <a class="pjaxload" href="[% request.url_for('available_payment_methods.cgi') %]"[% IF
                             target %]
                             target="[% target %]"[% END %]>[% l('Payment Methods') %]</a>
                         </li>
-                        <li>
-                            <a class="pjaxload"
-                               href="[% request.url_for('c_template.cgi', {filecode => 'legal'}) %]#privacy-tab"[% IF
-                            target
-                            %] target="[% target %]"[% END %]>[% l('Security and Privacy') %]</a>
-                        </li>
                     </ul>
-                </div>
-            </div>
-            <div class="grd-grid-6 grd-grid-mobile-12 grd-parent">
-                <div class="grd-grid-4">
-                    <h1>[% l('Education') %]</h1>
-                    <ul>
-                        <li>
-                            <a class="pjaxload" href="[% request.url_for('why-us') %]"[% IF target %] target="[% target
-                            %]"[% END %]>[% l('Why Us?') %]</a>
-                        </li>
-                        <li>
-                            <a class="pjaxload" href="[% request.url_for('get-started') %]"[% IF target %] target="[%
-                            target
-                            %]"[% END %]>[% l('Getting Started') %]</a>
-                        </li>
-                        <li>
-                            <a class="pjaxload" href="[% request.url_for('tour') %]"[% IF target %] target="[% target
-                            %]"[%
-                            END %]>[% l('Platform Tour') %]</a>
-                        </li>
-                        <li>
-                            <a href="http://www.gamcare.org.uk/" target="_blank">[% l('GamCare') %]</a>
-                        </li>
-                        <li>
-                            <a href="http://blog.binary.com/webinar.html" target="_blank">[% l('Webinars') %]</a>
-                        </li>
-                    </ul>
+                    <div class='grd-row-padding'>
+                        <h1>[% l('Terms') %]</h1>
+                        <ul>
+                            <li>
+                                <a class="pjaxload" href="[% request.url_for('c_template.cgi', {filecode => 'legal'}) %]"[%
+                                IF
+                                target %] target="[% target %]"[% END %]>[% l('Terms and Conditions') %]</a>
+                            </li>
+                            <li>
+                                <a class="pjaxload"
+                                   href="[% request.url_for('c_template.cgi', {filecode => 'legal'}) %]#privacy-tab"[% IF
+                                target
+                                %] target="[% target %]"[% END %]>[% l('Security and Privacy') %]</a>
+                            </li>
+                            <li>
+                                <a class="pjaxload" href="[% request.url_for('responsible-trading') %]"[% IF target %]
+                                target="[% target %]"[% END %]>[% l('Responsible Trading') %]</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="grd-grid-4">
                     <h1>[% l('Market Data') %]</h1>
@@ -134,12 +156,10 @@
                             %]"[% END %]>[% l('Group History') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('careers') %]">[% l('Careers') %]</a>
+                            <a href="[% request.url_for('us_patents.cgi') %]" class="us_patent_link pjaxload">[% l('Patents') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
-                            target
-                            %]"[% END %]>[% l('Partner API') %]</a>
+                            <a class="pjaxload" href="[% request.url_for('careers') %]">[% l('Careers') %]</a>
                         </li>
                         <li class="blog">
                             <a href="http://blog.binary.com" target="_blank">[% l('Blog') %]</a>
@@ -151,15 +171,6 @@
                             <a class="pjaxload" href="[% request.url_for('contact.cgi') %]"[% IF target %] target="[%
                             target
                             %]"[% END %]>[% l('Contact Us') %]</a>
-                        </li>
-                        <li>
-                            <a href="[% request.url_for('us_patents.cgi') %]" class="us_patent_link pjaxload">[% l('US Patents') %]</a>
-                        </li>
-                        <li>
-                            <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
-                        </li>
-                        <li>
-                            <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
                         </li>
                     </ul>
                 </div>
