@@ -4,6 +4,8 @@ var TickDisplay = function() {
             var $self = this;
             $self.contract_barrier = null;
             $self.applicable_ticks = [];
+            $self.number_of_ticks = null;
+            $self.ev.close();
             $self.chart.destroy();
         },
         initialize: function(data) {
