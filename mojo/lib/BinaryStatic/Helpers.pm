@@ -14,6 +14,16 @@ sub register {
     my ($self, $app) = @_;
 
     $app->helper(
+        cookie_options => sub {
+            my $c = shift;
+            return {
+                domain => $c->req->url->host,
+                secure => 1,
+                path   => '/',
+            };
+        });
+
+    $app->helper(
         google_tag_tracking_code => sub {
             my $c = shift;
             return '';

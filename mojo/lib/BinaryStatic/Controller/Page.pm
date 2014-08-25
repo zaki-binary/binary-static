@@ -73,6 +73,8 @@ sub haml {
         'get-started/glossary' => ['get_started/glossary', 'get_started'],
         'get-started/random-markets' => ['get_started/random_markets', 'full_width'],
 
+        'login' => ['home/login', $c->layout, '', 1],
+
         'not_found' => ['not_found', '', 404],
         'exception' => ['exception', 'exception', 500]
     );
@@ -82,6 +84,8 @@ sub haml {
     my @extra_stash;
     if ($curr_path eq 'ticker') {
         push @extra_stash, (rows => [ BinaryStatic::Consts::ticker() ]);
+    } elsif ($curr_path eq 'login') {
+        push @extra_stash, (loginid => $c->param('loginid')) if $c->param('loginid');
     }
 
     if ($m->[3]) {
@@ -146,6 +150,72 @@ sub open_account_with_promocode {
             promotionalcode => $promo_code,
             t               => $affilate_token
         });
+}
+
+sub login {
+    my $self = shift;
+    my ($loginid, $password);
+    my $redirect        = 'login';
+    my $redirect_params = {};
+
+    if (not($self->param('loginid') =~ /^\s*[A-Z]{2,6}\d{3,}\s*$/i)) {
+        $self->flash(error => {loginid => $self->l('Login ID not given.')});
+    } elsif (not $self->param('password')) {
+        $self->flash(error => {password => $self->l('Password not given.')});
+    } else {
+        ($loginid, $password) = (uc $self->param('loginid'), $self->param('password'));
+
+        $loginid =~ s/^\s+|\s+$//g;
+        $self->stash(loginid => $loginid);
+
+        my $response = ($loginid eq 'DEMO123' and $password eq 'demo') ?
+            { success => 1, session_cookie => Mojo::Cookie->new(value => 'abcdefghijklmn')} : {};
+        if ($response->{success}) {
+            $self->stash(just_logged_in => 1);
+            $redirect = 'my_account.cgi';
+            $redirect_params->{login} = 'true';
+            my $options = $self->cookie_options;
+            $options->{expires} = time + 86400 * 30;
+            my $cookie = $response->{session_cookie};
+            my $cookie_value = $cookie->value // '';
+            $self->cookie(
+                'cookie_name' => $cookie_value, # FIX the cookie_name
+                $options
+            );
+            $self->cookie(
+                'loginid' => $loginid,
+                $options
+            );
+        } else {
+            my $msg = $response->{error}->{description} || 'Invalid login ID and password combination.';
+            $self->flash(error => {password => $self->l($msg)});
+        }
+    }
+    $redirect_params->{loginid} = $loginid if $loginid;
+
+    $self->res->headers->location($self->url_for($redirect, $redirect_params)->to_abs);
+    return $self->rendered(302);
+}
+
+sub logout {
+    my $self = shift;
+
+    my $options = $self->cookie_options;
+    $options->{expires} = 1;
+    $self->cookie(
+        'cookie_name' => '', # fix cookie_name
+        $options
+    );
+    $self->cookie(
+        'loginid' => '',
+        $options
+    );
+    $self->cookie(
+        'settings_cookie' => '',
+        $options
+    );
+
+    return $self->redirect_to('/');
 }
 
 sub not_found {

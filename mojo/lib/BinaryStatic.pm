@@ -85,6 +85,11 @@ sub startup {
     $get_started->get('/glossary')->to('page#haml');
     $get_started->get('/random-markets')->to('page#haml');
 
+    ## login
+    $r->get('/login')->to('page#haml')->name('login');
+    $r->post('/login')->to('page#login');
+    $r->get('/logout')->to('page#logout');
+
     $r->get('/c/contact.cgi')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');
