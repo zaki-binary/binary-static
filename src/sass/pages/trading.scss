@@ -524,25 +524,6 @@ a.close {
             padding-top: 6px;
         }
 
-        .standout {
-            font-size: 100%;
-            font-weight: bold;
-            .price {
-                color: $BIN_ORANGE;
-            }
-        }
-        .standin {
-            font-size: 90%;
-            font-weight: normal;
-        }
-        .standin.with_right_border, .standout.with_right_border {
-            border-right: solid 1px $BIN_BLACK;
-        }
-
-        .standin.with_left_border, .standout.with_left_border {
-            border-left: solid 1px $BIN_BLACK;
-        }
-
         .success {
             background: $BIN_ORANGE;
             color:      $BIN_WHITE;
@@ -554,6 +535,28 @@ a.close {
     }
 }
 
+.standout {
+    font-weight: bold;
+    .price {
+        color: $BIN_ORANGE;
+    }
+}
+.standin {
+    font-size: 100%;
+    font-weight: normal;
+}
+.profit {
+    color: $BIN_GREEN;
+}
+.loss {
+    color: $BIN_RED;
+}
+.with_right_border {
+    border-right: solid 1px $BIN_BLACK;
+}
+.with_left_border {
+    border-left: solid 1px $BIN_BLACK;
+}
 #buy_confirm_container {
     position: absolute;
     overflow: display;
