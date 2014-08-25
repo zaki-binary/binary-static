@@ -5,7 +5,7 @@ module.exports = {
             updateConfigs: [],
             commit: true,
             commitMessage: 'Release v%VERSION%',
-            commitFiles: ['package.json'],
+            commitFiles: ['package.json', 'config.json'],
             createTag: false,
             push: false
         }
