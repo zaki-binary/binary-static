@@ -95,6 +95,7 @@ sub startup {
     $r->get('/logout')->to('page#logout');
 
     $r->get('/c/contact.cgi')->to('page#toolkit');
+    $r->get('/c/open_account.cgi')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');
     $r->route('/*')->to('page#not_found');

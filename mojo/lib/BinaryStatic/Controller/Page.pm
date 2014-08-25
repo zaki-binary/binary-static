@@ -6,9 +6,25 @@ use BinaryStatic::Consts;
 sub toolkit {
     my $c = shift;
 
+    my $curr_path = $c->req->url->path->to_string;
+    $curr_path =~ s/^\/|\/$//g;
+
+    $curr_path = '/' if $curr_path eq '';
+
+    # template, layout, code
     my %url_map = (
-        '/c/contact.cgi' => 'misc/contact_us'
+        'c/contact.cgi' => ['misc/contact_us', 'default'],
+        'c/open_account.cgi' => ['account/open_account', 'default']
     );
+    my $m = $url_map{$curr_path};
+
+    unless ($m) {
+        return $c->render(
+            template => 'not_found',
+            handler => 'haml',
+            status => 404
+        );
+    }
 
     ## get all render helpers and register them
     # my $helpers = $c->app->renderer->helpers;
@@ -20,9 +36,12 @@ sub toolkit {
     }
 
     $c->render(
-        template => 'misc/contact_us',
+        template => $m->[0],
+        handler => 'haml',
+        defined $m->[1] ? (layout => $m->[1] ? $c->layout($m->[1]) : '') : (),
+        $m->[2] ? (status => $m->[2]) : (),
+
         handler => 'tt',
-        layout => 'default', # not default
 
         ## fix subs for TT2 call
         javascript => $c->app->js_configs,
