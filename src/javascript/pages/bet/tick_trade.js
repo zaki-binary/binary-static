@@ -82,7 +82,7 @@ var TickDisplay = function() {
                     type: 'line',
                     renderTo: 'tick_chart',
                     width: config.minimize ? 394 : null,
-                    height: config.minimize ? 125 : null,
+                    height: config.minimize ? 143 : null,
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
@@ -167,6 +167,7 @@ var TickDisplay = function() {
                                 }
 
                                 $self.add_barrier();
+                                $self.apply_chart_background_color(tick);
                             }
                         }
 
@@ -174,6 +175,24 @@ var TickDisplay = function() {
                 }
             };
             $self.ev.onerror = function(e) {$self.ev.close(); };
+        },
+        apply_chart_background_color: function(tick) {
+            var $self = this;
+
+            var chart_container = $('#tick_chart');
+            if ($self.contract_sentiment === 'up') {
+                if (tick.quote > $self.contract_barrier) {
+                    chart_container.css('background-color', 'rgba(46,136,54,0.198039)');
+                } else {
+                    chart_container.css('background-color', 'rgba(204,0,0,0.098039)');
+                }
+            } else if ($self.contract_sentiment === 'down') {
+                if (tick.quote < $self.contract_barrier) {
+                    chart_container.css('background-color', 'rgba(46,136,54,0.198039)');
+                } else {
+                    chart_container.css('background-color', 'rgba(204,0,0,0.098039)');
+                }
+            }
         },
         add_barrier: function() {
             var $self = this;
@@ -273,11 +292,11 @@ var TickDisplay = function() {
             $('#contract-outcome-payout').text($self.to_monetary_format(final_price));
 
             if (pnl > 0) {
-                $('#contract-outcome-label').text(text.localize('Profit'));
-                $('#contract-outcome-profit').addClass('profit').text($self.to_monetary_format(pnl));
+                $('#contract-outcome-label').removeClass('standin loss').addClass('standout profit').text(text.localize('Profit'));
+                $('#contract-outcome-profit').removeClass('standin loss').addClass('standout profit').text($self.to_monetary_format(pnl));
             } else {
-                $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
-                $('#contract-outcome-profit').addClass('loss').text($self.to_monetary_format(pnl));
+                $('#contract-outcome-label').removeClass('standout profit').addClass('standin loss').text(text.localize('Loss'));
+                $('#contract-outcome-profit').removeClass('standout profit').addClass('standin loss').text($self.to_monetary_format(pnl));
             }
             $('#confirmation_table').hide();
             $('#contract-outcome-details').show();

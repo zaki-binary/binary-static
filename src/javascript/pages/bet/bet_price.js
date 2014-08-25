@@ -270,7 +270,7 @@ var BetPrice = function() {
                         $('#digit-contract-details').css('background', 'rgba(46,136,54,0.198039)');
                     } else {
                         $('#bet-confirm-header').text(text.localize('This contract lost'));
-                        $('#contract-outcome-label').removeClass('standout profit').addClass('loss').text(text.localize('Loss'));
+                        $('#contract-outcome-label').removeClass('standout profit').addClass('standin loss').text(text.localize('Loss'));
                         $('#contract-outcome-profit').removeClass('standout profit').addClass('standin loss').text($self.round(cost,2));
                         $('#digit-contract-details').css('background', 'rgba(204,0,0,0.098039)');
                     }
