@@ -54,7 +54,7 @@ var TickDisplay = function() {
             } else if ($self.contract_type.match('FLASH')) {
                 $self.ticks_needed = $self.number_of_ticks + 1;
                 $self.x_indicators = {
-                    '_1': { label: 'Tick 1', id: 'start_tick'},
+                    '_0': { label: 'Entry Spot', id: 'entry_tick'},
                 };
                 $self.x_indicators['_' + $self.number_of_ticks] = {
                     label: 'Exit Spot',
