@@ -55,6 +55,8 @@ module.exports = function (grunt) {
 	copy: {
 	    main: {
 		files: [
+		    {expand: true, src: ['config.json'], dest: 'dist/<%= pkg.version %>/',},
+		    {expand: true, src: ['config.json'], dest: 'dist/0.0.0/',},
 		    {expand: true, src: ['javascript.json'], dest: 'dist/<%= pkg.version %>/',},
 		    {expand: true, src: ['javascript.json'], dest: 'dist/0.0.0/',},
                     {expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/<%= pkg.version %>/config/locales/'},
@@ -142,11 +144,11 @@ module.exports = function (grunt) {
 	},	
         bump: {
            options: {
-                files: ['package.json'],
+                files: ['package.json', 'config.json'],
                 updateConfigs: [],
                 commit: true,
                 commitMessage: 'Release v%VERSION%',
-                commitFiles: ['package.json'],
+                commitFiles: ['package.json', 'config.json'],
                 createTag: false,
                 push: false,
            },
