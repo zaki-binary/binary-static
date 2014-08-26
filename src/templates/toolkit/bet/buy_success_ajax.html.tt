@@ -2,7 +2,7 @@
     <h4 id="bet-confirm-header">[% l('Trade Confirmation') %]</h4>
     <p id="bet-confirm-exp">[% l('You have purchased the following contract:') %]</p>
     <div id='tick_info' style="display:none">
-            [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+            [% WRAPPER 'container/full_table.html.tt' table_id="confirmation_table" %]
             <tr>
                 <th>[% l('Entry spot') %]</th><td id='entry'></td>
                 <th>[% l('Exit spot') %]</th><td id='exit'></td>
@@ -15,7 +15,7 @@
     </div>
 
     <div id='contract-confirmation-details'>
-        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+        [% WRAPPER 'container/full_table.html.tt' table_id="confirmation_table" %]
             <tr>
                 <th class="standin with_right_border">[% l('Potential Payout') %]</th>
                 <th class="standout with_right_border">[% l('Total Cost') %]</th>
@@ -38,7 +38,7 @@
         [% END %]
     </div>
     <div id='contract-outcome-details' style="display:none">
-        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+        [% WRAPPER 'container/full_table.html.tt' table_id="confirmation_table" %]
             <tr>
                 <th class="standin with_right_border">[% l('Buy Price') %]</th>
                 <th class="standin with_right_border">[% l('Final Price') %]</th>
