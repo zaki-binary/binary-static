@@ -9,21 +9,23 @@
         <div class="grd-container grd-default-container">
             <div class="grd-grid-6 grd-grid-mobile-12 grd-parent">
                 <div class="grd-grid-4">
-                    <h1>[% l('Accounts') %]</h1>
-                    <ul>
-                        <li>
-                            <a class="by_client_type client_logged_out client_virtual pjaxload"
-                               href="[% request.url_for('linkto_acopening.cgi', {actype => 'real'}) %]"[% IF target %]
-                            target="[% target %]"[% END %]>[% l('Trading Account') %]</a>
-                        </li>
-                        <li>
-                            <a class="by_client_type client_logged_out pjaxload"
-                               href="[% request.url_for('linkto_acopening.cgi', { actype => 'virtual'}) %]"[% IF target
-                            %]
-                            target="[% target %]"[% END %]>[% l('Virtual Account') %]</a>
-                        </li>
-                    </ul>
-                    <div class='grd-row-padding'>
+                    <div id="accounts_links" class="by_client_type client_logged_out client_virtual">
+                        <h1>[% l('Accounts') %]</h1>
+                        <ul>
+                            <li>
+                                <a class="by_client_type client_logged_out client_virtual pjaxload"
+                                   href="[% request.url_for('linkto_acopening.cgi', {actype => 'real'}) %]"[% IF target %]
+                                target="[% target %]"[% END %]>[% l('Trading Account') %]</a>
+                            </li>
+                            <li>
+                                <a class="by_client_type client_logged_out pjaxload"
+                                   href="[% request.url_for('linkto_acopening.cgi', { actype => 'virtual'}) %]"[% IF target
+                                %]
+                                target="[% target %]"[% END %]>[% l('Virtual Account') %]</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
                         <h1>[% l('Partners') %]</h1>
                         <ul>
                             <li class="affiliate">
