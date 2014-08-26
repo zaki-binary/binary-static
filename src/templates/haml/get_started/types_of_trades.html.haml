@@ -8,7 +8,8 @@
       %li= l('Higher/lower trades')
       %li= l('Touch/no touch trades')
       %li= l('In/out trades')
-      %li= l('Tick trades')
+      %li= l('Asians')
+      %li= l('Digits')
 
   .subsection
     .grd-grid-12
@@ -61,15 +62,5 @@
         %a.pjaxload{:href => url_for('trade.cgi?market=random&form_name=digits')}= l('Asians')
       %p= l('Choose Asian Rise/Fall when you want to profit from the market ending higher or lower than the average price.')
       %ol
-        %li= l('“Asian Rise” – You when the last tick is higher than the average of the ticks during the trade.')
+        %li= l('“Asian Rise” – You win the last tick is higher than the average of the ticks during the trade.')
         %li= l(' “Asian Fall” – You win when the last tick is lower than the average of the ticks during the trade.')
-  .subsection.last
-    .grd-grid-12
-      %h2
-        %a.pjaxload{:href => url_for('tick_trades.cgi')}= l('Tick Trades')
-      %p= l('Choose Tick Trades when you want to profit from very short-term market movements over the next 5 ticks.')
-      %p.highlight= l('There are 3 types of tick trades:')
-      %ol
-        %li= l('"Tick Trades Up/Down" - you win when you correctly predict if the market will rise or fall over the next 5 ticks.')
-        %li= l('"Lucky 10 Digits" - you win when you correctly predict the last decimal digit of the 5th tick.')
-        %li= l('"Quick 10%" - you win when you correctly predict what the last decimal digit of the 5th tick will not be.')
