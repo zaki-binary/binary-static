@@ -14,7 +14,8 @@ sub toolkit {
     # template, layout, code
     my %url_map = (
         'c/contact.cgi' => ['misc/contact_us', 'default'],
-        'c/open_account.cgi' => ['account/open_account', 'default']
+        'c/open_account.cgi' => ['account/open_account', 'default'],
+        'c/affiliate_signup.cgi' => ['affiliates/main', 'default'],
     );
     my $m = $url_map{$curr_path};
 
