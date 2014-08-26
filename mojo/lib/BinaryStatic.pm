@@ -3,6 +3,7 @@ package BinaryStatic;
 use Mojo::Base 'Mojolicious';
 use Mojo::Util qw/slurp/;
 use JSON;
+use Template;
 
 sub startup {
     my $self = shift;
@@ -25,7 +26,13 @@ sub startup {
 
     $self->plugin('haml_renderer', { cache => 0 });
     $self->plugin('tt_renderer' => {
-        template_options => {}
+        template_options => {
+            ENCODING     => 'utf8',
+            INTERPOLATE  => 1,
+            PRE_CHOMP    => $Template::CHOMP_GREEDY,
+            POST_CHOMP   => $Template::CHOMP_GREEDY,
+            TRIM         => 1,
+        }
     });
     $self->renderer->default_handler( 'haml' );
     $self->defaults(layout => 'default');
