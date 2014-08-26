@@ -105,6 +105,10 @@ sub startup {
     $r->get('/c/open_account.cgi')->to('page#toolkit');
     $r->get('/c/affiliate_signup.cgi')->to('page#toolkit');
     $r->get('/c/pricing_table.cgi')->to('page#toolkit');
+    # $r->get('/c/asset_index.cgi')->to('page#toolkit');
+    $r->get('/c/chart_application.cgi')->to('page#toolkit');
+    $r->get('/c/livechart.cgi')->to('page#toolkit');
+    $r->get('/c/rise_fall_table.cgi')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');
     $r->route('/*')->to('page#not_found');
