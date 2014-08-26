@@ -453,7 +453,6 @@ a.close {
 
     p, div {
         font-size: 16px;
-        margin: 10px 0;
     }
 
     .bet_confirm_error_message {
@@ -462,7 +461,7 @@ a.close {
 
     .price {
         font-weight: bold;
-        font-size: 110%;
+        font-size: 100%;
     }
 
     .bet_confirm_desc {
@@ -506,8 +505,6 @@ a.close {
         font-size: 16px;
         border: none;
         margin: 0;
-        padding-top: 0;
-        padding-bottom: 0;
 
         th, tr, td {
             border: none;
@@ -520,35 +517,11 @@ a.close {
             padding-bottom: 5px;
         }
 
-        td.notes {
+        span.notes {
             font-size: 12px;
             margin: 0;
             padding: 0;
             padding-top: 6px;
-        }
-
-        .standout {
-            font-size: 130%;
-            font-weight: bold;
-            .price {
-                color: $BIN_ORANGE;
-            }
-        }
-        .standout.loss {
-                color: $BIN_RED;
-                font-size: 100%;
-                font-weight: normal;
-        }
-        .standout.profit {
-                color: $BIN_GREEN;
-        }
-
-        .standin.with_right_border, .standout.with_right_border {
-            border-right: solid 1px $BIN_BLACK;
-        }
-
-        .standout.with_left_border {
-            border-left: solid 1px $BIN_BLACK;
         }
 
         .success {
@@ -562,6 +535,28 @@ a.close {
     }
 }
 
+.standout {
+    font-weight: bold;
+    .price {
+        color: $BIN_ORANGE;
+    }
+}
+.standin {
+    font-size: 100%;
+    font-weight: normal;
+}
+.profit {
+    color: $BIN_GREEN;
+}
+.loss {
+    color: $BIN_RED;
+}
+.with_right_border {
+    border-right: solid 1px $BIN_BLACK;
+}
+.with_left_border {
+    border-left: solid 1px $BIN_BLACK;
+}
 #buy_confirm_container {
     position: absolute;
     overflow: display;
