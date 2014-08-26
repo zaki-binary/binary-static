@@ -1,0 +1,35 @@
+[% IF analyse_link %]
+    [% analyse_link %]
+[% END %]
+
+[% IF display_digits %]
+    <div id='digit-contract-details' style="display:none">
+        [% WRAPPER 'container/full_table.tt' table_id="confirmation_table" %]
+        <tr>
+            <th class='standin'>[% l('Prediction') %]   </th>
+            <th class='standin'></th>
+            <th class='standin'>[% l('Current') %]</th>
+        </tr>
+        <tr>
+            <td><div id='digit-prediction' class='flipper'>[% client_prediction %]</div></td>
+            <td><div class='sign'>[% IF contract_sentiment == 'match' %]=[% ELSIF contract_sentiment == 'differ' %]≠[% END %]</div></td>
+            <td><div id='digit-current'></div></td>
+        </tr>
+        [% END %]
+        Tick count: <span id='digit-count'></span>
+        <span id='is-digit' data-is-digit=1></span>
+        <span id='client-prediction' data-client-prediction="[% client_prediction %]"></span>
+    </div>
+[% END %]
+
+[% IF display_chart %]
+    <div id='tick_chart'></div>
+[% END %]
+
+[% IF display_contract_outcome %]
+    <span id='contract-sentiment' data-contract-sentiment="[% contract_sentiment %]"></span>
+    <span id='contract-type' data-contract-type="[% contract_type %]"></span>
+    <span id='tick-count' data-count="[% how_many_ticks %]"></span>
+    <span id='outcome-buyprice' data-buyprice="[% price %]"></span>
+    <span id='outcome-payout' data-payout="[% payout %]"></span>
+[% END %]
