@@ -2186,14 +2186,13 @@ a.close:hover {
 }
 .bet_confirm_wrapper p, .bet_confirm_wrapper div {
   font-size: 16px;
-  margin: 10px 0;
 }
 .bet_confirm_wrapper .bet_confirm_error_message {
   margin: 10px 0;
 }
 .bet_confirm_wrapper .price {
   font-weight: bold;
-  font-size: 110%;
+  font-size: 100%;
 }
 .bet_confirm_wrapper .bet_confirm_desc {
   float: clear;
@@ -2231,8 +2230,6 @@ a.close:hover {
   font-size: 16px;
   border: none;
   margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
 }
 .bet_confirm_wrapper #confirmation_table th, .bet_confirm_wrapper #confirmation_table tr, .bet_confirm_wrapper #confirmation_table td {
   border: none;
@@ -2243,32 +2240,11 @@ a.close:hover {
 .bet_confirm_wrapper #confirmation_table th {
   padding-bottom: 5px;
 }
-.bet_confirm_wrapper #confirmation_table td.notes {
+.bet_confirm_wrapper #confirmation_table span.notes {
   font-size: 12px;
   margin: 0;
   padding: 0;
   padding-top: 6px;
-}
-.bet_confirm_wrapper #confirmation_table .standout {
-  font-size: 130%;
-  font-weight: bold;
-}
-.bet_confirm_wrapper #confirmation_table .standout .price {
-  color: #e98024;
-}
-.bet_confirm_wrapper #confirmation_table .standout.loss {
-  color: #cc0000;
-  font-size: 100%;
-  font-weight: normal;
-}
-.bet_confirm_wrapper #confirmation_table .standout.profit {
-  color: #2e8836;
-}
-.bet_confirm_wrapper #confirmation_table .standin.with_right_border, .bet_confirm_wrapper #confirmation_table .standout.with_right_border {
-  border-right: solid 1px black;
-}
-.bet_confirm_wrapper #confirmation_table .standout.with_left_border {
-  border-left: solid 1px black;
 }
 .bet_confirm_wrapper #confirmation_table .success {
   background: #e98024;
@@ -2277,6 +2253,34 @@ a.close:hover {
   padding-right: 1px;
   margin-left: 8px;
   margin-right: 8px;
+}
+
+.standout {
+  font-weight: bold;
+}
+.standout .price {
+  color: #e98024;
+}
+
+.standin {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+.profit {
+  color: #2e8836;
+}
+
+.loss {
+  color: #cc0000;
+}
+
+.with_right_border {
+  border-right: solid 1px black;
+}
+
+.with_left_border {
+  border-left: solid 1px black;
 }
 
 #buy_confirm_container {
@@ -2623,15 +2627,14 @@ a.close:hover {
   color: #c2c2c2;
 }
 
-.flipper {
-  font-size: 45px !important;
-  padding: 15px !important;
-  border-radius: 10px;
-  background: linear-gradient(to bottom, transparent, #dcdcdc);
+.bigger {
+  font-weight: 600;
 }
 
-.flipper.focus {
-  background: linear-gradient(to bottom, transparent, #808080);
+.digit-container {
+  border-top: 1px solid #dedede;
+  background: rgba(222, 222, 222, 0.5);
+  margin: 0 !important;
 }
 
 .flipper.focus.win, .flipper.win {
@@ -2640,11 +2643,6 @@ a.close:hover {
 
 .flipper.focus.lose, .flipper.lose {
   background: linear-gradient(to bottom, transparent, #cc0000);
-}
-
-div.flipper {
-  margin: 5px 30px;
-  width: 85px;
 }
 
 #digit-contract-details .sign {
@@ -7038,9 +7036,20 @@ body {
   overflow: hidden;
 }
 
+.grd-no-col-padding {
+  padding-left: 0px;
+  padding-right: 0px;
+  overflow: hidden;
+}
+
 .grd-with-padding {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.grd-with-top-padding {
+  padding-top: 7.5px;
+  padding-bottom: 0px;
 }
 
 .grd-default-container {

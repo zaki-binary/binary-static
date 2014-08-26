@@ -9133,7 +9133,7 @@ BetForm.Time.EndTime.prototype = {
                 var total = $("select[name='tick_count']").val();
                 var percentage = that.y/total*100;
                 return '<b>Digit:</b> '+ that.x +'<br/>'+
-                '<b>Percentage:</b> '+ percentage.toFixed(2) + " %";
+                '<b>Percentage:</b> '+ percentage.toFixed(1) + " %";
             }
         },
         plotOptions:{
@@ -9143,12 +9143,21 @@ BetForm.Time.EndTime.prototype = {
                 borderColor:'#666',
                 pointPadding:0,
                 groupPadding:0,
-                color: 'rgba(204,204,204,.85)'
+                color: '#e1f0fb',
+            },
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    formatter: function() {
+                        var total = $("select[name='tick_count']").val();
+                        var percentage = this.point.y/total*100;
+                        return percentage.toFixed(2) + ' %';
+                    },
+                },
             },
         },
         xAxis:{
             categories: ['0','1','2','3','4','5','6','7','8','9'],
-            labels:{ enabled:false},
             lineWidth:0,
             lineColor:'#999',
             tickLength:10,
@@ -9164,6 +9173,7 @@ BetForm.Time.EndTime.prototype = {
             lineColor:'#ccc',
             endOnTick:true,
             labels: {
+                enabled: false,
                 formatter: function() {
                     var total = $("select[name='tick_count']").val();
                     var percentage = parseInt(this.value/total*100);
@@ -9251,8 +9261,26 @@ BetAnalysis.DigitInfo.prototype = {
         var filtered_spots = [];
         var digit = 10,
             filterFunc = function (el) { return el == digit; };
+        var min_max_counter = [];
         while(digit--) {
-            filtered_spots[digit] = this.spots.filter(filterFunc).length;
+            var val = this.spots.filter(filterFunc).length;
+            filtered_spots[digit] = val;
+            if (typeof min_max_counter[val] === 'undefined') {
+                min_max_counter[val] = 0;
+            }
+            min_max_counter[val]++;
+        }
+        var min = Math.min.apply(null, filtered_spots);
+        var max = Math.max.apply(null, filtered_spots);
+        var min_index = filtered_spots.indexOf(min);
+        var max_index = filtered_spots.indexOf(max);
+        // changing color
+        if (min_max_counter[min] === 1) {
+            filtered_spots[min_index] = {y: min, color: '#CC0000'};
+        }
+
+        if (min_max_counter[max] === 1) {
+            filtered_spots[max_index] = {y: max, color: '#2E8836'};
         }
         return series.setData(filtered_spots);
     },
@@ -9463,6 +9491,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
 
                     $self.digit_tick_count = 0;
                     $self.applicable_ticks = [];
+                    $self.info_for_display = [];
                     var symbol = BetForm.attributes.underlying();
                     var how_many_ticks = $('#tick-count').data('count');
                     var end = start_moment.clone().add('minutes',3);
@@ -9484,12 +9513,12 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                                         if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
                                             $self.applicable_ticks.push(tick.quote);
                                             $self.digit_tick_count++;
+                                            $self.info_for_display.push([$self.digit_tick_count,tick.epoch,tick.quote]);
                                             var last_digit = tick.quote.toString().substr(-1);
                                             if (!$('#digit-current').hasClass('flipper')) {
                                                 $('#digit-current').addClass('flipper focus');
                                             }
-                                            $('#digit-current').text(last_digit);
-                                            $('#digit-count').text($self.digit_tick_count);
+                                            $self.update_display();
 
                                             if ($('#digit-contract-details').css('display') === 'none') {
                                                 $('#digit-contract-details').show();
@@ -9504,6 +9533,24 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                                 }
                     };
                     $self.ev.onerror = function() { $self.ev.close(); };
+                },
+                update_display: function(data) {
+                    var $self = this;
+
+                    var ticks_to_display = $self.info_for_display.slice(-5);
+                    for (var i=0;i<5;i++) {
+                        if (typeof ticks_to_display[i] !== 'undefined') {
+                            var tick_number = ticks_to_display[i][0];
+                            var tick_time = moment.utc(ticks_to_display[i][1]*1000).format("hh:mm:ss");
+                            var tick_string = ticks_to_display[i][2].toString();
+                            $('#count-'+i).text('Tick '+tick_number);
+                            $('#time-'+i).text(tick_time);
+                            var shorten = tick_string.substr(0,tick_string.length-1);
+                            var last = tick_string.substr(-1);
+                            $('#tick-'+i+' span#latest-shorten').text(shorten);
+                            $('#tick-'+i+' span#latest-last').text(last);
+                        }
+                    }
                 },
                 evaluate_digit_outcome: function() {
                     var $self = this;
@@ -9522,20 +9569,18 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                         final_price = (last_digit !== client_prediction) ? potential_payout : 0;
                     }
 
-                    $('#contract-confirmation-details').hide();
+                    $('#confirmation_table').hide();
                     $('#contract-outcome-payout').text($self.round(final_price,2));
 
                     if (final_price !== 0) {
                         $('#bet-confirm-header').text(text.localize('This contract won'));
-                        $('#contract-outcome-profit').addClass('profit').text($self.round(potential_payout - cost,2));
-                        $('#digit-current').addClass('win');
-                        $('#digit-prediction').addClass('win');
+                        $('#contract-outcome-profit').removeClass('standin').addClass('standout profit').text($self.round(potential_payout - cost,2));
+                        $('#digit-contract-details').css('background', 'rgba(46,136,54,0.198039)');
                     } else {
                         $('#bet-confirm-header').text(text.localize('This contract lost'));
-                        $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
-                        $('#contract-outcome-profit').addClass('loss').text($self.round(cost,2));
-                        $('#digit-current').addClass('lose');
-                        $('#digit-prediction').addClass('lose');
+                        $('#contract-outcome-label').removeClass('standout profit').addClass('standin loss').text(text.localize('Loss'));
+                        $('#contract-outcome-profit').removeClass('standout profit').addClass('standin loss').text($self.round(cost,2));
+                        $('#digit-contract-details').css('background', 'rgba(204,0,0,0.098039)');
                     }
 
                     $('#contract-outcome-details').show();
@@ -10373,58 +10418,19 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                 var time_obj = that.seconds_to_time(duration);
                 var selected = 0;
                 time_obj['is_inverse'] = 1;
-                var text_year, text_years, text_month, text_months, text_day, text_days, text_hour, text_hours, text_minute, text_minutes, text_second, text_seconds;
 
-                if (!(time_container.attr('year') || now_time_container.attr('year'))) {
-                    time_obj.year = 0;
-                } else if (time_obj.year > 0) {
-                    selected++;
-                }
-                text_year = text.localize('year');
-                text_years = text.localize('years');
-
-                if (!(time_container.attr('month') || now_time_container.attr('month'))) {
-                    time_obj.month = 0;
-                } else if (time_obj.month > 0) {
-                    selected++;
-                }
-                text_month = text.localize('month');
-                text_months = text.localize('months');
-
-                if (!(time_container.attr('day') || now_time_container.attr('day')) || selected >= 3) {
-                    time_obj.day = 0;
-                } else if (time_obj.day > 0) {
-                    selected++;
-                }
-                text_day = text.localize('day');
-                text_days = text.localize('days');
-
-                if (!(time_container.attr('hour') || now_time_container.attr('hour')) || selected >= 3) {
-                    time_obj.hour = 0;
-                } else if (time_obj.hour > 0) {
-                    selected++;
-                }
-                text_hour = text.localize('hour');
-                text_hours = text.localize('hours');
-
-                if(selected <= 2) {
-                    selected++;
-                } else if (!(time_container.attr('minute') || now_time_container.attr('minute')) || selected >= 3) {
-                    time_obj.minute = 0;
-                } else if (time_obj.minute > 0) {
-                    selected++;
-                }
-
-                text_minute = text.localize('minute');
-                text_minutes = text.localize('minutes');
-
-                if(selected <= 1) {
-                    selected++;
-                } else if (!(time_container.attr('second') || now_time_container.attr('second')) || selected >= 2) {
-                    time_obj.second = 0;
-                }
-                text_second = text.localize('second');
-                text_seconds = text.localize('seconds');
+                var text_year = text.localize('year');
+                var text_years = text.localize('years');
+                var text_month = text.localize('month');
+                var text_months = text.localize('months');
+                var text_day = text.localize('day');
+                var text_days = text.localize('days');
+                var text_hour = text.localize('hour');
+                var text_hours = text.localize('hours');
+                var text_minute = text.localize('minute');
+                var text_minutes = text.localize('minutes');
+                var text_second = text.localize('second');
+                var text_seconds = text.localize('seconds');
 
 
                 var interval = 1;
@@ -10446,37 +10452,19 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             var time_container = con.find('#' + attr_selector_id);
             if (time_container.length > 0) {
                 var time_obj = that.seconds_to_time(time_container.attr('duration'));
-                var text_year, text_years, text_month, text_months, text_day, text_days, text_hour, text_hours, text_minute, text_minutes, text_second, text_seconds;
-                if (!time_container.attr('year')) {
-                    time_obj.year = 0;
-                }
-                text_year = text.localize('year');
-                text_years = text.localize('years');
-                if (!time_container.attr('month')) {
-                    time_obj.month = 0;
-                }
-                text_month = text.localize('month');
-                text_months = text.localize('months');
-                if (!time_container.attr('day')) {
-                    time_obj.day = 0;
-                }
-                text_day = text.localize('day');
-                text_days = text.localize('days');
-                if (!time_container.attr('hour')) {
-                    time_obj.hour = 0;
-                }
-                text_hour = text.localize('hour');
-                text_hours = text.localize('hours');
-                if (!time_container.attr('minute')) {
-                    time_obj.minute = 0;
-                }
-                text_minute = text.localize('minute');
-                text_minutes = text.localize('minutes');
-                if (!time_container.attr('second')) {
-                    time_obj.second = 0;
-                }
-                text_second = text.localize('second');
-                text_seconds = text.localize('seconds');
+
+                var text_year = text.localize('year');
+                var text_years = text.localize('years');
+                var text_month = text.localize('month');
+                var text_months = text.localize('months');
+                var text_day = text.localize('day');
+                var text_days = text.localize('days');
+                var text_hour = text.localize('hour');
+                var text_hours = text.localize('hours');
+                var text_minute = text.localize('minute');
+                var text_minutes = text.localize('minutes');
+                var text_second = text.localize('second');
+                var text_seconds = text.localize('seconds');
 
                 var interval = 1;
                 var timer_input = {
@@ -11039,7 +11027,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             } else if ($self.contract_type.match('FLASH')) {
                 $self.ticks_needed = $self.number_of_ticks + 1;
                 $self.x_indicators = {
-                    '_1': { label: 'Tick 1', id: 'start_tick'},
+                    '_0': { label: 'Entry Spot', id: 'entry_tick'},
                 };
                 $self.x_indicators['_' + $self.number_of_ticks] = {
                     label: 'Exit Spot',
@@ -11067,7 +11055,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     type: 'line',
                     renderTo: 'tick_chart',
                     width: config.minimize ? 394 : null,
-                    height: config.minimize ? 125 : null,
+                    height: config.minimize ? 143 : null,
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
                 },
@@ -11152,6 +11140,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                                 }
 
                                 $self.add_barrier();
+                                $self.apply_chart_background_color(tick);
                             }
                         }
 
@@ -11159,6 +11148,24 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                 }
             };
             $self.ev.onerror = function(e) {$self.ev.close(); };
+        },
+        apply_chart_background_color: function(tick) {
+            var $self = this;
+
+            var chart_container = $('#tick_chart');
+            if ($self.contract_sentiment === 'up') {
+                if (tick.quote > $self.contract_barrier) {
+                    chart_container.css('background-color', 'rgba(46,136,54,0.198039)');
+                } else {
+                    chart_container.css('background-color', 'rgba(204,0,0,0.098039)');
+                }
+            } else if ($self.contract_sentiment === 'down') {
+                if (tick.quote < $self.contract_barrier) {
+                    chart_container.css('background-color', 'rgba(46,136,54,0.198039)');
+                } else {
+                    chart_container.css('background-color', 'rgba(204,0,0,0.098039)');
+                }
+            }
         },
         add_barrier: function() {
             var $self = this;
@@ -11258,13 +11265,13 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             $('#contract-outcome-payout').text($self.to_monetary_format(final_price));
 
             if (pnl > 0) {
-                $('#contract-outcome-label').text(text.localize('Profit'));
-                $('#contract-outcome-profit').addClass('profit').text($self.to_monetary_format(pnl));
+                $('#contract-outcome-label').removeClass('standin loss').addClass('standout profit').text(text.localize('Profit'));
+                $('#contract-outcome-profit').removeClass('standin loss').addClass('standout profit').text($self.to_monetary_format(pnl));
             } else {
-                $('#contract-outcome-label').removeClass('standout').text(text.localize('Loss'));
-                $('#contract-outcome-profit').addClass('loss').text($self.to_monetary_format(pnl));
+                $('#contract-outcome-label').removeClass('standout profit').addClass('standin loss').text(text.localize('Loss'));
+                $('#contract-outcome-profit').removeClass('standout profit').addClass('standin loss').text($self.to_monetary_format(pnl));
             }
-            $('#contract-confirmation-details').hide();
+            $('#confirmation_table').hide();
             $('#contract-outcome-details').show();
         },
         to_monetary_format: function(number) {

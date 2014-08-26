@@ -538,58 +538,19 @@ var BetSell = function() {
                 var time_obj = that.seconds_to_time(duration);
                 var selected = 0;
                 time_obj['is_inverse'] = 1;
-                var text_year, text_years, text_month, text_months, text_day, text_days, text_hour, text_hours, text_minute, text_minutes, text_second, text_seconds;
 
-                if (!(time_container.attr('year') || now_time_container.attr('year'))) {
-                    time_obj.year = 0;
-                } else if (time_obj.year > 0) {
-                    selected++;
-                }
-                text_year = text.localize('year');
-                text_years = text.localize('years');
-
-                if (!(time_container.attr('month') || now_time_container.attr('month'))) {
-                    time_obj.month = 0;
-                } else if (time_obj.month > 0) {
-                    selected++;
-                }
-                text_month = text.localize('month');
-                text_months = text.localize('months');
-
-                if (!(time_container.attr('day') || now_time_container.attr('day')) || selected >= 3) {
-                    time_obj.day = 0;
-                } else if (time_obj.day > 0) {
-                    selected++;
-                }
-                text_day = text.localize('day');
-                text_days = text.localize('days');
-
-                if (!(time_container.attr('hour') || now_time_container.attr('hour')) || selected >= 3) {
-                    time_obj.hour = 0;
-                } else if (time_obj.hour > 0) {
-                    selected++;
-                }
-                text_hour = text.localize('hour');
-                text_hours = text.localize('hours');
-
-                if(selected <= 2) {
-                    selected++;
-                } else if (!(time_container.attr('minute') || now_time_container.attr('minute')) || selected >= 3) {
-                    time_obj.minute = 0;
-                } else if (time_obj.minute > 0) {
-                    selected++;
-                }
-
-                text_minute = text.localize('minute');
-                text_minutes = text.localize('minutes');
-
-                if(selected <= 1) {
-                    selected++;
-                } else if (!(time_container.attr('second') || now_time_container.attr('second')) || selected >= 2) {
-                    time_obj.second = 0;
-                }
-                text_second = text.localize('second');
-                text_seconds = text.localize('seconds');
+                var text_year = text.localize('year');
+                var text_years = text.localize('years');
+                var text_month = text.localize('month');
+                var text_months = text.localize('months');
+                var text_day = text.localize('day');
+                var text_days = text.localize('days');
+                var text_hour = text.localize('hour');
+                var text_hours = text.localize('hours');
+                var text_minute = text.localize('minute');
+                var text_minutes = text.localize('minutes');
+                var text_second = text.localize('second');
+                var text_seconds = text.localize('seconds');
 
 
                 var interval = 1;
@@ -611,37 +572,19 @@ var BetSell = function() {
             var time_container = con.find('#' + attr_selector_id);
             if (time_container.length > 0) {
                 var time_obj = that.seconds_to_time(time_container.attr('duration'));
-                var text_year, text_years, text_month, text_months, text_day, text_days, text_hour, text_hours, text_minute, text_minutes, text_second, text_seconds;
-                if (!time_container.attr('year')) {
-                    time_obj.year = 0;
-                }
-                text_year = text.localize('year');
-                text_years = text.localize('years');
-                if (!time_container.attr('month')) {
-                    time_obj.month = 0;
-                }
-                text_month = text.localize('month');
-                text_months = text.localize('months');
-                if (!time_container.attr('day')) {
-                    time_obj.day = 0;
-                }
-                text_day = text.localize('day');
-                text_days = text.localize('days');
-                if (!time_container.attr('hour')) {
-                    time_obj.hour = 0;
-                }
-                text_hour = text.localize('hour');
-                text_hours = text.localize('hours');
-                if (!time_container.attr('minute')) {
-                    time_obj.minute = 0;
-                }
-                text_minute = text.localize('minute');
-                text_minutes = text.localize('minutes');
-                if (!time_container.attr('second')) {
-                    time_obj.second = 0;
-                }
-                text_second = text.localize('second');
-                text_seconds = text.localize('seconds');
+
+                var text_year = text.localize('year');
+                var text_years = text.localize('years');
+                var text_month = text.localize('month');
+                var text_months = text.localize('months');
+                var text_day = text.localize('day');
+                var text_days = text.localize('days');
+                var text_hour = text.localize('hour');
+                var text_hours = text.localize('hours');
+                var text_minute = text.localize('minute');
+                var text_minutes = text.localize('minutes');
+                var text_second = text.localize('second');
+                var text_seconds = text.localize('seconds');
 
                 var interval = 1;
                 var timer_input = {

@@ -24,7 +24,7 @@ BetAnalysis.DigitInfo = function() {
                 var total = $("select[name='tick_count']").val();
                 var percentage = that.y/total*100;
                 return '<b>Digit:</b> '+ that.x +'<br/>'+
-                '<b>Percentage:</b> '+ percentage.toFixed(2) + " %";
+                '<b>Percentage:</b> '+ percentage.toFixed(1) + " %";
             }
         },
         plotOptions:{
@@ -34,12 +34,21 @@ BetAnalysis.DigitInfo = function() {
                 borderColor:'#666',
                 pointPadding:0,
                 groupPadding:0,
-                color: 'rgba(204,204,204,.85)'
+                color: '#e1f0fb',
+            },
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    formatter: function() {
+                        var total = $("select[name='tick_count']").val();
+                        var percentage = this.point.y/total*100;
+                        return percentage.toFixed(2) + ' %';
+                    },
+                },
             },
         },
         xAxis:{
             categories: ['0','1','2','3','4','5','6','7','8','9'],
-            labels:{ enabled:false},
             lineWidth:0,
             lineColor:'#999',
             tickLength:10,
@@ -55,6 +64,7 @@ BetAnalysis.DigitInfo = function() {
             lineColor:'#ccc',
             endOnTick:true,
             labels: {
+                enabled: false,
                 formatter: function() {
                     var total = $("select[name='tick_count']").val();
                     var percentage = parseInt(this.value/total*100);
@@ -142,8 +152,26 @@ BetAnalysis.DigitInfo.prototype = {
         var filtered_spots = [];
         var digit = 10,
             filterFunc = function (el) { return el == digit; };
+        var min_max_counter = [];
         while(digit--) {
-            filtered_spots[digit] = this.spots.filter(filterFunc).length;
+            var val = this.spots.filter(filterFunc).length;
+            filtered_spots[digit] = val;
+            if (typeof min_max_counter[val] === 'undefined') {
+                min_max_counter[val] = 0;
+            }
+            min_max_counter[val]++;
+        }
+        var min = Math.min.apply(null, filtered_spots);
+        var max = Math.max.apply(null, filtered_spots);
+        var min_index = filtered_spots.indexOf(min);
+        var max_index = filtered_spots.indexOf(max);
+        // changing color
+        if (min_max_counter[min] === 1) {
+            filtered_spots[min_index] = {y: min, color: '#CC0000'};
+        }
+
+        if (min_max_counter[max] === 1) {
+            filtered_spots[max_index] = {y: max, color: '#2E8836'};
         }
         return series.setData(filtered_spots);
     },
