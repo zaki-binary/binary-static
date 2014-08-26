@@ -31,4 +31,4 @@ External tools
 
 **Paid participation** with [![Bountysource](https://www.bountysource.com/badge/issue?issue_id=3774909)](https://www.bountysource.com/issues/3774909-simple-webserver?utm_source=3774909&utm_medium=shield&utm_campaign=ISSUE_BADGE)
 
-**Heroku deploy** [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/binary-com/binary-static)
+**Heroku deploy** [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/fayland/binary-static)
