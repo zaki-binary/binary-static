@@ -16,10 +16,12 @@ sub toolkit {
         'c/contact.cgi' => ['misc/contact_us', 'default'],
         'c/open_account.cgi' => ['account/open_account', 'default'],
         'c/affiliate_signup.cgi' => ['affiliates/main', 'default'],
+        'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
     );
     my $m = $url_map{$curr_path};
 
     unless ($m) {
+        print STDERR "[FIX] Can't find related tt for $curr_path\n";
         return $c->render(
             template => 'not_found',
             handler => 'haml',
