@@ -26,6 +26,10 @@
     %link{:rel=>"stylesheet" :href=> $css}
   - }
 
+  %link{:rel=>"stylesheet" :href=>url_for('css/binary.min.css')}
+  %script{:src => "/js/lib.min.js" :async=>"async"}
+  %script{:src => "/js/binary.min.js" :async=>"async"}
+
   = include('layouts/default/javascripts')
   %script{:type => "text/javascript"}
     :plain
