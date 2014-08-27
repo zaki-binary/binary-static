@@ -130,7 +130,8 @@ sub register {
             return {
                 libs           => [
                     'https://www.binary.com/cdn/compressed_binary.9fb5fc413e777c4ff16738799074a63f.js',
-                    $config->{static}->{url} . $config->{static}->{version} . '/js/binary.min.js'
+                    $config->{static}->{url} .'/js/lib.min.js',
+                    $config->{static}->{url} .'/js/binary.min.js'
                 ],
                 settings       => to_json(\%setting),
                 head_js_inline => '',
@@ -184,7 +185,7 @@ has 'c';
 sub files {
     my $self = shift;
     my $config = $self->c->config;
-    ($config->{static}->{url} . $config->{static}->{version} . '/css/binary.min.css')
+    ($config->{static}->{url} . '/css/binary.min.css')
 }
 
 package
