@@ -26,24 +26,7 @@
     %link{:rel=>"stylesheet" :href=> $css}
   - }
 
-  %link{:rel=>"stylesheet" :href=>url_for('css/binary.min.css')}
-  %script{:src => "/js/lib.min.js" :async=>"async"}
-  %script{:src => "/js/binary.min.js" :async=>"async"}
+  %script{:src => "static.binary.com/js/lib.min.js" :defer=>"true"}
+  %script{:src => "static.binary.com/js/binary.min.js" :defer=>"true"}
 
   = include('layouts/default/javascripts')
-  %script{:type => "text/javascript"}
-    :plain
-      function loadCss(url, absolute) {
-          var link = document.createElement("link");
-          link.type = "text/css";
-          link.rel = "stylesheet";
-          if(absolute) {
-            link.href = url;
-          } else {
-            link.href = '#{stash('other_static_cdn')}/'+url;
-          }
-          document.getElementsByTagName("head")[0].appendChild(link);
-      }
-    - foreach my $css (css()->files) {
-      != "loadCss('" .  $css . "', true)"
-    - }

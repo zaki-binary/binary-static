@@ -1,8 +1,0 @@
-<span class="non_input">
-    [% l('Net profit') %]: [% currency %]
-    <span id="id_[% bet_type_id %]_profit">[% win %]</span>
-    | [% text_return %]:
-    <span id="id_[% bet_type_id %]_roi">[% roi %]</span>%
-    [% details_link %]
-</span>
-
