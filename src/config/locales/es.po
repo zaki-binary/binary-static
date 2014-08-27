@@ -30,22 +30,14 @@ msgstr " se ha acreditado en su cuenta de dinero virtual"
 msgid " or email us at "
 msgstr " o contáctenos a través de correo electrónico "
 
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+msgid " “Asian Fall” – You win when the last tick is lower than the average of the ticks during the trade."
+msgstr ""
+
 #. (broker_name)
 #: /home/git/binary-com/binary-static/src/templates/toolkit/affiliates/main.tt:42
 msgid "\"I work with a number of affiliate companies, and %1 is by far the friendliest and most helpful that I've found. They go out of their way to provide their affiliates with all the tools, advice and support they need to succeed. To top it all off they offer some of the most handsome rebates in the industry.\" - <strong>Vinod Gorasia, Marketing Manager, Agora Lifestyles</strong>."
 msgstr "\"Trabajo con varias compañías afiliadas y %1 es por mucho la más amigable y servicial que encontré. Sobrepasan sus límites para proporcionar a sus afiliados todas las herramientas, consejo y apoyo que necesitan para triunfar. Para rematar todo eso, ofrecen algunos de los mejores reembolsos de la industria.\" - <strong>Vinod Gorasia, Director comercial, Agora Lifestyles</strong>."
-
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-msgid "\"Lucky 10 Digits\" - you win when you correctly predict the last decimal digit of the 5th tick."
-msgstr "\"10 dígitos de la suerte\" - usted gana si acierta el último dígito decimal del quinto intervalo."
-
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-msgid "\"Quick 10%\" - you win when you correctly predict what the last decimal digit of the 5th tick will not be."
-msgstr "\"10% rápido\" - usted gana si acierta qué número el último decimal del quinto intervalo no será."
-
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-msgid "\"Tick Trades Up/Down\" - you win when you correctly predict if the market will rise or fall over the next 5 ticks."
-msgstr "\"Instantáneos arriba/abajo\" - usted gana si acierta si el mercado subirá o bajará durante los próximos 5 intervalos."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "$1 to $100,000 payouts, low-risk to high-leverage, and much more. We offer limitless profit opportunities."
@@ -892,7 +884,7 @@ msgid "A momentum indicator showing the percent rate-of-change of a triple expon
 msgstr "Un indicador del impulso que muestra porcentualmente la velocidad de cambio de un promedio móvil suavizado exponencialmente tres veces. Como otros osciladores, TRIX oscila alrededor de una línea de cero."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:200
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:216
 msgid "A new version of the interface is available. Please refresh this page to try again."
 msgstr "Una nueva versión de la interfaz está disponible. Por favor, vuelva a cargar esta página para intentar de nuevo."
 
@@ -955,7 +947,7 @@ msgstr "Acerca de"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/about/index.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:124
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:148
 msgid "About Us"
 msgstr "Sobre nosotros"
 
@@ -1012,7 +1004,7 @@ msgid "Account management facilities (under development)"
 msgstr "Opciones de gestión de cuentas (en desarrollo)"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:12
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:13
 msgid "Accounts"
 msgstr "Cuentas"
 
@@ -1065,7 +1057,7 @@ msgid "Affiliate"
 msgstr "Afiliado"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:27
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:33
 msgid "Affiliate Program"
 msgstr "Programa de afiliados"
 
@@ -1224,6 +1216,10 @@ msgstr "Aplicar para convertirse en un <a class=\"pjaxload\" href=\"%2\">agente 
 msgid "Apr"
 msgstr "Abr"
 
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "Are there any costs?"
+msgstr ""
+
 #: /home/git/binary-com/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Are you ready?"
 msgstr "¿Está listo?"
@@ -1271,15 +1267,23 @@ msgid "Asia and Europe 24 Hours"
 msgstr "Asia y Europa las 24 horas"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1205 cgi/oop/Controller/Bet.pm:1212
 #, fuzzy
 #| msgid "Asia"
 msgid "Asian"
 msgstr "Asia"
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/asian.tt:1
-msgid "Asian options settle by comparing the exit spot with the average spot over the period."
-msgstr ""
+#, fuzzy
+#| msgid "If you select \"Higher\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>barrier</strong>."
+msgid "Asian options settle by comparing the <strong>last tick</strong> with the average spot over the period."
+msgstr "Si selecciona \"Superior\", ganará el pago si el <strong>precio de salida</strong> es estrictamente superior a la <strong>barrera</strong>."
+
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+#: cgi/oop/Controller/Bet.pm:1205 cgi/oop/Controller/Bet.pm:1212
+#, fuzzy
+#| msgid "Asia"
+msgid "Asians"
+msgstr "Asia"
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/resources/pricing_table.tt:50
 #: cgi/subs/subs_BOMFeed_history.pm:374
@@ -1293,9 +1297,9 @@ msgstr "Activo"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/resources/index.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:60
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:95
 #: cgi/asset_index.cgi:114 cgi/asset_index.cgi:25
-#: lib/BOM/Product/Contract.pm:2773 lib/BOM/Product/Contract.pm:2812
+#: lib/BOM/Product/Contract.pm:2780 lib/BOM/Product/Contract.pm:2819
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:148
 msgid "Asset Index"
@@ -1418,9 +1422,11 @@ msgid "Bank/Credit Union/Building Society/Credit/Debit Card statement or passboo
 msgstr "Extracto de la tarjeta de crédito/débito o libreta de banco/unión de crédito/sociedad de construcción (de los últimos tres meses)"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:65
-msgid "Banking & Security"
-msgstr "Banca/seguridad"
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:102
+#, fuzzy
+#| msgid "Banking Index"
+msgid "Banking"
+msgstr "Índice Banca"
 
 #: lib/BOM/Feed/DataSource/BBDL/CSVParser/CorporateAction.pm:211
 msgid "Bankruptcy Filing"
@@ -1457,12 +1463,12 @@ msgstr "Grado de la barrera (%) fuera de los límites"
 msgid "Barrier Step format error"
 msgstr "Error de formato del cambio de la barrera"
 
-#: lib/BOM/Product/Contract.pm:2542
+#: lib/BOM/Product/Contract.pm:2549
 msgid "Barrier may not be adjusted."
 msgstr "La barrera no puede ajustarse."
 
 #. ($min_pips . ' pips away from the spot.')
-#: lib/BOM/Product/Contract.pm:2508
+#: lib/BOM/Product/Contract.pm:2515
 msgid "Barrier must be at least "
 msgstr "La barrera tiene que ser al menos "
 
@@ -1483,7 +1489,7 @@ msgstr "Términos de la barrera"
 msgid "Barrier(s)"
 msgstr "Límite(s)"
 
-#: lib/BOM/Product/Contract.pm:2533
+#: lib/BOM/Product/Contract.pm:2540
 msgid "Barriers must be on either side of the spot."
 msgstr "Las barreras deberían estar a uno de los lados de la posición actual."
 
@@ -1579,6 +1585,10 @@ msgstr "Operar con opciones binarias es sencillo."
 msgid "Binary.com Open-Source Projects"
 msgstr "Los proyectos de Binary.com de Código abierto"
 
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "Binary.com White Labels"
+msgstr ""
+
 #: /home/git/binary-com/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Binary.com continues to innovate and grow"
 msgstr "Binary.com continúa innovando y creciendo"
@@ -1617,7 +1627,7 @@ msgid "Binary.com’s remarkable history"
 msgstr "Notable historia de Binary.com"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:145
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:167
 msgid "Blog"
 msgstr "Blog"
 
@@ -1676,7 +1686,7 @@ msgstr "Pero somo exigentes. Sólo seleccionamos a personas con cualidades espec
 msgid "Buy"
 msgstr "Compra"
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:43
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:42
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/sell_success_ajax.tt:10
 msgid "Buy Price"
 msgstr "Precio de compra"
@@ -1757,7 +1767,7 @@ msgstr "Velas"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/static/careers.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:137
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:164
 msgid "Careers"
 msgstr "Carreras"
 
@@ -1829,7 +1839,7 @@ msgid "Chart"
 msgstr "Gráfico"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:111
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:135
 #: cgi/chart_application.cgi:12
 msgid "Chart Application"
 msgstr "Aplicación de gráficos"
@@ -1870,6 +1880,12 @@ msgid "Check out the payment methods accepted by the payment agents in the list 
 msgstr "Compruebe los métodos de pago admitidos por los agentes de pagos en la lista a continuación."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+#, fuzzy
+#| msgid "Choose Higher/Lower when you want to profit from the market ending higher or lower than a price target."
+msgid "Choose Asian Rise/Fall when you want to profit from the market ending higher or lower than the average price."
+msgstr "Seleccione Superior/Inferior para ganar si el mercado acabará por encima o por debajo del precio objetivo al concluir."
+
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "Choose Ends In/Out to profit from the market stopping inside or outside two price targets at the end of the time period."
 msgstr "Seleccione Finaliza dentro/fuera para ganar si el mercado finaliza dentro/fuera de los dos objetivos al final del período."
 
@@ -1886,10 +1902,6 @@ msgid "Choose Stays In/Out to profit from the market staying inside or going out
 msgstr "Seleccione Queda dentro/Sale para ganar si el mercado permanece dentro o sale de los dos objetivos de precio en cualquier momento durante el período de contrato."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-msgid "Choose Tick Trades when you want to profit from very short-term market movements over the next 5 ticks."
-msgstr "Seleccione los contratos instantáneos para benefeciarse de los movimientos del mercado a muy corto plazo durante los próximos cinco intervalos."
-
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "Choose Touch / No Touch when you want to profit from the market touching or not touching a target any time during the contract period."
 msgstr "Seleccione Toque/Sin toque para ganar si el mercado toca o no el precio objetivo durante cualquier momento del periodo de contrato."
 
@@ -1904,6 +1916,12 @@ msgstr "Seleccione un pago desde $1 hasta $100.000."
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/how_to_trade_binaries.html.haml:1
 msgid "Choose a trade type"
 msgstr "Seleccione el tipo de contrato"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+#, fuzzy
+#| msgid "\"Lucky 10 Digits\" - you win when you correctly predict the last decimal digit of the 5th tick."
+msgid "Choose digit if you want to profit from predicting the last decimal digit of the spot."
+msgstr "\"10 dígitos de la suerte\" - usted gana si acierta el último dígito decimal del quinto intervalo."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "Choose from over 1 million trades"
@@ -2082,8 +2100,9 @@ msgstr "Contacto"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/topbar.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/toolkit/email/common_email.tt:105
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:153
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:175
 #: /home/git/binary-com/binary-static/src/templates/toolkit/global/header.tt:14
 #: /home/git/binary-com/binary-static/src/templates/toolkit/misc/contact_us.tt:6
 #: cgi/contact.cgi:12 cgi/emailus.cgi:182 cgi/subs/subs_cashier.pm:90
@@ -2123,7 +2142,7 @@ msgid "Contract barrier must be positive."
 msgstr "El límite del contrato debe ser un valor positivo."
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2887
+#: lib/BOM/Product/Contract.pm:2894
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "Los contratos no pueden expirar durante el período vacacional de fin de año. Seleccione una fecha de vencimiento después de %1."
 
@@ -2139,20 +2158,20 @@ msgstr "Descubrir contratos y precios"
 msgid "Contract expired"
 msgstr "Contrato expiró"
 
-#: lib/BOM/Product/Contract.pm:2664
+#: lib/BOM/Product/Contract.pm:2671
 msgid "Contract has already expired."
 msgstr "Ya pasó la hora del inicio del contrato."
 
-#: lib/BOM/Product/Contract.pm:1814
+#: lib/BOM/Product/Contract.pm:1821
 msgid "Contract market price is too close to final payout."
 msgstr "El precio del mercado del contrato está demasiado cerca del pago final."
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2703
+#: lib/BOM/Product/Contract.pm:2710
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "Contrato no puede expirar dentro de los últimos %1 del horario operativo."
 
-#: lib/BOM/Product/Contract.pm:2673
+#: lib/BOM/Product/Contract.pm:2680
 msgid "Contract must expire during trading hours."
 msgstr "Contrato debe acabar durante el horario operativo del mercado."
 
@@ -2188,7 +2207,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "Contratos sobre %1 que comienzan y terminan entre %2 y %3 el mismo día no están disponibles."
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2689
+#: lib/BOM/Product/Contract.pm:2696
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "Contratos de %1 de duración inferior a 24 horas deben expirar dentro del mismo día."
 
@@ -2225,6 +2244,10 @@ msgstr "Cookies"
 #: cgi/c_template.cgi:77
 msgid "Copyright"
 msgstr "Copyright"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "Costs"
+msgstr ""
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/misc/tollfree_table.tt:4
 msgid "Country"
@@ -2282,15 +2305,11 @@ msgstr "Transferencia de conversión de divisas"
 msgid "Currency quotes are truncated to 5 digits and all contracts are purchased and settled based on 5-digit currency quotes. However, for Tick Trades only, a 6th digit is retained."
 msgstr "Las cotizaciones de divisas están truncadas al quinto dígito y todos los contratos se adquieren y se liquidan basándose en cotizaciones de divisas de 5 dígitos. No obstante, se retiene un sexto dígito solo para los contratos instantáneos."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/contract_visualization.tt:11
-msgid "Current"
-msgstr "Corriente"
-
 #: cgi/analyse_contract.cgi:196
 msgid "Current Spot"
 msgstr "Precio actual"
 
-#: lib/BOM/Product/Contract.pm:2406
+#: lib/BOM/Product/Contract.pm:2413
 msgid "Current market price is 0."
 msgstr "Precio actual es 0."
 
@@ -2407,23 +2426,36 @@ msgstr "Estimado/a %1,"
 
 #. ($client_name, $ce_broker_name, $support_email)
 #: lib/BOM/Platform/Client/IDAuthentication.pm:127
+#, fuzzy
+#| msgid ""
+#| "Dear %1,\n"
+#| "\n"
+#| "I am writing to you regarding your account with %2.\n"
+#| "\n"
+#| "%2 is legally required to verify that clients are over\n"
+#| "the age of 18, and so we request that you forward scanned copies of\n"
+#| "one of the following to %3:\n"
+#| "\n"
+#| "    - Valid Passport or Driving licence or National ID card\n"
+#| "\n"
+#| "In order to comply with licencing regulations, you will be unable to\n"
+#| "make further deposits or withdrawals until we receive this document.\n"
+#| "I look forward to hearing from you soon.\n"
+#| "\n"
+#| "Kind regards,\n"
+#| "%2\n"
 msgid ""
 "Dear %1,\n"
 "\n"
-"We were unable to verify your identity and prove your residential address using\n"
-"our automated verification procedure. You can still authenticate your account\n"
-"by sending scans of the following documents by email to us at %3:\n"
+"I am writing to you regarding your account with Binary.com.\n"
 "\n"
-"- A scanned copy of your current valid passport, current driving license\n"
-"  (provisional or full), or identity card\n"
-"- A recent (less than 3 months old) scanned copy of your paper utility bill, or\n"
-"  your paper bank, credit union, building society, credit, or debit card\n"
-"  statement, or passbook\n"
+"We are legally required to verify that clients are over the age of 18, and so we request that you forward scanned copies of one of the following to helpdesk@binary.com:\n"
 "\n"
-"All scans must be legible and in colour or they will not be accepted.\n"
+"- Valid Passport or Driving licence or National ID card\n"
 "\n"
-"Please note that mobile telephone bills are not acceptable as evidence of\n"
-"address.\n"
+"In order to comply with licencing regulations, you will be unable to make further deposits or withdrawals or to trade on the account until we receive this document.\n"
+"\n"
+"I look forward to hearing from you soon.\n"
 "\n"
 "Kind regards,\n"
 "\n"
@@ -2431,17 +2463,19 @@ msgid ""
 msgstr ""
 "Estimado/a %1,\n"
 "\n"
-"No hemos podido verificar su identidad y comprobar su dirección residencial utilizando  nuestro procedimiento de verificación automática. Todavía se puede autenticar su cuenta mediante el envío de lasa copias de los siguientes documentos por correo electrónico a %3:\n"
+"Le escribo en relación a su cuenta con %2.\n"
 "\n"
-"- Una copia escaneada de su pasaporte vigente, un permiso de conducir (provisional o permanente) o tarjeta de identidad\n"
-"- Una copia reciente (menos de 3 meses de edad) escaneada de su factura de servicios públicos de papel (no electrónica), o un extracto de su banco o tarjeta de crédito/débito en papel, o de la libreta de ahorros\n"
+"%2 está obligado legalmente a verificar que sus clientes sean mayores de\n"
+"18 años de edad, por lo que le solicitamos nos envíe copias digitalizadas de\n"
+"cualquiera de los siguientes documentos a %3:\n"
 "\n"
-"Todas las copias escaneadas deben ser legibles y en color; de otro modo, no serán aceptadas.\n"
+"    - Pasaporte válido o carnet de conducción o tarjeta nacional de identidad\n"
 "\n"
-"Por favor, tenga en cuenta que las facturas de teléfono móvil no se aceptan como prueba de domicilio.\n"
+"A fin de cumplir con los reglamentos de licencias, usted no podrá\n"
+"efectuar más depósitos o extracciones hasta que recibamos este documento.\n"
+"Espero saber de usted pronto.\n"
 "\n"
-"Atentamente,\n"
-"\n"
+"Saludos cordiales,\n"
 "%2\n"
 
 #. (name, website_name, currency, amount, support_email, tac_url)
@@ -2666,6 +2700,7 @@ msgid "Differences with other data feeds"
 msgstr "Diferencias con otros flujos de datos"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 #: cgi/oop/Controller/Bet.pm:1220 cgi/oop/Controller/Bet.pm:1227
 msgid "Digits"
 msgstr "Dígitos"
@@ -2834,7 +2869,7 @@ msgid "Duration"
 msgstr "Duración"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2779
+#: lib/BOM/Product/Contract.pm:2786
 msgid "Duration must be between %1 and %2."
 msgstr "Duracion válida tiene que ser entre %1 y %2."
 
@@ -2885,7 +2920,7 @@ msgid "Ease of Movement"
 msgstr "Facilidad de movimiento"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:83
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:51
 msgid "Education"
 msgstr "Formación"
 
@@ -3017,7 +3052,6 @@ msgstr "La tecnología exclusiva de comercio con los binarios."
 msgid "Execute your trade in seconds."
 msgstr "Realice sus transacciones en cuestión de segundos."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/asian.tt:1
 #: cgi/analyse_contract.cgi:126
 msgid "Exit Spot"
 msgstr "Punto de salida"
@@ -3145,7 +3179,7 @@ msgstr "Quince años después seguimos innovando, creciendo y trabajando, buscan
 msgid "Filtering Stray Ticks"
 msgstr "Filtrado de intervalos erróneos"
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:44
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:46
 #: cgi/analyse_contract.cgi:129
 msgid "Final Price"
 msgstr "Precio final"
@@ -3328,7 +3362,7 @@ msgid "GMT stands for Greenwich Mean Time, the official time used in the UK duri
 msgstr "El Tiempo Medio de Greenwich (GMT) es la hora oficial que se utiliza en el Reino Unido durante el invierno. En el verano, el Reino Unido cambia a la Hora de verano de Gran Bretaña, que es GMT + 1 hora. Todas las horas en Binary.con son GMT durante todo el año."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:100
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:68
 msgid "GamCare"
 msgstr "GamCare"
 
@@ -3371,7 +3405,7 @@ msgid "Get your price"
 msgstr "Obtenga su precio"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:92
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:60
 msgid "Getting Started"
 msgstr "Cómo empezar"
 
@@ -3426,12 +3460,12 @@ msgstr "Estupendos pagos, obtenga hasta un 35%"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/static/group_history.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:134
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:158
 msgid "Group History"
 msgstr "Historia corporativa"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:129
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:153
 msgid "Group Information"
 msgstr "Información del grupo"
 
@@ -3551,6 +3585,12 @@ msgstr "¿Cómo averiguo cuánto he ganado?"
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/beginners_faq.html.haml:1
 msgid "How does %1 make money?"
 msgstr "¿Cómo gana dinero %1?"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+#, fuzzy
+#| msgid "How it works..."
+msgid "How does it work?"
+msgstr "Cómo funciona..."
 
 #. (stash->{website_name})
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/beginners_faq.html.haml:1
@@ -3679,18 +3719,20 @@ msgstr "En caso de que necesite más asesoramiento contacte con nuestro servicio
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/asian.tt:7
 #, fuzzy
 #| msgid "If you select \"Lower\", you win the payout if the <strong>exit spot</strong> is strictly lower than the <strong>barrier</strong>."
-msgid "If you select \"Asian Down\", you win the payout if the <strong>exit spot</strong> is strictly lower than the <strong>average</strong> spot over the period."
+msgid "If you select \"Asian Fall\", you will win the payout if the <strong>last tick</strong> is <strong>lower</strong> than the <strong>average</strong> of the ticks."
 msgstr "Si selecciona \"Inferior\", ganará el pago si el <strong>precio de salida</strong> es estrictamente inferior a la <strong>barrera</strong>."
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/asian.tt:4
 #, fuzzy
 #| msgid "If you select \"Higher\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>barrier</strong>."
-msgid "If you select \"Asian Up\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>average</strong> spot over the period."
+msgid "If you select \"Asian Rise\", you will win the payout if the <strong>last tick</strong> is <strong>higher</strong> than the <strong>average</strong> of the ticks."
 msgstr "Si selecciona \"Superior\", ganará el pago si el <strong>precio de salida</strong> es estrictamente superior a la <strong>barrera</strong>."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/digits.tt:2
-msgid "If you select \"Differs\", you win the payout if the market price does not end in the digit you have selected."
-msgstr "Si usted selecciona \"Es diferente\", ganará si el precio del mercado no finaliza en el dígito que usted ha seleccionado."
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/digits.tt:5
+#, fuzzy
+#| msgid "If you select \"Rises\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>entry spot</strong>."
+msgid "If you select \"Differs\", you will win the payout if the <strong>last digit</strong> of the last tick is <strong>not the same</strong> as your <strong>prediction</strong>."
+msgstr "Si selecciona \"Alza\", ganará el pago si el <strong>precio de salida</strong> es estrictamente superior al <strong>precio de entrada</strong>."
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/touchnotouch.tt:5
 msgid "If you select \"Does Not Touch\", you win the payout if the market never touches the <strong>barrier</strong> at any time during the <strong>contract period</strong>."
@@ -3721,9 +3763,11 @@ msgstr "Si selecciona \"Superior\", ganará el pago si el <strong>precio de sali
 msgid "If you select \"Lower\", you win the payout if the <strong>exit spot</strong> is strictly lower than the <strong>barrier</strong>."
 msgstr "Si selecciona \"Inferior\", ganará el pago si el <strong>precio de salida</strong> es estrictamente inferior a la <strong>barrera</strong>."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/digits.tt:5
-msgid "If you select \"Matches\", you win the payout if the market price ends in the digit you have selected."
-msgstr "Si usted selecciona \"Es igual a\", ganará si el precio del mercado finaliza en el dígito que usted ha seleccionado."
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/digits.tt:2
+#, fuzzy
+#| msgid "If you select \"Rises\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>entry spot</strong>."
+msgid "If you select \"Matches\", you will win the payout if the <strong>last digit</strong> of the last tick is the <strong>same</strong> as your <strong>prediction.</strong>"
+msgstr "Si selecciona \"Alza\", ganará el pago si el <strong>precio de salida</strong> es estrictamente superior al <strong>precio de entrada</strong>."
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/risefall.tt:2
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/winning/ticks.tt:2
@@ -3987,7 +4031,7 @@ msgstr "Riesgos de invertir por Internet"
 msgid "Intraday"
 msgstr "Intradía"
 
-#: lib/BOM/Product/Contract.pm:1582
+#: lib/BOM/Product/Contract.pm:1589
 msgid "Intraday contracts may not cross market open."
 msgstr "Contratos intradía no pueden cruzar al día siguiente."
 
@@ -4020,7 +4064,7 @@ msgstr "Divisa no válida %1"
 msgid "Invalid fax number."
 msgstr "Número de fax no válido."
 
-#: lib/BOM/Product/Contract.pm:2342
+#: lib/BOM/Product/Contract.pm:2349
 msgid "Invalid payout currency."
 msgstr "Divisa no válida."
 
@@ -4028,7 +4072,7 @@ msgstr "Divisa no válida."
 msgid "Invalid period input! Please input the period between 0 and #1"
 msgstr "¡Entrada de plazo no válida! Introduzca un período entre 0 y #1"
 
-#: lib/BOM/Product/Contract.pm:2391
+#: lib/BOM/Product/Contract.pm:2398
 msgid "Invalid stake"
 msgstr "Apuesta no válida"
 
@@ -4155,13 +4199,15 @@ msgstr "Grande"
 msgid "Last"
 msgstr "Último"
 
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/form/last_digit.tt:4
+#, fuzzy
+#| msgid "Last Digit Stats"
+msgid "Last Digit Prediction"
+msgstr "Estadísticas del último dígito"
+
 #: cgi/oop/Controller/Bet.pm:2201
 msgid "Last Digit Stats"
 msgstr "Estadísticas del último dígito"
-
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/form/last_digit.tt:4
-msgid "Last digit"
-msgstr "Último dígito"
 
 #. ($tick_count, $underlying->translated_display_name)
 #: cgi/last_digit_info.cgi:50
@@ -4209,7 +4255,7 @@ msgstr "Aprender a invertir en línea"
 msgid "Legacy Contract"
 msgstr "Contrato heredado"
 
-#: lib/BOM/Product/Contract.pm:949
+#: lib/BOM/Product/Contract.pm:956
 msgid "Legacy contract. No further information is available."
 msgstr "Contrato heredado. No hay más información disponible."
 
@@ -4219,7 +4265,7 @@ msgstr "Licencia para usar Marcas"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/charting/index.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:115
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:139
 #: cgi/smartchart.cgi:256 cgi/smartchart.cgi:264 lib/BOM/View/Menu.pm:216
 msgid "Light Charts"
 msgstr "Sencillos"
@@ -4261,7 +4307,7 @@ msgstr "Gráfico en tiempo real"
 #: /home/git/binary-com/binary-static/src/templates/haml/charting/index.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/toolkit/charting/livechart.tt:2
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:119
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:143
 #: lib/BOM/View/Menu.pm:223
 msgid "Live Charts"
 msgstr "Gráficos en tiempo real"
@@ -4444,7 +4490,7 @@ msgid "Market"
 msgstr "Mercado"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:108
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:132
 msgid "Market Data"
 msgstr "Gráficos"
 
@@ -4465,7 +4511,7 @@ msgid "Market exit price"
 msgstr "Precio de salida del mercado"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2839
+#: lib/BOM/Product/Contract.pm:2846
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "Hay días festivos del mercado durante el período del contrato. Seleccione una fecha de vencimiento después de %1."
 
@@ -4606,15 +4652,15 @@ msgstr "Mínimo"
 msgid "Miss"
 msgstr "Srta."
 
-#: lib/BOM/Product/Contract.pm:1543 lib/BOM/Product/Contract.pm:1596
+#: lib/BOM/Product/Contract.pm:1550 lib/BOM/Product/Contract.pm:1603
 msgid "Missing market data for contract period."
 msgstr "Faltan los datos del mercado para el período del contrato."
 
-#: lib/BOM/Product/Contract.pm:1482
+#: lib/BOM/Product/Contract.pm:1489
 msgid "Missing market data for entry spot."
 msgstr "Faltan los datos del mercado para el precio de entrada."
 
-#: lib/BOM/Product/Contract.pm:1556 lib/BOM/Product/Contract.pm:1569
+#: lib/BOM/Product/Contract.pm:1563 lib/BOM/Product/Contract.pm:1576
 msgid "Missing market data for exit spot."
 msgstr "Faltan los datos del mercado para el precio de salida."
 
@@ -4763,7 +4809,7 @@ msgid "Net profit"
 msgstr "Beneficio Neto"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:148
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:170
 msgid "Network Status"
 msgstr "Estado de la red"
 
@@ -4938,11 +4984,12 @@ msgid "Number of quoted digits"
 msgstr "Número de dígitos cotizados"
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/form/tick.tt:2
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/last_digit_info.tt:5
 msgid "Number of ticks"
 msgstr "Número de intervalos"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2738
+#: lib/BOM/Product/Contract.pm:2745
 msgid "Number of ticks must be between %1 and %2"
 msgstr "Número de los intervalos tiene que ser entre %1 y %2"
 
@@ -5004,9 +5051,17 @@ msgstr "Pagos puntuales en cualquier momento"
 msgid "Once stray ticks have been removed, a very short-term smoothing algorithm is applied to the data feed. This smoothing algorithm removes a little of the \"random noise\" surrounding the data feed, and ensures that clients who buy path-dependent contracts (such as the one-touch or barrier-range contracts) will not have their contracts knocked-in or knocked-out by random short-term market noise that does not reflect the true market price."
 msgstr "Una vez eliminadas las cotizaciones erróneas, se aplicará un algoritmo de suavizado de corto plazo al sistema de flujo de datos. Este algoritmo de suavizado quita el poco \"ruido aleatorio\" alrededor del sistema de flujo de datos y asegura que los clientes que compran contratos dependientes de la tendencia (como los contratos de un toque o de rango de barrera) sin que sus contratos se activen o desactiven por el ruido aleatorio del mercado a corto plazo que no refleja el verdadero precio del mercado."
 
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "Once the white-label is live, you will earn standard affiliate commissions on clients trading via the white-label."
+msgstr ""
+
 #: cgi/subs/subs_forms.pm:3550
 msgid "Once this limit is reached, you may no longer deposit."
 msgstr "Una vez que se alcance este límite ya no podrá depositar."
+
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "Once you are satisfied with the design of your white label, your IT developer should submit a pull-request of his fork."
+msgstr ""
 
 #: cgi/subs/subs_cashier.pm:173
 msgid "Once you click the 'Submit' button the funds will be withdrawn from your account and will be sent to the Payment Agent you have chosen."
@@ -5062,7 +5117,7 @@ msgid "Open Real Account"
 msgstr "Abrir una cuenta real"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:159
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:44
 msgid "Open Source"
 msgstr "Código abierto"
 
@@ -5223,7 +5278,7 @@ msgid "Participating in the forex, stocks or commodities markets"
 msgstr "Participar en los mercados de divisas, bursátiles o de materias primas"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:142
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:41
 msgid "Partner API"
 msgstr "API Socios"
 
@@ -5234,6 +5289,13 @@ msgstr "Registro de la Partner API"
 #: /home/git/binary-com/binary-static/src/templates/toolkit/api/register.tt:2
 msgid "Partner API Registration for"
 msgstr "Registro de la Partner API para"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:29
+#, fuzzy
+#| msgid "Partner API"
+msgid "Partners"
+msgstr "API Socios"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/home/login.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/header.html.haml:1
@@ -5261,6 +5323,13 @@ msgstr "Contraseña restablecida"
 #: /home/git/binary-com/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "Password:"
 msgstr "Contraseña:"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:161
+#, fuzzy
+#| msgid "US Patents"
+msgid "Patents"
+msgstr "Patentes de EE.UU."
 
 #: cgi/paymentagent_list.cgi:12
 msgid "Payment Agent Deposit"
@@ -5290,7 +5359,7 @@ msgid "Payment Agents are not available on this site."
 msgstr "Los agentes de pagos no están disponibles para este sitio."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:70
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:107
 msgid "Payment Methods"
 msgstr "Métodos de pago"
 
@@ -5326,12 +5395,12 @@ msgstr "Divisa de pago"
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "El pago ha cambiado a su favor de %1 a %2."
 
-#: lib/BOM/Product/Contract.pm:2364
+#: lib/BOM/Product/Contract.pm:2371
 msgid "Payout may not have more than two decimal places."
 msgstr "Pago no puede tener más de dos decimales."
 
 #. (to_monetary_number_format($payout_min, 1)
-#: lib/BOM/Product/Contract.pm:1826
+#: lib/BOM/Product/Contract.pm:1833
 msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Ganancias deseadas deben estar entre <strong>%1</strong> y <strong>%2</strong>."
 
@@ -5374,7 +5443,7 @@ msgid "Place a random trade"
 msgstr "Comprar un contrato Random"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:97
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:65
 msgid "Platform Tour"
 msgstr "La plataforma"
 
@@ -5625,21 +5694,17 @@ msgstr "Código Postal es obligatorio para los residentes del Reino Unido."
 msgid "Postcode must be less than 20 characters long and may not contain \"+\"."
 msgstr "Código postal debe ser inferior a 20 caracteres y no puede contener \"+\"."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:20
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:19
 msgid "Potential Payout"
 msgstr "Pago potencial"
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:22
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:27
 msgid "Potential Profit"
 msgstr "Beneficios potenciales"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Power & simplicity"
 msgstr "Potencia y simplicidad"
-
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/contract_visualization.tt:9
-msgid "Prediction"
-msgstr "Predicción"
 
 #: cgi/limits.cgi:41
 msgid "Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions."
@@ -5649,7 +5714,7 @@ msgstr "Presenta el pago total máximo de los contratos pendientes en su cartera
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "En este momento, no es posible determinar el precio del mercado."
 
-#: lib/BOM/Product/Contract.pm:1495 lib/BOM/Product/Contract.pm:2913
+#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2920
 msgid "Prevailing market price cannot be determined."
 msgstr "No se puede determinar el precio actual de mercado."
 
@@ -5684,7 +5749,7 @@ msgstr "Precios"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/resources/index.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:51
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:86
 #: /home/git/binary-com/binary-static/src/templates/toolkit/resources/pricing_table_form.tt:2
 #: cgi/oop/Controller/Bet.pm:2190 cgi/pricing_table.cgi:164
 #: lib/BOM/View/Menu.pm:169
@@ -5709,6 +5774,7 @@ msgid "Prof"
 msgstr "Beneficios"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/glossary.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:50
 msgid "Profit"
 msgstr "Beneficios"
 
@@ -5752,7 +5818,7 @@ msgstr "Promocional"
 msgid "Proof of address"
 msgstr "Comprobante de domicilio"
 
-#: lib/BOM/Product/Contract.pm:2524
+#: lib/BOM/Product/Contract.pm:2531
 msgid "Proper barriers could not be determined."
 msgstr "No se puede determinar barreras adecuadas."
 
@@ -6040,25 +6106,25 @@ msgstr "Representa el volumen máximo de contratos que puede comprar en un día 
 msgid "Required"
 msgstr "Requerido"
 
-#: lib/BOM/Product/Contract.pm:2886
+#: lib/BOM/Product/Contract.pm:2893
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "La reventa de este contrato no se oferece debido a los festivos del mercado."
 
-#: lib/BOM/Product/Contract.pm:2838
+#: lib/BOM/Product/Contract.pm:2845
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "La reventa de este contrato no se oferece debido a los festivos del mercado durante el período del contrato."
 
-#: lib/BOM/Product/Contract.pm:2859
+#: lib/BOM/Product/Contract.pm:2866
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "La reventa de este contraro no se oferece debido a los festivos durante el período del contrato."
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2769
+#: lib/BOM/Product/Contract.pm:2776
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "La reventa de este contrato no se oferece con menos de %1 de tiempo restante."
 
-#: lib/BOM/Product/Contract.pm:2305 lib/BOM/Product/Contract.pm:2763
-#: lib/BOM/Product/Contract.pm:2810
+#: lib/BOM/Product/Contract.pm:2312 lib/BOM/Product/Contract.pm:2770
+#: lib/BOM/Product/Contract.pm:2817
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "La reventa de este contrato no se oferece."
@@ -6078,7 +6144,7 @@ msgstr "Recursos"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:31
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:126
 msgid "Responsible Trading"
 msgstr "Transacción responsable"
 
@@ -6153,7 +6219,7 @@ msgstr "Alza/Baja"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/resources/index.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:55
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:90
 msgid "Rise/Fall Table"
 msgstr "Tabla de Alza/Baja"
 
@@ -6215,7 +6281,7 @@ msgid "Security Statement"
 msgstr "Declaración de seguridad"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:76
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:122
 msgid "Security and Privacy"
 msgstr "Seguridad/privacidad"
 
@@ -6239,6 +6305,10 @@ msgstr "Seleccionar país"
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Select indices"
 msgstr "Seleccione los índices"
+
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/last_digit_info.tt:4
+msgid "Select market"
+msgstr "Seleccione mercado"
 
 #: cgi/f_brokercgi/f_setting_selfexclusion.cgi:20
 #: cgi/subs/subs_forms_output.pm:327
@@ -6732,7 +6802,7 @@ msgid "Stake %1 is too small"
 msgstr "La inversión de %1 es demasiado baja"
 
 #. (to_monetary_number_format($stake_min, 1)
-#: lib/BOM/Product/Contract.pm:1817
+#: lib/BOM/Product/Contract.pm:1824
 msgid "Stake must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Apuesta debe estar entre <strong>%1</strong> y <strong>%2</strong>."
 
@@ -6754,20 +6824,20 @@ msgstr "Operar ahora"
 msgid "Start time"
 msgstr "Hora de comienzo"
 
-#: lib/BOM/Product/Contract.pm:2588 lib/BOM/Product/Transaction.pm:365
+#: lib/BOM/Product/Contract.pm:2595 lib/BOM/Product/Transaction.pm:365
 msgid "Start time is in the past"
 msgstr "La hora de inicio ya ha pasado"
 
-#: lib/BOM/Product/Contract.pm:2578
+#: lib/BOM/Product/Contract.pm:2585
 msgid "Start time is invalid."
 msgstr "El tiempo del inicio no es válido."
 
-#: lib/BOM/Product/Contract.pm:2568
+#: lib/BOM/Product/Contract.pm:2575
 msgid "Start time must be before expiry time."
 msgstr "La hora de inicio debe ser anterior a la hora de la finalización."
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2621
+#: lib/BOM/Product/Contract.pm:2628
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "El contrato de comienzo aplazado debe comenzar a más de 1% a partir de ahora."
 
@@ -6991,7 +7061,14 @@ msgid "Termination of this Agreement shall not prejudice any rights of any party
 msgstr "La finalización de este contrato no deberá perjudicar los derechos de ninguna parte que puedan haber surgido antes o en la fecha de finalización."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:36
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:111
+#, fuzzy
+#| msgid "See Terms"
+msgid "Terms"
+msgstr "Ver términos"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:116
 #: /home/git/binary-com/binary-static/src/templates/toolkit/legal/terms_and_conditions.tt:3
 #: cgi/c_template.cgi:17 cgi/c_template.cgi:27
 msgid "Terms and Conditions"
@@ -7115,12 +7192,6 @@ msgstr "La <strong>hora de finalización</strong> es la cantidad de segundos/min
 msgid "The <strong>exit spot</strong> is the spot at the <strong>end time</strong>."
 msgstr "El <strong>precio de salida</strong> es el valor en efecto en la <strong>finalización</strong> del contrato."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/asian.tt:3
-#, fuzzy
-#| msgid "The <strong>exit spot</strong> is the price in effect at the <strong>end time</strong>."
-msgid "The <strong>exit spot</strong> is the spot at the end time."
-msgstr "El <strong>precio de salida</strong> es el valor en efecto en la <strong>finalización</strong> del contrato."
-
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/endsinout.tt:11
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/higherlower.tt:4
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/staysinout.tt:5
@@ -7144,9 +7215,23 @@ msgstr "El precio de demanda representa el precio con el que puede comprarse el 
 msgid "The Authentication process verifies the information you have provided us during account registration. It will increase your trading limits and enable you to register more than one credit card.<br/><br/>In order to facilitate the process, please confirm your building no./name before clicking \"Authenticate\".<br/>"
 msgstr "El proceso de autenticación verifica la información que brindó durante el registro de la cuenta. Aumentará sus límites de comercialización y le permitirá registrar más de una tarjeta de crédito. <br/><br/>Para facilitar el proceso confirme su número/nombre de edificio antes de hacer clic en \"Autenticar\".<br/>"
 
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/asian.tt:5
+#, fuzzy
+#| msgid "Average"
+msgid "The Average"
+msgstr "Promedio"
+
 #: /home/git/binary-com/binary-static/src/templates/toolkit/resources/pricing_table.tt:75
 msgid "The Bid price represents the re-sale price of the contract once it appears on your Portfolio. It is approximately 100 minus the price of the opposite contract."
 msgstr "El precio de oferta representa el precio de reventa del contrato una vez que aparece en su cartera. Es de aproximadamente 100 menos el precio del contrato opuesto."
+
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "The Binary.com IT, Marketing, and Compliance teams will then review your pull-request, and may provide you with some feedback. Once we approve the pull-‎request, we will link your fork to the domain you wish to use for the white-label."
+msgstr ""
+
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "The Binary.com White Label program allows affiliates to create their own branded versions of the Binary.com platform."
+msgstr ""
 
 #. ('http://phonegap.com/', 'https://github.com/binary-com/client-app')
 #: /home/git/binary-com/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
@@ -7274,6 +7359,7 @@ msgstr "El oscilador de precios sin tendencia compara el precio de cierre con un
 msgid "The EUR Index is a weighted Index, measuring the Euro’s value against a basket of 5 global currencies (USD, AUD, GBP, JPY, CAD), each weighted by 20%."
 msgstr "El índice de EUR es un índice ponderado, que mide el valor del euro frente a una cesta de 5 divisas mundiales (USD, AUD, GBP, JPY, CAD), cada una ponderada por 20%."
 
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/asian.tt:1
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/digits.tt:1
 msgid "The First Tick"
 msgstr "El primer intervalo"
@@ -7332,6 +7418,10 @@ msgstr "El índice de USD es un índice ponderado, que mide el valor del dólar 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/legal/privacy.tt:10
 msgid "The above personal data that we collect will be held by us and processed for any purpose as may be allowed by law or required by any law. We may also transfer such personal data to any company within the Regent Markets Group of companies or any of our business associates."
 msgstr "Los datos personales anteriores que reunimos quedarán en nuestro poder y serán procesados por cualquier motivo según permita o requiera la ley. También podremos transmitir estos datos a cualquier compañía dentro del grupo de Regent Markets Group o a cualquiera de nuestros asociados."
+
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/asian.tt:7
+msgid "The average is the average of the ticks, including the first and the last tick."
+msgstr ""
 
 #: cgi/subs/subs_graphs_chartdirector.pm:262
 #: cgi/subs/subs_graphs_chartdirector.pm:487
@@ -7424,7 +7514,7 @@ msgstr "Costo de sus posiciones abiertas"
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "La divisa de su bonificación será la misma que la de su primer depósito."
 
-#: lib/BOM/Product/Contract.pm:992
+#: lib/BOM/Product/Contract.pm:999
 msgid "The database is not yet updated with settlement data."
 msgstr "La base de datos aún no cuenta con información actualizada de liquidaciones."
 
@@ -7470,7 +7560,15 @@ msgid "The first thing to do is choose the asset you wish to trade, such as gold
 msgstr "Lo primero que tiene que hacer es elegir el activo con qué desea negociar, como el oro o el petróleo, las acciones o Forex. (El valor de una opción binaria se deriva del precio del activo subyacente). Una gran ventaja de las opciones binarias es que usted no está comprando o vendiendo el activo real."
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/digits.tt:3
-msgid "The first tick for this contract is the first tick after the contract is processed by our servers."
+#, fuzzy
+#| msgid "The first tick for this contract is the first tick after the contract is processed by our servers."
+msgid "The first tick is the first tick after the contract is processed by our servers"
+msgstr "El primer intervalo para este contrato es el primer intervalo después de que el contrato haya sido procesado por nuestros servidores."
+
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/explanation/details/asian.tt:3
+#, fuzzy
+#| msgid "The first tick for this contract is the first tick after the contract is processed by our servers."
+msgid "The first tick is the first tick after the contract is processed by our servers."
 msgstr "El primer intervalo para este contrato es el primer intervalo después de que el contrato haya sido procesado por nuestros servidores."
 
 #: cgi/subs/subs_runbets_execute.pm:576
@@ -7491,7 +7589,7 @@ msgstr "El último dígito decimal del %1º intervalo era '%2'."
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "El precio de salida del mercado es el precio en vigor en el momento de la finalización del contrato."
 
-#: lib/BOM/Product/Contract.pm:2594
+#: lib/BOM/Product/Contract.pm:2601
 msgid "The market must be open at the start time."
 msgstr "El mercado debe estar abierto al inicio."
 
@@ -7674,13 +7772,14 @@ msgstr "El mercado subyacente se ha alterado mucho desde que le dio un precio al
 msgid "The value of your open positions"
 msgstr "Valor de sus posiciones abiertas"
 
+#. ('<a href="http://www.odesk.com" target="_blank">odesk.com</a>', '<a href="https://github.com/binary-com/binary-static" target="_blank">binary-static</a>')
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "Then please ask your IT developer to fork the %2 repo on github, and to make the changes you require to the HTML, Javascript, CSS, and images of the website. If you don't have an IT developer at your disposal, you can recruit one by placing a free advert on %1."
+msgstr ""
+
 #: /home/git/binary-com/binary-static/src/templates/haml/static/tour.html.haml:1
 msgid "Then, make your trade"
 msgstr "Después, compre su contrato"
-
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-msgid "There are 3 types of tick trades:"
-msgstr "Existen 3 tipos de contratos instantáneos:"
 
 #. ($client->residence)
 #: cgi/paymentagent_withdraw.cgi:80
@@ -7694,6 +7793,10 @@ msgstr "No hay agentes de pagos disponibles."
 #: cgi/templates/backoffice/account/profit_table.tt:108
 msgid "There are no contracts during this period"
 msgstr "No hay contratos durante este período"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "There are no costs involved on the Binary.com side. However you will bear the costs of your own IT developers who develop the white-label for you."
+msgstr ""
 
 #: /home/git/binary-com/binary-static/src/templates/toolkit/account/profit_table.tt:83
 #: /home/git/binary-com/binary-static/src/templates/toolkit/account/statement.tt:120
@@ -7823,7 +7926,7 @@ msgstr "Esta sección de cajero del cliente está bloqueada."
 msgid "This contract cannot be properly validated at this time."
 msgstr "En este momento, no es posible validar este contrato."
 
-#: lib/BOM/Product/Contract.pm:1682
+#: lib/BOM/Product/Contract.pm:1689
 msgid "This contract has already expired."
 msgstr "Este contrato ya expiró."
 
@@ -7844,7 +7947,7 @@ msgstr "El contrato ha expirado."
 msgid "This contract is limited to "
 msgstr "Este contrato está limitado a "
 
-#: lib/BOM/Product/Contract.pm:978
+#: lib/BOM/Product/Contract.pm:985
 msgid "This contract is no longer offered."
 msgstr "Este contrato ya no está en oferta."
 
@@ -7852,7 +7955,7 @@ msgstr "Este contrato ya no está en oferta."
 msgid "This contract is unavailable on this account."
 msgstr "Este contrato no está disponible para esta cuenta."
 
-#: lib/BOM/Product/Contract.pm:2406
+#: lib/BOM/Product/Contract.pm:2413
 msgid "This contract offers no return."
 msgstr "Este contrato no ofrece ganancias."
 
@@ -7922,7 +8025,7 @@ msgstr "Esto es para confirmar que la dirección de correo electrónico de su cu
 msgid "This market closes early today at"
 msgstr "Este mercado cierra temprano hoy a las"
 
-#: lib/BOM/Product/Contract.pm:2594
+#: lib/BOM/Product/Contract.pm:2601
 msgid "This market is presently closed."
 msgstr "Este mercado está cerrado."
 
@@ -7952,7 +8055,7 @@ msgstr "Esta oferta no se puede usar en combinación con otras ofertas."
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgstr "Esta promoción solo está disponible para Clientes nuevos. No se aplica a Clientes actuales o anteriores. Está disponible solo una vez para cada Cliente."
 
-#: lib/BOM/Product/Contract.pm:2306
+#: lib/BOM/Product/Contract.pm:2313
 msgid "This trade is not offered."
 msgstr "Este contrato no está en oferta."
 
@@ -7968,7 +8071,7 @@ msgstr "Este sitio web no reúne su información de identificación personal exc
 msgid "This website is marketed in the UK and Isle of Man by Regent Markets (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and in the rest of the EU by Regent Markets (Malta) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by the Lotteries and Gaming Authority in Malta, licence no LGA/CL2/118/2000, 26th May 2010. This website's services are not made available in the USA, Japan or Hong Kong."
 msgstr "Este sitio web se comercializa en el Reino Unido y la Isla de Man por Regent Markets (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isla de Man, las Islas Británicas, autorizado y regulado por la Comisión de Supervisión del Juego de la Isla de Man, las Islas Británicas, licencia de juego en línea vigente publicada el 31 de agosto de 2012, y en el resto de la UE por Regent Marcets(Malta) Ltd., Mompalao Building, Suite 2, Torre Road, Msida MSD1825, Malta, autorizado y regulado por las Autoridades de Loterías y Juegos de Malta, con el número de la licencia LGA/CL2/118/2000, del 26 de mayo de 2010. Los servicios de este sitio web no están disponibles en los EE.UU., Japón o Hong Kong."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:188
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:204
 msgid "This website is marketed in the UK by Regent Markets (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, regulated by the Gambling Supervision Commission in the Isle of Man, online gambling licence issued on 31 August 2012, and in the rest of the EU by Regent Markets (Malta) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Lotteries and Gaming Authority in Malta, licence no LGA/CL2/118/2000, 26th May 2010. This website's services are not made available in the USA, Japan or Hong Kong."
 msgstr "Este sitio web se comercializa en el Reino Unido por Regent Markets (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isla de Man, las Islas Británicas, regulado por la Comisión de Supervisión del Juego de la Isla de Man, licencia de juego en línea publicada el 31 de agosto de 2012, y en el resto de la UE por Regent Marcets(Malta) Ltd., Mompalao Building, Suite 2, Torre Road, Msida MSD1825, Malta, autorizado y regulado por las Autoridades de Loterías y Juegos de Malta, con el número de la licencia LGA/CL2/118/2000, del 26 de mayo de 2010. Los servicios de este sitio web no están disponibles en los EE.UU., Japón o Hong Kong."
 
@@ -7995,9 +8098,8 @@ msgstr "Los instantáneos"
 msgid "Tick Trade Up/Down"
 msgstr "Contrato instantáneo hacia arriba/abajo"
 
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:46
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:81
 #: cgi/contract_demo.cgi:100 cgi/contract_demo.cgi:107
 #: cgi/contract_demo.cgi:114 cgi/contract_guide.cgi:68 cgi/tick_trades.cgi:423
 #: lib/BOM/View/Menu.pm:238
@@ -8013,7 +8115,6 @@ msgid "Tick number"
 msgstr "Número de intervalo"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/get_started/glossary.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "Tick trades"
 msgstr "Los contratos instantáneos"
 
@@ -8069,6 +8170,11 @@ msgstr "Para continuar usando nuestro sistema de cajeros, intente acceder nuevam
 msgid "To convert money between the different currencies in your account, please use the form below."
 msgstr "Para la conversión de dinero entre las diferentes divisas, llene el formulario a continuación."
 
+#. (pjax_link_for(l('sign up as an affiliate')
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+msgid "To create a White Label, first %1. This will allow you to earn commissions from clients of your White Label."
+msgstr ""
+
 #: /home/git/binary-com/binary-static/src/templates/toolkit/misc/logintrouble.tt:6
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "Para habilitar cookies, siga las indicaciones a continuación para la versión de navegador que utiliza."
@@ -8112,11 +8218,11 @@ msgid "Toll-Free number"
 msgstr "Número gratuito"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2860
+#: lib/BOM/Product/Contract.pm:2867
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "Demasiados días festivos en el mercado durante el período del contrato. Seleccione una fecha de vencimiento después de %1."
 
-#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:21
+#: /home/git/binary-com/binary-static/src/templates/toolkit/bet/buy_success_ajax.tt:23
 msgid "Total Cost"
 msgstr "Coste total"
 
@@ -8223,12 +8329,12 @@ msgid "Trade your way"
 msgstr "Comercie según sus necesidades"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:41
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:76
 msgid "Trading"
 msgstr "Operar"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:17
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:18
 msgid "Trading Account"
 msgstr "Cuenta operativa"
 
@@ -8249,9 +8355,9 @@ msgstr "Reglas comerciales"
 
 #: /home/git/binary-com/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/toolkit/legal/datafeed.tt:29
-#: cgi/trading_times.cgi:14 lib/BOM/Product/Contract.pm:2274
-#: lib/BOM/Product/Contract.pm:2641 lib/BOM/Product/Contract.pm:2656
-#: lib/BOM/Product/Contract.pm:2829 lib/BOM/View/Menu.pm:155
+#: cgi/trading_times.cgi:14 lib/BOM/Product/Contract.pm:2281
+#: lib/BOM/Product/Contract.pm:2648 lib/BOM/Product/Contract.pm:2663
+#: lib/BOM/Product/Contract.pm:2836 lib/BOM/View/Menu.pm:155
 msgid "Trading Times"
 msgstr "Horarios comerciales"
 
@@ -8272,37 +8378,37 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "La comercialización de contratos financieros implica un alto nivel de riesgo y podría no ser adecuado para todas las personas. Antes de decidirse por la comercialización de contratos financieros debe considerar muy bien sus objetivos, su nivel de experiencia y sus deseos de riesgo. Debe estar al tanto de todos los riesgos relacionados con la comercialización financiera y recurrir a la ayuda de un asesor financiero independiente en caso de dudas."
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2609
+#: lib/BOM/Product/Contract.pm:2616
 msgid "Trading is available after the first %1 of the session."
 msgstr "Operaciones disponibles después del primer/de los primeros %1 de la sesión."
 
-#: lib/BOM/Product/Contract.pm:2811
+#: lib/BOM/Product/Contract.pm:2818
 msgid "Trading is not offered for this duration."
 msgstr "Operaciones no están disponibles para la duración elegida."
 
 #: cgi/oop/Controller/Bet.pm:674 cgi/subs/subs_runbets_execute.pm:402
-#: lib/BOM/Product/Contract.pm:2227 lib/BOM/Product/Contract.pm:2293
+#: lib/BOM/Product/Contract.pm:2234 lib/BOM/Product/Contract.pm:2300
 msgid "Trading is suspended at the moment."
 msgstr "Por el momento, la comercialización está suspendida."
 
 #. ($translated_name)
 #. ($underlying->translated_display_name()
-#: cgi/analyse_contract.cgi:69 lib/BOM/Product/Contract.pm:2235
-#: lib/BOM/Product/Contract.pm:2244 lib/BOM/Product/Contract.pm:2272
+#: cgi/analyse_contract.cgi:69 lib/BOM/Product/Contract.pm:2242
+#: lib/BOM/Product/Contract.pm:2251 lib/BOM/Product/Contract.pm:2279
 msgid "Trading on %1 is suspended at the moment."
 msgstr "En estos momentos, operaciones sobre %1 están suspendidas."
 
 #. ($translated_name)
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2255 lib/BOM/Product/Contract.pm:2262
-#: lib/BOM/Product/Contract.pm:2921
-#: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:797
+#: lib/BOM/Product/Contract.pm:2262 lib/BOM/Product/Contract.pm:2269
+#: lib/BOM/Product/Contract.pm:2928
+#: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:794
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "Operaciones sobre %1 están suspendidas por falta de los datos del mercado."
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2639
+#: lib/BOM/Product/Contract.pm:2646
 msgid "Trading suspended for the last %1 of the session."
 msgstr "Operaciones están suspendidas para los últimos %1 de la sesión."
 
@@ -8414,8 +8520,6 @@ msgstr "Los habitantes del RU y de la Isla de Man abren su cuenta con Regent Mar
 msgid "UP"
 msgstr "ARRIBA"
 
-#: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:156
 #: /home/git/binary-com/binary-static/src/templates/toolkit/legal/us_patents.tt:3
 #: cgi/us_patents.cgi:10
 msgid "US Patents"
@@ -8560,7 +8664,7 @@ msgstr "Ver"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "Ver precios de contratos Alza/Baja para mercados diferentes."
 
-#: lib/BOM/Product/Contract.pm:2601 lib/BOM/Product/Contract.pm:2611
+#: lib/BOM/Product/Contract.pm:2608 lib/BOM/Product/Contract.pm:2618
 msgid "View Trading Times"
 msgstr "Horarios comerciales"
 
@@ -8630,7 +8734,7 @@ msgid "View your trading profit/loss."
 msgstr "Vea sus ganancias/pérdidas."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:23
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:24
 msgid "Virtual Account"
 msgstr "Cuenta virtual"
 
@@ -8805,7 +8909,7 @@ msgid "We're sorry, but our system has been unable to authenticate your ID onlin
 msgstr "Lo sentimos, el sistema no pudo autenticar su usuario en línea debido a una falla en la conexión. Inténtelo nuevamente más tarde."
 
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:103
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:71
 msgid "Webinars"
 msgstr "Seminarios web"
 
@@ -8970,6 +9074,12 @@ msgstr "Donde su experiencia, su pasión y talento le pueden llevar a lugares de
 msgid "Whether in Malta or Malaysia, you’ll enjoy a high standard of living, and your income will stretch further than in most western countries."
 msgstr "Sea en Malta o en Malasia, podrá disfrutar de un alto nivel de vida, y sus ingresos se estirarán más que en la mayoría de los países occidentales."
 
+#: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/haml/static/white_labels.html.haml:1
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:36
+msgid "White Labels"
+msgstr ""
+
 #. (broker_name)
 #: /home/git/binary-com/binary-static/src/templates/toolkit/affiliates/faq.tt:13
 msgid "Who can be a client on the %1 platform?"
@@ -8987,7 +9097,7 @@ msgstr "¿Por qué elegir contratos binarios?"
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/mobile_menu.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/layouts/default/nav.html.haml:1
 #: /home/git/binary-com/binary-static/src/templates/haml/static/why_us.html.haml:1
-#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:87
+#: /home/git/binary-com/binary-static/src/templates/toolkit/global/footer.tt:55
 #: /home/git/binary-com/binary-static/src/templates/toolkit/global/header.tt:43
 #: /home/git/binary-com/binary-static/src/templates/toolkit/global/mobile_menu.tt:5
 msgid "Why Us?"
@@ -9921,7 +10031,7 @@ msgstr "cualquier instancia en que la compañía pueda sufrir algún perjuicio p
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "cualquier restricción a sus clientes de comprar cualquier contrato durante un horario determinado."
 
-#: lib/BOM/Product/Contract.pm:2206
+#: lib/BOM/Product/Contract.pm:2213
 msgid "barrier"
 msgstr "límite"
 
@@ -9998,7 +10108,7 @@ msgstr "para las instrucciones detalladas de codificación."
 msgid "here"
 msgstr "aquí"
 
-#: lib/BOM/Product/Contract.pm:2206
+#: lib/BOM/Product/Contract.pm:2213
 msgid "high barrier"
 msgstr "límite superior"
 
@@ -10026,7 +10136,7 @@ msgstr "menor"
 msgid "loading..."
 msgstr "cargando..."
 
-#: lib/BOM/Product/Contract.pm:2206
+#: lib/BOM/Product/Contract.pm:2213
 msgid "low barrier"
 msgstr "límite inferior"
 
@@ -10054,7 +10164,7 @@ msgstr "duración mínima disponible"
 msgid "minimum is"
 msgstr "mínimo es"
 
-#: lib/BOM/Product/Contract.pm:2203
+#: lib/BOM/Product/Contract.pm:2210
 msgid "minus"
 msgstr "menos"
 
@@ -10095,7 +10205,7 @@ msgstr "o mire el mapa del sitio abajo"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr "página para ver el momento exacto de liquidación de todos los contratos. Otros sitios pueden adoptar diferentes convenciones (por ejemplo, algunos sitios web eligen las 4 en punto, hora de Nueva York o las 5 en punto, hora de Londres). Por esto, los precios de apertura, los máximos, los mínimos y los de cierre en nuestro sitio pueden ser diferentes a los de otros sitios web, debido a la convención de la hora de cierre del mercado."
 
-#: lib/BOM/Product/Contract.pm:2203
+#: lib/BOM/Product/Contract.pm:2210
 msgid "plus"
 msgstr "más"
 
@@ -10249,6 +10359,18 @@ msgstr "El galardón \"Mejor Empresa de Probabilidades Fijas 2012\" por Global B
 #: /home/git/binary-com/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "‘Financial Betting Operator of the Year’ award by eGaming Review"
 msgstr "El galardón \"Operador de Apuestas Financieras del Año\" por eGaming Review"
+
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+msgid "“Asian Rise” – You win the last tick is higher than the average of the ticks during the trade."
+msgstr ""
+
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+msgid "“Differs” – You win when the last digit of the last tick does not match your prediction."
+msgstr ""
+
+#: /home/git/binary-com/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
+msgid "“Matches” – You win when the last digit of the last tick matches your prediction."
+msgstr ""
 
 # Start of extra_translations
 #: Underlying Symbol AEX
@@ -11673,7 +11795,20 @@ msgstr "baja"
 #: Translation for contract type description (ASIAND - intraday)
 #, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>lower</strong> than <strong>%6</strong>."
-msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>lower</strong> than the <strong>average</strong> of the %5 ticks."
+msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
+msgstr "Pago de %1 <strong>%2</strong> si %3 es estrictamente <strong>menor</strong> a <strong>%6</strong> depués de <strong>%5 intervalos</strong>."
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (ASIAND - tick)
+#, fuzzy
+#| msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>lower</strong> than <strong>%6</strong>."
+msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</storng>."
 msgstr "Pago de %1 <strong>%2</strong> si %3 es estrictamente <strong>menor</strong> a <strong>%6</strong> depués de <strong>%5 intervalos</strong>."
 
 #: Translation for contract type "DIGITDIFF"
@@ -12064,7 +12199,7 @@ msgstr ""
 #: Translation for contract type description (ASIANU - intraday)
 #, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>higher</strong> than <strong>%6</strong>."
-msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>higher</strong> than the <strong>average</strong> of the %5 ticks."
+msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>higher</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgstr "Pago de %1 <strong>%2</strong> si %3 es estrictamente <strong>mayor</strong> a <strong>%6</strong> depués de <strong>%5 intervalos</strong>."
 
 #. %1 - Payout Currency (example USD)
@@ -12112,6 +12247,78 @@ msgstr "Lo sentimos, se ha desactivado el acceso a través de esta red de IP. Po
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Lo sentimos, ya tuvo demasiados intentos fallidos. Por favor, inténtelo de nuevo dentro de 5 minutos."
+
+#~ msgid "\"Quick 10%\" - you win when you correctly predict what the last decimal digit of the 5th tick will not be."
+#~ msgstr "\"10% rápido\" - usted gana si acierta qué número el último decimal del quinto intervalo no será."
+
+#~ msgid "\"Tick Trades Up/Down\" - you win when you correctly predict if the market will rise or fall over the next 5 ticks."
+#~ msgstr "\"Instantáneos arriba/abajo\" - usted gana si acierta si el mercado subirá o bajará durante los próximos 5 intervalos."
+
+#~ msgid "Banking & Security"
+#~ msgstr "Banca/seguridad"
+
+#~ msgid "Choose Tick Trades when you want to profit from very short-term market movements over the next 5 ticks."
+#~ msgstr "Seleccione los contratos instantáneos para benefeciarse de los movimientos del mercado a muy corto plazo durante los próximos cinco intervalos."
+
+#~ msgid "Current"
+#~ msgstr "Corriente"
+
+#~ msgid ""
+#~ "Dear %1,\n"
+#~ "\n"
+#~ "We were unable to verify your identity and prove your residential address using\n"
+#~ "our automated verification procedure. You can still authenticate your account\n"
+#~ "by sending scans of the following documents by email to us at %3:\n"
+#~ "\n"
+#~ "- A scanned copy of your current valid passport, current driving license\n"
+#~ "  (provisional or full), or identity card\n"
+#~ "- A recent (less than 3 months old) scanned copy of your paper utility bill, or\n"
+#~ "  your paper bank, credit union, building society, credit, or debit card\n"
+#~ "  statement, or passbook\n"
+#~ "\n"
+#~ "All scans must be legible and in colour or they will not be accepted.\n"
+#~ "\n"
+#~ "Please note that mobile telephone bills are not acceptable as evidence of\n"
+#~ "address.\n"
+#~ "\n"
+#~ "Kind regards,\n"
+#~ "\n"
+#~ "%2\n"
+#~ msgstr ""
+#~ "Estimado/a %1,\n"
+#~ "\n"
+#~ "No hemos podido verificar su identidad y comprobar su dirección residencial utilizando  nuestro procedimiento de verificación automática. Todavía se puede autenticar su cuenta mediante el envío de lasa copias de los siguientes documentos por correo electrónico a %3:\n"
+#~ "\n"
+#~ "- Una copia escaneada de su pasaporte vigente, un permiso de conducir (provisional o permanente) o tarjeta de identidad\n"
+#~ "- Una copia reciente (menos de 3 meses de edad) escaneada de su factura de servicios públicos de papel (no electrónica), o un extracto de su banco o tarjeta de crédito/débito en papel, o de la libreta de ahorros\n"
+#~ "\n"
+#~ "Todas las copias escaneadas deben ser legibles y en color; de otro modo, no serán aceptadas.\n"
+#~ "\n"
+#~ "Por favor, tenga en cuenta que las facturas de teléfono móvil no se aceptan como prueba de domicilio.\n"
+#~ "\n"
+#~ "Atentamente,\n"
+#~ "\n"
+#~ "%2\n"
+
+#~ msgid "If you select \"Differs\", you win the payout if the market price does not end in the digit you have selected."
+#~ msgstr "Si usted selecciona \"Es diferente\", ganará si el precio del mercado no finaliza en el dígito que usted ha seleccionado."
+
+#~ msgid "If you select \"Matches\", you win the payout if the market price ends in the digit you have selected."
+#~ msgstr "Si usted selecciona \"Es igual a\", ganará si el precio del mercado finaliza en el dígito que usted ha seleccionado."
+
+#~ msgid "Last digit"
+#~ msgstr "Último dígito"
+
+#~ msgid "Prediction"
+#~ msgstr "Predicción"
+
+#, fuzzy
+#~| msgid "The <strong>exit spot</strong> is the price in effect at the <strong>end time</strong>."
+#~ msgid "The <strong>exit spot</strong> is the spot at the end time."
+#~ msgstr "El <strong>precio de salida</strong> es el valor en efecto en la <strong>finalización</strong> del contrato."
+
+#~ msgid "There are 3 types of tick trades:"
+#~ msgstr "Existen 3 tipos de contratos instantáneos:"
 
 #~ msgid "%plural(%1,%d day,%d days)"
 #~ msgstr "%plural(%1,%d día,%d días)"
@@ -12527,41 +12734,6 @@ msgstr "Lo sentimos, ya tuvo demasiados intentos fallidos. Por favor, inténtelo
 
 #~ msgid "Age Verification"
 #~ msgstr "Verificación de edad"
-
-#~ msgid ""
-#~ "Dear %1,\n"
-#~ "\n"
-#~ "I am writing to you regarding your account with %2.\n"
-#~ "\n"
-#~ "%2 is legally required to verify that clients are over\n"
-#~ "the age of 18, and so we request that you forward scanned copies of\n"
-#~ "one of the following to %3:\n"
-#~ "\n"
-#~ "    - Valid Passport or Driving licence or National ID card\n"
-#~ "\n"
-#~ "In order to comply with licencing regulations, you will be unable to\n"
-#~ "make further deposits or withdrawals until we receive this document.\n"
-#~ "I look forward to hearing from you soon.\n"
-#~ "\n"
-#~ "Kind regards,\n"
-#~ "%2\n"
-#~ msgstr ""
-#~ "Estimado/a %1,\n"
-#~ "\n"
-#~ "Le escribo en relación a su cuenta con %2.\n"
-#~ "\n"
-#~ "%2 está obligado legalmente a verificar que sus clientes sean mayores de\n"
-#~ "18 años de edad, por lo que le solicitamos nos envíe copias digitalizadas de\n"
-#~ "cualquiera de los siguientes documentos a %3:\n"
-#~ "\n"
-#~ "    - Pasaporte válido o carnet de conducción o tarjeta nacional de identidad\n"
-#~ "\n"
-#~ "A fin de cumplir con los reglamentos de licencias, usted no podrá\n"
-#~ "efectuar más depósitos o extracciones hasta que recibamos este documento.\n"
-#~ "Espero saber de usted pronto.\n"
-#~ "\n"
-#~ "Saludos cordiales,\n"
-#~ "%2\n"
 
 #~ msgid "Deposit funds into your account"
 #~ msgstr "Depositar fondos en su cuenta"
@@ -13483,9 +13655,6 @@ msgstr "Lo sentimos, ya tuvo demasiados intentos fallidos. Por favor, inténtelo
 
 #~ msgid "Purchase<br>Price"
 #~ msgstr "Compra<br>Precio"
-
-#~ msgid "Select market"
-#~ msgstr "Seleccione mercado"
 
 #~ msgid "Select your barriers"
 #~ msgstr "Seleccione los límites"
@@ -15452,9 +15621,6 @@ msgstr "Lo sentimos, ya tuvo demasiados intentos fallidos. Por favor, inténtelo
 
 #~ msgid "Find Another Contract"
 #~ msgstr "Buscar otro contrato"
-
-#~ msgid "How it works..."
-#~ msgstr "Cómo funciona..."
 
 #~ msgid "More than %1 trades available at any time"
 #~ msgstr "Más de %1 de contratos disponibles en cualquier momento"
