@@ -8,9 +8,13 @@ module.exports = {
                 'src/javascript/external/jquery.js', 
                 'src/javascript/external/highstock/highstock.js', 
                 'src/javascript/external/moment/moment.js', 
-                 'src/javascript/external/**/*.js'
+                'src/javascript/external/**/*.js'
              ],
-            'dist/js/binary.js': ['src/javascript/**/*.js', '!src/javascript/external/**/*.js']
+            'dist/js/binary.js': [
+                'src/javascript/base/*.js',
+                'src/javascript/**/*.js', 
+                '!src/javascript/external/**/*.js'
+            ]
         }
     }
 };
