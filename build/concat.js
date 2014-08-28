@@ -5,15 +5,14 @@ module.exports = {
         },
         files: {
             'dist/js/lib.js': [
-                'src/javascript/external/jquery.js', 
-                'src/javascript/external/highstock/highstock.js', 
-                'src/javascript/external/moment/moment.js', 
-                'src/javascript/external/**/*.js'
+                'src/javascript/lib/jquery.js', 
+                'src/javascript/lib/highstock/highstock.js', 
+                'src/javascript/lib/moment/moment.js', 
+                'src/javascript/lib/**/*.js'
              ],
             'dist/js/binary.js': [
-                'src/javascript/base/*.js',
-                'src/javascript/**/*.js', 
-                '!src/javascript/external/**/*.js'
+                'src/javascript/binary/base/*.js',
+                'src/javascript/binary/**/*.js'
             ]
         }
     }
