@@ -3,8 +3,7 @@ module.exports = {
         options: {
             ignore: ['#added_at_runtime', /test\-[0-9]+/],
             media: ['(min-width: 700px) handheld and (orientation: landscape)'],
-            stylesheets: ['dist/css/binary.min.css'],
-            //ignoreSheets: [/fonts.googleapis/],
+            stylesheets: ['../dist/css/binary.min.css'],
             urls: [
                 'https://binary.com',
                 'https://www.binary.com/styles',
@@ -19,7 +18,7 @@ module.exports = {
             report: 'min'
         },
         files: {
-            'dist/css/binary.css': ['empty.html']
+            '/dist/css/binary.css': ['build/empty.html']
         }
     }
 };
