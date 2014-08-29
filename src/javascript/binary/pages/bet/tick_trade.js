@@ -280,11 +280,11 @@ var TickDisplay = function() {
             var $self = this;
 
             var profit = $self.payout - $self.price;
-            $self.update_ui($self.payout, profit, 'This contract won');
+            $self.update_ui($self.payout, profit, text.localize('This contract won'));
         },
         lose: function() {
             var $self = this;
-            $self.update_ui(0, -$self.price, 'This contract lost');
+            $self.update_ui(0, -$self.price, text.localize('This contract lost'));
         },
         update_ui: function(final_price, pnl, contract_status) {
             var $self = this;
