@@ -1,6 +1,6 @@
 [% IF toomuchtodisplay %][% l('Sorry, there is too much data to display, please select a shorter interval') %][% END %]
 
-[% WRAPPER 'container/full_table.tt' table_id='legacy-chart-data' %]
+[% WRAPPER 'container/full_table.html.tt' table_id='legacy-chart-data' %]
     <thead>
         <tr class="rbox-table-heading">
             [% IF quotetimes.size %]

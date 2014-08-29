@@ -1,9 +1,9 @@
 [% USE String %]
 [% explanation = String.new( "bet/explanation/details/$form_name" ) %]
-[% CALL explanation.append(".tt") %]
+[% CALL explanation.append(".html.tt") %]
 
 [% winning = String.new( "bet/explanation/winning/$form_name" ) %]
-[% CALL winning.append(".tt") %]
+[% CALL winning.append(".html.tt") %]
 
 [%
     static_url = String.new(text => static_url)

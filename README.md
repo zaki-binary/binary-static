@@ -28,3 +28,5 @@ External tools
 **Discuss the project on IRC** with gitter: [![Gitter chat](https://badges.gitter.im/binary-com/binary-static.png)](https://gitter.im/binary-com/binary-static)
 
 **Automated code review**: [![Code Climate](https://codeclimate.com/github/binary-com/binary-static.png)](https://codeclimate.com/github/binary-com/binary-static)
+
+**Heroku Deploy** [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
