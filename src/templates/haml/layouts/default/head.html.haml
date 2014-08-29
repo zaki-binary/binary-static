@@ -22,20 +22,8 @@
   %link{:rel=>"apple-touch-icon" :sizes=>"72x72" :href=>url_for('images/common/apple-touch-icon-72x72_1.png')}
   %link{:rel=>"apple-touch-icon" :sizes=>"114x114" :href=>url_for('images/common/apple-touch-icon-114x114_1.png')}
 
+  - foreach my $css (css()->files) {
+    %link{:rel=>"stylesheet" :href=> $css}
+  - }
+
   = include('layouts/default/javascripts')
-  %script{:type => "text/javascript"}
-    :plain
-      function loadCss(url, absolute) {
-          var link = document.createElement("link");
-          link.type = "text/css";
-          link.rel = "stylesheet";
-          if(absolute) {
-            link.href = url;
-          } else {
-            link.href = '#{stash('other_static_cdn')}/'+url;
-          }
-          document.getElementsByTagName("head")[0].appendChild(link);
-      }
-    - foreach my $css (css()->files) {
-      != "loadCss('" .  $css . "', true)"
-    - }

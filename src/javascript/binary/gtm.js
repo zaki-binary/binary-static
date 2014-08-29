@@ -5,7 +5,7 @@ function push_data_layer() {
 
         dataLayer.push(info[i].params);
         dataLayer.push({"event": info[i].event});
-    };
+    }
 }
 
 onLoad.queue(push_data_layer);
