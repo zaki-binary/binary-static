@@ -1,6 +1,7 @@
 module.exports = {
     all: {
         files: [
+            { expand: true, src: ['config.json'], dest: 'dist' },
             { expand: true, src: ['javascript.json'], dest: 'dist' },
             { expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/config/locales/' },
             { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/', },
