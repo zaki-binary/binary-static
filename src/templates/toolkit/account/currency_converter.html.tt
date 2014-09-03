@@ -1,7 +1,7 @@
 <a name="convertsegment"></a>
 <form action="[% request.url_for('currency_converter.cgi') %]" method="post">
     <input type="hidden" name="l" value="[% language %]" />
-    [% WRAPPER 'container/rounded_box.tt' %]
+    [% WRAPPER 'container/rounded_box.html.tt' %]
         <fieldset class="portfolio-currency-converter">
             <legend>[% l('Convert between your currency segment accounts') %]</legend>
             <div class="row">

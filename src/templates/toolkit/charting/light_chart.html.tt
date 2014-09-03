@@ -16,10 +16,10 @@
         <input type="hidden" name="chart_size" value="[% template_data.default_chart_size %]" />
         <input type="hidden" name="symbol" value="" />
 
-        [% WRAPPER 'container/drop_down_menu.tt' %]
+        [% WRAPPER 'container/drop_down_menu.html.tt' %]
             <li class="tm-li">
                 <a id="instrument" href="#" class="tm-a">[% l('Instruments') %] <span class="down-arrow-1"></span></a>
-                [% WRAPPER 'container/rounded_box.tt' id='instrument-content' extra_class='drop-down-content' %]
+                [% WRAPPER 'container/rounded_box.html.tt' id='instrument-content' extra_class='drop-down-content' %]
                     <div class="rbox-content">
                         [% FOREACH underlying_input IN template_data.underlying_input %]
                             <div class="underlying_group">
@@ -37,7 +37,7 @@
             </li>
             <li class="tm-li">
                 <a id="settings" class="tm-a" href="#">[% l('Settings') %] <span class="down-arrow-1"></span></a>
-                [% WRAPPER 'container/rounded_box.tt' id='settings-content' extra_class='drop-down-content' %]
+                [% WRAPPER 'container/rounded_box.html.tt' id='settings-content' extra_class='drop-down-content' %]
                     <div class="rbox-content">
                         <ul class="half-1 with-separator not-li">
                             [% FOREACH chart_type IN template_data.chart_types %]
@@ -55,7 +55,7 @@
             </li>
             <li class="tm-li">
                 <a id="band" class="tm-a" href="#">[% l('Price Band') %] <span class="down-arrow-1"></span></a>
-                [% WRAPPER 'container/rounded_box.tt' id='band-content' extra_class='drop-down-content' %]
+                [% WRAPPER 'container/rounded_box.html.tt' id='band-content' extra_class='drop-down-content' %]
                     <div class="rbox-content">
                         <ul class="not-li">
                             [% FOREACH band IN template_data.bands %]
@@ -67,7 +67,7 @@
             </li>
             <li class="tm-li">
                 <a id="moving-average" class="tm-a" href="#">[% l('Moving Average') %] <span class="down-arrow-1"></span></a>
-                [% WRAPPER 'container/rounded_box.tt' id='moving-average-content' extra_class='drop-down-content' %]
+                [% WRAPPER 'container/rounded_box.html.tt' id='moving-average-content' extra_class='drop-down-content' %]
                     <div class="rbox-content">
                         <ul class="half-1 with-separator not-li">
                             [% FOREACH moving_average IN template_data.chart_moving_average_1 %]
@@ -85,7 +85,7 @@
             </li>
             <li class="tm-li">
                 <a id="indicator" class="tm-a" href="#">[% l('Indicator') %] <span class="down-arrow-1"></span></a>
-                [% WRAPPER 'container/rounded_box.tt' id='indicator-content' extra_class='drop-down-content' %]
+                [% WRAPPER 'container/rounded_box.html.tt' id='indicator-content' extra_class='drop-down-content' %]
                     <div class="rbox-content">
                         <ul class="not-li">
                             [% FOREACH study IN template_data.studies_input %]
