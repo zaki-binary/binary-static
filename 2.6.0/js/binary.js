@@ -12009,7 +12009,7 @@ onLoad.queue_for_url(function() {
     $('#download-app').toggle(canBeInstalled);
 
     $('#install-java').on('click', function () {
-        deployJava.installLatestJava();
+        deployJava.installLatestJRE();
     });
 
     $('#download-app').on('click', function () {
@@ -12022,7 +12022,8 @@ onLoad.queue_for_url(function() {
             alert('The charting app is not available on mobile devices!');
         }
     });
-})();;var calculate_button_event = function() {
+})();
+;var calculate_button_event = function() {
     $('#pricingtable_calculate').on('click', function(e) {
         e.preventDefault();
         var form = $('form[name=pricing_table_input]').get(0);
