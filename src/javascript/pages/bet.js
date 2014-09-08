@@ -137,7 +137,6 @@ pjax_config_page('tick_trades', function() {
                 $('#ticktrade-updown').hide();
                 $('#ticktrade-digit').hide();
                 $('#ticktrade-new-msg').hide();
-                $('#runbet_tools_container').show();
                 $('#ticktrade-flash').show();
             });
         },

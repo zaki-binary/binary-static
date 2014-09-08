@@ -103,19 +103,3 @@ onLoad.queue_for_url(function() {
         return false;
     });
 }, '/c/paymentagent_list');
-
-onLoad.queue_for_url(function() {
-    $('#runbet_tickbrain_criteria_form').find('select[name="whattodo"]').change(function() {
-        var whattodo = $(this).val();
-        var disabled = '';
-        if ($(this).val() == 'list') {
-            disabled = 'disabled';
-        }
-        $('select#lastn > option').each(function() {
-            var number_ticks = $(this).val();
-            if (number_ticks > 1000) {
-                $(this).attr('disabled', disabled);
-            }
-        });
-    });
-}, 'runbet_tickbrain');
