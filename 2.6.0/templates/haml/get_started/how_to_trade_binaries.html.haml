@@ -107,7 +107,7 @@
     .grd-grid-12
       %a.by_client_type.client_logged_out{:name => 'dont-just-read-about-it-section'}
       %h2= l("Interested? Why not try a virtual account")
-      %p= l('Test-run [_1], and sharpen your trading skills, with a no-risk, no-commitment, virtual account.')
+      %p= l('Test-run [_1], and sharpen your trading skills, with a no-risk, no-commitment, virtual account.' stash->{website_name})
     .grd-grid-12.grd-parent
       .grd-grid-4
         %img.responsive{:src => url_for('images/pages/home/step-1.svg')}
