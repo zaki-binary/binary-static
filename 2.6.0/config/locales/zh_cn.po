@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1228\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2014-09-03 10:12+0200\n"
+"PO-Revision-Date: 2014-09-04 08:11+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
 "Language-Team: Simplified Chinese <https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
 "Language: zh_cn\n"
@@ -1021,7 +1021,7 @@ msgstr "累积/分配"
 msgid "Accuracy of Information"
 msgstr "信息的精确性"
 
-#: cgi/paymentagent_transfer.cgi:265
+#: cgi/paymentagent_transfer.cgi:279
 msgid "Acknowledgement of Money Transfer"
 msgstr "确认转帐"
 
@@ -1129,7 +1129,7 @@ msgstr "也有提供自动生成的 <a href=\"https://apigee.com/rmg/resources/b
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "出现错误：系统无法让您登入 (2)。"
 
-#: cgi/paymentagent_transfer.cgi:121 cgi/paymentagent_transfer.cgi:128
+#: cgi/paymentagent_transfer.cgi:135 cgi/paymentagent_transfer.cgi:142
 #: cgi/paymentagent_withdraw.cgi:225 cgi/paymentagent_withdraw.cgi:231
 msgid "An error occurred while processing request. If this error persists, please contact customer support"
 msgstr "处理申请时发生错误。如果问题持续出现，请联系客服支援部"
@@ -1303,7 +1303,7 @@ msgstr "资产"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:95
 #: cgi/asset_index.cgi:116 cgi/asset_index.cgi:27
-#: lib/BOM/Product/Contract.pm:2778 lib/BOM/Product/Contract.pm:2817
+#: lib/BOM/Product/Contract.pm:2796 lib/BOM/Product/Contract.pm:2835
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:148
 msgid "Asset Index"
@@ -2190,7 +2190,7 @@ msgid "Contract barrier must be positive."
 msgstr "合约界线必须为正。"
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2892
+#: lib/BOM/Product/Contract.pm:2910
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "合约的到期日不能设置在年末节日期间。选择 %1 之后的一个到日期。"
 
@@ -2206,7 +2206,7 @@ msgstr "交易开始及价格"
 msgid "Contract expired"
 msgstr "合约已过期"
 
-#: lib/BOM/Product/Contract.pm:2669
+#: lib/BOM/Product/Contract.pm:2687
 msgid "Contract has already expired."
 msgstr "合约已经失效。"
 
@@ -2215,11 +2215,11 @@ msgid "Contract market price is too close to final payout."
 msgstr "合同市场价位离最终支出太近。"
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2708
+#: lib/BOM/Product/Contract.pm:2726
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "在交易的最后%1中，合约可能不会失效。"
 
-#: lib/BOM/Product/Contract.pm:2678
+#: lib/BOM/Product/Contract.pm:2696
 msgid "Contract must expire during trading hours."
 msgstr "合约必须在交易时间内失效。"
 
@@ -2260,7 +2260,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "%1在同一天始于及结束于 %2 和 %3 之间的合约不可用。"
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2694
+#: lib/BOM/Product/Contract.pm:2712
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "%1 中为期少于24小时的合约必需在购买当天失效。"
 
@@ -2457,7 +2457,7 @@ msgstr "要显示的日期"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (BOM::View::Language::translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:211 cgi/paymentagent_transfer.cgi:253
+#: cgi/f_writepartics.cgi:211 cgi/paymentagent_transfer.cgi:267
 #: cgi/paymentagent_withdraw.cgi:397
 msgid "Dear %1 %2 %3,"
 msgstr "尊敬的 %1 %2 %3,"
@@ -2915,7 +2915,7 @@ msgid "Duration"
 msgstr "持续时间"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2784
+#: lib/BOM/Product/Contract.pm:2802
 msgid "Duration must be between %1 and %2."
 msgstr "持续时间须在%1 与 %2之间。"
 
@@ -4473,7 +4473,7 @@ msgid "Login ID"
 msgstr "登录 ID"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:81
+#: cgi/paymentagent_transfer.cgi:95
 msgid "Login ID (%1) does not exist."
 msgstr "登录 ID (%1) 不存在。"
 
@@ -4629,7 +4629,7 @@ msgid "Market exit price"
 msgstr "平仓价"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2844
+#: lib/BOM/Product/Contract.pm:2862
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "该合约期间之市场假日。在 %1之后选择到期日。"
 
@@ -5132,7 +5132,7 @@ msgid "Number of ticks"
 msgstr "跳动点数目"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2743
+#: lib/BOM/Product/Contract.pm:2761
 msgid "Number of ticks must be between %1 and %2"
 msgstr "跳动点数目须在%1 与 %2之间"
 
@@ -5604,7 +5604,7 @@ msgstr "请选择你想要存入的货币类型。"
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "请点击“播放”键播放视频。"
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:209
+#: cgi/paymentagent_transfer.cgi:99 cgi/paymentagent_withdraw.cgi:209
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "请确认交易详情以完成转帐："
 
@@ -5635,7 +5635,7 @@ msgid "Please enter a town or city."
 msgstr "请输入城镇或城市。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/currency_converter.html.tt:11
-#: cgi/paymentagent_transfer.cgi:104 cgi/subs/subs_forms.pm:3880
+#: cgi/paymentagent_transfer.cgi:118 cgi/subs/subs_forms.pm:3880
 #: cgi/subs/subs_forms.pm:4081
 msgid "Please enter a valid amount."
 msgstr "请输入有效金额。"
@@ -5683,7 +5683,7 @@ msgstr "请输入您的姓。"
 msgid "Please enter your secret answer"
 msgstr "请输入您的密码保护问题答案"
 
-#: cgi/paymentagent_transfer.cgi:276
+#: cgi/paymentagent_transfer.cgi:290
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "请在下表填写登录 ID 以及您要转给您的客户的金额："
 
@@ -5863,7 +5863,7 @@ msgstr "在您的证券组合中给出未清偿合约的最大总交易额。如
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "现行市价无法在此时确定。"
 
-#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2918
+#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2936
 msgid "Prevailing market price cannot be determined."
 msgstr "现行市价无法确定。"
 
@@ -6261,25 +6261,25 @@ msgstr "表示任一给定交易日您可以购买的交易的最大数量。"
 msgid "Required"
 msgstr "必填"
 
-#: lib/BOM/Product/Contract.pm:2891
+#: lib/BOM/Product/Contract.pm:2909
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "因为年底市场休假，该合约此时尚未提供转售。"
 
-#: lib/BOM/Product/Contract.pm:2843
+#: lib/BOM/Product/Contract.pm:2861
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "因为合约期内市场休假，该合约不提供转售。"
 
-#: lib/BOM/Product/Contract.pm:2864
+#: lib/BOM/Product/Contract.pm:2882
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "因为合约期内市场休假，该合约不提供转售。"
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2774
+#: lib/BOM/Product/Contract.pm:2792
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "不允许转售少于%1的合约。"
 
-#: lib/BOM/Product/Contract.pm:2310 lib/BOM/Product/Contract.pm:2768
-#: lib/BOM/Product/Contract.pm:2815
+#: lib/BOM/Product/Contract.pm:2310 lib/BOM/Product/Contract.pm:2786
+#: lib/BOM/Product/Contract.pm:2833
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "该合约不提供转售。"
@@ -6687,12 +6687,12 @@ msgid "Sorry you cannot buy/sell contracts"
 msgstr "抱歉您不能购买/出售合约"
 
 #. ($client_to->loginid)
-#: cgi/paymentagent_transfer.cgi:100
+#: cgi/paymentagent_transfer.cgi:114
 msgid "Sorry, $currency is not default currency for client "
 msgstr "很抱歉，$货币不是以下指定客户的预设货币 "
 
 #. ($client_fm->loginid)
-#: cgi/paymentagent_transfer.cgi:99
+#: cgi/paymentagent_transfer.cgi:113
 msgid "Sorry, $currency is not default currency for payment agent "
 msgstr "抱歉，$货币不是以下支付代理的预设货币 "
 
@@ -6733,7 +6733,7 @@ msgid "Sorry, an error occurred while processing your account."
 msgstr "对不起，在处理您的帐户时出错。"
 
 #. ($client_fm->broker)
-#: cgi/paymentagent_transfer.cgi:94
+#: cgi/paymentagent_transfer.cgi:108
 msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgstr "抱歉，经纪商 %1 不允许从付款代理处进行转账。"
 
@@ -6745,7 +6745,7 @@ msgstr "对不起，目前暂停开设新帐户。"
 msgid "Sorry, only UK residents can authenticate their identity online."
 msgstr "对不起，仅英国居民可在线验证身份。"
 
-#: cgi/paymentagent_transfer.cgi:98
+#: cgi/paymentagent_transfer.cgi:112
 msgid "Sorry, only USD is allowed."
 msgstr "对不起，只允许美元。"
 
@@ -6798,7 +6798,7 @@ msgstr "抱歉，您账户的%合约(复数）总交易额不能超过%2%1。您
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "抱歉，在交易时段最后一分钟内不能购买该 交易。"
 
-#: cgi/paymentagent_transfer.cgi:97
+#: cgi/paymentagent_transfer.cgi:111
 msgid "Sorry, the currency format is incorrect."
 msgstr "对不起，货币格式不正确。"
 
@@ -6872,11 +6872,11 @@ msgstr "对不起，您输入的出纳密码不正确"
 msgid "Sorry, you have entered an incorrect email address."
 msgstr "对不起，您输入的电邮地址不正确。"
 
-#: cgi/paymentagent_transfer.cgi:163 cgi/paymentagent_withdraw.cgi:295
+#: cgi/paymentagent_transfer.cgi:177 cgi/paymentagent_withdraw.cgi:295
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "对不起，您已超过今日允许的最大交易。"
 
-#: cgi/paymentagent_transfer.cgi:155 cgi/paymentagent_withdraw.cgi:266
+#: cgi/paymentagent_transfer.cgi:169 cgi/paymentagent_withdraw.cgi:266
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "对不起，您已超过今日允许的最大转帐金额。"
 
@@ -6992,20 +6992,20 @@ msgstr "网上交易风险"
 msgid "Start time"
 msgstr "（开始时间）"
 
-#: lib/BOM/Product/Contract.pm:2593 lib/BOM/Product/Transaction.pm:365
+#: lib/BOM/Product/Contract.pm:2596 lib/BOM/Product/Transaction.pm:365
 msgid "Start time is in the past"
 msgstr "开始时间是在过去"
 
-#: lib/BOM/Product/Contract.pm:2583
+#: lib/BOM/Product/Contract.pm:2586
 msgid "Start time is invalid."
 msgstr "开始时间无效。"
 
-#: lib/BOM/Product/Contract.pm:2573
+#: lib/BOM/Product/Contract.pm:2576
 msgid "Start time must be before expiry time."
 msgstr "起始时间必须早于终止时间。"
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2626
+#: lib/BOM/Product/Contract.pm:2629
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "从现在开始，远期启动合约之起始时间必须超过 %1。"
 
@@ -7774,7 +7774,7 @@ msgstr "%1 tick 的最后十进位数是 '%2'。"
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "市场平仓价为合约交易终止时的有效价格。"
 
-#: lib/BOM/Product/Contract.pm:2599
+#: lib/BOM/Product/Contract.pm:2602
 msgid "The market must be open at the start time."
 msgstr "开始时市场必须已经开市。"
 
@@ -8024,7 +8024,7 @@ msgstr "在验证您地址的时候出现了问题。请修改提示字段。如
 msgid "There was an error and we were unable to process your request."
 msgstr "出现错误，我们无法处理您的请求。"
 
-#: cgi/paymentagent_transfer.cgi:111 cgi/paymentagent_transfer.cgi:115
+#: cgi/paymentagent_transfer.cgi:125 cgi/paymentagent_transfer.cgi:129
 #: cgi/paymentagent_withdraw.cgi:156 cgi/paymentagent_withdraw.cgi:186
 msgid "There was an error processing the request."
 msgstr "处理请求时出错。"
@@ -8107,7 +8107,7 @@ msgstr "此奖金代码不可用。"
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr "这个调用会返回相同的JSON结构，可以从API控制台设备进行预览。"
 
-#: cgi/paymentagent_transfer.cgi:111
+#: cgi/paymentagent_transfer.cgi:125
 msgid "This client cashier section is locked."
 msgstr "此客户的出纳部分已锁定。"
 
@@ -8222,7 +8222,7 @@ msgstr "这是为了确认您 %2 上的帐户 %1 的电子邮件地址已从 %3 
 msgid "This market closes early today at"
 msgstr "此市场今日在下列时间关闭"
 
-#: lib/BOM/Product/Contract.pm:2599
+#: lib/BOM/Product/Contract.pm:2602
 msgid "This market is presently closed."
 msgstr "本市场目前已收市。"
 
@@ -8417,7 +8417,7 @@ msgid "Toll-Free number"
 msgstr "免费号码"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2865
+#: lib/BOM/Product/Contract.pm:2883
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "该合约期间有太多市场假日。在 %1之后选择到期日。"
 
@@ -8560,8 +8560,9 @@ msgstr "交易规则"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 #: cgi/trading_times.cgi:15 lib/BOM/Product/Contract.pm:2279
-#: lib/BOM/Product/Contract.pm:2646 lib/BOM/Product/Contract.pm:2661
-#: lib/BOM/Product/Contract.pm:2834 lib/BOM/View/Menu.pm:155
+#: lib/BOM/Product/Contract.pm:2648 lib/BOM/Product/Contract.pm:2663
+#: lib/BOM/Product/Contract.pm:2679 lib/BOM/Product/Contract.pm:2852
+#: lib/BOM/View/Menu.pm:155
 msgid "Trading Times"
 msgstr "交易时间"
 
@@ -8582,11 +8583,11 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "财务交易 合约交易涉及较高风险，不适合所有人。在决定进行财务交易交易之前，您应该仔细考虑您的投资目标、经验级别和风险偏好。您应该注意与财务交易相关的所有风险，如有疑问请向独立财务顾问咨询。"
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2614
+#: lib/BOM/Product/Contract.pm:2617
 msgid "Trading is available after the first %1 of the session."
 msgstr "该合约到交易时段第一个 %1 后可用。"
 
-#: lib/BOM/Product/Contract.pm:2816
+#: lib/BOM/Product/Contract.pm:2834
 msgid "Trading is not offered for this duration."
 msgstr "不在此段期间提供交易。"
 
@@ -8606,14 +8607,20 @@ msgstr "%1 的当前交易暂停。"
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
 #: lib/BOM/Product/Contract.pm:2260 lib/BOM/Product/Contract.pm:2267
-#: lib/BOM/Product/Contract.pm:2926
+#: lib/BOM/Product/Contract.pm:2944
 #: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:794
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "由于市场数据丢失，%1 交易暂停。"
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2644
+#: lib/BOM/Product/Contract.pm:2646
 msgid "Trading suspended for the last %1 of the session."
+msgstr "该合约交易时段最后 %1 暂停。"
+
+#: lib/BOM/Product/Contract.pm:2661
+#, fuzzy
+#| msgid "Trading suspended for the last %1 of the session."
+msgid "Trading suspended for the last 300s of the session."
 msgstr "该合约交易时段最后 %1 暂停。"
 
 #: cgi/subs/subs_forms_output.pm:331
@@ -8659,7 +8666,7 @@ msgid "Transfer to client"
 msgstr "转到客户"
 
 #. ($client_to->full_name, $loginid_to, $currency, $amount)
-#: cgi/paymentagent_transfer.cgi:87
+#: cgi/paymentagent_transfer.cgi:101
 msgid "Transfer to: %1<br/>Login ID: %2<br/>Amount: %3 %4"
 msgstr "转至：%1<br/>登录 ID：%2<br/>金额：%3 %4"
 
@@ -8884,7 +8891,7 @@ msgstr "查看"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "在一系列的市场中查看上升/下跌合同价格。"
 
-#: lib/BOM/Product/Contract.pm:2606 lib/BOM/Product/Contract.pm:2616
+#: lib/BOM/Product/Contract.pm:2609 lib/BOM/Product/Contract.pm:2619
 msgid "View Trading Times"
 msgstr "查看交易时间"
 
@@ -8945,7 +8952,7 @@ msgstr "查看您的交易历史纪录。"
 msgid "View your open positions."
 msgstr "查看您的敞口头寸。"
 
-#: cgi/paymentagent_transfer.cgi:248 cgi/paymentagent_withdraw.cgi:387
+#: cgi/paymentagent_transfer.cgi:262 cgi/paymentagent_withdraw.cgi:387
 msgid "View your statement"
 msgstr "查看您的报表"
 
@@ -9097,7 +9104,7 @@ msgid "We will provide you with all the tools to turn your traffic into a lucrat
 msgstr "我们将向您提供所有工具，将您的流量转化为可观的收入"
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:254
+#: cgi/paymentagent_transfer.cgi:268
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -9681,7 +9688,7 @@ msgid "You can use an authorized payment agent to process deposits and withdrawa
 msgstr "不受%1支持的支付方式或本地货币， 您可通过使用授权支付代理人处理存款和取款。这是很简单的。"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:122
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "您不能转帐至帐户%1，因为此帐户目前禁用。"
 
@@ -10059,7 +10066,7 @@ msgstr "您的出纳已被密码锁定。"
 msgid "Your cashier is locked."
 msgstr "您的出纳已被锁定。"
 
-#: cgi/paymentagent_transfer.cgi:115
+#: cgi/paymentagent_transfer.cgi:129
 msgid "Your cashier section is locked."
 msgstr "您的出纳部分已被锁定。"
 
@@ -10184,7 +10191,7 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "您撤消委托书的请求已收到。请等待 2 个工作日让我们处理此请求。"
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:243
+#: cgi/paymentagent_transfer.cgi:257
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "您从 %3 转帐%1%2到 %4 的请求已成功处理。"
 
@@ -10650,16 +10657,12 @@ msgid "‘Financial Betting Operator of the Year’ award by eGaming Review"
 msgstr "eGaming评论授予“年度最佳金融投注运营商”奖项"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#, fuzzy
-#| msgid " “Asian Fall” – You win when the last tick is lower than the average of the ticks during the trade."
 msgid "“Asian Fall” – You win when the last tick is lower than the average of the ticks during the trade."
-msgstr " “亚洲下跌”-当出场点低于交易中的平均点,您赢得获利。"
+msgstr "“亚洲下跌”-当出场点低于交易中的平均点,您赢得获利。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#, fuzzy
-#| msgid "“Asian Rise” – You win the last tick is higher than the average of the ticks during the trade."
 msgid "“Asian Rise” – You win when the last tick is higher than the average of the ticks during the trade."
-msgstr "“亚洲上升”-如果退场价高于交易中的平均价位，您赢得获利。"
+msgstr "“亚洲上升”-当退场价高于交易中的平均价位，您赢得获利。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "“Differs” – You win when the last digit of the last tick does not match your prediction."

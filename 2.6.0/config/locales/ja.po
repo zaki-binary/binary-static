@@ -1225,7 +1225,7 @@ msgstr "Accumulation/Distribution：A/D"
 msgid "Accuracy of Information"
 msgstr "情報の精度"
 
-#: cgi/paymentagent_transfer.cgi:265
+#: cgi/paymentagent_transfer.cgi:279
 msgid "Acknowledgement of Money Transfer"
 msgstr "Acknowledgement of Money Transfer"
 
@@ -1341,7 +1341,7 @@ msgstr "自動で作成される<a href=\"https://apigee.com/resources/binary1\"
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "エラー発生につき、(2)へのログインが不可能です。"
 
-#: cgi/paymentagent_transfer.cgi:121 cgi/paymentagent_transfer.cgi:128
+#: cgi/paymentagent_transfer.cgi:135 cgi/paymentagent_transfer.cgi:142
 #: cgi/paymentagent_withdraw.cgi:225 cgi/paymentagent_withdraw.cgi:231
 #, fuzzy
 #| msgid "Sorry, your account has got stuck in a previous transaction that did not complete.  If this error persists, please email %1 quoting your loginID"
@@ -1533,7 +1533,7 @@ msgstr "取引対象"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:95
 #: cgi/asset_index.cgi:116 cgi/asset_index.cgi:27
-#: lib/BOM/Product/Contract.pm:2778 lib/BOM/Product/Contract.pm:2817
+#: lib/BOM/Product/Contract.pm:2796 lib/BOM/Product/Contract.pm:2835
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:148
 msgid "Asset Index"
@@ -2524,7 +2524,7 @@ msgid "Contract barrier must be positive."
 msgstr "バリアは正の値を指定して下さい。"
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2892
+#: lib/BOM/Product/Contract.pm:2910
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "トレードは年末の祭日に終了することはできませんので、%1より後の日付を選択して下さい。"
 
@@ -2542,7 +2542,7 @@ msgstr "トレード開示と価格設定"
 msgid "Contract expired"
 msgstr "取引期間"
 
-#: lib/BOM/Product/Contract.pm:2669
+#: lib/BOM/Product/Contract.pm:2687
 msgid "Contract has already expired."
 msgstr "トレードは既に終了しました。"
 
@@ -2551,11 +2551,11 @@ msgid "Contract market price is too close to final payout."
 msgstr ""
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2708
+#: lib/BOM/Product/Contract.pm:2726
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "トレード終了時間%1以内にトレードを終了させることはできません。"
 
-#: lib/BOM/Product/Contract.pm:2678
+#: lib/BOM/Product/Contract.pm:2696
 msgid "Contract must expire during trading hours."
 msgstr "トレードはトレード可能時間内に終了する必要があります。"
 
@@ -2602,7 +2602,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "同一日の%2と%3の期間内で開始・終了する条件で%1をトレードすることはできません。"
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2694
+#: lib/BOM/Product/Contract.pm:2712
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "取引期間を２４時間以下と指定した%1でのトレードは、購入日と同日に終了します。"
 
@@ -2805,7 +2805,7 @@ msgstr "表示日数"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (BOM::View::Language::translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:211 cgi/paymentagent_transfer.cgi:253
+#: cgi/f_writepartics.cgi:211 cgi/paymentagent_transfer.cgi:267
 #: cgi/paymentagent_withdraw.cgi:397
 msgid "Dear %1 %2 %3,"
 msgstr "%1 %2 %3様"
@@ -3324,7 +3324,7 @@ msgid "Duration"
 msgstr "取引期間"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2784
+#: lib/BOM/Product/Contract.pm:2802
 msgid "Duration must be between %1 and %2."
 msgstr "有効な取引期間は、%1から%2の間です。"
 
@@ -5061,7 +5061,7 @@ msgid "Login ID"
 msgstr "ログインID"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:81
+#: cgi/paymentagent_transfer.cgi:95
 #, fuzzy
 #| msgid "Sorry, the Login ID (%1) does not exist."
 msgid "Login ID (%1) does not exist."
@@ -5227,7 +5227,7 @@ msgid "Market exit price"
 msgstr "市場出口価格（トレード終了価格）"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2844
+#: lib/BOM/Product/Contract.pm:2862
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "トレードの取引期間に市場の休日が存在します。トレード終了日を%1以降に設定して下さい。"
 
@@ -5762,7 +5762,7 @@ msgid "Number of ticks"
 msgstr "分析されたのTickの総数："
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2743
+#: lib/BOM/Product/Contract.pm:2761
 #, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Number of ticks must be between %1 and %2"
@@ -6260,7 +6260,7 @@ msgstr "お取り引き希望の通貨をお選び下さい。"
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "上記画像をクリックし解説動画を再生して下さい。"
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:209
+#: cgi/paymentagent_transfer.cgi:99 cgi/paymentagent_withdraw.cgi:209
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "Please confirm the transaction details in order to complete the transfer:"
 
@@ -6293,7 +6293,7 @@ msgid "Please enter a town or city."
 msgstr "都市または街の名前をご入力して下さい。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/currency_converter.html.tt:11
-#: cgi/paymentagent_transfer.cgi:104 cgi/subs/subs_forms.pm:3880
+#: cgi/paymentagent_transfer.cgi:118 cgi/subs/subs_forms.pm:3880
 #: cgi/subs/subs_forms.pm:4081
 msgid "Please enter a valid amount."
 msgstr "有効な値をご入力して下さい。"
@@ -6341,7 +6341,7 @@ msgstr "姓をご入力して下さい。"
 msgid "Please enter your secret answer"
 msgstr "秘密のご質問をご入力して下さい。"
 
-#: cgi/paymentagent_transfer.cgi:276
+#: cgi/paymentagent_transfer.cgi:290
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 
@@ -6527,7 +6527,7 @@ msgstr "資産情報ページ内に存在する未決済分トレードに対す
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "現在、このトレードの優勢価格を決定することができません。"
 
-#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2918
+#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2936
 msgid "Prevailing market price cannot be determined."
 msgstr "優勢価格を定めることができません。"
 
@@ -6963,25 +6963,25 @@ msgstr "購入可能な１日あたりのトレードの総額を示します。
 msgid "Required"
 msgstr "入力必須項目"
 
-#: lib/BOM/Product/Contract.pm:2891
+#: lib/BOM/Product/Contract.pm:2909
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "年末年始の市場スケージュルの都合上、このトレードを売ることは不可能です。"
 
-#: lib/BOM/Product/Contract.pm:2843
+#: lib/BOM/Product/Contract.pm:2861
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "市場の休場スケジュールの都合につき、このトレードの取引期間中にトレードを売ることは不可能です。"
 
-#: lib/BOM/Product/Contract.pm:2864
+#: lib/BOM/Product/Contract.pm:2882
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "市場の休場スケジュールの都合につき、このトレードの取引期間中にトレードを売ることは不可能です。"
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2774
+#: lib/BOM/Product/Contract.pm:2792
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "残りの取引期間が%1未満のトレードを売ることはできません。"
 
-#: lib/BOM/Product/Contract.pm:2310 lib/BOM/Product/Contract.pm:2768
-#: lib/BOM/Product/Contract.pm:2815
+#: lib/BOM/Product/Contract.pm:2310 lib/BOM/Product/Contract.pm:2786
+#: lib/BOM/Product/Contract.pm:2833
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "このトレードを売ることは不可能です。"
@@ -7435,12 +7435,12 @@ msgid "Sorry you cannot buy/sell contracts"
 msgstr "申し訳ございませんが、お客様はトレードを売買することができません。"
 
 #. ($client_to->loginid)
-#: cgi/paymentagent_transfer.cgi:100
+#: cgi/paymentagent_transfer.cgi:114
 msgid "Sorry, $currency is not default currency for client "
 msgstr ""
 
 #. ($client_fm->loginid)
-#: cgi/paymentagent_transfer.cgi:99
+#: cgi/paymentagent_transfer.cgi:113
 #, fuzzy
 #| msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgid "Sorry, $currency is not default currency for payment agent "
@@ -7489,7 +7489,7 @@ msgid "Sorry, an error occurred while processing your account."
 msgstr "申し訳ございませんが、処理中にエラーが発生しました。"
 
 #. ($client_fm->broker)
-#: cgi/paymentagent_transfer.cgi:94
+#: cgi/paymentagent_transfer.cgi:108
 msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgstr "Sorry, broker %1 does not allow transfers from payment agents."
 
@@ -7501,7 +7501,7 @@ msgstr "申し訳ございませんが現在、新規にご口座の開設を承
 msgid "Sorry, only UK residents can authenticate their identity online."
 msgstr "申し訳ございませんが、イギリスに居住のお客様に限りオンライン上で身分証明の認証手続きを承っております。"
 
-#: cgi/paymentagent_transfer.cgi:98
+#: cgi/paymentagent_transfer.cgi:112
 msgid "Sorry, only USD is allowed."
 msgstr "申し訳ございませんが、米ドルのみ承ります。"
 
@@ -7564,7 +7564,7 @@ msgstr "申し訳ございませんが、お客様のご口座での総合払い
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "申し訳ございませんが、トレード・セッションの終了直前のトレード購入は不可能です。"
 
-#: cgi/paymentagent_transfer.cgi:97
+#: cgi/paymentagent_transfer.cgi:111
 msgid "Sorry, the currency format is incorrect."
 msgstr "申し訳ございませんが、通貨フォーマットが正しくありません。"
 
@@ -7642,11 +7642,11 @@ msgstr "申し訳ございませんが、ご入力頂いたキャッシャー・
 msgid "Sorry, you have entered an incorrect email address."
 msgstr "申し訳ございませんが、入力されたメールアドレスに誤りがあります。"
 
-#: cgi/paymentagent_transfer.cgi:163 cgi/paymentagent_withdraw.cgi:295
+#: cgi/paymentagent_transfer.cgi:177 cgi/paymentagent_withdraw.cgi:295
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "申し訳ございませんが、本日のお取り引き上限金額を超えてしまいまいた。"
 
-#: cgi/paymentagent_transfer.cgi:155 cgi/paymentagent_withdraw.cgi:266
+#: cgi/paymentagent_transfer.cgi:169 cgi/paymentagent_withdraw.cgi:266
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "Sorry, you have exceeded the maximum allowable transfer amount for today."
 
@@ -7774,20 +7774,20 @@ msgstr "トレード開始"
 msgid "Start time"
 msgstr "開始時間"
 
-#: lib/BOM/Product/Contract.pm:2593 lib/BOM/Product/Transaction.pm:365
+#: lib/BOM/Product/Contract.pm:2596 lib/BOM/Product/Transaction.pm:365
 msgid "Start time is in the past"
 msgstr "開始時間が過去に値になっています"
 
-#: lib/BOM/Product/Contract.pm:2583
+#: lib/BOM/Product/Contract.pm:2586
 msgid "Start time is invalid."
 msgstr "開始時間が正しくありません。"
 
-#: lib/BOM/Product/Contract.pm:2573
+#: lib/BOM/Product/Contract.pm:2576
 msgid "Start time must be before expiry time."
 msgstr "トレードの開始時間は、終了時間より以前の時間でなければなりません。"
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2626
+#: lib/BOM/Product/Contract.pm:2629
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "予約指定トレードは現在時間より%1後にスタートしなければなりません。"
 
@@ -8656,7 +8656,7 @@ msgstr "%1後の最後の桁数は'%2'でした。"
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "市場出口価格は、バイナリー取引の終了時間に影響を及ぼすデータのことです。"
 
-#: lib/BOM/Product/Contract.pm:2599
+#: lib/BOM/Product/Contract.pm:2602
 #, fuzzy
 #| msgid "Market must be open at start time."
 msgid "The market must be open at the start time."
@@ -8944,7 +8944,7 @@ msgstr "お客様のご住所の認証プロセスにて問題が発生しまし
 msgid "There was an error and we were unable to process your request."
 msgstr "エラーが発生につき、お客様のリクエストを処理することができませんでした。"
 
-#: cgi/paymentagent_transfer.cgi:111 cgi/paymentagent_transfer.cgi:115
+#: cgi/paymentagent_transfer.cgi:125 cgi/paymentagent_transfer.cgi:129
 #: cgi/paymentagent_withdraw.cgi:156 cgi/paymentagent_withdraw.cgi:186
 msgid "There was an error processing the request."
 msgstr "リクエスト処理時にエラーが発生しました。"
@@ -9045,7 +9045,7 @@ msgstr "このボーナスコードは無効です。"
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr ""
 
-#: cgi/paymentagent_transfer.cgi:111
+#: cgi/paymentagent_transfer.cgi:125
 msgid "This client cashier section is locked."
 msgstr "この顧客のキャッシャーはロックされています。"
 
@@ -9182,7 +9182,7 @@ msgstr "お客様の%2のご口座%1のメールアドレスは、%3から%4へ�
 msgid "This market closes early today at"
 msgstr "この市場は本日早めに閉場します。閉場時間："
 
-#: lib/BOM/Product/Contract.pm:2599
+#: lib/BOM/Product/Contract.pm:2602
 #, fuzzy
 #| msgid "Sorry, the market is currently closed."
 msgid "This market is presently closed."
@@ -9387,7 +9387,7 @@ msgid "Toll-Free number"
 msgstr "フリーダイヤル番号"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2865
+#: lib/BOM/Product/Contract.pm:2883
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "このトレードの取引期間中に多くの祭日が存在しますので、トレード終了日を%1以降に設定して下さい。"
 
@@ -9556,8 +9556,9 @@ msgstr "取引ルール"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 #: cgi/trading_times.cgi:15 lib/BOM/Product/Contract.pm:2279
-#: lib/BOM/Product/Contract.pm:2646 lib/BOM/Product/Contract.pm:2661
-#: lib/BOM/Product/Contract.pm:2834 lib/BOM/View/Menu.pm:155
+#: lib/BOM/Product/Contract.pm:2648 lib/BOM/Product/Contract.pm:2663
+#: lib/BOM/Product/Contract.pm:2679 lib/BOM/Product/Contract.pm:2852
+#: lib/BOM/View/Menu.pm:155
 msgid "Trading Times"
 msgstr "トレード対応時間"
 
@@ -9578,13 +9579,13 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "金融トレードは高いリスクを伴うため、全ての方が売買に適しているとは限りません。金融トレードの売買を決定される前に、ご自身の目的、経験値、そしてリスクの許容範囲を十分にご考慮下さい。金融トレードに関する全てのリスクを認識し、もし不明な点がある際は専門家の助言を求めるべきであるということもご留意下さい。"
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2614
+#: lib/BOM/Product/Contract.pm:2617
 #, fuzzy
 #| msgid "Trading available after the first %1 of the session."
 msgid "Trading is available after the first %1 of the session."
 msgstr "トレード・セッション開始後%1にてトレードが可能です。"
 
-#: lib/BOM/Product/Contract.pm:2816
+#: lib/BOM/Product/Contract.pm:2834
 msgid "Trading is not offered for this duration."
 msgstr "この取引期間のトレードは不可能です。"
 
@@ -9604,14 +9605,20 @@ msgstr "現在、%1でのトレード提供を一時的に停止しておりま�
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
 #: lib/BOM/Product/Contract.pm:2260 lib/BOM/Product/Contract.pm:2267
-#: lib/BOM/Product/Contract.pm:2926
+#: lib/BOM/Product/Contract.pm:2944
 #: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:794
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "市場価格の入手が不可能なため、%1でのトレード提供を一時的に停止しております。"
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2644
+#: lib/BOM/Product/Contract.pm:2646
 msgid "Trading suspended for the last %1 of the session."
+msgstr "セッション最後の%1でのトレードのお取り扱いを中止しております。"
+
+#: lib/BOM/Product/Contract.pm:2661
+#, fuzzy
+#| msgid "Trading suspended for the last %1 of the session."
+msgid "Trading suspended for the last 300s of the session."
 msgstr "セッション最後の%1でのトレードのお取り扱いを中止しております。"
 
 #: cgi/subs/subs_forms_output.pm:331
@@ -9657,7 +9664,7 @@ msgid "Transfer to client"
 msgstr "Transfer to client"
 
 #. ($client_to->full_name, $loginid_to, $currency, $amount)
-#: cgi/paymentagent_transfer.cgi:87
+#: cgi/paymentagent_transfer.cgi:101
 msgid "Transfer to: %1<br/>Login ID: %2<br/>Amount: %3 %4"
 msgstr "Transfer to: %1<br/>Login ID: %2<br/>Amount: %3 %4"
 
@@ -9898,7 +9905,7 @@ msgstr "表示"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "バリアと取引期間に基づくトレード価格を確認する。"
 
-#: lib/BOM/Product/Contract.pm:2606 lib/BOM/Product/Contract.pm:2616
+#: lib/BOM/Product/Contract.pm:2609 lib/BOM/Product/Contract.pm:2619
 #, fuzzy
 #| msgid "Trading Times"
 msgid "View Trading Times"
@@ -9975,7 +9982,7 @@ msgstr "取引履歴を表示する"
 msgid "View your open positions."
 msgstr "現在、オープン中のポジションはございません。"
 
-#: cgi/paymentagent_transfer.cgi:248 cgi/paymentagent_withdraw.cgi:387
+#: cgi/paymentagent_transfer.cgi:262 cgi/paymentagent_withdraw.cgi:387
 #, fuzzy
 #| msgid "View statement"
 msgid "View your statement"
@@ -10149,7 +10156,7 @@ msgid "We will provide you with all the tools to turn your traffic into a lucrat
 msgstr "サイト訪問数を収入に転化するツールを提供"
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:254
+#: cgi/paymentagent_transfer.cgi:268
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -10809,7 +10816,7 @@ msgid "You can use an authorized payment agent to process deposits and withdrawa
 msgstr "Payment Agents process deposits and withdrawals for Clients who wish to use e-cash methods or local currencies not supported by"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:122
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "You cannot transfer to account %1, as their account is currently disabled."
 
@@ -11251,7 +11258,7 @@ msgstr "この顧客のキャッシャーはロックされています。"
 msgid "Your cashier is locked."
 msgstr "この顧客のキャッシャーはロックされています。"
 
-#: cgi/paymentagent_transfer.cgi:115
+#: cgi/paymentagent_transfer.cgi:129
 #, fuzzy
 #| msgid "This client cashier section is locked."
 msgid "Your cashier section is locked."
@@ -11382,7 +11389,7 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "Your request to revoke the Power of Attorney has been received. Please allow 2 working days for us to process this request."
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:243
+#: cgi/paymentagent_transfer.cgi:257
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 
