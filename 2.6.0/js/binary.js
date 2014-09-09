@@ -11067,7 +11067,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                         var decimal_places = Math.max( $self.display_decimal, new_decimal);
                         $self.display_decimal = decimal_places;
                         var new_y = that.y.toFixed(decimal_places);
-                        var mom = moment.utc(that.x*1000).format("dddd, MMM D, HH:mm:ss");
+                        var mom = moment.utc(that.x).format("dddd, MMM D, HH:mm:ss");
                         return mom + "<br/>" + $self.display_symbol + " " + new_y;
                     },
                 },
