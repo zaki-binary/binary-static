@@ -38,8 +38,6 @@
           %h1= l('Trading')
           %ul
             %li
-              %a.pjaxload.with_login_cookies{:href=>url_for("tick_trades.cgi")}= l('Tick Trades')
-            %li
               %a.pjaxload{:href=>url_for("pricing_table.cgi")}= l('Pricing Table')
             %li
               %a.pjaxload{:href=>url_for("rise_fall_table.cgi")}= l('Rise/Fall Table')
