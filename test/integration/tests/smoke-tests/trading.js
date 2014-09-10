@@ -9,7 +9,6 @@ var urls = [
     { page: 'Sectors', path: URL.SECTORS },
     { page: 'Randoms', path: URL.RANDOMS },
     { page: 'Smart Indices', path: URL.SMART_INDICES },
-    { page: 'Tick Trades', path: URL.TICK_TRADES }
 ];
 
 module.exports = utils.smokeTestUrls(urls);
