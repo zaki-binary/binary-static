@@ -51,7 +51,6 @@ module.exports = {
         SECTORS: '/c/trade.cgi?market=sectors',
         RANDOMS: '/c/trade.cgi?market=random',
         SMART_INDICES: '/c/trade.cgi?market=smarties',
-        TICK_TRADES: '/d/tick_trades.cgi',
     },
 
     RESOURCES: {
