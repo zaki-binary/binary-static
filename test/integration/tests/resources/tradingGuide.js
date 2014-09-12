@@ -5,7 +5,6 @@ var element = {
     higherLowerSeeDemoLink: '.bet_demo_link:nth-child(2)',
     touchNoTouchSeeDemoLink: '.bet_demo_link:nth-child(3)',
     inOutSeeDemoLink: '.bet_demo_link:nth-child(4)',
-    tickTradesSeeDemoLink: '.bet_demo_link:nth-child(5)',
     demoPopup: '.inpage_popup_container ui-draggable',
     closeButton: '.close'
 };
@@ -34,11 +33,6 @@ module.exports = {
             .click(element.closeButton)
         
             .click(element.inOutSeeDemoLink)
-            .pause(1000)
-            .assert.visible(element.demoPopup)
-            .click(element.closeButton)
-
-            .click(element.tickTradesSeeDemoLink)
             .pause(1000)
             .assert.visible(element.demoPopup)
             .click(element.closeButton)

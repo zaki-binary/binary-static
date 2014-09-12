@@ -35,16 +35,6 @@
 
   .section
     .section-content
-      .grd-grid-12.grd-parent
-        .grd-grid-12
-          %h1= l('Explore tick trades')
-          %p= l('Trade the next 5 ticks with [_1]\'s Tick Trades interface.', stash->{website_name})
-        .grd-grid-7.grd-grid-mobile-12.grd-grid-phablet-9.grd-centered
-          %a.pjaxload.button{:href => url_for('tick_trades.cgi')}
-            %img.responsive{:src => url_for('images/pages/tour/tour-ultra-short.png')}
-
-  .section
-    .section-content
       .grd-grid-12
         %h1= l('Bank your way')
         %a.pjaxload.button{:href => url_for('available_payment_methods.cgi')}

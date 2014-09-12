@@ -1027,7 +1027,7 @@ msgstr "Akumulacja/dystrybucja"
 msgid "Accuracy of Information"
 msgstr "Dokładność informacji"
 
-#: cgi/paymentagent_transfer.cgi:265
+#: cgi/paymentagent_transfer.cgi:279
 msgid "Acknowledgement of Money Transfer"
 msgstr "Potwierdzenie przelewu pieniędzy"
 
@@ -1137,7 +1137,7 @@ msgstr "Dostępne jest także <a href=\"https://apigee.com/rmg/resources/binary1
 msgid "An error occurred : the system cannot log you in (2)."
 msgstr "Wystąpił błąd: system nie może Cię zalogować (2)."
 
-#: cgi/paymentagent_transfer.cgi:121 cgi/paymentagent_transfer.cgi:128
+#: cgi/paymentagent_transfer.cgi:135 cgi/paymentagent_transfer.cgi:142
 #: cgi/paymentagent_withdraw.cgi:225 cgi/paymentagent_withdraw.cgi:231
 msgid "An error occurred while processing request. If this error persists, please contact customer support"
 msgstr "Podczas przetwarzania wniosku wystąpił błąd. Jeśli problem nadal będzie występował, skontaktuj się ze wsparciem klienta"
@@ -1323,7 +1323,7 @@ msgstr "Kapitał"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:95
 #: cgi/asset_index.cgi:116 cgi/asset_index.cgi:27
-#: lib/BOM/Product/Contract.pm:2778 lib/BOM/Product/Contract.pm:2817
+#: lib/BOM/Product/Contract.pm:2796 lib/BOM/Product/Contract.pm:2835
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:148
 msgid "Asset Index"
@@ -2236,7 +2236,7 @@ msgid "Contract barrier must be positive."
 msgstr "Limit kontraktu musi być wartością dodatnią."
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2892
+#: lib/BOM/Product/Contract.pm:2910
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "Kontrakt nie może zakończyć się podczas okresu świątecznego pod koniec roku. Wybierz datę zakończenia przed %1."
 
@@ -2252,7 +2252,7 @@ msgstr "Odkrycie i wycena kontraktów"
 msgid "Contract expired"
 msgstr "Kontrakt wygasł"
 
-#: lib/BOM/Product/Contract.pm:2669
+#: lib/BOM/Product/Contract.pm:2687
 msgid "Contract has already expired."
 msgstr "Kontrakt wygasł."
 
@@ -2261,11 +2261,11 @@ msgid "Contract market price is too close to final payout."
 msgstr "Cena rynkowa kontraktu jest zbyt bliska, aby dokonać ostatecznej wypłaty."
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2708
+#: lib/BOM/Product/Contract.pm:2726
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "Kontrakt nie może kończyć się w ciągu ostatnich %1 handlu."
 
-#: lib/BOM/Product/Contract.pm:2678
+#: lib/BOM/Product/Contract.pm:2696
 msgid "Contract must expire during trading hours."
 msgstr "Kontrakt musi kończyć się w porze handlowej."
 
@@ -2310,7 +2310,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "Niedostępne są kontrakty na %1 zaczynające i kończące się pomiędzy %2 a %3 tego samego dnia."
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2694
+#: lib/BOM/Product/Contract.pm:2712
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "Kontrakty na %1 z okresem trwania poniżej 24 godz. muszą wygasnąć podczas tej samej sesji."
 
@@ -2507,7 +2507,7 @@ msgstr "Dni do wyświetlenia"
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
 #. (BOM::View::Language::translate_salutation($client->salutation)
-#: cgi/f_writepartics.cgi:211 cgi/paymentagent_transfer.cgi:253
+#: cgi/f_writepartics.cgi:211 cgi/paymentagent_transfer.cgi:267
 #: cgi/paymentagent_withdraw.cgi:397
 msgid "Dear %1 %2 %3,"
 msgstr "Szanowny(a) %1 %2 %3,"
@@ -2991,7 +2991,7 @@ msgid "Duration"
 msgstr "Czas trwania"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2784
+#: lib/BOM/Product/Contract.pm:2802
 msgid "Duration must be between %1 and %2."
 msgstr "Czas trwania musi wynosić pomiędzy %1 a %2."
 
@@ -4599,7 +4599,7 @@ msgid "Login ID"
 msgstr "Login"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:81
+#: cgi/paymentagent_transfer.cgi:95
 msgid "Login ID (%1) does not exist."
 msgstr "Login (%1) nie istnieje."
 
@@ -4757,7 +4757,7 @@ msgid "Market exit price"
 msgstr "Rynkowa cena wyjściowa"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2844
+#: lib/BOM/Product/Contract.pm:2862
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "Okres świąteczny podczas czasu trwania kontraktu. Wybierz datę zakończenia przed %1."
 
@@ -5266,7 +5266,7 @@ msgid "Number of ticks"
 msgstr "Liczba najmniejszych przyrostów ceny"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2743
+#: lib/BOM/Product/Contract.pm:2761
 msgid "Number of ticks must be between %1 and %2"
 msgstr "Liczba najmniejszych przyrostów ceny musi wynosić między %1 a %2"
 
@@ -5756,7 +5756,7 @@ msgstr "Wybierz, w jakiej walucie chcesz zawrzeć transakcję."
 msgid "Please click on the \"Play\" button to start the video."
 msgstr "Naciśnij przycisk \"Odtwórz\", aby włączyć film."
 
-#: cgi/paymentagent_transfer.cgi:85 cgi/paymentagent_withdraw.cgi:209
+#: cgi/paymentagent_transfer.cgi:99 cgi/paymentagent_withdraw.cgi:209
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "Proszę potwierdzić szczegóły transakcji w celu zakończenia transferu:"
 
@@ -5787,7 +5787,7 @@ msgid "Please enter a town or city."
 msgstr "Wpisz nazwę miejscowości."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/currency_converter.html.tt:11
-#: cgi/paymentagent_transfer.cgi:104 cgi/subs/subs_forms.pm:3880
+#: cgi/paymentagent_transfer.cgi:118 cgi/subs/subs_forms.pm:3880
 #: cgi/subs/subs_forms.pm:4081
 msgid "Please enter a valid amount."
 msgstr "Wpisz poprawną kwotę."
@@ -5835,7 +5835,7 @@ msgstr "Wpisz swoje nazwisko."
 msgid "Please enter your secret answer"
 msgstr "Wpisz swoją sekretną odpowiedź"
 
-#: cgi/paymentagent_transfer.cgi:276
+#: cgi/paymentagent_transfer.cgi:290
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "W formularzu poniżej wpisz login i kwotę, którą chcesz przekazać swojemu Klientowi:"
 
@@ -6017,7 +6017,7 @@ msgstr "Pokazuje maksymalne zagregowane wypłaty dla niezapłaconych kontraktów
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "Obowiązująca cena rynkowa nie może być obecnie wyznaczona."
 
-#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2918
+#: lib/BOM/Product/Contract.pm:1502 lib/BOM/Product/Contract.pm:2936
 msgid "Prevailing market price cannot be determined."
 msgstr "Obowiązująca cena rynkowa nie może być wyznaczona."
 
@@ -6423,25 +6423,25 @@ msgstr "Pokazuje maksymalną liczbę kontraktów, które możesz nabyć w danym 
 msgid "Required"
 msgstr "Wymagane"
 
-#: lib/BOM/Product/Contract.pm:2891
+#: lib/BOM/Product/Contract.pm:2909
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "Odsprzedaż tego kontraktu nie jest dostępna z powodu świąt."
 
-#: lib/BOM/Product/Contract.pm:2843
+#: lib/BOM/Product/Contract.pm:2861
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "Odsprzedaż tego kontraktu nie jest dostępna z powodu świąt podczas okresu trwania kontraktu."
 
-#: lib/BOM/Product/Contract.pm:2864
+#: lib/BOM/Product/Contract.pm:2882
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "Odsprzedaż tego kontraktu nie jest dostępna z powodu świąt podczas okresu trwania kontraktu."
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2774
+#: lib/BOM/Product/Contract.pm:2792
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "Odsprzedaż tego kontraktu nie jest dostępna z pozostałym poniżej %1."
 
-#: lib/BOM/Product/Contract.pm:2310 lib/BOM/Product/Contract.pm:2768
-#: lib/BOM/Product/Contract.pm:2815
+#: lib/BOM/Product/Contract.pm:2310 lib/BOM/Product/Contract.pm:2786
+#: lib/BOM/Product/Contract.pm:2833
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "Odsprzedaż tego kontraktu nie jest dostępna."
@@ -6853,12 +6853,12 @@ msgid "Sorry you cannot buy/sell contracts"
 msgstr "Przepraszamy, ale nie możesz kupować ani sprzedawać kontraktów"
 
 #. ($client_to->loginid)
-#: cgi/paymentagent_transfer.cgi:100
+#: cgi/paymentagent_transfer.cgi:114
 msgid "Sorry, $currency is not default currency for client "
 msgstr ""
 
 #. ($client_fm->loginid)
-#: cgi/paymentagent_transfer.cgi:99
+#: cgi/paymentagent_transfer.cgi:113
 #, fuzzy
 #| msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgid "Sorry, $currency is not default currency for payment agent "
@@ -6901,7 +6901,7 @@ msgid "Sorry, an error occurred while processing your account."
 msgstr "Przepraszamy, wystąpił błąd podczas operacji na Twoim koncie."
 
 #. ($client_fm->broker)
-#: cgi/paymentagent_transfer.cgi:94
+#: cgi/paymentagent_transfer.cgi:108
 msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgstr "Przepraszamy, broker %1 nie umożliwia transferów od pośredników płatności."
 
@@ -6913,7 +6913,7 @@ msgstr "Przepraszamy, na jakiś czas zawieszono możliwość otwierania nowego k
 msgid "Sorry, only UK residents can authenticate their identity online."
 msgstr "Przepraszamy, tylko mieszkańcy Wielkiej Brytanii mogą zweryfikować swoją tożsamość online."
 
-#: cgi/paymentagent_transfer.cgi:98
+#: cgi/paymentagent_transfer.cgi:112
 msgid "Sorry, only USD is allowed."
 msgstr "Przepraszamy, dozwolony jest tylko dolar amerykański."
 
@@ -6968,7 +6968,7 @@ msgstr "Przepraszamy,zagregowane wypłaty kontraktów na Twoim koncie nie mogą 
 msgid "Sorry, the contract cannot be purchased during the last minute of the trading session."
 msgstr "Przepraszamy, kontraktu nie można kupić w ostatniej minucie sesji handlowej."
 
-#: cgi/paymentagent_transfer.cgi:97
+#: cgi/paymentagent_transfer.cgi:111
 msgid "Sorry, the currency format is incorrect."
 msgstr "Przepraszamy, format waluty jest niepoprawny."
 
@@ -7042,11 +7042,11 @@ msgstr "Przepraszamy, wpisano nieprawidłowe hasło do kasjera"
 msgid "Sorry, you have entered an incorrect email address."
 msgstr "Przepraszamy, wpisano nieprawidłowy adres e-mail."
 
-#: cgi/paymentagent_transfer.cgi:163 cgi/paymentagent_withdraw.cgi:295
+#: cgi/paymentagent_transfer.cgi:177 cgi/paymentagent_withdraw.cgi:295
 msgid "Sorry, you have exceeded the maximum allowable transactions for today."
 msgstr "Przepraszamy, przekroczyłeś maksymalną dopuszczoną dziś liczbę transakcji."
 
-#: cgi/paymentagent_transfer.cgi:155 cgi/paymentagent_withdraw.cgi:266
+#: cgi/paymentagent_transfer.cgi:169 cgi/paymentagent_withdraw.cgi:266
 msgid "Sorry, you have exceeded the maximum allowable transfer amount for today."
 msgstr "Przepraszamy, przekroczyłeś maksymalny dopuszczony dziś limit przelewów."
 
@@ -7166,20 +7166,20 @@ msgstr "Rozpocznij handel"
 msgid "Start time"
 msgstr "Godzina rozpoczęcia"
 
-#: lib/BOM/Product/Contract.pm:2593 lib/BOM/Product/Transaction.pm:365
+#: lib/BOM/Product/Contract.pm:2596 lib/BOM/Product/Transaction.pm:365
 msgid "Start time is in the past"
 msgstr "Czas rozpoczęcia w przeszłości"
 
-#: lib/BOM/Product/Contract.pm:2583
+#: lib/BOM/Product/Contract.pm:2586
 msgid "Start time is invalid."
 msgstr "Niepoprawny czas rozpoczęcia."
 
-#: lib/BOM/Product/Contract.pm:2573
+#: lib/BOM/Product/Contract.pm:2576
 msgid "Start time must be before expiry time."
 msgstr "Czas rozpoczęcia musi przypadać przed godziną wygaśnięcia."
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2626
+#: lib/BOM/Product/Contract.pm:2629
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "Czas rozpoczęcia kontraktów rozpoczynających się przyszłości musi przypadać później niż %1 od teraz."
 
@@ -7972,7 +7972,7 @@ msgstr "Ostatnia cyfra po przecinki z pierwszego przyrostu %1 to '%2'."
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "Rynkowa cena wyjściowa to cena obowiązująca w momencie zakończenia okresu kontraktu."
 
-#: lib/BOM/Product/Contract.pm:2599
+#: lib/BOM/Product/Contract.pm:2602
 msgid "The market must be open at the start time."
 msgstr "Rynek musi być otwarty w porze rozpoczęcia."
 
@@ -8232,7 +8232,7 @@ msgstr "Wystąpił problem z potwierdzeniem Twojego adresu. Prosimy poprawić za
 msgid "There was an error and we were unable to process your request."
 msgstr "Wystąpił błąd i nie byliśmy w stanie przetworzyć Twojego polecenia."
 
-#: cgi/paymentagent_transfer.cgi:111 cgi/paymentagent_transfer.cgi:115
+#: cgi/paymentagent_transfer.cgi:125 cgi/paymentagent_transfer.cgi:129
 #: cgi/paymentagent_withdraw.cgi:156 cgi/paymentagent_withdraw.cgi:186
 msgid "There was an error processing the request."
 msgstr "Wystąpił błąd podczas przetwarzania Twojego polecenia."
@@ -8317,7 +8317,7 @@ msgstr "kod bonusowy jest niedostępny."
 msgid "This call will return the same JSON structure that can be previewed from the API Console Facility."
 msgstr "Ta rozmowa zwróci taką samą strukturę JSON, którą można podejrzeć z konsoli funkcji API."
 
-#: cgi/paymentagent_transfer.cgi:111
+#: cgi/paymentagent_transfer.cgi:125
 msgid "This client cashier section is locked."
 msgstr "Sekcja kasjer klienta jest zablokowana."
 
@@ -8436,7 +8436,7 @@ msgstr "To jest potwierdzenie zmiany adresu z %3 na %4 dla Twojego konta %1 z dn
 msgid "This market closes early today at"
 msgstr "Ten rynek zostanie dziś wcześniej zamknięty o godz."
 
-#: lib/BOM/Product/Contract.pm:2599
+#: lib/BOM/Product/Contract.pm:2602
 msgid "This market is presently closed."
 msgstr "Rynek jest obecnie zamknięty."
 
@@ -8635,7 +8635,7 @@ msgid "Toll-Free number"
 msgstr "Połączenie bezpłatne"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2865
+#: lib/BOM/Product/Contract.pm:2883
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "Zbyt wiele dni wolnych podczas trwania kontraktu. Wybierz datę ważności po %1."
 
@@ -8784,8 +8784,9 @@ msgstr "Zasady handlowania"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 #: cgi/trading_times.cgi:15 lib/BOM/Product/Contract.pm:2279
-#: lib/BOM/Product/Contract.pm:2646 lib/BOM/Product/Contract.pm:2661
-#: lib/BOM/Product/Contract.pm:2834 lib/BOM/View/Menu.pm:155
+#: lib/BOM/Product/Contract.pm:2648 lib/BOM/Product/Contract.pm:2663
+#: lib/BOM/Product/Contract.pm:2679 lib/BOM/Product/Contract.pm:2852
+#: lib/BOM/View/Menu.pm:155
 msgid "Trading Times"
 msgstr "Godziny handlu"
 
@@ -8806,11 +8807,11 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "Handel kontraktami finansowymi wiąże się z wysokim poziomem ryzyka i może nie być odpowiedni dla każdego. Przed podjęciem decyzji o handlu kontraktami finansowymi powinieneś dokładnie rozważyć swoje cele, poziom doświadczenia i chęć podjęcia ryzyka. Musisz mieć świadomość wszelkiego ryzyka, jakie wiąże się z handlem finansowym, a w przypadku jakichkolwiek wątpliwości zasięgnąć porady niezależnego doradcy finansowego."
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2614
+#: lib/BOM/Product/Contract.pm:2617
 msgid "Trading is available after the first %1 of the session."
 msgstr "Handel jest dostępny po pierwszych %1 sesji."
 
-#: lib/BOM/Product/Contract.pm:2816
+#: lib/BOM/Product/Contract.pm:2834
 msgid "Trading is not offered for this duration."
 msgstr "Na ten okres nie ma oferowanych zakładów."
 
@@ -8830,14 +8831,20 @@ msgstr "Handel na %1 jest obecnie wstrzymany."
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
 #: lib/BOM/Product/Contract.pm:2260 lib/BOM/Product/Contract.pm:2267
-#: lib/BOM/Product/Contract.pm:2926
+#: lib/BOM/Product/Contract.pm:2944
 #: lib/BOM/Product/Pricing/Engine/IntradayHistorical.pm:794
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "Handel na %1 jest obecnie wstrzymany z powodu brakujących danych rynkowych."
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2644
+#: lib/BOM/Product/Contract.pm:2646
 msgid "Trading suspended for the last %1 of the session."
+msgstr "Handel został wstrzymany na czas ostatnich %1 sesji."
+
+#: lib/BOM/Product/Contract.pm:2661
+#, fuzzy
+#| msgid "Trading suspended for the last %1 of the session."
+msgid "Trading suspended for the last 300s of the session."
 msgstr "Handel został wstrzymany na czas ostatnich %1 sesji."
 
 #: cgi/subs/subs_forms_output.pm:331
@@ -8883,7 +8890,7 @@ msgid "Transfer to client"
 msgstr "Przelew dla klienta"
 
 #. ($client_to->full_name, $loginid_to, $currency, $amount)
-#: cgi/paymentagent_transfer.cgi:87
+#: cgi/paymentagent_transfer.cgi:101
 msgid "Transfer to: %1<br/>Login ID: %2<br/>Amount: %3 %4"
 msgstr "Przelew dla: %1<br/>Login: %2<br/>Kwota: %3 %4"
 
@@ -9116,7 +9123,7 @@ msgstr "Widok"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "Zobacz, jakie ceny kontraktów wzrost/spadek dla różnych rynków."
 
-#: lib/BOM/Product/Contract.pm:2606 lib/BOM/Product/Contract.pm:2616
+#: lib/BOM/Product/Contract.pm:2609 lib/BOM/Product/Contract.pm:2619
 msgid "View Trading Times"
 msgstr "Zobacz godziny handlu"
 
@@ -9181,7 +9188,7 @@ msgstr "Zobacz swoją historię transakcji."
 msgid "View your open positions."
 msgstr "Zobacz swoje otwarte pozycje."
 
-#: cgi/paymentagent_transfer.cgi:248 cgi/paymentagent_withdraw.cgi:387
+#: cgi/paymentagent_transfer.cgi:262 cgi/paymentagent_withdraw.cgi:387
 msgid "View your statement"
 msgstr "Zobacz swój wyciąg"
 
@@ -9339,7 +9346,7 @@ msgid "We will provide you with all the tools to turn your traffic into a lucrat
 msgstr "Zapewnimy Ci wszystkie narzędzia, dzięki którym zamienisz ruch na swojej stronie na źródło przychodów"
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, request()
-#: cgi/paymentagent_transfer.cgi:254
+#: cgi/paymentagent_transfer.cgi:268
 msgid ""
 "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 "The funds have been credited into your account.\n"
@@ -9939,7 +9946,7 @@ msgid "You can use an authorized payment agent to process deposits and withdrawa
 msgstr "Pośrednicy płatności dokonują wpłat i wypłat dla Klientów, którzy chcą korzystać z metod e-gotówki lub lokalnych walut nie obsługiwanych przez"
 
 #. ($loginid_to)
-#: cgi/paymentagent_transfer.cgi:108
+#: cgi/paymentagent_transfer.cgi:122
 msgid "You cannot transfer to account %1, as their account is currently disabled."
 msgstr "Nie możesz przelać pieniędzy na konto %1, ponieważ jest ono obecnie wyłączone."
 
@@ -10323,7 +10330,7 @@ msgstr "Twoja sekcja kasjer jest zablokowana hasłem."
 msgid "Your cashier is locked."
 msgstr "Twoja sekcja kasjer jest zablokowana."
 
-#: cgi/paymentagent_transfer.cgi:115
+#: cgi/paymentagent_transfer.cgi:129
 msgid "Your cashier section is locked."
 msgstr "Twoja sekcja kasjer jest zablokowana."
 
@@ -10448,7 +10455,7 @@ msgid "Your request to revoke the Power of Attorney has been received. Please al
 msgstr "Twoja prośba o odwołanie pełnomocnictwa została odebrana. Potrzebujemy 2 dni roboczych do przetworzenia tego wniosku."
 
 #. ($currency, $amount, $loginid_fm,        $loginid_to)
-#: cgi/paymentagent_transfer.cgi:243
+#: cgi/paymentagent_transfer.cgi:257
 msgid "Your request to transfer %1 %2 from %3 to %4 has been successfully processed."
 msgstr "Twój wniosek o przelanie %1 %2 z %3 na %4 został wykonany."
 
