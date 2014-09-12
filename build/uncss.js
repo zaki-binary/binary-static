@@ -18,7 +18,7 @@ module.exports = {
             report: 'min'
         },
         files: {
-            '/dist/css/binary.css': ['build/empty.html']
+            'dist/css/binary.css': ['build/empty.html']
         }
     }
 };
