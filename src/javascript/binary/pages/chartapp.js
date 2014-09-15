@@ -7,13 +7,13 @@
         isWindowsPhone = /Windows Phone/i.test(navigator.userAgent),
         isJavaInstalled = (deployJava.getJREs().length > 0) && deployJava.versionCheck("1.5+"),
         isMobile = isIOS || isAndroid || isWindowsPhone,
-        canBeInstalled = isJavaInstalled && !isMobile;
+        shouldBeInstalled = !isJavaInstalled && !isMobile;
 
-    $('#install-java').toggle(!isJavaInstalled);
-    $('#download-app').toggle(canBeInstalled);
+    $('#install-java').toggle(shouldBeInstalled);
+    $('#download-app').toggle(isJavaInstalled);
 
     $('#install-java').on('click', function () {
-        deployJava.installLatestJava();
+        deployJava.installLatestJRE();
     });
 
     $('#download-app').on('click', function () {

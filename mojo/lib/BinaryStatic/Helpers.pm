@@ -205,7 +205,6 @@ sub main_menu {
     push @{$menu}, $self->_main_menu_cashier();
     push @{$menu}, $self->_main_menu_resources();
     push @{$menu}, $self->_main_menu_charting();
-    push @{$menu}, $self->_main_menu_ticktrades();
 
     return $menu;
 }
@@ -421,21 +420,6 @@ sub _main_menu_charting {
     $charting_items_ref->{'sub_items'} = [$bomchart_ref, $charts_director_ref, $live_charts_ref,];
 
     return $charting_items_ref;
-}
-
-sub _main_menu_ticktrades {
-    my $self = shift;
-
-    if (1) {
-        return {
-            url        => $self->c->url_for('/tick_trades.cgi'),
-            text       => $self->c->l('Tick Trades'),
-            id         => 'topMenuRunbets',
-            link_class => 'with_login_cookies pjaxload',
-        };
-    }
-
-    return;
 }
 
 1;

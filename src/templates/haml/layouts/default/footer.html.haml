@@ -38,8 +38,6 @@
           %h1= l('Trading')
           %ul
             %li
-              %a.pjaxload.with_login_cookies{:href=>url_for("tick_trades.cgi")}= l('Tick Trades')
-            %li
               %a.pjaxload{:href=>url_for("pricing_table.cgi")}= l('Pricing Table')
             %li
               %a.pjaxload{:href=>url_for("rise_fall_table.cgi")}= l('Rise/Fall Table')
@@ -98,9 +96,9 @@
         .grd-grid-4.grd-grid-phablet-12
           %a{:href => "http://www.gov.im/gambling/", :target => "_blank"}
             %img.responsive#iom_icon_footer{:src => url_for('images/pages/footer/isle-of-man.png')}
-        .grd-grid-6.grd-grid-phablet-12.grd-no-gutter-left
+        .grd-grid-5.grd-grid-phablet-12.grd-no-gutter-left
           %a{:href => "http://www.lga.org.mt/lga/home.aspx", :target => "_blank"}
-            %img.responsive#lga_icon_footer{:src => url_for('images/pages/footer/authority-malta.svg')}
+            %img.responsive#lga_icon_footer{:src => url_for('images/pages/footer/authority-malta-licensed.png')}
         .grd-grid-2.grd-grid-phablet-12.grd-no-gutter
           %img.responsive#eighteen_plus{:src => url_for('images/pages/footer/eighteen-plus.svg')}
       .grd-grid-6.grd-grid-phablet-7.grd-grid-mobile-12

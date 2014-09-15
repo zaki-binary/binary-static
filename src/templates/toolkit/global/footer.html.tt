@@ -76,11 +76,6 @@
                     <h1>[% l('Trading') %]</h1>
                     <ul>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('tick_trades.cgi') %]"[% IF target %]
-                            target="[%
-                            target %]"[% END %]>[% l('Tick Trades') %]</a>
-                        </li>
-                        <li>
                             <a class="pjaxload" href="[% request.url_for('pricing_table.cgi') %]"[% IF target %]
                             target="[%
                             target %]"[% END %]>[% l('Pricing Table') %]</a>
@@ -194,9 +189,9 @@
                         <img id="iom_icon_footer" class="responsive" src="[% request.url_for('images/pages/footer/isle-of-man.png') %]"/>
                     </a>
                 </div>
-                <div class="grd-grid-6 grd-grid-phablet-12 grd-no-gutter-left">
+                <div class="grd-grid-5 grd-grid-phablet-12 grd-no-gutter-left">
                     <a href="http://www.lga.org.mt/lga/home.aspx" target="_blank">
-                        <img id="lga_icon_footer" class="responsive" src="[% request.url_for('images/pages/footer/authority-malta.svg') %]"/>
+                        <img id="lga_icon_footer" class="responsive" src="[% request.url_for('images/pages/footer/authority-malta-licensed.png') %]"/>
                     </a>
                 </div>
                 <div class="grd-grid-2 grd-grid-phablet-12 grd-no-gutter">
