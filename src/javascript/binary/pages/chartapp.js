@@ -13,7 +13,7 @@
     $('#download-app').toggle(isJavaInstalled);
 
     $('#install-java').on('click', function () {
-        deployJava.installLatestJava();
+        deployJava.installLatestJRE();
     });
 
     $('#download-app').on('click', function () {

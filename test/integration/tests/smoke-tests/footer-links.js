@@ -8,7 +8,6 @@ var urls = [
     { page: 'Responsible Trading', path: URL.RESPONSIBLE_TRADING },
     { page: 'Terms and Conditions', path: URL.TERMS_AND_CONDITIONS },
 
-    { page: 'Tick Trades', path: URL.TICK_TRADES },
     { page: 'Pricing Table', path: URL.PRICING_TABLE },
     { page: 'Rise/Fall Table', path: URL.RISE_FALL_TABLE },
     { page: 'Asset Index', path: URL.ASSET_INDEX },
