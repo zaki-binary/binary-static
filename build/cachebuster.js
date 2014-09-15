@@ -11,6 +11,8 @@ module.exports = {
                         output += '"binary_css_hash":"' + hashes[filename] + '"';
                     } else if (/\bbinary\b/.test(filename)) {
                         output += '"binary_js_hash":"' + hashes[filename] + '"';
+                    } else if (/\bdata\b/.test(filename)) {
+                        output += '"binary_data_hash":"' + hashes[filename] + '"';
                     } else {
                         output += '"binary_lib_hash":"' + hashes[filename] + '"';
                     }
@@ -24,7 +26,7 @@ module.exports = {
             }
         },
         files: {
-            'dist/hashed.json': ['dist/js/binary.min.js', 'dist/js/lib.min.js', 'dist/css/binary.min.css'],
+            'dist/hashed.json': ['dist/js/binary.min.js', 'dist/js/lib.min.js', 'dist/js/data.min.js', 'dist/css/binary.min.css'],
         },
     }
 };
