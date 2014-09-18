@@ -267,6 +267,11 @@ msgstr "%1 umożliwia zatwierdzonym kontrahentom korzystanie przez internet z AP
 msgid "%1 provides you with the opportunity to either self exclude or"
 msgstr "%1 umożliwia rezygnację lub"
 
+#. ('REFRESH_TOKEN')
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "%1 was found in the same JSON structure which supplied the original access_token."
+msgstr ""
+
 #. ('ACCESS_TOKEN')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "%1 was returned by the authentication procedure."
@@ -966,10 +971,6 @@ msgstr "Saldo konta: %1 %2"
 msgid "Account balance: "
 msgstr "Saldo konta: "
 
-#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-msgid "Account management facilities (under development)"
-msgstr "Funkcje zarządzania kontem (obecnie opracowywane)"
-
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:13
 msgid "Accounts"
@@ -1466,6 +1467,10 @@ msgstr "Limit(y)"
 #: lib/BOM/Product/Contract.pm:2529
 msgid "Barriers must be on either side of the spot."
 msgstr "Limity muszą być po którejś ze stron punktu."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Basic Account review/update facilities"
+msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/batch_sell_success_ajax.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/batch_transactions_result_table.html.tt:2
@@ -2213,6 +2218,10 @@ msgstr "Wypłaty kontraktów będą określane przez Firmę w odniesieniu do dzi
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/touchnotouch.html.tt:2
 msgid "Contract period"
 msgstr "Okres kontraktu"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Contract purchase (approved applications only"
+msgstr ""
 
 #: cgi/oop/Controller/Bet.pm:1468
 msgid "Contract purchases on this account must be on behalf of granters."
@@ -5099,6 +5108,10 @@ msgstr "Uwierzytelnienie OAuth2 korzystające ze strumienia autokodowania"
 msgid "OAuth2 Authentication Using Implicit Flow"
 msgstr "Uwierzytelnienie OAuth2 korzystające ze strumienia autokodowania"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "OAuth2 Token Renewal"
+msgstr ""
+
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
 msgid "OAuth2.0 is the emerging internet standard for this purpose. See <a href=\"http://oauth.net/2\" target=\"_blank\">http://oauth.net/2</a> for a formal definition, although we will guide you through the steps relevant to your platform."
 msgstr "OAuth2.0 to najnowszy standard internetowy przeznaczony do takich celów. Z formalną definicją można zapoznać się tutaj: <a href=\"http://oauth.net/2\" target=\"_blank\">http://oauth.net/2</a>, jednak i tak zapoznamy Cię krok po kroku z informacjami odpowiednimi dla tego portalu."
@@ -6934,6 +6947,10 @@ msgstr "Stan/prowincja"
 msgid "Statement"
 msgstr "Oświadczenie"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Statement and Portfolio Enquiries"
+msgstr ""
+
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 #, fuzzy
 #| msgid "Statement"
@@ -7238,6 +7255,13 @@ msgstr "Portal %1 jest chroniony prawami autorskimi."
 
 #. ('POST')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+#, fuzzy
+#| msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
+msgid "The %1 will return a JSON structure which includes a new access_token along with several other useful attributes relevant to the renewal."
+msgstr "%1 zwróci strukturę JSON, która obejmuje token_dostepu oraz kilka innych przydatnych atrybutów."
+
+#. ('POST')
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
 msgstr "%1 zwróci strukturę JSON, która obejmuje token_dostepu oraz kilka innych przydatnych atrybutów."
 
@@ -7463,6 +7487,10 @@ msgstr "pierwszy najmniejszy przyrost ceny"
 msgid "The GBP Index is a weighted Index, measuring the British Pound’s value against a basket of 5 global currencies (USD, EUR, AUD, JPY, CAD), each weighted by 20%."
 msgstr "Indeks GBP to indeks ważony mierzący wartość funta brytyjskiego w stosunku do koszyka 5 światowych walut (USD, EUR, AUD, JPY, CAD), z których każda ma wagę 20%."
 
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "The JSON structure which supplied the access_token also included a refresh_token.  Supply this in the following call:"
+msgstr ""
+
 #: cgi/subs/subs_BOMFeed_history.pm:460
 #: cgi/subs/subs_graphs_chartdirector.pm:363
 msgid "The Mass Index attempts to predict reversals by comparing the trading range (High minus Low) for each period. Reversals are signalled by a bulge in the index line."
@@ -7513,6 +7541,10 @@ msgstr "Indeks USD to indeks ważony mierzący wartość dolara amerykańskiego 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/privacy.html.tt:10
 msgid "The above personal data that we collect will be held by us and processed for any purpose as may be allowed by law or required by any law. We may also transfer such personal data to any company within the Regent Markets Group of companies or any of our business associates."
 msgstr "Powyższe dane osobowe, które otrzymamy będą prowadzone przez nas i przetwarzane w dowolnym celu, który może być dozwolony lub wymagany przez prawo. Możemy również przekazać takie dane osobowe do każdej firmy w ramach Regent Markets Group lub któremukolwiek z naszych partnerów biznesowych."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "The access-token retrieved earlier has a limited lifetime.  In the case of Auth-Code Flow only, it can be renewed."
+msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:63
 #: /home/git/translations/binary-static/src/templates/toolkit/legtrouble.html.tt:63
@@ -8459,10 +8491,6 @@ msgstr "Limity wypłat i handlowe"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/how_to_trade_binaries.html.haml:1
 msgid "Trading binaries is remarkably easy, and requires only 3 simple steps:"
 msgstr "Handel opcjami binarnymi jest niezwykle prosty i mieści się w 3 prostych krokach:"
-
-#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-msgid "Trading facilities (under development)"
-msgstr "Narzędzia do handlowania (w trakcie opracowywania)"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:8
 msgid "Trading financial contracts involves a high level of risk and may not be suitable for all persons.  Before deciding to trade financial contracts you should carefully consider your objectives, level of experience and risk appetite.  You should be aware of all the risks associated with financial trading and seek advice from an independent financial advisor if you have any doubts."
@@ -10142,6 +10170,12 @@ msgstr "limit strat, jakie możesz ponieść w określonym czasie;"
 #: cgi/subs/subs_clientdetails.pm:136
 msgid "and"
 msgstr "i"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+#, fuzzy
+#| msgid "and with this HTTP header"
+msgid "and with this (same as before) HTTP header"
+msgstr "i z tym nagłówkiem HTTP"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "and with this HTTP header"
@@ -12415,6 +12449,12 @@ msgstr "Niestety, dostęp za pośrednictwem tej sieci IP został wyłączony. Pr
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Przepraszamy, wykonano zbyt wiele prób zakończonych niepowodzeniem. Prosimy spróbować ponownie za 5 minut."
+
+#~ msgid "Account management facilities (under development)"
+#~ msgstr "Funkcje zarządzania kontem (obecnie opracowywane)"
+
+#~ msgid "Trading facilities (under development)"
+#~ msgstr "Narzędzia do handlowania (w trakcie opracowywania)"
 
 #~ msgid "%1 Up/Down"
 #~ msgstr "Zysk/Strata %1"

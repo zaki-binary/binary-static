@@ -264,6 +264,11 @@ msgstr "%1 предоставляет бизнес-партнерам интер
 msgid "%1 provides you with the opportunity to either self exclude or"
 msgstr "%1 предлагает Вам возможность временного самоисключения или"
 
+#. ('REFRESH_TOKEN')
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "%1 was found in the same JSON structure which supplied the original access_token."
+msgstr ""
+
 #. ('ACCESS_TOKEN')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "%1 was returned by the authentication procedure."
@@ -958,10 +963,6 @@ msgstr "Баланс счета : %1 %2"
 msgid "Account balance: "
 msgstr "Баланс счета: "
 
-#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-msgid "Account management facilities (under development)"
-msgstr "Средства для управления счетом (в разработке)"
-
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:13
 msgid "Accounts"
@@ -1438,6 +1439,10 @@ msgstr "Барьер(ы)"
 #: lib/BOM/Product/Contract.pm:2529
 msgid "Barriers must be on either side of the spot."
 msgstr "Барьеры должны быть выше или ниже рыночной цены."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Basic Account review/update facilities"
+msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/batch_sell_success_ajax.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/batch_transactions_result_table.html.tt:2
@@ -2164,6 +2169,10 @@ msgstr "Выплата по контрактам будет определять
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/touchnotouch.html.tt:2
 msgid "Contract period"
 msgstr "Период контракта"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Contract purchase (approved applications only"
+msgstr ""
 
 #: cgi/oop/Controller/Bet.pm:1468
 msgid "Contract purchases on this account must be on behalf of granters."
@@ -4964,6 +4973,10 @@ msgstr "Авторизация OAuth2, используя поток с кодо
 msgid "OAuth2 Authentication Using Implicit Flow"
 msgstr "Авторизация OAuth2, используя неявный поток (Implicit Flow)"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "OAuth2 Token Renewal"
+msgstr ""
+
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
 msgid "OAuth2.0 is the emerging internet standard for this purpose. See <a href=\"http://oauth.net/2\" target=\"_blank\">http://oauth.net/2</a> for a formal definition, although we will guide you through the steps relevant to your platform."
 msgstr "OAuth2.0 - это новейший интернет-стандарт для этой цели. См. <a href=\"http://oauth.net/2\" target=\"_blank\">http://oauth.net/2</a> для официального определения, хотя мы поможем Вам совершить относящиеся к Вашей платформе шаги."
@@ -6771,6 +6784,10 @@ msgstr "Штат/провинция/область"
 msgid "Statement"
 msgstr "История счета"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Statement and Portfolio Enquiries"
+msgstr ""
+
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Static Content"
 msgstr "Статическое содержание"
@@ -7069,6 +7086,13 @@ msgstr "Сайт %1 защищен копирайтом."
 
 #. ('POST')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+#, fuzzy
+#| msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
+msgid "The %1 will return a JSON structure which includes a new access_token along with several other useful attributes relevant to the renewal."
+msgstr "%1 вернет структуру JSON, которая включает ключ к доступу access_token вместе с некоторыми другими важными аттрибутами."
+
+#. ('POST')
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
 msgstr "%1 вернет структуру JSON, которая включает ключ к доступу access_token вместе с некоторыми другими важными аттрибутами."
 
@@ -7284,6 +7308,10 @@ msgstr "Первая котировка"
 msgid "The GBP Index is a weighted Index, measuring the British Pound’s value against a basket of 5 global currencies (USD, EUR, AUD, JPY, CAD), each weighted by 20%."
 msgstr "Индекс GBP Index является взвешенным индексом, измеряющим значение британского фунта против корзины из 5 основных мировых валют (USD, EUR, AUD, JPY, CAD), каждая взвешенная на 20%."
 
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "The JSON structure which supplied the access_token also included a refresh_token.  Supply this in the following call:"
+msgstr ""
+
 #: cgi/subs/subs_BOMFeed_history.pm:460
 #: cgi/subs/subs_graphs_chartdirector.pm:363
 msgid "The Mass Index attempts to predict reversals by comparing the trading range (High minus Low) for each period. Reversals are signalled by a bulge in the index line."
@@ -7334,6 +7362,10 @@ msgstr "Индекс USD Index является взвешенным индек�
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/privacy.html.tt:10
 msgid "The above personal data that we collect will be held by us and processed for any purpose as may be allowed by law or required by any law. We may also transfer such personal data to any company within the Regent Markets Group of companies or any of our business associates."
 msgstr "Предоставленные Вами личные данные хранятся в Компании и могут быть предъявлены по требованию представителей закона. Ваша персональная информация может быть передана в любой из филиалов компании Regent Markets Group или ее деловым партнерам."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "The access-token retrieved earlier has a limited lifetime.  In the case of Auth-Code Flow only, it can be renewed."
+msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:63
 #: /home/git/translations/binary-static/src/templates/toolkit/legtrouble.html.tt:63
@@ -8254,10 +8286,6 @@ msgstr "Лимиты на торговлю и вывод"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/how_to_trade_binaries.html.haml:1
 msgid "Trading binaries is remarkably easy, and requires only 3 simple steps:"
 msgstr "Торговля на опционах очень проста и заключается в трех простых шагах:"
-
-#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-msgid "Trading facilities (under development)"
-msgstr "Торговые возможности (в разработке)"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:8
 msgid "Trading financial contracts involves a high level of risk and may not be suitable for all persons.  Before deciding to trade financial contracts you should carefully consider your objectives, level of experience and risk appetite.  You should be aware of all the risks associated with financial trading and seek advice from an independent financial advisor if you have any doubts."
@@ -9892,6 +9920,12 @@ msgstr "лимит на потери, которые Вы можете поне�
 #: cgi/subs/subs_clientdetails.pm:136
 msgid "and"
 msgstr "и"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+#, fuzzy
+#| msgid "and with this HTTP header"
+msgid "and with this (same as before) HTTP header"
+msgstr "и с этим заголовком HTTP"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "and with this HTTP header"
@@ -12108,6 +12142,12 @@ msgstr "Извините, вход с этого ip-адреса был запр
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Извините, у Вас уже было слишком много неудачных попыток. Попробуйте через пять минут."
+
+#~ msgid "Account management facilities (under development)"
+#~ msgstr "Средства для управления счетом (в разработке)"
+
+#~ msgid "Trading facilities (under development)"
+#~ msgstr "Торговые возможности (в разработке)"
 
 #~ msgid " and "
 #~ msgstr " и "
