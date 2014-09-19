@@ -7,9 +7,10 @@ msgstr ""
 "Project-Id-Version: 1228\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2014-09-13 01:55+0200\n"
+"PO-Revision-Date: 2014-09-18 06:39+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
-"Language-Team: Simplified Chinese <https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
+"Language-Team: Simplified Chinese "
+"<https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
 "Language: zh_cn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,6 +265,11 @@ msgstr "%1给已受核准的商业伙伴通过网际网络提供表述性状态�
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
 msgid "%1 provides you with the opportunity to either self exclude or"
 msgstr "%1为您提供自行排除的机会或"
+
+#. ('REFRESH_TOKEN')
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "%1 was found in the same JSON structure which supplied the original access_token."
+msgstr "发现了结构与提供原始 access_token 的 JSON 相同的 1％ 。"
 
 #. ('ACCESS_TOKEN')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
@@ -956,10 +962,6 @@ msgstr "帐户余额 : %1 %2"
 msgid "Account balance: "
 msgstr "帐户余额: "
 
-#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-msgid "Account management facilities (under development)"
-msgstr "账户管理工具（开发中）"
-
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:13
 msgid "Accounts"
@@ -1436,6 +1438,10 @@ msgstr "价位水平"
 #: lib/BOM/Product/Contract.pm:2529
 msgid "Barriers must be on either side of the spot."
 msgstr "障碍必须放到点的两边之一。"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Basic Account review/update facilities"
+msgstr "基本帐户审查/更新设施"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/batch_sell_success_ajax.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/batch_transactions_result_table.html.tt:2
@@ -2161,6 +2167,10 @@ msgstr "公司将参考本网站上公布的与合同标的指数有关的或者
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/touchnotouch.html.tt:2
 msgid "Contract period"
 msgstr "合约期间"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Contract purchase (approved applications only"
+msgstr "购买合同（仅限于获批准的申请"
 
 #: cgi/oop/Controller/Bet.pm:1468
 msgid "Contract purchases on this account must be on behalf of granters."
@@ -4359,7 +4369,7 @@ msgstr "与一流金融 交易 服务商的长期伙伴关系"
 
 #: web/bin/JavascriptCompress.pm:133
 msgid "Loss"
-msgstr ""
+msgstr "亏损"
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/header.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/header.html.tt:72
@@ -4958,6 +4968,10 @@ msgstr "使用 Auth-Code Flow 进行 OAuth2 验证"
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "OAuth2 Authentication Using Implicit Flow"
 msgstr "使用隐式控制流进行 OAuth2 验证"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "OAuth2 Token Renewal"
+msgstr "OAuth2令牌续期"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
 msgid "OAuth2.0 is the emerging internet standard for this purpose. See <a href=\"http://oauth.net/2\" target=\"_blank\">http://oauth.net/2</a> for a formal definition, although we will guide you through the steps relevant to your platform."
@@ -6758,6 +6772,10 @@ msgstr "州/省"
 msgid "Statement"
 msgstr "报表"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
+msgid "Statement and Portfolio Enquiries"
+msgstr "声明和组合查询"
+
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Static Content"
 msgstr "静态内容"
@@ -7056,6 +7074,12 @@ msgstr "%1网站受版权保护。"
 
 #. ('POST')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+#| msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
+msgid "The %1 will return a JSON structure which includes a new access_token along with several other useful attributes relevant to the renewal."
+msgstr "%1将返回一个JSON结构，其中包括新的ACCESS_TOKEN以及其他几个有用的与延期有关的属性。"
+
+#. ('POST')
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
 msgstr "%1将返回一个JSON结构，其中包括ACCESS_TOKEN以及其他几个有用的属性。"
 
@@ -7269,6 +7293,10 @@ msgstr "首个跳动点"
 msgid "The GBP Index is a weighted Index, measuring the British Pound’s value against a basket of 5 global currencies (USD, EUR, AUD, JPY, CAD), each weighted by 20%."
 msgstr "英镑指数是加权指数，衡量英镑兑换5种全球货币（美元，欧元，澳元，日元，加元）的价值，分别加权20％。"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "The JSON structure which supplied the access_token also included a refresh_token.  Supply this in the following call:"
+msgstr "提供access_token的JSON结构还包括refresh_token。 在下面的调用提供这个："
+
 #: cgi/subs/subs_BOMFeed_history.pm:460
 #: cgi/subs/subs_graphs_chartdirector.pm:363
 msgid "The Mass Index attempts to predict reversals by comparing the trading range (High minus Low) for each period. Reversals are signalled by a bulge in the index line."
@@ -7319,6 +7347,10 @@ msgstr "美元指数是加权指数，衡量美元兑换5种全球货币（欧�
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/privacy.html.tt:10
 msgid "The above personal data that we collect will be held by us and processed for any purpose as may be allowed by law or required by any law. We may also transfer such personal data to any company within the Regent Markets Group of companies or any of our business associates."
 msgstr "对于以上收集的个人数据，我们将根据法律允许或规定目的持有或加工。我们可能会将相关个人信息转移给Regent Markets Group的公司或我们的业务伙伴。"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+msgid "The access-token retrieved earlier has a limited lifetime.  In the case of Auth-Code Flow only, it can be renewed."
+msgstr "早前检索的访问令牌具有有限的寿命。 如果是只有验证码流之情况，可以延长。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:63
 #: /home/git/translations/binary-static/src/templates/toolkit/legtrouble.html.tt:63
@@ -8235,10 +8267,6 @@ msgstr "交易和提款限额"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/how_to_trade_binaries.html.haml:1
 msgid "Trading binaries is remarkably easy, and requires only 3 simple steps:"
 msgstr "二元期权交易非常简单，仅需执行 3 个简单的步骤："
-
-#: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-msgid "Trading facilities (under development)"
-msgstr "交易设施（开发中）"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:8
 msgid "Trading financial contracts involves a high level of risk and may not be suitable for all persons.  Before deciding to trade financial contracts you should carefully consider your objectives, level of experience and risk appetite.  You should be aware of all the risks associated with financial trading and seek advice from an independent financial advisor if you have any doubts."
@@ -9880,6 +9908,11 @@ msgstr "您可能在某一给定时间期限内遭受的损失限额;"
 #: cgi/subs/subs_clientdetails.pm:136
 msgid "and"
 msgstr "以及"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
+#| msgid "and with this HTTP header"
+msgid "and with this (same as before) HTTP header"
+msgstr "以及这个(跟之前的相同)HTTP标题"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "and with this HTTP header"
@@ -12094,6 +12127,12 @@ msgstr "对不起，通过此 IP 网络的访问已禁用，请联系「客户�
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "对不起，您的失败尝试次数过多。请5分钟后再尝试。"
+
+#~ msgid "Account management facilities (under development)"
+#~ msgstr "账户管理工具（开发中）"
+
+#~ msgid "Trading facilities (under development)"
+#~ msgstr "交易设施（开发中）"
 
 #~ msgid " and "
 #~ msgstr " 以及 "
