@@ -14,26 +14,14 @@
         <meta name="author" content="[%= broker_name =%]" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+        [%= FOREACH css_file IN css_files =%]
+            <link rel="stylesheet" href="[%= css_file =%]">
+        [% END %]
+
         [% INCLUDE global/javascripts.html.tt
             javascript=javascript
         %]
-        <script>
-            function loadCss(url, absolute) {
-                var link = document.createElement("link");
-                link.type = "text/css";
-                link.rel = "stylesheet";
-                if(absolute) {
-                  link.href = url;
-                } else {
-                  link.href = '[%= other_static_cdn =%]/'+url;
-                }
-                document.getElementsByTagName("head")[0].appendChild(link);
-            }
 
-            [%= FOREACH css_file IN css_files =%]
-                loadCss('[%= css_file =%]', true);
-            [% END %]
-        </script>
         <title>[%= broker_name =%] - [%= title =%]</title>
         <link rel="SHORTCUT ICON" href="[%= icon_url =%]" />
     </head>
