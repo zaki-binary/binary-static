@@ -134,7 +134,6 @@ sub register {
                     $config->{static}->{url} .'js/binary.min.js'
                 ],
                 settings       => to_json(\%setting),
-                head_js_inline => '',
             };
         });
 

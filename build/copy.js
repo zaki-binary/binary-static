@@ -1,6 +1,7 @@
 module.exports = {
     all: {
         files: [
+            { expand: true, src: ['config.json'], dest: 'dist' },
             { expand: true, src: ['javascript.json'], dest: 'dist' },
             { expand: true, cwd: 'src/config/locales/', src: ['**'], dest: 'dist/config/locales/' },
             { expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/', },
@@ -9,7 +10,7 @@ module.exports = {
             { expand: true, cwd: 'src/templates/', src: ['**'], dest: 'dist/templates/' },
             { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/images/', src: ['**'], dest: 'dist/css/images' },
             { expand: true, cwd: 'src/css/external/jquery-ui-custom-theme/', src: ['*.css'], dest: 'dist/css/' },
-            { expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/dev/javascript/' }
+            { expand: true, cwd: 'src/javascript/', src: ['**'], dest: 'dist/dev/src/javascript/' }
         ]
     }
 };
