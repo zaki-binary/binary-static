@@ -2367,15 +2367,13 @@ LiveChartTick.prototype.process_data = function(point) {
             epoch: parseInt(point[1]),
             quote: parseFloat(point[2])
         };
-        if (!this.config.to || tick.epoch <= this.config.to) {
-            this.chart.series[0].addPoint(
-                [tick.epoch * 1000, tick.quote], false, this.shift, false
-            );
-            this.spot = tick.quote;
-            // for tick trade charting purposes
-            if (tick.epoch > this.config.contract_start_time && ticks_array.length < this.config.how_many_ticks) {
-                    ticks_array.push(tick);
-            }
+        this.chart.series[0].addPoint(
+            [tick.epoch * 1000, tick.quote], false, this.shift, false
+        );
+        this.spot = tick.quote;
+        // for tick trade charting purposes
+        if (tick.epoch > this.config.contract_start_time && ticks_array.length < this.config.how_many_ticks) {
+                ticks_array.push(tick);
         }
     } else if (point[0] == 'contract') {
         this.process_contract(point[1]);
@@ -2409,7 +2407,7 @@ LiveChartOHLC.prototype.process_data = function(point) {
     if (type == 'ohlc') {
         this.process_ohlc(point);
     } else if (type == 'tick') {
-        if ( this.accept_ticks && (!this.config.to || point[0] < this.config.to)) {
+        if (this.accept_ticks) {
                 this.process_tick(point);
         }
     } else if (type == 'corp_action') {
@@ -6542,7 +6540,7 @@ BetForm.Time.EndTime.prototype = {
                                        }
                                    } else {
                                        from_date = that.get_date_from_seconds(time_obj['from_time'] - 5);
-                                       to_date = that.get_date_from_seconds(time_obj['to_time'] + 5);
+                                       to_date = that.get_date_from_seconds(time_obj['to_time']);
                                    }
 
                                    var display_marker = false;
@@ -8304,7 +8302,7 @@ var add_qq = function() {
 
 var show_live_chat_icon = function() {
     if(typeof DESK === 'undefined') {
-        loadCSS("https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_191.cssgz?1367387331", 1);
+        loadCSS("https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_191.cssgz?1367387331");
         loadJS("https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries_191.jsgz?1367387332");
     }
 
