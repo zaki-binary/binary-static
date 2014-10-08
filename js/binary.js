@@ -3101,6 +3101,16 @@ pjax_config_page('portfolio|trade.cgi|statement|f_manager_statement|f_manager_hi
         }
     };
 });
+
+pjax_config_page('chart_application', function () {
+    return {
+        onLoad: function () {
+            $.getScript("https://www.java.com/js/deployJava.js").done(function () {
+                load_chart_app();
+            });
+        }
+    };
+});
 ;var BetAnalysis = function () {
     var tab_change_registered = false;
     var restored = false;
@@ -7918,9 +7928,7 @@ onLoad.queue_for_url(function() {
     listen_to_chart_element();
 }, 'smartchart');
 
-;(function () {
-    'use strict';
-
+;var load_chart_app = function () {
     var isMac = /Mac/i.test(navigator.platform),
         isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent),
         isAndroid = /Android/i.test(navigator.userAgent),
@@ -7946,7 +7954,7 @@ onLoad.queue_for_url(function() {
             alert('The charting app is not available on mobile devices!');
         }
     });
-})();
+};
 ;//// togglePromoCodeTnC ////////////////////////////////////////////
 //
 // triggered when the promocode field on the account opening form
