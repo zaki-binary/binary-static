@@ -1,6 +1,4 @@
-﻿(function () {
-    'use strict';
-
+﻿var load_chart_app = function () {
     var isMac = /Mac/i.test(navigator.platform),
         isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent),
         isAndroid = /Android/i.test(navigator.userAgent),
@@ -26,4 +24,4 @@
             alert('The charting app is not available on mobile devices!');
         }
     });
-})();
+};

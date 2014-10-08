@@ -129,3 +129,13 @@ pjax_config_page('portfolio|trade.cgi|statement|f_manager_statement|f_manager_hi
         }
     };
 });
+
+pjax_config_page('chart_application', function () {
+    return {
+        onLoad: function () {
+            $.getScript("https://www.java.com/js/deployJava.js").done(function () {
+                load_chart_app();
+            });
+        }
+    };
+});
