@@ -1,6 +1,5 @@
 module.exports = {
     all: {
-        github: {
             options: {
                 hostname: '127.0.0.1',
                 port: 443,
@@ -8,6 +7,5 @@ module.exports = {
                 base: 'dist',
                 keepalive: true
             }
-        },
     }
 };
