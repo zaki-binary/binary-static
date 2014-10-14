@@ -4060,11 +4060,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                         params += '&type=' + type;
                     }
 
-                    var skin = page.url.param('skin');
-                    if(skin) {
-                        params += '&skin=' + skin;
-                    }
-
                     var expiry_type = BetForm.attributes.model.expiry_type();
                     if (expiry_type) {
                         params += '&expiry_type=' + expiry_type;
@@ -7260,7 +7255,6 @@ BetForm.Time.EndTime.prototype = {
                         data: { controller_action: 'vcal_weights',
                             underlying_symbol: underlying_symbol,
                         year: year,
-                        skin: page.settings.get('skin')
                         },
                         success: function(vcal_weights) {
                             cache[cache_key] = vcal_weights;
