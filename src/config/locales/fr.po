@@ -79,7 +79,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2014-11-12 07:53+0200\n"
+"PO-Revision-Date: 2014-11-18 09:03+0200\n"
 "Last-Translator: olvn@weblate_13 <francaisatwork@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/binary/static/fr/>\n"
 "Language: fr\n"
@@ -87,7 +87,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.0\n"
+"X-Generator: Weblate 2.1-dev\n"
 
 #: cgi/top_up_virtual.cgi:52
 msgid " has been credited to your Virtual money account"
@@ -194,8 +194,8 @@ msgstr "%1 considère avoir acquis le client au moment du premier contact avec l
 msgid "%1 does not charge any transfer fees."
 msgstr "%1 ne facture aucun frais de transfert."
 
-#. (stash('website_name')
 #. (broker_name)
+#. (stash('website_name')
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/head.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:11
 msgid "%1 gives everyone an easy and exciting way to participate in the financial markets. Trade with as little as $1 USD on major currencies, indices, commodities and stocks."
@@ -1312,7 +1312,7 @@ msgstr "Actif"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:90
 #: cgi/asset_index.cgi:144 cgi/asset_index.cgi:29
-#: lib/BOM/Product/Contract.pm:2857 lib/BOM/Product/Contract.pm:2899
+#: lib/BOM/Product/Contract.pm:2873 lib/BOM/Product/Contract.pm:2915
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:147
 msgid "Asset Index"
@@ -1413,7 +1413,7 @@ msgstr "Retour"
 msgid "Balance"
 msgstr "Solde"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:291
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:293
 msgid "Bank Wire"
 msgstr "Virement bancaire"
 
@@ -1469,16 +1469,16 @@ msgstr "Etape de barrière (%) hors limite"
 msgid "Barrier Step format error"
 msgstr "Barrière Pas erreur de format"
 
-#: lib/BOM/Product/Contract.pm:2592
+#: lib/BOM/Product/Contract.pm:2608
 msgid "Barrier is out of acceptable range."
 msgstr "Barrière est en dehors de l'intervalle acceptable."
 
-#: lib/BOM/Product/Contract.pm:2582
+#: lib/BOM/Product/Contract.pm:2598
 msgid "Barrier may not be adjusted."
 msgstr "Barrière ne peut pas être ajustée."
 
 #. ($min_pips . ' pips away from the spot.')
-#: lib/BOM/Product/Contract.pm:2538
+#: lib/BOM/Product/Contract.pm:2554
 msgid "Barrier must be at least "
 msgstr "Barrière doit être au moins "
 
@@ -1499,7 +1499,7 @@ msgstr "Termes de barrière"
 msgid "Barrier(s)"
 msgstr "Barrière(s)"
 
-#: lib/BOM/Product/Contract.pm:2563
+#: lib/BOM/Product/Contract.pm:2579
 msgid "Barriers must be on either side of the spot."
 msgstr "Barrières doivent se trouver de chaque côté de la valeur."
 
@@ -2194,7 +2194,7 @@ msgid "Contract barrier must be positive."
 msgstr "La barrière du contrat doit être positive."
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2974
+#: lib/BOM/Product/Contract.pm:2990
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "Les contrats ne peuvent pas expirer pendant la période des fêtes de fin d'année. Veuillez sélectionner une date d'expiration après %1."
 
@@ -2210,20 +2210,20 @@ msgstr "Découverte et tarification du contrat"
 msgid "Contract expired"
 msgstr "Contrat arrivé à échéance"
 
-#: lib/BOM/Product/Contract.pm:2739
+#: lib/BOM/Product/Contract.pm:2755
 msgid "Contract has already expired."
 msgstr "Contrat a déjà expiré."
 
-#: lib/BOM/Product/Contract.pm:1842
+#: lib/BOM/Product/Contract.pm:1858
 msgid "Contract market price is too close to final payout."
 msgstr "Prix du contrat de marché est trop près du paiement final."
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2781
+#: lib/BOM/Product/Contract.pm:2797
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "Contrat ne peut pas expirer au cours des dernières %1 de trading."
 
-#: lib/BOM/Product/Contract.pm:2748
+#: lib/BOM/Product/Contract.pm:2764
 msgid "Contract must expire during trading hours."
 msgstr "Contrats doit expirer pendant les heures de trading."
 
@@ -2268,7 +2268,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "Des contrats sur %1 qui commencent et terminent entre %2 et %3 le même jour ne sont pas disponibles."
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2767
+#: lib/BOM/Product/Contract.pm:2783
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "Des contrats sur %1 de durées inférieures à 24 heures doivent expirer durant la même journée de trading."
 
@@ -2356,7 +2356,7 @@ msgstr "Les relevés de devise sont tronqués à 5 chiffres et tous les contrats
 msgid "Current Spot"
 msgstr "Au comptant courant"
 
-#: lib/BOM/Product/Contract.pm:2435
+#: lib/BOM/Product/Contract.pm:2451
 msgid "Current market price is 0."
 msgstr "Prix du marché actuel est 0."
 
@@ -2452,12 +2452,12 @@ msgid "Dear %1 %2 %3,"
 msgstr "Cher/Chère %1 %2 %3,"
 
 #. (BOM::View::Language::translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:298
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:300
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgstr "Cher/Chère %1 %2 %3, Nous aimerions vous informer que votre Dépôt %5 a été traité. Cordialement, %4"
 
 #. (BOM::View::Language::translate_salutation($salutation)
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:305
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:306
 msgid "Dear %1 %2 %3, We would like to inform you that your %5 Withdrawal has been processed. Kind Regards, %4"
 msgstr "Cher/Chère %1 %2 %3, Nous aimerions vous informer que votre Retrait %5 a été traité. Cordialement, %4"
 
@@ -2654,7 +2654,7 @@ msgstr "Dépôt via DoughFlow"
 msgid "Deposit via Western Union (MTCN: %1)"
 msgstr "Dépôt via Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:292
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:294
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:89
 msgid "Deposit via bank wire"
 msgstr "Dépôt via virement bancaire"
@@ -2878,7 +2878,7 @@ msgid "Duration"
 msgstr "Durée"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2863
+#: lib/BOM/Product/Contract.pm:2879
 msgid "Duration must be between %1 and %2."
 msgstr "Durée doit être entre %1 et %2."
 
@@ -4027,7 +4027,7 @@ msgstr "Interprétation"
 msgid "Intraday"
 msgstr "Intrajournalier"
 
-#: lib/BOM/Product/Contract.pm:1609
+#: lib/BOM/Product/Contract.pm:1614
 msgid "Intraday contracts may not cross market open."
 msgstr "Contrats intrajournalier ne peuvent pas croiser un marché ouvert."
 
@@ -4060,7 +4060,7 @@ msgstr "Montant non valide"
 msgid "Invalid fax number."
 msgstr "Numéro de fax non valide."
 
-#: lib/BOM/Product/Contract.pm:2371
+#: lib/BOM/Product/Contract.pm:2387
 msgid "Invalid payout currency."
 msgstr "Devise de paiement non valide."
 
@@ -4068,7 +4068,7 @@ msgstr "Devise de paiement non valide."
 msgid "Invalid period input! Please input the period between 0 and #1"
 msgstr "Entrée de période non valide ! Veuillez entrer une période entre 0 et #1"
 
-#: lib/BOM/Product/Contract.pm:2420
+#: lib/BOM/Product/Contract.pm:2436
 msgid "Invalid stake"
 msgstr "Mise non valide"
 
@@ -4262,7 +4262,7 @@ msgstr "Apprendre à trader en ligne"
 msgid "Legacy Contract"
 msgstr "Contrat antérieur"
 
-#: lib/BOM/Product/Contract.pm:969
+#: lib/BOM/Product/Contract.pm:974
 msgid "Legacy contract. No further information is available."
 msgstr "Contrat antérieur. Pas d'informations supplémentaires disponibles."
 
@@ -4438,7 +4438,7 @@ msgstr "Bande Inférieure"
 msgid "Lower Band = Average - 0.5 * Std Deviation"
 msgstr "Bande Inférieure = Moyenne - 0,5 * Déviation std"
 
-#: lib/BOM/Product/Contract.pm:2572
+#: lib/BOM/Product/Contract.pm:2588
 msgid "Lower barrier is out of acceptable range. Please adjust the lower barrier."
 msgstr "Barrière inférieure est en dehors de l'intervalle acceptable. Veuillez ajuster la barrière inférieure."
 
@@ -4505,7 +4505,7 @@ msgid "Market exit price"
 msgstr "Prix final du marché"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2926
+#: lib/BOM/Product/Contract.pm:2942
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "Jours fériés du marché pendant la période de contrat. Veuillez sélectionner une date d'expiration après %1."
 
@@ -4647,15 +4647,15 @@ msgstr "Minimum"
 msgid "Miss"
 msgstr "Mlle"
 
-#: lib/BOM/Product/Contract.pm:1570 lib/BOM/Product/Contract.pm:1623
+#: lib/BOM/Product/Contract.pm:1575 lib/BOM/Product/Contract.pm:1628
 msgid "Missing market data for contract period."
 msgstr "Données du marché manquantes pour la période du contrat."
 
-#: lib/BOM/Product/Contract.pm:1509
+#: lib/BOM/Product/Contract.pm:1514
 msgid "Missing market data for entry spot."
 msgstr "Données du marché manquantes pour point de départ."
 
-#: lib/BOM/Product/Contract.pm:1583 lib/BOM/Product/Contract.pm:1596
+#: lib/BOM/Product/Contract.pm:1588 lib/BOM/Product/Contract.pm:1601
 msgid "Missing market data for exit spot."
 msgstr "Données du marché manquantes pour point de sortie."
 
@@ -4901,8 +4901,8 @@ msgstr "Remarque : pendant l'heure d'été (économies d'énergie), le temps GMT
 msgid "Note: The company reserves the right to cancel commissions that are not claimed after 2 years. Please also read our affiliate terms and conditions."
 msgstr "Remarque : la société se réserve le droit de mettre fin à des commissions non réclamées au bout de 2 ans. Nous vous prions également de bien vouloir lire nos conditions générales d'affiliation."
 
-#. ($self->currency,                    $limits->{frozen_free_gift},                    $limits->{free_gift_turnover_limit},                    virgule($limits->{aggregate_buys_for_currency})
 #. ($currency,            $withdrawal_limits->{'frozen_free_gift'},            $withdrawal_limits->{'free_gift_turnover_limit'},            virgule($withdrawal_limits->{'aggregate_buys_for_currency'})
+#. ($self->currency,                    $limits->{frozen_free_gift},                    $limits->{free_gift_turnover_limit},                    virgule($limits->{aggregate_buys_for_currency})
 #: cgi/oop/Validation/Transaction/Payment/Withdrawal.pm:153
 #: cgi/subs/subs_payments_withdrawals.pm:107
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
@@ -4959,7 +4959,7 @@ msgid "Number of ticks"
 msgstr "Nombre d'intervalles"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2816
+#: lib/BOM/Product/Contract.pm:2832
 msgid "Number of ticks must be between %1 and %2"
 msgstr "Nombre d'intervalles doit être entre %1 et %2"
 
@@ -5357,12 +5357,12 @@ msgstr "Devise du Versement"
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "Le gain a évolué en votre faveur de %1 à %2."
 
-#: lib/BOM/Product/Contract.pm:2393
+#: lib/BOM/Product/Contract.pm:2409
 msgid "Payout may not have more than two decimal places."
 msgstr "Un retrait ne peut pas contenir plus de deux décimales."
 
 #. (to_monetary_number_format($payout_min, 1)
-#: lib/BOM/Product/Contract.pm:1854
+#: lib/BOM/Product/Contract.pm:1870
 msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "La mise doit se situer entre <strong>%1</strong> et <strong>%2</strong>."
 
@@ -5663,7 +5663,7 @@ msgstr "Présente les gains cumulés maximaux sur les contrats actifs dans votre
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "Le prix prévalant du marché ne peut pas être déterminé pour le moment."
 
-#: lib/BOM/Product/Contract.pm:1522 lib/BOM/Product/Contract.pm:3000
+#: lib/BOM/Product/Contract.pm:1527 lib/BOM/Product/Contract.pm:3016
 msgid "Prevailing market price cannot be determined."
 msgstr "Le prix prévalant du marché ne peut pas être déterminé."
 
@@ -5773,7 +5773,7 @@ msgstr "Promotionnel"
 msgid "Proof of address"
 msgstr "Preuve d'adresse"
 
-#: lib/BOM/Product/Contract.pm:2555
+#: lib/BOM/Product/Contract.pm:2571
 msgid "Proper barriers could not be determined."
 msgstr "Des barrières correctes n'ont pas pu être déterminées."
 
@@ -6046,25 +6046,25 @@ msgstr "Représente le volume maximal de contrats que vous pouvez acheter au cou
 msgid "Required"
 msgstr "Requis"
 
-#: lib/BOM/Product/Contract.pm:2973
+#: lib/BOM/Product/Contract.pm:2989
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "La revente de ce contrat n'est pas proposée à cause des jours fériés de fin d'année sur les marchés."
 
-#: lib/BOM/Product/Contract.pm:2925
+#: lib/BOM/Product/Contract.pm:2941
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "La revente de ce contrat n'est pas proposée à cause des jours fériés sur les marchés durant la durée du contrat."
 
-#: lib/BOM/Product/Contract.pm:2946
+#: lib/BOM/Product/Contract.pm:2962
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "La revente de ce contrat n'est pas proposée à cause des jours fériés de fin d'année sur les marchés."
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2853
+#: lib/BOM/Product/Contract.pm:2869
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "La revente de ce contrat n'est pas proposée avec moins de %1 restant."
 
-#: lib/BOM/Product/Contract.pm:2334 lib/BOM/Product/Contract.pm:2847
-#: lib/BOM/Product/Contract.pm:2897
+#: lib/BOM/Product/Contract.pm:2350 lib/BOM/Product/Contract.pm:2863
+#: lib/BOM/Product/Contract.pm:2913
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "La revente de ce contrat n'est pas proposée."
@@ -6701,7 +6701,7 @@ msgid "Stake"
 msgstr "Gain"
 
 #. (to_monetary_number_format($stake_min, 1)
-#: lib/BOM/Product/Contract.pm:1845
+#: lib/BOM/Product/Contract.pm:1861
 msgid "Stake must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Mise doit se situer entre <strong>%1</strong> et <strong>%2</strong>."
 
@@ -6723,20 +6723,20 @@ msgstr "Commencer le Trading"
 msgid "Start time"
 msgstr "Heure du début"
 
-#: lib/BOM/Product/Contract.pm:2647 lib/BOM/Product/Transaction.pm:365
+#: lib/BOM/Product/Contract.pm:2663 lib/BOM/Product/Transaction.pm:365
 msgid "Start time is in the past"
 msgstr "Le moment de début est dans le passé"
 
-#: lib/BOM/Product/Contract.pm:2637
+#: lib/BOM/Product/Contract.pm:2653
 msgid "Start time is invalid."
 msgstr "L'heure de départ est non valide."
 
-#: lib/BOM/Product/Contract.pm:2627
+#: lib/BOM/Product/Contract.pm:2643
 msgid "Start time must be before expiry time."
 msgstr "Le moment de début doit être antérieur au moment d'expiration."
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2680
+#: lib/BOM/Product/Contract.pm:2696
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "L'heure de départ de contrats commençant dans le futur doit être plus de %1 à partir de maintenant."
 
@@ -6900,7 +6900,7 @@ msgstr "Passer en mode normal"
 msgid "System Time"
 msgstr "Temps Système"
 
-#: lib/BOM/Product/Contract.pm:521
+#: lib/BOM/Product/Contract.pm:526
 msgid "System problems prevent proper settlement at this time."
 msgstr "Des problèmes du système empêchent une clôture correcte en ce moment."
 
@@ -7360,7 +7360,7 @@ msgstr "La barrière d'un trade d'une option binaire est le prix-cible que vous 
 msgid "The barrier(s) you choose defines your position and triggers your payout."
 msgstr "La(les) barrière(s) que vous choisissez définit votre position et déclenche votre gain."
 
-#: lib/BOM/Product/Contract.pm:554 lib/BOM/Product/Contract.pm:562
+#: lib/BOM/Product/Contract.pm:559 lib/BOM/Product/Contract.pm:567
 msgid "The barriers are improperly entered for this contract."
 msgstr "Les barrières ne sont pas correctement définies pour ce contrat."
 
@@ -7418,7 +7418,7 @@ msgstr "Le contrat a expiré"
 msgid "The contract is not available after %1 GMT."
 msgstr "Le contrat n'est pas disponible après %1 GMT."
 
-#: lib/BOM/Product/Contract.pm:610
+#: lib/BOM/Product/Contract.pm:615
 msgid "The contract must expire on a trading day."
 msgstr "Le contrat doit expirer un jour de trading."
 
@@ -7444,7 +7444,7 @@ msgstr "Le coût de vos positions ouvertes"
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "La devise de votre bonus sera la même que la devise de votre premier dépôt."
 
-#: lib/BOM/Product/Contract.pm:1009
+#: lib/BOM/Product/Contract.pm:1014
 msgid "The database is not yet updated with settlement data."
 msgstr "La base de données n'a pas encore été actualisée avec les données de configuration."
 
@@ -7502,7 +7502,7 @@ msgstr "Le premier intervalle est le premier intervalle après le moment où le 
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "Le prix final du marché est le prix en vigueur à la fin de la période du contrat."
 
-#: lib/BOM/Product/Contract.pm:2653
+#: lib/BOM/Product/Contract.pm:2669
 msgid "The market must be open at the start time."
 msgstr "Le marché doit être ouvert à l'heure du départ."
 
@@ -7616,8 +7616,8 @@ msgstr "La devise fournie %1 est non valide."
 msgid "The provided currency %1 is not the default currency"
 msgstr "La devise fournie %1 n'est pas la devise par défaut"
 
-#. ($new_email)
 #. ($email)
+#. ($new_email)
 #: cgi/create_account.cgi:104 cgi/f_writepartics.cgi:107
 msgid "The provided email address %1 is already in use by another Login ID."
 msgstr "L'adresse email fournie %1 est déjà utilisée par un autre Identifiant de connexion."
@@ -7834,7 +7834,7 @@ msgstr "La section caisse de ce client est verrouillée."
 msgid "This contract cannot be properly validated at this time."
 msgstr "Ce contrat ne peut pas être correctement validé pour le moment."
 
-#: lib/BOM/Product/Contract.pm:1709
+#: lib/BOM/Product/Contract.pm:1714
 msgid "This contract has already expired."
 msgstr "Ce contrat a déjà expiré."
 
@@ -7855,7 +7855,7 @@ msgstr "Ce contrat est arrivé à échéance."
 msgid "This contract is limited to "
 msgstr "Ce contrat est limité à "
 
-#: lib/BOM/Product/Contract.pm:998
+#: lib/BOM/Product/Contract.pm:1003
 msgid "This contract is no longer offered."
 msgstr "Ce contrat n'est plus proposé."
 
@@ -7867,7 +7867,7 @@ msgstr "Ce contrat est indisponible sur ce compte."
 msgid "This contract lost"
 msgstr "Ce contrat perdu"
 
-#: lib/BOM/Product/Contract.pm:2435
+#: lib/BOM/Product/Contract.pm:2451
 msgid "This contract offers no return."
 msgstr "Ce contrat n'offre pas de retour."
 
@@ -7937,7 +7937,7 @@ msgstr "Ceci est la confirmation que votre adresse email pour votre compte %1 su
 msgid "This market closes early today at"
 msgstr "Ce marché ferme tôt aujourd'hui à"
 
-#: lib/BOM/Product/Contract.pm:2653
+#: lib/BOM/Product/Contract.pm:2669
 msgid "This market is presently closed."
 msgstr "Ce marché va bientôt fermer."
 
@@ -7967,7 +7967,7 @@ msgstr "Cette offre ne peut pas être utilisée en association avec toute autre 
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgstr "Cette promotion est uniquement valable pour les nouveaux Clients. Les Clients actuels ou les anciens Clients ne peuvent pas en bénéficier. Elle n'est valable qu'une seule fois pour chaque Client."
 
-#: lib/BOM/Product/Contract.pm:2335
+#: lib/BOM/Product/Contract.pm:2351
 msgid "This trade is not offered."
 msgstr "Ce trade n'est pas proposé."
 
@@ -8096,7 +8096,7 @@ msgid "Toll-Free number"
 msgstr "Numéro d'appel gratuit"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2947
+#: lib/BOM/Product/Contract.pm:2963
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "Trop de jours fériés du marché pendant la période de contrat. Veuillez sélectionner une date d'expiration après %1."
 
@@ -8229,9 +8229,9 @@ msgstr "Règles de Trading"
 
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
-#: cgi/trading_times.cgi:16 lib/BOM/Product/Contract.pm:2303
-#: lib/BOM/Product/Contract.pm:2700 lib/BOM/Product/Contract.pm:2715
-#: lib/BOM/Product/Contract.pm:2731 lib/BOM/Product/Contract.pm:2916
+#: cgi/trading_times.cgi:16 lib/BOM/Product/Contract.pm:2319
+#: lib/BOM/Product/Contract.pm:2716 lib/BOM/Product/Contract.pm:2731
+#: lib/BOM/Product/Contract.pm:2747 lib/BOM/Product/Contract.pm:2932
 #: lib/BOM/View/Menu.pm:154
 msgid "Trading Times"
 msgstr "Heures de Trading"
@@ -8249,23 +8249,23 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "Le trading de contrats financiers implique un haut niveau de risques et n'est pas approprié à toutes les personnes. Avant de décider de trader des contrats financiers, vous devez réfléchir attentivement à vos objectifs, à votre niveau d'expérience et à votre goût du risque. Vous devez être au courant de l'ensemble des risques liés au trading financier et demander conseil à un conseiller financier indépendant si vous avez des doutes."
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2668
+#: lib/BOM/Product/Contract.pm:2684
 msgid "Trading is available after the first %1 of the session."
 msgstr "Le trading est disponible après les premières %1 de la session."
 
-#: lib/BOM/Product/Contract.pm:2898
+#: lib/BOM/Product/Contract.pm:2914
 msgid "Trading is not offered for this duration."
 msgstr "Trading n'est pas offert pour cette durée."
 
-#: cgi/oop/Controller/Bet.pm:681 lib/BOM/Product/Contract.pm:2256
-#: lib/BOM/Product/Contract.pm:2322
+#: cgi/oop/Controller/Bet.pm:681 lib/BOM/Product/Contract.pm:2272
+#: lib/BOM/Product/Contract.pm:2338
 msgid "Trading is suspended at the moment."
 msgstr "Le trading est suspendu pour le moment."
 
 #. ($translated_name)
 #. ($underlying->translated_display_name()
-#: cgi/analyse_contract.cgi:71 lib/BOM/Product/Contract.pm:2264
-#: lib/BOM/Product/Contract.pm:2273 lib/BOM/Product/Contract.pm:2301
+#: cgi/analyse_contract.cgi:71 lib/BOM/Product/Contract.pm:2280
+#: lib/BOM/Product/Contract.pm:2289 lib/BOM/Product/Contract.pm:2317
 msgid "Trading on %1 is suspended at the moment."
 msgstr "Le trading sur %1 est suspendu pour le moment."
 
@@ -8273,19 +8273,19 @@ msgstr "Le trading sur %1 est suspendu pour le moment."
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
 #. ($bet->underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2284 lib/BOM/Product/Contract.pm:2291
-#: lib/BOM/Product/Contract.pm:3008
+#: lib/BOM/Product/Contract.pm:2300 lib/BOM/Product/Contract.pm:2307
+#: lib/BOM/Product/Contract.pm:3024
 #: lib/BOM/Product/Pricing/Engine/Intraday.pm:281
 #: lib/BOM/Product/Pricing/Engine/Intraday/Index.pm:79
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "Le trading sur %1 est suspendu à cause de données de marché manquantes."
 
-#: lib/BOM/Product/Contract.pm:2713
+#: lib/BOM/Product/Contract.pm:2729
 msgid "Trading on this contract type is suspended for the last one hour of the session."
 msgstr "Effectuer des trades sur ce type de contrat est suspendu pour la dernière heure de la session."
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2698
+#: lib/BOM/Product/Contract.pm:2714
 msgid "Trading suspended for the last %1 of the session."
 msgstr "Trading suspendu pour le dernier %1 de la session."
 
@@ -8547,7 +8547,7 @@ msgstr "Voir"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "Voir les prix de contrats Hausse/Baisse sur différents marchés."
 
-#: lib/BOM/Product/Contract.pm:2660 lib/BOM/Product/Contract.pm:2670
+#: lib/BOM/Product/Contract.pm:2676 lib/BOM/Product/Contract.pm:2686
 msgid "View Trading Times"
 msgstr "Voir heures de Trading"
 
@@ -8677,7 +8677,7 @@ msgstr "Nous n'acceptions pas de comptes de résidents de ce pays pour le moment
 msgid "We could not authenticate your account online. please proceed to the <a href=\"%1\">manual authentication section</a>. If you would like to register additional credit cards, please contact <a class=\"pjaxload\" href=\"%2\">customer support</a>."
 msgstr "Nous ne sommes pas en mesure d'authentifier votre compte en ligne. Veuillez vous rendre à la <a href=\"%1\">section d'authentification manuelle</a>. Si vous désirez enregistrer des cartes bancaires supplémentaires, veuillez contacter le <a class=\"pjaxload\" href=\"%2\">service clientèle</a>."
 
-#: lib/BOM/Product/Contract.pm:503
+#: lib/BOM/Product/Contract.pm:1811 lib/BOM/Product/Contract.pm:508
 msgid "We could not process this contract at this time."
 msgstr "Nous n'avons pas pu traiter ce contrat en ce moment."
 
@@ -9195,7 +9195,7 @@ msgstr "Retrait via DoughFlow"
 msgid "Withdrawal via Western Union (MTCN: %1)"
 msgstr "Retrait via Western Union (MTCN: %1)"
 
-#: cgi/f_brokercgi/f_manager_confodeposit.cgi:292
+#: cgi/f_brokercgi/f_manager_confodeposit.cgi:294
 #: lib/BOM/Platform/Model/Payment/BankWire.pm:91
 msgid "Withdrawal via bank wire"
 msgstr "Retrait via virement bancaire"
@@ -9883,7 +9883,7 @@ msgstr "chaque occasion où la Société pourrait subir un préjudice financier,
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "toute restriction à ses Clients relative à l'acquisition de tout contrat durant certaines heures."
 
-#: lib/BOM/Product/Contract.pm:2235
+#: lib/BOM/Product/Contract.pm:2251
 msgid "barrier"
 msgstr "barrière"
 
@@ -9964,7 +9964,7 @@ msgstr "pour des instructions de codage détaillées."
 msgid "here"
 msgstr "ici"
 
-#: lib/BOM/Product/Contract.pm:2235
+#: lib/BOM/Product/Contract.pm:2251
 msgid "high barrier"
 msgstr "barrière supérieure"
 
@@ -9988,7 +9988,7 @@ msgstr "moins"
 msgid "loading..."
 msgstr "chargement..."
 
-#: lib/BOM/Product/Contract.pm:2235
+#: lib/BOM/Product/Contract.pm:2251
 msgid "low barrier"
 msgstr "barrière inférieure"
 
@@ -10012,7 +10012,7 @@ msgstr "durée minimale disponible"
 msgid "minimum is"
 msgstr "le minimum est"
 
-#: lib/BOM/Product/Contract.pm:2232
+#: lib/BOM/Product/Contract.pm:2248
 msgid "minus"
 msgstr "moins"
 
@@ -10061,7 +10061,7 @@ msgstr "ou essayez s'il vous plaît le plan du site ci-dessous"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr "afin d'obtenir l'heure exacte de la clôture de tous les contrats. Les autres sites web peuvent adopter une convention différente (par exemple, certains sites web choisissent 4 heures, heure de NY, ou 5 heures, heure de Londres). Par conséquent, les prix à l'ouverture, supérieurs, inférieurs et à la clôture affichés sur notre site web peuvent différer de ceux affichés sur d'autres sites web, du fait de leur convention sur l'heure de clôture du marché."
 
-#: lib/BOM/Product/Contract.pm:2232
+#: lib/BOM/Product/Contract.pm:2248
 msgid "plus"
 msgstr "plus"
 
@@ -10284,10 +10284,8 @@ msgid "Belgian Index"
 msgstr "Indice Belge"
 
 #: Underlying Symbol BSESENSEX30
-#, fuzzy
-#| msgid "Bombay 30 Index"
 msgid "Bombay Index"
-msgstr "Indice Bombay 30"
+msgstr "Indice Bombay"
 
 #: Underlying Symbol DEADS
 msgid "ADIDAS AG"
@@ -10626,10 +10624,8 @@ msgid "Global Property Index"
 msgstr "Global Property Index"
 
 #: Underlying Symbol SPC
-#, fuzzy
-#| msgid "USD Index"
 msgid "US Index"
-msgstr "Indice USD"
+msgstr "Indice US"
 
 #: Underlying Symbol SPGSAM
 msgid "Metals Index"
@@ -10788,10 +10784,8 @@ msgid "Transportation Index"
 msgstr "Transportation Index"
 
 #: Underlying Symbol SPTSX60
-#, fuzzy
-#| msgid "Canadian 60 Index"
 msgid "Canadian Index"
-msgstr "Indice Canadian 60"
+msgstr "Indice Canadien"
 
 #: Underlying Symbol SREITGUP
 msgid "Global REIT Index"
