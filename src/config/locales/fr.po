@@ -81,8 +81,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2014-12-01 08:09+0200\n"
 "Last-Translator: Kamelia Milcheva <kami@binary.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/binary/static/fr/>"
-"\n"
+"Language-Team: French <https://hosted.weblate.org/projects/binary/static/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -199,7 +198,9 @@ msgstr "%1 ne facture aucun frais de transfert."
 #. (stash('website_name')
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/head.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:11
-msgid "%1 gives everyone an easy and exciting way to participate in the financial markets. Trade with as little as $1 USD on major currencies, indices, commodities and stocks."
+#, fuzzy
+#| msgid "%1 gives everyone an easy and exciting way to participate in the financial markets. Trade with as little as $1 USD on major currencies, indices, commodities and stocks."
+msgid "%1 gives everyone an easy and exciting way to participate in the financial markets. Trade with as little as $1 USD on major currencies, indices and commodities."
 msgstr "%1 donne à chacun une manière simple et excitante de participer aux marchés financiers. Tradez avec aussi peu que $1 USD sur les devises, indices, matières premières et bourses majeures du monde."
 
 #. (broker_name)
@@ -367,7 +368,9 @@ msgstr "La technologie de tarification brevetée de %1 vous permet de profiter d
 #. (stash('broker_name')
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
-msgid "%1: Online Trading platform for binary options on Forex, Indices, Stocks, Commodities and Global Sector Indices"
+#, fuzzy
+#| msgid "%1: Online Trading platform for binary options on Forex, Indices, Stocks, Commodities and Global Sector Indices"
+msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
 msgstr "Plate-forme de Trading en ligne pour les options binaires sur les Taux de Change, les Indices, les Bourses, les Matières premières et les Indices du Secteur Global"
 
 #. (stash->{website_name})
@@ -989,7 +992,7 @@ msgid "Acceptance"
 msgstr "Acceptation"
 
 #. (request()
-#: cgi/create_account.cgi:108
+#: cgi/create_account.cgi:110
 msgid "According to our terms and conditions, you may only register for one real money account through our site. If you have forgotten the Login ID or password of your existing account, please <a href=\"%1\">try our password recovery tool</a> or contact customer service."
 msgstr "Conformément à nos termes et conditions, vous ne pouvez vous enregistrer que pour un compte d'argent réel sur notre site. Si vous avez oublié l'Identifiant de connexion ou le mot de passe de votre compte existant, veuillez <a href=\"%1\">essayer notre outil de récupération de mot de passe</a> ou contactez le service clients."
 
@@ -1012,7 +1015,7 @@ msgstr "Gestion et Suivi du Compte"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:121
 #: /home/git/translations/binary-static/src/templates/toolkit/legtrouble.html.tt:121
-#: cgi/create_account.cgi:192 cgi/create_account.cgi:294
+#: cgi/create_account.cgi:194 cgi/create_account.cgi:296
 #: cgi/open_account.cgi:14 lib/BOM/View/CGIForm.pm:4291
 msgid "Account Opening"
 msgstr "Ouverture de Compte"
@@ -1052,7 +1055,7 @@ msgstr "Attestation du transfert d'argent"
 msgid "Acknowledgement of Withdrawal Request"
 msgstr "Attestation de la demande de retrait"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:208
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:208
 #, fuzzy
 msgid "Acquisition"
 msgstr "Acquisition"
@@ -1074,7 +1077,7 @@ msgstr "Ajouter Lignes"
 msgid "Add Overlay"
 msgstr "Ajouter Réseau"
 
-#: cgi/f_writepartics.cgi:207 lib/BOM/View/CGIForm.pm:1520
+#: cgi/f_writepartics.cgi:208 lib/BOM/View/CGIForm.pm:1520
 #: lib/BOM/View/CGIForm.pm:763
 msgid "Address"
 msgstr "Adresse"
@@ -1103,7 +1106,7 @@ msgstr "Après s'être connecté chez binary.com, vous pouvez vous enregistrer c
 msgid "After the user authenticates to %1; their browser will be re-directed to your callback handler with a call like this:"
 msgstr "Après que l'utilisateur s'est authentifié chez %1; leur navigateur sera redirigé vers le gestionnaire de votre rappel avec un appel comme ceci:"
 
-#: lib/BOM/Product/Model/ContractForm.pm:856
+#: lib/BOM/Product/Model/ContractForm.pm:859
 msgid "All"
 msgstr "Tout"
 
@@ -1315,7 +1318,7 @@ msgstr "Actif"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:90
 #: cgi/asset_index.cgi:144 cgi/asset_index.cgi:29
-#: lib/BOM/Product/Contract.pm:2873 lib/BOM/Product/Contract.pm:2915
+#: lib/BOM/Product/Contract.pm:2852 lib/BOM/Product/Contract.pm:2894
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:177
 #: lib/BOM/View/Menu.pm:147
 msgid "Asset Index"
@@ -1433,7 +1436,7 @@ msgstr "Relevé de carte de crédit/débit ou de livret d'épargne de Banque/Cai
 msgid "Banking"
 msgstr "Bancaire"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:211
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:211
 msgid "Bankruptcy Filing"
 msgstr "Mise en Faillite"
 
@@ -1468,16 +1471,16 @@ msgstr "Etape de barrière (%) hors limite"
 msgid "Barrier Step format error"
 msgstr "Barrière Pas erreur de format"
 
-#: lib/BOM/Product/Contract.pm:2608
+#: lib/BOM/Product/Contract.pm:2587
 msgid "Barrier is out of acceptable range."
 msgstr "Barrière est en dehors de l'intervalle acceptable."
 
-#: lib/BOM/Product/Contract.pm:2598
+#: lib/BOM/Product/Contract.pm:2577
 msgid "Barrier may not be adjusted."
 msgstr "Barrière ne peut pas être ajustée."
 
 #. ($min_pips . ' pips away from the spot.')
-#: lib/BOM/Product/Contract.pm:2554
+#: lib/BOM/Product/Contract.pm:2533
 msgid "Barrier must be at least "
 msgstr "Barrière doit être au moins "
 
@@ -1498,7 +1501,7 @@ msgstr "Termes de barrière"
 msgid "Barrier(s)"
 msgstr "Barrière(s)"
 
-#: lib/BOM/Product/Contract.pm:2579
+#: lib/BOM/Product/Contract.pm:2558
 msgid "Barriers must be on either side of the spot."
 msgstr "Barrières doivent se trouver de chaque côté de la valeur."
 
@@ -1792,7 +1795,7 @@ msgstr "Carrières"
 msgid "Cascade"
 msgstr "Cascade"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:204
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:204
 msgid "Cash Dividend"
 msgstr "Dividende en espèces"
 
@@ -1836,7 +1839,7 @@ msgstr "Variation"
 msgid "Change = Close - Open, for the day"
 msgstr "Changement = Fermer - Ouvrir, pour la journée"
 
-#: cgi/f_writepartics.cgi:16 cgi/f_writepartics.cgi:24
+#: cgi/f_writepartics.cgi:17 cgi/f_writepartics.cgi:25
 msgid "Change Account Information"
 msgstr "Modifier les informations de mon compte"
 
@@ -1847,7 +1850,7 @@ msgstr "Modifier les informations de mon compte"
 msgid "Change Password"
 msgstr "Changer de mot de passe"
 
-#: cgi/f_writepartics.cgi:239 cgi/f_writepartics.cgi:247
+#: cgi/f_writepartics.cgi:240 cgi/f_writepartics.cgi:248
 msgid "Change in account settings"
 msgstr "Changement dans les paramètres du compte"
 
@@ -2194,7 +2197,7 @@ msgid "Contract barrier must be positive."
 msgstr "La barrière du contrat doit être positive."
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2990
+#: lib/BOM/Product/Contract.pm:2969
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "Les contrats ne peuvent pas expirer pendant la période des fêtes de fin d'année. Veuillez sélectionner une date d'expiration après %1."
 
@@ -2210,20 +2213,20 @@ msgstr "Découverte et tarification du contrat"
 msgid "Contract expired"
 msgstr "Contrat arrivé à échéance"
 
-#: lib/BOM/Product/Contract.pm:2755
+#: lib/BOM/Product/Contract.pm:2734
 msgid "Contract has already expired."
 msgstr "Contrat a déjà expiré."
 
-#: lib/BOM/Product/Contract.pm:1858
+#: lib/BOM/Product/Contract.pm:1846
 msgid "Contract market price is too close to final payout."
 msgstr "Prix du contrat de marché est trop près du paiement final."
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2797
+#: lib/BOM/Product/Contract.pm:2776
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "Contrat ne peut pas expirer au cours des dernières %1 de trading."
 
-#: lib/BOM/Product/Contract.pm:2764
+#: lib/BOM/Product/Contract.pm:2743
 msgid "Contract must expire during trading hours."
 msgstr "Contrats doit expirer pendant les heures de trading."
 
@@ -2268,7 +2271,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "Des contrats sur %1 qui commencent et terminent entre %2 et %3 le même jour ne sont pas disponibles."
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2783
+#: lib/BOM/Product/Contract.pm:2762
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "Des contrats sur %1 de durées inférieures à 24 heures doivent expirer durant la même journée de trading."
 
@@ -2306,7 +2309,7 @@ msgstr "Coûts"
 msgid "Country"
 msgstr "Pays"
 
-#: cgi/f_writepartics.cgi:205 lib/BOM/View/CGIForm.pm:1036
+#: cgi/f_writepartics.cgi:206 lib/BOM/View/CGIForm.pm:1036
 #: lib/BOM/View/CGIForm.pm:430
 msgid "Country of Residence"
 msgstr "Pays de Résidence"
@@ -2357,7 +2360,7 @@ msgstr "Les relevés de devise sont tronqués à 5 chiffres et tous les contrats
 msgid "Current Spot"
 msgstr "Au comptant courant"
 
-#: lib/BOM/Product/Contract.pm:2451
+#: lib/BOM/Product/Contract.pm:2430
 msgid "Current market price is 0."
 msgstr "Prix du marché actuel est 0."
 
@@ -2446,14 +2449,13 @@ msgid "Days to display"
 msgstr "Jours à afficher"
 
 #: /home/git/regentmarkets/bom-backoffice/f_manager_confodeposit.cgi:296
-#| msgid "Dear %1,"
 msgid "Dear"
 msgstr "Cher"
 
 #. (BOM::View::Language::translate_salutation($client->salutation)
 #. ($client_to->salutation, $client_to->first_name, $client_to->last_name,)
 #. ($pa_client->salutation, $pa_client->first_name, $pa_client->last_name)
-#: cgi/f_writepartics.cgi:196 cgi/paymentagent_transfer.cgi:272
+#: cgi/f_writepartics.cgi:197 cgi/paymentagent_transfer.cgi:272
 #: cgi/paymentagent_withdraw.cgi:404
 msgid "Dear %1 %2 %3,"
 msgstr "Cher/Chère %1 %2 %3,"
@@ -2548,7 +2550,7 @@ msgstr ""
 "\n"
 "Nous avons pensé à vous informer du fait que nous avons reçu votre demande de bonus. Malheureusement, nous n'avons pas pu traité votre demande à cause d'une des raisons suivantes:"
 
-#: cgi/f_writepartics.cgi:189
+#: cgi/f_writepartics.cgi:190
 msgid "Dear Client,"
 msgstr "Cher Client,"
 
@@ -2639,7 +2641,6 @@ msgid "Deposit via Bank Transfer"
 msgstr "Dépôt via Transfert Bancaire"
 
 #: /home/git/regentmarkets/bom-backoffice/f_manager_confodeposit.cgi:293
-#| msgid "Deposit via bank wire"
 msgid "Deposit via Bank Wire"
 msgstr "Dépôt par Virement Bancaire"
 
@@ -2751,7 +2752,7 @@ msgstr "Découvrez le moyen le plus simple de commencer sur les marchés financi
 msgid "Discovering an easy, low-risk, flexible, award-winning platform for profiting from market action"
 msgstr "Découvrir une plate-forme simple, à faibles risques, flexible et primée, pour profiter de l'action du marché"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:207
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:207
 msgid "Divestiture"
 msgstr "Désinvestissement"
 
@@ -2879,7 +2880,7 @@ msgid "Duration"
 msgstr "Durée"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2879
+#: lib/BOM/Product/Contract.pm:2858
 msgid "Duration must be between %1 and %2."
 msgstr "Durée doit être entre %1 et %2."
 
@@ -2951,7 +2952,7 @@ msgstr "Email"
 msgid "Email Us"
 msgstr "Contactez-nous par email"
 
-#: cgi/f_writepartics.cgi:193 cgi/f_writepartics.cgi:204
+#: cgi/f_writepartics.cgi:194 cgi/f_writepartics.cgi:205
 #: lib/BOM/View/CGIForm.pm:1049 lib/BOM/View/CGIForm.pm:2145
 #: lib/BOM/View/CGIForm.pm:460
 msgid "Email address"
@@ -3005,11 +3006,11 @@ msgstr "Prix du point d'entrée"
 msgid "Envelop (SMA 20 +/- 10%)"
 msgstr "Envelopper (SMA 20 +/- 10%)"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:213
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:213
 msgid "Equity Offering"
 msgstr "Offre d'Actions"
 
-#: cgi/create_account.cgi:115
+#: cgi/create_account.cgi:117
 msgid "Error : password field is blank !"
 msgstr "Erreur : le champ du mot de passe est vide !"
 
@@ -3025,7 +3026,7 @@ msgstr "Europe"
 msgid "European Union residents with the exception of the UK will have their account opened with Regent Markets (Malta) Ltd."
 msgstr "Les résidents de l'Union Européenne, exceptés les résidents du Royaume-Uni, auront leur compte ouvert avec Regent Markets (Malte) Ltd."
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:214
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:214
 msgid "Exchange Offering"
 msgstr "Offre d’Échange"
 
@@ -3146,7 +3147,7 @@ msgstr "Artiste préféré"
 msgid "Favourite dish"
 msgstr "Plat préféré"
 
-#: cgi/f_writepartics.cgi:216 lib/BOM/View/CGIForm.pm:1280
+#: cgi/f_writepartics.cgi:217 lib/BOM/View/CGIForm.pm:1280
 #: lib/BOM/View/CGIForm.pm:4199 lib/BOM/View/CGIForm.pm:4200
 msgid "Fax"
 msgstr "Fax"
@@ -3293,7 +3294,7 @@ msgid "Forgot Login ID or Password?"
 msgstr "Identifiant de connexion ou mot de passe oublié ?"
 
 #. ($underlying->market->translated_display_name)
-#: lib/BOM/Product/Model/ContractForm.pm:828
+#: lib/BOM/Product/Model/ContractForm.pm:831
 msgid "Forward starting intraday and daily contracts are available on some %1"
 msgstr "Des contrats intrajournaliers démarrant à terme et des contrats journaliers sont disponibles sur certain %1"
 
@@ -3661,7 +3662,7 @@ msgstr "Numérisations d'identité soumises"
 msgid "IP Address"
 msgstr "Adresse IP"
 
-#: cgi/f_writepartics.cgi:217 lib/BOM/View/CGIForm.pm:1537
+#: cgi/f_writepartics.cgi:218 lib/BOM/View/CGIForm.pm:1537
 msgid "IP Security"
 msgstr "Sécurité IP"
 
@@ -4028,7 +4029,7 @@ msgstr "Interprétation"
 msgid "Intraday"
 msgstr "Intrajournalier"
 
-#: lib/BOM/Product/Contract.pm:1614
+#: lib/BOM/Product/Contract.pm:1602
 msgid "Intraday contracts may not cross market open."
 msgstr "Contrats intrajournalier ne peuvent pas croiser un marché ouvert."
 
@@ -4061,7 +4062,7 @@ msgstr "Montant non valide"
 msgid "Invalid fax number."
 msgstr "Numéro de fax non valide."
 
-#: lib/BOM/Product/Contract.pm:2387
+#: lib/BOM/Product/Contract.pm:2366
 msgid "Invalid payout currency."
 msgstr "Devise de paiement non valide."
 
@@ -4069,7 +4070,7 @@ msgstr "Devise de paiement non valide."
 msgid "Invalid period input! Please input the period between 0 and #1"
 msgstr "Entrée de période non valide ! Veuillez entrer une période entre 0 et #1"
 
-#: lib/BOM/Product/Contract.pm:2436
+#: lib/BOM/Product/Contract.pm:2415
 msgid "Invalid stake"
 msgstr "Mise non valide"
 
@@ -4192,7 +4193,6 @@ msgid "Keep this value secure"
 msgstr "Sécurisez cette valeur"
 
 #: /home/git/regentmarkets/bom-backoffice/f_manager_confodeposit.cgi:298
-#| msgid "Kind Regards,"
 msgid "Kind Regards"
 msgstr "Cordialement"
 
@@ -4268,7 +4268,7 @@ msgstr "Apprendre à trader en ligne"
 msgid "Legacy Contract"
 msgstr "Contrat antérieur"
 
-#: lib/BOM/Product/Contract.pm:974
+#: lib/BOM/Product/Contract.pm:962
 msgid "Legacy contract. No further information is available."
 msgstr "Contrat antérieur. Pas d'informations supplémentaires disponibles."
 
@@ -4448,7 +4448,7 @@ msgstr "Bande Inférieure"
 msgid "Lower Band = Average - 0.5 * Std Deviation"
 msgstr "Bande Inférieure = Moyenne - 0,5 * Déviation std"
 
-#: lib/BOM/Product/Contract.pm:2588
+#: lib/BOM/Product/Contract.pm:2567
 msgid "Lower barrier is out of acceptable range. Please adjust the lower barrier."
 msgstr "Barrière inférieure est en dehors de l'intervalle acceptable. Veuillez ajuster la barrière inférieure."
 
@@ -4515,7 +4515,7 @@ msgid "Market exit price"
 msgstr "Prix final du marché"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2942
+#: lib/BOM/Product/Contract.pm:2921
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "Jours fériés du marché pendant la période de contrat. Veuillez sélectionner une date d'expiration après %1."
 
@@ -4659,15 +4659,15 @@ msgstr "Minimum"
 msgid "Miss"
 msgstr "Mlle"
 
-#: lib/BOM/Product/Contract.pm:1575 lib/BOM/Product/Contract.pm:1628
+#: lib/BOM/Product/Contract.pm:1563 lib/BOM/Product/Contract.pm:1616
 msgid "Missing market data for contract period."
 msgstr "Données du marché manquantes pour la période du contrat."
 
-#: lib/BOM/Product/Contract.pm:1514
+#: lib/BOM/Product/Contract.pm:1502
 msgid "Missing market data for entry spot."
 msgstr "Données du marché manquantes pour point de départ."
 
-#: lib/BOM/Product/Contract.pm:1588 lib/BOM/Product/Contract.pm:1601
+#: lib/BOM/Product/Contract.pm:1576 lib/BOM/Product/Contract.pm:1589
 msgid "Missing market data for exit spot."
 msgstr "Données du marché manquantes pour point de sortie."
 
@@ -4832,7 +4832,7 @@ msgstr "Demande de nouveau mot de passe"
 msgid "New To Trading?"
 msgstr "Nouveau dans le Trading ?"
 
-#: cgi/create_account.cgi:180
+#: cgi/create_account.cgi:182
 msgid "New account registration fail."
 msgstr "Echec d'enregistrement de nouveau compte."
 
@@ -4957,7 +4957,7 @@ msgstr "Novembre"
 msgid "Novice or Expert..."
 msgstr "Débutant ou Expert..."
 
-#: cgi/analyse_contract.cgi:192 lib/BOM/Product/Model/ContractForm.pm:820
+#: cgi/analyse_contract.cgi:192 lib/BOM/Product/Model/ContractForm.pm:823
 msgid "Now"
 msgstr "Maintenant"
 
@@ -4971,7 +4971,7 @@ msgid "Number of ticks"
 msgstr "Nombre d'intervalles"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2832
+#: lib/BOM/Product/Contract.pm:2811
 msgid "Number of ticks must be between %1 and %2"
 msgstr "Nombre d'intervalles doit être entre %1 et %2"
 
@@ -5359,7 +5359,7 @@ msgid "Payments"
 msgstr "Paiements"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
-#: lib/BOM/Product/Model/ContractForm.pm:651
+#: lib/BOM/Product/Model/ContractForm.pm:654
 msgid "Payout"
 msgstr "Mise"
 
@@ -5373,12 +5373,12 @@ msgstr "Devise du Versement"
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "Le gain a évolué en votre faveur de %1 à %2."
 
-#: lib/BOM/Product/Contract.pm:2409
+#: lib/BOM/Product/Contract.pm:2388
 msgid "Payout may not have more than two decimal places."
 msgstr "Un retrait ne peut pas contenir plus de deux décimales."
 
 #. (to_monetary_number_format($payout_min, 1)
-#: lib/BOM/Product/Contract.pm:1870
+#: lib/BOM/Product/Contract.pm:1858
 msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "La mise doit se situer entre <strong>%1</strong> et <strong>%2</strong>."
 
@@ -5558,7 +5558,7 @@ msgstr "Veuillez noter que les cours du weekend sont ignorés pour les règlemen
 msgid "Please note that you may update your personal information at any time by logging into the \"Settings\" section of your account. It is your responsibility to ensure that %1 is promptly and continually informed of any change in your personal information."
 msgstr "Veuillez noter que vous pouvez actualiser vos informations personnelles à tout moment en vous connectant à la section \"Paramètres\" de votre compte. Il est de votre responsabilité de veiller à ce que %1 soit correctement et continuellement informé de tout changement dans vos informations personnelles."
 
-#: cgi/f_writepartics.cgi:191 cgi/f_writepartics.cgi:199
+#: cgi/f_writepartics.cgi:192 cgi/f_writepartics.cgi:200
 msgid "Please note that your settings have been updated as follows:"
 msgstr "Veuillez noter que vos paramètres ont été actualisés de la manière suivante:"
 
@@ -5679,7 +5679,7 @@ msgstr "Présente les gains cumulés maximaux sur les contrats actifs dans votre
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "Le prix prévalant du marché ne peut pas être déterminé pour le moment."
 
-#: lib/BOM/Product/Contract.pm:1527 lib/BOM/Product/Contract.pm:3016
+#: lib/BOM/Product/Contract.pm:1515 lib/BOM/Product/Contract.pm:2995
 msgid "Prevailing market price cannot be determined."
 msgstr "Le prix prévalant du marché ne peut pas être déterminé."
 
@@ -5789,7 +5789,7 @@ msgstr "Promotionnel"
 msgid "Proof of address"
 msgstr "Preuve d'adresse"
 
-#: lib/BOM/Product/Contract.pm:2571
+#: lib/BOM/Product/Contract.pm:2550
 msgid "Proper barriers could not be determined."
 msgstr "Des barrières correctes n'ont pas pu être déterminées."
 
@@ -6062,25 +6062,25 @@ msgstr "Représente le volume maximal de contrats que vous pouvez acheter au cou
 msgid "Required"
 msgstr "Requis"
 
-#: lib/BOM/Product/Contract.pm:2989
+#: lib/BOM/Product/Contract.pm:2968
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "La revente de ce contrat n'est pas proposée à cause des jours fériés de fin d'année sur les marchés."
 
-#: lib/BOM/Product/Contract.pm:2941
+#: lib/BOM/Product/Contract.pm:2920
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "La revente de ce contrat n'est pas proposée à cause des jours fériés sur les marchés durant la durée du contrat."
 
-#: lib/BOM/Product/Contract.pm:2962
+#: lib/BOM/Product/Contract.pm:2941
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "La revente de ce contrat n'est pas proposée à cause des jours fériés de fin d'année sur les marchés."
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2869
+#: lib/BOM/Product/Contract.pm:2848
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "La revente de ce contrat n'est pas proposée avec moins de %1 restant."
 
-#: lib/BOM/Product/Contract.pm:2350 lib/BOM/Product/Contract.pm:2863
-#: lib/BOM/Product/Contract.pm:2913
+#: lib/BOM/Product/Contract.pm:2329 lib/BOM/Product/Contract.pm:2842
+#: lib/BOM/Product/Contract.pm:2892
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:171
 msgid "Resale of this contract is not offered."
 msgstr "La revente de ce contrat n'est pas proposée."
@@ -6142,7 +6142,7 @@ msgstr "Révoquer Procuration"
 msgid "Right click to add studies, lines, overlays and more. You can save your work by choosing Workspace from the top menu"
 msgstr "Faites un clic droit pour ajouter des etudes, lignes, superpositions et plus. Vous pouvez sauvegarder votre travail en selectionnant Espace de travail dans le menu du haut"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:209
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:209
 msgid "Rights Offering"
 msgstr "Offre de Droits"
 
@@ -6179,7 +6179,7 @@ msgstr "Hausse/Baisse"
 msgid "Rise/Fall Table"
 msgstr "Tableau de Hausses/Baisses"
 
-#: lib/BOM/Product/Model/ContractForm.pm:829
+#: lib/BOM/Product/Model/ContractForm.pm:832
 msgid "Rise/Fall contracts of less than 5 minutes duration are only available when you select \"Now\" as the start time."
 msgstr "Les contrats Hausse/Baisse d'une durée inférieure à 5 minutes sont disponibles uniquement si vous sélectionnez \"Maintenant\" comme moment de départ."
 
@@ -6372,7 +6372,7 @@ msgstr "Définissez votre position"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/light_chart.html.tt:39
-#: cgi/f_writepartics.cgi:68 cgi/settings.cgi:13 cgi/settings.cgi:16
+#: cgi/f_writepartics.cgi:69 cgi/settings.cgi:13 cgi/settings.cgi:16
 #: lib/BOM/View/CGIForm.pm:4483 lib/BOM/View/Menu.pm:97
 msgid "Settings"
 msgstr "Paramètres"
@@ -6518,12 +6518,12 @@ msgstr "Désolé, une erreur s'est produite concernant ce trade. Veuillez réess
 msgid "Sorry, an error occurred"
 msgstr "Désolé, une erreur est survenue"
 
-#: lib/BOM/Product/Model/ContractForm.pm:512
-#: lib/BOM/Product/Model/ContractForm.pm:534
+#: lib/BOM/Product/Model/ContractForm.pm:515
+#: lib/BOM/Product/Model/ContractForm.pm:537
 msgid "Sorry, an error occurred while loading the form. Please contact customer support if this problem persists"
 msgstr "Désolé, une erreur est survenue lors du chargement du formulaire. Veuillez contacter le service clientèle si le problème persiste."
 
-#: cgi/f_writepartics.cgi:145
+#: cgi/f_writepartics.cgi:146
 msgid "Sorry, an error occurred while processing your account."
 msgstr "Désolé, une erreur est survenu pendant le traitement de votre compte."
 
@@ -6532,7 +6532,7 @@ msgstr "Désolé, une erreur est survenu pendant le traitement de votre compte."
 msgid "Sorry, broker %1 does not allow transfers from payment agents."
 msgstr "Désolé, le broker %1 n'autorise pas les transferts depuis les agents de paiement."
 
-#: cgi/create_account.cgi:74
+#: cgi/create_account.cgi:76
 msgid "Sorry, new account opening is suspended for the time being."
 msgstr "Désolé, l'ouverture de nouveaux comptes est suspendue à l'heure actuelle."
 
@@ -6697,7 +6697,7 @@ msgstr "Désolé, votre paiement ne peut pas être traité pour le moment."
 msgid "Spam - We do not condone Spam"
 msgstr "Spam - Nous ne tolérons pas le Spam"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:210
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:210
 msgid "Spin-Off"
 msgstr "Scission"
 
@@ -6714,12 +6714,12 @@ msgid "Spread"
 msgstr "Ecart"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
-#: lib/BOM/Product/Model/ContractForm.pm:655
+#: lib/BOM/Product/Model/ContractForm.pm:658
 msgid "Stake"
 msgstr "Gain"
 
 #. (to_monetary_number_format($stake_min, 1)
-#: lib/BOM/Product/Contract.pm:1861
+#: lib/BOM/Product/Contract.pm:1849
 msgid "Stake must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Mise doit se situer entre <strong>%1</strong> et <strong>%2</strong>."
 
@@ -6741,20 +6741,20 @@ msgstr "Commencer le Trading"
 msgid "Start time"
 msgstr "Heure du début"
 
-#: lib/BOM/Product/Contract.pm:2663 lib/BOM/Product/Transaction.pm:365
+#: lib/BOM/Product/Contract.pm:2642 lib/BOM/Product/Transaction.pm:365
 msgid "Start time is in the past"
 msgstr "Le moment de début est dans le passé"
 
-#: lib/BOM/Product/Contract.pm:2653
+#: lib/BOM/Product/Contract.pm:2632
 msgid "Start time is invalid."
 msgstr "L'heure de départ est non valide."
 
-#: lib/BOM/Product/Contract.pm:2643
+#: lib/BOM/Product/Contract.pm:2622
 msgid "Start time must be before expiry time."
 msgstr "Le moment de début doit être antérieur au moment d'expiration."
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2696
+#: lib/BOM/Product/Contract.pm:2675
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "L'heure de départ de contrats commençant dans le futur doit être plus de %1 à partir de maintenant."
 
@@ -6847,15 +6847,15 @@ msgstr "Stochastique Lent %D"
 msgid "Stochastic Slow %K"
 msgstr "Stockastique Lent %K"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:212
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:212
 msgid "Stock Buyback"
 msgstr "Rachat d'Actions"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:205
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:205
 msgid "Stock Dividend"
 msgstr "Dividende en Actions"
 
-#: lib/BOM/Market/DataSource/BBDL/CSVParser/CorporateAction.pm:206
+#: lib/BOM/MarketData/Parser/Bloomberg/CSVParser/CorporateAction.pm:206
 msgid "Stock Split"
 msgstr "Division d'Actions"
 
@@ -6918,7 +6918,7 @@ msgstr "Passer en mode normal"
 msgid "System Time"
 msgstr "Temps Système"
 
-#: lib/BOM/Product/Contract.pm:526
+#: lib/BOM/Product/Contract.pm:522
 msgid "System problems prevent proper settlement at this time."
 msgstr "Des problèmes du système empêchent une clôture correcte en ce moment."
 
@@ -6955,7 +6955,7 @@ msgstr "Leader technologique avec plus de 10 ans d'expérience..."
 msgid "Tel"
 msgstr "Tél."
 
-#: cgi/f_writepartics.cgi:215 lib/BOM/View/CGIForm.pm:1236
+#: cgi/f_writepartics.cgi:216 lib/BOM/View/CGIForm.pm:1236
 #: lib/BOM/View/CGIForm.pm:489
 msgid "Telephone"
 msgstr "Téléphone"
@@ -7062,7 +7062,7 @@ msgstr "Le %1 simule un marché qui est actif durant la journée (et qui devient
 
 #. (request()
 #. ($website->display_name)
-#: cgi/f_writepartics.cgi:231 cgi/paymentagent_withdraw.cgi:415
+#: cgi/f_writepartics.cgi:232 cgi/paymentagent_withdraw.cgi:415
 msgid "The %1 team."
 msgstr "L'équipe %1."
 
@@ -7378,7 +7378,7 @@ msgstr "La barrière d'un trade d'une option binaire est le prix-cible que vous 
 msgid "The barrier(s) you choose defines your position and triggers your payout."
 msgstr "La(les) barrière(s) que vous choisissez définit votre position et déclenche votre gain."
 
-#: lib/BOM/Product/Contract.pm:559 lib/BOM/Product/Contract.pm:567
+#: lib/BOM/Product/Contract.pm:555 lib/BOM/Product/Contract.pm:563
 msgid "The barriers are improperly entered for this contract."
 msgstr "Les barrières ne sont pas correctement définies pour ce contrat."
 
@@ -7436,7 +7436,7 @@ msgstr "Le contrat a expiré"
 msgid "The contract is not available after %1 GMT."
 msgstr "Le contrat n'est pas disponible après %1 GMT."
 
-#: lib/BOM/Product/Contract.pm:615
+#: lib/BOM/Product/Contract.pm:611
 msgid "The contract must expire on a trading day."
 msgstr "Le contrat doit expirer un jour de trading."
 
@@ -7462,7 +7462,7 @@ msgstr "Le coût de vos positions ouvertes"
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "La devise de votre bonus sera la même que la devise de votre premier dépôt."
 
-#: lib/BOM/Product/Contract.pm:1014
+#: lib/BOM/Product/Contract.pm:1002
 msgid "The database is not yet updated with settlement data."
 msgstr "La base de données n'a pas encore été actualisée avec les données de configuration."
 
@@ -7520,7 +7520,7 @@ msgstr "Le premier intervalle est le premier intervalle après le moment où le 
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "Le prix final du marché est le prix en vigueur à la fin de la période du contrat."
 
-#: lib/BOM/Product/Contract.pm:2669
+#: lib/BOM/Product/Contract.pm:2648
 msgid "The market must be open at the start time."
 msgstr "Le marché doit être ouvert à l'heure du départ."
 
@@ -7636,7 +7636,7 @@ msgstr "La devise fournie %1 n'est pas la devise par défaut"
 
 #. ($email)
 #. ($new_email)
-#: cgi/create_account.cgi:104 cgi/f_writepartics.cgi:107
+#: cgi/create_account.cgi:106 cgi/f_writepartics.cgi:108
 msgid "The provided email address %1 is already in use by another Login ID."
 msgstr "L'adresse email fournie %1 est déjà utilisée par un autre Identifiant de connexion."
 
@@ -7669,7 +7669,7 @@ msgstr "Les algorithmes de lissage et de filtrage décrits ci-dessus."
 msgid "The stake is the amount that a trader must pay to enter into a trade."
 msgstr "La mise est le montant que le trader doit payer pour entrer dans un trade."
 
-#: lib/BOM/Market/PricingInputs/VolSurface.pm:1084
+#: lib/BOM/MarketData/VolSurface.pm:1108
 msgid "The system is missing critical pricing information. Please try again in a few minutes, or try a different market."
 msgstr "Le système ne possède pas les informations d'évaluation critiques. Veuillez réessayer dans quelques minutes, ou essayer un marché différent."
 
@@ -7852,7 +7852,7 @@ msgstr "La section caisse de ce client est verrouillée."
 msgid "This contract cannot be properly validated at this time."
 msgstr "Ce contrat ne peut pas être correctement validé pour le moment."
 
-#: lib/BOM/Product/Contract.pm:1714
+#: lib/BOM/Product/Contract.pm:1702
 msgid "This contract has already expired."
 msgstr "Ce contrat a déjà expiré."
 
@@ -7873,7 +7873,7 @@ msgstr "Ce contrat est arrivé à échéance."
 msgid "This contract is limited to "
 msgstr "Ce contrat est limité à "
 
-#: lib/BOM/Product/Contract.pm:1003
+#: lib/BOM/Product/Contract.pm:991
 msgid "This contract is no longer offered."
 msgstr "Ce contrat n'est plus proposé."
 
@@ -7885,7 +7885,7 @@ msgstr "Ce contrat est indisponible sur ce compte."
 msgid "This contract lost"
 msgstr "Ce contrat perdu"
 
-#: lib/BOM/Product/Contract.pm:2451
+#: lib/BOM/Product/Contract.pm:2430
 msgid "This contract offers no return."
 msgstr "Ce contrat n'offre pas de retour."
 
@@ -7916,7 +7916,7 @@ msgid "This is a virtual-money account. Please click <a class=\"pjaxload\" href=
 msgstr "Ceci est un compte d'argent virtuel. Veuillez cliquer <a class=\"pjaxload\" href=\"%1\">ici</a> pour ouvrir un compte d'argent réel et déposer des fonds."
 
 #. ($client->loginid,                        $ENV{'REMOTE_ADDR'})
-#: cgi/f_writepartics.cgi:63
+#: cgi/f_writepartics.cgi:64
 msgid "This is an automated message to alert you to the fact that there was a failed attempt to unlock the Cashier/Settings section of your account %1 from IP address %2"
 msgstr "Ceci est un message automatique vous alertant du fait qu'une tentative infructueuse pour débloquer votre section Caisse/Paramètres a été effectuée sur votre compte %1 depuis l'adresse IP %2"
 
@@ -7955,7 +7955,7 @@ msgstr "Ceci est la confirmation que votre adresse email pour votre compte %1 su
 msgid "This market closes early today at"
 msgstr "Ce marché ferme tôt aujourd'hui à"
 
-#: lib/BOM/Product/Contract.pm:2669
+#: lib/BOM/Product/Contract.pm:2648
 msgid "This market is presently closed."
 msgstr "Ce marché va bientôt fermer."
 
@@ -7985,7 +7985,7 @@ msgstr "Cette offre ne peut pas être utilisée en association avec toute autre 
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgstr "Cette promotion est uniquement valable pour les nouveaux Clients. Les Clients actuels ou les anciens Clients ne peuvent pas en bénéficier. Elle n'est valable qu'une seule fois pour chaque Client."
 
-#: lib/BOM/Product/Contract.pm:2351
+#: lib/BOM/Product/Contract.pm:2330
 msgid "This trade is not offered."
 msgstr "Ce trade n'est pas proposé."
 
@@ -8114,7 +8114,7 @@ msgid "Toll-Free number"
 msgstr "Numéro d'appel gratuit"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2963
+#: lib/BOM/Product/Contract.pm:2942
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "Trop de jours fériés du marché pendant la période de contrat. Veuillez sélectionner une date d'expiration après %1."
 
@@ -8247,9 +8247,9 @@ msgstr "Règles de Trading"
 
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
-#: cgi/trading_times.cgi:16 lib/BOM/Product/Contract.pm:2319
-#: lib/BOM/Product/Contract.pm:2716 lib/BOM/Product/Contract.pm:2731
-#: lib/BOM/Product/Contract.pm:2747 lib/BOM/Product/Contract.pm:2932
+#: cgi/trading_times.cgi:16 lib/BOM/Product/Contract.pm:2298
+#: lib/BOM/Product/Contract.pm:2695 lib/BOM/Product/Contract.pm:2710
+#: lib/BOM/Product/Contract.pm:2726 lib/BOM/Product/Contract.pm:2911
 #: lib/BOM/View/Menu.pm:154
 msgid "Trading Times"
 msgstr "Heures de Trading"
@@ -8267,23 +8267,23 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "Le trading de contrats financiers implique un haut niveau de risques et n'est pas approprié à toutes les personnes. Avant de décider de trader des contrats financiers, vous devez réfléchir attentivement à vos objectifs, à votre niveau d'expérience et à votre goût du risque. Vous devez être au courant de l'ensemble des risques liés au trading financier et demander conseil à un conseiller financier indépendant si vous avez des doutes."
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2684
+#: lib/BOM/Product/Contract.pm:2663
 msgid "Trading is available after the first %1 of the session."
 msgstr "Le trading est disponible après les premières %1 de la session."
 
-#: lib/BOM/Product/Contract.pm:2914
+#: lib/BOM/Product/Contract.pm:2893
 msgid "Trading is not offered for this duration."
 msgstr "Trading n'est pas offert pour cette durée."
 
-#: cgi/oop/Controller/Bet.pm:681 lib/BOM/Product/Contract.pm:2272
-#: lib/BOM/Product/Contract.pm:2338
+#: cgi/oop/Controller/Bet.pm:681 lib/BOM/Product/Contract.pm:2251
+#: lib/BOM/Product/Contract.pm:2317
 msgid "Trading is suspended at the moment."
 msgstr "Le trading est suspendu pour le moment."
 
 #. ($translated_name)
 #. ($underlying->translated_display_name()
-#: cgi/analyse_contract.cgi:71 lib/BOM/Product/Contract.pm:2280
-#: lib/BOM/Product/Contract.pm:2289 lib/BOM/Product/Contract.pm:2317
+#: cgi/analyse_contract.cgi:71 lib/BOM/Product/Contract.pm:2259
+#: lib/BOM/Product/Contract.pm:2268 lib/BOM/Product/Contract.pm:2296
 msgid "Trading on %1 is suspended at the moment."
 msgstr "Le trading sur %1 est suspendu pour le moment."
 
@@ -8291,19 +8291,19 @@ msgstr "Le trading sur %1 est suspendu pour le moment."
 #. ($self->underlying->translated_display_name()
 #. ($underlying->translated_display_name()
 #. ($bet->underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2300 lib/BOM/Product/Contract.pm:2307
-#: lib/BOM/Product/Contract.pm:3024
+#: lib/BOM/Product/Contract.pm:2279 lib/BOM/Product/Contract.pm:2286
+#: lib/BOM/Product/Contract.pm:3003
 #: lib/BOM/Product/Pricing/Engine/Intraday.pm:281
 #: lib/BOM/Product/Pricing/Engine/Intraday/Index.pm:79
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "Le trading sur %1 est suspendu à cause de données de marché manquantes."
 
-#: lib/BOM/Product/Contract.pm:2729
+#: lib/BOM/Product/Contract.pm:2708
 msgid "Trading on this contract type is suspended for the last one hour of the session."
 msgstr "Effectuer des trades sur ce type de contrat est suspendu pour la dernière heure de la session."
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2714
+#: lib/BOM/Product/Contract.pm:2693
 msgid "Trading suspended for the last %1 of the session."
 msgstr "Trading suspendu pour le dernier %1 de la session."
 
@@ -8565,7 +8565,7 @@ msgstr "Voir"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "Voir les prix de contrats Hausse/Baisse sur différents marchés."
 
-#: lib/BOM/Product/Contract.pm:2676 lib/BOM/Product/Contract.pm:2686
+#: lib/BOM/Product/Contract.pm:2655 lib/BOM/Product/Contract.pm:2665
 msgid "View Trading Times"
 msgstr "Voir heures de Trading"
 
@@ -8695,7 +8695,7 @@ msgstr "Nous n'acceptions pas de comptes de résidents de ce pays pour le moment
 msgid "We could not authenticate your account online. please proceed to the <a href=\"%1\">manual authentication section</a>. If you would like to register additional credit cards, please contact <a class=\"pjaxload\" href=\"%2\">customer support</a>."
 msgstr "Nous ne sommes pas en mesure d'authentifier votre compte en ligne. Veuillez vous rendre à la <a href=\"%1\">section d'authentification manuelle</a>. Si vous désirez enregistrer des cartes bancaires supplémentaires, veuillez contacter le <a class=\"pjaxload\" href=\"%2\">service clientèle</a>."
 
-#: lib/BOM/Product/Contract.pm:1811 lib/BOM/Product/Contract.pm:508
+#: lib/BOM/Product/Contract.pm:1799 lib/BOM/Product/Contract.pm:504
 msgid "We could not process this contract at this time."
 msgstr "Nous n'avons pas pu traiter ce contrat en ce moment."
 
@@ -8797,7 +8797,6 @@ msgstr "Nous aimerions vous informer que la demande de retrait de %1%2 par %3 %4
 
 #. ($subject)
 #: /home/git/regentmarkets/bom-backoffice/f_manager_confodeposit.cgi:297
-#| msgid "Dear %1 %2 %3, We would like to inform you that your %5 Deposit has been processed. Kind Regards, %4"
 msgid "We would like to inform you that your %1 has been processed."
 msgstr "Nous voudrions vous informer que votre %1 a été traité."
 
@@ -9120,8 +9119,8 @@ msgstr "Avec un access_token actuel il est maintenant possible d'effectuer des a
 msgid "With payouts from $1 to $100,000, we have you covered."
 msgstr "Avec des montants de $1 à $100,000, chacun trouvera sa place."
 
-#. ($mx_client->loginid,                        $loginid)
-#: cgi/backend/convert_uk.pl:277
+#. ($mlt_client->loginid,                        $loginid)
+#: cgi/backend/convert_uk.pl:282
 msgid ""
 "With reference to our previous email, please note that we have opened a new account for you so as to comply with the Gambling (Licensing and Advertising) Act that is expected to come into force in the UK on the 1st October 2014.\n"
 "\n"
@@ -9208,7 +9207,6 @@ msgid "Withdrawal via Bank Transfer"
 msgstr "Retrait via Transfert Bancaire"
 
 #: /home/git/regentmarkets/bom-backoffice/f_manager_confodeposit.cgi:293
-#| msgid "Withdrawal via bank wire"
 msgid "Withdrawal via Bank Wire"
 msgstr "Retrait par Transfert Bancaire"
 
@@ -9829,7 +9827,7 @@ msgstr "Vos risques sont connus"
 msgid "Your secret answer is too short.  Please enter at least 4 characters."
 msgstr "Votre réponse secrète est trop courte.  Veuillez entrer au moins 4 caractères."
 
-#: cgi/f_writepartics.cgi:182
+#: cgi/f_writepartics.cgi:183
 msgid "Your settings have been updated successfully."
 msgstr "Vos paramètres ont été actualisés avec succès."
 
@@ -9908,7 +9906,7 @@ msgstr "chaque occasion où la Société pourrait subir un préjudice financier,
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "toute restriction à ses Clients relative à l'acquisition de tout contrat durant certaines heures."
 
-#: lib/BOM/Product/Contract.pm:2251
+#: lib/BOM/Product/Contract.pm:2230
 msgid "barrier"
 msgstr "barrière"
 
@@ -9916,13 +9914,12 @@ msgstr "barrière"
 msgid "better trade"
 msgstr "meilleur trade"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:13
-msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex stocks, binary trading, binary bet, binary online bet, binary options trading platform, digital options, trading stocks"
-msgstr "options binaires, option binaire, trading forex, trading en ligne, trading financier, trading financier option binaire, trading binaire, trading d'indice, trading d'indices, trades forex, trading matières premières, marché trading forex, pratique du trading, pratique du trading binaire, trade ponctuel, trading d'argent virtuel, trading des actions forex, trading binaire, pari binaire, pari binaire en ligne, plate-forme de trading d'options binaires, options numériques, trading des actions"
-
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/head.html.haml:1
-msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex stocks, binary trading, binary bet, binary online bet, binary options trading platform, digital options, trading stocks."
-msgstr "options binaires, option binaire, trading taux de change, trading en ligne, trading financier, trading financier d'option binaire, trading binaire, trading indices, indices d'indices, trades indices boursiers, trades matières premières, marché de trade forex, trade pratique, trading binaire pratique, trade ponctuel, trading d'argent virtuel, trading des indices boursiers forex, trading binaire, pais binaire, pais binaires en ligne, plateforme de trading d'options binaires, options numériques, trading des indices boursiers."
+#: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:13
+#, fuzzy
+#| msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex stocks, binary trading, binary bet, binary online bet, binary options trading platform, digital options, trading stocks"
+msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex, binary trading, binary bet, binary online bet, binary options trading platform, digital options"
+msgstr "options binaires, option binaire, trading forex, trading en ligne, trading financier, trading financier option binaire, trading binaire, trading d'indice, trading d'indices, trades forex, trading matières premières, marché trading forex, pratique du trading, pratique du trading binaire, trade ponctuel, trading d'argent virtuel, trading des actions forex, trading binaire, pari binaire, pari binaire en ligne, plate-forme de trading d'options binaires, options numériques, trading des actions"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
 msgid "contact us"
@@ -9936,7 +9933,7 @@ msgstr "moment de début du contrat"
 msgid "day"
 msgstr "jour"
 
-#: lib/BOM/Product/Model/ContractForm.pm:743 lib/BOM/View/Charting.pm:461
+#: lib/BOM/Product/Model/ContractForm.pm:746 lib/BOM/View/Charting.pm:461
 #: platform/bin/GenerateStaticData.pm:104
 msgid "days"
 msgstr "jours"
@@ -9989,7 +9986,7 @@ msgstr "pour des instructions de codage détaillées."
 msgid "here"
 msgstr "ici"
 
-#: lib/BOM/Product/Contract.pm:2251
+#: lib/BOM/Product/Contract.pm:2230
 msgid "high barrier"
 msgstr "barrière supérieure"
 
@@ -10013,7 +10010,7 @@ msgstr "moins"
 msgid "loading..."
 msgstr "chargement..."
 
-#: lib/BOM/Product/Contract.pm:2251
+#: lib/BOM/Product/Contract.pm:2230
 msgid "low barrier"
 msgstr "barrière inférieure"
 
@@ -10037,7 +10034,7 @@ msgstr "durée minimale disponible"
 msgid "minimum is"
 msgstr "le minimum est"
 
-#: lib/BOM/Product/Contract.pm:2248
+#: lib/BOM/Product/Contract.pm:2227
 msgid "minus"
 msgstr "moins"
 
@@ -10086,7 +10083,7 @@ msgstr "ou essayez s'il vous plaît le plan du site ci-dessous"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr "afin d'obtenir l'heure exacte de la clôture de tous les contrats. Les autres sites web peuvent adopter une convention différente (par exemple, certains sites web choisissent 4 heures, heure de NY, ou 5 heures, heure de Londres). Par conséquent, les prix à l'ouverture, supérieurs, inférieurs et à la clôture affichés sur notre site web peuvent différer de ceux affichés sur d'autres sites web, du fait de leur convention sur l'heure de clôture du marché."
 
-#: lib/BOM/Product/Contract.pm:2248
+#: lib/BOM/Product/Contract.pm:2227
 msgid "plus"
 msgstr "plus"
 
@@ -10142,7 +10139,7 @@ msgstr "démarrant dans"
 msgid "teams up with Professional Speakers on a monthly basis to teach you trading techniques and ways you can profit with binary trading."
 msgstr "fait équipe avec des Orateurs Professionnels tous les mois pour vous enseigner des techniques de trade et des moyens pour tirer profit du trade binaire."
 
-#: lib/BOM/Product/Model/ContractForm.pm:721
+#: lib/BOM/Product/Model/ContractForm.pm:724
 msgid "ticks"
 msgstr "intervalles"
 
@@ -12103,6 +12100,9 @@ msgstr "Désolé, l'accès par le biais de ce réseau IP a été désactivé. ve
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Désolé, vous avez déjà effectué trop de tentatives infructueuses. Veuillez réessayer dans 5 minutes."
+
+#~ msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex stocks, binary trading, binary bet, binary online bet, binary options trading platform, digital options, trading stocks."
+#~ msgstr "options binaires, option binaire, trading taux de change, trading en ligne, trading financier, trading financier d'option binaire, trading binaire, trading indices, indices d'indices, trades indices boursiers, trades matières premières, marché de trade forex, trade pratique, trading binaire pratique, trade ponctuel, trading d'argent virtuel, trading des indices boursiers forex, trading binaire, pais binaire, pais binaires en ligne, plateforme de trading d'options binaires, options numériques, trading des indices boursiers."
 
 #~ msgid "Bank Wire"
 #~ msgstr "Virement bancaire"
