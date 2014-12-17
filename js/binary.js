@@ -2499,6 +2499,7 @@ LiveChartOHLC.prototype.process_tick = function(tickInput) {
     this.with_trades = typeof params['with_trades'] !== 'undefined' ? params['with_trades'] : 1;
     this.streaming_server = page.settings.get('streaming_server');
     this.with_marker = typeof params['with_marker'] !== 'undefined' ? params['with_marker'] : 0;
+    this.force_tick = typeof params['force_tick'] !== 'undefined' ? params['force_tick'] : 0;
 
     this.indicators = [];
     this.resolutions = {
@@ -2646,8 +2647,14 @@ LiveChartConfig.prototype = {
         if(opts.with_markers) {
             this.with_markers = opts.with_markers;
         }
+        if(opts.force_tick) {
+            this.force_tick = opts.force_tick;
+        }
     },
     best_resolution: function(from, to) {
+        if(this.force_tick) {
+            return 'tick';
+        }
         var length = parseInt(to - from);
         for(var resolution in this.resolutions) {
             if (this.resolutions[resolution].interval >= length) {
@@ -6553,6 +6560,12 @@ BetForm.Time.EndTime.prototype = {
                                        display_marker = true;
                                    }
 
+                                   if(time_obj['force_tick']) {
+                                       liveChartConfig.update({
+                                           force_tick: true,
+                                       });
+                                   }
+
                                    liveChartConfig.update({
                                        interval: {
                                            from: from_date,
@@ -7104,7 +7117,11 @@ BetForm.Time.EndTime.prototype = {
                         // check if end date is more than 1 hours and now time - start time is less than 1 hours
                         // in this case we switch back to tick chart rather than ohlc
                         time_obj['from_time'] = parseInt(start_time);
-                        time_obj['to_time'] = parseInt(start_time) + 3600;
+                        time_obj['to_time'] = parseInt(start_time) + 3595;
+                    } else if ((parseInt(end_time) - parseInt(start_time)) === 3600) {
+                        time_obj['from_time'] = parseInt(start_time);
+                        time_obj['to_time'] = parseInt(end_time);
+                        time_obj['force_tick'] = 1;
                     } else {
                         time_obj['from_time'] = parseInt(start_time);
                         time_obj['to_time'] = parseInt(end_time);
