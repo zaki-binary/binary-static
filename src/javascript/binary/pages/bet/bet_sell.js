@@ -459,6 +459,12 @@ var BetSell = function() {
                                        display_marker = true;
                                    }
 
+                                   if(time_obj['force_tick']) {
+                                       liveChartConfig.update({
+                                           force_tick: true,
+                                       });
+                                   }
+
                                    liveChartConfig.update({
                                        interval: {
                                            from: from_date,
@@ -1010,7 +1016,11 @@ var BetSell = function() {
                         // check if end date is more than 1 hours and now time - start time is less than 1 hours
                         // in this case we switch back to tick chart rather than ohlc
                         time_obj['from_time'] = parseInt(start_time);
-                        time_obj['to_time'] = parseInt(start_time) + 3600;
+                        time_obj['to_time'] = parseInt(start_time) + 3595;
+                    } else if ((parseInt(end_time) - parseInt(start_time)) === 3600) {
+                        time_obj['from_time'] = parseInt(start_time);
+                        time_obj['to_time'] = parseInt(end_time);
+                        time_obj['force_tick'] = 1;
                     } else {
                         time_obj['from_time'] = parseInt(start_time);
                         time_obj['to_time'] = parseInt(end_time);
