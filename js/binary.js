@@ -5695,7 +5695,7 @@ BetForm.Time.EndTime.prototype = {
             }
 
             con.show();
-            push_data_layer();
+            // push_data_layer();
             var _clear_results = function () { that.clear_buy_results(); };
             con.find('a.close').on('click', _clear_results).css('cursor', 'pointer').addClass('unbind_later');
         },
@@ -6327,7 +6327,7 @@ BetForm.Time.EndTime.prototype = {
             con.css('position', 'fixed').css('z-index', get_highest_zindex() + 100);
             body.append(con);
             con.show();
-            push_data_layer();
+            // push_data_layer();
             if ($('#sell_bet_desc', con).length > 0) {
                 con.draggable({
                     handle: '#sell_bet_desc'
