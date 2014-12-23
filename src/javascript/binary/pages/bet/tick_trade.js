@@ -19,8 +19,7 @@ var TickDisplay = function() {
             $self.contract_type = data.contract_type;
             $self.set_barrier = ($self.contract_type.match('DIGIT')) ? false : true;
             $self.display_decimal = 0;
-            var submarket = data.submarket;
-            var tick_frequency = submarket === 'smart_opi' ? 3 : 2;
+            var tick_frequency = data.tick_frequency;
 
             if (typeof data.decimal !== 'undefined') {
                 $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
