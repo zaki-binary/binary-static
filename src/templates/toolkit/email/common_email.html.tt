@@ -576,104 +576,214 @@
   </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="header">
-            <a href="[% website_url %]">
-                <img src="[% request.url_for('images/email/logo.png') %]">
-            </a>
-        </div>
-        <div class="main">
-            [% IF email_template_loginid %]
-                <p style="font-weight:bold; font-size:13px; text-align:right; margin:0; padding:8px 0 0 0;">[% l('Your Login ID') %]: [% email_template_loginid %]</p>
-            [% END %]
-            <br>[% content %]
-        </div>
-        <div class="footer">
-            <div class="learn">
-                <div>[% l('Want to learn more?') %]</div>
-            </div>
-            <div class="break">
-                <div><!-- --></div>
-            </div>
-            <div class="content">
-                <table>
-                    <thead>
+    <center>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+            <tr>
+                <td align="center" valign="top" id="bodyCell">
+                    <!-- BEGIN TEMPLATE // -->
+                    <table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
                         <tr>
-                            <td>
-                                <a href="http://blog.binary.com/daily-report.html?utm_medium=email&utm_campaign=reactivation&utm_source=intercom">[% l('Daily report') %]</a>
-                            </td>
-                            <td>
-                                <a href="http://blog.binary.com/weekly-trading-room.html?utm_medium=email&utm_campaign=reactivation&utm_source=intercom">[% l('Weekly Live Trading Room') %]</a>
-                            </td>
-                            <td>
-                                <a href="http://blog.binary.com/en/webinar/?utm_medium=email&utm_campaign=reactivation&utm_source=intercom">[% l('Monthly Webinars') %]</a>
+                            <td align="center" valign="top">
+                                <!-- BEGIN HEADER // -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
+                                    <tr>
+                                        <td valign="top" class="headerContent">
+                                            <a href="https://www.binary.com?utm_medium=email&utm_campaign=notification&utm_source=binary">
+                                                <img src="http://offers.binary.com/binary/templates/email/logo.png" id="headerImage" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- // END HEADER -->
                             </td>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr>
-                            <td>
-                                <a href="http://blog.binary.com/daily-report.html?utm_medium=email&utm_campaign=reactivation&utm_source=intercom">
-                                    <img src="[% request.url_for('images/email/daily_report.png') %]">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="http://blog.binary.com/weekly-trading-room.html?utm_medium=email&utm_campaign=reactivation&utm_source=intercom">
-                                    <img src="[% request.url_for('images/email/trading_room.png') %]">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="http://blog.binary.com/en/webinar/?utm_medium=email&utm_campaign=reactivation&utm_source=intercom">
-                                    <img src="[% request.url_for('images/email/webinar.png') %]">
-                                </a>
+                            <td align="center" valign="top">
+                                <!-- BEGIN BODY // -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+                                    <tr>
+                                        <td valign="top" class="bodyContent" style="width: 100%;">
+                                            [% IF email_template_loginid %]
+                                                <p style="font-weight:bold;">[% l('Your Login ID') %]: [% email_template_loginid %]</p>
+                                            [% END %]
+                                            [% content %]
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- // END BODY -->
                             </td>
                         </tr>
-                    </tbody>
-                    <tfoot>
                         <tr>
-                            <td>[% l('Check out our daily market reports written by Dave Evans, Professional Trader to stay up to date with the latest financial news.') %]</td>
-                            <td>[% l('Join our analysts LIVE twice a week for a comprehensive analysis of recent developments and trends in the global financial markets.') %]</td>
-                            <td>[% l('Watch, earn and learn for FREE!') %] [% website_name %] [% l('teams up with Professional Speakers on a monthly basis to teach you trading techniques and ways you can profit with binary trading.') %]</td>
+                            <td align="center" valign="top">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="learnMore">Want to learn more?</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- BEGIN COLUMNS // -->
+                                <table style="border-top: 1px solid #cccccc;" border="0" cellpadding="0" cellspacing="0" width="100%" id="templateColumns">
+                                    <tr>
+                                        <td align="center" valign="top" class="templateColumnContainer">
+                                            <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <a href="http://blog.binary.com/en/daily-report/?utm_medium=email&utm_campaign=notification&utm_source=binary"><h4>Daily Report</h4></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="leftColumnContent">
+                                                        <a href="http://blog.binary.com/en/daily-report/?utm_medium=email&utm_campaign=notification&utm_source=binary">
+                                                            <img src="http://offers.binary.com/binary/templates/email/daily_report.png" style="max-width:160px;" class="columnImage" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" class="leftColumnContent">
+                                                        Check out our daily market reports written by Dave Evan, Professional Trader to stay up to date with the latest world's financial news.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td align="center" valign="top" class="templateColumnContainer">
+                                            <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <a href="http://blog.binary.com/en/events/?utm_medium=email&utm_campaign=notification&utm_source=binary"><h4>Weekly Live Trading Room</h4></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="centerColumnContent">
+                                                        <a href="http://blog.binary.com/en/events/?utm_medium=email&utm_campaign=notification&utm_source=binary">
+                                                            <img src="http://offers.binary.com/binary/templates/email/trading_room.png" style="max-width:160px;" class="columnImage" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" class="centerColumnContent">
+                                                        Join our analysts LIVE twice a week for a comprehensive analysis of recent developments and trends in the global financial markets.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td align="center" valign="top" class="templateColumnContainer">
+                                            <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <a href="http://blog.binary.com/en/webinars/?utm_medium=email&utm_campaign=notification&utm_source=binary"><h4>Monthly Webinars</h4></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="rightColumnContent">
+                                                        <a href="http://blog.binary.com/en/webinars/?utm_medium=email&utm_campaign=notification&utm_source=binary">
+                                                            <img src="http://offers.binary.com/binary/templates/email/webinar.png" class="columnImage" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" class="rightColumnContent">
+                                                        Watch,earn and learn for FREE! Binary.com teams up with professional traders on a monthly basis to show you how to identify trading opportunities using various trading techniques and strategies.
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- // END COLUMNS -->
+                            </td>
                         </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <div class="bottom">
-                <table>
-                    <tr>
-                        <td style="text-align:left">
-                            <b>[% l('Have a question? Need Help?') %]</b><br>[% l('Visit our ') %]<a href="https://binary.desk.com/customer/en/portal/articles">FAQ</a>[% l(' or email us at ') %]<a href="mailto:helpdesk@binary.com">helpdesk@binary.com</a>.
-                        </td>
-                        <td style="width:10px">
-                            <img src="[% request.url_for('images/email/line_icon.png') %]">
-                        </td>
-                        <td style="text-align:center">
-                            <a href="[% contactus_url %]">[% l('Contact Us') %]</a>
-                        </td>
-                        <td style="width:10px">
-                            <img src="[% request.url_for('images/email/line_icon.png') %]">
-                        </td>
-                        <td style="text-align:right">
-                            <a href="http://www.youtube.com/user/BinaryTradingVideos">
-                                <img src="[% request.url_for('images/email/youtube.png') %]">
-                            </a>
-                            <a href="https://plus.google.com/106251151552682209951">
-                                <img src="[% request.url_for('images/email/googleplus.png') %]">
-                            </a>
-                            <a href="https://www.facebook.com/binarydotcom">
-                                <img src="[% request.url_for('images/email/facebook.png') %]">
-                            </a>
-                            <a href="https://twitter.com/Binarydotcom">
-                                <img src="[% request.url_for('images/email/twitter.png') %]">
-                            </a>
-                            <a href="http://www.linkedin.com/groups/Binarycom-5137612">
-                                <img src="[% request.url_for('images/email/linkedin.png') %]">
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+                        <tr>
+                            <td align="center" valign="top">
+                                <!-- BEGIN FOOTER // -->
+                                <tr>
+                                    <td align="center" valign="top">
+                                        <!-- BEGIN COLUMNS // -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateColumns">
+                                            <tr>
+                                                <td align="center" valign="top" class="templateColumnContainer" style="padding-top:20px;">
+                                                    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+
+                                                        <tr>
+                                                            <td class="leftColumnContent-footer">
+                                                                <b>Have a question? Need Help?</b>
+                                                                <br />Visit our <a style="color:#699A7D;" href="https://binary.desk.com/customer/en/portal/articles">FAQ</a> or Email us at <a style="color:#699A7D;" href="mailto:helpdesk@binary.com">helpdesk@binary.com</a>.
+
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td class="footer-border">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="http://offers.binary.com/binary/templates/email/line_icon.png">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td align="center" valign="top" class="templateColumnContainer" style="padding-top:20px;">
+                                                    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+
+                                                        <tr>
+                                                            <td class="centerColumnContent-footer">
+                                                                <a style="color:#699A7D;" href="https://cr-deal01.binary.com/c/contact.cgi?l=EN">Contact Us</a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td class="footer-border">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="http://offers.binary.com/binary/templates/email/line_icon.png">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td align="center" valign="top" class="templateColumnContainer" style="padding-top:20px;">
+                                                    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+
+                                                        <tr>
+                                                            <td class="rightColumnContent-footer">
+                                                                <a href="http://info.binary.com/binary_youtube">
+                                                                    <img src="http://offers.binary.com/binary/templates/email/youtube.png">
+                                                                </a>
+                                                                <a href="http://info.binary.com/binary_gplus">
+                                                                    <img src="http://offers.binary.com/binary/templates/email/googleplus.png">
+                                                                </a>
+                                                                <a href="http://info.binary.com/binary_facebook">
+                                                                    <img src="http://offers.binary.com/binary/templates/email/facebook.png">
+                                                                </a>
+                                                                <a href="http://info.binary.com/binary_twitter">
+                                                                    <img src="http://offers.binary.com/binary/templates/email/twitter.png">
+                                                                </a>
+                                                                <a href="http://info.binary.com/binary_linkedin">
+                                                                    <img src="http://offers.binary.com/binary/templates/email/linkedin.png">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                        <!-- // END COLUMNS -->
+                                    </td>
+                                </tr>
+
+                                <!-- // END FOOTER -->
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- // END TEMPLATE -->
+                </td>
+            </tr>
+        </table>
+    </center>
 </body>
 </html>
