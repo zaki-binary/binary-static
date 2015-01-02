@@ -12,6 +12,9 @@
   %meta{:name => "dcterms.rights", :content => stash('website_name')}
   %meta{:name => "google-site-verification", :content => "roReCEK-wNa1EMA6ZM9a4zCOQOMqxfJjvfsZMC9qh_k"}
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+  %meta{:property => "og:title", :content=>"Binary.com"}
+  %meta{:property => "og:type", :content=>"website"}
+  %meta{:property => "og:image", :content=>url_for('images/common/og_image.gif')}
 
   %title= stash('website_name') . (stash('title') ? " : ".stash('title'): '')
 
@@ -21,6 +24,11 @@
   %link{:rel=>"apple-touch-icon" :href=>url_for('images/common/apple-touch-icon-57x57_1.png')}
   %link{:rel=>"apple-touch-icon" :sizes=>"72x72" :href=>url_for('images/common/apple-touch-icon-72x72_1.png')}
   %link{:rel=>"apple-touch-icon" :sizes=>"114x114" :href=>url_for('images/common/apple-touch-icon-114x114_1.png')}
+  - my $languages = available_languages();
+  - foreach (keys %{ $languages }) {
+    - my $url = "https://www.binary.com/" . current_route . "?l=" . $_;
+    %link{:rel=>"alternate" :hreflang=>$_ :href=>$url}
+  - }
 
   - foreach my $css (css()->files) {
     %link{:rel=>"stylesheet" :href=> $css}
