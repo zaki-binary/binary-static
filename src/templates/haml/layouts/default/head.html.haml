@@ -12,6 +12,9 @@
   %meta{:name => "dcterms.rights", :content => stash('website_name')}
   %meta{:name => "google-site-verification", :content => "roReCEK-wNa1EMA6ZM9a4zCOQOMqxfJjvfsZMC9qh_k"}
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+  %meta{:property => "og:title", :content=>"Binary.com"}
+  %meta{:property => "og:type", :content=>"website"}
+  %meta{:property => "og:image", :content=>url_for('images/common/og_image.gif')}
 
   %title= stash('website_name') . (stash('title') ? " : ".stash('title'): '')
 
