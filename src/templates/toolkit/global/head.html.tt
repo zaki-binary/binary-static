@@ -22,6 +22,9 @@
 
         <link rel="icon" type="image/png" href="[% request.url_for('images/common/favicon_1.ico') %]"/>
 
+        [% FOREACH key = available_languages.keys %]
+            <link rel="alternate" href="[% request.get_current_path() =%]?l=[% key %]" hreflang="[% key %]"/>
+        [% END %]
         [%= FOREACH css_file IN css_files =%]
             <link rel="stylesheet" href="[%= css_file =%]">
         [% END %]
