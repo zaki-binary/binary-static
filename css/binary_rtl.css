@@ -2452,14 +2452,11 @@ a.close:hover {
 }
 
 .down-arrow-1 {
-  background: url("../images/common/old_sprite_1.png") no-repeat scroll 0 -52px;
-  background-repeat: no-repeat;
-  width: 8px;
-  height: 5px;
-  position: absolute;
-  right: 15px;
-  top: 13px;
-  font-size: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #2a3052;
+  width: 0;
+  height: 0;
 }
 
 /* show more button */
@@ -2480,13 +2477,13 @@ a.close:hover {
 }
 
 .market_higher {
-  background: transparent url("../images/common/old_sprite_1.png") no-repeat -42px -49px;
-  padding-left: 14px;
+  background: transparent url("../images/javascript/up_arrow_1.gif") no-repeat 0 0;
+  padding-left: 15px;
 }
 
 .market_lower {
-  background: transparent url("../images/common/old_sprite_1.png") no-repeat -57px -49px;
-  padding-left: 14px;
+  background: transparent url("../images/javascript/down_arrow_1.gif") no-repeat 0 0;
+  padding-left: 15px;
 }
 
 .title {
@@ -2633,38 +2630,6 @@ a.close:hover {
 
 .rbox .form_button {
   margin-bottom: 8px;
-}
-
-.collapsible .rbox-heading,
-.expandable .rbox-heading {
-  cursor: pointer;
-}
-
-.arrow-expand-collapse {
-  position: absolute;
-  background-image: url("../images/common/old_sprite_1.png");
-  background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
-  right: 15px;
-  top: 6px;
-  cursor: pointer;
-}
-
-.arrow-expand-collapse-text {
-  width: 100px;
-  position: relative;
-  left: -105px;
-  color: #2a3052;
-  text-align: right;
-}
-
-.collapsible .arrow-expand-collapse {
-  background-position: -151px -46px;
-}
-
-.expandable .arrow-expand-collapse {
-  background-position: -170px -46px;
 }
 
 /*------------------------------------------------------------------------------------
@@ -2999,19 +2964,19 @@ input#duration_amount {
 }
 
 #risefall {
-  background-image: url("../images/pages/contract_guide/risefall_icon_1.png");
+  background-image: url("../images/pages/contract_guide/rise-fall.svg");
 }
 
 #higherlower {
-  background-image: url("../images/pages/contract_guide/higherlower_icon_1.png");
+  background-image: url("../images/pages/contract_guide/higher-lower.svg");
 }
 
 #touchnotouch {
-  background-image: url("../images/pages/contract_guide/touchnotouch_icon_1.png");
+  background-image: url("../images/pages/contract_guide/touch-notouch.svg");
 }
 
 #inout {
-  background-image: url("../images/pages/contract_guide/inout_icon_1.png");
+  background-image: url("../images/pages/contract_guide/in-out.svg");
 }
 
 /* Fixed width to match datepicker */

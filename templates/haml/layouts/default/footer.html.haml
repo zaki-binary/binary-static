@@ -102,4 +102,5 @@
         #social-networks
           = include('layouts/default/social')
     #appcache-reload-message
-      .message= l("A new version of the interface is available. Please refresh this page to try again.")
+      .message
+        != l("A new version of the interface is available. Please <a href='#' id='appcache-refresh-link'>refresh</a> this page to try again.")
