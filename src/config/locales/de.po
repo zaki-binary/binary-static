@@ -222,7 +222,7 @@ msgid "%1 prices are benchmarked against the interbank options market, so you al
 msgstr "%1 Preise werden im Verhältnis zum Interbank-Optionmarkt festgelegt, sodass Sie best-in-class Preise für Ihre Trades erhalten."
 
 #. (request()
-#: lib/BOM/View/CGIForm.pm:4761
+#: lib/BOM/View/CGIForm.pm:4757
 msgid "%1 provides <a href=\"%2\">Self Exclusion</a> facilities which allow you to set limits on your account."
 msgstr "%1 bietet die Möglichkeit eines <a href=\"%2\">Selbstausschlusses</a>, der es Ihnen erlaubt, auf Ihrem Konto Limits festzulegen."
 
@@ -272,14 +272,6 @@ msgstr "Die Random Indizes von %1 sind die %2, %3, %4, und %5. Diese Indizes ent
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "%1's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "Die patentierte Preisgestaltungstechnologie von %1 erlaubt es Ihnen von den gleichen Renditen wie Trader auf dem Interbankenmarkt zu profitieren."
-
-#. (stash('broker_name')
-#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
-#, fuzzy
-#| msgid "%1: Online Trading platform for binary options on Forex, Indices, Stocks, Commodities and Global Sector Indices"
-msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
-msgstr "%1: Online Handelsplattform für Binäre Optionen mit Devisen, Indizes, Aktien, Rohstoffen und weltweiten Sektorindizes"
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/smart_indices.html.haml:1
@@ -817,9 +809,16 @@ msgstr "Ein Mitglied unseres Kundenbetreuungsteams wird Sie in Kürze kontaktier
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "Ein Indikator für Eigendynamik zeigt die prozentuale Änderung eines dreifach exponentiell geglätteten, gleitenden Mittelwerts an. Wie andere Indikatoren, bewegt sich TRIX um die Nulllinie. herum."
 
-#: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:209
-msgid "A new version of the interface is available. Please refresh this page to try again."
+#, fuzzy
+#| msgid "A new version of the interface is available. Please refresh this page to try again."
+msgid "A new version of the interface is available. Please <a href=\"#\" id=\"appcache-refresh-link\">refresh</a> this page to try again."
+msgstr "Eine neue Version der Schnittstelle ist verfügbar. Bitte aktualisieren Sie diese Seite um es erneut zu versuchen."
+
+#: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
+#, fuzzy
+#| msgid "A new version of the interface is available. Please refresh this page to try again."
+msgid "A new version of the interface is available. Please <a href='#' id='appcache-refresh-link'>refresh</a> this page to try again."
 msgstr "Eine neue Version der Schnittstelle ist verfügbar. Bitte aktualisieren Sie diese Seite um es erneut zu versuchen."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
@@ -838,7 +837,7 @@ msgstr "Es ist ein Problem aufgetreten"
 msgid "A problem occurred while connecting to the server. Please try again later."
 msgstr "Bei der Verbindung zum Server ist ein Problem aufgetreten. Bitte versuchen Sie es später erneut."
 
-#: lib/BOM/View/CGIForm.pm:5308
+#: lib/BOM/View/CGIForm.pm:5304
 msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
 msgstr "Eine rezente (nicht älter als 3 Monate) gescannte Kopie Ihrer broschierten Rechnung eines Versorgungsunternehmens, oder Ihr Ausug des Bankkontos, der Genossenschaftsbank, Bausparkasse, Kreditkarte oder Debitkarte, oder des Sparbuchs"
 
@@ -846,7 +845,7 @@ msgstr "Eine rezente (nicht älter als 3 Monate) gescannte Kopie Ihrer broschier
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr "Eine gescannte Kopie Ihrer Rechnung eines Versorgungsunternehmens mit Ihrer aktuellen Wohnanschrift (Rechnung muss nicht älter als 3 Monate sein)."
 
-#: lib/BOM/View/CGIForm.pm:5305
+#: lib/BOM/View/CGIForm.pm:5301
 msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
 msgstr "Eine gescannte Kopie Ihres gültigen Reisepasses,gültigen Führerscheins (vorläufig oder endgültig), oder des Personalausweises"
 
@@ -914,9 +913,9 @@ msgstr "Kontolimits"
 msgid "Account Management and Tracking"
 msgstr "Kontoverwaltung und Überwachung"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:121
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:127
 #: cgi/create_account.cgi:191 cgi/create_account.cgi:306
-#: cgi/open_account.cgi:15 lib/BOM/View/CGIForm.pm:4527
+#: cgi/open_account.cgi:15 lib/BOM/View/CGIForm.pm:4523
 msgid "Account Opening"
 msgstr "Kontoeröffnung"
 
@@ -1007,7 +1006,7 @@ msgstr "Alle"
 msgid "All credit card details are submitted directly to the Visa/Mastercard network using the latest SSL encryption technology, in accordance with bank policies."
 msgstr "Es werden alle Kreditkartendetails direkt an das Visa/Mastercard Netzwerk weitergeleitet. Dabei kommt in Übereinstimmung mit den Richtlinien der Bank, die neueste SSL-Verschlüsselungstechnologie zur Anwendung."
 
-#: lib/BOM/View/CGIForm.pm:4591
+#: lib/BOM/View/CGIForm.pm:4587
 msgid "All email inquiries will be responded to within 2 business days whenever possible."
 msgstr "Alle E-Mail Anfragen werden, wenn möglich, innerhalb von zwei Geschäftstagen beantwortet."
 
@@ -1087,7 +1086,7 @@ msgstr "Alle Änderungen unserer Datenschutzrichtlinien oder der Sicherheitserkl
 msgid "Any form of Spam will result in your account being placed under review and all funds due being withheld pending an investigation into your account. You need to be aware that %1 is liable to incur expenses in dealing with Spam generated mail and these same expenses will be deducted from your account. In this instance the amount determined will be fair and deemed final and acceptable based on good faith and such amount will be collectable by law and deemed to have been accepted by yourself as fair and reasonable and as agreed to by registration as an affiliate of %1."
 msgstr "Jede Form von Spam hat zur Folge, dass Ihr Konto einer Prüfung unterzogen und alle zur Auszahlung bereiten Mittel für die Dauer einer Kontenprüfung zurückgehalten werden. Sie sollten sich dessen bewusst sein, dass %1 durch Spam-Mails Kosten entsteht. Diese Kosten werden vom Guthaben auf Ihrem Konto abgezogen. In einem solchen Fall wird ein als angemessen erachteter Betrag festgelegt, der nach gutem Glauben als endgültig und für akzeptabel erachtet wird. Ein solcher Betrag ist rechtlich vollstreckbar. Es wird davon ausgegangen, dass Sie als Partner von %1 den Betrag als fair und angemessen akzeptieren, so wie Sie dies bei Ihrer Anmeldung als Partner von %1 erklärt haben."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:104
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:110
 msgid "Any information given on these pages and/or emails or newsletters sent by the company related thereto, is not intended as financial or investment advice and the Company will not accept any liability in this respect, nor will the Company accept any responsibility for the accuracy or comprehensiveness of the information provided on this site."
 msgstr "Alle Informationen, die auf diesen Seiten und/oder in E-Mails oder Newslettern, welche vom jeweiligen Unternehmen verschickt werden,enthalten sind, gelten nicht als Finanz- oder Anlagenberatung.Das Unternehmen übernimmt diesbezüglich kein Haftung oder Verantwortung für die Genauigkeit oder den Umfang der auf dieser Seite zur Verfügung gestellten Informationen."
 
@@ -1114,7 +1113,7 @@ msgid "Apply for access"
 msgstr "Zugang beantragen"
 
 #: cgi/paymentagent_application.cgi:17 cgi/paymentagent_application.cgi:21
-#: cgi/paymentagent_application.cgi:51 lib/BOM/View/CGIForm.pm:4780
+#: cgi/paymentagent_application.cgi:51 lib/BOM/View/CGIForm.pm:4776
 msgid "Apply to become Payment Agent"
 msgstr "Bewerben Sie sich als Zahlungsagent"
 
@@ -1209,7 +1208,7 @@ msgstr "Vermögen"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:90
 #: cgi/asset_index.cgi:146 cgi/asset_index.cgi:30
-#: lib/BOM/Product/Contract.pm:2867 lib/BOM/Product/Contract.pm:2909
+#: lib/BOM/Product/Contract.pm:2877 lib/BOM/Product/Contract.pm:2919
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:179
 #: lib/BOM/View/Menu.pm:150
 msgid "Asset Index"
@@ -1250,7 +1249,7 @@ msgstr "Authentifizierung Ihres Kontos"
 msgid "Authenticated"
 msgstr "Authentifiziert"
 
-#: lib/BOM/View/CGIForm.pm:5245
+#: lib/BOM/View/CGIForm.pm:5241
 msgid "Authentication"
 msgstr "Authentifizierung"
 
@@ -1318,7 +1317,7 @@ msgstr "Überweisung/Geldtransfer"
 msgid "Bank your way"
 msgstr "Die Bank auf Ihre Art"
 
-#: lib/BOM/View/CGIForm.pm:4814
+#: lib/BOM/View/CGIForm.pm:4810
 msgid "Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)."
 msgstr "Bank-/Genossenschaftsbank-/Bausparkassen-/Kredit-/Debitkartenauszug oder Sparbuch (der letzten drei Monate)."
 
@@ -1664,7 +1663,7 @@ msgstr "Berechnen"
 msgid "Call me now"
 msgstr "Rufen Sie mich jetzt an"
 
-#: lib/BOM/View/CGIForm.pm:4596
+#: lib/BOM/View/CGIForm.pm:4592
 msgid "Call us"
 msgstr "Rufen Sie uns an"
 
@@ -1672,7 +1671,7 @@ msgstr "Rufen Sie uns an"
 msgid "Callback URL"
 msgstr "Rückruf URL"
 
-#: lib/BOM/View/CGIForm.pm:4607
+#: lib/BOM/View/CGIForm.pm:4603
 msgid "Callback services"
 msgstr "Rückruf-Service"
 
@@ -1950,7 +1949,7 @@ msgstr ""
 msgid "Clients must be aware that underage gambling is an offence. If a client, upon age verification, is proven to be underage, will be deprived from any winnings and only deposits made shall be refunded."
 msgstr "Kunden müssen sich dessen bewusst sein dass Glücksspiele bei Minderjährigen eine Straftat darstellen. Wenn sich bei der Altersverifizierung herausstellt dass ein Kunde minderjährig ist, werden diesem alle Gewinne entzogen und nur getätigte Einzahlungen werden rückerstattet."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:66
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:72
 msgid "Clients must fill into the account opening form all requested details that establish their identity."
 msgstr "Kunden müssen im Kontoeröffnungsformular alle geforderten Daten angeben, um ihre Identität nachzuweisen."
 
@@ -1972,7 +1971,7 @@ msgstr "Kunden, die bei Binary (Europe) Ltd angemeldet sind, können ihre ungel�
 msgid "Clients registered with Binary (IOM) Ltd can raise their unresolved disputes with the Isle of Man Gambling Supervision Commission at gaming@gov.im."
 msgstr "Kunden, die bei Binary (IOM) Ltd angemeldet sind, können ihre ungelösten Konflikte bei der Isle of Man Gambling Supervision Commission unter gaming@gov.im einreichen."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:72
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:78
 msgid "Clients shall not hold or pool third party funds into their own account held with the Company."
 msgstr "Kunden dürfen keine Gelder von Dritten auf Ihrem eigenen Konto bei dem Unternehmen halten."
 
@@ -2068,7 +2067,7 @@ msgstr "Commodity Channel Index"
 msgid "Company trip to Phuket, Thailand"
 msgstr "Unternehmensreise nach Phuket, Thailand"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:85
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:91
 msgid "Company's Right"
 msgstr "Unternehmensrechte"
 
@@ -2144,7 +2143,7 @@ msgid "Contract barrier must be positive."
 msgstr "Vertragsbarriere muss positiv sein."
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2984
+#: lib/BOM/Product/Contract.pm:2994
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "Verträge können während der Feiertage am Jahresende nicht auslaufen. Wählen Sie ein Verfalldatum nach %1."
 
@@ -2160,7 +2159,7 @@ msgstr "Vertragsentdeckung und Preisgestaltung"
 msgid "Contract expired"
 msgstr "Vertrag abgelaufen"
 
-#: lib/BOM/Product/Contract.pm:2749
+#: lib/BOM/Product/Contract.pm:2759
 msgid "Contract has already expired."
 msgstr "Vertrag ist bereits abgelaufen."
 
@@ -2169,11 +2168,11 @@ msgid "Contract market price is too close to final payout."
 msgstr "Marktpreis des Vertrags ist zu nahe an der abschließenden Auszahlung."
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2791
+#: lib/BOM/Product/Contract.pm:2801
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "Vertrag kann nicht innerhalb des letzten %1 des Handels ablaufen."
 
-#: lib/BOM/Product/Contract.pm:2758
+#: lib/BOM/Product/Contract.pm:2768
 msgid "Contract must expire during trading hours."
 msgstr "Vertrag muss während der Börsenstunden ablaufen."
 
@@ -2217,7 +2216,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "Verträge auf %1, die beide zwischen %2 und $3 am gleichen Tag beginnen und enden, sind nicht verfügbar."
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2777
+#: lib/BOM/Product/Contract.pm:2787
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "Verträge auf %1 mit Laufzeiten von unter 24 Stunden müssen an dem gleichen Börsentag ablaufen."
 
@@ -2299,15 +2298,15 @@ msgstr "Aktueller Marktpreis ist 0."
 msgid "Current password"
 msgstr "Aktuelles Passwort"
 
-#: lib/BOM/View/CGIForm.pm:4805 lib/BOM/View/CGIForm.pm:5325
+#: lib/BOM/View/CGIForm.pm:4801 lib/BOM/View/CGIForm.pm:5321
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "Aktueller Führerschein mit Foto (vorläufig oder endgǘltig)"
 
-#: lib/BOM/View/CGIForm.pm:4802
+#: lib/BOM/View/CGIForm.pm:4798
 msgid "Current signed Passport"
 msgstr "Aktueller unterzeichneter Pass"
 
-#: lib/BOM/View/CGIForm.pm:5324
+#: lib/BOM/View/CGIForm.pm:5320
 msgid "Current signed Passport OR"
 msgstr "Aktueller unterzeichneter Pass ODER"
 
@@ -2337,7 +2336,7 @@ msgstr "Tägliches Umsatzlimit"
 #. ($currencies, $self_exclusion->max_turnover)
 #. ($all_currencies, $self_exclusion->max_turnover)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:64
-#: lib/BOM/View/CGIForm.pm:4868
+#: lib/BOM/View/CGIForm.pm:4864
 msgid "Daily Turnover limit is currently set to <strong>%1 %2</strong>"
 msgstr "Das tägliche Umsatzlimit ist momentan auf <strong>%2 %1</strong> festgelegt"
 
@@ -2747,7 +2746,7 @@ msgstr "Donchian Kanäle stellen das höchste Hoch und das tiefste Tief der letz
 msgid "Don’t be put off by the name. Quotidian just means something that happens everyday."
 msgstr "Lassen Sie sich von dem Namen nicht abschrecken. Quotidian bedeuten einfach etwas das täglich passiert."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:109
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:115
 msgid "Dormant and Inactive Accounts"
 msgstr "Umsatzlose und inaktive Konten"
 
@@ -2794,7 +2793,7 @@ msgid "Duration"
 msgstr "Dauer"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2873
+#: lib/BOM/Product/Contract.pm:2883
 msgid "Duration must be between %1 and %2."
 msgstr "Laufzeit muss zwischen %1 und %2 liegen."
 
@@ -2861,7 +2860,7 @@ msgstr "Entweder haben Sie die Kasse für eine Weile ruhen lassen oder wir waren
 msgid "Email"
 msgstr "E-Mail"
 
-#: cgi/emailus.cgi:31 lib/BOM/View/CGIForm.pm:4586
+#: cgi/emailus.cgi:31 lib/BOM/View/CGIForm.pm:4582
 msgid "Email Us"
 msgstr "Schicken Sie uns ein E-Mail"
 
@@ -3177,7 +3176,7 @@ msgstr ""
 "\n"
 "%1"
 
-#: lib/BOM/View/CGIForm.pm:4795
+#: lib/BOM/View/CGIForm.pm:4791
 msgid "For security reasons, please note that Payment Agent accounts will only be able to deposit via Bank Wire."
 msgstr "Aus Sicherheitsgründen beachten Sie bitte, dass Einzahlungen auf Konten der Zahlungsagenten nur per Banküberweisung möglich sind."
 
@@ -3216,7 +3215,7 @@ msgstr "Fr"
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr "Bilden Sie Ihre Handelsstrategie mit Hilfe der leistungsstarken Live Charts von %1. Sofortige Anzeige der Trading-Vorlagen von Devisen, Indizes, Rohstoffen und Aktien."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:58
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:64
 msgid "Fraud and Money Laundering"
 msgstr "Betrug und Geldwäsche"
 
@@ -3226,7 +3225,7 @@ msgstr "Betrug und Geldwäsche"
 msgid "Free Bonus"
 msgstr "Kostenloser Vertragsbonus"
 
-#: lib/BOM/View/CGIForm.pm:5033
+#: lib/BOM/View/CGIForm.pm:5029
 msgid "Free Contract Bonus"
 msgstr "Kostenloser Vertragsbonus"
 
@@ -3307,7 +3306,7 @@ msgid "Generous Commission Structure"
 msgstr "Großzügige Provisionsstruktur"
 
 #. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
-#: lib/BOM/View/CGIForm.pm:5009
+#: lib/BOM/View/CGIForm.pm:5005
 msgid "Get %1 when you deposit %2."
 msgstr "Erhalten Sie %1 wenn Sie %2 einzahlen."
 
@@ -3541,7 +3540,7 @@ msgstr "Wie handelt man die Random Märkte?"
 msgid "How to use a payment agent?"
 msgstr "Wie verwendet man einen Zahlungsagenten?"
 
-#: lib/BOM/View/CGIForm.pm:5319
+#: lib/BOM/View/CGIForm.pm:5315
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
 msgstr "Allerdings werden Sie freundlich aufgefordert, die anschließenden Anweisungen zu befolgen, um Ihre Auszahlungslimits zu erhöhen."
 
@@ -3787,7 +3786,7 @@ msgstr "Damit Sie Verträge platzieren können, müssen wir Ihren Wohnsitz (Land
 msgid "In order to complete your withdrawal, you must authenticate your account. Once you have done so, please proceed to the Cashier and try withdrawing again."
 msgstr "Um Ihre Auszahlung abzuschließen müssen Sie Ihr Konto authentifizieren. Wenn Sie dies getan haben, begeben Sie sich auf die Kassen-Sektion und versuchen Sie die Auszahlung erneut."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:98
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:104
 msgid "In such an event, the Company may at its sole discretion (with or without notice) close out Client's open financial contracts at prices it considers fair and reasonable at such a time and no claims may be entertained against the Company in connection thereto."
 msgstr "In solch einem Fall kann das Unternehmen im alleinigen Ermessen (mit oder ohne Mitteilung) offene Finanzverträge von Kunden zu Preisen ausbuchen, die man zu diesem Zeitpunkt als fair und akzeptabel erachtet. In diesem Zusammenhang können gegen das Unternehmen keinerlei Forderungen gestellt werden."
 
@@ -3801,7 +3800,7 @@ msgstr "Geben Sie im Feld \"Weitere Anweisungen\" bitte die Zahlungsart und Kont
 msgid "In the case of single stock and stock index prices, the final closing price as reported by the relevant official Exchange shall apply for all settlements (this final settlement price may, at times, be reported by the relevant Exchange 30-90 minutes after the official closing time of the market, and may differ from the latest tick price that occurred at the closing time)."
 msgstr "Die Schlusswerte des Aktienindex werden durch die offizielle Börsenschlussnotierung bestimmt, die von der jeweiligen Börse 30 - 90 Minuten nach Börsenschluss mitgeteilt werden und vom letzten Tick-Preis abweichen können."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:101
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:107
 msgid "In the case that any financial contracts are acquired or sold at prices that do not reflect fair market prices or that are acquired or sold at an abnormally low level of risk due to an undetected programming error, bug or glitch in our website software, the Company reserves the right to cancel or reverse such transactions upon notification to the Client of the nature of the computer error that led to the mispricing. Clients have a duty to report to the Company any problems or suspected system inadequacies that they may experience and may not abuse of system problems for profit. The Company will endeavour to resolve any such difficulties in the shortest time possible. Persons with insider knowledge of any financial market or instrument are prohibited from trading at this website."
 msgstr "Für den Fall, dass Finanzverträge zu Preisen erworben oder verkauft werden, die keine fairen Marktpreise widerspiegeln oder die aufgrund eines unbemerkten Programmierungsfehler, einer Störung oder Panne unserer Webseiten-Software zu einem anormalen, niedrigen Risikolevel erworben oder verkauft werden, behält sich das Unternehmen das Recht vor, solche Transaktionen zu stornieren oder rückgängig zu machen, wobei der Kunde über die Ursache des Computerfehlers benachrichtigt wird, der zu dem irrtümlichen Preis geführt hat. Die Kunden sind verpflichtet, dem Unternehmen alle Probleme oder verdächtige Systemunzulänglichkeiten, die sie bemerken, zu melden und Systemprobleme nicht gewinnbringend ausnutzen. Das Unternehmen ist bemüht, solche Schwierigkeiten so schnell wie möglich zu beheben. Personen mit Insider-Wissen eines Finanzmarkts oder Wertpapiers ist der Handel auf dieser Webseite untersagt."
 
@@ -3998,7 +3997,7 @@ msgstr "Ungültige Telefonnummer."
 msgid "Invalid underlying"
 msgstr "Ungültiger Bezugswert"
 
-#: lib/BOM/View/CGIForm.pm:4728
+#: lib/BOM/View/CGIForm.pm:4724
 msgid "Invalid value."
 msgstr "Ungültiger Wert."
 
@@ -4173,7 +4172,7 @@ msgstr "Herkömmlicher Vertrag"
 msgid "Legacy contract. No further information is available."
 msgstr "Herkömmlicher Vertrag. Es steht keine weitere Information zur Verfügung."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:113
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:119
 msgid "Liability"
 msgstr "Haftung"
 
@@ -4371,7 +4370,7 @@ msgstr "Eine Einzahlung tätigen"
 msgid "Make a deposit or withdraw"
 msgstr "Tätigen Sie eine Ein- oder Auszahlung"
 
-#: lib/BOM/View/CGIForm.pm:4530
+#: lib/BOM/View/CGIForm.pm:4526
 msgid "Make a deposit using credit card, bank wire, cheque and e-cash. Accounts are available in dollars, pounds and euros. The minimum account size is ($/&pound;/&euro;) 5 and the maximum account size is ($/&pound;/&euro;) 150,000."
 msgstr "Machen Sie eine Einzahlung mit einer Kreditkarte, via Banküberweisung, Scheck und e-cash. Konten werden in Dollar, Pfund und Euro geführt. Das Mindestkontovolumen sind 5 ($/Pfund/Euro)und das Maximalvolumen liegt bei 150.000 ($/Pfund/Euro)."
 
@@ -4411,7 +4410,7 @@ msgid "Market exit price"
 msgstr "Kurs zum Vertragsende"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2936
+#: lib/BOM/Product/Contract.pm:2946
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "Marktfeiertag während der Vertragslaufzeit. Wählen Sie ein Verfalldatum nach %1."
 
@@ -4428,7 +4427,7 @@ msgid "Market:"
 msgstr "Markt:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/faq.html.tt:76
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:117
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:123
 msgid "Marketing and Promotion"
 msgstr "Marketing und Werbung"
 
@@ -4441,7 +4440,7 @@ msgstr "Märkte"
 msgid "Mass Index"
 msgstr "Mass Index"
 
-#: lib/BOM/View/CGIForm.pm:5021
+#: lib/BOM/View/CGIForm.pm:5017
 msgid "Matched Contract Bonus"
 msgstr "Angepasster Vertragsbonus"
 
@@ -4461,7 +4460,7 @@ msgstr "Maximales Kontoguthaben"
 #. ($currencies, $self_exclusion->max_balance)
 #. ($all_currencies, $self_exclusion->max_balance)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:59
-#: lib/BOM/View/CGIForm.pm:4862
+#: lib/BOM/View/CGIForm.pm:4858
 msgid "Maximum account cash balance is currently set to <strong>%1 %2</strong>"
 msgstr "Das maximale Kontoguthaben liegt aktuell bei <strong>%2 %1</strong>"
 
@@ -4484,7 +4483,7 @@ msgstr "Maximale Anzahl offener Positionen"
 
 #. ($self_exclusion->max_open_bets)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:69
-#: lib/BOM/View/CGIForm.pm:4874
+#: lib/BOM/View/CGIForm.pm:4870
 msgid "Maximum number of open positions is currently set to <strong>%1</strong>"
 msgstr "Die maximale Anzahl offener Positionen liegt aktuell bei <strong>%1</strong>"
 
@@ -4590,7 +4589,9 @@ msgid "Monday"
 msgstr "Montag"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:53
-msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients"
+#, fuzzy
+#| msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients"
+msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients."
 msgstr "Gelder, die von Kunden stammen werden im Interesse der Kunden nicht in Wertpapiere, Futures, Währungen, Derivate oder andere Investments investiert"
 
 #: lib/BOM/Product/Helper/PricingTableParameters.pm:233
@@ -4781,7 +4782,7 @@ msgstr "Unangesehen des Marktes - steigend oder fallend, ruhig oder volatil - Si
 msgid "No open positions."
 msgstr "Keine offenen Positionen."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:60
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:66
 #, fuzzy
 #| msgid "No person shall abuse this site for the purpose of money laundering. The Company employs best-practice anti-money laundering procedures, which may have several effects on Clients. The Company reserves the right to refuse to do business with, to discontinue to do business with, and to reverse the transactions of, Clients who do not accept or adhere to these anti-money laundering processes. The anti-money laundering processes have the following effects on Clients:"
 msgid "No person shall abuse this site for the purpose of money laundering. The Company employs best-practice anti-money laundering procedures, which may have several effects on Clients. The Company reserves the right to refuse to do business with, to discontinue to do business with, and to reverse the transactions of, Clients who do not accept or adhere to these anti-money laundering processes."
@@ -4815,23 +4816,23 @@ msgstr "Anmerkung: Das Unternehmen behält sich das Recht vor, Provisionen zu st
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
 msgstr "Anmerkung: Sie können Ihren Bonus von %1%2 abzuheben, wenn Ihr Handelsgesamtvolumen %3%1 übersteigt (momentan liegt es nur bei %4%1). Diese Einschränkung beschränkt sich nur auf den Bonus und die daraus entstandenen Gewinne. Alle anderen Einzahlungen und daraus entstandenen Gewinne können zu jeder Zeit abgehoben werden."
 
-#: lib/BOM/View/CGIForm.pm:4901
+#: lib/BOM/View/CGIForm.pm:4897
 msgid "Note: limits will apply to all currency segments on your account individually."
 msgstr "Anmerkung: Die Limits gelten jeweils für alle Währungssegmente Ihres Kontos."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table.html.tt:69
-#: lib/BOM/View/CGIForm.pm:4791 lib/BOM/View/Cashier.pm:156
+#: lib/BOM/View/CGIForm.pm:4787 lib/BOM/View/Cashier.pm:156
 #: lib/BOM/View/Cashier.pm:174
 msgid "Notes:"
 msgstr "Anmerkungen:"
 
 #. ($attorney->url, $attorney->company_name)
-#: lib/BOM/View/CGIForm.pm:4939
+#: lib/BOM/View/CGIForm.pm:4935
 msgid "Notice: Power of Attorney to your account has been revoked from <a target=\"_blank\" href=\"%1\">%2</a>.<br>Trades cannot be placed anymore on your account directly by <a target=\"_blank\" href=\"%1\">%2</a>."
 msgstr "Hinweis: Bevollmächtigung Ihres Kontos wurde von <a target=\"_blank\" href=\"%1\">%2</a> aberkannt.<br /> Trades können nicht mehr direkt über Ihr Konto durch  <a target=\"_blank\" href=\"%1\">%2</a> abgewickelt werden."
 
 #. ($attorney->url,            $attorney->company_name,            request()
-#: lib/BOM/View/CGIForm.pm:4935
+#: lib/BOM/View/CGIForm.pm:4931
 msgid "Notice: your account has granted Power of Attorney to <a target=\"_blank\" href=\"%1\">%2</a>.<br>Trades may be placed on your account directly by <a target=\"_blank\" href=\"%1\">%2</a>. You may <a class=\"bom_confirm_popup_link\" href=\"%3\">revoke this Power of Attorney at any time.</a>"
 msgstr "Hinweis: Ihr Konto besitzt eine Vollmacht für <a target=\"_blank\" href=\"%1\">%2</a>.<br>Trades können direkt über <a target=\"_blank\" href=\"%1\">%2</a> auf Ihr Konto abgewickelt werden. Sie können <a class=\"bom_confirm_popup_link\" href=\"%3\">diese Vollmacht jederzeit widerrufen.</a>"
 
@@ -4866,7 +4867,7 @@ msgid "Number of ticks"
 msgstr "Anzahl der Ticks"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2826
+#: lib/BOM/Product/Contract.pm:2836
 msgid "Number of ticks must be between %1 and %2"
 msgstr "Die Anzahl der Ticks muss zwischen %1 und %2 liegen"
 
@@ -4890,11 +4891,11 @@ msgstr "OAuth2.0 ist der neue Internetstandard für diesen Zweck. Siehe <a href=
 msgid "OK"
 msgstr "OK"
 
-#: lib/BOM/View/CGIForm.pm:5329
+#: lib/BOM/View/CGIForm.pm:5325
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "Bank-/Genossenschaftsbank-/Bausparkassen-/Kredit-/Debitkartenauszug oder Sparbuch im ORIGINAL (der letzten drei Monate)"
 
-#: lib/BOM/View/CGIForm.pm:5328
+#: lib/BOM/View/CGIForm.pm:5324
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "Rechnung eines Versorgungsunternehmen im ORIGINAL (der letzten drei Monate) ; oder"
 
@@ -4969,11 +4970,18 @@ msgstr "Wenn Sie auf \"Abschicken\" klicken, werden die Gelder von Ihrem Konto a
 msgid "One simple platform"
 msgstr "Eine einfache Plattform"
 
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
+#, fuzzy
+#| msgid "%1: Online Trading platform for binary options on Forex, Indices, Stocks, Commodities and Global Sector Indices"
+msgid "Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
+msgstr "%1: Online Handelsplattform für Binäre Optionen mit Devisen, Indizes, Aktien, Rohstoffen und weltweiten Sektorindizes"
+
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Only five years after inception, we pick up this major award for our online trading services. The award recognises BetOnMarkets.com’s reliable, fast and secure online trading for novice and expert traders. At this time, our website has received over 15 million trades."
 msgstr "Nur fünf Jahre nach der Gründung erhalten wir diese bedeutende Auszeichnung für unsere Online Trading Dienstleistungen. Die Auszeichnung erkennt das zuverlässige, schnelle und sichere Online Trading für Einsteiger und Trading Experten an. Heutzutage hat unsere Webseite über 15 Millionen Trades durchgeführt."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:75
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:81
 msgid "Only one account is allowed per person. No winnings may be collected on accounts opened in false names or on multiple accounts opened by the same person."
 msgstr "Es ist nur ein Konto pro Person erlaubt. Auf Konten, die unter falschem Namen eröffnet wurden oder mehrere Konten, die von der gleichen Person eröffnet werden, können keine Gewinne angesammelt werden."
 
@@ -5086,7 +5094,7 @@ msgid "Our data feed may at times differ slightly from other data feeds found on
 msgstr "Unsere Dateneinspeisung kann manchmal von anderen Dateneinspeisungen abweichen, die man im Internet findet (und die untereinander ebenfalls abweichen). Zu den Gründen für Abweichungen bei den Einspeisungsprovidern gehören:"
 
 #. ($cs_email)
-#: lib/BOM/View/CGIForm.pm:5331
+#: lib/BOM/View/CGIForm.pm:5327
 msgid "Our email address is %1."
 msgstr "Unsere E-Mail Adresse ist %1."
 
@@ -5283,7 +5291,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "Die Auszahlung muss zwischen <strong>%1</strong> und <strong>%2</strong> liegen."
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: lib/BOM/View/CGIForm.pm:5000
+#: lib/BOM/View/CGIForm.pm:4996
 msgid "Pending Bonus: %1"
 msgstr "Ausstehender Bonus: %1"
 
@@ -5337,7 +5345,7 @@ msgstr "Bitte klicken Sie auf \"Play\", um das Video zu starten."
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "Bitte bestätigen Sie die Transaktionsdetails, um das Transfer zu vervollständigen:"
 
-#: lib/BOM/View/CGIForm.pm:4601
+#: lib/BOM/View/CGIForm.pm:4597
 msgid "Please contact us using the toll-free number provided for your country or our general contact number below."
 msgstr "Bitte kontaktieren Sie uns über die kostenlose Telefonnummer Ihres Landes oder über unsere allgemeine Kontaktnummer, die Sie im Anschluss finden."
 
@@ -5346,7 +5354,7 @@ msgstr "Bitte kontaktieren Sie uns über die kostenlose Telefonnummer Ihres Land
 msgid "Please contact us with whatever is on your mind at <a href=\"mailto:%1\">%1</a>. We'll be happy to hear your feedback and to answer any questions promptly and accurately."
 msgstr "Bitte kontaktieren Sie uns unter <a href=\"mailto:%1\">%1</a> und teilen Sie uns Ihre Anliegen mit. Wir freuen uns auf Ihr Feedback und beantworten Ihre Fragen umgehend und genau."
 
-#: lib/BOM/View/CGIForm.pm:4544
+#: lib/BOM/View/CGIForm.pm:4540
 msgid "Please do not click more than once and please allow 15 seconds for processing."
 msgstr "Bitte klicken Sie nicht mehr als einmal und warten Sie 15 Sekunden, bis die Daten verarbeitet werden."
 
@@ -5430,7 +5438,7 @@ msgstr "Bitte geben Sie es zur Bestätigung erneut ein"
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "Bitte versichern Sie sich, dass Sie zuerst mit dem Händler die Zahlungsbedingungen abstimmen, bevor Sie Ihren Antrag abschicken."
 
-#: lib/BOM/View/CGIForm.pm:4817
+#: lib/BOM/View/CGIForm.pm:4813
 msgid "Please note that mobile telephone bills are not acceptable as evidence of address"
 msgstr "Bitte beachten Sie, dass Rechnungen von Mobilfunkanbietern nicht zur Adressenüberprüfung akzeptiert werden"
 
@@ -5462,7 +5470,7 @@ msgstr "Bitte beachten Sie, dass Sie Ihre persönlichen Daten jederzeit aktualis
 msgid "Please note that your settings have been updated as follows:"
 msgstr "Bitte beachten Sie, dass Ihre Einstellungen wie folgt aktualisiert wurden:"
 
-#: lib/BOM/View/CGIForm.pm:4822
+#: lib/BOM/View/CGIForm.pm:4818
 msgid "Please post the documents to:"
 msgstr "Bitte schicken Sie die Dokumente an:"
 
@@ -5478,7 +5486,7 @@ msgstr "Bitte geben Sie Kreditgeber ID(s) an."
 msgid "Please provide some information about yourself and your proposed services"
 msgstr "Bitte geben Sie Informationen über sich selbst und über die von Ihnen vorgeschlagenen Dienstleistungen an"
 
-#: lib/BOM/View/CGIForm.pm:4613
+#: lib/BOM/View/CGIForm.pm:4609
 msgid "Please provide the following contact information and we will call you free of charge as soon as a representative is free."
 msgstr "Bitte geben Sie die folgenden Kontaktinformationen an, und wir werden Sie kostenlos anrufen, sobald ein Mitarbeiter frei ist."
 
@@ -5486,7 +5494,7 @@ msgstr "Bitte geben Sie die folgenden Kontaktinformationen an, und wir werden Si
 msgid "Please provide us with the following information:"
 msgstr "Bitte teilen Sie uns folgende Informationen mit:"
 
-#: lib/BOM/View/CGIForm.pm:4542
+#: lib/BOM/View/CGIForm.pm:4538
 msgid "Please provide your email address and password to open a virtual money account and start practicing."
 msgstr "Bitte teilen Sie uns Ihre E-Mail Adresse und Ihr Passwort mit, um ein Konto mit virtuellem Geld zu eröffnen, damit Sie mit dem Training beginnen können."
 
@@ -5503,11 +5511,11 @@ msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "Bitte wählen Sie die \"Auszahlung\" oder \"Einsatz\" Option."
 
 #. (qq(<a href="mailto:$cs_email">$cs_email</a>)
-#: lib/BOM/View/CGIForm.pm:5311
+#: lib/BOM/View/CGIForm.pm:5307
 msgid "Please send this email to %1."
 msgstr "Bitte senden Sie diese E-Mail an %1."
 
-#: lib/BOM/View/CGIForm.pm:1367 lib/BOM/View/CGIForm.pm:4464
+#: lib/BOM/View/CGIForm.pm:1367 lib/BOM/View/CGIForm.pm:4460
 #: lib/BOM/View/CGIForm.pm:582
 msgid "Please specify your country."
 msgstr "Bitte geben Sie Ihr Land an."
@@ -5579,7 +5587,7 @@ msgstr "Stellt die maximalen Gesamtauszahlungen ausstehender Verträge Ihres Por
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "Geltender Marktpreis kann zu diesem Zeitpunkt nicht festgelegt werden."
 
-#: lib/BOM/Product/Contract.pm:1508 lib/BOM/Product/Contract.pm:3010
+#: lib/BOM/Product/Contract.pm:1508 lib/BOM/Product/Contract.pm:3020
 msgid "Prevailing market price cannot be determined."
 msgstr "Geltender Marktpreis kann nicht festgelegt werden."
 
@@ -5678,7 +5686,7 @@ msgstr "%1 Webseite bewerben"
 msgid "Promotional"
 msgstr "Verkaufsfördernd"
 
-#: lib/BOM/View/CGIForm.pm:4808
+#: lib/BOM/View/CGIForm.pm:4804
 msgid "Proof of address"
 msgstr "Adressennachweis"
 
@@ -5690,7 +5698,7 @@ msgstr "Angemessene Barrieren konnten nicht festgelegt werden."
 msgid "Provide the Company with all data and information related to the Company (including, but not limited to, passwords) at no charge to the Company, to enable the Company to monitor your Site and to ensure that you are complying with these terms and conditions."
 msgstr "Stellen Sie dem Unternehmen kostenlos alle Daten und Informationen bezogen auf das Unternehmen (sowie, jedoch nicht nur, Passwörter) zur Verfügung, um dem Unternehmen zu ermöglichen, Ihre Webseite zu überwachen und sicherzustellen, dass Sie die Allgemeinen Geschäftsbedingungen einhalten."
 
-#: lib/BOM/View/CGIForm.pm:4797
+#: lib/BOM/View/CGIForm.pm:4793
 msgid "Provide us with the following documentation:"
 msgstr "Bitte stellen Sie uns folgende Dokumentation zur Verfügung:"
 
@@ -5935,25 +5943,25 @@ msgstr "Stellt das maximale Volumen an Verträgen dar, die Sie an einem bestimmt
 msgid "Required"
 msgstr "Notwendig"
 
-#: lib/BOM/Product/Contract.pm:2983
+#: lib/BOM/Product/Contract.pm:2993
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "Wiederverkauf dieses Vertrags liegt aufgrund der Jahresendmarktfeiertage nicht im Angebot."
 
-#: lib/BOM/Product/Contract.pm:2935
+#: lib/BOM/Product/Contract.pm:2945
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "Wiederverkauf dieses Vertrags liegt aufgrund der Marktfeiertage während der Vertragslaufzeit nicht im Angebot."
 
-#: lib/BOM/Product/Contract.pm:2956
+#: lib/BOM/Product/Contract.pm:2966
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "Wiederverkauf dieses Vertrags liegt aufgrund der Marktfeiertage während der Vertragslaufzeit nicht im Angebot."
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2863
+#: lib/BOM/Product/Contract.pm:2873
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "Wiederverkauf dieses Vertrags liegt mit weniger als %1 verbleibend nicht im Angebot."
 
-#: lib/BOM/Product/Contract.pm:2344 lib/BOM/Product/Contract.pm:2857
-#: lib/BOM/Product/Contract.pm:2907
+#: lib/BOM/Product/Contract.pm:2344 lib/BOM/Product/Contract.pm:2867
+#: lib/BOM/Product/Contract.pm:2917
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:173
 msgid "Resale of this contract is not offered."
 msgstr "Wiederverkauf dieses Vertrags liegt nicht im Angebot."
@@ -6129,7 +6137,7 @@ msgstr "Geheime Frage"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
-#: lib/BOM/View/CGIForm.pm:4739 lib/BOM/View/CGIForm.pm:922
+#: lib/BOM/View/CGIForm.pm:4735 lib/BOM/View/CGIForm.pm:922
 msgid "Security"
 msgstr "Sicherheit"
 
@@ -6164,7 +6172,7 @@ msgid "Select market"
 msgstr "Wählen Sie den Markt"
 
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:23
-#: lib/BOM/View/CGIForm.pm:4843
+#: lib/BOM/View/CGIForm.pm:4839
 msgid "Self-Exclusion Facilities"
 msgstr "Selbstausschluss Gelegenheiten"
 
@@ -6227,7 +6235,7 @@ msgstr "Die Sitzung ist auf max. 1440 Minuten limitiert."
 
 #. ($self_exclusion->session_duration_limit)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:73
-#: lib/BOM/View/CGIForm.pm:4879
+#: lib/BOM/View/CGIForm.pm:4875
 msgid "Session duration limit is currently set to <strong>%1 minutes.</strong>"
 msgstr "Das Limit einer Sitzung liegt momentan bei <strong>%1 Minute.</strong>"
 
@@ -6242,7 +6250,7 @@ msgstr "Definieren Sie Ihre Position"
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/light_chart.html.tt:39
 #: cgi/f_writepartics.cgi:75 cgi/settings.cgi:15 cgi/settings.cgi:19
-#: lib/BOM/View/CGIForm.pm:4734 lib/BOM/View/Menu.pm:99
+#: lib/BOM/View/CGIForm.pm:4730 lib/BOM/View/Menu.pm:99
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -6425,7 +6433,7 @@ msgid "Sorry, only USD is allowed."
 msgstr "Es tut uns leid, aber nur USD sind erlaubt."
 
 #. ($country)
-#: lib/BOM/View/CGIForm.pm:4471
+#: lib/BOM/View/CGIForm.pm:4467
 msgid "Sorry, our service is not available for residents of %1."
 msgstr "Es tut uns leid, aber unser Service steht Bewohnern aus %1 nicht zur Verfügung."
 
@@ -6631,7 +6639,7 @@ msgid "Start time must be before expiry time."
 msgstr "Die Startzeit muss vor der Auslaufzeit liegen."
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2690
+#: lib/BOM/Product/Contract.pm:2700
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "Startzeit der Forwardsverträge muss ab jetzt mehr als %1 betragen."
 
@@ -7076,7 +7084,7 @@ msgstr "Das Unternehmen gewährt Ihnen hiermit für die Laufzeit des Vertrags ei
 msgid "The Company makes no claims that %1 will be uninterrupted or provide an error free service and will not be liable for the consequences of any such errors or interruptions."
 msgstr "Das Unternehmen beansprucht nicht für sich, dass %1 einen ununterbrochenen oder fehlerfreien Dienst zur Verfügung stellt und haftet nicht für die Folgen von Unterbrechungen oder Fehlern."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:119
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:125
 msgid "The Company may from time to time inform you about changes on the website, new services and promotions. If you, however, wish to opt out of such a service and do not wish to receive any direct marketing data you can either unsubscribe to the service or email our customer support team. If you decide to opt in again into receiving promotional material, you can also do so by contacting us."
 msgstr "Das Unternehmen kann Sie von Zeit zu Zeit über die Änderungen auf der Webseite, neue Dienstleistungen und Angebote informieren. Wenn Sie sich allerdings von diesem Service abmelden möchten und keine direkten Marketing Informationen erhalten möchten, können Sie sich entweder abmelden oder eine E-Mail an unsere Kundenbetreuung schicken.  Wenn Sie sich erneut anmelden und Promo-Material erhalten möchten, können Sie uns gerne kontaktieren."
 
@@ -7088,7 +7096,7 @@ msgstr "Das Unternehmen kann in Bezug auf die Platzierung von Marktaufträgen ü
 msgid "The Company may impose volume trading limits on Client accounts in its sole discretion. Current trading volume limits upon account opening are USD/GBP/EUR/AUD 30,000/day maximum trading volume. The maximum account size (i.e. cash balance) is USD/GBP/EUR/AUD 25,000 and the maximum outstanding contract payout at a given time per account is USD/GBP/EUR/AUD 25,000. These limits are increased once a Client is fully authenticated; where the new maximum trading volume will be USD/GBP/EUR/AUD 500,000, having a maximum account size of USD/GBP/EUR/AUD 500,000 and a maximum outstanding contract payout at a given time per account of USD/GBP/EUR/AUD 500,000. If the account balance exceeds the maximum account size, then withdrawals must be made to bring the balance down to under this limit."
 msgstr "Das Unternehmen kann im alleinigen Ermessen Limits für das Handelsvolumen von Kundenkonten aussprechen. Die aktuellen Limits des Handelsvolumen bei Kontoeröffnung liegen bei einem maximalen Handelsvolumen von 30.000 USD/GBP/EUR/AUD pro Tag. Die maximale Kontogröße (z. B. Barguthaben)liegt bei 25.000 USD/GBP/EUR/AUD und die maximale Auszahlung offenstehender Verträge zu einem festgelegten Zeitpunkt bei 25.000 USD/GBP/EUR/AUD. Diese Limits werden angehoben, sobald ein Kunde vollständig authentifiziert ist. Das neue maximale Handelsvolumen steigt dann auf 500000 USD/GBP/EUR/AUD, die Kontogröße auf 500000 USD/GBP/EUR/AUD und die maximale Auszahlung offenstehender Verträge zu einem festgelegten Zeitpunkt auf 500000 USD/GBP/EUR/AUD. Wenn das Kontoguthaben die maximale Kontogröße übersteigt, müssen Auszahlungen vorgenommen werden, um den Kontostand wieder unter dieses Limit zu bringen."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:78
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
 msgid "The Company may, from time to time, at its sole discretion, require a Client to provide proof of identity (such as notarized copy of passport or other means of identity verification as the Company deems required under the circumstances) and may at its sole discretion suspend an account until such proof has been provided to its satisfaction."
 msgstr "Das Unternehmen kann zur gegebenen Zeit im eigenen Ermessen den Kunden auffordern, einen Identitätsnachweis zu liefern (wie z. B. eine vom Notar bestätigte Ausweiskopie oder andere Arten des Identitätsnachweis, wie es das Unternehmen unter den gegebenen Umständen verlangen kann). Im eigenen Ermessen kann auch ein Konto suspendiert werden, bis ein solcher Nachweis zur Zufriedenheit des Unternehmens geliefert wird."
 
@@ -7100,7 +7108,7 @@ msgstr "Das Unternehmen behält sich das Recht vor, im eigenen Ermessen Servicel
 msgid "The Company reserves the right to change any part of this Agreement at any time. Notice of any changes will be sent to your email address 7 days in advance of any such changes, but it is ultimately your responsibility to check these terms and conditions regularly. Your continued participation in our affiliate program after we have posted the changes will constitute binding acceptance of such changes."
 msgstr "Das Unternehmen behält sich das Recht vor, jederzeit einen Teil dieses Vertrags zu ändern. Mitteilungen über evtl. Änderungen werden sieben Tage vor Inkrafttreten an Ihre E-Mail Adresse geschickt.Die Verantwortung liegt letztlich bei Ihnen, diese Allgemeinen Geschäftsbedingungen regelmäßig zu überprüfen. Nachdem wir die Änderungen bekannt gemacht haben, stellt Ihre weitere Teilnahme an unserem Partnerprogramm eine bindende Annahme dieser Änderungen dar."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:87
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:93
 msgid "The Company reserves the right to suspend the operation of this site or sections thereof:"
 msgstr "Das Unternehmen behält sich das Recht vor, den Betrieb dieser Seite oder Sektionen davon zu suspendieren:"
 
@@ -7121,7 +7129,7 @@ msgstr "Das Unternehmen zahlt Ihnen (gemäß den Bestimmungen von Ziffer 5.3) de
 msgid "The Company shall provide you with statements accessible through the website %1 detailing the revenues generated by Clients you have introduced, if any, which have accrued to you over the course of the calendar month. Such statements shall be updated daily. At the end of a calendar month, the Company shall record your total share of Net Revenues, if any, during the previous calendar month. In the event that a revenue share in any calendar month is a negative amount, the Company shall be entitled but not obliged to carry forward and set off such negative amount against future revenue shares which would otherwise be payable to you. However the Company shall also be entitled but not obliged to zero the negative balance that would otherwise be carried forward."
 msgstr "Das Unternehmen wird Ihnen entsprechende Kontoauszüge zur Verfügung stellen, auf die Sie über die %1 Webseite zugreifen können. In diesen Kontoauszügen sind die Umsätze, die die von Ihnen eingeführten Kunden generiert haben und die Ihnen im Laufe eines Kalendermonats zugerechnet worden sind im Detail aufgeführt. Diese Kontoauszüge werden täglich aktualisiert. Am Ende eines Kalendermonats wird das Unternehmen Ihren Gesamtanteil an dem während des vergangenen Kalendermonats erzielten Nettoumsatz auflisten. Für den Fall, dass der Umsatzanteil in einem Kalendermonat einen negativen Betrag ergibt, ist das Unternehmen berechtigt, aber nicht verpflichtet, diesen Fehlbetrag zu übertragen und mit zukünftigen Umsatzbeteiligungen, die andernfalls an Sie auszuzahlen wären, aufzurechnen. Das Unternehmen ist jedoch ebenfalls berechtigt, aber nicht verpflichtet, einen Ausgleich des Fehlbetrags zu verlangen."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:115
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:121
 msgid "The Company will not be liable in any way to any persons in the event of force majeure, or for the act of any Government or legal authority or for the failure of or damage or destruction to, its computer systems, data or records or any part thereof, or for delays, losses, errors or omissions resulting from the failure or mismanagement of any telecommunications or computer equipment or software. The Company shall not be responsible for any damages or losses deemed or alleged to have resulted from or been caused by this site or its content. This includes any client's use or misuse of its content, the inability of any client to connect with or use the site, delay in operations or transmission, failure of communication lines, or any errors or omissions in content."
 msgstr "Im Fall von Höherer Gewalt oder beim Eingreifen von Regierungen oder Behörden, haftet das Unternehmen gegenüber anderen Personen nicht für den Verlust oder Schäden oder die Zerstörung  ihrer Computersysteme, Daten oder Aufzeichnungen oder Teil dieser, oder für Verzögerungen, Verluste, Fehler oder Auslassungen die sich aus dem Ausfall oder falschen Einsatz von Telekommunikations- oder Computerausstattungen oder von der Software ergeben. Das Unternehmen haftet nicht für jegliche Schäden oder Verluste die sich angeblich von oder durch die Verwendung unserer Seite und ihrem Inhalt ergeben. Dies umfasst die Anwendung oder den Missbrauch eines jeden Kunden, die Unfähigkeit eines jeden Kunden sich mit der Seite zu verbinden oder diese zu benutzen, Verzögerungen in der Bedienung oder Übertragung, Ausfall der Verbindung oder jegliche andere Fehlermeldungen oder Auslassungen des Inhalts."
 
@@ -7238,7 +7246,7 @@ msgstr "Die oben erwähnten persönlichen Daten, die wir sammeln, werden von uns
 msgid "The access-token retrieved earlier has a limited lifetime.  In the case of Auth-Code Flow only, it can be renewed."
 msgstr ""
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:63
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:69
 msgid "The anti-money laundering processes have the following effects on Clients:"
 msgstr "Die Verfahren gegen Geldwäsche haben folgende Auswirkungen auf Kunden:"
 
@@ -7290,8 +7298,8 @@ msgstr ""
 msgid "The company does not guarantee the ability to sell a contract prior to its expiration time."
 msgstr "Das Unternehmen garantiert die Möglichkeit, einen Vertrag vor seinem Verfalldatum zu verkaufen."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:56
-msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:59
+msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. This meets the Gambling Commission’s requirements for the segregation of customer funds at the level: medium protection."
 msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:35
@@ -7299,7 +7307,7 @@ msgstr ""
 msgid "The company reserves the right to cancel/prohibit the use of this promotion at its own discretion at any time."
 msgstr "Das Unternehmen behält sich das Recht vor, die Anwendung dieser Werbeaktion jederzeit und auf eigenes Ermessen zu stornieren/untersagen."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:111
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:117
 msgid "The company reserves the right to charge a dormant fee of up to USD/EUR/AUD/GBP25 every 6 months for every Client account that has had no transaction recorded for over 24 months."
 msgstr "Das Unternehmen behält sich das Recht vor, für alle Kundenkonten, die in den vergangenen 24 Monaten keine Transaktionen verzeichnet haben, alle sechs Monate eine Inaktivgebühr von 25 USD/EUR/AUD/GBP zu erheben."
 
@@ -7336,7 +7344,7 @@ msgstr "Die Vertragsperiode ist der Zeitrahmen eines Trades. Sie wird auch Laufz
 msgid "The cost of your open positions"
 msgstr "Die Kosten Ihrer offenen Positionen"
 
-#: lib/BOM/View/CGIForm.pm:5030
+#: lib/BOM/View/CGIForm.pm:5026
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "Die Währung Ihres Bonus ist die gleiche, wie die Währung Ihrer ersten Einzahlung."
 
@@ -7519,7 +7527,7 @@ msgstr "Der Weiterverkaufspreis deutet auf den aktuellen Marktpreis eines Vertra
 msgid "The return is the money realized when the contract expires (see 'Payout')."
 msgstr "Die Rendite ist das zu Vertragsende(siehe \"Auszahlung\") erhaltene Geld."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:107
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:113
 msgid "The right is also reserved to amend or change the rules and scope of this service from time to time. Any change to the rules made whilst the site is in operation will not apply retrospectively and will only apply to acquisitions of financial contracts made after such change. It is the Company’s responsibility to notify Clients before any changes to its terms come into effect."
 msgstr "Wir behalten uns auch das Recht vor, die Regeln und Geltungsbereich dieses Services von Zeit zu Zeit zu ergänzen oder zu ändern. Jede Änderung der Regeln, die während dem Betrieb der Seite gemacht wurde, wird nicht rückwirkend angewendet und erstreckt sich nur auf Käufe von Finanzverträgen, die nach einer solchen Änderung abgeschlossen wurden. Es ist die Verantwortung des Unternehmens die Kunden von jeglichen Änderungen der Geschäftsbedingungen die in Kraft treten zu verständigen."
 
@@ -7780,7 +7788,7 @@ msgstr "Dieser Vertrag gewonnen"
 msgid "This document (the \"Agreement\") sets out the terms and conditions between \"the Company\" which is Binary Ltd, and you (the person who applied for this program; \"you\" or \"your\"), in relation to your application to setup an affiliate account (and membership of the affiliate program if your application is deemed successful) to promote the website %1"
 msgstr "Dieses Dokument (\"Vertrag\") legt die Allgemeinen Geschäftsbedingungen zwischen \"dem Unternehmen\", d. h. der Regent Markets Group und Ihnen (der Person, die sich für das Programm beworben hat) in Bezug auf Ihren Antrag detailliert fest, ein Partnerkonto (und eine Mitgliedschaft beim Partnerprogramm) einzurichten, wenn Ihr Antrag positiv beschieden wurde um die Webseite %1 zu bewerben"
 
-#: lib/BOM/View/CGIForm.pm:5241
+#: lib/BOM/View/CGIForm.pm:5237
 msgid "This function is not relevant to Virtual money accounts"
 msgstr "Diese Funktion ist für virtuelle Geldkonten nicht relevant"
 
@@ -7952,7 +7960,7 @@ msgstr "Um ein Weißprodukt zu erstellen, %1 zuerst. Dies wird es Ihnen ermögli
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "Um Cookies zuzulassen, folgen Sie den anschließenden Anweisungen für die Browserversion, die Sie benutzen."
 
-#: lib/BOM/View/CGIForm.pm:5323
+#: lib/BOM/View/CGIForm.pm:5319
 msgid "To fully authenticate your account, please email scanned copies of the document listed below."
 msgstr "Um Ihr Konto vollständig zu authentifizieren, schicken Sie bitte gescannte Kopien der folgenden Dokumente."
 
@@ -7969,7 +7977,7 @@ msgstr "Um sicherzustellen, dass Sie eine Antwort erhalten, fügen Sie die \"%1\
 msgid "To reset your password, enter the e-mail address you registered in the field below and click \"RESET PASSWORD\"."
 msgstr "Um Ihr Passwort zurückzusetzen, geben Sie im unteren Feld Ihre registrierte E-Mail Adresse an und klicken Sie auf \"PASSWORT ZURÜCKSETZEN\"."
 
-#: lib/BOM/View/CGIForm.pm:4577
+#: lib/BOM/View/CGIForm.pm:4573
 msgid "To speak to our customer service representatives online, please click on the Live Help button. Live Help in English is available Monday to Friday, 24 hours a day. Assistance in Russian is available from 7h00GMT until 23h30; in Indonesian from 1h00GMT to 10h00."
 msgstr "Um mit einem unserer Kundenbetreuern online zu sprechen, klicken Sie bitte auf die Schaltfläche \"Live-Help\". Live-Help auf Englisch steht Montag bis Freitag rund um die Uhr zur Verfügung. Hilfe auf Russisch ist von 7h00 bis 23.30 Uhr GMT und auf Indonesisch von 1.00 bis 10.00 Uhr GMT verfügbar."
 
@@ -7986,7 +7994,7 @@ msgid "Toll-Free number"
 msgstr "Gebührenfreie Nummer"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2957
+#: lib/BOM/Product/Contract.pm:2967
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "Zu viele Marktfeiertage während des Vertragszeitraums. Wählen Sie ein Verfalldatum nach %1."
 
@@ -8120,8 +8128,8 @@ msgstr "Trading-Regeln"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 #: cgi/trading_times.cgi:17 lib/BOM/Product/Contract.pm:2313
-#: lib/BOM/Product/Contract.pm:2710 lib/BOM/Product/Contract.pm:2725
-#: lib/BOM/Product/Contract.pm:2741 lib/BOM/Product/Contract.pm:2926
+#: lib/BOM/Product/Contract.pm:2720 lib/BOM/Product/Contract.pm:2735
+#: lib/BOM/Product/Contract.pm:2751 lib/BOM/Product/Contract.pm:2936
 #: lib/BOM/View/Menu.pm:157
 msgid "Trading Times"
 msgstr "Tradingzeiten"
@@ -8139,11 +8147,11 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "Das Traden von Finanzverträgen birgt ein hohes Risiko und eignet sich nicht für alle Personen. Bevor Sie sich entscheiden, mit Finanzverträgen zu handeln, sollten Sie Ihre Ziele, Ihre Erfahrung und Ihre Risikolust sorgfältig abwägen. Sie sollten sich aller Risiken bewusst sein, die mit dem Finanzhandel zusammenhängen und sich von einem unabhängigen Finanzberater beraten lassen, wenn Sie Zweifel haben."
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2678
+#: lib/BOM/Product/Contract.pm:2683
 msgid "Trading is available after the first %1 of the session."
 msgstr "Trading ist nach der ersten %1 der Sitzung verfügbar."
 
-#: lib/BOM/Product/Contract.pm:2908
+#: lib/BOM/Product/Contract.pm:2918
 msgid "Trading is not offered for this duration."
 msgstr "Trading liegt für diese Laufzeit nicht im Angebot."
 
@@ -8164,24 +8172,24 @@ msgstr "Das Trading auf %1 ist momentan suspendiert."
 #. ($underlying->translated_display_name()
 #. ($bet->underlying->translated_display_name()
 #: lib/BOM/Product/Contract.pm:2294 lib/BOM/Product/Contract.pm:2301
-#: lib/BOM/Product/Contract.pm:3018
+#: lib/BOM/Product/Contract.pm:3028
 #: lib/BOM/Product/Pricing/Engine/Intraday.pm:281
 #: lib/BOM/Product/Pricing/Engine/Intraday/Index.pm:80
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "Das Trading auf %1 ist aufgrund fehlender Marktdaten suspendiert."
 
-#: lib/BOM/Product/Contract.pm:2723
+#: lib/BOM/Product/Contract.pm:2733
 #, fuzzy
 #| msgid "Trading suspended for the last one hour of the session."
 msgid "Trading on this contract type is suspended for the last one hour of the session."
 msgstr "Das Trading ist für die letzte Stunde der Sitzung suspendiert."
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2708
+#: lib/BOM/Product/Contract.pm:2718
 msgid "Trading suspended for the last %1 of the session."
 msgstr "Das Trading ist für das letzte %1 der Sitzung suspendiert."
 
-#: lib/BOM/View/CGIForm.pm:4847
+#: lib/BOM/View/CGIForm.pm:4843
 msgid "Trading the financial markets can become addictive. Fill in the form below to limit your participation on the website or send a signed letter or fax to our customer support team. Limits will only be removed or altered after 7 days."
 msgstr "Trading auf Finanzmärkten kann abhängig machen. Füllen Sie das Formular im Anschluss aus, um Ihre Teilnahme auf der Webseite zu begrenzen oder schicken Sie einen unterschriebenen Brief oder ein Fax an unser Kundenbetreuungsteam. Die Limits werden nur nach 7 Tagen entfernt oder verändert."
 
@@ -8375,7 +8383,7 @@ msgstr "Nutzen Sie diese Funktion, um den Zugang von einer spezifischen IP Adres
 msgid "User Support - Thank you"
 msgstr "Nutzerunterstützung - Vielen Dank"
 
-#: lib/BOM/View/CGIForm.pm:4811
+#: lib/BOM/View/CGIForm.pm:4807
 msgid "Utility bill (within last 3 months)"
 msgstr "Rechnung eines Versorgungsunternehmen (der letzten drei Monate)"
 
@@ -8387,7 +8395,7 @@ msgstr "Valletta, die Haupstadt Maltas"
 msgid "Variable return"
 msgstr "Variable Rendite"
 
-#: lib/BOM/View/CGIForm.pm:4799
+#: lib/BOM/View/CGIForm.pm:4795
 msgid "Verification of identity"
 msgstr "Identitätsprüfung"
 
@@ -8409,10 +8417,6 @@ msgstr "Vertikal"
 msgid "Vertical Grid"
 msgstr "Vertikales Raster"
 
-#: lib/BOM/View/CGIForm.pm:4433 lib/BOM/View/CGIForm.pm:4435
-msgid "Viber"
-msgstr "Viber"
-
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/intraday_prices.html.tt:16
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:21
 #: cgi/oop/Controller/Bet.pm:1276 cgi/oop/Controller/Bet.pm:1295
@@ -8423,7 +8427,7 @@ msgstr "Ansehen"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "Vertragspreise für Rise/Fall über eine Auswahl von Märkten anzeigen."
 
-#: lib/BOM/Product/Contract.pm:2670 lib/BOM/Product/Contract.pm:2680
+#: lib/BOM/Product/Contract.pm:2671 lib/BOM/Product/Contract.pm:2686
 msgid "View Trading Times"
 msgstr "Tradingzeiten anzeigen"
 
@@ -8468,7 +8472,7 @@ msgid "View the operating hours of the markets you can trade."
 msgstr "Die Betriebszeiten der Märkte ansehen, auf denen Sie traden können."
 
 #. (request()
-#: lib/BOM/View/CGIForm.pm:5248
+#: lib/BOM/View/CGIForm.pm:5244
 msgid "View your <a href=\"%1\">withdrawal limits</a>."
 msgstr "Sehen Sie Ihre <a href=\"%1\">Auszahlungslimits</a>."
 
@@ -8493,13 +8497,13 @@ msgstr "Trading Gewinn/Verlust ansehen."
 msgid "Virtual Account"
 msgstr "Virtuelles Konto"
 
-#: lib/BOM/View/CGIForm.pm:4533
+#: lib/BOM/View/CGIForm.pm:4529
 msgid "Virtual Money Account Opening"
 msgstr "Eröffnen eines virtuellen Geldkontos"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/open_account.html.tt:24
 #: cgi/lost_password.cgi:385 lib/BOM/View/CGIForm.pm:1160
-#: lib/BOM/View/CGIForm.pm:4921
+#: lib/BOM/View/CGIForm.pm:4917
 msgid "Virtual money account"
 msgstr "Virtuelles Geldkonto"
 
@@ -8549,6 +8553,11 @@ msgstr "Wir können live Preise zu diesem Zeitpunkt nicht anzeigen. Um Echtzeit�
 #: lib/BOM/View/CGIForm.pm:587 platform/bin/GenerateStaticData.pm:56
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "Wir akzeptieren zu diesem Zeitpunkt keine Konten von Einwohnern dieses Landes."
+
+#. ("http://www.gamblingcommission.gov.uk/Consumers/Protection-of-customer-funds.aspx")
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:56
+msgid "We are required by our licence to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='%1' target='_blank'>%1</a>."
+msgstr ""
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:187
@@ -8619,7 +8628,7 @@ msgstr "Wir möchten es Ihnen so einfach wie möglich machen, uns potentielle Ge
 msgid "We were unable to recover your Login ID or Password with the provided information. <a href=\"%1\">Return to Password Recovery</a>, or <a href=\"%2\"><strong>contact us</strong></a> should you need further assistance."
 msgstr "Wir sind nicht in der Lage, Ihre Log-in ID oder Passwort mit den zur Verfügung gestellten Informationen wieder herzustellen. <a href=\"%1\">Kehren Sie zur Wiederherstellung des Passworts zurück</a>, oder <a href=\"%2\"><strong>kontaktieren Sie uns</strong></a>, sofern Sie weitere Hilfe brauchen."
 
-#: lib/BOM/View/CGIForm.pm:5302
+#: lib/BOM/View/CGIForm.pm:5298
 msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
 msgstr "Wir konnten Ihre Identität und Ihre Wohnanschrift mit unserem Online-Überprüfungsprozess nicht verifizieren."
 
@@ -8686,7 +8695,7 @@ msgstr "Webseite"
 #. ($until->date)
 #. ($self_exclusion->exclude_until)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:77
-#: lib/BOM/View/CGIForm.pm:4889
+#: lib/BOM/View/CGIForm.pm:4885
 msgid "Website exclusion is currently set to <strong>%1.</strong>"
 msgstr "Der Webseitenausschluss steht momentan auf <strong>%1.</strong>"
 
@@ -8939,7 +8948,7 @@ msgstr "Fenster"
 msgid "Winning the contract"
 msgstr "Den Vertrag gewinnen"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:69
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:75
 msgid "Winnings may only be paid to the initiator of an account. When a Client maintains an account by means of telegraphic deposits, winnings are only paid to the holder of the originating bank account, and it is the onus of the Client to ensure that account number and name accompany all transfers to the Company. When a Client maintains an account by means of credit/debit card deposits, winnings are only paid back to the same card."
 msgstr "Gewinne werden nur an den Initiator des Kontos gezahlt. Wenn ein Kunde ein Konto mit Hilfe von telegrafischen Einzahlungen aufrecht erhält, werden die Gewinne nur an den Inhaber des Ursprungsbankkontos gezahlt, und es ist die Pflicht des Kunden sicherzustellen, dass die Kontonummer und der Name bei allen Überweisungen an das Unternehmen angegeben werden. Wenn der Kunde ein Konto mit Hilfe von Einzahlungen per Kredit-/Debitkarten aufrecht erhält, werden die Gewinne nur auf die gleiche Kreditkarte zurückgezahlt."
 
@@ -9077,7 +9086,7 @@ msgstr "Ja"
 msgid "Yes. Please email us at <a href=\"mailto:%1\">%1</a> for further assistance."
 msgstr "Ja. Für weitere Hilfe schicken Sie bitte ein E-Mail an <a href=\"mailto:%1\">%1</a>."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:81
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:87
 msgid "You agree that we may use Personal information provided by you in order to conduct appropriate anti-fraud checks. Personal Information that you provide may be disclosed to a credit reference or fraud prevention agency, which may keep a record of that information."
 msgstr "Sie stimmen zu, dass wir die von Ihnen zur Verfügung gestellten persönlichen Informationen verwenden, um entsprechende Anti-Betrugsüberprüfungen durchzuführen. Von Ihnen zur Verfügung gestellte persönliche Informationen zum Zweck von Kreditreferenzen oder für Behörden zur Vorbeugung von Betrug offengelegt und von diesen Stellen gespeichert werden."
 
@@ -9143,7 +9152,7 @@ msgstr "Sie können jederzeit langfristige Trades zurückverkaufen um von verän
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "Sie können die Länge Ihres Trades festlegen, von 10 Sekunden bis 365 Tage."
 
-#: lib/BOM/View/CGIForm.pm:5303
+#: lib/BOM/View/CGIForm.pm:5299
 msgid "You can still authenticate your account by sending us scans of the following documents by email"
 msgstr "Sie können Ihr Konto immer noch authentifizieren indem Sie uns gescannte Kopien folgender Dokumente via E-Mail zuschicken"
 
@@ -9215,7 +9224,7 @@ msgstr "Sie haben bereits den Gegenwert von EUR %1 abgehoben, der sich während 
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "Sie haben bereits den Gegenwert von EUR %1 abgehoben."
 
-#: lib/BOM/View/CGIForm.pm:5018
+#: lib/BOM/View/CGIForm.pm:5014
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "Sie haben Verträge mit einem kombinierten Kaufpreis aus dem 5-fachen des Bonusbetrags gekauft."
 
@@ -9260,7 +9269,7 @@ msgstr "Sie haben folgenden Vertrag verkauft:"
 msgid "You may not purchase or register keywords, search terms or other identifiers for use in any search engine, portal, sponsored advertising service or other search or referral service which are identical or similar to any of the Company's trademarks or trade names that include the word \"%1\" or any variation thereof. However, this does not extend to the use of Meta tag keywords on your site which are identical or similar to any of the Company's trademarks or trade names including the term %1."
 msgstr "Sie dürfen keine Keywords, Suchbegriffe oder andere Kennungen zur Nutzung in einer Suchmaschine, in einem Portal, bei gesponserten Werbediensten oder anderen Such- oder Linkdiensten kaufen oder registrieren, die den Handelsmarken des Unternehmens gleich oder ähnlich sind. Das gleiche Verbot gilt auch für Handelsnamen, die den Begriff „%1“ oder eine Variante davon als Bestandteil enthalten. Das Verbot bezieht sich jedoch nicht auf den Einsatz von Keywords bei den Metatags auf Ihrer Webseite, die den Handelsmarken des Unternehmens gleich oder ähnlich oder Handelsnamen sind, die den Begriff %1 als Bestandteil enthalten."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:123
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:129
 msgid "You may only open an account at this site on condition that:"
 msgstr "Sie können nur ein Konto auf dieser Seite eröffnen, unter der Bedingung, dass:"
 
@@ -9379,7 +9388,7 @@ msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 
 msgstr "Ihr Abhebelimit von %1 Tagen ist momentan <strong>EUR %2</strong> (oder %3 in einer anderen Währung)."
 
 #. ($currency_label, $min_deposit)
-#: lib/BOM/View/CGIForm.pm:5016
+#: lib/BOM/View/CGIForm.pm:5012
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "Ihre <strong>erste</strong> Einzahlung entspricht oder übersteigt %2%1, und"
 
@@ -9421,7 +9430,7 @@ msgstr "Ihr Kontostand"
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "Ihr Kontostand (%2%1) reicht nicht aus, um diesen Vertrag zu kaufen (%3%1)."
 
-#: lib/BOM/View/CGIForm.pm:5333
+#: lib/BOM/View/CGIForm.pm:5329
 msgid "Your account does not require authentication at this time."
 msgstr "Ihr Konto benötigt momentan keine Authentifizierung."
 
@@ -9441,11 +9450,11 @@ msgid "Your account is fully authenticated and your withdrawal limit of EUR %1 h
 msgstr "Ihr Konto ist voll authentifiziert und Ihr Abhebelimit von EUR %1 wurde angehoben."
 
 #. (request()
-#: lib/BOM/View/CGIForm.pm:5272
+#: lib/BOM/View/CGIForm.pm:5268
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
 msgstr "Ihr Konto ist vollständig authentifiziert. Ihre <a href=\"%1\">Trading-Limits sind hier ersichtlich</a>."
 
-#: lib/BOM/View/CGIForm.pm:5317
+#: lib/BOM/View/CGIForm.pm:5313
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
 msgstr "Ihr Konto ist voll funktionsfähig und Sie können damit beginnen, Geld einzuzahlen und Verträge zu kaufen."
 
@@ -9462,6 +9471,10 @@ msgstr "Ihr Konto ist als Zahlungsagent registriert."
 msgid "Your account is restricted to withdrawals only."
 msgstr "Ihr Konto ist nur auf Auszahlungen eingeschränkt."
 
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:62
+msgid "Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
+msgstr ""
+
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:20
 msgid "Your base url for all API calls"
 msgstr ""
@@ -9471,15 +9484,15 @@ msgstr ""
 msgid "Your bonus request - %1"
 msgstr "Ihre Bonusanfrage- %1"
 
-#: lib/BOM/View/CGIForm.pm:5012
+#: lib/BOM/View/CGIForm.pm:5008
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "Ihr Bonus wird Ihrem Konto innerhalb von drei Werktage gutgeschrieben, wenn die folgenden Voraussetzungen erfüllt wurden:"
 
-#: lib/BOM/View/CGIForm.pm:5025
+#: lib/BOM/View/CGIForm.pm:5021
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "Ihr Bonus wird Ihrem Konto innerhalb von drei Werktage gutgeschrieben, nachdem Sie Verträge mit einem kombinierten Kaufpreis erworben haben, die dem Bonusbetrag entsprechen oder darüber liegen."
 
-#: lib/BOM/View/CGIForm.pm:5034
+#: lib/BOM/View/CGIForm.pm:5030
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "Ihr Bonus wird Ihrem Konto innerhalb von drei Werktage gutgeschrieben."
 
@@ -9509,7 +9522,7 @@ msgstr "Ihre Kassen-Session ist abgelaufen"
 msgid "Your country"
 msgstr "Ihr Land"
 
-#: lib/BOM/View/CGIForm.pm:4856
+#: lib/BOM/View/CGIForm.pm:4852
 msgid "Your current self-exclusion settings are as follows:"
 msgstr "Ihre aktuellen Selbstausschlusseinstellungen sind folgende:"
 
@@ -9676,7 +9689,7 @@ msgstr "ein Betragslimit, das Sie in einem bestimmten Zeitraum für das Traden v
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "ein Verlustlimit, das Sie in einem bestimmten Zeitraum erleiden können;"
 
-#: lib/BOM/View/CGIForm.pm:5326
+#: lib/BOM/View/CGIForm.pm:5322
 msgid "and"
 msgstr "und"
 
@@ -9716,7 +9729,7 @@ msgstr "besserer Trade"
 #: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:13
 #, fuzzy
 #| msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex stocks, binary trading, binary bet, binary online bet, binary options trading platform, digital options, trading stocks"
-msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex, binary trading, binary bet, binary online bet, binary options trading platform, digital options"
+msgid "binary options, forex, forex trading, online trading, financial trading, binary trading, index trading, trading indices, forex trades, trading commodities, binary options strategy, binary broker, binary bet, binary options trading platform, binary strategy, finance, stocks, investment, trading"
 msgstr "Binäre Optionen, Binäre Option, Devisenhandel, Online-Trading, Finanzhandel, Finanzhandel mit Binären Optionen, Binäres Trading, Index Trading, Trading mit Indizes, Devisenhandel, Rohstoffhandel, Devisenhandelmarkt, Handel ausüben, Binäres Trading ausführen, Trick-Trade, Handel mit virtuellem Geld, Handel mit Forexaktien, Binäres Trading, Binärer Handel, Binärer Onlinehandel, Handelsplattform mit binären Optionen, Digitale Optionen, Aktienhandel"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
@@ -9869,13 +9882,18 @@ msgstr "nicht verfügbar"
 msgid "on this website. You may also"
 msgstr "auf dieser Webseite. Sie können auch"
 
-#: lib/BOM/View/CGIForm.pm:4803 lib/BOM/View/CGIForm.pm:4812
+#: lib/BOM/View/CGIForm.pm:4799 lib/BOM/View/CGIForm.pm:4808
 msgid "or"
 msgstr "oder"
 
 #: /home/git/translations/binary-static/src/templates/haml/not_found.html.haml:1
 msgid "or please try the site map below"
 msgstr "oder versuchen Sie bitte die untere Sitemap"
+
+#. (request()
+#: lib/BOM/Product/Contract.pm:2674 lib/BOM/Product/Contract.pm:2689
+msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
+msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
@@ -9961,11 +9979,11 @@ msgstr "Trades"
 msgid "website"
 msgstr "Webseite"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:93
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:99
 msgid "when there is a breakdown in the means of communication normally employed in determining the price or value of any of the financial contracts or where the price or value of any of the financial contracts cannot be promptly or accurately ascertained."
 msgstr "wenn es zu einer Kommunikationsunterbrechung kommt, die normalerweise dazu benutzt wird, den Preis oder Wert eines Finanzvertrags zu bestimmen oder wo der Preis oder Wert eines Finanzvertrags nicht umgehend oder genau ermittelt werden können."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:90
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:96
 msgid "when, as a result of political, economic, military or monetary events (including unusual market volatility or illiquidity) or any circumstances outside the control, responsibility and power of the Company, the continued operation of this site is not reasonably practicable without materially and adversely affecting and prejudicing the interests of Clients or the Company, or if, in the opinion of the Company, a price cannot be calculated for financial contracts; or"
 msgstr "wenn durch politische, wirtschaftliche, militärische oder finanzielle Geschehnisse (inkl. unübliche Marktvolatilität oder Zahlungsunfähigkeit) oder durch andere Umstände, die sich der Kontrolle, Verantwortung und Macht des Unternehmens entziehen, der fortlaufende Betrieb dieser Seite praktisch nicht durchführbar ist, ohne die Interessen der Kunden oder der Gesellschaft materiell und negativ zu beeinflussen oder wenn - nach Meinung des Unternehmens - ein Preis für Finanzverträge nicht kalkuliert werden kann; oder"
 
@@ -9994,7 +10012,7 @@ msgstr "Jahr"
 msgid "years"
 msgstr "Jahre"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:135
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:141
 msgid "you are not resident in a restricted country such as the USA, Japan or Hong Kong;"
 msgstr "Sie sind kein Bewohner eines eingeschränkten Landes, sowie die USA, Japan oder Hong Kong;"
 
@@ -10002,19 +10020,19 @@ msgstr "Sie sind kein Bewohner eines eingeschränkten Landes, sowie die USA, Jap
 msgid "you are not resident in a restricted country such as the USA, Japan, Hong Kong, Bahamas, Costa Rica, Malaysia, Malta, Iran, North Korea, Jersey, Iraq or Myanmar;"
 msgstr "Sie sind kein Bewohner eines eingeschränkten Landes, sowie die USA, Japan, Hong Kong, Bahamas, Costa Rica, Malaysia, Malta, Iran, Nordkorea, Jersey, Irak oder Myanmar;"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:132
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:138
 msgid "you are over 18 years of age, unless you are an Estonian resident whereby you would have to be over 21;"
 msgstr "Sie sind über 18 Jahre alt. Wenn Sie ein in Estland wohnen müssen Sie über 21 Jahre alt sein;"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:129
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:135
 msgid "you have read our privacy statement and hereby give us consent to process your personal information as outlined there;"
 msgstr "Sie haben unsere Datenschutzerklärung gelesen und erteilen uns Ihre Zustimmung, Ihre persönlichen Daten zu verarbeiten, wie es in der Erklärung beschrieben ist;"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:126
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:132
 msgid "you have read this Legal Terms and Conditions page in full and understood that you will be buying and selling financial contracts subject to these terms and conditions;"
 msgstr "Sie haben die Seite mit diese gesetzlichen Allgemeinen Geschäftsbedingungen vollständig gelesen und verstanden, dass Sie Finanzverträge kaufen und verkaufen werden, die diesen Allgemeinen Geschäftsbedingungen unterliegen;"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:138
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:144
 msgid "you have sufficient experience and knowledge in matters of financial trading to be capable of evaluating the merits and risks of acquiring financial contracts via this site and have done so without relying on any information contained in this site."
 msgstr "Sie haben ausreichend Erfahrung und Wissen in Bezug auf den Finanzhandel, um in der Lage zu sein, die Vorzüge und Risiken beim Erwerb von Finanzverträgen auf dieser Seite zu bewerten und haben das getan, ohne sich dabei auf Informationen zu verlassen, die diese Seite beinhaltet."
 
@@ -11988,6 +12006,9 @@ msgstr "Es tut uns leid, aber der Zugang über dieses IP Netzwerk wurde deaktivi
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "Es tut uns leid, aber Sie haben zu oft erfolglos versucht, einzuloggen. Bitte versuchen Sie es in 5 Minuten erneut."
+
+#~ msgid "Viber"
+#~ msgstr "Viber"
 
 #~ msgid "The contract payout has changed from %1%2 to %1%3."
 #~ msgstr "Die Vertragsauszahlung hat sich von %1%2 auf %1%3 geändert."
