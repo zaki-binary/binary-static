@@ -217,7 +217,7 @@ msgid "%1 prices are benchmarked against the interbank options market, so you al
 msgstr "%1的报价立基于银行间二元期权市场，让您可在交易中总是获得同类产品中最优的报价。"
 
 #. (request()
-#: lib/BOM/View/CGIForm.pm:4761
+#: lib/BOM/View/CGIForm.pm:4757
 msgid "%1 provides <a href=\"%2\">Self Exclusion</a> facilities which allow you to set limits on your account."
 msgstr "%1 提供 <a href=\"%2\">自我排除 (Self Exclusion)</a> 工具，使您能够对您的帐户设置限制。"
 
@@ -267,12 +267,6 @@ msgstr "％1的随机指数为%2, %3, %4, 及 %5 。相应于分别为25％，50
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "%1's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "通过 %1 的专利报价技术，您可获得与在银行间市场交易员同样的回报率。"
-
-#. (stash('broker_name')
-#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
-msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
-msgstr "%1：可交易外汇、指数、大宗商品及智慧指数的二元期权在线交易平台"
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/smart_indices.html.haml:1
@@ -809,9 +803,16 @@ msgstr "我们的客户支持团队成员稍后将联系您。"
 msgid "A momentum indicator showing the percent rate-of-change of a triple exponentially smoothed moving average. Like other oscillators, TRIX oscillates around a zero line."
 msgstr "一个动量指标，指示三重指数平滑移动平均数的百分比变动率。如同其它摆动指标，TRIX 在基准线周围摆动。"
 
-#: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:209
-msgid "A new version of the interface is available. Please refresh this page to try again."
+#, fuzzy
+#| msgid "A new version of the interface is available. Please refresh this page to try again."
+msgid "A new version of the interface is available. Please <a href=\"#\" id=\"appcache-refresh-link\">refresh</a> this page to try again."
+msgstr "已经推出了界面的新版本。请刷新此页面再次尝试。"
+
+#: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
+#, fuzzy
+#| msgid "A new version of the interface is available. Please refresh this page to try again."
+msgid "A new version of the interface is available. Please <a href='#' id='appcache-refresh-link'>refresh</a> this page to try again."
 msgstr "已经推出了界面的新版本。请刷新此页面再次尝试。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
@@ -830,7 +831,7 @@ msgstr "出现一个问题"
 msgid "A problem occurred while connecting to the server. Please try again later."
 msgstr "连接到服务器时出现问题。请稍后重新尝试。"
 
-#: lib/BOM/View/CGIForm.pm:5308
+#: lib/BOM/View/CGIForm.pm:5304
 msgid "A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook"
 msgstr "您的最近期的（3个月内）纸张型水电费单，银行存折，信用会社，建筑联会，信用卡或借记卡月结单，或者Passbook的扫描件"
 
@@ -838,7 +839,7 @@ msgstr "您的最近期的（3个月内）纸张型水电费单，银行存折�
 msgid "A scanned copy of a utility bill showing your current residential address (utility bill must not be more than 3 months old)."
 msgstr "显示您目前的居住地址的公共设施费帐单之扫描件（公共设施费帐单不得超过3个月）。"
 
-#: lib/BOM/View/CGIForm.pm:5305
+#: lib/BOM/View/CGIForm.pm:5301
 msgid "A scanned copy of your current valid passport, current driving license (provisional or full), or identity card"
 msgstr "当前有效护照，当前驾照(临时或永久)或身份证副本扫描件"
 
@@ -906,9 +907,9 @@ msgstr "帐户限制"
 msgid "Account Management and Tracking"
 msgstr "帐户管理及追踪"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:121
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:127
 #: cgi/create_account.cgi:191 cgi/create_account.cgi:306
-#: cgi/open_account.cgi:15 lib/BOM/View/CGIForm.pm:4527
+#: cgi/open_account.cgi:15 lib/BOM/View/CGIForm.pm:4523
 msgid "Account Opening"
 msgstr "帐户开设"
 
@@ -999,7 +1000,7 @@ msgstr "所有"
 msgid "All credit card details are submitted directly to the Visa/Mastercard network using the latest SSL encryption technology, in accordance with bank policies."
 msgstr "所有信用卡的内容都按照银行政策使用最新的SSL加密技术直接提交至Visa/Mastercard 网络。"
 
-#: lib/BOM/View/CGIForm.pm:4591
+#: lib/BOM/View/CGIForm.pm:4587
 msgid "All email inquiries will be responded to within 2 business days whenever possible."
 msgstr "在可能的情况下，所有咨询邮件将在 2 个营业日内给予回复。"
 
@@ -1079,7 +1080,7 @@ msgstr "隐私政策或安全声明的任何变化都会公布在本网站上。
 msgid "Any form of Spam will result in your account being placed under review and all funds due being withheld pending an investigation into your account. You need to be aware that %1 is liable to incur expenses in dealing with Spam generated mail and these same expenses will be deducted from your account. In this instance the amount determined will be fair and deemed final and acceptable based on good faith and such amount will be collectable by law and deemed to have been accepted by yourself as fair and reasonable and as agreed to by registration as an affiliate of %1."
 msgstr "任何形式的垃圾邮件都将会导致您的账户受到审查，所有应付资金将会暂停支付，直至您账户的调查完成。你需注意，%1承担处理垃圾邮件所产生的费用，该等费用将从您的账户中扣减。在这种情况下，该等确定的金额将基于诚信原则视为公平并具有终局和可接受性。该等金额将依法收取；通过注册成为%1加盟会员，您视为自行接受该等金额为公平和合理，并同意缴纳。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:104
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:110
 msgid "Any information given on these pages and/or emails or newsletters sent by the company related thereto, is not intended as financial or investment advice and the Company will not accept any liability in this respect, nor will the Company accept any responsibility for the accuracy or comprehensiveness of the information provided on this site."
 msgstr "这些网页上和/或公司发送的与之相关的邮件或简报上的信息不构成财务或投资建议，公司将不会承担任何与此相关的责任，公司也不负责确保网站上信息的准确性或完整性。"
 
@@ -1106,7 +1107,7 @@ msgid "Apply for access"
 msgstr "申请访问权限"
 
 #: cgi/paymentagent_application.cgi:17 cgi/paymentagent_application.cgi:21
-#: cgi/paymentagent_application.cgi:51 lib/BOM/View/CGIForm.pm:4780
+#: cgi/paymentagent_application.cgi:51 lib/BOM/View/CGIForm.pm:4776
 msgid "Apply to become Payment Agent"
 msgstr "申请成为支付代理人"
 
@@ -1201,7 +1202,7 @@ msgstr "资产"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:90
 #: cgi/asset_index.cgi:146 cgi/asset_index.cgi:30
-#: lib/BOM/Product/Contract.pm:2867 lib/BOM/Product/Contract.pm:2909
+#: lib/BOM/Product/Contract.pm:2877 lib/BOM/Product/Contract.pm:2919
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:179
 #: lib/BOM/View/Menu.pm:150
 msgid "Asset Index"
@@ -1242,7 +1243,7 @@ msgstr "验证您的帐户"
 msgid "Authenticated"
 msgstr "已验证"
 
-#: lib/BOM/View/CGIForm.pm:5245
+#: lib/BOM/View/CGIForm.pm:5241
 msgid "Authentication"
 msgstr "验证"
 
@@ -1310,7 +1311,7 @@ msgstr "银行电汇/货币转帐"
 msgid "Bank your way"
 msgstr "以你的方式存入银行"
 
-#: lib/BOM/View/CGIForm.pm:4814
+#: lib/BOM/View/CGIForm.pm:4810
 msgid "Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)."
 msgstr "银行/信用社/建筑协会/信用卡/借记卡对账单或存折（最近 3 个月内）。"
 
@@ -1646,7 +1647,7 @@ msgstr "计算"
 msgid "Call me now"
 msgstr "现在拨打我的电话吧"
 
-#: lib/BOM/View/CGIForm.pm:4596
+#: lib/BOM/View/CGIForm.pm:4592
 msgid "Call us"
 msgstr "打电话给我们"
 
@@ -1654,7 +1655,7 @@ msgstr "打电话给我们"
 msgid "Callback URL"
 msgstr "回电网址"
 
-#: lib/BOM/View/CGIForm.pm:4607
+#: lib/BOM/View/CGIForm.pm:4603
 msgid "Callback services"
 msgstr "回电服务"
 
@@ -1928,7 +1929,7 @@ msgstr "客户只有在开了真实帐户以后才能援用此奖金。"
 msgid "Clients must be aware that underage gambling is an offence. If a client, upon age verification, is proven to be underage, will be deprived from any winnings and only deposits made shall be refunded."
 msgstr "客户必须了解未成年人投机交易是违法的。如果某一个客户在年龄验证时被证明是未成年人，其所有奖金将被剥夺，只有存款会予以退还。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:66
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:72
 msgid "Clients must fill into the account opening form all requested details that establish their identity."
 msgstr "顾客必须在开户表格中填写所需的所有识别身份之详情。"
 
@@ -1944,7 +1945,7 @@ msgstr "在 Binary （欧洲）有限公司注册的客户可以在此向彩票�
 msgid "Clients registered with Binary (IOM) Ltd can raise their unresolved disputes with the Isle of Man Gambling Supervision Commission at gaming@gov.im."
 msgstr "在 Binary（IOM）有限公司注册的客户可以传送电子邮件到 gaming@gov.im 向马恩岛博采监督委员会提诉他们悬而未决的纠纷。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:72
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:78
 msgid "Clients shall not hold or pool third party funds into their own account held with the Company."
 msgstr "客户不可将第三方资金截留或汇集至他们在公司持有的自己账户内。"
 
@@ -2040,7 +2041,7 @@ msgstr "商品通道指数"
 msgid "Company trip to Phuket, Thailand"
 msgstr "公司旅游，前往泰国普吉岛"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:85
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:91
 msgid "Company's Right"
 msgstr "公司权利"
 
@@ -2116,7 +2117,7 @@ msgid "Contract barrier must be positive."
 msgstr "合约界线必须为正。"
 
 #. ($end_of_bo->date)
-#: lib/BOM/Product/Contract.pm:2984
+#: lib/BOM/Product/Contract.pm:2994
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "合约的到期日不能设置在年末节日期间。选择 %1 之后的一个到日期。"
 
@@ -2132,7 +2133,7 @@ msgstr "交易开始及价格"
 msgid "Contract expired"
 msgstr "合约已过期"
 
-#: lib/BOM/Product/Contract.pm:2749
+#: lib/BOM/Product/Contract.pm:2759
 msgid "Contract has already expired."
 msgstr "合约已经失效。"
 
@@ -2141,11 +2142,11 @@ msgid "Contract market price is too close to final payout."
 msgstr "合同市场价位离最终支出太近。"
 
 #. ($eod_blackout_expiry->as_string)
-#: lib/BOM/Product/Contract.pm:2791
+#: lib/BOM/Product/Contract.pm:2801
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "在交易的最后%1中，合约可能不会失效。"
 
-#: lib/BOM/Product/Contract.pm:2758
+#: lib/BOM/Product/Contract.pm:2768
 msgid "Contract must expire during trading hours."
 msgstr "合约必须在交易时间内失效。"
 
@@ -2189,7 +2190,7 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "%1在同一天始于及结束于 %2 和 %3 之间的合约不可用。"
 
 #. ($underlying->translated_display_name()
-#: lib/BOM/Product/Contract.pm:2777
+#: lib/BOM/Product/Contract.pm:2787
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "%1 中为期少于24小时的合约必需在购买当天失效。"
 
@@ -2271,15 +2272,15 @@ msgstr "当前市场价格是 0 。"
 msgid "Current password"
 msgstr "当前密码"
 
-#: lib/BOM/View/CGIForm.pm:4805 lib/BOM/View/CGIForm.pm:5325
+#: lib/BOM/View/CGIForm.pm:4801 lib/BOM/View/CGIForm.pm:5321
 msgid "Current photocard Driving Licence (Provisional or Full)"
 msgstr "当前照片卡驾照（临时的或正式的）"
 
-#: lib/BOM/View/CGIForm.pm:4802
+#: lib/BOM/View/CGIForm.pm:4798
 msgid "Current signed Passport"
 msgstr "当前签字护照"
 
-#: lib/BOM/View/CGIForm.pm:5324
+#: lib/BOM/View/CGIForm.pm:5320
 msgid "Current signed Passport OR"
 msgstr "当前签名护照或"
 
@@ -2309,7 +2310,7 @@ msgstr "每日交易量限制"
 #. ($currencies, $self_exclusion->max_turnover)
 #. ($all_currencies, $self_exclusion->max_turnover)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:64
-#: lib/BOM/View/CGIForm.pm:4868
+#: lib/BOM/View/CGIForm.pm:4864
 msgid "Daily Turnover limit is currently set to <strong>%1 %2</strong>"
 msgstr "每日交易量限制当前设置为 <strong>%1 %2</strong>"
 
@@ -2686,7 +2687,7 @@ msgstr "唐奇安通道指标描绘上一期间的最高点和最低点。"
 msgid "Don’t be put off by the name. Quotidian just means something that happens everyday."
 msgstr "别让它的名词吓退。Quotidian 即日常所发生的事。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:109
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:115
 msgid "Dormant and Inactive Accounts"
 msgstr "蛰伏性和非活跃性账户"
 
@@ -2733,7 +2734,7 @@ msgid "Duration"
 msgstr "持续时间"
 
 #. ($shortest->as_string, $longest->as_string)
-#: lib/BOM/Product/Contract.pm:2873
+#: lib/BOM/Product/Contract.pm:2883
 msgid "Duration must be between %1 and %2."
 msgstr "持续时间须在%1 与 %2之间。"
 
@@ -2800,7 +2801,7 @@ msgstr "您或者会让收银台闲置一段时间，或者我们无法让您正
 msgid "Email"
 msgstr "电子邮件"
 
-#: cgi/emailus.cgi:31 lib/BOM/View/CGIForm.pm:4586
+#: cgi/emailus.cgi:31 lib/BOM/View/CGIForm.pm:4582
 msgid "Email Us"
 msgstr "发电邮给我们"
 
@@ -3114,7 +3115,7 @@ msgstr ""
 "↵ \n"
 "％1"
 
-#: lib/BOM/View/CGIForm.pm:4795
+#: lib/BOM/View/CGIForm.pm:4791
 msgid "For security reasons, please note that Payment Agent accounts will only be able to deposit via Bank Wire."
 msgstr "出于安全考虑，请注意，支付代理人帐户将只能通过银行电汇存款。"
 
@@ -3153,7 +3154,7 @@ msgstr "星期五"
 msgid "Frame your trading strategy using %1's powerful live charts. Instantly view the trading patterns of forex, indices, commodities and stocks."
 msgstr "使用 %1 的强大实时图表设定您的交易策略。立时观察外汇兑换，指数，期货商品和股票的交易格局。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:58
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:64
 msgid "Fraud and Money Laundering"
 msgstr "欺诈和洗钱"
 
@@ -3161,7 +3162,7 @@ msgstr "欺诈和洗钱"
 msgid "Free Bonus"
 msgstr "免费红利"
 
-#: lib/BOM/View/CGIForm.pm:5033
+#: lib/BOM/View/CGIForm.pm:5029
 msgid "Free Contract Bonus"
 msgstr "免费合约红利"
 
@@ -3242,7 +3243,7 @@ msgid "Generous Commission Structure"
 msgstr "优厚的佣金结构"
 
 #. ($promocode_currency . $promocode_amount,            $promocode_currency . $min_deposit)
-#: lib/BOM/View/CGIForm.pm:5009
+#: lib/BOM/View/CGIForm.pm:5005
 msgid "Get %1 when you deposit %2."
 msgstr "当您存入 %2 时，将获得 %1。"
 
@@ -3476,7 +3477,7 @@ msgstr "随机市场有哪些?"
 msgid "How to use a payment agent?"
 msgstr "如何使用支付代理人?"
 
-#: lib/BOM/View/CGIForm.pm:5319
+#: lib/BOM/View/CGIForm.pm:5315
 msgid "However, in order to increase your withdrawal limits, you are kindly requested to follow the instructions below."
 msgstr "但是，为了增加您的提款限额，您会被友善地要求遵照以下指令行事。"
 
@@ -3722,7 +3723,7 @@ msgstr "为了让您能够制订交易，我们需要知道您的居住地（国
 msgid "In order to complete your withdrawal, you must authenticate your account. Once you have done so, please proceed to the Cashier and try withdrawing again."
 msgstr "为了完成你的提款，你必须证明你账户的真实性。然后请重新进入出纳，并且在此取款。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:98
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:104
 msgid "In such an event, the Company may at its sole discretion (with or without notice) close out Client's open financial contracts at prices it considers fair and reasonable at such a time and no claims may be entertained against the Company in connection thereto."
 msgstr "在这种情况下，公司可自行（不论通知与否）以其认为合理公平的价格关闭顾客敞开的金融交易合约，且无需受理对公司提起的与此相关的任何索赔。"
 
@@ -3734,7 +3735,7 @@ msgstr "请在“详细说明”字段指明支付方式及代理人转账的账
 msgid "In the case of single stock and stock index prices, the final closing price as reported by the relevant official Exchange shall apply for all settlements (this final settlement price may, at times, be reported by the relevant Exchange 30-90 minutes after the official closing time of the market, and may differ from the latest tick price that occurred at the closing time)."
 msgstr "关于个别股票和股票指数价，所有结算均须依照由相关官方交易所收盘价确定的最后收盘价（此结算价可由相关官方交易所在正式收盘时间过后30-90分钟内公布，其与闭市时发生的最新成交价格可能有所不同）。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:101
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:107
 msgid "In the case that any financial contracts are acquired or sold at prices that do not reflect fair market prices or that are acquired or sold at an abnormally low level of risk due to an undetected programming error, bug or glitch in our website software, the Company reserves the right to cancel or reverse such transactions upon notification to the Client of the nature of the computer error that led to the mispricing. Clients have a duty to report to the Company any problems or suspected system inadequacies that they may experience and may not abuse of system problems for profit. The Company will endeavour to resolve any such difficulties in the shortest time possible. Persons with insider knowledge of any financial market or instrument are prohibited from trading at this website."
 msgstr "如果由于我们网站软件没有检测出的编程错误、病毒或缺陷，导致任何金融交易合约的购买或售出价格未能反映公平的市场价格或者以异常低的风险购买和售出，公司有权通过将导致错误报价的电脑错误通知顾客的方式取消或者撤销这类交易。顾客有义务向公司报告其所经历的任何问题或可能的系统缺陷，不得滥用系统缺陷盈利。公司将努力在最短时间内解决这些问题。拥有任何金融市场或者工具的内幕信息的人员禁止在本网站上交易。"
 
@@ -3930,7 +3931,7 @@ msgstr "无效电话号码。"
 msgid "Invalid underlying"
 msgstr "无效标的"
 
-#: lib/BOM/View/CGIForm.pm:4728
+#: lib/BOM/View/CGIForm.pm:4724
 msgid "Invalid value."
 msgstr "无效值。"
 
@@ -4103,7 +4104,7 @@ msgstr "预先存在的合同"
 msgid "Legacy contract. No further information is available."
 msgstr "预先存在的 交易。无其他信息可用。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:113
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:119
 msgid "Liability"
 msgstr "责任"
 
@@ -4301,7 +4302,7 @@ msgstr "进行存款"
 msgid "Make a deposit or withdraw"
 msgstr "存款或提款"
 
-#: lib/BOM/View/CGIForm.pm:4530
+#: lib/BOM/View/CGIForm.pm:4526
 msgid "Make a deposit using credit card, bank wire, cheque and e-cash. Accounts are available in dollars, pounds and euros. The minimum account size is ($/&pound;/&euro;) 5 and the maximum account size is ($/&pound;/&euro;) 150,000."
 msgstr "使用信用卡、银行电汇、支票和电子现金存款。帐户支持美元、英磅和欧元。最低帐户金额为 5（美元/英磅/欧元），最大帐户金额为  150,000（美元/英磅/欧元）。"
 
@@ -4341,7 +4342,7 @@ msgid "Market exit price"
 msgstr "平仓价"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2936
+#: lib/BOM/Product/Contract.pm:2946
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "该合约期间之市场假日。在 %1之后选择到期日。"
 
@@ -4358,7 +4359,7 @@ msgid "Market:"
 msgstr "市场:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/faq.html.tt:76
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:117
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:123
 msgid "Marketing and Promotion"
 msgstr "营销及促销"
 
@@ -4371,7 +4372,7 @@ msgstr "市场"
 msgid "Mass Index"
 msgstr "梅斯指数"
 
-#: lib/BOM/View/CGIForm.pm:5021
+#: lib/BOM/View/CGIForm.pm:5017
 msgid "Matched Contract Bonus"
 msgstr "匹配交易红利"
 
@@ -4391,7 +4392,7 @@ msgstr "最大帐户现金余额"
 #. ($currencies, $self_exclusion->max_balance)
 #. ($all_currencies, $self_exclusion->max_balance)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:59
-#: lib/BOM/View/CGIForm.pm:4862
+#: lib/BOM/View/CGIForm.pm:4858
 msgid "Maximum account cash balance is currently set to <strong>%1 %2</strong>"
 msgstr "最大帐户现金余额当前设置为  <strong>%1 %2</strong>"
 
@@ -4414,7 +4415,7 @@ msgstr "最大敞口头寸数目"
 
 #. ($self_exclusion->max_open_bets)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:69
-#: lib/BOM/View/CGIForm.pm:4874
+#: lib/BOM/View/CGIForm.pm:4870
 msgid "Maximum number of open positions is currently set to <strong>%1</strong>"
 msgstr "最大敞口头寸数目当前设置为 <strong>%1</strong>"
 
@@ -4518,7 +4519,9 @@ msgid "Monday"
 msgstr "周一"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:53
-msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients"
+#, fuzzy
+#| msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients"
+msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients."
 msgstr "从客户聚集的资金不以客户名义投资于任何证券、期货、外汇、衍生品及其他投资产品"
 
 #: lib/BOM/Product/Helper/PricingTableParameters.pm:233
@@ -4711,7 +4714,7 @@ msgstr "无论市场是什么状况，上升或下跌，平静或波动，您都
 msgid "No open positions."
 msgstr "您没有以此货币计价的敞口头寸。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:60
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:66
 msgid "No person shall abuse this site for the purpose of money laundering. The Company employs best-practice anti-money laundering procedures, which may have several effects on Clients. The Company reserves the right to refuse to do business with, to discontinue to do business with, and to reverse the transactions of, Clients who do not accept or adhere to these anti-money laundering processes."
 msgstr "任何人都不得以洗钱为目的滥用本网站。公司采用了高效的反洗钱程序，可能会对客户造成一些影响。公司有权拒绝或中断或撤销不接受或不遵守反洗钱规定的客户的交易。"
 
@@ -4743,23 +4746,23 @@ msgstr "注意：公司有权撤销逾期两年未要求的佣金。请阅读附
 msgid "Note: You will be able to withdraw your bonus of %1%2 only once your aggregate volume of trades exceeds %1%3 (at the moment it is only %1%4). This restriction applies only to the bonus and profits derived therefrom.  All other deposits and profits derived therefrom can be withdrawn at any time."
 msgstr "附注：仅当您的交易总额超过 %1%3（目前其仅有%1%4）时，您才能够提取您的奖金  %1%2。此限制仅适用于由此产生的奖金和收益。由此产生的所有其它存款和收益可随时提取。"
 
-#: lib/BOM/View/CGIForm.pm:4901
+#: lib/BOM/View/CGIForm.pm:4897
 msgid "Note: limits will apply to all currency segments on your account individually."
 msgstr "附注：将单独对您帐户的所有货币段应用限制。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table.html.tt:69
-#: lib/BOM/View/CGIForm.pm:4791 lib/BOM/View/Cashier.pm:156
+#: lib/BOM/View/CGIForm.pm:4787 lib/BOM/View/Cashier.pm:156
 #: lib/BOM/View/Cashier.pm:174
 msgid "Notes:"
 msgstr "附注："
 
 #. ($attorney->url, $attorney->company_name)
-#: lib/BOM/View/CGIForm.pm:4939
+#: lib/BOM/View/CGIForm.pm:4935
 msgid "Notice: Power of Attorney to your account has been revoked from <a target=\"_blank\" href=\"%1\">%2</a>.<br>Trades cannot be placed anymore on your account directly by <a target=\"_blank\" href=\"%1\">%2</a>."
 msgstr "注意：您的帐户之委托书已从<a target=\"_blank\" href=\"%1\">%2</a>撤销。<br/>您的账户再也不能通过<a target=\"_blank\" href=\"%1\">%2</a>直接进行交易。"
 
 #. ($attorney->url,            $attorney->company_name,            request()
-#: lib/BOM/View/CGIForm.pm:4935
+#: lib/BOM/View/CGIForm.pm:4931
 msgid "Notice: your account has granted Power of Attorney to <a target=\"_blank\" href=\"%1\">%2</a>.<br>Trades may be placed on your account directly by <a target=\"_blank\" href=\"%1\">%2</a>. You may <a class=\"bom_confirm_popup_link\" href=\"%3\">revoke this Power of Attorney at any time.</a>"
 msgstr "注意：您的帐户已将委托书授予<a target=\"_blank\" href=\"%1\">%2</a>。<br/><a target=\"_blank\" href=\"%1\">%2</a>可通过您的账户直接进行交易。要撤消此委托书，请<a class=\"bom_confirm_popup_link\" href=\"%3\">点击这里。</a>"
 
@@ -4794,7 +4797,7 @@ msgid "Number of ticks"
 msgstr "跳动点数目"
 
 #. ($min_tick, $max_tick)
-#: lib/BOM/Product/Contract.pm:2826
+#: lib/BOM/Product/Contract.pm:2836
 msgid "Number of ticks must be between %1 and %2"
 msgstr "跳动点数目须在%1 与 %2之间"
 
@@ -4818,11 +4821,11 @@ msgstr "OAuth2.0 是为达此目的而新兴的互联网标准。正式的定义
 msgid "OK"
 msgstr "确定"
 
-#: lib/BOM/View/CGIForm.pm:5329
+#: lib/BOM/View/CGIForm.pm:5325
 msgid "ORIGINAL Bank/Credit Union/Building Society/Credit/Debit Card statement or passbook (within last 3 months)"
 msgstr "原始的银行/信用社/建筑协会/信用卡/借记卡对账单或存折（最近 3 个月内）"
 
-#: lib/BOM/View/CGIForm.pm:5328
+#: lib/BOM/View/CGIForm.pm:5324
 msgid "ORIGINAL Utility bill (within last 3 months) ; or"
 msgstr "原始费用单（最近 3 个月内）；或"
 
@@ -4894,11 +4897,18 @@ msgstr "一旦您点击“提交”按钮，资金将从您的帐户提取并转
 msgid "One simple platform"
 msgstr "单一简易平台"
 
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
+#, fuzzy
+#| msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
+msgid "Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
+msgstr "%1：可交易外汇、指数、大宗商品及智慧指数的二元期权在线交易平台"
+
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Only five years after inception, we pick up this major award for our online trading services. The award recognises BetOnMarkets.com’s reliable, fast and secure online trading for novice and expert traders. At this time, our website has received over 15 million trades."
 msgstr "启用后仅五年，我们的在线交易服务获得这个主要奖项。该奖项旨在表彰BetOnMarkets.com给新手和专业交易商提供可靠，快速和安全的网上交易。在这个时候，我们的网站已收到了超过1500万宗交易。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:75
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:81
 msgid "Only one account is allowed per person. No winnings may be collected on accounts opened in false names or on multiple accounts opened by the same person."
 msgstr "每人只能拥有一个账户。假名或同一人开立多个的账户将不会获得任何赢得的款项。"
 
@@ -5011,7 +5021,7 @@ msgid "Our data feed may at times differ slightly from other data feeds found on
 msgstr "我们的数据源有时可能与互联网上其他数据源（它们本身之间就有差异）有所差异。数据源提供商之间差异的原因包括："
 
 #. ($cs_email)
-#: lib/BOM/View/CGIForm.pm:5331
+#: lib/BOM/View/CGIForm.pm:5327
 msgid "Our email address is %1."
 msgstr "我们的电子邮件地址为%1。"
 
@@ -5204,7 +5214,7 @@ msgid "Payout must be between <strong>%1</strong> and <strong>%2</strong>."
 msgstr "最高获利必须介于 <strong>%1</strong> 和 <strong>%2</strong>之间。"
 
 #. (qq{<span class="balance">$currency_label $promocode_amount</span>})
-#: lib/BOM/View/CGIForm.pm:5000
+#: lib/BOM/View/CGIForm.pm:4996
 msgid "Pending Bonus: %1"
 msgstr "待定奖金：%1"
 
@@ -5258,7 +5268,7 @@ msgstr "请点击“播放”键播放视频。"
 msgid "Please confirm the transaction details in order to complete the transfer:"
 msgstr "请确认交易详情以完成转帐："
 
-#: lib/BOM/View/CGIForm.pm:4601
+#: lib/BOM/View/CGIForm.pm:4597
 msgid "Please contact us using the toll-free number provided for your country or our general contact number below."
 msgstr "请拨打我们在您的国家提供的免费电话号码联系我们，或拨打下面的通用联系号码。"
 
@@ -5267,7 +5277,7 @@ msgstr "请拨打我们在您的国家提供的免费电话号码联系我们，
 msgid "Please contact us with whatever is on your mind at <a href=\"mailto:%1\">%1</a>. We'll be happy to hear your feedback and to answer any questions promptly and accurately."
 msgstr "无论有何问题，请与发送邮件 至 <a href=\"mailto:%1\">%1</a>与我们联系。我们十分乐意听取您的反馈，也将快速准确地回复您的问题。"
 
-#: lib/BOM/View/CGIForm.pm:4544
+#: lib/BOM/View/CGIForm.pm:4540
 msgid "Please do not click more than once and please allow 15 seconds for processing."
 msgstr "点击请勿超过一次，请等待 15 秒进行处理。"
 
@@ -5351,7 +5361,7 @@ msgstr "请再次输入以确认"
 msgid "Please make sure that you first agree with the Agent on the terms of payment before submitting your request."
 msgstr "在提交请求前，请确保您首先同意代理人的支付条款。"
 
-#: lib/BOM/View/CGIForm.pm:4817
+#: lib/BOM/View/CGIForm.pm:4813
 msgid "Please note that mobile telephone bills are not acceptable as evidence of address"
 msgstr "请注意，不接受手机帐单作为地址证明"
 
@@ -5383,7 +5393,7 @@ msgstr "请注意，你可以随时登录账户的“设置”部分更新你的
 msgid "Please note that your settings have been updated as follows:"
 msgstr "请注意，您的设置已更新如下："
 
-#: lib/BOM/View/CGIForm.pm:4822
+#: lib/BOM/View/CGIForm.pm:4818
 msgid "Please post the documents to:"
 msgstr "请将文件邮寄至："
 
@@ -5399,7 +5409,7 @@ msgstr "请提供授权人 ID 。"
 msgid "Please provide some information about yourself and your proposed services"
 msgstr "请提供关于您和您提议的服务的一些信息"
 
-#: lib/BOM/View/CGIForm.pm:4613
+#: lib/BOM/View/CGIForm.pm:4609
 msgid "Please provide the following contact information and we will call you free of charge as soon as a representative is free."
 msgstr "请提供下列联系信息，我们的代表将在有空时打您电话，电话不对您收费。"
 
@@ -5407,7 +5417,7 @@ msgstr "请提供下列联系信息，我们的代表将在有空时打您电话
 msgid "Please provide us with the following information:"
 msgstr "请向我们提供下列信息："
 
-#: lib/BOM/View/CGIForm.pm:4542
+#: lib/BOM/View/CGIForm.pm:4538
 msgid "Please provide your email address and password to open a virtual money account and start practicing."
 msgstr "请提供电子邮件和密码以开设虚拟货币帐户，并开始运作。"
 
@@ -5424,11 +5434,11 @@ msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "请选择「支付」或「成本」选项。"
 
 #. (qq(<a href="mailto:$cs_email">$cs_email</a>)
-#: lib/BOM/View/CGIForm.pm:5311
+#: lib/BOM/View/CGIForm.pm:5307
 msgid "Please send this email to %1."
 msgstr "请传送此电子邮件至%1。"
 
-#: lib/BOM/View/CGIForm.pm:1367 lib/BOM/View/CGIForm.pm:4464
+#: lib/BOM/View/CGIForm.pm:1367 lib/BOM/View/CGIForm.pm:4460
 #: lib/BOM/View/CGIForm.pm:582
 msgid "Please specify your country."
 msgstr "请指定你的国家。"
@@ -5500,7 +5510,7 @@ msgstr "在您的证券组合中给出未清偿合约的最大总交易额。如
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "现行市价无法在此时确定。"
 
-#: lib/BOM/Product/Contract.pm:1508 lib/BOM/Product/Contract.pm:3010
+#: lib/BOM/Product/Contract.pm:1508 lib/BOM/Product/Contract.pm:3020
 msgid "Prevailing market price cannot be determined."
 msgstr "现行市价无法确定。"
 
@@ -5599,7 +5609,7 @@ msgstr "推广 %1网站"
 msgid "Promotional"
 msgstr "促销的"
 
-#: lib/BOM/View/CGIForm.pm:4808
+#: lib/BOM/View/CGIForm.pm:4804
 msgid "Proof of address"
 msgstr "地址证明"
 
@@ -5611,7 +5621,7 @@ msgstr "无法确定正确的障碍。"
 msgid "Provide the Company with all data and information related to the Company (including, but not limited to, passwords) at no charge to the Company, to enable the Company to monitor your Site and to ensure that you are complying with these terms and conditions."
 msgstr "无偿向公司提供与公司有关的全部数据和信息（包括但不限于密码），使公司能够监督您的网站并确保您遵守本条款和条件。"
 
-#: lib/BOM/View/CGIForm.pm:4797
+#: lib/BOM/View/CGIForm.pm:4793
 msgid "Provide us with the following documentation:"
 msgstr "请向我们提供下列文件："
 
@@ -5852,25 +5862,25 @@ msgstr "表示任一给定交易日您可以购买的交易的最大数量。"
 msgid "Required"
 msgstr "必填"
 
-#: lib/BOM/Product/Contract.pm:2983
+#: lib/BOM/Product/Contract.pm:2993
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "因为年底市场休假，该合约此时尚未提供转售。"
 
-#: lib/BOM/Product/Contract.pm:2935
+#: lib/BOM/Product/Contract.pm:2945
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "因为合约期内市场休假，该合约不提供转售。"
 
-#: lib/BOM/Product/Contract.pm:2956
+#: lib/BOM/Product/Contract.pm:2966
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "因为合约期内市场休假，该合约不提供转售。"
 
 #. ($shortest->as_string)
-#: lib/BOM/Product/Contract.pm:2863
+#: lib/BOM/Product/Contract.pm:2873
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "不允许转售少于%1的合约。"
 
-#: lib/BOM/Product/Contract.pm:2344 lib/BOM/Product/Contract.pm:2857
-#: lib/BOM/Product/Contract.pm:2907
+#: lib/BOM/Product/Contract.pm:2344 lib/BOM/Product/Contract.pm:2867
+#: lib/BOM/Product/Contract.pm:2917
 #: lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:173
 msgid "Resale of this contract is not offered."
 msgstr "该合约不提供转售。"
@@ -6046,7 +6056,7 @@ msgstr "密码提示问题"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
-#: lib/BOM/View/CGIForm.pm:4739 lib/BOM/View/CGIForm.pm:922
+#: lib/BOM/View/CGIForm.pm:4735 lib/BOM/View/CGIForm.pm:922
 msgid "Security"
 msgstr "安全"
 
@@ -6081,7 +6091,7 @@ msgid "Select market"
 msgstr "选择市场"
 
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:23
-#: lib/BOM/View/CGIForm.pm:4843
+#: lib/BOM/View/CGIForm.pm:4839
 msgid "Self-Exclusion Facilities"
 msgstr "自我排除工具"
 
@@ -6144,7 +6154,7 @@ msgstr "交易期持续时间限制不能大于 1440 分钟。"
 
 #. ($self_exclusion->session_duration_limit)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:73
-#: lib/BOM/View/CGIForm.pm:4879
+#: lib/BOM/View/CGIForm.pm:4875
 msgid "Session duration limit is currently set to <strong>%1 minutes.</strong>"
 msgstr "交易期持续时间限制当前设置为  <strong>%1 分钟。</strong>"
 
@@ -6159,7 +6169,7 @@ msgstr "设置您的交易头寸"
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/light_chart.html.tt:39
 #: cgi/f_writepartics.cgi:75 cgi/settings.cgi:15 cgi/settings.cgi:19
-#: lib/BOM/View/CGIForm.pm:4734 lib/BOM/View/Menu.pm:99
+#: lib/BOM/View/CGIForm.pm:4730 lib/BOM/View/Menu.pm:99
 msgid "Settings"
 msgstr "设置"
 
@@ -6342,7 +6352,7 @@ msgid "Sorry, only USD is allowed."
 msgstr "对不起，只允许美元。"
 
 #. ($country)
-#: lib/BOM/View/CGIForm.pm:4471
+#: lib/BOM/View/CGIForm.pm:4467
 msgid "Sorry, our service is not available for residents of %1."
 msgstr "对不起，我们不对 %1 的居民提供服务。"
 
@@ -6546,7 +6556,7 @@ msgid "Start time must be before expiry time."
 msgstr "起始时间必须早于终止时间。"
 
 #. ($forward_starting_blackout->as_string)
-#: lib/BOM/Product/Contract.pm:2690
+#: lib/BOM/Product/Contract.pm:2700
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "从现在开始，远期启动合约之起始时间必须超过 %1。"
 
@@ -6981,7 +6991,7 @@ msgstr "公司因此授予你在协议期间使用%1知识产权标志（我们�
 msgid "The Company makes no claims that %1 will be uninterrupted or provide an error free service and will not be liable for the consequences of any such errors or interruptions."
 msgstr "公司并不声称，%1 不会中断服务或提供无差错服务，也不承担任何该等中断或错误导致的后果。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:119
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:125
 msgid "The Company may from time to time inform you about changes on the website, new services and promotions. If you, however, wish to opt out of such a service and do not wish to receive any direct marketing data you can either unsubscribe to the service or email our customer support team. If you decide to opt in again into receiving promotional material, you can also do so by contacting us."
 msgstr "公司可能会随时通知您关于网站上的改变，新的服务和促销活动。但是，如果您选择退出这种服务，不希望收到任何直接营销数据，您可以退订该项服务或发送电子邮件至我们的客户支持团队。然后如果您决定再次选择接收宣传材料，您也可以随时联系并通知我们。"
 
@@ -6993,7 +7003,7 @@ msgstr "公司可能会对网站的市场指令设定某些规则或限制。这
 msgid "The Company may impose volume trading limits on Client accounts in its sole discretion. Current trading volume limits upon account opening are USD/GBP/EUR/AUD 30,000/day maximum trading volume. The maximum account size (i.e. cash balance) is USD/GBP/EUR/AUD 25,000 and the maximum outstanding contract payout at a given time per account is USD/GBP/EUR/AUD 25,000. These limits are increased once a Client is fully authenticated; where the new maximum trading volume will be USD/GBP/EUR/AUD 500,000, having a maximum account size of USD/GBP/EUR/AUD 500,000 and a maximum outstanding contract payout at a given time per account of USD/GBP/EUR/AUD 500,000. If the account balance exceeds the maximum account size, then withdrawals must be made to bring the balance down to under this limit."
 msgstr "本公司可自行决定对客户账户设定交易额限制。现行的开户后交易额限制为USD/GBP/EUR/AUD 30,000/天 最大交易额。账户最大规模（即现金余额）为 USD/GBP/EUR/AUD 25,000，且每一账户在特定时间的未偿合约最高支出金额为 USD/GBP/EUR/AUD 25,000 。客户经过充分的身份认证后，以上限额可相应增加；此时新的最大交易限额将上升为 USD/GBP/EUR/AUD 500,000，同时账户最大规模将为 USD/GBP/EUR/AUD 500,000，每一账户在某一给定时间的未偿合约最高支出限额将为 USD/GBP/EUR/AUD 500,000 。如果账户余额超过了账户规模上限，那么就必须提款以将余额降低至该限额之下。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:78
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
 msgid "The Company may, from time to time, at its sole discretion, require a Client to provide proof of identity (such as notarized copy of passport or other means of identity verification as the Company deems required under the circumstances) and may at its sole discretion suspend an account until such proof has been provided to its satisfaction."
 msgstr "公司有权不时自行要求客户提供身份证明（如经公证的护照复印件或公司在相关情形下认为必要的其他身份证明文件），也有权在得到满意的身份证明之前自行中止账户。"
 
@@ -7005,7 +7015,7 @@ msgstr "公司有权自行以任何理由拒绝和/或取消对任何人的服�
 msgid "The Company reserves the right to change any part of this Agreement at any time. Notice of any changes will be sent to your email address 7 days in advance of any such changes, but it is ultimately your responsibility to check these terms and conditions regularly. Your continued participation in our affiliate program after we have posted the changes will constitute binding acceptance of such changes."
 msgstr "公司有权在任何时间修改本协议的任何内容。任何修改的通知都会在该修改之前七天以邮件形式发送给您，但是您承担定期检查本条款和条件的最终责任。该等修改公布后，您继续参加加盟计划的行为，将构成对该等修改的约束性接受。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:87
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:93
 msgid "The Company reserves the right to suspend the operation of this site or sections thereof:"
 msgstr "公司有权中止网站或其部分运行的权利:"
 
@@ -7026,7 +7036,7 @@ msgstr "公司将会（根据5.3条规定）向你支付协议期间获得净收
 msgid "The Company shall provide you with statements accessible through the website %1 detailing the revenues generated by Clients you have introduced, if any, which have accrued to you over the course of the calendar month. Such statements shall be updated daily. At the end of a calendar month, the Company shall record your total share of Net Revenues, if any, during the previous calendar month. In the event that a revenue share in any calendar month is a negative amount, the Company shall be entitled but not obliged to carry forward and set off such negative amount against future revenue shares which would otherwise be payable to you. However the Company shall also be entitled but not obliged to zero the negative balance that would otherwise be carried forward."
 msgstr "本公司通过网站 %1 提供各种报表，它们详细列明了由您介绍的客户所创造的收入，这些收入会以日历月为单位累积给您（如果有的话）。这些报表将会每日更新。日历月末，本公司将会记录下您上个公历月度的净收入总份额（如果有的话）。若某日历月的收入份额为负值，本公司将有权但无义务将该负值结转并用其抵消未来应该支付给您的收入份额。但是本公司同样有权但无义务将这一可以结转的负余额归零。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:115
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:121
 msgid "The Company will not be liable in any way to any persons in the event of force majeure, or for the act of any Government or legal authority or for the failure of or damage or destruction to, its computer systems, data or records or any part thereof, or for delays, losses, errors or omissions resulting from the failure or mismanagement of any telecommunications or computer equipment or software. The Company shall not be responsible for any damages or losses deemed or alleged to have resulted from or been caused by this site or its content. This includes any client's use or misuse of its content, the inability of any client to connect with or use the site, delay in operations or transmission, failure of communication lines, or any errors or omissions in content."
 msgstr "在不可抗力、政府或司法机关的行动、电脑系统和数据和记录全部或部分出现故障、损坏或毁坏、由于通信系统或电脑设备及软件的故障或管理不善造成的延迟、损失、错误或遗漏的情况下，公司不对任何人承担任何责任。对于本网站或其内容产生或导致的任何损坏、或被视为或称为的损失，本公司概不负责。这包括任何客户对其内容的使用或滥用,任何客户无法连接或使用网站,操作或传输的延迟,通信线路的故障,或内容中的任何错误或遗漏。"
 
@@ -7141,7 +7151,7 @@ msgstr "对于以上收集的个人数据，我们将根据法律允许或规定
 msgid "The access-token retrieved earlier has a limited lifetime.  In the case of Auth-Code Flow only, it can be renewed."
 msgstr "早前检索的访问令牌具有有限的寿命。 如果是只有验证码流之情况，可以延长。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:63
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:69
 msgid "The anti-money laundering processes have the following effects on Clients:"
 msgstr "反洗黑钱程序对客户提供以下的效果："
 
@@ -7193,16 +7203,16 @@ msgstr "客户的成交量已达到了奖金额的 5 倍"
 msgid "The company does not guarantee the ability to sell a contract prior to its expiration time."
 msgstr "公司不保证在失效时间之前有能力销售合同。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:56
-msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
-msgstr "公司持有的客户资金存在独立的银行账户，与业务帐目分开。在破产的情况下，不会形成公司资产的一部分。您的帐户不应该被用来作为银行信贷及存款，而应该视为只用以进行交易的资金。如果你重复进行存款和取款，却没有进行相称的交易，在关闭帐户之前，我们保留在不事先通知的情况下把我们所承担的任何银行费用转到你的帐户的权利。"
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:59
+msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. This meets the Gambling Commission’s requirements for the segregation of customer funds at the level: medium protection."
+msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:35
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:61
 msgid "The company reserves the right to cancel/prohibit the use of this promotion at its own discretion at any time."
 msgstr "公司有权任何时候自行取消/禁止使用本推广。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:111
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:117
 msgid "The company reserves the right to charge a dormant fee of up to USD/EUR/AUD/GBP25 every 6 months for every Client account that has had no transaction recorded for over 24 months."
 msgstr "对于超过 24 个月无交易记录的所有客户账户，本公司有权每 6 个月收取一笔达 USD/EUR/AUD/GBP25 的账户休眠费。"
 
@@ -7237,7 +7247,7 @@ msgstr "合约时期是一个交易的时间框位。也称为期间。"
 msgid "The cost of your open positions"
 msgstr "您的敞口头寸成本"
 
-#: lib/BOM/View/CGIForm.pm:5030
+#: lib/BOM/View/CGIForm.pm:5026
 msgid "The currency of your bonus will be the same as the currency of your first deposit."
 msgstr "您奖金的货币类型将与您首次存款的货币类型相同。"
 
@@ -7418,7 +7428,7 @@ msgstr "转售价格表示合同的当前市场价格。转售价格是根据于
 msgid "The return is the money realized when the contract expires (see 'Payout')."
 msgstr "最高获利是当合约失效时所变现的金额。（参阅‘获利’）。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:107
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:113
 msgid "The right is also reserved to amend or change the rules and scope of this service from time to time. Any change to the rules made whilst the site is in operation will not apply retrospectively and will only apply to acquisitions of financial contracts made after such change. It is the Company’s responsibility to notify Clients before any changes to its terms come into effect."
 msgstr "我们也保留经常修正或更改本服务规则和范围的权利。网站运营期间作出的任何规则修改并不会溯及以往，且只适用于更改之后发生的财务交易合约购买行为。在任何修改条款生效前公司有责任通知客户。"
 
@@ -7669,7 +7679,7 @@ msgstr "此交易获利"
 msgid "This document (the \"Agreement\") sets out the terms and conditions between \"the Company\" which is Binary Ltd, and you (the person who applied for this program; \"you\" or \"your\"), in relation to your application to setup an affiliate account (and membership of the affiliate program if your application is deemed successful) to promote the website %1"
 msgstr "本文件（“协议”）规定了“公司”（即 Binary Ltd.）与“您”（本项目申请人；“您”或“您的”）之间关于您申请设立加盟账户（您的申请视为成功时，还包括加盟项目的成员资格）以推广网站%1的条款和条件"
 
-#: lib/BOM/View/CGIForm.pm:5241
+#: lib/BOM/View/CGIForm.pm:5237
 msgid "This function is not relevant to Virtual money accounts"
 msgstr "此功能对虚拟货币帐户不可用"
 
@@ -7837,7 +7847,7 @@ msgstr "要创建白色标签，首先％1。这将允许您从白色标签的�
 msgid "To enable cookies, follow the instructions below for the browser version that you are using."
 msgstr "要启用 cookie，请按下面符合您浏览器版本的指示说明进行操作。"
 
-#: lib/BOM/View/CGIForm.pm:5323
+#: lib/BOM/View/CGIForm.pm:5319
 msgid "To fully authenticate your account, please email scanned copies of the document listed below."
 msgstr "为了充分验证您的账户，请将下面列示的文件扫描件以电子邮件发送过来。"
 
@@ -7854,7 +7864,7 @@ msgstr "为确保您能收到回复，请将 \"%1\"域名添加到您的电子�
 msgid "To reset your password, enter the e-mail address you registered in the field below and click \"RESET PASSWORD\"."
 msgstr "如要重新设置密码，在下面的栏目中输入您注册的电子邮件地址并点击“重置密码”。"
 
-#: lib/BOM/View/CGIForm.pm:4577
+#: lib/BOM/View/CGIForm.pm:4573
 msgid "To speak to our customer service representatives online, please click on the Live Help button. Live Help in English is available Monday to Friday, 24 hours a day. Assistance in Russian is available from 7h00GMT until 23h30; in Indonesian from 1h00GMT to 10h00."
 msgstr "如需在线联系我们的客服代表，请点击Live Help(在线帮助）按键。以英语提供服务的在线帮助时间为：周一至周五，全天无休。俄语服务从早7点GMT至晚23点半；印度尼西亚语服务为早1点GMT至10点。"
 
@@ -7871,7 +7881,7 @@ msgid "Toll-Free number"
 msgstr "免费号码"
 
 #. ($safer_expiry->date)
-#: lib/BOM/Product/Contract.pm:2957
+#: lib/BOM/Product/Contract.pm:2967
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "该合约期间有太多市场假日。在 %1之后选择到期日。"
 
@@ -8005,8 +8015,8 @@ msgstr "交易规则"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 #: cgi/trading_times.cgi:17 lib/BOM/Product/Contract.pm:2313
-#: lib/BOM/Product/Contract.pm:2710 lib/BOM/Product/Contract.pm:2725
-#: lib/BOM/Product/Contract.pm:2741 lib/BOM/Product/Contract.pm:2926
+#: lib/BOM/Product/Contract.pm:2720 lib/BOM/Product/Contract.pm:2735
+#: lib/BOM/Product/Contract.pm:2751 lib/BOM/Product/Contract.pm:2936
 #: lib/BOM/View/Menu.pm:157
 msgid "Trading Times"
 msgstr "交易时间"
@@ -8024,11 +8034,11 @@ msgid "Trading financial contracts involves a high level of risk and may not be 
 msgstr "财务交易 合约交易涉及较高风险，不适合所有人。在决定进行财务交易交易之前，您应该仔细考虑您的投资目标、经验级别和风险偏好。您应该注意与财务交易相关的所有风险，如有疑问请向独立财务顾问咨询。"
 
 #. ($blackout_time)
-#: lib/BOM/Product/Contract.pm:2678
+#: lib/BOM/Product/Contract.pm:2683
 msgid "Trading is available after the first %1 of the session."
 msgstr "该合约到交易时段第一个 %1 后可用。"
 
-#: lib/BOM/Product/Contract.pm:2908
+#: lib/BOM/Product/Contract.pm:2918
 msgid "Trading is not offered for this duration."
 msgstr "不在此段期间提供交易。"
 
@@ -8049,22 +8059,22 @@ msgstr "%1 的当前交易暂停。"
 #. ($underlying->translated_display_name()
 #. ($bet->underlying->translated_display_name()
 #: lib/BOM/Product/Contract.pm:2294 lib/BOM/Product/Contract.pm:2301
-#: lib/BOM/Product/Contract.pm:3018
+#: lib/BOM/Product/Contract.pm:3028
 #: lib/BOM/Product/Pricing/Engine/Intraday.pm:281
 #: lib/BOM/Product/Pricing/Engine/Intraday/Index.pm:80
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "由于市场数据丢失，%1 交易暂停。"
 
-#: lib/BOM/Product/Contract.pm:2723
+#: lib/BOM/Product/Contract.pm:2733
 msgid "Trading on this contract type is suspended for the last one hour of the session."
 msgstr "此种合约交易时段最后一小時暂停。"
 
 #. ($eod_blackout_start->as_string)
-#: lib/BOM/Product/Contract.pm:2708
+#: lib/BOM/Product/Contract.pm:2718
 msgid "Trading suspended for the last %1 of the session."
 msgstr "该合约交易时段最后 %1 暂停。"
 
-#: lib/BOM/View/CGIForm.pm:4847
+#: lib/BOM/View/CGIForm.pm:4843
 msgid "Trading the financial markets can become addictive. Fill in the form below to limit your participation on the website or send a signed letter or fax to our customer support team. Limits will only be removed or altered after 7 days."
 msgstr "金融市场交易可能使人上瘾。请填写下表以限制您对本网站的参与，或发送签名信或传真到我们的客户支持团队。限制只能在 7 天后消除或更改。"
 
@@ -8254,7 +8264,7 @@ msgstr "使用此功能可限制从某个或某些 IP 地址访问您的账户�
 msgid "User Support - Thank you"
 msgstr "用户支持，谢谢"
 
-#: lib/BOM/View/CGIForm.pm:4811
+#: lib/BOM/View/CGIForm.pm:4807
 msgid "Utility bill (within last 3 months)"
 msgstr "费用单（最近 3 个月内）"
 
@@ -8266,7 +8276,7 @@ msgstr "瓦莱塔，马耳他的首都"
 msgid "Variable return"
 msgstr "可变回报"
 
-#: lib/BOM/View/CGIForm.pm:4799
+#: lib/BOM/View/CGIForm.pm:4795
 msgid "Verification of identity"
 msgstr "身份验证"
 
@@ -8286,10 +8296,6 @@ msgstr "垂直的"
 msgid "Vertical Grid"
 msgstr "垂直网格"
 
-#: lib/BOM/View/CGIForm.pm:4433 lib/BOM/View/CGIForm.pm:4435
-msgid "Viber"
-msgstr "Viber 通讯软件"
-
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/intraday_prices.html.tt:16
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:21
 #: cgi/oop/Controller/Bet.pm:1276 cgi/oop/Controller/Bet.pm:1295
@@ -8300,7 +8306,7 @@ msgstr "查看"
 msgid "View Rise/Fall contract prices across a range of markets."
 msgstr "在一系列的市场中查看上升/下跌合同价格。"
 
-#: lib/BOM/Product/Contract.pm:2670 lib/BOM/Product/Contract.pm:2680
+#: lib/BOM/Product/Contract.pm:2671 lib/BOM/Product/Contract.pm:2686
 msgid "View Trading Times"
 msgstr "查看交易时间"
 
@@ -8345,7 +8351,7 @@ msgid "View the operating hours of the markets you can trade."
 msgstr "查看你可以进行交易的市场营业时间。"
 
 #. (request()
-#: lib/BOM/View/CGIForm.pm:5248
+#: lib/BOM/View/CGIForm.pm:5244
 msgid "View your <a href=\"%1\">withdrawal limits</a>."
 msgstr "查看您的<a href=\"%1\">提款限额</a>。"
 
@@ -8370,13 +8376,13 @@ msgstr "查看您的交易利润/亏损。"
 msgid "Virtual Account"
 msgstr "虚拟帐户"
 
-#: lib/BOM/View/CGIForm.pm:4533
+#: lib/BOM/View/CGIForm.pm:4529
 msgid "Virtual Money Account Opening"
 msgstr "虚拟货币帐户开设"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/open_account.html.tt:24
 #: cgi/lost_password.cgi:385 lib/BOM/View/CGIForm.pm:1160
-#: lib/BOM/View/CGIForm.pm:4921
+#: lib/BOM/View/CGIForm.pm:4917
 msgid "Virtual money account"
 msgstr "虚拟货币帐户"
 
@@ -8424,6 +8430,11 @@ msgstr "当前我们不能够串流实时价格。要享受价格的实时串流
 #: lib/BOM/View/CGIForm.pm:587 platform/bin/GenerateStaticData.pm:56
 msgid "We are not accepting accounts from residents of this country at the present time."
 msgstr "目前不接受来自该国居民的帐户。"
+
+#. ("http://www.gamblingcommission.gov.uk/Consumers/Protection-of-customer-funds.aspx")
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:56
+msgid "We are required by our licence to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='%1' target='_blank'>%1</a>."
+msgstr ""
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:187
@@ -8494,7 +8505,7 @@ msgstr "我们希望尽可能创造条件，以方便您介绍潜在客户。一
 msgid "We were unable to recover your Login ID or Password with the provided information. <a href=\"%1\">Return to Password Recovery</a>, or <a href=\"%2\"><strong>contact us</strong></a> should you need further assistance."
 msgstr "我们无法根据您提供的信息找回您的登录 ID 或密码。<a href=\"%1\">返回“找回密码”页面</a>，或<a href=\"%2\"><strong>联系我们</strong></a>获取进一步帮助。"
 
-#: lib/BOM/View/CGIForm.pm:5302
+#: lib/BOM/View/CGIForm.pm:5298
 msgid "We were unable to verify your identity and prove your residential address using our automated verification procedure."
 msgstr "我们未能通过自动验证程序验证您的身份和您的住址。"
 
@@ -8559,7 +8570,7 @@ msgstr "网站"
 #. ($until->date)
 #. ($self_exclusion->exclude_until)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:77
-#: lib/BOM/View/CGIForm.pm:4889
+#: lib/BOM/View/CGIForm.pm:4885
 msgid "Website exclusion is currently set to <strong>%1.</strong>"
 msgstr "网站排除当前设置为 <strong>[%1。</strong>"
 
@@ -8813,7 +8824,7 @@ msgstr "窗口"
 msgid "Winning the contract"
 msgstr "赢得合同"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:69
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:75
 msgid "Winnings may only be paid to the initiator of an account. When a Client maintains an account by means of telegraphic deposits, winnings are only paid to the holder of the originating bank account, and it is the onus of the Client to ensure that account number and name accompany all transfers to the Company. When a Client maintains an account by means of credit/debit card deposits, winnings are only paid back to the same card."
 msgstr "奖金只会支付给账户的发起人。如果客户通过电汇存款方式持有账户，奖金只会支付给汇出银行账户的持有人，且客户有责任确保账号及户名和所有汇款信息一并发送至本公司。如果客户通过借记卡/贷记卡存款的方式持有账户，则奖金仅会支付给与之相同的那张卡。"
 
@@ -8953,7 +8964,7 @@ msgstr "是"
 msgid "Yes. Please email us at <a href=\"mailto:%1\">%1</a> for further assistance."
 msgstr "是的，请发送电邮至 <a href=\"mailto:%1\">%1</a> 获得更多协助。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:81
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:87
 msgid "You agree that we may use Personal information provided by you in order to conduct appropriate anti-fraud checks. Personal Information that you provide may be disclosed to a credit reference or fraud prevention agency, which may keep a record of that information."
 msgstr "您同意，我们可使用您提供的个人信息，以进行执行适当的反欺诈检查。您提供的个人信息可能会披露给信用参考或欺诈预防机构，而且该等机构可能会保留信息记录。"
 
@@ -9019,7 +9030,7 @@ msgstr "您可以在任何时间卖出您的长线交易合约，根据市场变
 msgid "You can set the length of your trade, from 10 seconds to 365 days."
 msgstr "您可设定交易期，从10 秒至 365 天。"
 
-#: lib/BOM/View/CGIForm.pm:5303
+#: lib/BOM/View/CGIForm.pm:5299
 msgid "You can still authenticate your account by sending us scans of the following documents by email"
 msgstr "您还是可以通过把下面列示的文件扫描件以电子邮件发送过来，以验证您的账户"
 
@@ -9091,7 +9102,7 @@ msgstr "自您开账户以来，您已经提取的金额总计相等于EUR %1。
 msgid "You have already withdrawn the equivalent of EUR %1."
 msgstr "您已经提取的金额相等于EUR %1。"
 
-#: lib/BOM/View/CGIForm.pm:5018
+#: lib/BOM/View/CGIForm.pm:5014
 msgid "You have bought contracts with a combined purchase price of five times the bonus amount."
 msgstr "您已经购入了总买价为红利额五倍的交易。"
 
@@ -9136,7 +9147,7 @@ msgstr "您已经售出以下交易："
 msgid "You may not purchase or register keywords, search terms or other identifiers for use in any search engine, portal, sponsored advertising service or other search or referral service which are identical or similar to any of the Company's trademarks or trade names that include the word \"%1\" or any variation thereof. However, this does not extend to the use of Meta tag keywords on your site which are identical or similar to any of the Company's trademarks or trade names including the term %1."
 msgstr "您不得购买或注册关键词、搜索字词或与公司任何商标或商标名称相同或类似的、包含“%1”字样或其任何变化的任何搜索引擎、门户网站、赞助广告服务或其他搜索或推荐服务的其他识别符。但是，这并不适用于您网站上与公司任何商标或商标名称（包括%1字样）相同或类似的Meta标签关键词之使用。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:123
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:129
 msgid "You may only open an account at this site on condition that:"
 msgstr "您只能在下列条件下在本网站开设账户："
 
@@ -9255,7 +9266,7 @@ msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 
 msgstr "您的%1天提款限额目前为<strong>EUR %2</strong>（或其他货币为 %3）。"
 
 #. ($currency_label, $min_deposit)
-#: lib/BOM/View/CGIForm.pm:5016
+#: lib/BOM/View/CGIForm.pm:5012
 msgid "Your <strong>first</strong> deposit is equal to or more than %1%2, and"
 msgstr "您的<strong>首次</strong>充值额等于或高于%1%2，且"
 
@@ -9297,7 +9308,7 @@ msgstr "您的帐户余额"
 msgid "Your account balance (%1%2) is insufficient to buy this contract (%1%3)."
 msgstr "您的账户余额(%1%2)不足以买入该交易 (%1%3)。"
 
-#: lib/BOM/View/CGIForm.pm:5333
+#: lib/BOM/View/CGIForm.pm:5329
 msgid "Your account does not require authentication at this time."
 msgstr "现时您的账户不需要认证。"
 
@@ -9315,11 +9326,11 @@ msgid "Your account is fully authenticated and your withdrawal limit of EUR %1 h
 msgstr "您的账户已经得到完全验证，且您EUR %1 的取款限额已经取消。"
 
 #. (request()
-#: lib/BOM/View/CGIForm.pm:5272
+#: lib/BOM/View/CGIForm.pm:5268
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
 msgstr "您的账户已经得到完全验证，且您 <a href=\"%1\">% 的取款限额已经取消</a>。"
 
-#: lib/BOM/View/CGIForm.pm:5317
+#: lib/BOM/View/CGIForm.pm:5313
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
 msgstr "您的账户完全可用，您可以开始充值并买入交易。"
 
@@ -9336,6 +9347,12 @@ msgstr "您的帐户于%1下注册。"
 msgid "Your account is restricted to withdrawals only."
 msgstr "您的帐户只限于提款。"
 
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:62
+#, fuzzy
+#| msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
+msgid "Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
+msgstr "公司持有的客户资金存在独立的银行账户，与业务帐目分开。在破产的情况下，不会形成公司资产的一部分。您的帐户不应该被用来作为银行信贷及存款，而应该视为只用以进行交易的资金。如果你重复进行存款和取款，却没有进行相称的交易，在关闭帐户之前，我们保留在不事先通知的情况下把我们所承担的任何银行费用转到你的帐户的权利。"
+
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:20
 msgid "Your base url for all API calls"
 msgstr "您对所有API来电的基本网址"
@@ -9345,15 +9362,15 @@ msgstr "您对所有API来电的基本网址"
 msgid "Your bonus request - %1"
 msgstr "您的奖励要求- %1"
 
-#: lib/BOM/View/CGIForm.pm:5012
+#: lib/BOM/View/CGIForm.pm:5008
 msgid "Your bonus will be credited to your account within 3 working days after the following conditions have been met:"
 msgstr "您的奖金将在满足下列条件后的 3 个工作日内计入您的帐户："
 
-#: lib/BOM/View/CGIForm.pm:5025
+#: lib/BOM/View/CGIForm.pm:5021
 msgid "Your bonus will be credited to your account within 3 working days after you have bought contracts with a combined purchase price equal to or greater than the bonus amount."
 msgstr "您的奖金将在您以等于或大于奖金额的总买价买入交易后的3个工作日内贷记到您的账户。"
 
-#: lib/BOM/View/CGIForm.pm:5034
+#: lib/BOM/View/CGIForm.pm:5030
 msgid "Your bonus will be credited to your account within 3 working days."
 msgstr "您的奖金将在3个工作日内贷记至您的账户。"
 
@@ -9381,7 +9398,7 @@ msgstr "你的出纳已经过期"
 msgid "Your country"
 msgstr "您的国家"
 
-#: lib/BOM/View/CGIForm.pm:4856
+#: lib/BOM/View/CGIForm.pm:4852
 msgid "Your current self-exclusion settings are as follows:"
 msgstr "您当前的自我排除设置如下："
 
@@ -9546,7 +9563,7 @@ msgstr "限制您在特定时期内交易的金额；"
 msgid "a limit on the losses you may incur within a specified period of time;"
 msgstr "您可能在某一给定时间期限内遭受的损失限额;"
 
-#: lib/BOM/View/CGIForm.pm:5326
+#: lib/BOM/View/CGIForm.pm:5322
 msgid "and"
 msgstr "以及"
 
@@ -9584,7 +9601,9 @@ msgstr "更佳交易"
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/head.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:13
-msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex, binary trading, binary bet, binary online bet, binary options trading platform, digital options"
+#, fuzzy
+#| msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex, binary trading, binary bet, binary online bet, binary options trading platform, digital options"
+msgid "binary options, forex, forex trading, online trading, financial trading, binary trading, index trading, trading indices, forex trades, trading commodities, binary options strategy, binary broker, binary bet, binary options trading platform, binary strategy, finance, stocks, investment, trading"
 msgstr "二元期权、二元期权、外汇交易、在线交易、金融交易、金融交易二元期权、二元交易、指数交易、交易指数、外汇交易、交易大宗商品、外汇交易市场、练习交易、练习二元交易、tick交易、虚拟资金交易、交易外汇、二元交易、二元投注、二元在线投注、二元期权交易平台、数字期权"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
@@ -9738,13 +9757,18 @@ msgstr "不可使用"
 msgid "on this website. You may also"
 msgstr "在本网站上。您还可以"
 
-#: lib/BOM/View/CGIForm.pm:4803 lib/BOM/View/CGIForm.pm:4812
+#: lib/BOM/View/CGIForm.pm:4799 lib/BOM/View/CGIForm.pm:4808
 msgid "or"
 msgstr "或"
 
 #: /home/git/translations/binary-static/src/templates/haml/not_found.html.haml:1
 msgid "or please try the site map below"
 msgstr "或请尝试以下的网站地图"
+
+#. (request()
+#: lib/BOM/Product/Contract.pm:2674 lib/BOM/Product/Contract.pm:2689
+msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
+msgstr ""
 
 # 交易 = Trades
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
@@ -9831,11 +9855,11 @@ msgstr "交易"
 msgid "website"
 msgstr "网站"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:93
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:99
 msgid "when there is a breakdown in the means of communication normally employed in determining the price or value of any of the financial contracts or where the price or value of any of the financial contracts cannot be promptly or accurately ascertained."
 msgstr "当通常用于确定任何财务交易合约的价格或价值的通讯手段出现故障时，或者当任何财务交易合约的价格或价值无法及时或精确确定时。"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:90
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:96
 msgid "when, as a result of political, economic, military or monetary events (including unusual market volatility or illiquidity) or any circumstances outside the control, responsibility and power of the Company, the continued operation of this site is not reasonably practicable without materially and adversely affecting and prejudicing the interests of Clients or the Company, or if, in the opinion of the Company, a price cannot be calculated for financial contracts; or"
 msgstr "当政治、经济、军事或货币事件（包括市场非正常波动或丧失流动性）或其它不在本公司控制、责任及权力范围之内的任何情形导致本网站在不对客户或本公司利益产生重大负面影响或侵害的情况下无法继续合理可行地运转时，或者依公司之见，无法计算财务交易合约的价格时；或"
 
@@ -9864,7 +9888,7 @@ msgstr "年"
 msgid "years"
 msgstr "年"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:135
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:141
 msgid "you are not resident in a restricted country such as the USA, Japan or Hong Kong;"
 msgstr "您不是受限制国家如美国，日本或香港的居民；"
 
@@ -9872,19 +9896,19 @@ msgstr "您不是受限制国家如美国，日本或香港的居民；"
 msgid "you are not resident in a restricted country such as the USA, Japan, Hong Kong, Bahamas, Costa Rica, Malaysia, Malta, Iran, North Korea, Jersey, Iraq or Myanmar;"
 msgstr "您不是受限制国家如美国，日本，香港，巴哈马，哥斯达黎加，马来西亚，马耳他，伊朗，朝鲜，泽西岛，伊拉克或缅甸的居民；"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:132
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:138
 msgid "you are over 18 years of age, unless you are an Estonian resident whereby you would have to be over 21;"
 msgstr "您的年龄超过了18岁，除非您是爱沙尼亚居民（在爱沙尼亚您的年龄必须超过21岁）；"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:129
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:135
 msgid "you have read our privacy statement and hereby give us consent to process your personal information as outlined there;"
 msgstr "您已经阅读了我们的隐私声明并据此同意我们按照前述内容对您的个人信息进行处置；"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:126
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:132
 msgid "you have read this Legal Terms and Conditions page in full and understood that you will be buying and selling financial contracts subject to these terms and conditions;"
 msgstr "您已经完整地阅读了这份法律条款及条件，并明白您将在这些条款和条件下买卖财务交易；"
 
-#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:138
+#: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:144
 msgid "you have sufficient experience and knowledge in matters of financial trading to be capable of evaluating the merits and risks of acquiring financial contracts via this site and have done so without relying on any information contained in this site."
 msgstr "您已经拥有足够的有关财务交易的经验和知识从而有能力评估经由本网站购买财务交易合约的收益与风险，并且不是根据本网站包含的任何信息作出购买决定的。"
 
@@ -11815,6 +11839,9 @@ msgstr "对不起，通过此 IP 网络的访问已禁用，请联系「客户�
 #: Message for API Error 'LOGIN_TOO_MANY_FAILED_ATTEMPTS'
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
 msgstr "对不起，您的失败尝试次数过多。请5分钟后再尝试。"
+
+#~ msgid "Viber"
+#~ msgstr "Viber 通讯软件"
 
 #~ msgid "The contract payout has changed from %1%2 to %1%3."
 #~ msgstr "合同支出已从%1%2 改成 %1%3。"
