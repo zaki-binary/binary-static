@@ -5083,7 +5083,7 @@ BetForm.TradingTime.prototype = {
     },
     min_unit: function() {
         var units = this.configured_units_by_start_time();
-        var order = [ 'd', 'h', 'm', 's' ,'t'];
+        var order = ['d', 'h', 'm', 's' ,'t'];
         var checking = order.length;
         while(checking > 0) {
             checking--;
@@ -5094,7 +5094,7 @@ BetForm.TradingTime.prototype = {
     },
     max_unit: function() {
         var units = this.configured_units_by_start_time();
-        var order = [ 's', 'm', 'h', 'd', 't'];
+        var order = ['t', 's', 'm', 'h', 'd'];
         var checking = order.length;
         while(checking > 0) {
             checking--;
@@ -5113,7 +5113,6 @@ BetForm.TradingTime.prototype = {
         var units;
         var amount;
         var start_time = BetForm.attributes.start_time_moment();
-        
         var time = moment.utc(parseInt(inputTime) * 1000);
 
         var diff = time.valueOf() - start_time.valueOf();
@@ -5122,18 +5121,18 @@ BetForm.TradingTime.prototype = {
         if(time.isBefore(min_expiration_time)) {
             units = min_unit.units;
             amount = min_unit.min;
-        } else if (start_time.utc().date() != time.utc().date()) {
-            units = 'd';
-            amount = time.diff(start_time, 'day');
-        } else if(diff % (60 * 60) === 0) {
-            units = 'h';
-            amount = Math.ceil(diff / (60 * 60 * 1000));
-        } else if(diff % 60 === 0) {
-            units = 'm';
-            amount = Math.ceil(diff / (60 * 1000));
-        } else  {
+        } else if(diff / 1000 < 60) {
             units = 's';
             amount = Math.ceil(diff / 1000);
+        } else if (diff / (60 * 1000) < 60) {
+            units = 'm';
+            amount = Math.ceil(diff / (60 * 1000));
+        } else if (diff / (3600 * 1000) < 24) {
+            units = 'h';
+            amount = Math.ceil(diff / (3600 * 1000));
+        } else {
+            units = 'd';
+            amount = time.diff(start_time, 'day');
         }
 
         return {
