@@ -10,8 +10,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-01-12 15:38+0200\n"
 "Last-Translator: olga borg <olga@binary.com>\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/binary/static/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/binary/static/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -447,7 +446,7 @@ msgid "<p>Please take a moment to verify your identity by providing us with the 
 msgstr "<p>Tómese un momento para verificar su identidad proporcionándonos a continuación la respuesta correcta a su pregunta secreta y su fecha de nacimiento.</p>"
 
 #. (request()
-#: cgi/cashier_forward.cgi:190
+#: cgi/cashier_forward.cgi.tidyup:202 cgi/cashier_forward.cgi:190
 msgid "<p>Sorry, an error has occurred. Please <a href=\"%1\">try accessing our Cashier</a> again.</p>"
 msgstr "<p>Perdone, ha ocurrido un error. Por favor, <a href=\"%1\">intente acceder a su cajero</a> una vez más.</p>"
 
@@ -526,7 +525,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>Precios de referencia</strong>: %1 acota sus precios de forma diaria a partir de derivativos de los mercados interbancarios."
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:2174
+#: lib/BOM/View/Controller/Bet.pm:2179
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>¡Mejor precio de ejecución!</strong><br /> El precio se ha movido en su favor de %1 a %2."
 
@@ -804,20 +803,12 @@ msgid "A momentum indicator showing the percent rate-of-change of a triple expon
 msgstr "Un indicador del impulso que muestra porcentualmente la velocidad de cambio de un promedio móvil suavizado exponencialmente tres veces. Como otros osciladores, TRIX oscila alrededor de una línea de cero."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:209
-#| msgid "A new version of the interface is available. Please refresh this page to try again."
 msgid "A new version of the interface is available. Please <a href=\"#\" id=\"appcache-refresh-link\">refresh</a> this page to try again."
-msgstr ""
-"Una nueva versión de la interfaz está disponible. Por favor, vuelva a <a "
-"href=\"#\" id=\"appcache-refresh-link\">cargar</a> esta página para intentar "
-"de nuevo."
+msgstr "Una nueva versión de la interfaz está disponible. Por favor, vuelva a <a href=\"#\" id=\"appcache-refresh-link\">cargar</a> esta página para intentar de nuevo."
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#| msgid "A new version of the interface is available. Please refresh this page to try again."
 msgid "A new version of the interface is available. Please <a href='#' id='appcache-refresh-link'>refresh</a> this page to try again."
-msgstr ""
-"Una nueva versión de la interfaz está disponible. Por favor, vuelva a <a "
-"href=\"#\" id=\"appcache-refresh-link\">cargar</a> esta página para intentar "
-"de nuevo."
+msgstr "Una nueva versión de la interfaz está disponible. Por favor, vuelva a <a href=\"#\" id=\"appcache-refresh-link\">cargar</a> esta página para intentar de nuevo."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "A next-generation front-end interface with Sencha ExtJS-5"
@@ -1022,7 +1013,7 @@ msgstr "Todos los horarios en el sitio web corresponden a GMT (Greenwich Mean Ti
 msgid "Amount"
 msgstr "Monto"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:257
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:257
 msgid "Amount must be a positive number."
 msgstr "El monto debe ser un valor positivo."
 
@@ -1188,7 +1179,7 @@ msgid "Asian options settle by comparing the <strong>last tick</strong> with the
 msgstr "Opciones asiáticas se resuelven comparando el <strong>último intervalo</strong> con el precio mediano durante el período del contrato."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1224 cgi/oop/Controller/Bet.pm:1231
+#: lib/BOM/View/Controller/Bet.pm:1229 lib/BOM/View/Controller/Bet.pm:1236
 msgid "Asians"
 msgstr "Asiáticas"
 
@@ -1343,7 +1334,7 @@ msgstr "Gráfico de barras OHLC"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:18
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:59
-#: cgi/oop/Controller/Bet.pm:2398 platform/bin/GenerateStaticData.pm:117
+#: lib/BOM/View/Controller/Bet.pm:2405 platform/bin/GenerateStaticData.pm:117
 msgid "Barrier"
 msgstr "Límite"
 
@@ -1373,7 +1364,7 @@ msgid "Barrier must be at least "
 msgstr "La barrera tiene que ser al menos "
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:15
-#: cgi/oop/Controller/Bet.pm:2397
+#: lib/BOM/View/Controller/Bet.pm:2404
 msgid "Barrier offset"
 msgstr "Desplazamiento de barrera"
 
@@ -1597,13 +1588,7 @@ msgstr "Código de bonificación"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:17
 msgid "Both the deposit and the bonus amounts are clearly displayed when this type of promotion is available. E.g. Get $25 when you deposit $100. By way of example, if you choose to participate in a \"Get $25 when you deposit $100\" promotion, we will add an additional $25 to your account when you deposit $100 AND when you have purchased at least $125 worth of trades ($25 * 5= $125). The bonus will only be credited to your account when both of these conditions are met."
-msgstr ""
-"Las cantidades de tanto el depósito como el bono se muestran claramente "
-"cuando este tipo de promoción está disponible. Por ejemplo, la promoción \""
-"Reciba $25 cuando deposita $100\" significa que añadiremos $25 a su cuenta "
-"cuando deposita $100 Y TAMBIÉN cuando haya comprado contratos por el valor "
-"de al menos $125 ($25 * 5= $125). La bonificación sólo será acreditada a su "
-"cuenta cuando se cumpla las  ambas condiciones."
+msgstr "Las cantidades de tanto el depósito como el bono se muestran claramente cuando este tipo de promoción está disponible. Por ejemplo, la promoción \"Reciba $25 cuando deposita $100\" significa que añadiremos $25 a su cuenta cuando deposita $100 Y TAMBIÉN cuando haya comprado contratos por el valor de al menos $125 ($25 * 5= $125). La bonificación sólo será acreditada a su cuenta cuando se cumpla las  ambas condiciones."
 
 #: lib/BOM/View/CGIForm.pm:664
 msgid "Brand of first car"
@@ -1722,7 +1707,8 @@ msgid "Cash Dividend"
 msgstr "Dividendo en efectivo"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/homepage/logged_in.html.tt:95
-#: cgi/available_payment_methods.cgi:18 cgi/cashier_forward.cgi:28
+#: cgi/available_payment_methods.cgi:18 cgi/cashier_forward.cgi.tidyup:28
+#: cgi/cashier_forward.cgi.tidyup:31 cgi/cashier_forward.cgi:28
 #: cgi/cashier_forward.cgi:31 lib/BOM/View/Menu.pm:130
 msgid "Cashier"
 msgstr "Cajero"
@@ -1780,7 +1766,7 @@ msgstr "Cambiar contraseña"
 msgid "Change in account settings"
 msgstr "Cambiar en configuración de cuenta"
 
-#: cgi/analyse_contract.cgi:280 cgi/oop/Controller/Bet.pm:2203
+#: cgi/analyse_contract.cgi:280 lib/BOM/View/Controller/Bet.pm:2208
 msgid "Chart"
 msgstr "Gráfico"
 
@@ -1933,9 +1919,7 @@ msgstr "A los clientes del resto del mundo se les abrirá su cuenta con Binary (
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:23
 msgid "Clients may avail of this bonus only when a real money account is opened."
-msgstr ""
-"Los clientes pueden hacer uso de esta bonificación sólo cuando se abre una "
-"cuenta de dinero real."
+msgstr "Los clientes pueden hacer uso de esta bonificación sólo cuando se abre una cuenta de dinero real."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
 msgid "Clients must be aware that underage gambling is an offence. If a client, upon age verification, is proven to be underage, will be deprived from any winnings and only deposits made shall be refunded."
@@ -2096,6 +2080,7 @@ msgstr "Contáctenos"
 msgid "Contact the payment agent directly for more information on how to transfer money to them."
 msgstr "Póngase en contacto con el agente de pago directamente para obtener más información sobre cómo hacer una transferencia de dinero a través de él."
 
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Contact us"
 msgstr "Contáctenos"
@@ -2176,7 +2161,7 @@ msgstr "Período del contrato"
 msgid "Contract purchase (approved applications only)"
 msgstr "Compra de contrato (sólo aplicaciones aprobadas)"
 
-#: cgi/oop/Controller/Bet.pm:1503
+#: lib/BOM/View/Controller/Bet.pm:1508
 msgid "Contract purchases on this account must be on behalf of granters."
 msgstr "Compra de contratos en esta cuenta deben solamente se permite a las personas autorizadas."
 
@@ -2311,7 +2296,7 @@ msgid "Daily"
 msgstr "Diario"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:31
-#: cgi/oop/Controller/Bet.pm:2226
+#: lib/BOM/View/Controller/Bet.pm:2231
 msgid "Daily Prices"
 msgstr "Precios diarios"
 
@@ -2605,7 +2590,7 @@ msgstr "Diferencias con otros flujos de datos"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1239 cgi/oop/Controller/Bet.pm:1246
+#: lib/BOM/View/Controller/Bet.pm:1244 lib/BOM/View/Controller/Bet.pm:1251
 msgid "Digits"
 msgstr "Dígitos"
 
@@ -2833,7 +2818,7 @@ msgstr "Hora de finalización"
 msgid "Ends Between/Ends Outside trades"
 msgstr "Contratos Finaliza dentro/Finaliza fuera"
 
-#: cgi/contract_demo.cgi:87 cgi/oop/Controller/Bet.pm:1207
+#: cgi/contract_demo.cgi:87 lib/BOM/View/Controller/Bet.pm:1212
 msgid "Ends Between/Outside"
 msgstr "Finaliza Dentro/Fuera"
 
@@ -2851,7 +2836,7 @@ msgstr "Asegurarse de que usted no promociona %1 con mensajes dirigidos a person
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "Introduzca el límite en términos de la diferencia con el precio al contado. Si usted introduce +0.005, estará adquiriendo un contrato con un límite 0.005 por encima del precio al contado. El precio al contado es el precio recibido una vez ejecutada la orden de la compra"
 
-#: cgi/oop/Controller/Bet.pm:2401
+#: lib/BOM/View/Controller/Bet.pm:2408
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "Introduzca el límite en términos de la diferencia con el precio al contado. Si usted introduce +0.005, estará adquiriendo un contrato con un límite 0.005 por encima del precio al contado. El precio al contado es el precio recibido una vez ejecutada la orden de la compra."
 
@@ -3260,7 +3245,7 @@ msgstr "Generosa estructura de comisiones"
 msgid "Get %1 when you deposit %2."
 msgstr "Obtenga %1 al depositar %2."
 
-#: cgi/oop/Controller/Bet.pm:1088
+#: lib/BOM/View/Controller/Bet.pm:1093
 msgid "Get Prices"
 msgstr "Obtener precios"
 
@@ -3376,12 +3361,12 @@ msgstr "Barrera Superior"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:18
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart.html.tt:43
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:60
-#: cgi/oop/Controller/Bet.pm:2394
+#: lib/BOM/View/Controller/Bet.pm:2401
 msgid "High barrier"
 msgstr "Barrera superior"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:15
-#: cgi/oop/Controller/Bet.pm:2392
+#: lib/BOM/View/Controller/Bet.pm:2399
 msgid "High barrier offset"
 msgstr "Desplazamiento de la barrera superior"
 
@@ -3403,7 +3388,7 @@ msgstr "Superior / Inferior"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:46 cgi/contract_demo.cgi:47 cgi/contract_guide.cgi:32
-#: cgi/oop/Controller/Bet.pm:1162 cgi/oop/Controller/Bet.pm:1169
+#: lib/BOM/View/Controller/Bet.pm:1167 lib/BOM/View/Controller/Bet.pm:1174
 msgid "Higher/Lower"
 msgstr "Superior/Inferior"
 
@@ -3761,7 +3746,7 @@ msgid "In what country do you want to offer your service"
 msgstr "En qué país desea ofrecer su servicio"
 
 #: cgi/contract_demo.cgi:75 cgi/contract_demo.cgi:88 cgi/contract_guide.cgi:58
-#: cgi/oop/Controller/Bet.pm:1213
+#: lib/BOM/View/Controller/Bet.pm:1218
 msgid "In/Out"
 msgstr "Dentro/Fuera"
 
@@ -3881,7 +3866,7 @@ msgstr "Intradía"
 msgid "Intraday contracts may not cross market open."
 msgstr "Contratos intradía no pueden cruzar al día siguiente."
 
-#: cgi/oop/Controller/Bet.pm:2238
+#: lib/BOM/View/Controller/Bet.pm:2243
 msgid "Intraday prices"
 msgstr "Precios intradía"
 
@@ -3893,9 +3878,9 @@ msgstr "Introducción"
 msgid "Invalid Building No./Name"
 msgstr "Número/nombre del edificio no válido"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:129
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:237
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:436
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:129
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:237
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:441
 msgid "Invalid Input"
 msgstr "Entrada no válida"
 
@@ -4063,7 +4048,7 @@ msgstr "Último"
 msgid "Last Digit Prediction"
 msgstr "Predicción del último dígito"
 
-#: cgi/oop/Controller/Bet.pm:2255
+#: lib/BOM/View/Controller/Bet.pm:2260
 msgid "Last Digit Stats"
 msgstr "Estadísticas del último dígito"
 
@@ -4271,12 +4256,12 @@ msgstr "La barrera inferior debe ser un valor numérico"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:37
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart.html.tt:47
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:46
-#: cgi/oop/Controller/Bet.pm:2395
+#: lib/BOM/View/Controller/Bet.pm:2402
 msgid "Low barrier"
 msgstr "Barrera inferior"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:34
-#: cgi/oop/Controller/Bet.pm:2393
+#: lib/BOM/View/Controller/Bet.pm:2400
 msgid "Low barrier offset"
 msgstr "Desplazamiento de la barrera inferior"
 
@@ -4532,11 +4517,8 @@ msgid "Monday"
 msgstr "Lunes"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:53
-#| msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients"
 msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients."
-msgstr ""
-"El dinero recaudado de los clientes no se invierte en ningún valor, futuro, "
-"divisa, derivado u otras inversiones en representación de los clientes."
+msgstr "El dinero recaudado de los clientes no se invierte en ningún valor, futuro, divisa, derivado u otras inversiones en representación de los clientes."
 
 #: lib/BOM/Product/Helper/PricingTableParameters.pm:233
 msgid "Moneyness terms"
@@ -4745,7 +4727,7 @@ msgstr "No. No hay ningún costo para acceder al programa de afiliados de %1."
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "Atención: el contrato se venderá al precio vigente en el mercado en el moment de la recepción de la solicitud de venta por nuestros servidores. Este precio puede ser diferente del precio indicado."
 
-#: cgi/oop/Controller/Bet.pm:1055
+#: lib/BOM/View/Controller/Bet.pm:1060
 msgid "Note: During summer time (daylight saving), GMT is one hour behind BST (British Summer Time)"
 msgstr "Nota: durante el verano, (horario de verano), el GMT está una hora por detrás del BST (horario británico de verano)"
 
@@ -4881,11 +4863,8 @@ msgid "Once stray ticks have been removed, a very short-term smoothing algorithm
 msgstr "Una vez eliminadas las cotizaciones erróneas, se aplicará un algoritmo de suavizado de corto plazo al sistema de flujo de datos. Este algoritmo de suavizado quita el poco \"ruido aleatorio\" alrededor del sistema de flujo de datos y asegura que los clientes que compran contratos dependientes de la tendencia (como los contratos de un toque o de rango de barrera) sin que sus contratos se activen o desactiven por el ruido aleatorio del mercado a corto plazo que no refleja el verdadero precio del mercado."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:20
-#| msgid "You may withdraw the Y deposited to claim the bonus and any winnings generated by the bonus at any time."
 msgid "Once the bonus is credited to your account, you may withdraw the bonus and any winnings generated from it at any time."
-msgstr ""
-"Una vez que el bono esté acreditado a su cuenta, podrá retirar el bono y las "
-"ganancias generadas de él en cualquier momento."
+msgstr "Una vez que el bono esté acreditado a su cuenta, podrá retirar el bono y las ganancias generadas de él en cualquier momento."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/white_labels.html.haml:1
 msgid "Once the white-label is live, you will earn standard affiliate commissions on clients trading via the white-label."
@@ -4914,11 +4893,8 @@ msgstr "Una sencilla plataforma"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
-#| msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
 msgid "Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
-msgstr ""
-"La plataforma en linea de opciones binarias sobre divisas, índices, materias "
-"primas y índices Smart"
+msgstr "La plataforma en linea de opciones binarias sobre divisas, índices, materias primas y índices Smart"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Only five years after inception, we pick up this major award for our online trading services. The award recognises BetOnMarkets.com’s reliable, fast and secure online trading for novice and expert traders. At this time, our website has received over 15 million trades."
@@ -5066,7 +5042,6 @@ msgid "Outperformance Indices"
 msgstr "Índices Rendimiento"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
-#| msgid "Over one billion dollars in trades to date."
 msgid "Over two billion dollars in trades to date."
 msgstr "Más de dos millones de dólares en transacciones hasta la fecha."
 
@@ -5217,7 +5192,7 @@ msgid "Payout Currency"
 msgstr "Divisa de pago"
 
 #. (to_monetary_number_format($transaction_parameters->{payout})
-#: cgi/oop/Controller/Bet.pm:1591
+#: lib/BOM/View/Controller/Bet.pm:1596
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "El pago ha cambiado a su favor de %1 a %2."
 
@@ -5418,7 +5393,7 @@ msgstr "Publique los documentos en:"
 msgid "Please provide at least one self-exclusion setting."
 msgstr "Brinde al menos una configuración de auto-exclusión."
 
-#: cgi/oop/Controller/Bet.pm:1713 cgi/oop/Controller/Bet.pm:2000
+#: lib/BOM/View/Controller/Bet.pm:1718 lib/BOM/View/Controller/Bet.pm:2005
 msgid "Please provide granter id(s)."
 msgstr "Por favor, proprocione los identificadores de los clientes."
 
@@ -5446,7 +5421,7 @@ msgstr "Por favor recuerde en todo momento que el comercio de opciones binarias 
 msgid "Please select"
 msgstr "Seleccione"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:272
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:272
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "Seleccione la opcion de \"Pago\" o \"Apuesta\"."
 
@@ -5551,7 +5526,7 @@ msgid "Price Oscillator"
 msgstr "Oscilador de precios"
 
 #. (to_monetary_number_format($transaction_parameters->{price})
-#: cgi/oop/Controller/Bet.pm:1586
+#: lib/BOM/View/Controller/Bet.pm:1591
 msgid "Price has moved in your favour from %1 to %2."
 msgstr "El precio se ha movido a su favor de %1 a %2."
 
@@ -5567,7 +5542,7 @@ msgstr "Precios"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:81
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:2
-#: cgi/oop/Controller/Bet.pm:2244 cgi/pricing_table.cgi:170
+#: cgi/pricing_table.cgi:170 lib/BOM/View/Controller/Bet.pm:2249
 #: lib/BOM/View/Menu.pm:171
 msgid "Pricing Table"
 msgstr "Tabla de precios"
@@ -5643,7 +5618,7 @@ msgid "Provide us with the following documentation:"
 msgstr "Bríndenos la siguiente documentación:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:26
-#: cgi/oop/Controller/Bet.pm:1443
+#: lib/BOM/View/Controller/Bet.pm:1448
 msgid "Purchase"
 msgstr "Compra"
 
@@ -5785,15 +5760,12 @@ msgid "Ref."
 msgstr "Ref."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
-#| msgid "Regent Markets Group Limited, with registered office address situated at"
 msgid "Regent Markets Group Ltd. renames to Binary Ltd."
 msgstr "Regent Markets Group Ltd. cambia el nombre Binary ltd."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Regent Markets Group Ltd. renames to Binary Ltd., harmonising company and website branding throughout the organisation."
-msgstr ""
-"Regent Markets Group Ltd. está renombrado a Binary Ltd., así unificando la "
-"marca de la empresa y del sitio web a través de toda la organización."
+msgstr "Regent Markets Group Ltd. está renombrado a Binary Ltd., así unificando la marca de la empresa y del sitio web a través de toda la organización."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Regent Markets acquires BetsForTraders client base"
@@ -5858,7 +5830,7 @@ msgstr "Índice relativo de la fuerza"
 msgid "Reload Cashier"
 msgstr "Actualizar cajero"
 
-#: lib/BOM/Platform/Plack.pm:330
+#: lib/BOM/Platform/Plack.pm.tidyup:322 lib/BOM/Platform/Plack.pm:322
 msgid "Reload page"
 msgstr "Recargar página"
 
@@ -5940,7 +5912,7 @@ msgstr "Reintentar"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/ticker.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/sell_success_ajax.html.tt:12
-#: cgi/oop/Controller/Bet.pm:483
+#: lib/BOM/View/Controller/Bet.pm:488
 msgid "Return"
 msgstr "Ganancias"
 
@@ -5989,7 +5961,7 @@ msgstr "Ganancia de contrato de alza (%)"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:33 cgi/contract_guide.cgi:19
-#: cgi/oop/Controller/Bet.pm:1130 cgi/oop/Controller/Bet.pm:1137
+#: lib/BOM/View/Controller/Bet.pm:1135 lib/BOM/View/Controller/Bet.pm:1142
 msgid "Rise/Fall"
 msgstr "Alza/Baja"
 
@@ -6197,10 +6169,10 @@ msgstr "Configuración"
 msgid "Settles"
 msgstr "Establece"
 
-#: cgi/oop/Controller/Bet.pm:1489 cgi/oop/Controller/Bet.pm:1695
-#: cgi/oop/Controller/Bet.pm:1953 cgi/oop/Controller/Bet.pm:1992
-#: cgi/oop/Controller/Bet.pm:2414 cgi/oop/Controller/Bet.pm:777
-#: cgi/oop/Controller/Bet.pm:886
+#: lib/BOM/View/Controller/Bet.pm:1494 lib/BOM/View/Controller/Bet.pm:1700
+#: lib/BOM/View/Controller/Bet.pm:1958 lib/BOM/View/Controller/Bet.pm:1997
+#: lib/BOM/View/Controller/Bet.pm:2421 lib/BOM/View/Controller/Bet.pm:782
+#: lib/BOM/View/Controller/Bet.pm:891
 msgid "Sharp Prices. Smart Trading."
 msgstr "Mejores precios. Comercio inteligente."
 
@@ -6329,11 +6301,11 @@ msgstr "Lo sentimos, OHLC no está disponible para %1."
 msgid "Sorry, Payment Agent Transfer is temporarily disabled due to system maintenance. Please try again in 30 minutes."
 msgstr "Lo sentimos, los pagos a través de agentes de pago están desactivados temporalmente por cuestiones de mantenimiento.  Inténtelo nuevamente dentro de 30 minutos."
 
-#: cgi/cashier_forward.cgi:50
+#: cgi/cashier_forward.cgi.tidyup:62 cgi/cashier_forward.cgi:50
 msgid "Sorry, access to the CASHIER SECTION is disabled for TRADING AGENT accounts. This is to protect you from accidentally attempting to place real money contracts via this account instead of using it to place trades for authorised third parties."
 msgstr "Lo sentimos, se deshabilitó el acceso a la SECCIÓN DE CAJERO para las cuentas de los AGENTES DE PAGOS. Esto es para protegerlo de intentar colocar accidentalmente contratos de dinero real a través de esta cuenta en lugar de hacerlo mediante terceros autorizados."
 
-#: cgi/oop/Controller/Bet.pm:714
+#: lib/BOM/View/Controller/Bet.pm:719
 msgid "Sorry, an error occured with this trade.  Please try again in a few minutes.  If the problem persists, please contact customer support."
 msgstr "Lo sentimos, ha ocurrido un error con este contrato. Por favor, inténtelo de nuevo en unos minutos.. Si este error persiste, póngase en contacto con nuestro servicio de atención al cliente."
 
@@ -6432,7 +6404,7 @@ msgstr "Lo sentimos, no puede comprar el mismo contrato más de una vez. Ya tien
 msgid "Sorry, there is too much data to display, please select a shorter interval"
 msgstr "Lo sentimos, hay demasiados datos para mostrar. Seleccione un intervalo más breve."
 
-#: cgi/cashier_forward.cgi:155
+#: cgi/cashier_forward.cgi.tidyup:167 cgi/cashier_forward.cgi:155
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "Lo sentimos, ocurrió un problema para validar su información personal con su procesador de pago. Contáctese con nuestro servicio de atención al cliente."
 
@@ -6454,12 +6426,8 @@ msgstr "Lo sentimos, usted es muy joven para abrir una cuenta."
 
 #. ($max_open_positions_limit, request()
 #: lib/BOM/Product/Transaction.pm:1106
-#| msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please sell some of your existing contracts before buying any more."
 msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please visit the <a href=\"%2\" class=\"pjaxload\">statement</a> page to automatically sell your expired contracts."
-msgstr ""
-"Lo sentimos, no puede retener más de %1 contratos al mismo tiempo. Por "
-"favor, visite su <a href=\"%2\" class=\"pjaxload\">extracto</a> para que los "
-"contratos expirados se cierren de forma automática."
+msgstr "Lo sentimos, no puede retener más de %1 contratos al mismo tiempo. Por favor, visite su <a href=\"%2\" class=\"pjaxload\">extracto</a> para que los contratos expirados se cierren de forma automática."
 
 #: lib/BOM/View/Cashier.pm:223 lib/BOM/View/Cashier.pm:246
 msgid "Sorry, you cannot withdraw."
@@ -6619,7 +6587,7 @@ msgstr "Estadísticas"
 msgid "Stay informed. %1 offers daily market reports and market research, as well as frequent trading webinars."
 msgstr "Manténgase informado. %1 le ofrece los informes diarios y los estudios del mercado (en inglés) y los seminarios transmitidos en linea."
 
-#: cgi/contract_demo.cgi:74 cgi/oop/Controller/Bet.pm:1197
+#: cgi/contract_demo.cgi:74 lib/BOM/View/Controller/Bet.pm:1202
 msgid "Stays Between/Goes Outside"
 msgstr "Queda Dentro/Sale"
 
@@ -6708,13 +6676,8 @@ msgid "Submit"
 msgstr "Enviar"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/copyright.html.tt:12
-#| msgid "Such materials may be copied and distributed on a limited basis for noncommercial purposes only, provided that any material copied remains intact and that all copies include the following notice in a clearly visible position: &ldquo;Copyright 1999-2014 Regent Markets Group. All rights reserved.&rdquo;"
 msgid "Such materials may be copied and distributed on a limited basis for noncommercial purposes only, provided that any material copied remains intact and that all copies include the following notice in a clearly visible position: &ldquo;Copyright 1999-2015 Binary Ltd. All rights reserved.&rdquo;"
-msgstr ""
-"Dichos materiales pueden copiarse y distribuirse de acuerdo con una base "
-"limitada solo para propósitos no comerciales, siempre y cuando el material "
-"que se copie permanezca intacto y en una posición visible: &ldquo;Copyright "
-"1999-2015 Binary Ltd. Todos los derechos reservados.&rdquo;"
+msgstr "Dichos materiales pueden copiarse y distribuirse de acuerdo con una base limitada solo para propósitos no comerciales, siempre y cuando el material que se copie permanezca intacto y en una posición visible: &ldquo;Copyright 1999-2015 Binary Ltd. Todos los derechos reservados.&rdquo;"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/available_payment_agents_list.html.tt:3
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:60
@@ -6847,15 +6810,8 @@ msgstr "Gracias. Se envió su solicitud y nuestro equipo la examinará cuanto an
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
-#| msgid "The \"raw\" API can be inspected \"live\" using Apigee's <a href=\"http://apigee.com/rmg/console/binary1\" target=\"_blank\">Console-to-go</a> facility. This facility aplies the full OAuth2 validation process, hence you will need to opt for the \"OAuth2\" Authentication option offered here and you will then need a valid %1 login to proceed."
 msgid "The \"raw\" API can be inspected \"live\" using Apigee's <a href=\"http://apigee.com/rmg/console/binary1\" target=\"_blank\">Console-to-go</a> facility. This facility applies the full OAuth2 validation process, hence you will need to opt for the \"OAuth2\" Authentication option offered here and you will then need a valid %1 login to proceed."
-msgstr ""
-"Las APIs \"Nativas\" pueden consultarse \"en tiempo real\" utilizando la <a "
-"href=\"http://apigee.com/rmg/console/binary1\" target=\"_blank\">consola</a> "
-"de Apigee. Este servicio utiliza el proceso de validación completo OAuth2, "
-"por lo tanto, tendrá que seleccionar la opción de autenticación \"OAuth2\" "
-"ofrecida aquí y luego necesitará una válida identificación de usuario de %1 "
-"para continuar."
+msgstr "Las APIs \"Nativas\" pueden consultarse \"en tiempo real\" utilizando la <a href=\"http://apigee.com/rmg/console/binary1\" target=\"_blank\">consola</a> de Apigee. Este servicio utiliza el proceso de validación completo OAuth2, por lo tanto, tendrá que seleccionar la opción de autenticación \"OAuth2\" ofrecida aquí y luego necesitará una válida identificación de usuario de %1 para continuar."
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/partner_api.html.haml:1
@@ -6869,13 +6825,8 @@ msgstr "La API de %1 utiliza el esquema OAuth2.0 para autenticar usuarios."
 
 #. (broker_name)
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/main.html.tt:72
-#| msgid "The %1 Affiliate Program has been delivering payments on time, every time, since our official launch in March, 2004. Your affiliate commissions will be credited into your affiliate account within fifteen days of the end of a calendar month by Regent Markets."
 msgid "The %1 Affiliate Program has been delivering payments on time, every time, since our official launch in March, 2004. Your affiliate commissions will be credited into your affiliate account within fifteen days of the end of a calendar month by Binary Ltd."
-msgstr ""
-"El programa de afiliados de %1 entrega siempre puntualmente los pagos desde "
-"su lanzamiento oficial en marzo de 2004. Sus comisiones de afiliado se "
-"acreditarán en su cuenta de afiliado dentro de los quince días desde la "
-"finalización del mes calendario de Binary Ltd."
+msgstr "El programa de afiliados de %1 entrega siempre puntualmente los pagos desde su lanzamiento oficial en marzo de 2004. Sus comisiones de afiliado se acreditarán en su cuenta de afiliado dentro de los quince días desde la finalización del mes calendario de Binary Ltd."
 
 #. (pjax_link_for(l('Random 100 Index')
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
@@ -6925,14 +6876,8 @@ msgstr "El %1 devolverá una estructura JSON que incluye señal de acceso access
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/about/index.html.haml:1
-#| msgid "The <span itemprop=\"brand\">%1</span> service (formerly known as BetOnMarkets.com) is owned and operated by the Regent Markets Group of companies. Fully licensed and regulated, %1 has been providing financial trading to a worldwide audience of over 300,000 clients since <span itemprop=\"foundingdate\">1999</span>"
 msgid "The <span itemprop=\"brand\">%1</span> service (formerly known as BetOnMarkets.com) is owned and operated by the Binary Ltd. Fully licensed and regulated, %1 has been providing financial trading to a worldwide audience of over 300,000 clients since <span itemprop=\"foundingdate\">1999</span>"
-msgstr ""
-"El servicio de <span itemprop=\"brand\">%1</span> (anteriormente conocido "
-"como BetOnMarkets.com) es propiedad y está operado por Binary Ltd. Con "
-"licencia y regulación completa, %1 ha brindado un servicio de "
-"comercialización financiera a una audiencia mundial de más de 300.000 "
-"clientes desde el año <span itemprop=\"foundingdate\">1999</span>"
+msgstr "El servicio de <span itemprop=\"brand\">%1</span> (anteriormente conocido como BetOnMarkets.com) es propiedad y está operado por Binary Ltd. Con licencia y regulación completa, %1 ha brindado un servicio de comercialización financiera a una audiencia mundial de más de 300.000 clientes desde el año <span itemprop=\"foundingdate\">1999</span>"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/staysinout.html.tt:3
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/touchnotouch.html.tt:4
@@ -7191,13 +7136,8 @@ msgid "The USD Index is a weighted Index, measuring the US Dollar’s value agai
 msgstr "El índice de USD es un índice ponderado, que mide el valor del dólar americano frente a una cesta de 5 divisas mundiales (EUR, GBP, JPY, CAD, AUD), cada una ponderada por 20%."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/privacy.html.tt:10
-#| msgid "The above personal data that we collect will be held by us and processed for any purpose as may be allowed by law or required by any law. We may also transfer such personal data to any company within the Regent Markets Group of companies or any of our business associates."
 msgid "The above personal data that we collect will be held by us and processed for any purpose as may be allowed by law or required by any law. We may also transfer such personal data to any company within the Binary Group of companies or any of our business associates."
-msgstr ""
-"Los datos personales anteriores que reunimos quedarán en nuestro poder y "
-"serán procesados por cualquier motivo según permita o requiera la ley. "
-"También podremos transmitir estos datos a cualquier compañía dentro del "
-"grupo Binary o a cualquiera de nuestros asociados."
+msgstr "Los datos personales anteriores que reunimos quedarán en nuestro poder y serán procesados por cualquier motivo según permita o requiera la ley. También podremos transmitir estos datos a cualquier compañía dentro del grupo Binary o a cualquiera de nuestros asociados."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "The access-token retrieved earlier has a limited lifetime.  In the case of Auth-Code Flow only, it can be renewed."
@@ -7237,11 +7177,7 @@ msgstr "El código de bonificación solo puede ingresarse y activarse luego de a
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:32
 msgid "The bonus will be added to the account when the required minimum deposit has been made via a single transaction. Clients who make multiple deposits in an attempt to accumulate the required deposit amount will not be eligible for this bonus."
-msgstr ""
-"La bonificación se añadirá a la cuenta cuando el depósito mínimo requerido "
-"se haya hecho a través de una sola transacción. Los clientes que hacen "
-"múltiples depósitos en un intento de acumular la cantidad del depósito "
-"requerida no serán elegibles para este bono."
+msgstr "La bonificación se añadirá a la cuenta cuando el depósito mínimo requerido se haya hecho a través de una sola transacción. Los clientes que hacen múltiples depósitos en un intento de acumular la cantidad del depósito requerida no serán elegibles para este bono."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/betting_rules.html.tt:48
 msgid "The calculation of the price to be paid (or the payout to be received) for financial contracts on this site at the time the financial contract is purchased or sold will be based on the Company's best estimate of market price movements and the expected level of interest rates, implied volatilities and other market conditions during the life of the financial contract, and is based on complex mathematics. The calculation will include a bias in favour of the Company. The financial contract prices (or the payout amounts) offered to Clients speculating on market or index prices may differ substantially from prices available in the primary markets where stock indices or commodities or contracts thereupon are traded, due to the bias favouring the Company in the price calculation system referred to above."
@@ -7253,9 +7189,7 @@ msgstr "Los datos de gráficos a disposición de los Clientes de la Compañía s
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:12
 msgid "The client has reached a turnover that is 5 times the bonus amount"
-msgstr ""
-"El cliente ha alcanzado un volumen de negocios que constitue 5 veces la "
-"cantidad del bono"
+msgstr "El cliente ha alcanzado un volumen de negocios que constitue 5 veces la cantidad del bono"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/betting_rules.html.tt:34
 msgid "The company does not guarantee the ability to sell a contract prior to its expiration time."
@@ -7263,12 +7197,7 @@ msgstr "La compañía no garantiza la posibilidad de vender un contrato antes de
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:59
 msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. This meets the Gambling Commission’s requirements for the segregation of customer funds at the level: medium protection."
-msgstr ""
-"La Compañía guarda con los recursos de los clientes en cuentas bancarias "
-"separadas de las cuentas operativas que no formarán, en caso de insolvencia, "
-"parte de los activos de la Compañía. Esto cumple con los requisitos de la "
-"Comisión de juego para la segregación de los recursos de clientes a nivel: "
-"protección media."
+msgstr "La Compañía guarda con los recursos de los clientes en cuentas bancarias separadas de las cuentas operativas que no formarán, en caso de insolvencia, parte de los activos de la Compañía. Esto cumple con los requisitos de la Comisión de juego para la segregación de los recursos de clientes a nivel: protección media."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:35
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:61
@@ -7286,7 +7215,6 @@ msgstr "El contenido de este sitio web está sujeto a cambios en cualquier momen
 
 #. ($currency,                to_monetary_number_format($amount)
 #: lib/BOM/Product/Transaction.pm:752
-#| msgid "The contract price has changed from %1%2 to %1%3."
 msgid "The contract %4 has changed from %1%2 to %1%3."
 msgstr "El %4 de contrato ha cambiado a su favor de %1%2 a %1%3."
 
@@ -7376,13 +7304,8 @@ msgstr "El mercado debe estar abierto al inicio."
 
 #. (SITENAME)
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/copyright.html.tt:9
-#| msgid "The materials comprising the %1 website (including without limitation all articles, text, images, logos, compilation, systems, code and design) are Copyright 1999-2014 Regent Markets Group of companies. All rights reserved."
 msgid "The materials comprising the %1 website (including without limitation all articles, text, images, logos, compilation, systems, code and design) are Copyright 1999-2015 Binary Group of companies. All rights reserved."
-msgstr ""
-"Los materiales que comprenden el sitio web de %1 (incluyendo pero no "
-"limitándose a todos los artículos, texto, logotipos, compilaciones, "
-"sistemas, códigos y diseños) son propiedad de Copyright 1999-2015 Binary "
-"Group of companies. Todos los derechos reservados."
+msgstr "Los materiales que comprenden el sitio web de %1 (incluyendo pero no limitándose a todos los artículos, texto, logotipos, compilaciones, sistemas, códigos y diseños) son propiedad de Copyright 1999-2015 Binary Group of companies. Todos los derechos reservados."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:21
 msgid "The maximum loss that may be incurred by any Client is the amount of money paid by oneself to the Company."
@@ -7397,7 +7320,7 @@ msgstr "El beneficio más importante de la utilización de OAuth2.0 es que los u
 msgid "The moving average period of the signal line"
 msgstr "El período promedio móvil de la línea de señal"
 
-#: lib/BOM/Platform/Plack.pm:342
+#: lib/BOM/Platform/Plack.pm.tidyup:334 lib/BOM/Platform/Plack.pm:334
 msgid "The page has timed out. This may be due to a slow Internet connection, or to excess load on our servers.  Please try again in a few moments."
 msgstr "Se agotó el tiempo de espera. Esto podría ser a causa de una conexión lenta de Internet o por una sobrecarga en nuestros servidores. Vuelva a intentarlo más tarde."
 
@@ -7514,14 +7437,8 @@ msgid "The system is missing critical pricing information. Please try again in a
 msgstr "El sistema requiere información vital de precios. Vuelva a intentarlo en unos minutos o pruebe con otro mercado."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:11
-#| msgid "The term \"the Company\" shall denote either of Binary (IOM) Ltd., Binary (Europe) Ltd. or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
 msgid "The term \"the Company\" shall denote either of Binary (IOM) Ltd., Binary (Europe) Ltd. or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
-msgstr ""
-"El término \"la Compañía\" se referirá a Binary (IOM) Ltd., Binary (Europe) "
-"Ltd. o a Binary (CR) S.A., dependiendo de la jurisdicción en la que se haya "
-"creado la cuenta de un cliente de acuerdo a los procedimientos de apertura "
-"de cuenta del sitio web y a las indicaciones de la sección \"Sobre nosotros\""
-" del mismo."
+msgstr "El término \"la Compañía\" se referirá a Binary (IOM) Ltd., Binary (Europe) Ltd. o a Binary (CR) S.A., dependiendo de la jurisdicción en la que se haya creado la cuenta de un cliente de acuerdo a los procedimientos de apertura de cuenta del sitio web y a las indicaciones de la sección \"Sobre nosotros\" del mismo."
 
 #. (time_now, time_zone, underlying)
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/errors/closed.html.tt:4
@@ -7597,7 +7514,7 @@ msgid "There was a market data disruption during the contract period. For real-m
 msgstr "Se ha producido una interrupción de datos del mercado durante el período del contrato. Para transacciones de la cuenta de dinero real vamos a tratar de corregir esto y liquidar el contrato correctamente; si no fuera posible, cancelaremos el contrato y le devolveremos su precio de compra. Para las cuentas de dinero virtual, cancelaremos el contrato y le devolveremos su precio de compra."
 
 #. (request()
-#: cgi/cashier_forward.cgi:175
+#: cgi/cashier_forward.cgi.tidyup:187 cgi/cashier_forward.cgi:175
 msgid "There was a problem validating your address. Please fix the indicated fields. If you need assistance feel free to contact our <a href=\"%1\">Customer Support</a>."
 msgstr "Hubo un problema al validar su dirección de correo electrónico. Verifique los campos indicados. Si necesita ayuda, contáctese con nuestro <a href=\"%1\">servicio de atención al cliente</a>."
 
@@ -7640,14 +7557,8 @@ msgid "These are trades where the trader selects a price target, and predicts th
 msgstr "Estos son los contratos en los que que el comerciante selecciona un precio objetivo y predice que el mercado tocará el objetivo antes del vencimiento del contrato."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/copyright.html.tt:15
-#| msgid "These materials may not be copied or redistributed for commercial purposes or for compensation of any kind without prior written permission from a Regent Markets Group company. If you have questions about these terms or would like information about licensing materials from Regent Markets Group, please contact us."
 msgid "These materials may not be copied or redistributed for commercial purposes or for compensation of any kind without prior written permission from a Binary Group company. If you have questions about these terms or would like information about licensing materials from Binary Ltd., please contact us."
-msgstr ""
-"Estos materiales no se pueden copiar ni distribuir con fines comerciales o a "
-"modo de compensación sin autorización previa por escrito de una compañía de "
-"Binary Group. Si tiene dudas acerca de estos términos o necesita más "
-"información acerca de la licencia sobre materiales de Binary Ltd., "
-"comuníquese con nosotros."
+msgstr "Estos materiales no se pueden copiar ni distribuir con fines comerciales o a modo de compensación sin autorización previa por escrito de una compañía de Binary Group. Si tiene dudas acerca de estos términos o necesita más información acerca de la licencia sobre materiales de Binary Ltd., comuníquese con nosotros."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:123
 msgid "This Agreement contains the entire agreement between the parties with respect to its subject matter and supersedes all previous agreements and understandings between the parties with respect to its subject matter."
@@ -7691,13 +7602,8 @@ msgid "This bonus code is not available."
 msgstr "Este código de bonificación no está disponible."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:26
-#| msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgid "This bonus is only available to new clients. Existing or former clients do not qualify. New clients are eligible for this type of bonus only once. This bonus is available only once per household."
-msgstr ""
-"Esta bonificación solo está disponible para clientes nuevos. No se aplica a "
-"clientes actuales o anteriores. Los nuevos clientes son elegibles para este "
-"tipo de bonificación sólo una vez. La bonificación está disponible solo una "
-"vez por domicilio."
+msgstr "Esta bonificación solo está disponible para clientes nuevos. No se aplica a clientes actuales o anteriores. Los nuevos clientes son elegibles para este tipo de bonificación sólo una vez. La bonificación está disponible solo una vez por domicilio."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:6
 msgid "This bonus will be processed and credited to a client's account when:"
@@ -7762,21 +7668,15 @@ msgstr "Este contrato ganó"
 
 #. (site_url)
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:10
-#| msgid "This document (the \"Agreement\") sets out the terms and conditions between \"the Company\" which is Regent Markets Group, and you (the person who applied for this program; \"you\" or \"your\"), in relation to your application to setup an affiliate account (and membership of the affiliate program if your application is deemed successful) to promote the website %1"
 msgid "This document (the \"Agreement\") sets out the terms and conditions between \"the Company\" which is Binary Ltd, and you (the person who applied for this program; \"you\" or \"your\"), in relation to your application to setup an affiliate account (and membership of the affiliate program if your application is deemed successful) to promote the website %1"
-msgstr ""
-"Este documento (el \"Acuerdo\") expone los términos y condiciones entre \"la "
-"Compañía\", Binary Ltd., y usted (la persona que aplicó para este programa; "
-"\"usted\" o \"su\"), en relación a su solicitud para crear una cuenta de "
-"afiliado (y afiliación al programa de afiliados si su solicitud es estimada "
-"con éxito) para promocionar el sitio web %1"
+msgstr "Este documento (el \"Acuerdo\") expone los términos y condiciones entre \"la Compañía\", Binary Ltd., y usted (la persona que aplicó para este programa; \"usted\" o \"su\"), en relación a su solicitud para crear una cuenta de afiliado (y afiliación al programa de afiliados si su solicitud es estimada con éxito) para promocionar el sitio web %1"
 
 #: lib/BOM/View/CGIForm.pm:5237
 msgid "This function is not relevant to Virtual money accounts"
 msgstr "Esta función no es relevante para cuentas de dinero virtual"
 
 #. (request()
-#: cgi/cashier_forward.cgi:45
+#: cgi/cashier_forward.cgi.tidyup:57 cgi/cashier_forward.cgi:45
 msgid "This is a virtual-money account. Please click <a class=\"pjaxload\" href=\"%1\">here</a> to open a real-money account and deposit funds."
 msgstr "Esta es una cuenta de dinero virtual. Haga clic <a class=\"pjaxload\" href=\"%1\">aquí</a> para abrir una cuenta de dinero real y depositar fondos."
 
@@ -7787,7 +7687,7 @@ msgstr "Este es un mensaje automático para alertarlo de que hubo un intento sin
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:23
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:42
-#: cgi/oop/Controller/Bet.pm:2405
+#: lib/BOM/View/Controller/Bet.pm:2412
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "Esta es una barrera indicativa. Barrera real será el punto de entrada más el desplazamiento de barrera."
 
@@ -7864,24 +7764,8 @@ msgstr "Este sitio web no reúne su información de identificación personal exc
 #. ("https://secure.gamblingcommission.gov.uk/gccustomweb/PublicRegister/PRSearch.aspx?ExternalAccountId=39172", "https://secure.gamblingcommission.gov.uk/gccustomweb/PublicRegister/PRSearch.aspx?ExternalAccountId=39495")
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:197
-#| msgid "This website is marketed in the UK and Isle of Man by Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission - <a href='%1' target='_blank'>view license</a>. This website is marketed in the rest of the EU by Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Lotteries and Gaming Authority in Malta, licence no LGA/CL2/118/2000, 26th May 2010 and for UK clients by (2) the UK Gambling Commission - <a href='%2' target='_blank'>view license</a>. This website's services are not made available in the USA, Japan or Hong Kong, or to persons under age 18."
 msgid "This website is marketed in the UK and Isle of Man by Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission - <a href='%1' target='_blank'>view license</a>. This website is marketed in the rest of the EU by Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Lotteries and Gaming Authority in Malta, licence no LGA/CL2/118/2000, 26th May 2010 and for UK clients by (2) the UK Gambling Commission - <a href='%2' target='_blank'>view license</a>. This website's services are not made available in the USA, Japan or Hong Kong, or to persons under age 18."
-msgstr ""
-"Este sitio web se comercializa en el Reino Unido y la Isla de Man por Binary "
-"(IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, "
-"Isla de Man, las Islas Británicas, autorizado y regulado por (1) la Comisión "
-"de Supervisión del Juego de la Isla de Man, las Islas Británicas, licencia "
-"de juego en línea vigente publicada el 31 de agosto de 2012, y para los "
-"clientes del Reino Unido, por la comisión (2) UK Gambling Commission - <a "
-"href='%1' target='_blank'>ver la licencia</a>. En el resto de la UE este "
-"sitio web está comercializado por Regent Marcets(Malta) Ltd., Mompalao "
-"Building, Suite 2, Torre Road, Msida MSD1825, Malta, autorizado y regulado "
-"por (1) la Autoridad de Loterías y Juegos de Malta, con el número de la "
-"licencia LGA/CL2/118/2000, del 26 de mayo de 2010, y para los clientes del "
-"Reino Unido, por la comisión (2) UK Gambling Commission - <a href='%2' "
-"target='_blank'>ver la licencia</a>. Los servicios de este sitio web no "
-"están disponibles en los EE.UU., Japón o Hong Kong o a las personas menores "
-"de 18 años."
+msgstr "Este sitio web se comercializa en el Reino Unido y la Isla de Man por Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isla de Man, las Islas Británicas, autorizado y regulado por (1) la Comisión de Supervisión del Juego de la Isla de Man, las Islas Británicas, licencia de juego en línea vigente publicada el 31 de agosto de 2012, y para los clientes del Reino Unido, por la comisión (2) UK Gambling Commission - <a href='%1' target='_blank'>ver la licencia</a>. En el resto de la UE este sitio web está comercializado por Regent Marcets(Malta) Ltd., Mompalao Building, Suite 2, Torre Road, Msida MSD1825, Malta, autorizado y regulado por (1) la Autoridad de Loterías y Juegos de Malta, con el número de la licencia LGA/CL2/118/2000, del 26 de mayo de 2010, y para los clientes del Reino Unido, por la comisión (2) UK Gambling Commission - <a href='%2' target='_blank'>ver la licencia</a>. Los servicios de este sitio web no están disponibles en los EE.UU., Japón o Hong Kong o a las personas menores de 18 años."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:29
 msgid "Throughout the term of this Agreement, you shall:"
@@ -7900,7 +7784,7 @@ msgstr "Intervalo"
 msgid "Tick by Tick"
 msgstr "Intervalo a intervalo"
 
-#: cgi/oop/Controller/Bet.pm:1145 cgi/oop/Controller/Bet.pm:1152
+#: lib/BOM/View/Controller/Bet.pm:1150 lib/BOM/View/Controller/Bet.pm:1157
 msgid "Ticks"
 msgstr "Intervalos"
 
@@ -8011,7 +7895,7 @@ msgstr "Toque / Sin toque"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:60 cgi/contract_demo.cgi:61 cgi/contract_guide.cgi:45
-#: cgi/oop/Controller/Bet.pm:1177 cgi/oop/Controller/Bet.pm:1184
+#: lib/BOM/View/Controller/Bet.pm:1182 lib/BOM/View/Controller/Bet.pm:1189
 msgid "Touch/No Touch"
 msgstr "Toque/Sin toque"
 
@@ -8150,8 +8034,8 @@ msgstr "Operaciones disponibles después del primer/de los primeros %1 de la ses
 msgid "Trading is not offered for this duration."
 msgstr "Operaciones no están disponibles para la duración elegida."
 
-#: cgi/oop/Controller/Bet.pm:688 lib/BOM/Product/Contract.pm:2266
-#: lib/BOM/Product/Contract.pm:2332
+#: lib/BOM/Product/Contract.pm:2266 lib/BOM/Product/Contract.pm:2332
+#: lib/BOM/View/Controller/Bet.pm:693
 msgid "Trading is suspended at the moment."
 msgstr "Por el momento, la comercialización está suspendida."
 
@@ -8264,20 +8148,12 @@ msgid "UK Stocks"
 msgstr "Acciones del RU"
 
 #: /home/git/translations/binary-static/src/templates/haml/about/index.html.haml:1
-#| msgid "UK and Manx residents will have their account opened with Binary (IOM) Ltd."
 msgid "UK and Manx residents will have their account opened with Binary (IOM) Ltd."
-msgstr ""
-"Los habitantes del Reino Unido y de la Isla de Man abren su cuenta con "
-"Binary (IOM) Ltd."
+msgstr "Los habitantes del Reino Unido y de la Isla de Man abren su cuenta con Binary (IOM) Ltd."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/complaints_disputes.html.tt:16
-#| msgid "UK clients registered with Binary (Europe) Ltd can submit their dispute with the alternative dispute resolution entity which is the Independent Betting Adjudication Service Ltd (IBAS) by filling the adjudication form on the ADR entity’s"
 msgid "UK clients registered with Binary (Europe) Ltd can submit their dispute with the alternative dispute resolution entity which is the Independent Betting Adjudication Service Ltd (IBAS) by filling the adjudication form on the ADR entity’s"
-msgstr ""
-"Clientes del Reino Unido registrado con Binary (Europe) Ltd pueden presentar "
-"sus disputas ante una entidad alternativa de resolución de conflictos que es "
-"el Independent Betting Adjudication Service Ltd (IBAS), rellenando el "
-"formulario de adjudicación de la entidad"
+msgstr "Clientes del Reino Unido registrado con Binary (Europe) Ltd pueden presentar sus disputas ante una entidad alternativa de resolución de conflictos que es el Independent Betting Adjudication Service Ltd (IBAS), rellenando el formulario de adjudicación de la entidad"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/us_patents.html.tt:3
 #: cgi/us_patents.cgi:13
@@ -8401,7 +8277,6 @@ msgid "Verify new password"
 msgstr "Verificar contraseña"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:4
-#| msgid "Version 31. Last modified 2014-08-29."
 msgid "Version 33. Last modified 2014-12-11."
 msgstr "Versión 33. Última modificación el 2015-12-11."
 
@@ -8415,7 +8290,7 @@ msgstr "Cuadrícula vertical"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/intraday_prices.html.tt:16
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:21
-#: cgi/oop/Controller/Bet.pm:1276 cgi/oop/Controller/Bet.pm:1295
+#: lib/BOM/View/Controller/Bet.pm:1281 lib/BOM/View/Controller/Bet.pm:1300
 msgid "View"
 msgstr "Ver"
 
@@ -8551,11 +8426,7 @@ msgstr "En este momento, no aceptamos cuentas de residentes de este país."
 #. ("http://www.gamblingcommission.gov.uk/Consumers/Protection-of-customer-funds.aspx")
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:56
 msgid "We are required by our licence to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='%1' target='_blank'>%1</a>."
-msgstr ""
-"Estamos obligados por nuestra licencia a informarle acerca de lo que ocurre "
-"con sus fondos que guardamos en la cuenta para usted y acerca del grado de "
-"protección de los fondos en caso de insolvencia de <a href='%1' "
-"target='_blank'>%1</a>."
+msgstr "Estamos obligados por nuestra licencia a informarle acerca de lo que ocurre con sus fondos que guardamos en la cuenta para usted y acerca del grado de protección de los fondos en caso de insolvencia de <a href='%1' target='_blank'>%1</a>."
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:187
@@ -9095,7 +8966,7 @@ msgstr "Usted también tiene derecho a solicitarnos le informemos sobre los dato
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "Usted y nosotros somos contratistas independientes, y nada en el presente Acuerdo creará ninguna asociación, empresa conjunta, agencia, franquicia, representación de ventas o relación laboral entre las partes. Usted no tendrá ninguna autoridad para hacer o aceptar cualquier oferta o representación en nuestro nombre. Usted no hará ninguna declaración, ya sea en su sitio o no, que contradiga razonablemente nada en este párrafo."
 
-#: cgi/oop/Controller/Bet.pm:2177
+#: lib/BOM/View/Controller/Bet.pm:2182
 msgid "You are being given the better price."
 msgstr "Se le está otorgando el mejor precio."
 
@@ -9435,8 +9306,7 @@ msgstr "Su cuenta no requiere verificación en este momento."
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
 msgstr "Su cuenta ha excedido el límite de inversiones con el código promocional gratuito, por favor realice un depósito si desea continuar invirtiendo."
 
-#: cgi/cashier_forward.cgi:63
-#| msgid "Your account is disabled."
+#: cgi/cashier_forward.cgi.tidyup:75 cgi/cashier_forward.cgi:63
 msgid "Your account is disabled"
 msgstr "Su cuenta está deshabilitada"
 
@@ -9463,19 +9333,13 @@ msgstr "Su cuenta es importante para nosotros. Por favor <a href=\"%1\">contáct
 msgid "Your account is registered as a Payment Agent."
 msgstr "Su cuenta ha sido registrada como un agente de pagos."
 
-#: cgi/cashier_forward.cgi:39
+#: cgi/cashier_forward.cgi.tidyup:51 cgi/cashier_forward.cgi:39
 msgid "Your account is restricted to withdrawals only."
 msgstr "Su cuenta está restringida sólo a los retiros."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:62
-#| msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
 msgid "Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
-msgstr ""
-"Su cuenta no debe ser utilizada como un banco, y depósitos deben hacerse con "
-"el único fin de utilizar los recursos para comprar contratos. En caso de "
-"hacer depósitos y retiros repetidos sin adquirir contratos, nos reservamos "
-"el derecho a transmitir a sus cuentas, sin previo aviso, los gastos "
-"bancarios que hemos incurrido antes de cerrar la cuenta."
+msgstr "Su cuenta no debe ser utilizada como un banco, y depósitos deben hacerse con el único fin de utilizar los recursos para comprar contratos. En caso de hacer depósitos y retiros repetidos sin adquirir contratos, nos reservamos el derecho a transmitir a sus cuentas, sin previo aviso, los gastos bancarios que hemos incurrido antes de cerrar la cuenta."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:20
 msgid "Your base url for all API calls"
@@ -9502,12 +9366,11 @@ msgstr "Su bonificación será acreditada a su cuenta dentro de los 3 días háb
 msgid "Your callback handler now swaps the new authorization code for a session token with this call:"
 msgstr "Su controlador callback ahora intercambia el nuevo código de autorización por un identificador de sesión con esta llamada:"
 
-#: cgi/cashier_forward.cgi:59
-#| msgid "Your cashier is locked."
+#: cgi/cashier_forward.cgi.tidyup:71 cgi/cashier_forward.cgi:59
 msgid "Your cashier is locked"
 msgstr "Su caja está bloqueada"
 
-#: cgi/cashier_forward.cgi:67
+#: cgi/cashier_forward.cgi.tidyup:79 cgi/cashier_forward.cgi:67
 msgid "Your cashier is locked by password."
 msgstr "Su caja está bloqueada por contraseña."
 
@@ -9531,8 +9394,7 @@ msgstr "Su configuración de autoexclusión actual es la siguiente:"
 msgid "Your details"
 msgstr "Sus datos"
 
-#: cgi/cashier_forward.cgi:55
-#| msgid "Your documents are expired."
+#: cgi/cashier_forward.cgi.tidyup:67 cgi/cashier_forward.cgi:55
 msgid "Your documents are expired"
 msgstr "Sus documentos están caducados"
 
@@ -9567,12 +9429,12 @@ msgstr "Su nombre"
 msgid "Your name/company"
 msgstr "Su nombre/compañía"
 
-#: cgi/oop/Controller/Bet.pm:2137
+#: lib/BOM/View/Controller/Bet.pm:2142
 msgid "Your new account balance is %s %s"
 msgstr "Balance de su cuenta es %s %s"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:2182
+#: lib/BOM/View/Controller/Bet.pm:2187
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "Su orden (referencia # <span id=\"reference_no\">%1</span>) se ha ejecutado al precio %2."
 
@@ -9647,7 +9509,7 @@ msgid "Your settings have been updated successfully."
 msgstr "Su configuración se ha actualizado exitosamente."
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1548 cgi/oop/Controller/Bet.pm:2141
+#: lib/BOM/View/Controller/Bet.pm:1553 lib/BOM/View/Controller/Bet.pm:2146
 msgid "Your transaction reference number is %1"
 msgstr "El número de referencia de su transacción es %1"
 
@@ -9721,27 +9583,20 @@ msgstr "cualquier restricción a sus clientes de comprar cualquier contrato dura
 msgid "barrier"
 msgstr "límite"
 
-#: cgi/oop/Controller/Bet.pm:1596
+#: lib/BOM/View/Controller/Bet.pm:1601
 msgid "better trade"
 msgstr "mejor contrato"
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/head.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:13
-#| msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex, binary trading, binary bet, binary online bet, binary options trading platform, digital options"
 msgid "binary options, forex, forex trading, online trading, financial trading, binary trading, index trading, trading indices, forex trades, trading commodities, binary options strategy, binary broker, binary bet, binary options trading platform, binary strategy, finance, stocks, investment, trading"
-msgstr ""
-"opciones binarias, Forex, mercado de Forex, comercio en línea, comercio "
-"financiero, comercio binario, comercio sobre índices, operar sobre índices, "
-"operaciones de divisas, operaciones con materias primas, estrategia de "
-"opciones binarias, corredor binario, apuesta binaria, plataforma de "
-"operaciones con opciones binarias, estrategia binaria, finanzas, acción, "
-"inversión, comercio"
+msgstr "opciones binarias, Forex, mercado de Forex, comercio en línea, comercio financiero, comercio binario, comercio sobre índices, operar sobre índices, operaciones de divisas, operaciones con materias primas, estrategia de opciones binarias, corredor binario, apuesta binaria, plataforma de operaciones con opciones binarias, estrategia binaria, finanzas, acción, inversión, comercio"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
 msgid "contact us"
 msgstr "contactarnos"
 
-#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:364
+#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:350
 msgid "contract start time"
 msgstr "hora inicio contrato"
 
@@ -9786,11 +9641,11 @@ msgstr "punto de entrada positivo %plural(%1,1 pip, %d pips)"
 msgid "equivalent"
 msgstr "equivalente"
 
-#: cgi/oop/Controller/Bet.pm:2214
+#: lib/BOM/View/Controller/Bet.pm:2219
 msgid "explanation"
 msgstr "explicación"
 
-#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:362
+#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:348
 msgid "first tick"
 msgstr "primer intervalo"
 
@@ -9806,7 +9661,7 @@ msgstr "aquí"
 msgid "high barrier"
 msgstr "límite superior"
 
-#: lib/BOM/Platform/Plack.pm:335
+#: lib/BOM/Platform/Plack.pm.tidyup:327 lib/BOM/Platform/Plack.pm:327
 msgid "homepage"
 msgstr "página principal"
 
@@ -9898,9 +9753,7 @@ msgstr "o mire el mapa del sitio abajo"
 #. (request()
 #: lib/BOM/Product/Contract.pm:2674 lib/BOM/Product/Contract.pm:2689
 msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
-msgstr ""
-"o pruebe nuestros <a href='%1'>índices Random Indices</a> que siempre están "
-"disponibles."
+msgstr "o pruebe nuestros <a href='%1'>índices Random Indices</a> que siempre están disponibles."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
