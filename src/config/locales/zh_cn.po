@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1228\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-01-06 12:30+0200\n"
+"PO-Revision-Date: 2015-01-09 10:19+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
 "Language-Team: Simplified Chinese <https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
 "Language: zh_cn\n"
@@ -447,7 +447,7 @@ msgid "<p>Please take a moment to verify your identity by providing us with the 
 msgstr "<p>请花几分钟在下面提交您密码保护问题的正确答案及您的生日，以验证您的 ID。</p>"
 
 #. (request()
-#: cgi/cashier_forward.cgi:190
+#: cgi/cashier_forward.cgi.tidyup:202 cgi/cashier_forward.cgi:190
 msgid "<p>Sorry, an error has occurred. Please <a href=\"%1\">try accessing our Cashier</a> again.</p>"
 msgstr "<p>抱歉，出现错误。请重新<a href=\"%1\">尝试访问我们的收银台</a>。</p>"
 
@@ -526,7 +526,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>基准价格</strong> - %1 每日都对比银行间衍生品市场来制定基准价格。"
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:2174
+#: lib/BOM/View/Controller/Bet.pm:2179
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>更好的成交价！</strong><br />  该价格变动对您有利，从 %1 变为 %2。"
 
@@ -804,16 +804,12 @@ msgid "A momentum indicator showing the percent rate-of-change of a triple expon
 msgstr "一个动量指标，指示三重指数平滑移动平均数的百分比变动率。如同其它摆动指标，TRIX 在基准线周围摆动。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:209
-#, fuzzy
-#| msgid "A new version of the interface is available. Please refresh this page to try again."
 msgid "A new version of the interface is available. Please <a href=\"#\" id=\"appcache-refresh-link\">refresh</a> this page to try again."
-msgstr "已经推出了界面的新版本。请刷新此页面再次尝试。"
+msgstr "已经推出了界面的新版本。请 <a href=\"#\" id=\"appcache-refresh-link\">刷新</a>此页面再次尝试。"
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
-#, fuzzy
-#| msgid "A new version of the interface is available. Please refresh this page to try again."
 msgid "A new version of the interface is available. Please <a href='#' id='appcache-refresh-link'>refresh</a> this page to try again."
-msgstr "已经推出了界面的新版本。请刷新此页面再次尝试。"
+msgstr "已经推出了界面的新版本。请<a href='#' id='appcache-refresh-link'>刷新</a>此页面再次尝试。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "A next-generation front-end interface with Sencha ExtJS-5"
@@ -1018,7 +1014,7 @@ msgstr "所有时间均采用 GMT \"格林威治标准时间\"。"
 msgid "Amount"
 msgstr "金额"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:257
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:257
 msgid "Amount must be a positive number."
 msgstr "金额须为正数。"
 
@@ -1184,7 +1180,7 @@ msgid "Asian options settle by comparing the <strong>last tick</strong> with the
 msgstr "通过把<strong>退出点</strong>与同期的平均点相比较来结算亚洲期权。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1224 cgi/oop/Controller/Bet.pm:1231
+#: lib/BOM/View/Controller/Bet.pm:1229 lib/BOM/View/Controller/Bet.pm:1236
 msgid "Asians"
 msgstr "亚洲"
 
@@ -1339,7 +1335,7 @@ msgstr "条形 OHLC 图"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:18
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:59
-#: cgi/oop/Controller/Bet.pm:2398 platform/bin/GenerateStaticData.pm:117
+#: lib/BOM/View/Controller/Bet.pm:2405 platform/bin/GenerateStaticData.pm:117
 msgid "Barrier"
 msgstr "目标"
 
@@ -1369,7 +1365,7 @@ msgid "Barrier must be at least "
 msgstr "障碍至少必须 "
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:15
-#: cgi/oop/Controller/Bet.pm:2397
+#: lib/BOM/View/Controller/Bet.pm:2404
 msgid "Barrier offset"
 msgstr "目标位移"
 
@@ -1712,7 +1708,8 @@ msgid "Cash Dividend"
 msgstr "现金红利"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/homepage/logged_in.html.tt:95
-#: cgi/available_payment_methods.cgi:18 cgi/cashier_forward.cgi:28
+#: cgi/available_payment_methods.cgi:18 cgi/cashier_forward.cgi.tidyup:28
+#: cgi/cashier_forward.cgi.tidyup:31 cgi/cashier_forward.cgi:28
 #: cgi/cashier_forward.cgi:31 lib/BOM/View/Menu.pm:130
 msgid "Cashier"
 msgstr "支付"
@@ -1770,7 +1767,7 @@ msgstr "更改密码"
 msgid "Change in account settings"
 msgstr "帐户设置变更"
 
-#: cgi/analyse_contract.cgi:280 cgi/oop/Controller/Bet.pm:2203
+#: cgi/analyse_contract.cgi:280 lib/BOM/View/Controller/Bet.pm:2208
 msgid "Chart"
 msgstr "图表"
 
@@ -2084,6 +2081,7 @@ msgstr "联系我们"
 msgid "Contact the payment agent directly for more information on how to transfer money to them."
 msgstr "直接联系支付代理询问关于如何汇款给他们的详情。"
 
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Contact us"
 msgstr "与我们联系"
@@ -2164,7 +2162,7 @@ msgstr "合约期间"
 msgid "Contract purchase (approved applications only)"
 msgstr "购买合同(仅限于获批准的申请)"
 
-#: cgi/oop/Controller/Bet.pm:1503
+#: lib/BOM/View/Controller/Bet.pm:1508
 msgid "Contract purchases on this account must be on behalf of granters."
 msgstr "在此帐户进行合同采购交易者必须是授予人的代理。"
 
@@ -2299,7 +2297,7 @@ msgid "Daily"
 msgstr "毎日"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:31
-#: cgi/oop/Controller/Bet.pm:2226
+#: lib/BOM/View/Controller/Bet.pm:2231
 msgid "Daily Prices"
 msgstr "每日价格"
 
@@ -2590,7 +2588,7 @@ msgstr "与其他数据源的差异"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1239 cgi/oop/Controller/Bet.pm:1246
+#: lib/BOM/View/Controller/Bet.pm:1244 lib/BOM/View/Controller/Bet.pm:1251
 msgid "Digits"
 msgstr "数位"
 
@@ -2820,7 +2818,7 @@ msgstr "结束时间"
 msgid "Ends Between/Ends Outside trades"
 msgstr "收于交易范围之内/之外"
 
-#: cgi/contract_demo.cgi:87 cgi/oop/Controller/Bet.pm:1207
+#: cgi/contract_demo.cgi:87 lib/BOM/View/Controller/Bet.pm:1212
 msgid "Ends Between/Outside"
 msgstr "收于范围之内/之外"
 
@@ -2838,7 +2836,7 @@ msgstr "确保您不会通过针对18周岁以下人士的信息来推广%1 。"
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "输入以与现货价格差额为计的障碍。如果您输入 +0.005 ，那么您将以高于入市现价 0.005 的障碍水平购买交易。入市现价在收到您的订购之后将是下一个高频"
 
-#: cgi/oop/Controller/Bet.pm:2401
+#: lib/BOM/View/Controller/Bet.pm:2408
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "输入以与现货价格差额为计的障碍。如果您输入 +0.005 ，那么您将以高于入市现价 0.005 的障碍水平购买交易。入市现价在收到您的订购之后将是下一个高频。"
 
@@ -3247,7 +3245,7 @@ msgstr "优厚的佣金结构"
 msgid "Get %1 when you deposit %2."
 msgstr "当您存入 %2 时，将获得 %1。"
 
-#: cgi/oop/Controller/Bet.pm:1088
+#: lib/BOM/View/Controller/Bet.pm:1093
 msgid "Get Prices"
 msgstr "获得价格"
 
@@ -3363,12 +3361,12 @@ msgstr "高门槛"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:18
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart.html.tt:43
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:60
-#: cgi/oop/Controller/Bet.pm:2394
+#: lib/BOM/View/Controller/Bet.pm:2401
 msgid "High barrier"
 msgstr "价格上限"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:15
-#: cgi/oop/Controller/Bet.pm:2392
+#: lib/BOM/View/Controller/Bet.pm:2399
 msgid "High barrier offset"
 msgstr "价格上限位移"
 
@@ -3390,7 +3388,7 @@ msgstr "高于/低于"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:46 cgi/contract_demo.cgi:47 cgi/contract_guide.cgi:32
-#: cgi/oop/Controller/Bet.pm:1162 cgi/oop/Controller/Bet.pm:1169
+#: lib/BOM/View/Controller/Bet.pm:1167 lib/BOM/View/Controller/Bet.pm:1174
 msgid "Higher/Lower"
 msgstr "高于/低于"
 
@@ -3748,7 +3746,7 @@ msgid "In what country do you want to offer your service"
 msgstr "您要提供服务的国家"
 
 #: cgi/contract_demo.cgi:75 cgi/contract_demo.cgi:88 cgi/contract_guide.cgi:58
-#: cgi/oop/Controller/Bet.pm:1213
+#: lib/BOM/View/Controller/Bet.pm:1218
 msgid "In/Out"
 msgstr "范围之内/之外"
 
@@ -3868,7 +3866,7 @@ msgstr "当日"
 msgid "Intraday contracts may not cross market open."
 msgstr "盘中合同可能不能跨越市场开放。"
 
-#: cgi/oop/Controller/Bet.pm:2238
+#: lib/BOM/View/Controller/Bet.pm:2243
 msgid "Intraday prices"
 msgstr "当天价格"
 
@@ -3880,9 +3878,9 @@ msgstr "介绍"
 msgid "Invalid Building No./Name"
 msgstr "无效地址/名称"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:129
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:237
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:436
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:129
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:237
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:441
 msgid "Invalid Input"
 msgstr "无效输入"
 
@@ -4050,7 +4048,7 @@ msgstr "最近"
 msgid "Last Digit Prediction"
 msgstr "最后的数字预测"
 
-#: cgi/oop/Controller/Bet.pm:2255
+#: lib/BOM/View/Controller/Bet.pm:2260
 msgid "Last Digit Stats"
 msgstr "最后的数字统计"
 
@@ -4258,12 +4256,12 @@ msgstr "低门槛只应为数字"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:37
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart.html.tt:47
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:46
-#: cgi/oop/Controller/Bet.pm:2395
+#: lib/BOM/View/Controller/Bet.pm:2402
 msgid "Low barrier"
 msgstr "价格下限"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:34
-#: cgi/oop/Controller/Bet.pm:2393
+#: lib/BOM/View/Controller/Bet.pm:2400
 msgid "Low barrier offset"
 msgstr "价格下限位移"
 
@@ -4519,10 +4517,8 @@ msgid "Monday"
 msgstr "周一"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:53
-#, fuzzy
-#| msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients"
 msgid "Money collected from Clients are not invested in any securities, futures, currencies, derivatives or other investments, on behalf of Clients."
-msgstr "从客户聚集的资金不以客户名义投资于任何证券、期货、外汇、衍生品及其他投资产品"
+msgstr "从客户聚集的资金不以客户名义投资于任何证券、期货、外汇、衍生品及其他投资产品。"
 
 #: lib/BOM/Product/Helper/PricingTableParameters.pm:233
 msgid "Moneyness terms"
@@ -4733,7 +4729,7 @@ msgstr "不，加入%1 联盟计划无需任何成本。"
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "注释：合同将在我们的服务器收到请求时以当时的市场价格出售。此价格可能会与指定的价格有差异。"
 
-#: cgi/oop/Controller/Bet.pm:1055
+#: lib/BOM/View/Controller/Bet.pm:1060
 msgid "Note: During summer time (daylight saving), GMT is one hour behind BST (British Summer Time)"
 msgstr "附注：在夏季时间（夏令时）内，格林威治标准时间 (GMT) 迟于 BST（英国夏季时间）一小时"
 
@@ -4899,10 +4895,8 @@ msgstr "单一简易平台"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
-#, fuzzy
-#| msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
 msgid "Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
-msgstr "%1：可交易外汇、指数、大宗商品及智慧指数的二元期权在线交易平台"
+msgstr "可交易外汇、指数、大宗商品及智慧指数的二元期权在线交易平台"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "Only five years after inception, we pick up this major award for our online trading services. The award recognises BetOnMarkets.com’s reliable, fast and secure online trading for novice and expert traders. At this time, our website has received over 15 million trades."
@@ -5200,7 +5194,7 @@ msgid "Payout Currency"
 msgstr "支付货币"
 
 #. (to_monetary_number_format($transaction_parameters->{payout})
-#: cgi/oop/Controller/Bet.pm:1591
+#: lib/BOM/View/Controller/Bet.pm:1596
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "该支出变动对您有利，从 %1 变为 %2。"
 
@@ -5401,7 +5395,7 @@ msgstr "请将文件邮寄至："
 msgid "Please provide at least one self-exclusion setting."
 msgstr "请提供至少一个自我排除设置。"
 
-#: cgi/oop/Controller/Bet.pm:1713 cgi/oop/Controller/Bet.pm:2000
+#: lib/BOM/View/Controller/Bet.pm:1718 lib/BOM/View/Controller/Bet.pm:2005
 msgid "Please provide granter id(s)."
 msgstr "请提供授权人 ID 。"
 
@@ -5429,7 +5423,7 @@ msgstr "请随时记住，二元期权交易会是一个令人兴奋的活动，
 msgid "Please select"
 msgstr "请选择"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:272
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:272
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "请选择「支付」或「成本」选项。"
 
@@ -5534,7 +5528,7 @@ msgid "Price Oscillator"
 msgstr "价格摆动指标"
 
 #. (to_monetary_number_format($transaction_parameters->{price})
-#: cgi/oop/Controller/Bet.pm:1586
+#: lib/BOM/View/Controller/Bet.pm:1591
 msgid "Price has moved in your favour from %1 to %2."
 msgstr "该价格变动对您有利，从 %1 变为 %2。"
 
@@ -5550,7 +5544,7 @@ msgstr "价格"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:81
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:2
-#: cgi/oop/Controller/Bet.pm:2244 cgi/pricing_table.cgi:170
+#: cgi/pricing_table.cgi:170 lib/BOM/View/Controller/Bet.pm:2249
 #: lib/BOM/View/Menu.pm:171
 msgid "Pricing Table"
 msgstr "价格表"
@@ -5626,7 +5620,7 @@ msgid "Provide us with the following documentation:"
 msgstr "请向我们提供下列文件："
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:26
-#: cgi/oop/Controller/Bet.pm:1443
+#: lib/BOM/View/Controller/Bet.pm:1448
 msgid "Purchase"
 msgstr "购买"
 
@@ -5838,7 +5832,7 @@ msgstr "相对强度指数"
 msgid "Reload Cashier"
 msgstr "重新加载收银台"
 
-#: lib/BOM/Platform/Plack.pm:330
+#: lib/BOM/Platform/Plack.pm.tidyup:322 lib/BOM/Platform/Plack.pm:322
 msgid "Reload page"
 msgstr "重新加载页面"
 
@@ -5920,7 +5914,7 @@ msgstr "重新尝试"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/ticker.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/sell_success_ajax.html.tt:12
-#: cgi/oop/Controller/Bet.pm:483
+#: lib/BOM/View/Controller/Bet.pm:488
 msgid "Return"
 msgstr "回报"
 
@@ -5969,7 +5963,7 @@ msgstr "上涨交易收益(%)"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:33 cgi/contract_guide.cgi:19
-#: cgi/oop/Controller/Bet.pm:1130 cgi/oop/Controller/Bet.pm:1137
+#: lib/BOM/View/Controller/Bet.pm:1135 lib/BOM/View/Controller/Bet.pm:1142
 msgid "Rise/Fall"
 msgstr "上升/下跌"
 
@@ -6177,10 +6171,10 @@ msgstr "设置"
 msgid "Settles"
 msgstr "结算"
 
-#: cgi/oop/Controller/Bet.pm:1489 cgi/oop/Controller/Bet.pm:1695
-#: cgi/oop/Controller/Bet.pm:1953 cgi/oop/Controller/Bet.pm:1992
-#: cgi/oop/Controller/Bet.pm:2414 cgi/oop/Controller/Bet.pm:777
-#: cgi/oop/Controller/Bet.pm:886
+#: lib/BOM/View/Controller/Bet.pm:1494 lib/BOM/View/Controller/Bet.pm:1700
+#: lib/BOM/View/Controller/Bet.pm:1958 lib/BOM/View/Controller/Bet.pm:1997
+#: lib/BOM/View/Controller/Bet.pm:2421 lib/BOM/View/Controller/Bet.pm:782
+#: lib/BOM/View/Controller/Bet.pm:891
 msgid "Sharp Prices. Smart Trading."
 msgstr "精准价位。明智交易。"
 
@@ -6309,11 +6303,11 @@ msgstr "对不起，不提供 %1的 OHLC。"
 msgid "Sorry, Payment Agent Transfer is temporarily disabled due to system maintenance. Please try again in 30 minutes."
 msgstr "对不起，由于系统维护，汇款给代理人之支付暂停。请 30 分钟后重新尝试。"
 
-#: cgi/cashier_forward.cgi:50
+#: cgi/cashier_forward.cgi.tidyup:62 cgi/cashier_forward.cgi:50
 msgid "Sorry, access to the CASHIER SECTION is disabled for TRADING AGENT accounts. This is to protect you from accidentally attempting to place real money contracts via this account instead of using it to place trades for authorised third parties."
 msgstr "抱歉，交易代理账户无法访问出纳员部分。这样做是为了防止您意外通过该账户试图制订真实货币交易，而不是通过它为授权第三方进行交易。"
 
-#: cgi/oop/Controller/Bet.pm:714
+#: lib/BOM/View/Controller/Bet.pm:719
 msgid "Sorry, an error occured with this trade.  Please try again in a few minutes.  If the problem persists, please contact customer support."
 msgstr "对不起，此交易发生错误。请数分钟后再试。如果问题持续出现，请联系客服支援部。"
 
@@ -6412,7 +6406,7 @@ msgstr "对不起，对同一合约的购买不能超过一次。您的帐户中
 msgid "Sorry, there is too much data to display, please select a shorter interval"
 msgstr "对不起，要显示的数据太多，请选择较短的间隔时间"
 
-#: cgi/cashier_forward.cgi:155
+#: cgi/cashier_forward.cgi.tidyup:167 cgi/cashier_forward.cgi:155
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "很抱歉，我们的支付处理器在验证你的个人信息时出现了问题，请联系我们的客户服务。"
 
@@ -6595,7 +6589,7 @@ msgstr "统计"
 msgid "Stay informed. %1 offers daily market reports and market research, as well as frequent trading webinars."
 msgstr "通过 %1 的每日市场报告及市场调查，还有经常都在进行的交易讨论会保持灵通消息。"
 
-#: cgi/contract_demo.cgi:74 cgi/oop/Controller/Bet.pm:1197
+#: cgi/contract_demo.cgi:74 lib/BOM/View/Controller/Bet.pm:1202
 msgid "Stays Between/Goes Outside"
 msgstr "保持在范围之内/超出范围之外"
 
@@ -7205,7 +7199,7 @@ msgstr "公司不保证在失效时间之前有能力销售合同。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:59
 msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. This meets the Gambling Commission’s requirements for the segregation of customer funds at the level: medium protection."
-msgstr ""
+msgstr "公司把客户资金存在独立的银行账户，与运作帐户分开，不会在万一破产的情况下，成为公司资产的一部分。此运作方式符合把客户资金分开隔离的博彩委员会需求，即为中等等级防护。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:35
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:61
@@ -7328,7 +7322,7 @@ msgstr "使用OAuth2.0的最重要的好处是,在 ％1 已经拥有有效的登
 msgid "The moving average period of the signal line"
 msgstr "单线的移动平均数周期"
 
-#: lib/BOM/Platform/Plack.pm:342
+#: lib/BOM/Platform/Plack.pm.tidyup:334 lib/BOM/Platform/Plack.pm:334
 msgid "The page has timed out. This may be due to a slow Internet connection, or to excess load on our servers.  Please try again in a few moments."
 msgstr "此页已超时。这可能因为互联网连接速度慢，或因为我们的服务器负载过高。请稍后重新尝试。"
 
@@ -7522,7 +7516,7 @@ msgid "There was a market data disruption during the contract period. For real-m
 msgstr "在合约期间出现市场数据中断的情况。对于真实货币账户，我们将尽力修正并恰当地结算合约，不然合约将取消及退款。对于虚拟货币交易，我们将取消交易，并退款。"
 
 #. (request()
-#: cgi/cashier_forward.cgi:175
+#: cgi/cashier_forward.cgi.tidyup:187 cgi/cashier_forward.cgi:175
 msgid "There was a problem validating your address. Please fix the indicated fields. If you need assistance feel free to contact our <a href=\"%1\">Customer Support</a>."
 msgstr "在验证您地址的时候出现了问题。请修改提示字段。如需帮助，请联系我们的 <a href=\"%1\">客户支持</a>."
 
@@ -7684,7 +7678,7 @@ msgid "This function is not relevant to Virtual money accounts"
 msgstr "此功能对虚拟货币帐户不可用"
 
 #. (request()
-#: cgi/cashier_forward.cgi:45
+#: cgi/cashier_forward.cgi.tidyup:57 cgi/cashier_forward.cgi:45
 msgid "This is a virtual-money account. Please click <a class=\"pjaxload\" href=\"%1\">here</a> to open a real-money account and deposit funds."
 msgstr "这是虚拟货币帐户。请点击 <a class=\"pjaxload\" href=\"%1\">这里</a>以开设真实货币帐户并存款。"
 
@@ -7695,7 +7689,7 @@ msgstr "这是一个自动消息，提醒您下列情况：有一个来自 IP �
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:23
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:42
-#: cgi/oop/Controller/Bet.pm:2405
+#: lib/BOM/View/Controller/Bet.pm:2412
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "这是一个指示性的界线。实际的界线将是进入点加界线抵消。"
 
@@ -7792,7 +7786,7 @@ msgstr "跳动点"
 msgid "Tick by Tick"
 msgstr "逐笔"
 
-#: cgi/oop/Controller/Bet.pm:1145 cgi/oop/Controller/Bet.pm:1152
+#: lib/BOM/View/Controller/Bet.pm:1150 lib/BOM/View/Controller/Bet.pm:1157
 msgid "Ticks"
 msgstr "跳动点"
 
@@ -7903,7 +7897,7 @@ msgstr "触及/未触及"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:60 cgi/contract_demo.cgi:61 cgi/contract_guide.cgi:45
-#: cgi/oop/Controller/Bet.pm:1177 cgi/oop/Controller/Bet.pm:1184
+#: lib/BOM/View/Controller/Bet.pm:1182 lib/BOM/View/Controller/Bet.pm:1189
 msgid "Touch/No Touch"
 msgstr "触及/未触及"
 
@@ -8042,8 +8036,8 @@ msgstr "该合约到交易时段第一个 %1 后可用。"
 msgid "Trading is not offered for this duration."
 msgstr "不在此段期间提供交易。"
 
-#: cgi/oop/Controller/Bet.pm:688 lib/BOM/Product/Contract.pm:2266
-#: lib/BOM/Product/Contract.pm:2332
+#: lib/BOM/Product/Contract.pm:2266 lib/BOM/Product/Contract.pm:2332
+#: lib/BOM/View/Controller/Bet.pm:693
 msgid "Trading is suspended at the moment."
 msgstr "当前交易暂停。"
 
@@ -8298,7 +8292,7 @@ msgstr "垂直网格"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/intraday_prices.html.tt:16
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:21
-#: cgi/oop/Controller/Bet.pm:1276 cgi/oop/Controller/Bet.pm:1295
+#: lib/BOM/View/Controller/Bet.pm:1281 lib/BOM/View/Controller/Bet.pm:1300
 msgid "View"
 msgstr "查看"
 
@@ -8434,7 +8428,7 @@ msgstr "目前不接受来自该国居民的帐户。"
 #. ("http://www.gamblingcommission.gov.uk/Consumers/Protection-of-customer-funds.aspx")
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:56
 msgid "We are required by our licence to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='%1' target='_blank'>%1</a>."
-msgstr ""
+msgstr "我们的许可证要求我们把代你保管的资金存款详情通知你，以及万一破产时提供何种程度的资金保护 <a href='%1' target='_blank'>%1</a>。"
 
 #. ($manualAuthenticationLocation, $contact_us_url)
 #: cgi/f_onlineid.cgi:187
@@ -8976,7 +8970,7 @@ msgstr "您还有权要求我们告知您我们处理的有关您的个人信息
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "您与我们都为独立订约人，本协议的任何规定均不得建立双方之间任何合作伙伴关系、合资、代理、特许经营、销售代表或雇佣关系。您无权代表我方做出或接受任何要约或陈述。您不得作出有理由认为与本条内容不一致的声明（无论在您的网站上）。"
 
-#: cgi/oop/Controller/Bet.pm:2177
+#: lib/BOM/View/Controller/Bet.pm:2182
 msgid "You are being given the better price."
 msgstr "正在为您获取更好的价格。"
 
@@ -9316,7 +9310,7 @@ msgstr "现时您的账户不需要认证。"
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
 msgstr "您的帐户已超过免费推广代码的交易限制，如果要继续交易，请存款。"
 
-#: cgi/cashier_forward.cgi:63
+#: cgi/cashier_forward.cgi.tidyup:75 cgi/cashier_forward.cgi:63
 msgid "Your account is disabled"
 msgstr "您的帐户已经被禁"
 
@@ -9343,15 +9337,13 @@ msgstr "您的帐户对我们很重要。若需进一步帮助，请 <a href=\"%
 msgid "Your account is registered as a Payment Agent."
 msgstr "您的帐户于%1下注册。"
 
-#: cgi/cashier_forward.cgi:39
+#: cgi/cashier_forward.cgi.tidyup:51 cgi/cashier_forward.cgi:39
 msgid "Your account is restricted to withdrawals only."
 msgstr "您的帐户只限于提款。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:62
-#, fuzzy
-#| msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
 msgid "Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
-msgstr "公司持有的客户资金存在独立的银行账户，与业务帐目分开。在破产的情况下，不会形成公司资产的一部分。您的帐户不应该被用来作为银行信贷及存款，而应该视为只用以进行交易的资金。如果你重复进行存款和取款，却没有进行相称的交易，在关闭帐户之前，我们保留在不事先通知的情况下把我们所承担的任何银行费用转到你的帐户的权利。"
+msgstr "您的帐户不应该被用来作为银行信贷及存款，而应该视为只用以进行交易的资金。如果你重复进行存款和取款，却没有进行相称的交易，在关闭帐户之前，我们保留在不事先通知的情况下把我们所承担的任何银行费用转到你的帐户的权利。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:20
 msgid "Your base url for all API calls"
@@ -9378,11 +9370,11 @@ msgstr "您的奖金将在3个工作日内贷记至您的账户。"
 msgid "Your callback handler now swaps the new authorization code for a session token with this call:"
 msgstr "您的回调处理程序现在以此调用获取一时段标记之新的授权码："
 
-#: cgi/cashier_forward.cgi:59
+#: cgi/cashier_forward.cgi.tidyup:71 cgi/cashier_forward.cgi:59
 msgid "Your cashier is locked"
 msgstr "您的出纳已被锁定"
 
-#: cgi/cashier_forward.cgi:67
+#: cgi/cashier_forward.cgi.tidyup:79 cgi/cashier_forward.cgi:67
 msgid "Your cashier is locked by password."
 msgstr "您的出纳已被密码锁定。"
 
@@ -9406,7 +9398,7 @@ msgstr "您当前的自我排除设置如下："
 msgid "Your details"
 msgstr "您的详细信息"
 
-#: cgi/cashier_forward.cgi:55
+#: cgi/cashier_forward.cgi.tidyup:67 cgi/cashier_forward.cgi:55
 msgid "Your documents are expired"
 msgstr "您的文件已经失效"
 
@@ -9441,12 +9433,12 @@ msgstr "您的姓名"
 msgid "Your name/company"
 msgstr "您的姓名/公司"
 
-#: cgi/oop/Controller/Bet.pm:2137
+#: lib/BOM/View/Controller/Bet.pm:2142
 msgid "Your new account balance is %s %s"
 msgstr "您的新帐户余额为 %s %s"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:2182
+#: lib/BOM/View/Controller/Bet.pm:2187
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "您的订单 (参考 # <span id=\"参考_编号\">%1</span>)已经于%2生效。"
 
@@ -9521,7 +9513,7 @@ msgid "Your settings have been updated successfully."
 msgstr "您的设置已成功更新。"
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1548 cgi/oop/Controller/Bet.pm:2141
+#: lib/BOM/View/Controller/Bet.pm:1553 lib/BOM/View/Controller/Bet.pm:2146
 msgid "Your transaction reference number is %1"
 msgstr "您的交易参考号是%1"
 
@@ -9595,22 +9587,20 @@ msgstr "对客户在特定时段买入任何合约的限制。"
 msgid "barrier"
 msgstr "目标"
 
-#: cgi/oop/Controller/Bet.pm:1596
+#: lib/BOM/View/Controller/Bet.pm:1601
 msgid "better trade"
 msgstr "更佳交易"
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/head.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/head.html.tt:13
-#, fuzzy
-#| msgid "binary options, binary option, forex trading, online trading, financial trading, financial trading binary option, binary trading, index trading, trading indices, forex trades, trading commodities, forex trading market, practice trading, practice binary trading, tick trade, virtual money trading, trading forex, binary trading, binary bet, binary online bet, binary options trading platform, digital options"
 msgid "binary options, forex, forex trading, online trading, financial trading, binary trading, index trading, trading indices, forex trades, trading commodities, binary options strategy, binary broker, binary bet, binary options trading platform, binary strategy, finance, stocks, investment, trading"
-msgstr "二元期权、二元期权、外汇交易、在线交易、金融交易、金融交易二元期权、二元交易、指数交易、交易指数、外汇交易、交易大宗商品、外汇交易市场、练习交易、练习二元交易、tick交易、虚拟资金交易、交易外汇、二元交易、二元投注、二元在线投注、二元期权交易平台、数字期权"
+msgstr "二元期权、外汇交易、在线交易、金融交易、二元期权交易、指数交易、交易指数、外汇交易、交易大宗商品、二元期权策略、二元经纪、二元投注、二元期权交易平台、二元策略、金融、股票、投资、交易"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
 msgid "contact us"
 msgstr "请与我们联系"
 
-#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:364
+#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:350
 msgid "contract start time"
 msgstr "合约开始时间"
 
@@ -9655,11 +9645,11 @@ msgstr "入市现价加上%plural(%1,1 点, %d 点)"
 msgid "equivalent"
 msgstr "相当于"
 
-#: cgi/oop/Controller/Bet.pm:2214
+#: lib/BOM/View/Controller/Bet.pm:2219
 msgid "explanation"
 msgstr "说明"
 
-#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:362
+#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:348
 msgid "first tick"
 msgstr "首个跳动点"
 
@@ -9675,7 +9665,7 @@ msgstr "这里"
 msgid "high barrier"
 msgstr "价格上限"
 
-#: lib/BOM/Platform/Plack.pm:335
+#: lib/BOM/Platform/Plack.pm.tidyup:327 lib/BOM/Platform/Plack.pm:327
 msgid "homepage"
 msgstr "首页"
 
@@ -9768,7 +9758,7 @@ msgstr "或请尝试以下的网站地图"
 #. (request()
 #: lib/BOM/Product/Contract.pm:2674 lib/BOM/Product/Contract.pm:2689
 msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
-msgstr ""
+msgstr "或者尝试总是开放的 <a href='%1'>随机指数</a>。"
 
 # 交易 = Trades
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
