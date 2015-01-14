@@ -452,7 +452,7 @@ msgid "<p>Please take a moment to verify your identity by providing us with the 
 msgstr "<p>Bitte nehmen Sie sich einen Moment Zeit, um Ihre Identität zu verifizieren. Dazu geben Sie bitte weiter unten die Antwort auf Ihre geheime Frage und Ihr Geburtsdatum ein.</p>"
 
 #. (request()
-#: cgi/cashier_forward.cgi:190
+#: cgi/cashier_forward.cgi.tidyup:202 cgi/cashier_forward.cgi:190
 msgid "<p>Sorry, an error has occurred. Please <a href=\"%1\">try accessing our Cashier</a> again.</p>"
 msgstr "<p>Es tut uns leid, ein Fehler ist aufgetreten. Bitte <a href=\"%1\">versuchen Sie erneut auf unsere Kasse zuzugreifen.</a></p>"
 
@@ -532,7 +532,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>Benchmark-Preise</strong> - %1 legt seine Preise täglich im Verhältnis zu Interbank-Derivatemärkten fest."
 
 #. (to_monetary_number_format($limit_price)
-#: cgi/oop/Controller/Bet.pm:2174
+#: lib/BOM/View/Controller/Bet.pm:2179
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>Besserer Ausführungspreis!</strong><br /> Der Preis hat sich zu Ihren Gunsten von %1 auf %2 geändert."
 
@@ -1024,7 +1024,7 @@ msgstr "Alle Zeiten beziehen sich auf GMT (Greenwich-Zeit)."
 msgid "Amount"
 msgstr "Betrag"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:257
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:257
 msgid "Amount must be a positive number."
 msgstr "Betrag muss eine positive Zahl sein."
 
@@ -1190,7 +1190,7 @@ msgid "Asian options settle by comparing the <strong>last tick</strong> with the
 msgstr "Asiatische Optionen werden festgelegt indem der <strong>letzte Tick</strong> mit dem durchschnittlichen Kassakurs während der Periode verglichen wird."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1224 cgi/oop/Controller/Bet.pm:1231
+#: lib/BOM/View/Controller/Bet.pm:1229 lib/BOM/View/Controller/Bet.pm:1236
 msgid "Asians"
 msgstr "Asiaten"
 
@@ -1345,7 +1345,7 @@ msgstr "OHLC Balkendiagramm"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:18
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:59
-#: cgi/oop/Controller/Bet.pm:2398 platform/bin/GenerateStaticData.pm:117
+#: lib/BOM/View/Controller/Bet.pm:2405 platform/bin/GenerateStaticData.pm:117
 msgid "Barrier"
 msgstr "Barriere"
 
@@ -1375,7 +1375,7 @@ msgid "Barrier must be at least "
 msgstr "Barriere muss sein mindestens "
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:15
-#: cgi/oop/Controller/Bet.pm:2397
+#: lib/BOM/View/Controller/Bet.pm:2404
 msgid "Barrier offset"
 msgstr "Barrierenverschiebung"
 
@@ -1728,7 +1728,8 @@ msgid "Cash Dividend"
 msgstr "Bardividende"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/homepage/logged_in.html.tt:95
-#: cgi/available_payment_methods.cgi:18 cgi/cashier_forward.cgi:28
+#: cgi/available_payment_methods.cgi:18 cgi/cashier_forward.cgi.tidyup:28
+#: cgi/cashier_forward.cgi.tidyup:31 cgi/cashier_forward.cgi:28
 #: cgi/cashier_forward.cgi:31 lib/BOM/View/Menu.pm:130
 msgid "Cashier"
 msgstr "Kasse"
@@ -1788,7 +1789,7 @@ msgstr "Passwort ändern"
 msgid "Change in account settings"
 msgstr "Änderung der Kontoeinstellungen"
 
-#: cgi/analyse_contract.cgi:280 cgi/oop/Controller/Bet.pm:2203
+#: cgi/analyse_contract.cgi:280 lib/BOM/View/Controller/Bet.pm:2208
 msgid "Chart"
 msgstr "Chart"
 
@@ -2110,6 +2111,7 @@ msgstr "Kontaktieren Sie uns"
 msgid "Contact the payment agent directly for more information on how to transfer money to them."
 msgstr "Kontaktieren Sie direkt den Zahlungsagenten für weitere Informationen über die Überweisungsmethoden."
 
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Contact us"
 msgstr "Kontaktieren Sie uns"
@@ -2190,7 +2192,7 @@ msgstr "Vertragszeitraum"
 msgid "Contract purchase (approved applications only)"
 msgstr "Vertragskauf (nur genehmigte Applikationen)"
 
-#: cgi/oop/Controller/Bet.pm:1503
+#: lib/BOM/View/Controller/Bet.pm:1508
 msgid "Contract purchases on this account must be on behalf of granters."
 msgstr "Vertragskäufe für diesen Account müssen im Auftrag der Kreditgeber sein."
 
@@ -2325,7 +2327,7 @@ msgid "Daily"
 msgstr "Täglich"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:31
-#: cgi/oop/Controller/Bet.pm:2226
+#: lib/BOM/View/Controller/Bet.pm:2231
 msgid "Daily Prices"
 msgstr "Tages-Kurse"
 
@@ -2649,7 +2651,7 @@ msgstr "Unterschiede zu anderen Daten-Feeds"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
-#: cgi/oop/Controller/Bet.pm:1239 cgi/oop/Controller/Bet.pm:1246
+#: lib/BOM/View/Controller/Bet.pm:1244 lib/BOM/View/Controller/Bet.pm:1251
 msgid "Digits"
 msgstr "Digits"
 
@@ -2879,7 +2881,7 @@ msgstr "Endzeit"
 msgid "Ends Between/Ends Outside trades"
 msgstr "Ends Between/Ends Outside Trades"
 
-#: cgi/contract_demo.cgi:87 cgi/oop/Controller/Bet.pm:1207
+#: cgi/contract_demo.cgi:87 lib/BOM/View/Controller/Bet.pm:1212
 msgid "Ends Between/Outside"
 msgstr "Ends Between/Outside"
 
@@ -2897,7 +2899,7 @@ msgstr "Stellen Sie sicher, dass Sie %1 nicht mit Botschaften werben, die auf Pe
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"
 msgstr "Geben Sie die Barriere in Bezug auf die Differenz zum Kassakurs an. Wenn Sie +0,005 eingeben, erwerben Sie einen Vertrag mit einer 0,005 höheren Barriere als der Kurs bei Vertragsbeginn. Der Kurs bei Vertragsbeginn wird der nächste Tick nach Erhalt Ihres Auftrags sein"
 
-#: cgi/oop/Controller/Bet.pm:2401
+#: lib/BOM/View/Controller/Bet.pm:2408
 msgid "Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received."
 msgstr "Geben Sie die Barriere in Bezug auf die Differenz zum Kassakurs an. Wenn Sie +0,005 eingeben, erwerben Sie einen Vertrag mit einer 0,005 höheren Barriere als der Kurs bei Vertragsbeginn. Der Kurs bei Vertragsbeginn wird der nächste Tick nach Erhalt Ihres Auftrags sein."
 
@@ -3310,7 +3312,7 @@ msgstr "Großzügige Provisionsstruktur"
 msgid "Get %1 when you deposit %2."
 msgstr "Erhalten Sie %1 wenn Sie %2 einzahlen."
 
-#: cgi/oop/Controller/Bet.pm:1088
+#: lib/BOM/View/Controller/Bet.pm:1093
 msgid "Get Prices"
 msgstr "Preise abrufen"
 
@@ -3426,12 +3428,12 @@ msgstr "Hohe Barriere"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:18
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart.html.tt:43
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:60
-#: cgi/oop/Controller/Bet.pm:2394
+#: lib/BOM/View/Controller/Bet.pm:2401
 msgid "High barrier"
 msgstr "Hohe Barriere"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:15
-#: cgi/oop/Controller/Bet.pm:2392
+#: lib/BOM/View/Controller/Bet.pm:2399
 msgid "High barrier offset"
 msgstr "Hohe Barrierenverschiebung"
 
@@ -3453,7 +3455,7 @@ msgstr "Higher / Lower"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:46 cgi/contract_demo.cgi:47 cgi/contract_guide.cgi:32
-#: cgi/oop/Controller/Bet.pm:1162 cgi/oop/Controller/Bet.pm:1169
+#: lib/BOM/View/Controller/Bet.pm:1167 lib/BOM/View/Controller/Bet.pm:1174
 msgid "Higher/Lower"
 msgstr "Higher/Lower"
 
@@ -3813,7 +3815,7 @@ msgid "In what country do you want to offer your service"
 msgstr "In welchem Land möchten Sie Ihren Service anbieten"
 
 #: cgi/contract_demo.cgi:75 cgi/contract_demo.cgi:88 cgi/contract_guide.cgi:58
-#: cgi/oop/Controller/Bet.pm:1213
+#: lib/BOM/View/Controller/Bet.pm:1218
 msgid "In/Out"
 msgstr "In/Out"
 
@@ -3934,7 +3936,7 @@ msgstr "Intraday"
 msgid "Intraday contracts may not cross market open."
 msgstr "Intraday Verträge"
 
-#: cgi/oop/Controller/Bet.pm:2238
+#: lib/BOM/View/Controller/Bet.pm:2243
 msgid "Intraday prices"
 msgstr "Intraday-Kurse"
 
@@ -3946,9 +3948,9 @@ msgstr "Einführung"
 msgid "Invalid Building No./Name"
 msgstr "Ungültiger Gebäudenr./-name"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:129
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:237
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:436
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:129
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:237
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:441
 msgid "Invalid Input"
 msgstr "Ungültige Eingabe"
 
@@ -4118,7 +4120,7 @@ msgstr "Letzter"
 msgid "Last Digit Prediction"
 msgstr "Letzte Stelle Voraussage"
 
-#: cgi/oop/Controller/Bet.pm:2255
+#: lib/BOM/View/Controller/Bet.pm:2260
 msgid "Last Digit Stats"
 msgstr "Letzte Stelle Statistiken"
 
@@ -4326,12 +4328,12 @@ msgstr "Die niedrige Barriere soll nur aus Zahlen bestehen"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:37
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart.html.tt:47
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:46
-#: cgi/oop/Controller/Bet.pm:2395
+#: lib/BOM/View/Controller/Bet.pm:2402
 msgid "Low barrier"
 msgstr "Niedrige Barriere"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:34
-#: cgi/oop/Controller/Bet.pm:2393
+#: lib/BOM/View/Controller/Bet.pm:2400
 msgid "Low barrier offset"
 msgstr "Niedrige Barrierenverschiebung"
 
@@ -4803,7 +4805,7 @@ msgstr "Nein. Die Teilnahme am Partnerprogramm von %1 ist kostenlos."
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "Anmerkung: Vertrag wird zum geltenden Marktpreis verkauft wenn die Anfrage von unseren Servern empfangen wird.Dieser Preis kann von dem angegebenen Preis abweichen."
 
-#: cgi/oop/Controller/Bet.pm:1055
+#: lib/BOM/View/Controller/Bet.pm:1060
 msgid "Note: During summer time (daylight saving), GMT is one hour behind BST (British Summer Time)"
 msgstr "Anmerkung: Während der Sommerzeit liegt GMT eine Stunde hinter der BST (Britische Sommerzeit)zurück"
 
@@ -5277,7 +5279,7 @@ msgid "Payout Currency"
 msgstr "Auszahlungwährung"
 
 #. (to_monetary_number_format($transaction_parameters->{payout})
-#: cgi/oop/Controller/Bet.pm:1591
+#: lib/BOM/View/Controller/Bet.pm:1596
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "Auszahlung hat sich zu Ihren Gunsten von %1 auf %2 geändert."
 
@@ -5478,7 +5480,7 @@ msgstr "Bitte schicken Sie die Dokumente an:"
 msgid "Please provide at least one self-exclusion setting."
 msgstr "Bitte geben Sie mindestens eine Selbstausschluss-Einstellung an."
 
-#: cgi/oop/Controller/Bet.pm:1713 cgi/oop/Controller/Bet.pm:2000
+#: lib/BOM/View/Controller/Bet.pm:1718 lib/BOM/View/Controller/Bet.pm:2005
 msgid "Please provide granter id(s)."
 msgstr "Bitte geben Sie Kreditgeber ID(s) an."
 
@@ -5506,7 +5508,7 @@ msgstr "Bitte behalten Sie zu allen Zeiten dass der Handel mit binären Optionen
 msgid "Please select"
 msgstr "Bitte wählen Sie"
 
-#: cgi/oop/Helper/Controller/Bet/PriceBoxParameters.pm:272
+#: lib/BOM/View/Controller/Bet/PriceBoxParameters.pm:272
 msgid "Please select \"Payout\" or \"Stake\" option."
 msgstr "Bitte wählen Sie die \"Auszahlung\" oder \"Einsatz\" Option."
 
@@ -5611,7 +5613,7 @@ msgid "Price Oscillator"
 msgstr "Preisoszillator"
 
 #. (to_monetary_number_format($transaction_parameters->{price})
-#: cgi/oop/Controller/Bet.pm:1586
+#: lib/BOM/View/Controller/Bet.pm:1591
 msgid "Price has moved in your favour from %1 to %2."
 msgstr "Preis hat sich zu Ihren Gunsten von %1 auf %2 geändert."
 
@@ -5627,7 +5629,7 @@ msgstr "Preise"
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:81
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_form.html.tt:2
-#: cgi/oop/Controller/Bet.pm:2244 cgi/pricing_table.cgi:170
+#: cgi/pricing_table.cgi:170 lib/BOM/View/Controller/Bet.pm:2249
 #: lib/BOM/View/Menu.pm:171
 msgid "Pricing Table"
 msgstr "Preistabelle"
@@ -5703,7 +5705,7 @@ msgid "Provide us with the following documentation:"
 msgstr "Bitte stellen Sie uns folgende Dokumentation zur Verfügung:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:26
-#: cgi/oop/Controller/Bet.pm:1443
+#: lib/BOM/View/Controller/Bet.pm:1448
 msgid "Purchase"
 msgstr "Kauf"
 
@@ -5919,7 +5921,7 @@ msgstr "Relativer-Stärke-Index"
 msgid "Reload Cashier"
 msgstr "Cash erneut laden"
 
-#: lib/BOM/Platform/Plack.pm:330
+#: lib/BOM/Platform/Plack.pm.tidyup:322 lib/BOM/Platform/Plack.pm:322
 msgid "Reload page"
 msgstr "Seite erneut laden"
 
@@ -6001,7 +6003,7 @@ msgstr "Erneut versuchen"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/ticker.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/sell_success_ajax.html.tt:12
-#: cgi/oop/Controller/Bet.pm:483
+#: lib/BOM/View/Controller/Bet.pm:488
 msgid "Return"
 msgstr "Rendite"
 
@@ -6050,7 +6052,7 @@ msgstr "Anstieg Vertragsrendite (%)"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:33 cgi/contract_guide.cgi:19
-#: cgi/oop/Controller/Bet.pm:1130 cgi/oop/Controller/Bet.pm:1137
+#: lib/BOM/View/Controller/Bet.pm:1135 lib/BOM/View/Controller/Bet.pm:1142
 msgid "Rise/Fall"
 msgstr "Rise/Fall"
 
@@ -6258,10 +6260,10 @@ msgstr "Einstellungen"
 msgid "Settles"
 msgstr "Begleicht"
 
-#: cgi/oop/Controller/Bet.pm:1489 cgi/oop/Controller/Bet.pm:1695
-#: cgi/oop/Controller/Bet.pm:1953 cgi/oop/Controller/Bet.pm:1992
-#: cgi/oop/Controller/Bet.pm:2414 cgi/oop/Controller/Bet.pm:777
-#: cgi/oop/Controller/Bet.pm:886
+#: lib/BOM/View/Controller/Bet.pm:1494 lib/BOM/View/Controller/Bet.pm:1700
+#: lib/BOM/View/Controller/Bet.pm:1958 lib/BOM/View/Controller/Bet.pm:1997
+#: lib/BOM/View/Controller/Bet.pm:2421 lib/BOM/View/Controller/Bet.pm:782
+#: lib/BOM/View/Controller/Bet.pm:891
 msgid "Sharp Prices. Smart Trading."
 msgstr ""
 
@@ -6390,11 +6392,11 @@ msgstr "Es tut uns leid, aber OHLC steht für %1 nicht zur Verfügung."
 msgid "Sorry, Payment Agent Transfer is temporarily disabled due to system maintenance. Please try again in 30 minutes."
 msgstr "Es tut uns leid, aber Zahlungagent-Überweisungen wurden aufgrund von Systemwartung vorläufig deaktiviert. Bitte versuchen Sie es in 30 Minuten erneut."
 
-#: cgi/cashier_forward.cgi:50
+#: cgi/cashier_forward.cgi.tidyup:62 cgi/cashier_forward.cgi:50
 msgid "Sorry, access to the CASHIER SECTION is disabled for TRADING AGENT accounts. This is to protect you from accidentally attempting to place real money contracts via this account instead of using it to place trades for authorised third parties."
 msgstr "Es tut uns leid, der Zugang zur KASSEN-SEKTION ist für Konten von TRADING-AGENTEN deaktiviert, um Sie dafür zu schützen, dass Sie nicht zufällig versuchen, Echtgeld-Verträge über dieses Konto zu platzieren, anstatt für das Platzieren von Handelsaufträgen von befugten Dritten."
 
-#: cgi/oop/Controller/Bet.pm:714
+#: lib/BOM/View/Controller/Bet.pm:719
 msgid "Sorry, an error occured with this trade.  Please try again in a few minutes.  If the problem persists, please contact customer support."
 msgstr "Es tut uns leid, bei diesem Trade ist ein Fehler aufgetaucht. Sollte dieser Fehler beharren, kontaktieren Sie bitte unsere Kundenbetreuung."
 
@@ -6493,7 +6495,7 @@ msgstr "Es tut uns leid, aber der gleiche Vertrag kann nicht mehr als ein Mal er
 msgid "Sorry, there is too much data to display, please select a shorter interval"
 msgstr "Es tut uns leid, aber es gibt zu viele Daten zum Anzeigen. Bitte geben Sie ein kürzeres Intervall ein"
 
-#: cgi/cashier_forward.cgi:155
+#: cgi/cashier_forward.cgi.tidyup:167 cgi/cashier_forward.cgi:155
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
 msgstr "Es tut uns leid, aber es gab ein Problem bei der Validierung Ihrer persönlichen Daten mit unserem Zahlungsabwickler. Bitte kontaktieren Sie unsere Kundenbetreuung."
 
@@ -6678,7 +6680,7 @@ msgstr "Statistiken"
 msgid "Stay informed. %1 offers daily market reports and market research, as well as frequent trading webinars."
 msgstr "Bleiben Sie informiert. %1 bietet tägliche Marktberichte und Marktanalysen, aber auch häufige Trading Webinars."
 
-#: cgi/contract_demo.cgi:74 cgi/oop/Controller/Bet.pm:1197
+#: cgi/contract_demo.cgi:74 lib/BOM/View/Controller/Bet.pm:1202
 msgid "Stays Between/Goes Outside"
 msgstr "Stays Between/Goes Outside"
 
@@ -7427,7 +7429,7 @@ msgstr "Der wichtigste Vorteil der OAuth2.0 ist dass die Endbenutzer, die bereit
 msgid "The moving average period of the signal line"
 msgstr "Die Periode des gleitenden Mittelwerts der Signallinie"
 
-#: lib/BOM/Platform/Plack.pm:342
+#: lib/BOM/Platform/Plack.pm.tidyup:334 lib/BOM/Platform/Plack.pm:334
 msgid "The page has timed out. This may be due to a slow Internet connection, or to excess load on our servers.  Please try again in a few moments."
 msgstr "Die Seite ist abgelaufen. Dies kann aufgrund einer langsamen Internetverbindung oder einer Überlastung unserer Server passieren. Bitte versuchen Sie es in einem Moment erneut."
 
@@ -7625,7 +7627,7 @@ msgid "There was a market data disruption during the contract period. For real-m
 msgstr "Es gab eine Störung der Marktdaten während der Vertragslaufzeit. Im Fall von Echtgeldkonten werden wir versuchen das Problem zu beheben und den Vertrag ordnungsgemäß zu regeln; ansonsten wird der Vertrag aufgelöst und erstattet. Verträge mit virtuellem Geld werden aufgelöst und erstattet."
 
 #. (request()
-#: cgi/cashier_forward.cgi:175
+#: cgi/cashier_forward.cgi.tidyup:187 cgi/cashier_forward.cgi:175
 msgid "There was a problem validating your address. Please fix the indicated fields. If you need assistance feel free to contact our <a href=\"%1\">Customer Support</a>."
 msgstr "Beim Bestätigen Ihrer Adresse gab es ein Problem. Bitte bringen Sie die angegebenen Felder in Ordnung. Wenn Sie Hilfe benötigen, kontaktieren Sie bitte unsere <a href=\"%1\">Kundenbetreuung</a>."
 
@@ -7793,7 +7795,7 @@ msgid "This function is not relevant to Virtual money accounts"
 msgstr "Diese Funktion ist für virtuelle Geldkonten nicht relevant"
 
 #. (request()
-#: cgi/cashier_forward.cgi:45
+#: cgi/cashier_forward.cgi.tidyup:57 cgi/cashier_forward.cgi:45
 msgid "This is a virtual-money account. Please click <a class=\"pjaxload\" href=\"%1\">here</a> to open a real-money account and deposit funds."
 msgstr "Dies ist ein virtuelles Geldkonto. Bitte klicken Sie <a class=\"pjaxload\" href=\"%1\">hier</a>, um ein Konto mit echtem Geld zu eröffnen und um Geld einzuzahlen."
 
@@ -7804,7 +7806,7 @@ msgstr "Dies ist eine automatische Mitteilung, um Sie auf die Tatsache aufmerksa
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:23
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/barrier.html.tt:42
-#: cgi/oop/Controller/Bet.pm:2405
+#: lib/BOM/View/Controller/Bet.pm:2412
 msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgstr "Dies ist eine hinweisende Barriere. Die tatsächliche Barriere wird der Kurs bei Vertragsbeginn plus die Barrierenverschiebung sein."
 
@@ -7903,7 +7905,7 @@ msgstr "Tick"
 msgid "Tick by Tick"
 msgstr "Tick für Tick"
 
-#: cgi/oop/Controller/Bet.pm:1145 cgi/oop/Controller/Bet.pm:1152
+#: lib/BOM/View/Controller/Bet.pm:1150 lib/BOM/View/Controller/Bet.pm:1157
 msgid "Ticks"
 msgstr "Ticks"
 
@@ -8016,7 +8018,7 @@ msgstr "Touch / No Touch"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 #: cgi/contract_demo.cgi:60 cgi/contract_demo.cgi:61 cgi/contract_guide.cgi:45
-#: cgi/oop/Controller/Bet.pm:1177 cgi/oop/Controller/Bet.pm:1184
+#: lib/BOM/View/Controller/Bet.pm:1182 lib/BOM/View/Controller/Bet.pm:1189
 msgid "Touch/No Touch"
 msgstr "Touch/No Touch"
 
@@ -8155,8 +8157,8 @@ msgstr "Trading ist nach der ersten %1 der Sitzung verfügbar."
 msgid "Trading is not offered for this duration."
 msgstr "Trading liegt für diese Laufzeit nicht im Angebot."
 
-#: cgi/oop/Controller/Bet.pm:688 lib/BOM/Product/Contract.pm:2266
-#: lib/BOM/Product/Contract.pm:2332
+#: lib/BOM/Product/Contract.pm:2266 lib/BOM/Product/Contract.pm:2332
+#: lib/BOM/View/Controller/Bet.pm:693
 msgid "Trading is suspended at the moment."
 msgstr "Das Trading ist momentan suspendiert."
 
@@ -8419,7 +8421,7 @@ msgstr "Vertikales Raster"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/intraday_prices.html.tt:16
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:21
-#: cgi/oop/Controller/Bet.pm:1276 cgi/oop/Controller/Bet.pm:1295
+#: lib/BOM/View/Controller/Bet.pm:1281 lib/BOM/View/Controller/Bet.pm:1300
 msgid "View"
 msgstr "Ansehen"
 
@@ -9098,7 +9100,7 @@ msgstr "Sie können von uns verlangen, dass wir Sie über Ihre persönlichen Dat
 msgid "You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
 msgstr "Sowohl wir, als auch Sie sind unabhängige Auftragsnehmer. Dieser Vertrag begründet keine Partnerschaft, kein Joint Venture, keine Agentur und keine Funktion als Handelsvertreter oder eine arbeitsvertragliche Beziehung zwischen den Parteien. Sie sind nicht befugt, Angebote oder Erklärungen in unserem Namen abzugeben oder anzunehmen. Auch dürfen Sie keine Erklärungen auf Ihrer Webseite oder auf andere Weise abgeben, die den Bestimmungen dieses Absatzes widersprechen."
 
-#: cgi/oop/Controller/Bet.pm:2177
+#: lib/BOM/View/Controller/Bet.pm:2182
 msgid "You are being given the better price."
 msgstr "Ihnen wurde der bessere Preis gegeben."
 
@@ -9438,7 +9440,7 @@ msgstr "Ihr Konto benötigt momentan keine Authentifizierung."
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
 msgstr "Ihr Konto hat das Trading-Limit mit kostenlosen Werbecodes überschritten. Bitte machen Sie eine Einzahlung, wenn Sie weiter Traden möchten."
 
-#: cgi/cashier_forward.cgi:63
+#: cgi/cashier_forward.cgi.tidyup:75 cgi/cashier_forward.cgi:63
 #, fuzzy
 #| msgid "Your account is disabled."
 msgid "Your account is disabled"
@@ -9467,7 +9469,7 @@ msgstr "Ihr Konto ist uns wichtig. Bitte <a href=\"%1\">kontaktieren Sie uns</a>
 msgid "Your account is registered as a Payment Agent."
 msgstr "Ihr Konto ist als Zahlungsagent registriert."
 
-#: cgi/cashier_forward.cgi:39
+#: cgi/cashier_forward.cgi.tidyup:51 cgi/cashier_forward.cgi:39
 msgid "Your account is restricted to withdrawals only."
 msgstr "Ihr Konto ist nur auf Auszahlungen eingeschränkt."
 
@@ -9500,13 +9502,13 @@ msgstr "Ihr Bonus wird Ihrem Konto innerhalb von drei Werktage gutgeschrieben."
 msgid "Your callback handler now swaps the new authorization code for a session token with this call:"
 msgstr "Ihr Callback Handler wechselt nun den neuen Berechtigungskode mit einem Sitzungs-Token durch diesen Anruf:"
 
-#: cgi/cashier_forward.cgi:59
+#: cgi/cashier_forward.cgi.tidyup:71 cgi/cashier_forward.cgi:59
 #, fuzzy
 #| msgid "Your cashier is locked."
 msgid "Your cashier is locked"
 msgstr "Ihre Kasse ist gesperrt."
 
-#: cgi/cashier_forward.cgi:67
+#: cgi/cashier_forward.cgi.tidyup:79 cgi/cashier_forward.cgi:67
 msgid "Your cashier is locked by password."
 msgstr "Ihre Kassen-Sektion ist mit Passwort gesperrt."
 
@@ -9530,7 +9532,7 @@ msgstr "Ihre aktuellen Selbstausschlusseinstellungen sind folgende:"
 msgid "Your details"
 msgstr "Ihre Angaben"
 
-#: cgi/cashier_forward.cgi:55
+#: cgi/cashier_forward.cgi.tidyup:67 cgi/cashier_forward.cgi:55
 #, fuzzy
 #| msgid "Your documents are expired."
 msgid "Your documents are expired"
@@ -9567,12 +9569,12 @@ msgstr "Ihr Name"
 msgid "Your name/company"
 msgstr "Ihr Name/Unternehmen"
 
-#: cgi/oop/Controller/Bet.pm:2137
+#: lib/BOM/View/Controller/Bet.pm:2142
 msgid "Your new account balance is %s %s"
 msgstr "Ihr neuer Kontostand ist %s %s"
 
 #. ($reference_number, $executed_price)
-#: cgi/oop/Controller/Bet.pm:2182
+#: lib/BOM/View/Controller/Bet.pm:2187
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "Ihr Auftrag (Referenz # <span id=\"reference_no\">%1</span>) wurde bei %2 ausgeführt."
 
@@ -9647,7 +9649,7 @@ msgid "Your settings have been updated successfully."
 msgstr "Ihre Einstellungen wurden erfolgreich aktualisiert."
 
 #. ($tradeRef)
-#: cgi/oop/Controller/Bet.pm:1548 cgi/oop/Controller/Bet.pm:2141
+#: lib/BOM/View/Controller/Bet.pm:1553 lib/BOM/View/Controller/Bet.pm:2146
 msgid "Your transaction reference number is %1"
 msgstr "Ihre Überweisungsnummer ist %1"
 
@@ -9721,7 +9723,7 @@ msgstr "Einschränkungen Kunden gegenüber, Verträge zu gewissen Zeiten zu erwe
 msgid "barrier"
 msgstr "Barriere"
 
-#: cgi/oop/Controller/Bet.pm:1596
+#: lib/BOM/View/Controller/Bet.pm:1601
 msgid "better trade"
 msgstr "besserer Trade"
 
@@ -9736,7 +9738,7 @@ msgstr "Binäre Optionen, Binäre Option, Devisenhandel, Online-Trading, Finanzh
 msgid "contact us"
 msgstr "Kontaktieren Sie uns"
 
-#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:364
+#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:350
 msgid "contract start time"
 msgstr "Zeit des Vertragsbeginns"
 
@@ -9781,11 +9783,11 @@ msgstr "Kurs bei Vertragsbeginn plus %plural(%1,1 Pip, %d Pips)"
 msgid "equivalent"
 msgstr "äquivalent"
 
-#: cgi/oop/Controller/Bet.pm:2214
+#: lib/BOM/View/Controller/Bet.pm:2219
 msgid "explanation"
 msgstr "Erklärung"
 
-#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:362
+#: lib/BOM/Product/Contract/ContractCategory/ContractType.pm:348
 msgid "first tick"
 msgstr "erster Tick"
 
@@ -9801,7 +9803,7 @@ msgstr "hier"
 msgid "high barrier"
 msgstr "hohe Barriere"
 
-#: lib/BOM/Platform/Plack.pm:335
+#: lib/BOM/Platform/Plack.pm.tidyup:327 lib/BOM/Platform/Plack.pm:327
 msgid "homepage"
 msgstr "Homepage"
 
