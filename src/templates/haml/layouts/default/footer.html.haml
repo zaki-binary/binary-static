@@ -57,7 +57,7 @@
                 %li
                   %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal#privacy-tab")}= l('Security and Privacy')
                 %li
-                  %a.pjaxload{:href=>url_for("responsible-trading"), :class => 'pjaxload'}= l('Responsible Trading')
+                  %a.pjaxload{:href=>url_for("responsible-trading")}= l('Responsible Trading')
                 %li
                   %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal&selected_tab=complaints-disputes-tac-tab")}= l('Complaints and Disputes')
         .grd-grid-4
@@ -102,4 +102,5 @@
         #social-networks
           = include('layouts/default/social')
     #appcache-reload-message
-      .message= l("A new version of the interface is available. Please refresh this page to try again.")
+      .message
+        != l("A new version of the interface is available. Please <a href='#' id='appcache-refresh-link'>refresh</a> this page to try again.")
