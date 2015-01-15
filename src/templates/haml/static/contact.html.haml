@@ -10,7 +10,7 @@
       - my $faq_url = "https://binary.desk.com/customer/" . lc(stash->{language}) . "/portal/articles";
       .grd-row-padding
         %p.no-para-margin!= l("You'll find answers to most of your questions on the <a href='[_1]' target='_blank'>FAQ</a> page.", $faq_url)
-        %p!= l("Email: <span id='cs_contact_eaddress'>/span>")
+        %p!= l("Email: <span id='cs_contact_eaddress'></span>")
       .grd-grid-12.grd-parent.grd-row-padding
         %label.grd-grid-4.grd-grid-mobile-12.grd-no-gutter= l('Telephone:')
         - my $contact_number = customer_support_telephone();
