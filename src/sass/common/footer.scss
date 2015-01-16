@@ -47,6 +47,23 @@
       padding-right: 5px;
       padding-top: 10px;
     }
+    #appcache-reload-message {
+      display: none;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: $BIN_YELLOW;
+      z-index: 999;
+      text-align: center;
+      .message {
+        margin: 12px;
+        font-style: italic;
+        color: $BIN_RED;
+        a {
+          color: $BIN_GREEN;
+        }
+      }
+    }
   }
 
   #suspend-message {
