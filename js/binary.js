@@ -8581,6 +8581,13 @@ var display_cs_numbers = function () {
     $('#cs_contact_eaddress').html("<n uers=\"znvygb:fhccbeg@ovanel.pbz\" ery=\"absbyybj\">fhccbeg@ovanel.pbz</n>".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
 };
 
+var show_live_chat = function () {
+    $('.contact-content').on("click", "#live-chat-icon", function (e) {
+        e.preventDefault();
+        Intercom('show');
+    });
+};
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
@@ -8664,6 +8671,7 @@ pjax_config_page('/contact', function() {
     return {
         onLoad: function() {
             display_cs_numbers();
+            show_live_chat();
         },
     };
 });
