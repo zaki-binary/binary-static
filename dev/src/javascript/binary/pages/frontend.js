@@ -193,6 +193,9 @@ var show_live_chat = function () {
         e.preventDefault();
         Intercom('show');
     });
+    if ($('#intercom-container').length === 0) {
+        $('#live-chat-container').hide();
+    }
 };
 
 pjax_config_page('/$|/home', function() {
