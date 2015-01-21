@@ -17,7 +17,7 @@
       = l('[_1] provides you with the opportunity to either self exclude or', stash->{website_name})
       %a{:href => url_for('self_exclusion.cgi')}= l('set limits on your trading activities')
       = l('on this website. You may also')
-      %a.pjaxload{:href => url_for('contact.cgi')}= l('contact us')
+      %a.pjaxload{:href => url_for('contact')}= l('contact us')
       = l('to state the limits you wish to set via live chat, email or phone. Available limits are:')
       %ol
         %li= l('a limit on the amount you may trade within a specified period of time;')
