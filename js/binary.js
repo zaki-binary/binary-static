@@ -1204,7 +1204,7 @@ Page.prototype = {
     },
     localize_for: function(language) {
         text = texts[language];
-        moment.lang(language.toLowerCase());
+        moment.locale(language.toLowerCase());
     },
     url_for_language: function(lang) {
         lang = lang.trim().toUpperCase();
@@ -5117,7 +5117,7 @@ BetForm.TradingTime.prototype = {
 
         var diff = time.valueOf() - start_time.valueOf();
         var min_unit = this.min_unit();
-        var min_expiration_time = BetForm.attributes.start_time_moment().add(min_unit.units, min_unit.min);
+        var min_expiration_time = BetForm.attributes.start_time_moment().add(min_unit.min, min_unit.units);
         if(time.isBefore(min_expiration_time)) {
             units = min_unit.units;
             amount = min_unit.min;
@@ -5142,7 +5142,7 @@ BetForm.TradingTime.prototype = {
     },
     convert_to_end_time: function(duration_amount, duration_units) {
         var ms = BetForm.attributes.start_time_moment();
-        ms.add(duration_units, duration_amount);
+        ms.add(duration_amount, duration_units);
         if(duration_units == "d") {
             var trading_times = this.get_trading_times(ms.format("YYYY-MM-DD"));
             ms = trading_times.closing;
@@ -5719,7 +5719,7 @@ BetForm.Time.EndTime.prototype = {
                     $self.info_for_display = [];
                     var symbol = BetForm.attributes.underlying();
                     var how_many_ticks = $('#tick-count').data('count');
-                    var end = start_moment.clone().add('minutes',3);
+                    var end = start_moment.clone().add(3, 'minutes');
                     var stream_url = window.location.protocol + '//' + page.settings.get('streaming_server');
                     stream_url += "/stream/ticks/" + symbol + "/" + start_moment.unix() + "/" + end.unix();
                     $self.ev = new EventSource(stream_url, { withCredentials: true });
@@ -8573,7 +8573,7 @@ var home_bomoverlay = {
     }
 };
 
-var display_cs_numbers = function () {
+var display_cs_contacts = function () {
     $('.contact-content').on("change", '#cs_telephone_number', function () {
         var val = $(this).val();
         $('#display_cs_telephone').text(val);
@@ -8673,7 +8673,7 @@ pjax_config_page('/get-started', function() {
 pjax_config_page('/contact', function() {
     return {
         onLoad: function() {
-            display_cs_numbers();
+            display_cs_contacts();
             show_live_chat();
         },
     };
