@@ -180,7 +180,7 @@ var home_bomoverlay = {
     }
 };
 
-var display_cs_numbers = function () {
+var display_cs_contacts = function () {
     $('.contact-content').on("change", '#cs_telephone_number', function () {
         var val = $(this).val();
         $('#display_cs_telephone').text(val);
@@ -280,7 +280,7 @@ pjax_config_page('/get-started', function() {
 pjax_config_page('/contact', function() {
     return {
         onLoad: function() {
-            display_cs_numbers();
+            display_cs_contacts();
             show_live_chat();
         },
     };
