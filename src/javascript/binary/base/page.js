@@ -533,6 +533,7 @@ Contents.prototype = {
         this.update_content_class();
         this.tooltip.attach();
         this.init_draggable();
+        this.display_live_chat();
     },
     on_unload: function() {
         this.tooltip.detach();
@@ -567,6 +568,11 @@ Contents.prototype = {
     },
     init_draggable: function() {
         $('.draggable').draggable();
+    },
+    display_live_chat: function () {
+        if ($('#intercom-container').length === 0) {
+            $('#live-chat-container').hide();
+        }
     },
 };
 
