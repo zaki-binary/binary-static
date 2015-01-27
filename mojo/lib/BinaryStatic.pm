@@ -79,6 +79,7 @@ sub startup {
     $r->get('/resources')->to('page#haml');
     $r->get('/charting')->to('page#haml');
     $r->get('/about-us')->to('page#haml');
+    $r->get('/contact')->to('page#haml');
 
     # Display to clients from AppCache when they are offline.
     $r->get('/offline')->to('page#offline');
@@ -101,7 +102,6 @@ sub startup {
     $r->post('/login')->to('page#login');
     $r->get('/logout')->to('page#logout');
 
-    $r->get('/c/contact.cgi')->to('page#toolkit');
     $r->get('/c/open_account.cgi')->to('page#toolkit');
     $r->get('/c/affiliate_signup.cgi')->to('page#toolkit');
     $r->get('/c/pricing_table.cgi')->to('page#toolkit');

@@ -13,7 +13,6 @@ sub toolkit {
 
     # template, layout, code
     my %url_map = (
-        'c/contact.cgi' => ['misc/contact_us', 'default'],
         'c/open_account.cgi' => ['account/open_account', 'default'],
         'c/affiliate_signup.cgi' => ['affiliates/main', 'default'],
         'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
@@ -82,6 +81,7 @@ sub haml {
         'group-history' => ['static/group_history', 'full_width'],
         'smart-indices' => ['static/smart_indices', 'full_width'],
         'open-source-projects' => ['static/open_source_projects', 'full_width'],
+        'contact' => ['static/contact', 'full_width'],
 
         'resources' => ['resources/index', $c->layout],
         'charting'  => ['charting/index', $c->layout],
