@@ -117,13 +117,11 @@ sub register {
                     up            => $c->url_for('/images/javascript/up_arrow_1.gif')->to_string,
                     down          => $c->url_for('/images/javascript/down_arrow_1.gif')->to_string,
                     calendar_icon => $c->url_for('/images/common/calendar_icon_1.png')->to_string,
-                    livechaticon  => $c->url_for('/images/javascript/live-chat-icon_1.png')->to_string,
                 },
                 broker               => 'CR',
                 restricted_countries => 'cr|hk|ir|my|mt|us|vi|um|jp|bs|je|gg',
                 valid_loginids       => "MX|VRTC|MLT|CR|FOG|BFT|VRTM|VRTU|WS'",
                 streaming_server => 'stream.binary.com',
-                cs_times         => [{"end" => 15, "start" => 0}, {"end" => 23, "start" => 14}],
                 arr_all_currencies => ["USD","EUR","GBP","AUD"],
             );
 
