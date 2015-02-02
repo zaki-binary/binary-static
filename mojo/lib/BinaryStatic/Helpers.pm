@@ -298,7 +298,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id   => 'topMenuBecomeAffiliate',
-        url  => $self->c->url_for('/affiliate_signup.cgi'),
+        url  => $self->c->url_for('/affiliate/signup'),
         text => $self->c->l('Affiliate'),
       };
 
