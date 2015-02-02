@@ -107,15 +107,6 @@ ClientForm.prototype = {
 
         return true;
     },
-    custom_check_file_format: function() {
-            var file_name = $('#Screenshot').attr('value');
-            if (file_name && file_name.length > 0) {
-                    if (!file_name.match(/(?:jpg|jpeg|png|gif)/i)) {
-                            return false;
-                    }
-            }
-            return true;
-    },
     self_exclusion: function() {
         return {
             has_something_to_save: function() {
