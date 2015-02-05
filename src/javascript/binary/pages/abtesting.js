@@ -1,8 +1,9 @@
 var signup = function() {
     var signup = $('.login-button, .dialog, .overlay').on('click', function() {
         $('.overlay').toggleClass('hidden');
-    })
+    });
 };
+
 var xscroll = function() {
     var xscroll = $("#scroll").click(function() {
         $('html, body').animate({
@@ -10,6 +11,7 @@ var xscroll = function() {
         }, 1000);
     });
 };
+
 pjax_config_page('/home3', function() {
     return {
         onLoad: function() {
@@ -17,6 +19,7 @@ pjax_config_page('/home3', function() {
         },
     };
 });
+
 pjax_config_page('/home4', function() {
     return {
         onLoad: function() {
