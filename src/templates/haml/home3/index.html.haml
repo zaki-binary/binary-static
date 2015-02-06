@@ -5,20 +5,21 @@
 - );
 - my $lang = stash->{language};
 %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}
-.zbanner1
-  .grd-container
-    .grd-grid-12.grd-parent
-      .zhead
-        %h1 The Premier Platform for Binary Options Trading
-        .grd-grid-4.grd-grid-mobile-12.grd-parent
-          %i.fa.fa-line-chart
-        .grd-grid-4.grd-grid-mobile-12.grd-parent
-          %p!= "Up to <span> 100% </span> Return <br> on Rise/Fall Trades"
-        .grd-grid-4.grd-grid-mobile-12.grd-parent
-          %p!= "Up to <span> 1000% </span> Return <br> on Trades you Make"
-      .zcta
-        .button.pjaxload.zreal.pjaxload-focus.login-button
-          %span OPEN FREE ACCOUNT NOW
+#zbacktop
+  .zbanner1
+    .grd-container
+      .grd-grid-12.grd-parent
+        .zhead
+          %h1 The Premier Platform for Binary Options Trading
+          .grd-grid-4.grd-grid-mobile-12.grd-parent
+            %i.fa.fa-line-chart
+          .grd-grid-4.grd-grid-mobile-12.grd-parent
+            %p!= "Up to <span> 100% </span> Return <br> on Rise/Fall Trades"
+          .grd-grid-4.grd-grid-mobile-12.grd-parent
+            %p!= "Up to <span> 1000% </span> Return <br> on Trades you Make"
+        .zcta
+          .button.pjaxload.zreal.pjaxload-focus.login-button
+            %span OPEN FREE ACCOUNT NOW
 .grd-container
   #zsection1
     .grd-grid-12.grd-parent
@@ -111,7 +112,7 @@
           %span Create Free Account Now
 .overlay.shown.hidden
   .dialog
-    %p.zvirtual-money Get your free $10k virtual money account
+    %p.zvirtual-money Get Your Free $10k Virtual Money Account
     %form#virtual-acc-form{:action => "https://www.binary.com/d/create_account.cgi?l=EN", :method => "post", :name => "oppAccForm"}
       %span#virtual-fields
         %span.grd-grid-12.grd-no-gutter.center

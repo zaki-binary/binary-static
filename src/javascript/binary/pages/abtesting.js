@@ -5,7 +5,7 @@ var signup = function() {
 };
 
 var xscroll = function() {
-    var xscroll = $("#scroll").click(function() {
+    var xscroll = $("#xscroll").click(function() {
         $('html, body').animate({
             scrollTop: $("#section2").offset().top
         }, 1000);

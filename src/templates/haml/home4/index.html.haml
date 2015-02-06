@@ -5,28 +5,29 @@
 - );
 - my $lang = stash->{language};
 %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}
-#section1
-  .ycontent1
-    .grd-container
-      .grd-grid-12
-        .grd-grid-12.center
-          %h1 Trading Opsi Binary Termudah dan Terheboh
+#ybacktop
+  #section1
+    .ycontent1
+      .grd-container
         .grd-grid-12
-          .grd-grid-4.grd-grid-mobile-12.ybenefit1
-            %img{:alt => "", :src => url_for('images/pages/home4/$1.png')}
-              %p Posisi Trading Mulai $1
-          .grd-grid-4.grd-grid-mobile-12.ybenefit1
-            %img{:alt => "", :src => url_for('images/pages/home4/type-trade.png')}
-              %p Posisi Tepat Meraih Profit
-          .grd-grid-4.grd-grid-mobile-12.ybenefit1
-            %img{:alt => "", :src => url_for('images/pages/home4/payment-methods.png')}
-              %p Pilihan Pembayaran Mudah
-        .grd-grid-12.center
-          .ycta
-            .button.pjaxload.yvirtual.pjaxload-focus.login-button
-              %span DAFTAR AKUN GRATIS SEKARANG
-            %a#scroll.button.pjaxload.ylearn.pjaxload-focus{:href => "#"}
-              %span Pelajari Lebih Lanjut
+          .grd-grid-12.center
+            %h1 Trading Opsi Binary Termudah dan Terheboh
+          .grd-grid-12
+            .grd-grid-4.grd-grid-mobile-12.ybenefit1
+              %img{:alt => "", :src => url_for('images/pages/home4/$1.png')}
+                %p Posisi Trading Mulai $1
+            .grd-grid-4.grd-grid-mobile-12.ybenefit1
+              %img{:alt => "", :src => url_for('images/pages/home4/type-trade.png')}
+                %p Posisi Tepat Meraih Profit
+            .grd-grid-4.grd-grid-mobile-12.ybenefit1
+              %img{:alt => "", :src => url_for('images/pages/home4/payment-agents-id.png')}
+                %p Pilihan Pembayaran Mudah
+          .grd-grid-12.center
+            .ycta
+              .button.pjaxload.yvirtual.pjaxload-focus.login-button
+                %span DAFTAR AKUN DEMO SEKARANG
+              .button#xscroll.pjaxload.ylearn.pjaxload-focus
+                %span Pelajari Lebih Lanjut
 #section2
   .ycontent2
     .grd-container
@@ -44,7 +45,7 @@
               Perdagangan semua mata uang utama, indeks, saham, dan komoditas.
             %li
               %i.fa.fa-check-square>
-              Pilih Durasi Trading Mulai dari 10 Detik Hinnga 365 Hari.
+              Pilih Durasi Trading Mulai dari 10 Detik Hingga 365 Hari.
             %li
               %i.fa.fa-check-square>
               Pilih Strategi Anda sendiri.
@@ -87,7 +88,7 @@
       .grd-grid-12
         .ystart
           .button.pjaxload.pjaxload-focus.login-button
-            %span= l('DAFTAR GRATIS')
+            %span= l('Daftar Akun Demo')
           %a.pjaxload.yreal{:href => url_for('linkto_acopening.cgi?actype=real&l=ID'), :class => 'button'}
             %span= l('Daftar Akun Uang Riil')
         .center
@@ -125,13 +126,7 @@
         %p Binary.com Menjamin Keamanan Dana Anda.
       .grd-grid-12
         .ypayment
-          %img{:alt => "", :src => url_for('images/pages/home4/western-union-icon.png')}/
-          %img{:alt => "", :src => url_for('images/pages/home4/skrill-icon.png')}/
-          %img.ybiglogo{:alt => "", :src => url_for('images/pages/home4/visa-icon.png')}/
-          %img.ybiglogo{:alt => "", :src => url_for('images/pages/home4/mastercard-icon.png')}/
-          %img{:alt => "", :src => url_for('images/pages/home4/neteller-icon.png')}/
-          %img{:alt => "", :src => url_for('images/pages/home4/ukash-icon.png')}/
-          %img{:alt => "", :src => url_for('images/pages/home4/okpay-icon.png')}/
+          %img.responsive{:alt => "", :src => url_for('images/pages/home4/payment-agent-icons.png')}/
         %p.ymore
           %a{:href => "https://www.binary.com/c/available_payment_methods.cgi?l=ID", :target => "_blank"} Dan Banyak Lagi
       .grd-grid-12.center
