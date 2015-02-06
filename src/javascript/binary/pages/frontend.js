@@ -202,7 +202,8 @@ var change_chat_icon = function () {
                   'background-image': 'url("' + image_link['livechaticon'] + '")',
                   'background-size': 'contain',
                   'min-width': 50,
-                  'min-height': 50
+                  'min-height': 50,
+                  'width': 'auto'
               });
               desk_widget.hover(function() {
                   $(this).css({
