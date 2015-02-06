@@ -37,7 +37,7 @@
           = $default_number
       .grd-grid-12.grd-parent.grd-row-padding
         %label.grd-grid-4.grd-grid-mobile-12.grd-no-gutter= l('Skype:')
-        .grd-grid-2.grd-grid-mobile-3.grd-no-gutter
+        .grd-grid-2.grd-no-gutter
           - my $skype_helpline = customer_support_skype_helpline();
           - my $helpline = $skype_helpline->{$selected_language} || $skype_helpline->{'EN'};
           - $helpline = "skype:" . $helpline . "?call";
@@ -45,7 +45,7 @@
             %img.responsive{:src => url_for('images/pages/contact/skype-icon.svg')}
       #live-chat-container.grd-grid-12.grd-parent.grd-row-padding
         %label.grd-grid-4.grd-grid-mobile-12.grd-no-gutter= l('Live chat:')
-        .grd-grid-2.grd-grid-mobile-3.grd-no-gutter
+        .grd-grid-2.grd-no-gutter
           %span{:id => "live-chat-icon"}
     .grd-grid-5.grd-grid-mobile-12
       %h1= l("Company addresses")
