@@ -1,3 +1,9 @@
 .grd-grid-12
     %h1= title
+    - if ($client_message) {
+        #client_message.rbox.errorbox
+          .rbox-wrap
+            #client_message_content.rbox-content
+                = $client_message
+    - }
     != $form->build()
