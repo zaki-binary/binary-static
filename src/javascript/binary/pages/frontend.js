@@ -277,7 +277,7 @@ var show_live_chat_icon = function() {
             clearInterval(desk_load);
         }
     }, 80);
-}
+};
 
 pjax_config_page('/$|/home', function() {
     return {
