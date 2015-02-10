@@ -72,18 +72,6 @@ sub register {
         });
 
     $app->helper(
-        renderSkin => sub {
-            my $self     = shift;
-            my %params   = @_;
-            my $template = $params{template};
-            my $skin     = $self->stash('skin');
-            $params{template} = $template . $skin;
-            return if $skin && $self->render_maybe(%params);
-            $params{template} = $template;
-            return $self->render(%params);
-        });
-
-    $app->helper(
         is_logged_in => sub {
             my $c = shift;
             return $c->stash('client');
