@@ -112,6 +112,9 @@ sub startup {
 
     $r->route('/exception')->to('page#exception');
     $r->route('/*')->to('page#not_found');
+
+    #CRO - Matjaz
+    $r->get('/home5')->to('page#haml');
 }
 
 1;
