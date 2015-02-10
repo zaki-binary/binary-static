@@ -1199,7 +1199,12 @@ Page.prototype = {
         var that = this;
         $('#language_select').on('change', 'select', function() {
             var language = $(this).find('option:selected').attr('class');
-            document.location = that.url_for_language(language);
+            var re = /^\/home\d+$/;
+            if (re.exec(document.location.pathname)) {
+                document.location = that.url_for_ab_testing(language);
+            } else {
+                document.location = that.url_for_language(language);
+            }
         });
     },
     localize_for: function(language) {
@@ -1222,6 +1227,13 @@ Page.prototype = {
             }
             url += qs + lang;
         }
+        return url;
+    },
+    url_for_ab_testing: function(lang) {
+        lang = lang.trim().toUpperCase();
+        SessionStore.set('selected.language', lang);
+        var loc = document.location; // quick access
+        var url = loc.protocol + '//' + loc.host + '/?l=' + lang;
         return url;
     },
     record_affiliate_exposure: function() {
@@ -6019,6 +6031,8 @@ BetForm.Time.EndTime.prototype = {
                     var amount = BetForm.amount.calculation_value;
                     var price;
                     var payout;
+                    var profit = 0;
+                    var roi = 0;
                     if(BetForm.attributes.is_amount_stake()) {
                         payout = this.virgule_amount(Math.round((amount / prob) * 100));
                         price = this.virgule_amount(amount * 100);
@@ -6029,8 +6043,10 @@ BetForm.Time.EndTime.prototype = {
 
                     var prev_price = parseFloat($('input[name="price"]', form).val());
                     var prev_payout = parseFloat($('input[name="payout"]', form).val());
-                    var profit =  this.virgule_amount(payout.raw - price.raw);
-                    var roi = Math.round(profit.raw / price.raw * 100);
+                    if (payout && price) {
+                        profit =  this.virgule_amount(payout.raw - price.raw);
+                        roi = Math.round(profit.raw / price.raw * 100);
+                    }
 
                     return {
                         id: id,
