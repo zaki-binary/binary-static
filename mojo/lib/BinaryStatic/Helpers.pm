@@ -163,6 +163,11 @@ sub register {
             return $c->url_for("/");
         });
 
+    $app->helper(
+        on_production => sub {
+            return 0;
+        });
+
     return 1;
 }
 
