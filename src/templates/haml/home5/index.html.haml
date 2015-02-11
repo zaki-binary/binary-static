@@ -1,7 +1,7 @@
 - stash(
 -   title => l('Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices'),
 -   next_link => '/why-us',
--   createacc => l('Create free account now'),
+-   createacc => l('Create free;return&account now'),
 - );
 - my $lang = stash->{language};
 :javascript
@@ -225,8 +225,7 @@
                       %input#chooseapassword{:name => 'chooseapassword', :type => 'password', :maxlength => '25', :required => true,:style=>'width:88%;'}
                 %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                 %input{:type => 'hidden', :name => 'l', :value => $lang}
-                %input.button{:id => 'btn_registration',:type => 'submit',:style=>'margin-top:10px'}
-                  != l('Create free account now')
+                %input.button{:id => 'btn_registration',:type => 'submit', :value => stash('createacc'),:style=>'margin-top:10px'}
               %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
         .bottom-dark-box.acc-input-security{:style=>'margin:0 0 0 -9px;overflow:hidden;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
           %p{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
