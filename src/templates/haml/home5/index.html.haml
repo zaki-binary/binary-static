@@ -235,7 +235,7 @@
                   %span.acc-input{:style=>'margin:9px 0 0 0'}
                     %label.grd-grid-4.grd-grid-phablet-12.grd-grid-tablet-4.grd-grid-mobile-12{:for => 'Email',:style=>'padding:0;margin-top:8px;text-align: right;padding-right: 3px;'}= l('Your Email:')
                     %span.grd-grid-8.grd-no-gutter.grd-no-gutter.grd-grid-phablet-12.grd-grid-tablet-8.grd-grid-mobile-12
-                      %input{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder=>'your1 email here':style=>'width:88%;text-align: left;'}
+                      %input{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder=>'your email here':style=>'width:88%;text-align: left;'}
                   %span.acc-input{:style=>'margin-top:12px'}
                     %label.grd-grid-4.grd-grid-phablet-12.grd-grid-tablet-4.grd-grid-mobile-12{:for => 'chooseapassword',:style=>'padding:0;margin:9px 0 0 0;text-align: right;padding-right: 3px;'}= l('Password:')
                     %span.grd-grid-8.grd-no-gutter.grd-no-gutter.grd-grid-phablet-12.grd-grid-tablet-8.grd-grid-mobile-12
@@ -395,7 +395,7 @@
           .box-wrap.section-margin.signup.grid-signup-box.grd-hide-phablet.grd-hide-tablet.grd-hide-mobile{:style=>'padding:0;position:relative;'}
             %div
               %header{:style=>'padding:15px 0;'}
-                %h3.title.padding.text-center{:style=>'min-height:inherit;margin:0;'}= l('Start here')
+                %h3.title.padding.text-center{:style=>'min-height:inherit;margin:0;'}= l('Start trading binary options')
               .body{:style=>'padding:0px 20px 10px 20px;'}
                 #open-account.grd-grid-12{:style=>'padding:0px;border-radius:0px;margin-top:0px;padding-top:0px;'}
                   .form-w{:style=>'padding:0 0px;'}
@@ -438,7 +438,8 @@
                             %input#chooseapassword{:name => 'chooseapassword', :type => 'password', :maxlength => '25', :required => true,:style=>'width:88%;'}
                       %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                       %input{:type => 'hidden', :name => 'l', :value => $lang}
-                      %input.button{:id => 'btn_registration',:type => 'submit', :value => stash('createacc'),:style=>'margin-top:10px'}
+                      %button{:id => 'no_btn_registration',:style=>'margin-top:10px',:class=>'input-button button'}
+                        != l('Create free<br/>account now')
                     %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
                 .clearfix
             .bottom-dark-box.acc-input-security{:style=>'margin:0;overflow:hidden;position:absolute;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
