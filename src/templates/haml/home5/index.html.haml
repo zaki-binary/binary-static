@@ -4,87 +4,6 @@
 -   createacc => l('Create free account now'),
 - );
 - my $lang = stash->{language};
-:javascript
-  (function(){
-  var throttle =function (callback, limit) {
-      var wait = false;                 // Initially, we're not waiting
-      return function () {              // We return a throttled function
-          if (!wait) {                  // If we're not waiting
-              callback.call();          // Execute users function
-              wait = true;              // Prevent future invocations
-              setTimeout(function () {  // After a period of time
-                  wait = false;         // And allow future invocations
-              }, limit);
-          }
-      }
-  }
-  //var elems=null
-  var resetH=function(){
-    var elems=$("#benefits .box-wrap:visible")
-    if(!elems)return
-    var hArr=[]
-    elems.height('')
-    //if($(window).width()<400){return }
-    var gsbH=0
-    var $gridSignupBox=$('.grid-signup-box:visible','#benefits')
-    $gridSignupBox.children().each(function(i,obj){
-      gsbH+=$(obj).outerHeight()
-    })
-    var resizeRow=function(rowObj,nextElIdx,elArr){
-      if(rowObj.rowElArr.length<2 && rowObj.rowElArr[0][0]!=$gridSignupBox[0]){
-      processRow(elArr,nextElIdx)
-      return
-      }
-           var maxH=Math.max.apply(this,rowObj.h)
-            for(var i=0;i<rowObj.rowElArr.length;i++){
-              rowObj.rowElArr[i].outerHeight(maxH)
-            }
-            if(nextElIdx>-1)processRow(elArr,nextElIdx)
-    }
-
-    var processRow=function(elArr,fromElIdx){
-    if(fromElIdx<0)return
-      var $el,top,prevRowTop,currRowObj
-      for(var i=fromElIdx;i<elArr.length;i++){
-        $el=$(elArr[i])
-        top=$el.offset().top.toString()
-        if(prevRowTop!=null && top!=prevRowTop ){
-          resizeRow(currRowObj,i,elArr)
-          return
-        }
-        prevRowTop=top
-        if(!currRowObj)currRowObj={rowElArr:[],h:[]}
-        h=$el.outerHeight()
-        if($el[0]==$gridSignupBox[0]){
-          h=gsbH
-        }
-        currRowObj.h.push(h)
-        currRowObj.rowElArr.push($el)
-        var isLast=i+1==elArr.length
-        if(isLast)resizeRow(currRowObj,-1,elArr)
-      }
-    }
-    processRow(elems,0)
-  }
-  window._waitJq=function(){
-    if(window.$==null){
-      setTimeout(window._waitJq,100)
-      return
-    }else{
-      $(function(){
-        //elems=$("#benefits .box-wrap")
-
-        resetH()
-        $(window).load(function(){resetH()})
-        $(window).resize(resetH)
-        //$(window).resize(throttle(resetH,500))
-      })
-    }
-  }
-  window._waitJq()
-
-  }())
-
 :css
   .static_full .section:first-child{padding-bottom:0;}
   .static_full .section:not(:first-child){padding:0 0;}
@@ -132,7 +51,7 @@
   .box-wrap.signup header{background-color:#e98024;}
   .box-wrap.signup header h3{margin: 25px 0}
   .box-wrap.signup header .title{color:#fff;margin: 0 0 10px;min-height: inherit;}
-  
+
     p, body{line-height:1.7em; color:#2a3052;}
     h1,h2,h3,h4,h5{color:#2a3052;line-height:1em;}
     .small{font-size:0.7em;}
@@ -268,7 +187,8 @@
                       %input#chooseapassword{:name => 'chooseapassword', :type => 'password', :maxlength => '25', :required => true,:style=>'width:88%;'}
                 %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                 %input{:type => 'hidden', :name => 'l', :value => $lang}
-                %input.button{:id => 'btn_registration',:type => 'submit', :value => stash('createacc'),:style=>'margin-top:10px'}
+                %button{:id => 'no_btn_registration',:style=>'margin-top:10px',:class=>'input-button button'}
+                  != l('Create free<br/>account now')
               %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
         .bottom-dark-box.acc-input-security{:style=>'margin:0 0 0 -9px;overflow:hidden;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
           %p{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
@@ -386,7 +306,8 @@
                             %input#chooseapassword{:name => 'chooseapassword', :type => 'password', :maxlength => '25', :required => true,:style=>'width:88%;'}
                       %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                       %input{:type => 'hidden', :name => 'l', :value => $lang}
-                      %input.button{:id => 'btn_registration',:type => 'submit', :value => stash('createacc'),:style=>'margin-top:10px'}
+                      %button{:id => 'no_btn_registration',:style=>'margin-top:10px',:class=>'input-button button'}
+                        != l('Create free<br/>account now')
                     %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
                 .clearfix
             .bottom-dark-box.acc-input-security{:style=>'margin:0;overflow:hidden;position:absolute;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
@@ -439,3 +360,83 @@
           != l('More than [_1] trades available', '<h1>1,000,000</h1>')
         .figureses.grd-grid-6
           != l('Under [_1] for market-leading returns', '<h1>$1</h1>')
+:javascript
+  (function(){
+  var throttle =function (callback, limit) {
+      var wait = false;                 // Initially, we're not waiting
+      return function () {              // We return a throttled function
+          if (!wait) {                  // If we're not waiting
+              callback.call();          // Execute users function
+              wait = true;              // Prevent future invocations
+              setTimeout(function () {  // After a period of time
+                  wait = false;         // And allow future invocations
+              }, limit);
+          }
+      }
+  }
+  //var elems=null
+  var resetH=function(){
+    var elems=$("#benefits .box-wrap:visible")
+    if(!elems)return
+    var hArr=[]
+    elems.height('')
+    //if($(window).width()<400){return }
+    var gsbH=0
+    var $gridSignupBox=$('.grid-signup-box:visible','#benefits')
+    $gridSignupBox.children().each(function(i,obj){
+      gsbH+=$(obj).outerHeight()
+    })
+    var resizeRow=function(rowObj,nextElIdx,elArr){
+      if(rowObj.rowElArr.length<2 && rowObj.rowElArr[0][0]!=$gridSignupBox[0]){
+      processRow(elArr,nextElIdx)
+      return
+      }
+           var maxH=Math.max.apply(this,rowObj.h)
+            for(var i=0;i<rowObj.rowElArr.length;i++){
+              rowObj.rowElArr[i].outerHeight(maxH)
+            }
+            if(nextElIdx>-1)processRow(elArr,nextElIdx)
+    }
+
+    var processRow=function(elArr,fromElIdx){
+    if(fromElIdx<0)return
+      var $el,top,prevRowTop,currRowObj
+      for(var i=fromElIdx;i<elArr.length;i++){
+        $el=$(elArr[i])
+        top=$el.offset().top.toString()
+        if(prevRowTop!=null && top!=prevRowTop ){
+          resizeRow(currRowObj,i,elArr)
+          return
+        }
+        prevRowTop=top
+        if(!currRowObj)currRowObj={rowElArr:[],h:[]}
+        h=$el.outerHeight()
+        if($el[0]==$gridSignupBox[0]){
+          h=gsbH
+        }
+        currRowObj.h.push(h)
+        currRowObj.rowElArr.push($el)
+        var isLast=i+1==elArr.length
+        if(isLast)resizeRow(currRowObj,-1,elArr)
+      }
+    }
+    processRow(elems,0)
+  }
+  window._waitJq=function(){
+    if(window.$==null){
+      setTimeout(window._waitJq,100)
+      return
+    }else{
+      $(function(){
+        //elems=$("#benefits .box-wrap")
+
+        resetH()
+        $(window).load(function(){resetH()})
+        $(window).resize(resetH)
+        //$(window).resize(throttle(resetH,500))
+      })
+    }
+  }
+  window._waitJq()
+
+  }())
