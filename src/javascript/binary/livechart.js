@@ -45,7 +45,9 @@ LiveChart.prototype = {
         }
 
         if (!chart_closed && live_chart) {
-            this.chart.destroy();
+            if (this.chart) {
+                this.chart.destroy();
+            }
             chart_closed = true;
             live_chart = null;
         }
