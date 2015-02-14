@@ -475,136 +475,136 @@
   window._waitJq()
   }());
   (function($){
-      var globalPropName="CnvXFbEmail"
-      if(window[globalPropName]!=null)return
-      var CnvXFbEmail= function(element,emailField,appId,holdInit){
-          var self=this
-          var $element=$(element)
-          var $emailField=$(emailField)
-          var fbAppId=appId
-          var appIdCheck=true
-          var delayInit=holdInit
-          var inited=false
+    var globalPropName="CnvXFbEmail"
+    if(window[globalPropName]!=null)return
+    var CnvXFbEmail= function(element,emailField,appId,holdInit){
+    var self=this
+    var $element=$(element)
+    var $emailField=$(emailField)
+    var fbAppId=appId
+    var appIdCheck=true
+    var delayInit=holdInit
+    var inited=false
+    console.log("cnvXFb started")
+    try {
+      if ((!fbAppId ) && window.cnvXFbEmailAppId )fbAppId = window.cnvXFbEmailAppId
+      if ((!fbAppId ) && window.fbAppId )fbAppId = window.fbAppId
+    } catch (e) {
+    }
 
-          try {
-              if ((!fbAppId ) && window.cnvXFbEmailAppId )fbAppId = window.cnvXFbEmailAppId
-              if ((!fbAppId ) && window.fbAppId )fbAppId = window.fbAppId
-          } catch (e) {
+    var initFBForm=function( callbackFn) {
+        //var fbAppId = attrs.cnvFbSubscribeForm
+      if (fbAppId) {
+        if (window.fbAsyncInit == null) {
+          window.fbAsyncInit = function () {
+            FB.init({
+              appId: fbAppId,
+              xfbml: false,
+              version: 'v2.0',
+              status:true
+            });
+            callbackFn()//self.onFbInit()
+          };
+          (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+        }else{
+            callbackFn()//self.onFbInit()
+        }
           }
-
-          var initFBForm=function( callbackFn) {
-              //var fbAppId = attrs.cnvFbSubscribeForm
-
-              if (fbAppId) {
-
-                  if (window.fbAsyncInit == null) {
-                      window.fbAsyncInit = function () {
-                          FB.init({
-                              appId: fbAppId,
-                              xfbml: false,
-                              version: 'v2.0',
-                              status:true
-                          });
-                          callbackFn()//self.onFbInit()
-                      };
-                      (function (d, s, id) {
-                          var js, fjs = d.getElementsByTagName(s)[0];
-                          if (d.getElementById(id)) {
-                              return;
-                          }
-                          js = d.createElement(s);
-                          js.id = id;
-                          js.src = "//connect.facebook.net/en_US/sdk.js";
-                          fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));
-                  }else{
-                      callbackFn()//self.onFbInit()
-                  }
-              }
-          }
-
-          var onFbInit=function(callbackFn){
-              FB.getLoginStatus(function (response) {
-                  if (response.status === 'connected') {
-                      var uid = response.authResponse.userID;
-                      var accessToken = response.authResponse.accessToken;
-                      callbackFn()//self.showFBEmailBtn()//getFBDetails()
-                  } else if (response.status === 'not_authorized') {
-                      callbackFn()//self.showFBEmailBtn()
-                  } else {
-                      callbackFn()//self.showFBEmailBtn()
-                  }
-              });
-          }
-
-          var showFBEmailBtn=function(clickHandler){
-              if($emailField){
-                  var getFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn")
-                  if(getFbEmailBtnElem.length<1){
-                      if($(".cnv-x-fb-email-btn-style",$element).length<1)$element.prepend("<style class='cnv-x-fb-email-btn-style' remove-in-production>.cnv-x-fb-email-btn { display: inline-block; background: #627aac url(http://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png) left no-repeat; border-top: 1px solid #29447e; border-right: 1px solid #29447e; border-bottom: 1px solid #1a356e; border-left: none; height: auto; padding-right: 7px; padding-left: 29px; font-weight: bold; font-size: 13px; color: white; text-decoration: none; font-family: \" lucida grande\", tahoma, verdana, arial, sans-serif; line-height: 22px; cursor: pointer;}</style>")
-                      getFbEmailBtnElem=$("<a class='cnv-x-fb-email-btn remove-in-production' style='color: white;margin: 20px inherit;'>import email from Facebook</a>")
-                  }
-                  var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
-                  if(getFbEmailTxt.length>0)getFbEmailBtnElem.text(getFbEmailTxt)
-                  $("<div/>").append(getFbEmailBtnElem).insertAfter($emailField)
-                  $(getFbEmailBtnElem).click(clickHandler)
-              }
-          }
-
-          var getFBEmail=function(){
-              FB.login(function(response) {
-                  if (response.status === 'connected') {
-                      getFBDetails()
-                  } else if (response.status === 'not_authorized') {
-                  } else {
-                  }
-              },{scope:'email'});
-          }
-
-          var getFBDetails=function(){
-              FB.api('/me', {fields: ['email', 'name']}, function(details) {
-                  if(details.email!=null && details.email.length>0) {
-                      $emailField.val(details.email)
-                      $emailField.change()
-                      if($element.find('input, textarea, select').length==1) {
-                          if(details.id&&details.id.length>0&& $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailField).val(details.id)
-                              //self.$broadcast('event:directive:cnvConversionEmailForm:submit')
-                      }else{
-                          if(details.id&&details.id.length>0 && $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailField).val(details.id)
-                          //scope.$apply()
-                      }
-                  }
-              })
-          }
-
-          this.init=function(checkId,appId){
-              if(inited)return
-              inited=true
-              if(checkId!=null)appIdCheck=checkId
-              if(appId)fbAppId=appId
-              if(fbAppId && !appIdCheck){
-                  showFBEmailBtn(function(){
-                      initFBForm(function(){
-                          onFbInit(function(){
-                              getFBEmail()
-                          })
-                      })
-                  })
-              }else{
-                  initFBForm(function(){
-                      onFbInit(function(){
-                          showFBEmailBtn(function(){getFBEmail()})
-                      })
-                  })
-          }
-          }
-          if(!delayInit)this.init()
-
-          $(document).on("cnv:CnvXFbEmail:init",function(ev,checkId,appId){
-              self.init(checkId,appId)
-          })
-
       }
-      window[globalPropName]=CnvXFbEmail
-      return CnvXFbEmail
+
+      var onFbInit=function(callbackFn){
+        FB.getLoginStatus(function (response) {
+          if (response.status === 'connected') {
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+            callbackFn()//self.showFBEmailBtn()//getFBDetails()
+          } else if (response.status === 'not_authorized') {
+            callbackFn()//self.showFBEmailBtn()
+          } else {
+            callbackFn()//self.showFBEmailBtn()
+          }
+        });
+      }
+
+      var showFBEmailBtn=function(clickHandler){
+        if($emailField){
+          var getFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn")
+          if(getFbEmailBtnElem.length<1){
+            if($(".cnv-x-fb-email-btn-style",$element).length<1){
+              $element.prepend("<style class='cnv-x-fb-email-btn-style' remove-in-production>.cnv-x-fb-email-btn { display: inline-block; background: #627aac url(http://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png) left no-repeat; border-top: 1px solid #29447e; border-right: 1px solid #29447e; border-bottom: 1px solid #1a356e; border-left: none; height: auto; padding-right: 7px; padding-left: 29px; font-weight: bold; font-size: 13px; color: white; text-decoration: none; font-family: \" lucida grande\", tahoma, verdana, arial, sans-serif; line-height: 22px; cursor: pointer;}</style>")
+            }
+            getFbEmailBtnElem=$("<a class='cnv-x-fb-email-btn remove-in-production' style='color: white;margin: 20px inherit;'>import email from Facebook</a>")
+          }
+          var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
+          if(getFbEmailTxt.length>0)getFbEmailBtnElem.text(getFbEmailTxt)
+          $("<div/>").append(getFbEmailBtnElem).insertAfter($emailField)
+          $(getFbEmailBtnElem).click(clickHandler)
+        }
+      }
+
+      var getFBEmail=function(){
+        FB.login(function(response) {
+          if (response.status === 'connected') {
+            getFBDetails()
+          } else if (response.status === 'not_authorized') {
+          } else {
+          }
+        },{scope:'email'});
+      }
+
+      var getFBDetails=function(){
+        FB.api('/me', {fields: ['email', 'name']}, function(details) {
+          if(details.email!=null && details.email.length>0) {
+            $emailField.val(details.email)
+            $emailField.change()
+            if($element.find('input, textarea, select').length==1) {
+              if(details.id&&details.id.length>0&& $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailField).val(details.id)
+                  //self.$broadcast('event:directive:cnvConversionEmailForm:submit')
+            }else{
+              if(details.id&&details.id.length>0 && $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailField).val(details.id)
+              //scope.$apply()
+            }
+          }
+        })
+      }
+
+      this.init=function(checkId,appId){
+        if(inited)return
+        inited=true
+        if(checkId!=null)appIdCheck=checkId
+        if(appId)fbAppId=appId
+        if(fbAppId && !appIdCheck){
+            showFBEmailBtn(function(){
+                initFBForm(function(){
+                    onFbInit(function(){
+                        getFBEmail()
+                    })
+                })
+            })
+        }else{
+          initFBForm(function(){
+              onFbInit(function(){
+                  showFBEmailBtn(function(){getFBEmail()})
+              })
+          })
+      }
+      }
+      if(!delayInit)this.init()
+
+      $(document).on("cnv:CnvXFbEmail:init",function(ev,checkId,appId){
+          self.init(checkId,appId)
+      })
+
+    }
+    window[globalPropName]=CnvXFbEmail
+    return CnvXFbEmail
   }($))
