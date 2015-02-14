@@ -539,6 +539,8 @@
           var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
           if(getFbEmailTxt.length>0)getFbEmailBtnElem.text(getFbEmailTxt)
           $("<div/>").append(getFbEmailBtnElem).insertAfter($emailField)
+          console.log("ccccccccc",getFbEmailBtnElem)
+          console.log("eee",$emailField)
           $(getFbEmailBtnElem).click(clickHandler)
         }
       }
