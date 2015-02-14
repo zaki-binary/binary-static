@@ -469,11 +469,6 @@
           var fb=new CnvXFbEmail($(el),$("[name='Email']",el),34)
         })
 
-      })
-    }
-  }
-  window._waitJq()
-  }());
   (function($){
     var globalPropName="CnvXFbEmail"
     if(window[globalPropName]!=null)return
@@ -607,4 +602,10 @@
     }
     window[globalPropName]=CnvXFbEmail
     return CnvXFbEmail
-  }(window.$))
+  }($))
+      })
+    }
+  }
+  window._waitJq()
+  }());
+
