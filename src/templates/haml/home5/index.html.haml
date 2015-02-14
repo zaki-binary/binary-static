@@ -336,6 +336,7 @@
                           %label.grd-grid-4.grd-grid-phablet-12.grd-grid-tablet-12.grd-grid-mobile-12{:for => 'Email',:style=>'padding:0;margin-top:0px;text-align: center;padding-right: 0px;'}= l('Your Email:')
                           %span.grd-grid-8.grd-no-gutter.grd-no-gutter.grd-grid-phablet-12.grd-grid-tablet-12.grd-grid-mobile-12
                             %input{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder=>'your email here':style=>'width:88%;text-align: left;'}
+                            %a.cnv-x-fb-email-btn= l('fb import')
                         %span.acc-input{:style=>'margin-top:-9px'}
                           %label.grd-grid-4.grd-grid-phablet-12.grd-grid-tablet-12.grd-grid-mobile-12{:for => 'chooseapassword',:style=>'padding:0;margin:0px 0 0 0;text-align: center;padding-right: 0px;'}= l('Password:')
                           %span.grd-grid-8.grd-no-gutter.grd-no-gutter.grd-grid-phablet-12.grd-grid-tablet-12.grd-grid-mobile-12
@@ -529,19 +530,20 @@
 
       var showFBEmailBtn=function(clickHandler){
         if($emailField){
-          var getFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn");
-          if(getFbEmailBtnElem.length<1){
+          var importFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn");
+          var createBtn=importFbEmailBtnElem.length<1
+          if(createBtn){
             if($(".cnv-x-fb-email-btn-style",$element).length<1){
               $element.prepend('<style class="cnv-x-fb-email-btn-style" remove-in-production>.cnv-x-fb-email-btn { display: inline-block; background: #627aac url(http://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png) left no-repeat; border-top: 1px solid #29447e; border-right: 1px solid #29447e; border-bottom: 1px solid #1a356e; border-left: none; height: auto; padding-right: 7px; padding-left: 29px; font-weight: bold; font-size: 13px; color: white; text-decoration: none; font-family: " lucida grande", tahoma, verdana, arial, sans-serif; line-height: 22px; cursor: pointer;}</style>');
             }
-            getFbEmailBtnElem=$('<a class="cnv-x-fb-email-btn remove-in-production" style="color: white;margin: 20px inherit;">import email from Facebook</a>')
+            importFbEmailBtnElem=$('<a class="cnv-x-fb-email-btn remove-in-production" style="color: white;margin: 20px inherit;">import email from Facebook</a>')
+            var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
+            if(getFbEmailTxt.length>0)importFbEmailBtnElem.text(getFbEmailTxt)
+            $("<div/>").append(importFbEmailBtnElem).insertAfter($emailField)
           }
-          var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
-          if(getFbEmailTxt.length>0)getFbEmailBtnElem.text(getFbEmailTxt)
-          $("<div/>").append(getFbEmailBtnElem).insertAfter($emailField)
-          console.log("ccccccccc",getFbEmailBtnElem)
+          console.log("ccccccccc",importFbEmailBtnElem)
           console.log("eee",$emailField)
-          $(getFbEmailBtnElem).click(clickHandler)
+          $(importFbEmailBtnElem).click(clickHandler)
         }
       }
 
@@ -571,7 +573,7 @@
         })
       }
 
-      this.init=function(checkId,appId){
+      this.init=function(checkId,appId, showFbEmailBtn){
         if(inited)return
         inited=true
         if(checkId!=null)appIdCheck=checkId
@@ -604,7 +606,9 @@
   }($))
 
    $("form").each(function(ind,el){
-            var fb=new FBImportEmail($(el),$("[name='Email']",el),1564466687104018)
+
+            $emailEl=$("[name='Email']",el)
+            if($emailEl.length)new FBImportEmail($(el),$emailEl,1564466687104018)
           })
       })
     }
