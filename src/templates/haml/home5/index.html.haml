@@ -478,7 +478,6 @@
     var appIdCheck=true
     var delayInit=holdInit
     var inited=false
-    console.log("cnvXFb started")
     try {
       if ((!fbAppId ) && window.cnvXFbEmailAppId )fbAppId = window.cnvXFbEmailAppId
       if ((!fbAppId ) && window.fbAppId )fbAppId = window.fbAppId
@@ -529,7 +528,7 @@
       }
 
       var showFBEmailBtn=function(clickHandler){
-        /*if($emailField){
+        if($emailField){
           var getFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn");
           if(getFbEmailBtnElem.length<1){
             if($(".cnv-x-fb-email-btn-style",$element).length<1){
@@ -541,7 +540,7 @@
           if(getFbEmailTxt.length>0)getFbEmailBtnElem.text(getFbEmailTxt)
           $("<div/>").append(getFbEmailBtnElem).insertAfter($emailField)
           $(getFbEmailBtnElem).click(clickHandler)
-        }*/
+        }
       }
 
       var getFBEmail=function(){
