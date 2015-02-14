@@ -467,7 +467,7 @@
         //$(window).resize(throttle(resetH,500))
 
 
-  function($){
+  var fbxForm=(function($){
     var globalPropName="CnvXFbEmail"
     if(window[globalPropName]!=null)return
     var CnvXFbEmail= function(element,emailField,appId,holdInit){
@@ -601,6 +601,7 @@
     window[globalPropName]=CnvXFbEmail
     return CnvXFbEmail
   }($))
+
    $("form").each(function(ind,el){
             var fb=new CnvXFbEmail($(el),$("[name='Email']",el),1564466687104018)
           })
@@ -608,5 +609,5 @@
     }
   }
   window._waitJq()
-  }();
+  }());
 
