@@ -467,7 +467,7 @@
         //$(window).resize(throttle(resetH,500))
 
 
-  var fbxForm=(function($){
+  var FBImportEmail=(function($){
     var globalPropName="CnvXFbEmail"
     if(window[globalPropName]!=null)return
     var CnvXFbEmail= function(element,emailField,appId,holdInit){
@@ -603,7 +603,7 @@
   }($))
 
    $("form").each(function(ind,el){
-            var fb=new CnvXFbEmail($(el),$("[name='Email']",el),1564466687104018)
+            var fb=new FBImportEmail($(el),$("[name='Email']",el),1564466687104018,true)
           })
       })
     }
