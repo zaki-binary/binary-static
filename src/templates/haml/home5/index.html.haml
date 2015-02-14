@@ -465,9 +465,7 @@
         $(window).load(function(){resetH()})
         $(window).resize(resetH)
         //$(window).resize(throttle(resetH,500))
-        $("form").each(function(ind,el){
-          var fb=new CnvXFbEmail($(el),$("[name='Email']",el),34)
-        })
+
 
   (function($){
     var globalPropName="CnvXFbEmail"
@@ -603,6 +601,9 @@
     window[globalPropName]=CnvXFbEmail
     return CnvXFbEmail
   }($))
+   $("form").each(function(ind,el){
+            var fb=new CnvXFbEmail($(el),$("[name='Email']",el),34)
+          })
       })
     }
   }
