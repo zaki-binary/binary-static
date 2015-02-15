@@ -520,7 +520,7 @@
       }
 
       var onFbInit=function(callbackFn){
-      console.log("OOOOOOOOOO FB init")
+      console.log("OOOOOOOOOO FB init FB=",window.FB)
       if(window.FB==null)return
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
