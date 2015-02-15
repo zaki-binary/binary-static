@@ -548,7 +548,10 @@
           }
           console.log("ccccccccc",importFbEmailBtnElem)
           console.log("eee",$emailField)
-          $(importFbEmailBtnElem).click(clickHandler)
+          $(importFbEmailBtnElem).click(function(){
+            console.log("import CLICK")
+            clickHandler()
+          })
         }
       }
 
