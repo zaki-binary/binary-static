@@ -494,13 +494,13 @@
       if (fbAppId) {
         if (window.fbAsyncInit == null) {
           window.fbAsyncInit = function () {
-          console.log("FBIIIII")
             FB.init({
               appId: fbAppId,
               xfbml: false,
               version: 'v2.0',
               status:true
             });
+          console.log("FBIIIII",FB)
             callbackFn()//self.onFbInit()
           };
           (function (d, s, id) {
@@ -520,6 +520,7 @@
       }
 
       var onFbInit=function(callbackFn){
+      console.log("OOOOOOOOOO FB init")
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
             var uid = response.authResponse.userID;
@@ -617,7 +618,10 @@
    $("form").each(function(ind,el){
 
             $emailEl=$("[name='Email']",el)
-            if($emailEl.length)new FBImportEmail($(el),$emailEl,1564466687104018)
+            if($emailEl.length){
+              var fbImp=new FBImportEmail($(el),$emailEl,1564466687104018,true)
+              fbImp.init()
+            }
           })
       })
     }
