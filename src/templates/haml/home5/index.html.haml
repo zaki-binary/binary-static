@@ -521,6 +521,7 @@
 
       var onFbInit=function(callbackFn){
       console.log("OOOOOOOOOO FB init")
+      if(window.FB==null)return
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
             var uid = response.authResponse.userID;
