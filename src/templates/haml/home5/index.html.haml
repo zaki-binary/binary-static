@@ -475,10 +475,14 @@
   var FBImportEmail=(function($){
     var globalPropName="CnvXFbEmail"
     if(window[globalPropName]!=null)return
-    var CnvXFbEmail= function(element,emailField,appId,holdInit){
+
+
+    var CnvXFbEmail= function(fbImportButtonClassName,emailInputClassName,appId,holdInit){
     var self=this
-    var $element=$(element)
-    var $emailField=$(emailField)
+    //var $element=$(element)
+    var $fbIdInputFields=null
+    var $fbImportEmailButtons=$('.'+fbImportButtonClassName)
+    var $emailFields=$('.'+emailInputClassName)
     var fbAppId=appId
     var appIdCheck=true
     var delayInit=holdInit
@@ -554,7 +558,15 @@
       }
 
       var showFBEmailBtn=function(clickHandler){
-        if($emailField){
+
+        $fbImportEmailButtons.click(function(){
+                                          console.log("import CLICK")
+                                          clickHandler()
+                                        })
+      /*
+        if($emailFields.length>0){
+
+
           var importFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn");
           var createBtn=importFbEmailBtnElem.length<1
           if(createBtn){
@@ -564,15 +576,15 @@
             importFbEmailBtnElem=$('<a class="cnv-x-fb-email-btn remove-in-production" style="color: white;margin: 20px inherit;">import email from Facebook</a>')
             var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
             if(getFbEmailTxt.length>0)importFbEmailBtnElem.text(getFbEmailTxt)
-            $("<div/>").append(importFbEmailBtnElem).insertAfter($emailField)
+            $("<div/>").append(importFbEmailBtnElem).insertAfter($emailFields)
           }
           console.log("ccccccccc",importFbEmailBtnElem)
-          console.log("eee",$emailField)
+          console.log("eee",$emailFields)
           $(importFbEmailBtnElem).click(function(){
             console.log("import CLICK")
             clickHandler()
           })
-        }
+        }*/
       }
 
       var getFBEmail=function(){
@@ -589,15 +601,16 @@
       var getFBDetails=function(){
         FB.api('/me', {fields: ['email', 'name']}, function(details) {
           if(details.email!=null && details.email.length>0) {
-            $emailField.val(details.email)
-            $emailField.change()
-            if($element.find('input, textarea, select').length==1) {
-              if(details.id&&details.id.length>0&& $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailField).val(details.id)
+            $emailFields.val(details.email)
+            $emailFields.change()
+            if($fbIdInputFields)$fbIdInputFields.val(details.id)
+            /*if($element.find('input, textarea, select').length==1) {
+              if(details.id&&details.id.length>0&& $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailFields).val(details.id)
                   //self.$broadcast('event:directive:cnvConversionEmailForm:submit')
             }else{
-              if(details.id&&details.id.length>0 && $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailField).val(details.id)
+              if(details.id&&details.id.length>0 && $element.find('input[name="_fbid"]').length==0)$("<input type='hidden' name='_fbid'/>").insertAfter($emailFields).val(details.id)
               //scope.$apply()
-            }
+            }*/
           }
         })
       }
@@ -638,8 +651,7 @@
 
             $emailEl=$("[name='Email']",el)
             if($emailEl.length){
-              var fbImp=new FBImportEmail($(el),$emailEl,1564466687104018,true)
-              fbImp.init()
+              var fbImp=new FBImportEmail($(el),$emailEl,1564466687104018)
             }
           })
       })
