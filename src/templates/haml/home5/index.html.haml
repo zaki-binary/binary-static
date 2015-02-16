@@ -480,7 +480,7 @@
   var totW=$emailInput.closest("form").outerWidth()
   $emailInput.outerWidth(totW-$fbImpBtn.outerWidth()-1)
   var emailWrap=$emailInput.closest(".acc-input")
-      emailWrap.siblings().outerWidth(totW)
+      emailWrap.siblings.find("[name='chooseapassword']").outerWidth(totW)
       })
     }
 
