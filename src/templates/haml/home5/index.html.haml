@@ -479,6 +479,9 @@
         $fbImpBtn.css({width:$emailInput.outerHeight(),height:$emailInput.outerHeight()})
   var totW=$emailInput.closest("form").outerWidth()
   $emailInput.outerWidth(totW-$fbImpBtn.outerWidth()-1)
+  var emailWrap=$emailInput.closest("acc-input")
+      var emailW=emailWrap.outerWidth()
+      emailWrap.siblings().outerWidth(totW)
       })
     }
 
