@@ -472,7 +472,7 @@
         //$(window).resize(throttle(resetH,500))
 
 
-        (function($,globalPropName){
+        var fbImportScr=(function($,globalPropName){
           if(globalPropName==null){console.log("ERROR global prop not defined=");return}
           if(window[globalPropName]!=null){console.log("global prop already defined=",globalPropName);return}
 
