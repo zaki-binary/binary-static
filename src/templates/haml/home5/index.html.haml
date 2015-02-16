@@ -123,7 +123,7 @@
             %img.responsive#new-trader-icon{:style=>'margin-left: 8px;width: 42px;',:src => url_for('images/pages/home5/user-icon.svg')}
             %h4.text-center{:style=>'display:inline-block;margin-left:21px;'}
               = l('Vinod G., UK')
-      .grd-grid-4.grd-parent.section-margin.grd-hide-phablet.grd-hide-tablet.grd-hide-mobile.grd-push-1
+      -#.grd-grid-4.grd-parent.section-margin.grd-hide-phablet.grd-hide-tablet.grd-hide-mobile.grd-push-1
         -#desktop version
         .box-wrap.signup{:style=>'margin:0 9px 0 -9px;min-height: inherit;padding-bottom:0'}
           %header{:style=>'background:none;'}
@@ -153,7 +153,7 @@
           %p{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
             %img.acc-input-security-icon{:src=>url_for('images/pages/home5/security-w.svg'),:style=>'margin: -6px 5px 0;max-width:13px;'}
             = l('we use highest security and privacy measures')
-      .grd-grid-tablet-4.grd-parent.section-margin.grd-show-tablet.grd-hide.grd-hide-phablet.grd-hide-mobile.grd-push-1
+      .grd-grid-tablet-4.grd-parent.section-margin.grd-show-tablet.grd-hide-phablet.grd-hide-mobile.grd-push-1
         -#tablet version
         .box-wrap.signup{:style=>'margin:0 9px 0 -9px;min-height: inherit;padding-bottom:0'}
           %header{:style=>'background:none;'}
@@ -480,6 +480,7 @@
         var totW=$emailInput.closest("form").outerWidth()
         $emailInput.outerWidth(totW-$fbImpBtn.outerWidth()-1)
         var emailWrap=$emailInput.closest(".acc-input")
+        //TODO fix this width in css
         emailWrap.siblings().find("[name='chooseapassword']").outerWidth(totW)
       })
     }
