@@ -504,7 +504,6 @@
                     version: 'v2.0',
                     status:true
                   });
-                console.log("FBIIIII",FB)
                   window[globalPropName].onInitFbForm()//callbackFn()//self.onFbInit()
                 };
                 (function (d, s, id) {
@@ -542,7 +541,6 @@
             }
 
             var onFbInit=function(callbackFn){
-            console.log("OOOOOOOOOO FB init FB=",window.FB)
             if(window.FB==null)return
               FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
@@ -559,13 +557,11 @@
 
             var showFBEmailBtn=function(clickHandler){
               $fbImportEmailButtons.click(function(){
-                console.log("import CLICK")
                 clickHandler()
               })
             }
 
             var getFBEmail=function(){
-            console.log("getFBEmail")
               FB.login(function(response) {
                 if (response.status === 'connected') {
                   getFBDetails()
