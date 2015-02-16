@@ -492,8 +492,8 @@
     var initFBForm=function( callbackFn) {
         //var fbAppId = attrs.cnvFbSubscribeForm
       if (fbAppId) {
-        if (window.asyncInit == null) {
-          window.asyncInit = function () {
+        if (window.fbAsyncInit == null) {
+          window.fbAsyncInit = function () {
             FB.init({
               appId: fbAppId,
               xfbml: false,
