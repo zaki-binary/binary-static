@@ -520,12 +520,17 @@
       }
 
       window[globalPropName].addOnInitFbFormCallback=function(listenerFunction){
+        if(window[globalPropName].onInitFbFormComplete){
+          listenerFunction()
+          return
+        }
         if(window[globalPropName].asyncInitListeners==null)window[globalPropName].asyncInitListeners=[]
         window[globalPropName].asyncInitListeners.push(listenerFunction)
       }
 
 
       window[globalPropName].onInitFbForm=function(){
+        window[globalPropName].onInitFbFormComplete=true
       for(var i=0;i<window[globalPropName].asyncInitListeners.length;i++){
         window[globalPropName].asyncInitListeners[i]()
       }
