@@ -558,33 +558,10 @@
       }
 
       var showFBEmailBtn=function(clickHandler){
-
         $fbImportEmailButtons.click(function(){
-                                          console.log("import CLICK")
-                                          clickHandler()
-                                        })
-      /*
-        if($emailFields.length>0){
-
-
-          var importFbEmailBtnElem=$element.find(".cnv-x-fb-email-btn");
-          var createBtn=importFbEmailBtnElem.length<1
-          if(createBtn){
-            if($(".cnv-x-fb-email-btn-style",$element).length<1){
-              $element.prepend('<style class="cnv-x-fb-email-btn-style" remove-in-production>.cnv-x-fb-email-btn { display: inline-block; background: #627aac url(http://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png) left no-repeat; border-top: 1px solid #29447e; border-right: 1px solid #29447e; border-bottom: 1px solid #1a356e; border-left: none; height: auto; padding-right: 7px; padding-left: 29px; font-weight: bold; font-size: 13px; color: white; text-decoration: none; font-family: " lucida grande", tahoma, verdana, arial, sans-serif; line-height: 22px; cursor: pointer;}</style>');
-            }
-            importFbEmailBtnElem=$('<a class="cnv-x-fb-email-btn remove-in-production" style="color: white;margin: 20px inherit;">import email from Facebook</a>')
-            var getFbEmailTxt=$element.find(".cnv-x-fb-email-btn-text").text()
-            if(getFbEmailTxt.length>0)importFbEmailBtnElem.text(getFbEmailTxt)
-            $("<div/>").append(importFbEmailBtnElem).insertAfter($emailFields)
-          }
-          console.log("ccccccccc",importFbEmailBtnElem)
-          console.log("eee",$emailFields)
-          $(importFbEmailBtnElem).click(function(){
-            console.log("import CLICK")
-            clickHandler()
-          })
-        }*/
+          console.log("import CLICK")
+          clickHandler()
+        })
       }
 
       var getFBEmail=function(){
@@ -648,15 +625,9 @@
   }($,'CnvXFbEmail'))
 
   var fbImport=new CnvXFbEmail('import-fb-email-btn','import-fb-email-field',1564466687104018)
-   /*$("form").each(function(ind,el){
-
-            $emailEl=$("[name='Email']",el)
-            if($emailEl.length){
-              var fbImp=new FBImportEmail($(el),$emailEl,1564466687104018)
-            }
-          })
-      })
-    }
-  }*/
+  }
+  }
+  }
   window._waitJq()
+
   }());
