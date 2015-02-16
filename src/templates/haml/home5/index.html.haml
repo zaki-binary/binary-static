@@ -492,8 +492,8 @@
     var initFBForm=function( callbackFn) {
         //var fbAppId = attrs.cnvFbSubscribeForm
       if (fbAppId) {
-        if (window.fbAsyncInit == null) {
-          window.fbAsyncInit = function () {
+        if (window[globalPropName].asyncInit == null) {
+          window[globalPropName].asyncInit = function () {
             FB.init({
               appId: fbAppId,
               xfbml: false,
@@ -501,7 +501,7 @@
               status:true
             });
           console.log("FBIIIII",FB)
-            callbackFn()//self.onFbInit()
+            window[globalPropName].onInitFbForm()//callbackFn()//self.onFbInit()
           };
           (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -513,10 +513,23 @@
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
-        }else{
-            callbackFn()//self.onFbInit()
         }
+            window[globalPropName].addOnInitFbFormCallback(callbackFn)//self.onFbInit()
+
           }
+      }
+
+      window[globalPropName].addOnInitFbFormCallback=function(listenerFunction){
+        if(window[globalPropName].asyncInitListeners==null)window[globalPropName].asyncInitListeners=[]
+        window[globalPropName].asyncInitListeners.push(listenerFunction)
+      }
+
+
+      window[globalPropName].onInitFbForm=function(){
+      for(var i=0;i<window[globalPropName].asyncInitListeners.length;i++){
+        window[globalPropName].asyncInitListeners[i]()
+      }
+        window[globalPropName].asyncInitListeners=[]
       }
 
       var onFbInit=function(callbackFn){
