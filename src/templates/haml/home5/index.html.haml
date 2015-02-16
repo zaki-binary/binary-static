@@ -477,10 +477,10 @@
         var $emailInput=$(el)
         var $fbImpBtn=$emailInput.next()
         $fbImpBtn.css({width:$emailInput.outerHeight(),height:$emailInput.outerHeight()})
-  var totW=$emailInput.closest("form").outerWidth()
-  $emailInput.outerWidth(totW-$fbImpBtn.outerWidth()-1)
-  var emailWrap=$emailInput.closest(".acc-input")
-      emailWrap.siblings.find("[name='chooseapassword']").outerWidth(totW)
+        var totW=$emailInput.closest("form").outerWidth()
+        $emailInput.outerWidth(totW-$fbImpBtn.outerWidth()-1)
+        var emailWrap=$emailInput.closest(".acc-input")
+        emailWrap.siblings().find("[name='chooseapassword']").outerWidth(totW)
       })
     }
 
