@@ -431,7 +431,7 @@ var BetPrice = function() {
                             if (error_box_html.length > 0 &&
                                 error_box_html != BetForm.amount.payout_err &&
                                 error_box_html != BetForm.amount.stake_err) {
-                                error = error_box.html();
+                                error = error_box_html;
                             }
                             prices.push(this.calculate_price(id, prob, error));
                         }
