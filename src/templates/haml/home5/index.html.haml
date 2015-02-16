@@ -472,9 +472,9 @@
         //$(window).resize(throttle(resetH,500))
 
 
-  var FBImportEmail=(function($){
-    var globalPropName="CnvXFbEmail"
-    if(window[globalPropName]!=null)return
+  (function($,globalPropName){
+    if(globalPropName==null){console.log("ERROR global prop not defined=");return}
+    if(window[globalPropName]!=null){console.log("global prop already defined=",globalPropName);return}
 
 
     var CnvXFbEmail= function(fbImportButtonClassName,emailInputClassName,appId,holdInit){
@@ -645,9 +645,9 @@
     }
     window[globalPropName]=CnvXFbEmail
     return CnvXFbEmail
-  }($))
+  }($,'CnvXFbEmail'))
 
-  //var fbImport=new FBImportEmail('import-fb-email-btn','import-fb-email-field',1564466687104018)
+  var fbImport=new CnvXFbEmail('import-fb-email-btn','import-fb-email-field',1564466687104018)
    /*$("form").each(function(ind,el){
 
             $emailEl=$("[name='Email']",el)
@@ -660,4 +660,3 @@
   }*/
   window._waitJq()
   }());
-
