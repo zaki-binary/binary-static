@@ -34,6 +34,10 @@
 
   %title= stash('website_name') . (stash('title') ? " : ".stash('title'): '')
 
+  %script{:src => "//use.typekit.net/bfu3ywb.js"}
+  :javascript
+    try{Typekit.load();}catch(e){}
+
   %link{:rel=>"icon" :type=>"image/png" :href=>url_for('images/common/favicon_1.ico')}
   /[if IE]
     %link{:rel=>"shortcut icon" :href=>url_for('images/common/favicon_1.ico')}
