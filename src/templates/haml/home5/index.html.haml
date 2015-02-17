@@ -52,7 +52,7 @@
   .box-wrap.signup header h3{margin: 25px 0}
   .box-wrap.signup header .title{color:#fff;margin: 0 0 10px;min-height: inherit;}
 
-    p, body{line-height:1.7em; color:#2a3052;}
+    .paragraph-style{line-height:1.7em; color:#2a3052;}
     .title{color:#2a3052;line-height:1em;}
     .small{font-size:0.7em;}
     #benefits{background-color:#f2f2f2; margin-top:0px;}
@@ -105,15 +105,15 @@
       margin-top: -2px !important;
       margin-bottom: -2px !important;
     }
-.home-content
+.home-content.paragraph-style
   #banner.section-margin{:style=>'background-position-y: 103%;background-position-x: -272px;'}
     .grd-container{:style=>''}
       .grd-grid-12.text-center{:style=>'padding-top:0px'}
         %h1.dark.title{:style=>'font-size:33px;color:#2a3052;margin-bottom:13px;margin-top:-4px;'}= l('The premier platform for binary options trading')
-        %p{:style=>'font-size: 1.2em;margin:0px;'}
+        %p.paragraph-style{:style=>'font-size: 1.2em;margin:0px;'}
           = l('The most simple and exciting way to experience financial markets.')
       .grd-grid-7.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent.section-margin
-        %p.grd-hide-phablet.grd-hide-mobile.talk-bubble{:style=>'padding:25px 22px 20px 44px; margin-top:0px;position:relative;font-size:1.3em;line-height:1.3em;background:#f2f2f2'}
+        %p.paragraph-style.grd-hide-phablet.grd-hide-mobile.talk-bubble{:style=>'padding:25px 22px 20px 44px; margin-top:0px;position:relative;font-size:1.3em;line-height:1.3em;background:#f2f2f2'}
           != ('<strong style="font-size: 1.8em;position: absolute;left: 16px;top: 25px;font-family:serif;">&ldquo;</strong> For me personally Binary.com is by far the best place to trade binary online. Not only are they well established and a trusted source, I find their pricing super competitive across the wide range of markets. <strong style="font-size: 1.8em;position: absolute;bottom: 20px;font-family:serif;">&rdquo;</strong>')
         .grd-container.grd-hide-phablet.grd-hide-mobile{:style=>'margin-top:99px'}
           .wrap
@@ -145,9 +145,9 @@
                         != l('Create free<br/>account now')
                 %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                 %input{:type => 'hidden', :name => 'l', :value => $lang}
-              %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
+              %p.paragraph-style{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
         .bottom-dark-box.acc-input-security{:style=>'margin:0 0 0 -9px;overflow:hidden;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
-          %p{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
+          %p.paragraph-style{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
             %img.acc-input-security-icon{:src=>url_for('images/pages/home5/security-w.svg'),:style=>'margin: -6px 5px 0;max-width:13px;'}
             = l('we use highest security and privacy measures')
       .grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.grd-grid-tablet-4.grd-parent.grd-centered-phablet.grd-centered-mobile.section-margin.grd-hide
@@ -175,9 +175,9 @@
                         != l('Create free<br/>account now')
                 %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                 %input{:type => 'hidden', :name => 'l', :value => $lang}
-              %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
+              %p.paragraph-style{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
         .bottom-dark-box.acc-input-security{:style=>'margin:0 0 0 -9px;overflow:hidden;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
-          %p{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
+          %p.paragraph-style{style=>'color:inherit; padding: 1px 8px;line-height: 1.3em;font-size: 0.9em;'}
             %img.acc-input-security-icon{:src=>url_for('images/pages/home5/security-w.svg'),:style=>'margin: -6px 5px 0;max-width:13px;'}
             = l('we use highest security and privacy measures')
   .seen-on.section-margin
@@ -238,7 +238,7 @@
                 %img.responsive#new-trader-icon{:style=>'max-width:150px;',:src => url_for('images/pages/home5/prices-icon.svg')}
               %h4.title.padding.text-center= l('Best-in-class pricing for binaries')
             .body
-              %p= l('Our exclusive pricing technology gives you the best possible opportunity to make your money work for you.');
+              %p.paragraph-style= l('Our exclusive pricing technology gives you the best possible opportunity to make your money work for you.');
         %section.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.grd-grid-tablet-4
           .box-wrap.section-margin
             %header
@@ -246,7 +246,7 @@
                 %img.responsive#new-trader-icon{:style=>'max-width:150px;',:src => url_for('images/pages/home5/binary-product-selection.svg')}
               %h4.title.padding.text-center= l('Choose From 10 Seconds To 365 Days')
             .body
-              %p= l('$1 to $100,000 payouts, low-risk to high-leverage, and much more. We offer limitless profit opportunities.');
+              %p.paragraph-style= l('$1 to $100,000 payouts, low-risk to high-leverage, and much more. We offer limitless profit opportunities.');
         %section.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.grd-grid-tablet-4
           .box-wrap.section-margin
             %header
@@ -254,7 +254,7 @@
                 %img.responsive#new-trader-icon{:style=>'max-width:150px;',:src => url_for('images/pages/home5/first-icon.svg')}
               %h4.title.padding.text-center= l('Technology leader with more than 10 years experience')
             .body
-              %p= l('Trade with confidence with the industry pioneer.');
+              %p.paragraph-style= l('Trade with confidence with the industry pioneer.');
         %section.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.grd-grid-tablet-4
           .box-wrap.section-margin
             %header
@@ -262,7 +262,7 @@
                 %img.responsive#new-trader-icon{:style=>'max-width:150px;',:src => url_for('images/pages/home5/support-icon.svg')}
               %h4.title.padding.text-center= l('Get help and support when you need it')
             .body
-              %p= l('Our exclusive pricing technology gives you the best possible opportunity to make your money work for you.');
+              %p.paragraph-style= l('Our exclusive pricing technology gives you the best possible opportunity to make your money work for you.');
         %section.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.grd-grid-tablet-4
           .box-wrap.section-margin
             %header
@@ -270,7 +270,7 @@
                 %img.responsive#new-trader-icon{:style=>'max-width:150px;',:src => url_for('images/pages/home5/charting-icon.svg')}
               %h4.title.padding.text-center= l('Charting tools like nowhere else')
             .body
-              %p= l('Our exclusive pricing technology gives you the best possible opportunity to make your money work for you.');
+              %p.paragraph-style= l('Our exclusive pricing technology gives you the best possible opportunity to make your money work for you.');
         %section.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.grd-grid-tablet-4
           .box-wrap.section-margin.signup.grid-signup-box{:style=>'padding:0;position:relative;'}
             %div
@@ -297,10 +297,10 @@
                               != l('Create free<br/>account now')
                       %input#actype{:type => 'hidden', :name => 'actype', :value => 'virtual'}
                       %input{:type => 'hidden', :name => 'l', :value => $lang}
-                    %p{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
+                    %p.paragraph-style{:style=>'margin:0px;padding:0px;line-height: 1.5em;font-weight: bold;'}= l('Get your free $10k virtual money account')
                 .clearfix
             .bottom-dark-box.acc-input-security{:style=>'margin:0;overflow:hidden;position:absolute;bottom:0;padding: 0px 0;background:#15212d;font-size: 72%;width:100%;text-align:center;color:#fff'}
-              %p{style=>'color:inherit; padding: 1px 10px;line-height: 1.3em;font-size: 0.9em;'}
+              %p.paragraph-style{style=>'color:inherit; padding: 1px 10px;line-height: 1.3em;font-size: 0.9em;'}
                 %img.acc-input-security-icon{:src=>url_for('images/pages/home5/security-w.svg'),:style=>'margin: -6px 5px 0;max-width:13px;'}
                 = l('we use highest security and privacy measures')
   #quickstart.section-margin{:style=>'padding-bottom:0px;'}
