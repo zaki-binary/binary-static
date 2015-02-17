@@ -53,7 +53,7 @@
   .box-wrap.signup header .title{color:#fff;margin: 0 0 10px;min-height: inherit;}
 
     p, body{line-height:1.7em; color:#2a3052;}
-    h1,h2,h3,h4,h5{color:#2a3052;line-height:1em;}
+    .title{color:#2a3052;line-height:1em;}
     .small{font-size:0.7em;}
     #benefits{background-color:#f2f2f2; margin-top:0px;}
     #benefits .acc-input{margin:0}
@@ -109,7 +109,7 @@
   #banner.section-margin{:style=>'background-position-y: 103%;background-position-x: -272px;'}
     .grd-container{:style=>''}
       .grd-grid-12.text-center{:style=>'padding-top:0px'}
-        %h1.dark{:style=>'font-size:33px;color:#2a3052;margin-bottom:13px;margin-top:-4px;'}= l('The premier platform for binary options trading')
+        %h1.dark.title{:style=>'font-size:33px;color:#2a3052;margin-bottom:13px;margin-top:-4px;'}= l('The premier platform for binary options trading')
         %p{:style=>'font-size: 1.2em;margin:0px;'}
           = l('The most simple and exciting way to experience financial markets.')
       .grd-grid-7.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent.section-margin
@@ -118,7 +118,7 @@
         .grd-container.grd-hide-phablet.grd-hide-mobile{:style=>'margin-top:99px'}
           .wrap
             %img.responsive#new-trader-icon{:style=>'margin-left: 8px;width: 42px;',:src => url_for('images/pages/home5/user-icon.svg')}
-            %h4.text-center{:style=>'display:inline-block;margin-left:21px;'}
+            %h4.title.text-center{:style=>'display:inline-block;margin-left:21px;'}
               = l('Vinod G., UK')
       .grd-grid-4.grd-grid-tablet-4.grd-parent.section-margin.grd-show-tablet.grd-hide-phablet.grd-hide-mobile.grd-push-1
         -#tablet version
@@ -183,9 +183,9 @@
   .seen-on.section-margin
     .grd-container
       .grd-grid-6.grd-hide-tablet.grd-hide-phablet.grd-hide-mobile{:style=>'padding-top:8px'}
-        %h4{:style=>'margin:53px 0 28px;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
+        %h4.title{:style=>'margin:53px 0 28px;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
       .grd-show-mobile.grd-show-phablet.grd-show-tablet.grd-grid-mobile-12.grd-grid-phablet-12.grd-grid-tablet-12.grd-hide.text-center{:style=>'padding-top:0px'}
-        %h4{:style=>'margin:-10px 0 12px;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
+        %h4.title{:style=>'margin:-10px 0 12px;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
       .grd-grid-6.grd-grid-mobile-12.grd-grid-tablet-12.grd-grid-phablet-12{:style=>'padding-top:8px'}
         .grd-container.grd-show-mobile.grd-hide
           -#mobile
@@ -216,7 +216,7 @@
   .seen-on.section-margin{:style=>''}
     .grd-container
       .grd-grid-12{:style=>'padding:10px 0'}
-        %h3.text-center= l('As Seen On')
+        %h3.title.text-center= l('As Seen On')
         .grd-container
           .grd-with-padding.grd-grid-3.grd-grid-mobile-4.text-center{:style=>'padding-top:14px'}
             %img.responsive{:style=>'margin-top:32px;':src=>url_for('images/pages/home5/binaryoptions.net.au-db.jpg')}
@@ -331,13 +331,13 @@
       #prices.grd-grid-6.grd-grid-mobile-12.grd-parent
         .figures.grd-grid-6
           = l('Up to')
-          %h1= l('[_1]', '100%')
+          %h1.title= l('[_1]', '100%')
           = l('return on')
           %a.pjaxload{:href => url_for('trade.cgi?market=forex&focus=risefall')}= l('rise/fall')
           = l('trades')
         .figures.grd-grid-6
           = l('Up to')
-          %h1= l('[_1]', '1000%')
+          %h1.title= l('[_1]', '1000%')
           = l('return on trades you make')
       #try-now.grd-grid-6.grd-grid-mobile-12.grd-parent
         .figures.grd-grid-6
