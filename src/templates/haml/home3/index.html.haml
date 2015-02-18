@@ -2,6 +2,8 @@
 -   title => l('[_1]: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices',stash('broker_name')),
 -   next_link => '/why-us',
 -   createacc => l('Create free account'),
+-   emailtext   => l('Enter your email'),
+-   passwordstext   => l('Choose a password'),
 - );
 - my $lang = stash->{language};
 %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}
@@ -94,13 +96,13 @@
     %form#virtual-acc-form{:action => url_for('create_account.cgi'), :method => "post", :name => "oppAccForm"}
       %span#virtual-fields
         %span.grd-grid-12.grd-no-gutter.center
-          %input#Email.zemail{:name => "Email", :placeholder => "Enter Your Email", :required => "required", :type => "email"}
+          %input#Email.zemail{:name => "Email", :placeholder => stash('emailtext'), :required => "required", :type => "email"}
         %span.grd-grid-12.grd-no-gutter.center
-          %input#chooseapassword.zpass{:maxlength => "25", :name => "chooseapassword", :placeholder => "Choose a Password", :required => "required", :type => "password"}
+          %input#chooseapassword.zpass{:maxlength => "25", :name => "chooseapassword", :placeholder => stash('passwordstext'), :required => "required", :type => "password"}
             %input#actype{:name => "actype", :type => "hidden", :value => "virtual"}
-              %input{:name => "l", :type => "hidden", :value => "EN"}
+              %input{:name => "l", :type => "hidden", :value => $lang}
         %span.grd-grid-12.grd-no-gutter.center
-          %input#btn_registration.button.submit-button{:type => "submit", :value => "Create Free Account"}
+          %input#btn_registration.button.submit-button{:type => "submit", :value => stash('createacc')}
     %p.zreal-money
       %a{:href => url_for('linkto_acopening.cgi?actype=real')}= l('Create a real money account')
         
