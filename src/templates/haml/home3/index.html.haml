@@ -34,7 +34,7 @@
           %li!= l('<i class="fa fa-check-square"></i><span> All durations:</span> from 10 seconds to 365 days.')
           %li!= l('<i class="fa fa-check-square"></i><span> All payouts:</span> from $1 to $100,000.')
         .center{:style => "margin-top:40px;"}
-          %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('open_account.cgi')}
+          %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('linkto_acopening.cgi?actype=real')}
             %span= l('Open a Real Money Account')
 .zbackground
   .grd-container
@@ -102,7 +102,7 @@
         %span.grd-grid-12.grd-no-gutter.center
           %input#btn_registration.button.submit-button{:type => "submit", :value => "Create Free Account"}
     %p.zreal-money
-      %a{:href => url_for('open_account.cgi')}= l('Create a real money account')
+      %a{:href => url_for('linkto_acopening.cgi?actype=real')}= l('Create a real money account')
         
 
 
