@@ -14,20 +14,16 @@
       %li= l('Trade only with money you can afford to lose. Do not trade with borrowed money.')
     %h2= l('Written limits and self-exclusion')
     %p
-      = l('[_1] provides you with the opportunity to either self exclude or', stash->{website_name})
-      %a{:href => url_for('self_exclusion.cgi')}= l('set limits on your trading activities')
-      = l('on this website. You may also')
-      %a.pjaxload{:href => url_for('contact')}= l('contact us')
-      = l('to state the limits you wish to set via live chat, email or phone. Available limits are:')
+      != l('[_1] provides you with the opportunity to either self exclude or <a href="[_2]">set limits on your trading activities</a> on this website. You may also <a href="[_3]">contact us</a> to state the limits you wish to set via live chat, email or phone. Available limits are:', stash->{website_name}, url_for('self_exclusion.cgi'), url_for('contact'))
       %ol
         %li= l('a limit on the amount you may trade within a specified period of time;')
         %li= l('a limit on the losses you may incur within a specified period of time;')
         %li= l('a limit on the amount of time you may trade in any given online session;')
         %li= l('a definite or indefinite period during which you wish to exclude yourself from the website.')
     %p
-      = l('Any limits set may only be changed or increased after 7 days notice.')
+      = l('Limits 1 to 3 may only be changed or increased after 7 days notice.')
     %p
-      = l('Clients who wish to self-exclude should be aware that the self-exclusion period is a minimum of six months and are given the option to extend it to a total of at least five years, immediately without any cooling-off period. At the end of the self-exclusion period, the self-exclusion remains in place, unless positive action is taken by the client in order to trade again.')
+      = l("Clients who wish to self-exclude should be aware that the self-exclusion period is a minimum of six months and are given the option to extend it to a total of at least five years, immediately without any cooling-off period. When the self-exclusion period is set, the balance of funds in the client's account will be refunded to the client. At the end of the self-exclusion period, the self-exclusion remains in place, unless positive action is taken by the client in order to trade again.")
     %p
       = l('Clients who do not wish to renew the self-exclusion and make a request to begin trading again, the client shall be given one day to cool off before being allowed access to the website. It is important to note that contact must be to our customer services via telephone. Email contact is not sufficient.')
     %h2= l('Underage Gambling')
