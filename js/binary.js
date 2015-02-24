@@ -2946,11 +2946,6 @@ var asset_index_init = function() {
 };
 
 function confirm_popup_action() {
-    SpotLight.attach_click_event('a.tm-a-2', function (e){
-        e.preventDefault();
-        $(this).parents('#bom-confirm-popup').find('a.tm-a-2').removeClass('a-active').end().end().addClass('a-active');
-        $('#'+this.id+'-content').siblings('div.rbox-content').addClass('invisible').end().removeClass('invisible');
-    });
 
     $('.bom_confirm_popup_link').on('click', function (e){
         e.preventDefault();
@@ -8205,15 +8200,28 @@ ClientForm.prototype = {
             },
             validate_exclusion_date: function() {
                 var exclusion_date = $('#EXCLUDEUNTIL').val();
-                exclusion_date = new Date(exclusion_date);
 
-                // self exclusion date must >= 6 month from now
-                var six_month_date = new Date();
-                six_month_date.setMonth(six_month_date.getMonth() + 6);
+                if (exclusion_date) {
+                    var error_element_errorEXCLUDEUNTIL = clearInputErrorField('errorEXCLUDEUNTIL');
 
-                if (exclusion_date < six_month_date) {
-                    return false;
+                    exclusion_date = new Date(exclusion_date);
+                    // self exclusion date must >= 6 month from now
+                    var six_month_date = new Date();
+                    six_month_date.setMonth(six_month_date.getMonth() + 6);
+
+                    if (exclusion_date < six_month_date) {
+                        error_element_errorEXCLUDEUNTIL.innerHTML = text.localize("Please enter a date that is at least 6 months from now.");
+                        return false ;
+                    }
+
+                    if (confirm(text.localize("When you click 'Ok' you will be excluded from trading on the site until the selected date.")) === true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
                 }
+
                 return true;
             },
         };
@@ -9132,9 +9140,16 @@ var self_exclusion_date_picker = function () {
     });
 };
 
+var self_exclusion_validate_date = function () {
+    $('#selfExclusion').on('click', '#self_exclusion_submit', function () {
+        return client_form.self_exclusion.validate_exclusion_date();
+    });
+};
+
 onLoad.queue_for_url(function () {
 // date picker for self exclusion
     self_exclusion_date_picker();
+    self_exclusion_validate_date();
 }, 'self_exclusion');
 ;onLoad.queue_for_url(function() {
     $('#portfolio-table')
