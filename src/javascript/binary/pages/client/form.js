@@ -138,15 +138,28 @@ ClientForm.prototype = {
             },
             validate_exclusion_date: function() {
                 var exclusion_date = $('#EXCLUDEUNTIL').val();
-                exclusion_date = new Date(exclusion_date);
 
-                // self exclusion date must >= 6 month from now
-                var six_month_date = new Date();
-                six_month_date.setMonth(six_month_date.getMonth() + 6);
+                if (exclusion_date) {
+                    var error_element_errorEXCLUDEUNTIL = clearInputErrorField('errorEXCLUDEUNTIL');
 
-                if (exclusion_date < six_month_date) {
-                    return false;
+                    exclusion_date = new Date(exclusion_date);
+                    // self exclusion date must >= 6 month from now
+                    var six_month_date = new Date();
+                    six_month_date.setMonth(six_month_date.getMonth() + 6);
+
+                    if (exclusion_date < six_month_date) {
+                        error_element_errorEXCLUDEUNTIL.innerHTML = text.localize("Please enter a date that is at least 6 months from now.");
+                        return false ;
+                    }
+
+                    if (confirm(text.localize("When you click 'Ok' you will be excluded from trading on the site until the selected date.")) === true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
                 }
+
                 return true;
             },
         };

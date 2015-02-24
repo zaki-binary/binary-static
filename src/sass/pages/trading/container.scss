@@ -183,22 +183,16 @@ table.half-2 {
     left: -12em;  /* half the width of rbox-shadow-popup */
     background-color: $COLOR_WHITE;
     padding-bottom: 0.5em;
-    .rbox-bg-alt {
-      background: none;
+    text-align: center;
+    #bom-confirm-popup {
+        padding: 0 3em;
     }
     h4 {
-      background-color: $COLOR_WHITE;
       padding: 0.2em 0.5em;
     }
     p {
       padding: 0.5em;
       font-size: 0.9em;
-    }
-    a.button {
-      @include link-button;
-      display: block;
-      width: 6em;
-      margin: 0 auto;
     }
     .close_button {
       background: transparent url("../images/common/tooltips_1.png") no-repeat 0 100%;
@@ -209,30 +203,8 @@ table.half-2 {
       right: 0.4em;
       top: 0.4em;
     }
-
-    .rbox-heading {
-      padding-top: 1px;
-    }
-    .rbox-content {
-        p {
-            a {
-                text-decoration: none;
-                color: $COLOR_GREEN;
-            }
-        }
-    }
-    .form_button {
-      margin-bottom: 0;
-    }
     .first {
       padding-left: 0;
-    }
-    .tm-ul-2 {
-      position: static;
-      width: auto;
-      background-color: transparent;
-      border-bottom: 1px solid $COLOR_GRAY;
-      margin: 0 15px;
     }
   }
 }
