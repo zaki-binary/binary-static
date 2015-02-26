@@ -21,7 +21,7 @@ $grow-effect-duration: 0.4s;
   }
 
   .year {
-    background: $BIN_LIGHT_GRAY;
+    background: $COLOR_LIGHT_GRAY;
     clear: both;
     width: $year-cricle-size;
     height: $year-cricle-size;
@@ -33,12 +33,12 @@ $grow-effect-duration: 0.4s;
     @media all and (max-width: $width-break-point - 1) {
       margin: 25px auto;
     }
-    border: 1px solid $BIN_GRAY;
+    border: 1px solid $COLOR_GRAY;
     font-weight: bold;
     font-size: 22px;    
     transition-duration: $grow-effect-duration;
     transition-property: transform;
-    box-shadow: 0 0 2px $BIN_GRAY;
+    box-shadow: 0 0 2px $COLOR_GRAY;
 
     &:first-of-type {
       margin-top: 0 !important;
@@ -52,8 +52,8 @@ $grow-effect-duration: 0.4s;
 
     &:hover {
       transform: scale($grow-effect-factor);
-      background: $BIN_ORANGE;
-      color: $BIN_LIGHT_GRAY;
+      background: $COLOR_ORANGE;
+      color: $COLOR_LIGHT_GRAY;
     }
 
   }
@@ -63,35 +63,35 @@ $grow-effect-duration: 0.4s;
     float: left;
     clear: left;
     width: $event-column-width;
-    background: $BIN_WHITE;
+    background: $COLOR_WHITE;
     text-align: left;
     margin-bottom: 20px;
-    box-shadow: 0 0 2px $BIN_GRAY;
+    box-shadow: 0 0 2px $COLOR_GRAY;
 
     .header {
-      background: $BIN_LIGHT_GRAY;
+      background: $COLOR_LIGHT_GRAY;
       font-weight: bold;
       padding: 12px;
     }
 
     .event-body {
-      border: 1px solid $BIN_LIGHT_GRAY;
+      border: 1px solid $COLOR_LIGHT_GRAY;
       padding: 12px;
     }
 
     &.featured {
       .header {
-        background: $BIN_ORANGE;
-        color: $BIN_LIGHT_GRAY;
+        background: $COLOR_ORANGE;
+        color: $COLOR_LIGHT_GRAY;
       }
       &.right {
         &:after {
-          border-right: $arrow-size solid $BIN_ORANGE;
+          border-right: $arrow-size solid $COLOR_ORANGE;
         }
       }
       &:after {
         @media all and (min-width: $width-break-point) {
-          border-left: $arrow-size solid $BIN_ORANGE;
+          border-left: $arrow-size solid $COLOR_ORANGE;
         }
       }
     }
@@ -105,7 +105,7 @@ $grow-effect-duration: 0.4s;
       clear: right;
       &:after {
         border-left: none;
-        border-right: $arrow-size solid $BIN_LIGHT_GRAY;
+        border-right: $arrow-size solid $COLOR_LIGHT_GRAY;
         left: -$arrow-size;
       }
     }
@@ -117,7 +117,7 @@ $grow-effect-duration: 0.4s;
         height: 0px;
         border-top: $arrow-size solid transparent;
         border-bottom: $arrow-size solid transparent;
-        border-left: $arrow-size solid $BIN_LIGHT_GRAY;
+        border-left: $arrow-size solid $COLOR_LIGHT_GRAY;
         position: absolute;
         top: $arrow-vertical-offset;
         right: -$arrow-size;
