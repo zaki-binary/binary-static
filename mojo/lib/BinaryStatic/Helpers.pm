@@ -266,7 +266,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuStatement',
-        url        => $self->c->url_for('/statement.cgi'),
+        url        => $self->c->url_for('/user/statement'),
         text       => $self->c->l('Statement'),
         link_class => 'with_login_cookies pjaxload',
       };
