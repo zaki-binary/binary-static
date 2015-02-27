@@ -116,17 +116,21 @@
           = l('The most simple and exciting way to experience financial markets.')
       .grd-grid-7.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent.section-margin
         %p.paragraph-style.grd-hide-phablet.grd-hide-mobile.talk-bubble{:style=>'padding:25px 22px 20px 44px; margin-top:0px;position:relative;font-size:1.3em;line-height:1.3em;background:#f2f2f2'}
-          != ('<strong style="font-size: 1.8em;position: absolute;left: 16px;top: 25px;font-family:serif;">&ldquo;</strong> For me personally Binary.com is by far the best place to trade binaries online. Not only are they well established and a trusted source, I find their pricing super competitive across the wide range of markets. <strong style="font-size: 1.8em;position: absolute;bottom: 20px;font-family:serif;">&rdquo;</strong>')
+          %strong{:style=>"font-size: 1.8em;position: absolute;left: 16px;top: 25px;font-family:serif;"}
+            != '&ldquo;'
+          != l(' For me personally Binary.com is by far the best place to trade binaries online. Not only are they well established and a trusted source, I find their pricing super competitive across the wide range of markets. ')
+          %strong{:style=>"font-size: 1.8em;position: absolute;bottom: 20px;font-family:serif;"}
+            != '&rdquo;'
         .grd-container.grd-hide-phablet.grd-hide-mobile{:style=>'margin-top:40px'}
           .wrap
             %img.responsive#new-trader-icon{:style=>'margin-left: 8px;width: 42px;',:src => url_for('images/pages/home5/user-icon.svg')}
             %h4.title.text-center{:style=>'display:inline-block;margin-left:21px;'}
-              = l('Vinod G., UK')
+              = !('Vinod G., UK')
         .grd-container
           .grd-grid-4.grd-hide-tablet.grd-hide-phablet.grd-hide-mobile{:style=>'padding-top:8px'}
-            %p.text-center.title{:style=>'margin:10px 0 0 0;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
+            %p.text-center.title{:style=>'margin:10px 0 0 0;line-height:1.7em;padding: 0 0px;'}= l('1st in the market and trusted by over 1 Million users')
           .grd-hide-phablet.grd-hide-mobile.grd-show-tablet.grd-grid-tablet-12.grd-hide.text-center{:style=>'padding-top:30px'}
-            %p.text-center.title{:style=>'margin:-10px 0 12px;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
+            %p.text-center.title{:style=>'margin:-10px 0 12px;line-height:1.7em;padding: 0 0px;'}= l('1st in the market and trusted by over 1 Million users')
           .grd-grid-8.grd-hide-phablet.grd-hide-mobile.grd-grid-tablet-12{:style=>'padding-top:8px'}
             .grd-container.grd-show-mobile.grd-hide
               -#mobile
@@ -212,7 +216,7 @@
   .seen-on.section-margin.grd-show-mobile.grd-show-phablet.grd-hide
     .grd-container
       .grd-show-mobile.grd-show-phablet.grd-hide-tablet.grd-grid-mobile-12.grd-grid-phablet-12.grd-hide.text-center{:style=>'padding-top:10px'}
-        %h4.title.text-center{:style=>'margin:0;line-height:1.7em;padding: 0 0px;'}= '1st in the market and trusted by over 1 Million users'
+        %h4.title.text-center{:style=>'margin:0;line-height:1.7em;padding: 0 0px;'}= l('1st in the market and trusted by over 1 Million users')
       .grd-grid-mobile-12.grd-grid-phablet-12{:style=>'padding-top:8px'}
         .grd-container.grd-show-mobile.grd-hide
           -#mobile
