@@ -1,45 +1,53 @@
 /* HOME PAGE RULES */
-.home-content#content {
+.home2-content#content {
   width: 100%;
 }
-.home-content {
+.home2-content {
    #banner {
-    background: url("../images/pages/home/banner-background_1.png") no-repeat 0 0;
+    background: url("../images/pages/home2/map.png") repeat 0px 0px;   
+    background-size: contain;
    }
-   .xtopseparator{
+   .q-topseparator{
     height: 32px;
     border: 0px none;
     box-shadow: 0px 32px 32px -32px rgba(120, 120, 120, 0.5) inset;
     display: block!important;
    }
   #open-account {
-    background: $COLOR_ORANGE;
     color: $COLOR_WHITE;
     text-align: center;
     border-radius: 0;
+    padding: 5px 0;
     margin-top: 10px;
     text-align: center;
-    padding: 0 0 0;
-    p {
+    width:100%;
+    background-color: rgba(165, 165, 165, 0.20);
+    border-top:1px solid $COLOR_GRAY;
+    border-bottom:1px solid $COLOR_GRAY;
+   p {
       line-height: 2em;
       margin: 0;
-      background: $COLOR_DARK_BLUE;
       font-size: 100%;
+      color:$COLOR_BLACK;
     }
     #virtual-fields {
+        display:block;
+        margin:10px;
         input, select, textarea {
             border-radius: 3px;
-            padding: 0px;
+            margin-right: 20px;
+            margin-left:20px;   
         }
-        margin: 4px 0;
     }
     input[type=submit] {
       @include link-button;
       background: $COLOR_BLUE;
-      padding: 9px 10.83333%;
       border: 0;
       white-space: normal;
       font-size:18px;
+      display:inline;
+        padding:10px;
+        margin-bottom: 0;
       &:hover {
                 text-decoration: none;
                 background-color: $COLOR_DARK_GREEN;
@@ -47,9 +55,10 @@
     }
     form {
         font-size: 100%;
+        display:inline;
     }
   }
-#xsection1 {
+#q-section1 {
   padding: 30px 0;
   display: inline-block;
   p{
@@ -71,20 +80,20 @@
   }
 }
 
-#xreason {
+#q-reason {
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: $COLOR_LIGHT_GRAY;
     padding-bottom: 40px;
 }
-#xtop {
+#q-top {
     padding-top: 50px;
     text-align: center;
     p{
       font-size:110%;
     }
 }
-#xbadges {
+#q-badges {
     img {
         text-align: center;
         max-width: 100px;
@@ -94,7 +103,7 @@
     }
     text-align: center;
 }
-.xhead {
+.q-head {
     margin-bottom: 20px;
     margin-top: 30px;
     padding-bottom: 15px;
@@ -103,63 +112,63 @@
 .inlined {
     display: inline-block;
 }
-.xhead2 {
+.q-head2 {
     margin-top: 0px;
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid $COLOR_GRAY;
 }
-.xlist1 {
+.q-list1 {
     background: url(../images/pages/home/xicon-1.png) no-repeat;
     padding-left: 50px;
     min-height: 24px;
     background-size: 30px;
 }
-.xlist2 {
+.q-list2 {
     background: url(../images/pages/home/xicon-2.png) no-repeat;
     padding-left: 50px;
     min-height: 24px;
     background-size: 30px;
 }
-.xlist3 {
+.q-list3 {
     background: url(../images/pages/home/xicon-3.png) no-repeat;
     padding-left: 50px;
     min-height: 24px;
     background-size: 30px;
 }
-.xlist4 {
+.q-list4 {
     background: url(../images/pages/home/xicon-4.png) no-repeat;
     padding-left: 50px;
     min-height: 24px;
     background-size: 30px;
 }
-.xcta {
+.q-cta {
     position: relative;
     bottom: 30px;
     text-align: center;
-    .xreal {
+    .q-real {
         margin-right: 10px;
         span {
             padding: 10px 25px;
         }
     }
-    .xvirtual span {
+    .q-virtual span {
         background-color: $COLOR_BLUE;
-        padding: 10px 25px;
+        padding: 10px;
         &:hover {
             text-decoration: none;
             background-color: $COLOR_DARK_GREEN;
         }
     }
 }
-.xquote {
+.q-quote {
     background-color: $COLOR_LIGHT_GRAY;
     padding: 20px 40px;
     p {
         font-style: italic;
     }
 }
-.xbubble-right {
+.q-bubble-right {
     content: '';
     width: 0px;
     height: 0px;
@@ -169,7 +178,7 @@
     position: relative;
     left: 80%;
 }
-.xbubble-left {
+.q-bubble-left {
     content: '';
     width: 0px;
     height: 0px;
@@ -179,70 +188,70 @@
     position: relative;
     left: 10%;
 }
-.xquoter-left {
+.q-quoter-left {
     text-align: left;
 }
-.xquoter-right {
+.q-quoter-right {
     text-align: right;
 }
-.xemail, .xpass {
-    width: 35%;
+.q-email, .q-pass {
     display: inline-block;
-    margin-top: 15px;
-    margin-bottom: 10px;
     padding: 10px !important;
-    font-size: 14px;
-}
-.xemail {
+    width: 15%;
+    font-size:12px;
+    display:inline;
+    margin-left: 20px;
     margin-right: 20px;
 }
-.xpass {
-    margin-left: 20px;
-}
-.xtopcta {
+.q-topcta {
     display: inline-block;
-    width: 35%;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    padding: 15px!important;
+    width: 25%!important;
 }
-.xquoter-left p span, .xquoter-right p span {
+.q-quoter-left p span, .q-quoter-right p span {
     font-size: 12px;
     font-style: italic;
 }
-#xpayment a:hover{
+#q-payment a:hover{
   text-decoration: none;
 }
 }
 
 @media screen and (max-width: 480px) {
-    .home-content{
-        #xtop {
+    .home2-content{
+        #open-account{
+            #virtual-fields{
+                input{
+                    margin:10px;
+                }
+            }
+        }
+        #q-top {
             padding-top: 30px;
         }
-        .xhead2 {
+        .q-head2 {
             margin-top: 30px;
         }
-        .xemail {
+        .q-email {
             width: 80% !important;
             margin-right: 0;
         }
-        .xpass {
+        .q-pass {
             width: 80% !important;
             margin-left: 0;
+            margin-right: 20px;
         }
-        .xtopcta {
-            width: 80%;
+        .q-topcta {
+            width: 80%!important;
         }
-        .xtestimonial h1, .xhead {
+        .q-testimonial h1, .q-head {
             padding: 10px;
         }
-        #xsection1 {
+        #q-section1 {
             padding: 10px 0;
         }
-        .xcta {
+        .q-cta {
             position: initial;
-            .xreal {
+            .q-real {
                 margin-right: 0px;
                 span {
                     font-weight: 700;
@@ -251,7 +260,7 @@
                     margin: 10px 0;
                 }
             }
-            .xvirtual span {
+            .q-virtual span {
                 background-color: $COLOR_BLUE;
                 font-weight: 700;
                 padding: 20px 20px;
