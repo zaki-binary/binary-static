@@ -1,5 +1,5 @@
 /**!
- * PJAX- Standalone
+ * PJAX- Standalone (+ several custom changes for binary.com)
  *
  * A standalone implementation of Pushstate AJAX, for non-jQuery web pages.
  * jQuery are recommended to use the original implementation at: http://github.com/defunkt/jquery-pjax
@@ -101,6 +101,8 @@
 			var opt = {
 				'url': st.state.url,
 				'container': st.state.container,
+                'useClass': st.state.useClass,
+                'loggedin': st.state.loggedin,
 				'title' : st.state.title,
 				'history': false
 			};
@@ -151,6 +153,8 @@
 
 		// Add link HREF to object
 		options.url = node.href;
+		options.update_url = node.pathname + node.search + node.hash;
+		options.loggedin = node.classList.contains('with_login_cookies');
 
 		// If PJAX data is specified, use as container
 		if(node.getAttribute('data-pjax')) {
@@ -349,11 +353,11 @@
 			if(options.history) {
 				// If this is the first time pjax has run, create a state object for the current page.
 				if(internal.firstrun){
-					window.history.replaceState({'url': document.location.href, 'container':  options.container.id, 'title': document.title}, document.title);
+					window.history.replaceState({'url': document.location.href, 'container':  options.container.id, 'useClass': options.useClass, 'loggedin': options.loggedin, 'title': document.title}, document.title);
 					internal.firstrun = false;
 				}
 				// Update browser history
-				window.history.pushState({'url': options.url, 'container': options.container.id, 'title': options.title }, options.title , options.url);
+				window.history.pushState({'url': options.url, 'container': options.container.id, 'useClass': options.useClass, 'loggedin': options.loggedin, 'title': options.title }, options.title , options.url);
 			}
 
 			// Initialize any new links found within document (if enabled).
