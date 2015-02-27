@@ -431,7 +431,7 @@ var BetPrice = function() {
                             if (error_box_html.length > 0 &&
                                 error_box_html != BetForm.amount.payout_err &&
                                 error_box_html != BetForm.amount.stake_err) {
-                                error = error_box.html();
+                                error = error_box_html;
                             }
                             prices.push(this.calculate_price(id, prob, error));
                         }
@@ -459,8 +459,8 @@ var BetPrice = function() {
                     var amount = BetForm.amount.calculation_value;
                     var price;
                     var payout;
-                    var profit = 0;
-                    var roi = 0;
+                    var profit;
+                    var roi;
                     if(BetForm.attributes.is_amount_stake()) {
                         payout = this.virgule_amount(Math.round((amount / prob) * 100));
                         price = this.virgule_amount(amount * 100);
@@ -471,10 +471,17 @@ var BetPrice = function() {
 
                     var prev_price = $('input[name="price"]', form).length ? parseFloat($('input[name="price"]', form).val()) : 0;
                     var prev_payout = $('input[name="payout"]', form).length ? parseFloat($('input[name="payout"]', form).val()) : 0;
+
                     if (payout && price) {
                         profit =  this.virgule_amount(payout.raw - price.raw);
                         roi = Math.round(profit.raw / price.raw * 100);
+                    } else {
+                        profit = this.virgule_amount(0);
+                        roi = this.virgule_amount(0);
                     }
+
+                    payout = payout ? payout : this.virgule_amount(0);
+                    price = price ? price : this.virgule_amount(0);
 
                     return {
                         id: id,
