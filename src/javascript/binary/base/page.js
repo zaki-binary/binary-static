@@ -606,12 +606,7 @@ Page.prototype = {
         var that = this;
         $('#language_select').on('change', 'select', function() {
             var language = $(this).find('option:selected').attr('class');
-            var re = /^\/home\d+$/;
-            if (re.exec(document.location.pathname)) {
-                document.location = that.url_for_ab_testing(language);
-            } else {
-                document.location = that.url_for_language(language);
-            }
+            document.location = that.url_for_language(language);
         });
     },
     localize_for: function(language) {
@@ -634,13 +629,6 @@ Page.prototype = {
             }
             url += qs + lang;
         }
-        return url;
-    },
-    url_for_ab_testing: function(lang) {
-        lang = lang.trim().toUpperCase();
-        SessionStore.set('selected.language', lang);
-        var loc = document.location; // quick access
-        var url = loc.protocol + '//' + loc.host + '/?l=' + lang;
         return url;
     },
     record_affiliate_exposure: function() {
