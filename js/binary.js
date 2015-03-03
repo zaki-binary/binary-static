@@ -622,7 +622,7 @@ var URL = function (url) { // jshint ignore:line
     } else {
         this.location = window.location;
     }
-}; 
+};
 
 URL.prototype = {
     url_for: function(path, params, type) {
@@ -862,7 +862,7 @@ Menu.prototype = {
     }
 };
 
-var Header = function(params) { 
+var Header = function(params) {
     this.client = params['client'];
     this.settings = params['settings'];
     this.menu = new Menu(params['url']);
@@ -1115,60 +1115,13 @@ Contents.prototype = {
     },
 };
 
-var Footer = function() { };
-
-Footer.prototype = {
-    on_load: function() {
-        var that = this;
-        var footer = $('#footer');
-        this.make_sticky();
-        $(window).resize(function() {
-            footer.css({'margin-top': 0});
-            that.make_sticky();
-        });
-        $(window).bind('hashchange', function() {
-            that.make_sticky();
-        });
-    },
-    make_sticky: function() {
-        var docHeight = $(window).height();
-        var footer = $('#footer');
-        if (footer.length > 0) {
-            var footerHeight = footer.height();
-            var footerTop = footer.offset().top + footerHeight;
-
-            if (footerTop < docHeight) {
-                var margintop = $('body').prop('scrollHeight') - footer.offset().top - footer.height();
-                if (margintop > 0) {
-                    // Create the measurement node
-                    var scrollDiv = document.createElement("div");
-                    scrollDiv.className = "scrollbar-measure";
-                    document.body.appendChild(scrollDiv);
-                    // Get the scrollbar width
-                    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-                    // Delete the DIV
-                    document.body.removeChild(scrollDiv);
-                    // hack for browser other than firefox
-                    if (navigator.userAgent.indexOf("Firefox") > -1) {
-                        footer.css({'margin-top': margintop + 'px'});
-                    } else {
-                        margintop += scrollbarWidth - 1;
-                        footer.css({'margin-top': margintop + 'px'});
-                    }
-                }
-            }
-        }
-    }
-};
-
-var Page = function(config) { 
+var Page = function(config) {
     config = typeof config !== 'undefined' ? config : {};
     this.client = new Client();
     this.url = new URL();
     this.settings = new InScriptStore(config['settings']);
     this.header = new Header({ client: this.client, settings: this.settings, url: this.url});
     this.contents = new Contents(this.client);
-    this.footer = new Footer();
 };
 
 Page.prototype = {
@@ -1188,7 +1141,6 @@ Page.prototype = {
         this.on_change_language();
         this.record_affiliate_exposure();
         this.contents.on_load();
-        this.footer.on_load();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -1199,12 +1151,7 @@ Page.prototype = {
         var that = this;
         $('#language_select').on('change', 'select', function() {
             var language = $(this).find('option:selected').attr('class');
-            var re = /^\/home\d+$/;
-            if (re.exec(document.location.pathname)) {
-                document.location = that.url_for_ab_testing(language);
-            } else {
-                document.location = that.url_for_language(language);
-            }
+            document.location = that.url_for_language(language);
         });
     },
     localize_for: function(language) {
@@ -1227,13 +1174,6 @@ Page.prototype = {
             }
             url += qs + lang;
         }
-        return url;
-    },
-    url_for_ab_testing: function(lang) {
-        lang = lang.trim().toUpperCase();
-        SessionStore.set('selected.language', lang);
-        var loc = document.location; // quick access
-        var url = loc.protocol + '//' + loc.host + '/?l=' + lang;
         return url;
     },
     record_affiliate_exposure: function() {
@@ -8298,28 +8238,7 @@ ClientForm.prototype = {
         $('#Email').disableSelection();
     }
 };
-;var slider = function() {
-    var slider = $('#slider');
-    if (slider.size()) {
-        $('.invisibleslides').show();
-        slider.slides({
-            container: 'slides-container',
-            paginationClass: 'slides-pagination',
-            generatePagination: false,
-            generateNextPrev: false,
-            start: 1,
-            preload: true,
-            play: 10000,
-            slideSpeed: 800,
-        });
-        if ($('.slides_control').height() < 300) {
-            $('.slides_control').css('min-height', '300px');
-        }
-    }
-};
-
-
-var sidebar_scroll = function(elm_selector) {
+;var sidebar_scroll = function(elm_selector) {
     elm_selector.on('click', '#sidebar-nav li', function() {
         var clicked_li = $(this);
         $.scrollTo($('.section:eq(' + clicked_li.index() + ')'), 500);
@@ -8582,7 +8501,6 @@ var show_live_chat_icon = function() {
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
-            slider();
             select_user_country();
             get_ticker();
             home_bomoverlay.init();
