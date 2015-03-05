@@ -266,7 +266,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuStatement',
-        url        => $self->c->url_for('/user/statement'),
+        url        => $self->c->url_for('/statement.cgi'),
         text       => $self->c->l('Statement'),
         link_class => 'with_login_cookies pjaxload',
       };
@@ -291,7 +291,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id   => 'topMenuBecomeAffiliate',
-        url  => $self->c->url_for('/affiliate/signup'),
+        url  => $self->c->url_for('/affiliate_signup.cgi'),
         text => $self->c->l('Affiliate'),
       };
 
