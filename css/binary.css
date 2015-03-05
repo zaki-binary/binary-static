@@ -577,6 +577,87 @@ ul.checked li {
   margin-bottom: 10px;
 }
 
+*,
+*:after,
+*:before {
+  transition: opacity .2s, color .2s, background .2s;
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  -webkit-animation: spinning 1s infinite linear;
+  animation: spinning 1s infinite linear;
+}
+
+@keyframes pulsing {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes pulsing {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.pulser {
+  -webkit-animation: pulsing 1s infinite ease;
+  animation: pulsing 1s infinite ease;
+}
+
+.overlay {
+  opacity: 1;
+  transition: opacity .2s, height 0;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  transition: opacity .2s, height 0 .2s;
+  height: 0;
+}
+
+.overlay .dialog {
+  transition: transform .2s, height 0;
+  transform: scale(1);
+}
+
+.overlay.hidden .dialog {
+  transition: transform .2s, height 0 .2s;
+  transform: scale(0.9);
+}
+
 /* main style */
 /* Logo and top bar */
 #topbar {
@@ -5168,7 +5249,7 @@ table .loss, table .lower {
 @media screen and (max-width: 400px) {
   @-ms-viewport {
     width: device-width;
-}
+  }
 }
 .grd-grid-0 {
   width: 0%;
@@ -6794,7 +6875,7 @@ html.mm-opened #mm-blocker {
   left: 0;
   top: 0;
   margin: 0;
-  border: 0px solid rgba(0, 0, 0, 0);
+  border: 0px solid transparent;
 }
 
 html.mm-opening .mm-page,
