@@ -103,7 +103,7 @@ sub startup {
     $r->get('/logout')->to('page#logout');
 
     $r->get('/c/open_account.cgi')->to('page#toolkit');
-    $r->get('/c/affiliate_signup.cgi')->to('page#toolkit');
+    $r->get('/affiliate/signup')->to('page#toolkit');
     $r->get('/c/pricing_table.cgi')->to('page#toolkit');
     # $r->get('/c/asset_index.cgi')->to('page#toolkit');
     $r->get('/c/chart_application.cgi')->to('page#toolkit');
