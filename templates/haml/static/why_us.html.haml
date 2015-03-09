@@ -31,7 +31,7 @@
               %ul.checked
                 %li= l('Real-time prices, benchmarked against interbank options markets.')
                 %li
-                  != l("Returns above 100% on simple [_1] contracts.", pjax_link_for(l('rise/fall'), url_for('trade.cgi?market=forex&form_name=risefall')))
+                  != l("Returns above 100% on simple <a href='[_1]' class='pjaxload'>rise/fall</a> contracts.", url_for('trade.cgi?market=forex&form_name=risefall'))
                 %li
                   != l("Returns above 1000% on <a href='[_1]' class='pjaxload'>higher/lower</a> and <a href='[_2]' class='pjaxload'>touch/no-touch</a> trades.", url_for('trade.cgi?market=forex&form_name=higherlower'), url_for('trade.cgi?market=forex&form_name=touchnotouch'))
                 %li= l('No hidden fees or commissions.')
