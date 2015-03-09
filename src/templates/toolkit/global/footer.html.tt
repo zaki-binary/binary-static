@@ -97,7 +97,7 @@
                     <h1>[% l('Banking') %]</h1>
                     <ul>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('available_payment_methods.cgi') %]"[% IF
+                            <a class="pjaxload" href="[% request.url_for('/cashier/available_payment_methods') %]"[% IF
                             target %]
                             target="[% target %]"[% END %]>[% l('Payment Methods') %]</a>
                         </li>
