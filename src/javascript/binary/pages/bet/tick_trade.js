@@ -108,7 +108,12 @@ var TickDisplay = function() {
                     labels: { enabled: false, }
                 },
                 yAxis: {
-                    title: '',
+                    opposite: false,
+                    labels: {
+                        align: 'left',
+                        x: 0,
+                    },
+                    title: ''
                 },
                 series: [{
                     data: [],
