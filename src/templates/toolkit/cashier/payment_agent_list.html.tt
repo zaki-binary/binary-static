@@ -14,7 +14,9 @@
         <p>
             [% l('Show payment agents for:') %]
             <select name="target_country" onchange="this.form.submit()">
-                [% options %]
+                [% FOREACH pa_country IN all_pa_countries %]
+                <option value='[% pa_country.0 %]'[% IF pa_country.0 == target_country +%] selected="selected"[% END %]>[% pa_country.1 %]</option>
+                [% END %]
             </select>
         </p>
     </form>
