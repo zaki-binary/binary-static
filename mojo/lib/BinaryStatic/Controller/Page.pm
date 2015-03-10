@@ -14,7 +14,7 @@ sub toolkit {
     # template, layout, code
     my %url_map = (
         'c/open_account.cgi' => ['account/open_account', 'default'],
-        'c/affiliate_signup.cgi' => ['affiliates/main', 'default'],
+        'affiliate/signup' => ['affiliates/main', 'default'],
         'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
         # 'c/asset_index.cgi' => ['resources/pricing_table_form', 'default'],
         'c/chart_application.cgi' => ['charting/chart_application', 'default'],
@@ -43,7 +43,6 @@ sub toolkit {
 
     $c->render(
         template => $m->[0],
-        handler => 'haml',
         defined $m->[1] ? (layout => $m->[1] ? $c->layout($m->[1]) : '') : (),
         $m->[2] ? (status => $m->[2]) : (),
 
