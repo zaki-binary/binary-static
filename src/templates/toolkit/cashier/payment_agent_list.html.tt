@@ -18,7 +18,11 @@
             </select>
         </p>
     </form>
-    [% payment_agent_list %]
+    [% IF payment_agent_table_row.size %]
+    [% INCLUDE cashier/available_payment_agents_list.html.tt %]
+    [% ELSE %]
+    <p id="no_paymentagent">[% l('There are no available Payment Agents.') %]</p>
+    [% END %]
     <p>
         [% l('Apply to become a [_1] <a class="pjaxload" href="[_2]">payment agent</a>.', website, apply_payment_agent_url) %]
     </p>
