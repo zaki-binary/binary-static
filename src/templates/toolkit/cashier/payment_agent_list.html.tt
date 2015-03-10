@@ -9,7 +9,7 @@
         <li>[% l("Contact the payment agent directly for more information on how to transfer money to them.") %]</li>
         <li>[% l("Send your funds to the payment agent. The deposited funds, less the agent's commission, will show up in your account.") %]</li>
     </ol>
-    <form action="[% request.url_for('paymentagent_list.cgi') %]">
+    <form action="[% request.url_for('/cashier/payment_agent_list') %]">
         <input name="l" type="hidden" value="[% language %]"/>
         <p>
             [% l('Show payment agents for:') %]
