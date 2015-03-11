@@ -1246,7 +1246,6 @@ var PjaxExecQueue = function () {
     this.url_exec_queue = [];
     this.id_exec_queue = [];
     this.fired = false;
-    this.indicating_loading = false;
     this.content = $('#content');
 };
 
@@ -1261,10 +1260,6 @@ PjaxExecQueue.prototype = {
         this.id_exec_queue.unshift(new IDPjaxQueueElement(exec_function, id));
     },
     fire: function () {
-        if(this.indicating_loading) {
-            this.content.removeClass("indicate-loading");
-            this.indicating_loading = false;
-        }
         if(!this.fired) {
             var match_loc = window.location.pathname;
             var i = this.url_exec_queue.length;
@@ -1283,8 +1278,6 @@ PjaxExecQueue.prototype = {
         this.fired = false;
     },
     loading: function () {
-        this.content.addClass("indicate-loading");
-        this.indicating_loading = true;
         this.reset();
     },
     count: function () {
@@ -2097,13 +2090,13 @@ function updateLiveChart(config) {
 var LiveChart = function(config) {
     //Required for inheritence.
     if (!config) return;
-    
+
     this.config = config;
     this.shift = false;
     if (!config.trade_visualization) {
         this.on_duration_change();
         this.highlight_duration();
-    }    
+    }
 };
 
 LiveChart.prototype = {
@@ -2243,7 +2236,10 @@ LiveChart.prototype = {
                 min: this.config.from * 1000,
             },
             yAxis: {
+                opposite: false,
                 labels: {
+                    align: 'left',
+                    x: 0,
                     formatter: function() { return this.value; }
                 },
                 title: {
@@ -3402,7 +3398,7 @@ pjax_config_page('chart_application', function () {
     this.chart_config = {
         chart: {
                 renderTo:'last_digit_histo',
-                defaultSeriesType:'column',                
+                defaultSeriesType:'column',
                 backgroundColor:'#eee',
                 borderWidth:1,
                 borderColor:'#ccc',
@@ -3463,7 +3459,10 @@ pjax_config_page('chart_application', function () {
             tickColor:'#ccc',
             lineColor:'#ccc',
             endOnTick:true,
+            opposite: false,
             labels: {
+                align: 'left',
+                x: 0,
                 enabled: false,
                 formatter: function() {
                     var total = $("select[name='tick_count']").val();
@@ -3766,7 +3765,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             return moment.utc(page.header.time_now);
         },
         error_message: function () {
-            $('#betInputBox').removeClass("indicate-loading");
             BetPrice.error_handler();
         },
         actions: function() {
@@ -3857,7 +3855,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     }
 
                     var that = this;
-                    $('#betInputBox').addClass("indicate-loading");
                     betform_request = $.ajax({
                             url     : this.form_url(form_name),
                             success : function (data) {
@@ -3878,7 +3875,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     }
 
                     var that = this;
-                    $('#betInputBox').addClass("indicate-loading");
                     betform_request = $.ajax({
                         url     : this.form_url('', underlying),
                         success : function (data) {
@@ -3910,7 +3906,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     this.on_amount_type_change();
                     this.on_other_input_change();
 
-                    $('#betInputBox').removeClass("indicate-loading");
                     $('#bet_calculate').focus(); //Focus on the Get Prices button.
                     this.hide_sub_trade();
 
@@ -7234,7 +7229,6 @@ BetForm.Time.EndTime.prototype = {
             if(this.popup().length > 0) {
                 this.on_open_debug_link();
                 this.on_close();
-                this.on_historic_vol();
             }
         },
         on_open_debug_link: function() {
@@ -7246,10 +7240,6 @@ BetForm.Time.EndTime.prototype = {
 
                 $('#' + popup.children(':first').attr('id')).tabs();
 
-                $('a.vcal_tab', popup).on('click', function() {
-                    that.vcal_datepicker_handler.init();
-                }).addClass('unbind_later');
-
                 event.preventDefault();
             }).addClass('unbind_later');
         },
@@ -7260,82 +7250,9 @@ BetForm.Time.EndTime.prototype = {
                 event.preventDefault();
             }).addClass('unbind_later');
         },
-        on_historic_vol: function() {
-            var that = this;
-            $('a[class^="hvol_tab_"]').on('click', function(event) {
-                event.preventDefault();
-                that.get_historic_vol();
-            }).addClass('unbind_later');
-        },
         popup: function() {
             return $('#pricing_details_popup');
-        },
-        get_historic_vol: function() {
-            $.post(
-                    page.url.url_for('trade_get.cgi'),
-                    {
-                        controller_action : 'historical_vol',
-            underlying        : $('#bet_underlying').val()
-                    },
-                    function(data) {
-                        $('#hvol').html(data);
-                    },
-                    "html"
-                  );
-        },
-        vcal_datepicker_handler: function() {
-            var that = {};
-            var cache = {};
-
-            var getWeight = function(date) {
-                var year = date.getFullYear();
-                var underlying_symbol = $('#bet_underlying').val();
-
-                var cache_key = underlying_symbol + '-' + year;
-                var lookup = year + '-' + (date.getMonth()+1) + '-' + date.getDate();
-
-                if (typeof cache[cache_key] === 'undefined') {
-                    $.ajax({
-                        url: page.url.url_for('trade_get.cgi'),
-                        data: { controller_action: 'vcal_weights',
-                            underlying_symbol: underlying_symbol,
-                        year: year,
-                        },
-                        success: function(vcal_weights) {
-                            cache[cache_key] = vcal_weights;
-                        },
-                        dataType:'json',
-                        async: false
-                    });
-                }
-
-                return cache[cache_key][lookup];
-            };
-
-            var beforeShowDay = function(date) {
-                window.setTimeout(
-                        function() {
-                            var tds = $("div.vcal").find("td").filter(function() { return $(this).attr("class").match(/weight/); });
-
-                            tds.find('a').html( function() {
-                                var td = $(this).parent('td');
-                                var weight = td.attr("class").match('\\d\\.?\\d?\\d?')[0];
-                                return weight;
-                            });
-                        },
-                        0);
-                return [true, "weight" + getWeight(date), date.getDate()];
-            };
-
-            that.init = function() {
-                $(".vcal").datepicker({
-                    numberOfMonths: 2,
-                    beforeShowDay: beforeShowDay
-                });
-            };
-
-            return that;
-        }()
+        }
     };
 }();
 ;var TickDisplay = function() {
@@ -7448,7 +7365,12 @@ BetForm.Time.EndTime.prototype = {
                     labels: { enabled: false, }
                 },
                 yAxis: {
-                    title: '',
+                    opposite: false,
+                    labels: {
+                        align: 'left',
+                        x: 0,
+                    },
+                    title: ''
                 },
                 series: [{
                     data: [],
@@ -7907,9 +7829,10 @@ function listen_to_chart_element () {
 }
 
 var draw_chart = function (callback_after_complete) {
-    if($("#chart_director_imageholder").length === 0){
-        return;
-    }
+
+    var chart_director_imageholder = document.getElementById('chart_director_imageholder');
+
+    if (chart_director_imageholder === null) return;
 
     var all_li = $('#chart_compare_underlying').find('li');
     if (all_li.length == 1) {
@@ -7968,7 +7891,6 @@ var draw_chart = function (callback_after_complete) {
 onLoad.queue_for_url(function() {
     listen_to_chart_element();
 }, 'smartchart');
-
 ;var load_chart_app = function () {
     var isMac = /Mac/i.test(navigator.platform),
         isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent),
