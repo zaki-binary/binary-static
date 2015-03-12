@@ -13,7 +13,7 @@ sub toolkit {
 
     # template, layout, code
     my %url_map = (
-        'c/open_account.cgi' => ['account/open_account', 'default'],
+        'user/open_account' => ['account/open_account', 'default'],
         'affiliate/signup' => ['affiliates/main', 'default'],
         'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
         # 'c/asset_index.cgi' => ['resources/pricing_table_form', 'default'],
