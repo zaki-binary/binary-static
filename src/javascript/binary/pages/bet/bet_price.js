@@ -180,6 +180,7 @@ var BetPrice = function() {
                     $self.ev.close();
                     $self.digit_tick_count = 0;
                     $self.applicable_ticks = [];
+                    $self.info_for_display = [];
                 },
                 process: function(start_moment) {
                     var $self = this;
