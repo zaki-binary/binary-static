@@ -5657,6 +5657,7 @@ BetForm.Time.EndTime.prototype = {
                 this.display_buy_error(data.error);
             } else if (data.display) {
                 this.display_buy_results(data);
+                BetSell.register();
             } else {
                 throw new Error("Invalid server response: " + data);
             }
