@@ -8,7 +8,7 @@
         %p= l('When you start trading with Binary.com, you’ll be directed to the trading screen, where you set your trading parameters, and choose what you want to trade, how and when.')
         %a.pjaxload.button{:href => url_for('trade.cgi')}
           %img.responsive#new-trader-icon{:src => url_for('images/pages/tour/trade-tutorial_1.svg')}
- 
+
   .section
     .section-content
       .grd-grid-12
@@ -37,10 +37,10 @@
     .section-content
       .grd-grid-12
         %h1= l('Bank your way')
-        %a.pjaxload.button{:href => url_for('available_payment_methods.cgi')}
+        %a.pjaxload.button{:href => url_for('/cashier/available_payment_methods')}
           %span= l('View payment methods')
         %p= l('Trade with ease with [_1]\'s wide range of deposit and withdrawal methods. Your funds will be segregated and held in AAA-rated banks.', stash->{website_name})
-        %a.pjaxload.button{:href => url_for('available_payment_methods.cgi')}
+        %a.pjaxload.button{:href => url_for('/cashier/available_payment_methods')}
           %img.responsive{:src => url_for('images/pages/tour/tour-flexible-banking.png')}
 
   .section

@@ -25,7 +25,7 @@
             %input{:name => 'password', :type => 'password', :placeholder => stash('pwdholder')}
             %input{:type => 'submit', :value => stash('logintext')}
           %span#login-links
-            %a.pjaxload#register{:href=>url_for('open_account.cgi')}= l('Register')
+            %a.pjaxload#register{:href=>url_for('/user/open_account')}= l('Register')
             %a.pjaxload#lost-password{:href=>url_for('lost_password.cgi')}= l('Lost password?')
       .grd-grid-1.grd-hide.grd-show-mobile.grd-no-gutter-mobile.grd-show-phablet
         #mobile-menu-icon-container
