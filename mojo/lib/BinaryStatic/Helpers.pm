@@ -406,7 +406,7 @@ sub _main_menu_charting {
     # live charts
     my $live_charts_ref = {
         id         => 'topMenuLiveCharts',
-        url        => $self->c->url_for('/livechart.cgi'),
+        url        => $self->c->url_for('/charting/livechart'),
         text       => $self->c->l('Live Charts'),
         link_class => 'pjaxload',
     };

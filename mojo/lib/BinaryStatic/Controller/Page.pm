@@ -18,7 +18,7 @@ sub toolkit {
         'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
         # 'c/asset_index.cgi' => ['resources/pricing_table_form', 'default'],
         'c/chart_application.cgi' => ['charting/chart_application', 'default'],
-        'c/livechart.cgi' => ['charting/livechart', 'default'],
+        'charting/livechart' => ['charting/livechart', 'default'],
         'c/rise_fall_table.cgi' => ['resources/rise_fall_table', 'default'],
     );
     my $m = $url_map{$curr_path};
