@@ -383,7 +383,7 @@ sub _main_menu_charting {
     };
 
     my $bomchart_ref = {
-        url        => $self->c->url_for('/chart_application.cgi'),
+        url        => $self->c->url_for('/charting/application'),
         text       => $self->c->l('Java Charts'),
         id         => 'topMenuInteractiveChartid',
         link_class => 'pjaxload',

@@ -131,7 +131,7 @@
                     <h1>[% l('Market Data') %]</h1>
                     <ul>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('chart_application.cgi') %]"[% IF target %] target="[% target %]"[% END %]>[% l('Chart Application') %]</a>
+                            <a class="pjaxload" href="[% request.url_for('/charting/application') %]"[% IF target %] target="[% target %]"[% END %]>[% l('Chart Application') %]</a>
                         </li>
                         <li>
                             <a class="pjaxload" href="[% request.url_for('smartchart.cgi') %]"[% IF target %] target="[%
