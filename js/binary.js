@@ -5728,9 +5728,8 @@ BetForm.Time.EndTime.prototype = {
                     $self.info_for_display = [];
                     var symbol = BetForm.attributes.underlying();
                     var how_many_ticks = $('#tick-count').data('count');
-                    var end = start_moment.clone().add(3, 'minutes');
                     var stream_url = window.location.protocol + '//' + page.settings.get('streaming_server');
-                    stream_url += "/stream/ticks/" + symbol + "/" + start_moment.unix() + "/" + end.unix();
+                    stream_url += "/stream/ticks/" + symbol + "/" + start_moment.unix();
                     $self.ev = new EventSource(stream_url, { withCredentials: true });
 
                     $self.ev.onmessage = function(msg) {
@@ -5762,6 +5761,7 @@ BetForm.Time.EndTime.prototype = {
                                         if ($self.applicable_ticks.length === how_many_ticks) {
                                             $self.evaluate_digit_outcome();
                                             $self.reset();
+                                            break; // need to break the loop else it will keep on processing the extra tick
                                         }
                                     }
                                 }
