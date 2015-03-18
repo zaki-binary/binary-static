@@ -281,7 +281,7 @@ LiveChartTick.prototype.process_data = function(point) {
             epoch: parseInt(point[1]),
             quote: parseFloat(point[2])
         };
-        if (!this.chart && !this.chart.series) {
+        if (!this.chart || !this.chart.series) {
             return;
         }
         this.chart.series[0].addPoint(
