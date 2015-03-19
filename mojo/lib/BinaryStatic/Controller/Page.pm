@@ -191,7 +191,7 @@ sub login {
             { success => 1, session_cookie => Mojo::Cookie->new(value => 'abcdefghijklmn')} : {};
         if ($response->{success}) {
             $self->stash(just_logged_in => 1);
-            $redirect = 'my_account.cgi';
+            $redirect = '/user/my_account';
             $redirect_params->{login} = 'true';
             my $options = $self->cookie_options;
             $options->{expires} = time + 86400 * 30;

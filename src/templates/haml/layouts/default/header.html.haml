@@ -16,7 +16,7 @@
         = include('layouts/default/nav')
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.by_client_type.client_virtual.client_real#client-logged-in{ :style => 'display: none;'}
         #logout
-          %a.pjaxload#client_loginid{:href => url_for('my_account.cgi')}
+          %a.pjaxload#client_loginid{:href => url_for('/user/my_account')}
           %a.logout{:href => url_for('/logout')}= l('Log out')
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.grd-no-gutter-left.by_client_type.client_logged_out#client-logged-out
         %form#login-form{:action => url_for('/login'), :method => 'post'}

@@ -239,7 +239,7 @@ sub _main_menu_myaccount {
 
     my $my_account_ref = {
         id         => 'topMenuMyAccount',
-        url        => $self->c->url_for('/my_account.cgi'),
+        url        => $self->c->url_for('/user/my_account'),
         text       => $self->c->l('My Account'),
         class      => 'by_client_type client_real client_virtual',
         link_class => 'with_login_cookies pjaxload',
