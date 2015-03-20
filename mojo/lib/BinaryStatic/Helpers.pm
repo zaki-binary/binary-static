@@ -312,7 +312,7 @@ sub _main_menu_cashier {
 
     my $cashier_items_ref = {
         id         => 'topMenuCashier',
-        url        => $self->c->url_for('/available_payment_methods.cgi'),
+        url        => $self->c->url_for('/cashier/available_payment_methods'),
         text       => $self->c->l('Cashier'),
         link_class => 'pjaxload',
     };
