@@ -9162,11 +9162,6 @@ msgstr "الذين يحبون العمل مع أناس من مختلف الثق�
 msgid "Why 1,000,000 People Around the World Trust us"
 msgstr "لم يثق بنا مليون شخص حول العالم"
 
-#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
-msgid "Why 1,000,000 people around the world trust us"
-msgstr "لم يثق بنا مليون شخص حول العالم"
-
 #: /home/git/translations/binary-static/src/templates/haml/get_started/what_is_binary_trading.html.haml:1
 msgid "Why Choose Binary Trading?"
 msgstr "لم تختار تداول الثنائيات؟"
@@ -9189,6 +9184,11 @@ msgstr "لم تصبح شريك عمل لـ %1؟"
 #: /home/git/translations/binary-static/src/templates/haml/layouts/get_started/nav.html.haml:1
 msgid "Why choose binary trading?"
 msgstr "لم تختار تداول الثنائيات؟"
+
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
+msgid "Why choose us"
+msgstr "لماذا تختارنا"
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
@@ -10452,25 +10452,25 @@ msgstr "AUD/SGD"
 msgid "EUR/INR"
 msgstr "يورو/الروبية الهندية"
 
-#: Underlying Symbol frxAUDBRL
-msgid "AUD/BRL"
-msgstr "دولار أسترالى/ريال برازيلى"
-
 #: Underlying Symbol frxGBPCNY
 msgid "GBP/CNY"
 msgstr "GBP/CNY"
+
+#: Underlying Symbol frxAUDBRL
+msgid "AUD/BRL"
+msgstr "دولار أسترالى/ريال برازيلى"
 
 #: Underlying Symbol frxUSDJPY
 msgid "USD/JPY"
 msgstr "USD/JPY"
 
-#: Underlying Symbol frxGBPBRL
-msgid "GBP/BRL"
-msgstr "GBP/BRL"
-
 #: Underlying Symbol frxUSDSGD
 msgid "USD/SGD"
 msgstr "USD/SGD"
+
+#: Underlying Symbol frxGBPBRL
+msgid "GBP/BRL"
+msgstr "GBP/BRL"
 
 #: Underlying Symbol frxAUDNOK
 msgid "AUD/NOK"
@@ -10524,13 +10524,13 @@ msgstr "يورو/يوان صينى"
 msgid "EUR/BRL"
 msgstr "يورو/ ريال برازيلى"
 
-#: Underlying Symbol frxNZDUSD
-msgid "NZD/USD"
-msgstr "NZD/USD"
-
 #: Underlying Symbol frxUSDDKK
 msgid "USD/DKK"
 msgstr "USD/DKK"
+
+#: Underlying Symbol frxNZDUSD
+msgid "NZD/USD"
+msgstr "NZD/USD"
 
 #: Underlying Symbol frxAUDNZD
 msgid "AUD/NZD"
@@ -10556,13 +10556,13 @@ msgstr "يورو/الكرون الدانمركى"
 msgid "AUD/CHF"
 msgstr "AUD/CHF"
 
-#: Underlying Symbol frxGBPCAD
-msgid "GBP/CAD"
-msgstr "GBP/CAD"
-
 #: Underlying Symbol frxUSDCHF
 msgid "USD/CHF"
 msgstr "USD/CHF"
+
+#: Underlying Symbol frxGBPCAD
+msgid "GBP/CAD"
+msgstr "GBP/CAD"
 
 #: Underlying Symbol frxGBPNOK
 msgid "GBP/NOK"
@@ -10624,13 +10624,13 @@ msgstr "GBP/HKD"
 msgid "GBP/NZD"
 msgstr "GBP/NZD"
 
-#: Underlying Symbol frxNZDJPY
-msgid "NZD/JPY"
-msgstr "NZD/JPY"
-
 #: Underlying Symbol frxUSDPLN
 msgid "USD/PLN"
 msgstr "USD/PLN"
+
+#: Underlying Symbol frxNZDJPY
+msgid "NZD/JPY"
+msgstr "NZD/JPY"
 
 #: Underlying Symbol frxAUDSEK
 msgid "AUD/SEK"
@@ -10648,13 +10648,13 @@ msgstr "GBP/DKK"
 msgid "EUR/HKD"
 msgstr "يورو/دولار هونج كونج"
 
-#: Underlying Symbol frxGBPAUD
-msgid "GBP/AUD"
-msgstr "GBP/AUD"
-
 #: Underlying Symbol frxGBPPLN
 msgid "GBP/PLN"
 msgstr "GBP/PLN"
+
+#: Underlying Symbol frxGBPAUD
+msgid "GBP/AUD"
+msgstr "GBP/AUD"
 
 #: Underlying Symbol frxUSDSEK
 msgid "USD/SEK"
@@ -11634,10 +11634,6 @@ msgstr "%1 <strong>%2</strong> عائد إذا %3 <strong>بقى بين %7</stro
 msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>higher</strong> than <strong>%6</strong>."
 msgstr "%1 <strong>%2</strong> عائد إذا كان %3 بعد <strong>%5 حركات</strong> بالضبط <strong>أعلى</strong> من <strong>%6</strong>."
 
-#: Translation for contract type "PUT"
-msgid "lower"
-msgstr "أدنى"
-
 #: Translation for contract type "ASIANU"
 msgid "asian up"
 msgstr "صعود آسيوي"
@@ -11653,12 +11649,15 @@ msgstr "صعود آسيوي"
 msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>higher</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgstr "%1 <strong>%2</strong> عائد إذا كانت <strong>آخر حركة</strong> من %3 بالضبط <strong>أعلى</strong> من <strong>متوسط</strong> كل <strong>%5الحركات</strong>."
 
+#: Translation for contract type "PUT"
+msgid "lower"
+msgstr "أدنى"
+
+#~ msgid "Why 1,000,000 people around the world trust us"
+#~ msgstr "لم يثق بنا مليون شخص حول العالم"
+
 #~ msgid "Deposit via Bank Wire"
 #~ msgstr "أودع عن طريق تحويل بنكى"
-
-#~| msgid "Why us?"
-#~ msgid "Why choose us"
-#~ msgstr "لماذا تختارنا"
 
 #~ msgid "Withdrawal via Bank Wire"
 #~ msgstr "السحب عن طريق تحويل بنكى"
