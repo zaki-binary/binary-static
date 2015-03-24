@@ -3,24 +3,16 @@
     .grd-container.grd-default-container
       .grd-grid-6.grd-grid-mobile-12.grd-parent
         .grd-grid-4
-          #accounts_links.by_client_type.client_logged_out.client_virtual
-            %h1= l('Accounts')
-            %ul
-              %li.by_client_type.client_logged_out.client_virtual
-                %a.pjaxload{:href=>url_for("linkto_acopening.cgi?actype=real")}= l('Trading Account')
-              %li.by_client_type.client_logged_out
-                %a.pjaxload{:href=>url_for("linkto_acopening.cgi?actype=virtual")}= l('Virtual Account')
-          %div
-            %h1= l('Partners')
-              %ul
-                %li.affiliate
-                  %a.pjaxload{:href=>url_for("/affiliate/signup")}= l('Affiliate Program')
-                %li
-                  %a.pjaxload{:href=>url_for("white-labels")}= l('White Labels')
-                %li
-                  %a.pjaxload{:href=>url_for("partnerapi")}= l('Partner API')
-                %li
-                  %a.pjaxload{:href=>url_for("open-source-projects")}= l('Open Source')
+          %h1= l('Partners')
+          %ul
+            %li.affiliate
+              %a.pjaxload{:href=>url_for("/affiliate/signup")}= l('Affiliate Program')
+            %li
+              %a.pjaxload{:href=>url_for("white-labels")}= l('White Labels')
+            %li
+              %a.pjaxload{:href=>url_for("partnerapi")}= l('Partner API')
+            %li
+              %a.pjaxload{:href=>url_for("open-source-projects")}= l('Open Source')
         .grd-grid-4
           %h1= l('Education')
           %ul
