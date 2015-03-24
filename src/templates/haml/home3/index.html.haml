@@ -21,7 +21,7 @@
             %p!= l('Up to <span> 1000% </span> Return <br> on Trades you Make')
         .zcta
           .button.pjaxload.zreal.pjaxload-focus.login-button
-            %span= l('Open Free Account Now')
+            %span= l('Open Account Now')
 .grd-container
   #zsection1
     .grd-grid-12.grd-parent
@@ -35,9 +35,6 @@
           %li!= l('<i class="fa fa-check-square"></i><span> All market conditions:</span> up/down, touch/no-touch, stays in/goes out.')
           %li!= l('<i class="fa fa-check-square"></i><span> All durations:</span> from 10 seconds to 365 days.')
           %li!= l('<i class="fa fa-check-square"></i><span> All payouts:</span> from $1 to $100,000.')
-        .center{:style => "margin-top:40px;"}
-          %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('linkto_acopening.cgi?actype=real')}
-            %span= l('Open a Real Money Account')
 .zbackground
   .grd-container
     #zsection2
@@ -88,8 +85,6 @@
       .center.zmargin
         %i.fa.fa-lock.zprivacy
           %span= l('We value your privacy and never share your information with anyone.')
-        .button.pjaxload.pjaxload-focus.login-button
-          %span= ('Create Free Account Now')
 .overlay.shown.hidden
   .dialog
     %p.zvirtual-money= l('Get your free $10k virtual money account')
