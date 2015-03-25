@@ -14,7 +14,7 @@
           %p= l('Trade 24/7, even on weekends. Customize your trades to meet your needs.')
       .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent
   #open-account
-    %p= l('Get your free $10k virtual money account')
+    %p= l('Get started now')
     %form#virtual-acc-form{ :name => 'oppAccForm', :action => url_for('create_account.cgi'), :method => 'post' }
       %span#virtual-fields
         %input.q-email{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder => stash('emailtext')}
