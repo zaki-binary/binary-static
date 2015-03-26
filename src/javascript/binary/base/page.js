@@ -336,7 +336,7 @@ Header.prototype = {
     },
     show_or_hide_login_form: function() {
         if (this.client.is_logged_in) {
-            $("#client_loginid").html(this.client.loginid);
+            $("#client_loginid").html('<option value="' + this.client.loginid + '" selected="selected">' + this.client.loginid + '</option>');
         }
     },
     simulate_input_placeholder_for_ie: function() {
