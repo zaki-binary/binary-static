@@ -250,7 +250,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuPortfolio',
-        url        => $self->c->url_for('/portfolio.cgi'),
+        url        => $self->c->url_for('/user/portfolio'),
         text       => $self->c->l('Portfolio'),
         link_class => 'with_login_cookies pjaxload',
       };
