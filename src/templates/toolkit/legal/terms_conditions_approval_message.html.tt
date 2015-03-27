@@ -1,3 +1,4 @@
+[% tnc_page_url = request.url_for("c_template.cgi", {filecode => "legal"}) %]
 <div class='grd-grid-12 grd-parent'>
     <div class="grd-grid-2 grd-grid-mobile-6 grd-centered-mobile">
         <p>
@@ -7,7 +8,7 @@
     <div class="grd-grid-10 grd-grid-mobile-12">
         <form name="tnc_approval_form" method="POST" action="[% form_action_url %]">
             <p>
-                [% l("Binary (Europe) Ltd has updated its Terms & Conditions. By clicking OK, you confirm that you have read and accepted the updated Terms & Conditions.") %]
+                [% l('Binary (Europe) Ltd has updated its <a class="pjaxload" href="[_1]">Terms & Conditions</a>. By clicking OK, you confirm that you have read and accepted the updated <a class="pjaxload" href="[_1]">Terms & Conditions</a>.', tnc_page_url) %]
             </p>
             <input name="act" value="[% action %]" type="hidden"/>
             <input name="currency" value="[% currency %]" type="hidden"/>
