@@ -15,6 +15,8 @@ window._trackJs = {
             "[object Event]",
             // General script error, not actionable
             "Script error.",
+            // error when user  interrupts script loading, nothing to fix
+            "Error loading script",
             // an error caused by DealPly (http://www.dealply.com/) chrome extension
             "DealPly",
             // this error is reported when a post request returns error, i.e. html body
