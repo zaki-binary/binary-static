@@ -955,7 +955,7 @@ Header.prototype = {
         sync();
         setInterval(function() {
             sync();
-        }, 300000);
+        }, 900000);
 
         this.clock_started = true;
         return;
