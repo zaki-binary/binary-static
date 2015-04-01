@@ -7,17 +7,17 @@
     %legend= l('Your details')
     .grd-parent.grd-grid-12.grd-row-padding
       .grd-grid-4.form_label
-        %label{:for => "loginid"}= l('Login ID')
+        %label{:for => "email"}= l('Email')
       .grd-grid-8
-        %input#loginid{:type => 'text', :name => 'loginid', :placeholder => "#{l('Login ID')}"}
-        - if (flash('error') and flash('error')->{loginid}) {
-          %p.errorfield= flash('error')->{loginid}
+        %input#email{:type => 'text', :name => 'email', :placeholder => "#{l('Email')}"}
+        - if (flash('error') and flash('error')->{email}) {
+          %p.errorfield= flash('error')->{email}
         - }
     .grd-parent.grd-grid-12.grd-row-padding
       .grd-grid-4.form_label
         %label{:for => "password"}= l('Password')
       .grd-grid-8
-        %input#loginid{:type => 'password', :name => 'password', :placeholder => "#{l('Password')}"}
+        %input#password{:type => 'password', :name => 'password', :placeholder => "#{l('Password')}"}
         - if (flash('error') and flash('error')->{password}) {
           %p.errorfield= flash('error')->{password}
         - }
