@@ -639,19 +639,15 @@ Page.prototype = {
             document.location = that.url_for_language(language);
         });
     },
-
     on_change_loginid: function() {
         var that = this;
-        $('#client_loginid').on('change', 'select', function() {
+        $('#client_loginid').on('change', function() {
             var selected_loginid = $(this).val();
-
             url_loginid = page.url.url_for('loginid_login');
             url_loginid += '&loginid=' + selected_loginid;
-
             document.location = url_loginid;
         });
     },
-
     localize_for: function(language) {
         text = texts[language];
         moment.locale(language.toLowerCase());
