@@ -623,6 +623,7 @@ Page.prototype = {
         this.header.on_load();
         this.localize_for(this.language());
         this.on_change_language();
+        this.on_change_loginid();
         this.record_affiliate_exposure();
         this.contents.on_load();
         $('#current_width').val(get_container_width());//This should probably not be here.
@@ -638,6 +639,19 @@ Page.prototype = {
             document.location = that.url_for_language(language);
         });
     },
+
+    on_change_loginid: function() {
+        var that = this;
+        $('#client_loginid').on('change', 'select', function() {
+            var selected_loginid = $(this).val();
+
+            url_loginid = page.url.url_for('loginid_login');
+            url_loginid += '&loginid=' + selected_loginid;
+
+            document.location = url_loginid;
+        });
+    },
+
     localize_for: function(language) {
         text = texts[language];
         moment.locale(language.toLowerCase());
