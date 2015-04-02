@@ -30,6 +30,21 @@ var gtm_data_layer_info = function() {
     return gtm_data_layer_info;
 };
 
+var User = function() {
+    this.email =  $.cookie('email');
+    var loginid_list = $.cookie('loginid_list');
+
+    if(this.email === null || typeof this.email === "undefined") {
+        this.is_logged_in = false;
+    } else {
+        this.is_logged_in = true;
+
+        if(loginid_list !== null && typeof loginid_list !== "undefined") {
+            this.loginid_array = loginid_list.split(':');
+        }
+    }
+};
+
 var Client = function() {
     this.loginid =  $.cookie('loginid');
     this.is_logged_in = false;
@@ -318,6 +333,7 @@ Menu.prototype = {
 };
 
 var Header = function(params) {
+    this.user = params['user'];
     this.client = params['client'];
     this.settings = params['settings'];
     this.menu = new Menu(params['url']);
@@ -335,8 +351,17 @@ Header.prototype = {
         this.menu.reset();
     },
     show_or_hide_login_form: function() {
-        if (this.client.is_logged_in) {
-            $("#client_loginid").html('<option value="' + this.client.loginid + '" selected="selected">' + this.client.loginid + '</option>');
+        if (this.user.is_logged_in && this.client.is_logged_in) {
+            var loginid_select;
+            for (var i=0;i<this.user.loginid_array.length;i++) {
+                var curr_loginid = this.user.loginid_array[i];
+                var selected;
+                if (curr_loginid == this.client.loginid) {
+                    selected = 'selected="selected"';
+                }
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + curr_loginid + '</option>'
+            }
+            $("#client_loginid").html(loginid_select);
         }
     },
     simulate_input_placeholder_for_ie: function() {
@@ -572,10 +597,11 @@ Contents.prototype = {
 
 var Page = function(config) {
     config = typeof config !== 'undefined' ? config : {};
+    this.user = new User();
     this.client = new Client();
     this.url = new URL();
     this.settings = new InScriptStore(config['settings']);
-    this.header = new Header({ client: this.client, settings: this.settings, url: this.url});
+    this.header = new Header({ user: this.user, client: this.client, settings: this.settings, url: this.url});
     this.contents = new Contents(this.client);
 };
 
