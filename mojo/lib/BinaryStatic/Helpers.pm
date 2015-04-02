@@ -36,7 +36,8 @@ sub register {
         });
     $app->helper(
         is_pjax_request => sub {
-            return (shift)->req->param('_pjax') ? 1 : 0;
+            my $c = shift;
+            return defined $c->req->param('_pjax') ? 1 : 0;
         });
     $app->helper(
         haml => sub {
