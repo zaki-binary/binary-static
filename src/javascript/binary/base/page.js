@@ -357,10 +357,11 @@ Header.prototype = {
 
             for (var i=0;i<sorted_list.length;i++) {
                 var curr_loginid = sorted_list[i];
-                var selected;
+                var selected = '';
                 if (curr_loginid == this.client.loginid) {
                     selected = 'selected="selected"';
                 }
+
                 loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + curr_loginid + '</option>'
             }
             $("#client_loginid").html(loginid_select);
