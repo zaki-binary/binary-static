@@ -36,8 +36,7 @@ sub register {
         });
     $app->helper(
         is_pjax_request => sub {
-            my ($c) = @_;
-            return (grep { $_ eq '_pjax' } @{$c->req->url->query->params});
+            return (shift)->req->param('_pjax') ? 1 : 0;
         });
     $app->helper(
         haml => sub {
