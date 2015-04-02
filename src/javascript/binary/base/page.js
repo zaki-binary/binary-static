@@ -353,8 +353,10 @@ Header.prototype = {
     show_or_hide_login_form: function() {
         if (this.user.is_logged_in && this.client.is_logged_in) {
             var loginid_select;
-            for (var i=0;i<this.user.loginid_array.length;i++) {
-                var curr_loginid = this.user.loginid_array[i];
+            var sorted_list = this.user.loginid_array.sort();
+
+            for (var i=0;i<sorted_list.length;i++) {
+                var curr_loginid = sorted_list[i];
                 var selected;
                 if (curr_loginid == this.client.loginid) {
                     selected = 'selected="selected"';
