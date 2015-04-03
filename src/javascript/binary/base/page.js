@@ -577,6 +577,20 @@ Contents.prototype = {
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
+
+                // only show "upgrade to real acc" when user doesn't have real acc
+                var loginids = $.cookie('loginid_list').split(':');
+                var has_real;
+                for (var loginid_item in loginids) {
+                    if (! /VRT/.test(loginid_item)) {
+                        has_real = 1;
+                        break;
+                    }
+                }
+                if (has_real == 1) {
+                    $('#virtualupgrade').addClass('invisible');
+                    $('#virtualupgrade').hide();
+                }
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
