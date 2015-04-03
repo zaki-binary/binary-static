@@ -17,8 +17,9 @@
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.by_client_type.client_virtual.client_real#client-logged-in{ :style => 'display: none;'}
         #logout
           - my $sel_loginid = stash->{client}->{loginid};
+          - my $loginid_list = stash->{loginid_list};
           %select{:name => 'client_loginid', :id => 'client_loginid'}
-            - foreach my $loginid (@{stash->{loginid_list}) {
+            - foreach my $loginid (@{$loginid_list}) {
               - if ($loginid ne $sel_loginid) {
                 %option{:class => $loginid}= $loginid
               - } else {
