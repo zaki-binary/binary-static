@@ -644,7 +644,7 @@ Page.prototype = {
         $('#client_loginid').on('change', function() {
             var selected_loginid = $(this).val();
             var login_url = page.url.url_for('loginid_login', 'loginid=' + selected_loginid);
-            document.location = url_loginid;
+            document.location = login_url;
         });
     },
     localize_for: function(language) {
