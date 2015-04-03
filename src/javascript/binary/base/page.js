@@ -643,8 +643,7 @@ Page.prototype = {
         var that = this;
         $('#client_loginid').on('change', function() {
             var selected_loginid = $(this).val();
-            url_loginid = page.url.url_for('loginid_login');
-            url_loginid += '&loginid=' + selected_loginid;
+            var login_url = page.url.url_for('loginid_login', 'loginid=' + selected_loginid);
             document.location = url_loginid;
         });
     },
