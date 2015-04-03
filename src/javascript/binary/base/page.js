@@ -580,9 +580,10 @@ Contents.prototype = {
 
                 // only show "upgrade to real acc" when user doesn't have real acc
                 var loginids = $.cookie('loginid_list').split(':');
-                var has_real;
-                for (var loginid_item in loginids) {
-                    if (! /VRT/.test(loginid_item)) {
+                var has_real = 0;
+                for (var i=0;i<loginids.length;i++) {
+                    var loginid_item = loginids[i];
+                    if (!/^VRT/.test(loginids[i])) {
                         has_real = 1;
                         break;
                     }
