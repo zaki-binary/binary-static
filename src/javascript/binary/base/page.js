@@ -657,9 +657,11 @@ Page.prototype = {
     on_change_loginid: function() {
         var that = this;
         $('#client_loginid').on('change', function() {
-            var selected_loginid = $(this).val();
-            var login_url = page.url.url_for('user/loginid_switch', 'loginid=' + selected_loginid);
-            document.location = login_url;
+//            var selected_loginid = $(this).val();
+//            var login_url = page.url.url_for('user/loginid_switch', 'loginid=' + selected_loginid);
+//            document.location = login_url;
+
+            $('#loginid-switch-form').submit();
         });
     },
     localize_for: function(language) {
