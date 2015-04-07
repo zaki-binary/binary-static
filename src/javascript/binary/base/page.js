@@ -658,7 +658,7 @@ Page.prototype = {
         var that = this;
         $('#client_loginid').on('change', function() {
             var selected_loginid = $(this).val();
-            var login_url = page.url.url_for('loginid_login', 'loginid=' + selected_loginid + '&loginid_switch=1');
+            var login_url = page.url.url_for('/user/loginid_switch', 'loginid=' + selected_loginid);
             document.location = login_url;
         });
     },
