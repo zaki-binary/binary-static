@@ -16,11 +16,10 @@
         = include('layouts/default/nav')
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.by_client_type.client_virtual.client_real#client-logged-in{ :style => 'display: none;'}
         #logout
-          %form#loginid-switch{:action => url_for('/user/loginid_switch'), :method => 'post'}
+          %form#loginid-switch-form{:action => url_for('/user/loginid_switch'), :method => 'post'}
             %span#login-fields
               %select{:name => 'client_loginid', :id => 'client_loginid'}
-              %input{:type => 'submit', :value => stash('logintext'), :style => 'display: none;' }
-          %a.logout{:href => url_for('/logout')}= l('Log out')
+            %a.logout{:href => url_for('/logout')}= l('Log out')
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.grd-no-gutter-left.by_client_type.client_logged_out#client-logged-out
         %form#login-form{:action => url_for('/login'), :method => 'post'}
           %span#login-fields
