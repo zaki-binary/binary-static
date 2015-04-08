@@ -610,8 +610,8 @@ Contents.prototype = {
                     }
                 }
                 if (has_real == 1) {
-                    $('.by_client_type.client_virtual').addClass('invisible');
-                    $('.by_client_type.client_virtual').hide();
+                    $('#virtualupgrade').addClass('invisible');
+                    $('#virtualupgrade').hide();
                 }
             }
         } else {
