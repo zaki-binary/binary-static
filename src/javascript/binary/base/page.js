@@ -598,7 +598,7 @@ Contents.prototype = {
                     }
                 }
                 if (has_real == 1) {
-                    $('#virtual_upgrade_link').hide();
+                    $('#virtual_upgrade_link').css('visibility', 'hidden');
                 }
             }
         } else {
