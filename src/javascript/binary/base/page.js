@@ -368,11 +368,20 @@ Header.prototype = {
             var loginid_array = this.user.loginid_array;
             for (var i=0;i<loginid_array.length;i++) {
                 var curr_loginid = loginid_array[i].id;
+                var real = loginid_array[i].real;
                 var selected = '';
                 if (curr_loginid == this.client.loginid) {
                     selected = 'selected="selected"';
                 }
-                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + curr_loginid +  '</option>'
+
+                var loginid_text;
+                if (real == 1) {
+                    loginid_text = 'Real Money (' + curr_loginid + ')';
+                } else {
+                    loginid_text = 'Virtual Money (' + curr_loginid + ')';
+                }
+
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + loginid_text +  '</option>'
             }
             $("#client_loginid").html(loginid_select);
         }
