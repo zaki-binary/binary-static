@@ -568,8 +568,9 @@ ToolTip.prototype = {
     },
 };
 
-var Contents = function(client) {
+var Contents = function(client, user) {
     this.client = client;
+    this.user = user;
     this.tooltip = new ToolTip();
 };
 
@@ -601,7 +602,9 @@ Contents.prototype = {
                 var has_real = 0;
                 for (var i=0;i<loginid_array.length;i++) {
                     var loginid = loginid_array[i].id;
-                    if (loginid_array[i].real == 1) {
+                    var real = loginid_array[i].real;
+
+                    if (real == 1) {
                         has_real = 1;
                         break;
                     }
@@ -638,7 +641,7 @@ var Page = function(config) {
     this.url = new URL();
     this.settings = new InScriptStore(config['settings']);
     this.header = new Header({ user: this.user, client: this.client, settings: this.settings, url: this.url});
-    this.contents = new Contents(this.client);
+    this.contents = new Contents(this.client, this.user);
 };
 
 Page.prototype = {
