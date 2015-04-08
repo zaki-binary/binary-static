@@ -598,6 +598,8 @@ Contents.prototype = {
                     }
                 }
                 if (has_real == 1) {
+alert('VR has real acc, hide VR upgrade to real URL......');
+
                     $('#virtual_upgrade_link').css('visibility', 'hidden');
                 }
             }
