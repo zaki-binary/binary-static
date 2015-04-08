@@ -298,7 +298,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuAuthenticateAccount',
-        url        => $self->c->url_for('/authenticate.cgi')->query({o => 'id'}),
+        url        => $self->c->url_for('/cashier/authenticate')->query({o => 'id'}),
         text       => $self->c->l('Authenticate'),
         class      => 'by_client_type client_real',
         link_class => 'with_login_cookies pjaxload',
