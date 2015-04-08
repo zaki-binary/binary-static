@@ -40,16 +40,18 @@ var User = function() {
         this.is_logged_in = true;
 
         if(loginid_list !== null && typeof loginid_list !== "undefined") {
-            var loginid_array;
+            var loginid_array = [];
             var loginids = loginid_list.split('+').sort();
+
             for (var i = 0; i < loginids.length; i++) {
-                var elements =  loginids[i].split(':');
-                if (elements[1] == 'R') {
-                    loginid_array[i] = elements[0] + ' (Real Money)';
-                } else {
-                    loginid_array[i] = elements[0] + ' (Virtual Money)';
+                var real = 0;
+                var items = loginids[i].split(':');
+                if (items[1] == 'R') {
+                    real = 1;
                 }
+                loginid_array.push({'id':items[0], 'real':real});
             }
+
             this.loginid_array = loginid_array;
         }
     }
@@ -363,20 +365,14 @@ Header.prototype = {
     show_or_hide_login_form: function() {
         if (this.user.is_logged_in && this.client.is_logged_in) {
             var loginid_select;
-            var list = this.user.loginid_array;
-
-            for (var i=0;i<list.length;i++) {
-                var loginid_detail = list[i];
+            var loginid_array = this.user.loginid_array;
+            for (var i=0;i<loginid_array.length;i++) {
+                var curr_loginid = loginid_array[i].id;
                 var selected = '';
-
-                var elements = loginid_detail.match(/^(\w+) /);
-                var curr_loginid = elements[1];
-
                 if (curr_loginid == this.client.loginid) {
                     selected = 'selected="selected"';
                 }
-
-                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + loginid_detail + '</option>'
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + curr_loginid +  '</option>'
             }
             $("#client_loginid").html(loginid_select);
         }
@@ -592,19 +588,17 @@ Contents.prototype = {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
 
-                // only show "upgrade to real acc" when user doesn't have real acc
-                var loginids = $.cookie('loginid_list').split(':');
+                var loginid_array = this.user.loginid_array;
                 var has_real = 0;
-                for (var i=0;i<loginids.length;i++) {
-                    var loginid_item = loginids[i];
-                    if (!/^VRT/.test(loginids[i])) {
+                for (var i=0;i<loginid_array.length;i++) {
+                    var loginid = loginid_array[i].id;
+                    if (loginid_array[i].real == 1) {
                         has_real = 1;
                         break;
                     }
                 }
                 if (has_real == 1) {
-                    $('#virtualupgrade').addClass('invisible');
-                    $('#virtualupgrade').hide();
+                    $('#virtual_upgrade_link').hide();
                 }
             }
         } else {
