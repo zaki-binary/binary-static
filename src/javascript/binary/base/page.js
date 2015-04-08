@@ -40,7 +40,17 @@ var User = function() {
         this.is_logged_in = true;
 
         if(loginid_list !== null && typeof loginid_list !== "undefined") {
-            this.loginid_array = loginid_list.split(':');
+            var loginid_array;
+            var loginids = loginid_list.split('+').sort();
+            for (var i = 0; i < loginids.length; i++) {
+                var elements =  loginids[i].split(':');
+                if (elements[1] == 'R') {
+                    loginid_array[i] = elements[0] + ' (Real Money)';
+                } else {
+                    loginid_array[i] = elements[0] + ' (Virtual Money)';
+                }
+            }
+            this.loginid_array = loginid_array;
         }
     }
 };
@@ -353,16 +363,20 @@ Header.prototype = {
     show_or_hide_login_form: function() {
         if (this.user.is_logged_in && this.client.is_logged_in) {
             var loginid_select;
-            var sorted_list = this.user.loginid_array.sort();
+            var list = this.user.loginid_array;
 
-            for (var i=0;i<sorted_list.length;i++) {
-                var curr_loginid = sorted_list[i];
+            for (var i=0;i<list.length;i++) {
+                var loginid_detail = list[i];
                 var selected = '';
+
+                var elements = loginid_detail.match(/^(\w+) /);
+                var curr_loginid = elements[1];
+
                 if (curr_loginid == this.client.loginid) {
                     selected = 'selected="selected"';
                 }
 
-                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + curr_loginid + '</option>'
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + loginid_detail + '</option>'
             }
             $("#client_loginid").html(loginid_select);
         }
