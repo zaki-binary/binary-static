@@ -56,7 +56,7 @@
                 </div>
                 <div id="client-logged-in" class="grd-grid-3 grd-grid-mobile-9 grd-grid-phablet-10 by_client_type client_real client_virtual" style="display: none">
                   <div id="logout">
-                    <form id="loginid-switch-form" action="https://www.devbin.io/user/loginid_switch?l=EN" method="post">
+                    <form id="loginid-switch-form" action="[% request.url_for(user/loginid_switch?l=EN) %]" method="post">
                         <span id="login-fields">
                             <select id="client_loginid" name="client_loginid">
                             </select>
