@@ -376,9 +376,9 @@ Header.prototype = {
 
                 var loginid_text;
                 if (real == 1) {
-                    loginid_text = 'Real Money (' + curr_loginid + ')';
+                    loginid_text = text.localize('Real Money') + ' (' + curr_loginid + ')';
                 } else {
-                    loginid_text = 'Virtual Money (' + curr_loginid + ')';
+                    loginid_text = text.localize('Virtual Money') + ' (' + curr_loginid + ')';
                 }
 
                 loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + loginid_text +  '</option>'
