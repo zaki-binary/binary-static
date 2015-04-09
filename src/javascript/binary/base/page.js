@@ -623,6 +623,9 @@ Contents.prototype = {
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
             $('.by_client_type.client_logged_out').show();
+
+            $('#topbar').removeClass('orange');
+            $('#topbar').addClass('dark-blue');
         }
     },
     update_body_id: function() {
