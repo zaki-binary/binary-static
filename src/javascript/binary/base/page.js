@@ -595,8 +595,8 @@ Contents.prototype = {
                 $('.by_client_type.client_real').removeClass('invisible');
                 $('.by_client_type.client_real').show();
 
-                $('#topbar').removeClass('orange');
                 $('#topbar').addClass('dark-blue');
+                $('#topbar').removeClass('orange');
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
@@ -617,8 +617,8 @@ Contents.prototype = {
                     $('#virtual-upgrade-link').hide();
                 }
 
-                $('#topbar').removeClass('dark-blue');
                 $('#topbar').addClass('orange');
+                $('#topbar').removeClass('dark-blue');
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
