@@ -613,8 +613,8 @@ Contents.prototype = {
                     }
                 }
                 if (has_real == 1) {
-                    $('#virtual_upgrade_link').addClass('invisible');
-                    $('#virtual_upgrade_link').hide();
+                    $('#virtual-upgrade-link').addClass('invisible');
+                    $('#virtual-upgrade-link').hide();
                 }
 
                 $('#topbar').removeClass('dark-blue');
