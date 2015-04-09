@@ -4,7 +4,7 @@
             <div class='grd-grid-12 grd-parent'>
                 <div class='grd-grid-6 grd-grid-mobile-12 by_client_type client_virtual' id='virtualupgrade' style="display: none;">
                     <span class='grd-hide-mobile'>
-                        <span>[% l("You're using a virtual money account.") %]</span>
+                        <span id='virtual-text'>[% l("You're using a virtual money account.") %]</span>
                     </span>
                     <a id="virtual_upgrade_link" class="pjaxload with_login_cookies pulser" href="[% request.url_for('linkto_acopening.cgi', { actype => 'real'}) %]">[% l("Upgrade to a real money account") %]</a>
                 </div>
