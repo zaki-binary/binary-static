@@ -613,6 +613,9 @@ Contents.prototype = {
                     $('#virtualupgrade').addClass('invisible');
                     $('#virtualupgrade').hide();
                 }
+
+                $('#topbar').removeClass('dark-blue');
+                $('#topbar').addClass('orange');
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
