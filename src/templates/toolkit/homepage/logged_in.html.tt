@@ -1,7 +1,7 @@
 <div class="grd-grid-12">
     <h1>[% l('Welcome!') %]</h1>
     <p>
-        [% l('Account') %] : <span class="clientid">[% client.loginid %]</span> - [% welcome_text %]
+        [% welcome_text %] <span class="clientid">([% client.loginid %])</span>
     </p>
 
     [% IF client.is_virtual %]
