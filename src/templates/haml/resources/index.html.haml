@@ -8,11 +8,11 @@
 .grd-grid-6.grd-grid-mobile-12.grd-parent
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
-      %a.pjaxload{:href => url_for('asset_index.cgi'), :id => 'asset-index'}
+      %a.pjaxload{:href => url_for('/resources/asset_index'), :id => 'asset-index'}
         %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/asset-index.svg')}
     .grd-grid-12
       %h4
-        %a.pjaxload{:href => url_for('asset_index.cgi')}= l('Asset Index')
+        %a.pjaxload{:href => url_for('/resources/asset_index')}= l('Asset Index')
       %p= l('View the full list of assets, contract types and durations.')
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding

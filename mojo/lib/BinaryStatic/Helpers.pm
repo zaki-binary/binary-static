@@ -332,7 +332,7 @@ sub _main_menu_resources {
 
     my $asset_index_ref = {
         id         => 'topMenuAssetIndex',
-        url        => $self->c->url_for('/asset_index.cgi'),
+        url        => $self->c->url_for('/resources/asset_index'),
         text       => $self->c->l('Asset Index'),
         link_class => 'pjaxload',
     };

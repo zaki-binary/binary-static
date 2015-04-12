@@ -16,7 +16,6 @@ sub toolkit {
         'user/open_account' => ['account/open_account', 'default'],
         'affiliate/signup' => ['affiliates/main', 'default'],
         'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
-        # 'c/asset_index.cgi' => ['resources/pricing_table_form', 'default'],
         'charting/application' => ['charting/chart_application', 'default'],
         'charting/livechart' => ['charting/livechart', 'default'],
         'c/rise_fall_table.cgi' => ['resources/rise_fall_table', 'default'],
