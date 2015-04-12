@@ -110,7 +110,7 @@ sub startup {
     $r->get('/c/pricing_table.cgi')->to('page#toolkit');
     $r->get('/charting/application')->to('page#toolkit');
     $r->get('/charting/livechart')->to('page#toolkit');
-    $r->get('/c/rise_fall_table.cgi')->to('page#toolkit');
+    $r->get('/resources/rise_fall_table')->to('page#toolkit');
 
     $r->route('/exception')->to('page#exception');
     $r->route('/*')->to('page#not_found');

@@ -361,7 +361,7 @@ sub _main_menu_resources {
 
     my $forward_start_ref = {
         id         => 'topMenuRiseFallTable',
-        url        => $self->c->url_for('/rise_fall_table.cgi'),
+        url        => $self->c->url_for('/resources/rise_fall_table'),
         text       => $self->c->l('Rise / Fall Table'),
         link_class => 'pjaxload',
         id         => 'risefall_table_lnk',
