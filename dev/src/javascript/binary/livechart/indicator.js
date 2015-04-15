@@ -15,9 +15,18 @@ LiveChartIndicator['Barrier'] = function(params) {
 
 LiveChartIndicator['Barrier'].prototype = {
     remove: function(that) {
+        if(!that.chart){
+            return;
+        }
         if (this.axis == 'y') {
+            if(!that.chart.yAxis){
+                return;
+            }
             that.chart.yAxis[0].removePlotLine(this.id);
         } else {
+            if(!that.chart.xAxis){
+                return;
+            }
             that.chart.xAxis[0].removePlotLine(this.id);
         }
     },
