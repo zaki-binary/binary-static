@@ -19,7 +19,7 @@
     <li>[% l('A scanned copy of your current valid passport, current driving license (provisional or full), or identity card') %]</li>
     <li>[% l('A recent (less than 3 months old) scanned copy of your paper utility bill, or your paper bank, credit union, building society, credit, or debit card statement, or passbook') %]</li>
 </ul>
-<p>[% l('Please send this email to [_1].', '<a href="mailto:[% cs_email %]">[% cs_email %]</a>') %]</p>
+<p>[% l('Please send this email to [_1].', '<a href="mailto:' . cs_email . '">' . cs_email . '</a>') %]</p>
 
 [%# Costa Rica - only ask for clients that have withdrawn over 5000, and ask for scans only %]
 [% ELSIF country == 'Costa Rica' AND client.total_withdrawal_value >= 5000 %]
