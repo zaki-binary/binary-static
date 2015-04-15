@@ -15,7 +15,7 @@ sub toolkit {
     my %url_map = (
         'user/open_account' => ['account/open_account', 'default'],
         'affiliate/signup' => ['affiliates/main', 'default'],
-        'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
+        'resources/pricing_table' => ['resources/pricing_table_form', 'default'],
         'charting/application' => ['charting/chart_application', 'default'],
         'charting/livechart' => ['charting/livechart', 'default'],
         'resources/rise_fall_table' => ['resources/rise_fall_table', 'default'],

@@ -33,11 +33,11 @@
       %p= l('Learn about the different ways to trade on the markets.')
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
-      %a.pjaxload{:href => url_for('pricing_table.cgi'),:id => 'pricing-table'}
+      %a.pjaxload{:href => url_for('/resources/pricing_table'),:id => 'pricing-table'}
         %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/pricing-table.svg')}
     .grd-grid-12
       %h4
-        %a.pjaxload{:href => url_for('pricing_table.cgi')}= l('Pricing Table')
+        %a.pjaxload{:href => url_for('/resources/pricing_table')}= l('Pricing Table')
       %p= l('View contract prices across a range of barriers and durations.')
 .grd-grid-6.grd-grid-mobile-12.grd-parent.grd-clear
   .grd-grid-6.grd-parent

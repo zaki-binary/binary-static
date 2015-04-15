@@ -353,7 +353,7 @@ sub _main_menu_resources {
 
     my $pricing_table_ref = {
         id         => 'topMenuPricingTable',
-        url        => $self->c->url_for('/pricing_table.cgi'),
+        url        => $self->c->url_for('/resources/pricing_table'),
         text       => $self->c->l('Pricing Table'),
         link_class => 'pjaxload',
         id         => 'pricing_table_lnk',

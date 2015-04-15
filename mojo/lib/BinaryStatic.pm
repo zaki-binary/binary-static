@@ -107,7 +107,7 @@ sub startup {
 
     $r->get('/user/open_account')->to('page#toolkit');
     $r->get('/affiliate/signup')->to('page#toolkit');
-    $r->get('/c/pricing_table.cgi')->to('page#toolkit');
+    $r->get('/resources/pricing_table')->to('page#toolkit');
     $r->get('/charting/application')->to('page#toolkit');
     $r->get('/charting/livechart')->to('page#toolkit');
     $r->get('/resources/rise_fall_table')->to('page#toolkit');
