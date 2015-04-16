@@ -373,7 +373,7 @@ BetForm.TradingTime.prototype = {
         return trading_dates;
     },
     get_trading_days: function() {
-        var underlying_symbol = this.underlying();
+        var underlying_symbol = BetForm.attributes.underlying();
         var barrier_category = BetForm.attributes.barrier_1() === 'undefined' ? 'atm' : 'non_atm';
         if (typeof this.trading_info[underlying_symbol] === 'undefined') {
             var that = this;
