@@ -2026,9 +2026,6 @@ TimePicker.prototype = {
         return true;
     }
 };
-
-// if Track:js is already loaded, we need to initialize it
-if (trackJs) trackJs.configure(window._trackJs);
 ;//
 //
 //
