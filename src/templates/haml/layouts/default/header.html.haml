@@ -2,6 +2,7 @@
 -    loginholder => l('Login ID'),
 -    pwdholder   => l('Password'),
 -    logintext   => l('Log in'),
+-    emailtip    => l('Binary.com now requires your email and password to log in. If you have both a real-money and a virtual-money account, please use the password from your real-money account.')
 - );
 #header
   .grd-container
@@ -21,7 +22,8 @@
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.grd-no-gutter-left.by_client_type.client_logged_out#client-logged-out
         %form#login-form{:action => url_for('/login'), :method => 'post'}
           %span#login-fields
-            %input{:name => 'loginid', :type => 'text', :placeholder => stash('loginholder')}
+            %abbr{:rel => 'tooltip', :title => stash('emailtip')}
+              %input{:name => 'loginid', :type => 'text', :placeholder => stash('loginholder')}
             %input{:name => 'password', :type => 'password', :placeholder => stash('pwdholder')}
             %input{:type => 'submit', :value => stash('logintext')}
           %span#login-links
