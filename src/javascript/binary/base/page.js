@@ -45,11 +45,16 @@ var User = function() {
 
             for (var i = 0; i < loginids.length; i++) {
                 var real = 0;
+                var disabled = 0;
                 var items = loginids[i].split(':');
                 if (items[1] == 'R') {
                     real = 1;
                 }
-                loginid_array.push({'id':items[0], 'real':real});
+                if (items[2] == 'D') {
+                    disabled = 1;
+                }
+
+                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled });
             }
 
             this.loginid_array = loginid_array;
@@ -369,9 +374,10 @@ Header.prototype = {
             for (var i=0;i<loginid_array.length;i++) {
                 var curr_loginid = loginid_array[i].id;
                 var real = loginid_array[i].real;
+                var disabled = loginid_array[i].disabled;
                 var selected = '';
                 if (curr_loginid == this.client.loginid) {
-                    selected = 'selected="selected"';
+                    selected = ' selected="selected" ';
                 }
 
                 var loginid_text;
@@ -381,7 +387,12 @@ Header.prototype = {
                     loginid_text = text.localize('Virtual Money') + ' (' + curr_loginid + ')';
                 }
 
-                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + loginid_text +  '</option>'
+                var disabled_text = '';
+                if (disabled == 1) {
+                    disabled_text = ' disabled="disabled" ';
+                }
+
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + disabled_text + '>' + loginid_text +  '</option>'
             }
             $("#client_loginid").html(loginid_select);
         }
