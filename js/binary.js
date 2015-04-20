@@ -3127,7 +3127,7 @@ pjax_config_page('rise_fall_table', function() {
                 $(this).hide();
                 $('#rise_fall_calculating').show();
                 var form = $('form[name=rise_fall]').get(0);
-                var url = page.url.url_for('rise_fall_table.cgi', getFormParams(form));
+                var url = page.url.url_for('resources/rise_fall_table', getFormParams(form));
                 $('#rise_fall_prices_div').html('');
                 $.ajax({
                     url: url,
@@ -8908,7 +8908,7 @@ pjax_config_page('portfolio', function() {
     $('#pricingtable_calculate').on('click', function(e) {
         e.preventDefault();
         var form = $('form[name=pricing_table_input]').get(0);
-        var url = page.url.url_for('pricing_table.cgi', getFormParams(form));
+        var url = page.url.url_for('resources/pricing_table', getFormParams(form));
         $('#pricingtable_calculate').hide();
         $('#pricingtable_calculating').show();
         $('#pricing_table_prices_div').html('');
@@ -8953,7 +8953,7 @@ var bet_type_select = function() {
         var prev_underlying = $("#pricingtable_underlying").val();
 
         // change underlying option list
-        var ajax_url = page.url.url_for('pricing_table.cgi');
+        var ajax_url = page.url.url_for('resources/pricing_table');
         $.post(
             ajax_url,
             {
@@ -8980,7 +8980,7 @@ var select_underlying_change = function() {
     $("#pricingtable_underlying").on("change", function() {
         var underlying = $(this).val();
         // change lower strike
-        var ajax_url = page.url.url_for('pricing_table.cgi');
+        var ajax_url = page.url.url_for('resources/pricing_table');
         $.post(
             ajax_url,
             {
