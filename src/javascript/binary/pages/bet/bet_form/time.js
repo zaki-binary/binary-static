@@ -374,7 +374,7 @@ BetForm.TradingTime.prototype = {
     },
     get_trading_days: function() {
         var underlying_symbol = BetForm.attributes.underlying();
-        var barrier_category = BetForm.attributes.barrier_1();
+        var barrier = BetForm.attributes.barrier_1();
         if (typeof this.trading_info[underlying_symbol] === 'undefined') {
             var that = this;
             $.ajax({
@@ -383,7 +383,7 @@ BetForm.TradingTime.prototype = {
                         underlying_symbol: underlying_symbol,
                         form_name: BetForm.attributes.form_name(),
                         date_start: BetForm.attributes.start_time(),
-                        barrier_category: barrier_category,
+                        barrier: barrier,
                     },
                 dataType:'json',
                 async: false
