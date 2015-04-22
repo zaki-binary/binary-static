@@ -296,6 +296,7 @@ var BetPrice = function() {
             var that = this;
             var con = this.buy_response_container();
             con.addClass('bet_confirm_error');
+            data += '<p>' + text.localize('Please confirm the trade on your statement before proceeding.') + '</p>';
             con.children('div').first().html(data);
             con.show();
             var _clear_results = function () { that.clear_buy_results(); };
