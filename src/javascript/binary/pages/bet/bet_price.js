@@ -81,6 +81,7 @@ var BetPrice = function() {
             var that = this;
             var timeout = 60000;
             that.hide_buy_buttons();
+            BetPrice.order_form.disable_buy_buttons();
 
             if(!page.client.is_logged_in) {
                 window.location.href = page.url.url_for('login');
@@ -126,6 +127,7 @@ var BetPrice = function() {
             }
             $('.price_box').fadeTo(0, 1);
             this.display_buy_buttons();
+            BetPrice.order_form.enable_buy_buttons();
         },
         on_buy_bet_error: function (form, jqXHR, resp_status, exp) {
             var details = '' + exp;
@@ -140,6 +142,7 @@ var BetPrice = function() {
             this.display_buy_error('<div style="width: ' + width + 'px;"><h3>Error</h3><p>' + details + ' </p></div>');
             $('.price_box').fadeTo(0, 1);
             this.display_buy_buttons();
+            BetPrice.order_form.enable_buy_buttons();
         },
         buy_response_container: function () {
             if (!_buy_response_container) {
@@ -389,6 +392,12 @@ var BetPrice = function() {
                 },
                 show_buy_button: function() {
                     return $('button[name^="btn_buybet"]').parent().show();
+                },
+                disable_buy_buttons: function() {
+                    $('button[name^="btn_buybet"]').attr('disabled','disabled');
+                },
+                enable_buy_buttons: function() {
+                    $('button[name^="btn_buybet"]').removeAttr('disabled');
                 },
                 update_from_stream: function(stream) {
                     var prices = this.prices_from_stream(stream);
