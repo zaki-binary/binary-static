@@ -392,7 +392,7 @@ Header.prototype = {
                     disabled_text = ' disabled="disabled" ';
                 }
 
-                loginid_select += '<option value="' + curr_loginid + '" ' + selected + disabled_text + '>' + loginid_text +  '</option>'
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + disabled_text + '>' + loginid_text +  '</option>';
             }
             $("#client_loginid").html(loginid_select);
         }
@@ -624,8 +624,8 @@ Contents.prototype = {
                     }
                 }
                 if (has_real == 1) {
-                    $('#virtual-upgrade-link').addClass('invisible');
-                    $('#virtual-upgrade-link').hide();
+                    $('.virtual-upgrade-link').addClass('invisible');
+                    $('.virtual-upgrade-link').hide();
                 }
 
                 $('#topbar').addClass('orange');
