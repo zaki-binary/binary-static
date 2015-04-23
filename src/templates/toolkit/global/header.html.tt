@@ -4,9 +4,9 @@
             <div class='grd-grid-12 grd-parent'>
                 <div class='grd-grid-6 grd-grid-mobile-12 by_client_type client_virtual' id='virtualupgrade' style="display: none;">
                     <span class='grd-hide-mobile'>
-                        <span id='virtual-text'>[% l("You're using a virtual money account.") %]</span>
+                        <span>[% l("You're using a virtual money account.") %]</span>
                     </span>
-                    <a class="virtual-upgrade-link pjaxload with_login_cookies pulser" href="[% request.url_for('linkto_acopening.cgi', { actype => 'real'}) %]">[% l("Upgrade to a real money account") %]</a>
+                    <a class="pjaxload with_login_cookies" href="[% request.url_for('linkto_acopening.cgi', { actype => 'real'}) %]">[% l("Upgrade to a real money account") %]</a>
                 </div>
                 <div class='grd-grid-6 grd-grid-mobile-12 grd-parent' id='topbar-info'>
                     <div class='grd-grid-5 grd-grid-mobile-7' id="gmt-clock"></div>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div id="header" class="dark-blue">
+    <div id="header">
         <div class='grd-container'>
             <div class='grd-row-padding'>
                 <div class='grd-grid-3 grd-grid-mobile-2 grd-grid-phablet-1'>
@@ -56,26 +56,20 @@
                 </div>
                 <div id="client-logged-in" class="grd-grid-3 grd-grid-mobile-9 grd-grid-phablet-10 by_client_type client_real client_virtual" style="display: none">
                   <div id="logout">
-                    <form id="loginid-switch-form" action="[% request.url_for('user/loginid_switch?l=EN') %]" method="post">
-                        <span id="login-fields">
-                            <select id="client_loginid" name="client_loginid">
-                            </select>
-                        </span>
-                        <a id="btn_logout" class="logout" href="[% request.url_for('logout') %]"[% target %]>[% l('LOG OUT') %]</a>
-                    </form>
+                      <a id="client_loginid" class="pjaxload" href="[% request.url_for('/user/my_account') %]"[% target %]></a>
+                      <a id="btn_logout" class="logout" href="[% request.url_for('logout') %]"[% target %]>[% l('LOG OUT') %]</a>
                   </div>
                 </div>
                 <div id="client-logged-out" class="grd-grid-3 grd-grid-mobile-9 grd-grid-phablet-10 grd-no-gutter-left by_client_type client_logged_out">
                     <form id="login-form" action="[% request.url_for('login') %]" method="post">
                         <span id="login-fields">
-                            <abbr rel="tooltip" title="[% l('Binary.com now requires your email and password to log in. If you have both a real-money and a virtual-money account, please use the password from your real-money account.') %]">
-                                <input name="email" type="text" placeholder="[% l("Email") %]" />
-                            </abbr>
+                            <input name="loginid" type="text" placeholder="[% l("Login ID") %]" />
                             <input name="password" type="password" placeholder="[% l("Password") %]" />
                             <input type="submit" value="[% l("Log in") %]" />
                         </span>
                         <span id="login-links">
-                            <a class="pjaxload" id="lost-password" href="[% request.url_for('/user/lost_password') %]">[% l("Lost password?") %]</a>
+                            <a class="pjaxload" id="register" href="[% request.url_for('/user/open_account') %]">[% l("Register") %]</a>
+                            <a class="pjaxload" id="lost-password" href="[% request.url_for('lost_password.cgi') %]">[% l("Lost password?") %]</a>
                         </span>
                     </form>
                 </div>
