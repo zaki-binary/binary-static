@@ -9,24 +9,43 @@
         <div class="grd-container grd-default-container">
             <div class="grd-grid-6 grd-grid-mobile-12 grd-parent">
                 <div class="grd-grid-4">
-                    <h1>[% l('Partners') %]</h1>
-                    <ul>
-                        <li class="affiliate">
-                            <a class="pjaxload" href="[% request.url_for('/affiliate/signup') %]"[% IF target %]
-                            target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
-                        </li>
-                        <li>
-                            <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
-                        </li>
-                        <li>
-                            <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
-                            target
-                            %]"[% END %]>[% l('Partner API') %]</a>
-                        </li>
-                        <li>
-                            <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
-                        </li>
-                    </ul>
+                    <div id="accounts_links" class="by_client_type client_logged_out client_virtual">
+                        <h1>[% l('Accounts') %]</h1>
+                        <ul>
+                            <li>
+                                <a class="by_client_type client_logged_out client_virtual pjaxload"
+                                   href="[% request.url_for('linkto_acopening.cgi', {actype => 'real'}) %]"[% IF target %]
+                                target="[% target %]"[% END %]>[% l('Trading Account') %]</a>
+                            </li>
+                            <li>
+                                <a class="by_client_type client_logged_out pjaxload"
+                                   href="[% request.url_for('linkto_acopening.cgi', { actype => 'virtual'}) %]"[% IF target
+                                %]
+                                target="[% target %]"[% END %]>[% l('Virtual Account') %]</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h1>[% l('Partners') %]</h1>
+                        <ul>
+                            <li class="affiliate">
+                                <a class="pjaxload" href="[% request.url_for('/affiliate/signup') %]"[% IF target %]
+                                target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
+                            </li>
+                            <li>
+                                <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
+                            </li>
+                            <li>
+                                <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
+                                target
+                                %]"[% END %]>[% l('Partner API') %]</a>
+                            </li>
+                            <li>
+                                <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="grd-grid-4">
                     <h1>[% l('Education') %]</h1>
