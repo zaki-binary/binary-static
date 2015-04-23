@@ -637,8 +637,8 @@ ul.checked li {
 }
 
 .pulser {
-  -webkit-animation: pulsing 3s infinite ease;
-  animation: pulsing 3s infinite ease;
+  -webkit-animation: pulsing 1s infinite ease;
+  animation: pulsing 1s infinite ease;
 }
 
 .overlay {
@@ -664,24 +664,14 @@ ul.checked li {
 
 /* main style */
 /* Logo and top bar */
-.dark-blue {
-  background: #15212d;
-}
-
-.orange {
-  background: #e98024;
-}
-
 #topbar {
   width: 100%;
+  background: #15212d;
   color: white;
   line-height: 1;
   font-size: 70%;
   text-align: right;
   padding: 3px 0;
-}
-#topbar #virtual-text {
-  font-weight: 700;
 }
 #topbar #topbar-info {
   float: right;
@@ -760,33 +750,30 @@ ul.checked li {
   color: white;
   text-decoration: none;
 }
-#header select#client_loginid option[disabled=disabled] {
-  background-color: lightgrey;
-}
 #header #binary-logo-text {
   margin-top: 10px;
 }
-#header #login-form, #header #loginid-switch-form {
+#header #login-form {
   text-align: right;
 }
-#header #login-form #login-links, #header #loginid-switch-form #login-links {
+#header #login-form #login-links {
   margin: 5px 0 0 0;
   display: block;
 }
-#header #login-form input, #header #loginid-switch-form input {
+#header #login-form input {
   display: inline;
   border-radius: 4px;
   font-size: 11px;
   margin: 0 0 0 5px;
 }
-#header #login-form input[type=text], #header #login-form input[type=password], #header #loginid-switch-form input[type=text], #header #loginid-switch-form input[type=password] {
+#header #login-form input[type=text], #header #login-form input[type=password] {
   background: #FEFEFE;
   border: 0;
   width: 50px;
   color: #000000;
   padding: 4px;
 }
-#header #login-form input[type=submit], #header #loginid-switch-form input[type=submit] {
+#header #login-form input[type=submit] {
   color: white;
   text-decoration: none;
   text-align: center;
@@ -806,10 +793,10 @@ ul.checked li {
   max-width: 60px;
   letter-spacing: 0;
 }
-#header #login-form input[type=submit]:visited, #header #loginid-switch-form input[type=submit]:visited {
+#header #login-form input[type=submit]:visited {
   color: white;
 }
-#header #login-form input[type=submit]:hover, #header #login-form input[type=submit]:active, #header #loginid-switch-form input[type=submit]:hover, #header #loginid-switch-form input[type=submit]:active {
+#header #login-form input[type=submit]:hover, #header #login-form input[type=submit]:active {
   text-decoration: none;
   background-color: #14602B;
 }
@@ -823,6 +810,7 @@ ul.checked li {
   text-align: right;
   color: white;
   font-size: 70%;
+  margin-top: 10px;
 }
 #header #logout a:hover, #header #logout a:active, #header #logout a:visited:hover, #header #logout a:visited:active {
   text-decoration: underline;
@@ -844,8 +832,6 @@ ul.checked li {
   padding: 6px;
   font-weight: normal;
   margin-left: 0.4em;
-  margin-top: 0.5em;
-  text-transform: uppercase;
 }
 #header #logout a.logout:visited, #header #logout a:visited.logout:visited {
   color: white;
@@ -2468,14 +2454,6 @@ abbr {
   text-align: left;
 }
 
-#login-fail {
-  background-color: #fef1cf;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 10px;
-  line-height: 1.4em;
-}
-
 /* GET-STARTED PAGES RULES */
 .get-started {
   margin-top: 40px;
@@ -3744,7 +3722,7 @@ table.half-2 {
 
 .errorbox .rbox-content {
   padding-left: 7.69em;
-  min-height: 1.5em;
+  min-height: 3.85em;
 }
 
 .errorbox .form_button {
@@ -4538,7 +4516,7 @@ form#rise_fall_form label {
 }
 #content #client_message.errorbox .rbox-wrap .rbox-content {
   background-color: inherit;
-  margin: 10px 0;
+  margin: 0 0 15px;
 }
 #content #client_message.errorbox .rbox-wrap .rbox-content .form_button {
   padding: 0;
