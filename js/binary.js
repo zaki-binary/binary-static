@@ -575,6 +575,38 @@ var gtm_data_layer_info = function() {
     return gtm_data_layer_info;
 };
 
+var User = function() {
+    this.email =  $.cookie('email');
+    var loginid_list = $.cookie('loginid_list');
+
+    if(this.email === null || typeof this.email === "undefined") {
+        this.is_logged_in = false;
+    } else {
+        this.is_logged_in = true;
+
+        if(loginid_list !== null && typeof loginid_list !== "undefined") {
+            var loginid_array = [];
+            var loginids = loginid_list.split('+').sort();
+
+            for (var i = 0; i < loginids.length; i++) {
+                var real = 0;
+                var disabled = 0;
+                var items = loginids[i].split(':');
+                if (items[1] == 'R') {
+                    real = 1;
+                }
+                if (items[2] == 'D') {
+                    disabled = 1;
+                }
+
+                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled });
+            }
+
+            this.loginid_array = loginid_array;
+        }
+    }
+};
+
 var Client = function() {
     this.loginid =  $.cookie('loginid');
     this.is_logged_in = false;
@@ -863,6 +895,7 @@ Menu.prototype = {
 };
 
 var Header = function(params) {
+    this.user = params['user'];
     this.client = params['client'];
     this.settings = params['settings'];
     this.menu = new Menu(params['url']);
@@ -880,8 +913,33 @@ Header.prototype = {
         this.menu.reset();
     },
     show_or_hide_login_form: function() {
-        if (this.client.is_logged_in) {
-            $("#client_loginid").html(this.client.loginid);
+        if (this.user.is_logged_in && this.client.is_logged_in) {
+            var loginid_select;
+            var loginid_array = this.user.loginid_array;
+            for (var i=0;i<loginid_array.length;i++) {
+                var curr_loginid = loginid_array[i].id;
+                var real = loginid_array[i].real;
+                var disabled = loginid_array[i].disabled;
+                var selected = '';
+                if (curr_loginid == this.client.loginid) {
+                    selected = ' selected="selected" ';
+                }
+
+                var loginid_text;
+                if (real == 1) {
+                    loginid_text = text.localize('Real Money') + ' (' + curr_loginid + ')';
+                } else {
+                    loginid_text = text.localize('Virtual Money') + ' (' + curr_loginid + ')';
+                }
+
+                var disabled_text = '';
+                if (disabled == 1) {
+                    disabled_text = ' disabled="disabled" ';
+                }
+
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + disabled_text + '>' + loginid_text +  '</option>';
+            }
+            $("#client_loginid").html(loginid_select);
         }
     },
     simulate_input_placeholder_for_ie: function() {
@@ -1066,8 +1124,9 @@ ToolTip.prototype = {
     },
 };
 
-var Contents = function(client) {
+var Contents = function(client, user) {
     this.client = client;
+    this.user = user;
     this.tooltip = new ToolTip();
 };
 
@@ -1091,13 +1150,38 @@ Contents.prototype = {
             if(this.client.is_real) {
                 $('.by_client_type.client_real').removeClass('invisible');
                 $('.by_client_type.client_real').show();
+
+                $('#topbar').addClass('dark-blue');
+                $('#topbar').removeClass('orange');
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
+
+                var loginid_array = this.user.loginid_array;
+                var has_real = 0;
+                for (var i=0;i<loginid_array.length;i++) {
+                    var loginid = loginid_array[i].id;
+                    var real = loginid_array[i].real;
+
+                    if (real == 1) {
+                        has_real = 1;
+                        break;
+                    }
+                }
+                if (has_real == 1) {
+                    $('.virtual-upgrade-link').addClass('invisible');
+                    $('.virtual-upgrade-link').hide();
+                }
+
+                $('#topbar').addClass('orange');
+                $('#topbar').removeClass('dark-blue');
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
             $('.by_client_type.client_logged_out').show();
+
+            $('#topbar').removeClass('orange');
+            $('#topbar').addClass('dark-blue');
         }
     },
     update_body_id: function() {
@@ -1117,11 +1201,12 @@ Contents.prototype = {
 
 var Page = function(config) {
     config = typeof config !== 'undefined' ? config : {};
+    this.user = new User();
     this.client = new Client();
     this.url = new URL();
     this.settings = new InScriptStore(config['settings']);
-    this.header = new Header({ client: this.client, settings: this.settings, url: this.url});
-    this.contents = new Contents(this.client);
+    this.header = new Header({ user: this.user, client: this.client, settings: this.settings, url: this.url});
+    this.contents = new Contents(this.client, this.user);
 };
 
 Page.prototype = {
@@ -1136,9 +1221,10 @@ Page.prototype = {
     },
     on_load: function() {
         this.url.reset();
-        this.header.on_load();
         this.localize_for(this.language());
+        this.header.on_load();
         this.on_change_language();
+        this.on_change_loginid();
         this.record_affiliate_exposure();
         this.contents.on_load();
         $('#current_width').val(get_container_width());//This should probably not be here.
@@ -1152,6 +1238,12 @@ Page.prototype = {
         $('#language_select').on('change', 'select', function() {
             var language = $(this).find('option:selected').attr('class');
             document.location = that.url_for_language(language);
+        });
+    },
+    on_change_loginid: function() {
+        var that = this;
+        $('#client_loginid').on('change', function() {
+            $('#loginid-switch-form').submit();
         });
     },
     localize_for: function(language) {
@@ -1517,7 +1609,7 @@ Localizable.prototype = {
 //http://stackoverflow.com/questions/11487216/cors-with-jquery-and-xdomainrequest-in-ie8-9
 //
 $(document).ajaxSuccess(function () {
-    var contents = new Contents(page.client);
+    var contents = new Contents(page.client, page.user);
     contents.on_load();
 });
 
@@ -8799,16 +8891,6 @@ function checkCurrencyAmountFormat(input_value)
     return false;
 }
 
-function activate_copy_granters() {
-    $('#portfolio-table').on('click', '.paste_all_granters', function () {
-            $(this).prev('textarea.granter_loginids_input').val(document.getElementById('all_approved_granter_loginids').innerHTML);
-            $(this).siblings('span.button').children('.open_contract_details').attr('granter_loginids', document.getElementById('all_approved_granter_loginids').innerHTML);
-    });
-    $('#portfolio-table').on('change', '.granter_loginids_input', function () {
-            $(this).siblings('span.button').children('.open_contract_details').attr('granter_loginids', $(this).val());
-    });
-}
-
 var Portfolio = function () {
     var _price_request = null;
     var elements = $('button.open_contract_details');
@@ -8905,7 +8987,6 @@ pjax_config_page('portfolio', function() {
     return {
         onLoad: function() {
             $('#portfolio-table .hourglass').hide();
-            activate_copy_granters();
             $('#currencyfrom').change(function(event) { currencyConvertorCalculator(event.target); });
             $('#currencyfrom').keyup(function(event) { currencyConvertorCalculator(event.target); });
             $('#currencyfromvalue').change(function(event) { checkCurrencyAmountFormat(event.target); });
@@ -9087,13 +9168,6 @@ onLoad.queue_for_url(function () {
     self_exclusion_validate_date();
 }, 'self_exclusion');
 ;onLoad.queue_for_url(function() {
-    $('#portfolio-table')
-        .on('click', '.paste_all_granters', function () {
-            $(this).prev('textarea[name=granter_loginids]').val(document.getElementById('all_approved_granter_loginids').innerHTML);
-        });
-}, 'portfolio|statement|f_manager_history|f_manager_statement|f_manager_confodeposit');
-
-onLoad.queue_for_url(function() {
     $('#statement-date').on('change', function() {
         $('#submit-date').removeClass('invisible');
     });
