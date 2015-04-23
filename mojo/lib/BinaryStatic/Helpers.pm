@@ -339,7 +339,7 @@ sub _main_menu_resources {
 
     my $trading_times_ref = {
         id         => 'topMenuTradingTimes',
-        url        => $self->c->url_for('/trading_times.cgi')->query({date => today_yyyymmdd()}),
+        url        => $self->c->url_for('/resources/trading_times')->query({date => today_yyyymmdd()}),
         text       => $self->c->l('Trading Times'),
         link_class => 'pjaxload',
     };
