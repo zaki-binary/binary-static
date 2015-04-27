@@ -1,13 +1,24 @@
 /* Logo and top bar */
 
+
+.dark-blue {
+  background: $COLOR_DARK_BLUE;
+}
+.orange {
+  background: $COLOR_ORANGE;
+}
+
 #topbar {
   width: 100%;
-  background: $COLOR_DARK_BLUE;
   color: $COLOR_WHITE;
   line-height: 1;
   font-size: 70%;
   text-align: right;
   padding: 3px 0;
+
+  #virtual-text {
+    font-weight: 700;
+  }
   #topbar-info {
     float: right;
   }
@@ -72,10 +83,13 @@
     color: $COLOR_WHITE;
     text-decoration: none;
   }
+  select#client_loginid option[disabled=disabled] {
+      background-color: lightgrey;
+  }
   #binary-logo-text {
       margin-top: 10px;
   }
-  #login-form {
+  #login-form, #loginid-switch-form {
     text-align: right;
     #login-links {
       margin: 5px 0 0 0;
@@ -115,7 +129,6 @@
     text-align: right;
     color: $COLOR_WHITE;
     font-size: 70%;
-    margin-top: 10px;
     a, a:visited {
       &:hover, &:active {
         text-decoration: underline;
@@ -127,6 +140,8 @@
         padding: 6px;
         font-weight: normal;
         margin-left: 0.4em;
+        margin-top: 0.5em;
+        text-transform: uppercase;
       }
     }
   }

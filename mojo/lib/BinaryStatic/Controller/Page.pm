@@ -15,11 +15,10 @@ sub toolkit {
     my %url_map = (
         'user/open_account' => ['account/open_account', 'default'],
         'affiliate/signup' => ['affiliates/main', 'default'],
-        'c/pricing_table.cgi' => ['resources/pricing_table_form', 'default'],
-        # 'c/asset_index.cgi' => ['resources/pricing_table_form', 'default'],
+        'resources/pricing_table' => ['resources/pricing_table_form', 'default'],
         'charting/application' => ['charting/chart_application', 'default'],
         'charting/livechart' => ['charting/livechart', 'default'],
-        'c/rise_fall_table.cgi' => ['resources/rise_fall_table', 'default'],
+        'resources/rise_fall_table' => ['resources/rise_fall_table', 'default'],
     );
     my $m = $url_map{$curr_path};
 
@@ -190,7 +189,6 @@ sub login {
         my $response = ($loginid eq 'DEMO123' and $password eq 'demo') ?
             { success => 1, session_cookie => Mojo::Cookie->new(value => 'abcdefghijklmn')} : {};
         if ($response->{success}) {
-            $self->stash(just_logged_in => 1);
             $redirect = '/user/my_account';
             $redirect_params->{login} = 'true';
             my $options = $self->cookie_options;

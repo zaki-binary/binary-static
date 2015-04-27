@@ -1,13 +1,14 @@
 - stash(
 -   title => l('[_1]: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices',stash('broker_name')),
 -   next_link => '/why-us',
--   createacc => l('Create free account'),
+-   createacc => l('Create account'),
 -   emailtext   => l('Enter your email'),
 -   passwordstext   => l('Choose a password'),
 - );
 - my $lang = stash->{language};
 #banner
   .grd-container
+<<<<<<< HEAD
       .grd-grid-12.grd-row-padding
         #xtop
           %h1.dark= l('The Premier Platform for Binary Options Trading')
@@ -16,6 +17,17 @@
       .grd-grid-2.grd-hide-mobile.grd-hide-phablet
       #open-account.grd-grid-8.grd-grid-mobile-12.grd-grid-phablet-12
         %p= l('Get your free $10k virtual money account')
+=======
+    .grd-grid-12.grd-row-padding
+      #q-top
+        %h1.dark= l('The Premier Platform for Binary Options Trading')
+        %p= l('Trade 24/7, even on weekends. Customize your trades to meet your needs.')
+    .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent
+  .grd-container
+    .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent
+      %p.q-cta-text= l('Get started now')
+      #open-account
+>>>>>>> upstream/master
         %form#virtual-acc-form{ :name => 'oppAccForm', :action => url_for('create_account.cgi'), :method => 'post' }
           %span#virtual-fields
             %span.grd-grid-12.grd-no-gutter
@@ -40,11 +52,16 @@
           %li!= l('<span>All market conditions:</span> up/down, touch/no-touch, stays in/goes out.')
           %li!= l('<span>All durations:</span> from 10 seconds to 365 days.')
           %li!= l('<span>All payouts:</span> from $1 to $100,000.')
+<<<<<<< HEAD
         .center{:style => "margin-top:40px;"}
           %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('linkto_acopening.cgi?actype=real')}
             %span= l('Open a Real Money Account')
 #xcta
   #xreason
+=======
+#q-cta
+  #q-reason
+>>>>>>> upstream/master
     .grd-container
       .grd-row-padding
         %h1.center-aligned.xhead= l('Why choose us')
@@ -64,11 +81,14 @@
             %li.xlist4
               %h3= l('Go with the leader')
               %p= l('Binary.com is the award-winning industry pioneer in online options trading.')
+<<<<<<< HEAD
   .xcta
     %a.pjaxload.xreal{:href => url_for('linkto_acopening.cgi?actype=real'), :class => 'button'}
       %span= l('Open real account')
     %a.pjaxload.xvirtual{:href => url_for('linkto_acopening.cgi?actype=virtual'), :class => 'button'}
       %span= l('Open virtual account')
+=======
+>>>>>>> upstream/master
 #xtestimonial
   .grd-container
     .grd-row-padding

@@ -9,43 +9,24 @@
         <div class="grd-container grd-default-container">
             <div class="grd-grid-6 grd-grid-mobile-12 grd-parent">
                 <div class="grd-grid-4">
-                    <div id="accounts_links" class="by_client_type client_logged_out client_virtual">
-                        <h1>[% l('Accounts') %]</h1>
-                        <ul>
-                            <li>
-                                <a class="by_client_type client_logged_out client_virtual pjaxload"
-                                   href="[% request.url_for('linkto_acopening.cgi', {actype => 'real'}) %]"[% IF target %]
-                                target="[% target %]"[% END %]>[% l('Trading Account') %]</a>
-                            </li>
-                            <li>
-                                <a class="by_client_type client_logged_out pjaxload"
-                                   href="[% request.url_for('linkto_acopening.cgi', { actype => 'virtual'}) %]"[% IF target
-                                %]
-                                target="[% target %]"[% END %]>[% l('Virtual Account') %]</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h1>[% l('Partners') %]</h1>
-                        <ul>
-                            <li class="affiliate">
-                                <a class="pjaxload" href="[% request.url_for('/affiliate/signup') %]"[% IF target %]
-                                target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
-                            </li>
-                            <li>
-                                <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
-                            </li>
-                            <li>
-                                <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
-                                target
-                                %]"[% END %]>[% l('Partner API') %]</a>
-                            </li>
-                            <li>
-                                <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
-                            </li>
-                        </ul>
-                    </div>
-
+                    <h1>[% l('Partners') %]</h1>
+                    <ul>
+                        <li class="affiliate">
+                            <a class="pjaxload" href="[% request.url_for('/affiliate/signup') %]"[% IF target %]
+                            target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
+                        </li>
+                        <li>
+                            <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
+                        </li>
+                        <li>
+                            <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
+                            target
+                            %]"[% END %]>[% l('Partner API') %]</a>
+                        </li>
+                        <li>
+                            <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="grd-grid-4">
                     <h1>[% l('Education') %]</h1>
@@ -76,16 +57,16 @@
                     <h1>[% l('Trading') %]</h1>
                     <ul>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('pricing_table.cgi') %]"[% IF target %]
+                            <a class="pjaxload" href="[% request.url_for('/resources/pricing_table') %]"[% IF target %]
                             target="[%
                             target %]"[% END %]>[% l('Pricing Table') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('rise_fall_table.cgi') %]"[% IF target %]
+                            <a class="pjaxload" href="[% request.url_for('/resources/rise_fall_table') %]"[% IF target %]
                             target="[% target %]"[% END %]>[% l('Rise/Fall Table') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('asset_index.cgi') %]"[% IF target %]
+                            <a class="pjaxload" href="[% request.url_for('/resources/asset_index') %]"[% IF target %]
                             target="[%
                             target %]"[% END %]>[% l('Asset Index') %]</a>
                         </li>

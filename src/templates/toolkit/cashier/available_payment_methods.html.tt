@@ -6,11 +6,8 @@
         </p>
         <div id="payment_method_suggestions grd-row-padding" class='center-aligned'>
             <p>
-                <a href="[% request.url_for('linkto_acopening.cgi', {actype => "real"}) %]" class="button by_client_type client_logged_out pjaxload">
+                <a href="[% request.url_for('/') %]" class="button by_client_type client_logged_out pjaxload">
                 <span>[% l('Open an account now') %]</span>
-                </a>
-                <a href="[% request.url_for('linkto_acopening.cgi', {actype => real}) %]" class="button by_client_type client_virtual pjaxload">
-                <span>[% l('Open Real Account') %]</span>
                 </a>
                 <a href="[% deposit_url %]" class="button button_large by_client_type client_real with_login_cookies">
                 <span>[% l('Deposit') %]</span>
