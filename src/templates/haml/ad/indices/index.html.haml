@@ -10,8 +10,8 @@
   .grd-container
       .grd-grid-12.grd-row-padding
         #xtop
-          %h1.dark= l('The Premier Platform for Binary Options Trading')
-          %p= l('Trade 24/7, even on weekends. Customize your trades to meet your needs.')
+          %h1.dark= l('The Premier Commodities Trading Platform')
+          %p!= l('Trade Oil, Gold, Silver, Platinum & More from just $1')
       .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent
       .grd-grid-2.grd-hide-mobile.grd-hide-phablet
       #open-account.grd-grid-8.grd-grid-mobile-12.grd-grid-phablet-12
@@ -30,19 +30,21 @@
   %hr.xtopseparator
   #xsection1
     .grd-grid-12.grd-parent
-      %h1.center= l('The easiest way to get started in the financial markets')
-      %p.center= l('Trade in the world\'s financial markets in a simple, user-friendly platform.')
-      .grd-grid-6.grd-grid-mobile-12.grd-parent
-        %img.responsive{:alt => "", :src => url_for("images/pages/home2/rises-falls.png")}
-      .grd-grid-6.grd-grid-mobile-12.grd-parent
-        %ul
-          %li!= l('<span>All markets:</span> currencies, stock indices, and commodities.')
-          %li!= l('<span>All market conditions:</span> up/down, touch/no-touch, stays in/goes out.')
-          %li!= l('<span>All durations:</span> from 10 seconds to 365 days.')
-          %li!= l('<span>All payouts:</span> from $1 to $100,000.')
-        .center{:style => "margin-top:40px;"}
-          %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('linkto_acopening.cgi?actype=real')}
-            %span= l('Open a Real Money Account')
+      %h1.center= l('The easiest way to get started in the forex markets')
+      %p.center= l('Trade in forex markets in a simple, user-friendly platform.')
+      .grd-grid-5.grd-grid-mobile-12.grd-parent
+        %ul.checked
+          %li!= l('Trade all major currency pairs')
+          %li!= l('Returns above 100% on simple rise/fall contracts.')
+          %li!= l('Returns above 1000% on higher/lower and touch/no-touch trades.')
+          %li!= l('No hidden fees or commissions.')
+          %li!= l('Choose a payout from $1 to $100,000.')
+      .grd-grid-7.grd-grid-mobile-12.grd-parent
+        %img.responsive{:alt => "", :src => url_for("images/pages/ad/forex.png")}
+    .grd-grid-12.grd-parent
+      .center{:style => "margin-top:40px;"}
+        %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('linkto_acopening.cgi?actype=real')}
+          %span= l('Open a Real Money Account')
 #xcta
   #xreason
     .grd-container
