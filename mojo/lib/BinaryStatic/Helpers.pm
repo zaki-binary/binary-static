@@ -346,7 +346,7 @@ sub _main_menu_resources {
 
     my $bet_guide_ref = {
         id         => 'topMenuContractGuide',
-        url        => $self->c->url_for('/contract_guide.cgi'),
+        url        => $self->c->url_for('/resources/contract_guide'),
         text       => $self->c->l('Trading Guide'),
         link_class => 'pjaxload',
     };
