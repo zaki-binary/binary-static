@@ -1,0 +1,68 @@
+<div class="content-tab-container">
+  <div class="tab-menu">
+    <div class="tab-menu-wrap grd-container">
+      <ul id="legal-menu" class="tm-ul">
+        <li id="legal-tab" class="tm-li active first">
+          <span class="menu-wrap-a">
+            <span class="menu-wrap-b"><a href="#legal-tab" class="tm-a first a-active">Terms and Conditions</a></span>
+          </span>
+          <ul class="tm-ul-2">
+            <li id="legal-tac-tab" class="tm-li-2 active first"><span class="tm-a-2 a-active">Site</span></li>
+            <li id="betting-rules-tab" class="tm-li-2"><a href="?selected_tab=betting-rules-tab" class="tm-a-2">Trading Rules</a></li>
+            <li id="promo-tac-tab" class="tm-li-2"><a href="?selected_tab=promo-tac-tab" class="tm-a-2">Bonus Code</a></li>
+            <li id="affiliate-tac-tab" class="tm-li-2"><a href="?selected_tab=affiliate-tac-tab" class="tm-a-2">Affiliate</a></li>
+            [% IF request.country != 'JAPAN' %]
+            <li id="trading-agent-tac-tab" class="tm-li-2"><a href="?selected_tab=trading-agent-tac-tab" class="tm-a-2">Trading Agent</a></li>
+            [% END %]
+            <li id="complaints-disputes-tac-tab" class="tm-li-2 last"><a href="?selected_tab=complaints-disputes-tac-tab" class="tm-a-2">Complaints and Disputes</a></li>
+          </ul>
+        </li>
+        <li id="datafeed-tab" class="tm-li"><a href="#datafeed-tab" class="tm-a">Data Feed</a></li>
+        <li id="privacy-tab" class="tm-li"><a href="#privacy-tab" class="tm-a">Privacy & Security</a></li>
+        <li id="copyright-tab" class="tm-li"><a href="#copyright-tab" class="tm-a">Copyright</a></li>
+        <li id="risk-tab" class="tm-li last"><a href="#risk-tab" class="tm-a">Risk Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content grd-container">
+    <div class="tab-content-wrapper menu-has-sub-item">
+      <div id="legal-tac-tab-content" class="toggle-content">
+        [% INCLUDE legal/terms_and_conditions.html.tt %]
+      </div>
+      <div id="betting-rules-tab-content" class="toggle-content">
+        [% INCLUDE legal/betting_rules.html.tt %]
+      </div>
+      <div id="promo-tac-tab-content" class="toggle-content">
+        [% INCLUDE legal/promocode.html.tt %]
+      </div>
+      <div id="affiliate-tac-tab-content" class="toggle-content">
+        [% INCLUDE misc/affiliate_tac_tab.html.tt %]
+      </div>
+
+      [% IF request.country != 'JAPAN' %]
+      <div id="trading-agent-tac-tab-content" class="toggle-content">
+        [% INCLUDE legal/trading_agent.html.tt %]
+      </div>
+      [% END %]
+
+      <div id="complaints-disputes-tac-tab-content" class="toggle-content">
+        [% INCLUDE legal/complaints_disputes.html.tt %]
+      </div>
+
+      <div id="datafeed-tab-content" class="toggle-content">
+        [% INCLUDE legal/datafeed.html.tt %]
+      </div>
+      <div id="privacy-tab-content" class="toggle-content">
+        [% INCLUDE legal/privacy.html.tt %]
+      </div>
+      <div id="copyright-tab-content" class="toggle-content">
+        [% INCLUDE legal/copyright.html.tt %]
+      </div>
+      <div id="risk-tab-content" class="toggle-content">
+        [% INCLUDE legal/risk_disclaimer.html.tt %]
+      </div>
+
+    </div>
+  </div>
+</div>
+
