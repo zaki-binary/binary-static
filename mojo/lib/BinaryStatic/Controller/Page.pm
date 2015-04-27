@@ -19,6 +19,7 @@ sub toolkit {
         'charting/application' => ['charting/chart_application', 'default'],
         'charting/livechart' => ['charting/livechart', 'default'],
         'resources/rise_fall_table' => ['resources/rise_fall_table', 'default'],
+        'terms-and-conditions' => ['legal/tac', 'default'],
     );
     my $m = $url_map{$curr_path};
 
