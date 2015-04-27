@@ -45,13 +45,13 @@
             %h1= l('Terms')
               %ul
                 %li
-                  %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal")}= l('Terms and Conditions')
+                  %a.pjaxload{:href=>url_for("/terms-and-conditions")}= l('Terms and Conditions')
                 %li
-                  %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal#privacy-tab")}= l('Security and Privacy')
+                  %a.pjaxload{:href=>url_for("/terms-and-conditions#privacy-tab")}= l('Security and Privacy')
                 %li
                   %a.pjaxload{:href=>url_for("responsible-trading")}= l('Responsible Trading')
                 %li
-                  %a.pjaxload{:href=>url_for("c_template.cgi?filecode=legal&selected_tab=complaints-disputes-tac-tab")}= l('Complaints and Disputes')
+                  %a.pjaxload{:href=>url_for("/terms-and-conditions?selected_tab=complaints-disputes-tac-tab")}= l('Complaints and Disputes')
         .grd-grid-4
           %h1= l('Market Data')
           %ul
