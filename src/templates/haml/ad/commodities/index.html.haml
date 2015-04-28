@@ -1,7 +1,7 @@
 - stash(
 -   title => l('[_1]: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices',stash('broker_name')),
 -   next_link => '/why-us',
--   createacc => l('Create free account'),
+-   createacc => l('Create account'),
 -   emailtext   => l('Enter your email'),
 -   passwordstext   => l('Choose a password'),
 - );
@@ -10,12 +10,12 @@
   .grd-container
       .grd-grid-12.grd-row-padding
         #xtop
-          %h1.dark= l('The Premier Commodities Trading Platform')
-          %p!= l('Trade Oil, Gold, Silver, Platinum & More from just $1')
+          %h1.dark= l('The Premier Platform for Trading Commodities Online')
+          %p= l('Trade Oil, Gold, Silver, Palladium and Platinum from one account. Start from only $1.')
       .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-12.grd-parent
       .grd-grid-2.grd-hide-mobile.grd-hide-phablet
       #open-account.grd-grid-8.grd-grid-mobile-12.grd-grid-phablet-12
-        %p= l('Get your free $10k virtual money account')
+        %p= l('Get your free $10,000 virtual money')
         %form#virtual-acc-form{ :name => 'oppAccForm', :action => url_for('create_account.cgi'), :method => 'post' }
           %span#virtual-fields
             %span.grd-grid-12.grd-no-gutter
@@ -30,21 +30,16 @@
   %hr.xtopseparator
   #xsection1
     .grd-grid-12.grd-parent
-      %h1.center= l('The easiest way to get started in the forex markets')
-      %p.center= l('Trade in forex markets in a simple, user-friendly platform.')
-      .grd-grid-5.grd-grid-mobile-12.grd-parent
-        %ul.checked
-          %li!= l('Trade all major currency pairs')
-          %li!= l('Returns above 100% on simple rise/fall contracts.')
-          %li!= l('Returns above 1000% on higher/lower and touch/no-touch trades.')
-          %li!= l('No hidden fees or commissions.')
-          %li!= l('Choose a payout from $1 to $100,000.')
+      %h1.center= l('Join our community of 1,000,000+ traders')
+      %p.center= l('Trade in the world\'s financial markets in a simple, user-friendly platform.')
       .grd-grid-7.grd-grid-mobile-12.grd-parent
-        %img.responsive{:alt => "", :src => url_for("images/pages/ad/forex.png")}
-    .grd-grid-12.grd-parent
-      .center{:style => "margin-top:40px;"}
-        %a#signbox.button.pjaxload.pjaxload-focus{:href => url_for('linkto_acopening.cgi?actype=real')}
-          %span= l('Open a Real Money Account')
+        %img.responsive{:alt => "", :src => url_for("images/pages/ad/commodities.png")}
+      .grd-grid-5.grd-grid-mobile-12.grd-parent
+        %ul.bullet
+          %li!= l('Trade precious metals and energy')
+          %li!= l('<span>All market conditions:</span> up/down, touch/no-touch, stays in/goes out etc.')
+          %li!= l('<span>All durations:</span> from 5 minutes to 365 days.')
+          %li!= l('<span>All payouts:</span> from $1 to $100,000.')
 #xcta
   #xreason
     .grd-container
@@ -66,11 +61,6 @@
             %li.xlist4
               %h3= l('Go with the leader')
               %p= l('Binary.com is the award-winning industry pioneer in online options trading.')
-  .xcta
-    %a.pjaxload.xreal{:href => url_for('linkto_acopening.cgi?actype=real'), :class => 'button'}
-      %span= l('Open real account')
-    %a.pjaxload.xvirtual{:href => url_for('linkto_acopening.cgi?actype=virtual'), :class => 'button'}
-      %span= l('Open virtual account')
 #xtestimonial
   .grd-container
     .grd-row-padding
