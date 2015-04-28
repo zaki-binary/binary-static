@@ -1,0 +1,13 @@
+- stash(title => l('Email Verification'));
+%div.grd-grid-12
+
+  - if (stash->{client_message}) {
+      %h1= l('Email Verification')
+      %p= stash->{client_message}
+      %p.center-aligned
+        %a.button.pjaxload{:href => url_for("/user/upgrade")}
+          %span= l('Send verification')
+  - } else {
+      %h1= l('Verification Successful')
+      %p= l("Thank you for verifying your email.")
+  - }

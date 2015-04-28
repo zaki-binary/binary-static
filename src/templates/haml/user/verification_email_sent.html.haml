@@ -1,0 +1,6 @@
+- stash(title => l('Email Verification'));
+%div.grd-grid-12
+  %h1= l('Email Verification')
+  %p!= l('A verfication email has been sent to your registered email. The email subject line reads, <strong>Verify your email address</strong>.')
+  %p!= l("Remember, if you don't receive an email from us in the next few minutes, please check your junk/spam mail folder or start the process again.")
+  %p!= l("Please <a href='[_1]' class='pjaxload'>contact us</a> should you need further assistance.", url_for('contact'))
