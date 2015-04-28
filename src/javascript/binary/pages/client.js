@@ -25,7 +25,7 @@ onLoad.queue(function() {
         client_form = new ClientForm({restricted_countries: page.settings.get('restricted_countries'), valid_loginids: page.settings.get('valid_loginids')});
 });
 
-pjax_config_page('linkto_acopening', function() {
+pjax_config_page('user/upgrade', function() {
     return {
         onLoad: function() {
             $('#promotionalcode').blur(togglePromoCodeTnC);
