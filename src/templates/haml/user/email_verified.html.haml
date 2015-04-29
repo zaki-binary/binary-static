@@ -9,13 +9,13 @@
     - } else {
         %h1= l('Verification Successful')
         %p= l("Thank you for verifying your email.")
-    - }
-    - if ($is_real) {
-        %p.center-aligned
-          %a.button.pjaxload{:href => url_for("/user/my_account")}
-            %span= l('Proceed')
-    - } else {
-        %p.center-aligned
-          %a.button.pjaxload{:href => url_for("/user/upgrade")}
-            %span= l('Proceed')
+        - if ($is_real) {
+            %p.center-aligned
+              %a.button.pjaxload{:href => url_for("/user/my_account")}
+                %span= l('Proceed')
+        - } else {
+            %p.center-aligned
+              %a.button.pjaxload{:href => url_for("/user/upgrade")}
+                %span= l('Proceed')
+        - }
     - }
