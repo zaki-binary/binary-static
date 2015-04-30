@@ -4,7 +4,7 @@
         %h1= l('Email Verification')
         %p= stash->{client_message}
         %p.center-aligned
-          %a.button.pjaxload{:href => url_for("/user/upgrade")}
+          %a.button.pjaxload{:href => url_for("/user/resend_verification")}
             %span= l('Send Verification Email')
     - } else {
         %h1= l('Verification Successful')
