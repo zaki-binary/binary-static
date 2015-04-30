@@ -163,10 +163,9 @@ sub open_account_with_promocode {
     my $promo_code     = $self->param('promo');
     my $affilate_token = $self->param('t');
     return $self->redirect_to(
-        'linkto_acopening.cgi',
+        '/user/upgrade',
         {
             actype          => 'real',
-            promotionalcode => $promo_code,
             t               => $affilate_token
         });
 }
