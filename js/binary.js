@@ -780,7 +780,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/partnerapi$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/partnerapi$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -8023,37 +8023,14 @@ onLoad.queue_for_url(function() {
         }
     });
 };
-;//// togglePromoCodeTnC ////////////////////////////////////////////
-//
-// triggered when the promocode field on the account opening form
-// loses focus. If a promocode is entered, additional T&C will be
-// shown, and the Client will have to agree to them when opening
-// the account.
-//
-////////////////////////////////////////////////////////////////////
-var togglePromoCodeTnC = function(event)
-{
-    var o = $(event.target);
-
-    if (o.val() !== '')
-    {
-        $('#formlayout').find('#comment').find('span').removeClass('invisible');
-    }
-    else
-    {
-        $('#formlayout').find('#comment').find('span').addClass('invisible');
-    }
-};
-
-var client_form;
+;var client_form;
 onLoad.queue(function() {
         client_form = new ClientForm({restricted_countries: page.settings.get('restricted_countries'), valid_loginids: page.settings.get('valid_loginids')});
 });
 
-pjax_config_page('linkto_acopening', function() {
+pjax_config_page('user/upgrade', function() {
     return {
         onLoad: function() {
-            $('#promotionalcode').blur(togglePromoCodeTnC);
             client_form.on_residence_change();
             select_user_country();
             if(page.client.is_logged_in) {
