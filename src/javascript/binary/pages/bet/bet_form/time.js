@@ -18,7 +18,7 @@ BetForm.Time.prototype = {
         if (BetForm.attributes.model.form_name() == "digits" || BetForm.attributes.model.form_name() == "asian") {
             var expiry_val = 'duration';
             $('#expiry_type').val(expiry_val);
-            page.url.invalidate()
+            page.url.invalidate();
             LocalStore.set('bet_page.expiry_type', expiry_val);
             BetForm.attributes.model.expiry_type(expiry_val);
             this.model.expiry_type = expiry_val;
