@@ -3012,7 +3012,7 @@ var trading_times_init = function() {
      onSelect: function( dateText, picker ){
          trading_times.tabs( "destroy" );
          showLoadingImage(trading_times);
-         url = page.url.url_for('trading_times.cgi', 'date=' + dateText, 'cached');
+         url = page.url.url_for('resources/trading_times', 'date=' + dateText, 'cached');
          $.ajax({
                   url: url,
                   data:  { 'ajax_only': 1 },
@@ -8215,7 +8215,7 @@ ClientForm.prototype = {
             if(that.is_allowed_opening_account_country($(this).val())) {
                 $.ajax({
                     crossDomain:true,
-                    url: page.url.url_for('states_list.cgi'),
+                    url: page.url.url_for('states_list'),
                     data: {"c":$('#residence').get(0).value,"l": page.language()},
                     async: true,
                     dataType: "html"
