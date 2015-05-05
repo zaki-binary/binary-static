@@ -4037,6 +4037,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                         BetForm.underlying_drop_down.update_for_submarket(this.value);
                         //If Underlying Changed because of submarket
                         if (BetForm.attributes.model.underlying() != BetForm.attributes.underlying()) {
+                            BetForm.attributes.model.underlying(BetForm.attributes.underlying());
                             that.update_for_underlying(BetForm.attributes.underlying());
                         }
                     }).addClass('unbind_later');
@@ -4553,7 +4554,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             model: function() {
                 return {
                     form_name: function(form_name) {
-                        var fallback = 'bets_tab_risefall';
+                        var fallback = 'bets_tab_callput';
                         if(form_name) {
                             LocalStore.set('bet_page.form_name', form_name);
                         }
@@ -5359,13 +5360,17 @@ BetForm.TradingTime.prototype = {
         return trading_dates;
     },
     get_trading_days: function() {
-        var underlying_symbol = this.underlying();
+        var underlying_symbol = BetForm.attributes.underlying();
+        var barrier = BetForm.attributes.barrier_1();
         if (typeof this.trading_info[underlying_symbol] === 'undefined') {
             var that = this;
             $.ajax({
                 url: page.url.url_for('trade_get.cgi'),
                 data: { controller_action: 'trading_days',
-                        underlying_symbol: underlying_symbol
+                        underlying_symbol: underlying_symbol,
+                        form_name: BetForm.attributes.form_name(),
+                        date_start: BetForm.attributes.start_time(),
+                        barrier: barrier,
                     },
                 dataType:'json',
                 async: false
@@ -7383,8 +7388,8 @@ BetForm.Time.EndTime.prototype = {
             $self.symbol = data.symbol;
             $self.display_symbol = data.display_symbol;
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
-            $self.contract_type = data.contract_type;
-            $self.set_barrier = ($self.contract_type.match('DIGIT')) ? false : true;
+            $self.contract_category = data.contract_category;
+            $self.set_barrier = ($self.contract_category.match('digits')) ? false : true;
             $self.display_decimal = 0;
             var tick_frequency = 5;
 
@@ -7412,7 +7417,7 @@ BetForm.Time.EndTime.prototype = {
             var $self = this;
 
             var exit_tick_index = $self.number_of_ticks - 1;
-            if ($self.contract_type.match('ASIAN')) {
+            if ($self.contract_category.match('asian')) {
                 $self.ticks_needed = $self.number_of_ticks;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
@@ -7421,7 +7426,7 @@ BetForm.Time.EndTime.prototype = {
                     label: 'Exit Spot',
                     id: 'exit_tick',
                 };
-            } else if ($self.contract_type.match('FLASH')) {
+            } else if ($self.contract_category.match('callput')) {
                 $self.ticks_needed = $self.number_of_ticks + 1;
                 $self.x_indicators = {
                     '_0': { label: 'Entry Spot', id: 'entry_tick'},
@@ -7430,7 +7435,7 @@ BetForm.Time.EndTime.prototype = {
                     label: 'Exit Spot',
                     id: 'exit_tick',
                 };
-            } else if ($self.contract_type.match('DIGIT')) {
+            } else if ($self.contract_category.match('digits')) {
                 $self.ticks_needed = $self.number_of_ticks;
                 $self.x_indicators = {
                     '_0': { label: 'Tick 1', id: 'start_tick'},
@@ -7576,7 +7581,7 @@ BetForm.Time.EndTime.prototype = {
                 return;
             }
 
-            var barrier_type = $self.contract_type.match('ASIAN') ? 'asian' : 'static';
+            var barrier_type = $self.contract_category.match('asian') ? 'asian' : 'static';
 
             if (barrier_type === 'static') {
                 var barrier_tick = $self.applicable_ticks[0];
