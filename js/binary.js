@@ -5001,8 +5001,18 @@ BetForm.Time.prototype = {
         this.trading_time.init();
         this.duration.init();
         this.end_time.init();
-        $('#expiry_type').val(this.model.expiry_type);
         this.register();
+        if (BetForm.attributes.model.form_name() == "digits" || BetForm.attributes.model.form_name() == "asian") {
+            var expiry_val = 'duration';
+            $('#expiry_type').val(expiry_val);
+            page.url.invalidate();
+            LocalStore.set('bet_page.expiry_type', expiry_val);
+            BetForm.attributes.model.expiry_type(expiry_val);
+            this.model.expiry_type = expiry_val;
+            $('#duration_amount').val(this.trading_time.min_unit().min);
+        } else {
+            $('#expiry_type').val(this.model.expiry_type);
+        }
         this.update_ui();
     },
     register: function() {
