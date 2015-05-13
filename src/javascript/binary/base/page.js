@@ -54,7 +54,7 @@ var User = function() {
                     disabled = 1;
                 }
 
-                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled });
+                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled, 'gaming': /MLT/.test(items[0]), 'financial': /MF/.test(items[0])});
             }
 
             this.loginid_array = loginid_array;
@@ -588,6 +588,7 @@ var Contents = function(client, user) {
 Contents.prototype = {
     on_load: function() {
         this.activate_by_client_type();
+        this.topbar_message_visibility();
         this.update_body_id();
         this.update_content_class();
         this.tooltip.attach();
@@ -612,22 +613,6 @@ Contents.prototype = {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
 
-                var loginid_array = this.user.loginid_array;
-                var has_real = 0;
-                for (var i=0;i<loginid_array.length;i++) {
-                    var loginid = loginid_array[i].id;
-                    var real = loginid_array[i].real;
-
-                    if (real == 1) {
-                        has_real = 1;
-                        break;
-                    }
-                }
-                if (has_real == 1) {
-                    $('.virtual-upgrade-link').addClass('invisible');
-                    $('.virtual-upgrade-link').hide();
-                }
-
                 $('#topbar').addClass('orange');
                 $('#topbar').removeClass('dark-blue');
             }
@@ -651,6 +636,40 @@ Contents.prototype = {
     },
     init_draggable: function() {
         $('.draggable').draggable();
+    },
+    topbar_message_visibility: function() {
+        if(this.client.is_logged_in) {
+            var loginid_array = this.user.loginid_array;
+            var has_real = 0;
+            var upgrade_financial = false;
+            for (var i=0;i<loginid_array.length;i++) {
+                var loginid = loginid_array[i].id;
+                var real = loginid_array[i].real;
+
+                if (real == 1) {
+                    has_real = 1;
+                    if($.cookie('staff')) {
+                        if (loginid_array[i].gaming) {
+                            if(!loginid_array[i].financial){
+                                upgrade_financial = true;
+                            } else {
+                                upgrade_financial = false;
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (has_real == 1) {
+                $('.virtual-upgrade-link').addClass('invisible');
+                $('.virtual-upgrade-link').hide();
+                if(upgrade_financial) {
+                    $('#financial-upgrade-link').removeClass('invisible');
+                    $('#topbar').removeClass('orange');
+                }
+            }
+        }
     },
 };
 
