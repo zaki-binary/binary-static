@@ -1,0 +1,44 @@
+%div{:style => 'padding: 0; text-align: left;'}
+  %h1= l('Reality Check')
+  %p= l('Your trading statistics ' . ($mode eq 'login' ? 'since login' : 'for the recent 48 hours') . ' for [_1]', join( ', ', map {$_->[0]} @$summary))
+  %table
+    %tr
+      %th{:style => 'width: 12.4999%'}= l('Login ID')
+      %th{:style => 'width: 12.4999%'}= l('Currency')
+      %th{:style => 'width: 12.4999%'}= l('Stake')
+      %th{:style => 'width: 12.4999%'}= l('Profit / Loss')
+      %th{:style => 'width: 12.4999%'}= l('Contracts bought')
+      %th{:style => 'width: 12.4999%'}= l('Contracts sold')
+      %th{:style => 'width: 12.4999%'}= l('Open contracts')
+      %th{:style => 'width: 12.4999%'}= l('Potential profit')
+    - for my $data (@$summary) {
+      - for my $el (@{$data->[1]}) {
+        - my $pl = $el->{sell_amount} >= $el->{buy_amount} ? 'profit' : 'loss';
+        %tr
+          %td{:style => 'width: 12.4999%'}= $data->[0]
+          %td{:style => 'width: 12.4999%'}= $el->{currency_code}
+          %td{:style => 'width: 12.4999%'}= $to_monetary_number_format->($el->{buy_amount})
+          %td{:style => 'width: 12.4999%', :class => $pl}= $to_monetary_number_format->($el->{sell_amount} - $el->{buy_amount})
+          %td{:style => 'width: 12.4999%'}= $el->{buy_count}
+          %td{:style => 'width: 12.4999%'}= $el->{sell_count}
+          %td{:style => 'width: 12.4999%'}= $el->{open_cnt}
+          %td{:style => 'width: 12.4999%'}= $to_monetary_number_format->($el->{pot_profit})
+      - }
+    - }
+%div{:style => 'margin-top: 1em;'}
+  %p
+    = l('To continue trading please press')
+    %strong= $button+1
+    = '...'
+  %div
+    %span.button
+      %button.button{:bcont => ($button==0)} 1
+    %span{:style => 'display: inline-block; width: 1em'}
+    %span.button
+      %button.button{:bcont => ($button==1)} 2
+    %span{:style => 'display: inline-block; width: 1em'}
+    %span.button
+      %button.button{:bcont => ($button==2)} 3
+    %span{:style => 'display: inline-block; width: 5em'}
+    %span.button
+      %button.button.blogout= l('Logout')
