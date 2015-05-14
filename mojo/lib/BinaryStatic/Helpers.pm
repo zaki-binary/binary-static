@@ -282,7 +282,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuAccountSettings',
-        url        => $self->c->url_for('/settings.cgi')->query({o => 'settings'}),
+        url        => $self->c->url_for('/user/settings')->query({o => 'settings'}),
         text       => $self->c->l('Settings'),
         id         => 'top_Settings',
         link_class => 'with_login_cookies pjaxload',
