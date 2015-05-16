@@ -12,7 +12,7 @@
     .grd-grid-12
       %h4
         %a.pjaxload{:href => url_for('/resources/asset_index')}= l('Payment Methods')
-      %p= l('You can fund your account with a minimum of &#36;/&pound;/&euro; 5 via any of the methods.')
+      %p!= l('You can fund your account with a minimum of &#36;/&pound;/&euro; 5 via any of the methods.')
   .grd-grid-6.grd-parent
     .grd-grid-8.grd-with-padding
       %a.pjaxload{:href => url_for('/resources/trading_times'),:id => 'payment_agent'}
