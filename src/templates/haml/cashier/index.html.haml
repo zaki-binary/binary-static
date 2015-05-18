@@ -4,31 +4,28 @@
 
 .grd-grid-12
   %h1= l('Cashier')
-.grd-grid-6.grd-grid-mobile-12.grd-parent
-  .grd-grid-6.grd-parent
-    .grd-grid-8.grd-with-padding
-      %a.pjaxload{:href => url_for('/resources/asset_index'), :id => 'payment_methods'}
-        %img#payment_methods_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/asset-index.svg')}
-    .grd-grid-12
-      %h4
-        %a.pjaxload{:href => url_for('/resources/asset_index')}= l('Payment Methods')
-      %p!= l('You can fund your account with a minimum of &#36;/&pound;/&euro; 5 via any of the methods.')
-  .grd-grid-6.grd-parent
-    .grd-grid-8.grd-with-padding
-      %a.pjaxload{:href => url_for('/resources/trading_times'),:id => 'payment_agent'}
-        %img#payment_agent_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/trading-times.svg')}
-    .grd-grid-12
-      %h4
-        %a.pjaxload{:href => url_for('/resources/trading_times')}= l('Payment Agents')
-      %p= l('You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by [_1].', stash->{website_name})
 
-.grd-grid-6.grd-grid-mobile-12.grd-parent
-  .grd-grid-6.grd-parent
-    .grd-grid-8.grd-with-padding
-      %a.pjaxload{:href => url_for('/resources/contract_guide'),:id => 'acc_transfer'}
-        %img#acc_transfer_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/contract-guide.svg')}
-    .grd-grid-12
-      %h4
-        %a.pjaxload{:href => url_for('/resources/contract_guide')}= l('Account Transfer')
-      %p= l('Transfer money between your real money accounts')
+.grd-row-padding.table-body
+  .grd-grid-3
+    %a.pjaxload{:href => url_for('/resources/asset_index'), :id => 'payment_methods'}
+      %img#payment_methods_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/asset-index.svg')}
+  .grd-grid-5
+    %p= l('Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet.')
+  .grd-grid-4
+    %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('cashier_forward.cgi')}
+      %span= l('Deposit')
+    %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('cashier_forward.cgi')}
+      %span= l('Withdraw')
+
+.grd-row-padding.table-body
+  .grd-grid-3
+    %a.pjaxload{:href => url_for('/resources/trading_times'), :id => 'payment_agent'}
+      %img#payment_agent_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/trading-times.svg')}
+  .grd-grid-5
+    %p= l('You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by [_1].', stash->{website_name})
+  .grd-grid-4
+    %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/payment_agent_list')}
+      %span= l('Deposit To Payment Agent')
+    %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('paymentagent_withdraw.cgi')}
+      %span= l('Withdraw Via Payment Agent')
 
