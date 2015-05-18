@@ -3,7 +3,11 @@
 - );
 
 .grd-grid-12
-  %h1= l('Cashier')
+  .grd-grid-6
+    %h1= l('Cashier')
+  .grd-grid-6
+    %a.pjaxload.button.by_client_type.client_logged_out{ :href => url_for('/') }
+      %span= l('Open an account now')
 
 .grd-row-padding.table-body
   .grd-grid-2
