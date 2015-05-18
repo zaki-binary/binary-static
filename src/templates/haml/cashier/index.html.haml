@@ -12,10 +12,12 @@
   .grd-grid-5
     %p= l('Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet.')
   .grd-grid-4
-    %a.grd-row-padding.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('cashier_forward.cgi')}
-      %span= l('Deposit')
-    %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('cashier_forward.cgi')}
-      %span= l('Withdraw')
+    .grd-row-padding
+      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('cashier_forward.cgi')}
+        %span= l('Deposit')
+    .grd-row-padding
+      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('cashier_forward.cgi')}
+        %span= l('Withdraw')
 
 .grd-row-padding.table-body
   .grd-grid-3
