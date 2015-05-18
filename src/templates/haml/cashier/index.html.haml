@@ -7,8 +7,9 @@
 
 .grd-row-padding.table-body
   .grd-grid-2
-    %a.pjaxload{:href => url_for('/resources/asset_index'), :id => 'payment_methods'}
-      %img#payment_methods_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/asset-index.svg')}
+    .grd-grid-8
+      %a.pjaxload{:href => url_for('/resources/asset_index'), :id => 'payment_methods'}
+        %img#payment_methods_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/asset-index.svg')}
   .grd-grid-5
     %p= l('Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet.')
   .grd-grid-5
