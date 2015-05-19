@@ -37,9 +37,9 @@
     %p= l('You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by [_1].', stash->{website_name})
   .grd-grid-5
     .grd-row-padding
-      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/payment_agent_list')}
+      %a#deposit_to_payment_agent.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/payment_agent_list')}
         %span= l('Deposit To Payment Agent')
     .grd-row-padding
-      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('paymentagent_withdraw.cgi')}
+      %a#withdraw_to_payment_agent.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('paymentagent_withdraw.cgi')}
         %span= l('Withdraw Via Payment Agent')
 
