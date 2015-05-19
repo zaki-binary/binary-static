@@ -610,11 +610,8 @@ Contents.prototype = {
                 $('#topbar').removeClass('orange');
 
                 if (!/^Q?CR/.test(this.client.loginid)) {
-                    $('#deposit_to_payment_agent').addClass('invisible');
-                    $('#deposit_to_payment_agent').hide();
-
-                    $('#withdraw_to_payment_agent').addClass('invisible');
-                    $('#withdraw_to_payment_agent').hide();
+                    $('#payment-agent-section').addClass('invisible');
+                    $('#payment-agent-section').hide();
                 }
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
