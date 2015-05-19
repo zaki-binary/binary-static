@@ -27,9 +27,11 @@
     - }
     .grd-parent.grd-grid-12
       .grd-grid-4
-      .grd-grid-8
+      .grd-grid-2
         %span.button
           %button#submit.button{:name => "submit" :type => "submit"}= l('Login')
+      .grd-grid-3
+        %a.pjaxload#open-account{:href=>url_for('/')}= l('Open an Account')
 
 %p
   %a.pjaxload#lost-password{:href=>url_for('/user/lost_password')}= l('Forgot Login ID or Password?')
