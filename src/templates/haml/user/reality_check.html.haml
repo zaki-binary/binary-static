@@ -5,7 +5,7 @@
   - my $days = int($dur / (24 * 3600)); $dur = $dur % (24 * 3600);
   - my $hours = int($dur / 3600); $dur = $dur % 3600;
   - my $minutes = int($dur / 60);
-  %p= l('Login time: [_1] UTC', sprintf '%04d-%02d-%02d %02d:%02d:%02d', $tm[5]+1900, $tm[4]+1, @tm[3,2,1,0])
+  %p= l('Login time: [_1] GMT', sprintf '%04d-%02d-%02d %02d:%02d:%02d', $tm[5]+1900, $tm[4]+1, @tm[3,2,1,0])
   %p= l('Session duration: [_1] [plural,_1,day,days] [_2] [plural,_2,hour,hours] [_3] [plural,_3,minute,minutes]', $days, $hours, $minutes)
   %p= l('Your trading statistics ' . ($mode eq 'login' ? 'since login' : 'for the recent 48 hours') . ' for [_1]', join( ', ', map {$_->[0]} @$summary))
   %table
