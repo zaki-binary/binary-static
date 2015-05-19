@@ -609,13 +609,13 @@ Contents.prototype = {
                 $('#topbar').addClass('dark-blue');
                 $('#topbar').removeClass('orange');
 
-                if (!/^Q?CR/.test(this.client.loginid)) {
-                    $('#deposit_to_payment_agent').addClass('invisible');
-                    $('#deposit_to_payment_agent').hide();
-
-                    $('#withdraw_to_payment_agent').addClass('invisible');
-                    $('#withdraw_to_payment_agent').hide();
-                }
+//                if (!/^Q?CR/.test(this.client.loginid)) {
+//                    $('#deposit_to_payment_agent').addClass('invisible');
+//                    $('#deposit_to_payment_agent').hide();
+//
+//                    $('#withdraw_to_payment_agent').addClass('invisible');
+//                    $('#withdraw_to_payment_agent').hide();
+//                }
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
