@@ -121,5 +121,5 @@ RealityCheck = (function ($) {
 onLoad.queue(function () {
     var logoutBtn = $('#btn_logout')[0];
     if (!logoutBtn) return;
-    new RealityCheck('rck', LocalStore, logoutBtn.getAttribute('href'));
+    new RealityCheck('reality_check', LocalStore, logoutBtn.getAttribute('href'));
 });
