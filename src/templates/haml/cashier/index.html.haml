@@ -38,3 +38,14 @@
       %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('paymentagent_withdraw.cgi')}
         %span= l('Withdraw Via Payment Agent')
 
+#account-transfer-section.grd-row-padding.table-body
+  .grd-grid-2
+    .grd-grid-12
+      %a.pjaxload{:href => url_for('/cashier/account_transfer'), :id => 'account_transfer'}
+        %img#acc_transfer_icon.responsive.charting-page-icon{:src => url_for('images/pages/cashier/account-transfer.svg')}
+  .grd-grid-5
+    %p= l('Transfer between your gaming and financial accounts.')
+  .grd-grid-5
+    .grd-row-padding
+      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/account_transfer')}
+        %span= l('Transfer')

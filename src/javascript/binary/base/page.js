@@ -613,6 +613,11 @@ Contents.prototype = {
                     $('#payment-agent-section').addClass('invisible');
                     $('#payment-agent-section').hide();
                 }
+
+                if (!/^Q?MF|MLT/.test(this.client.loginid)) {
+                    $('#account-transfer-section').addClass('invisible');
+                    $('#account-transfer-section').hide();
+                }
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
