@@ -54,7 +54,7 @@ var User = function() {
                     disabled = 1;
                 }
 
-                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled, 'gaming': /MLT/.test(items[0]), 'financial': /MF/.test(items[0])});
+                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled, 'non_financial': /MLT/.test(items[0]), 'financial': /MF/.test(items[0])});
             }
 
             this.loginid_array = loginid_array;
@@ -648,16 +648,12 @@ Contents.prototype = {
 
                 if (real == 1) {
                     has_real = 1;
-                    if($.cookie('staff')) {
-                        if (loginid_array[i].gaming) {
-                            if(!loginid_array[i].financial){
-                                upgrade_financial = true;
-                            } else {
-                                upgrade_financial = false;
-                            }
+                    if (loginid_array[i].non_financial) {
+                        if(!loginid_array[i].financial){
+                            upgrade_financial = true;
+                        } else {
+                            upgrade_financial = false;
                         }
-                    } else {
-                        break;
                     }
                 }
             }
