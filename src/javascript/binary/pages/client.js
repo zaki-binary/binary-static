@@ -9,7 +9,6 @@ pjax_config_page('user/upgrade', function() {
             client_form.on_residence_change();
             select_user_country();
             if(page.client.is_logged_in) {
-                client_form.set_virtual_login_id(page.client.loginid);
                 client_form.set_virtual_email_id(page.client.email);
             }
         }
