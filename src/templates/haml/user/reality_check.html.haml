@@ -1,4 +1,4 @@
-%div{:style => 'padding: 0; text-align: left;'}
+%div
   %h1= l('Reality Check')
   - my @tm = gmtime $login_time;
   - my $dur = time - $login_time;
@@ -10,31 +10,31 @@
   %p= l('Your trading statistics ' . ($mode eq 'login' ? 'since login' : 'for the recent 48 hours') . ' for [_1]', join( ', ', map {$_->[0]} @$summary))
   %table
     %tr
-      %th{:style => 'width: 12.4999%'}= l('Login ID')
-      %th{:style => 'width: 12.4999%'}= l('Currency')
-      %th{:style => 'width: 12.4999%'}= l('Stake')
-      %th{:style => 'width: 12.4999%'}= l('Profit / Loss')
-      %th{:style => 'width: 12.4999%'}= l('Contracts bought')
-      %th{:style => 'width: 12.4999%'}= l('Contracts sold')
-      %th{:style => 'width: 12.4999%'}= l('Open contracts')
-      %th{:style => 'width: 12.4999%'}= l('Potential profit')
+      %th= l('Login ID')
+      %th= l('Currency')
+      %th= l('Stake')
+      %th= l('Profit / Loss')
+      %th= l('Contracts bought')
+      %th= l('Contracts sold')
+      %th= l('Open contracts')
+      %th= l('Potential profit')
     - for my $data (@$summary) {
       - for my $el (@{$data->[1]}) {
         - my $pl = $el->{sell_amount} >= $el->{buy_amount} ? 'profit' : 'loss';
         %tr
-          %td{:style => 'width: 12.4999%'}= $data->[0]
-          %td{:style => 'width: 12.4999%'}= $el->{currency_code}
-          %td{:style => 'width: 12.4999%'}= $to_monetary_number_format->($el->{buy_amount})
-          %td{:style => 'width: 12.4999%', :class => $pl}= $to_monetary_number_format->($el->{sell_amount} - $el->{buy_amount})
-          %td{:style => 'width: 12.4999%'}= $el->{buy_count}
-          %td{:style => 'width: 12.4999%'}= $el->{sell_count}
-          %td{:style => 'width: 12.4999%'}= $el->{open_cnt}
-          %td{:style => 'width: 12.4999%'}= $to_monetary_number_format->($el->{pot_profit})
+          %td= $data->[0]
+          %td= $el->{currency_code}
+          %td= $to_monetary_number_format->($el->{buy_amount})
+          %td{:class => $pl}= $to_monetary_number_format->($el->{sell_amount} - $el->{buy_amount})
+          %td= $el->{buy_count}
+          %td= $el->{sell_count}
+          %td= $el->{open_cnt}
+          %td= $to_monetary_number_format->($el->{pot_profit})
       - }
     - }
-%div{:style => 'margin-top: 1em;'}
+%div
   %span.button
     %button.button{:bcont => 1}= l('Continue Trading')
-  %span{:style => 'display: inline-block; width: 5em'}
+  %span
   %span.button
     %button.button.blogout= l('Logout')

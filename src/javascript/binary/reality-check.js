@@ -62,29 +62,9 @@ RealityCheck = (function ($) {
 
         if (outer = $('#reality-check')) outer.remove();
 
-        outer = $("<div id='reality-check'></div>").css({
-            'display':          'table',
-            'position':         'fixed',
-            'top':              '0',
-            'left':             '0',
-            'width':            '100%',
-            'height':           '100%',
-            'background-color': 'rgba(0,0,0,.7)',
-            'z-index':          '20000',
-        }).appendTo('body');
-        middle = $('<div />').css({
-            'display':        'table-cell',
-            'vertical-align': 'middle',
-        }).appendTo(outer);
-        $('<div>' + data + '</div>').css({
-            'margin-left':      'auto',
-            'margin-right':     'auto',
-            'padding':          '.5em .5em',
-            'width':            '44em',
-            'text-align':       'center',
-            'background-color': '#fff',
-            'border-radius':    '.3em',
-        }).appendTo(middle);
+        outer = $("<div id='reality-check'></div>").appendTo('body');
+        middle = $('<div />').appendTo(outer);
+        $('<div>' + data + '</div>').appendTo(middle);
 
         storage_handler = function (jq_event) {
             var ack;
