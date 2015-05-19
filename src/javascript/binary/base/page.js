@@ -666,6 +666,9 @@ Contents.prototype = {
                 $('.virtual-upgrade-link').hide();
                 if(upgrade_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
+                    if($('#investment_message').length > 0) {
+                        $('#investment_message').removeClass('invisible');
+                    }
                 }
             }
         }
