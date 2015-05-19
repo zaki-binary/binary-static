@@ -1153,6 +1153,11 @@ Contents.prototype = {
 
                 $('#topbar').addClass('dark-blue');
                 $('#topbar').removeClass('orange');
+
+                if (!/^Q?CR/.test(this.client.loginid)) {
+                    $('#payment-agent-section').addClass('invisible');
+                    $('#payment-agent-section').hide();
+                }
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
