@@ -653,12 +653,11 @@ Contents.prototype = {
 
                 if (real == 1) {
                     has_real = 1;
-                    if (loginid_array[i].non_financial) {
-                        if(!loginid_array[i].financial){
-                            upgrade_financial = true;
-                        } else {
-                            upgrade_financial = false;
-                        }
+                    if(loginid_array[i].financial){
+                        upgrade_financial = false;
+                        break;
+                    } else if(loginid_array[i].non_financial) {
+                        upgrade_financial = true;
                     }
                 }
             }
@@ -669,6 +668,11 @@ Contents.prototype = {
                     $('#financial-upgrade-link').removeClass('invisible');
                     if($('#investment_message').length > 0) {
                         $('#investment_message').removeClass('invisible');
+                    }
+                } else {
+                    $('#financial-upgrade-link').addClass('invisible');
+                    if($('#investment_message').length > 0) {
+                        $('#investment_message').addClass('invisible');
                     }
                 }
             }
