@@ -24,7 +24,7 @@
           - if (flash('error') and flash('error')->{amount}) {
             %p.errorfield= flash('error')->{amount}
           - }
-          %input#currency{:type => 'hidden', :name => 'currency', :value => "#stash('currency')"}
+          %input#currency{:type => 'hidden', :name => 'currency', :value => "#{stash('currency')}"}
     - if (flash('error')) {
       .grd-grid-12.grd-parent.grd-row-padding
         #transfer-fail= l('Transfer failed')
