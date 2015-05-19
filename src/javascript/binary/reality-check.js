@@ -10,7 +10,11 @@ RealityCheck = (function ($) {
         this.storage = persistentStore;
 
         val = parseInt($.cookie(this.cookieName).split(',')[0]);
-        if (!val>0) return;     // no or invalid cookie
+        if (!val>0) {           // no or invalid cookie
+            persistentStore.remove('reality_check.basetime');
+            persistentStore.remove('reality_check.ack');
+            return;
+        }
 
         this.logoutLocation = logoutLocation;
         if (!this.logoutLocation) return; // not logged in?
