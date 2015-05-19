@@ -141,6 +141,8 @@ ClientForm.prototype = {
         var that = this;
         $('#residence').on('change', function() {
             that.set_idd_for_residence($(this).val());
+            var address_state = $('#AddressState');
+            var current_state = address_state.length > 0 ? address_state.val() : '';
 
             var postcodeLabel = $('label[for=AddressPostcode]');
             if ($(this).val() == 'GB') {
@@ -158,17 +160,18 @@ ClientForm.prototype = {
                     dataType: "html"
                 }).done(function(response) {
                     $('#AddressState').html(response);
-                    that.hide_state_list_if_empty();
+                    that.hide_state_list_if_empty(current_state);
                 });
             } else {
                 $("#AddressState").parents(".row").first().hide(); //Hide States list.
             }
         });
     },
-    hide_state_list_if_empty: function() {
+    hide_state_list_if_empty: function(current_state) {
         var addr_state = $("#AddressState");
         if (addr_state.children().size() > 2) {
             addr_state.parents(".row").first().show();
+            addr_state.val(current_state);
         } else {
             addr_state.parents(".row").first().hide();
         }
