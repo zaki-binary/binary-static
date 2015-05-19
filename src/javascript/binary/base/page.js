@@ -640,6 +640,9 @@ Contents.prototype = {
 
                 $('#topbar').addClass('orange');
                 $('#topbar').removeClass('dark-blue');
+
+                $('#account-transfer-section').addClass('invisible');
+                $('#account-transfer-section').hide();
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
