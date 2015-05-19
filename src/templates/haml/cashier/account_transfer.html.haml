@@ -8,8 +8,12 @@
         %label{:for => "transfer"}= l('Transfer')
       .grd-grid-9
         %select#transfer{:name => 'transfer', :id => 'account_transfer'}
-          %option{ :value => "#{stash('options')->{'1'}->{'value'}}" }= stash('options')->{'1'}->{'text'}
-          %option{ :value => "#{stash('options')->{'2'}->{'value'}}" }= stash('options')->{'2'}->{'text'}
+          - if (stash('options')->{'1'}) {
+              %option{ :value => "#{stash('options')->{'1'}->{'value'}}" }= stash('options')->{'1'}->{'text'}
+          - }
+          - if (stash('options')->{'2'}) {
+              %option{ :value => "#{stash('options')->{'2'}->{'value'}}" }= stash('options')->{'2'}->{'text'}
+          - }
         - if (flash('error') and flash('error')->{transfer}) {
           %p.errorfield= flash('error')->{transfer}
         - }
