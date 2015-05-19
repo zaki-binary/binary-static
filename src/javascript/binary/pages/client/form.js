@@ -114,8 +114,7 @@ ClientForm.prototype = {
                 var names = ['MAXCASHBAL', 'MAXOPENPOS',
                              'DAILYTURNOVERLIMIT', 'DAILYLOSSLIMIT',
                              '7DAYTURNOVERLIMIT', '7DAYLOSSLIMIT',
-                             'SESSIONDURATION', 'EXCLUDEUNTIL',
-                             'REALITYCHECK'];
+                             'SESSIONDURATION', 'EXCLUDEUNTIL'];
                 for (i=0; i<names.length; i++) {
                     el = document.getElementById(names[i]);
                     if (el && el.value.length > 0) {
