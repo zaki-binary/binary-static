@@ -25,27 +25,6 @@ ClientForm.prototype = {
             return true;
         }
     },
-    validate_promo_code_expiry: function() {
-        var has_expired = $('#promo_code_expired').val();
-        if(has_expired == "true") {
-            return false;
-        }
-
-        return true;
-    },
-    validate_promo_code_country: function() {
-        var country_list = $('#promo_code_countries').val();
-        if(country_list.indexOf('ALL') >= 0) {
-                return true;
-        } else {
-            var residence = $('#residence').val();
-            if(country_list.indexOf(residence) >= 0) {
-                return true;
-            }
-        }
-
-        return false;
-    },
     compare_new_password: function(new_password1, new_password2) {
         if (new_password1.length > 0 && new_password2.length > 0)
             {
@@ -193,9 +172,6 @@ ClientForm.prototype = {
         } else {
             addr_state.parents(".row").first().hide();
         }
-    },
-    set_virtual_login_id: function(loginid) {
-        $('#virtual_loginid').val(loginid);
     },
     set_virtual_email_id: function(email) {
         $('#Email').val(email);
