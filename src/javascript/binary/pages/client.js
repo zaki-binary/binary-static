@@ -14,3 +14,18 @@ pjax_config_page('user/upgrade', function() {
         }
     };
 });
+
+var upgrade_investment_disabled_field = function () {
+    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
+    fields.forEach(function (element, index, array) {
+        $('#'+element).attr('disabled', true);
+    });
+};
+
+pjax_config_page('user/upgrade/financial', function() {
+    return {
+        onLoad: function() {
+            upgrade_investment_disabled_field();
+        }
+    };
+});
