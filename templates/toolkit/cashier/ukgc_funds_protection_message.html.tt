@@ -5,7 +5,7 @@
         </p>
     </div>
     <div class="grd-grid-10 grd-grid-mobile-12">
-        <form name="ukgc_funds_protection_form" method="POST" action="[% request.url_for('cashier_forward.cgi') %]">
+        <form name="ukgc_funds_protection_form" method="POST" action="[% request.url_for('/cashier/forward') %]">
             <p>
                 [% l("We are required by our license to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='[_1]' target='_blank'>[_1]</a>.", "http://www.gamblingcommission.gov.uk/Consumers/Protection-of-customer-funds.aspx") %]
             </p>
