@@ -33,9 +33,13 @@ RealityCheck = (function ($) {
         var that = this;
         var alrm = this.interval - ((new Date()).getTime() - this.basetime) % this.interval;
 
+        // console.log('interval = '+this.interval+', next alarm in '+alrm+' ms');
+        // console.log('alrm at '+(new Date((new Date()).getTime()+alrm)).toUTCString());
+
         if (this.tmout) window.clearTimeout(this.tmout);
 
         this.tmout = window.setTimeout(function () {
+            // console.log('fire at '+(new Date()).toUTCString());
             that.fire();
         }, alrm);
     };
@@ -103,5 +107,6 @@ RealityCheck = (function ($) {
 onLoad.queue(function () {
     var logoutBtn = $('#btn_logout')[0];
     if (!logoutBtn) return;
-    new RealityCheck('reality_check', LocalStore, logoutBtn.getAttribute('href'));
+    if (window.reality_check_object) return;
+    window.reality_check_object = new RealityCheck('reality_check', LocalStore, logoutBtn.getAttribute('href'));
 });
