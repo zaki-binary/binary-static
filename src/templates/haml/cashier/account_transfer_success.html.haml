@@ -1,6 +1,17 @@
 .grd-grid-12
     %h1= title
     %p Your account transfer is successful. You new balances are:
-      %li= $balance_1
-      %li= $balance_2
+    .grd-row-padding.table-body
+      .grd-grid-2
+      .grd-grid-2
+        %span= $loginid_1
+      .grd-grid-5
+        %span= $balance_1
+    .grd-row-padding.table-body
+      .grd-grid-2
+      .grd-grid-2
+        %span= $loginid_2
+      .grd-grid-5
+        %span= $balance_2
+
 
