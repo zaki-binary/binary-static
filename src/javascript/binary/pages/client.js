@@ -18,14 +18,30 @@ pjax_config_page('user/upgrade', function() {
 var upgrade_investment_disabled_field = function () {
     var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
     fields.forEach(function (element, index, array) {
-        $('#'+element).attr('disabled', true);
+        var obj = $('#'+element);
+        if (obj.length > 0) {
+            $('#'+element).attr('disabled', true);
+        }
     });
 };
 
-pjax_config_page('user/upgrade/financial', function() {
+var enable_fields_form_submit = function () {
+    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
+    $('form#openAccForm').submit(function (event) {
+        fields.forEach(function (element, index, array) {
+            var obj = $('#'+element);
+            if (obj.length > 0) {
+                obj.removeAttr('disabled');
+            }
+        });
+    });
+};
+
+pjax_config_page('user/upgrade/financial|create_account', function() {
     return {
         onLoad: function() {
             upgrade_investment_disabled_field();
+            enable_fields_form_submit();
         }
     };
 });
