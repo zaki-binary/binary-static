@@ -614,7 +614,8 @@ Contents.prototype = {
                     $('#payment-agent-section').hide();
                 }
 
-                if (!/^Q?MF|MLT/.test(this.client.loginid)) {
+                // temporary only show for internal staff
+                if (!$.cookie('staff') or !/^Q?MF|MLT/.test(this.client.loginid)) {
                     $('#account-transfer-section').addClass('invisible');
                     $('#account-transfer-section').hide();
                 }
