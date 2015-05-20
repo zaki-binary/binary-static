@@ -3,7 +3,6 @@
 %br
 %form{:action => url_for('/cashier/account_transfer'), :method => 'POST'}
   %fieldset
-
     .grd-parent.grd-grid-12.grd-row-padding
       .grd-grid-3.form_label
         %label{:for => "transfer"}= l('Transfer')
@@ -18,7 +17,6 @@
         - if (flash('error') and flash('error')->{transfer}) {
           %p.errorfield= flash('error')->{transfer}
         - }
-
     .grd-parent.grd-grid-12.grd-row-padding
       .grd-grid-3.form_label
         %label{:for => "amount"}= l('Amount')
@@ -31,7 +29,6 @@
             %p.errorfield= flash('error')->{amount}
           - }
           %input#currency{:type => 'hidden', :name => 'currency', :value => "#{stash('currency')}"}
-
     .grd-parent.grd-grid-12.grd-row-padding
     .grd-parent.grd-grid-12.grd-row-padding
       .grd-grid-4
