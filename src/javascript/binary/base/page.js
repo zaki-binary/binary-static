@@ -382,9 +382,15 @@ Header.prototype = {
 
                 var loginid_text;
                 if (real == 1) {
-                    loginid_text = text.localize('Real Money') + ' (' + curr_loginid + ')';
+                    if(loginid_array[i].financial){
+                        loginid_text = text.localize('Investment Account') + ' (' + curr_loginid + ')';
+                    } else if(loginid_array[i].non_financial) {
+                        loginid_text = text.localize('Gaming Account') + ' (' + curr_loginid + ')';
+                    } else {
+                        loginid_text = text.localize('Real Account') + ' (' + curr_loginid + ')';
+                    }
                 } else {
-                    loginid_text = text.localize('Virtual Money') + ' (' + curr_loginid + ')';
+                    loginid_text = text.localize('Virtual Account') + ' (' + curr_loginid + ')';
                 }
 
                 var disabled_text = '';
