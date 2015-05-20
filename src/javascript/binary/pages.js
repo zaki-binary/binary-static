@@ -23,7 +23,7 @@ var trading_times_init = function() {
      onSelect: function( dateText, picker ){
          trading_times.tabs( "destroy" );
          showLoadingImage(trading_times);
-         url = page.url.url_for('trading_times.cgi', 'date=' + dateText, 'cached');
+         url = page.url.url_for('resources/trading_times', 'date=' + dateText, 'cached');
          $.ajax({
                   url: url,
                   data:  { 'ajax_only': 1 },
@@ -88,7 +88,7 @@ onLoad.queue_for_url(contract_guide_popup, 'contract_guide');
 onLoad.queue_for_url(trading_times_init, 'trading_times');
 onLoad.queue_for_url(asset_index_init, 'asset_index');
 onLoad.queue_for_url(confirm_popup_action, 'my_account|confirm_popup');
-onLoad.queue_for_url(hide_payment_agents, 'available_payment_methods');
+onLoad.queue_for_url(hide_payment_agents, 'cashier');
 
 onLoad.queue_for_url(function() {
     $('div.further-info')

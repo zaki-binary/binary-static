@@ -6,7 +6,7 @@
                     <span class='grd-hide-mobile'>
                         <span id='virtual-text'>[% l("You're using a virtual money account.") %]</span>
                     </span>
-                    <a class="virtual-upgrade-link pjaxload with_login_cookies pulser" href="[% request.url_for('linkto_acopening.cgi', { actype => 'real'}) %]">[% l("Upgrade to a real money account") %]</a>
+                    <a class="virtual-upgrade-link pjaxload with_login_cookies pulser" href="[% request.url_for('/user/upgrade/') %]">[% l("Upgrade to a real money account") %]</a>
                 </div>
                 <div class='grd-grid-6 grd-grid-mobile-12 grd-parent' id='topbar-info'>
                     <div class='grd-grid-5 grd-grid-mobile-7' id="gmt-clock"></div>

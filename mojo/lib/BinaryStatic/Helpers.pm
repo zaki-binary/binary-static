@@ -282,7 +282,7 @@ sub _main_menu_myaccount {
     push @{$my_account_ref->{sub_items}},
       {
         id         => 'topMenuAccountSettings',
-        url        => $self->c->url_for('/settings.cgi')->query({o => 'settings'}),
+        url        => $self->c->url_for('/user/settings')->query({o => 'settings'}),
         text       => $self->c->l('Settings'),
         id         => 'top_Settings',
         link_class => 'with_login_cookies pjaxload',
@@ -312,7 +312,7 @@ sub _main_menu_cashier {
 
     my $cashier_items_ref = {
         id         => 'topMenuCashier',
-        url        => $self->c->url_for('/cashier/available_payment_methods'),
+        url        => $self->c->url_for('/cashier'),
         text       => $self->c->l('Cashier'),
         link_class => 'pjaxload',
     };
@@ -339,14 +339,14 @@ sub _main_menu_resources {
 
     my $trading_times_ref = {
         id         => 'topMenuTradingTimes',
-        url        => $self->c->url_for('/trading_times.cgi')->query({date => today_yyyymmdd()}),
+        url        => $self->c->url_for('/resources/trading_times')->query({date => today_yyyymmdd()}),
         text       => $self->c->l('Trading Times'),
         link_class => 'pjaxload',
     };
 
     my $bet_guide_ref = {
         id         => 'topMenuContractGuide',
-        url        => $self->c->url_for('/contract_guide.cgi'),
+        url        => $self->c->url_for('/resources/contract_guide'),
         text       => $self->c->l('Trading Guide'),
         link_class => 'pjaxload',
     };
