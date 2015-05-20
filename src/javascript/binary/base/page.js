@@ -650,6 +650,9 @@ Contents.prototype = {
 
             $('#topbar').removeClass('orange');
             $('#topbar').addClass('dark-blue');
+
+            $('#account-transfer-section').addClass('invisible');
+            $('#account-transfer-section').hide();
         }
     },
     update_body_id: function() {
