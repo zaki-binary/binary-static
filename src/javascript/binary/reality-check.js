@@ -11,11 +11,11 @@ RealityCheck = (function ($) {
 
         val = ($.cookie(this.cookieName)||'').split(',');
         val[0] = parseInt(val[0]);
-        if (!val[0]>0) return;  // no or invalid cookie
+        if (isNaN(val[0]) || val[0]<=0) return;  // no or invalid cookie
 
         if (val[1] && val[1] != persistentStore.get('reality_check.srvtime')) {
             persistentStore.set('reality_check.srvtime', val[1]);
-            persistentStore.set('reality_check.basetime', (new Date).getTime());
+            persistentStore.set('reality_check.basetime', (new Date()).getTime());
             persistentStore.set('reality_check.ack', 1);
         }
 
@@ -27,11 +27,11 @@ RealityCheck = (function ($) {
         this.basetime = persistentStore.get('reality_check.basetime');
 
         return this.setAlarm();
-    };
+    }
 
     RealityCheck.prototype.setAlarm = function () {
         var that = this;
-        var alrm = this.interval - ((new Date).getTime() - this.basetime) % this.interval;
+        var alrm = this.interval - ((new Date()).getTime() - this.basetime) % this.interval;
 
         if (this.tmout) window.clearTimeout(this.tmout);
 
@@ -53,7 +53,7 @@ RealityCheck = (function ($) {
                 if (xhr.status === 404) return; // no MF loginid
                 window.setTimeout(function () {
                     that.fire();
-                }, 5000)
+                }, 5000);
             },
         });
     };
@@ -61,7 +61,8 @@ RealityCheck = (function ($) {
     RealityCheck.prototype.display = function (data) {
         var that = this, outer, middle, storage_handler; 
 
-        if (outer = $('#reality-check')) outer.remove();
+        outer = $('#reality-check');
+        if (outer) outer.remove();
 
         outer = $("<div id='reality-check'></div>").appendTo('body');
         middle = $('<div />').appendTo(outer);
