@@ -681,7 +681,7 @@ Contents.prototype = {
                     if(loginid_array[i].financial && !loginid_array[i].disabled){
                         upgrade_financial = false;
                         break;
-                    } else if(loginid_array[i].non_financial && loginid_array[i].financial) {
+                    } else if(loginid_array[i].non_financial && !loginid_array[i].disabled) {
                         upgrade_financial = true;
                     }
                 }
