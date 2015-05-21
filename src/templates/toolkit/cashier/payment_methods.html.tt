@@ -1,7 +1,21 @@
-<!-- src/templates/toolkit/cashier/payment_methods.html.tt -->
 <div id='cashier-content'>
     <div class="grd-grid-12">
         <h1>[% l('Available payment methods') %]</h1></br>
+    </div>
+    <div class="grd-grid-12">
+        <div id="payment_method_suggestions grd-row-padding" class='center-aligned'>
+            <p>
+                <a href="[% request.url_for('/') %]" class="button by_client_type client_logged_out pjaxload">
+                <span>[% l('Open an account now') %]</span>
+                </a>
+                <a href="[% deposit_url %]" class="button button_large by_client_type client_real with_login_cookies">
+                <span>[% l('Deposit') %]</span>
+                </a>
+                <a href="[% withdrawal_url %]" class="button by_client_type client_real with_login_cookies">
+                    <span>[% l('Withdraw') %]</span>
+                </a>
+            </p>
+        </div>
     </div>
 
     <div class="grd-row-padding grd-hide-mobile table-header">
@@ -483,22 +497,6 @@
 
        <div class="grd-grid-3">
             [% l('Deposit: Instant') %]
-        </div>
-    </div>
-
-    <div class="grd-grid-12">
-        <div id="payment_method_suggestions grd-row-padding" class='center-aligned'>
-            <p>
-                <a href="[% request.url_for('/') %]" class="button by_client_type client_logged_out pjaxload">
-                <span>[% l('Open an account now') %]</span>
-                </a>
-                <a href="[% deposit_url %]" class="button button_large by_client_type client_real with_login_cookies">
-                <span>[% l('Deposit') %]</span>
-                </a>
-                <a href="[% withdrawal_url %]" class="button by_client_type client_real with_login_cookies">
-                    <span>[% l('Withdraw') %]</span>
-                </a>
-            </p>
         </div>
     </div>
 </div>
