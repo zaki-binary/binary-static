@@ -613,6 +613,12 @@ Contents.prototype = {
                     $('#payment-agent-section').addClass('invisible');
                     $('#payment-agent-section').hide();
                 }
+
+                // temporary only show for internal staff
+                if (!$.cookie('staff') || !/^Q?MF|MLT/.test(this.client.loginid)) {
+                    $('#account-transfer-section').addClass('invisible');
+                    $('#account-transfer-section').hide();
+                }
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
@@ -635,6 +641,9 @@ Contents.prototype = {
 
                 $('#topbar').addClass('orange');
                 $('#topbar').removeClass('dark-blue');
+
+                $('#account-transfer-section').addClass('invisible');
+                $('#account-transfer-section').hide();
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
@@ -642,6 +651,9 @@ Contents.prototype = {
 
             $('#topbar').removeClass('orange');
             $('#topbar').addClass('dark-blue');
+
+            $('#account-transfer-section').addClass('invisible');
+            $('#account-transfer-section').hide();
         }
     },
     update_body_id: function() {
