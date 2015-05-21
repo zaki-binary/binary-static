@@ -37,11 +37,19 @@ var enable_fields_form_submit = function () {
     });
 };
 
+var hide_account_opening_for_risk_disclaimer = function () {
+    var risk_section = $('#risk_disclaimer_section');
+    if (risk_section.length > 0) {
+        $('#openAccForm fieldset').not("#risk_disclaimer_section").hide();
+    }
+};
+
 pjax_config_page('user/upgrade/financial|create_account', function() {
     return {
         onLoad: function() {
             upgrade_investment_disabled_field();
             enable_fields_form_submit();
+            hide_account_opening_for_risk_disclaimer();
         }
     };
 });
