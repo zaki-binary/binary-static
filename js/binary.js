@@ -1223,11 +1223,17 @@ Contents.prototype = {
 
                 if (real == 1) {
                     has_real = 1;
-                    if(loginid_array[i].financial && !loginid_array[i].disabled){
-                        upgrade_financial = false;
+
+                    var curr_loginid = this.client.loginid;
+                    if (/MLT/.test(curr_loginid) || /MF/.test(curr_loginid)) {
+                        if(loginid_array[i].financial && !loginid_array[i].disabled){
+                            upgrade_financial = false;
+                            break;
+                        } else if(loginid_array[i].non_financial && !loginid_array[i].disabled) {
+                            upgrade_financial = true;
+                        }
+                    } else {
                         break;
-                    } else if(loginid_array[i].non_financial && !loginid_array[i].disabled) {
-                        upgrade_financial = true;
                     }
                 }
             }
