@@ -473,6 +473,7 @@ fieldset .error-msg {
   color: black;
   background-color: #fef1cf;
   padding: 10px;
+  overflow: hidden;
 }
 
 /* hacks - avoid! */
@@ -689,10 +690,10 @@ ul.checked li {
 #topbar #gmt-clock, #topbar #contact-us {
   padding-top: 3px;
 }
-#topbar #virtualupgrade {
+#topbar .upgrademessage {
   padding-top: 3px;
 }
-#topbar #virtualupgrade a {
+#topbar .upgrademessage a {
   color: white;
   text-decoration: none;
   text-align: center;
@@ -707,12 +708,13 @@ ul.checked li {
   border-radius: 2px;
   font-size: 90%;
   padding: 2px 4px 2px 4px;
+  text-transform: none;
   margin: 0 0 0 10px;
 }
-#topbar #virtualupgrade a:visited {
+#topbar .upgrademessage a:visited {
   color: white;
 }
-#topbar #virtualupgrade a:hover, #topbar #virtualupgrade a:active {
+#topbar .upgrademessage a:hover, #topbar .upgrademessage a:active {
   text-decoration: none;
   background-color: #14602B;
 }

@@ -599,7 +599,7 @@ var User = function() {
                     disabled = 1;
                 }
 
-                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled });
+                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled, 'non_financial': /MLT/.test(items[0]), 'financial': /MF/.test(items[0])});
             }
 
             this.loginid_array = loginid_array;
@@ -927,9 +927,15 @@ Header.prototype = {
 
                 var loginid_text;
                 if (real == 1) {
-                    loginid_text = text.localize('Real Money') + ' (' + curr_loginid + ')';
+                    if(loginid_array[i].financial){
+                        loginid_text = text.localize('Investment Account') + ' (' + curr_loginid + ')';
+                    } else if(loginid_array[i].non_financial) {
+                        loginid_text = text.localize('Gaming Account') + ' (' + curr_loginid + ')';
+                    } else {
+                        loginid_text = text.localize('Real Account') + ' (' + curr_loginid + ')';
+                    }
                 } else {
-                    loginid_text = text.localize('Virtual Money') + ' (' + curr_loginid + ')';
+                    loginid_text = text.localize('Virtual Account') + ' (' + curr_loginid + ')';
                 }
 
                 var disabled_text = '';
@@ -1133,6 +1139,7 @@ var Contents = function(client, user) {
 Contents.prototype = {
     on_load: function() {
         this.activate_by_client_type();
+        this.topbar_message_visibility();
         this.update_body_id();
         this.update_content_class();
         this.tooltip.attach();
@@ -1168,22 +1175,6 @@ Contents.prototype = {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
 
-                var loginid_array = this.user.loginid_array;
-                var has_real = 0;
-                for (var i=0;i<loginid_array.length;i++) {
-                    var loginid = loginid_array[i].id;
-                    var real = loginid_array[i].real;
-
-                    if (real == 1) {
-                        has_real = 1;
-                        break;
-                    }
-                }
-                if (has_real == 1) {
-                    $('.virtual-upgrade-link').addClass('invisible');
-                    $('.virtual-upgrade-link').hide();
-                }
-
                 $('#topbar').addClass('orange');
                 $('#topbar').removeClass('dark-blue');
 
@@ -1213,6 +1204,42 @@ Contents.prototype = {
     },
     init_draggable: function() {
         $('.draggable').draggable();
+    },
+    topbar_message_visibility: function() {
+        if(this.client.is_logged_in) {
+            var loginid_array = this.user.loginid_array;
+            var has_real = 0;
+            var upgrade_financial = false;
+            for (var i=0;i<loginid_array.length;i++) {
+                var loginid = loginid_array[i].id;
+                var real = loginid_array[i].real;
+
+                if (real == 1) {
+                    has_real = 1;
+                    if(loginid_array[i].financial){
+                        upgrade_financial = false;
+                        break;
+                    } else if(loginid_array[i].non_financial) {
+                        upgrade_financial = true;
+                    }
+                }
+            }
+            if (has_real == 1) {
+                $('.virtual-upgrade-link').addClass('invisible');
+                $('.virtual-upgrade-link').hide();
+                if(upgrade_financial) {
+                    $('#financial-upgrade-link').removeClass('invisible');
+                    if($('#investment_message').length > 0) {
+                        $('#investment_message').removeClass('invisible');
+                    }
+                } else {
+                    $('#financial-upgrade-link').addClass('invisible');
+                    if($('#investment_message').length > 0) {
+                        $('#investment_message').addClass('invisible');
+                    }
+                }
+            }
+        }
     },
 };
 
@@ -8066,9 +8093,47 @@ pjax_config_page('user/upgrade', function() {
             client_form.on_residence_change();
             select_user_country();
             if(page.client.is_logged_in) {
-                client_form.set_virtual_login_id(page.client.loginid);
                 client_form.set_virtual_email_id(page.client.email);
             }
+        }
+    };
+});
+
+var upgrade_investment_disabled_field = function () {
+    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
+    fields.forEach(function (element, index, array) {
+        var obj = $('#'+element);
+        if (obj.length > 0) {
+            $('#'+element).attr('disabled', true);
+        }
+    });
+};
+
+var enable_fields_form_submit = function () {
+    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
+    $('form#openAccForm').submit(function (event) {
+        fields.forEach(function (element, index, array) {
+            var obj = $('#'+element);
+            if (obj.length > 0) {
+                obj.removeAttr('disabled');
+            }
+        });
+    });
+};
+
+var hide_account_opening_for_risk_disclaimer = function () {
+    var risk_section = $('#risk_disclaimer_section');
+    if (risk_section.length > 0) {
+        $('#openAccForm fieldset').not("#risk_disclaimer_section").hide();
+    }
+};
+
+pjax_config_page('user/upgrade/financial|create_account', function() {
+    return {
+        onLoad: function() {
+            upgrade_investment_disabled_field();
+            enable_fields_form_submit();
+            hide_account_opening_for_risk_disclaimer();
         }
     };
 });
@@ -8098,27 +8163,6 @@ ClientForm.prototype = {
         } else {
             return true;
         }
-    },
-    validate_promo_code_expiry: function() {
-        var has_expired = $('#promo_code_expired').val();
-        if(has_expired == "true") {
-            return false;
-        }
-
-        return true;
-    },
-    validate_promo_code_country: function() {
-        var country_list = $('#promo_code_countries').val();
-        if(country_list.indexOf('ALL') >= 0) {
-                return true;
-        } else {
-            var residence = $('#residence').val();
-            if(country_list.indexOf(residence) >= 0) {
-                return true;
-            }
-        }
-
-        return false;
     },
     compare_new_password: function(new_password1, new_password2) {
         if (new_password1.length > 0 && new_password2.length > 0)
@@ -8236,6 +8280,8 @@ ClientForm.prototype = {
         var that = this;
         $('#residence').on('change', function() {
             that.set_idd_for_residence($(this).val());
+            var address_state = $('#AddressState');
+            var current_state = address_state.length > 0 ? address_state.val() : '';
 
             var postcodeLabel = $('label[for=AddressPostcode]');
             if ($(this).val() == 'GB') {
@@ -8253,23 +8299,21 @@ ClientForm.prototype = {
                     dataType: "html"
                 }).done(function(response) {
                     $('#AddressState').html(response);
-                    that.hide_state_list_if_empty();
+                    that.hide_state_list_if_empty(current_state);
                 });
             } else {
                 $("#AddressState").parents(".row").first().hide(); //Hide States list.
             }
         });
     },
-    hide_state_list_if_empty: function() {
+    hide_state_list_if_empty: function(current_state) {
         var addr_state = $("#AddressState");
         if (addr_state.children().size() > 2) {
             addr_state.parents(".row").first().show();
+            addr_state.val(current_state);
         } else {
             addr_state.parents(".row").first().hide();
         }
-    },
-    set_virtual_login_id: function(loginid) {
-        $('#virtual_loginid').val(loginid);
     },
     set_virtual_email_id: function(email) {
         $('#Email').val(email);
@@ -8401,10 +8445,11 @@ var select_user_country = function() {
     if($('#residence').length > 0) {
         get_user_country(function() {
             var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
-            if(restricted_countries.test(this.country)) {
+            var current_selected = $('#residence').val() || this.country;
+            if(restricted_countries.test(current_selected)) {
                 $('#residence').val('default').change();
             } else {
-                $('#residence').val(this.country).change();
+                $('#residence').val(current_selected).change();
             }
         });
     }
