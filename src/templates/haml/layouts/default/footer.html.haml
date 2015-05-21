@@ -35,13 +35,15 @@
               %a.pjaxload{:href=>url_for("/resources/rise_fall_table")}= l('Rise/Fall Table')
             %li
               %a.pjaxload{:href=>url_for("/resources/asset_index")}= l('Asset Index')
+          .grd-row-padding
+            %h1= l('Banking')
+            %ul
+              %li
+                %a.pjaxload{:href=>url_for("/cashier")}= l('Cashier')
+              %li
+                %a.pjaxload{:href=>url_for("/cashier/payment_methods")}= l('Payment Methods')
       .grd-grid-6.grd-grid-mobile-12.grd-parent
         .grd-grid-4
-          %h1= l('Banking')
-          %ul
-            %li
-              %a.pjaxload{:href=>url_for("/cashier")}= l('Payment Methods')
-          .grd-row-padding
             %h1= l('Terms')
               %ul
                 %li
