@@ -764,7 +764,7 @@ Page.prototype = {
         $('#chooseapassword').on('change', function() {
             $('#reenter-password').removeClass('invisible');
             $('#reenter-password').show();
-            $("#reenter-password").focus();
+            $("#chooseapassword_2").focus();
         });
     },
     on_click_signup: function() {
