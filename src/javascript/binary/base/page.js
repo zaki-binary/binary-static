@@ -761,10 +761,9 @@ Page.prototype = {
         });
     },
     on_change_password: function() {
-        $('#chooseapassword').on('change', function() {
+        $('#chooseapassword').on('input', function() {
             $('#reenter-password').removeClass('invisible');
             $('#reenter-password').show();
-            $("#chooseapassword_2").focus();
         });
     },
     on_click_signup: function() {
