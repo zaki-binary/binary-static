@@ -82,13 +82,14 @@ function ws_setup() {
     };
     g.Contract.prototype.update = function(data) {
         //console.log("update with %o", data);
-        for (fld in data) {
+        var cul;
+        for (var fld in data) {
             var $div = $('.'+fld, this.$div);
             $div.html(data[fld]);
             this.d0[fld] = data[fld];
         }
         if (data.payout) {
-            var cul = g.currency_cultures[this.d0.currency];
+            cul = g.currency_cultures[this.d0.currency];
             var pay = Globalize.format(parseFloat(data.payout   ), 'C', cul);
             $('.payout', this.$div).html(pay);
         }
@@ -108,7 +109,7 @@ function ws_setup() {
             price = data.buy_price;
         }
         if (price) {
-            var cul = g.currency_cultures[this.d0.currency];
+            cul = g.currency_cultures[this.d0.currency];
             var val = Globalize.format(parseFloat(price), 'C', cul);
             $('.price', this.$div).html(val);
             $('.ttype', this.$div).html(ttype);
@@ -232,9 +233,10 @@ function ws_setup() {
     }
     function onmessage(m) {
         var data = JSON.parse(m.data);
+        var contract, symbol;
         //console.log('got message %o', data);
         if (data.ticks) {
-            var symbol = data.ticks;
+            symbol = data.ticks;
             var $live_symbol = g.$live_symbols[symbol];
             if (!$live_symbol) {
                 if (data.id) g.ws.send(JSON.stringify({forget:data.id}));
@@ -264,7 +266,7 @@ function ws_setup() {
         }
         if (data.buy) {
             console.log("buy result data is %o", data);
-            var contract = g.live_contracts[data.buy];
+            contract = g.live_contracts[data.buy];
             if (!contract) {
                 console.log("dropping buy result for " + data.buy);
                 g.ws.send(JSON.stringify({forget:data.buy}));
@@ -276,7 +278,7 @@ function ws_setup() {
         }
         if (data.sell) {
             console.log("sell result data is %o", data);
-            var contract = g.live_contracts[data.sell];
+            contract = g.live_contracts[data.sell];
             if (!contract) {
                 console.log("dropping sell result for " + data.sell);
                 g.ws.send(JSON.stringify({forget:data.sell}));
@@ -292,7 +294,7 @@ function ws_setup() {
             return;
         }
         if (data.contracts_for) {
-            var symbol = data.contracts_for.symbol;
+            symbol = data.contracts_for.symbol;
             delete data.contracts_for.symbol;
             console.log("limits_for " + symbol + ": %o", data.contracts_for);
             g.limits_for[symbol] = data.contracts_for;
@@ -301,7 +303,7 @@ function ws_setup() {
         }
         // any other input message should be about a contract.
         var contract_id = data.id;
-        var contract = g.live_contracts[contract_id];
+        contract = g.live_contracts[contract_id];
         if (!contract) {
             if (data.fmb_id) {
                 if (data.batch_index == data.batch_count) {
@@ -366,14 +368,15 @@ function ws_setup() {
     function purchase() {
         var contract_id = $(this).parents('.contract').attr('id');
         var contract = g.live_contracts[contract_id];
+        var price;
         $(this).button('disable').button('option', 'label', 'Wait..');
         if (contract.bSell) {
-            var price = contract.d0.bid_price;
+            price = contract.d0.bid_price;
             console.log("selling " + contract_id + " from %o " + " for " + price, contract);
             g.ws.send(JSON.stringify({sell:contract_id, price:price}));
             return;
         }
-        var price = contract.d0.ask_price;
+        price = contract.d0.ask_price;
         console.log("buying " + contract_id + " from %o " + " for " + price, contract);
         g.ws.send(JSON.stringify({buy:contract_id, price:price}));
     }
