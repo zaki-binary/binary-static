@@ -5790,7 +5790,7 @@ BetForm.Time.EndTime.prototype = {
             BetPrice.order_form.disable_buy_buttons();
             that.hide_buy_buttons();
 
-            if(!page.client.is_logged_in) {
+            if(!$.cookie('login')) {
                 window.location.href = page.url.url_for('login');
                 return;
             }
