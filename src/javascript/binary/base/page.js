@@ -758,6 +758,30 @@ Page.prototype = {
             $('#loginid-switch-form').submit();
         });
     },
+
+    on_click_signup: function() {
+        $('#btn_registration').on('click', function() {
+            var pwd = $('#chooseapassword').val();
+            var pwd_2 = $('#chooseapassword_2').val();
+
+            // enter password twice
+            if (pwd_2 == null || pwd_2.length == 0) {
+                alert('choose password twice !!!!!');
+                $('#reenter-password').removeClass('invisible');
+                $('#reenter-password').show();
+                return false;
+            }
+
+            // 2 passwords not match
+            if (!client_form.compare_new_password(pwd, pwd_2)) {
+                $('#password_2_error').removeClass('invisible');
+                $('#password_2_error').show();
+                return false;
+            }
+            $('#virtual-acc-form').submit();
+        });
+    },
+
     localize_for: function(language) {
         text = texts[language];
         moment.locale(language.toLowerCase());
