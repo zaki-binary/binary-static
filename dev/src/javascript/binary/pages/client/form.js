@@ -26,13 +26,12 @@ ClientForm.prototype = {
         }
     },
     compare_new_password: function(new_password1, new_password2) {
-        if (new_password1.length > 0 && new_password2.length > 0)
-            {
-                if (new_password1 != new_password2) {
-                    return false;
-                }
+        if (new_password1.length > 0 && new_password2.length > 0) {
+            if (new_password1 == new_password2) {
+                return true;
             }
-            return true;
+        }
+        return false;
     },
     is_allowed_opening_account_country: function(selected_country) {
         var error_residence = clearInputErrorField('errorresidence');
