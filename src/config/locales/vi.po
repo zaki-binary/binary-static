@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: I 18N\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-05-22 04:46+0200\n"
-"Last-Translator: Karen <karen@binary.com>\n"
+"PO-Revision-Date: 2015-05-22 06:30+0200\n"
+"Last-Translator: Linguavista <saritar@lingua-vista.com>\n"
 "Language-Team: Vietnamese "
 "<https://hosted.weblate.org/projects/binary/static/vi/>\n"
 "Language: vi\n"
@@ -2345,7 +2345,7 @@ msgstr "Hợp đồng không hết hạn trong lượt %1 giao dịch cuố
 #. ($minimum_hold->as_string)
 #: lib/BOM/Product/Contract.pm:1923
 msgid "Contract must be held for %1 before resale is offered."
-msgstr ""
+msgstr "Hợp đồng phải được giữ trong %1 trước khi mời bán lại."
 
 #: lib/BOM/Product/Contract.pm:2066
 msgid "Contract must expire during trading hours."
@@ -2759,6 +2759,7 @@ msgstr "Gửi tiền cho đại lý thanh toán"
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet."
 msgstr ""
+"Gửi hay rút tiền từ tài khoản qua ngân hàng, thẻ tín dụng hay ví e-cash."
 
 #. (1)
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/payment_methods.html.tt:442
@@ -3492,7 +3493,7 @@ msgstr "Hội cờ bạc GamCare"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/responsible_trading.html.haml:1
 msgid "Gambling can be addictive. Please play responsibly."
-msgstr ""
+msgstr "Cờ bạc có thể gây nghiện. Xin chơi hợp lý."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:121
 msgid "General"
@@ -4178,16 +4179,14 @@ msgid "Invalid amount"
 msgstr "Số tiền không hợp lệ"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:280
-#, fuzzy
 #| msgid "Invalid amount"
 msgid "Invalid amount."
-msgstr "Số tiền không hợp lệ"
+msgstr "Số tiền không hợp lệ."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:272
-#, fuzzy
 #| msgid "Invalid payout currency."
 msgid "Invalid currency."
-msgstr "Tiền thanh toán không hợp lệ."
+msgstr "Tiền tệ không hợp lệ."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Home.pm:170
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Home.pm:206
@@ -4235,10 +4234,9 @@ msgstr "Số điện thoại không hợp lệ."
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:266
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:289
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:304
-#, fuzzy
 #| msgid "Invalid stake"
 msgid "Invalid transfer."
-msgstr "Cổ phần không hợp lệ"
+msgstr "Chuyển khoản không hợp lệ."
 
 #: /home/git/regentmarkets/bom-app/smartchart.cgi:127
 #: /home/git/regentmarkets/bom-app/smartchart.cgi:467
@@ -5302,7 +5300,6 @@ msgid "Open a free account & get your $10,000 virtual money"
 msgstr "Mở tài khoản miễn phí và nhận $10,000 khoản tiền ảo"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#, fuzzy
 #| msgid "Open Account"
 msgid "Open an Account"
 msgstr "Mở Tài khoản"
@@ -6869,6 +6866,10 @@ msgstr "Xin lỗi, bạn đã có vị thế mở. Vui lòng đóng tấ
 #: lib/BOM/Platform/Client.pm:286
 msgid "Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you don't remember your account with us, please <a href=\"%1\">contact us</a>."
 msgstr ""
+"Xin lỗi, bạn đã có tài khoản tiền thực với chúng tôi. Có lẽ bạn đã dùng "
+"email khác để đăng ký. Vì lý do pháp lý chúng tôi không được phép mở nhiều "
+"tài khoản tiền thực cho cùng một người. Nếu không nhớ tài khoản của mình, "
+"vui lòng <a href=\"%1\">Liên hệ với chúng tôi</a>."
 
 #. ("$currency$balance",                $limit)
 #: lib/BOM/Product/Transaction.pm:830
@@ -7566,42 +7567,43 @@ msgstr "Mã truy cập lấy trước đó có vòng đời hạn chế
 
 #. ($r->url_for('cashier_forward.cgi', {act => 'deposit'})
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:491
-#, fuzzy
 #| msgid "This account is unavailable. For any questions please contact <a href=\"%1\">Customer Support</a>."
 msgid "The account transfer is unavailable as your account balance is 0. Please <a href=\"%1\">deposit</a> to your account."
-msgstr "Tài khoản này không có sẵn. Nếu bạn có bất cứ câu hỏi nào, vui lòng liên hệ với <a href=\"%1\">Phòng Hỗ trợ khách hàng</a>."
+msgstr ""
+"Chuyển khoản không khả dụng do số dư tài khoản là 0. Vui lòng <a href=\"%1\">"
+"gửi tiền</a> vào tài khoản."
 
 #. ($company_name)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:395
-#, fuzzy
 #| msgid "This contract is unavailable on this account."
 msgid "The account transfer is unavailable for %1 account."
-msgstr "Hợp đồng này không có  trong tài khoản này."
+msgstr "Chuyển khoản qua tài khoản không khả dụng cho %1 tài khoản."
 
 #. ($gaming->landing_company->name,                    $financial->landing_company->name)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:449
 msgid "The account transfer is unavailable for %1 and %2 accounts with different default currency."
 msgstr ""
+"Chuyển khoản qua tài khoản không khả dụng cho %1 và %2 tài khoản với loại "
+"tiền tệ mặc định khác nhau."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:420
-#, fuzzy
 #| msgid "This contract is unavailable on this account."
 msgid "The account transfer is unavailable for your account."
-msgstr "Hợp đồng này không có  trong tài khoản này."
+msgstr "Chuyển khoản qua tài khoản không khả dụng với tài khoản của bạn."
 
 #. ($client->loginid)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:375
-#, fuzzy
 #| msgid "This contract is unavailable on this account."
 msgid "The account transfer is unavailable for your account: %1."
-msgstr "Hợp đồng này không có  trong tài khoản này."
+msgstr "Chuyển khoản qua tài khoản không khả dụng với tài khoản của bạn: %1."
 
 #. ($r->url_for('cashier_forward.cgi', {act => 'deposit'})
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:463
-#, fuzzy
 #| msgid "This account is unavailable. For any questions please contact <a href=\"%1\">Customer Support</a>."
 msgid "The account transfer is unavailable. Please <a href=\"%1\">deposit</a> to your account."
-msgstr "Tài khoản này không có sẵn. Nếu bạn có bất cứ câu hỏi nào, vui lòng liên hệ với <a href=\"%1\">Phòng Hỗ trợ khách hàng</a>."
+msgstr ""
+"Chuyển khoản qua tài khoản không khả dụng. Vui lòng <a href=\"%1\">gửi "
+"tiền</a> vào tài khoản."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:72
 msgid "The anti-money laundering processes have the following effects on Clients:"
@@ -8600,14 +8602,13 @@ msgstr "Giao dịch trong"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/account_transfer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
-#, fuzzy
 #| msgid "Transfer to"
 msgid "Transfer"
-msgstr "Chuyển tới"
+msgstr "Chuyển khoản"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Transfer between your gaming and financial accounts."
-msgstr ""
+msgstr "Chuyển khoản giữa tài khoản chơi game và tài chính."
 
 #: /home/git/regentmarkets/bom-app/paymentagent_withdraw.cgi:220
 msgid "Transfer to"
@@ -9451,7 +9452,6 @@ msgid "Withdraw"
 msgstr "Rút tiền"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
-#, fuzzy
 #| msgid "Withdraw via Payment Agent"
 msgid "Withdraw Via Payment Agent"
 msgstr "Rút tiền qua Đại lý Thanh toán"
@@ -9597,10 +9597,12 @@ msgstr "Bạn có thể thử <a href=\"%1\">một lựa chọn thanh toán k
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
-#, fuzzy
 #| msgid "You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by"
 msgid "You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by %1."
-msgstr "Bạn có thể sử dụng một đại lý thanh toán uỷ quyền để xử lý các khoản tiền gửi và rút tiền với phương thức tiền mặt trực tuyến hoặc đồng tiền địa phương không được hỗ trợ bởi"
+msgstr ""
+"Bạn có thể sử dụng một đại lý thanh toán uỷ quyền để xử lý các khoản tiền "
+"gửi và rút tiền với phương thức tiền mặt trực tuyến hoặc đồng tiền đị"
+"a phương không được hỗ trợ bởi %1."
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/payment_agent_list.html.tt:4
@@ -9899,10 +9901,9 @@ msgid "Your account should not be used as a banking facility and deposits should
 msgstr "Tài khoản của bạn không nên được sử dụng như một thiết bị ngân hàng và bạn chỉ nên gửi tiền với mục đích sử dụng nó để đặt hợp đồng. Nếu bạn gửi tiền và rút tiền nhiều lần mà không đặt hợp đồng tương xứng, chúng tôi có thu hồi tài khoản của bạn, mà không cần thông báo trước, bất kỳ khoản phí ngân hàng nào chúng tôi sẽ thu bạn trước khi đóng tài khoản."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:330
-#, fuzzy
 #| msgid "Your account is disabled"
 msgid "Your account transfer has failed."
-msgstr "Tài khoản của bạn bị vô hiệu hóa"
+msgstr "Chuyển khoản qua tài khoản thất bại."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:20
 msgid "Your base url for all API calls"
@@ -10242,12 +10243,12 @@ msgstr "chỉ dẫn mã chi tiết."
 #. ($financial->loginid, $gaming->loginid)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:483
 msgid "from financial account (%1) to gaming account (%2)"
-msgstr ""
+msgstr "từ tài khoản tài chính (%1) đến tài khoản chơi game (%2)"
 
 #. ($gaming->loginid, $financial->loginid)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:478
 msgid "from gaming account (%1) to financial account (%2)"
-msgstr ""
+msgstr "từ tài khoản chơi game (%1) đến tài khoản tài chính (%2)"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "here"
