@@ -773,20 +773,20 @@ Page.prototype = {
             var email = $('#Email').val();
 
             if (!client_form.compare_new_password(pwd, pwd_2)) {
-                $('#signup_error').val(text.localize('The two passwords that you entered do not match.'));
+                $('#signup_error').text(text.localize('The two passwords that you entered do not match.'));
                 $('#signup_error').removeClass('invisible');
                 $('#signup_error').show();
                 return false;
             }
             if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
-                $('#signup_error').val(text.localize('Invalid email address'));
+                $('#signup_error').text(text.localize('Invalid email address'));
                 $('#signup_error').removeClass('invisible');
                 $('#signup_error').show();
                 return false;
             }
             // email != password
             if (email == pwd) {
-                $('#signup_error').val(text.localize('Your password cannot be the same as your email'));
+                $('#signup_error').text(text.localize('Your password cannot be the same as your email'));
                 $('#signup_error').removeClass('invisible');
                 $('#signup_error').show();
                 return false;
