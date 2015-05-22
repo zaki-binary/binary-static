@@ -739,6 +739,8 @@ Page.prototype = {
         this.on_change_loginid();
         this.record_affiliate_exposure();
         this.contents.on_load();
+        this.on_click_signup();
+        this.on_change_password();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -758,6 +760,42 @@ Page.prototype = {
             $('#loginid-switch-form').submit();
         });
     },
+    on_change_password: function() {
+        $('#chooseapassword').on('input', function() {
+            $('#reenter-password').removeClass('invisible');
+            $('#reenter-password').show();
+        });
+    },
+    on_click_signup: function() {
+        $('#btn_registration').on('click', function() {
+            var pwd = $('#chooseapassword').val();
+            var pwd_2 = $('#chooseapassword_2').val();
+            var email = $('#Email').val();
+
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                $('#signup_error').text(text.localize('Invalid email address'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+            if (!client_form.compare_new_password(pwd, pwd_2)) {
+                $('#signup_error').text(text.localize('The two passwords that you entered do not match.'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+            // email != password
+            if (email == pwd) {
+                $('#signup_error').text(text.localize('Your password cannot be the same as your email'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+
+            $('#virtual-acc-form').submit();
+        });
+    },
+
     localize_for: function(language) {
         text = texts[language];
         moment.locale(language.toLowerCase());
