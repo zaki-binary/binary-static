@@ -25,7 +25,7 @@
                 %input{:type => 'hidden', :name => 'l', :value => stash('language')}
             #reenter-password.grd-parent
               %span.grd-grid-12.grd-no-gutter
-                %label.xemail{:for => 'chooseapassword_2' :style => 'display: none;'}
+                %label.xemail{:for => 'chooseapassword_2'}
                 %input#chooseapassword_2.xpass{:name => 'chooseapassword_2', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('reenter_password')}
             %span.grd-grid-12.grd-no-gutter
               %input.button.xtopcta{:id => 'btn_registration',:type => 'submit', :value => stash('createacc')}
