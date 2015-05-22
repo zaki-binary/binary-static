@@ -770,12 +770,28 @@ Page.prototype = {
         $('#btn_registration').on('click', function() {
             var pwd = $('#chooseapassword').val();
             var pwd_2 = $('#chooseapassword_2').val();
+            var email = $('#Email').val();
 
             if (!client_form.compare_new_password(pwd, pwd_2)) {
-                $('#password_2_error').removeClass('invisible');
-                $('#password_2_error').show();
+                $('#signup_error').val(text.localize('The two passwords that you entered do not match.'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
                 return false;
             }
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                $('#signup_error').val(text.localize('Invalid email address'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+            // email != password
+            if (email == pwd) {
+                $('#signup_error').val(text.localize('Your password cannot be the same as your email'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+
             $('#virtual-acc-form').submit();
         });
     },

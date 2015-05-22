@@ -27,7 +27,7 @@
               %span.grd-grid-12.grd-no-gutter
                 %label.xemail{:for => 'chooseapassword_2'}
                 %input#chooseapassword_2.xpass{:name => 'chooseapassword_2', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('reenter_password')}
-                %p#password_2_error.errorfield.invisible= l('The two passwords that you entered do not match.')
+                %p#signup_error.errorfield.invisible
             %span.grd-grid-12.grd-no-gutter
               %input.button.xtopcta{:id => 'btn_registration',:type => 'submit', :value => stash('createacc')}
       .grd-grid-2.grd-hide-mobile.grd-hide-phablet
