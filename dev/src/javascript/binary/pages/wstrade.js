@@ -589,6 +589,12 @@ function WSTrade() {
         }
     }
 
+    function ws_stop() {
+        console.log("Stopping WSTrade.  Closing websocket..");
+        g.ws.onopen = g.ws.onmessage = g.ws.onclose = function(){};
+        g.ws.close();
+    }
+
     function position(of) {
         return {width: '640px', position:{my:'left top', at: 'left bottom', of:of} /*, modal:true*/}
     }
@@ -645,6 +651,7 @@ function WSTrade() {
         opensocket({onclose:onclose,onmessage:onmessage,onopen:get_initial});
     }
 
+    onUnload.queue(ws_stop);
     ws_setup();
     ws_init();
 }
