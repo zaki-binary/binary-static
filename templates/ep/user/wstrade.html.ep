@@ -1,4 +1,3 @@
-%# add_stash(errors=>"Under Maintenance.  This page is not currently operational.");
 
 % layout 'default';
 % title 'Contract Watch';
@@ -22,13 +21,11 @@
     div.innerzone { padding: 12px }
     div.innerzone .ui-state-active { color: #f00 }
     div.buttonset    { display: inline-block; margin-bottom: 6px }
-    /*
     div#symbolbuts   { display: none }
     div#durationflds { display: none }
     div#payoutflds   { display: none }
     div#contractbuts { display: none }
     div#startflds    { display: none }
-    */
     div#barriers     { margin-top: 8px }
     div.cts          { display: none }
     div.contract  { float: left; width: 220px; height: 220px; padding: 6px }
@@ -250,6 +247,6 @@
     </div>
 
 <script>
-    g = new Object;
-    g.websockets_svr = "<%=$websockets_svr%>/websockets/contracts";
+    GlobalWSTrade = { websockets_svr: "<%=$websockets_svr%>/websockets/contracts" }
 </script>
+

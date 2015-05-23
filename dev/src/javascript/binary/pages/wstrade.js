@@ -1,158 +1,162 @@
 
-function buttonmaker() {
-    var $this = $(this);
-    var icon = $this.attr('icon');
-    var rcon = $this.attr('rcon');
-    var mute = $this.attr('mute');
-    var size = $this.attr('size');
-    var opts = {icons:{}};
-    if (0) {
-        // buttons w/ icons are hopelessly broken in binary.com stylesheet..
-        if (icon) opts.icons.primary = icon;
-        if (rcon) opts.icons.secondary = rcon;
+function WSTrade() {
+
+    var g = GlobalWSTrade;
+
+    function buttonmaker() {
+        var $this = $(this);
+        var icon = $this.attr('icon');
+        var rcon = $this.attr('rcon');
+        var mute = $this.attr('mute');
+        var size = $this.attr('size');
+        var opts = {icons:{}};
+        if (0) {
+            // buttons w/ icons are hopelessly broken in binary.com stylesheet..
+            if (icon) opts.icons.primary = icon;
+            if (rcon) opts.icons.secondary = rcon;
+        }
+        if (mute) opts.text = false;
+        $this.button(opts);
+        if (size && size=='baby') $this.css({'font-size':'0.75em'});
+        if (size && size=='huge') $this.css({'font-size':'1.75em'});
     }
-    if (mute) opts.text = false;
-    $this.button(opts);
-    if (size && size=='baby') $this.css({'font-size':'0.75em'});
-    if (size && size=='huge') $this.css({'font-size':'1.75em'});
-}
 
-function ws_setup() {
+    function ws_setup() {
 
-    //prepare a 'timespinner' widget extension to 'spinner' as per http://jqueryui.com/spinner/#time
-    $.widget( "ui.timespinner", $.ui.spinner, {
-        options: { /*secs*/step: 60 * 1000, /*hours*/page: 60 },
-        _parse: function( value ) {
-            if ( typeof value !== "string" ) return value;
-            if ( Number( value ) == value ) return Number( value );
-            return +Globalize.parseDate( value );
-        },
-        _format: function(value) {return Globalize.format(new Date(value), "t")}
-    });
+        //prepare a 'timespinner' widget extension to 'spinner' as per http://jqueryui.com/spinner/#time
+        $.widget( "ui.timespinner", $.ui.spinner, {
+            options: { /*secs*/step: 60 * 1000, /*hours*/page: 60 },
+            _parse: function( value ) {
+                if ( typeof value !== "string" ) return value;
+                if ( Number( value ) == value ) return Number( value );
+                return +Globalize.parseDate( value );
+            },
+            _format: function(value) {return Globalize.format(new Date(value), "t")}
+        });
 
-    g.currency_cultures = {USD:'en-US',GBP:'en-GB',AUD:'en-AU', EUR:'de-DE',YEN:'ja-JP'};
-    g.nicetypes = {};
-    g.live_contracts = {};
-    g.limits_for = {};
-    g.fmb_ids = {};
-    g.$live_symbols = {};
-    g.$contracts = $('#contracts');
-    g.init_trade = {symbol:'R_100',ct_bc:'CALL-euro_atm',duration:900,duration_unit:'Seconds',basis:'Payout',currency:'USD',amount_val:10,date_start:0};
-    g.contracts_built = 0;
-    g.timezone_offset = (new Date()).getTimezoneOffset()*60;
-    g.Contract = function(data) {
-        console.log("new contract data %o", data);
-        var symobj = g.all_symbols[data.symbol];
-        if (!symobj) {
-            console.log("will not build, no symbol " + data.symbol);
-            return
-        }
-        var ct_bc = data.contract_type;
-        if (data.barrier_category) ct_bc += '-' + data.barrier_category;
-        var brief = symobj.display_name + '<br/>' + (g.nicetypes[ct_bc]||data.contract_type);
-        this.bSell = !!data.fmb_id;
-        var buysell = this.bSell? 'SELL': 'BUY';
-        var div = '<div id="' + data.id + '" class="contract ui-state-default">'
-                     + '<div class="contract_header ui-helper-clearfix">'
-                         + '<button class="forget right" size="baby" mute="1" icon="ui-icon-circle-close">Close</button>'
-                         + '<button class="dtldlg right" size="baby" mute="1" icon="ui-icon-help">Details</button>'
-                         + '<div class="proposal">Offer</div>'
-                         + '<span class="error"></span>'
-                         + '<button class="purchase" size="huge" icon="ui-icon-cart">' + buysell + '</button>'
-                     + '</div>'
-                     + '<div><span class="bigtext">' + brief + '</span></div>'
-                     + '<div><div class="ttype elbow">Not Offered</div><span class="price bigtext"></span></div>'
-                     + '<div><div class="basis elbow">Payout</div><span class="payout bigtext"></span></div>'
-                     + '<div><div class="symbol elbow"></div><span class="spot bigtext"></span></div>'
-                     + '<div class="longcode"></div>'
-                     + '<div class="contract_dlg" title="Contract Details"></div>'
-                  + '</div>'
-        $('#contracts').append(div);
-        this.d0 = data;
-        this.$div = $('#'+data.id, g.$contracts);
-        this.$dlg = $('div.contract_dlg', this.$div).dialog({autoOpen:false});
-        $('button', this.$div).each(buttonmaker);
-        $('button.forget', this.$div).click(forget);
-        $('button.dtldlg', this.$div).click(dtldlg);
-        $('button.purchase', this.$div).click(purchase);
-        if (this.bSell) {
-            this.$div.removeClass('ui-state-active').addClass('ui-state-highlight');
-            $('.proposal', this.$div).html('Contract ' + data.fmb_id);
-        }
-    };
-    g.Contract.prototype.update = function(data) {
-        //console.log("update with %o", data);
-        var cul;
-        for (var fld in data) {
-            var $div = $('.'+fld, this.$div);
-            $div.html(data[fld]);
-            this.d0[fld] = data[fld];
-        }
-        if (data.payout) {
-            cul = g.currency_cultures[this.d0.currency];
-            var pay = Globalize.format(parseFloat(data.payout   ), 'C', cul);
-            $('.payout', this.$div).html(pay);
-        }
-        var ttype, price;
-        if (data.sell) {
-            ttype = 'Sold for';
-            price = data.sold_for;
-        } else if (this.bSell) {
-            ttype = 'Sell for';
-            price = data.bid_price;
-        } else {
-            ttype = 'Buy for';
-            price = data.ask_price;
-        }
-        if (!price && data.buy_price) {
-            ttype = 'Bought for';
-            price = data.buy_price;
-        }
-        if (price) {
-            cul = g.currency_cultures[this.d0.currency];
-            var val = Globalize.format(parseFloat(price), 'C', cul);
-            $('.price', this.$div).html(val);
-            $('.ttype', this.$div).html(ttype);
-        }
-        if (data.fmb_id && data.trx_id) {
-            this.bSell = true;
-            $('button.purchase', this.$div).button('option', 'label', data.fmb_id);
-            this.$div.removeClass('ui-state-active').addClass('ui-state-highlight');
-            $('.proposal', this.$div).html('Contract ' + data.fmb_id);
-        }
-        var details = '';
-        if (this.bSell) {
-            if (data.fmb_id) {
-                details += 'Contract Number '+ data.fmb_id + '<br/>';
-                if (data.trx_id)        details += 'Transaction Number '+ data.trx_id + '<br/>';
-                if (data.buy_price)     details += 'Bought for '+ data.buy_price + '<br/>';
-                if (data.expiry_time)   details += 'Expires '   + niceDate(data.expiry_time) + '<br/>';
-                if (data.purchase_time) details += 'Purchased ' + niceDate(data.purchase_time) + '<br/>';
-                if (data.start_time)    details += 'Contract Starts ' + niceDate(data.start_time) + '<br/>';
-                if (data.balance_after) details += 'Balance After ' + data.balance_after + '<br/>';
+        g.currency_cultures = {USD:'en-US',GBP:'en-GB',AUD:'en-AU', EUR:'de-DE',YEN:'ja-JP'};
+        g.nicetypes = {};
+        g.live_contracts = {};
+        g.limits_for = {};
+        g.fmb_ids = {};
+        g.$live_symbols = {};
+        g.$contracts = $('#contracts');
+        g.init_trade = {symbol:'R_100',ct_bc:'CALL-euro_atm',duration:900,duration_unit:'Seconds',basis:'Payout',currency:'USD',amount_val:10,date_start:0};
+        g.contracts_built = 0;
+        g.timezone_offset = (new Date()).getTimezoneOffset()*60;
+        g.Contract = function(data) {
+            console.log("new contract data %o", data);
+            var symobj = g.all_symbols[data.symbol];
+            if (!symobj) {
+                console.log("will not build, no symbol " + data.symbol);
+                return
             }
-        } else {
-            details += 'Not yet purchased<br/>';
-            if (data.date_start)    details += 'Proposed Start Time '+ niceDate(data.date_start) + '<br/>';
-        }
+            var ct_bc = data.contract_type;
+            if (data.barrier_category) ct_bc += '-' + data.barrier_category;
+            var brief = symobj.display_name + '<br/>' + (g.nicetypes[ct_bc]||data.contract_type);
+            this.bSell = !!data.fmb_id;
+            var buysell = this.bSell? 'SELL': 'BUY';
+            var div = '<div id="' + data.id + '" class="contract ui-state-default">'
+                         + '<div class="contract_header ui-helper-clearfix">'
+                             + '<button class="forget right" size="baby" mute="1" icon="ui-icon-circle-close">Close</button>'
+                             + '<button class="dtldlg right" size="baby" mute="1" icon="ui-icon-help">Details</button>'
+                             + '<div class="proposal">Offer</div>'
+                             + '<span class="error"></span>'
+                             + '<button class="purchase" size="huge" icon="ui-icon-cart">' + buysell + '</button>'
+                         + '</div>'
+                         + '<div><span class="bigtext">' + brief + '</span></div>'
+                         + '<div><div class="ttype elbow">Not Offered</div><span class="price bigtext"></span></div>'
+                         + '<div><div class="basis elbow">Payout</div><span class="payout bigtext"></span></div>'
+                         + '<div><div class="symbol elbow"></div><span class="spot bigtext"></span></div>'
+                         + '<div class="longcode"></div>'
+                         + '<div class="contract_dlg" title="Contract Details"></div>'
+                      + '</div>'
+            $('#contracts').append(div);
+            this.d0 = data;
+            this.$div = $('#'+data.id, g.$contracts);
+            this.$dlg = $('div.contract_dlg', this.$div).dialog({autoOpen:false});
+            $('button', this.$div).each(buttonmaker);
+            $('button.forget', this.$div).click(forget);
+            $('button.dtldlg', this.$div).click(dtldlg);
+            $('button.purchase', this.$div).click(purchase);
+            if (this.bSell) {
+                this.$div.removeClass('ui-state-active').addClass('ui-state-highlight');
+                $('.proposal', this.$div).html('Contract ' + data.fmb_id);
+            }
+        };
+        g.Contract.prototype.update = function(data) {
+            //console.log("update with %o", data);
+            var cul;
+            for (var fld in data) {
+                var $div = $('.'+fld, this.$div);
+                $div.html(data[fld]);
+                this.d0[fld] = data[fld];
+            }
+            if (data.payout) {
+                cul = g.currency_cultures[this.d0.currency];
+                var pay = Globalize.format(parseFloat(data.payout   ), 'C', cul);
+                $('.payout', this.$div).html(pay);
+            }
+            var ttype, price;
+            if (data.sell) {
+                ttype = 'Sold for';
+                price = data.sold_for;
+            } else if (this.bSell) {
+                ttype = 'Sell for';
+                price = data.bid_price;
+            } else {
+                ttype = 'Buy for';
+                price = data.ask_price;
+            }
+            if (!price && data.buy_price) {
+                ttype = 'Bought for';
+                price = data.buy_price;
+            }
+            if (price) {
+                cul = g.currency_cultures[this.d0.currency];
+                var val = Globalize.format(parseFloat(price), 'C', cul);
+                $('.price', this.$div).html(val);
+                $('.ttype', this.$div).html(ttype);
+            }
+            if (data.fmb_id && data.trx_id) {
+                this.bSell = true;
+                $('button.purchase', this.$div).button('option', 'label', data.fmb_id);
+                this.$div.removeClass('ui-state-active').addClass('ui-state-highlight');
+                $('.proposal', this.$div).html('Contract ' + data.fmb_id);
+            }
+            var details = '';
+            if (this.bSell) {
+                if (data.fmb_id) {
+                    details += 'Contract Number '+ data.fmb_id + '<br/>';
+                    if (data.trx_id)        details += 'Transaction Number '+ data.trx_id + '<br/>';
+                    if (data.buy_price)     details += 'Bought for '+ data.buy_price + '<br/>';
+                    if (data.expiry_time)   details += 'Expires '   + niceDate(data.expiry_time) + '<br/>';
+                    if (data.purchase_time) details += 'Purchased ' + niceDate(data.purchase_time) + '<br/>';
+                    if (data.start_time)    details += 'Contract Starts ' + niceDate(data.start_time) + '<br/>';
+                    if (data.balance_after) details += 'Balance After ' + data.balance_after + '<br/>';
+                }
+            } else {
+                details += 'Not yet purchased<br/>';
+                if (data.date_start)    details += 'Proposed Start Time '+ niceDate(data.date_start) + '<br/>';
+            }
 
-        if (details) this.$dlg.html(details);
-        if (data.error) {
-            this.$div.removeClass('ui-state-active').addClass('ui-state-error');
-            $('button.purchase', this.$div).hide();
-            $('span.error', this.$div).show();
-            var detail = data.detail || 
-                        ( (data.basis? (data.basis||' '): ''                          )
-                        + (data.amount_str? (data.amount_str + ' '): ''               )
-                        + (data.duration && data.duration_unit? ('over '+data.duration+data.duration_unit+' '): '')
-                        + (data.data_start? ('starting '+niceDate(data.date_start)+' '): '' ) );
-            $('.longcode', this.$div).html(detail);
-        }
-    };
-    g.Contract.prototype.destroy = function() {
-        this.$div && this.$div.remove();
-    };
-}
+            if (details) this.$dlg.html(details);
+            if (data.error) {
+                this.$div.removeClass('ui-state-active').addClass('ui-state-error');
+                $('button.purchase', this.$div).hide();
+                $('span.error', this.$div).show();
+                var detail = data.detail || 
+                            ( (data.basis? (data.basis||' '): ''                          )
+                            + (data.amount_str? (data.amount_str + ' '): ''               )
+                            + (data.duration && data.duration_unit? ('over '+data.duration+data.duration_unit+' '): '')
+                            + (data.data_start? ('starting '+niceDate(data.date_start)+' '): '' ) );
+                $('.longcode', this.$div).html(detail);
+            }
+        };
+        g.Contract.prototype.destroy = function() {
+            this.$div && this.$div.remove();
+        };
+    }
 
     // http://freeda.dbnet.com.au/pub/globalize/0.1.1/examples/browser/
     function niceDayUTC(epochStr) {
@@ -641,6 +645,11 @@ function ws_setup() {
         opensocket({onclose:onclose,onmessage:onmessage,onopen:get_initial});
     }
 
-onLoad.queue(ws_setup);
-onLoad.queue(ws_init);
+    ws_setup();
+    ws_init();
+}
+
+if ('GlobalWSTrade' in window) {
+    onLoad.queue(WSTrade)
+}
 
