@@ -97,7 +97,7 @@ ClientForm.prototype = {
                     el = document.getElementById(names[i]);
                     if (el) {
                         el.value = el.value.replace(/^\s*/, '').replace(/\s*$/, '');
-                        if (el.value == init[names[i]]) continue;
+                        if (el.value == (init[names[i]]===undefined ? '' : init[names[i]])) continue;
                         return true;
                     }
                 }
