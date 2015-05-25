@@ -19,6 +19,8 @@
             <li id="trading-agent-tac-tab" class="tm-li-2[% IF selected_tab == 'trading-agent-tac-tab' +%] active[% END +%]"><a href="?selected_tab=trading-agent-tac-tab" class="tm-a-2[% IF selected_tab == 'trading-agent-tac-tab' +%] a-active[% END +%]">[% l('Trading Agent') %]</a></li>
             [% END %]
             <li id="complaints-disputes-tac-tab" class="tm-li-2[% IF selected_tab == 'complaints-disputes-tac-tab' +%] active[% END +%] last"><a href="?selected_tab=complaints-disputes-tac-tab" class="tm-a-2[% IF selected_tab == 'complaints-disputes-tac-tab' +%] a-active[% END +%]">[% l('Complaints and Disputes') %]</a></li>
+            <li id="conflicts-policy-tac-tab" class="tm-li-2[% IF selected_tab == 'conflicts-policy-tac-tab' +%] active[% END +%] last"><a href="?selected_tab=conflicts-policy-tac-tab" class="tm-a-2[% IF selected_tab == 'conflicts-policy-tac-tab' +%] a-active[% END +%]">[% l('conflicts Policy') %]</a></li>
+            <li id="biel-terms-tac-tab" class="tm-li-2[% IF selected_tab == 'biel-terms-tac-tab' +%] active[% END +%] last"><a href="?selected_tab=biel-terms-tac-tab" class="tm-a-2[% IF selected_tab == 'biel-terms-tac-tab' +%] a-active[% END +%]">[% l('BIEL Terms') %]</a></li>
           </ul>
         </li>
         <li id="datafeed-tab" class="tm-li[% IF selected_tab == 'datafeed-tab' +%] active[% END +%]"><a href="#datafeed-tab" class="tm-a[% IF selected_tab == 'datafeed-tab' +%] a-active[% END +%]">[% l('Data Feed') %]</a></li>
@@ -52,6 +54,14 @@
 
       <div id="complaints-disputes-tac-tab-content" class="toggle-content[% IF selected_tab == 'complaints-disputes-tac-tab' +%][% ELSE +%] invisible[% END +%]">
         [% INCLUDE legal/complaints_disputes.html.tt %]
+      </div>
+
+      <div id="conflicts-policy-tac-tab-content" class="toggle-content[% IF selected_tab == 'conflicts-policy-tac-tab' +%][% ELSE +%] invisible[% END +%]">
+        [% INCLUDE legal/conflicts_policy.html.tt %]
+      </div>
+
+      <div id="biel-terms-tac-tab-content" class="toggle-content[% IF selected_tab == 'biel-terms-tac-tab' +%][% ELSE +%] invisible[% END +%]">
+        [% INCLUDE legal/biel_terms.html.tt %]
       </div>
 
       <div id="datafeed-tab-content" class="toggle-content[% IF selected_tab == 'datafeed-tab' +%][% ELSE +%] invisible[% END +%]">
