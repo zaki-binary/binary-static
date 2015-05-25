@@ -281,7 +281,7 @@ Menu.prototype = {
             var sub_items = $('li#topMenuStartBetting ul.sub_items')
             sub_items.find('li').each(function () {
                 var link_id = $(this).attr('id').split('_')[1];
-                if(allowed_markets.indexOf(link_id) < 0) {
+                if(markets_array.indexOf(link_id) < 0) {
                     var link = $(this).find('a');
                     if(markets_array.indexOf(link.attr('id')) < 0) {
                         link.addClass('disabled-link');
@@ -347,6 +347,14 @@ Menu.prototype = {
     },
     register_dynamic_links: function() {
         var stored_market = page.url.param('market') || LocalStore.get('bet_page.market');
+        var allowed_markets = $.cookie('allowed_markets');
+        if(allowed_markets) {
+            var markets_array = allowed_markets.split(',');
+            if(markets_array.indexOf(stored_market) < 0) {
+                stored_market = markets_array[0];
+                LocalStore.set('bet_page.market', stored_market)
+            }
+        }
         var start_trading = $('#topMenuStartBetting a:first');
         var trade_url = start_trading.attr("href");
         if(stored_market) {
