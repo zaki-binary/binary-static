@@ -273,6 +273,23 @@ Menu.prototype = {
         }
 
         this.on_mouse_hover(active.item);
+
+        // enable only allowed markets
+        var allowed_markets = $.cookie('allowed_markets');
+        if(allowed_markets) {
+            var markets_array = allowed_markets.split(',');
+            var sub_items = $('li#topMenuStartBetting ul.sub_items')
+            sub_items.find('li').each(function () {
+                var link_id = $(this).attr('id').split('_')[1];
+                if(allowed_markets.indexOf(link_id) < 0) {
+                    var link = $(this).find('a');
+                    if(markets_array.indexOf(link.attr('id')) < 0) {
+                        link.addClass('disabled-link');
+                        link.removeAttr('href');
+                    }
+                }
+            });
+        }
     },
     reset: function() {
         $("#main-menu .item").unbind();
