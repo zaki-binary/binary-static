@@ -336,10 +336,13 @@ Menu.prototype = {
         });
 
         $("#main-menu .sub_items a").each(function(){
-            var url = new URL($(this).attr('href'));
-            if(url.is_in(that.page_url)) {
-                item = $(this).closest('.item');
-                subitem = $(this);
+            var link_href = $(this).attr('href');
+            if (link_href) {
+                var url = new URL(link_href);
+                if(url.is_in(that.page_url)) {
+                    item = $(this).closest('.item');
+                    subitem = $(this);
+                }
             }
         });
 
