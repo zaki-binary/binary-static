@@ -628,8 +628,7 @@ Contents.prototype = {
                     $('#payment-agent-section').hide();
                 }
 
-                // temporary only show for internal staff
-                if (!$.cookie('staff') || !/^Q?MF|MLT/.test(this.client.loginid)) {
+                if (!/^Q?MF|MLT/.test(this.client.loginid)) {
                     $('#account-transfer-section').addClass('invisible');
                     $('#account-transfer-section').hide();
                 }
