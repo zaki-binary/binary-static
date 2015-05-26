@@ -87,7 +87,7 @@ ClientForm.prototype = {
     },
     self_exclusion: function() {
         return {
-            has_something_to_save: function() {
+            has_something_to_save: function(init) {
                 var el, i;
                 var names = ['MAXCASHBAL', 'MAXOPENPOS',
                              'DAILYTURNOVERLIMIT', 'DAILYLOSSLIMIT',
@@ -95,7 +95,9 @@ ClientForm.prototype = {
                              'SESSIONDURATION', 'EXCLUDEUNTIL'];
                 for (i=0; i<names.length; i++) {
                     el = document.getElementById(names[i]);
-                    if (el && el.value.length > 0) {
+                    if (el) {
+                        el.value = el.value.replace(/^\s*/, '').replace(/\s*$/, '');
+                        if (el.value == (init[names[i]]===undefined ? '' : init[names[i]])) continue;
                         return true;
                     }
                 }
