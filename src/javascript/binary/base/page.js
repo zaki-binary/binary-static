@@ -628,7 +628,6 @@ Contents.prototype = {
                     $('#payment-agent-section').hide();
                 }
 
-                // temporary only show for internal staff
                 if (!/^Q?MF|MLT/.test(this.client.loginid)) {
                     $('#account-transfer-section').addClass('invisible');
                     $('#account-transfer-section').hide();
