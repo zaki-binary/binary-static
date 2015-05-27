@@ -807,7 +807,7 @@ Page.prototype = {
                 $('#signup_error').show();
                 return false;
             }
-            if (!client_form.compare_new_password(pwd, pwd_2)) {
+            if (pwd.length == 0 || pwd_2.length == 0 || !client_form.compare_new_password(pwd, pwd_2)) {
                 $('#signup_error').text(text.localize('The two passwords that you entered do not match.'));
                 $('#signup_error').removeClass('invisible');
                 $('#signup_error').show();
