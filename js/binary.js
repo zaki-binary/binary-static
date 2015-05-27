@@ -1313,7 +1313,8 @@ Page.prototype = {
         this.record_affiliate_exposure();
         this.contents.on_load();
         this.on_click_signup();
-        this.on_change_password();
+        this.on_input_password();
+        this.on_click_acc_transfer();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -1333,7 +1334,7 @@ Page.prototype = {
             $('#loginid-switch-form').submit();
         });
     },
-    on_change_password: function() {
+    on_input_password: function() {
         $('#chooseapassword').on('input', function() {
             $('#reenter-password').removeClass('invisible');
             $('#reenter-password').show();
@@ -1366,6 +1367,17 @@ Page.prototype = {
             }
 
             $('#virtual-acc-form').submit();
+        });
+    },
+    on_click_acc_transfer: function() {
+        $('#acc_transfer_submit').on('click', function() {
+            var amount = $('#acc_transfer_amount').val();
+            if (!/^[0-9]+\.?[0-9]{0,2}$/.test(amount) || amount < 0.1) {
+                $('#invalid_amount').removeClass('invisible');
+                $('#invalid_amount').show();
+                return false;
+            }
+            $('#acc_transfer_submit').submit();
         });
     },
 
