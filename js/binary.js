@@ -894,7 +894,7 @@ Menu.prototype = {
         return { item: item, subitem: subitem };
     },
     register_dynamic_links: function() {
-        var stored_market = page.url.param('market') || LocalStore.get('bet_page.market');
+        var stored_market = page.url.param('market') || LocalStore.get('bet_page.market') || 'forex';
         var allowed_markets = $.cookie('allowed_markets');
         if(allowed_markets) {
             var markets_array = allowed_markets.split(',');
@@ -914,6 +914,7 @@ Menu.prototype = {
             start_trading.attr("href", trade_url);
 
             $('#menu-top li:eq(3) a').attr('href', trade_url);
+            $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
         start_trading.on('click', function(event) {
