@@ -794,6 +794,17 @@ Page.prototype = {
             $('#virtual-acc-form').submit();
         });
     },
+    on_click_acc_transfer: function() {
+        $('#acc_transfer_submit').on('click', function() {
+            var amount = $('#acc_transfer_amount').val();
+            if (!/^[0-9]+\.?[0-9]{0,}$/.test(amount)) {
+                $('#invalid_amount').removeClass('invisible');
+                $('#invalid_amount').show();
+                return false;
+            }
+            $('#acc_transfer_submit').submit();
+        });
+    },
 
     localize_for: function(language) {
         text = texts[language];
