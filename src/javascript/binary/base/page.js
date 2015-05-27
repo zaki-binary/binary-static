@@ -273,6 +273,23 @@ Menu.prototype = {
         }
 
         this.on_mouse_hover(active.item);
+
+        // enable only allowed markets
+        var allowed_markets = $.cookie('allowed_markets');
+        if(allowed_markets) {
+            var markets_array = allowed_markets.split(',');
+            var sub_items = $('li#topMenuStartBetting ul.sub_items');
+            sub_items.find('li').each(function () {
+                var link_id = $(this).attr('id').split('_')[1];
+                if(markets_array.indexOf(link_id) < 0) {
+                    var link = $(this).find('a');
+                    if(markets_array.indexOf(link.attr('id')) < 0) {
+                        link.addClass('disabled-link');
+                        link.removeAttr('href');
+                    }
+                }
+            });
+        }
     },
     reset: function() {
         $("#main-menu .item").unbind();
@@ -319,17 +336,28 @@ Menu.prototype = {
         });
 
         $("#main-menu .sub_items a").each(function(){
-            var url = new URL($(this).attr('href'));
-            if(url.is_in(that.page_url)) {
-                item = $(this).closest('.item');
-                subitem = $(this);
+            var link_href = $(this).attr('href');
+            if (link_href) {
+                var url = new URL(link_href);
+                if(url.is_in(that.page_url)) {
+                    item = $(this).closest('.item');
+                    subitem = $(this);
+                }
             }
         });
 
         return { item: item, subitem: subitem };
     },
     register_dynamic_links: function() {
-        var stored_market = page.url.param('market') || LocalStore.get('bet_page.market');
+        var stored_market = page.url.param('market') || LocalStore.get('bet_page.market') || 'forex';
+        var allowed_markets = $.cookie('allowed_markets');
+        if(allowed_markets) {
+            var markets_array = allowed_markets.split(',');
+            if(markets_array.indexOf(stored_market) < 0) {
+                stored_market = markets_array[0];
+                LocalStore.set('bet_page.market', stored_market);
+            }
+        }
         var start_trading = $('#topMenuStartBetting a:first');
         var trade_url = start_trading.attr("href");
         if(stored_market) {
@@ -341,6 +369,7 @@ Menu.prototype = {
             start_trading.attr("href", trade_url);
 
             $('#menu-top li:eq(3) a').attr('href', trade_url);
+            $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
         start_trading.on('click', function(event) {
