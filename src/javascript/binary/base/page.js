@@ -798,7 +798,7 @@ Page.prototype = {
     on_click_acc_transfer: function() {
         $('#acc_transfer_submit').on('click', function() {
             var amount = $('#acc_transfer_amount').val();
-            if (!/^[0-9]+\.?[0-9]{0,2}$/.test(amount) && amount < 0.1) {
+            if (!/^[0-9]+\.?[0-9]{0,2}$/.test(amount) || amount < 0.1) {
                 $('#invalid_amount').removeClass('invisible');
                 $('#invalid_amount').show();
                 return false;
