@@ -1,4 +1,4 @@
-%div
+%div#balances-content
   %h1= l('Balances')
   %p
   - if (@$client_balances > 0) {
@@ -17,6 +17,6 @@
     %p
       %label= l('No available balance for your account')
   - }
-%div
+%div#balances-nav
   %span.button
     %button.button{:bcont => 1}= l('Continue Trading')
