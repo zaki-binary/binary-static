@@ -837,7 +837,6 @@ Page.prototype = {
         });
     },
     on_click_view_balances: function() {
-        "use strict";
         $('#view-balances').on('click', function(event) {
             event.preventDefault();
             $.ajax({
