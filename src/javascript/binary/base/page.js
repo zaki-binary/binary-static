@@ -837,7 +837,8 @@ Page.prototype = {
         });
     },
     on_click_view_balances: function() {
-        $('#view_balances').on('click', function() {
+        $('#view_balances').on('click', function(event) {
+            event.preventDefault();
             $.ajax({
                 url: page.url.url_for('user/balances'),
                 dataType: 'text',
