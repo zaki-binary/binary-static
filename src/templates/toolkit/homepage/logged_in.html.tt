@@ -3,6 +3,11 @@
     <p>
         [% welcome_text %] <span class="clientid">([% client.loginid %]).</span>
     </p>
+    [% IF show_authenticate_button %]
+        <a class="button pjaxload" href="[% request.url_for('/cashier/authenticate') %]">
+              <span>[% l('Authenticate your account') %]</span>
+        </a>
+    [% END %]
 
     [% IF client.is_virtual %]
         [% IF virtual_topup_link %]
