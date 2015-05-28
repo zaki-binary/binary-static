@@ -839,6 +839,11 @@ Page.prototype = {
     on_click_view_balances: function() {
         $('#view-balances').on('click', function(event) {
             event.preventDefault();
+            if ($(this).hasClass("disabled")) {
+                return false;
+            }
+            $(this).addClass("disabled");
+
             $.ajax({
                 url: page.url.url_for('user/balances'),
                 dataType: 'text',
@@ -854,9 +859,8 @@ Page.prototype = {
                         $('#client-balances').remove();
                     });
                 },
-                error: function (xhr) {
-                    return;
-                },
+            }).always(function() {
+                $('#view-balances').removeClass("disabled");
             });
         });
     },
