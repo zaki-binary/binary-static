@@ -770,6 +770,7 @@ Page.prototype = {
         this.on_click_signup();
         this.on_input_password();
         this.on_click_acc_transfer();
+        this.on_click_view_balances();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -833,6 +834,29 @@ Page.prototype = {
                 return false;
             }
             $('#acc_transfer_submit').submit();
+        });
+    },
+    on_click_view_balances: function() {
+        $('#view_balances').on('click', function() {
+            $.ajax({
+                url: page.url.url_for('user/balances'),
+                dataType: 'text',
+                success: function (data) {
+                    var outer = $('#client-balances');
+                    if (outer) outer.remove();
+
+                    outer = $("<div id='client-balances' class='lightbox'></div>").appendTo('body');
+                    middle = $('<div />').appendTo(outer);
+                    $('<div>' + data + '</div>').appendTo(middle);
+
+                    $('#client-balances [bcont=1]').on('click', function () {
+                        $('#client-balances').remove();
+                    });
+                },
+                error: function (xhr) {
+                    return;
+                },
+            });
         });
     },
 
