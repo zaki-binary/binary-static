@@ -11,7 +11,7 @@
           %tr
             %td= $balance->{loginid}
             %td= $balance->{currency}
-            %td= $balance->{balance}
+            %td= $to_monetary_number_format->($balance->{balance})
       - }
   - } else {
     %p
