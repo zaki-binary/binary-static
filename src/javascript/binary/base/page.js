@@ -845,7 +845,7 @@ Page.prototype = {
             $(this).addClass("disabled");
 
             $.ajax({
-                url: page.url.url_for('user/balances'),
+                url: page.url.url_for('user/balance'),
                 dataType: 'text',
                 success: function (data) {
                     var outer = $('#client-balances');
