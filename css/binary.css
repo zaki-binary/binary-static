@@ -1312,7 +1312,7 @@ ul.checked li {
   color: #cc0033;
 }
 
-#reality-check {
+.lightbox {
   display: table;
   position: fixed;
   top: 0;
@@ -1323,12 +1323,12 @@ ul.checked li {
   z-index: 2000000000;
 }
 
-#reality-check > div {
+.lightbox > div {
   display: table-cell;
   vertical-align: middle;
 }
 
-#reality-check > div > div {
+.lightbox > div > div {
   margin-left: auto;
   margin-right: auto;
   padding: .5em .5em;
@@ -1338,22 +1338,22 @@ ul.checked li {
   border-radius: .3em;
 }
 
-#reality-check > div > div > div:first-child {
+#reality-check-content, #balances-content {
   padding: 0;
   text-align: left;
 }
-#reality-check > div > div > div:first-child tr, #reality-check > div > div > div:first-child td {
+#reality-check-content tr, #reality-check-content td, #balances-content tr, #balances-content td {
   width: 12.4999%;
 }
-#reality-check > div > div > div:first-child label {
+#reality-check-content label, #balances-content label {
   display: inline-block;
   width: 10em;
 }
 
-#reality-check > div > div > div:nth-child(2) {
+#reality-check-nav, #balances-nav {
   margin-top: 1em;
 }
-#reality-check > div > div > div:nth-child(2) span:nth-child(2) {
+#reality-check-nav span:nth-child(2), #balances-nav span:nth-child(2) {
   display: inline-block;
   width: 5em;
 }
