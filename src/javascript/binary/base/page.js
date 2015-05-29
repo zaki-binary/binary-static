@@ -54,7 +54,14 @@ var User = function() {
                     disabled = 1;
                 }
 
-                loginid_array.push({'id':items[0], 'real':real, 'disabled':disabled });
+                var id_obj = { 'id':items[0], 'real':real, 'disabled':disabled };
+                if (/MLT/.test(items[0])) {
+                    id_obj['non_financial']= true;
+                }
+                if (/MF/.test(items[0])) {
+                    id_obj['financial']= true;
+                }
+                loginid_array.push(id_obj);
             }
 
             this.loginid_array = loginid_array;
@@ -266,6 +273,23 @@ Menu.prototype = {
         }
 
         this.on_mouse_hover(active.item);
+
+        // enable only allowed markets
+        var allowed_markets = $.cookie('allowed_markets');
+        if(allowed_markets) {
+            var markets_array = allowed_markets.split(',');
+            var sub_items = $('li#topMenuStartBetting ul.sub_items');
+            sub_items.find('li').each(function () {
+                var link_id = $(this).attr('id').split('_')[1];
+                if(markets_array.indexOf(link_id) < 0) {
+                    var link = $(this).find('a');
+                    if(markets_array.indexOf(link.attr('id')) < 0) {
+                        link.addClass('disabled-link');
+                        link.removeAttr('href');
+                    }
+                }
+            });
+        }
     },
     reset: function() {
         $("#main-menu .item").unbind();
@@ -312,17 +336,28 @@ Menu.prototype = {
         });
 
         $("#main-menu .sub_items a").each(function(){
-            var url = new URL($(this).attr('href'));
-            if(url.is_in(that.page_url)) {
-                item = $(this).closest('.item');
-                subitem = $(this);
+            var link_href = $(this).attr('href');
+            if (link_href) {
+                var url = new URL(link_href);
+                if(url.is_in(that.page_url)) {
+                    item = $(this).closest('.item');
+                    subitem = $(this);
+                }
             }
         });
 
         return { item: item, subitem: subitem };
     },
     register_dynamic_links: function() {
-        var stored_market = page.url.param('market') || LocalStore.get('bet_page.market');
+        var stored_market = page.url.param('market') || LocalStore.get('bet_page.market') || 'forex';
+        var allowed_markets = $.cookie('allowed_markets');
+        if(allowed_markets) {
+            var markets_array = allowed_markets.split(',');
+            if(markets_array.indexOf(stored_market) < 0) {
+                stored_market = markets_array[0];
+                LocalStore.set('bet_page.market', stored_market);
+            }
+        }
         var start_trading = $('#topMenuStartBetting a:first');
         var trade_url = start_trading.attr("href");
         if(stored_market) {
@@ -334,6 +369,7 @@ Menu.prototype = {
             start_trading.attr("href", trade_url);
 
             $('#menu-top li:eq(3) a').attr('href', trade_url);
+            $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
         start_trading.on('click', function(event) {
@@ -369,7 +405,7 @@ Header.prototype = {
     },
     show_or_hide_login_form: function() {
         if (this.user.is_logged_in && this.client.is_logged_in) {
-            var loginid_select;
+            var loginid_select = '';
             var loginid_array = this.user.loginid_array;
             for (var i=0;i<loginid_array.length;i++) {
                 var curr_loginid = loginid_array[i].id;
@@ -382,9 +418,15 @@ Header.prototype = {
 
                 var loginid_text;
                 if (real == 1) {
-                    loginid_text = text.localize('Real Money') + ' (' + curr_loginid + ')';
+                    if(loginid_array[i].financial){
+                        loginid_text = text.localize('Investment Account') + ' (' + curr_loginid + ')';
+                    } else if(loginid_array[i].non_financial) {
+                        loginid_text = text.localize('Gaming Account') + ' (' + curr_loginid + ')';
+                    } else {
+                        loginid_text = text.localize('Real Account') + ' (' + curr_loginid + ')';
+                    }
                 } else {
-                    loginid_text = text.localize('Virtual Money') + ' (' + curr_loginid + ')';
+                    loginid_text = text.localize('Virtual Account') + ' (' + curr_loginid + ')';
                 }
 
                 var disabled_text = '';
@@ -588,6 +630,7 @@ var Contents = function(client, user) {
 Contents.prototype = {
     on_load: function() {
         this.activate_by_client_type();
+        this.topbar_message_visibility();
         this.update_body_id();
         this.update_content_class();
         this.tooltip.attach();
@@ -608,28 +651,25 @@ Contents.prototype = {
 
                 $('#topbar').addClass('dark-blue');
                 $('#topbar').removeClass('orange');
+
+                if (!/^Q?CR/.test(this.client.loginid)) {
+                    $('#payment-agent-section').addClass('invisible');
+                    $('#payment-agent-section').hide();
+                }
+
+                if (!/^Q?MF|MLT/.test(this.client.loginid)) {
+                    $('#account-transfer-section').addClass('invisible');
+                    $('#account-transfer-section').hide();
+                }
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
 
-                var loginid_array = this.user.loginid_array;
-                var has_real = 0;
-                for (var i=0;i<loginid_array.length;i++) {
-                    var loginid = loginid_array[i].id;
-                    var real = loginid_array[i].real;
-
-                    if (real == 1) {
-                        has_real = 1;
-                        break;
-                    }
-                }
-                if (has_real == 1) {
-                    $('.virtual-upgrade-link').addClass('invisible');
-                    $('.virtual-upgrade-link').hide();
-                }
-
                 $('#topbar').addClass('orange');
                 $('#topbar').removeClass('dark-blue');
+
+                $('#account-transfer-section').addClass('invisible');
+                $('#account-transfer-section').hide();
             }
         } else {
             $('.by_client_type.client_logged_out').removeClass('invisible');
@@ -637,6 +677,9 @@ Contents.prototype = {
 
             $('#topbar').removeClass('orange');
             $('#topbar').addClass('dark-blue');
+
+            $('#account-transfer-section').addClass('invisible');
+            $('#account-transfer-section').hide();
         }
     },
     update_body_id: function() {
@@ -651,6 +694,48 @@ Contents.prototype = {
     },
     init_draggable: function() {
         $('.draggable').draggable();
+    },
+    topbar_message_visibility: function() {
+        if(this.client.is_logged_in) {
+            var loginid_array = this.user.loginid_array;
+            var has_real = 0;
+            var upgrade_financial = false;
+            for (var i=0;i<loginid_array.length;i++) {
+                var loginid = loginid_array[i].id;
+                var real = loginid_array[i].real;
+
+                if (real == 1) {
+                    has_real = 1;
+
+                    var curr_loginid = this.client.loginid;
+                    if (/MLT/.test(curr_loginid) || /MF/.test(curr_loginid)) {
+                        if(loginid_array[i].financial && !loginid_array[i].disabled){
+                            upgrade_financial = false;
+                            break;
+                        } else if(loginid_array[i].non_financial && !loginid_array[i].disabled) {
+                            upgrade_financial = true;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (has_real == 1) {
+                $('.virtual-upgrade-link').addClass('invisible');
+                $('.virtual-upgrade-link').hide();
+                if(upgrade_financial) {
+                    $('#financial-upgrade-link').removeClass('invisible');
+                    if($('#investment_message').length > 0) {
+                        $('#investment_message').removeClass('invisible');
+                    }
+                } else {
+                    $('#financial-upgrade-link').addClass('invisible');
+                    if($('#investment_message').length > 0) {
+                        $('#investment_message').addClass('invisible');
+                    }
+                }
+            }
+        }
     },
 };
 
@@ -682,6 +767,10 @@ Page.prototype = {
         this.on_change_loginid();
         this.record_affiliate_exposure();
         this.contents.on_load();
+        this.on_click_signup();
+        this.on_input_password();
+        this.on_click_acc_transfer();
+        this.on_click_view_balances();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -701,6 +790,81 @@ Page.prototype = {
             $('#loginid-switch-form').submit();
         });
     },
+    on_input_password: function() {
+        $('#chooseapassword').on('input', function() {
+            $('#reenter-password').removeClass('invisible');
+            $('#reenter-password').show();
+        });
+    },
+    on_click_signup: function() {
+        $('#btn_registration').on('click', function() {
+            var pwd = $('#chooseapassword').val();
+            var pwd_2 = $('#chooseapassword_2').val();
+            var email = $('#Email').val();
+
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                $('#signup_error').text(text.localize('Invalid email address'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+            if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
+                $('#signup_error').text(text.localize('The two passwords that you entered do not match.'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+            // email != password
+            if (email == pwd) {
+                $('#signup_error').text(text.localize('Your password cannot be the same as your email'));
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
+
+            $('#virtual-acc-form').submit();
+        });
+    },
+    on_click_acc_transfer: function() {
+        $('#acc_transfer_submit').on('click', function() {
+            var amount = $('#acc_transfer_amount').val();
+            if (!/^[0-9]+\.?[0-9]{0,2}$/.test(amount) || amount < 0.1) {
+                $('#invalid_amount').removeClass('invisible');
+                $('#invalid_amount').show();
+                return false;
+            }
+            $('#acc_transfer_submit').submit();
+        });
+    },
+    on_click_view_balances: function() {
+        $('#view-balances').on('click', function(event) {
+            event.preventDefault();
+            if ($(this).hasClass("disabled")) {
+                return false;
+            }
+            $(this).addClass("disabled");
+
+            $.ajax({
+                url: page.url.url_for('user/balance'),
+                dataType: 'text',
+                success: function (data) {
+                    var outer = $('#client-balances');
+                    if (outer) outer.remove();
+
+                    outer = $("<div id='client-balances' class='lightbox'></div>").appendTo('body');
+                    middle = $('<div />').appendTo(outer);
+                    $('<div>' + data + '</div>').appendTo(middle);
+
+                    $('#client-balances [bcont=1]').on('click', function () {
+                        $('#client-balances').remove();
+                    });
+                },
+            }).always(function() {
+                $('#view-balances').removeClass("disabled");
+            });
+        });
+    },
+
     localize_for: function(language) {
         text = texts[language];
         moment.locale(language.toLowerCase());

@@ -3,6 +3,11 @@
     <p>
         [% welcome_text %] <span class="clientid">([% client.loginid %]).</span>
     </p>
+    [% IF show_authenticate_button %]
+        <a class="button pjaxload" href="[% request.url_for('/cashier/authenticate') %]">
+              <span>[% l('Authenticate your account') %]</span>
+        </a>
+    [% END %]
 
     [% IF client.is_virtual %]
         [% IF virtual_topup_link %]
@@ -27,19 +32,31 @@
             [% END %]
         </div>
         [% END %]
+
+        <div class='notice-msg invisible' id="investment_message">
+            <div class="grd-grid-2 grd-hide-mobile">
+                <img class="responsive" src="[% request.url_for('images/pages/cashier/protection-icon.svg') %]"/>
+            </div>
+            <div class="grd-grid-10 grd-grid-mobile-12">
+                [% l('Due to changes in regulation within the European Union, binary options on financial indices are now considered to be an investment activity.') %]
+                <p>
+                [% l('Accordingly, to continue trading binary options on forex/stock indices/commodities, please <a href="[_1]" class="pjaxload">open an account with Binary Investments (Europe) Ltd</a>., which is regulated by the Malta Financial Services Authority.', request.url_for('user/upgrade/financial')) %]
+                </p>
+            </div>
+        </div>
     [% END %]
 </div>
 <div class='grd-grid-12 grd-row-padding grd-parent'>
     <div class='grd-grid-9 grd-grid-mobile-12 grd-parent'>
         <div class='grd-grid-4 grd-parent by_client_type client_real'>
             <div class='grd-grid-8 grd-with-padding'>
-                <a href="[% request.url_for('/cashier/available_payment_methods') %]" class="pjaxload">
+                <a href="[% request.url_for('/cashier') %]" class="pjaxload">
                     <img class='responsive' src="[% request.url_for('images/pages/my_account/cashier-icon.svg') %]"/>
                 </a>
             </div>
             <div class='grd-grid-12'>
                 <h4>
-                    <a href="[% request.url_for('/cashier/available_payment_methods') %]" class="pjaxload">[% l('Cashier') %]</a>
+                    <a href="[% request.url_for('/cashier') %]" class="pjaxload">[% l('Cashier') %]</a>
                 </h4>
                 <p>
                     [% l('Make a deposit or withdraw') %]
