@@ -17,7 +17,7 @@
       .grd-grid-3.grd-grid-mobile-9.grd-grid-phablet-10.by_client_type.client_virtual.client_real#client-logged-in{ :style => 'display: none;'}
         #logout
           %form#loginid-switch-form{:action => url_for('/user/loginid_switch'), :method => 'post'}
-            %span#login-fields
+            #login-fields
               %select{:name => 'client_loginid', :id => 'client_loginid'}
             %a#view-balances{:href => url_for('/user/balance')}= l('View balances')
             %a.logout{:href => url_for('/logout')}= l('Log out')
