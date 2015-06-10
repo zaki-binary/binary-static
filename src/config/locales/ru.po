@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: BOM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-06-05 13:52+0200\n"
+"PO-Revision-Date: 2015-06-10 16:11+0200\n"
 "Last-Translator: olga borg <olga@binary.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/binary/static/ru/>\n"
+"Language-Team: Russian "
+"<https://hosted.weblate.org/projects/binary/static/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.4-dev\n"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1023
@@ -2804,7 +2806,6 @@ msgstr ""
 
 #. (link)
 #: /home/git/translations/binary-static/src/templates/toolkit/email/resend_verification.html.tt:1
-#, fuzzy
 #| msgid ""
 #| "Dear Valued Customer,\n"
 #| "\n"
@@ -2822,7 +2823,7 @@ msgid ""
 msgstr ""
 "Уважаемый клиент,\n"
 "\n"
-"Для верификации своего электронного адреса, пожалуйста, нажмите на ссылку ниже:\n"
+"Для верификации, пожалуйста, нажмите на ссылку ниже:\n"
 "\n"
 "%1\n"
 "\n"
@@ -3488,6 +3489,10 @@ msgstr "Следуйте простым пошаговым инструкция�
 #: /home/git/translations/binary-static/src/templates/haml/cashier/withdrawal_request.html.haml:1
 msgid "For added security protection against unauthorised withdrawals, an email containing a secure link to the withdrawals page has been sent to your email %1. Please check your email to access this link."
 msgstr ""
+"Для дополнительной защиты безопасности против несанкционированного снятия "
+"средств, на Ваш электронный адрес %1 было выслано письмо, содержащее "
+"безопасную ссылку на страницу снятия . Пожалуйста, проверьте свою "
+"электронную почту, чтобы получить доступ к этой ссылке."
 
 #. (broker_name, affiliate_email)
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/main.html.tt:63
@@ -8495,6 +8500,9 @@ msgstr "Контракт выиграл"
 #: lib/BOM/Product/Transaction.pm:1215
 msgid "This contract's price is %1%2. Contracts purchased from %3 must have a purchase price above %1%4. Please accordingly increase the contract amount to meet this minimum stake."
 msgstr ""
+"Цена контракта %1%2. Контракты, приобретнные с %3, должны иметь цену выше %1%"
+"4. Пожалуйста, увеличьте выигрыш контракта для удовлетворения этой "
+"минимальной ставки."
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:10
@@ -9452,7 +9460,6 @@ msgstr "Мы предоставим Вам все необходимые инс�
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, $r->website->display_name)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1446
-#, fuzzy
 #| msgid ""
 #| "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 #| "The funds have been credited into your account.\n"
@@ -9467,7 +9474,15 @@ msgid ""
 "    Kind Regards,\n"
 "\n"
 "    The %4 team."
-msgstr "Уважаемый(ая) %1 %2 %3,Хотим сообщить, что Ваш перевод %4 %5 через %6 был обработан.Средства внесены на Ваш счет.С уважением,Команда %7."
+msgstr ""
+"Уважаемый(ая) %1 %2 %3,\n"
+"\n"
+"Хотим сообщить, что Ваш перевод %4 %5 через %6 был обработан. Средства "
+"внесены на Ваш счет.\n"
+"\n"
+"С уважением,\n"
+"\n"
+"Команда %4."
 
 #. ($currency, $amount, $client_name, $client_loginid, $paymentagent_loginid, $website->display_name)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1763
@@ -9893,10 +9908,9 @@ msgid "Withdrawal"
 msgstr "Вывод"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/withdrawal_request.html.haml:1
-#, fuzzy
 #| msgid "Email Verification"
 msgid "Withdrawal Verification"
-msgstr "Верификация эл.адреса"
+msgstr "Верификация"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:8
 msgid "Withdrawal limits"
@@ -10335,7 +10349,7 @@ msgstr "Ваш рабочий счет не должен использоват�
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1001
 msgid "Your balance is higher than the permitted amount."
-msgstr ""
+msgstr "Ваш баланс выше позволенной суммы."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:20
 msgid "Your base url for all API calls"
