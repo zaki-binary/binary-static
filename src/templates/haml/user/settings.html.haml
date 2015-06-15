@@ -1,0 +1,47 @@
+- stash(
+-   title => l('Settings'),
+- );
+
+.grd-grid-12
+  %h1= l('Settings')
+.grd-grid-6.grd-grid-mobile-12.grd-parent
+  .grd-grid-6.grd-parent
+    .grd-grid-8.grd-with-padding
+      %a.pjaxload{:href => url_for('/user/settings/details')}
+        %img.responsive{:src => url_for('images/pages/resources/asset-index.svg')}
+    .grd-grid-12
+      %h4
+        %a.pjaxload{:href => url_for('/user/settings/details')}= l('Personal Details')
+      %p= l('View your personal information.')
+  .grd-grid-6.grd-parent
+    .grd-grid-8.grd-with-padding
+      %a.pjaxload{:href => url_for('/user/settings/security')}
+        %img.responsive{:src => url_for('images/pages/cashier/protection-icon.svg')}
+    .grd-grid-12
+      %h4
+        %a.pjaxload{:href => url_for('/user/settings/security')}= l('Security')
+      %p= l('Manage your account access and security settings.')
+.grd-grid-6.grd-grid-mobile-12.grd-parent
+  - if ($show_self_exclusion) {
+    .grd-grid-6.grd-parent
+      .grd-grid-8.grd-with-padding
+        %a.pjaxload{:href => url_for('/user/self_exclusion')}
+          %img.responsive{:src => url_for('images/pages/resources/asset-index.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/user/self_exclusion')}= l('Self Exclusion')
+        %p= l('Facility that allows you to set limits on your account.')
+  - }
+  - if ($show_financial_assessment) {
+    .grd-grid-6.grd-parent
+      .grd-grid-8.grd-with-padding
+        %a.pjaxload{:href => url_for('/user/assessment')}
+          %img.responsive{:src => url_for('images/pages/resources/trading-times.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/user/assessment')}= l('Financial Assessment')
+        %p= l('View your financial assessment settings.')
+  - }
+.grd-grid-12
+  %p
+    != l('Your API Token is:') . "<span class='notice-msg'>$token</span>"
