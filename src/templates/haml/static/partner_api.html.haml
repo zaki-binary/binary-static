@@ -1,23 +1,67 @@
 - stash(title => l('API'));
 
+:css
+ table.api ul.checked     { margin: 0 auto; width: 20px }
+ table.api td             { text-align: center }
+ table.api td:first-child { text-align: left }
+
 .grd-container.grd-default-container
   .partner-api.static_full
     .grd-grid-3.grd-hide-mobile
       .sidebar
           %ul#sidebar-nav
-            %li#sidebar-link-section-1.selected
-              %a{:href => "#the-api"}= l('The [_1] API', stash->{website_name})
+            %li#sidebar-link-section-0.selected
+              %a{:href => "#api-intro"}= l('The Binary.com APIs')
+            %li#sidebar-link-section-1
+              %a{:href => "#api-ws"}= l('WebSocket API')
             %li#sidebar-link-section-2
-              %a{:href => "#api-rest"}= l('REST')
+              %a{:href => "#api-rest"}= l('REST API')
             %li#sidebar-link-section-3
-              %a{:href => "#api-security"}= l('Security')
+              %a{:href => "#api-security"}= l('API Security')
             %li#sidebar-link-section-4
-              %a{:href => "#api-console"}= l('Console Facility')
-            %li#sidebar-link-section-5
-              %a{:href => "#dev-guide"}= l('Developer\'s Guide')
+              %a{:href => "#api-console"}= l('REST API Console Facility')
           .sidebar-button
             %a{:href => 'http://trade.binary.com/api_en_binary/', :target => '_blank'}= l('Apply for access')
     .grd-grid-9.grd-grid-mobile-12.grd-parent
+      .section
+        %a#api-intro
+        .section-content
+          #section-0
+            .grd-grid-12
+              %h1= l('The Binary.com APIs')
+              %p= l('Binary.com provides business partners with two application programming interfaces (APIs).')
+              %p= l('These are')
+              %ul.checked
+                %li  REST API
+                %li  Websockets API
+              %p= l('Together, these provide most of the functionality available at the Binary.com website.  Each API currently has specific capabilities as follows:')
+              %table.api
+                - my $can_do = '<td><ul class="checked"><li/></ul></td>';
+                - my $not_do = '<td>No</td>';
+                - my @functionalities = (
+                -#                      can-do flags: REST? WS?
+                - [l('Market Discovery'),                 1, 1, l('Receive comprehensive information about current market conditions and contract availability')],
+                - [l('Contract Pricing'),                 1, 1, l('Propose specific contracts; receive validation and real-time pricing as determined by current market conditions')],
+                - [l('Account Profile Review / Update'),  1, 0, l('Inspect and Update some account profile information')],
+                - [l('Account Creation (Virtual)'),       1, 0, l('Create a new virtual account ready for trading')],
+                - [l('Account Upgrade (Virtual to Real'), 0, 0, l('Supply identity and address information and create a Real trading account')],
+                - [l('Portfolio'),                        1, 1, l('Receive listing of current open positions, detail on each position, and sell-back price (if available)')],
+                - [l('Sell Contract from Portfolio'),     1, 1, l('Sell back one of the currently open position shown in Portfolio')],
+                - [l('Account Statement'),                1, 0, l('Query historical account transactions')],
+                - [l('Live-Stream Spot Prices'),          0, 1, l('Receive real-time stream of spot prices for a given symbol')],
+                - [l('Live-Stream Contract Prices'),      0, 1, l('Receive real-time stream of contract prices for a given contract proposal')],
+                - );
+                %tr
+                  %th= l('Functionality')
+                  %th REST API
+                  %th Websockets API
+                - for my $f (@functionalities) {
+                -    my @f = @$f;
+                %tr
+                  %td{:rel=>'tooltip',:title=>'#{$f[3]}'}= $f[0]
+                  != $f[1]?$can_do:$not_do
+                  != $f[2]?$can_do:$not_do
+                - }
       .section
         %a#the-api
         .section-content
