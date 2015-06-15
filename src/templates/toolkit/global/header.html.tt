@@ -60,10 +60,10 @@
                 <div id="client-logged-in" class="grd-grid-3 grd-grid-mobile-9 grd-grid-phablet-10 by_client_type client_real client_virtual" style="display: none">
                   <div id="logout">
                     <form id="loginid-switch-form" action="[% request.url_for('user/loginid_switch?l=EN') %]" method="post">
-                        <span id="login-fields">
+                        <div id="login-fields">
                             <select id="client_loginid" name="client_loginid">
                             </select>
-                        </span>
+                        </div>
                         <a id="view-balances" href="[% request.url_for('user/balance') %]">[% l('View balances') %]</a>
                         <a id="btn_logout" class="logout" href="[% request.url_for('logout') %]"[% target %]>[% l('LOG OUT') %]</a>
                     </form>

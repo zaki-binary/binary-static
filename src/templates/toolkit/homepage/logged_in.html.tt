@@ -19,7 +19,7 @@
         [% IF client.payment_agent && client.payment_agent.is_authenticated %]
             <p>
             [% l('Your account is registered as a Payment Agent.') %]
-            <a class="pjaxload with_login_cookies" href="[% request.url_for('paymentagent_transfer.cgi') %]">[% l('Transfer to client') %]</a>
+            <a class="pjaxload with_login_cookies" href="[% request.url_for('/paymentagent/transfer') %]">[% l('Transfer to client') %]</a>
             </p>
         [% END %]
 
