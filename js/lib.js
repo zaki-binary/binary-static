@@ -46394,13 +46394,6 @@ var tabs = $.widget( "ui.tabs", {
     });
 
 })(jQuery);
-;var __lc = {};
-__lc.license = 5998271;
-(function() {
-    var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-})();
 ;/*!
 loadCSS: load a CSS file asynchronously.
 [c]2014 @scottjehl, Filament Group, Inc.
