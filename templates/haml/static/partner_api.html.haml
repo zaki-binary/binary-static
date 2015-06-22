@@ -93,6 +93,8 @@
               %a{:href => url_for('/devguide')}= l('Developer\'s Guide')
               = l('first, then consult the')
               %a{:href=>'https://apigee.com/rmg/resources/binary1'}= l('Binary.com REST API Resource Summary')
+            .grd-grid-12
+              %p!= l('The REST API interface is hosted by an API Proxy management provider, namely <a href="http://apigee.com" target="_blank">Apigee</a>. This service applies several services of benefit both to the application developer and to the API provider.')
       .section
         %a#api-wsok
         .section-content
@@ -121,8 +123,6 @@
                 %p= l('The most important benefit of using OAuth2.0 is that the end-users, who already have valid logins at [_1], are able to leverage new applications to execute various trading activities, without these applications needing to know or "see" the end-users security credentials.', stash->{website_name})
             .grd-grid-5.grd-grid-mobile-12
               %img.responsive{:src => url_for('images/pages/partnerapi/security.svg')}
-            .grd-grid-12
-              %p!= l('Further to this, the API interface is hosted by an API Proxy management provider, namely <a href="http://apigee.com" target="_blank">Apigee</a>. This service applies several services of benefit both to the application developer and to the API provider.')
       .section
         %a#api-console
         .section-content
