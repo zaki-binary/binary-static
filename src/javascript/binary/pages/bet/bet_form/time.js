@@ -11,9 +11,12 @@ BetForm.Time = function() {
 
 BetForm.Time.prototype = {
     init: function() {
-        this.trading_time.init();
-        this.duration.init();
-        this.end_time.init();
+        // spreads doesn't have any concept of expiry
+        if (BetForm.attributes.model.form_name() != "spreads") {
+            this.trading_time.init();
+            this.duration.init();
+            this.end_time.init();
+        }
         this.register();
         if (BetForm.attributes.model.form_name() == "digits" || BetForm.attributes.model.form_name() == "asian") {
             var expiry_val = 'duration';
