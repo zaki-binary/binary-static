@@ -45,16 +45,12 @@ var User = function() {
 
             for (var i = 0; i < loginids.length; i++) {
                 var real = 0;
-                var disabled = 0;
                 var items = loginids[i].split(':');
                 if (items[1] == 'R') {
                     real = 1;
                 }
-                if (items[2] == 'D') {
-                    disabled = 1;
-                }
 
-                var id_obj = { 'id':items[0], 'real':real, 'disabled':disabled };
+                var id_obj = { 'id':items[0], 'real':real };
                 if (/MLT/.test(items[0])) {
                     id_obj['non_financial']= true;
                 }
@@ -410,7 +406,6 @@ Header.prototype = {
             for (var i=0;i<loginid_array.length;i++) {
                 var curr_loginid = loginid_array[i].id;
                 var real = loginid_array[i].real;
-                var disabled = loginid_array[i].disabled;
                 var selected = '';
                 if (curr_loginid == this.client.loginid) {
                     selected = ' selected="selected" ';
@@ -429,12 +424,7 @@ Header.prototype = {
                     loginid_text = text.localize('Virtual Account') + ' (' + curr_loginid + ')';
                 }
 
-                var disabled_text = '';
-                if (disabled == 1) {
-                    disabled_text = ' disabled="disabled" ';
-                }
-
-                loginid_select += '<option value="' + curr_loginid + '" ' + selected + disabled_text + '>' + loginid_text +  '</option>';
+                loginid_select += '<option value="' + curr_loginid + '" ' + selected + '>' + loginid_text +  '</option>';
             }
             $("#client_loginid").html(loginid_select);
         }
@@ -698,40 +688,42 @@ Contents.prototype = {
     topbar_message_visibility: function() {
         if(this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
-            var has_real = 0;
-            var upgrade_financial = false;
+            var has_real = false;
+
+            var has_financial = false;
+            var check_financial = false;
+            if (/MLT/.test(this.client.loginid)) {
+                check_financial = true;
+            }
+
             for (var i=0;i<loginid_array.length;i++) {
                 var loginid = loginid_array[i].id;
                 var real = loginid_array[i].real;
 
                 if (real == 1) {
-                    has_real = 1;
-
-                    var curr_loginid = this.client.loginid;
-                    if (/MLT/.test(curr_loginid) || /MF/.test(curr_loginid)) {
-                        if(loginid_array[i].financial && !loginid_array[i].disabled){
-                            upgrade_financial = false;
-                            break;
-                        } else if(loginid_array[i].non_financial && !loginid_array[i].disabled) {
-                            upgrade_financial = true;
-                        }
-                    } else {
+                    has_real = true;
+                    if (!check_financial) {
+                        break;
+                    }
+                    if (loginid_array[i].financial) {
+                        has_financial = true;
                         break;
                     }
                 }
             }
-            if (has_real == 1) {
+            if (has_real) {
                 $('.virtual-upgrade-link').addClass('invisible');
                 $('.virtual-upgrade-link').hide();
-                if(upgrade_financial) {
-                    $('#financial-upgrade-link').removeClass('invisible');
-                    if($('#investment_message').length > 0) {
-                        $('#investment_message').removeClass('invisible');
+
+                if (!check_finanical || has_finanicial) {
+                    $('#financial-upgrade-link').addClass('invisible');
+                    if ($('#investment_message').length > 0) {
+                        $('#investment_message').addClass('invisible');
                     }
                 } else {
-                    $('#financial-upgrade-link').addClass('invisible');
-                    if($('#investment_message').length > 0) {
-                        $('#investment_message').addClass('invisible');
+                    $('#financial-upgrade-link').removeClass('invisible');
+                    if ($('#investment_message').length > 0) {
+                        $('#investment_message').removeClass('invisible');
                     }
                 }
             }
