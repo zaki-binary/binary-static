@@ -14,6 +14,9 @@
             [% spot_html %]
             [% barrier_html %]
             <div>[% amount_html %]</div>
+            <div>[% amount_per_point_html %]</div>
+            [% stop_loss_html %]
+            [% stop_profit_html %]
 
             [% FOREACH input IN hidden_inputs %]
                 <input type="hidden" name="[% input.name %]" value="[% input.value %]"
