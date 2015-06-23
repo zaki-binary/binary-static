@@ -721,7 +721,7 @@ Contents.prototype = {
                 $('.virtual-upgrade-link').addClass('invisible');
                 $('.virtual-upgrade-link').hide();
 
-                if (check_finanical && !has_finanicial) {
+                if (check_financial && !has_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
                     if ($('#investment_message').length > 0) {
                         $('#investment_message').removeClass('invisible');
