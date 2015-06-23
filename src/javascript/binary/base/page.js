@@ -721,15 +721,15 @@ Contents.prototype = {
                 $('.virtual-upgrade-link').addClass('invisible');
                 $('.virtual-upgrade-link').hide();
 
-                if (!check_finanical || has_finanicial) {
-                    $('#financial-upgrade-link').addClass('invisible');
-                    if ($('#investment_message').length > 0) {
-                        $('#investment_message').addClass('invisible');
-                    }
-                } else {
+                if (check_finanical && !has_finanicial) {
                     $('#financial-upgrade-link').removeClass('invisible');
                     if ($('#investment_message').length > 0) {
                         $('#investment_message').removeClass('invisible');
+                    }
+                } else {
+                    $('#financial-upgrade-link').addClass('invisible');
+                    if ($('#investment_message').length > 0) {
+                        $('#investment_message').addClass('invisible');
                     }
                 }
             }
