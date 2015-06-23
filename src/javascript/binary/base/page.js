@@ -44,13 +44,17 @@ var User = function() {
             var loginids = loginid_list.split('+').sort();
 
             for (var i = 0; i < loginids.length; i++) {
-                var real = 0;
+                var real = false;
+                var disabled = false;
                 var items = loginids[i].split(':');
                 if (items[1] == 'R') {
-                    real = 1;
+                    real = true;
+                }
+                if (items[2] == 'D') {
+                    disabled = true;
                 }
 
-                var id_obj = { 'id':items[0], 'real':real };
+                var id_obj = { 'id':items[0], 'real':real, 'disabled':disabled };
                 if (/MLT/.test(items[0])) {
                     id_obj['non_financial']= true;
                 }
@@ -404,6 +408,8 @@ Header.prototype = {
             var loginid_select = '';
             var loginid_array = this.user.loginid_array;
             for (var i=0;i<loginid_array.length;i++) {
+                if (loginid_array[i].disabled) continue;
+
                 var curr_loginid = loginid_array[i].id;
                 var real = loginid_array[i].real;
                 var selected = '';
@@ -412,7 +418,7 @@ Header.prototype = {
                 }
 
                 var loginid_text;
-                if (real == 1) {
+                if (real) {
                     if(loginid_array[i].financial){
                         loginid_text = text.localize('Investment Account') + ' (' + curr_loginid + ')';
                     } else if(loginid_array[i].non_financial) {
@@ -700,7 +706,7 @@ Contents.prototype = {
                 var loginid = loginid_array[i].id;
                 var real = loginid_array[i].real;
 
-                if (real == 1) {
+                if (real) {
                     has_real = true;
                     if (!check_financial) {
                         break;
