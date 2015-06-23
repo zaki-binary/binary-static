@@ -19,6 +19,10 @@
     [% IF fields.id %]<input type="hidden" name="id" value="[% fields.id %]" />[% END %]
     [% IF fields.1 %]<input type="hidden" name="l" value="[% fields.l %]" />[% END %]
     [% IF fields.expiry_type %]<input type="hidden" name="expiry_type" value="[% fields.expiry_type %]" />[% END %]
+    [% IF fields.amount_per_point %]<input type="hidden" name="amount_per_point" value="[% fields.amount_per_point %]" />[% END %]
+    [% IF fields.stop_loss %]<input type="hidden" name="stop_loss" value="[% fields.stop_loss %]" />[% END %]
+    [% IF fields.stop_profit %]<input type="hidden" name="stop_profit" value="[% fields.stop_profit %]" />[% END %]
+    [% IF fields.stop_type %]<input type="hidden" name="stop_type" value="[% fields.stop_type %]" />[% END %]
     <input type="hidden" name="controller_action" value="buy" />
     <input type="hidden" name="qty" value="1" />
     <input type="hidden" name="comment" value=" " />
