@@ -8,7 +8,7 @@
     <div class="grd-grid-10 grd-grid-mobile-12">
         <form name="tnc_approval_form" method="POST" action="[% form_action_url %]">
             <p>
-                [% l('Binary (Europe) Ltd has updated its <a class="pjaxload" href="[_1]">Terms & Conditions</a>. By clicking OK, you confirm that you have read and accepted the updated <a class="pjaxload" href="[_1]">Terms & Conditions</a>.', tnc_page_url) %]
+                [% l('[_1] has updated its <a class="pjaxload" href="[_2]">Terms & Conditions</a>. By clicking OK, you confirm that you have read and accepted the updated <a class="pjaxload" href="[_2]">Terms & Conditions</a>.', landing_company, tnc_page_url) %]
             </p>
             <input name="act" value="[% action %]" type="hidden"/>
             <input name="currency" value="[% currency %]" type="hidden"/>
