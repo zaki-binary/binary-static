@@ -417,12 +417,20 @@ var BetPrice = function() {
                     var prices = [];
                     for (var i = 0; i < stream.length; i++) {
                         var id = stream[i].id || undefined;
-                        var prob = stream[i].prob || undefined;
+                        var prob = stream[i].value || undefined;
                         if (!id || prob === undefined) {
                             continue;
                         }
-
-                        prices.push(this.calculate_price(id, prob, stream[i].err));
+                        if (prob > 1) {
+                            prices.push({
+                                type: 'spread',
+                                value: prob,
+                                id: id,
+                                err: stream[i].err,
+                            });
+                        } else {
+                            prices.push(this.calculate_price(id, prob, stream[i].err));
+                        }
                     }
 
                     return prices;
@@ -500,6 +508,7 @@ var BetPrice = function() {
                     price = price ? price : this.virgule_amount(0);
 
                     return {
+                        type: 'price',
                         id: id,
                         prob: prob,
                         err: error,
@@ -513,6 +522,9 @@ var BetPrice = function() {
                 },
                 update_form: function(prices) {
                     for (var i = 0; i < prices.length; i++) {
+                        if (prices[i].type === 'spread') {
+                            continue;
+                        }
                         var form = this.form_by_id(prices[i].id);
                         $('input[name="prob"]', form).val(prices[i].prob);
                         $('input[name="price"]', form).val(prices[i].price.raw/100);
@@ -522,27 +534,43 @@ var BetPrice = function() {
                 },
                 update_ui: function(prices) {
                     for (var i = 0; i < prices.length; i++) {
-                        var form = this.form_by_id(prices[i].id);
-                        var err = prices[i].err;
-                        var bf_amount = BetForm.amount;
-                        var epsilon = 0.001; // Outside the visible range of a price.
-                        // We're intentionally making payout errors have highest priority
-                        // it's something they can fix immediately on this web interface.
+                        if (prices[i].type === 'spread') {
+                            this.update_spread(prices[i].id, prices[i].value);
+                        } else if (prices[i].type === 'price') {
+                            var form = this.form_by_id(prices[i].id);
+                            var err = prices[i].err;
+                            var bf_amount = BetForm.amount;
+                            var epsilon = 0.001; // Outside the visible range of a price.
+                            // We're intentionally making payout errors have highest priority
+                            // it's something they can fix immediately on this web interface.
 
-                        if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
-                            prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
-                            err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 - epsilon > bf_amount.stake_max ||
-                            prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
-                            // You probably think there should be two conditions above, but too high stake just
-                            // makes for "too high payout" or "no return" errors.
-                            err = bf_amount.stake_err;
+                            if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
+                                prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
+                                err = bf_amount.payout_err;
+                            } else if (prices[i].price.raw/100 - epsilon > bf_amount.stake_max ||
+                                prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
+                                // You probably think there should be two conditions above, but too high stake just
+                                // makes for "too high payout" or "no return" errors.
+                                err = bf_amount.stake_err;
+                            }
+                            this.show_error(form, err);
+                            this.update_price(prices[i].id, prices[i].price, prices[i].prev_price);
+                            this.update_description(prices[i].id, prices[i].payout, prices[i].prev_payout);
+                            this.update_profit_roi(prices[i].id, prices[i].profit, prices[i].roi);
                         }
-                        this.show_error(form, err);
-                        this.update_price(prices[i].id, prices[i].price, prices[i].prev_price);
-                        this.update_description(prices[i].id, prices[i].payout, prices[i].prev_payout);
-                        this.update_profit_roi(prices[i].id, prices[i].profit, prices[i].roi);
                     }
+                },
+                update_spread: function(id, value) {
+                    var other_box = $('#spread_other_' + id);
+                    var point_box = $('#spread_point_' + id);
+                    var cents_box = $('#spread_cents_' + id);
+                    var matches = value.toString().match(/[0-9]+/g);
+                    var other_val = matches[0].substr(0, matches[0].length - 1);
+                    var point_val = matches[0].substr(-1,1);
+                    var cents_val = matches[1];
+                    other_box.text(other_val);
+                    point_box.text(point_val);
+                    cents_box.text('.'+cents_val);
                 },
                 update_price: function(id, price, old_price) {
                     var units_box = $('#units_for_' + id);
