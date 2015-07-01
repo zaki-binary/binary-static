@@ -8,16 +8,16 @@
 
     <div id='confirmation_table' class='grd-parent grd-grid-12 grd-row-padding'>
         <span class="grd-grid-4 grd-no-col-padding standin">
-            <span class="grd-grid-12 grd-no-col-padding standin">[% l('Potential Payout') %]</span>
-            <span class="grd-grid-12 grd-with-top-padding standin">[% payout %]</span>
+            <span class="grd-grid-12 grd-no-col-padding standin">[% l(first_label) %]</span>
+            <span class="grd-grid-12 grd-with-top-padding standin">[% first_value %]</span>
         </span>
         <span class="grd-grid-4 grd-no-col-padding standout with_left_border with_right_border">
-            <span class="grd-grid-12 grd-no-col-padding standout"><span class='price'>[% l('Total Cost') %]</span></span>
-            <span class="grd-grid-12 grd-with-top-padding standout"><span class='price'>[% price %]</span></span>
+            <span class="grd-grid-12 grd-no-col-padding standout"><span class='price'>[% l(second_label) %]</span></span>
+            <span class="grd-grid-12 grd-with-top-padding standout"><span class='price'>[% second_value %]</span></span>
         </span>
         <span class="grd-grid-4 grd-no-col-padding standin">
-            <span class="grd-grid-12 grd-no-col-padding standin">[% l('Potential Profit') %]</span>
-            <span class="grd-grid-12 grd-with-top-padding standin">[% win %]</span>
+            <span class="grd-grid-12 grd-no-col-padding standin">[% l(third_label) %]</span>
+            <span class="grd-grid-12 grd-with-top-padding standin">[% third_value %]</span>
         </span>
         [% IF notes %]
         <span class="notes">
