@@ -44,8 +44,7 @@ var hide_account_opening_for_risk_disclaimer = function () {
     }
 };
 
-//pjax_config_page('new_financial', function() {
-pjax_config_page('user/upgrade/financial|create_account', function() {
+pjax_config_page('new_financial', function() {
     return {
         onLoad: function() {
             upgrade_investment_disabled_field();
