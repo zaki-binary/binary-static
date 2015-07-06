@@ -19,7 +19,12 @@
         - my $default_country = customer_support_default_telephone();
         - my $default_number = $contact_number->{$default_country};
         %select.grd-grid-7.grd-grid-mobile-12.grd-no-gutter{:id => 'cs_telephone_number'}
-          %option{:disabled => true}= l('Select Country')
+          %option{:disabled => true}= l('== Toll Free ==')
+          - foreach (sort keys %{ $tollfree_number }) {
+            - my $tollfree = $tollfree_number->{$_};
+            %option{:value => $tollfree}= $_
+          - }
+          %option{:disabled => true}= l('== Local Line ==')
           - foreach (sort keys %{ $contact_number }) {
             - my $number = $contact_number->{$_};
             - if ($_ eq $default_country) {
@@ -27,11 +32,6 @@
             - } else {
               %option{:value => $number}= $_
             - }
-          - }
-          %option{:disabled => true}= l('== Toll Free ==')
-          - foreach (sort keys %{ $tollfree_number }) {
-            - my $tollfree = $tollfree_number->{$_};
-            %option{:value => $tollfree}= $_
           - }
         %span#display_cs_telephone.grd-grid-7.grd-prefix-4.grd-no-gutter.grd-grid-mobile-12.grd-prefix-mobile-0.grd-row-padding
           = $default_number
