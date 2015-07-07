@@ -374,7 +374,7 @@ var BetPrice = function() {
                     if(update_from_stream) {
                         var bet = JSON.parse(data);
                         BetForm.spot.update(bet.spot);
-                        BetPrice.order_form.update_from_stream(bet.prices);
+                        BetPrice.order_form.update_from_stream(bet);
                         BetAnalysis.tab_last_digit.update(BetForm.attributes.underlying(), bet.spot);
                     }
                 },
@@ -405,8 +405,14 @@ var BetPrice = function() {
                     $('button[name^="btn_buybet"]').removeAttr('disabled');
                 },
                 update_from_stream: function(stream) {
-                    var prices = this.prices_from_stream(stream);
-                    this.update(prices);
+                    var type = stream.type;
+                    if (type === 'spread') {
+                        this.update_spread_ui(stream.prices);
+                    } else if (type === 'price') {
+                        var prices = this.prices_from_stream(stream.prices);
+                        this.update_form(prices);
+                        this.update_ui(prices);
+                    }
                 },
                 update: function(prices) {
                     prices = typeof prices !== 'undefined' ? prices : this.prices_from_form();
@@ -421,16 +427,7 @@ var BetPrice = function() {
                         if (!id || prob === undefined) {
                             continue;
                         }
-                        if (prob > 1) {
-                            prices.push({
-                                type: 'spread',
-                                value: prob,
-                                id: id,
-                                err: stream[i].err,
-                            });
-                        } else {
-                            prices.push(this.calculate_price(id, prob, stream[i].err));
-                        }
+                        prices.push(this.calculate_price(id, prob, stream[i].err));
                     }
 
                     return prices;
@@ -522,9 +519,6 @@ var BetPrice = function() {
                 },
                 update_form: function(prices) {
                     for (var i = 0; i < prices.length; i++) {
-                        if (prices[i].type === 'spread') {
-                            continue;
-                        }
                         var form = this.form_by_id(prices[i].id);
                         $('input[name="prob"]', form).val(prices[i].prob);
                         $('input[name="price"]', form).val(prices[i].price.raw/100);
@@ -534,43 +528,43 @@ var BetPrice = function() {
                 },
                 update_ui: function(prices) {
                     for (var i = 0; i < prices.length; i++) {
-                        if (prices[i].type === 'spread') {
-                            this.update_spread(prices[i].id, prices[i].value);
-                        } else if (prices[i].type === 'price') {
-                            var form = this.form_by_id(prices[i].id);
-                            var err = prices[i].err;
-                            var bf_amount = BetForm.amount;
-                            var epsilon = 0.001; // Outside the visible range of a price.
-                            // We're intentionally making payout errors have highest priority
-                            // it's something they can fix immediately on this web interface.
+                        var form = this.form_by_id(prices[i].id);
+                        var err = prices[i].err;
+                        var bf_amount = BetForm.amount;
+                        var epsilon = 0.001; // Outside the visible range of a price.
+                        // We're intentionally making payout errors have highest priority
+                        // it's something they can fix immediately on this web interface.
 
-                            if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
-                                prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
-                                err = bf_amount.payout_err;
-                            } else if (prices[i].price.raw/100 - epsilon > bf_amount.stake_max ||
-                                prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
-                                // You probably think there should be two conditions above, but too high stake just
-                                // makes for "too high payout" or "no return" errors.
-                                err = bf_amount.stake_err;
-                            }
-                            this.show_error(form, err);
-                            this.update_price(prices[i].id, prices[i].price, prices[i].prev_price);
-                            this.update_description(prices[i].id, prices[i].payout, prices[i].prev_payout);
-                            this.update_profit_roi(prices[i].id, prices[i].profit, prices[i].roi);
+                        if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
+                            prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
+                            err = bf_amount.payout_err;
+                        } else if (prices[i].price.raw/100 - epsilon > bf_amount.stake_max ||
+                            prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
+                            // You probably think there should be two conditions above, but too high stake just
+                            // makes for "too high payout" or "no return" errors.
+                            err = bf_amount.stake_err;
                         }
+                        this.show_error(form, err);
+                        this.update_price(prices[i].id, prices[i].price, prices[i].prev_price);
+                        this.update_description(prices[i].id, prices[i].payout, prices[i].prev_payout);
+                        this.update_profit_roi(prices[i].id, prices[i].profit, prices[i].roi);
                     }
                 },
-                update_spread: function(id, value) {
-                    var other_box = $('#spread_other_' + id);
-                    var point_box = $('#spread_point_' + id);
-                    var cents_box = $('#spread_cents_' + id);
-                    var matches = value.toString().match(/[0-9]+/g);
-                    var other_val = matches[0].substr(0, matches[0].length - 1);
-                    var point_val = matches[0].substr(-1,1);
-                    var cents_val = matches[1];
-                    other_box.text(other_val);
-                    point_box.text(point_val);
-                    cents_box.text('.'+cents_val);
+                update_spread_ui: function(spread) {
+                    for (var i = 0; i < spread.length; i++) {
+                        var id = spread[i].id;
+                        var value = spread[i].level;
+                        var other_box = $('#spread_other_' + id);
+                        var point_box = $('#spread_point_' + id);
+                        var cents_box = $('#spread_cents_' + id);
+                        var matches = value.toString().match(/[0-9]+/g);
+                        var other_val = matches[0].substr(0, matches[0].length - 1);
+                        var point_val = matches[0].substr(-1,1);
+                        var cents_val = matches[1];
+                        other_box.text(other_val);
+                        point_box.text(point_val);
+                        cents_box.text('.'+cents_val);
+                    }
                 },
                 update_price: function(id, price, old_price) {
                     var units_box = $('#units_for_' + id);
