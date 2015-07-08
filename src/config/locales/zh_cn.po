@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1228\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-06-30 04:14+0200\n"
+"PO-Revision-Date: 2015-07-08 05:52+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
 "Language-Team: Chinese (China) "
 "<https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
@@ -1568,7 +1568,7 @@ msgstr "障碍2"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/PricingTableParameters.pm:348
 msgid "Barrier From format error"
-msgstr "障碍起始水平格式错误"
+msgstr "格式错误所导致障碍"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/PricingTableParameters.pm:354
 msgid "Barrier Step (%) out of limit"
@@ -1607,7 +1607,7 @@ msgstr "障碍"
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Role/DoubleBarrier.pm:113
 msgid "Barriers must be on either side of the spot."
-msgstr "障碍必须放到点的两边之一。"
+msgstr "高和低障碍必须分别大于和小于现货价。。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:29
 msgid "Before we open an account for you to trade or invest in Investment Products with BIEL, we are required to make an assessment of whether the Investment Products or services you have chosen are appropriate for you, and to warn you if, on the basis of the information you provide to us, any such product or service is not appropriate. Any decision to open an account and to use our products or services is yours. It is your responsibility to understand the risks involved with our products or services."
@@ -1945,7 +1945,7 @@ msgstr "计算"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/api/register.html.tt:12
 msgid "Callback URL"
-msgstr "调用网址"
+msgstr "回叫网址"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "Calling a REST Service"
@@ -2284,7 +2284,7 @@ msgstr "关闭全部"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:543
 msgid "Close Location Value"
-msgstr "收盘位置值"
+msgstr "关闭位置值"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/duration.html.tt:41
 msgid "Close of trading day."
@@ -2601,7 +2601,7 @@ msgstr "开立账户"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/statement.html.tt:132
 msgid "Credit/<wbr/>Debit"
-msgstr "信用卡/<wbr/>借记卡"
+msgstr "借方/<wbr/>貸方"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/payment_methods.html.tt:147
 msgid "Credit/Debit Card"
@@ -8699,7 +8699,7 @@ msgstr "此市场目前已收市。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/market_warning.html.tt:8
 msgid "This market opens late today at"
-msgstr "此市场今日延迟收市时间至"
+msgstr "此市场今日延迟开市时间至"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "This method is for web applications which are hosted on their own web-server. It is the most secure way of protecting your organisation's identity as the owner of your application."
@@ -10219,7 +10219,7 @@ msgstr "您可全天候参与各种市场、时间周期和指数的交易。"
 #. ($r->url_for("/cashier/forward", {act => $action})
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1858
 msgid "You can try another <a href=\"%1\">payment option</a> or for additional assistance:"
-msgstr "您可尝试其他 <a href=\"[%1\">支付选项</a>，或寻求其他帮助："
+msgstr "您可尝试其他 <a href=\"%1\">支付选项</a>，或寻求其他帮助："
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
@@ -10318,7 +10318,9 @@ msgstr "您已经卖出以下合约："
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:185
 msgid "You may choose to contact us to close your account held with the Company. Your account may be closed if you do not have any open trade positions and if you have complied with the requested \"Know Your Client\" procedures to enable you to withdraw any pending funds in your account."
-msgstr "您可以选择跟我们联系以关闭在本公司开立的账户。如您没有任何平仓交易头寸，以及如果您已符合“了解您的客户“之程序需求，允许您提取账户内的任何待领款项，您的账户就可以关闭。"
+msgstr ""
+"您可以选择跟我们联系以关闭在本公司开立的账户。如您没有任何未平仓交易头寸，以及如果您已符合“了解您的客户“之程序需求，允许您提取账户内的任何待领款项，您的"
+"账户就可以关闭。"
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:43
@@ -10496,7 +10498,7 @@ msgstr "您的账户已经得到完全验证，且您的取款限额已经取消
 #. (request.url_for("/cashier/limits"))
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/authenticate.html.tt:5
 msgid "Your account is fully authenticated. You can view your <a href=\"%1\">trading limits here</a>."
-msgstr "您的账户已经得到完全验证，且您 <a href=\"%1\">% 的取款限额已经取消</a>。"
+msgstr "您的账户已经得到完全验证，且您可在此查看您的<a href=\"%1\">交易限额</a>。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/authenticate.html.tt:23
 msgid "Your account is fully operational and you may begin depositing money and buying contracts."
@@ -10517,7 +10519,9 @@ msgstr "您的账户只限于取款。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:77
 msgid "Your account should not be used as a banking facility and deposits should only be made with a view to using funds to place contracts. The Company is not a financial institution, Clients will not receive interest on deposits. Should you make repeated deposits and withdrawals without commensurate contracts being placed, we reserve the right to pass on to your accounts, without prior notice, any bank charges we have incurred before closing the account."
-msgstr "您的账户不应该被用来作为银行信贷及存款，而应该视为只用以进行交易的资金。本公司并不是金融机构，客户存款将不会有利息。如果您重复进行存款和取款，却没有进行相称的交易，在关闭账户之前，我们保留在不事先通知的情况下把我们所承担的任何银行费用转到您账户的权利。"
+msgstr ""
+"您的账户不应该被用来作为银行信贷，而存款应该视为只用以进行交易的资金。本公司并不是金融机构，客户存款将不会有利息。如果您重复进行存款和取款，却没有进行相称"
+"的交易，在关闭账户之前，我们保留在不事先通知的情况下把我们所承担的任何银行费用转到您账户的权利。"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1039
 msgid "Your balance is higher than the permitted amount."
@@ -11154,7 +11158,7 @@ msgstr "美元兑南非兰特"
 
 #: Underlying Symbol frxAUDPLN
 msgid "AUD/PLN"
-msgstr "澳元/波兰克朗"
+msgstr "澳元/波兰兹罗提"
 
 #: Underlying Symbol frxUSDKRW
 msgid "USD/KRW"
@@ -11646,7 +11650,7 @@ msgstr "必和必拓公司"
 
 #: Underlying Symbol JPTE
 msgid "Tokyo Electric Power Co. Inc"
-msgstr "东京电力公司公司"
+msgstr "东京电力公司"
 
 #: Underlying Symbol JPTM
 msgid "Toyota Motor"
@@ -11934,7 +11938,7 @@ msgstr "法国安盛集团（AXA）"
 
 #: Underlying Symbol USKO
 msgid "The Coca-Cola Company"
-msgstr "可有可乐"
+msgstr "可口可乐"
 
 #: Underlying Symbol NOTEL
 msgid "Telenor"
