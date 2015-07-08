@@ -361,17 +361,3 @@ pjax_config_page('/careers', function() {
         },
     };
 });
-
-pjax_config_page('/bulk-trader-facility', function() {
-    return {
-        onLoad: function() {
-            var whyus = $('.bulk-trader-facility');
-            sidebar_scroll(whyus);
-        },
-        onUnload: function() {
-            $(window).off('scroll');
-        }
-    };
-});
-
-
