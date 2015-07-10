@@ -17,26 +17,11 @@
     <input type="hidden" name="comment" value=" " />
     <input type="hidden" name="batch" value="no" />
 
-    <a id="spread_[% fields.action %]" href="#">
-        <div class="div_wrapper default"[%- IF fields.start_hidden -%] style="display:none"[%- END -%]>
-            <div class="outer_box [% fields.action%]">
-                <span class="button_text">[% fields.button_text %]</span>
-                <div class="inner_box">
-                    <div>
-                        <span class='grd-grid-12 stylized_price'>
-                            <span id="spread_other_[% fields.display_id %]">
-                            [% level.other %]
-                            </span>
-                            <span class="stylized_price" id="spread_point_[% fields.display_id %]">
-                            [% level.point %]
-                            </span>
-                            <span class="stylized_cents" id="spread_other_[% fields.display_id %]">
-                            [% level.cents %]
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
+    [% INCLUDE bet/spread_button_wrapper.html.tt
+        id=fields.display_id
+        action=fields.action
+        level=level
+        button_text=fields.button_text
+        hidden=fields.start_hidden
+    %]
 </form>

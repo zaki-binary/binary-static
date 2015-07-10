@@ -67,7 +67,7 @@ var BetPrice = function() {
         },
         on_buy: function() {
             var that = this;
-            $('#content button.buy_bet_button').on('click', function (e) {
+            $('#content button.buy_bet_button, a.spread_250, a.spread_260').on('click', function (e) {
                 e = e || window.event;
                 if (typeof e.preventDefault == 'function') {
                     e.preventDefault();
@@ -172,11 +172,152 @@ var BetPrice = function() {
                 that.digit.process(start_moment);
             }
 
+            if (data.is_spread) {
+                that.spread.on_sell();
+                that.spread.display(data);
+            }
+
             con.show();
             // push_data_layer();
             var _clear_results = function () { that.clear_buy_results(); };
             con.find('a.close').on('click', _clear_results).css('cursor', 'pointer').addClass('unbind_later');
         },
+        spread: function() {
+            var that = this;
+            return {
+                reset: function() {
+                    var that = this;
+                    if (typeof that._stream !== 'undefined') {
+                        that._stream.close();
+                    }
+                },
+                on_sell: function(form) {
+                    var that = this;
+                    $('a.spread_buy, a.spread_sell').on('click', function (e) {
+                        e = e || window.event;
+                        if (typeof e.preventDefault == 'function') {
+                            e.preventDefault();
+                        }
+                        var target = $(e.target);
+                        that.sell_bet(target);
+                        return false;
+                    }).addClass('unbind_later');
+                },
+                sell_bet: function(target) {
+                    var that = this;
+                    var form = target.parents('form');
+                    that.disable(form.find('a[class^="spread"]'));
+                    var timeout = 60000;
+                    that.disable(target);
+
+                    if(!$.cookie('login')) {
+                        page.client.is_logged_in = false;
+                        window.location.href = page.url.url_for('login');
+                        return;
+                    }
+
+                    // pass the DOM form object wrapped in jQuery form object to getFormParams
+                    var data = getFormParams(form.get(0)) + '&ajax_only=1';
+                    $.ajax(ajax_loggedin({
+                        url     : form.attr('action'),
+                        type    : 'POST',
+                        async   : true,
+                        data    : data,
+                        timeout : timeout,
+                        success : function (resp, resp_status, jqXHR) { that.on_sell_success(form, resp, resp_status, jqXHR); },
+                        error   : function (jqXHR, resp_status, exp) { that.on_sell_error(form, jqXHR, resp_status, exp); },
+                    }));
+                    $('.price_box').fadeTo(200, 0.6);
+                },
+                on_sell_success: function(form, resp, resp_status, jqXHR) {
+                    var that = this;
+                    var data = {};
+
+                    if (resp) {
+                        var con = $('#confirmation_table');
+                        con.find('.first_label').text(text.localize('Entry Level'));
+                        con.find('.first_value').text(resp.entry_level);
+                        var pnl = parseFloat(resp.current_value);
+                        var pnl_label = pnl > 0 ? 'Profit' : 'Loss';
+                        con.find('.second_label').text(text.localize(pnl_label));
+                        con.find('.second_value').text(pnl);
+                        con.find('.third_label').text(text.localize('Exit Level'));
+                        con.find('.third_value').text(resp.exit_level);
+                    }
+                    alert('success');
+                },
+                on_sell_error: function(form, resp, resp_status, jqXHR) {
+                    var data = {};
+                    alert('error');
+                },
+                disable: function(target) {
+                    var that = this;
+                    target.unbind('click');
+                    target.find('.outer_box').removeClass('sell');
+                    target.find('.outer_box').removeClass('buy');
+                    target.find('.outer_box').addClass('grey-out');
+                    that.reset();
+                },
+                streaming: function(channel) {
+                    var that = this;
+                    var url = window.location.protocol + '//' + page.settings.get('streaming_server')+'/push/price/'+channel;
+                    that._stream = new EventSource(url, { withCredentials: true });
+                    that._stream.onmessage = function(e) {
+                        var data = JSON.parse(e.data);
+                        var prices = data.prices;
+                        for (var i = 0; i < prices.length; i++) {
+                            var id = prices[i].id;
+                            var level = parseFloat(prices[i].level);
+                            var matches = level.toString().match(/[0-9]+/g);
+                            var other_val = matches[0].substr(0, matches[0].length - 1);
+                            var point_val = matches[0].substr(-1,1);
+                            var cents_val = matches[1];
+                            var con = $('.spread_container');
+
+                            if (con.find('.disabled')) {
+                                that.disable(con.find('.disabled').parents('a[class^="spread"]'));
+                            }
+
+                            con.find('.spread_other_'+id).text(other_val);
+                            con.find('.spread_point_'+id).text(point_val);
+                            con.find('.spread_cents_'+id).text('.'+cents_val);
+
+                            var higher_stop_level;
+                            var lower_stop_level;
+                            if (that.stop_loss_level() > that.stop_profit_level()) {
+                                higher_stop_level = that.stop_loss_level();
+                                lower_stop_level = that.stop_profit_level();
+                            } else {
+                                lower_stop_level = that.stop_loss_level();
+                                higher_stop_level = that.stop_profit_level();
+                            }
+
+                            if (level >= higher_stop_level || level <= lower_stop_level) {
+                                that.sell_bet(con.find('a.spread_'+id));
+                            }
+                        }
+                    };
+                    that._stream.onerror = function() {
+                        that._stream.close();
+                    };
+                },
+                display: function(data) {
+                    var that = this;
+                    that.streaming(data.stream_channel);
+                },
+                container: function() {
+                    return $('.spread_container');
+                },
+                stop_loss_level: function() {
+                    var that = this;
+                    return parseFloat(that.container().find('#stop_loss_level').val());
+                },
+                stop_profit_level: function() {
+                    var that = this;
+                    return parseFloat(that.container().find('#stop_profit_level').val());
+                },
+            };
+        }(),
         digit: function() {
             return {
                 reset: function() {
@@ -315,6 +456,11 @@ var BetPrice = function() {
             if ($('#is-digit').data('is-digit')) {
                 this.digit.reset();
             }
+
+            if ($('a[class^=spread]').length > 0) {
+                this.spread.reset();
+            }
+
             con.hide().remove();
             _buy_response_container = null;
         },
@@ -399,9 +545,11 @@ var BetPrice = function() {
                     return $('button[name^="btn_buybet"]').parent().show();
                 },
                 disable_buy_buttons: function() {
+                    $('a[id^="spread"]').attr('disabled','disabled');
                     $('button[name^="btn_buybet"]').attr('disabled','disabled');
                 },
                 enable_buy_buttons: function() {
+                    $('a[id^="spread"]').removeAttr('disabled');
                     $('button[name^="btn_buybet"]').removeAttr('disabled');
                 },
                 update_from_stream: function(stream) {
@@ -554,16 +702,15 @@ var BetPrice = function() {
                     for (var i = 0; i < spread.length; i++) {
                         var id = spread[i].id;
                         var value = spread[i].level;
-                        var other_box = $('#spread_other_' + id);
-                        var point_box = $('#spread_point_' + id);
-                        var cents_box = $('#spread_cents_' + id);
                         var matches = value.toString().match(/[0-9]+/g);
                         var other_val = matches[0].substr(0, matches[0].length - 1);
                         var point_val = matches[0].substr(-1,1);
                         var cents_val = matches[1];
-                        other_box.text(other_val);
-                        point_box.text(point_val);
-                        cents_box.text('.'+cents_val);
+
+                        var con = $('.spread_'+id);
+                        con.find('.spread_other_' + id).text(other_val);
+                        con.find('.spread_point_' + id).text(point_val);
+                        con.find('.spread_cents_' + id).text('.'+cents_val);
                     }
                 },
                 update_price: function(id, price, old_price) {

@@ -305,8 +305,31 @@
     position: relative;
     width: 153px;
     height: 106px;
+    text-decoration: none;
+    text-align: left;
     .button_text {
       margin-left: 8px;
+    }
+}
+
+.inner_box {
+    color: #000;
+    position: absolute;
+    text-align: center;
+    width: 139px;
+    height: 60px;
+    bottom: 0px;
+    margin: 0px 7px 7px;
+    background-color: rgb(255, 255, 255);
+    .stylized_price {
+      margin: 15px 0;
+    }
+}
+
+.grey-out {
+    background-color: $COLOR_GRAY;
+    .inner_box {
+      color: $COLOR_GRAY;
     }
 }
 
@@ -318,16 +341,8 @@
     background-color: $COLOR_RED;
 }
 
-.inner_box {
-    color: #000;
-    position: absolute;
-    text-align: center;
-    width: 139px;
-    height: 68px;
-    bottom: 0px;
-    margin: 0px 7px 7px;
-    background-color: rgb(255, 255, 255);
-    line-height: 70px;
+a.spread_250, a.spread_260, a.spread_buy, a.spread_sell {
+    text-decoration: none;
 }
 
 .stylized_cents {

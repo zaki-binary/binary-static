@@ -1,8 +1,71 @@
-<div id="sell_bet_desc" class='popup_bet_desc drag-handle'>[% longcode %]</div>
-
 <div id='sell_content_wrapper'>
-    <div>[% current_value%]</div>
-    <div>[% buy_level %]</div>
-    <div>[% sell_level %]</div>
+    <div id='sell_price_container'>
+            <input name="price" type="hidden" />
+    </div>
+    <div class="information_table">
+        <table>
+            <thead>
+                <th>Contract Information</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>[% l("Entry Level") %]</td>
+                    <td>[% entry_level %]</td>
+                </tr>
+                <tr>
+                    <td>[% l("Stop Loss Level") %]</td>
+                    <td>[% stop_loss_level %]</td>
+                </tr>
+                <tr>
+                    <td>[% l("Stop Profit Level") %]</td>
+                    <td>[% stop_profit_level %]</td>
+                </tr>
+                <tr>
+                    <td>[% l("Profit/Loss") %]</td>
+                    <td id="current_value">[% current_value %]</td>
+                </tr>
+                <tr>
+                    <td>[% l("Amount Per Point") %]</td>
+                    <td>[% amount_per_point %]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="spread_container">
+        <input type="hidden" id="stop_loss_level" name="stop_loss_level" value="[% stop_loss_level %]"\>
+        <input type="hidden" id="stop_profit_level" name="stop_profit_level" value="[% stop_profit_level %]"\>
+        <form action="[% url %]" method="post" autocomplete="off">
+            <input type="hidden" id="shortcode" name="shortcode" value="[% shortcode %]">
+            <input type="hidden" id="currency" name="currency" value="[% currency %]">
+            <input type="hidden" id="purchase_price" name="purchase_price" value="[% purchase_price %]">
+            <input type="hidden" id="contract_id" name="contract_id" value="[% contract_id %]">
+            <input type="hidden" id="controller_action" name="controller_action" value="[% controller_action %]">
+            <div class="grd-grid-6" style="padding: 10px 10px">
+                [% INCLUDE bet/spread_button_wrapper.html.tt
+                    id=buy.id
+                    action=buy.id
+                    level=buy.level
+                    button_text=buy.button_text
+                    disabled=buy.disabled
+                %]
+            </div>
+        </form>
+        <form action="[% url %]" method="post" autocomplete="off">
+            <input type="hidden" id="shortcode" name="shortcode" value="[% shortcode %]">
+            <input type="hidden" id="currency" name="currency" value="[% currency %]">
+            <input type="hidden" id="purchase_price" name="purchase_price" value="[% purchase_price %]">
+            <input type="hidden" id="contract_id" name="contract_id" value="[% contract_id %]">
+            <input type="hidden" id="controller_action" name="controller_action" value="[% controller_action %]">
+            <div class="grd-grid-6" style="padding: 10px 10px">
+                [% INCLUDE bet/spread_button_wrapper.html.tt
+                    id=sell.id
+                    action=sell.id
+                    level=sell.level
+                    button_text=sell.button_text
+                    disabled=sell.disabled
+                %]
+            </div>
+        </form>
+    </div>
 </div>
-
