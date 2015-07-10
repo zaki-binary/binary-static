@@ -739,7 +739,7 @@ var BetSell = function() {
                 success : function (data) {
                     var con = that.show_spread_popup(data);
                     if (!attr.model.is_expired()) {
-                        BetPrice.spread.streaming(attr.model.sell_channel());
+                        BetPrice.spread.stream(attr.model.sell_channel());
                     }
                },
             })).always(function () {

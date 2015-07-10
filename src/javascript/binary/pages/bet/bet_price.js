@@ -174,7 +174,7 @@ var BetPrice = function() {
 
             if (data.is_spread) {
                 that.spread.on_sell();
-                that.spread.display(data);
+                that.spread.stream(data.stream_channel);
             }
 
             con.show();
@@ -205,10 +205,10 @@ var BetPrice = function() {
                 },
                 sell_bet: function(target) {
                     var that = this;
+                    that.reset();
                     var form = target.parents('form');
                     that.disable(form.find('a[class^="spread"]'));
                     var timeout = 60000;
-                    that.disable(target);
 
                     if(!$.cookie('login')) {
                         page.client.is_logged_in = false;
@@ -256,9 +256,8 @@ var BetPrice = function() {
                     target.find('.outer_box').removeClass('sell');
                     target.find('.outer_box').removeClass('buy');
                     target.find('.outer_box').addClass('grey-out');
-                    that.reset();
                 },
-                streaming: function(channel) {
+                stream: function(channel) {
                     var that = this;
                     var url = window.location.protocol + '//' + page.settings.get('streaming_server')+'/push/price/'+channel;
                     that._stream = new EventSource(url, { withCredentials: true });
@@ -294,16 +293,13 @@ var BetPrice = function() {
 
                             if (level >= higher_stop_level || level <= lower_stop_level) {
                                 that.sell_bet(con.find('a.spread_'+id));
+                                that.reset();
                             }
                         }
                     };
                     that._stream.onerror = function() {
                         that._stream.close();
                     };
-                },
-                display: function(data) {
-                    var that = this;
-                    that.streaming(data.stream_channel);
                 },
                 container: function() {
                     return $('.spread_container');
