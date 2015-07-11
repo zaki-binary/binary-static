@@ -848,14 +848,8 @@ var BetSell = function() {
                 process_message: function(data) {
                     if (_update_from_stream) {
                         var bet = JSON.parse(data);
-                        var type = bet.type;
                         var no_error = true;
-
-                        if (type === 'price') {
-                            this.update_price(bet);
-                        } else {
-                            this.update_spread(bet);
-                        }
+                        this.update_price(bet);
                     }
                 }, // process_message
                 update_price: function(bet) {
@@ -877,41 +871,6 @@ var BetSell = function() {
                         BetSell.update_barriers(bet.barriers);
                     } // for
                     BetSell.update_spot(spot);
-                },
-                update_spread: function(data) {
-                    var prices = data.prices;
-                    for (var i = 0; i < prices.length; i++) {
-                        var id = prices[i].id;
-                        var level = parseFloat(prices[i].level);
-                        var matches = level.toString().match(/[0-9]+/g);
-                        var other_val = matches[0].substr(0, matches[0].length - 1);
-                        var point_val = matches[0].substr(-1,1);
-                        var cents_val = matches[1];
-                        var con = $('.spread_container');
-
-                        if (con.find('.disabled')) {
-                            BetPrice.spread.disable(con.find('.disabled').parents('a[class^="spread"]'));
-                        }
-
-                        con.find('.spread_other_'+id).text(other_val);
-                        con.find('.spread_point_'+id).text(point_val);
-                        con.find('.spread_cents_'+id).text('.'+cents_val);
-
-                        var higher_stop_level;
-                        var lower_stop_level;
-                        if (BetPrice.spread.stop_loss_level() > BetPrice.spread.stop_profit_level()) {
-                            higher_stop_level = BetPrice.spread.stop_loss_level();
-                            lower_stop_level = BetPrice.spread.stop_profit_level();
-                        } else {
-                            lower_stop_level = BetPrice.spread.stop_loss_level();
-                            higher_stop_level = BetPrice.spread.stop_profit_level();
-                        }
-
-                        if (level >= higher_stop_level || level <= lower_stop_level) {
-                            var expired_con = con.find('a.spread_'+id);
-                            BetPrice.spread.disable(expired_con);
-                        }
-                    }
                 },
                 url: function(val) {
                     if (val !== undefined) {

@@ -231,24 +231,21 @@ var BetPrice = function() {
                 },
                 on_sell_success: function(form, resp, resp_status, jqXHR) {
                     var that = this;
-                    var data = {};
 
                     if (resp) {
                         var con = $('#confirmation_table');
                         con.find('.first_label').text(text.localize('Entry Level'));
                         con.find('.first_value').text(resp.entry_level);
-                        var pnl = parseFloat(resp.current_value);
+                        var pnl = that.round(parseFloat(resp.value),2);
                         var pnl_label = pnl > 0 ? 'Profit' : 'Loss';
-                        con.find('.second_label').text(text.localize(pnl_label));
-                        con.find('.second_value').text(pnl);
+                        con.find('.second_label').text(text.localize(pnl_label)).addClass(pnl_label.toLowerCase());
+                        con.find('.second_value').text(pnl).addClass(pnl_label.toLowerCase());
                         con.find('.third_label').text(text.localize('Exit Level'));
                         con.find('.third_value').text(resp.exit_level);
                     }
-                    alert('success');
                 },
                 on_sell_error: function(form, resp, resp_status, jqXHR) {
                     var data = {};
-                    alert('error');
                 },
                 disable: function(target) {
                     var that = this;
@@ -271,7 +268,10 @@ var BetPrice = function() {
                             var other_val = matches[0].substr(0, matches[0].length - 1);
                             var point_val = matches[0].substr(-1,1);
                             var cents_val = matches[1];
-                            var con = $('.spread_container');
+                            var con = that.container();
+
+                            var current_value = that.round(parseFloat(prices[i].value),2);
+                            $('#confirmation_table').find('.second_label').text(current_value);
 
                             if (con.find('.disabled')) {
                                 that.disable(con.find('.disabled').parents('a[class^="spread"]'));
@@ -292,8 +292,11 @@ var BetPrice = function() {
                             }
 
                             if (level >= higher_stop_level || level <= lower_stop_level) {
-                                that.sell_bet(con.find('a.spread_'+id));
+                                var to_sell = con.find('.outer_box').not('.disabled').parents('a[class^="spread"]');
+                                console.log(level);
+                                that.sell_bet(to_sell);
                                 that.reset();
+                                break;
                             }
                         }
                     };
@@ -311,6 +314,11 @@ var BetPrice = function() {
                 stop_profit_level: function() {
                     var that = this;
                     return parseFloat(that.container().find('#stop_profit_level').val());
+                },
+                round: function(number,number_after_dec) {
+                    var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
+                    result = result.toFixed(number_after_dec);
+                    return result;
                 },
             };
         }(),
