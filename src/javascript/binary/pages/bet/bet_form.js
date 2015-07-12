@@ -221,6 +221,10 @@ var BetForm = function () {
                         BetForm.time.update_for_start_time_change();
                         $('#bet_calculation_container').hide();
                     }).addClass('unbind_later');
+                    $('#stop_type').on('change', function (e) {
+                        var selected = $(this).val();
+                        $('#stop_type_2').val(selected);
+                    }).addClass('unbind_later');
                 },
                 on_form_submit: function() {
                     BetForm.attributes.form().on('submit', function (event) {
