@@ -264,22 +264,21 @@ var BetPrice = function() {
                         for (var i = 0; i < prices.length; i++) {
                             var id = prices[i].id;
                             var level = parseFloat(prices[i].level);
-                            var matches = level.toString().match(/[0-9]+/g);
-                            var other_val = matches[0].substr(0, matches[0].length - 1);
-                            var point_val = matches[0].substr(-1,1);
-                            var cents_val = matches[1];
+                            var chunks = that.split_level(level);
+
+                            if (typeof(prices[i].value) !== 'undefined') {
+                                var current_value = that.round(parseFloat(prices[i].value),2);
+                                $('#confirmation_table').find('.second_value').text(current_value);
+                            }
+
                             var con = that.container();
-
-                            var current_value = that.round(parseFloat(prices[i].value),2);
-                            $('#confirmation_table').find('.second_label').text(current_value);
-
                             if (con.find('.disabled')) {
                                 that.disable(con.find('.disabled').parents('a[class^="spread"]'));
                             }
 
-                            con.find('.spread_other_'+id).text(other_val);
-                            con.find('.spread_point_'+id).text(point_val);
-                            con.find('.spread_cents_'+id).text('.'+cents_val);
+                            con.find('.spread_other_'+id).text(chunks.other);
+                            con.find('.spread_point_'+id).text(chunks.point);
+                            con.find('.spread_cents_'+id).text('.'+chunks.cents);
 
                             var higher_stop_level;
                             var lower_stop_level;
@@ -292,8 +291,8 @@ var BetPrice = function() {
                             }
 
                             if (level >= higher_stop_level || level <= lower_stop_level) {
-                                var to_sell = con.find('.outer_box').not('.disabled').parents('a[class^="spread"]');
                                 console.log(level);
+                                var to_sell = con.find('.outer_box').not('.disabled').parents('a[class^="spread"]');
                                 that.sell_bet(to_sell);
                                 that.reset();
                                 break;
@@ -302,6 +301,20 @@ var BetPrice = function() {
                     };
                     that._stream.onerror = function() {
                         that._stream.close();
+                    };
+                },
+                split_level: function(level) {
+                    var that = this;
+
+                    var matches = level.toString().match(/[0-9]+/g);
+                    var other_val = matches[0].substr(0, matches[0].length - 1);
+                    var point_val = matches[0].substr(-1,1);
+                    var cents_val = matches[1] || '00';
+
+                    return {
+                        other: other_val,
+                        point: point_val,
+                        cents: cents_val,
                     };
                 },
                 container: function() {
@@ -703,18 +716,17 @@ var BetPrice = function() {
                     }
                 },
                 update_spread_ui: function(spread) {
+                    var that = this;
+
                     for (var i = 0; i < spread.length; i++) {
                         var id = spread[i].id;
-                        var value = spread[i].level;
-                        var matches = value.toString().match(/[0-9]+/g);
-                        var other_val = matches[0].substr(0, matches[0].length - 1);
-                        var point_val = matches[0].substr(-1,1);
-                        var cents_val = matches[1];
+                        var level = spread[i].level;
+                        var chunks = BetPrice.spread.split_level(level);
 
                         var con = $('.spread_'+id);
-                        con.find('.spread_other_' + id).text(other_val);
-                        con.find('.spread_point_' + id).text(point_val);
-                        con.find('.spread_cents_' + id).text('.'+cents_val);
+                        con.find('.spread_other_' + id).text(chunks.other);
+                        con.find('.spread_point_' + id).text(chunks.point);
+                        con.find('.spread_cents_' + id).text('.'+chunks.cents);
                     }
                 },
                 update_price: function(id, price, old_price) {
