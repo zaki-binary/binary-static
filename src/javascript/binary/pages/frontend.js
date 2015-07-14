@@ -137,29 +137,6 @@ var Charts = function(charts) {
     window.open(charts, 'DetWin', 'width=580,height=710,scrollbars=yes,location=no,status=no,menubar=no');
 };
 
-var home_bomoverlay = {
-    url : {
-	    param : {
-            get : function(name) {
-                name = name.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
-                var regexS = "[\\?&]"+name+"=([^&#]*)";
-                var regex = new RegExp(regexS);
-                var results = regex.exec(window.location.href);
-                return (results === null)? null:results[1];
-            }
-        }
-    },
-
-    init : function() {
-        if (! this.url.param.get('frombom')) return;
-        var obj = document.getElementById('banner').getElementsByClassName('wrapper')[0];
-        var div = document.createElement('div');
-        div.className = 'bomoverlay';
-        obj.appendChild(div);
-        div.addEventListener('click', function() { this.parentNode.removeChild(this); });
-    }
-};
-
 var email_rot13 = function(str) {
     return str.replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);});
 };
@@ -272,7 +249,6 @@ pjax_config_page('/$|/home', function() {
         onLoad: function() {
             select_user_country();
             get_ticker();
-            home_bomoverlay.init();
         }
     };
 });
