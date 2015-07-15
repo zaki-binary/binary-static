@@ -256,6 +256,7 @@ var BetPrice = function() {
                 },
                 stream: function(channel) {
                     var that = this;
+                    that.on_sell();
                     var url = window.location.protocol + '//' + page.settings.get('streaming_server')+'/push/price/'+channel;
                     that._stream = new EventSource(url, { withCredentials: true });
                     that._stream.onmessage = function(e) {
