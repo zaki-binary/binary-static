@@ -7,9 +7,7 @@ var Trade = (function () {
         var selectors = data.offerings.selectors;
         var offerings = data.offerings.offerings;
 
-        var submarketElements = new Object(),
-            underlyingElements = new Object(),
-            contractCategories = new Object();
+        var submarketElements = {}, underlyingElements = {}, contractCategories = {};
 
         submarketElements['all'] = 'All';
 
@@ -36,13 +34,13 @@ var Trade = (function () {
 
                             if (!formName) {
                                 formName = 'callput';
-                                barrierCategory = 'euro_atm'
+                                barrierCategory = 'euro_atm';
                             } else if (formName == 'risefall') {
                                 formName = 'callput';
-                                barrierCategory = 'euro_atm'
+                                barrierCategory = 'euro_atm';
                             } else if (formName == 'higherlower') {
                                 formName = 'callput';
-                                barrierCategory = 'euro_non_atm'
+                                barrierCategory = 'euro_non_atm';
                             }
 
                             for (var m = 0, ctcategoryavalen = offerings[i].available[j].available[k].available[l].available.length; m < ctcategoryavalen; m++) {

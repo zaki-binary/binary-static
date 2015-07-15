@@ -5,7 +5,7 @@ var Contract = (function () {
 
     var processContracts = function (contractObject, formName, expiryType) {
         var contracts = contractObject.contracts_for;
-        open = contracts.open, close = contracts.close;
+        open = contracts['open'], close = contracts['close'];
         var contractsArray = [], sendAll = true, barrierCategory;
 
         if (formName) {
@@ -31,7 +31,7 @@ var Contract = (function () {
             if (barrierCategory) {
                 var j = contractsArray.length;
                 while (j--) {
-                    if (!(barrierCategory == contractsArray[j]['barrier_category'])) {
+                    if (barrierCategory != contractsArray[j]['barrier_category']) {
                         contractsArray.splice(j, 1);
                     }
                 }
