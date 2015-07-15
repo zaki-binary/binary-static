@@ -4,9 +4,7 @@ var Contract = (function () {
     var open, close, contractDetails = [];
 
     var processContracts = function (contractObject, formName, expiryType) {
-        var contracts = contractObject.contracts_for;
-        open = contracts['open'], close = contracts['close'];
-        var contractsArray = [], sendAll = true, barrierCategory;
+        var contracts = contractObject.contracts_for, open = contracts['open'], close = contracts['close'], contractsArray = [], sendAll = true, barrierCategory;
 
         if (formName) {
             if(formName == 'risefall') {
