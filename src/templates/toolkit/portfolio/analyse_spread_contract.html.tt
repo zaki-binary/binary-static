@@ -17,7 +17,7 @@
                     <td>[% l("Stop Loss Level") %]</td>
                     <td>[% stop_loss_level %]</td>
                 </tr>
-                <tr>
+                <tr [% IF is_expired %]style="display:none"[% END %]>
                     <td>[% l("Stop Profit Level") %]</td>
                     <td>[% stop_profit_level %]</td>
                 </tr>
@@ -32,7 +32,7 @@
             </tbody>
         </table>
     </div>
-    <div class="spread_container">
+    <div class="spread_container" [% IF is_expired %]style="display:none"[% END %]>
         <input type="hidden" id="stop_loss_level" name="stop_loss_level" value="[% stop_loss_level %]"\>
         <input type="hidden" id="stop_profit_level" name="stop_profit_level" value="[% stop_profit_level %]"\>
         <form action="[% url %]" method="post" autocomplete="off">
