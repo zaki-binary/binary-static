@@ -173,7 +173,6 @@ var BetPrice = function() {
             }
 
             if (data.is_spread) {
-                that.spread.on_sell();
                 that.spread.stream(data.stream_channel);
             }
 
