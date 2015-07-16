@@ -4,8 +4,8 @@ var Trade = (function () {
     var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms;
 
     var processOfferings = function (data, market, formName, submarket, underlying) {
-        var selectors = data.offerings.selectors;
-        var offerings = data.offerings.offerings;
+        var selectors = data.selectors;
+        var offerings = data.offerings;
 
         var submarketElements = {}, underlyingElements = {}, contractCategories = {};
 
