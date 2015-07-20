@@ -2,31 +2,6 @@
     [% analyse_link %]
 [% END %]
 
-[% IF is_spread %]
-    <div class='grd-grid-12 grid-parent spread_container'>
-        <input type="hidden" id="stop_loss_level" name="stop_loss_level" value="[% stop_loss_level %]"\>
-        <input type="hidden" id="stop_profit_level" name="stop_profit_level" value="[% stop_profit_level %]"\>
-        [% FOREACH input IN data %]
-            <form action="[% url %]" method="post" autocomplete="off">
-                <input type="hidden" id="shortcode" name="shortcode" value="[% shortcode %]">
-                <input type="hidden" id="currency" name="currency" value="[% currency %]">
-                <input type="hidden" id="purchase_price" name="purchase_price" value="[% purchase_price %]">
-                <input type="hidden" id="contract_id" name="contract_id" value="[% contract_id %]">
-                <input type="hidden" id="controller_action" name="controller_action" value="[% controller_action %]">
-                <div class="grd-grid-6">
-                    [% INCLUDE bet/spread_button_wrapper.html.tt
-                        id=input.id
-                        action=input.id
-                        level=input.level
-                        button_text=input.button_text
-                        disabled=input.disabled
-                    %]
-                </div>
-            </form>
-        [% END %]
-    </div>
-[% END %]
-
 [% IF display_digits %]
     <div id='digit-contract-details' style="display:none" class="grd-parent grd-grid-12 digit-container">
         <span class="grd-grid-4">
