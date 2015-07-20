@@ -95,6 +95,13 @@ select, input, button, textarea {
 button {
     vertical-align: top;
 }
+button:focus, input[type="submit"]:focus {
+    background: red;
+    outline: none;
+}
+button::-moz-focus-inner, input[type="submit"]::-moz-focus-inner {
+  border: 0;
+}
 input, button, textarea, select, optgroup, option {
     font-family: inherit;
     font-size: inherit;
