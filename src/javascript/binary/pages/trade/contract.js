@@ -1,10 +1,11 @@
 var Contract = (function () {
     'use strict';
 
-    var open, close, contractDetails = [];
+    var open, close, contractDetails = [], durations = {};
 
     var processContracts = function (contractObject, formName, expiryType) {
-        var contracts = contractObject.contracts_for, open = contracts['open'], close = contracts['close'], contractsArray = [], sendAll = true, barrierCategory;
+        var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true, barrierCategory;
+        open = contracts['open'], close = contracts['close'];
 
         if (formName) {
             if(formName == 'risefall') {
@@ -14,7 +15,28 @@ var Contract = (function () {
                 formName = 'callput';
                 barrierCategory = '"euro_non_atm"';
             }
+
             for(var i = 0, len = contracts.available.length; i < len; i++) {
+                if (!durations[contracts.available[i]['expiry_type']]) {
+                    durations[contracts.available[i]['expiry_type']] = {};
+                }
+
+                if(!durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']]) {
+                    durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']] = {};
+                }
+
+                if(!durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']]) {
+                    durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']] = {};
+                }
+
+                if(!durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']]) {
+                    durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']] = {};
+                }
+
+                durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']]['max_contract_duration'] = contracts.available[i]['max_contract_duration'];
+
+                durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']]['min_contract_duration'] = contracts.available[i]['min_contract_duration'];
+
                 if(formName == contracts.available[i]['contract_category']) {
                     if (expiryType) {
                         if (expiryType == contracts.available[i]['expiry_type']) {
@@ -26,6 +48,13 @@ var Contract = (function () {
                     sendAll = false;
                 }
             }
+
+            if(expiryType) {
+                var obj = {};
+                obj[expiryType] = durations[expiryType];
+                durations = obj;
+            }
+
             if (barrierCategory) {
                 var j = contractsArray.length;
                 while (j--) {
@@ -51,8 +80,8 @@ var Contract = (function () {
         details: details,
         open: function () { return open; },
         close: function () { return close; },
-        contracts: function () { return contractDetails; }
+        contracts: function () { return contractDetails; },
+        durations: function () { return durations; }
     };
 
 })();
-
