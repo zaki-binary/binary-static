@@ -19,7 +19,6 @@ if (isStorageSupported(window.sessionStorage)) {
     if (!LocalStore) {
         LocalStore = new Store(window.sessionStorage);
     }
-
     SessionStore = new Store(window.sessionStorage);
 }
 
@@ -27,7 +26,6 @@ if (!SessionStore || !LocalStore) {
     if (!LocalStore) {
         LocalStore = new InScriptStore();
     }
-
     if (!SessionStore) {
         SessionStore = new InScriptStore();
     }
@@ -189,4 +187,9 @@ onLoad.queue(function () {
     attach_time_picker('.has-time-picker');
     attach_inpage_popup('.has-inpage-popup');
     attach_tabs('.has-tabs');
+});
+
+$(window).on('storage', function (jq_event) {
+    if (jq_event.originalEvent.key !== 'active_loginid') return;
+    location.reload();
 });
