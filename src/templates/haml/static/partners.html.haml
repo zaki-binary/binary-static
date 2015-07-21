@@ -1,0 +1,49 @@
+- stash(
+-   title => l('Partners'),
+- );
+.grd-container
+  .grd-grid-12
+    %h1= stash->{title}
+    %p= l('[_1] provides business partnership serivces via various programs.', stash->{website_name})
+  .grd-grid-12.grd-grid-mobile-12.grd-parent
+    .grd-grid-4.grd-grid-mobile-12.grd-parent
+      .grd-grid-6.grd-with-padding
+        %a.pjaxload{:href => url_for('/affiliate/signup')}
+          %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/partners/affiliate-program.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/affiliate/signup')}= l('Affiliate Program')
+        %p= l('Our affiliate program is for investing professionals and webmasters who manage their own website, newsletter or mailing list.')
+    .grd-grid-4.grd-grid-mobile-12.grd-parent
+      .grd-grid-6.grd-with-padding
+        %a.pjaxload{:href => url_for('/white-labels')}
+          %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/partners/white-label-program.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/white-labels')}= l('White Labels')
+        %p= l('The [_1] White Label program allows affiliates to create their own branded versions of the [_1] platform.', stash->{website_name})
+    .grd-grid-4.grd-grid-mobile-12.grd-parent
+      .grd-grid-6.grd-with-padding
+        %a.pjaxload{:href => url_for('/bulk-trader-facility')}
+          %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/partners/bulktrader-facilities.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/bulk-trader-facility')}= l('Bulk Trader')
+        %p= l('Enjoy the benefits of our bulk trader facility with [_1]', stash->{website_name})
+  .grd-grid-12.grd-grid-mobile-12.grd-parent.grd-clear
+    .grd-grid-4.grd-grid-mobile-12.grd-parent
+      .grd-grid-6.grd-with-padding
+        %a.pjaxload{:href => url_for('/partnerapi')}
+          %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/partners/api.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/partnerapi')}= l('Partner API')
+        %p= l('[_1] provides business partners with two application programming interfaces (APIs).', stash->{website_name})
+    .grd-grid-4.grd-grid-mobile-12.grd-parent
+      .grd-grid-6.grd-with-padding
+        %a.pjaxload{:href => url_for('/open-source-projects')}
+          %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/partners/open-source-venture.svg')}
+      .grd-grid-12
+        %h4
+          %a.pjaxload{:href => url_for('/open-source-projects')}= l('Open Source')
+        %p= l('[_1] is an active proponent of the open-source movement and is in the process of open-sourcing a number of components of its codebase.', stash->{website_name})
