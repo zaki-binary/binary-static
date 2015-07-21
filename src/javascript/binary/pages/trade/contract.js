@@ -1,7 +1,7 @@
 var Contract = (function () {
     'use strict';
 
-    var open, close, contractDetails = [], durations = {};
+    var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {};
 
     var processContracts = function (contractObject, formName, expiryType) {
         var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true, barrierCategory;
@@ -13,7 +13,7 @@ var Contract = (function () {
                 barrierCategory = 'euro_atm';
             } else if (formName == 'higherlower') {
                 formName = 'callput';
-                barrierCategory = '"euro_non_atm"';
+                barrierCategory = 'euro_non_atm';
             }
 
             for(var i = 0, len = contracts.available.length; i < len; i++) {
@@ -46,6 +46,31 @@ var Contract = (function () {
                         contractsArray.push(contracts.available[i]);
                     }
                     sendAll = false;
+                }
+
+                if (contracts.available[i].forward_starting_options && contracts.available[i]['start_type'] == 'forward') {
+                    startDates = contracts.available[i].forward_starting_options;
+                }
+
+                if (formName == contracts.available[i]['contract_category']) {
+                    if (contracts.available[i].barriers == 1) {
+                        if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
+                            var barrier = {};
+                            barrier['count'] = 1;
+                            barrier['barrier'] = contracts.available[i]['barrier'];
+                            barrier['barrier_category'] = contracts.available[i]['barrier_category'];
+                            barriers[contracts.available[i]['contract_category']] = barrier;
+                        }
+                    } else if (contracts.available[i].barriers == 2) {
+                        if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
+                            var barrier = {};
+                            barrier['count'] = 1;
+                            barrier['barrier'] = contracts.available[i]['high_barrier'];
+                            barrier['barrier1'] = contracts.available[i]['low_barrier'];
+                            barrier['barrier_category'] = contracts.available[i]['barrier_category'];
+                            barriers[contracts.available[i]['contract_category']] = barrier;
+                        }
+                    }
                 }
             }
 
@@ -81,7 +106,9 @@ var Contract = (function () {
         open: function () { return open; },
         close: function () { return close; },
         contracts: function () { return contractDetails; },
-        durations: function () { return durations; }
+        durations: function () { return durations; },
+        startDates: function () { return startDates; },
+        barriers: function () { return barriers; }
     };
 
 })();

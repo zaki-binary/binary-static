@@ -19,7 +19,7 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="date_start_row">
                 <div class="col form_label">
                     Start time:
                 </div>
@@ -62,20 +62,28 @@
                     <span id="spot"></span>
                 </div>
             </div>
-            <div class="row">
+            <div class="row barrier_class" id="barrier_row">
+                <div class="col form_label">
+                    <label for="barrier" id="barrier_label">Barrier:</label>
+                </div>
+                <div class="big-col">
+                    <input id="barrier" type="text" name="H"/>
+                </div>
+            </div>
+            <div class="row barrier_class" id="high_barrier_row">
                 <div class="col form_label">
                     <label for="barrier" id="barrier_label">High barrier:</label>
                 </div>
                 <div class="big-col">
-                    <input id="barrier" type="text"/>
+                    <input id="barrier" type="text" name="H"/>
                 </div>
             </div>
-            <div class="row">
+            <div class="row barrier_class" id="low_barrier_row">
                 <div class="col form_label">
                     <label for="barrier1" id="barrier1_label">Low barrier:</label>
                 </div>
                 <div class="big-col">
-                    <input id="barrier1" type="text"/>
+                    <input id="barrier1" type="text" name="L"/>
                 </div>
             </div>
             <div class="row">
