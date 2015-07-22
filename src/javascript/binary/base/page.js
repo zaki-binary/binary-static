@@ -801,7 +801,7 @@ Page.prototype = {
             var email = $('#Email').val();
             var residence = $('#residence').val();
 
-            var error_msg;
+            var error_msg = '';
             if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
                 error_msg = text.localize('Invalid email address');
             } else if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
