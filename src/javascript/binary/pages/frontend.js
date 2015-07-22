@@ -249,10 +249,11 @@ var get_residence_list = function() {
     $.getJSON(url, function(data) {
         var countries = [];
         $.each(data.residence, function(i, country) {
-            if (i === 1) {
-                alert("country text: " + country.text + ", country code: " + country.value);
+            var disabled = '';
+            if (country.disabled) {
+                disabled = 'disabled';
             }
-            countries.push('<option value="' + country.value + '">' + country.text + '</option>');
+            countries.push('<option value="' + country.value + '"' + disabled + '>' + country.text + '</option>');
             $("#residence").html(countries.join(''));
         });
     });
@@ -262,8 +263,8 @@ pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
             //select_user_country();
-            get_ticker();
             get_residence_list();
+            get_ticker();
         }
     };
 });
