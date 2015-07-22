@@ -44,43 +44,50 @@ var displayDurations = function (id, durations, formName, barrierCategory, start
             if (duration == 'intraday') {
                 switch (textMapping['value']) {
                     case 's':
-                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
                         fragment.appendChild(option);
-                        option = document.createElement('option'), content = document.createTextNode('minutes');
+                        option = document.createElement('option');
+                        content = document.createTextNode('minutes');
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
                         fragment.appendChild(option);
-                        option = document.createElement('option'), content = document.createTextNode('hours');
+                        option = document.createElement('option');
+                        content = document.createTextNode('hours');
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
                         fragment.appendChild(option);
                         break;
                     case 'm':
-                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
                         fragment.appendChild(option);
-                        option = document.createElement('option'), content = document.createTextNode('hours');
+                        option = document.createElement('option');
+                        content = document.createTextNode('hours');
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
                         fragment.appendChild(option);
                         break;
                     case 'h':
-                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
                         fragment.appendChild(option);
                         break;
                     default :
-                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
@@ -88,13 +95,15 @@ var displayDurations = function (id, durations, formName, barrierCategory, start
                         break;
                 }
             } else if (duration == 'daily') {
-                option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                option = document.createElement('option');
+                content = document.createTextNode(textMapping['text']);
                 option.setAttribute('value', textMapping['value']);
                 option.setAttribute('data-minimum', textMapping['min']);
                 option.appendChild(content);
                 fragment.appendChild(option);
             } else if (duration == 'tick') {
-                option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                option = document.createElement('option');
+                content = document.createTextNode(textMapping['text']);
                 option.setAttribute('value', textMapping['value']);
                 option.setAttribute('data-minimum', textMapping['min']);
                 option.appendChild(content);
@@ -149,7 +158,8 @@ var displayExpiryType = function (id, unit) {
     fragment.appendChild(option);
 
     if (unit != 't') {
-        var option = document.createElement('option'), content = document.createTextNode('End Time');
+        option = document.createElement('option');
+        content = document.createTextNode('End Time');
         option.setAttribute('value', 'endtime');
         option.appendChild(content);
         fragment.appendChild(option);
