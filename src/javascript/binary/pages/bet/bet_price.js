@@ -172,10 +172,6 @@ var BetPrice = function() {
                 that.digit.process(start_moment);
             }
 
-            if (data.is_spread) {
-                that.spread.stream(data.stream_channel);
-            }
-
             con.show();
             // push_data_layer();
             var _clear_results = function () { that.clear_buy_results(); };
@@ -192,7 +188,7 @@ var BetPrice = function() {
                 },
                 on_sell: function(form) {
                     var that = this;
-                    $('a.spread_buy, a.spread_sell').on('click', function (e) {
+                    $('button.close_position').on('click', function (e) {
                         e = e || window.event;
                         if (typeof e.preventDefault == 'function') {
                             e.preventDefault();
@@ -205,8 +201,8 @@ var BetPrice = function() {
                 sell_bet: function(target) {
                     var that = this;
                     that.reset();
+                    target.attr('disabled','disabled').hide();
                     var form = target.parents('form');
-                    that.disable(form.find('a[class^="spread"]'));
                     var timeout = 60000;
 
                     if(!$.cookie('login')) {
@@ -232,26 +228,16 @@ var BetPrice = function() {
                     var that = this;
 
                     if (resp) {
-                        var con = $('#confirmation_table');
-                        con.find('.first_label').text(text.localize('Entry Level'));
-                        con.find('.first_value').text(resp.entry_level);
-                        var pnl = that.round(parseFloat(resp.value),2);
-                        var pnl_label = pnl > 0 ? 'Profit' : 'Loss';
-                        con.find('.second_label').text(text.localize(pnl_label)).addClass(pnl_label.toLowerCase());
-                        con.find('.second_value').text(pnl).addClass(pnl_label.toLowerCase());
-                        con.find('.third_label').text(text.localize('Exit Level'));
-                        con.find('.third_value').text(resp.exit_level);
+                        var con = that.spread_con();
+                        var color = resp.value.dollar > 0 ? 'profit' : 'loss';
+                        con.find('#status').text(text.localize('Close')).addClass(color);
+                        con.find('#pnl_value').text(resp.value.dollar).addClass(color);
+                        con.find('#pnl_point').text(resp.value.point);
+                        con.find('#exit_level').text(resp.exit_level).parents('tr').show();
                     }
                 },
                 on_sell_error: function(form, resp, resp_status, jqXHR) {
                     var data = {};
-                },
-                disable: function(target) {
-                    var that = this;
-                    target.unbind('click');
-                    target.find('.outer_box').removeClass('sell');
-                    target.find('.outer_box').removeClass('buy');
-                    target.find('.outer_box').addClass('grey-out');
                 },
                 stream: function(channel) {
                     var that = this;
@@ -264,20 +250,13 @@ var BetPrice = function() {
                         for (var i = 0; i < prices.length; i++) {
                             var id = prices[i].id;
                             var level = parseFloat(prices[i].level);
-                            var chunks = that.split_level(level);
 
                             if (typeof(prices[i].value) !== 'undefined') {
-                                var current_value = that.round(parseFloat(prices[i].value),2);
-                                $('#confirmation_table').find('.second_value').text(current_value);
+                                that.spread_con().find('#sell_level').text(level);
+                                var current_value = that.round(parseFloat(prices[i].value.dollar),2);
+                                that.spread_con().find('#pnl_level').text(current_value);
+                                that.spread_con().find('#pnl_point').text(prices[i].value.point);
                             }
-
-                            var con = that.container();
-                            if (con.find('.disabled')) {
-                                that.disable(con.find('.disabled').parents('a[class^="spread"]'));
-                            }
-
-                            con.find('.spread_point_'+id).text(chunks.point);
-                            con.find('.spread_decimal_'+id).text('.'+chunks.decimal);
 
                             var higher_stop_level;
                             var lower_stop_level;
@@ -290,10 +269,8 @@ var BetPrice = function() {
                             }
 
                             if (level >= higher_stop_level || level <= lower_stop_level) {
-                                console.log(level);
-                                var to_sell = con.find('.outer_box').not('.disabled').parents('a[class^="spread"]');
-                                that.sell_bet(to_sell);
-                                that.reset();
+                                var sell_button = that.spread_con().find('.close_position');
+                                sell_button.click();
                                 break;
                             }
                         }
@@ -301,6 +278,9 @@ var BetPrice = function() {
                     that._stream.onerror = function() {
                         that._stream.close();
                     };
+                },
+                spread_con: function() {
+                    return $('#sell_content_wrapper');
                 },
                 split_level: function(level) {
                     var that = this;
@@ -313,16 +293,13 @@ var BetPrice = function() {
                         decimal: cents_val,
                     };
                 },
-                container: function() {
-                    return $('.spread_container');
-                },
                 stop_loss_level: function() {
                     var that = this;
-                    return parseFloat(that.container().find('#stop_loss_level').val());
+                    return parseFloat(that.spread_con().find('#stop_loss_level').text());
                 },
                 stop_profit_level: function() {
                     var that = this;
-                    return parseFloat(that.container().find('#stop_profit_level').val());
+                    return parseFloat(that.spread_con().find('#stop_profit_level').text());
                 },
                 round: function(number,number_after_dec) {
                     var result = Math.round(number * Math.pow(10,number_after_dec)) / Math.pow(10,number_after_dec);
