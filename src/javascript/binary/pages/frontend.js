@@ -254,7 +254,7 @@ var get_residence_list = function() {
             }
             countries.push('<option value="' + country.value + '">' + country.text + '</option>');
             $("#residence").html(countries.join(''));
-        }
+        });
     });
 };
 
