@@ -791,8 +791,7 @@ Page.prototype = {
     },
     on_input_password: function() {
         $('#chooseapassword').on('input', function() {
-            $('#chooseapassword_2').removeClass('invisible');
-            $('#chooseapassword_2').show();
+            $("#chooseapassword_2").css("visibility", "visible");
         });
     },
     on_click_signup: function() {

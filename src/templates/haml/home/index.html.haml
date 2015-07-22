@@ -21,12 +21,12 @@
           %span#virtual-fields
             .grd-parent
               %span.grd-grid-12.grd-no-gutter
-                %input.xemail{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder => stash('emailtext')}
-                %select#residence{:name => 'residence', :required => true, :placeholder => stash('residence_text')}
+                %input.virtual-acc-left{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder => stash('emailtext')}
+                %select.virtual-acc-right{:name => 'residence', :id => 'residence', :required => true, :placeholder => stash('residence_text')}
             .grd-parent
               %span.grd-grid-12.grd-no-gutter
-                %input#chooseapassword.xpass{:name => 'chooseapassword', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('passwordstext')}
-                %input#chooseapassword_2.xpass.invisible{:name => 'chooseapassword_2', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('reenter_password')}
+                %input.virtual-acc-left{:name => 'chooseapassword', :id => 'chooseapassword', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('passwordstext')}
+                %input.virtual-acc-right.invisible{:name => 'chooseapassword_2', :id => 'chooseapassword_2', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('reenter_password')}
                 %p#signup_error.errorfield.invisible
                 %input{:type => 'hidden', :name => 'l', :value => stash('language')}
             %span.grd-grid-12.grd-no-gutter
