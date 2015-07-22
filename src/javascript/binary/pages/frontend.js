@@ -250,10 +250,13 @@ var get_residence_list = function() {
         var countries = [];
         $.each(data.residence, function(i, country) {
             var disabled = '';
+            var selected = '';
             if (country.disabled) {
-                disabled = 'disabled';
+                disabled = ' disabled ';
+            } else if (country.selected) {
+                selected = ' selected="selected" ';
             }
-            countries.push('<option value="' + country.value + '"' + disabled + '>' + country.text + '</option>');
+            countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
             $("#residence").html(countries.join(''));
         });
     });
