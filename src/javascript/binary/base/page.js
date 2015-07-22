@@ -765,8 +765,6 @@ Page.prototype = {
         this.on_change_loginid();
         this.record_affiliate_exposure();
         this.contents.on_load();
-        this.on_click_signup();
-        this.on_input_password();
         this.on_click_acc_transfer();
         this.on_click_view_balances();
         $('#current_width').val(get_container_width());//This should probably not be here.
@@ -787,38 +785,6 @@ Page.prototype = {
         $('#client_loginid').on('change', function() {
             LocalStore.set('active_loginid', $(this).val());
             $('#loginid-switch-form').submit();
-        });
-    },
-    on_input_password: function() {
-        $('#chooseapassword').on('input', function() {
-            $("#chooseapassword_2").css("visibility", "visible");
-        });
-    },
-    on_click_signup: function() {
-        $('#btn_registration').on('click', function() {
-            var pwd = $('#chooseapassword').val();
-            var pwd_2 = $('#chooseapassword_2').val();
-            var email = $('#Email').val();
-            var residence = $('#residence').val();
-
-            var error_msg = '';
-            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
-                error_msg = text.localize('Invalid email address');
-            } else if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
-                error_msg = text.localize('The two passwords that you entered do not match.');
-            } else if (email == pwd) {
-                error_msg = text.localize('Your password cannot be the same as your email');
-            } else if (residence.length === 0) {
-                error_msg = text.localize('Please specify your country.');
-            }
-
-            if (error_msg.length > 0) {
-                $('#signup_error').text(error_msg);
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
-            }
-            $('#virtual-acc-form').submit();
         });
     },
     on_click_acc_transfer: function() {
