@@ -248,7 +248,7 @@ var get_residence_list = function() {
     var url = page.url.url_for('residence_list');
     $.getJSON(url, function(data) {
         var countries = [];
-        $.each(data, function(i, country) {
+        $.each(data.residence, function(i, country) {
             var disabled = '';
             var selected = '';
             if (country.disabled) {
