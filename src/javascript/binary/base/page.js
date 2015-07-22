@@ -718,8 +718,8 @@ Contents.prototype = {
                 }
             }
             if (has_real) {
-                $('.virtual-upgrade-link').addClass('invisible');
-                $('.virtual-upgrade-link').hide();
+                $('#virtual-upgrade-link').addClass('invisible');
+                $('#virtual-upgrade-link').hide();
 
                 if (check_financial && !has_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
