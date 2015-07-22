@@ -7,8 +7,8 @@
       %li= l('Up/Down trades')
       %li= l('Touch/no touch trades')
       %li= l('In/out trades')
-      %li= l('Asians')
-      %li= l('Digits')
+      %li.ja-hide= l('Asians')
+      %li.ja-hide= l('Digits')
 
   .subsection
     .grd-grid-12
@@ -39,7 +39,7 @@
         %li= l('Choose the market, the price targets, the time period, and how much you wish to win.')
         %li= l('Price the trade.')
         %li= l('Win 10-1000% on your stake if you are correct. Increase your winning return by choosing "Stays In" with a narrow price target.')
-  .subsection
+  .subsection.ja-hide
     .grd-grid-12
       %h2
         %a.pjaxload{:href => url_for('trade.cgi?market=random&form_name=digits')}= l('Digits')
@@ -47,7 +47,7 @@
       %ol
         %li= l('“Matches” – You win when the last digit of the last tick matches your prediction.')
         %li= l('“Differs” – You win when the last digit of the last tick does not match your prediction.')
-  .subsection
+  .subsection.ja-hide
     .grd-grid-12
       %h2
         %a.pjaxload{:href => url_for('trade.cgi?market=random&form_name=digits')}= l('Asians')

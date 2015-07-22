@@ -19,7 +19,6 @@ if (isStorageSupported(window.sessionStorage)) {
     if (!LocalStore) {
         LocalStore = new Store(window.sessionStorage);
     }
-
     SessionStore = new Store(window.sessionStorage);
 }
 
@@ -27,7 +26,6 @@ if (!SessionStore || !LocalStore) {
     if (!LocalStore) {
         LocalStore = new InScriptStore();
     }
-
     if (!SessionStore) {
         SessionStore = new InScriptStore();
     }
@@ -189,4 +187,13 @@ onLoad.queue(function () {
     attach_time_picker('.has-time-picker');
     attach_inpage_popup('.has-inpage-popup');
     attach_tabs('.has-tabs');
+});
+
+// this event is fired when there is change in localStorage
+// that looks for active_loginid key change, this was needed for
+// scenario where client has multiple tab/window open and switch
+// account on one tab then we need to load all the open tab/window
+$(window).on('storage', function (jq_event) {
+    if (jq_event.originalEvent.key !== 'active_loginid') return;
+    location.reload();
 });

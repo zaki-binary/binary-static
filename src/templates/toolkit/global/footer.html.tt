@@ -15,15 +15,15 @@
                             <a class="pjaxload" href="[% request.url_for('/affiliate/signup') %]"[% IF target %]
                             target="[% target %]"[% END %]>[% l('Affiliate Program') %]</a>
                         </li>
-                        <li>
+                        <li class="ja-hide">
                             <a href="[% request.url_for('white-labels') %]" class="pjaxload">[% l('White Labels') %]</a>
                         </li>
-                        <li>
+                        <li class="ja-hide">
                             <a class="pjaxload" href="[% request.url_for('partnerapi') %]"[% IF target %] target="[%
                             target
                             %]"[% END %]>[% l('Partner API') %]</a>
                         </li>
-                        <li>
+                        <li class="ja-hide">
                             <a href="[% request.url_for('open-source-projects') %]" class="pjaxload">[% l('Open Source') %]</a>
                         </li>
                     </ul>
@@ -45,7 +45,7 @@
                             %]"[%
                             END %]>[% l('Platform Tour') %]</a>
                         </li>
-                        <li>
+                        <li class="ja-hide">
                             <a href="http://www.gamcare.org.uk/" target="_blank">[% l('GamCare') %]</a>
                         </li>
                         <li>
@@ -103,7 +103,7 @@
                             target
                             %] target="[% target %]"[% END %]>[% l('Security and Privacy') %]</a>
                         </li>
-                        <li>
+                        <li class="ja-hide">
                             <a class="pjaxload" href="[% request.url_for('responsible-trading') %]"[% IF target %]
                             target="[% target %]"[% END %]>[% l('Responsible Trading') %]</a>
                         </li>
@@ -164,9 +164,9 @@
             </div>
         </div>
     </div>
-    <div id="footer-regulatory">
+    <div id="footer-regulatory" class="ja-top-paddingclass">
         <div class="grd-container grd-default-container">
-            <div class="grd-parent grd-grid-12">
+            <div class="grd-parent grd-grid-12 ja-hide">
                 <div class="grd-grid-2 center">
                     <a href="http://www.gov.im/gambling/" target="_blank">
                         <img id="iom_icon_footer" class="responsive" src="[% request.url_for('images/pages/footer/isle-of-man.png') %]"/>
