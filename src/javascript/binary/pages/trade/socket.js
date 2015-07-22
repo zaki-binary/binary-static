@@ -68,7 +68,21 @@
                 displayStartDates('date_start', Contract.startDates());
                 displayBarriers(Contract.barriers(), formName);
 
+                tradeSocket.send(JSON.stringify({
+                    currencies: 1
+                }));
+            } else if (type == 'currencies') {
+                displayCurrencies(response);
+
+                tradeSocket.send(JSON.stringify(
+                    Price.proposal()
+                ));
+            } else if (type == 'price') {
+                console.log(response);
             }
+        } else {
+            // need to print error if no response is sent
+            console.log('some error occured');
         }
     };
 
