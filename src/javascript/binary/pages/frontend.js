@@ -258,6 +258,9 @@ var get_residence_list = function() {
             }
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
             $("#residence").html(countries.join(''));
+
+            // enable vr acc opening submit button
+            $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
     });
 };
