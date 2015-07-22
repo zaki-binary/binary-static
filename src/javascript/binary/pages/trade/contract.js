@@ -3,18 +3,11 @@ var Contract = (function () {
 
     var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {};
 
-    var processContracts = function (contractObject, formName, expiryType) {
-        var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true, barrierCategory;
+    var processContracts = function (contractObject, formName, barrierCategory, expiryType) {
+        var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true;
         open = contracts['open'], close = contracts['close'];
 
         if (formName) {
-            if(formName == 'risefall') {
-                formName = 'callput';
-                barrierCategory = 'euro_atm';
-            } else if (formName == 'higherlower') {
-                formName = 'callput';
-                barrierCategory = 'euro_non_atm';
-            }
 
             for(var i = 0, len = contracts.available.length; i < len; i++) {
                 if (!durations[contracts.available[i]['expiry_type']]) {
@@ -59,18 +52,22 @@ var Contract = (function () {
                             barrier['count'] = 1;
                             barrier['barrier'] = contracts.available[i]['barrier'];
                             barrier['barrier_category'] = contracts.available[i]['barrier_category'];
-                            barriers[contracts.available[i]['contract_category']] = barrier;
+                            barriers[formName] = barrier;
                         }
                     } else if (contracts.available[i].barriers == 2) {
                         if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
                             var barrier = {};
-                            barrier['count'] = 1;
+                            barrier['count'] = 2;
                             barrier['barrier'] = contracts.available[i]['high_barrier'];
                             barrier['barrier1'] = contracts.available[i]['low_barrier'];
                             barrier['barrier_category'] = contracts.available[i]['barrier_category'];
-                            barriers[contracts.available[i]['contract_category']] = barrier;
+                            barriers[formName] = barrier;
                         }
                     }
+                }
+
+                if (barrierCategory && barriers && barriers[formName] && !barriers[formName][barrierCategory] ) {
+                    barriers = {};
                 }
             }
 

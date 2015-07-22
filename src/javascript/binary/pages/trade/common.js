@@ -40,3 +40,22 @@ var displayOptions = function (id, elements, selected) {
     }
     target.appendChild(fragment);
 }
+
+function getFormNameBarrierCategory (displayFormName) {
+    var obj = {};
+    if (displayFormName) {
+        if(displayFormName == 'risefall') {
+            obj['formName'] = 'callput';
+            obj['barrierCategory'] = 'euro_atm';
+        } else if (displayFormName == 'higherlower') {
+            obj['formName'] = 'callput';
+            obj['barrierCategory'] = 'euro_non_atm';
+        } else {
+            obj['formName'] = displayFormName;
+        }
+    } else {
+        obj['formName'] = 'callput';
+        obj['barrierCategory'] = 'euro_atm';
+    }
+    return obj;
+}

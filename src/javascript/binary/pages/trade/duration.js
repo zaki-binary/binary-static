@@ -1,19 +1,9 @@
-var displayDurations = function (id, durations, formName, startType) {
+var displayDurations = function (id, durations, formName, barrierCategory, startType) {
     var target= document.getElementById(id),
-        fragment =  document.createDocumentFragment(), barrierCategory, durationContainer = {};
+        fragment =  document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
-    }
-
-    if (formName) {
-        if(formName == 'risefall') {
-            formName = 'callput';
-            barrierCategory = 'euro_atm';
-        } else if (formName == 'higherlower') {
-            formName = 'callput';
-            barrierCategory = 'euro_non_atm';
-        }
     }
 
     for (var key in durations) {

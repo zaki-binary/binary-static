@@ -3,7 +3,7 @@ var Trade = (function () {
 
     var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms;
 
-    var processOfferings = function (data, market, formName, submarket, underlying) {
+    var processOfferings = function (data, market, formName, barrierCategory, submarket, underlying) {
         var selectors = data.selectors;
         var offerings = data.offerings;
 
@@ -29,8 +29,7 @@ var Trade = (function () {
                             continue underlying_label;
                         }
                         for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
-                            var contractCategory = offerings[i].available[j].available[k].available[l].contract_category;
-                            var barrierCategory, isBarrierUndefinedRequired = false;
+                            var contractCategory = offerings[i].available[j].available[k].available[l].contract_category, isBarrierUndefinedRequired = false;
 
                             if (!formName) {
                                 formName = 'callput';
