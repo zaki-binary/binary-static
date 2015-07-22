@@ -281,6 +281,8 @@ var on_click_signup = function() {
         var error_msg = '';
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
             error_msg = text.localize('Invalid email address');
+        } else if (pwd.length < 6 || pwd.length > 25 || pwd_2.length < 6 || pwd_2.length > 25) {
+            error_msg = text.localize('Password length should be between 6 and 25 characters');
         } else if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
             error_msg = text.localize('The two passwords that you entered do not match.');
         } else if (email == pwd) {
