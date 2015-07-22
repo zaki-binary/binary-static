@@ -809,7 +809,7 @@ Page.prototype = {
             } else if (email == pwd) {
                 error_msg = text.localize('Your password cannot be the same as your email');
             } else if (residence.length === 0) {
-                error_msg = text.localize('Please select your country of residence');
+                error_msg = text.localize('Please specify your country.');
             }
 
             if (error_msg.length > 0) {
