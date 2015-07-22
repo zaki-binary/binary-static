@@ -813,6 +813,7 @@ Page.prototype = {
             }
 
             if (error_msg.length > 0) {
+                $('#signup_error').text(error_msg);
                 $('#signup_error').removeClass('invisible');
                 $('#signup_error').show();
                 return false;
