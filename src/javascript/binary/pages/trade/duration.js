@@ -37,70 +37,73 @@ var displayDurations = function (id, durations, formName, barrierCategory, start
     }
 
     for (var duration in durationContainer) {
-        var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
+        if(durationContainer.hasOwnProperty(duration)) {
+            var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
 
-        if (duration == 'intraday') {
-            switch (textMapping['value']) {
-                case 's':
-                    var option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
-                    option.setAttribute('value', textMapping['value']);
-                    option.setAttribute('data-minimum', textMapping['min']);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    var option = document.createElement('option'), content = document.createTextNode('minutes');
-                    option.setAttribute('value', 'm');
-                    option.setAttribute('data-minimum', 1);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    var option = document.createElement('option'), content = document.createTextNode('hours');
-                    option.setAttribute('value', 'h');
-                    option.setAttribute('data-minimum', 1);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    break;
-                case 'm':
-                    var option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
-                    option.setAttribute('value', textMapping['value']);
-                    option.setAttribute('data-minimum', textMapping['min']);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    var option = document.createElement('option'), content = document.createTextNode('hours');
-                    option.setAttribute('value', 'h');
-                    option.setAttribute('data-minimum', 1);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    break;
-                case 'h':
-                    var option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
-                    option.setAttribute('value', textMapping['value']);
-                    option.setAttribute('data-minimum', textMapping['min']);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    break;
-                default :
-                    var option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
-                    option.setAttribute('value', textMapping['value']);
-                    option.setAttribute('data-minimum', textMapping['min']);
-                    option.appendChild(content);
-                    fragment.appendChild(option);
-                    break;
+            var option;
+            if (duration == 'intraday') {
+                switch (textMapping['value']) {
+                    case 's':
+                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        option = document.createElement('option'), content = document.createTextNode('minutes');
+                        option.setAttribute('value', 'm');
+                        option.setAttribute('data-minimum', 1);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        option = document.createElement('option'), content = document.createTextNode('hours');
+                        option.setAttribute('value', 'h');
+                        option.setAttribute('data-minimum', 1);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                    case 'm':
+                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        option = document.createElement('option'), content = document.createTextNode('hours');
+                        option.setAttribute('value', 'h');
+                        option.setAttribute('data-minimum', 1);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                    case 'h':
+                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                    default :
+                        option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                }
+            } else if (duration == 'daily') {
+                option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                option.setAttribute('value', textMapping['value']);
+                option.setAttribute('data-minimum', textMapping['min']);
+                option.appendChild(content);
+                fragment.appendChild(option);
+            } else if (duration == 'tick') {
+                option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
+                option.setAttribute('value', textMapping['value']);
+                option.setAttribute('data-minimum', textMapping['min']);
+                option.appendChild(content);
+                fragment.appendChild(option);
             }
-        } else if (duration == 'daily') {
-            var option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
-            option.setAttribute('value', textMapping['value']);
-            option.setAttribute('data-minimum', textMapping['min']);
-            option.appendChild(content);
-            fragment.appendChild(option);
-        } else if (duration == 'tick') {
-            var option = document.createElement('option'), content = document.createTextNode(textMapping['text']);
-            option.setAttribute('value', textMapping['value']);
-            option.setAttribute('data-minimum', textMapping['min']);
-            option.appendChild(content);
-            fragment.appendChild(option);
         }
+        target.appendChild(fragment);
     }
-    target.appendChild(fragment);
-}
+};
 
 var durationTextValueMappings = function (str) {
     var mapping = {
@@ -124,14 +127,14 @@ var durationTextValueMappings = function (str) {
     }
 
     return obj;
-}
+};
 
 var durationPopulate = function () {
     var unit = document.getElementById("duration_units"), unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
     document.getElementById("duration_amount").value = unitValue;
     document.getElementById("duration_minimum").textContent = unitValue;
     displayExpiryType('expiry_type', unitValue);
-}
+};
 
 var displayExpiryType = function (id, unit) {
     var target= document.getElementById(id), fragment =  document.createDocumentFragment();
@@ -152,4 +155,4 @@ var displayExpiryType = function (id, unit) {
         fragment.appendChild(option);
     }
     target.appendChild(fragment);
-}
+};

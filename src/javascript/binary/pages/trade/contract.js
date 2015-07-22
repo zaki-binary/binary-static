@@ -5,7 +5,8 @@ var Contract = (function () {
 
     var processContracts = function (contractObject, formName, barrierCategory, expiryType) {
         var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true;
-        open = contracts['open'], close = contracts['close'];
+        open = contracts['open'];
+        close = contracts['close'];
 
         if (formName) {
 
@@ -46,9 +47,9 @@ var Contract = (function () {
                 }
 
                 if (formName == contracts.available[i]['contract_category']) {
+                    var barrier = {};
                     if (contracts.available[i].barriers == 1) {
                         if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
-                            var barrier = {};
                             barrier['count'] = 1;
                             barrier['barrier'] = contracts.available[i]['barrier'];
                             barrier['barrier_category'] = contracts.available[i]['barrier_category'];
@@ -56,7 +57,6 @@ var Contract = (function () {
                         }
                     } else if (contracts.available[i].barriers == 2) {
                         if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
-                            var barrier = {};
                             barrier['count'] = 2;
                             barrier['barrier'] = contracts.available[i]['high_barrier'];
                             barrier['barrier1'] = contracts.available[i]['low_barrier'];

@@ -68,7 +68,6 @@
                 displayStartDates('date_start', Contract.startDates());
                 displayBarriers(Contract.barriers(), formName);
 
-            } else if (type == 'price') {
             }
         }
     };

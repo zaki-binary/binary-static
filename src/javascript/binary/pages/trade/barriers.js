@@ -10,6 +10,7 @@ function displayBarriers (barriers, formName, barrierCategory) {
                 var elm = document.querySelector('#barrier');
                 elm.value = barrier.barrier;
                 elm.textContent = barrier.barrier;
+                return;
             } else if (barrier.count == 2) {
                 document.querySelector('#barrier_row').style.display = 'none';
                 document.querySelector('#high_barrier_row').setAttribute('style', '');
@@ -22,17 +23,12 @@ function displayBarriers (barriers, formName, barrierCategory) {
                 var low_elm = document.querySelector('#barrier_low');
                 low_elm.value = barrier['barrier1'];
                 low_elm.textContent = barrier['barrier1'];
-            }
-        } else {
-            var elements = document.querySelectorAll('.barrier_class');
-            for (var i = 0; i < elements.length; i++){
-                elements[i].style.display = 'none';
+                return;
             }
         }
-    } else {
-        var elements = document.querySelectorAll('.barrier_class');
-        for (var i = 0; i < elements.length; i++){
-            elements[i].style.display = 'none';
-        }
+    }
+    var elements = document.querySelectorAll('.barrier_class');
+    for (var i = 0; i < elements.length; i++){
+        elements[i].style.display = 'none';
     }
 }

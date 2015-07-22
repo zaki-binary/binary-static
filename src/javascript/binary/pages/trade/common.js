@@ -17,7 +17,7 @@ var displayListElements = function (id, elements, selected) {
         fragment.appendChild(li);
     }
     target.appendChild(fragment);
-}
+};
 
 var displayOptions = function (id, elements, selected) {
     var target= document.getElementById(id),
@@ -39,9 +39,9 @@ var displayOptions = function (id, elements, selected) {
         }
     }
     target.appendChild(fragment);
-}
+};
 
-function getFormNameBarrierCategory (displayFormName) {
+var getFormNameBarrierCategory = function (displayFormName) {
     var obj = {};
     if (displayFormName) {
         if(displayFormName == 'risefall') {
@@ -58,4 +58,4 @@ function getFormNameBarrierCategory (displayFormName) {
         obj['barrierCategory'] = 'euro_atm';
     }
     return obj;
-}
+};

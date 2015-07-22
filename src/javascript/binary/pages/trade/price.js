@@ -51,7 +51,7 @@ var Price = (function () {
         }
 
         return proposal;
-    }
+    };
 
     return {
         proposal: createProposal
