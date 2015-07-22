@@ -791,8 +791,8 @@ Page.prototype = {
     },
     on_input_password: function() {
         $('#chooseapassword').on('input', function() {
-            $('#reenter-password').removeClass('invisible');
-            $('#reenter-password').show();
+            $('#chooseapassword_2').removeClass('invisible');
+            $('#chooseapassword_2').show();
         });
     },
     on_click_signup: function() {
@@ -800,27 +800,24 @@ Page.prototype = {
             var pwd = $('#chooseapassword').val();
             var pwd_2 = $('#chooseapassword_2').val();
             var email = $('#Email').val();
+            var residence = $('#residence').val();
 
+            var error_msg;
             if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
-                $('#signup_error').text(text.localize('Invalid email address'));
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
-            }
-            if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
-                $('#signup_error').text(text.localize('The two passwords that you entered do not match.'));
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
-            }
-            // email != password
-            if (email == pwd) {
-                $('#signup_error').text(text.localize('Your password cannot be the same as your email'));
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
+                error_msg = text.localize('Invalid email address');
+            } else if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
+                error_msg = text.localize('The two passwords that you entered do not match.');
+            } else if (email == pwd) {
+                error_msg = text.localize('Your password cannot be the same as your email');
+            } else if (residence.length === 0) {
+                error_msg = text.localize('Please select your country of residence');
             }
 
+            if (error_msg.length > 0) {
+                $('#signup_error').removeClass('invisible');
+                $('#signup_error').show();
+                return false;
+            }
             $('#virtual-acc-form').submit();
         });
     },

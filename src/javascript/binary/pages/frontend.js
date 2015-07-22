@@ -244,11 +244,26 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
+var get_residence_list = function() {
+    var url = page.url.url_for('residence_list');
+    $.getJSON(url, function(data) {
+        var countries = [];
+        $.each(data.residence, function(i, country) {
+            if (i === 1) {
+                alert("country text: " + country.text + ", country code: " + country.value);
+            }
+            countries.push('<option value="' + country.value + '">' + country.text + '</option>');
+            $("#residence").html(countries.join(''));
+        }
+    });
+};
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
-            select_user_country();
+            //select_user_country();
             get_ticker();
+            get_residence_list();
         }
     };
 });
