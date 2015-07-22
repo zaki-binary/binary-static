@@ -5,7 +5,6 @@
 -   emailtext   => l('Enter your email'),
 -   passwordstext   => l('Choose a password'),
 -   reenter_password => l('Re-enter your password'),
--   residence_text => l('Country of residence'),
 - );
 #banner
   .grd-container
@@ -22,7 +21,7 @@
             .grd-parent
               %span.grd-grid-12.grd-no-gutter
                 %input.virtual-acc-left{:name => 'Email', :id => 'Email', :type => 'email', :required => true, :placeholder => stash('emailtext')}
-                %select.virtual-acc-right{:name => 'residence', :id => 'residence', :required => true, :placeholder => stash('residence_text')}
+                %select.virtual-acc-right{:name => 'residence', :id => 'residence', :required => true}
             .grd-parent
               %span.grd-grid-12.grd-no-gutter
                 %input.virtual-acc-left{:name => 'chooseapassword', :id => 'chooseapassword', :pattern => '.{6,25}', :'required title' => 'Password length should be between 6 and 25 characters', :type => 'password', :maxlength => '25', :required => true, :placeholder => stash('passwordstext')}
