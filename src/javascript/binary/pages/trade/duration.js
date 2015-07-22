@@ -109,8 +109,8 @@ var displayDurations = function (id, durations, formName, barrierCategory, start
                 option.appendChild(content);
                 fragment.appendChild(option);
             }
+            target.appendChild(fragment);
         }
-        target.appendChild(fragment);
     }
 };
 
