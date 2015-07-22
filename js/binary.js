@@ -1959,6 +1959,10 @@ onLoad.queue(function () {
     attach_tabs('.has-tabs');
 });
 
+// this event is fired when there is change in localStorage
+// that looks for active_loginid key change, this was needed for
+// scenario where client has multiple tab/window open and switch
+// account on one tab then we need to load all the open tab/window
 $(window).on('storage', function (jq_event) {
     if (jq_event.originalEvent.key !== 'active_loginid') return;
     location.reload();
