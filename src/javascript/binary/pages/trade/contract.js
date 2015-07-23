@@ -1,7 +1,7 @@
 var Contract = (function () {
     'use strict';
 
-    var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {};
+    var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {}, contractType = {};
 
     var processContracts = function (contractObject, formName, barrierCategory, expiryType) {
         var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true;
@@ -11,59 +11,71 @@ var Contract = (function () {
         if (formName) {
 
             for(var i = 0, len = contracts.available.length; i < len; i++) {
-                if (!durations[contracts.available[i]['expiry_type']]) {
-                    durations[contracts.available[i]['expiry_type']] = {};
+
+                var currentObj = contracts.available[i];
+
+                if (!durations[currentObj['expiry_type']]) {
+                    durations[currentObj['expiry_type']] = {};
                 }
 
-                if(!durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']]) {
-                    durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']] = {};
+                if(!durations[currentObj['expiry_type']][currentObj['contract_category']]) {
+                    durations[currentObj['expiry_type']][currentObj['contract_category']] = {};
                 }
 
-                if(!durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']]) {
-                    durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']] = {};
+                if(!durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']]) {
+                    durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']] = {};
                 }
 
-                if(!durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']]) {
-                    durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']] = {};
+                if(!durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']][currentObj['start_type']]) {
+                    durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']][currentObj['start_type']] = {};
                 }
 
-                durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']]['max_contract_duration'] = contracts.available[i]['max_contract_duration'];
+                durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']][currentObj['start_type']]['max_contract_duration'] = currentObj['max_contract_duration'];
 
-                durations[contracts.available[i]['expiry_type']][contracts.available[i]['contract_category']][contracts.available[i]['barrier_category']][contracts.available[i]['start_type']]['min_contract_duration'] = contracts.available[i]['min_contract_duration'];
+                durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']][currentObj['start_type']]['min_contract_duration'] = currentObj['min_contract_duration'];
 
-                if(formName == contracts.available[i]['contract_category']) {
+                if(formName == currentObj['contract_category']) {
                     if (expiryType) {
-                        if (expiryType == contracts.available[i]['expiry_type']) {
-                            contractsArray.push(contracts.available[i]);
+                        if (expiryType == currentObj['expiry_type']) {
+                            contractsArray.push(currentObj);
                         }
                     } else {
-                        contractsArray.push(contracts.available[i]);
+                        contractsArray.push(currentObj);
                     }
                     sendAll = false;
                 }
 
-                if (contracts.available[i].forward_starting_options && contracts.available[i]['start_type'] == 'forward') {
-                    startDates = contracts.available[i].forward_starting_options;
+                if (currentObj.forward_starting_options && currentObj['start_type'] == 'forward') {
+                    startDates = currentObj.forward_starting_options;
                 }
 
-                if (formName == contracts.available[i]['contract_category']) {
+                if (formName == currentObj['contract_category']) {
                     var barrier = {};
-                    if (contracts.available[i].barriers == 1) {
-                        if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
+                    if (currentObj.barriers == 1) {
+                        if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
                             barrier['count'] = 1;
-                            barrier['barrier'] = contracts.available[i]['barrier'];
-                            barrier['barrier_category'] = contracts.available[i]['barrier_category'];
+                            barrier['barrier'] = currentObj['barrier'];
+                            barrier['barrier_category'] = currentObj['barrier_category'];
                             barriers[formName] = barrier;
                         }
-                    } else if (contracts.available[i].barriers == 2) {
-                        if (!barriers.hasOwnProperty(contracts.available[i]['contract_category'])) {
+                    } else if (currentObj.barriers == 2) {
+                        if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
                             barrier['count'] = 2;
-                            barrier['barrier'] = contracts.available[i]['high_barrier'];
-                            barrier['barrier1'] = contracts.available[i]['low_barrier'];
-                            barrier['barrier_category'] = contracts.available[i]['barrier_category'];
+                            barrier['barrier'] = currentObj['high_barrier'];
+                            barrier['barrier1'] = currentObj['low_barrier'];
+                            barrier['barrier_category'] = currentObj['barrier_category'];
                             barriers[formName] = barrier;
                         }
                     }
+
+                    if (!contractType[currentObj['contract_category']]) {
+                        contractType[currentObj['contract_category']] = {};
+                    }
+
+                    if (!contractType[currentObj['contract_category']].hasOwnProperty(currentObj['contract_type'])) {
+                        contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
+                    }
+
                 }
 
                 if (barrierCategory && barriers && barriers[formName] && !barriers[formName][barrierCategory] ) {
@@ -105,7 +117,8 @@ var Contract = (function () {
         contracts: function () { return contractDetails; },
         durations: function () { return durations; },
         startDates: function () { return startDates; },
-        barriers: function () { return barriers; }
+        barriers: function () { return barriers; },
+        contractType: function () { return contractType; }
     };
 
 })();
