@@ -1,20 +1,20 @@
 var Price = (function () {
 
-    var createProposal = function () {
+    var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
-            submarket = document.querySelector('#submarket'),
-            contractType = document.querySelector('#contract_type'),
-            amountType = document.querySelector('#amount_type'),
-            currency = document.querySelector('#currency'),
-            payout = document.querySelector('#amount'),
-            startTime = document.querySelector('#date_start'),
-            expiryType = document.querySelector('#expiry_type'),
-            duration = document.querySelector('#duration_amount'),
-            durationUnit = document.querySelector('#duration_units'),
-            endDate = document.querySelector('#expiry_date'),
-            endTime = document.querySelector('#expiry_time'),
-            highBarrier = document.querySelector('#barrier'),
-            lowBarrier = document.querySelector('#barrier1');
+            submarket = document.getElementById('submarket'),
+            contractType = typeOfContract,
+            amountType = document.getElementById('amount_type'),
+            currency = document.getElementById('currency'),
+            payout = document.getElementById('amount'),
+            startTime = document.getElementById('date_start'),
+            expiryType = document.getElementById('expiry_type'),
+            duration = document.getElementById('duration_amount'),
+            durationUnit = document.getElementById('duration_units'),
+            endDate = document.getElementById('expiry_date'),
+            endTime = document.getElementById('expiry_time'),
+            highBarrier = document.getElementById('barrier'),
+            lowBarrier = document.getElementById('barrier1');
 
         if (payout) {
             proposal['amount_val'] = payout.value;

@@ -123,7 +123,7 @@ var durationTextValueMappings = function (str) {
         t : 'ticks'
     };
 
-    var arry = str.match(/[a-zA-Z]+|[0-9]+/g), obj = {};
+    var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [], obj = {};
 
     if (arry.length > 1) {
         obj['value'] = arry[1];
