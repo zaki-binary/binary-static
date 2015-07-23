@@ -88,7 +88,11 @@ var Client = function() {
     if(dl_info.length > 0) {
         for (var i=0;i<dl_info.length;i++) {
             if(dl_info[i].event == 'log_in') {
-                SessionStore.set('client_info', this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname + ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone);
+                SessionStore.set('client_info',
+                    this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname
+                    + ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone
+                    + ':' + dl_info[i].params.bom_country_code
+                );
             }
         }
     }
@@ -102,6 +106,7 @@ var Client = function() {
             this.name = this.first_name +  ' ' + this.last_name;
             this.email = parsed[3];
             this.phone = parsed[4];
+            this.residence = parsed[5];
         } else {
             SessionStore.remove('client_info');
         }
@@ -692,7 +697,7 @@ Contents.prototype = {
         $('.draggable').draggable();
     },
     topbar_message_visibility: function() {
-        if(this.client.is_logged_in) {
+        if (this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
             var has_real = false;
 
@@ -702,15 +707,14 @@ Contents.prototype = {
                 check_financial = true;
             }
 
-            for (var i=0;i<loginid_array.length;i++) {
+            for (var i=0; i<loginid_array.length; i++) {
                 var loginid = loginid_array[i].id;
                 var real = loginid_array[i].real;
 
                 if (real) {
                     has_real = true;
-                    if (!check_financial) {
-                        break;
-                    }
+                    break if (!check_financial);
+
                     if (loginid_array[i].financial) {
                         has_financial = true;
                         break;
@@ -719,7 +723,7 @@ Contents.prototype = {
             }
             if (has_real) {
                 $('#virtual-upgrade-link').addClass('invisible');
-                $('#virtual-upgrade-link').hide();
+                // $('#virtual-upgrade-link').hide();
 
                 if (check_financial && !has_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
@@ -731,6 +735,17 @@ Contents.prototype = {
                     if ($('#investment_message').length > 0) {
                         $('#investment_message').addClass('invisible');
                     }
+                }
+            } else {
+                var EU_random_restricted_countries = new RegExp(page.settings.get('EU_random_restricted_countries'));
+                var residence = this.client.residence;
+
+                // directly upgrade to MF acc from VR
+                if (EU_random_restricted_countries.test(residence)) {
+                    $('#virtual-upgrade-link').addClass('invisible');
+                    // $('#virtual-upgrade-link').hide();
+
+                    $('#financial-upgrade-link').removeClass('invisible');
                 }
             }
         }
