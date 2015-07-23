@@ -1,6 +1,21 @@
 (function () {
 
-    var offerings, market, formName, submarket, underlying, expiryType, startType, barrierCategory;
+    var offerings, market, formName, submarket, underlying, expiryType, startType, barrierCategory, spot, updateSpotFor;
+
+    var contractTypeDisplayMapping = {
+            CALL: "top",
+            PUT: "bottom",
+            ASIANU: "top",
+            ASIAND: "bottom",
+            DIGITMATCH: "top",
+            DIGITDIFF: "bottom",
+            EXPIRYRANGE: "top",
+            EXPIRYMISS: "bottom",
+            RANGE: "top",
+            UPORDOWN: "bottom",
+            ONETOUCH: "top",
+            NOTOUCH: "bottom",
+    };
 
     var socketConfig = {
         url: "wss://ws.binary.com/websockets/contracts",
@@ -73,12 +88,19 @@
                 }));
             } else if (type == 'currencies') {
                 displayCurrencies(response);
-
-                tradeSocket.send(JSON.stringify(
-                    Price.proposal()
-                ));
+                spot = document.getElementById('spot');
+                for (var type in Contract.contractType()[formName]) {
+                    if(Contract.contractType()[formName].hasOwnProperty(type)) {
+                        tradeSocket.send(JSON.stringify(
+                            Price.proposal(type)
+                        ));
+                        updateSpotFor = type;
+                    }
+                }
             } else if (type == 'price') {
                 console.log(response);
+                var type = response.request['data']['contract_type'];
+                Price.display(response, type, Contract.contractType()[formName][type], contractTypeDisplayMapping[type], spot, updateSpotFor);
             }
         } else {
             // need to print error if no response is sent
