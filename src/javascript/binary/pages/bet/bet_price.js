@@ -254,7 +254,7 @@ var BetPrice = function() {
                             if (typeof(prices[i].value) !== 'undefined') {
                                 that.spread_con().find('#sell_level').text(level);
                                 var current_value = that.round(parseFloat(prices[i].value.dollar),2);
-                                that.spread_con().find('#pnl_level').text(current_value);
+                                that.spread_con().find('#pnl_value').text(current_value);
                                 that.spread_con().find('#pnl_point').text(prices[i].value.point);
                             }
 
