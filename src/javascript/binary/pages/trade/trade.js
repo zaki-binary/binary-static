@@ -1,7 +1,7 @@
 var Trade = (function () {
     'use strict';
 
-    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms;
+    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, contractType = {};
 
     var processOfferings = function (data, market, formName, barrierCategory, submarket, underlying) {
         var selectors = data.selectors;
@@ -43,6 +43,17 @@ var Trade = (function () {
                             }
 
                             for (var m = 0, ctcategoryavalen = offerings[i].available[j].available[k].available[l].available.length; m < ctcategoryavalen; m++) {
+
+                                var currentProperties = offerings[i].available[j].available[k].available[l].available[m];
+
+                                if (!contractType[contractCategory]) {
+                                    contractType[contractCategory] = [];
+                                }
+
+                                if (contractType[contractCategory].indexOf(currentProperties['contract_type']) == -1) {
+                                    contractType[contractCategory].push(currentProperties['contract_type']);
+                                }
+
                                 for (var property in  offerings[i].available[j].available[k].available[l].available[m]) {
                                     if (offerings[i].available[j].available[k].available[l].available[m].hasOwnProperty(property)) {
                                         var prop_value = offerings[i].available[j].available[k].available[l].available[m][property];
@@ -61,6 +72,7 @@ var Trade = (function () {
                                                 } else {
                                                     contractCategories[contractCategory] = contractCategory;
                                                 }
+
                                             }
                                             if(formName == contractCategory && barrierCategory == prop_value) {
                                                 submarketElements[loop_submarket.toLowerCase().replace(/ /g, '_')] = loop_submarket;
@@ -102,7 +114,8 @@ var Trade = (function () {
         markets: function () { return tradeMarkets; },
         submarkets: function () { return tradeSubmarkets; },
         underlyings: function () { return tradeUnderlyings; },
-        contractForms: function () { return tradeContractForms; }
+        contractForms: function () { return tradeContractForms; },
+        contractType: function () { return contractType; }
     };
 
 })();
