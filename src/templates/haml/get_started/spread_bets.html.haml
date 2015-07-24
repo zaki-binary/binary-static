@@ -3,8 +3,8 @@
   .grd-grid-12
     %h1= stash->{title}
     .grd-grid-12
-        %p= l('Binary.com’s Spread Contracts are leveraged derivative contracts the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market.')
-        %p= l('Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ level or when a \'spot profit\' level.')
+        %p= l('Binary.com’s Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market.')
+        %p= l('Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ or \'spot profit\' level.')
         %p= l('Example:')
         %p= l('Assume the current value of an instrument XYZ is 100 and Binary.com’s spread on this instrument is 2 points:')
         .grd-grid-9.grd-parent.grd-centered
@@ -19,6 +19,6 @@
             101
             %p= l('LONG')
     .grd-grid-12
-      %p= l('The client decides to go ‘Short’ on the market at 99 with an ‘amount per point’ of 10 USD and a ‘stop loss’ of 5 points. This also implies a maximum ‘stop profit’ of 50 points.')
-      %p= l('If the value of XYZ moves to 95, the contract would be valued at 40 USD: (99 - 95) * 10 USD. A move to 103 would result in a similar 40 USD loss: (103 - 99) * 10 USD.')
-      %p= l('While the contract may be closed at will, it will be automatically closed on the client’s behalf should XYZ move to 94 (the 5 point ‘stop loss’) or 149 (the 50 point ‘stop gain’.)  Potential losses are thus limited to 50 USD with profits capped at 500 USD.')
+      %p= l('The client decides to go ‘Short’ on the market at 99 with an ‘amount per point’ of 10 USD and a ‘stop loss’ of 5 points.')
+      %p= l('If the value of XYZ moves to 95, the contract would be valued at 30 USD: (99 - 96) * 10 USD. A move to 103 would result in a similar 50 USD loss: (104 - 99) * 10 USD.')
+      %p= l('Potential profit and losses are limited to stop profit and stop loss levels respectively.')
