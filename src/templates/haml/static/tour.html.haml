@@ -6,7 +6,7 @@
       .grd-grid-12
         %h1= l('First, define your position...')
         %p= l('When you start trading with Binary.com, you’ll be directed to the trading screen, where you set your trading parameters, and choose what you want to trade, how and when.')
-        %a.pjaxload.button{:href => url_for('trade.cgi')}
+        %a.pjaxload.button.ja-hide{:href => url_for('trade.cgi')}
           %img.responsive#new-trader-icon{:src => url_for('images/pages/tour/trade-tutorial_1.svg')}
 
   .section
@@ -33,7 +33,7 @@
         %h1= l('Do you want to lock in profits?')
         %p= l('If you do, no worries. With Binary.com, you can sell your trades before expiry to lock in profits. There’s no need to wait until the end time.')
 
-  .section
+  .section.ja-hide
     .section-content
       .grd-grid-12
         %h1= l('Bank your way')
@@ -65,6 +65,6 @@
       .grd-grid-12
         %h1= l('Talk to us')
         %p= l('Feel free to contact our friendly and helpful customer service experts. They\'re always available to answer your questions. You can contact us via live chat, email and telephone.')
-      .grd-grid-4.grd-grid-mobile-8.grd-centered
+      .grd-grid-4.grd-grid-mobile-8.grd-centered.ja-hide
         %a.pjaxload.button{:href => url_for('contact')}
           %img.responsive{:src => url_for('images/pages/tour/tour-customer-support.png')}

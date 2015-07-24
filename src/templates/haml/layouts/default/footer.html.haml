@@ -7,11 +7,11 @@
           %ul
             %li.affiliate
               %a.pjaxload{:href=>url_for("/affiliate/signup")}= l('Affiliate Program')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("white-labels")}= l('White Labels')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("partnerapi")}= l('Partner API')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("open-source-projects")}= l('Open Source')
         .grd-grid-4
           %h1= l('Education')
@@ -22,7 +22,7 @@
               %a.pjaxload{:href=>url_for("/get-started"), :class => 'pjaxload'}= l('Getting Started')
             %li
               %a.pjaxload{:href=>url_for("/tour"), :class => 'pjaxload'}= l('Platform Tour')
-            %li
+            %li.ja-hide
               %a{:href=>"http://www.gamcare.org.uk/", :target => "_blank"}= l('GamCare')
             %li
               %a{:href=>"http://blog.binary.com/en/webinar/", :target => "_blank"}= l('Webinars')
@@ -50,7 +50,7 @@
                   %a.pjaxload{:href=>url_for("/terms-and-conditions")}= l('Terms and Conditions')
                 %li
                   %a.pjaxload{:href=>url_for("/terms-and-conditions#privacy-tab")}= l('Security and Privacy')
-                %li
+                %li.ja-hide
                   %a.pjaxload{:href=>url_for("responsible-trading")}= l('Responsible Trading')
                 %li
                   %a.pjaxload{:href=>url_for("/terms-and-conditions?selected_tab=complaints-disputes-tac-tab")}= l('Complaints and Disputes')
@@ -81,9 +81,9 @@
             %li
               %a.pjaxload{:href=>url_for("contact")}= l('Contact Us')
 
-  #footer-regulatory
+  #footer-regulatory.ja-top-padding
     .grd-container.grd-default-container
-      .grd-parent.grd-grid-12
+      .grd-parent.grd-grid-12.ja-hide
         .grd-grid-2.center
           %a{:href => "http://www.gov.im/gambling/", :target => "_blank"}
             %img.responsive#iom_icon_footer{:src => url_for('images/pages/footer/isle-of-man.png')}
