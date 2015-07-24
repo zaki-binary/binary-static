@@ -738,7 +738,8 @@ var BetSell = function() {
                 data    : params,
                 success : function (data) {
                     var con = that.show_spread_popup(data);
-                    if (!attr.model.is_expired()) {
+                    var contract_status = con.find('#status').text();
+                    if (contract_status === 'Open') {
                         BetPrice.spread.stream(attr.model.sell_channel());
                     }
                },

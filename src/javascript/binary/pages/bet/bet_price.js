@@ -194,6 +194,7 @@ var BetPrice = function() {
                             e.preventDefault();
                         }
                         var target = $(e.target);
+                        BetSell.model.reload_page_on_close(true);
                         that.sell_bet(target);
                         return false;
                     }).addClass('unbind_later');
