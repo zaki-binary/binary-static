@@ -124,9 +124,7 @@ var select_user_country = function() {
         var selected_country = $('#residence').val();
 
         if (selected_country.length > 0) {
-            if (restricted_countries.test(selected_country)) {
-                selected_country = 'default';
-            }
+            selected_country = (restricted_countries.test(response.country)) ? '' : selected_country;
             $('#residence').val(selected_country).change();
         } else {
             $.ajax({
@@ -135,7 +133,7 @@ var select_user_country = function() {
                 async: true,
                 dataType: "json"
             }).done(function(response) {
-                selected_country = (restricted_countries.test(response.country)) ? 'default' : response.country;
+                selected_country = (restricted_countries.test(response.country)) ? '' : response.country;
                 $('#residence').val(selected_country).change();
             });
         }
