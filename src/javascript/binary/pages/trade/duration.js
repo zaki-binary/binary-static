@@ -1,4 +1,5 @@
 var displayDurations = function (id, durations, formName, barrierCategory, startType) {
+    'use strict';
     var target= document.getElementById(id),
         fragment =  document.createDocumentFragment(), durationContainer = {};
 
@@ -40,7 +41,7 @@ var displayDurations = function (id, durations, formName, barrierCategory, start
         if(durationContainer.hasOwnProperty(duration)) {
             var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
 
-            var option;
+            var option, content;
             if (duration == 'intraday') {
                 switch (textMapping['value']) {
                     case 's':
@@ -115,6 +116,7 @@ var displayDurations = function (id, durations, formName, barrierCategory, start
 };
 
 var durationTextValueMappings = function (str) {
+    'use strict';
     var mapping = {
         s : 'seconds',
         m : 'minutes',
@@ -139,6 +141,7 @@ var durationTextValueMappings = function (str) {
 };
 
 var durationPopulate = function () {
+    'use strict';
     var unit = document.getElementById("duration_units"), unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
     document.getElementById("duration_amount").value = unitValue;
     document.getElementById("duration_minimum").textContent = unitValue;
@@ -146,6 +149,7 @@ var durationPopulate = function () {
 };
 
 var displayExpiryType = function (id, unit) {
+    'use strict';
     var target= document.getElementById(id), fragment =  document.createDocumentFragment();
 
     while (target && target.firstChild) {

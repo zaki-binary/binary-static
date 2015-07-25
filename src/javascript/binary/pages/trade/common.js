@@ -1,4 +1,5 @@
 var displayListElements = function (id, elements, selected) {
+    'use strict';
     var target = document.getElementById(id),
         fragment = document.createDocumentFragment(),
         len = elements.length;
@@ -20,6 +21,7 @@ var displayListElements = function (id, elements, selected) {
 };
 
 var displayOptions = function (id, elements, selected) {
+    'use strict';
     var target= document.getElementById(id),
         fragment =  document.createDocumentFragment();
 
@@ -42,6 +44,7 @@ var displayOptions = function (id, elements, selected) {
 };
 
 var getFormNameBarrierCategory = function (displayFormName) {
+    'use strict';
     var obj = {};
     if (displayFormName) {
         if(displayFormName == 'risefall') {
@@ -52,6 +55,7 @@ var getFormNameBarrierCategory = function (displayFormName) {
             obj['barrierCategory'] = 'euro_non_atm';
         } else {
             obj['formName'] = displayFormName;
+            obj['barrierCategory'] = '';
         }
     } else {
         obj['formName'] = 'callput';

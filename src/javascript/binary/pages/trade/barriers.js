@@ -1,4 +1,5 @@
 function displayBarriers (barriers, formName, barrierCategory) {
+    'use strict';
     if (barriers && formName) {
         var barrier = barriers[formName];
         if(barrier) {

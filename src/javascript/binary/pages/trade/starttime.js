@@ -7,7 +7,7 @@ function compareStartDate(a,b) {
 }
 
 function displayStartDates(id, startDates) {
-
+    'use strict';
     if (startDates) {
         var target= document.getElementById(id),
             fragment =  document.createDocumentFragment(),

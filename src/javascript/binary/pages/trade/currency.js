@@ -1,4 +1,5 @@
 var displayCurrencies = function (input, selected) {
+    'use strict';
     var target= document.querySelector('#currency'),
         fragment =  document.createDocumentFragment(),
         currencies = input.currencies;

@@ -1,4 +1,5 @@
 var Price = (function () {
+    'use strict';
 
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
