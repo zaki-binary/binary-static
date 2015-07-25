@@ -54,8 +54,11 @@ var Price = (function () {
         return proposal;
     };
 
-    var display = function (details, contractType, display, position, spotElement, updateSpotFor) {
-        var container = document.getElementById('price_container_' + position),
+    var display = function (details, contractType, spotElement) {
+        var type = details.request['data']['contract_type'],
+            position = contractTypeDisplayMapping(type),
+            display = contractType[type],
+            container = document.getElementById('price_container_' + position),
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
             description = row.cloneNode(),
@@ -65,8 +68,8 @@ var Price = (function () {
             container.removeChild(container.firstChild);
         }
 
-        h4.setAttribute('class', 'contract_heading ' + display)
-        h4.setAttribute('id', 'contract_heading_' + position)
+        h4.setAttribute('class', 'contract_heading ' + display);
+        h4.setAttribute('id', 'contract_heading_' + position);
 
         description.setAttribute('class', 'contract_description big-col');
         description.setAttribute('id', 'contract_description_' + position);
@@ -109,16 +112,16 @@ var Price = (function () {
 
             fragment.appendChild(row);
             fragment.appendChild(purchase);
-            if (contractType == updateSpotFor) {
-                spotElement.textContent = details['spot'];
-            }
+
+            spotElement.textContent = details['spot'];
+
         }
         container.appendChild(fragment);
     };
 
     return {
         proposal: createProposal,
-        display: display
+        display: display,
     };
 
 })();

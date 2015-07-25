@@ -1,15 +1,20 @@
 var Trade = (function () {
     'use strict';
 
-    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms;
+    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
 
-    var processOfferings = function (data, market, formName, barrierCategory, submarket, underlying) {
-        var selectors = data.selectors;
-        var offerings = data.offerings;
+    var details = function (data, market, formName, barrierCategory, submarket, underlying) {
+        responseData = data;
+        var selectors = data.offerings.selectors;
+        var offerings = data.offerings.offerings;
 
         var submarketElements = {}, underlyingElements = {}, contractCategories = {};
 
         submarketElements['all'] = 'All';
+
+        var formBarrier = getFormNameBarrierCategory(formName);
+        form = formName = formBarrier['formName'];
+        barrier = barrierCategory = formBarrier['barrierCategory'];
 
         market_label:
         for (var i = 0, offlen = offerings.length; i < offlen; i++) {
@@ -30,17 +35,6 @@ var Trade = (function () {
                         }
                         for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
                             var contractCategory = offerings[i].available[j].available[k].available[l].contract_category, isBarrierUndefinedRequired = false;
-
-                            if (!formName) {
-                                formName = 'callput';
-                                barrierCategory = 'euro_atm';
-                            } else if (formName == 'risefall') {
-                                formName = 'callput';
-                                barrierCategory = 'euro_atm';
-                            } else if (formName == 'higherlower') {
-                                formName = 'callput';
-                                barrierCategory = 'euro_non_atm';
-                            }
 
                             for (var m = 0, ctcategoryavalen = offerings[i].available[j].available[k].available[l].available.length; m < ctcategoryavalen; m++) {
 
@@ -95,16 +89,15 @@ var Trade = (function () {
         tradeUnderlyings = underlyingElements;
     };
 
-    var details = function (offerings, market, formName, submarket, underlying) {
-        processOfferings(offerings, market, formName, submarket, underlying);
-    };
-
     return {
         details: details,
+        offerings: function () { return responseData; },
         markets: function () { return tradeMarkets; },
         submarkets: function () { return tradeSubmarkets; },
         underlyings: function () { return tradeUnderlyings; },
         contractForms: function () { return tradeContractForms; },
+        form: function () { return form; },
+        barrier: function () { return barrier; }
     };
 
 })();
