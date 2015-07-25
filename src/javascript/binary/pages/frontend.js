@@ -118,28 +118,6 @@ var get_ticker = function() {
     }
 };
 
-var select_user_country = function() {
-    if ($('#residence').length > 0) {
-        var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
-        var selected_country = $('#residence').val();
-
-        if (selected_country.length > 0) {
-            selected_country = (restricted_countries.test(response.country)) ? '' : selected_country;
-            $('#residence').val(selected_country).change();
-        } else {
-            $.ajax({
-                crossDomain: true,
-                url: page.url.url_for('country'),
-                async: true,
-                dataType: "json"
-            }).done(function(response) {
-                selected_country = (restricted_countries.test(response.country)) ? '' : response.country;
-                $('#residence').val(selected_country).change();
-            });
-        }
-    }
-};
-
 var Charts = function(charts) {
     window.open(charts, 'DetWin', 'width=580,height=710,scrollbars=yes,location=no,status=no,menubar=no');
 };

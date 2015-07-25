@@ -3,6 +3,28 @@ onLoad.queue(function() {
         client_form = new ClientForm({restricted_countries: page.settings.get('restricted_countries'), valid_loginids: page.settings.get('valid_loginids')});
 });
 
+var select_user_country = function() {
+    if ($('#residence').length > 0) {
+        var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
+        var selected_country = $('#residence').val();
+
+        if (selected_country.length > 0) {
+            selected_country = (restricted_countries.test(selected_country)) ? '' : selected_country;
+            $('#residence').val(selected_country).change();
+        } else {
+            $.ajax({
+                crossDomain: true,
+                url: page.url.url_for('country'),
+                async: true,
+                dataType: "json"
+            }).done(function(response) {
+                selected_country = (restricted_countries.test(response.country)) ? '' : response.country;
+                $('#residence').val(selected_country).change();
+            });
+        }
+    }
+};
+
 pjax_config_page('new_real', function() {
     return {
         onLoad: function() {
