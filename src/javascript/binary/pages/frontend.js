@@ -118,18 +118,27 @@ var get_ticker = function() {
     }
 };
 
-
 var select_user_country = function() {
-    if($('#residence').length > 0) {
-        get_user_country(function() {
-            var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
-            var current_selected = $('#residence').val() || this.country;
-            if(restricted_countries.test(current_selected)) {
-                $('#residence').val('default').change();
-            } else {
-                $('#residence').val(current_selected).change();
+    if ($('#residence').length > 0) {
+        var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
+        var selected_country = $('#residence').val();
+
+        if (selected_country.length > 0) {
+            if (restricted_countries.test(selected_country)) {
+                selected_country = 'default';
             }
-        });
+            $('#residence').val(selected_country).change();
+        } else {
+            $.ajax({
+                crossDomain: true,
+                url: page.url.url_for('country'),
+                async: true,
+                dataType: "json"
+            }).done(function(response) {
+                selected_country = (restricted_countries.test(response.country)) ? 'default' : response.country;
+                $('#residence').val(selected_country).change();
+            });
+        }
     }
 };
 
@@ -259,7 +268,6 @@ var get_residence_list = function() {
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
             $("#residence").html(countries.join(''));
 
-            // enable vr acc opening submit button
             $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
     });
