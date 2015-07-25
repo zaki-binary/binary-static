@@ -1,32 +1,20 @@
-(function () {
+var TradeSocket = (function () {
+    'use strict';
 
-    var offerings, market, formName, submarket, underlying, expiryType, startType, barrierCategory, spot, updateSpotFor;
+    var tradeSocket,
+        socketUrl = "wss://www.devbin.io/websockets/contracts";
 
-    var contractTypeDisplayMapping = {
-            CALL: "top",
-            PUT: "bottom",
-            ASIANU: "top",
-            ASIAND: "bottom",
-            DIGITMATCH: "top",
-            DIGITDIFF: "bottom",
-            EXPIRYRANGE: "top",
-            EXPIRYMISS: "bottom",
-            RANGE: "top",
-            UPORDOWN: "bottom",
-            ONETOUCH: "top",
-            NOTOUCH: "bottom",
+    var status = function () {
+        return tradeSocket && tradeSocket.readyState;
     };
 
-    var socketConfig = {
-        url: "wss://ws.binary.com/websockets/contracts",
-        token: 'igwygvy0v338okZMbW0z5-PMt7o',
+    var isReady = function () {
+        return tradeSocket && tradeSocket.readyState == 1;
     };
 
-    var tradeSocket = new WebSocket(socketConfig.url);
-
-    tradeSocket.onopen = function () {
+    var onOpen = function (token) {
         tradeSocket.send(JSON.stringify({
-            authorize: socketConfig.token
+            authorize: token
         }));
 
         tradeSocket.send(JSON.stringify({
@@ -34,86 +22,40 @@
         }));
     };
 
-    tradeSocket.onmessage = function (msg) {
+    var onMessage = function (msg) {
         var response = JSON.parse(msg.data);
-
-        if (response) {
-            var type = response.request.type;
-
-            if (type == 'offerings') {
-                offerings = response.offerings;
-
-                market = localStorage.getItem('market') || 'Forex';
-                formName = localStorage.getItem('formName') || 'risefall';
-                submarket = localStorage.getItem('submarket') || '';
-
-                var formAndBarrier = getFormNameBarrierCategory(formName);
-
-                formName = formAndBarrier['formName'];
-                barrierCategory = formAndBarrier['barrierCategory'];
-
-                Trade.details(offerings, market, formName, barrierCategory);
-
-                displayListElements('contract_market_nav', Trade.markets());
-                displayListElements('contract_form_name_nav', Object.keys(Trade.contractForms()));
-                displayOptions('submarket',Trade.submarkets());
-                displayOptions('underlying', Trade.underlyings());
-
-                underlying = localStorage.getItem('underlying') || document.getElementById('underlying').value;
-                startType = localStorage.getItem('start_type') || '';
-
-                tradeSocket.send(JSON.stringify({
-                    contracts_for: underlying
-                }));
-
-            } else if (type == 'contracts_for') {
-                var formNameElement = document.querySelector('#contract_form_name_nav > li.active');
-                if (formNameElement) {
-                    formName = formNameElement.id;
-                }
-
-                Contract.details(response, formName, barrierCategory);
-
-                displayDurations('duration_units', Contract.durations(), formName, barrierCategory, startType);
-                durationPopulate();
-                document.querySelector('#duration_units').addEventListener('change', function () {
-                    durationPopulate();
-                });
-
-                displayStartDates('date_start', Contract.startDates());
-                displayBarriers(Contract.barriers(), formName);
-
-                tradeSocket.send(JSON.stringify({
-                    currencies: 1
-                }));
-            } else if (type == 'currencies') {
-                displayCurrencies(response);
-                spot = document.getElementById('spot');
-                for (var type in Contract.contractType()[formName]) {
-                    if(Contract.contractType()[formName].hasOwnProperty(type)) {
-                        tradeSocket.send(JSON.stringify(
-                            Price.proposal(type)
-                        ));
-                        updateSpotFor = type;
-                    }
-                }
-            } else if (type == 'price') {
-                console.log(response);
-                var type = response.request['data']['contract_type'];
-                Price.display(response, type, Contract.contractType()[formName][type], contractTypeDisplayMapping[type], spot, updateSpotFor);
-            }
-        } else {
-            // need to print error if no response is sent
-            console.log('some error occured');
-        }
+        Message.process(msg);
     };
 
-    tradeSocket.onclose = function (e) {
+    var onClose = function (e) {
         console.log('socket closed', e);
     };
 
-    tradeSocket.onerror = function (error) {
+    var onError = function (error) {
         console.log('socket error', error);
+    };
+
+    var init = function (token) {
+        tradeSocket = new WebSocket(socketUrl);
+
+        tradeSocket.onopen = onOpen(token);
+        tradeSocket.onmessage = onMessage;
+        tradeSocket.onclose = onClose;
+        tradeSocket.onerror = onError;
+    };
+
+    var send = function(data) {
+        if (isReady()) {
+            tradeSocket.send(JSON.stringify(data));
+        } else {
+        }
+    };
+
+    return {
+        init: init,
+        status: status,
+        socket: tradeSocket,
+        send: send
     };
 
 })();
