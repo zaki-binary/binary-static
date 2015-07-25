@@ -63,3 +63,23 @@ var getFormNameBarrierCategory = function (displayFormName) {
     }
     return obj;
 };
+
+var contractTypeDisplayMapping = function (type) {
+    'use strict';
+    var obj = {
+        CALL: "top",
+        PUT: "bottom",
+        ASIANU: "top",
+        ASIAND: "bottom",
+        DIGITMATCH: "top",
+        DIGITDIFF: "bottom",
+        EXPIRYRANGE: "top",
+        EXPIRYMISS: "bottom",
+        RANGE: "top",
+        UPORDOWN: "bottom",
+        ONETOUCH: "top",
+        NOTOUCH: "bottom",
+    };
+
+    return type ? obj[type] : 'top';
+};
