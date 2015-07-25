@@ -8,10 +8,12 @@ var Contract = (function () {
         open = contracts['open'];
         close = contracts['close'];
 
+        var formBarrier = getFormNameBarrierCategory(formName);
+        formName = formBarrier['formName'];
+        barrierCategory = formBarrier['barrierCategory'];
+
         if (formName) {
-
             for(var i = 0, len = contracts.available.length; i < len; i++) {
-
                 var currentObj = contracts.available[i];
 
                 if (!durations[currentObj['expiry_type']]) {
