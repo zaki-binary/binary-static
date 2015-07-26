@@ -37,7 +37,7 @@ pjax_config_page('new_real', function() {
             client_form.on_residence_change();
             select_user_country();
 
-            # disable residence selection, if VR acc has residence
+            // disable residence selection, if VR acc has residence
             var virtual_residence = $('#virtual_residence');
             if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
                 $('#residence').attr('disabled', true);
