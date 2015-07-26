@@ -25,12 +25,26 @@ var select_user_country = function() {
     }
 };
 
+var enable_residence_form_submit = function () {
+    $('form#openAccForm').submit(function (event) {
+        $('#residence').removeAttr('disabled');
+    });
+};
+
 pjax_config_page('new_real', function() {
     return {
         onLoad: function() {
             client_form.on_residence_change();
             select_user_country();
-            if(page.client.is_logged_in) {
+
+            # disable residence selection, if VR acc has residence
+            var virtual_residence = $('#virtual_residence');
+            if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
+                $('#residence').attr('disabled', true);
+            }
+            enable_residence_form_submit();
+
+            if (page.client.is_logged_in) {
                 client_form.set_virtual_email_id(page.client.email);
             }
         }
