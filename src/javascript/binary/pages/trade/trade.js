@@ -96,8 +96,20 @@ var Trade = (function () {
         submarkets: function () { return tradeSubmarkets; },
         underlyings: function () { return tradeUnderlyings; },
         contractForms: function () { return tradeContractForms; },
-        form: function () { return form; },
-        barrier: function () { return barrier; }
+        form: function (name) {
+            if (name) {
+                form = getFormNameBarrierCategory(name);
+                barrier(form['barrier']);
+                form = form['formName'];
+            }
+            return form;
+        },
+        barrier: function (name) {
+            if (name) {
+                barrier = name;
+            }
+            return barrier;
+        }
     };
 
 })();
