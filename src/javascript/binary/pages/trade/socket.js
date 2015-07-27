@@ -36,17 +36,17 @@ var TradeSocket = (function () {
 
         tradeSocket.onclose = function (e) {
             console.log('socket closed', e);
-        };;
+        };
 
         tradeSocket.onerror = function (error) {
             console.log('socket error', error);
-        };;
+        };
     };
 
     var send = function(data) {
         if (isClose()) {
             bufferedSends.push(data);
-            tradeSocket.init();
+            init();
         } else if (isReady()) {
             tradeSocket.send(JSON.stringify(data));
         } else {

@@ -53,6 +53,9 @@ var getFormNameBarrierCategory = function (displayFormName) {
         } else if (displayFormName == 'higherlower') {
             obj['formName'] = 'callput';
             obj['barrierCategory'] = 'euro_non_atm';
+        } else if (displayFormName == 'callput'){
+            obj['formName'] = displayFormName;
+            obj['barrierCategory'] = 'euro_atm';
         } else {
             obj['formName'] = displayFormName;
             obj['barrierCategory'] = '';
