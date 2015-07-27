@@ -2,60 +2,69 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://www.devbin.io/websockets/contracts";
+        socketUrl = "wss://www.devbin.io/websockets/contracts",
+        bufferedSends = [];
 
     var status = function () {
         return tradeSocket && tradeSocket.readyState;
     };
 
     var isReady = function () {
-        return tradeSocket && tradeSocket.readyState == 1;
+        return tradeSocket && tradeSocket.readyState === 1;
     };
 
-    var onOpen = function (token) {
-        tradeSocket.send(JSON.stringify({
-            authorize: token
-        }));
-
-        tradeSocket.send(JSON.stringify({
-            offerings: {hierarchy: 1, contracts: 0}
-        }));
+    var isClose = function () {
+        return tradeSocket && tradeSocket.readyState === 3;
     };
 
-    var onMessage = function (msg) {
-        var response = JSON.parse(msg.data);
-        Message.process(msg);
-    };
-
-    var onClose = function (e) {
-        console.log('socket closed', e);
-    };
-
-    var onError = function (error) {
-        console.log('socket error', error);
+    var sendBufferedSends = function () {
+        while (bufferedSends.length > 0) {
+            tradeSocket.send(JSON.stringify(bufferedSends.shift()));
+        }
     };
 
     var init = function (token) {
         tradeSocket = new WebSocket(socketUrl);
 
-        tradeSocket.onopen = onOpen(token);
-        tradeSocket.onmessage = onMessage;
-        tradeSocket.onclose = onClose;
-        tradeSocket.onerror = onError;
+        tradeSocket.onopen = function (token){
+            sendBufferedSends();
+        };
+
+        tradeSocket.onmessage = function (msg){
+            Message.process(msg);
+        };
+
+        tradeSocket.onclose = function (e) {
+            console.log('socket closed', e);
+        };;
+
+        tradeSocket.onerror = function (error) {
+            console.log('socket error', error);
+        };;
     };
 
     var send = function(data) {
-        if (isReady()) {
+        if (isClose()) {
+            bufferedSends.push(data);
+            tradeSocket.init();
+        } else if (isReady()) {
             tradeSocket.send(JSON.stringify(data));
         } else {
+            bufferedSends.push(data);
+        }
+    };
+
+    var close = function () {
+        if (tradeSocket) {
+            tradeSocket.close();
         }
     };
 
     return {
         init: init,
-        status: status,
-        socket: tradeSocket,
-        send: send
+        send: send,
+        close: close,
+        socket: function () { return tradeSocket; }
     };
 
 })();
