@@ -25,18 +25,26 @@ var select_user_country = function() {
     }
 };
 
+var disable_residence = function () {
+    var virtual_residence = $('#virtual_residence');
+    if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
+        $('#residence').attr('disabled', true);
+    }
+};
+
+var enable_residence_form_submit = function () {
+    $('form#openAccForm').submit(function (event) {
+        $('#residence').removeAttr('disabled');
+    });
+};
+
 pjax_config_page('new_real', function() {
     return {
         onLoad: function() {
             client_form.on_residence_change();
             select_user_country();
-
-            // disable other residence options, if VR acc has residence
-            var virtual_residence = $('#virtual_residence');
-            if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
-                $('#residence').find(':not(:selected)').prop('disabled', true);
-            }
-
+            disable_residence();
+            enable_residence_form_submit();
             if (page.client.is_logged_in) {
                 client_form.set_virtual_email_id(page.client.email);
             }
@@ -54,7 +62,7 @@ var upgrade_investment_disabled_field = function () {
     });
 };
 
-var enable_fields_form_submit = function () {
+var financial_enable_fields_form_submit = function () {
     var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
     $('form#openAccForm').submit(function (event) {
         fields.forEach(function (element, index, array) {
@@ -77,7 +85,7 @@ pjax_config_page('new_financial', function() {
     return {
         onLoad: function() {
             upgrade_investment_disabled_field();
-            enable_fields_form_submit();
+            financial_enable_fields_form_submit();
             hide_account_opening_for_risk_disclaimer();
         }
     };
