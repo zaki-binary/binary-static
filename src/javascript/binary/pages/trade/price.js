@@ -59,13 +59,17 @@ var Price = (function () {
             position = contractTypeDisplayMapping(type),
             display = contractType[type],
             container = document.getElementById('price_container_' + position),
+            description_container = document.getElementById('description_container_' + position),
+            currency = document.getElementById('currency'),
+            purchase = document.getElementById('contract_purchase_' + position),
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
             description = row.cloneNode(),
+            priceId = document.createElement('input'),
             fragment = document.createDocumentFragment();
 
-        while (container && container.firstChild) {
-            container.removeChild(container.firstChild);
+        while (description_container && description_container.firstChild) {
+            description_container.removeChild(description_container.firstChild);
         }
 
         h4.setAttribute('class', 'contract_heading ' + display);
@@ -80,43 +84,39 @@ var Price = (function () {
         fragment.appendChild(h4);
 
         if (details['error']) {
+            purchase.style.display = 'none';
             content = document.createTextNode(details['error']);
             description.appendChild(content);
             row.appendChild(description);
             fragment.appendChild(row);
         } else {
-            var amount = document.createElement('div'),
-                purchase = row.cloneNode(),
-                button = document.createElement('button');
+            var amount = document.createElement('div');
 
             amount.setAttribute('class', 'contract_amount col');
             amount.setAttribute('id', 'contract_amount_' + position);
 
-            purchase.setAttribute('class', 'contract_purchase');
-            purchase.setAttribute('id', 'contract_purchase_' + position);
-            button.setAttribute('class', 'purchase_button');
-            button.setAttribute('value', 'purchase');
-
-            content = document.createTextNode(details['ask_price']);
+            content = document.createTextNode(currency.value + ' ' + details['ask_price']);
             amount.appendChild(content);
 
             content = document.createTextNode(details['longcode']);
             description.appendChild(content);
 
+            // create unique id object that is send in response
+            priceId.setAttribute('name', 'contract_price_id');
+            priceId.setAttribute('class', 'contract_price_id');
+            priceId.setAttribute('type', 'hidden');
+            priceId.setAttribute('id', details['id']);
+
             row.appendChild(amount);
             row.appendChild(description);
-
-            content = document.createTextNode('Purchase');
-            button.appendChild(content);
-            purchase.appendChild(button);
+            row.appendChild(priceId);
 
             fragment.appendChild(row);
-            fragment.appendChild(purchase);
 
             spotElement.textContent = details['spot'];
-
         }
-        container.appendChild(fragment);
+        description_container.appendChild(fragment);
+        container.insertBefore(description_container, purchase);
     };
 
     return {
