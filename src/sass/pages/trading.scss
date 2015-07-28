@@ -577,3 +577,45 @@ a.close {
         }
     }
 }
+
+#trade_tab_mobile_menu {
+    float: none !important;
+    margin: 0 10px 0;
+    .trade_menu_icon_container {
+        padding-bottom: 5px;
+        .navicon-line {
+            width: 24px;
+            height: 4px;
+            border-radius: 1px;
+            margin-bottom: 3px;
+            background-color: $COLOR_BLUE;
+        }
+    }
+}
+
+.mm-menu.tab-menu-wrap {
+    ul {
+        li {
+            margin: 0;
+            display: block;
+            &.active {
+                a {
+                    background-image: none;
+                }
+            }
+            &#risefall {
+                background-image: none;
+            }
+            &#higherlower {
+                background-image: none;
+            }
+            a {
+                color: inherit;
+                line-height: inherit;
+                display: block;
+                font-weight: inherit;
+                top: 0;
+            }
+        }
+    }
+}
