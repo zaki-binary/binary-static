@@ -118,21 +118,6 @@ var get_ticker = function() {
     }
 };
 
-
-var select_user_country = function() {
-    if($('#residence').length > 0) {
-        get_user_country(function() {
-            var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
-            var current_selected = $('#residence').val() || this.country;
-            if(restricted_countries.test(current_selected)) {
-                $('#residence').val('default').change();
-            } else {
-                $('#residence').val(current_selected).change();
-            }
-        });
-    }
-};
-
 var Charts = function(charts) {
     window.open(charts, 'DetWin', 'width=580,height=710,scrollbars=yes,location=no,status=no,menubar=no');
 };
@@ -259,7 +244,6 @@ var get_residence_list = function() {
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
             $("#residence").html(countries.join(''));
 
-            // enable vr acc opening submit button
             $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
     });
