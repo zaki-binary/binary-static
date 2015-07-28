@@ -67,11 +67,25 @@ var BetPrice = function() {
         },
         on_buy: function() {
             var that = this;
-            $('#content button.buy_bet_button, a.spread_250, a.spread_260').on('click', function (e) {
+            $('#content button.buy_bet_button').on('click', function (e) {
                 e = e || window.event;
                 if (typeof e.preventDefault == 'function') {
                     e.preventDefault();
                 }
+                BetPrice.order_form.disable_buy_buttons();
+                that.hide_buy_buttons();
+                var form = $(e.target).parents('form');
+                that.buy_bet(form);
+                return false;
+            }).addClass('unbind_later');
+            $('a.spread_250, a.spread_260').on('click', function (e) {
+                e = e || window.event;
+                if (typeof e.preventDefault == 'function') {
+                    e.preventDefault();
+                }
+                var target = $(e.target);
+                var button = target.parents('a[class^="spread"]');
+                that.spread.disable(button);
                 var form = $(e.target).parents('form');
                 that.buy_bet(form);
                 return false;
@@ -80,8 +94,6 @@ var BetPrice = function() {
         buy_bet: function (form) {
             var that = this;
             var timeout = 60000;
-            BetPrice.order_form.disable_buy_buttons();
-            that.hide_buy_buttons();
 
             if(!$.cookie('login')) {
                 page.client.is_logged_in = false;
@@ -185,6 +197,13 @@ var BetPrice = function() {
                     if (typeof that._stream !== 'undefined') {
                         that._stream.close();
                     }
+                },
+                disable: function(target) {
+                    var that = this;
+                    target.unbind('click');
+                    target.find('.outer_box').removeClass('sell');
+                    target.find('.outer_box').removeClass('buy');
+                    target.find('.outer_box').addClass('grey-out');
                 },
                 on_sell: function(form) {
                     var that = this;
@@ -536,7 +555,6 @@ var BetPrice = function() {
                     return $('button[name^="btn_buybet"]').parent().show();
                 },
                 disable_buy_buttons: function() {
-                    $('a[id^="spread"]').attr('disabled','disabled');
                     $('button[name^="btn_buybet"]').attr('disabled','disabled');
                 },
                 enable_buy_buttons: function() {
