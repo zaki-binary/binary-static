@@ -198,6 +198,15 @@ var BetPrice = function() {
                         that._stream.close();
                     }
                 },
+                validate_change: function(target) {
+                    var current = target.attr('value');
+                    var new_value = target.val();
+                    if (!new_value.toString().match(/^[0-9.]*$/)) {
+                        new_value = current;
+                    }
+
+                    return new_value;
+                },
                 disable: function(target) {
                     var that = this;
                     target.unbind('click');

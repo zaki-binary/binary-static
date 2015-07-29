@@ -228,17 +228,23 @@ var BetForm = function () {
                         $('#bet_calculation_container').hide();
                     }).addClass('unbind_later');
                     $('#stop_profit').on('change', function (e) {
-                        var selected = $(this).val();
+                        var target = $(this);
+                        var selected = BetPrice.spread.validate_change(target);
+                        target.val(selected);
                         BetForm.attributes.model.stop_profit(selected);
                         $('#bet_calculation_container').hide();
                     }).addClass('unbind_later');
                     $('#stop_loss').on('change', function (e) {
-                        var selected = $(this).val();
+                        var target = $(this);
+                        var selected = BetPrice.spread.validate_change(target);
+                        target.val(selected);
                         BetForm.attributes.model.stop_loss(selected);
                         $('#bet_calculation_container').hide();
                     }).addClass('unbind_later');
                     $('#amount_per_point').on('change', function (e) {
-                        var selected = $(this).val();
+                        var target = $(this);
+                        var selected = BetPrice.spread.validate_change(target);
+                        target.val(selected);
                         BetForm.attributes.model.amount_per_point(selected);
                         $('#bet_calculation_container').hide();
                     }).addClass('unbind_later');
