@@ -1263,8 +1263,8 @@ Contents.prototype = {
                 }
             }
             if (has_real) {
-                $('.virtual-upgrade-link').addClass('invisible');
-                $('.virtual-upgrade-link').hide();
+                $('#virtual-upgrade-link').addClass('invisible');
+                $('#virtual-upgrade-link').hide();
 
                 if (check_financial && !has_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
@@ -1310,8 +1310,6 @@ Page.prototype = {
         this.on_change_loginid();
         this.record_affiliate_exposure();
         this.contents.on_load();
-        this.on_click_signup();
-        this.on_input_password();
         this.on_click_acc_transfer();
         this.on_click_view_balances();
         $('#current_width').val(get_container_width());//This should probably not be here.
@@ -1332,41 +1330,6 @@ Page.prototype = {
         $('#client_loginid').on('change', function() {
             LocalStore.set('active_loginid', $(this).val());
             $('#loginid-switch-form').submit();
-        });
-    },
-    on_input_password: function() {
-        $('#chooseapassword').on('input', function() {
-            $('#reenter-password').removeClass('invisible');
-            $('#reenter-password').show();
-        });
-    },
-    on_click_signup: function() {
-        $('#btn_registration').on('click', function() {
-            var pwd = $('#chooseapassword').val();
-            var pwd_2 = $('#chooseapassword_2').val();
-            var email = $('#Email').val();
-
-            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
-                $('#signup_error').text(text.localize('Invalid email address'));
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
-            }
-            if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
-                $('#signup_error').text(text.localize('The two passwords that you entered do not match.'));
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
-            }
-            // email != password
-            if (email == pwd) {
-                $('#signup_error').text(text.localize('Your password cannot be the same as your email'));
-                $('#signup_error').removeClass('invisible');
-                $('#signup_error').show();
-                return false;
-            }
-
-            $('#virtual-acc-form').submit();
         });
     },
     on_click_acc_transfer: function() {
@@ -8220,12 +8183,49 @@ onLoad.queue(function() {
         client_form = new ClientForm({restricted_countries: page.settings.get('restricted_countries'), valid_loginids: page.settings.get('valid_loginids')});
 });
 
+var select_user_country = function() {
+    if ($('#residence').length > 0) {
+        var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
+        var selected_country = $('#residence').val();
+
+        if (selected_country.length > 0) {
+            selected_country = (restricted_countries.test(selected_country)) ? '' : selected_country;
+            $('#residence').val(selected_country).change();
+        } else {
+            $.ajax({
+                crossDomain: true,
+                url: page.url.url_for('country'),
+                async: true,
+                dataType: "json"
+            }).done(function(response) {
+                selected_country = (restricted_countries.test(response.country)) ? '' : response.country;
+                $('#residence').val(selected_country).change();
+            });
+        }
+    }
+};
+
+var disable_residence = function () {
+    var virtual_residence = $('#virtual_residence');
+    if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
+        $('#residence').attr('disabled', true);
+    }
+};
+
+var enable_residence_form_submit = function () {
+    $('form#openAccForm').submit(function (event) {
+        $('#residence').removeAttr('disabled');
+    });
+};
+
 pjax_config_page('new_real', function() {
     return {
         onLoad: function() {
             client_form.on_residence_change();
             select_user_country();
-            if(page.client.is_logged_in) {
+            disable_residence();
+            enable_residence_form_submit();
+            if (page.client.is_logged_in) {
                 client_form.set_virtual_email_id(page.client.email);
             }
         }
@@ -8242,7 +8242,7 @@ var upgrade_investment_disabled_field = function () {
     });
 };
 
-var enable_fields_form_submit = function () {
+var financial_enable_fields_form_submit = function () {
     var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
     $('form#openAccForm').submit(function (event) {
         fields.forEach(function (element, index, array) {
@@ -8265,7 +8265,7 @@ pjax_config_page('new_financial', function() {
     return {
         onLoad: function() {
             upgrade_investment_disabled_field();
-            enable_fields_form_submit();
+            financial_enable_fields_form_submit();
             hide_account_opening_for_risk_disclaimer();
         }
     };
@@ -8427,7 +8427,7 @@ ClientForm.prototype = {
             var current_state = address_state.length > 0 ? address_state.val() : '';
 
             var postcodeLabel = $('label[for=AddressPostcode]');
-            if ($(this).val() == 'GB') {
+            if ($(this).val() == 'gb') {
                 postcodeLabel.prepend('<em class="required_asterisk">* </em>');
             } else {
                 postcodeLabel.find('em').remove();
@@ -8583,21 +8583,6 @@ var get_ticker = function() {
     }
 };
 
-
-var select_user_country = function() {
-    if($('#residence').length > 0) {
-        get_user_country(function() {
-            var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
-            var current_selected = $('#residence').val() || this.country;
-            if(restricted_countries.test(current_selected)) {
-                $('#residence').val('default').change();
-            } else {
-                $('#residence').val(current_selected).change();
-            }
-        });
-    }
-};
-
 var Charts = function(charts) {
     window.open(charts, 'DetWin', 'width=580,height=710,scrollbars=yes,location=no,status=no,menubar=no');
 };
@@ -8709,10 +8694,68 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
+var get_residence_list = function() {
+    var url = page.url.url_for('residence_list');
+    $.getJSON(url, function(data) {
+        var countries = [];
+        $.each(data.residence, function(i, country) {
+            var disabled = '';
+            var selected = '';
+            if (country.disabled) {
+                disabled = ' disabled ';
+            } else if (country.selected) {
+                selected = ' selected="selected" ';
+            }
+            countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
+            $("#residence").html(countries.join(''));
+
+            $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
+        });
+    });
+};
+
+var on_input_password = function() {
+    $('#chooseapassword').on('input', function() {
+        $("#chooseapassword_2").css("visibility", "visible");
+    });
+};
+
+var on_click_signup = function() {
+    $('form#virtual-acc-form #btn_registration').on('click', function() {
+        var pwd = $('#chooseapassword').val();
+        var pwd_2 = $('#chooseapassword_2').val();
+        var email = $('#Email').val();
+        var residence = $('#residence').val();
+
+        var error_msg = '';
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+            error_msg = text.localize('Invalid email address');
+        } else if (pwd.length < 6 || pwd.length > 25 || pwd_2.length < 6 || pwd_2.length > 25) {
+            error_msg = text.localize('Password length should be between 6 and 25 characters');
+        } else if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
+            error_msg = text.localize('The two passwords that you entered do not match.');
+        } else if (email == pwd) {
+            error_msg = text.localize('Your password cannot be the same as your email');
+        } else if (residence.length === 0) {
+            error_msg = text.localize('Please specify your country.');
+        }
+
+        if (error_msg.length > 0) {
+            $('#signup_error').text(error_msg);
+            $('#signup_error').removeClass('invisible');
+            $('#signup_error').show();
+            return false;
+        }
+        $('#virtual-acc-form').submit();
+    });
+};
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
-            select_user_country();
+            on_input_password();
+            on_click_signup();
+            get_residence_list();
             get_ticker();
         }
     };
@@ -9551,18 +9594,6 @@ function get_highest_zindex(selector) {
 
     return all.length ? Math.max.apply(Math, all) : null;
 }
-
-var user_country;
-var get_user_country = function(callback) {
-    if(user_country) {
-            callback.call(user_country);
-    } else {
-        $.ajax({ crossDomain: true, url: page.url.url_for('country'), async: true, dataType: "json" }).done(function(response) {
-            user_country = response;
-            callback.call(response);
-        });
-    }
-};
 
 /**
  * Returns a stylized price for a value as units and cents.
