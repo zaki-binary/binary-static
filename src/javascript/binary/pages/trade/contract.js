@@ -4,7 +4,7 @@ var Contract = (function () {
     var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {}, contractType = {};
 
     var processContracts = function (contractObject, formName, barrierCategory, expiryType) {
-        var contracts = contractObject.contracts_for, contractsArray = [], sendAll = true;
+        var contracts = contractObject.contracts, contractsArray = [], sendAll = true;
         open = contracts['open'];
         close = contracts['close'];
 

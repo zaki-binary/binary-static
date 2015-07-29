@@ -41,7 +41,7 @@ var Price = (function () {
             proposal['duration'] = duration.value;
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && expiryType.value == 'endtime') {
-            proposal['date_expiry'] = moment.utc(endDate.value + " " + endtime.value).unix();
+            proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value + 5).unix();
         }
 
         if (highBarrier && highBarrier.value) {
@@ -51,11 +51,13 @@ var Price = (function () {
             proposal['barrier2'] = lowBarrier.value;
         }
 
+        proposal['type'] = 'price';
+
         return proposal;
     };
 
     var display = function (details, contractType, spotElement) {
-        var type = details.request['data']['contract_type'],
+        var type = details['contract_type'],
             position = contractTypeDisplayMapping(type),
             display = contractType[type],
             container = document.getElementById('price_container_' + position),
