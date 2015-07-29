@@ -1,8 +1,10 @@
-<h4>[% l("Spreads") %]</h4>
+<h4>[% l("Entry Level") %]</h4>
 <p>
-    [% l("The entry spot values for a Long  and Short contracts are separated by a spread, such that :") %]
+    [% l("For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread.  For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread.") %]
 </p>
-<ul>
-    <li>[% l("Long Entry Level = Next Spot + Spread/2") %] </li>
-    <li>[% l("Short Entry level = Next Spot - Spread/2") %]</li>
-</ul>
+<p>
+    [% l("The amount of profit/loss per point of rise/fall is multiplied by the amount per point.  A large amount per point will result in large profits/losses per point of movement on the index.") %]
+</p>
+<p>
+    [% l("The stop-loss and stop-profit are guaranteed. The loss and profit are limited to the stop-loss and stop-profit respectively.  When the exit level touches either the stop-loss or stop-profit, the contract will be closed at the stop-loss or stop-profit level.") %]
+</p>
