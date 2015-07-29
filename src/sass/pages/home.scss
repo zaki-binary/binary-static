@@ -193,20 +193,31 @@
 .xquoter-right {
     text-align: right;
 }
-.xemail, .xpass {
-    width: 35%;
-    display: inline-block;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    padding: 10px !important;
-    font-size: 14px;
+
+#virtual-acc-form {
+    input, select {
+        width: 35%;
+        display: inline-block;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        padding: 10px !important;
+        font-size: 14px;
+    }
+    #residence {
+        height: 39px;
+        line-height: 39px;
+        width: 246px;
+        vertical-align: middle;
+    }
+    #chooseapassword_2 {
+        visibility: hidden;
+    }
 }
-.xemail {
-    margin-right: 20px;
+
+.virtual-acc-right {
+    margin-left: 40px;
 }
-.xpass {
-    margin-left: 20px;
-}
+
 .xtopcta {
     display: inline-block;
     width: 35%;
@@ -231,13 +242,16 @@
         .xhead2 {
             margin-top: 30px;
         }
-        .xemail {
+        .virtual-acc-left {
             width: 80% !important;
             margin-right: 0;
         }
-        .xpass {
+        .virtual-acc-right {
             width: 80% !important;
             margin-left: 0;
+        }
+        #residence {
+            width: 85% !important;
         }
         .xtopcta {
             width: 80%;
