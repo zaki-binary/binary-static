@@ -268,7 +268,7 @@ var BetPrice = function() {
                             var level = parseFloat(prices[i].level);
 
                             if (typeof(prices[i].value) !== 'undefined') {
-                                if (typeof(prices[i].err) !== 'undefined') {
+                                if (prices[i].err !== null) {
                                     that.spread_con().find('.close_position').hide();
                                     that.spread_con().find('#error_message').text(prices[i].err).show();
                                     break;
