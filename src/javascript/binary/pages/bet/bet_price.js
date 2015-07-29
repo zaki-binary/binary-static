@@ -201,9 +201,6 @@ var BetPrice = function() {
                 disable: function(target) {
                     var that = this;
                     target.unbind('click');
-                    target.find('.outer_box').removeClass('sell');
-                    target.find('.outer_box').removeClass('buy');
-                    target.find('.outer_box').addClass('grey-out');
                 },
                 on_sell: function(form) {
                     var that = this;
@@ -247,17 +244,16 @@ var BetPrice = function() {
                 on_sell_success: function(form, resp, resp_status, jqXHR) {
                     var that = this;
 
-                    if (resp) {
-                        var con = that.spread_con();
+                    var con = that.spread_con();
+                    if (typeof(resp.error) !== 'undefined') {
+                        con.find('#error_message').text(resp.error).show();
+                    } else {
                         var color = resp.value.dollar > 0 ? 'profit' : 'loss';
-                        con.find('#status').text(text.localize('Close')).addClass(color);
+                        con.find('#status').text(text.localize('Closed')).addClass(color);
                         con.find('#pnl_value').text(resp.value.dollar).addClass(color);
                         con.find('#pnl_point').text(resp.value.point);
                         con.find('#exit_level').text(resp.exit_level).parents('tr').show();
                     }
-                },
-                on_sell_error: function(form, resp, resp_status, jqXHR) {
-                    var data = {};
                 },
                 stream: function(channel) {
                     var that = this;
@@ -272,10 +268,18 @@ var BetPrice = function() {
                             var level = parseFloat(prices[i].level);
 
                             if (typeof(prices[i].value) !== 'undefined') {
-                                that.spread_con().find('#sell_level').text(level);
-                                var current_value = that.round(parseFloat(prices[i].value.dollar),2);
-                                that.spread_con().find('#pnl_value').text(current_value);
-                                that.spread_con().find('#pnl_point').text(prices[i].value.point);
+                                if (typeof(prices[i].err) !== 'undefined') {
+                                    that.spread_con().find('.close_position').hide();
+                                    that.spread_con().find('#error_message').text(prices[i].err).show();
+                                    break;
+                                } else {
+                                    that.spread_con().find('.close_position').show();
+                                    that.spread_con().find('#error_message').hide();
+                                    that.spread_con().find('#sell_level').text(level);
+                                    var current_value = that.round(parseFloat(prices[i].value.dollar),2);
+                                    that.spread_con().find('#pnl_value').text(current_value);
+                                    that.spread_con().find('#pnl_point').text(prices[i].value.point);
+                                }
                             }
 
                             var higher_stop_level;
