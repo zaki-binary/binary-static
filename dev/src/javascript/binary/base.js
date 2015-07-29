@@ -195,5 +195,5 @@ onLoad.queue(function () {
 // account on one tab then we need to load all the open tab/window
 $(window).on('storage', function (jq_event) {
     if (jq_event.originalEvent.key !== 'active_loginid') return;
-    location.href = page.url.url_for('user/my_account');
+    location.reload();
 });
