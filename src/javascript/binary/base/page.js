@@ -89,9 +89,9 @@ var Client = function() {
         for (var i=0;i<dl_info.length;i++) {
             if(dl_info[i].event == 'log_in') {
                 SessionStore.set('client_info',
-                    this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname
-                    + ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone
-                    + ':' + dl_info[i].params.bom_country_code
+                    this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname +
+                    ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone +
+                    ':' + dl_info[i].params.bom_country_code
                 );
             }
         }
@@ -713,7 +713,7 @@ Contents.prototype = {
 
                 if (real) {
                     has_real = true;
-                    break if (!check_financial);
+                    if (!check_financial) { break; }
 
                     if (loginid_array[i].financial) {
                         has_financial = true;
