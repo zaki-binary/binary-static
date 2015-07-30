@@ -255,7 +255,8 @@ var BetPrice = function() {
 
                     var con = that.spread_con();
                     if (typeof(resp.error) !== 'undefined') {
-                        con.find('#error_message').text(resp.error).show();
+                        that.err_con.find('p').text(resp.error);
+                        that.err_con.show();
                     } else {
                         var color = resp.value.dollar > 0 ? 'profit' : 'loss';
                         con.find('#status').text(text.localize('Closed')).addClass(color);
@@ -272,22 +273,25 @@ var BetPrice = function() {
                     that._stream.onmessage = function(e) {
                         var data = JSON.parse(e.data);
                         var prices = data.prices;
+                        var con = that.spread_con();
+                        var err_con = that.err_con();
                         for (var i = 0; i < prices.length; i++) {
                             var id = prices[i].id;
                             var level = parseFloat(prices[i].level);
 
                             if (typeof(prices[i].value) !== 'undefined') {
                                 if (prices[i].err !== null) {
-                                    that.spread_con().find('.close_position').hide();
-                                    that.spread_con().find('#error_message').text(prices[i].err).show();
+                                    con.find('.close_position').hide();
+                                    err_con.find('p').text(prices[i].err);
+                                    err_con.show();
                                     break;
                                 } else {
-                                    that.spread_con().find('.close_position').show();
-                                    that.spread_con().find('#error_message').hide();
-                                    that.spread_con().find('#sell_level').text(level);
+                                    err_con.hide();
+                                    con.find('.close_position').show();
+                                    con.find('#sell_level').text(level);
                                     var current_value = that.round(parseFloat(prices[i].value.dollar),2);
-                                    that.spread_con().find('#pnl_value').text(current_value);
-                                    that.spread_con().find('#pnl_point').text(prices[i].value.point);
+                                    con.find('#pnl_value').text(current_value);
+                                    con.find('#pnl_point').text(prices[i].value.point);
                                 }
                             }
 
@@ -302,7 +306,7 @@ var BetPrice = function() {
                             }
 
                             if (level >= higher_stop_level || level <= lower_stop_level) {
-                                var sell_button = that.spread_con().find('.close_position');
+                                var sell_button = con.find('.close_position');
                                 sell_button.click();
                                 break;
                             }
@@ -311,6 +315,10 @@ var BetPrice = function() {
                     that._stream.onerror = function() {
                         that._stream.close();
                     };
+                },
+                err_con: function() {
+                    var that = this;
+                    return that.spread_con().find('#error_box');
                 },
                 spread_con: function() {
                     return $('#sell_content_wrapper');
