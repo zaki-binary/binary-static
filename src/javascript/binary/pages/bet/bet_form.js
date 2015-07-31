@@ -221,6 +221,33 @@ var BetForm = function () {
                         BetForm.time.update_for_start_time_change();
                         $('#bet_calculation_container').hide();
                     }).addClass('unbind_later');
+                    $('#stop_type').on('change', function (e) {
+                        var selected = $(this).val();
+                        $('#stop_type_2').val(selected);
+                        BetForm.attributes.model.stop_type(selected);
+                        $('#bet_calculation_container').hide();
+                    }).addClass('unbind_later');
+                    $('#stop_profit').on('change', function (e) {
+                        var target = $(this);
+                        var selected = BetPrice.spread.validate_change(target);
+                        target.val(selected);
+                        BetForm.attributes.model.stop_profit(selected);
+                        $('#bet_calculation_container').hide();
+                    }).addClass('unbind_later');
+                    $('#stop_loss').on('change', function (e) {
+                        var target = $(this);
+                        var selected = BetPrice.spread.validate_change(target);
+                        target.val(selected);
+                        BetForm.attributes.model.stop_loss(selected);
+                        $('#bet_calculation_container').hide();
+                    }).addClass('unbind_later');
+                    $('#amount_per_point').on('change', function (e) {
+                        var target = $(this);
+                        var selected = BetPrice.spread.validate_change(target);
+                        target.val(selected);
+                        BetForm.attributes.model.amount_per_point(selected);
+                        $('#bet_calculation_container').hide();
+                    }).addClass('unbind_later');
                 },
                 on_form_submit: function() {
                     BetForm.attributes.form().on('submit', function (event) {
