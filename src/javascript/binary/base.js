@@ -149,18 +149,6 @@ var make_mobile_menu = function () {
             selectedClass: 'active',
         });
     }
-    if ($('#trade_tab_mobile_menu').is(':visible')) {
-        $('#tradeTabWrapper').mmenu({
-            position: 'right',
-            zposition: 'front',
-            slidingSubmenus: true,
-            searchfield: true,
-            onClick: {
-                close: true
-            },
-        }, {
-        });
-    }
 };
 
 onLoad.queue(function () {

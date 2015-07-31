@@ -137,3 +137,23 @@ pjax_config_page('chart_application', function () {
         }
     };
 });
+
+pjax_config_page('trade.cgi', function () {
+    return {
+        onLoad: function () {
+            load_chart_app();
+            if ($('#trade_tab_mobile_menu').is(':visible')) {
+                $('#tradeTabWrapper').mmenu({
+                    position: 'right',
+                    zposition: 'front',
+                    slidingSubmenus: true,
+                    searchfield: true,
+                    onClick: {
+                        close: true
+                    },
+                }, {
+                });
+            }
+        }
+    };
+});
