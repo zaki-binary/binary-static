@@ -143,6 +143,12 @@
             .matches {
               background: url("../images/pages/trade/matches_1.svg") no-repeat 5% 75%;
             }
+            .spread_up {
+              background: url("../images/pages/trade/spreadbet.svg") no-repeat 5% 75%;
+            }
+            .spread_down {
+              background: url("../images/pages/trade/spreadbet.svg") no-repeat 5% 75%;
+            }
             .rises {
               background: url("../images/pages/trade/rise_1.png") no-repeat 5% 75%;
             }
@@ -292,6 +298,51 @@
       padding-top: 3px;
     }
   }
+}
+
+.outer_box {
+    color: white;
+    position: relative;
+    width: 153px;
+    height: 106px;
+    text-decoration: none;
+    text-align: left;
+    .button_text {
+      margin-left: 8px;
+    }
+}
+
+.inner_box {
+    color: #000;
+    position: absolute;
+    text-align: center;
+    width: 139px;
+    height: 60px;
+    bottom: 0px;
+    margin: 0px 7px 7px;
+    background-color: rgb(255, 255, 255);
+    .stylized_price {
+      margin: 15px 0;
+    }
+}
+
+.grey-out {
+    background-color: $COLOR_GRAY;
+    .inner_box {
+      color: $COLOR_GRAY;
+    }
+}
+
+.buy {
+    background-color: $COLOR_LIGHT_BLUE;
+}
+
+.sell {
+    background-color: $COLOR_RED;
+}
+
+a.spread_250, a.spread_260, a.spread_buy, a.spread_sell {
+    text-decoration: none;
 }
 
 .stylized_cents {
