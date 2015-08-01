@@ -53,25 +53,33 @@ pjax_config_page('new_real', function() {
 });
 
 var upgrade_investment_disabled_field = function () {
-    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
-    fields.forEach(function (element, index, array) {
-        var obj = $('#'+element);
-        if (obj.length > 0) {
-            $('#'+element).attr('disabled', true);
-        }
-    });
-};
-
-var financial_enable_fields_form_submit = function () {
-    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
-    $('form#openAccForm').submit(function (event) {
+    if (page.client.is_real) {
+        var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
         fields.forEach(function (element, index, array) {
             var obj = $('#'+element);
             if (obj.length > 0) {
-                obj.removeAttr('disabled');
+                $('#'+element).attr('disabled', true);
             }
         });
-    });
+    } else {
+        $('#residence').attr('disabled', true);
+    }
+};
+
+var financial_enable_fields_form_submit = function () {
+    if (page.client.is_real) {
+        var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
+        $('form#openAccForm').submit(function (event) {
+            fields.forEach(function (element, index, array) {
+                var obj = $('#'+element);
+                if (obj.length > 0) {
+                    obj.removeAttr('disabled');
+                }
+            });
+        });
+    } else {
+        $('#residence').removeAttr('disabled');
+    }
 };
 
 var hide_account_opening_for_risk_disclaimer = function () {
