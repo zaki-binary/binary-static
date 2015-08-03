@@ -38,6 +38,7 @@ function displayStartDates(id, startDates) {
 
             while(a.isBefore(b)) {
                 option = document.createElement('option');
+                option.setAttribute('value', a.utc().unix());
                 content = document.createTextNode(a.format('HH:mm ddd'));
                 option.appendChild(content);
                 fragment.appendChild(option);
