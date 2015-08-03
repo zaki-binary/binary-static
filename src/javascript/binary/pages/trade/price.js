@@ -53,8 +53,6 @@ var Price = (function () {
             proposal['barrier2'] = lowBarrier.value;
         }
 
-        proposal['type'] = 'price';
-
         return proposal;
     };
 

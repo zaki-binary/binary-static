@@ -18,7 +18,7 @@ var processMarketOfferings = function (offerings, market) {
     sessionStorage.setItem('underlying', underlying);
 
     // get the contract details based on underlying as market has changed
-    TradeSocket.send({ contracts_for: underlying, type: 'contracts_for' });
+    TradeSocket.send({ contracts_for: underlying });
 };
 
 var processContractFormOfferings = function (contracts) {
@@ -33,7 +33,7 @@ var processContractFormOfferings = function (contracts) {
     displayStartDates('date_start', Contract.startDates());
     displayBarriers(Contract.barriers(), Trade.form());
 
-    TradeSocket.send({ currencies: 1, type: "currencies" });
+    TradeSocket.send({ currencies: 1 });
 };
 
 var processForgetPriceIds = function () {
