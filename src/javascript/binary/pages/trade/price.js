@@ -1,6 +1,8 @@
 var Price = (function () {
     'use strict';
 
+    var typeDisplayIdMapping = {};
+
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
             submarket = document.getElementById('submarket'),
@@ -57,18 +59,23 @@ var Price = (function () {
     };
 
     var display = function (details, contractType, spotElement) {
-        var type = details['contract_type'],
-            position = contractTypeDisplayMapping(type),
-            display = contractType[type],
-            container = document.getElementById('price_container_' + position),
-            description_container = document.getElementById('description_container_' + position),
-            currency = document.getElementById('currency'),
-            purchase = document.getElementById('contract_purchase_' + position),
+        var proposal = details['proposal'],
+            params = details['echo_req'],
+            type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
             description = row.cloneNode(),
-            priceId = document.createElement('input'),
             fragment = document.createDocumentFragment();
+
+        if (params && Object.getOwnPropertyNames(params).length > 0) {
+            typeDisplayIdMapping[proposal['id']] = type;
+        }
+
+        var position = contractTypeDisplayMapping(type),
+            display = contractType[type],
+            container = document.getElementById('price_container_' + position),
+            description_container = document.getElementById('description_container_' + position),
+            purchase = document.getElementById('contract_purchase_' + position);
 
         while (description_container && description_container.firstChild) {
             description_container.removeChild(description_container.firstChild);
@@ -85,29 +92,31 @@ var Price = (function () {
         h4.appendChild(content);
         fragment.appendChild(h4);
 
-        if (details['error']) {
+        if (proposal['error']) {
             purchase.style.display = 'none';
-            content = document.createTextNode(details['error']);
+            content = document.createTextNode(proposal['error']);
             description.appendChild(content);
             row.appendChild(description);
             fragment.appendChild(row);
         } else {
-            var amount = document.createElement('div');
+            var amount = document.createElement('div'),
+                priceId = document.createElement('input'),
+                currency = document.getElementById('currency');
 
             amount.setAttribute('class', 'contract_amount col');
             amount.setAttribute('id', 'contract_amount_' + position);
 
-            content = document.createTextNode(currency.value + ' ' + details['ask_price']);
+            content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
             amount.appendChild(content);
 
-            content = document.createTextNode(details['longcode']);
+            content = document.createTextNode(proposal['longcode']);
             description.appendChild(content);
 
             // create unique id object that is send in response
             priceId.setAttribute('name', 'contract_price_id');
             priceId.setAttribute('class', 'contract_price_id');
             priceId.setAttribute('type', 'hidden');
-            priceId.setAttribute('id', details['id']);
+            priceId.setAttribute('id', proposal['id']);
 
             row.appendChild(amount);
             row.appendChild(description);
@@ -115,15 +124,21 @@ var Price = (function () {
 
             fragment.appendChild(row);
 
-            spotElement.textContent = details['spot'];
+            spotElement.textContent = proposal['spot'];
         }
         description_container.appendChild(fragment);
         container.insertBefore(description_container, purchase);
     };
 
+    var clearMapping = function () {
+        typeDisplayIdMapping = {};
+    };
+
     return {
         proposal: createProposal,
         display: display,
+        clearMapping: clearMapping,
+        idDisplayMapping: function () { return typeDisplayIdMapping; }
     };
 
 })();
