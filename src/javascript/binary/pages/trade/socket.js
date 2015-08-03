@@ -14,7 +14,7 @@ var TradeSocket = (function () {
     };
 
     var isClose = function () {
-        return tradeSocket && tradeSocket.readyState === 3;
+        return !tradeSocket || tradeSocket.readyState === 3;
     };
 
     var sendBufferedSends = function () {
