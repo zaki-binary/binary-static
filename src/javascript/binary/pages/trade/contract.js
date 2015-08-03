@@ -3,14 +3,14 @@ var Contract = (function () {
 
     var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {}, contractType = {};
 
-    var processContracts = function (contractObject, formName, barrierCategory, expiryType) {
+    var details = function (contractObject, formName, barrierCategory, expiryType) {
         var contracts = contractObject.contracts, contractsArray = [], sendAll = true;
         open = contracts['open'];
         close = contracts['close'];
 
         var formBarrier = getFormNameBarrierCategory(formName);
         formName = formBarrier['formName'];
-        barrierCategory = formBarrier['barrierCategory'];
+        barrierCategory = barrierCategory || formBarrier['barrierCategory'];
 
         if (formName) {
             for(var i = 0, len = contracts.available.length; i < len; i++) {
@@ -106,10 +106,6 @@ var Contract = (function () {
         } else {
             contractDetails = contractsArray;
         }
-    };
-
-    var details = function (contractObject, formName, expiryType) {
-        processContracts(contractObject, formName, expiryType);
     };
 
     return {
