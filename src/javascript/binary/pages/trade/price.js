@@ -41,7 +41,7 @@ var Price = (function () {
             proposal['duration'] = duration.value;
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && expiryType.value == 'endtime') {
-            proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value + 5).unix();
+            proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
         if (highBarrier && highBarrier.value) {
