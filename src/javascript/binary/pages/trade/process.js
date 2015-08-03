@@ -37,15 +37,15 @@ var processContractFormOfferings = function (contracts) {
 };
 
 var processForgetPriceIds = function () {
-    var priceIds = document.getElementsByClassName('contract_price_id'), id;
+    var priceIds = Object.keys(Price.idDisplayMapping());
     for (var i = 0, len = priceIds.length; i < len; i++) {
-        id = priceIds[i].id;
-        TradeSocket.send({ forget: priceIds[i].id });
+        TradeSocket.send({ forget: priceIds[i] });
     }
 };
 
 var processPriceRequest = function () {
     processForgetPriceIds();
+    Price.clearMapping();
     for (var typeOfContract in Contract.contractType()[Trade.form()]) {
         if(Contract.contractType()[Trade.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
