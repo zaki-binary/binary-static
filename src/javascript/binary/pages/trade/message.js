@@ -12,7 +12,7 @@ var Message = (function () {
                 processMarketOfferings(response, market);
             } else if (type == 'contracts') {
                 processContractFormOfferings(response, Trade.form());
-            } else if (type == 'currencies') {
+            } else if (type == 'payout_currencies') {
                 displayCurrencies(response);
                 processPriceRequest();
             } else if (type == 'proposal') {
