@@ -19,23 +19,23 @@ var Price = (function () {
             highBarrier = document.getElementById('barrier'),
             lowBarrier = document.getElementById('barrier1');
 
-        if (payout) {
+        if (payout && payout.value) {
             proposal['amount_val'] = payout.value;
         }
-        if (amountType) {
+        if (amountType && amountType.value) {
             proposal['basis'] = amountType.value;
         }
         if (contractType) {
             proposal['contract_type'] = typeOfContract;
         }
-        if (currency) {
+        if (currency && currency.value) {
             proposal['currency'] = currency.value;
         }
-        if (underlying) {
+        if (underlying && underlying.value) {
             proposal['symbol'] = underlying.value;
         }
 
-        if (startTime && startTime.value != 'now') {
+        if (startTime && isVisible(startTime) && startTime.value != 'now') {
             proposal['date_start'] = startTime.value;
         }
 
@@ -46,10 +46,10 @@ var Price = (function () {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
-        if (highBarrier && highBarrier.value) {
+        if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
             proposal['barrier'] = highBarrier.value;
         }
-        if (lowBarrier && lowBarrier.value) {
+        if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
             proposal['barrier2'] = lowBarrier.value;
         }
 
