@@ -143,22 +143,34 @@ var durationTextValueMappings = function (str) {
 
 var durationPopulate = function () {
     'use strict';
-    var unit = document.getElementById("duration_units"), unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-    document.getElementById("duration_amount").value = unitValue;
-    document.getElementById("duration_minimum").textContent = unitValue;
-    displayExpiryType('expiry_type', unitValue);
+
+    var unit = document.getElementById('duration_units'),
+        unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
+
+    document.getElementById('duration_amount').value = unitValue;
+    document.getElementById('duration_minimum').textContent = unitValue;
+    displayExpiryType(unit.value);
 };
 
-var displayExpiryType = function (id, unit) {
+var displayExpiryType = function (unit) {
     'use strict';
-    var target= document.getElementById(id), fragment =  document.createDocumentFragment();
+
+    var target = document.getElementById('expiry_type'),
+        fragment = document.createDocumentFragment();
+
+    var current_selected = target.value;
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
     }
 
-    var option = document.createElement('option'), content = document.createTextNode('Durations');
+    var option = document.createElement('option'),
+        content = document.createTextNode('Durations');
+
     option.setAttribute('value', 'duration');
+    if (current_selected == 'duration') {
+        option.setAttribute('selected', 'selected');
+    }
     option.appendChild(content);
     fragment.appendChild(option);
 
@@ -166,6 +178,9 @@ var displayExpiryType = function (id, unit) {
         option = document.createElement('option');
         content = document.createTextNode('End Time');
         option.setAttribute('value', 'endtime');
+        if (current_selected == 'endtime') {
+            option.setAttribute('selected', 'selected');
+        }
         option.appendChild(content);
         fragment.appendChild(option);
     }

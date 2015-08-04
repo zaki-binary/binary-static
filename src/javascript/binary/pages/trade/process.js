@@ -37,12 +37,16 @@ var processContractFormOfferings = function (contracts) {
 };
 
 var processForgetPriceIds = function () {
+    'use strict';
+
     Object.keys(Price.idDisplayMapping()).forEach(function (key) {
         TradeSocket.send({ forget: key });
     });
 };
 
 var processPriceRequest = function () {
+    'use strict';
+
     processForgetPriceIds();
     Price.clearMapping();
     for (var typeOfContract in Contract.contractType()[Trade.form()]) {

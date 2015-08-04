@@ -119,6 +119,12 @@ if (amount_elm) {
 var date_start_elm = document.getElementById('date_start');
 if (date_start_elm) {
     date_start_elm.addEventListener('change', function (e) {
+        if (e.target && e.target.value == 'now') {
+            displayDurations('duration_units', Contract.durations(), Trade.form(), Trade.barrier(), 'spot');
+        } else {
+            displayDurations('duration_units', Contract.durations(), Trade.form(), Trade.barrier(), 'forward');
+        }
+
         processPriceRequest();
     });
 }
