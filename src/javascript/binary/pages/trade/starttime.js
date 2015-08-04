@@ -24,9 +24,9 @@ function displayStartDates(id, startDates) {
 
         startDates.sort(compareStartDate);
 
-        for (var i = 0, len = startDates.length; i < len; i++) {
-            var a = moment.unix(startDates[i].open).utc();
-            var b = moment.unix(startDates[i].close).utc();
+        startDates.forEach(function (start_date) {
+            var a = moment.unix(start_date.open).utc();
+            var b = moment.unix(start_date.close).utc();
 
             var ROUNDING = 5 * 60 * 1000;
             var start = moment();
@@ -44,7 +44,7 @@ function displayStartDates(id, startDates) {
                 fragment.appendChild(option);
                 a.add(5, 'minutes');
             }
-        }
+        });
         target.appendChild(fragment);
     } else {
         document.getElementById('date_start_row').style.display = 'none';

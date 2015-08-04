@@ -8,15 +8,16 @@ var displayListElements = function (id, elements, selected) {
         target.removeChild(target.firstChild);
     }
 
-    for (var i = 0; i < len; i++) {
-        var li = document.createElement('li'), content = document.createTextNode(elements[i]);
-        li.setAttribute('id', elements[i].toLowerCase());
-        if (selected && selected == elements[i].toLowerCase()) {
+    elements.forEach(function (element) {
+        var li = document.createElement('li'),
+            content = document.createTextNode(element);
+        li.setAttribute('id', element.toLowerCase());
+        if (selected && selected == element.toLowerCase()) {
             li.setAttribute('class', 'active');
         }
         li.appendChild(content);
         fragment.appendChild(li);
-    }
+    });
     target.appendChild(fragment);
 };
 

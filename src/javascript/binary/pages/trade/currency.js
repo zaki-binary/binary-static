@@ -9,18 +9,18 @@ var displayCurrencies = function (input, selected) {
         target.removeChild(target.firstChild);
     }
 
-    for (var i = 0, len = currencies.length; i < len; i++) {
+    currencies.forEach(function (currency) {
         var option = document.createElement('option'),
-            content = document.createTextNode(currencies[i]);
+            content = document.createTextNode(currency);
 
-        option.setAttribute('value', currencies[i]);
-
+        option.setAttribute('value', currency);
         if (selected && selected == key) {
             option.setAttribute('selected', 'selected');
         }
 
         option.appendChild(content);
         fragment.appendChild(option);
-    }
+    });
+
     target.appendChild(fragment);
 };
