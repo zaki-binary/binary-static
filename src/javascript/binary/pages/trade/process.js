@@ -33,14 +33,13 @@ var processContractFormOfferings = function (contracts) {
     displayStartDates('date_start', Contract.startDates());
     displayBarriers(Contract.barriers(), Trade.form());
 
-    TradeSocket.send({ currencies: 1 });
+    TradeSocket.send({ payout_currencies: 1 });
 };
 
 var processForgetPriceIds = function () {
-    var priceIds = Object.keys(Price.idDisplayMapping());
-    for (var i = 0, len = priceIds.length; i < len; i++) {
-        TradeSocket.send({ forget: priceIds[i] });
-    }
+    Object.keys(Price.idDisplayMapping()).forEach(function (key) {
+        TradeSocket.send({ forget: key });
+    });
 };
 
 var processPriceRequest = function () {
