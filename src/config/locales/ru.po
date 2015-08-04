@@ -9,14 +9,12 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-08-03 14:37+0200\n"
 "Last-Translator: olga borg <olga@binary.com>\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/binary/static/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/binary/static/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.4-dev\n"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1046
@@ -275,6 +273,20 @@ msgid "%1's Random Indices are the %2, %3, %4, and %5. These indices correspond 
 msgstr "Индексы Random %1 - это %2, %3, %4 и %5. Они соответствуют проценту волатильности 25%, 50%, 75% и 100%"
 
 #. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
+#, fuzzy
+#| msgid "Binary.com’s Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market."
+msgid "%1's Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who 'Long' a rising market (and those who 'Short' a falling market) profit from those movements with much less investment than would be required in the live market."
+msgstr "Контракты со спредами от Binary.com представляют собой производные контракты с кредитным рычагом, стоимость которых прямо связана с динамикой основного рынка.  Клиенты, открывающие “длинные позиции” на растущем рынке (и “короткие позиции” на снижающемся рынке) получают прибыль от данных движений, внося гораздо меньшие инвестиции, чем на живом рынке."
+
+#. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
+#, fuzzy
+#| msgid "Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ or 'spot profit' level."
+msgid "%1's Spread Contracts require a 'stop loss' which limits the maximum losses incurred by a client. This 'stop loss' amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the 'stop loss' or 'stop profit' level."
+msgstr "Контракты со спредами от Binary.com’s требуют наличия функции ‘стоп-лосс’, ограничивающей максимальные потери, которые может понести клиент. Сумма, необходимая для активации функции ‘стоп-лосс’, послужит в качестве депозита и не может быть использована для дальнейшей торговли, пока не будет закрыт контракт со спредом. Контракты со спредом закрываются тогда, когда они будут проданы клиентом по достижении уровня ‘стоп-лосс’ или 'стоп-профит'."
+
+#. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "%1's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "Запатентованная ценовая технология %1 позволяет Вам получить тот же процент прибыли, как у трейдеров на межбанковском рынке."
@@ -319,15 +331,13 @@ msgstr "&#8220;Мы пользуемся www.binary.com уже 8 лет и ре�
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:2
 msgid "'<strong>Long</strong>' contracts generate profits when the index rises and loses when it falls."
-msgstr ""
-"'<strong>Длинные</strong>' позиции приносят прибыль, когда индекс растёт, и "
-"не приносят прибыли в случае снижения индекса."
+msgstr "'<strong>Длинные</strong>' позиции приносят прибыль, когда индекс растёт, и не приносят прибыли в случае снижения индекса."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:3
-msgid "'<strong>Short</strong> contracts generate loses when the index rises and profits when it falls."
-msgstr ""
-"'<strong>Короткие</strong>' позиции приносят прибыль при падении индекса и "
-"не приносят прибыли, когда индекс растёт."
+#, fuzzy
+#| msgid "'<strong>Short</strong> contracts generate loses when the index rises and profits when it falls."
+msgid "'<strong>Short</strong>' contracts generate losses when the index rises and profits when it falls."
+msgstr "'<strong>Короткие</strong>' позиции приносят прибыль при падении индекса и не приносят прибыли, когда индекс растёт."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:54
 msgid "(Bejing/CST -8 hours)"
@@ -1179,7 +1189,6 @@ msgstr "Сумма за пункт"
 
 #. ($limits->{min}, $limits->{max}, $self->currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:43
-#| msgid "Duration must be between %1 and %2."
 msgid "Amount Per Point must be between %1 and %2 %3."
 msgstr "Сумма за пункт должна составлять от %1 до %2 %3."
 
@@ -1188,7 +1197,6 @@ msgid "Amount must be a positive number."
 msgstr "Сумма должна быть положительным значением."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/amount_per_point.html.tt:2
-#| msgid "Account Opening"
 msgid "Amount per point"
 msgstr "Сумма за пункт"
 
@@ -1795,25 +1803,6 @@ msgstr "Запатентованная ценовая технология Binar
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Binary.com’s CPAN contributions"
 msgstr "Предложения CPAN от Binary.com"
-
-#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-msgid "Binary.com’s Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market."
-msgstr ""
-"Контракты со спредами от Binary.com представляют собой производные контракты "
-"с кредитным рычагом, стоимость которых прямо связана с динамикой основного "
-"рынка.  Клиенты, открывающие “длинные позиции” на растущем рынке (и “"
-"короткие позиции” на снижающемся рынке) получают прибыль от данных движений, "
-"внося гораздо меньшие инвестиции, чем на живом рынке."
-
-#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-msgid "Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ or 'spot profit' level."
-msgstr ""
-"Контракты со спредами от Binary.com’s требуют наличия функции ‘стоп-лосс’, "
-"ограничивающей максимальные потери, которые может понести клиент. Сумма, "
-"необходимая для активации функции ‘стоп-лосс’, послужит в качестве депозита "
-"и не может быть использована для дальнейшей торговли, пока не будет закрыт "
-"контракт со спредом. Контракты со спредом закрываются тогда, когда они будут "
-"проданы клиентом по достижении уровня ‘стоп-лосс’ или 'стоп-профит'."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Binary.com’s headquarters are in Malta, a favoured tourist destination with a warm climate, beautiful recreational areas and World Heritage sites. We also have an Operational Headquarters office in Cyberjaya, a high-tech precinct south of Kuala Lumpur, the capital of Malaysia, an equally exciting destination at the heart of Asia."
@@ -2596,7 +2585,6 @@ msgid "Currency quotes are truncated to 5 digits and all contracts are purchased
 msgstr "Котировки на валютах ограничены 5 знаками, и все контракты покупаются и рассчитываются на основе 5-значных котировок."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:30
-#| msgid "Current"
 msgid "Current Level"
 msgstr "Текущий уровень"
 
@@ -3234,7 +3222,6 @@ msgstr "Внесите свой email"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:1
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:14
-#| msgid "Entry time"
 msgid "Entry Level"
 msgstr "Уровень входа"
 
@@ -3292,7 +3279,6 @@ msgid "Execute your trade in seconds."
 msgstr "Купите контракт в считанные секунды."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:18
-#| msgid "Exit time"
 msgid "Exit Level"
 msgstr "Уровень окончания"
 
@@ -3513,12 +3499,10 @@ msgid "For forex: The forex market is an OTC (over the counter) market, where ba
 msgstr "Для форекса: форекс является внебиржевым рынком. Банки и другие крупные финансовые учреждения торгуют валютами между собой без наличия единого контролирующего этот процесс органа. В связи с этим, на котировки форекс нет единой официальной цены. В различных источниках котировки могут быть разными. Соответственно, цены могут различаться у различных провайдеров котировок в зависимости от того, от каких банков или из каких источников они получают информацию."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:3
-msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread.  For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
-msgstr ""
-"Уровень входа в длинные позиции: спот-цена плюс половина спреда. Уровень "
-"окончания: спот-цена минус половина спреда. Уровень входа в короткие позиции "
-"рассчитывается так: спот-цена минус половина спреда, а уровень окончания – "
-"так: спот-цена плюс половина спреда."
+#, fuzzy
+#| msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread.  For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
+msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread. For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
+msgstr "Уровень входа в длинные позиции: спот-цена плюс половина спреда. Уровень окончания: спот-цена минус половина спреда. Уровень входа в короткие позиции рассчитывается так: спот-цена минус половина спреда, а уровень окончания – так: спот-цена плюс половина спреда."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "For more information about calling Websocket services see"
@@ -6210,9 +6194,7 @@ msgstr "Пожалуйста, вводите только буквы, цифры
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:4057
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:4083
 msgid "Please use only letters, spaces, hyphens, full-stops or apostrophes."
-msgstr ""
-"Пожалуйста, используйте только буквы латинского алфавита, пробелы, дефисы, "
-"точки или апострофы."
+msgstr "Пожалуйста, используйте только буквы латинского алфавита, пробелы, дефисы, точки или апострофы."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:50
 msgid "Please wait.<br />Your request is being processed."
@@ -6251,9 +6233,7 @@ msgstr "Потенциальная прибыль"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "Potential profit and losses are limited to stop profit and stop loss levels respectively."
-msgstr ""
-"Потенциальные прибыли и убытки ограничены уровнями стоп-профит и стоп-лосс, "
-"соответственно."
+msgstr "Потенциальные прибыли и убытки ограничены уровнями стоп-профит и стоп-лосс, соответственно."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Power & simplicity"
@@ -6368,7 +6348,6 @@ msgid "Profit/Loss"
 msgstr "Плюс/Минус"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:42
-#| msgid "Profit/Loss"
 msgid "Profit/Loss (points)"
 msgstr "Прибыли/убытки (пункты)"
 
@@ -7054,14 +7033,7 @@ msgstr "Если поток котировок прерывается по пр�
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:77
 msgid "Should any client for whom you are receiving commissions process a chargeback, the Company reserves the right to deduct the commission portion of the chargeback from the total balance due to you for the current month. Should this deduction of the accumulated revenue exceed your current amount due, your balance will then revert to a negative balance, and you will have to earn revenue to cover the chargeback before you can start earning revenue again. The Company reserves the right, in special cases, to exclude revenue sharing  on promotional funds deposited into the client's account by the Company."
-msgstr ""
-"Если какой-либо из клиентов, от кого Вы получаете комиссии, сделает запрос "
-"на отзыв средств, Компания оставляет за собой право вычесть его комиссию из "
-"Ваших выплат за месяц. Если это отчисление превысит полагающиеся Вам на "
-"данный момент комиссии, негативный баланс будет перенесен на следующий "
-"месяц, и отчисление будет сделано из будущих комиссий. В редких случаях "
-"Компания оставляет за собой право исключать начисление комиссий по бонусам, "
-"полученным клиентами."
+msgstr "Если какой-либо из клиентов, от кого Вы получаете комиссии, сделает запрос на отзыв средств, Компания оставляет за собой право вычесть его комиссию из Ваших выплат за месяц. Если это отчисление превысит полагающиеся Вам на данный момент комиссии, негативный баланс будет перенесен на следующий месяц, и отчисление будет сделано из будущих комиссий. В редких случаях Компания оставляет за собой право исключать начисление комиссий по бонусам, полученным клиентами."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:117
 msgid "Should the Company receive a complaint which could have involved the Alternate Dispute Resolution entity, or the Company believes that the affiliate is in breach of any relevant advertising code of practice, then the Company has the right to terminate this Agreement."
@@ -7069,11 +7041,7 @@ msgstr "Если Компания получит жалобу, которая м
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:57
 msgid "Should these expenses not be covered by funds in your account we reserve the right to investigate other alternative means for obtaining payment for example: should your account have generated purchasing accounts we will hold payment of commission for these accounts until such a time as the account for damages has been cleared."
-msgstr ""
-"Если такие расходы не будут покрыты средствами на Вашем счету, мы оставляем "
-"за собой право расследовать другие альтернативные способы получения оплаты, "
-"как, например: задержка комиссий на время, пока оплата не будет полностью "
-"произведена."
+msgstr "Если такие расходы не будут покрыты средствами на Вашем счету, мы оставляем за собой право расследовать другие альтернативные способы получения оплаты, как, например: задержка комиссий на время, пока оплата не будет полностью произведена."
 
 #. (url_for('contact')
 #: /home/git/translations/binary-static/src/templates/haml/exception.html.haml:1
@@ -7121,11 +7089,7 @@ msgstr "Простота"
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/tour.html.haml:1
 msgid "Simply change any of your parameters and the trade price instantly changes, giving you real-time knowledge of your stake. %1 ensures fair and transparent pricing by showing you both sides of the trade."
-msgstr ""
-"Просто измените любой из параметров, и сделка мгновенно изменится, "
-"предоставив новую информацию о ставке. %1 обеспечивает справедливую и "
-"прозрачную оценку контрактов, показывая цену для двух возможных направлений "
-"рынка."
+msgstr "Просто измените любой из параметров, и сделка мгновенно изменится, предоставив новую информацию о ставке. %1 обеспечивает справедливую и прозрачную оценку контрактов, показывая цену для двух возможных направлений рынка."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/biel_terms.html.tt:70
 msgid "Since we exclusively deal on own account in Financial Products this means that we act as the execution venue and accordingly all transactions entered into with us will be executed outside a regulated market (stock exchange) or multilateral trading facility."
@@ -7208,8 +7172,7 @@ msgstr "Произошла ошибка. Пожалуйста, свяжитес�
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1366
 msgid "Sorry, contracts on Random Indices are not available in your country of residence"
-msgstr ""
-"Извините, контракты на индексах Random недоступны в стране Вашего проживания"
+msgstr "Извините, контракты на индексах Random недоступны в стране Вашего проживания"
 
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/CreateAccount.pm:136
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/CreateAccount.pm:35
@@ -7279,9 +7242,7 @@ msgstr "Слишком много данных. Пожалуйста, выбер
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:246
 msgid "Sorry, there was a problem validating your personal information with our payment processor. Please contact our Customer Service."
-msgstr ""
-"Извините, возникла проблема с проверкой Вашей личной информации в нашей "
-"системе оплат. Просим связаться с нашей службой поддержки."
+msgstr "Извините, возникла проблема с проверкой Вашей личной информации в нашей системе оплат. Просим связаться с нашей службой поддержки."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1020
 msgid "Sorry, this feature is available to virtual accounts only"
@@ -7302,10 +7263,7 @@ msgstr "Извините, но Ваш возраст не позволяет В�
 #. ($limit,                request()
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:783
 msgid "Sorry, you cannot hold more than %1 contracts at a given time. Please visit the <a href=\"%2\" class=\"pjaxload\">statement</a> page to automatically sell your expired contracts."
-msgstr ""
-"Извините, у Вас не может быть более %1 контрактов на счету одновременно. "
-"Пожалуйста, посетите страницу <a href=\"%2\" class=\"pjaxload\">История "
-"счета</a> для автоматической продажи закончившихся контрактов на Вашем счету."
+msgstr "Извините, у Вас не может быть более %1 контрактов на счету одновременно. Пожалуйста, посетите страницу <a href=\"%2\" class=\"pjaxload\">История счета</a> для автоматической продажи закончившихся контрактов на Вашем счету."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1907
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1915
@@ -7345,9 +7303,7 @@ msgstr "Извините, Вы ограничили свой доступ на �
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1028
 msgid "Sorry, you have open positions. Please close out all open positions before requesting additional funds."
-msgstr ""
-"Пожалуйста, закройте все открытые позиции до запроса дополнительных средств "
-"для счета."
+msgstr "Пожалуйста, закройте все открытые позиции до запроса дополнительных средств для счета."
 
 #. (request()
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Client.pm:254
@@ -7394,14 +7350,11 @@ msgstr "Спред"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:1
 msgid "Spread contracts payout based on the movement of the index relative to the entry level of the contract."
-msgstr ""
-"Выплаты по контрактам со спредами основаны на движении индекса по отношению "
-"к уровню входа в сделку."
+msgstr "Выплаты по контрактам со спредами основаны на движении индекса по отношению к уровню входа в сделку."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/layouts/get_started/nav.html.haml:1
-#| msgid "Spread"
 msgid "Spreads"
 msgstr "Спреды"
 
@@ -7572,7 +7525,6 @@ msgstr "Уровень стоп-лосс"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:414
-#| msgid "Duration must be between %1 and %2."
 msgid "Stop Loss must be between %1 and %2 %3"
 msgstr "Стоп-лосс должен находиться между %1 и %2 %3"
 
@@ -7582,7 +7534,6 @@ msgstr "Уровень стоп-профит"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:435
-#| msgid "Duration must be between %1 and %2."
 msgid "Stop Profit must be between %1 and %2 %3"
 msgstr "Стоп-профит должен находиться между %1 и %2 %3"
 
@@ -7591,7 +7542,6 @@ msgid "Stop-loss:"
 msgstr "Стоп-лосс:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:4
-#| msgid "Net profit"
 msgid "Stop-profit:"
 msgstr "Стоп-профит:"
 
@@ -7605,27 +7555,12 @@ msgstr "Вс"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/biel_terms.html.tt:64
 msgid "Subject to any specific instructions which may be provided by you, when executing client orders, we will take all reasonable steps to obtain the best possible results for you. The best possible results will be determined in terms of total consideration, that is, the price of the instrument and the costs related to execution which shall include all expenses incurred by you that are directly related to the execution of the order."
-msgstr ""
-"С учетом конкретных инструкций, которые могут быть сделаны Вами при "
-"выполнении клиентских ордеров, мы примем все разумные меры для получения "
-"наилучших результатов для Вас. Лучшие результаты будут определяться в рамках "
-"общего рассмотрения, то есть, цены инструмента и расходов, связанных с "
-"исполнением, которые будут включать все расходы, понесенные Вами и "
-"непосредственно связанные с исполнением ордера."
+msgstr "С учетом конкретных инструкций, которые могут быть сделаны Вами при выполнении клиентских ордеров, мы примем все разумные меры для получения наилучших результатов для Вас. Лучшие результаты будут определяться в рамках общего рассмотрения, то есть, цены инструмента и расходов, связанных с исполнением, которые будут включать все расходы, понесенные Вами и непосредственно связанные с исполнением ордера."
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:65
 msgid "Subject to your complying with the Company's instructions, with regards to tracking Clients accessing %1 via the Links on your Site or by quoting your affiliate IDs during signup, the Company shall use all reasonable endeavours to ensure that whenever a Client links to %1 through these Links or affiliate IDs and they subsequently place a contract or otherwise transact with the Company, the relevant Client is identified as originating from you or your Site. However, the Company shall not be liable to you in any way if the Company is unable to identify a Client as originating from you or your Site."
-msgstr ""
-"В рамках исполнения Вами инструкций Компании относительно отслеживания входа "
-"Клиентов на %1 по ссылками с Вашего Сайта или с цитированием Вашего "
-"партнерского идентификатора, Компания предпримет все разумные усилия, чтобы "
-"Клиент был закреплен за Вашим партнерским счетом %1 посредством данных "
-"ссылок или предоставления идентификатора. При последующих покупках "
-"контрактов или выполнении других транзакций на сайте Компании "
-"соответствующие Клиенты будут маркированы как пришедшие от Вас или с Вашего "
-"Сайта. Однако, Компания не несет ответственности, если она не сможет "
-"отследить связь Клиента с Вами или с Вашим Сайтом."
+msgstr "В рамках исполнения Вами инструкций Компании относительно отслеживания входа Клиентов на %1 по ссылками с Вашего Сайта или с цитированием Вашего партнерского идентификатора, Компания предпримет все разумные усилия, чтобы Клиент был закреплен за Вашим партнерским счетом %1 посредством данных ссылок или предоставления идентификатора. При последующих покупках контрактов или выполнении других транзакций на сайте Компании соответствующие Клиенты будут маркированы как пришедшие от Вас или с Вашего Сайта. Однако, Компания не несет ответственности, если она не сможет отследить связь Клиента с Вами или с Вашим Сайтом."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2296
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3013
@@ -7639,12 +7574,7 @@ msgstr "Последующие вызовы будут действовать о
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/copyright.html.tt:12
 msgid "Such materials may be copied and distributed on a limited basis for noncommercial purposes only, provided that any material copied remains intact and that all copies include the following notice in a clearly visible position: &ldquo;Copyright 1999-2015 Binary Ltd. All rights reserved.&rdquo;"
-msgstr ""
-"Такие материалы могут копироваться и распространяться на ограниченной основе "
-"и только для некоммерческих целей, при условии, что любой скопированный "
-"материал останется без изменений, а все копии будут иметь следующую пометку "
-"на хорошо видном месте: &ldquo;Copyright 1999-2015 Binary Ltd. Все права "
-"защищены.&rdquo;"
+msgstr "Такие материалы могут копироваться и распространяться на ограниченной основе и только для некоммерческих целей, при условии, что любой скопированный материал останется без изменений, а все копии будут иметь следующую пометку на хорошо видном месте: &ldquo;Copyright 1999-2015 Binary Ltd. Все права защищены.&rdquo;"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/available_payment_agents_list.html.tt:3
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:60
@@ -7731,9 +7661,7 @@ msgstr "Окончание"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:116
 msgid "Termination of this Agreement shall not prejudice any rights of any party which may have arisen on or before the date of termination."
-msgstr ""
-"Прекращение действия данного Соглашения не повлияет на права любой из "
-"сторон, которые были в силе до или на момент прекращения действия Соглашения."
+msgstr "Прекращение действия данного Соглашения не повлияет на права любой из сторон, которые были в силе до или на момент прекращения действия Соглашения."
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:93
@@ -7789,11 +7717,7 @@ msgstr "API %1 используют схему OAuth2.0 для авториза�
 #. (broker_name)
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/main.html.tt:72
 msgid "The %1 Affiliate Program has been delivering payments on time, every time, since our official launch in March, 2004. Your affiliate commissions will be credited into your affiliate account within fifteen days of the end of a calendar month by Binary Ltd."
-msgstr ""
-"Партнерская программа %1 выплачивает комиссии своевременно, с момента начала "
-"своей работы в марте 2004 года. Ваша партнерская комиссия будет внесена на "
-"Ваш партнерский счет Binary Ltd. через 15 дней после окончания календарного "
-"месяца."
+msgstr "Партнерская программа %1 выплачивает комиссии своевременно, с момента начала своей работы в марте 2004 года. Ваша партнерская комиссия будет внесена на Ваш партнерский счет Binary Ltd. через 15 дней после окончания календарного месяца."
 
 #. (pjax_link_for(l('Random 100 Index')
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
@@ -7803,9 +7727,7 @@ msgstr "%1 в два раза волатильнее, чем %2, и в четы�
 #. (pjax_link_for(l('Random Yin')
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "The %1 simulates a bearish market. The %2 simulates a bullish market."
-msgstr ""
-"%1 симулирует рынок с нисходящей тенденцией. %2 симулирует рынок с "
-"восходящей тенденцией."
+msgstr "%1 симулирует рынок с нисходящей тенденцией. %2 симулирует рынок с восходящей тенденцией."
 
 #. (pjax_link_for(l('Random Bull')
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
@@ -7815,10 +7737,7 @@ msgstr "%1 симулирует тенденцию \"быков\" (рынок н
 #. (pjax_link_for(l('Random Sun')
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "The %1 simulates a market that gets more volatile as the day progresses (and then more quiet at night). The %2 simulates a market that is quiet during the day (but becomes more volatile at night)."
-msgstr ""
-"%1 симулирует рынки, которые становятся все волатильнее в течение дня (и "
-"более спокойными ночью). %2 симулируют рынки, которые спокойны в течение дня "
-"(но становятся более волатильными ночью)."
+msgstr "%1 симулирует рынки, которые становятся все волатильнее в течение дня (и более спокойными ночью). %2 симулируют рынки, которые спокойны в течение дня (но становятся более волатильными ночью)."
 
 #. (pjax_link_for(l('Random Mars')
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
@@ -7840,27 +7759,17 @@ msgstr "Сайт %1 защищен авторскими правами."
 #. ('POST')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "The %1 will return a JSON structure which includes a new access_token along with several other useful attributes relevant to the renewal."
-msgstr ""
-"%1 вернет структуру JSON, которая включает новый токен (ключ) к доступу "
-"access_token вместе с некоторыми другими полезными атрибутами, имеющими "
-"отношение к обновлению."
+msgstr "%1 вернет структуру JSON, которая включает новый токен (ключ) к доступу access_token вместе с некоторыми другими полезными атрибутами, имеющими отношение к обновлению."
 
 #. ('POST')
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "The %1 will return a JSON structure which includes access_token along with several other useful attributes."
-msgstr ""
-"%1 вернет структуру JSON, которая включает ключ к доступу access_token "
-"вместе с некоторыми другими важными атрибутами."
+msgstr "%1 вернет структуру JSON, которая включает ключ к доступу access_token вместе с некоторыми другими важными атрибутами."
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/about/index.html.haml:1
 msgid "The <span itemprop=\"brand\">%1</span> service (formerly known as BetOnMarkets.com) is owned and operated by Binary Ltd. Fully licensed and regulated, %1 has been providing financial trading to a worldwide audience of over 1,000,000 clients since <span itemprop=\"foundingdate\">1999</span>"
-msgstr ""
-"Сайт <span itemprop=\"brand\">%1</span> (ранее известный как "
-"BetOnMarkets.com) является собственностью и находится под управлением группы "
-"Binary Ltd. Являясь полностью лицензированным и регулируемым сайтом, %1 "
-"предоставляет услуги финансовой торговли более 1,000,000 клиентов по всему "
-"миру, с <span itemprop=\"foundingdate\">1999 года</span>"
+msgstr "Сайт <span itemprop=\"brand\">%1</span> (ранее известный как BetOnMarkets.com) является собственностью и находится под управлением группы Binary Ltd. Являясь полностью лицензированным и регулируемым сайтом, %1 предоставляет услуги финансовой торговли более 1,000,000 клиентов по всему миру, с <span itemprop=\"foundingdate\">1999 года</span>"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/staysinout.html.tt:3
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/touchnotouch.html.tt:4
@@ -7892,10 +7801,7 @@ msgstr "<strong>Временем начала</strong> считается мом
 
 #: /home/git/translations/binary-static/src/templates/haml/static/smart_indices.html.haml:1
 msgid "The AUD Index is a weighted Index, measuring the Australian Dollar’s value against a basket of 5 global currencies (USD, EUR, GBP, JPY, CAD), each weighted by 20%."
-msgstr ""
-"Индекс AUD является взвешенным индексом, измеряющим значение австралийского "
-"доллара против корзины из 5 основных мировых валют (USD, EUR, GBP, JPY, CAD)"
-", каждая из которых взвешена на 20%."
+msgstr "Индекс AUD является взвешенным индексом, измеряющим значение австралийского доллара против корзины из 5 основных мировых валют (USD, EUR, GBP, JPY, CAD), каждая из которых взвешена на 20%."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/paymentagent_withdraw.html.tt:33
 msgid "The Agent will send you the withdrawal amount (minus the commission) via your preferred payment method."
@@ -7905,9 +7811,7 @@ msgstr "Агент вышлет Вам выведенную сумму (мину
 # 100%
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table.html.tt:72
 msgid "The Ask price represents the price at which the contract may be purchased at the present time."
-msgstr ""
-"Цена спроса представляет цену, по которой контракт может быть куплен в "
-"настоящее время."
+msgstr "Цена спроса представляет цену, по которой контракт может быть куплен в настоящее время."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1923
 msgid "The Authentication process verifies the information you have provided us during account registration. It will increase your trading limits and enable you to register more than one credit card.<br/><br/>In order to facilitate the process, please confirm your building no./name before clicking \"Authenticate\".<br/>"
@@ -7927,12 +7831,7 @@ msgstr "API Binary.com"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/white_labels.html.haml:1
 msgid "The Binary.com IT, Marketing, and Compliance teams will then review your pull-request, and may provide you with some feedback. Once we approve the pull-‎request, we will link your fork to the domain you wish to use for the white-label."
-msgstr ""
-"Ваш запрос pull-request будет далее рассмотрен отделами программирования, "
-"маркетинга и корпоративного регулирования Binary.com, после чего Вам будет "
-"предоставлен ответ. Как только мы одобрим Ваш запрос pull-‎request, мы "
-"сделаем ссылку Вашего ответвления к домену, который Вы желаете использовать "
-"для сайта White Label."
+msgstr "Ваш запрос pull-request будет далее рассмотрен отделами программирования, маркетинга и корпоративного регулирования Binary.com, после чего Вам будет предоставлен ответ. Как только мы одобрим Ваш запрос pull-‎request, мы сделаем ссылку Вашего ответвления к домену, который Вы желаете использовать для сайта White Label."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/white_labels.html.haml:1
 msgid "The Binary.com White Label program allows affiliates to create their own branded versions of the Binary.com platform."
@@ -7946,22 +7845,11 @@ msgstr "Приложение Binary.com для сотовых телефонов
 #. ('https://github.com/binary-com/binary-static')
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "The Binary.com website’s static content (CSS, Javascript) is available as the <a target=\"_blank\" href=\"%1\">binary-static</a> open-source project on github. Would you like to re-skin the Binary.com website, or improve browser compatibility, site rendering speed, or Javascript performance? Please fork the project and submit pull-requests of your suggested code changes."
-msgstr ""
-"Статический контент сайта Binary.com (CSS, Javascript) доступен как проект с "
-"открытым кодом <a target=\"_blank\" href=\"%1\">binary-static</a> на github. "
-"Вы хотите переделать скин сайта Binary.com, улучшить его совместимость с "
-"обозревателями (бразуерами), скорость сайта или работу Javascript? В этом "
-"случае скопируйте проект в свой репозиторий и вышлите pull-requests с Вашими "
-"предложениями изменения кода."
+msgstr "Статический контент сайта Binary.com (CSS, Javascript) доступен как проект с открытым кодом <a target=\"_blank\" href=\"%1\">binary-static</a> на github. Вы хотите переделать скин сайта Binary.com, улучшить его совместимость с обозревателями (бразуерами), скорость сайта или работу Javascript? В этом случае скопируйте проект в свой репозиторий и вышлите pull-requests с Вашими предложениями изменения кода."
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:589
 msgid "The CCI is a timing system that is best applied to commodity contracts, which have cyclical or seasonal tendencies. CCI does not determine the length of cycles - it is designed to detect when such cycles begin and end through the use of a statistical analysis which incorporates a moving average and a divisor reflecting both the possible and actual trading ranges."
-msgstr ""
-"CCI - это система расчета времени, лучше всего подходящая для контрактов на "
-"сырье, которые имеют цикличность или сезонные тренды. CCI не определяет "
-"длину циклов, а определяет моменты их начала и конца с помощью "
-"статистического анализа: скользящая средняя делится на возможные и "
-"действительные торговые периоды."
+msgstr "CCI - это система расчета времени, лучше всего подходящая для контрактов на сырье, которые имеют цикличность или сезонные тренды. CCI не определяет длину циклов, а определяет моменты их начала и конца с помощью статистического анализа: скользящая средняя делится на возможные и действительные торговые периоды."
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:648
 msgid "The CLV is an indicator based on the location of close related to low and high for the period. It is used to spot the tendency in the price movements."
@@ -7969,10 +7857,7 @@ msgstr "CLV - это индикатор, основанный на положе�
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:645
 msgid "The Chaikin Volatility function determines the volatility of a financial data series using the percent change in a moving average of the high versus low price over a given time."
-msgstr ""
-"С помощью функции Сhaikin Volatility рассчитывается волатильность финансовых "
-"инструментов: расчет основан на процентных изменениях скользящей средней при "
-"высоких и низких ценовых значениях за определенный период."
+msgstr "С помощью функции Сhaikin Volatility рассчитывается волатильность финансовых инструментов: расчет основан на процентных изменениях скользящей средней при высоких и низких ценовых значениях за определенный период."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/trading_agent.html.tt:18
 msgid "The Client acknowledges and understands that a Trading Agent authorisation may be revoked by the Client giving notice to the Company, however such revocation may require up to two business days processing time."
@@ -7984,36 +7869,16 @@ msgstr "Клиент авторизует Торгового Агента и д�
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:54
 msgid "The Company does not provide a market amongst or between Clients for investments, securities, derivatives or speculations. Each financial contract purchased by a Client via this site is an individual agreement between that Client and the Company and is not a security, nor is it transferable, negotiable or assignable to or with any third party."
-msgstr ""
-"Компания не предоставляет площадку для инвестиций, ценных бумаг, производных "
-"или спекуляций, производимых между Клиентами. Каждый финансовый контракт на "
-"данном сайте является индивидуальным соглашением между Клиентом и Компанией "
-"и не является ценной бумагой, не подлежит обсуждению, передаче или уступке "
-"третьему лицу."
+msgstr "Компания не предоставляет площадку для инвестиций, ценных бумаг, производных или спекуляций, производимых между Клиентами. Каждый финансовый контракт на данном сайте является индивидуальным соглашением между Клиентом и Компанией и не является ценной бумагой, не подлежит обсуждению, передаче или уступке третьему лицу."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:122
 msgid "The Company has and retains the right, to terminate any event or trade, including but not limited to the occurrence of any of the above events."
-msgstr ""
-"Компания сохраняет за собой право остановить какое-либо событие или сделку, "
-"включая, но не ограничиваясь наступлением любого из вышеперечисленных "
-"событий."
+msgstr "Компания сохраняет за собой право остановить какое-либо событие или сделку, включая, но не ограничиваясь наступлением любого из вышеперечисленных событий."
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:85
 msgid "The Company hereby grants you a non-exclusive, non-transferable licence, during the term of this Agreement, to use the %1 intellectual-property marks (licensed, in turn by us, from their owner) solely in connection with the display of the advertisements on your Site. This licence cannot be sub-licensed, assigned or otherwise transferred by you. Your right to use the marks is limited to and arises only out of this licence to use the advertisements. You shall not assert the invalidity, unenforceability, or contest the ownership of the marks in any action or proceeding of whatever kind or nature, and shall not take any action that may prejudice us or our licensor's rights in the marks, render the same generic, or otherwise weaken their validity or diminish their associated goodwill."
-msgstr ""
-"Данным Соглашением Компания предоставляет вам неэксклюзивную и не подлежащую "
-"передаче лицензию (на время действия данного Соглашения) на использование "
-"интеллектуальной собственности %1 (в свою очередь, лицензированной "
-"владельцем) исключительно с целью размещения объявлений на Вашем Сайте. "
-"Лицензия не может быть передана или суб-контрактирована Вами. Согласно "
-"данной лицензии, Ваше право на использование материала ограничивается только "
-"использованием объявлений. Вы не можете оспаривать её действие, исполнение "
-"или право владения какими-либо материалами и торговыми знаками в любых "
-"действиях или процессах, а также не можете совершать действия, наносящие "
-"вред нам или владельцу лицензии на торговый знак, пользоваться похожими "
-"знаками или иным образом ослаблять значимость и право интеллектуальной "
-"собственности."
+msgstr "Данным Соглашением Компания предоставляет вам неэксклюзивную и не подлежащую передаче лицензию (на время действия данного Соглашения) на использование интеллектуальной собственности %1 (в свою очередь, лицензированной владельцем) исключительно с целью размещения объявлений на Вашем Сайте. Лицензия не может быть передана или суб-контрактирована Вами. Согласно данной лицензии, Ваше право на использование материала ограничивается только использованием объявлений. Вы не можете оспаривать её действие, исполнение или право владения какими-либо материалами и торговыми знаками в любых действиях или процессах, а также не можете совершать действия, наносящие вред нам или владельцу лицензии на торговый знак, пользоваться похожими знаками или иным образом ослаблять значимость и право интеллектуальной собственности."
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:98
@@ -8026,12 +7891,7 @@ msgstr "Компания может время от времени информ�
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/betting_rules.html.tt:7
 msgid "The Company may impose certain rules and restrictions in relation to the placing of market orders on this website. Such rules may change from time to time, according to market conditions and other factors. The following indicative rules are currently in place:"
-msgstr ""
-"Компания оставляет за собой право вносить дополнительные правила и "
-"ограничения в отношении установления ордеров на данном сайте. Данные правила "
-"могут время от времени меняться, согласно рыночным условиям и другим "
-"факторам. На данный момент на сайте действуют следующие правила общего "
-"характера:"
+msgstr "Компания оставляет за собой право вносить дополнительные правила и ограничения в отношении установления ордеров на данном сайте. Данные правила могут время от времени меняться, согласно рыночным условиям и другим факторам. На данный момент на сайте действуют следующие правила общего характера:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/betting_rules.html.tt:58
 msgid "The Company may impose volume trading limits on Client accounts in its sole discretion. Current trading volume limits upon account opening are USD/GBP/EUR/AUD 30,000/day maximum trading volume. The maximum account size (i.e. cash balance) is USD/GBP/EUR/AUD 300,000 and the maximum outstanding contract payout at a given time per account is USD/GBP/EUR/AUD 25,000. These limits are increased once a Client is fully authenticated; where the new maximum trading volume will be USD/GBP/EUR/AUD 500,000, having a maximum account size of USD/GBP/EUR/AUD 300,000 and a maximum outstanding contract payout at a given time per account of USD/GBP/EUR/AUD 500,000. If the account balance exceeds the maximum account size, then withdrawals must be made to bring the balance down to under this limit."
@@ -8223,11 +8083,10 @@ msgid "The account transfer is unavailable. Please <a href=\"%1\">deposit</a> to
 msgstr "Трансфер недоступен. Пожалуйста, <a href=\"%1\">пополните</a> свой счет."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:6
-msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point.  A large amount per point will result in large profits/losses per point of movement on the index."
-msgstr ""
-"Сумма прибыли/убытков за каждый пункт при росте/падении должна быть "
-"помножена на сумму за пункт. Большая сумма за пункт приведет к большим "
-"прибылям/убыткам за каждый пункт движения индекса."
+#, fuzzy
+#| msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point.  A large amount per point will result in large profits/losses per point of movement on the index."
+msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point. A large amount per point will result in large profits/losses per point of movement of the index."
+msgstr "Сумма прибыли/убытков за каждый пункт при росте/падении должна быть помножена на сумму за пункт. Большая сумма за пункт приведет к большим прибылям/убыткам за каждый пункт движения индекса."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
 msgid "The anti-money laundering processes have the following effects on Clients:"
@@ -8354,25 +8213,15 @@ msgstr "Простой способ начала работы на финанс�
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a long contract is 1001, which is entry spot + half spread. At exit, the spot is at 1100 and hence the exit level for a long contract is 1099, which is exit spot - half spread."
-msgstr ""
-"Уровень входа в длинные позиции составляет 1001, что соответствует формуле: "
-"уровень входа + половина спреда. Спот-котировка на выходе составляет 1100; "
-"таким образом, уровень окончания длинной позиции составляет 1099, что "
-"соответствует формуле: спот-котировка на выходе - половина спреда."
+msgstr "Уровень входа в длинные позиции составляет 1001, что соответствует формуле: уровень входа + половина спреда. Спот-котировка на выходе составляет 1100; таким образом, уровень окончания длинной позиции составляет 1099, что соответствует формуле: спот-котировка на выходе - половина спреда."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a short contract is 999, which is entry spot - half spread. At exit, the spot is at 1100 and hence the exit level for a short contract is 1101, which is exit spot + half spread."
-msgstr ""
-"Уровень входа в короткие позиции составляет 999, что соответствует формуле: "
-"уровень входа - половина спреда. Спот-котировка на выходе составляет 1100; "
-"таким образом, уровень окончания короткой позиции составляет 1101, что "
-"соответствует формуле: спот-котировка на выходе + половина спреда."
+msgstr "Уровень входа в короткие позиции составляет 999, что соответствует формуле: уровень входа - половина спреда. Спот-котировка на выходе составляет 1100; таким образом, уровень окончания короткой позиции составляет 1101, что соответствует формуле: спот-котировка на выходе + половина спреда."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry spot of an instrument XYZ is 1000 and the spread on this instrument is 2 points."
-msgstr ""
-"Спот-котировка на входе в инструмент XYZ составляет 1000, а спред на данном "
-"инструменте составляет 2 пункта."
+msgstr "Спот-котировка на входе в инструмент XYZ составляет 1000, а спред на данном инструменте составляет 2 пункта."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The entry spot price is the starting price of the trade purchased by a trader."
@@ -8421,9 +8270,7 @@ msgstr "Предлагаемый и полагающийся каждому кл
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The loss of USD 306 is the difference between the exit and entry level multiplied by the amount per point."
-msgstr ""
-"Убытки в размере 306 USD являются разницей между уровнем выхода и входа, "
-"помноженной на сумму за пункт."
+msgstr "Убытки в размере 306 USD являются разницей между уровнем выхода и входа, помноженной на сумму за пункт."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The market exit price is the price in effect at the end of the contract period."
@@ -8473,11 +8320,8 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "Прибыль - это разница между выплатой и ценой покупки (ставкой) выигравшего контракта."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-#| msgid "The profit is the difference between the purchase price (the stake) and the payout on a winning trade."
 msgid "The profit of USD 294 is the difference between the exit and entry level multiplied by the amount per point."
-msgstr ""
-"Прибыль в размере 294 USD - это разница между уровнем выхода и входа, "
-"помноженная на сумму за пункт."
+msgstr "Прибыль в размере 294 USD - это разница между уровнем выхода и входа, помноженная на сумму за пункт."
 
 #. ($currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1015
@@ -8525,11 +8369,7 @@ msgstr "Ставка - это цена, которую должен заплат
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:5
 msgid "The stop-loss and stop-profit are guaranteed. The loss and profit are limited to the stop-loss and stop-profit respectively.  When the exit level touches either the stop-loss or stop-profit, the contract will be closed at the stop-loss or stop-profit level."
-msgstr ""
-"Стоп-лосс и стоп-профит являются гарантированными инструментами. Прибыли и "
-"убытки ограничены инструментами стоп-профит и стоп-лосс, соответственно. "
-"Когда уровень окончания касается уровня стоп-лосс или стоп-профит, контракт "
-"будет закрыт на соответствующей отметке."
+msgstr "Стоп-лосс и стоп-профит являются гарантированными инструментами. Прибыли и убытки ограничены инструментами стоп-профит и стоп-лосс, соответственно. Когда уровень окончания касается уровня стоп-лосс или стоп-профит, контракт будет закрыт на соответствующей отметке."
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:785
 msgid "The system is missing critical pricing information. Please try again in a few minutes, or try a different market."
@@ -8832,18 +8672,12 @@ msgid "This is an indicative barrier. Actual barrier will be the entry spot plus
 msgstr "Это ориентировочный барьер. Настоящим барьером будет спот-котировка плюс изменение барьера."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_loss.html.tt:18
-#| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop loss. Actual stop loss will be the entry spot plus the stop loss point."
-msgstr ""
-"Это ориентировочный уровень стоп-лосс. Настоящим уровнем стоп-лосс будет "
-"спот-котировка на входе плюс уровень стоп-лосс."
+msgstr "Это ориентировочный уровень стоп-лосс. Настоящим уровнем стоп-лосс будет спот-котировка на входе плюс уровень стоп-лосс."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:18
-#| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop profit. Actual stop profit will be the entry spot plus the stop profit point."
-msgstr ""
-"Это ориентировочный уровень стоп-профит. Настоящим уровнем стоп-профит будет "
-"спот-котировка на входе плюс уровень стоп-профит."
+msgstr "Это ориентировочный уровень стоп-профит. Настоящим уровнем стоп-профит будет спот-котировка на входе плюс уровень стоп-профит."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "This is another award we really savour. Trade2win is a portal for active traders seeking to profit from stocks, futures, options and forex, and these traders award us silver (we are just pipped for gold by Betfair). It means active traders worldwide rate our trading platform extremely highly."
@@ -9242,7 +9076,6 @@ msgstr "В данный момент торги приостановлены."
 
 #. ($self->underlying->translated_display_name)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:382
-#| msgid "Trading is not offered for this duration."
 msgid "Trading on %1 is not offered for this contract type."
 msgstr "Торговля на %1 недоступна для данного типа контрактов."
 
@@ -10270,7 +10103,6 @@ msgid "Written limits and self-exclusion"
 msgstr "Письменные лимиты и самоисключение"
 
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/CreateAccount.pm:168
-#| msgid "Country of Residence"
 msgid "Wrong country of residence"
 msgstr "Страна проживания указана неверно"
 
@@ -11956,7 +11788,6 @@ msgid "ITC Ltd"
 msgstr "ITC Ltd"
 
 #: Underlying Symbol UKHSBA
-#| msgid "ASML Holding"
 msgid "HSBC Holdings plc"
 msgstr "HSBC Holdings plc"
 
@@ -12773,7 +12604,6 @@ msgid "%1 <strong>%2</strong> payout if %3 <strong>stays between %7</strong> and
 msgstr "Получить %1 <strong>%2</strong>, если %3 <strong>останется строго между барьерами %7</strong> и <strong>%6</strong> до %5 после %4."
 
 #: Translation for contract type "SPREADD"
-#| msgid "asian down"
 msgid "spread down"
 msgstr "спред вниз"
 
@@ -12785,13 +12615,8 @@ msgstr "спред вниз"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - dollar)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr ""
-"Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, "
-"<strong>снижается</strong> с <strong>уровня входа</strong>, а стоп-лосс "
-"находится на <strong>%6 с %4</strong> и стоп-профит на <strong>%6 с "
-"%5</strong>."
+msgstr "Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, <strong>снижается</strong> с <strong>уровня входа</strong>, а стоп-лосс находится на <strong>%6 с %4</strong> и стоп-профит на <strong>%6 с %5</strong>."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12801,16 +12626,10 @@ msgstr ""
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr ""
-"Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, "
-"<strong>снижается</strong> с <strong>уровня входа</strong>, а стоп-лосс "
-"находится на <strong>%4 с %6</strong> и стоп-профит на <strong>%5 с "
-"%6</strong>."
+msgstr "Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, <strong>снижается</strong> с <strong>уровня входа</strong>, а стоп-лосс находится на <strong>%4 с %6</strong> и стоп-профит на <strong>%5 с %6</strong>."
 
 #: Translation for contract type "SPREADU"
-#| msgid "Spread"
 msgid "spread up"
 msgstr "спред вверх"
 
@@ -12822,13 +12641,8 @@ msgstr "спред вверх"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - dollar)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr ""
-"Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, "
-"<strong>растёт</strong> с <strong>уровня входа</strong>, а стоп-лосс "
-"находится на <strong>%6 с %4</strong> и стоп-профит на <strong>%6 с "
-"%5</strong>."
+msgstr "Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, <strong>растёт</strong> с <strong>уровня входа</strong>, а стоп-лосс находится на <strong>%6 с %4</strong> и стоп-профит на <strong>%6 с %5</strong>."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12838,13 +12652,8 @@ msgstr ""
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr ""
-"Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, "
-"<strong>растёт</strong> с <strong>уровня входа</strong>, а стоп-лосс "
-"находится на <strong>%4 с %6</strong> и стоп-профит на <strong>%5 с "
-"%6</strong>."
+msgstr "Выплата в %1, составляющая <strong>%2</strong> за каждый пункт %3, <strong>растёт</strong> с <strong>уровня входа</strong>, а стоп-лосс находится на <strong>%4 с %6</strong> и стоп-профит на <strong>%5 с %6</strong>."
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"

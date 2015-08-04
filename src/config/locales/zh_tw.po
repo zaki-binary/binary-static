@@ -9,8 +9,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-08-03 11:05+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) "
-"<https://hosted.weblate.org/projects/binary/static/zh_TW/>\n"
+"Language-Team: Chinese (Taiwan) <https://hosted.weblate.org/projects/binary/static/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -274,6 +273,20 @@ msgid "%1's Random Indices are the %2, %3, %4, and %5. These indices correspond 
 msgstr "%1的隨機指數包括%2、%3、%4和%5，分別對應25%、50%、75%和100%的波動率"
 
 #. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
+#, fuzzy
+#| msgid "Binary.com’s Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market."
+msgid "%1's Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who 'Long' a rising market (and those who 'Short' a falling market) profit from those movements with much less investment than would be required in the live market."
+msgstr "Binary.com的價差合約為槓桿型衍生合約，其價值直接與基礎市場走勢掛勾。  以比實時市場較低之投資對上漲市場購入「長倉」合同（及對下降市場購入「短倉」合同）的客戶從以上價格走勢中獲利。"
+
+#. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
+#, fuzzy
+#| msgid "Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ or 'spot profit' level."
+msgid "%1's Spread Contracts require a 'stop loss' which limits the maximum losses incurred by a client. This 'stop loss' amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the 'stop loss' or 'stop profit' level."
+msgstr "Binary.com的價差合約需要可以制定客戶最大損失限額的「止損」。此「止損」額將當作訂金，在價差合約平倉前不可用於繼續交易。價差合約在接觸「止損」或「現價獲利」水平時由客戶售出完成平倉。"
+
+#. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "%1's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "利用%1受專利保護的報價技術，您可獲得與銀行間市場交易員同樣的回報率。"
@@ -321,7 +334,9 @@ msgid "'<strong>Long</strong>' contracts generate profits when the index rises a
 msgstr "'<strong>長倉</strong>'合同當指數上漲則獲利，當指數下降則虧損。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:3
-msgid "'<strong>Short</strong> contracts generate loses when the index rises and profits when it falls."
+#, fuzzy
+#| msgid "'<strong>Short</strong> contracts generate loses when the index rises and profits when it falls."
+msgid "'<strong>Short</strong>' contracts generate losses when the index rises and profits when it falls."
 msgstr "'<strong>短倉</strong>合同當指數上漲則虧損，當指數下降則獲利。"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:54
@@ -1173,7 +1188,6 @@ msgstr "每點之金額"
 
 #. ($limits->{min}, $limits->{max}, $self->currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:43
-#| msgid "Duration must be between %1 and %2."
 msgid "Amount Per Point must be between %1 and %2 %3."
 msgstr "每點之金額須在%1 與 %2 %3之間。"
 
@@ -1182,7 +1196,6 @@ msgid "Amount must be a positive number."
 msgstr "金額須為正數。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/amount_per_point.html.tt:2
-#| msgid "Account Opening"
 msgid "Amount per point"
 msgstr "每點之金額"
 
@@ -1789,18 +1802,6 @@ msgstr "利用Binary.com受專利保護的報價技術，您可獲得與銀行�
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Binary.com’s CPAN contributions"
 msgstr "Binary.com 的 CPAN貢獻"
-
-#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-msgid "Binary.com’s Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market."
-msgstr ""
-"Binary.com的價差合約為槓桿型衍生合約，其價值直接與基礎市場走勢掛勾。  "
-"以比實時市場較低之投資對上漲市場購入「長倉」合同（及對下降市場購入「短倉」合同）的客戶從以上價格走勢中獲利。"
-
-#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-msgid "Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ or 'spot profit' level."
-msgstr ""
-"Binary.com的價差合約需要可以制定客戶最大損失限額的「止損」。此「止損」額將當作訂金，在價差合約平倉前不可用於繼續交易。價差合約在接觸「止損」或「"
-"現價獲利」水平時由客戶售出完成平倉。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Binary.com’s headquarters are in Malta, a favoured tourist destination with a warm climate, beautiful recreational areas and World Heritage sites. We also have an Operational Headquarters office in Cyberjaya, a high-tech precinct south of Kuala Lumpur, the capital of Malaysia, an equally exciting destination at the heart of Asia."
@@ -2582,7 +2583,6 @@ msgid "Currency quotes are truncated to 5 digits and all contracts are purchased
 msgstr "外匯報價截斷到5位數，所有的合約均以5位數外匯報價進行購買和結算。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:30
-#| msgid "Current time:"
 msgid "Current Level"
 msgstr "目前價位"
 
@@ -3503,9 +3503,10 @@ msgid "For forex: The forex market is an OTC (over the counter) market, where ba
 msgstr "關於外匯交易：外匯市場是銀行和其他大型金融機構相互交易外匯的場外交易（OTC）市場，沒有中央結算行。因此，外匯交易報價也沒有「官方」價格來源。不同的資料源包含不同類型國際銀行的報價。因此，根據其獲得價格的銀行不同，各外匯報價提供者的價格也不相同。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:3
-msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread.  For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
-msgstr ""
-"長倉合約之進場價位為現價加上價差的一半，而退出價位則是現價減去價差的一半。短倉合約之進場價位為現價減去價差的一半，而退出價位則是現價加價差的一半。"
+#, fuzzy
+#| msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread.  For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
+msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread. For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
+msgstr "長倉合約之進場價位為現價加上價差的一半，而退出價位則是現價減去價差的一半。短倉合約之進場價位為現價減去價差的一半，而退出價位則是現價加價差的一半。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "For more information about calling Websocket services see"
@@ -6342,7 +6343,6 @@ msgid "Profit/Loss"
 msgstr "利潤/虧損"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:42
-#| msgid "Profit/Loss"
 msgid "Profit/Loss (points)"
 msgstr "利潤/虧損(點)"
 
@@ -7345,7 +7345,6 @@ msgstr "價差合約賠付額是根據合約進場價位的相對指數走勢而
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/layouts/get_started/nav.html.haml:1
-#| msgid "Spread"
 msgid "Spreads"
 msgstr "價差"
 
@@ -7425,7 +7424,6 @@ msgid "Statistics"
 msgstr "統計"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:10
-#| msgid "Statistic"
 msgid "Status"
 msgstr "狀況"
 
@@ -7513,7 +7511,6 @@ msgstr "止損價位"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:414
-#| msgid "Duration must be between %1 and %2."
 msgid "Stop Loss must be between %1 and %2 %3"
 msgstr "止損須在%1 與 %2 %3之間"
 
@@ -7523,7 +7520,6 @@ msgstr "止盈價位"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:435
-#| msgid "Duration must be between %1 and %2."
 msgid "Stop Profit must be between %1 and %2 %3"
 msgstr "止盈須在%1 與 %2 %3之間"
 
@@ -7532,7 +7528,6 @@ msgid "Stop-loss:"
 msgstr "止損:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:4
-#| msgid "Net profit"
 msgid "Stop-profit:"
 msgstr "止盈:"
 
@@ -8072,7 +8067,9 @@ msgid "The account transfer is unavailable. Please <a href=\"%1\">deposit</a> to
 msgstr "帳戶不可轉帳。請將資金<a href=\"%1\">存入</a>您的帳戶。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:6
-msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point.  A large amount per point will result in large profits/losses per point of movement on the index."
+#, fuzzy
+#| msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point.  A large amount per point will result in large profits/losses per point of movement on the index."
+msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point. A large amount per point will result in large profits/losses per point of movement of the index."
 msgstr "每上漲/下降一點之盈利/虧損乘以每一點之金額。  如每一點之金額很大，每一點的指數走勢將導致極大的盈利/虧損。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
@@ -8200,8 +8197,7 @@ msgstr "參與金融市場最簡便的方法"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a long contract is 1001, which is entry spot + half spread. At exit, the spot is at 1100 and hence the exit level for a long contract is 1099, which is exit spot - half spread."
-msgstr ""
-"長倉合約的進場價位為1001，即進場現價 + 一半價差。退出時，現價為 1100，因此長倉合約的退出價位為 1099，即退場現價 - 一半價差。"
+msgstr "長倉合約的進場價位為1001，即進場現價 + 一半價差。退出時，現價為 1100，因此長倉合約的退出價位為 1099，即退場現價 - 一半價差。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a short contract is 999, which is entry spot - half spread. At exit, the spot is at 1100 and hence the exit level for a short contract is 1101, which is exit spot + half spread."
@@ -8308,7 +8304,6 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "利潤即贏利交易中所得賠付金額與購買價格（成本）之間的差額。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-#| msgid "The profit is the difference between the purchase price (the stake) and the payout on a winning trade."
 msgid "The profit of USD 294 is the difference between the exit and entry level multiplied by the amount per point."
 msgstr "294美元盈利是以退出和進場價位的相差額乘以每一點的金額算出。"
 
@@ -8659,12 +8654,10 @@ msgid "This is an indicative barrier. Actual barrier will be the entry spot plus
 msgstr "這是一個指示性的障礙。實際障礙將是入市現價加上障礙距離。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_loss.html.tt:18
-#| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop loss. Actual stop loss will be the entry spot plus the stop loss point."
 msgstr "這是一個指示性的止損。實際止損將是入市現價加上止損點。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:18
-#| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop profit. Actual stop profit will be the entry spot plus the stop profit point."
 msgstr "這是一個指示性的止盈。實際止盈將是入市現價加上止盈點。"
 
@@ -9063,7 +9056,6 @@ msgstr "目前交易暫停。"
 
 #. ($self->underlying->translated_display_name)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:382
-#| msgid "Trading is not offered for this duration."
 msgid "Trading on %1 is not offered for this contract type."
 msgstr "此類合約不在%1提供交易。"
 
@@ -12587,7 +12579,6 @@ msgid "%1 <strong>%2</strong> payout if %3 <strong>stays between %7</strong> and
 msgstr "如果%3<strong>在%4過後到%5時一直在%7</strong>與<strong>%6</strong>之間，將獲得%1<strong>%2</strong>的賠付額。"
 
 #: Translation for contract type "SPREADD"
-#| msgid "asian down"
 msgid "spread down"
 msgstr "價差下跌"
 
@@ -12599,11 +12590,8 @@ msgstr "價差下跌"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - dollar)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr ""
-"%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損"
-"為<strong>%6 %4</strong>，止盈為<strong>%6 %5</strong>。"
+msgstr "%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損為<strong>%6 %4</strong>，止盈為<strong>%6 %5</strong>。"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12613,14 +12601,10 @@ msgstr ""
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr ""
-"%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損"
-"為<strong>%4 %6</strong>，止盈為<strong>%5 %6</strong>。"
+msgstr "%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損為<strong>%4 %6</strong>，止盈為<strong>%5 %6</strong>。"
 
 #: Translation for contract type "SPREADU"
-#| msgid "Spread"
 msgid "spread up"
 msgstr "價差上漲"
 
@@ -12632,11 +12616,8 @@ msgstr "價差上漲"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - dollar)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr ""
-"%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損"
-"為<strong>%6 %4</strong>，止盈為<strong>%6 %5</strong>。"
+msgstr "%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損為<strong>%6 %4</strong>，止盈為<strong>%6 %5</strong>。"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12646,11 +12627,8 @@ msgstr ""
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr ""
-"%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損"
-"為<strong>%4 %6</strong>，止盈為<strong>%5 %6</strong>。"
+msgstr "%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損為<strong>%4 %6</strong>，止盈為<strong>%5 %6</strong>。"
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"

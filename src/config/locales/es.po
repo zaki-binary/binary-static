@@ -10,8 +10,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-08-03 13:11+0200\n"
 "Last-Translator: olga borg <olga@binary.com>\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/binary/static/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/binary/static/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -275,6 +274,16 @@ msgid "%1's Random Indices are the %2, %3, %4, and %5. These indices correspond 
 msgstr "Los índices Random de %1 son los %2, %3, %4, y %5. Corresponden a las volatilidades de 25%, 50%, 75% y 100% respectivamente"
 
 #. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
+msgid "%1's Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who 'Long' a rising market (and those who 'Short' a falling market) profit from those movements with much less investment than would be required in the live market."
+msgstr ""
+
+#. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
+msgid "%1's Spread Contracts require a 'stop loss' which limits the maximum losses incurred by a client. This 'stop loss' amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the 'stop loss' or 'stop profit' level."
+msgstr ""
+
+#. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "%1's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "Con la tecnología de valorización patentada de %1, usted puede obtener el mismo margen de beneficios que los inversores profesionales del mercado interbancario."
@@ -319,13 +328,13 @@ msgstr "&#8220;Hemos utilizado www.binary.com durante los últimos 8 años y rec
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:2
 msgid "'<strong>Long</strong>' contracts generate profits when the index rises and loses when it falls."
-msgstr ""
-"Contratos '<strong>largos</strong>' generan beneficios cuando el índice sube "
-"y pierden cuando este cae."
+msgstr "Contratos '<strong>largos</strong>' generan beneficios cuando el índice sube y pierden cuando este cae."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:3
-msgid "'<strong>Short</strong> contracts generate loses when the index rises and profits when it falls."
-msgstr ""
+#, fuzzy
+#| msgid "'<strong>Long</strong>' contracts generate profits when the index rises and loses when it falls."
+msgid "'<strong>Short</strong>' contracts generate losses when the index rises and profits when it falls."
+msgstr "Contratos '<strong>largos</strong>' generan beneficios cuando el índice sube y pierden cuando este cae."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:54
 msgid "(Bejing/CST -8 hours)"
@@ -1794,14 +1803,6 @@ msgstr "Con la tecnología de valorización patentada de Binary.com, usted puede
 msgid "Binary.com’s CPAN contributions"
 msgstr "Las contribuciones CPAN de Binary.com"
 
-#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-msgid "Binary.com’s Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who “Long” a rising market (and those who “Short” a falling market) profit from those movements with much less investment than would be required in the live market."
-msgstr ""
-
-#: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-msgid "Binary.com’s Spread Contracts require a ‘stop loss’ which limits the maximum losses incurred by a client. This ‘stop loss’ amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the ‘stop loss’ or 'spot profit' level."
-msgstr ""
-
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Binary.com’s headquarters are in Malta, a favoured tourist destination with a warm climate, beautiful recreational areas and World Heritage sites. We also have an Operational Headquarters office in Cyberjaya, a high-tech precinct south of Kuala Lumpur, the capital of Malaysia, an equally exciting destination at the heart of Asia."
 msgstr "La sede de Binary.com se encuentra en Malta, un popular destino turístico con un clima cálido, hermosas áreas recreativas y sitios que son patrimonio mundial. También tenemos una oficina de la sede operativa en Cyberjaya, un distrito de alta tecnología al sur de Kuala Lumpur, la ciudad capital de Malasia, un destino igual de emocionante en el corazón de Asia."
@@ -3225,7 +3226,6 @@ msgstr "Ingrese su correo electrónico"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:1
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:14
-#| msgid "Entry time"
 msgid "Entry Level"
 msgstr "Nivel de entrada"
 
@@ -3505,7 +3505,7 @@ msgid "For forex: The forex market is an OTC (over the counter) market, where ba
 msgstr "Para forex: el mercado de forex es un mercado Over The Counter (OTC, por sus siglas en inglés: sobre el mostrador), donde los bancos y otras instituciones financieras importantes intercambian divisas entre sí sin la presencia de una cámara de compensación central. En consecuencia, no hay una fuente de precios 'oficial' para las cotizaciones de forex. Los diferentes flujos de datos contendrán cotizaciones de diferentes subconjuntos de bancos internacionales. Por consiguiente, los precios pueden variar entre proveedores, dependiendo del(los) banco(s) del(los) que obtienen los precios."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:3
-msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread.  For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
+msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread. For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
 msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
@@ -8077,7 +8077,7 @@ msgid "The account transfer is unavailable. Please <a href=\"%1\">deposit</a> to
 msgstr "La transferencia no está disponible. Por favor, <a href=\"%1\">haga un depósito</a> a su cuenta."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:6
-msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point.  A large amount per point will result in large profits/losses per point of movement on the index."
+msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point. A large amount per point will result in large profits/losses per point of movement of the index."
 msgstr ""
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
@@ -8670,11 +8670,8 @@ msgid "This is an indicative stop loss. Actual stop loss will be the entry spot 
 msgstr "Esta es una barrera indicativa. Barrera real será el punto de entrada más el desplazamiento de barrera."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:18
-#| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop profit. Actual stop profit will be the entry spot plus the stop profit point."
-msgstr ""
-"Esto es un stop profit indicativo. El stop profit real será la suma del "
-"punto de entrada y el punto del stop profit."
+msgstr "Esto es un stop profit indicativo. El stop profit real será la suma del punto de entrada y el punto del stop profit."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "This is another award we really savour. Trade2win is a portal for active traders seeking to profit from stocks, futures, options and forex, and these traders award us silver (we are just pipped for gold by Betfair). It means active traders worldwide rate our trading platform extremely highly."
@@ -12613,12 +12610,8 @@ msgstr "asiáticas abajo"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - dollar)
-#| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr ""
-"Pago de %1 <strong>%2</strong> por cada punto que %3 <strong>baja</strong> "
-"del <strong>nivel de entrada</strong>, con el stop loss de <strong>%6 %4 "
-"</strong> y el stop profit de <strong>%6  %5</strong>.\n"
+msgstr "Pago de %1 <strong>%2</strong> por cada punto que %3 <strong>baja</strong> del <strong>nivel de entrada</strong>, con el stop loss de <strong>%6 %4 </strong> y el stop profit de <strong>%6  %5</strong>.\n"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
