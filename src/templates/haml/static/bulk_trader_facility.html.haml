@@ -27,7 +27,7 @@
               %h1= stash->{title}
               %p
                 %h2= l('Enjoy the benefits of our bulk trader facility')
-              %p!= l("<a href='#account-manager-guide'>Account managers</a> can now place trades for their clients with [_1]’s bulk trader facility", stash->{website_name})
+              %p!= l("<a href='#account-manager-guide'>Account managers</a> can now place trades for their clients with [_1]’s bulk trader facility.", stash->{website_name})
               %p!= l("This is very helpful for <a href='#client-guide'>clients</a> who don’t always have enough time, or expertise, to follow market trends.")
               %p!= l("It’s also a plus for account managers, who are paid a <a href='#''>commission</a> when they refer new clients to [_1].", stash->{website_name})
             .clearfix
@@ -57,7 +57,7 @@
               %p= l('To trade for your clients:')
               %ol
                 %li= l('Contact each client to get their unique API token. (The API token authorizes you to place trades for your clients using funds in their [_1] account)', stash->{website_name})
-                %li!= l("Go to <a href='http://bulktrader.binary.com' target='_blank'>http://bulktrader.binary.com</a> and log in to the system using your [_1] trading account.", stash->{website_name})
+                %li!= l("Go to <a href='https://bulktrader.binary.com' target='_blank'>https://bulktrader.binary.com</a> and log in to the system using your [_1] trading account.", stash->{website_name})
                 %li= l('Select Configure Bulk Clients at the top of the page.')
                 %li= l('Insert your client’s name or login ID (under Party Name), and their token as shown in the image below. This will activate their API token.')
                 %p
