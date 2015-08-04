@@ -87,3 +87,11 @@ var contractTypeDisplayMapping = function (type) {
 
     return type ? obj[type] : 'top';
 };
+
+var isVisible = function (elem) {
+    if (elem.offsetWidth === 0 && elem.offsetHeight === 0) {
+        return false;
+    } else {
+        return true;
+    }
+};
