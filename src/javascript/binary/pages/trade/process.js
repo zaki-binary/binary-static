@@ -26,7 +26,7 @@ var processContractFormOfferings = function (contracts) {
 
     Contract.details(contracts, Trade.form(), Trade.barrier());
 
-    displayDurations('duration_units', Contract.durations(), Trade.form(), Trade.barrier());
+    displayDurations();
 
     durationPopulate();
 

@@ -97,6 +97,7 @@ if (duration_unit_elm) {
 var expiry_type_elm = document.getElementById('expiry_type');
 if (expiry_type_elm) {
     expiry_type_elm.addEventListener('change', function(e) {
+        durationPopulate();
         if(e.target && e.target.value == 'endtime') {
             var current_moment = moment().add(5, 'minutes').utc();
             document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
@@ -120,11 +121,18 @@ var date_start_elm = document.getElementById('date_start');
 if (date_start_elm) {
     date_start_elm.addEventListener('change', function (e) {
         if (e.target && e.target.value == 'now') {
-            displayDurations('duration_units', Contract.durations(), Trade.form(), Trade.barrier(), 'spot');
+            displayDurations('spot');
         } else {
-            displayDurations('duration_units', Contract.durations(), Trade.form(), Trade.barrier(), 'forward');
+            displayDurations('forward');
         }
 
+        processPriceRequest();
+    });
+}
+
+var amount_type_elm = document.getElementById('amount_type');
+if (amount_type_elm) {
+    amount_type_elm.addEventListener('change', function (e) {
         processPriceRequest();
     });
 }

@@ -1,6 +1,10 @@
-var displayDurations = function (id, durations, formName, barrierCategory, startType) {
+var displayDurations = function (startType) {
     'use strict';
-    var target= document.getElementById(id),
+
+    var target= document.getElementById('duration_units'),
+        durations = Contract.durations(),
+        formName = Trade.form(),
+        barrierCategory = Trade.barrier(),
         fragment =  document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
@@ -158,7 +162,19 @@ var displayExpiryType = function (unit) {
     var target = document.getElementById('expiry_type'),
         fragment = document.createDocumentFragment();
 
-    var current_selected = target.value;
+    var current_selected = target.value || 'duration',
+        id = current_selected,
+        hideId = (current_selected == 'duration') ? 'endtime' : 'duration';
+
+    id = document.getElementById('expiry_type_' + id);
+    if (id) {
+        id.style.display = 'flex';
+    }
+    // need to hide the non selected one
+    hideId = document.getElementById('expiry_type_' + hideId);
+    if (hideId) {
+        hideId.style.display = 'none';
+    }
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
