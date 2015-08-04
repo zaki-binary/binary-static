@@ -11,9 +11,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-08-03 04:55+0200\n"
+"PO-Revision-Date: 2015-08-04 15:33+0200\n"
 "Last-Translator: Robert Grundler <grundlertex@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/binary/static/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/binary/static/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -280,11 +281,22 @@ msgstr "Die Random Indizes sind %1 sind %2, %3, %4 und %5. Diese Indizes entspre
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "%1's Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who 'Long' a rising market (and those who 'Short' a falling market) profit from those movements with much less investment than would be required in the live market."
 msgstr ""
+"%1 Spread Kontrakte sind gehebelte derivative Kontrakte, deren Wert direkt "
+"an die unterliegenden Marktbewegungen gebunden ist. Kunden, die nach einem "
+"steigenden Markt \"verlangen\" (und diejenigen die einen fallenden Martk \""
+"scheuen\") profitieren von diesen Bewegungen mit wesentlich geringeren "
+"Investition, als Sie an der echten Börse verlangt werden."
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "%1's Spread Contracts require a 'stop loss' which limits the maximum losses incurred by a client. This 'stop loss' amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the 'stop loss' or 'stop profit' level."
 msgstr ""
+"Die Spread Kontrakte von %1 erfordern ein 'Stop Loss', das die für einen "
+"Kunden entstehenden Höchstverluste beschränkt. Dieser 'Stop Loss' Betrag "
+"dient als Einlage und kann nicht für weitere Geschäfte verwendet werden, bis "
+"dieser Spread Kontrakt ausgelaufen ist. Spread Kontrakte laufen ab, wenn sie "
+"vom Kunden verkauft werden oder bei nach Erreichen der 'Stop Loss' oder "
+"'Stop Profit' Höhe."
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
@@ -332,10 +344,14 @@ msgstr "&#8220;Wir verwenden www.binary.com schon seit 8 Jahren und können bina
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:2
 msgid "'<strong>Long</strong>' contracts generate profits when the index rises and loses when it falls."
 msgstr ""
+"'<strong>Lange</strong>' Kontrakte generieren Profite, wenn der Index steigt "
+"und Verluste, wenn er fällt."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:3
 msgid "'<strong>Short</strong>' contracts generate losses when the index rises and profits when it falls."
 msgstr ""
+"'<strong>Kurze</strong>' Kontrakte bringen Verluste, wenn der Index steigt "
+"und Gewinne, wenn er fällt."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:54
 msgid "(Bejing/CST -8 hours)"
@@ -1183,24 +1199,22 @@ msgstr "Betrag"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:34
 msgid "Amount Per Point"
-msgstr ""
+msgstr "Betrag je Punkt"
 
 #. ($limits->{min}, $limits->{max}, $self->currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:43
-#, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Amount Per Point must be between %1 and %2 %3."
-msgstr "Die Laufzeit muss zwischen %1 und %2 betragen."
+msgstr "Der Betrag je Punkt muss zwischen %1 und %2 %3 betragen."
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet/ParametersBase.pm:210
 msgid "Amount must be a positive number."
 msgstr "Betrag muss eine positive Zahl sein."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/amount_per_point.html.tt:2
-#, fuzzy
 #| msgid "Account Opening"
 msgid "Amount per point"
-msgstr "Kontoeröffnung"
+msgstr "Betrag je Punkt"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "An Ends Between trade pays out if the market exit price is strictly higher than the low price target AND strictly lower than the high price target. An Ends Outside binary pays out if the market exit price is EITHER strictly higher than the high price target OR strictly lower than the low price target."
@@ -2588,10 +2602,9 @@ msgid "Currency quotes are truncated to 5 digits and all contracts are purchased
 msgstr "Die Wechselkursesind auf fünf Stellen gekürzt und alle Verträge werden mit fünfstelligen Wechselkursen erworben und ausgezahlt."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:30
-#, fuzzy
 #| msgid "Current"
 msgid "Current Level"
-msgstr "Aktuell"
+msgstr "Aktuelle Höhe"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:587
 msgid "Current Spot"
@@ -2892,7 +2905,7 @@ msgstr "Einzahlung an den Zahlungsabwickler"
 #. ($bet->currency, to_monetary_number_format($bet->ask_price)
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:470
 msgid "Deposit of %1 %2 is required. Current spread: %3 points"
-msgstr ""
+msgstr "Einzahlung von %1 %2 erforderlich. Aktueller Spread: %3 Punkte"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet."
@@ -3233,10 +3246,9 @@ msgstr "Geben Sie Ihre E-Mail ein"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:1
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:14
-#, fuzzy
 #| msgid "Entry time"
 msgid "Entry Level"
-msgstr "Einstiegszeit"
+msgstr "Einstiegshöhe"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:113
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:481
@@ -3265,7 +3277,7 @@ msgstr "Bei Binary Investments (Europe) Ltd. können Menschen mit gewöhnlichem 
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "Example:"
-msgstr ""
+msgstr "Beispiel:"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2660
 msgid "Exclude me from the website until"
@@ -3292,10 +3304,9 @@ msgid "Execute your trade in seconds."
 msgstr "Ihre Handelsgeschäfte in Sekunden in Sekunden abwickeln."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:18
-#, fuzzy
 #| msgid "Exit time"
 msgid "Exit Level"
-msgstr "Ausstiegszeit"
+msgstr "Ausstiegshöhe"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:496
 msgid "Exit Spot"
@@ -3516,6 +3527,10 @@ msgstr "Für Devisen: Der Divisenmarkt ist ein OTC (over the counter) Markt (Fre
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:3
 msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread. For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
 msgstr ""
+"Für lange Kontrakte ist die Einstiegshöhe der Spot plus einem halben Spread "
+"und die Ausstiegshöhe der Spot minus einem halben Spread. Bei kurzen "
+"Kontrakten beträgt die Einstiegshöhe den Spot minus einem halben Spread und "
+"die Ausstiegshöhe den Spot plus einem halben Spread."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "For more information about calling Websocket services see"
@@ -4639,7 +4654,7 @@ msgstr "Lernen Sie von uns"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 msgid "Learn more about spreads on binary.com."
-msgstr ""
+msgstr "Erfahren Sie auf binary.com mehr über Spreads."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 msgid "Learn the basics, from choosing your asset to winning your payout."
@@ -4825,7 +4840,7 @@ msgstr "Abmelden"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1402
 msgid "Long"
-msgstr ""
+msgstr "Lang"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/main.html.tt:45
 msgid "Long-term partnership with the leading financial trading service"
@@ -6238,6 +6253,8 @@ msgstr "Potentielle Rendite"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "Potential profit and losses are limited to stop profit and stop loss levels respectively."
 msgstr ""
+"Mögliche Gewinne und Verluste sind auf die Höhe von Stop Profit und Stop "
+"entsprechend beschränkt."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Power & simplicity"
@@ -6352,10 +6369,9 @@ msgid "Profit/Loss"
 msgstr "Gewinn/Verlust"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:42
-#, fuzzy
 #| msgid "Profit/Loss"
 msgid "Profit/Loss (points)"
-msgstr "Gewinn/Verlust"
+msgstr "Gewinn/Verlust (Punkte)"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:31
 msgid "Prominently incorporate and continually display the most up-to-date Links provided to you by the Company on your Site and you shall not alter the form, location or operation of the Links without the Company's prior consent"
@@ -7023,7 +7039,7 @@ msgstr "Präzise Kurse"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1404
 msgid "Short"
-msgstr ""
+msgstr "Kurz"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2056
 msgid "Short summary of your Payment Agent service"
@@ -7352,14 +7368,15 @@ msgstr "Marge"
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:1
 msgid "Spread contracts payout based on the movement of the index relative to the entry level of the contract."
 msgstr ""
+"Die Auszahlung bei Spread Kontrakten basiert auf der Bewegung des Index in "
+"Bezug auf die Einstiegshöhe des Kontrakts."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/layouts/get_started/nav.html.haml:1
-#, fuzzy
 #| msgid "Spread"
 msgid "Spreads"
-msgstr "Marge"
+msgstr "Spreads"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/ContractForm.pm:753
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
@@ -7520,35 +7537,32 @@ msgstr "Aktienhandelshäufigkeit"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:22
 msgid "Stop Loss Level"
-msgstr ""
+msgstr "Stop Loss Höhe"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:414
-#, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Stop Loss must be between %1 and %2 %3"
-msgstr "Die Laufzeit muss zwischen %1 und %2 betragen."
+msgstr "Stop Loss muss zwischen %1 und %2 %3 sein"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:26
 msgid "Stop Profit Level"
-msgstr ""
+msgstr "Stop Profit Höhe"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:435
-#, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Stop Profit must be between %1 and %2 %3"
-msgstr "Die Laufzeit muss zwischen %1 und %2 betragen."
+msgstr "Stop Profit  muss zwischen %1 und %2 %3 sein"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_loss.html.tt:4
 msgid "Stop-loss:"
-msgstr ""
+msgstr "Stop Loss:"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:4
-#, fuzzy
 #| msgid "Net profit"
 msgid "Stop-profit:"
-msgstr "Nettogewinn"
+msgstr "Stop Profit:"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/tour.html.haml:1
 msgid "Study our live charts"
@@ -8088,6 +8102,9 @@ msgstr "Die Kontoüberweisung ist nicht möglich. Bitte <a href=\"%1\">zahlen</a
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:6
 msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point. A large amount per point will result in large profits/losses per point of movement of the index."
 msgstr ""
+"Der Betrag von Profit/Verlust je Punkt von Steigen/Falle wird mit dem Betrag "
+"je Punkt multipliziert. Ein großer Betrag je Punkt ergibt hohe Gewinne/"
+"Verlust je Punkt der Indexbewegung."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
 msgid "The anti-money laundering processes have the following effects on Clients:"
@@ -8215,14 +8232,24 @@ msgstr "Der einfachste Weg, auf den Finanzmärkten aktiv zu werden"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a long contract is 1001, which is entry spot + half spread. At exit, the spot is at 1100 and hence the exit level for a long contract is 1099, which is exit spot - half spread."
 msgstr ""
+"Die Einstiegshöhe für einen langen Kontrakt beträgt 1001, was der "
+"Einstiegskurs + ein halber Spread ist. Bei Austieg ist der Spot 1100 und "
+"daher ist die Ausstiegshöhe für einen langen Kontrakt 1099, also der "
+"Ausstiegskurs abzüglich eines halben Spreads."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a short contract is 999, which is entry spot - half spread. At exit, the spot is at 1100 and hence the exit level for a short contract is 1101, which is exit spot + half spread."
 msgstr ""
+"Die Einstiegshöhe für einen kurzen Kontrakt ist 999, was der Einstiegskurs "
+"minus einem halben Spread entspricht. Beim Ausstieg beträgt der Kurs 1100 "
+"und daher ist die Ausstiegshöhe für einen kurzen Kontrakt 1101, was dem "
+"Ausstiegskurs plus einen halben Spread entspricht."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry spot of an instrument XYZ is 1000 and the spread on this instrument is 2 points."
 msgstr ""
+"Der Einstiegskurs eines Instruments XYZ beträgt 1000 und der Spread für "
+"dieses Instrument beträgt 2 Punkte."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The entry spot price is the starting price of the trade purchased by a trader."
@@ -8272,6 +8299,8 @@ msgstr "Das jedem Kunden angebotene und geschuldete Schutzniveau hängt von der 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The loss of USD 306 is the difference between the exit and entry level multiplied by the amount per point."
 msgstr ""
+"Der Verlust von 306 USD ist der Unterschied zwischen der Einstiegs- und "
+"Ausstiegshöhe, multipliziert mit dem Betrag je Punkt."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The market exit price is the price in effect at the end of the contract period."
@@ -8321,10 +8350,11 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "Der Gewinn ist die Differenz zwischen dem Kaufpreis (der Einsatz)und der Auszahlung eines erfolgreichen Kontrakts."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-#, fuzzy
 #| msgid "The profit is the difference between the purchase price (the stake) and the payout on a winning trade."
 msgid "The profit of USD 294 is the difference between the exit and entry level multiplied by the amount per point."
-msgstr "Der Gewinn ist die Differenz zwischen dem Kaufpreis (der Einsatz)und der Auszahlung eines erfolgreichen Kontrakts."
+msgstr ""
+"Der Gewinn von 294 USA ist die Differenz zwischen der Ausstiegs- und "
+"Einstiegshöhe, multipliziert mit dem Betrag je Punkt."
 
 #. ($currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1015
@@ -8373,6 +8403,10 @@ msgstr "Der Einsatz ist der Betrag, den ein Händler zahlen muss, um einen Kontr
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:5
 msgid "The stop-loss and stop-profit are guaranteed. The loss and profit are limited to the stop-loss and stop-profit respectively.  When the exit level touches either the stop-loss or stop-profit, the contract will be closed at the stop-loss or stop-profit level."
 msgstr ""
+"Stop Loss und Stop Profit sind garantiert. Der Verlust oder Gewinn ist je "
+"nach Stop Loss oder Stop Profit beschränkt. Wenn die Ausstiegshöhe entweder "
+"Stop Loss oder Stop Profit berührt, wird der Vertrag beim Stop Loss oder "
+"Stop Profit Level geschlossen."
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:785
 msgid "The system is missing critical pricing information. Please try again in a few minutes, or try a different market."
@@ -8673,16 +8707,18 @@ msgid "This is an indicative barrier. Actual barrier will be the entry spot plus
 msgstr "Dies ist ein Hinweis auf die Schwelle.. Die tatsächliche Schwelle wird der Kurs bei Kontraktbeginn zzgl. der Schwellenverschiebung sein."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_loss.html.tt:18
-#, fuzzy
 #| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop loss. Actual stop loss will be the entry spot plus the stop loss point."
-msgstr "Dies ist ein Hinweis auf die Schwelle.. Die tatsächliche Schwelle wird der Kurs bei Kontraktbeginn zzgl. der Schwellenverschiebung sein."
+msgstr ""
+"Dies ist ein indikativer Stop Loss. Der tatsächliche Stop Loss wird der "
+"Einstiegskurz plus des Stop Loss Punkts sein."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:18
-#, fuzzy
 #| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop profit. Actual stop profit will be the entry spot plus the stop profit point."
-msgstr "Dies ist ein Hinweis auf die Schwelle.. Die tatsächliche Schwelle wird der Kurs bei Kontraktbeginn zzgl. der Schwellenverschiebung sein."
+msgstr ""
+"Dies ist ein indikativer Stop Loss. Der tatsächliche Stop Profit wird der "
+"Einstiegskurs plus der Stop Loss Punkt sein."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "This is another award we really savour. Trade2win is a portal for active traders seeking to profit from stocks, futures, options and forex, and these traders award us silver (we are just pipped for gold by Betfair). It means active traders worldwide rate our trading platform extremely highly."
@@ -9079,10 +9115,9 @@ msgstr "Der Handel ist derzeit ausgesetzt."
 
 #. ($self->underlying->translated_display_name)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:382
-#, fuzzy
 #| msgid "Trading is not offered for this duration."
 msgid "Trading on %1 is not offered for this contract type."
-msgstr "Für diese Laufzeit wird kein Geschäft angeboten."
+msgstr "Der Handel dieser Kontraktart wird auf %1 nicht angeboten."
 
 #. ($underlying->translated_display_name()
 #. ($translated_name)
@@ -12605,10 +12640,9 @@ msgid "%1 <strong>%2</strong> payout if %3 <strong>stays between %7</strong> and
 msgstr "%2 <strong> %1</strong> Auszahlung, wenn %3 <strong> zwischen %7</strong> und <strong>%6</strong> bis %5 nach %4 bleibt."
 
 #: Translation for contract type "SPREADD"
-#, fuzzy
 #| msgid "asian down"
 msgid "spread down"
-msgstr "asiatisches Tief"
+msgstr "Spread tief"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12618,10 +12652,12 @@ msgstr "asiatisches Tief"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - dollar)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr "%1 <strong>%2</strong> Auszahlung wenn der <strong>letzte Tick</strong> von %3 genau <strong>niedriger</strong> als der <strong>Durchschnitt</strong> der <strong>%5 Ticks</strong> ist."
+msgstr ""
+"%1 <strong>%2</strong> Auszahlung für jeden Punkt %3 </strong> fällt <strong>"
+" von der </strong> Einstiegshöhe bei Stop Loss <strong>%6 %4</strong> und "
+"Stop Profit von  <strong>%6 %5</strong>."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12631,16 +12667,18 @@ msgstr "%1 <strong>%2</strong> Auszahlung wenn der <strong>letzte Tick</strong> 
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr "%1 <strong>%2</strong> Auszahlung wenn der <strong>letzte Tick</strong> von %3 genau <strong>niedriger</strong> als der <strong>Durchschnitt</strong> der <strong>%5 Ticks</strong> ist."
+msgstr ""
+"Auszahlung von %1 <strong>%2</strong> für jeden Punkt Punkt %3, der von der  "
+"<strong>Einstiegshöhe</strong> bei einem Stop Loss von  <strong>%4 "
+"%6</strong> und Stop Profit von <strong>%5 %6</strong>  "
+"<strong>fällt</strong>."
 
 #: Translation for contract type "SPREADU"
-#, fuzzy
 #| msgid "Spread"
 msgid "spread up"
-msgstr "Marge"
+msgstr "Spread hoch"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12650,10 +12688,13 @@ msgstr "Marge"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - dollar)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr "%1 <strong>%2</strong> Auszahlung wenn der <strong>letzte Tick</strong> von %3 genau <strong>niedriger</strong> als der <strong>Durchschnitt</strong> der <strong>%5 Ticks</strong> ist."
+msgstr ""
+"Auszahlung von %1 <strong>%2</strong> für jeden Punkt %3 "
+"<strong>steigt</strong> von der <strong>Einstiegshöhe</strong>, bei einem "
+"Stop Loss von <strong>%6 %4</strong> und Stop Profit von <strong>%6 "
+"%5</strong>."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12663,10 +12704,13 @@ msgstr "%1 <strong>%2</strong> Auszahlung wenn der <strong>letzte Tick</strong> 
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr "%1 <strong>%2</strong> Auszahlung wenn der <strong>letzte Tick</strong> von %3 genau <strong>niedriger</strong> als der <strong>Durchschnitt</strong> der <strong>%5 Ticks</strong> ist."
+msgstr ""
+"Auszahlung von %1 <strong>%2</strong> für jeden Punkt %3 "
+"<strong>steigt</strong> von der <strong>Einstiegshöhe</strong>, bei einem "
+"Stop Loss von <strong>%6 %4</strong> und Stop Profit von <strong>%6 "
+"%5</strong>."
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"
