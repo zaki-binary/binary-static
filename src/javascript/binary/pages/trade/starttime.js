@@ -32,7 +32,7 @@ function displayStartDates(id, startDates) {
             var start = moment();
             start = moment(Math.ceil((+start) / ROUNDING) * ROUNDING).utc();
 
-            if (moment(a, 'YYYY MM DD').isSame(moment(start ,'YYYY MM DD'))) {
+            if (moment(a, 'YYYY MM DD').isSame(moment(start ,'YYYY MM DD'), 'day')) {
                 a = start;
             }
 

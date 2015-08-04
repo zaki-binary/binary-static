@@ -13,9 +13,7 @@ var Contract = (function () {
         barrierCategory = barrierCategory || formBarrier['barrierCategory'];
 
         if (formName) {
-            for(var i = 0, len = contracts.available.length; i < len; i++) {
-                var currentObj = contracts.available[i];
-
+            contracts.available.forEach(function (currentObj) {
                 if (!durations[currentObj['expiry_type']]) {
                     durations[currentObj['expiry_type']] = {};
                 }
@@ -83,7 +81,7 @@ var Contract = (function () {
                 if (barrierCategory && barriers && barriers[formName] && !barriers[formName][barrierCategory] ) {
                     barriers = {};
                 }
-            }
+            });
 
             if(expiryType) {
                 var obj = {};
