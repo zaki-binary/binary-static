@@ -24,14 +24,15 @@ var processMarketOfferings = function (offerings, market) {
 var processContractFormOfferings = function (contracts) {
     'use strict';
 
-    Contract.details(contracts, Offerings.form(), Offerings.barrier());
+    Contract.details(contracts);
 
     displayDurations();
 
     durationPopulate();
 
-    displayStartDates('date_start', Contract.startDates());
-    displayBarriers(Contract.barriers(), Offerings.form());
+    displayStartDates();
+
+    displayBarriers();
 
     TradeSocket.send({ payout_currencies: 1 });
 };

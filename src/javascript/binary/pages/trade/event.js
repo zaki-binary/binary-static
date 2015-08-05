@@ -101,7 +101,7 @@ if (expiry_type_elm) {
         if(e.target && e.target.value == 'endtime') {
             var current_moment = moment().add(5, 'minutes').utc();
             document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
-            document.getElementById('expiry_time').value = current_moment.format('HH:mm')
+            document.getElementById('expiry_time').value = current_moment.format('HH:mm');
         }
         processPriceRequest();
     });

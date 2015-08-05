@@ -11,7 +11,7 @@ var Message = (function () {
                 var market = sessionStorage.getItem('market') || 'Random';
                 processMarketOfferings(response, market);
             } else if (type == 'contracts') {
-                processContractFormOfferings(response, Offerings.form());
+                processContractFormOfferings(response);
             } else if (type == 'payout_currencies') {
                 displayCurrencies(response);
                 processPriceRequest();

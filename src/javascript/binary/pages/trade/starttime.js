@@ -6,10 +6,13 @@ function compareStartDate(a,b) {
   return 0;
 }
 
-function displayStartDates(id, startDates) {
+function displayStartDates() {
     'use strict';
+
+    var startDates = Contract.startDates();
+
     if (startDates) {
-        var target= document.getElementById(id),
+        var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
             option = document.createElement('option'),
             content = document.createTextNode('Now');

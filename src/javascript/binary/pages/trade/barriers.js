@@ -1,5 +1,8 @@
-function displayBarriers (barriers, formName, barrierCategory) {
+function displayBarriers (barrierCategory) {
     'use strict';
+
+    var barriers = Contract.barriers(),
+        formName = Offerings.form();
 
     if (barriers && formName) {
         var barrier = barriers[formName];
