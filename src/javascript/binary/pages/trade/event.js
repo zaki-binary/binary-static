@@ -81,17 +81,6 @@ if (duration_amount_elm) {
 }
 
 /*
- * bind event to change in duration units, populate duration and request price
- */
-var duration_unit_elm = document.getElementById('duration_units');
-if (duration_unit_elm) {
-    duration_unit_elm.addEventListener('change', function () {
-        durationPopulate();
-        processPriceRequest();
-    });
-}
-
-/*
  * attach event to expiry time change, event need to populate duration
  * and request new price
  */
@@ -104,6 +93,34 @@ if (expiry_type_elm) {
             document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
             document.getElementById('expiry_time').value = current_moment.format('HH:mm');
         }
+        processPriceRequest();
+    });
+}
+
+/*
+ * bind event to change in duration units, populate duration and request price
+ */
+var duration_unit_elm = document.getElementById('duration_units');
+if (duration_unit_elm) {
+    duration_unit_elm.addEventListener('change', function () {
+        durationPopulate();
+        processPriceRequest();
+    });
+}
+
+/*
+ * bind event to change in endtime date and time
+ */
+var end_date_elm = document.getElementById('expiry_date');
+if (end_date_elm) {
+    end_date_elm.addEventListener('change', function () {
+        processPriceRequest();
+    });
+}
+
+var end_time_elm = document.getElementById('expiry_time');
+if (end_time_elm) {
+    end_time_elm.addEventListener('change', function () {
         processPriceRequest();
     });
 }
