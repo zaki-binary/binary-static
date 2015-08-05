@@ -25,8 +25,6 @@ var processContractFormOfferings = function (contracts) {
 
     displayDurations();
 
-    durationPopulate();
-
     displayStartDates();
 
     displayBarriers();

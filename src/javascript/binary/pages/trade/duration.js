@@ -126,6 +126,7 @@ var displayDurations = function (startType) {
             target.appendChild(fragment);
         }
     }
+    durationPopulate();
 };
 
 var durationTextValueMappings = function (str) {
@@ -157,12 +158,15 @@ var durationTextValueMappings = function (str) {
 var durationPopulate = function () {
     'use strict';
 
-    var unit = document.getElementById('duration_units'),
-        unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-
-    document.getElementById('duration_amount').value = unitValue;
-    document.getElementById('duration_minimum').textContent = unitValue;
-    displayExpiryType(unit.value);
+    var unit = document.getElementById('duration_units');
+    if (isVisible(unit)) {
+        var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
+        document.getElementById('duration_amount').value = unitValue;
+        document.getElementById('duration_minimum').textContent = unitValue;
+        displayExpiryType(unit.value);
+    } else {
+        displayExpiryType();
+    }
 };
 
 var displayExpiryType = function (unit) {

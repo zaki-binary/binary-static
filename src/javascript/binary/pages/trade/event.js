@@ -125,7 +125,6 @@ if (date_start_elm) {
         } else {
             displayDurations('forward');
         }
-
         processPriceRequest();
     });
 }
