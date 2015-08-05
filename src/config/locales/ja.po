@@ -7,9 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-08-04 07:25+0200\n"
-"Last-Translator: Yasushi Takeishi <takeishi@regentmarkets.com>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/binary/static/ja/>\n"
+"PO-Revision-Date: 2015-08-05 22:24+0200\n"
+"Last-Translator: Haruna Sekiya <hrnmyrn@gmail.com>\n"
+"Language-Team: Japanese "
+"<https://hosted.weblate.org/projects/binary/static/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -278,11 +279,16 @@ msgstr "％1のランダムインデックスは％2、％3、％4、％5です�
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "%1's Spread Contracts are leveraged derivative contracts, the value of which is directly tied to the underlying market movements.  Clients who 'Long' a rising market (and those who 'Short' a falling market) profit from those movements with much less investment than would be required in the live market."
 msgstr ""
+"%1のスプレッドトレードには、市場動向が直接関連する金銭的価値のデリバティブ契約を活用しています。市場が上昇すると「ロング」を選んだクライアント（市場が下"
+"落するとして「ショート」を選んだクライアント）のライブ市場で必要とされるよりもはるかに少ない投資でこれらの動向から利益を得られます。"
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "%1's Spread Contracts require a 'stop loss' which limits the maximum losses incurred by a client. This 'stop loss' amount will act as a deposit and may not be used for further trading until that Spread Contract is closed. Spread Contracts are closed when sold by the client, upon hitting the 'stop loss' or 'stop profit' level."
 msgstr ""
+"%1のスプレッドトレードでは、クライアントによって生じる損失の最大を制限できる「損切り」が必要です。この「損切り」の金額は、口座内の資金に作用し、スプレッ"
+"ドトレードが閉鎖するまでそれ以外のお取引ができないよう機能します。スプレッドトレードはクライアントによって転売される際に「損切り」と「利益ストップ」のレベ"
+"ルに到達次第閉鎖されます。"
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
@@ -329,11 +335,11 @@ msgstr "&#8220;当社はwww.binary.comを８年以上利用しています。世
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:2
 msgid "'<strong>Long</strong>' contracts generate profits when the index rises and loses when it falls."
-msgstr ""
+msgstr "「<strong>ロング</strong>」 インデックスが上昇すると条件を満たし、下落すると条件が満たされません。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:3
 msgid "'<strong>Short</strong>' contracts generate losses when the index rises and profits when it falls."
-msgstr ""
+msgstr "「<strong>ショート</strong>」 インデックスが下落すると条件を満たし、上昇すると条件が満たされません。"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:54
 msgid "(Bejing/CST -8 hours)"
@@ -1180,24 +1186,22 @@ msgstr "金額"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:34
 msgid "Amount Per Point"
-msgstr ""
+msgstr "1ポイントの金額"
 
 #. ($limits->{min}, $limits->{max}, $self->currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:43
-#, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Amount Per Point must be between %1 and %2 %3."
-msgstr "有効な取引期間は、%1から%2の間です。"
+msgstr "ポイントごとの金額は、%1から%2 %3の間です。"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet/ParametersBase.pm:210
 msgid "Amount must be a positive number."
 msgstr "ご入力値は正の値である必要があります。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/amount_per_point.html.tt:2
-#, fuzzy
 #| msgid "Account Opening"
 msgid "Amount per point"
-msgstr "ご口座の開設手続き"
+msgstr "ポイントごとの金額"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "An Ends Between trade pays out if the market exit price is strictly higher than the low price target AND strictly lower than the high price target. An Ends Outside binary pays out if the market exit price is EITHER strictly higher than the high price target OR strictly lower than the low price target."
@@ -2585,10 +2589,9 @@ msgid "Currency quotes are truncated to 5 digits and all contracts are purchased
 msgstr "当社では、最大で少数第５位までの価格データを採用しており、全てのトレードの最大で少数第５位までのデータに基づいて購入が可能であり、約定されます。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:30
-#, fuzzy
 #| msgid "Currency"
 msgid "Current Level"
-msgstr "通貨"
+msgstr "現在のレベル"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:587
 msgid "Current Spot"
@@ -2887,7 +2890,7 @@ msgstr "決済代行会社を利用して入金"
 #. ($bet->currency, to_monetary_number_format($bet->ask_price)
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:470
 msgid "Deposit of %1 %2 is required. Current spread: %3 points"
-msgstr ""
+msgstr "%1 %2のご入金が必要です。現在のスプレッド：%3ポイント"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet."
@@ -3228,10 +3231,9 @@ msgstr "メールアドレスを入力"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:1
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:14
-#, fuzzy
 #| msgid "Entry time"
 msgid "Entry Level"
-msgstr "開始時間"
+msgstr "開始レベル"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:113
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:481
@@ -3260,7 +3262,7 @@ msgstr "投資製品のお取引をご希望のイギリスを除く欧州連合
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "Example:"
-msgstr ""
+msgstr "例："
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2660
 msgid "Exclude me from the website until"
@@ -3287,10 +3289,9 @@ msgid "Execute your trade in seconds."
 msgstr "約定にかかる時間はほんの数秒。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:18
-#, fuzzy
 #| msgid "Exit time"
 msgid "Exit Level"
-msgstr "終了時間"
+msgstr "判定レベル"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:496
 msgid "Exit Spot"
@@ -3511,6 +3512,8 @@ msgstr "外国為替：外国為替市場は、取引所を介さずに主要な
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:3
 msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread. For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
 msgstr ""
+"長期トレードにおいて、開始レベルはスポットにスプレッドの半分を足し、判定レベルはスポットからスプレッドの半分を引きます。短期トレードにおいては、開始レベル"
+"はスポットから半分のスプレッドを引き、判定レベルはスポットにスプレッドの半分を足します。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "For more information about calling Websocket services see"
@@ -4634,7 +4637,7 @@ msgstr "トレードを学ぶ"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 msgid "Learn more about spreads on binary.com."
-msgstr ""
+msgstr "binary株式会社のスプレッドについて詳細を確認する"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 msgid "Learn the basics, from choosing your asset to winning your payout."
@@ -4820,7 +4823,7 @@ msgstr "ログアウト"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1402
 msgid "Long"
-msgstr ""
+msgstr "ロング"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/main.html.tt:45
 msgid "Long-term partnership with the leading financial trading service"
@@ -6232,7 +6235,7 @@ msgstr "潜在利益"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "Potential profit and losses are limited to stop profit and stop loss levels respectively."
-msgstr ""
+msgstr "潜在利益と損失は、それぞれ利益ストップと損切りレベルで制限されます。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Power & simplicity"
@@ -6347,10 +6350,9 @@ msgid "Profit/Loss"
 msgstr "利益/損益"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:42
-#, fuzzy
 #| msgid "Profit/Loss"
 msgid "Profit/Loss (points)"
-msgstr "利益/損益"
+msgstr "利益/損益（ポイント）"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/affiliate_tac_tab.html.tt:31
 msgid "Prominently incorporate and continually display the most up-to-date Links provided to you by the Company on your Site and you shall not alter the form, location or operation of the Links without the Company's prior consent"
@@ -7018,7 +7020,7 @@ msgstr "優れた価格設定"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1404
 msgid "Short"
-msgstr ""
+msgstr "ショート"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2056
 msgid "Short summary of your Payment Agent service"
@@ -7346,15 +7348,14 @@ msgstr "Spread"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:1
 msgid "Spread contracts payout based on the movement of the index relative to the entry level of the contract."
-msgstr ""
+msgstr "スプレッドトレードのペイアウトは、契約の開始レベルと相対的なインデックスの動きに基づいています。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/layouts/get_started/nav.html.haml:1
-#, fuzzy
 #| msgid "Spread"
 msgid "Spreads"
-msgstr "Spread"
+msgstr "スプレッド"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/ContractForm.pm:753
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
@@ -7515,35 +7516,32 @@ msgstr "株式取引の頻度"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:22
 msgid "Stop Loss Level"
-msgstr ""
+msgstr "損切りレベル"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:414
-#, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Stop Loss must be between %1 and %2 %3"
-msgstr "有効な取引期間は、%1から%2の間です。"
+msgstr "損切りは%1から%2 %3の間です。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:26
 msgid "Stop Profit Level"
-msgstr ""
+msgstr "利益ストップレベル"
 
 #. ($min, $max, $unit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:435
-#, fuzzy
 #| msgid "Duration must be between %1 and %2."
 msgid "Stop Profit must be between %1 and %2 %3"
-msgstr "有効な取引期間は、%1から%2の間です。"
+msgstr "利益ストップは%1から%2 %3の間です。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_loss.html.tt:4
 msgid "Stop-loss:"
-msgstr ""
+msgstr "損切り："
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:4
-#, fuzzy
 #| msgid "Net profit"
 msgid "Stop-profit:"
-msgstr "純利益"
+msgstr "利益ストップ："
 
 #: /home/git/translations/binary-static/src/templates/haml/static/tour.html.haml:1
 msgid "Study our live charts"
@@ -8083,6 +8081,8 @@ msgstr "口座振替はできません。口座へ <a href=\"%1\">入金</a> を
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:6
 msgid "The amount of profit/loss per point of rise/fall is multiplied by the amount per point. A large amount per point will result in large profits/losses per point of movement of the index."
 msgstr ""
+"アップ/ダウンのポイントごとの利益額/損失額は、1ポイントの金額を掛けたものになります。1ポイントが大きいとインデックスの動向のポイントごとの利益/損失も"
+"大きくなります。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:84
 msgid "The anti-money laundering processes have the following effects on Clients:"
@@ -8210,14 +8210,18 @@ msgstr "金融市場取引にアクセスする近道"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a long contract is 1001, which is entry spot + half spread. At exit, the spot is at 1100 and hence the exit level for a long contract is 1099, which is exit spot - half spread."
 msgstr ""
+"長期トレードのエントリーレベルが1001（始値 + スプレッドの半分）の場合、判定の際に値が1100であると長期トレードの判定レベルは1099です。（"
+"終値 - スプレッドの半分）"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a short contract is 999, which is entry spot - half spread. At exit, the spot is at 1100 and hence the exit level for a short contract is 1101, which is exit spot + half spread."
 msgstr ""
+"短期トレードのエントリーレベルが999（始値 - スプレッドの半分）の場合、判定の際に値が1100であると短期トレードの判定レベルは1101です。（終値 "
+"+ スプレッドの半分）"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry spot of an instrument XYZ is 1000 and the spread on this instrument is 2 points."
-msgstr ""
+msgstr "金融商品XYZの始値は1000で、この商品のスプレッドは2ポイントです。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The entry spot price is the starting price of the trade purchased by a trader."
@@ -8266,7 +8270,7 @@ msgstr "提供される保護レベルは、各クライアントに割り当て
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The loss of USD 306 is the difference between the exit and entry level multiplied by the amount per point."
-msgstr ""
+msgstr "USD306の損失は、判定レベルとエントリーレベルを1ポイントの金額で掛けた分の差額になります。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The market exit price is the price in effect at the end of the contract period."
@@ -8316,10 +8320,9 @@ msgid "The profit is the difference between the purchase price (the stake) and t
 msgstr "勝ちトレードの払い戻し金額と購入価格の差額が利益になります。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
-#, fuzzy
 #| msgid "The profit is the difference between the purchase price (the stake) and the payout on a winning trade."
 msgid "The profit of USD 294 is the difference between the exit and entry level multiplied by the amount per point."
-msgstr "勝ちトレードの払い戻し金額と購入価格の差額が利益になります。"
+msgstr "USD 294の利益は、判定レベルと開始レベルそれぞれをポイントごとの金額で掛け算した差額です。"
 
 #. ($currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1015
@@ -8368,6 +8371,8 @@ msgstr "購入価格とは、トレード開始のために支払わなければ
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:5
 msgid "The stop-loss and stop-profit are guaranteed. The loss and profit are limited to the stop-loss and stop-profit respectively.  When the exit level touches either the stop-loss or stop-profit, the contract will be closed at the stop-loss or stop-profit level."
 msgstr ""
+"損切りと利益ストップは保証されています。損失と利益はそれぞれ損切りと利益ストップに制限されています。判定レベルが損切りまたは利益ストップに到達した場合、損"
+"切りレベルまたは利益ストップレベルで閉鎖されます。"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:785
 msgid "The system is missing critical pricing information. Please try again in a few minutes, or try a different market."
@@ -8670,16 +8675,14 @@ msgid "This is an indicative barrier. Actual barrier will be the entry spot plus
 msgstr "このバリアは予想値です。実際のバリア値はスポット価格にバリア値を差し引いたものになります。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_loss.html.tt:18
-#, fuzzy
 #| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop loss. Actual stop loss will be the entry spot plus the stop loss point."
-msgstr "このバリアは予想値です。実際のバリア値はスポット価格にバリア値を差し引いたものになります。"
+msgstr "これは損切りを示しています。実際の損切りは始値と損切りポイントを足したものです。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/stop_profit.html.tt:18
-#, fuzzy
 #| msgid "This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset."
 msgid "This is an indicative stop profit. Actual stop profit will be the entry spot plus the stop profit point."
-msgstr "このバリアは予想値です。実際のバリア値はスポット価格にバリア値を差し引いたものになります。"
+msgstr "これは利益ストップを示しています。実際の利益ストップは始値と利益ストップポイントを足したものです。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
 msgid "This is another award we really savour. Trade2win is a portal for active traders seeking to profit from stocks, futures, options and forex, and these traders award us silver (we are just pipped for gold by Betfair). It means active traders worldwide rate our trading platform extremely highly."
@@ -9091,10 +9094,9 @@ msgstr "現在、トレードの提供を一時的に停止しております。
 
 #. ($self->underlying->translated_display_name)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:382
-#, fuzzy
 #| msgid "Trading is not offered for this duration."
 msgid "Trading on %1 is not offered for this contract type."
-msgstr "この取引期間のトレードは不可能です。"
+msgstr "%1でのこのタイプのトレードはできません。"
 
 #. ($underlying->translated_display_name()
 #. ($translated_name)
@@ -12621,10 +12623,9 @@ msgid "%1 <strong>%2</strong> payout if %3 <strong>stays between %7</strong> and
 msgstr "%3が%4後の%5まで常に正確に<strong>%7</strong>と<strong>%6の範囲内に存在している場合</strong>、%1 <strong>%2</strong>が払い戻されます。"
 
 #: Translation for contract type "SPREADD"
-#, fuzzy
 #| msgid "asian down"
 msgid "spread down"
-msgstr "asian down"
+msgstr "スプレッド ダウン"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12634,10 +12635,11 @@ msgstr "asian down"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - dollar)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr "%3の <strong>最後のtick</strong> が<strong>%5 tick</strong>の <strong>平均</strong> よりも正確に<strong>低い</strong>場合に、%1 <strong>%2</strong> のペイアウトが発生します。"
+msgstr ""
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
+"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12647,16 +12649,16 @@ msgstr "%3の <strong>最後のtick</strong> が<strong>%5 tick</strong>の <str
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr "%3の <strong>最後のtick</strong> が<strong>%5 tick</strong>の <strong>平均</strong> よりも正確に<strong>低い</strong>場合に、%1 <strong>%2</strong> のペイアウトが発生します。"
+msgstr ""
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
+"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #: Translation for contract type "SPREADU"
-#, fuzzy
 #| msgid "Spread"
 msgid "spread up"
-msgstr "Spread"
+msgstr "スプレッド アップ"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12666,10 +12668,11 @@ msgstr "Spread"
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - dollar)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
-msgstr "%3の <strong>最後のtick</strong> が<strong>%5 tick</strong>の <strong>平均</strong> よりも正確に<strong>低い</strong>場合に、%1 <strong>%2</strong> のペイアウトが発生します。"
+msgstr ""
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
+"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12679,10 +12682,11 @@ msgstr "%3の <strong>最後のtick</strong> が<strong>%5 tick</strong>の <str
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#, fuzzy
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
-msgstr "%3の <strong>最後のtick</strong> が<strong>%5 tick</strong>の <strong>平均</strong> よりも正確に<strong>低い</strong>場合に、%1 <strong>%2</strong> のペイアウトが発生します。"
+msgstr ""
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
+"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"
