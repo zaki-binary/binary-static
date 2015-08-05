@@ -5,7 +5,7 @@
 var market_nav_elm = document.getElementById('contract_market_nav');
 if (market_nav_elm) {
     market_nav_elm.addEventListener('click', function(e) {
-        if (e.target && e.target.nodeName == 'LI') {
+        if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('market', e.target.id);
             marketChangeEvent(e.target.id);
         }
@@ -24,7 +24,7 @@ var marketChangeEvent = function (market) {
 var form_nav_elm = document.getElementById('contract_form_name_nav');
 if (form_nav_elm) {
     form_nav_elm.addEventListener('click', function(e) {
-        if (e.target && e.target.nodeName == 'LI') {
+        if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('formname', e.target.id);
             contractFormEventChange(e.target.id);
         }
@@ -99,7 +99,7 @@ var expiry_type_elm = document.getElementById('expiry_type');
 if (expiry_type_elm) {
     expiry_type_elm.addEventListener('change', function(e) {
         durationPopulate();
-        if(e.target && e.target.value == 'endtime') {
+        if(e.target && e.target.value === 'endtime') {
             var current_moment = moment().add(5, 'minutes').utc();
             document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
             document.getElementById('expiry_time').value = current_moment.format('HH:mm');
@@ -126,7 +126,7 @@ if (amount_elm) {
 var date_start_elm = document.getElementById('date_start');
 if (date_start_elm) {
     date_start_elm.addEventListener('change', function (e) {
-        if (e.target && e.target.value == 'now') {
+        if (e.target && e.target.value === 'now') {
             displayDurations('spot');
         } else {
             displayDurations('forward');

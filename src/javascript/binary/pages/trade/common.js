@@ -19,7 +19,7 @@ var displayListElements = function (id, elements, selected) {
         var li = document.createElement('li'),
             content = document.createTextNode(element);
         li.setAttribute('id', element.toLowerCase());
-        if (selected && selected == element.toLowerCase()) {
+        if (selected && selected === element.toLowerCase()) {
             li.setAttribute('class', 'active');
         }
         li.appendChild(content);
@@ -44,7 +44,7 @@ var displayOptions = function (id, elements, selected) {
         if (elements.hasOwnProperty(key)){
             var option = document.createElement('option'), content = document.createTextNode(elements[key]);
             option.setAttribute('value', key);
-            if (selected && selected == key) {
+            if (selected && selected === key) {
                 option.setAttribute('selected', 'selected');
             }
             option.appendChild(content);
@@ -75,7 +75,7 @@ var displayUnderlyings = function (selected) {
             var option = document.createElement('option'), content = document.createTextNode(elements[key].display);
             option.setAttribute('value', key);
             option.setAttribute('class', elements[key].classname);
-            if (selected && selected == key) {
+            if (selected && selected === key) {
                 option.setAttribute('selected', 'selected');
             }
             option.appendChild(content);
@@ -94,13 +94,13 @@ var getFormNameBarrierCategory = function (displayFormName) {
     'use strict';
     var obj = {};
     if (displayFormName) {
-        if(displayFormName == 'risefall') {
+        if(displayFormName === 'risefall') {
             obj['formName'] = 'callput';
             obj['barrierCategory'] = 'euro_atm';
-        } else if (displayFormName == 'higherlower') {
+        } else if (displayFormName === 'higherlower') {
             obj['formName'] = 'callput';
             obj['barrierCategory'] = 'euro_non_atm';
-        } else if (displayFormName == 'callput'){
+        } else if (displayFormName === 'callput'){
             obj['formName'] = displayFormName;
             obj['barrierCategory'] = 'euro_atm';
         } else {

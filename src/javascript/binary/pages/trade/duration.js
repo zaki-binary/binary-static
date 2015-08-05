@@ -33,7 +33,7 @@ var displayDurations = function (startType) {
                     for (var type in obj) {
                         if (obj.hasOwnProperty(type)) {
                             if (startType) {
-                                if (startType == type) {
+                                if (startType === type) {
                                     if(!durationContainer.hasOwnProperty(startType)) {
                                         durationContainer[key] = obj[startType];
                                     }
@@ -55,7 +55,7 @@ var displayDurations = function (startType) {
             var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
 
             var option, content;
-            if (duration == 'intraday') {
+            if (duration === 'intraday') {
                 switch (textMapping['value']) {
                     case 's':
                         option = document.createElement('option');
@@ -108,14 +108,14 @@ var displayDurations = function (startType) {
                         fragment.appendChild(option);
                         break;
                 }
-            } else if (duration == 'daily') {
+            } else if (duration === 'daily') {
                 option = document.createElement('option');
                 content = document.createTextNode(textMapping['text']);
                 option.setAttribute('value', textMapping['value']);
                 option.setAttribute('data-minimum', textMapping['min']);
                 option.appendChild(content);
                 fragment.appendChild(option);
-            } else if (duration == 'tick') {
+            } else if (duration === 'tick') {
                 option = document.createElement('option');
                 content = document.createTextNode(textMapping['text']);
                 option.setAttribute('value', textMapping['value']);
@@ -177,7 +177,7 @@ var displayExpiryType = function (unit) {
 
     var current_selected = target.value || 'duration',
         id = current_selected,
-        hideId = (current_selected == 'duration') ? 'endtime' : 'duration';
+        hideId = (current_selected === 'duration') ? 'endtime' : 'duration';
 
     id = document.getElementById('expiry_type_' + id);
     if (id) {
@@ -197,17 +197,17 @@ var displayExpiryType = function (unit) {
         content = document.createTextNode('Durations');
 
     option.setAttribute('value', 'duration');
-    if (current_selected == 'duration') {
+    if (current_selected === 'duration') {
         option.setAttribute('selected', 'selected');
     }
     option.appendChild(content);
     fragment.appendChild(option);
 
-    if (unit != 't') {
+    if (unit !== 't') {
         option = document.createElement('option');
         content = document.createTextNode('End Time');
         option.setAttribute('value', 'endtime');
-        if (current_selected == 'endtime') {
+        if (current_selected === 'endtime') {
             option.setAttribute('selected', 'selected');
         }
         option.appendChild(content);

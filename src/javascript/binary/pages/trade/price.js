@@ -48,14 +48,14 @@ var Price = (function () {
             proposal['symbol'] = underlying.value;
         }
 
-        if (startTime && isVisible(startTime) && startTime.value != 'now') {
+        if (startTime && isVisible(startTime) && startTime.value !== 'now') {
             proposal['date_start'] = startTime.value;
         }
 
-        if (expiryType && expiryType.value == 'duration') {
+        if (expiryType && expiryType.value === 'duration') {
             proposal['duration'] = duration.value;
             proposal['duration_unit'] = durationUnit.value;
-        } else if (expiryType && expiryType.value == 'endtime') {
+        } else if (expiryType && expiryType.value === 'endtime') {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 

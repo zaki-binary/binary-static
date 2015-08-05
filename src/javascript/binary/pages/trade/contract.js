@@ -49,9 +49,9 @@ var Contract = (function () {
 
                 durations[currentObj['expiry_type']][currentObj['contract_category']][currentObj['barrier_category']][currentObj['start_type']]['min_contract_duration'] = currentObj['min_contract_duration'];
 
-                if(formName == currentObj['contract_category']) {
+                if(formName === currentObj['contract_category']) {
                     if (expiryType) {
-                        if (expiryType == currentObj['expiry_type']) {
+                        if (expiryType === currentObj['expiry_type']) {
                             contractsArray.push(currentObj);
                         }
                     } else {
@@ -60,20 +60,20 @@ var Contract = (function () {
                     sendAll = false;
                 }
 
-                if (currentObj.forward_starting_options && currentObj['start_type'] == 'forward') {
+                if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward') {
                     startDates = currentObj.forward_starting_options;
                 }
 
-                if (formName == currentObj['contract_category']) {
+                if (formName === currentObj['contract_category']) {
                     var barrier = {};
-                    if (currentObj.barriers == 1) {
+                    if (currentObj.barriers === 1) {
                         if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
                             barrier['count'] = 1;
                             barrier['barrier'] = currentObj['barrier'];
                             barrier['barrier_category'] = currentObj['barrier_category'];
                             barriers[formName] = barrier;
                         }
-                    } else if (currentObj.barriers == 2) {
+                    } else if (currentObj.barriers === 2) {
                         if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
                             barrier['count'] = 2;
                             barrier['barrier'] = currentObj['high_barrier'];
@@ -107,7 +107,7 @@ var Contract = (function () {
             if (barrierCategory) {
                 var j = contractsArray.length;
                 while (j--) {
-                    if (barrierCategory != contractsArray[j]['barrier_category']) {
+                    if (barrierCategory !== contractsArray[j]['barrier_category']) {
                         contractsArray.splice(j, 1);
                     }
                 }

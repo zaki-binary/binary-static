@@ -35,17 +35,17 @@ var Offerings = (function () {
         for (var i = 0, offlen = offerings.length; i < offlen; i++) {
             market = market || 'Forex';
             var mkt = offerings[i].market;
-            if (mkt == market) {
+            if (mkt === market) {
                 submarket_label:
                 for(var j = 0, sbmktlen = offerings[i].available.length; j < sbmktlen; j++) {
                     var loop_submarket = offerings[i].available[j].submarket;
-                    if (submarket && submarket != loop_submarket) {
+                    if (submarket && submarket !== loop_submarket) {
                         continue submarket_label;
                     }
                     underlying_label:
                     for (var k = 0, undrlylen = offerings[i].available[j].available.length; k < undrlylen; k++) {
                         var loop_underlying = offerings[i].available[j].available[k];
-                        if(underlying && underlying != loop_underlying.symbol) {
+                        if(underlying && underlying !== loop_underlying.symbol) {
                             continue underlying_label;
                         }
                         for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
@@ -56,14 +56,14 @@ var Offerings = (function () {
                                 for (var property in  offerings[i].available[j].available[k].available[l].available[m]) {
                                     if (offerings[i].available[j].available[k].available[l].available[m].hasOwnProperty(property)) {
                                         var prop_value = offerings[i].available[j].available[k].available[l].available[m][property];
-                                        if (property == 'barrier_category') {
+                                        if (property === 'barrier_category') {
                                             if (!barrierCategory) {
                                                 barrierCategory = prop_value;
                                                 isBarrierUndefinedRequired = true;
                                             }
                                             if (contractCategory && !contractCategories.hasOwnProperty(contractCategory)) {
-                                                if (contractCategory == 'callput') {
-                                                    if( prop_value == 'euro_atm') {
+                                                if (contractCategory === 'callput') {
+                                                    if( prop_value === 'euro_atm') {
                                                         contractCategories['risefall'] = 'risefall';
                                                     } else {
                                                         contractCategories['higherlower'] = 'higherlower';
@@ -73,7 +73,7 @@ var Offerings = (function () {
                                                 }
 
                                             }
-                                            if(formName == contractCategory && barrierCategory == prop_value) {
+                                            if(formName === contractCategory && barrierCategory === prop_value) {
                                                 var submarketId = loop_submarket.toLowerCase().replace(/ /g, '_');
                                                 submarketElements[submarketId] = loop_submarket;
                                                 underlyingElements[loop_underlying.symbol] = {
@@ -89,11 +89,11 @@ var Offerings = (function () {
                                 }
                             }
                         }
-                        if(underlying && underlying == loop_underlying.symbol) {
+                        if(underlying && underlying === loop_underlying.symbol) {
                             break underlying_label;
                         }
                     }
-                    if (submarket && submarket == loop_submarket) {
+                    if (submarket && submarket === loop_submarket) {
                         break submarket_label;
                     }
                 }

@@ -13,7 +13,7 @@ function displayBarriers (barrierCategory) {
     if (barriers && formName) {
         var barrier = barriers[formName];
         if(barrier) {
-            if (barrier.count == 1) {
+            if (barrier.count === 1) {
                 document.getElementById('high_barrier_row').style.display = 'none';
                 document.getElementById('low_barrier_row').style.display = 'none';
                 document.getElementById('barrier_row').setAttribute('style', '');
@@ -22,7 +22,7 @@ function displayBarriers (barrierCategory) {
                 elm.value = barrier.barrier;
                 elm.textContent = barrier.barrier;
                 return;
-            } else if (barrier.count == 2) {
+            } else if (barrier.count === 2) {
                 document.getElementById('barrier_row').style.display = 'none';
                 document.getElementById('high_barrier_row').setAttribute('style', '');
                 document.getElementById('low_barrier_row').setAttribute('style', '');

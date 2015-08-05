@@ -11,15 +11,15 @@ var Message = (function () {
         if (response) {
             var type = response.msg_type;
 
-            if (type == 'offerings') {
+            if (type === 'offerings') {
                 var market = sessionStorage.getItem('market') || 'Random';
                 processMarketOfferings(response, market);
-            } else if (type == 'contracts') {
+            } else if (type === 'contracts') {
                 processContractFormOfferings(response);
-            } else if (type == 'payout_currencies') {
+            } else if (type === 'payout_currencies') {
                 displayCurrencies(response);
                 processPriceRequest();
-            } else if (type == 'proposal') {
+            } else if (type === 'proposal') {
                 Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
             }
         } else {
