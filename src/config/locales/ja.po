@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-08-05 22:24+0200\n"
+"PO-Revision-Date: 2015-08-05 22:29+0200\n"
 "Last-Translator: Haruna Sekiya <hrnmyrn@gmail.com>\n"
 "Language-Team: Japanese "
 "<https://hosted.weblate.org/projects/binary/static/ja/>\n"
@@ -3233,7 +3233,7 @@ msgstr "メールアドレスを入力"
 #: /home/git/translations/binary-static/src/templates/toolkit/portfolio/analyse_spread_contract.html.tt:14
 #| msgid "Entry time"
 msgid "Entry Level"
-msgstr "開始レベル"
+msgstr "エントリーレベル"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:113
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:481
@@ -3512,8 +3512,8 @@ msgstr "外国為替：外国為替市場は、取引所を介さずに主要な
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/spreads.html.tt:3
 msgid "For long contracts, the entry level is the spot plus half spread and the exit level is spot minus half spread. For short contracts, the entry level is spot minus half spread and the exit level is spot plus half spread."
 msgstr ""
-"長期トレードにおいて、開始レベルはスポットにスプレッドの半分を足し、判定レベルはスポットからスプレッドの半分を引きます。短期トレードにおいては、開始レベル"
-"はスポットから半分のスプレッドを引き、判定レベルはスポットにスプレッドの半分を足します。"
+"ロングトレードにおいて、エントリーレベルは値にスプレッドの半分を足し、判定レベルは値からスプレッドの半分を引きます。ショートトレードにおいては、エントリー"
+"レベルは値から半分のスプレッドを引き、判定レベルは値にスプレッドの半分を足します。"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/devguide.html.haml:1
 msgid "For more information about calling Websocket services see"
@@ -7348,7 +7348,7 @@ msgstr "Spread"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/spreads.html.tt:1
 msgid "Spread contracts payout based on the movement of the index relative to the entry level of the contract."
-msgstr "スプレッドトレードのペイアウトは、契約の開始レベルと相対的なインデックスの動きに基づいています。"
+msgstr "スプレッドトレードのペイアウトは、契約のエントリーレベルと相対的なインデックスの動きに基づいています。"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
@@ -8210,14 +8210,14 @@ msgstr "金融市場取引にアクセスする近道"
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a long contract is 1001, which is entry spot + half spread. At exit, the spot is at 1100 and hence the exit level for a long contract is 1099, which is exit spot - half spread."
 msgstr ""
-"長期トレードのエントリーレベルが1001（始値 + スプレッドの半分）の場合、判定の際に値が1100であると長期トレードの判定レベルは1099です。（"
+"ロングトレードのエントリーレベルが1001（始値 + スプレッドの半分）の場合、判定の際に値が1100であるとロングトレードの判定レベルは1099です。（"
 "終値 - スプレッドの半分）"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry level for a short contract is 999, which is entry spot - half spread. At exit, the spot is at 1100 and hence the exit level for a short contract is 1101, which is exit spot + half spread."
 msgstr ""
-"短期トレードのエントリーレベルが999（始値 - スプレッドの半分）の場合、判定の際に値が1100であると短期トレードの判定レベルは1101です。（終値 "
-"+ スプレッドの半分）"
+"ショートトレードのエントリーレベルが999（始値 - "
+"スプレッドの半分）の場合、判定の際に値が1100であるとショートトレードの判定レベルは1101です。（終値 + スプレッドの半分）"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "The entry spot of an instrument XYZ is 1000 and the spread on this instrument is 2 points."
@@ -8322,7 +8322,7 @@ msgstr "勝ちトレードの払い戻し金額と購入価格の差額が利益
 #: /home/git/translations/binary-static/src/templates/haml/get_started/spread_bets.html.haml:1
 #| msgid "The profit is the difference between the purchase price (the stake) and the payout on a winning trade."
 msgid "The profit of USD 294 is the difference between the exit and entry level multiplied by the amount per point."
-msgstr "USD 294の利益は、判定レベルと開始レベルそれぞれをポイントごとの金額で掛け算した差額です。"
+msgstr "USD 294の利益は、判定レベルとエントリーレベルのそれぞれをポイントごとの金額で掛け算した差額です。"
 
 #. ($currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1015
@@ -12638,8 +12638,8 @@ msgstr "スプレッド ダウン"
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgstr ""
-"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
-"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します"
+"。損切りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12652,8 +12652,8 @@ msgstr ""
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
 msgstr ""
-"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
-"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します"
+"。損切りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #: Translation for contract type "SPREADU"
 #| msgid "Spread"
@@ -12671,8 +12671,8 @@ msgstr "スプレッド アップ"
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgstr ""
-"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
-"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します"
+"。損切りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12685,8 +12685,8 @@ msgstr ""
 #| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
 msgstr ""
-"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>開始レベル</strong>より降下します。損切"
-"りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します"
+"。損切りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"
