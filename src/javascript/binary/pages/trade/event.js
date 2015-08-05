@@ -43,7 +43,7 @@ var contractFormEventChange = function (formName) {
 
     // change only submarkets and underlyings as per formName change
     displayOptions('submarket',Offerings.submarkets());
-    displayOptions('underlying', Offerings.underlyings());
+    displayUnderlyings();
 
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
