@@ -1,4 +1,4 @@
-var Trade = (function () {
+var Offerings = (function () {
     'use strict';
 
     var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;

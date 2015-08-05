@@ -11,12 +11,12 @@ var Message = (function () {
                 var market = sessionStorage.getItem('market') || 'Random';
                 processMarketOfferings(response, market);
             } else if (type == 'contracts') {
-                processContractFormOfferings(response, Trade.form());
+                processContractFormOfferings(response, Offerings.form());
             } else if (type == 'payout_currencies') {
                 displayCurrencies(response);
                 processPriceRequest();
             } else if (type == 'proposal') {
-                Price.display(response, Contract.contractType()[Trade.form()], document.getElementById('spot'));
+                Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
             }
         } else {
             console.log('some error occured');

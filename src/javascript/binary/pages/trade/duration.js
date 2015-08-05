@@ -3,8 +3,8 @@ var displayDurations = function (startType) {
 
     var target= document.getElementById('duration_units'),
         durations = Contract.durations(),
-        formName = Trade.form(),
-        barrierCategory = Trade.barrier(),
+        formName = Offerings.form(),
+        barrierCategory = Offerings.barrier(),
         fragment =  document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {

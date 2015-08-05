@@ -4,14 +4,14 @@
 var processMarketOfferings = function (offerings, market) {
     'use strict';
 
-    // populate the Trade object
-    Trade.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
+    // populate the Offerings object
+    Offerings.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
 
     // display markets, submarket, underlyings corresponding to market selected
-    displayListElements('contract_market_nav', Trade.markets());
-    displayListElements('contract_form_name_nav', Object.keys(Trade.contractForms()));
-    displayOptions('submarket',Trade.submarkets());
-    displayOptions('underlying', Trade.underlyings());
+    displayListElements('contract_market_nav', Offerings.markets());
+    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()));
+    displayOptions('submarket',Offerings.submarkets());
+    displayOptions('underlying', Offerings.underlyings());
 
     // get the underlying selected
     var underlying = document.getElementById('underlying').value;
@@ -24,14 +24,14 @@ var processMarketOfferings = function (offerings, market) {
 var processContractFormOfferings = function (contracts) {
     'use strict';
 
-    Contract.details(contracts, Trade.form(), Trade.barrier());
+    Contract.details(contracts, Offerings.form(), Offerings.barrier());
 
     displayDurations();
 
     durationPopulate();
 
     displayStartDates('date_start', Contract.startDates());
-    displayBarriers(Contract.barriers(), Trade.form());
+    displayBarriers(Contract.barriers(), Offerings.form());
 
     TradeSocket.send({ payout_currencies: 1 });
 };
@@ -49,8 +49,8 @@ var processPriceRequest = function () {
 
     processForgetPriceIds();
     Price.clearMapping();
-    for (var typeOfContract in Contract.contractType()[Trade.form()]) {
-        if(Contract.contractType()[Trade.form()].hasOwnProperty(typeOfContract)) {
+    for (var typeOfContract in Contract.contractType()[Offerings.form()]) {
+        if(Contract.contractType()[Offerings.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }

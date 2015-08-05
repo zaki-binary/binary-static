@@ -14,7 +14,7 @@ if (market_nav_elm) {
 
 var marketChangeEvent = function (market) {
     'use strict';
-    processMarketOfferings(Trade.offerings(), market);
+    processMarketOfferings(Offerings.offerings(), market);
 };
 
 /*
@@ -39,11 +39,11 @@ var contractFormEventChange = function (formName) {
     market = market.charAt(0).toUpperCase() + market.substring(1);
 
     // pass the original offerings as we don't want to request offerings again and again
-    Trade.details(Trade.offerings(), market, formName);
+    Offerings.details(Offerings.offerings(), market, formName);
 
     // change only submarkets and underlyings as per formName change
-    displayOptions('submarket',Trade.submarkets());
-    displayOptions('underlying', Trade.underlyings());
+    displayOptions('submarket',Offerings.submarkets());
+    displayOptions('underlying', Offerings.underlyings());
 
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
