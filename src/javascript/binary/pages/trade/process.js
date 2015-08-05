@@ -8,7 +8,7 @@ var processMarketOfferings = function (offerings, market) {
     displayListElements('contract_market_nav', Offerings.markets());
     displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()));
     displayOptions('submarket',Offerings.submarkets());
-    displayOptions('underlying', Offerings.underlyings());
+    displayUnderlyings();
 
     // get the underlying selected
     var underlying = document.getElementById('underlying').value;

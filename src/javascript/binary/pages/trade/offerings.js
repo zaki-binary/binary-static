@@ -74,8 +74,12 @@ var Offerings = (function () {
 
                                             }
                                             if(formName == contractCategory && barrierCategory == prop_value) {
-                                                submarketElements[loop_submarket.toLowerCase().replace(/ /g, '_')] = loop_submarket;
-                                                underlyingElements[loop_underlying.symbol] = loop_underlying.symbol_display;
+                                                var submarketId = loop_submarket.toLowerCase().replace(/ /g, '_');
+                                                submarketElements[submarketId] = loop_submarket;
+                                                underlyingElements[loop_underlying.symbol] = {
+                                                    display: loop_underlying.symbol_display,
+                                                    classname: submarketId
+                                                };
                                             }
                                             if (isBarrierUndefinedRequired) {
                                                 barrierCategory = undefined;
