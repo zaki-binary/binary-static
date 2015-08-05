@@ -1,3 +1,9 @@
+/*
+ * Handles barrier processing and display
+ *
+ * It process `Contract.barriers` and display them if its applicable
+ * for current `Offerings.form()
+ */
 function displayBarriers (barrierCategory) {
     'use strict';
 
@@ -33,8 +39,6 @@ function displayBarriers (barrierCategory) {
         }
     }
 
-    // as these are node elements so they can't be iterated through forEach
-    // using normal for loop here
     var elements = document.getElementsByClassName('barrier_class');
     for (var i = 0; i < elements.length; i++){
         elements[i].style.display = 'none';

@@ -1,3 +1,7 @@
+/*
+ * This Message object process the response from server and fire
+ * events based on type of response
+ */
 var Message = (function () {
     'use strict';
 

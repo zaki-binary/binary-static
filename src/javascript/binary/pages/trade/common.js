@@ -1,3 +1,10 @@
+/*
+ * This contains common functions we need for processing the respinse
+ */
+
+/*
+ * function to create list elements `<li>` and append to element with id `id`
+ */
 var displayListElements = function (id, elements, selected) {
     'use strict';
     var target = document.getElementById(id),
@@ -21,6 +28,9 @@ var displayListElements = function (id, elements, selected) {
     target.appendChild(fragment);
 };
 
+/*
+ * function to create `option` and append to select box with id `id`
+ */
 var displayOptions = function (id, elements, selected) {
     'use strict';
     var target= document.getElementById(id),
@@ -44,6 +54,11 @@ var displayOptions = function (id, elements, selected) {
     target.appendChild(fragment);
 };
 
+/*
+ * This maps the form name and barrierCategory we display on
+ * trading form to the actual we send it to backend
+ * for e.g risefall is mapped to callput with barrierCategory euro_atm
+ */
 var getFormNameBarrierCategory = function (displayFormName) {
     'use strict';
     var obj = {};
@@ -68,6 +83,13 @@ var getFormNameBarrierCategory = function (displayFormName) {
     return obj;
 };
 
+/*
+ * This maps the contract type to where we display on trading form
+ * and as there is no mapping on server side so need to create it
+ * on front end
+ *
+ * for example we display CALL on top and PUT to bottom
+ */
 var contractTypeDisplayMapping = function (type) {
     'use strict';
     var obj = {
@@ -88,6 +110,12 @@ var contractTypeDisplayMapping = function (type) {
     return type ? obj[type] : 'top';
 };
 
+
+/*
+ * sub to check if element is visible or not
+ *
+ * alternative to jquery $('#id').is(':visible')
+ */
 var isVisible = function (elem) {
     if (elem.offsetWidth === 0 && elem.offsetHeight === 0) {
         return false;

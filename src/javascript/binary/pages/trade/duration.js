@@ -1,3 +1,12 @@
+/*
+ * Handles duration processing display
+ *
+ * It process `Contract.durations()` and display them according to
+ * the current `Offerings.form()` and `Offerings.barriers()`
+ *
+ * It also populate expiry type select box i.e Durations and Endtime select
+ *
+ */
 var displayDurations = function (startType) {
     'use strict';
 

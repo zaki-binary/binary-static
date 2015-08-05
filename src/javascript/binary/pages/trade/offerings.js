@@ -1,3 +1,18 @@
+/*
+ * Offerings object parses the offerings json that we get from socket.send({offerings: {hierachy :1 ...}}
+ * and outputs in usable form, like it gives markets, submarkets, underlyings, contractForms
+ *
+ *
+ * Usage:
+ *
+ * use `Offerings.details` to populate this object first
+ *
+ * then use
+ *
+ * `Offerings.markets` to get markets like Forex, Random etc
+ * `Offerings.contractForms` like risefall, higherlower
+ *
+ */
 var Offerings = (function () {
     'use strict';
 

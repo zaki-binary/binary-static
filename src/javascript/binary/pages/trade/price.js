@@ -1,3 +1,16 @@
+/*
+ * Price object handles all the functions we need to display prices
+ *
+ * We create Price proposal that we need to send to server to get price,
+ * longcode and all other information that we need to get the price for
+ * current contract
+ *
+ *
+ * Usage:
+ *
+ * `socket.send(Price.createProposal())` to send price proposal to sever
+ * `Price.display()` to display the price details returned from server
+ */
 var Price = (function () {
     'use strict';
 

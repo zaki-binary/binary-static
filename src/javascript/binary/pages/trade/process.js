@@ -1,6 +1,3 @@
-/*
- *
- */
 var processMarketOfferings = function (offerings, market) {
     'use strict';
 

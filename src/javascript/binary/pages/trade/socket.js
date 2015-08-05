@@ -1,3 +1,15 @@
+/*
+ * It provides a abstraction layer over native javascript Websocket.
+ *
+ * Provide additional functionality like if connection is close, open
+ * it again and process the buffered requests
+ *
+ *
+ * Usage:
+ *
+ * `TradeSocket.init()` to initiate the connection
+ * `TradeSocket.send({contracts_for : 1})` to send message to server
+ */
 var TradeSocket = (function () {
     'use strict';
 
@@ -23,10 +35,10 @@ var TradeSocket = (function () {
         }
     };
 
-    var init = function (token) {
+    var init = function () {
         tradeSocket = new WebSocket(socketUrl);
 
-        tradeSocket.onopen = function (token){
+        tradeSocket.onopen = function (){
             sendBufferedSends();
         };
 

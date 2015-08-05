@@ -1,3 +1,19 @@
+/*
+ * Contract object mocks the trading form we have on our website
+ * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
+ * and gives back barriers, startDate, durations etc
+ *
+ *
+ * Usage:
+ *
+ * use `Contract.details` to populate this object
+ *
+ * then use
+ *
+ * `Contract.durations()` to get durations like seconds, hours etc
+ * `Contract.open()` `Contract.close()`
+ * `Contract.barriers` if applicable for current underlying
+ */
 var Contract = (function () {
     'use strict';
 

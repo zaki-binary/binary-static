@@ -1,7 +1,13 @@
+/*
+ * Handles currency display
+ *
+ * It process 'socket.send({payout_currencies:1})` response
+ * and display them
+ */
 var displayCurrencies = function (input, selected) {
     'use strict';
 
-    var target= document.querySelector('#currency'),
+    var target = document.getElementById('currency'),
         fragment =  document.createDocumentFragment(),
         currencies = input['payout_currencies'];
 

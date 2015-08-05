@@ -1,9 +1,18 @@
+/*
+ * Handles start time display
+ *
+ * It process `Contract.startDates` in case of forward
+ * starting contracts and populate the start time select
+ * box
+ */
+
 function compareStartDate(a,b) {
-  if (a.date < b.date)
-    return -1;
-  if (a.date > b.date)
-    return 1;
-  return 0;
+    'use strict';
+    if (a.date < b.date)
+        return -1;
+    if (a.date > b.date)
+        return 1;
+    return 0;
 }
 
 function displayStartDates() {
