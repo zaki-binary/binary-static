@@ -62,7 +62,7 @@ if (underlying_elm) {
             sessionStorage.setItem('underlying', e.target.value);
             underlyingEventChange(e.target.value);
         }
-});
+    });
 }
 
 var underlyingEventChange = function (underlying) {
@@ -71,7 +71,7 @@ var underlyingEventChange = function (underlying) {
 };
 
 /*
- * bind event to change in duration amount, request price
+ * bind event to change in duration amount, request new price
  */
 var duration_amount_elm = document.getElementById('duration_amount');
 if (duration_amount_elm) {
@@ -92,7 +92,8 @@ if (duration_unit_elm) {
 }
 
 /*
- * attach event to expiry time change, event need to request new price
+ * attach event to expiry time change, event need to populate duration
+ * and request new price
  */
 var expiry_type_elm = document.getElementById('expiry_type');
 if (expiry_type_elm) {
@@ -117,6 +118,11 @@ if (amount_elm) {
     });
 }
 
+/*
+ * attach event to start time, display duration based on
+ * whether start time is forward starting or not and request
+ * new price
+ */
 var date_start_elm = document.getElementById('date_start');
 if (date_start_elm) {
     date_start_elm.addEventListener('change', function (e) {
@@ -129,9 +135,41 @@ if (date_start_elm) {
     });
 }
 
+/*
+ * attach event to change in amount type that is whether its
+ * payout or stake and request new price
+ */
 var amount_type_elm = document.getElementById('amount_type');
 if (amount_type_elm) {
     amount_type_elm.addEventListener('change', function (e) {
         processPriceRequest();
+    });
+}
+
+/*
+ * attach event to change in submarkets. We need to disable
+ * underlyings that are not in selected seubmarkets
+ */
+var submarket_elm = document.getElementById('submarket');
+if (submarket_elm) {
+    submarket_elm.addEventListener('change', function (e) {
+        if (e.target) {
+            var elem = document.getElementById('underlying');
+            var underlyings = elem.children;
+
+            for (var i = 0, len = underlyings.length; i < len; i++ ) {
+                if (e.target.value !== 'all' && e.target.value !== underlyings[i].className) {
+                    underlyings[i].disabled = true;
+                } else {
+                    underlyings[i].disabled = false;
+                }
+            }
+
+            // as submarket change has modified the underlying list so we need to manually
+            // fire change event for underlying
+            document.querySelectorAll('#underlying option:enabled')[0].selected = 'selected';
+            var event = new Event('change');
+            elem.dispatchEvent(event);
+        }
     });
 }
