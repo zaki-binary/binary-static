@@ -5,7 +5,7 @@ var processMarketOfferings = function (offerings, market) {
     Offerings.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
 
     // display markets, submarket, underlyings corresponding to market selected
-    displayListElements('contract_market_nav', Offerings.markets());
+    displayListElements('contract_market_nav', Offerings.markets(), market);
     displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()));
     displayOptions('submarket',Offerings.submarkets());
     displayUnderlyings();

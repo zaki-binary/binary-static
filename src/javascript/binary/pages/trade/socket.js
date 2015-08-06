@@ -14,7 +14,7 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://www.devbin.io/websockets/contracts",
+        socketUrl = "wss://ws.binary.com/websockets/contracts",
         bufferedSends = [];
 
     var status = function () {
