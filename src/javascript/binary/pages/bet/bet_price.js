@@ -255,8 +255,8 @@ var BetPrice = function() {
 
                     var con = that.spread_con();
                     if (typeof(resp.error) !== 'undefined') {
-                        that.err_con.find('p').text(resp.error);
-                        that.err_con.show();
+                        that.err_con().find('p').text(resp.error);
+                        that.err_con().show();
                     } else {
                         var color = resp.value.dollar > 0 ? 'profit' : 'loss';
                         con.find('#status').text(text.localize('Closed')).addClass(color);
