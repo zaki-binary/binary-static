@@ -78,14 +78,13 @@
               %p.heading= l("[_1]'s REST API conforms to the Representational State Transfer (REST) model.", stash->{website_name})
             .grd-grid-8.grd-grid-mobile-12
               %div#rest-main
+                %p= l('Calls which invoke the API are simple, recognizable and can be negotiated from all popular web programming technologies in use today.')
+                %p= l('For example, to get a list of "marketplaces" currently available at [_1]:',  stash->{website_name})
                 %p
-                  %div= l('Calls which invoke the API are simple, recognizable and can be negotiated from all popular web programming technologies in use today.')
+                  %strong= 'GET /markets'
+                %p= l('To get a summary of currently tradeable market symbols in the "forex" market:')
                 %p
-                  %div= l('For example, to get a list of "marketplaces" currently available at [_1]:',  stash->{website_name})
-                  %div= 'GET /markets'
-                %p
-                  %div= l('To get a summary of currently tradeable market symbols in the "forex" market:')
-                  %div= 'GET /markets/forex'
+                  %strong= 'GET /markets/forex'
             .grd-grid-4.grd-grid-mobile-12
               %img.responsive{:src => url_for('images/pages/partnerapi/rest.svg')}
             .grd-grid-12
