@@ -250,6 +250,14 @@ var BetPrice = function() {
                     }));
                     $('.price_box').fadeTo(200, 0.6);
                 },
+                on_sell_error: function(form, resp, resp_status, jqXHR) {
+                    var that = this;
+
+                    if (typeof(resp.error) !== 'undefined') {
+                        that.err_con().find('p').text(resp.error);
+                        that.err_con().show();
+                    }
+                },
                 on_sell_success: function(form, resp, resp_status, jqXHR) {
                     var that = this;
 
