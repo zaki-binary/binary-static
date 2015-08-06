@@ -83,7 +83,7 @@ var Price = (function () {
         }
 
         var position = contractTypeDisplayMapping(type),
-            display = contractType[type],
+            display = type ? contractType[type] : '',
             container = document.getElementById('price_container_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position);
@@ -92,7 +92,9 @@ var Price = (function () {
             description_container.removeChild(description_container.firstChild);
         }
 
-        h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
+        if (display) {
+            h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
+        }
         h4.setAttribute('id', 'contract_heading_' + position);
 
         description.setAttribute('class', 'contract_description big-col');
