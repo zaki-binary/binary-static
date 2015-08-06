@@ -92,7 +92,7 @@ var Price = (function () {
             description_container.removeChild(description_container.firstChild);
         }
 
-        h4.setAttribute('class', 'contract_heading ' + display);
+        h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
         h4.setAttribute('id', 'contract_heading_' + position);
 
         description.setAttribute('class', 'contract_description big-col');
@@ -111,8 +111,10 @@ var Price = (function () {
             fragment.appendChild(row);
         } else {
             var amount = document.createElement('div'),
-                priceId = document.createElement('input'),
-                currency = document.getElementById('currency');
+                currency = document.getElementById('currency'),
+                priceId = document.getElementById('purchase_button_' + position);
+
+            purchase.style.display = 'block';
 
             amount.setAttribute('class', 'contract_amount col');
             amount.setAttribute('id', 'contract_amount_' + position);
@@ -124,14 +126,10 @@ var Price = (function () {
             description.appendChild(content);
 
             // create unique id object that is send in response
-            priceId.setAttribute('name', 'contract_price_id');
-            priceId.setAttribute('class', 'contract_price_id');
-            priceId.setAttribute('type', 'hidden');
-            priceId.setAttribute('id', proposal['id']);
+            priceId.setAttribute('data-purchase-id', proposal['id']);
 
             row.appendChild(amount);
             row.appendChild(description);
-            row.appendChild(priceId);
 
             fragment.appendChild(row);
 
