@@ -34,7 +34,16 @@ var disable_residence = function () {
 
 var enable_residence_form_submit = function () {
     $('form#openAccForm').submit(function (event) {
-        $('#residence').removeAttr('disabled');
+        var field_error = false;
+        $("form#openAccForm").find('p.errorfield:visible').each(function() {
+            if ($(this).text().length > 0) {
+                field_error = true;
+                return false;
+            }
+        });
+        if (!field_error) {
+            $('#residence').removeAttr('disabled');
+        }
     });
 };
 
@@ -65,12 +74,21 @@ var upgrade_investment_disabled_field = function () {
 var financial_enable_fields_form_submit = function () {
     var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
     $('form#openAccForm').submit(function (event) {
-        fields.forEach(function (element, index, array) {
-            var obj = $('#'+element);
-            if (obj.length > 0) {
-                obj.removeAttr('disabled');
+        var field_error = false;
+        $("form#openAccForm").find('p.errorfield:visible').each(function() {
+            if ($(this).text().length > 0) {
+                field_error = true;
+                return false;
             }
         });
+        if (!field_error) {
+            fields.forEach(function (element, index, array) {
+                var obj = $('#'+element);
+                if (obj.length > 0) {
+                    obj.removeAttr('disabled');
+                }
+            });
+        }
     });
 };
 
