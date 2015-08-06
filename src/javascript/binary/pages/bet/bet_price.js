@@ -220,6 +220,7 @@ var BetPrice = function() {
                         }
                         var target = $(e.target);
                         BetSell.model.reload_page_on_close(true);
+                        that.spread_con().find('#sell_level').parent().hide();
                         that.sell_bet(target);
                         return false;
                     }).addClass('unbind_later');
