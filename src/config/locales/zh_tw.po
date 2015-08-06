@@ -7,9 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-08-04 11:38+0200\n"
+"PO-Revision-Date: 2015-08-06 09:54+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) <https://hosted.weblate.org/projects/binary/static/zh_TW/>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://hosted.weblate.org/projects/binary/static/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -319,7 +320,7 @@ msgstr "%ctx（如果您仰望天空）您會看到%plural(%1,一顆星星, %d �
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:523
 msgid "%ctx(the return of investment of a contract)Return"
-msgstr ""
+msgstr "%ctx(投資合約的回報)回報"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "&#8220;Binary.com is one of the oldest and trustworthy partners we ever had. We have worked together for many years.&#8221;"
@@ -2328,10 +2329,9 @@ msgid "Confirm"
 msgstr "確認"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3991
-#, fuzzy
 #| msgid "Enter your email"
 msgid "Confirm Your Email"
-msgstr "請輸入您的電子郵件"
+msgstr "請確定您的電子郵件"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/conflicts_policy.html.tt:2
 msgid "Conflicts Policy"
@@ -2888,10 +2888,9 @@ msgstr "存入支付代理"
 
 #. ($bet->currency, to_monetary_number_format($bet->ask_price)
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:477
-#, fuzzy
 #| msgid "Deposit of %1 %2 is required. Current spread: %3 points"
 msgid "Deposit of %1 %2 is required. Current spread: %plural(%3,%d point,%d points)"
-msgstr "需要%1 %2 訂金。目前價差：%3點"
+msgstr "需要%1 %2 訂金。目前價差：%複數(%3,%d 點,%d 點)"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet."
@@ -4408,10 +4407,9 @@ msgstr "無效期限輸入！請輸入在 0 和 #1 之間的期限"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:758
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:781
-#, fuzzy
 #| msgid "Invalid Input"
 msgid "Invalid request"
-msgstr "無效輸入"
+msgstr "無效請求"
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1895
 msgid "Invalid stake"
@@ -8700,10 +8698,9 @@ msgstr "此市場目前已收市。"
 
 #. (request()
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:386
-#, fuzzy
 #| msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
 msgid "This market is presently closed. <a href='%1'>View Trading Times</a> or try out the <a href='%2'>Random Indices</a> which are always open."
-msgstr "或者嘗試始終開放的<a href='%1'>隨機指數</a>。"
+msgstr "目前此市場已經關閉。 <a href='%1'>檢視交易時間</a> 或者嘗試始終開放的<a href='%2'>隨機指數</a>。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/market_warning.html.tt:8
 msgid "This market opens late today at"
@@ -8736,10 +8733,9 @@ msgid "This offer cannot be used in conjunction with any other offer."
 msgstr "本優惠不能和其他任何優惠一起使用。"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:297
-#, fuzzy
 #| msgid "This page is unavailable for your scope."
 msgid "This page is unavailable."
-msgstr "您的交易範圍不可使用此頁面。"
+msgstr "此頁面不可使用。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:49
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
@@ -12616,10 +12612,11 @@ msgstr "%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</st
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#, fuzzy
 #| msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>[plural,_4,%d point,%d points]</strong> and stop profit of <strong>[plural,_5,%d point,%d points]</strong>."
-msgstr "%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損為<strong>%6 %4</strong>，止盈為<strong>%6 %5</strong>。"
+msgstr ""
+"%3入市價位<strong>每下降一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損"
+"為<strong>[複數,_4,%d 點,%d 點]</strong>，止盈為<strong>[複數,_5,%d 點,%d 點]</strong>。"
 
 #: Translation for contract type "SPREADU"
 msgid "spread up"
@@ -12644,10 +12641,11 @@ msgstr "%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</st
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#, fuzzy
 #| msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>[plural,_4,%d point,%d points]</strong> and stop profit of <strong>[plural,_5,%d point,%d points]</strong>."
-msgstr "%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損為<strong>%6 %4</strong>，止盈為<strong>%6 %5</strong>。"
+msgstr ""
+"%3入市價位<strong>每上漲一點</strong>即可獲得<strong>%1</strong><strong>%2</strong>賠付額，而止損"
+"為<strong>[複數,_4,%d 點,%d 點]</strong>，止盈為<strong>[複數,_5,%d 點,%d 點]</strong>。"
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"
