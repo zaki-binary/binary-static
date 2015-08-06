@@ -193,9 +193,9 @@ var BetPrice = function() {
             var that = this;
             return {
                 reset: function() {
-                    var that = this;
-                    if (typeof that._stream !== 'undefined') {
-                        that._stream.close();
+                    if (typeof this._stream !== 'undefined') {
+                        this._stream.close();
+                        this._stream.onmessage = function() {};
                     }
                 },
                 validate_change: function(target) {
