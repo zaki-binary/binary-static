@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-08-06 09:17+0200\n"
-"Last-Translator: Yasushi Takeishi <takeishi@regentmarkets.com>\n"
+"PO-Revision-Date: 2015-08-06 20:19+0200\n"
+"Last-Translator: Haruna Sekiya <hrnmyrn@gmail.com>\n"
 "Language-Team: Japanese "
 "<https://hosted.weblate.org/projects/binary/static/ja/>\n"
 "Language: ja\n"
@@ -322,7 +322,7 @@ msgstr "%ctx(If you look in the sky)You will see %plural(%1,one star, %d stars).
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:523
 msgid "%ctx(the return of investment of a contract)Return"
-msgstr ""
+msgstr "%ctx(取引投資のリターン)リターン"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "&#8220;Binary.com is one of the oldest and trustworthy partners we ever had. We have worked together for many years.&#8221;"
@@ -2333,10 +2333,9 @@ msgid "Confirm"
 msgstr "決定"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3991
-#, fuzzy
 #| msgid "Your Email:"
 msgid "Confirm Your Email"
-msgstr "お客様のメールアドレス："
+msgstr "メールアドレスをご確認ください。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/conflicts_policy.html.tt:2
 msgid "Conflicts Policy"
@@ -2891,10 +2890,9 @@ msgstr "決済代行会社を利用して入金"
 
 #. ($bet->currency, to_monetary_number_format($bet->ask_price)
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:477
-#, fuzzy
 #| msgid "Deposit of %1 %2 is required. Current spread: %3 points"
 msgid "Deposit of %1 %2 is required. Current spread: %plural(%3,%d point,%d points)"
-msgstr "%1 %2のご入金が必要です。現在のスプレッド：%3ポイント"
+msgstr "%1 %2のご入金が必要です。現在のスプレッド：%plural(%3,%d ポイント,%d ポイント)"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet."
@@ -4411,10 +4409,9 @@ msgstr "期間の指定が不適切です。期間は0と#1の間でご指定下
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:758
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:781
-#, fuzzy
 #| msgid "Invalid Input"
 msgid "Invalid request"
-msgstr "入力値が不適切です"
+msgstr "無効なリクエストです"
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1895
 msgid "Invalid stake"
@@ -8705,10 +8702,11 @@ msgstr "この市場は現在閉場しております。"
 
 #. (request()
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:386
-#, fuzzy
 #| msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
 msgid "This market is presently closed. <a href='%1'>View Trading Times</a> or try out the <a href='%2'>Random Indices</a> which are always open."
-msgstr "または常にオープンの <a href='%1'>ランダムインデックス</a>をお試しください。"
+msgstr ""
+"この市場は現在閉鎖されています。<a href='%1'>取引時間を見る</a>、または常にオープンの <a "
+"href='%2'>ランダムインデックス</a>をお試しください。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/market_warning.html.tt:8
 msgid "This market opens late today at"
@@ -8741,10 +8739,9 @@ msgid "This offer cannot be used in conjunction with any other offer."
 msgstr "このボーナス特典は他の特典との併用は不可能です。"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:297
-#, fuzzy
 #| msgid "This page is unavailable for your scope."
 msgid "This page is unavailable."
-msgstr "このページではお客様のスコープをご利用いただけません"
+msgstr "このページはご利用いただけません。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:49
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
@@ -12641,10 +12638,12 @@ msgstr "全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#, fuzzy
 #| msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>[plural,_4,%d point,%d points]</strong> and stop profit of <strong>[plural,_5,%d point,%d points]</strong>."
-msgstr "全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します。損切りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
+msgstr ""
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します"
+"。損切りは<strong>[plural,_4,%d ポイント,%d ポイント]</strong> "
+"、利益ストップは<strong>[plural,_5,%d ポイント,%d ポイント]</strong>です。"
 
 #: Translation for contract type "SPREADU"
 msgid "spread up"
@@ -12669,10 +12668,12 @@ msgstr "全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#, fuzzy
 #| msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>[plural,_4,%d point,%d points]</strong> and stop profit of <strong>[plural,_5,%d point,%d points]</strong>."
-msgstr "全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します。損切りは<strong>%6 %4</strong> 、利益ストップは<strong>%6 %5</strong>です。"
+msgstr ""
+"全ポイント%3の %1<strong>%2</strong>のペイアウト<strong>は<strong>エントリーレベル</strong>より降下します"
+"。損切りは<strong>[plural,_4,%d ポイント,%d ポイント]</strong> "
+"、利益ストップは<strong>[plural,_5,%d ポイント,%d ポイント]</strong>です。"
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"
