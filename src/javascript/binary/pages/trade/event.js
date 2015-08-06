@@ -190,3 +190,17 @@ if (submarket_elm) {
         }
     });
 }
+
+/*
+ * attach event to purchase buttons to buy the current contract
+ */
+var purchase_button_elms = document.getElementsByClassName('purchase_button');
+if (purchase_button_elms) {
+    for (var i = 0, len = purchase_button_elms.length; i < len; i++) {
+        purchase_button_elms[i].addEventListener('click', function (e) {
+            if (e.target) {
+                TradeSocket.send({buy: e.target.getAttribute('data-purchase-id')});
+            }
+        });
+    }
+}
