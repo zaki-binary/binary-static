@@ -8,16 +8,12 @@
           %li#sidebar-link-section-1.selected
             %a{:href => "#open-source-projects-section"}= l('open-Source projects')
           %li#sidebar-link-section-2
-            %a{:href => "#extjs-frontend-section"}= l('ExtJS front-end')
-          %li#sidebar-link-section-3
             %a{:href => "#static-content"}= l('Static content')
-          %li#sidebar-link-section-4
+          %li#sidebar-link-section-3
             %a{:href => "#perl-modules"}= l('Perl modules')
-          %li#sidebar-link-section-5
+          %li#sidebar-link-section-4
             %a{:href => "#translations"}= l('Translations')
-          %li#sidebar-link-section-6
-            %a{:href => "#mobile-application"}= l('Mobile application')
-          %li#sidebar-link-section-7
+          %li#sidebar-link-section-5
             %a{:href => "#octal-futures"}= l('Octal futures')
         .sidebar-button
           %a.pjaxload{:href => url_for('contact')}= l('Contact us')
@@ -37,25 +33,9 @@
               .grd-grid-8
                 %img.responsive{:src => url_for('images/pages/open-source-projects/open-source-projects-1.svg')}
       .section
-        %a#extjs-frontend-section
-        .section-content
-          #section-2
-            .grd-grid-12
-              %h1= l('ExtJS front-end')
-            .grd-grid-12.grd-row-padding
-            .grd-grid-12
-              %h4= l('A next-generation front-end interface with Sencha ExtJS-5')
-            .grd-grid-6.grd-hide.grd-show-mobile.grd-centered-mobile.grd-row-padding
-              %img.responsive{:src => url_for('images/pages/open-source-projects/open-source-projects-2.svg')}
-            .grd-grid-8.grd-grid-mobile-12
-              %p!= l('Participate in the development of Binary.com’s next-generation user-interface. This project, open-sourced as <a target="_blank" href="[_1]">BinaryUI</a> on github, is written entirely in Sencha ExtJS 5, and consumes the Binary.com <a href="[_2]">RESTful API</a>.', 'https://github.com/binary-com/binary-ui-scaffolding', url_for("partnerapi"))
-            .grd-grid-4.grd-hide-mobile.grd-parent
-              .grd-grid-10
-                %img.responsive{:src => url_for('images/pages/open-source-projects/open-source-projects-2.svg')}
-      .section
         %a#static-content
         .section-content
-          #section-3
+          #section-2
             .grd-grid-12
               %h1= l('Static content')
             .grd-grid-12
@@ -69,7 +49,7 @@
       .section
         %a#perl-modules
         .section-content
-          #section-4
+          #section-3
             .grd-grid-12
               %h1= l('Perl modules')
             .grd-grid-12
@@ -86,7 +66,7 @@
       .section
         %a#translations
         .section-content
-          #section-5
+          #section-4
             .grd-grid-12
               %h1= l('Translations')
             .grd-grid-12.grd-row-padding
@@ -99,26 +79,9 @@
                 %a.pjaxload.button{:href => url_for('contact')}
                   %span= l('Contact us')
       .section
-        %a#mobile-application
-        .section-content
-          #section-6
-            .grd-grid-12
-              %h1= l('Mobile application')
-            .grd-grid-12
-              %h4= l('A Phonegap mobile application for Binary.com')
-            .grd-grid-12.grd-row-padding
-            .grd-grid-8.grd-hide.grd-show-mobile.grd-centered-mobile.grd-row-padding
-              %img.responsive{:src => url_for('images/pages/open-source-projects/open-source-projects-6.svg')}
-            .grd-grid-8.grd-grid-mobile-12
-              %p!= l('The Binary.com mobile application is developed with <a target="_blank" href="[_1]">Phonegap</a> and is open-sourced as <a target="_blank" href="[_2]">client-app</a> on github. Phonegap developers are invited to participate in this project by forking the repository.', 'http://phonegap.com/', 'https://github.com/binary-com/client-app')
-            .grd-grid-4.grd-parent.grd-hide-mobile
-              .grd-grid-12.grd-row-padding
-              .grd-grid-12
-                %img.responsive{:src => url_for('images/pages/open-source-projects/open-source-projects-6.svg')}
-      .section
         %a#octal-futures
         .section-content
-          #section-7
+          #section-5
             .grd-grid-12
               %h1= l('Octal futures')
             .grd-grid-12
