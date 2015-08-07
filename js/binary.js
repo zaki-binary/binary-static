@@ -4345,6 +4345,21 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                         params += '&expiry_type=' + expiry_type;
                     }
 
+                    var stop_profit = BetForm.attributes.model.stop_profit();
+                    if (stop_profit) {
+                        params += '&stop_profit=' + stop_profit;
+                    }
+
+                    var stop_loss = BetForm.attributes.model.stop_loss();
+                    if (stop_loss) {
+                        params += '&stop_loss=' + stop_loss;
+                    }
+
+                    var amount_per_point = BetForm.attributes.model.amount_per_point();
+                    if (amount_per_point) {
+                        params += '&amount_per_point=' + amount_per_point;
+                    }
+
                     return page.url.url_for('trade_get.cgi', params);
                },
                 disable: function (elements) {
