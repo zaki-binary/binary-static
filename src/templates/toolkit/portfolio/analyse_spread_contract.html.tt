@@ -8,7 +8,7 @@
             <tbody>
                 <tr>
                     <td>[% l("Status") %]</td>
-                    <td id="status">[% IF is_expired %][% l('Close') %][% ELSE %][% l('Open') %][% END %]</td>
+                    <td id="status" class="[% IF is_expired %]loss[% ELSE %]profit[% END %]">[% IF is_expired %][% l('Closed') %][% ELSE %][% l('Open') %][% END %]</td>
                 </tr>
                 <tr>
                     <td>[% l("Entry Level") %]</td>
@@ -26,7 +26,7 @@
                     <td>[% l("Stop Profit Level") %]</td>
                     <td id="stop_profit_level">[% stop_profit_level %]</td>
                 </tr>
-                <tr>
+                <tr [% IF is_expired %] style="display:none" [% END %]>
                     <td>[% l("Current Level") %]</td>
                     <td id="sell_level">[% sell_level %]</td>
                 </tr>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td id="pnl_label">[% l("Profit/Loss") %] ([% currency %])</td>
-                    <td><span id="pnl_value">[% current_value.dollar %]</span></td>
+                    <td><span id="pnl_value" class="[% status_class %]">[% current_value.dollar %]</span></td>
                 </tr>
                 <tr>
                     <td id="pnl_label">[% l("Profit/Loss (points)") %]</td>
