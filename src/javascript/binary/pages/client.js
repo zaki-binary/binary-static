@@ -34,7 +34,16 @@ var disable_residence = function () {
 
 var enable_residence_form_submit = function () {
     $('form#openAccForm').submit(function (event) {
-        $('#residence').removeAttr('disabled');
+        var field_error = false;
+        $("form#openAccForm").find('p.errorfield:visible').each(function() {
+            if ($(this).text().length > 0) {
+                field_error = true;
+                return false;
+            }
+        });
+        if (!field_error) {
+            $('#residence').removeAttr('disabled');
+        }
     });
 };
 
