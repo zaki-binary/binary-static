@@ -14,6 +14,7 @@
     flash.staysinout      = static_url.copy.append("flash/betguide-staysinout.swf")
     flash.endsinout       = static_url.copy.append("flash/betguide-endsinout.swf")
     flash.updown          = static_url.copy.append("flash/betguide-updown.swf")
+    image.spreads          = [ request.url_for('images/pages/get-started/spreadbet-long.png'),request.url_for('images/pages/get-started/spreadbet-long.png') ]
 %]
 
 <div class='grd-grid-12 grd-parent'>
@@ -34,6 +35,14 @@
         [% END %]
     [% END %]
 
+    [% IF show_image %]
+        <div class='grd-grid-4'>
+            [% FOREACH img_url IN image.$form_name %]
+            <img class="responsive" src="[% img_url %]"/>
+            [% END %]
+        </div>
+    [% END %]
+
     [% IF show_winning && show_flash && flash.$form_name  %]
         <div class='grd-grid-8 grd-grid-mobile-12'>
             <h4>
@@ -42,7 +51,7 @@
             [% INCLUDE "$winning" %]
         </div>
     [% ELSIF show_winning %]
-        <div class='grd-grid-12'>
+        <div class="[% IF show_image %]grd-grid-8[% ELSE %]grd-grid-12[% END %]">
             <h4>
                 [% l("Winning the contract") %]
             </h4>
