@@ -25,7 +25,9 @@ var displayListElements = function (id, elements, selected) {
         li.appendChild(content);
         fragment.appendChild(li);
     });
-    target.appendChild(fragment);
+    if (target) {
+        target.appendChild(fragment);
+    }
 };
 
 /*
@@ -51,7 +53,9 @@ var displayOptions = function (id, elements, selected) {
             fragment.appendChild(option);
         }
     }
-    target.appendChild(fragment);
+    if (target) {
+        target.appendChild(fragment);
+    }
 };
 
 /*
@@ -82,7 +86,9 @@ var displayUnderlyings = function (selected) {
             fragment.appendChild(option);
         }
     }
-    target.appendChild(fragment);
+    if (target) {
+        target.appendChild(fragment);
+    }
 };
 
 /*
