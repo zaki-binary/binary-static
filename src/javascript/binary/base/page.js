@@ -653,12 +653,12 @@ Contents.prototype = {
                 $('#topbar').addClass('dark-blue');
                 $('#topbar').removeClass('orange');
 
-                if (!/^Q?CR/.test(this.client.loginid)) {
+                if (!/^CR/.test(this.client.loginid)) {
                     $('#payment-agent-section').addClass('invisible');
                     $('#payment-agent-section').hide();
                 }
 
-                if (!/^Q?MF|MLT/.test(this.client.loginid)) {
+                if (!/^MF|MLT/.test(this.client.loginid)) {
                     $('#account-transfer-section').addClass('invisible');
                     $('#account-transfer-section').hide();
                 }
@@ -697,35 +697,42 @@ Contents.prototype = {
         $('.draggable').draggable();
     },
     topbar_message_visibility: function() {
-        if (this.client.is_logged_in) {
+        if(this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
-            var has_real = false;
 
-            var has_financial = false;
-            var check_financial = false;
-            if (/MLT/.test(this.client.loginid)) {
-                check_financial = true;
-            }
-
-            for (var i=0; i<loginid_array.length; i++) {
-                var loginid = loginid_array[i].id;
-                var real = loginid_array[i].real;
-
-                if (real) {
-                    has_real = true;
-                    if (!check_financial) { break; }
-
-                    if (loginid_array[i].financial) {
-                        has_financial = true;
+            if (!this.client.is_real) {
+                var show_upgrade = true;
+                for (var i=0;i<loginid_array.length;i++) {
+                    if (loginid_array[i].real) {
+                        show_upgrade = false;
                         break;
                     }
                 }
-            }
-            if (has_real) {
-                $('#virtual-upgrade-link').addClass('invisible');
-                // $('#virtual-upgrade-link').hide();
-
-                if (check_financial && !has_financial) {
+                if (!show_upgrade) {
+                    $('#virtual-upgrade-link').addClass('invisible');
+                    $('#vr-financial-upgrade-link').addClass('invisible');
+                } else {
+                    var residence = this.client.residence;
+                    if (residence.length > 0 && EU_random_restricted_countries.test(residence)) {
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-financial-upgrade-link').removeClass('invisible');
+                    } else {
+                        $('#virtual-upgrade-link').removeClass('invisible');
+                        $('#vr-financial-upgrade-link').removeClass('invisible');
+                    }
+                }
+            } else {
+                var show_financial = false;
+                if (/MLT/.test(this.client.loginid)) {
+                    show_financial = true;
+                    for (var i=0;i<loginid_array.length;i++) {
+                        if (loginid_array[i].financial) {
+                            show_financial = false;
+                            break;
+                        }
+                    }
+                }
+                if (show_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
                     if ($('#investment_message').length > 0) {
                         $('#investment_message').removeClass('invisible');
@@ -735,17 +742,6 @@ Contents.prototype = {
                     if ($('#investment_message').length > 0) {
                         $('#investment_message').addClass('invisible');
                     }
-                }
-            } else {
-                var EU_random_restricted_countries = new RegExp(page.settings.get('EU_random_restricted_countries'));
-                var residence = this.client.residence;
-
-                // directly upgrade to MF acc from VR
-                if (EU_random_restricted_countries.test(residence)) {
-                    $('#virtual-upgrade-link').addClass('invisible');
-                    // $('#virtual-upgrade-link').hide();
-
-                    $('#financial-upgrade-link').removeClass('invisible');
                 }
             }
         }
