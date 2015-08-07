@@ -83,10 +83,11 @@ var Price = (function () {
         }
 
         var position = contractTypeDisplayMapping(type),
-            display = type ? contractType[type] : '',
             container = document.getElementById('price_container_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position);
+
+        var display = type ? contractType[type] : '';
 
         while (description_container && description_container.firstChild) {
             description_container.removeChild(description_container.firstChild);
@@ -95,6 +96,7 @@ var Price = (function () {
         if (display) {
             h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
         }
+
         h4.setAttribute('id', 'contract_heading_' + position);
 
         description.setAttribute('class', 'contract_description big-col');
@@ -106,7 +108,9 @@ var Price = (function () {
         fragment.appendChild(h4);
 
         if (proposal['error']) {
-            purchase.style.display = 'none';
+            if (purchase) {
+                purchase.style.display = 'none';
+            }
             content = document.createTextNode(proposal['error']);
             description.appendChild(content);
             row.appendChild(description);
@@ -116,7 +120,9 @@ var Price = (function () {
                 currency = document.getElementById('currency'),
                 priceId = document.getElementById('purchase_button_' + position);
 
-            purchase.style.display = 'block';
+            if (purchase) {
+                purchase.style.display = 'block';
+            }
 
             amount.setAttribute('class', 'contract_amount col');
             amount.setAttribute('id', 'contract_amount_' + position);
@@ -129,6 +135,7 @@ var Price = (function () {
 
             // create unique id object that is send in response
             priceId.setAttribute('data-purchase-id', proposal['id']);
+            priceId.setAttribute('data-ask-price', proposal['ask_price']);
 
             row.appendChild(amount);
             row.appendChild(description);
@@ -137,8 +144,12 @@ var Price = (function () {
 
             spotElement.textContent = proposal['spot'];
         }
-        description_container.appendChild(fragment);
-        container.insertBefore(description_container, purchase);
+        if (description_container) {
+            description_container.appendChild(fragment);
+        }
+        if (container) {
+            container.insertBefore(description_container, purchase);
+        }
     };
 
     var clearMapping = function () {
