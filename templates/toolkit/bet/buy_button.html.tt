@@ -1,8 +1,8 @@
 <div id="bet_cal_buy" class="div_wrapper default"[%- IF fields.start_hidden -%] style="display:none"[%- END -%]>
 <form class="orderform" id="orderform_[% fields.display_id %]" name="orderform" action="[% fields.url %]" method="post" autocomplete="off">
     [% IF fields.display_id %]<input type="hidden" name="display_id" value="[% fields.display_id %]" />[% END %]
-    [% IF fields.H %]<input type="hidden" name="H" value="[% fields.H %]" />[% END %]
-    [% IF fields.L %]<input type="hidden" name="L" value="[% fields.L %]" />[% END %]
+    [% IF defined fields.H %]<input type="hidden" name="H" value="[% fields.H %]" />[% END %]
+    [% IF defined fields.L %]<input type="hidden" name="L" value="[% fields.L %]" />[% END %]
     [% IF fields.bet_type %]<input type="hidden" name="type" value="[% fields.bet_type %]" />[% END %]
     [% IF fields.underlying %]<input type="hidden" name="underlying_symbol" value="[% fields.underlying %]" />[% END %]
     [% IF fields.time %]<input type="hidden" name="time" value="[% fields.time %]" />[% END %]
