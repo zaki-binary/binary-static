@@ -266,12 +266,12 @@ var BetSell = function() {
             if (typeof price == 'object') {
                 if (typeof price.price != 'undefined') {
                     price = price.price;
-                } else if (typeof price.prob != 'undefined') {
+                } else if (typeof price.value != 'undefined') {
                     var payout = this.model.payout();
                     if (isNaN(payout)) {
                         throw new Error("Invalid payout " + payout);
                     }
-                    price = price.prob * payout;
+                    price = price.value * payout;
                 }
             }
             if (isNaN(price)) {
@@ -857,18 +857,18 @@ var BetSell = function() {
                     var prices = bet.prices;
                     var spot = bet.spot;
                     for (var i = 0; i < prices.length; i++) {
-                        if (!prices || prices.id != 'sell') {
+                        if (!prices[i] || prices[i].id != 'sell') {
                             continue;
                         }
-                        if (prices.err) {
-                            BetSell.show_warning(prices.err, true);
+                        if (prices[i].err) {
+                            BetSell.show_warning(prices[i].err, true);
                             BetSell.disable_sell_button('#sell_at_market', true);
                             no_error = false;
                         } else {
                             BetSell.clear_warnings();
                             BetSell.enable_sell_button();
                         }
-                        BetSell.update_price(prices);
+                        BetSell.update_price(prices[i]);
                         BetSell.update_barriers(bet.barriers);
                     } // for
                     BetSell.update_spot(spot);
