@@ -43,6 +43,7 @@ var processForgetPriceIds = function () {
 var processPriceRequest = function () {
     'use strict';
 
+    showPriceLoadingIcon();
     processForgetPriceIds();
     Price.clearMapping();
     for (var typeOfContract in Contract.contractType()[Offerings.form()]) {

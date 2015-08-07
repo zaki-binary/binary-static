@@ -21,6 +21,7 @@ var Message = (function () {
                 processPriceRequest();
             } else if (type === 'proposal') {
                 Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
+                hidePriceLoadingIcon();
             }
         } else {
             console.log('some error occured');

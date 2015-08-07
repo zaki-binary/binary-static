@@ -149,7 +149,7 @@ var contractTypeDisplayMapping = function (type) {
 
 
 /*
- * sub to check if element is visible or not
+ * function to check if element is visible or not
  *
  * alternative to jquery $('#id').is(':visible')
  */
@@ -159,4 +159,18 @@ var isVisible = function (elem) {
     } else {
         return true;
     }
+};
+
+/*
+ * function to hide and display the loading icon for price container
+ */
+
+var hidePriceLoadingIcon = function () {
+    var elm = document.getElementById('loading_container');
+    elm.style.display = 'none';
+};
+
+var showPriceLoadingIcon = function () {
+    var elm = document.getElementById('loading_container');
+    elm.style.display = 'block';
 };
