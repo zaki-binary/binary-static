@@ -713,7 +713,7 @@ Contents.prototype = {
                     $('#vr-financial-upgrade-link').addClass('invisible');
                 } else {
                     var residence = this.client.residence;
-                    if (residence.length > 0 && this.settings.get('EU_random_restricted_countries').test(residence)) {
+                    if (residence.length > 0 && page.settings.get('EU_random_restricted_countries').test(residence)) {
                         $('#virtual-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').removeClass('invisible');
                     } else {
