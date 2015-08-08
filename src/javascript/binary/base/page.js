@@ -87,7 +87,7 @@ var Client = function() {
     var dl_info = gtm_data_layer_info();
     if(dl_info.length > 0) {
         for (var i=0;i<dl_info.length;i++) {
-            if(dl_info[i].event == 'log_in') {
+            if(dl_info[i].event == 'log_in' || dl_info[i].event == 'new_account') {
                 SessionStore.set('client_info',
                     this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname +
                     ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone +
