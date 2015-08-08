@@ -720,7 +720,7 @@ Contents.prototype = {
                         $('#vr-financial-upgrade-link').removeClass('invisible');
                     } else {
                         $('#virtual-upgrade-link').removeClass('invisible');
-                        $('#vr-financial-upgrade-link').removeClass('invisible');
+                        $('#vr-financial-upgrade-link').addClass('invisible');
                     }
                 }
             } else {
