@@ -727,8 +727,8 @@ Contents.prototype = {
                 var show_financial = false;
                 if (/MLT/.test(this.client.loginid)) {
                     show_financial = true;
-                    for (var i=0;i<loginid_array.length;i++) {
-                        if (loginid_array[i].financial) {
+                    for (var j=0;j<loginid_array.length;j++) {
+                        if (loginid_array[j].financial) {
                             show_financial = false;
                             break;
                         }
