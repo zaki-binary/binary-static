@@ -26,8 +26,8 @@ var select_user_country = function() {
 };
 
 var disable_residence = function () {
-    var virtual_residence = $('#virtual_residence');
-    if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
+    var vr_residence = page.client.residence;
+    if (vr_residence.length > 0 && vr_residence == $('#residence').val()) {
         $('#residence').attr('disabled', true);
     }
 };
