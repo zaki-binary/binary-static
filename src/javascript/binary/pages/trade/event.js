@@ -222,3 +222,16 @@ if (purchaseButtonElements) {
         purchaseButtonElements[i].addEventListener('click', purchaseContractEvent);
     }
 }
+
+/*
+ * attach event to close icon for purchase container
+ */
+var closeContainerElement = document.getElementById('close_confirmation_container');
+if (closeContainerElement) {
+    closeContainerElement.addEventListener('click', function (e) {
+        if (e.target) {
+            e.preventDefault();
+            document.getElementById('contract_confirmation_container').style.display = 'none';
+        }
+    });
+}
