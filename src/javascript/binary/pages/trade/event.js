@@ -2,9 +2,9 @@
  * attach event to market list, so when client change market we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
-var market_nav_elm = document.getElementById('contract_market_nav');
-if (market_nav_elm) {
-    market_nav_elm.addEventListener('click', function(e) {
+var marketNavElement = document.getElementById('contract_market_nav');
+if (marketNavElement) {
+    marketNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('market', e.target.id);
             marketChangeEvent(e.target.id);
@@ -21,9 +21,9 @@ var marketChangeEvent = function (market) {
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
-var form_nav_elm = document.getElementById('contract_form_name_nav');
-if (form_nav_elm) {
-    form_nav_elm.addEventListener('click', function(e) {
+var formNavElement = document.getElementById('contract_form_name_nav');
+if (formNavElement) {
+    formNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('formname', e.target.id);
             contractFormEventChange(e.target.id);
@@ -55,9 +55,9 @@ var contractFormEventChange = function (formName) {
 /*
  * attach event to underlying change, event need to request new contract details and price
  */
-var underlying_elm = document.getElementById('underlying');
-if (underlying_elm) {
-    underlying_elm.addEventListener('change', function(e) {
+var underlyingElement = document.getElementById('underlying');
+if (underlyingElement) {
+    underlyingElement.addEventListener('change', function(e) {
         if (e.target) {
             sessionStorage.setItem('underlying', e.target.value);
             underlyingEventChange(e.target.value);
@@ -73,9 +73,9 @@ var underlyingEventChange = function (underlying) {
 /*
  * bind event to change in duration amount, request new price
  */
-var duration_amount_elm = document.getElementById('duration_amount');
-if (duration_amount_elm) {
-    duration_amount_elm.addEventListener('input', function (e) {
+var durationAmountElement = document.getElementById('duration_amount');
+if (durationAmountElement) {
+    durationAmountElement.addEventListener('input', function (e) {
         processPriceRequest();
     });
 }
@@ -84,9 +84,9 @@ if (duration_amount_elm) {
  * attach event to expiry time change, event need to populate duration
  * and request new price
  */
-var expiry_type_elm = document.getElementById('expiry_type');
-if (expiry_type_elm) {
-    expiry_type_elm.addEventListener('change', function(e) {
+var expiryTypeElement = document.getElementById('expiry_type');
+if (expiryTypeElement) {
+    expiryTypeElement.addEventListener('change', function(e) {
         durationPopulate();
         if(e.target && e.target.value === 'endtime') {
             var current_moment = moment().add(5, 'minutes').utc();
@@ -100,9 +100,9 @@ if (expiry_type_elm) {
 /*
  * bind event to change in duration units, populate duration and request price
  */
-var duration_unit_elm = document.getElementById('duration_units');
-if (duration_unit_elm) {
-    duration_unit_elm.addEventListener('change', function () {
+var durationUnitElement = document.getElementById('duration_units');
+if (durationUnitElement) {
+    durationUnitElement.addEventListener('change', function () {
         durationPopulate();
         processPriceRequest();
     });
@@ -111,16 +111,16 @@ if (duration_unit_elm) {
 /*
  * bind event to change in endtime date and time
  */
-var end_date_elm = document.getElementById('expiry_date');
-if (end_date_elm) {
-    end_date_elm.addEventListener('change', function () {
+var endDateElement = document.getElementById('expiry_date');
+if (endDateElement) {
+    endDateElement.addEventListener('change', function () {
         processPriceRequest();
     });
 }
 
-var end_time_elm = document.getElementById('expiry_time');
-if (end_time_elm) {
-    end_time_elm.addEventListener('change', function () {
+var endTimeElement = document.getElementById('expiry_time');
+if (endTimeElement) {
+    endTimeElement.addEventListener('change', function () {
         processPriceRequest();
     });
 }
@@ -128,9 +128,9 @@ if (end_time_elm) {
 /*
  * attach event to change in amount, request new price only
  */
-var amount_elm = document.getElementById('amount');
-if (amount_elm) {
-    amount_elm.addEventListener('input', function(e) {
+var amountElement = document.getElementById('amount');
+if (amountElement) {
+    amountElement.addEventListener('input', function(e) {
         sessionStorage.setItem('amount', e.target.value);
         processPriceRequest();
     });
@@ -141,9 +141,9 @@ if (amount_elm) {
  * whether start time is forward starting or not and request
  * new price
  */
-var date_start_elm = document.getElementById('date_start');
-if (date_start_elm) {
-    date_start_elm.addEventListener('change', function (e) {
+var dateStartElement = document.getElementById('date_start');
+if (dateStartElement) {
+    dateStartElement.addEventListener('change', function (e) {
         if (e.target && e.target.value === 'now') {
             displayDurations('spot');
         } else {
@@ -157,9 +157,9 @@ if (date_start_elm) {
  * attach event to change in amount type that is whether its
  * payout or stake and request new price
  */
-var amount_type_elm = document.getElementById('amount_type');
-if (amount_type_elm) {
-    amount_type_elm.addEventListener('change', function (e) {
+var amountTypeElement = document.getElementById('amount_type');
+if (amountTypeElement) {
+    amountTypeElement.addEventListener('change', function (e) {
         sessionStorage.setItem('amount_type', e.target.value);
         processPriceRequest();
     });
@@ -169,9 +169,9 @@ if (amount_type_elm) {
  * attach event to change in submarkets. We need to disable
  * underlyings that are not in selected seubmarkets
  */
-var submarket_elm = document.getElementById('submarket');
-if (submarket_elm) {
-    submarket_elm.addEventListener('change', function (e) {
+var submarketElement = document.getElementById('submarket');
+if (submarketElement) {
+    submarketElement.addEventListener('change', function (e) {
         if (e.target) {
             var elem = document.getElementById('underlying');
             var underlyings = elem.children;
@@ -196,9 +196,9 @@ if (submarket_elm) {
 /*
  * attach an event to change in currency
  */
-var currency_elm = document.getElementById('currency');
-if (currency_elm) {
-    currency_elm.addEventListener('change', function (e) {
+var currencyElement = document.getElementById('currency');
+if (currencyElement) {
+    currencyElement.addEventListener('change', function (e) {
         sessionStorage.setItem('currency', e.target.value);
         processPriceRequest();
     });
@@ -208,12 +208,17 @@ if (currency_elm) {
  * attach event to purchase buttons to buy the current contract
  */
 var purchaseContractEvent = function () {
-    TradeSocket.send({buy: this.getAttribute('data-purchase-id'), price: this.getAttribute('data-ask-price')});
+    var id = this.getAttribute('data-purchase-id'),
+        askPrice = this.getAttribute('data-ask-price');
+
+    if (id && askPrice) {
+        TradeSocket.send({buy: id, price: askPrice});
+    }
 };
 
-var purchase_button_elms = document.getElementsByClassName('purchase_button');
-if (purchase_button_elms) {
-    for (var i = 0, len = purchase_button_elms.length; i < len; i++) {
-        purchase_button_elms[i].addEventListener('click', purchaseContractEvent);
+var purchaseButtonElements = document.getElementsByClassName('purchase_button');
+if (purchaseButtonElements) {
+    for (var i = 0, len = purchaseButtonElements.length; i < len; i++) {
+        purchaseButtonElements[i].addEventListener('click', purchaseContractEvent);
     }
 }
