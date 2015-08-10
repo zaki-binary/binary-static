@@ -7,9 +7,10 @@ msgstr ""
 "Project-Id-Version: BOM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-08-05 07:14+0200\n"
+"PO-Revision-Date: 2015-08-10 11:50+0200\n"
 "Last-Translator: Alcino Jorge <alcino@binary.com>\n"
-"Language-Team: Portuguese <https://hosted.weblate.org/projects/binary/static/pt/>\n"
+"Language-Team: Portuguese "
+"<https://hosted.weblate.org/projects/binary/static/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -319,7 +320,7 @@ msgstr "%ctx(Se olhar para o céu)Verá %plural(%1,uma estrela, %d estrelas)."
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:523
 msgid "%ctx(the return of investment of a contract)Return"
-msgstr ""
+msgstr "%ctx(o retorno do investimento de um contrato)Retorno"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "&#8220;Binary.com is one of the oldest and trustworthy partners we ever had. We have worked together for many years.&#8221;"
@@ -2330,10 +2331,9 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3991
-#, fuzzy
 #| msgid "Your Email:"
 msgid "Confirm Your Email"
-msgstr "O seu e-mail:"
+msgstr "Confirme seu endereço de e-mail"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/conflicts_policy.html.tt:2
 msgid "Conflicts Policy"
@@ -2890,10 +2890,10 @@ msgstr "Depositar para o agente de pagamentos"
 
 #. ($bet->currency, to_monetary_number_format($bet->ask_price)
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:477
-#, fuzzy
 #| msgid "Deposit of %1 %2 is required. Current spread: %3 points"
 msgid "Deposit of %1 %2 is required. Current spread: %plural(%3,%d point,%d points)"
-msgstr "Depósito de %1 %2 é necessário. Spread atual: %3 pontos"
+msgstr ""
+"Depósito de %1 %2 é necessário. Spread atual: %plural(%3,%d ponto,%d pontos)"
 
 #: /home/git/translations/binary-static/src/templates/haml/cashier/index.html.haml:1
 msgid "Deposit or withdraw to your account via bank-wire, credit card, or e-cash wallet."
@@ -3240,7 +3240,7 @@ msgstr "Nível de entrada"
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:113
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:481
 msgid "Entry Spot"
-msgstr "Preço inicial do contrato comprado"
+msgstr "Preço de entrada"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/risefall.html.tt:1
 msgid "Entry spot"
@@ -3296,13 +3296,13 @@ msgstr "Nível de saída"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:496
 msgid "Exit Spot"
-msgstr "Preço Final"
+msgstr "Preço de saída"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/endsinout.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/higherlower.html.tt:1
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/risefall.html.tt:10
 msgid "Exit spot"
-msgstr "Preço final"
+msgstr "Preço de saída"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table.html.tt:5
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/pricing_table_ajax.html.tt:13
@@ -3316,7 +3316,7 @@ msgstr "Preço de Vencimento"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:558
 msgid "Expiry Spot"
-msgstr "Preço Final"
+msgstr "Preço final"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:550
 msgid "Expiry Time"
@@ -3419,7 +3419,7 @@ msgstr "Filtrar Ticks Extraviados"
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:515
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/buy_success_ajax.html.tt:38
 msgid "Final Price"
-msgstr "Preço Final"
+msgstr "Preço final"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3552
 msgid "Finance"
@@ -3845,7 +3845,7 @@ msgstr "GráficosAltos"
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Resources.pm:696
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Higher/Lower"
-msgstr "Mais Alto/Mais Baixo"
+msgstr "Superior/Inferior"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "Higher/Lower trades"
@@ -4026,7 +4026,10 @@ msgstr "Se selecionar \"Termina Fora\", ganha o pagamento se o <strong>preço de
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/risefall.html.tt:5
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/ticks.html.tt:5
 msgid "If you select \"Falls\", you win the payout if the <strong>exit spot</strong> is strictly lower than the <strong>entry spot</strong>."
-msgstr "Se selecionar \"Cai\", você ganha o pagamento se a <strong>preço de saída</strong> for estritamente inferior ao <strong>preço inicial</strong>."
+msgstr ""
+"Se selecionar \"Desce\", você ganha o pagamento se o <strong>preço de "
+"saída</strong> for estritamente inferior ao <strong>preço de "
+"entrada</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/staysinout.html.tt:5
 msgid "If you select \"Goes Outside\", you win the payout if the market touches either the <strong>High barrier</strong> or the <strong>Low barrier</strong> at any time during the <strong>contract period</strong>."
@@ -4034,11 +4037,15 @@ msgstr "Se selecionar \"Sai\", você ganha o pagamento se o mercado tocar na <st
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/higherlower.html.tt:2
 msgid "If you select \"Higher\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>barrier</strong>."
-msgstr "Se selecionar \"Mais alto\", você ganha o pagamento se o <strong>preço de saída</strong> for estritamente superior à <strong>barreira</strong>."
+msgstr ""
+"Se selecionar \"Superior\", você ganha o pagamento se o <strong>preço de "
+"saída</strong> for estritamente superior à <strong>barreira</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/higherlower.html.tt:5
 msgid "If you select \"Lower\", you win the payout if the <strong>exit spot</strong> is strictly lower than the <strong>barrier</strong>."
-msgstr "Se selecionar \"Mais baixo\", ganha o pagamento se o <strong>preço de saída</strong> for estritamente inferior à <strong>barreira</strong>."
+msgstr ""
+"Se selecionar \"Inferior\", você ganha o pagamento se o <strong>preço de "
+"saída</strong> for estritamente inferior à <strong>barreira</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/digits.html.tt:2
 msgid "If you select \"Matches\", you will win the payout if the <strong>last digit</strong> of the last tick is the <strong>same</strong> as your <strong>prediction.</strong>"
@@ -4047,7 +4054,10 @@ msgstr "Se selecionar \"Combina\", você ganha o pagamento se o <strong>último 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/risefall.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/ticks.html.tt:2
 msgid "If you select \"Rises\", you win the payout if the <strong>exit spot</strong> is strictly higher than the <strong>entry spot</strong>."
-msgstr "Se selecionar \"Mais alto\", você ganha o pagamento se o <strong>preço de saída</strong> for estritamente superior ao <strong>preço inicial</strong>."
+msgstr ""
+"Se selecionar \"Sobe\", você ganha o pagamento se o <strong>preço de "
+"saída</strong> for estritamente superior ao <strong>preço de "
+"entrada</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/staysinout.html.tt:2
 msgid "If you select \"Stays Between\", you win the payout if the market stays between (does not touch) either the <strong>High barrier</strong> or the <strong>Low barrier</strong> at any time during the <strong>contract period</strong>."
@@ -4059,19 +4069,27 @@ msgstr "Se selecionar \"Toca\", ganha o pagamento se o mercado tocar na <strong>
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/runbet-updown.html.tt:5
 msgid "If you select \"falls\", you win the payout if the market price is lower than the <strong>entry spot</strong>."
-msgstr "Se selecionar \"cai\", ganha o pagamento se o preço do mercado for inferior ao <strong>preço inicial do contrato comprado</strong>."
+msgstr ""
+"Se selecionar \"desce\", você ganha o pagamento se o preço do mercado for "
+"inferior ao <strong>preço de entrada</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/updown.html.tt:5
 msgid "If you select \"falls\", you win the payout if the market price is lower than the entry spot."
-msgstr "Se selecionar \"cai\", ganha o pagamento se o preço do mercado for inferior ao preço inicial do contrato comprado."
+msgstr ""
+"Se selecionar \"desce\", você ganha o pagamento se o preço do mercado for "
+"inferior ao preço de entrada."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/runbet-updown.html.tt:2
 msgid "If you select \"rises\", you win the payout if the market price is higher than the <strong>entry spot</strong>."
-msgstr "Se selecionar \"sobre\", ganha o pagamento se o preço do mercado for superior ao <strong>preço inicial do contrato comprado</strong>."
+msgstr ""
+"Se selecionar \"sobe\", ganha o pagamento se o preço do mercado for superior "
+"ao <strong>preço de entrada</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/winning/updown.html.tt:2
 msgid "If you select \"rises\", you win the payout if the market price is higher than the entry spot."
-msgstr "Se selecionar \"sobe\", ganha o pagamento se o preço do mercado for superior ao preço inicial do contrato comprado."
+msgstr ""
+"Se selecionar \"sobe\", você ganha o pagamento se o preço do mercado for "
+"superior ao preço de entrada."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/explanation/details/risefall.html.tt:6
 msgid "If you select a <strong>start time</strong> in the future, the <strong>start time</strong> is that which is selected and the <strong>entry spot</strong> is the price in effect at that time."
@@ -4410,10 +4428,9 @@ msgstr "Introdução de período inválido! Por favor introduza um período entr
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:758
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:781
-#, fuzzy
 #| msgid "Invalid Input"
 msgid "Invalid request"
-msgstr "Introdução Inválida"
+msgstr "Pedido Inválido"
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1895
 msgid "Invalid stake"
@@ -4829,7 +4846,7 @@ msgstr "Terminar Sessão"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1409
 msgid "Long"
-msgstr ""
+msgstr "Longo"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/affiliates/main.html.tt:45
 msgid "Long-term partnership with the leading financial trading service"
@@ -5910,7 +5927,7 @@ msgstr "Faça um contrato aleatório"
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:46
 msgid "Platform Tour"
-msgstr "Faça um tour pela Plataforma"
+msgstr "Visita Guiada da Plataforma"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/doughflow_currency_choice.html.tt:3
 msgid "Please choose which currency you would like to transact in."
@@ -6488,36 +6505,36 @@ msgstr "Índice Random 75"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Bear"
-msgstr "Aleatórios do Urso (Baixista)"
+msgstr "Random Urso (Baixista)"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Indices"
-msgstr "Índices Aleatórios"
+msgstr "Índices Random (Aleatórios)"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Markets"
-msgstr "Mercados Aleatórios"
+msgstr "Mercados Random (Aleatórios)"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Moon"
-msgstr "Aleatórios da Lua"
+msgstr "Random Lua"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Nocturnes"
-msgstr "Aleatórios Noturnos"
+msgstr "Random Noturnos"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Quotidians"
-msgstr "Aleatórios Cotidianos"
+msgstr "Random Cotidianos"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Venus"
-msgstr "Aleatórios de Vênus"
+msgstr "Random Vênus"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Random Yang"
-msgstr "Aleatórios de Yang"
+msgstr "Random Yang"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:481
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:622
@@ -6788,17 +6805,19 @@ msgstr "Retorno de Contrato de Alta (%)"
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Resources.pm:682
 #: /home/git/translations/binary-static/src/templates/haml/get_started/random_markets.html.haml:1
 msgid "Rise/Fall"
-msgstr "Em Alta/Em Queda"
+msgstr "Sobe/Desce"
 
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:66
 msgid "Rise/Fall Table"
-msgstr "Tabela de Em Alta/Em Queda"
+msgstr "Tabela Sobe/Desce"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/ContractForm.pm:640
 msgid "Rise/Fall contracts of less than 5 minutes duration are only available when you select \"Now\" as the start time."
-msgstr "Os contratos em Alta/Queda com uma duração de menos de 5 minutos são disponibilizados apenas quando \"Agora\" é selecionado como hora de início."
+msgstr ""
+"Os contratos Sobe/Desce com uma duração de menos de 5 minutos são "
+"disponibilizados apenas quando \"Agora\" é selecionado como hora de início."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "Rise/Fall trades"
@@ -7025,7 +7044,7 @@ msgstr "Preços nítidos"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1411
 msgid "Short"
-msgstr ""
+msgstr "Curto"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2036
 msgid "Short summary of your Payment Agent service"
@@ -8336,7 +8355,19 @@ msgstr "O endereço de e-mail fornecido %1 já está em uso por outro ID de Logi
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "The random index is a stock index whose price is simulated using random numbers. Unlike real market stock indices whose prices depend on the prices of the individual stocks listed on an Exchange, the random stock index only relies on factors like volatility, previous index price (previous simulated price) and a random number to determine the price of the index. Due to the use of random numbers, the price (or direction) of the index cannot be predicted with certainty and thus behaves like a real market index. When the index is appended with a number, the number is the percentage volatility used in calculating the index price. For instance, the Random Index 25 uses a volatility of 25% in the calculation of the index price. The index started at 1000 on 16 May 2004."
-msgstr "O índice random (aleatório) é um índice de ações cujo preço é simulado, utilizando-se números aleatórios. Ao contrário dos índices reais de ações do mercado cujos preços dependem dos preços das ações individuais cotadas na Bolsa, o índice de ações aleatório depende apenas de fatores como volatilidade, preço de índice anterior (preço simulado anterior) e um número aleatório para determinar o preço do índice. Devido à utilização de números aleatórios, o preço (ou direção) do índice não pode ser previsto com certeza, comportando-se, assim, como um índice de mercado real. Quando o índice tem anexado um número, o número é a volatilidade percentual usada no cálculo do preço do índice. Por exemplo, para o Índice Random 25 utilizamos uma volatilidade de 25% no cálculo do preço do índice. O índice começou a 1000 em 16 de Maio de 2004."
+msgstr ""
+"O índice Random (Aleatório) é um índice de ações cujo preço é simulado, "
+"utilizando-se números aleatórios. Ao contrário dos índices reais de ações do "
+"mercado cujos preços dependem dos preços das ações individuais cotadas na "
+"Bolsa, o índice de ações aleatório depende apenas de fatores como "
+"volatilidade, preço de índice anterior (preço simulado anterior) e um número "
+"aleatório para determinar o preço do índice. Devido à utilização de números "
+"aleatórios, o preço (ou direção) do índice não pode ser previsto com "
+"certeza, comportando-se, assim, como um índice de mercado real. Quando o "
+"índice tem anexado um número, o número é a volatilidade percentual usada no "
+"cálculo do preço do índice. Por exemplo, para o Índice Random 25 utilizamos "
+"uma volatilidade de 25% no cálculo do preço do índice. O índice começou a "
+"1000 em 16 de Maio de 2004."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:9
 msgid "The required minimum deposit has been made by the client AND"
@@ -8702,10 +8733,12 @@ msgstr "Este mercado está atualmente fechado."
 
 #. (request()
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:386
-#, fuzzy
 #| msgid "or try out the <a href='%1'>Random Indices</a> which are always open."
 msgid "This market is presently closed. <a href='%1'>View Trading Times</a> or try out the <a href='%2'>Random Indices</a> which are always open."
-msgstr "ou experimente os<a href='%1'>Índices Aleatórios</a> que estão sempre abertos."
+msgstr ""
+"Este mercado está atualmente fechado. <a href='%1'>Consulte os horários de "
+"negociação</a> ou experimente os <a href='%1'>Índices de Randoms "
+"(Aleatórios)</a> que estão sempre abertos."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/market_warning.html.tt:8
 msgid "This market opens late today at"
@@ -8738,10 +8771,9 @@ msgid "This offer cannot be used in conjunction with any other offer."
 msgstr "Esta oferta não pode ser utilizada juntamente com nenhuma outra oferta."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:297
-#, fuzzy
 #| msgid "This page is unavailable for your scope."
 msgid "This page is unavailable."
-msgstr "Esse contrato está indisponível no seu âmbito."
+msgstr "Esta página está indisponível."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:49
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
@@ -8922,7 +8954,7 @@ msgstr "Negociações Toca/Não Toca"
 #: /home/git/translations/binary-static/src/templates/toolkit/global/header.html.tt:52
 #: /home/git/translations/binary-static/src/templates/toolkit/global/mobile_menu.html.tt:11
 msgid "Tour"
-msgstr "Tour"
+msgstr "Visita Guiada"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3560
 msgid "Tourism"
@@ -9255,11 +9287,11 @@ msgstr "Classe de aposta não suportado $bet_params->{bet_class}"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "Up / Down"
-msgstr "Sobe / Desce"
+msgstr "Acima / Abaixo"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "Up/Down trades"
-msgstr "Negociações Sobe/Desce"
+msgstr "Negociações Acima/Abaixo"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/trading_times.html.tt:26
 msgid "Upcoming Events"
@@ -9373,7 +9405,7 @@ msgstr "Veja Índice de Ativos"
 
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 msgid "View Rise/Fall contract prices across a range of markets."
-msgstr "Veja o preço dos contratos Em alta/Em queda em uma variedade mercados."
+msgstr "Veja o preço dos contratos Sobe/Desce em uma variedade mercados."
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2002
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2017
@@ -12066,19 +12098,19 @@ msgstr "XPT/GBP"
 
 #: Underlying Symbol RDBULL
 msgid "Random Bull"
-msgstr "Aleatórios do Touro (Altista)"
+msgstr "Random Touro (Altista)"
 
 #: Underlying Symbol RDYIN
 msgid "Random Yin"
-msgstr "Aleatórios de Yin"
+msgstr "Random Yin"
 
 #: Underlying Symbol RDMARS
 msgid "Random Mars"
-msgstr "Aleatórios de Marte"
+msgstr "Random Marte"
 
 #: Underlying Symbol RDSUN
 msgid "Random Sun"
-msgstr "Aleatórios do Sol"
+msgstr "Random Sol"
 
 #: Translation for market name
 msgid "Synthetic"
@@ -12310,7 +12342,7 @@ msgstr "Preveja se o mercado vai tocar ou não um determinado nível antes de ex
 
 #: Translation for contract category "callput"
 msgid "Up/Down"
-msgstr "Sobe/Desce"
+msgstr "Acima/Abaixo"
 
 #: Explanation for contract category Up/Down
 msgid "Predict the ending market level relative to a chosen barrier."
@@ -12375,7 +12407,9 @@ msgstr "superior"
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (CALL - daily)
 msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5."
-msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>superior</strong> a <strong>%6</strong> às %5."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 for estritamente "
+"<strong>superior</strong> a <strong>%6</strong> a %5."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12386,7 +12420,9 @@ msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>super
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (CALL - intraday)
 msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5 after %4."
-msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>superior</strong> a <strong>%6</strong> às %5 em %4."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 for estritamente "
+"<strong>superior</strong> a <strong>%6</strong> a %5 depois do %4."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12397,7 +12433,10 @@ msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>super
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (CALL - tick)
 msgid "%1 <strong>%2</strong> payout if %3 after <strong>%5 ticks</strong> is strictly <strong>higher</strong> than <strong>%6</strong>."
-msgstr "%1 <strong>%2</strong> de pagamento se %3 depois <strong>%5 ticks</strong>for estritamente <strong>superior</strong> a <strong>%6</strong>."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 for estritamente "
+"<strong>superior</strong> a <strong>%6</strong> depois de <strong>%5 "
+"ticks</strong>."
 
 #: Translation for contract type "DIGITDIFF"
 msgid "differs"
@@ -12442,7 +12481,9 @@ msgstr "termina fora"
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (EXPIRYMISS - daily)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>ends outside %7</strong> to <strong>%6</strong> at %5."
-msgstr "%1 <strong>%2</strong>de pagamento se %3 <strong>terminar fora de%7</strong>para <strong>%6</strong> às %5."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>terminar fora de "
+"%7</strong> a <strong>%6</strong> a %5."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12453,7 +12494,9 @@ msgstr "%1 <strong>%2</strong>de pagamento se %3 <strong>terminar fora de%7</str
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (EXPIRYMISS - intraday)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>ends outside %7</strong> to <strong>%6</strong> at %5 after %4."
-msgstr "%1 <strong>%2</strong> de pagamento se %3 <strong>terminar fora de%7</strong>para <strong>%6</strong>às %5  em  %4."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se %3 <strong>terminar fora de "
+"%7</strong> a <strong>%6</strong> a %5 depois de %4."
 
 #: Translation for contract type "EXPIRYRANGE"
 msgid "ends between"
@@ -12468,7 +12511,9 @@ msgstr "termina entre"
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (EXPIRYRANGE - daily)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>ends strictly between %7</strong> to <strong>%6</strong> at %5."
-msgstr "%1 <strong>%2</strong>de retorno se %3 <strong>finalizar estritamente entre %7</strong> e <strong>%6</strong> em %5."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>finalizar estritamente "
+"entre %7</strong> e <strong>%6</strong> em %5."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12479,7 +12524,9 @@ msgstr "%1 <strong>%2</strong>de retorno se %3 <strong>finalizar estritamente en
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (EXPIRYRANGE - intraday)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>ends strictly between %7</strong> to <strong>%6</strong> at %5 after %4."
-msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>finalizar estritamente entre %7</strong> e <strong>%6</strong> às %5 depois da %4."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>finalizar estritamente "
+"entre o %7</strong> e o <strong>%6</strong> a %5 depois de %4."
 
 #: Translation for contract type "NOTOUCH"
 msgid "does not touch"
@@ -12520,7 +12567,9 @@ msgstr "toca"
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (ONETOUCH - daily)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>touches %6</strong> through %5."
-msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>tocar %6</strong> até %5."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>tocar no %6</strong> até "
+"%5."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12531,7 +12580,9 @@ msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>tocar %6</strong> até %
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (ONETOUCH - intraday)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>touches %6</strong> through %5 after %4."
-msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>tocar %6</strong> até %5 depois de %4."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>tocar no %6</strong> até "
+"%5 depois de %4."
 
 #: Translation for contract type "PUT"
 msgid "lower"
@@ -12546,7 +12597,9 @@ msgstr "inferior"
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (PUT - daily)
 msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>lower</strong> than <strong>%6</strong> at %5."
-msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>inferior</strong> a <strong>%6</strong> em %5."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se %3 for estritamente "
+"<strong>inferior</strong> a <strong>%6</strong> em %5."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12557,7 +12610,9 @@ msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>infer
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (PUT - intraday)
 msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>lower</strong> than <strong>%6</strong> at %5 after %4."
-msgstr "%1 <strong>%2</strong> de pagamento se %3 for estritamente <strong>inferior</strong> a <strong>%6</strong> às %5 depois %4."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se %3 for estritamente "
+"<strong>inferior</strong> a <strong>%6</strong> a %5 depois de %4."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12598,7 +12653,7 @@ msgstr "%1 <strong>%2</strong> de pagamento se %3 <strong>ficar entre %7</strong
 
 #: Translation for contract type "SPREADD"
 msgid "spread down"
-msgstr ""
+msgstr "spread down"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12619,16 +12674,18 @@ msgstr "Pagamento de %1 <strong>%2</strong> por cada ponto que %3 <strong>descer
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADD - point)
-#, fuzzy
 #| msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>[plural,_4,%d point,%d points]</strong> and stop profit of <strong>[plural,_5,%d point,%d points]</strong>."
-msgstr "Pagamento de %1 <strong>%2</strong> por cada ponto que %3 <strong>descer</strong> desde o <strong>nível de entrada</strong>, com limite de perdas de <strong>%6 %4</strong> e limite de ganhos de <strong>%6 %5</strong>."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> por cada ponto que %3 "
+"<strong>descer</strong> desde o <strong>nível de entrada</strong>, com "
+"limite de perdas de <strong>[plural,_4,%d ponto,%d pontos]</strong> e limite "
+"de ganhos de <strong>[plural,_5,%d ponto,%d pontos]</strong>."
 
 #: Translation for contract type "SPREADU"
-#, fuzzy
 #| msgid "Spread"
 msgid "spread up"
-msgstr "Spread"
+msgstr "spread up"
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12649,10 +12706,13 @@ msgstr "Pagamento de %1 <strong>%2</strong> por cada ponto que %3 <strong>subir<
 #. %6 - High (or single) barrier
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (SPREADU - point)
-#, fuzzy
 #| msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>%6 %4</strong> and stop profit of <strong>%6 %5</strong>."
 msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>rises</strong> from <strong>entry level</strong>, with stop loss of <strong>[plural,_4,%d point,%d points]</strong> and stop profit of <strong>[plural,_5,%d point,%d points]</strong>."
-msgstr "Pagamento de %1 <strong>%2</strong> por cada ponto que %3 <strong>subir</strong> desde o <strong>nível de entrada</strong>, com limite de perdas de <strong>%6 %4</strong> e limite de ganhos de <strong>%6 %5</strong>."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> por cada ponto que %3 "
+"<strong>subir</strong> desde o <strong>nível de entrada</strong>, com limite "
+"de perdas de <strong>[plural,_4,%d ponto,%d pontos]</strong> e limite de "
+"ganhos de <strong>[plural,_5,%d pontos,%d pontos]</strong>."
 
 #: Translation for contract type "UPORDOWN"
 msgid "goes outside"
@@ -12667,7 +12727,9 @@ msgstr "vai para fora"
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (UPORDOWN - daily)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>goes outside %7</strong> to <strong>%6</strong> through %5."
-msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>terminar fora de %7</strong> a <strong>%6</strong> até %5."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>terminar fora de "
+"%7</strong> a <strong>%6</strong> até %5."
 
 #. %1 - Payout Currency (example USD)
 #. %2 - Payout value (example 100)
@@ -12678,7 +12740,9 @@ msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>terminar fora de %7</str
 #. %7 - Low barrier (when present)
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 <strong>%2</strong> payout if %3 <strong>goes outside %7</strong> and <strong>%6</strong> through %5 after %4."
-msgstr "%1 <strong>%2</strong> de retorno se %3 <strong>sair de %7</strong> e <strong>%6</strong> até %5 depois de %4."
+msgstr ""
+"Pagamento de %1 <strong>%2</strong> se o %3 <strong>sair de %7</strong> e "
+"<strong>%6</strong> até %5 depois de %4."
 
 #~| msgid "%1 <strong>%2</strong> payout if the <strong>last tick</strong> of %3 is strictly <strong>lower</strong> than the <strong>average</strong> of the <strong>%5 ticks</strong>."
 #~ msgid "Payout of %1 <strong>%2</strong> for every point %3 <strong>falls</strong> from <strong>entry level</strong>, with stop loss of <strong>%4 %6</strong> and stop profit of <strong>%5 %6</strong>."
