@@ -131,6 +131,7 @@ if (end_time_elm) {
 var amount_elm = document.getElementById('amount');
 if (amount_elm) {
     amount_elm.addEventListener('input', function(e) {
+        sessionStorage.setItem('amount', e.target.value);
         processPriceRequest();
     });
 }
@@ -159,6 +160,7 @@ if (date_start_elm) {
 var amount_type_elm = document.getElementById('amount_type');
 if (amount_type_elm) {
     amount_type_elm.addEventListener('change', function (e) {
+        sessionStorage.setItem('amount_type', e.target.value);
         processPriceRequest();
     });
 }
@@ -188,6 +190,17 @@ if (submarket_elm) {
             var event = new Event('change');
             elem.dispatchEvent(event);
         }
+    });
+}
+
+/*
+ * attach an event to change in currency
+ */
+var currency_elm = document.getElementById('currency');
+if (currency_elm) {
+    currency_elm.addEventListener('change', function (e) {
+        sessionStorage.setItem('currency', e.target.value);
+        processPriceRequest();
     });
 }
 
