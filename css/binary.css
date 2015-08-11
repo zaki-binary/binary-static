@@ -70,7 +70,7 @@ body {
   background-repeat: repeat-x;
   padding: 0px;
   margin: 0px;
-  font-family: proxima-nova, arial;
+  font-family: roboto, sans-serif;
 }
 body .ui-widget {
   font-size: 0.9em;
@@ -106,13 +106,9 @@ p {
   line-height: 1.4em;
 }
 
-h1, h2, h3, h4 {
-  font-weight: bold;
-}
-
 h1 {
-  font-size: 34px;
-  font-weight: 700;
+  font-size: 36px;
+  font-weight: 300;
   color: #e98024;
 }
 h1 a {
@@ -127,7 +123,7 @@ h1.dark a {
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 28px;
   color: #2a3052;
 }
 h2 a {
@@ -143,7 +139,7 @@ h2.center {
 
 h3 {
   color: black;
-  font-size: 20px;
+  font-size: 22px;
 }
 h3 a {
   color: black !important;
@@ -418,11 +414,10 @@ fieldset .error-msg {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   overflow: visible;
   border: 0;
 }
@@ -450,11 +445,10 @@ fieldset .error-msg {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   overflow: visible;
   white-space: nowrap;
   border: 0;
@@ -605,7 +599,6 @@ ul.checked li {
     transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spinning {
   from {
     transform: rotate(0deg);
@@ -615,7 +608,6 @@ ul.checked li {
     transform: rotate(360deg);
   }
 }
-
 .spinner {
   -webkit-animation: spinning 1s infinite linear;
   animation: spinning 1s infinite linear;
@@ -634,7 +626,6 @@ ul.checked li {
     opacity: 1;
   }
 }
-
 @-webkit-keyframes pulsing {
   0% {
     opacity: 1;
@@ -648,7 +639,6 @@ ul.checked li {
     opacity: 1;
   }
 }
-
 .pulser {
   -webkit-animation: pulsing 3s infinite ease;
   animation: pulsing 3s infinite ease;
@@ -712,11 +702,10 @@ ul.checked li {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   border-radius: 2px;
   font-size: 90%;
   padding: 2px 4px 2px 4px;
@@ -807,11 +796,10 @@ ul.checked li {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   border: 0;
   text-transform: uppercase;
   padding: 5px 3px;
@@ -848,11 +836,10 @@ ul.checked li {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background-position: 104.6% 0.3%;
   background-repeat: no-repeat;
   padding: 6px;
@@ -907,12 +894,14 @@ ul.checked li {
 
 #footer #footer-menu {
   background: #2a3052;
+  padding: 10px 0;
 }
 #footer #footer-menu h1 {
-  font-size: 80%;
+  font-size: 13px;
+  font-weight: bold;
 }
 #footer #footer-menu a {
-  font-size: 74%;
+  font-size: 13px;
   font-weight: normal;
   color: white;
 }
@@ -936,7 +925,7 @@ ul.checked li {
   line-height: 1.2em;
   text-align: justify;
   color: white;
-  font-size: 64%;
+  font-size: 10px;
 }
 #footer #footer-regulatory #iom_icon_footer {
   max-width: 90px;
@@ -999,7 +988,7 @@ ul.checked li {
 #footer #footer-last .gambling {
   margin: 0;
   text-align: justify;
-  font-size: 74%;
+  font-size: 13px;
   font-weight: 400;
   color: white;
   line-height: 110%;
@@ -1294,11 +1283,10 @@ ul.checked li {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   display: inline;
 }
 #exception a:visited {
@@ -1433,10 +1421,10 @@ abbr {
 .home-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .home-content #open-account {
@@ -1468,11 +1456,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background: #2a3052;
   padding: 9px 10.83333%;
   border: 0;
@@ -1501,9 +1488,6 @@ abbr {
 .home-content #xsection1 {
   padding: 30px 0;
   display: inline-block;
-}
-.home-content #xsection1 p {
-  font-size: 110%;
 }
 .home-content #xsection1 ul li {
   padding-left: 10px;
@@ -1702,14 +1686,14 @@ abbr {
     margin-right: 0px;
   }
   .home-content .xcta .xreal span {
-    font-weight: 700;
+    font-weight: 300;
     padding: 20px 20px;
     width: 60%;
     margin: 10px 0;
   }
   .home-content .xcta .xvirtual span {
     background-color: #2a3052;
-    font-weight: 700;
+    font-weight: 300;
     padding: 20px 20px;
     width: 60%;
   }
@@ -1726,10 +1710,10 @@ abbr {
 .home2-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .home2-content #open-account {
@@ -1761,11 +1745,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background: #2a3052;
   padding: 9px 10.83333%;
   border: 0;
@@ -2005,10 +1988,10 @@ abbr {
 .ad-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .ad-content #open-account {
@@ -2040,11 +2023,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background: #2a3052;
   padding: 9px 10.83333%;
   border: 0;
@@ -2289,10 +2271,10 @@ abbr {
 .ad1-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .ad1-content #open-account {
@@ -2324,11 +2306,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background: #2a3052;
   padding: 9px 10.83333%;
   border: 0;
@@ -2573,10 +2554,10 @@ abbr {
 .ad2-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .ad2-content #open-account {
@@ -2608,11 +2589,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background: #2a3052;
   padding: 9px 10.83333%;
   border: 0;
@@ -2857,10 +2837,10 @@ abbr {
 .ad3-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .ad3-content #open-account {
@@ -2892,11 +2872,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   background: #2a3052;
   padding: 9px 10.83333%;
   border: 0;
@@ -3190,11 +3169,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   display: block;
 }
 .get-started .sidebar-left .open-account a:visited {
@@ -3230,11 +3208,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   display: block;
 }
 .get-started .sidebar-right .open-account a:visited {
@@ -3254,6 +3231,7 @@ abbr {
 }
 .get-started dl .section-header {
   padding: 10px;
+  font-weight: normal;
 }
 .get-started dl .section-info {
   width: auto;
@@ -3265,12 +3243,9 @@ abbr {
 .get-started dl a {
   display: block;
   color: white;
-  font-weight: bold;
-  padding-bottom: 0.5em;
   text-align: center;
   background: black;
   text-decoration: none;
-  font-size: 90%;
 }
 .get-started dl a:hover {
   background: #14602b;
@@ -3335,11 +3310,10 @@ abbr {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   padding: 0.4375em 3.19149%;
 }
 .get-started .subsection-navigation a:visited {
@@ -5604,11 +5578,10 @@ table .loss, table .lower {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   display: block;
 }
 .static_full .sidebar .open-account a:visited {
@@ -5650,11 +5623,10 @@ table .loss, table .lower {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   display: block;
 }
 .static_full .sidebar-button a:visited {
@@ -5697,11 +5669,10 @@ table .loss, table .lower {
   line-height: 100%;
   background: #2e8836;
   border-radius: 4px;
-  font-weight: bold;
   text-transform: capitalize;
   padding: 10px 25px 10px 25px;
   display: inline-block;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   padding: 6px 15px 6px 15px;
   font-size: 14px;
 }
@@ -6055,7 +6026,7 @@ table .loss, table .lower {
 @media screen and (max-width: 400px) {
   @-ms-viewport {
     width: device-width;
-}
+  }
 }
 .grd-grid-0 {
   width: 0%;
@@ -7681,7 +7652,7 @@ html.mm-opened #mm-blocker {
   left: 0;
   top: 0;
   margin: 0;
-  border: 0px solid rgba(0, 0, 0, 0);
+  border: 0px solid transparent;
 }
 
 html.mm-opening .mm-page,
