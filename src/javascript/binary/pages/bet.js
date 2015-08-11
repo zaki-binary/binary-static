@@ -138,7 +138,7 @@ pjax_config_page('chart_application', function () {
     };
 });
 
-pjax_config_page('newtrade', function () {
+pjax_config_page('trading', function () {
     return {
         onLoad: function () {
             TradeSocket.init();
