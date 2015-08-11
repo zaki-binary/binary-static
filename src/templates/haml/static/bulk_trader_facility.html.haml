@@ -9,9 +9,9 @@
           %li#sidebar-link-section-1.selected
             %a{:href => "#bulk-trader-facility"}= l('Bulk trader facility')
           %li#sidebar-link-section-2
-            %a{:href => "#client-guide"}= l('[_1] client\'s guide', stash->{website_name})
+            %a{:href => "#client-guide"}= l("[_1] client's guide", stash->{website_name})
           %li#sidebar-link-section-3
-            %a{:href => "#account-manager-guide"}= l('Account manager\'s guide')
+            %a{:href => "#account-manager-guide"}= l("Account manager's guide")
           %li#sidebar-link-section-4
             %a{:href => "#commisions-account-manager"}= l('Commissions for account managers')
           %li#sidebar-link-section-5
@@ -36,7 +36,7 @@
         .section-content
           #section-2
             .grd-grid-12
-              %h1= l('[_1] client\'s guide', stash->{website_name})
+              %h1= l("[_1] client's guide", stash->{website_name})
               %p= l('If you’d like to use an account manager to trade for you, you first need to authorize them. All you need to do is get an API token, which will be unique to you.')
               %p!= l("<strong>To get your API token:</strong>")
               %ol
@@ -52,7 +52,7 @@
         .section-content
           #section-3
             .grd-grid-12
-              %h1= l('Account manager\'s guide')
+              %h1= l("Account manager's guide")
               %p= l('You can place simultaneous trades for multiple clients once they authorize you. Note that all trades must have the same value and be placed in the same currency.')
               %p= l('To trade for your clients:')
               %ol
@@ -62,7 +62,7 @@
                 %li= l('Insert your client’s name or login ID (under Party Name), and their token as shown in the image below. This will activate their API token.')
                 %p
                   %img.responsive{:src => url_for('images/pages/bulk_trade/acc-manager-guide-1.png')}
-                %li= l('Select Trading, at the top of the page, to purchase a contract. At the top left, you will see your client’s name and details. Always confirm the client\'s details before buying a trade on their behalf.')
+                %li= l("Select Trading, at the top of the page, to purchase a contract. At the top left, you will see your client’s name and details. Always confirm the client's details before buying a trade on their behalf.")
                 %p
                   %img.responsive{:src => url_for('images/pages/bulk_trade/acc-manager-guide-2.png')}
                 %li= l('Select the contract that you want to place. Wait for the price details to be displayed and then click Buy.')
