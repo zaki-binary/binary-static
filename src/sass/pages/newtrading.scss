@@ -1,3 +1,24 @@
+@keyframes spinning {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+@-webkit-keyframes spinning {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+.spinner {
+    -webkit-animation: spinning .2s * 5 infinite linear;
+    animation: spinning .2s * 5 infinite linear;
+}
+
+.progress {
+    @extend .spinner;
+    background-image: url('../images/pages/binary-symbol-logo.svg');
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+}
+
 .row, .row-inner {
     flex-direction: row;
     display: flex;
@@ -147,13 +168,6 @@ ul[role=segmented] {
 
 #loading_icon {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    border: 8px solid $COLOR_BLUE;
-    border-right-color: $COLOR_ORANGE;
-    border-radius: 50%;
-    box-shadow: 0 0 25px 2px $COLOR_BLUE;
-    animation: spin 1s linear infinite;
     top: 45%;
     left: 45%;
 }
