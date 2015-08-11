@@ -193,9 +193,9 @@ var BetPrice = function() {
             var that = this;
             return {
                 reset: function() {
-                    var that = this;
-                    if (typeof that._stream !== 'undefined') {
-                        that._stream.close();
+                    if (typeof this._stream !== 'undefined') {
+                        this._stream.close();
+                        this._stream.onmessage = function() {};
                     }
                 },
                 validate_change: function(target) {
@@ -220,6 +220,7 @@ var BetPrice = function() {
                         }
                         var target = $(e.target);
                         BetSell.model.reload_page_on_close(true);
+                        that.spread_con().find('#sell_level').parent().hide();
                         that.sell_bet(target);
                         return false;
                     }).addClass('unbind_later');
@@ -250,20 +251,31 @@ var BetPrice = function() {
                     }));
                     $('.price_box').fadeTo(200, 0.6);
                 },
+                on_sell_error: function(form, resp, resp_status, jqXHR) {
+                    var that = this;
+
+                    if (typeof(resp.error) !== 'undefined') {
+                        that.err_con().find('p').text(resp.error);
+                        that.err_con().show();
+                    }
+                },
                 on_sell_success: function(form, resp, resp_status, jqXHR) {
                     var that = this;
 
                     var con = that.spread_con();
                     if (typeof(resp.error) !== 'undefined') {
-                        that.err_con.find('p').text(resp.error);
-                        that.err_con.show();
+                        that.err_con().find('p').text(resp.error);
+                        that.err_con().show();
                     } else {
-                        var color = resp.value.dollar > 0 ? 'profit' : 'loss';
-                        con.find('#status').text(text.localize('Closed')).addClass(color);
-                        con.find('#pnl_value').text(resp.value.dollar).addClass(color);
+                        con.find('#status').addClass('loss').text(text.localize('Closed'));
+                        that.paint_it(resp.value.dollar, con.find('#pnl_value').text(resp.value.dollar));
                         con.find('#pnl_point').text(resp.value.point);
                         con.find('#exit_level').text(resp.exit_level).parents('tr').show();
                     }
+                },
+                paint_it: function(value, target) {
+                    var color = value > 0 ? 'profit' : 'loss';
+                    $(target).removeClass().addClass(color);
                 },
                 stream: function(channel) {
                     var that = this;
@@ -290,7 +302,7 @@ var BetPrice = function() {
                                     con.find('.close_position').show();
                                     con.find('#sell_level').text(level);
                                     var current_value = that.round(parseFloat(prices[i].value.dollar),2);
-                                    con.find('#pnl_value').text(current_value);
+                                    that.paint_it(current_value, con.find('#pnl_value').text(current_value));
                                     con.find('#pnl_point').text(prices[i].value.point);
                                 }
                             }
