@@ -71,6 +71,7 @@ var User = function() {
 
 var Client = function() {
     this.loginid =  $.cookie('loginid');
+    this.residence =  $.cookie('residence');
     this.is_logged_in = false;
     this.is_real = false;
     if(this.loginid === null || typeof this.loginid === "undefined") {
@@ -87,11 +88,10 @@ var Client = function() {
     var dl_info = gtm_data_layer_info();
     if(dl_info.length > 0) {
         for (var i=0;i<dl_info.length;i++) {
-            if(dl_info[i].event == 'log_in' || dl_info[i].event == 'new_account') {
+            if(dl_info[i].event == 'log_in') {
                 SessionStore.set('client_info',
                     this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname +
-                    ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone +
-                    ':' + dl_info[i].params.bom_country_code
+                    ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone
                 );
             }
         }
@@ -106,7 +106,6 @@ var Client = function() {
             this.name = this.first_name +  ' ' + this.last_name;
             this.email = parsed[3];
             this.phone = parsed[4];
-            this.residence = parsed[5];
         } else {
             SessionStore.remove('client_info');
         }
