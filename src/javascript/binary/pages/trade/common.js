@@ -164,13 +164,26 @@ var isVisible = function (elem) {
 /*
  * function to hide and display the loading icon for price container
  */
-
 var hidePriceLoadingIcon = function () {
     var elm = document.getElementById('loading_container');
-    elm.style.display = 'none';
+    if (elm) {
+        elm.style.display = 'none';
+    }
 };
 
 var showPriceLoadingIcon = function () {
     var elm = document.getElementById('loading_container');
-    elm.style.display = 'block';
+    if (elm) {
+        elm.style.display = 'block';
+    }
 };
+
+/*
+ * function to hide contract confirmation overlay container
+ */
+var hideOverlayContainer = function () {
+    var elm = document.getElementById('contract_confirmation_container');
+    if (elm) {
+        elm.style.display = 'none';
+    }
+}

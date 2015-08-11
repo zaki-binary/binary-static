@@ -16,6 +16,7 @@ var Message = (function () {
                 processMarketOfferings(response, market);
             } else if (type === 'contracts') {
                 processContractFormOfferings(response);
+                hideOverlayContainer();
             } else if (type === 'payout_currencies') {
                 displayCurrencies(response);
                 processPriceRequest();
