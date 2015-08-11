@@ -1239,34 +1239,26 @@ Contents.prototype = {
     topbar_message_visibility: function() {
         if(this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
-            var has_real = false;
 
-            var has_financial = false;
-            var check_financial = false;
-            if (/MLT/.test(this.client.loginid)) {
-                check_financial = true;
-            }
-
-            for (var i=0;i<loginid_array.length;i++) {
-                var loginid = loginid_array[i].id;
-                var real = loginid_array[i].real;
-
-                if (real) {
-                    has_real = true;
-                    if (!check_financial) {
-                        break;
-                    }
-                    if (loginid_array[i].financial) {
-                        has_financial = true;
+            if (!this.client.is_real) {
+                for (var i=0;i<loginid_array.length;i++) {
+                    if (loginid_array[i].real) {
+                        $('#virtual-upgrade-link').addClass('invisible');
                         break;
                     }
                 }
-            }
-            if (has_real) {
-                $('#virtual-upgrade-link').addClass('invisible');
-                $('#virtual-upgrade-link').hide();
-
-                if (check_financial && !has_financial) {
+            } else {
+                var show_financial = false;
+                if (/MLT/.test(this.client.loginid)) {
+                    show_financial = true;
+                    for (var j=0;j<loginid_array.length;j++) {
+                        if (loginid_array[j].financial) {
+                            show_financial = false;
+                            break;
+                        }
+                    }
+                }
+                if (show_financial) {
                     $('#financial-upgrade-link').removeClass('invisible');
                     if ($('#investment_message').length > 0) {
                         $('#investment_message').removeClass('invisible');
@@ -8550,7 +8542,16 @@ var disable_residence = function () {
 
 var enable_residence_form_submit = function () {
     $('form#openAccForm').submit(function (event) {
-        $('#residence').removeAttr('disabled');
+        var field_error = false;
+        $("form#openAccForm").find('p.errorfield:visible').each(function() {
+            if ($(this).text().length > 0) {
+                field_error = true;
+                return false;
+            }
+        });
+        if (!field_error) {
+            $('#residence').removeAttr('disabled');
+        }
     });
 };
 
@@ -8581,12 +8582,21 @@ var upgrade_investment_disabled_field = function () {
 var financial_enable_fields_form_submit = function () {
     var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
     $('form#openAccForm').submit(function (event) {
-        fields.forEach(function (element, index, array) {
-            var obj = $('#'+element);
-            if (obj.length > 0) {
-                obj.removeAttr('disabled');
+        var field_error = false;
+        $("form#openAccForm").find('p.errorfield:visible').each(function() {
+            if ($(this).text().length > 0) {
+                field_error = true;
+                return false;
             }
         });
+        if (!field_error) {
+            fields.forEach(function (element, index, array) {
+                var obj = $('#'+element);
+                if (obj.length > 0) {
+                    obj.removeAttr('disabled');
+                }
+            });
+        }
     });
 };
 
