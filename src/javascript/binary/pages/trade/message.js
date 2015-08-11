@@ -22,6 +22,8 @@ var Message = (function () {
             } else if (type === 'proposal') {
                 Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
                 hidePriceLoadingIcon();
+            } else if (type === 'open_receipt') {
+                Purchase.display(response);
             }
         } else {
             console.log('some error occured');
