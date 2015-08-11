@@ -76,8 +76,7 @@ sub haml {
         'ticker' => ['home/ticker', ''],
 
         'why-us' => ['static/why_us', 'full_width'],
-        'partnerapi' => ['static/devguide', 'full_width'],
-        'devguide' => ['static/partner_api', 'full_width'],
+        'partnerapi' => ['static/partner_api', 'full_width'],
         'tour' => ['static/tour', 'full_width'],
         'responsible-trading' => ['static/responsible_trading', 'full_width'],
         'careers' => ['static/careers', 'full_width'],

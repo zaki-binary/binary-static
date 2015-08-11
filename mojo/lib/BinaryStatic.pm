@@ -64,7 +64,6 @@ sub startup {
     $r->get('/country')->to('page#country');
     $r->get('/why-us')->to('page#haml')->name('why-us');
     $r->get('/partnerapi')->to('page#haml');
-    $r->get('/devguide')->to('page#haml')->name('devguide');
 
     #CRO - Matjaz
     $r->get('/home5')->to('page#haml')->name('home5');
