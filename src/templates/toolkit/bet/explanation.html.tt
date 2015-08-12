@@ -8,31 +8,25 @@
 [%
     static_url = String.new(text => static_url)
 
-    flash.risefall        = static_url.copy.append("flash/betguide-risefall.swf")
-    flash.higherlower     = static_url.copy.append("flash/betguide-higherlower.swf")
-    flash.touchnotouch    = static_url.copy.append("flash/betguide-touchnotouch.swf")
-    flash.staysinout      = static_url.copy.append("flash/betguide-staysinout.swf")
-    flash.endsinout       = static_url.copy.append("flash/betguide-endsinout.swf")
-    flash.updown          = static_url.copy.append("flash/betguide-updown.swf")
-    image.spreads          = [ request.url_for('images/pages/get-started/spreadbet-long.png'),request.url_for('images/pages/get-started/spreadbet-long.png') ]
+    mp4.risefall        = static_url.copy.append("mp4/betguide-risefall.mp4")
+    mp4.higherlower     = static_url.copy.append("mp4/betguide-higherlower.mp4")
+    mp4.touchnotouch    = static_url.copy.append("mp4/betguide-touchnotouch.mp4")
+    mp4.staysinout      = static_url.copy.append("mp4/betguide-staysinout.mp4")
+    mp4.endsinout       = static_url.copy.append("mp4/betguide-endsinout.mp4")
+    mp4.updown          = static_url.copy.append("mp4/betguide-updown.mp4")
+    mp4.spreads          = [ request.url_for('images/pages/get-started/spreadbet-long.png'),request.url_for('images/pages/get-started/spreadbet-long.png') ]
 %]
 
 <div class='grd-grid-12 grd-parent'>
 
-    [% IF show_flash %]
-        [% IF flash.$form_name %]
+    [% IF mp4.$form_name %]
         <div class='grd-grid-4 grd-grid-mobile-12'>
             <div id="bet-guide-demo">
-                <object width="245" height="160" type="application/x-shockwave-flash" data="[% flash.$form_name %]">
-                    <param name="movie" value="[% flash.$form_name %]" />
-                    <param name="menu" value="false" />
-                    <param name="quality" value="high" />
-                    <param name="bgcolor" value="#FFFFFF" />
-                    <param name="wMode" value="transparent" />
-                </object>
+                <video width="245" height="160" controls>
+                    <source src="[% mp4.$form_name %]" type="video/mp4" />
+                </video>
             </div>
         </div>
-        [% END %]
     [% END %]
 
     [% IF show_image %]
@@ -43,7 +37,7 @@
         </div>
     [% END %]
 
-    [% IF show_winning && show_flash && flash.$form_name  %]
+    [% IF show_winning && mp4.$form_name  %]
         <div class='grd-grid-8 grd-grid-mobile-12'>
             <h4>
                 [% l("Winning the contract") %]
