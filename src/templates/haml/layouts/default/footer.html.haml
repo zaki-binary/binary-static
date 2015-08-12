@@ -3,16 +3,20 @@
     .grd-container.grd-default-container
       .grd-grid-6.grd-grid-mobile-12.grd-parent
         .grd-grid-4
-          %h1= l('Partners')
+          %h1= l('About Us')
           %ul
-            %li.affiliate
-              %a.pjaxload{:href=>url_for("/affiliate/signup")}= l('Affiliate Program')
-            %li.ja-hide
-              %a.pjaxload{:href=>url_for("white-labels")}= l('White Labels')
-            %li.ja-hide
-              %a.pjaxload{:href=>url_for("partnerapi")}= l('Partner API')
-            %li.ja-hide
-              %a.pjaxload{:href=>url_for("open-source-projects")}= l('Open Source')
+            %li
+              %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('Group Information')
+            %li
+              %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
+            %li
+              %a.pjaxload{:href=>url_for("/legal/us_patents"), :class=>"us_patent_link"}= l('Patents')
+            %li
+              %a.pjaxload{:href=>url_for("careers")}= l('Careers')
+            %li
+              %a{:href=>"http://binarycom.statuspage.io", :target => "_blank"}= l('Network Status')
+            %li
+              %a.pjaxload{:href=>url_for("contact")}= l('Contact Us')
         .grd-grid-4
           %h1= l('Education')
           %ul
@@ -24,6 +28,8 @@
               %a.pjaxload{:href=>url_for("/tour"), :class => 'pjaxload'}= l('Platform Tour')
             %li.ja-hide
               %a{:href=>"http://www.gamcare.org.uk/", :target => "_blank"}= l('GamCare')
+            %li.blog
+              %a{:href=>"http://blog.binary.com", :target => '_blank'}= l('Blog')
             %li
               %a{:href=>"http://blog.binary.com/en/webinar/", :target => "_blank"}= l('Webinars')
         .grd-grid-4
@@ -62,25 +68,13 @@
             %li
               %a.pjaxload{:href=>url_for("/charting/livechart")}= l('Live Charts')
             %li
-              %a.pjaxload{:href => '//highcharts.binary.com'}= l('HighCharts')              
+              %a.pjaxload{:href => '//highcharts.binary.com'}= l('HighCharts')
         .grd-grid-4
-          %h1= l('About Us')
-          %ul
-            %li
-              %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('Group Information')
-            %li
-              %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
-            %li
-              %a.pjaxload{:href=>url_for("/legal/us_patents"), :class=>"us_patent_link"}= l('Patents')
-            %li
-              %a.pjaxload{:href=>url_for("careers")}= l('Careers')
-            %li.blog
-              %a{:href=>"http://blog.binary.com", :target => '_blank'}= l('Blog')
-            %li
-              %a{:href=>"http://binarycom.statuspage.io", :target => "_blank"}= l('Network Status')
-            %li
-              %a.pjaxload{:href=>url_for("contact")}= l('Contact Us')
-
+          %h1= l('Partner with us')
+            %ul.partner
+              %li
+                %a.pjaxload{:href =>url_for("/partners")}
+                  %img.responsive#iom_icon_footer{:src => url_for('images/pages/footer/partner-icon.svg')}
   #footer-regulatory.ja-top-padding
     .grd-container.grd-default-container
       .grd-parent.grd-grid-12.ja-hide
