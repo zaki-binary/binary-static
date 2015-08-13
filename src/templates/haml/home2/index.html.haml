@@ -14,7 +14,11 @@
           %h1.dark= l('The Premier Platform for Binary Options Trading')
           %p.break= l('Trade 24/7, even on weekends.')
           %p.no-break= l('Customize your trades to meet your needs.')
-      #open-account.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-4
+          %ul.checked
+            %li!= l('Real-time Prices')
+            %li!= l('Returns above 100%')
+            %li!= l(' No Hidden Fees')
+      #open-account.grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-3
         %p= l('Get started now')
         %form#virtual-acc-form{ :name => 'oppAccForm', :action => url_for('new_virtual'), :method => 'post' }
           %span#virtual-fields
@@ -32,6 +36,7 @@
                 %input{:type => 'hidden', :name => 'l', :value => stash('language')}
             %span.grd-grid-12.grd-no-gutter
               %input.button.xtopcta{:id => 'btn_registration', :type => 'submit', :value => stash('createacc'), :disabled => 'disabled'}
+      .grd-grid-1.grd-grid-mobile-12.grd-grid-phablet-1
 .grd-container
   %hr.xtopseparator
   #xsection1
