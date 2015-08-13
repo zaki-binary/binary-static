@@ -39,6 +39,9 @@ var TradeSocket = (function () {
         tradeSocket = new WebSocket(socketUrl);
 
         tradeSocket.onopen = function (){
+            if($.cookie('login')) {
+                tradeSocket.send(JSON.stringify({authorize: $.cookie('login')}));
+            }
             sendBufferedSends();
         };
 

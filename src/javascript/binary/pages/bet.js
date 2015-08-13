@@ -143,9 +143,6 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             TradeSocket.init();
             TradeSocket.send({offerings: {contracts: 0}});
-            if ($.cookie('login')) {
-                TradeSocket.send({authorize: $.cookie('login')});
-            }
         },
         onUnload: function() {
             TradeSocket.close();

@@ -20,7 +20,7 @@ var Contract = (function () {
     var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {}, contractType = {};
 
     var details = function (contractObject, expiryType) {
-        var contracts = contractObject.contracts, contractsArray = [], sendAll = true;
+        var contracts = contractObject['contracts_for'], contractsArray = [], sendAll = true;
         open = contracts['open'];
         close = contracts['close'];
 
