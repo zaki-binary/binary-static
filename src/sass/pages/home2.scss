@@ -19,16 +19,14 @@
     background: $COLOR_ORANGE;
     color: $COLOR_WHITE;
     text-align: center;
-    border-radius: 5px;
-    margin-top: 30px;
+    border-radius: 0;
+    margin-top: -15px;
     text-align: center;
     padding: 0 0 0;
-    p {
-      line-height: 2em;
-      margin: 0;
-      background: $COLOR_DARK_BLUE;
-      font-size: 100%;
-      border-radius: 5px 5px 0 0;
+    h3 {
+      color: $COLOR_DARK_BLUE;
+      padding: 10px;
+      margin-top: 10px;
     }
     #virtual-fields {
         input, select, textarea {
@@ -39,13 +37,14 @@
     }
     input[type=submit] {
       @include link-button;
+      width: 88%;
       background: $COLOR_BLUE;
       padding: 9px 10.83333%;
       margin-top: 0;
       margin-bottom: 15px;
       border: 0;
       white-space: normal;
-      font-size: 16px;
+      font-size: 18px;
       &:hover {
                 text-decoration: none;
                 background-color: $COLOR_DARK_GREEN;
@@ -87,7 +86,7 @@
     padding-bottom: 40px;
 }
 #xtop {
-    padding-top: 40px;
+    padding-top: 30px;
     padding-left: 10px;
     text-align: center;
     line-height: 1.5;
@@ -242,7 +241,7 @@
 }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) {
     .home2-content{
         #xtop {
             padding-top: 30px;
@@ -260,16 +259,22 @@
             margin-top: 30px;
         }
         #open-account {
-            width: 100%;
             margin-left: 0;
-            margin-top: 10px;
+            margin-top: 20px;
+            h3 {
+                background: $COLOR_DARK_BLUE;
+                color: $COLOR_WHITE;
+            }
+            input[type=submit] {
+                width: 86% !important;
+            }
         }
         .virtual-acc-left {
             width: 80% !important;
             margin-right: 0;
         }
         #residence {
-            width: 80% !important;
+            width: 86% !important;
             margin: 0;
         }
         .xtopcta {

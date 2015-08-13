@@ -1,7 +1,7 @@
 - stash(
 -   title => l('[_1]: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices',stash('broker_name')),
 -   next_link => '/why-us',
--   createacc => l('Create account'),
+-   createacc => l('Create free account'),
 -   emailtext   => l('Enter your email'),
 -   passwordstext   => l('Choose a password'),
 -   reenter_password => l('Re-enter your password'),
@@ -9,7 +9,7 @@
 #banner
   .grd-container
     .grd-grid-12.grd-row-padding
-      .grd-grid-8.grd-grid-mobile-12.grd-grid-phablet-8
+      .grd-grid-7.grd-grid-mobile-12.grd-grid-phablet-12
         #xtop
           %h1.dark= l('The Premier Platform for Binary Options Trading')
           %p.break= l('Trade 24/7, even on weekends.')
@@ -18,8 +18,9 @@
             %li!= l('Real-time Prices')
             %li!= l('Returns above 100%')
             %li!= l(' No Hidden Fees')
-      #open-account.grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-3
-        %p= l('Get started now')
+      .grd-grid-1.grd-hide-mobile.grd-grid-phablet-2
+      #open-account.grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-8
+        %h3= l('Get started now')
         %form#virtual-acc-form{ :name => 'oppAccForm', :action => url_for('new_virtual'), :method => 'post' }
           %span#virtual-fields
             .grd-parent
@@ -36,7 +37,7 @@
                 %input{:type => 'hidden', :name => 'l', :value => stash('language')}
             %span.grd-grid-12.grd-no-gutter
               %input.button.xtopcta{:id => 'btn_registration', :type => 'submit', :value => stash('createacc'), :disabled => 'disabled'}
-      .grd-grid-1.grd-grid-mobile-12.grd-grid-phablet-1
+      .grd-grid-0.grd-hide-mobile.grd-grid-phablet-2
 .grd-container
   %hr.xtopseparator
   #xsection1
