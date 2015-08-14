@@ -715,7 +715,7 @@ Contents.prototype = {
                     }
                 }
                 if (show_upgrade) {
-                    if (c_config && c_config[gaming_company].length == 0 && c_config[financial_company] == 'maltainvest') {
+                    if (c_config && c_config[gaming_company] == undefined && c_config[financial_company] == 'maltainvest') {
                         $('#virtual-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').removeClass('invisible');
                     } else {
