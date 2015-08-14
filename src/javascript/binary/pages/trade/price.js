@@ -75,6 +75,7 @@ var Price = (function () {
             type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
+            para = document.createElement('p'),
             description = row.cloneNode(),
             fragment = document.createDocumentFragment();
 
@@ -85,7 +86,9 @@ var Price = (function () {
         var position = contractTypeDisplayMapping(type),
             container = document.getElementById('price_container_' + position),
             description_container = document.getElementById('description_container_' + position),
-            purchase = document.getElementById('contract_purchase_' + position);
+            purchase = document.getElementById('contract_purchase_' + position),
+            amount = document.createElement('div'),
+            currency = document.getElementById('currency');
 
         var display = type ? contractType[type] : '';
 
@@ -107,31 +110,32 @@ var Price = (function () {
         h4.appendChild(content);
         fragment.appendChild(h4);
 
+        amount.setAttribute('class', 'contract_amount col');
+        amount.setAttribute('id', 'contract_amount_' + position);
+
+        content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
+        amount.appendChild(content);
+
+        content = document.createTextNode(proposal['longcode']);
+        description.appendChild(content);
+        row.appendChild(amount);
+
         if (proposal['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
             }
-            content = document.createTextNode(proposal['error']);
-            description.appendChild(content);
             row.appendChild(description);
             fragment.appendChild(row);
+            content = document.createTextNode(proposal['error']['message']);
+            para.appendChild(content);
+            para.setAttribute('class', 'notice-msg');
+            fragment.appendChild(para);
         } else {
-            var amount = document.createElement('div'),
-                currency = document.getElementById('currency'),
-                priceId = document.getElementById('purchase_button_' + position);
+            var priceId = document.getElementById('purchase_button_' + position);
 
             if (purchase) {
                 purchase.style.display = 'block';
             }
-
-            amount.setAttribute('class', 'contract_amount col');
-            amount.setAttribute('id', 'contract_amount_' + position);
-
-            content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-            amount.appendChild(content);
-
-            content = document.createTextNode(proposal['longcode']);
-            description.appendChild(content);
 
             // create unique id object that is send in response
             priceId.setAttribute('data-purchase-id', proposal['id']);
@@ -140,10 +144,10 @@ var Price = (function () {
             row.appendChild(amount);
             row.appendChild(description);
 
-            fragment.appendChild(row);
-
             spotElement.textContent = proposal['spot'];
+            fragment.appendChild(row);
         }
+
         if (description_container) {
             description_container.appendChild(fragment);
         }
