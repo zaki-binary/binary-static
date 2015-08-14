@@ -93,10 +93,9 @@ var Contract = (function () {
 
                 }
 
-                if (barrierCategory && barriers && barriers[formName] && !barriers[formName][barrierCategory] ) {
-                    barriers = {};
-                }
+
             });
+
 
             if(expiryType) {
                 var obj = {};
@@ -105,6 +104,11 @@ var Contract = (function () {
             }
 
             if (barrierCategory) {
+
+                if (barriers && barriers[formName] && barriers[formName]['barrier_category'] !== barrierCategory) {
+                    barriers = {};
+                }
+
                 var j = contractsArray.length;
                 while (j--) {
                     if (barrierCategory !== contractsArray[j]['barrier_category']) {
