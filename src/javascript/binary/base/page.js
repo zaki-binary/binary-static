@@ -698,23 +698,24 @@ Contents.prototype = {
     topbar_message_visibility: function() {
         if(this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
+            var residence = this.client.residence;
+            var c_config;
+            if (residence.length > 0) {
+                c_config = page.settings.get('countries_list')[residence];
+            }
 
             if (!this.client.is_real) {
                 var show_upgrade = true;
                 for (var i=0;i<loginid_array.length;i++) {
                     if (loginid_array[i].real) {
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-financial-upgrade-link').addClass('invisible');
                         show_upgrade = false;
                         break;
                     }
                 }
-                if (!show_upgrade) {
-                    $('#virtual-upgrade-link').addClass('invisible');
-                    $('#vr-financial-upgrade-link').addClass('invisible');
-                } else {
-                    var residence = this.client.residence;
-                    var EU_random_restricted_countries = new RegExp(page.settings.get('EU_random_restricted_countries'));
-
-                    if (residence.length > 0 && EU_random_restricted_countries.test(residence)) {
+                if (show_upgrade) {
+                    if (c_config && c_config[gaming_company].length == 0 && c_config[financial_company] == 'maltainvest') {
                         $('#virtual-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').removeClass('invisible');
                     } else {
@@ -723,8 +724,7 @@ Contents.prototype = {
                     }
                 }
             } else {
-                var show_financial = false;
-                if (/MLT/.test(this.client.loginid)) {
+                if (c_config && c_config[financial_company] == 'maltainvest') {
                     show_financial = true;
                     for (var j=0;j<loginid_array.length;j++) {
                         if (loginid_array[j].financial) {

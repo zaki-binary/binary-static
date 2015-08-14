@@ -1,15 +1,16 @@
 var client_form;
 onLoad.queue(function() {
-        client_form = new ClientForm({restricted_countries: page.settings.get('restricted_countries'), valid_loginids: page.settings.get('valid_loginids')});
+    client_form = new ClientForm({valid_loginids: page.settings.get('valid_loginids')});
 });
 
 var select_user_country = function() {
     if ($('#residence').length > 0) {
-        var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
         var selected_country = $('#residence').val();
-
         if (selected_country.length > 0) {
-            selected_country = (restricted_countries.test(selected_country)) ? '' : selected_country;
+            var c_config = page.settings.get('countries_list')[selected_country];
+            if (c_config[gaming_company].length == 0 && c_config[financial_company].length == 0) {
+                selected_country = '';
+            }
             $('#residence').val(selected_country).change();
         } else {
             $.ajax({
@@ -18,7 +19,11 @@ var select_user_country = function() {
                 async: true,
                 dataType: "json"
             }).done(function(response) {
-                selected_country = (restricted_countries.test(response.country)) ? '' : response.country;
+                selected_country = response.country;
+                var c_config = page.settings.get('countries_list')[selected_country];
+                if (c_config[gaming_company].length == 0 && c_config[financial_company].length == 0) {
+                    selected_country = '';
+                }
                 $('#residence').val(selected_country).change();
             });
         }
