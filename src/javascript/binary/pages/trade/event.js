@@ -235,3 +235,33 @@ if (closeContainerElement) {
         }
     });
 }
+
+/*
+ * attach an event to change in barrier
+ */
+var barrierElement = document.getElementById('barrier');
+if (barrierElement) {
+    barrierElement.addEventListener('change', function (e) {
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach an event to change in low barrier
+ */
+var lowBarrierElement = document.getElementById('barrier_low');
+if (lowBarrierElement) {
+    lowBarrierElement.addEventListener('change', function (e) {
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach an event to change in high barrier
+ */
+var highBarrierElement = document.getElementById('barrier_high');
+if (highBarrierElement) {
+    highBarrierElement.addEventListener('change', function (e) {
+        processPriceRequest();
+    });
+}
