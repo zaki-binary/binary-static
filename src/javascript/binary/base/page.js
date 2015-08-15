@@ -89,10 +89,7 @@ var Client = function() {
     if(dl_info.length > 0) {
         for (var i=0;i<dl_info.length;i++) {
             if(dl_info[i].event == 'log_in') {
-                SessionStore.set('client_info',
-                    this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname +
-                    ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone
-                );
+                SessionStore.set('client_info', this.loginid + ':' + dl_info[i].params.bom_firstname + ':'  + dl_info[i].params.bom_lastname + ':' + dl_info[i].params.bom_email + ':' + dl_info[i].params.bom_phone);
             }
         }
     }
