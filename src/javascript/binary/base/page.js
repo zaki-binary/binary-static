@@ -695,11 +695,7 @@ Contents.prototype = {
     topbar_message_visibility: function() {
         if(this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
-            var residence = this.client.residence;
-            var c_config;
-            if (residence.length > 0) {
-                c_config = page.settings.get('countries_list')[residence];
-            }
+            var c_config = page.settings.get('countries_list')[this.client.residence];
 
             if (!this.client.is_real) {
                 var show_upgrade = true;
@@ -721,6 +717,7 @@ Contents.prototype = {
                     }
                 }
             } else {
+                var show_financial = false;
                 if (c_config && c_config[financial_company] == 'maltainvest') {
                     show_financial = true;
                     for (var j=0;j<loginid_array.length;j++) {
