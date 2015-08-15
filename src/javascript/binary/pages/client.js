@@ -6,9 +6,9 @@ onLoad.queue(function() {
 var select_user_country = function() {
     if ($('#residence').length > 0) {
         var selected_country = $('#residence').val();
+        var c_config = page.settings.get('countries_list');
         if (selected_country.length > 0) {
-            var c_config = page.settings.get('countries_list')[selected_country];
-            if (c_config[gaming_company] == undefined && c_config[financial_company] == undefined) {
+            if (c_config[selected_country][restricted]) {
                 selected_country = '';
             }
             $('#residence').val(selected_country).change();
@@ -20,8 +20,7 @@ var select_user_country = function() {
                 dataType: "json"
             }).done(function(response) {
                 selected_country = response.country;
-                var c_config = page.settings.get('countries_list')[selected_country];
-                if (c_config[gaming_company] == undefined && c_config[financial_company] == undefined) {
+                if (c_config[selected_country][restricted]) {
                     selected_country = '';
                 }
                 $('#residence').val(selected_country).change();
