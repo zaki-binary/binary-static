@@ -154,6 +154,7 @@ var contractTypeDisplayMapping = function (type) {
  * alternative to jquery $('#id').is(':visible')
  */
 var isVisible = function (elem) {
+    'use strict';
     if (elem.offsetWidth === 0 && elem.offsetHeight === 0) {
         return false;
     } else {
@@ -165,6 +166,7 @@ var isVisible = function (elem) {
  * function to hide and display the loading icon for price container
  */
 var hidePriceLoadingIcon = function () {
+    'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
         elm.style.display = 'none';
@@ -172,6 +174,7 @@ var hidePriceLoadingIcon = function () {
 };
 
 var showPriceLoadingIcon = function () {
+    'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
         elm.style.display = 'block';
@@ -182,6 +185,7 @@ var showPriceLoadingIcon = function () {
  * function to hide contract confirmation overlay container
  */
 var hideOverlayContainer = function () {
+    'use strict';
     var elm = document.getElementById('contract_confirmation_container');
     if (elm) {
         elm.style.display = 'none';
