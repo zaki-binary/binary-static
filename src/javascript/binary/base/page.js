@@ -708,7 +708,7 @@ Contents.prototype = {
                     }
                 }
                 if (show_upgrade) {
-                    if (c_config && typeof c_config[gaming_company] === 'undefined' && c_config[financial_company] == 'maltainvest') {
+                    if (c_config && typeof c_config['gaming_company'] === 'undefined' && c_config['financial_company'] == 'maltainvest') {
                         $('#virtual-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').removeClass('invisible');
                     } else {
@@ -718,7 +718,7 @@ Contents.prototype = {
                 }
             } else {
                 var show_financial = false;
-                if (c_config && c_config[financial_company] == 'maltainvest') {
+                if (c_config && c_config['financial_company'] == 'maltainvest') {
                     show_financial = true;
                     for (var j=0;j<loginid_array.length;j++) {
                         if (loginid_array[j].financial) {
