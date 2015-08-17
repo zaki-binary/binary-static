@@ -96,7 +96,7 @@ var Price = (function () {
             amount = document.createElement('div'),
             currency = document.getElementById('currency');
 
-        var display = type ? contractType[type] : '';
+        var display = type ? (contractType ? contractType[type] : '') : '';
 
         while (description_container && description_container.firstChild) {
             description_container.removeChild(description_container.firstChild);
