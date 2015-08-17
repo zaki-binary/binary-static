@@ -35,7 +35,7 @@ ClientForm.prototype = {
     },
     is_allowed_opening_account_country: function(selected_country) {
         var error_residence = clearInputErrorField('errorresidence');
-        if (page.settings.get('countries_list')[selected_country][restricted]) {
+        if (page.settings.get('countries_list')[selected_country]['restricted']) {
             error_residence.innerHTML = text.localize('We are not accepting accounts from residents of this country at the present time.');
             return false;
         }

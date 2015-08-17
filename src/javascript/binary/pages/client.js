@@ -8,7 +8,7 @@ var select_user_country = function() {
         var selected_country = $('#residence').val();
         var c_config = page.settings.get('countries_list');
         if (selected_country.length > 0) {
-            if (c_config[selected_country][restricted]) {
+            if (c_config[selected_country]['restricted']) {
                 selected_country = '';
             }
             $('#residence').val(selected_country).change();
@@ -20,7 +20,7 @@ var select_user_country = function() {
                 dataType: "json"
             }).done(function(response) {
                 selected_country = response.country;
-                if (c_config[selected_country][restricted]) {
+                if (c_config[selected_country]['restricted']) {
                     selected_country = '';
                 }
                 $('#residence').val(selected_country).change();
