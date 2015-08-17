@@ -190,4 +190,49 @@ var hideOverlayContainer = function () {
     if (elm) {
         elm.style.display = 'none';
     }
+};
+
+/*
+ * function to assign sorting to market list
+ */
+function compareMarkets(a, b) {
+    var sortedMarkets = {
+        'forex': 0,
+        'indices': 1,
+        'stocks': 2,
+        'commodities': 3,
+        'random': 4
+    };
+
+    if (sortedMarkets[a.toLowerCase()] < sortedMarkets[b.toLowerCase()]) {
+        return -1;
+    }
+    if (sortedMarkets[a.toLowerCase()] > sortedMarkets[b.toLowerCase()]) {
+        return 1;
+    }
+    return 0;
 }
+
+/*
+ * function to assign sorting to contract category
+ */
+ function compareContractCategory(a, b) {
+     var sortedContractCategory = {
+         'risefall': 0,
+         'higherlower': 1,
+         'endsinout': 2,
+         'staysinout': 3,
+         'touchnotouch': 4,
+         'asian': 5,
+         'digits': 6,
+         'spreads': 7
+     };
+
+     if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
+         return -1;
+     }
+     if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
+         return 1;
+     }
+     return 0;
+ }
