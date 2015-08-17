@@ -29,8 +29,9 @@ var Price = (function () {
             durationUnit = document.getElementById('duration_units'),
             endDate = document.getElementById('expiry_date'),
             endTime = document.getElementById('expiry_time'),
-            highBarrier = document.getElementById('barrier'),
-            lowBarrier = document.getElementById('barrier1');
+            barrier = document.getElementById('barrier'),
+            highBarrier = document.getElementById('barrier_high'),
+            lowBarrier = document.getElementById('barrier_low');
 
         if (payout && payout.value) {
             proposal['amount_val'] = payout.value;
@@ -59,9 +60,14 @@ var Price = (function () {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
+        if (barrier && isVisible(barrier) && barrier.value) {
+            proposal['barrier'] = barrier.value;
+        }
+
         if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
             proposal['barrier'] = highBarrier.value;
         }
+
         if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
             proposal['barrier2'] = lowBarrier.value;
         }
