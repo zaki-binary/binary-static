@@ -23,7 +23,7 @@ var processContractFormOfferings = function (contracts) {
 
     Contract.details(contracts);
 
-    displayDurations();
+    displayDurations('spot');
 
     displayStartDates();
 
