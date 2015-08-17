@@ -90,21 +90,10 @@ var Contract = (function () {
                     if (!contractType[currentObj['contract_category']].hasOwnProperty(currentObj['contract_type'])) {
                         contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
                     }
-
                 }
-
-
             });
 
-
-            if(expiryType) {
-                var obj = {};
-                obj[expiryType] = durations[expiryType];
-                durations = obj;
-            }
-
             if (barrierCategory) {
-
                 if (barriers && barriers[formName] && barriers[formName]['barrier_category'] !== barrierCategory) {
                     barriers = {};
                 }
@@ -118,11 +107,7 @@ var Contract = (function () {
             }
         }
 
-        if (sendAll) {
-            contractDetails = contracts.available;
-        } else {
-            contractDetails = contractsArray;
-        }
+        contractDetails = contractsArray;
     };
 
     return {
