@@ -22,10 +22,19 @@ var marketChangeEvent = function (market) {
  * and request for new Contract details to populate the form and request price accordingly
  */
 var formNavElement = document.getElementById('contract_form_name_nav');
+var removeActiveFormNav = function () {
+    var liElements = formNavElement.getElementsByTagName("li");
+    for (var i = 0, len = liElements.length; i < len; i++){
+        liElements[i].classList.remove('active');
+    }
+};
+
 if (formNavElement) {
     formNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
+            removeActiveFormNav();
             sessionStorage.setItem('formname', e.target.id);
+            e.target.classList.add('active');
             contractFormEventChange(e.target.id);
         }
     });

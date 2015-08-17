@@ -6,7 +6,7 @@ var processMarketOfferings = function (offerings, market) {
 
     // display markets, submarket, underlyings corresponding to market selected
     displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
-    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory));
+    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), sessionStorage.getItem('formname'));
     displayOptions('submarket',Offerings.submarkets());
     displayUnderlyings();
 
