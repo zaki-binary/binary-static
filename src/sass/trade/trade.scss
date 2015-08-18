@@ -178,3 +178,21 @@ ul[role=segmented] {
     50%  { transform: rotate(180deg); opacity: 1; }
     to   { transform: rotate(360deg); opacity: 0.2; }
 }
+
+@media all and (max-width: 640px) {
+    ul[role=segmented] {
+        flex-direction: column;
+    }
+    #contract_container.row {
+        flex-direction: column;
+        #contract_prices_container {
+            margin-left: 0;
+        }
+        .row-inner {
+            flex-direction: column;
+            .col-inner {
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
