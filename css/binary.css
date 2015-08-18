@@ -610,7 +610,7 @@ ul.checked li {
   }
 }
 
-.spinner {
+.spinner, .progress {
   -webkit-animation: spinning 1s infinite linear;
   animation: spinning 1s infinite linear;
 }
@@ -914,6 +914,10 @@ ul.checked li {
 }
 #footer #footer-menu #accounts_links {
   padding-bottom: 10px;
+}
+#footer #footer-menu .partner img {
+  max-width: 65%;
+  margin: 0.3em auto;
 }
 #footer #footer-regulatory {
   background: #15212d;
@@ -3292,7 +3296,12 @@ abbr {
 }
 .get-started dl div#smart-indices {
   height: 80px;
-  background: url("../images/pages/smart-indices/smart-indices-1.svg") no-repeat 50% 0%;
+  background: url("../images/pages/get-started/smart-indices.svg") no-repeat 50% 50%/20% #272825;
+  background-size: 20%;
+}
+.get-started dl div#partners {
+  height: 80px;
+  background: url("../images/pages/partners/partner.svg") no-repeat 50% 50%/50% #272825;
 }
 .get-started .section-content h2 {
   color: #e98024;
@@ -5823,6 +5832,222 @@ table .loss, table .lower {
   }
 }
 
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner, .progress {
+  -webkit-animation: spinning 1s infinite linear;
+  animation: spinning 1s infinite linear;
+}
+
+.progress {
+  background-image: url("../images/pages/binary-symbol-logo.svg");
+  background-size: contain;
+  width: 4rem;
+  height: 4rem;
+}
+
+.row, .row-inner {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+}
+
+.col, .col-inner {
+  flex: 1;
+}
+
+.vertical-row {
+  display: flex;
+  flex-direction: column;
+}
+
+ul[role=segmented] {
+  box-shadow: inset 0px 0px 0px 1px rgba(42, 48, 82, 0.2);
+  background-color: #f2f2f2;
+  border-radius: 2px;
+  color: #2a3052;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+ul[role=segmented] li {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0;
+  text-transform: capitalize;
+}
+ul[role=segmented] li.active {
+  color: white;
+  background-color: #2a3052;
+}
+ul[role=segmented] li.active a {
+  color: white;
+}
+ul[role=segmented] li#risefall, ul[role=segmented] li#higherlower, ul[role=segmented] li#touchnotouch {
+  background-image: none;
+}
+ul[role=segmented] a {
+  text-decoration: none;
+  font-weight: normal;
+  padding: .5rem .25rem;
+}
+ul[role=segmented] a:hover {
+  text-decoration: none;
+}
+
+#contract_container .row {
+  padding: 10px 0;
+}
+#contract_container .big-col {
+  flex: 2 0 0;
+}
+#contract_container #contract_form_container {
+  border: 1px solid #dedede;
+}
+#contract_container #contract_form_container .col {
+  margin-right: 1rem;
+}
+#contract_container #contract_prices_container {
+  margin-left: 1em;
+  position: relative;
+}
+#contract_container #contract_prices_container .price_container {
+  border: 1px solid #dedede;
+}
+#contract_container #contract_prices_container .price_container#price_container_top {
+  margin-bottom: 15px;
+}
+#contract_container #contract_prices_container .price_container .contract_purchase {
+  margin-bottom: 5px;
+}
+#contract_container #contract_prices_container .description_container .contract_heading {
+  text-transform: capitalize;
+  padding: .7em 0 .7em 4em;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.asian_up {
+  background: url("../images/pages/trade/asian-u_1.svg") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.asian_down {
+  background: url("../images/pages/trade/asian-d_1.svg") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.differs {
+  background: url("../images/pages/trade/differs_1.svg") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.matches {
+  background: url("../images/pages/trade/matches_1.svg") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.rises {
+  background: url("../images/pages/trade/rise_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.falls {
+  background: url("../images/pages/trade/fall_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.higher {
+  background: url("../images/pages/trade/higher_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.lower {
+  background: url("../images/pages/trade/lower_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.touches {
+  background: url("../images/pages/trade/touch_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.does_not_touch {
+  background: url("../images/pages/trade/no-touch_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.stays_between {
+  background: url("../images/pages/trade/stay-in-between_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.goes_outside {
+  background: url("../images/pages/trade/stay-out_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.ends_between {
+  background: url("../images/pages/trade/ends-between_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_heading.ends_outside {
+  background: url("../images/pages/trade/ends-outside_1.png") no-repeat 5% 75%;
+}
+#contract_container #contract_prices_container .description_container .contract_amount, #contract_container #contract_prices_container .description_container .contract_description {
+  margin-left: 5px;
+}
+
+.overlay_container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+#contract_confirmation_container {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+#loading_icon {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  to {
+    transform: rotate(360deg);
+    opacity: 0.2;
+  }
+}
+
+@media all and (max-width: 640px) {
+  ul[role=segmented] {
+    flex-direction: column;
+  }
+
+  #contract_container.row {
+    flex-direction: column;
+  }
+  #contract_container.row #contract_prices_container {
+    margin-left: 0;
+  }
+  #contract_container.row .row-inner {
+    flex-direction: column;
+  }
+  #contract_container.row .row-inner .col-inner {
+    margin-bottom: 5px;
+  }
+}
 /* Language based rules */
 /* Specific rules for languages */
 .JA .ja-hide {

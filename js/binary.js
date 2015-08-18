@@ -787,7 +787,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/partnerapi$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/partnerapi|\/bulk-trader-facility|\/partners$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -3234,7 +3234,7 @@ var toggleStreaming = function() {
    }
 };
 
-pjax_config_page('/trade', function() {
+pjax_config_page('/trade.cgi', function() {
     return {
         onLoad: function() {
             trade_contract_back();
@@ -3351,6 +3351,18 @@ pjax_config_page('chart_application', function () {
     return {
         onLoad: function () {
             load_chart_app();
+        }
+    };
+});
+
+pjax_config_page('trading', function () {
+    return {
+        onLoad: function () {
+            TradeSocket.init();
+            TradeSocket.send({offerings: {contracts: 0}});
+        },
+        onUnload: function() {
+            TradeSocket.close();
         }
     };
 });
@@ -9191,6 +9203,17 @@ pjax_config_page('/careers', function() {
         },
     };
 });
+pjax_config_page('/bulk-trader-facility', function() {
+    return {
+        onLoad: function() {
+            var whyus = $('.bulk-trader-facility');
+            sidebar_scroll(whyus);
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
 ;var minDT = new Date();
 minDT.setUTCFullYear(minDT.getUTCFullYear - 3);
 var liveChartsFromDT, liveChartsToDT, liveChartConfig;
@@ -9691,6 +9714,1560 @@ onLoad.queue_for_url(function () {
         $('#submit-date').removeClass('invisible');
     });
 }, 'statement');
+;/*
+ * Handles barrier processing and display
+ *
+ * It process `Contract.barriers` and display them if its applicable
+ * for current `Offerings.form()
+ */
+function displayBarriers (barrierCategory) {
+    'use strict';
+
+    var barriers = Contract.barriers(),
+        formName = Offerings.form();
+
+    if (barriers && formName) {
+        var barrier = barriers[formName];
+        if(barrier) {
+            if (barrier.count === 1) {
+                document.getElementById('high_barrier_row').style.display = 'none';
+                document.getElementById('low_barrier_row').style.display = 'none';
+                document.getElementById('barrier_row').setAttribute('style', '');
+
+                var elm = document.getElementById('barrier');
+                elm.value = barrier.barrier;
+                elm.textContent = barrier.barrier;
+                return;
+            } else if (barrier.count === 2) {
+                document.getElementById('barrier_row').style.display = 'none';
+                document.getElementById('high_barrier_row').setAttribute('style', '');
+                document.getElementById('low_barrier_row').setAttribute('style', '');
+
+                var high_elm = document.getElementById('barrier_high');
+                high_elm.value = barrier['barrier'];
+                high_elm.textContent = barrier['barrier'];
+
+                var low_elm = document.getElementById('barrier_low');
+                low_elm.value = barrier['barrier1'];
+                low_elm.textContent = barrier['barrier1'];
+                return;
+            }
+        }
+    }
+
+    var elements = document.getElementsByClassName('barrier_class');
+    for (var i = 0; i < elements.length; i++){
+        elements[i].style.display = 'none';
+    }
+}
+;/*
+ * This contains common functions we need for processing the respinse
+ */
+
+/*
+ * function to create list elements `<li>` and append to element with id `id`
+ */
+var displayListElements = function (id, elements, selected) {
+    'use strict';
+    var target = document.getElementById(id),
+        fragment = document.createDocumentFragment(),
+        len = elements.length;
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    elements.forEach(function (element) {
+        var li = document.createElement('li'),
+            content = document.createTextNode(element);
+        li.setAttribute('id', element.toLowerCase());
+        if (selected && selected === element.toLowerCase()) {
+            li.setAttribute('class', 'active');
+        }
+        li.appendChild(content);
+        fragment.appendChild(li);
+    });
+    if (target) {
+        target.appendChild(fragment);
+    }
+};
+
+/*
+ * function to create `option` and append to select box with id `id`
+ */
+var displayOptions = function (id, elements, selected) {
+    'use strict';
+    var target= document.getElementById(id),
+        fragment =  document.createDocumentFragment();
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    for (var key in elements) {
+        if (elements.hasOwnProperty(key)){
+            var option = document.createElement('option'), content = document.createTextNode(elements[key]);
+            option.setAttribute('value', key);
+            if (selected && selected === key) {
+                option.setAttribute('selected', 'selected');
+            }
+            option.appendChild(content);
+            fragment.appendChild(option);
+        }
+    }
+    if (target) {
+        target.appendChild(fragment);
+    }
+};
+
+/*
+ * function to display underlyings
+ *
+ * we need different function for this because we need to add submarket
+ * name as classname to underlyings option
+ */
+var displayUnderlyings = function (selected) {
+    'use strict';
+    var target= document.getElementById('underlying'),
+        fragment =  document.createDocumentFragment(),
+        elements = Offerings.underlyings();
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    for (var key in elements) {
+        if (elements.hasOwnProperty(key)){
+            var option = document.createElement('option'), content = document.createTextNode(elements[key].display);
+            option.setAttribute('value', key);
+            option.setAttribute('class', elements[key].classname);
+            if (selected && selected === key) {
+                option.setAttribute('selected', 'selected');
+            }
+            option.appendChild(content);
+            fragment.appendChild(option);
+        }
+    }
+    if (target) {
+        target.appendChild(fragment);
+    }
+};
+
+/*
+ * This maps the form name and barrierCategory we display on
+ * trading form to the actual we send it to backend
+ * for e.g risefall is mapped to callput with barrierCategory euro_atm
+ */
+var getFormNameBarrierCategory = function (displayFormName) {
+    'use strict';
+    var obj = {};
+    if (displayFormName) {
+        if(displayFormName === 'risefall') {
+            obj['formName'] = 'callput';
+            obj['barrierCategory'] = 'euro_atm';
+        } else if (displayFormName === 'higherlower') {
+            obj['formName'] = 'callput';
+            obj['barrierCategory'] = 'euro_non_atm';
+        } else if (displayFormName === 'callput'){
+            obj['formName'] = displayFormName;
+            obj['barrierCategory'] = 'euro_atm';
+        } else {
+            obj['formName'] = displayFormName;
+            obj['barrierCategory'] = '';
+        }
+    } else {
+        obj['formName'] = 'callput';
+        obj['barrierCategory'] = 'euro_atm';
+    }
+    return obj;
+};
+
+/*
+ * This maps the contract type to where we display on trading form
+ * and as there is no mapping on server side so need to create it
+ * on front end
+ *
+ * for example we display CALL on top and PUT to bottom
+ */
+var contractTypeDisplayMapping = function (type) {
+    'use strict';
+    var obj = {
+        CALL: "top",
+        PUT: "bottom",
+        ASIANU: "top",
+        ASIAND: "bottom",
+        DIGITMATCH: "top",
+        DIGITDIFF: "bottom",
+        EXPIRYRANGE: "top",
+        EXPIRYMISS: "bottom",
+        RANGE: "top",
+        UPORDOWN: "bottom",
+        ONETOUCH: "top",
+        NOTOUCH: "bottom",
+    };
+
+    return type ? obj[type] : 'top';
+};
+
+
+/*
+ * function to check if element is visible or not
+ *
+ * alternative to jquery $('#id').is(':visible')
+ */
+var isVisible = function (elem) {
+    'use strict';
+    if (elem.offsetWidth === 0 && elem.offsetHeight === 0) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+/*
+ * function to hide and display the loading icon for price container
+ */
+var hidePriceLoadingIcon = function () {
+    'use strict';
+    var elm = document.getElementById('loading_container');
+    if (elm) {
+        elm.style.display = 'none';
+    }
+};
+
+var showPriceLoadingIcon = function () {
+    'use strict';
+    var elm = document.getElementById('loading_container');
+    if (elm) {
+        elm.style.display = 'block';
+    }
+};
+
+/*
+ * function to hide contract confirmation overlay container
+ */
+var hideOverlayContainer = function () {
+    'use strict';
+    var elm = document.getElementById('contract_confirmation_container');
+    if (elm) {
+        elm.style.display = 'none';
+    }
+};
+
+/*
+ * function to assign sorting to market list
+ */
+function compareMarkets(a, b) {
+    var sortedMarkets = {
+        'forex': 0,
+        'indices': 1,
+        'stocks': 2,
+        'commodities': 3,
+        'random': 4
+    };
+
+    if (sortedMarkets[a.toLowerCase()] < sortedMarkets[b.toLowerCase()]) {
+        return -1;
+    }
+    if (sortedMarkets[a.toLowerCase()] > sortedMarkets[b.toLowerCase()]) {
+        return 1;
+    }
+    return 0;
+}
+
+/*
+ * function to assign sorting to contract category
+ */
+ function compareContractCategory(a, b) {
+     var sortedContractCategory = {
+         'risefall': 0,
+         'higherlower': 1,
+         'endsinout': 2,
+         'staysinout': 3,
+         'touchnotouch': 4,
+         'asian': 5,
+         'digits': 6,
+         'spreads': 7
+     };
+
+     if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
+         return -1;
+     }
+     if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
+         return 1;
+     }
+     return 0;
+ }
+;/*
+ * Contract object mocks the trading form we have on our website
+ * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
+ * and gives back barriers, startDate, durations etc
+ *
+ *
+ * Usage:
+ *
+ * use `Contract.details` to populate this object
+ *
+ * then use
+ *
+ * `Contract.durations()` to get durations like seconds, hours etc
+ * `Contract.open()` `Contract.close()`
+ * `Contract.barriers` if applicable for current underlying
+ */
+var Contract = (function () {
+    'use strict';
+
+    var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {}, contractType = {};
+
+    var populate_durations = function (currentContract) {
+        if (!durations[currentContract['expiry_type']]) {
+            durations[currentContract['expiry_type']] = {};
+        }
+
+        if(!durations[currentContract['expiry_type']][currentContract['contract_category']]) {
+            durations[currentContract['expiry_type']][currentContract['contract_category']] = {};
+        }
+
+        if(!durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']]) {
+            durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']] = {};
+        }
+
+        if(!durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']]) {
+            durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']] = {};
+        }
+
+        durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']]['max_contract_duration'] = currentContract['max_contract_duration'];
+
+        durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']]['min_contract_duration'] = currentContract['min_contract_duration'];
+    };
+
+    var details = function (contractObject) {
+        var contracts = contractObject['contracts_for'],
+            contractsArray = [];
+
+        startDates = [];
+        durations = {};
+        open = contracts['open'];
+        close = contracts['close'];
+
+        var formName = Offerings.form(),
+            barrierCategory = Offerings.barrier();
+
+        if (formName) {
+            contracts.available.forEach(function (currentObj) {
+                if (formName === currentObj['contract_category']) {
+
+                    if (barrierCategory) {
+                        if (barrierCategory === currentObj['barrier_category']) {
+                            populate_durations(currentObj);
+                        }
+                    } else {
+                        populate_durations(currentObj);
+                    }
+
+                    if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward') {
+                        startDates = currentObj.forward_starting_options;
+                    }
+
+                    contractsArray.push(currentObj);
+
+                    var barrier = {};
+                    if (currentObj.barriers === 1) {
+                        if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
+                            barrier['count'] = 1;
+                            barrier['barrier'] = currentObj['barrier'];
+                            barrier['barrier_category'] = currentObj['barrier_category'];
+                            barriers[formName] = barrier;
+                        }
+                    } else if (currentObj.barriers === 2) {
+                        if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
+                            barrier['count'] = 2;
+                            barrier['barrier'] = currentObj['high_barrier'];
+                            barrier['barrier1'] = currentObj['low_barrier'];
+                            barrier['barrier_category'] = currentObj['barrier_category'];
+                            barriers[formName] = barrier;
+                        }
+                    }
+
+                    if (!contractType[currentObj['contract_category']]) {
+                        contractType[currentObj['contract_category']] = {};
+                    }
+
+                    if (!contractType[currentObj['contract_category']].hasOwnProperty(currentObj['contract_type'])) {
+                        contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
+                    }
+                }
+            });
+
+            if (barrierCategory) {
+                if (barriers && barriers[formName] && barriers[formName]['barrier_category'] !== barrierCategory) {
+                    barriers = {};
+                }
+
+                var j = contractsArray.length;
+                while (j--) {
+                    if (barrierCategory !== contractsArray[j]['barrier_category']) {
+                        contractsArray.splice(j, 1);
+                    }
+                }
+            }
+        }
+        contractDetails = contractsArray;
+    };
+
+    return {
+        details: details,
+        open: function () { return open; },
+        close: function () { return close; },
+        contracts: function () { return contractDetails; },
+        durations: function () { return durations; },
+        startDates: function () { return startDates; },
+        barriers: function () { return barriers; },
+        contractType: function () { return contractType; }
+    };
+
+})();
+;/*
+ * Handles currency display
+ *
+ * It process 'socket.send({payout_currencies:1})` response
+ * and display them
+ */
+var displayCurrencies = function (input, selected) {
+    'use strict';
+
+    var target = document.getElementById('currency'),
+        fragment =  document.createDocumentFragment(),
+        currencies = input['payout_currencies'];
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    currencies.forEach(function (currency) {
+        var option = document.createElement('option'),
+            content = document.createTextNode(currency);
+
+        option.setAttribute('value', currency);
+        if (selected && selected == key) {
+            option.setAttribute('selected', 'selected');
+        }
+
+        option.appendChild(content);
+        fragment.appendChild(option);
+    });
+
+    target.appendChild(fragment);
+};
+;/*
+ * Handles duration processing display
+ *
+ * It process `Contract.durations()` and display them according to
+ * the current `Offerings.form()` and `Offerings.barriers()`
+ *
+ * It also populate expiry type select box i.e Durations and Endtime select
+ *
+ */
+var displayDurations = function (startType) {
+    'use strict';
+
+    var target= document.getElementById('duration_units'),
+        durations = Contract.durations(),
+        formName = Offerings.form(),
+        barrierCategory = Offerings.barrier(),
+        fragment =  document.createDocumentFragment(), durationContainer = {};
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    for (var key in durations) {
+        if (durations.hasOwnProperty(key)) {
+            for (var form in durations[key][formName]) {
+                if (durations[key][formName].hasOwnProperty(form)) {
+                    var obj = {};
+                    if (barrierCategory) {
+                        obj = durations[key][formName][barrierCategory];
+                    } else {
+                        obj = durations[key][formName][form];
+                    }
+                    for (var type in obj) {
+                        if (obj.hasOwnProperty(type)) {
+                            if (startType) {
+                                if (startType === type) {
+                                    if(!durationContainer.hasOwnProperty(startType)) {
+                                        durationContainer[key] = obj[startType];
+                                    }
+                                }
+                            } else {
+                                if(!durationContainer.hasOwnProperty(type)) {
+                                    durationContainer[key] = obj[type];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for (var duration in durationContainer) {
+        if(durationContainer.hasOwnProperty(duration)) {
+            var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
+
+            var option, content;
+            if (duration === 'intraday') {
+                switch (textMapping['value']) {
+                    case 's':
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        option = document.createElement('option');
+                        content = document.createTextNode('minutes');
+                        option.setAttribute('value', 'm');
+                        option.setAttribute('data-minimum', 1);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        option = document.createElement('option');
+                        content = document.createTextNode('hours');
+                        option.setAttribute('value', 'h');
+                        option.setAttribute('data-minimum', 1);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                    case 'm':
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        option = document.createElement('option');
+                        content = document.createTextNode('hours');
+                        option.setAttribute('value', 'h');
+                        option.setAttribute('data-minimum', 1);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                    case 'h':
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                    default :
+                        option = document.createElement('option');
+                        content = document.createTextNode(textMapping['text']);
+                        option.setAttribute('value', textMapping['value']);
+                        option.setAttribute('data-minimum', textMapping['min']);
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                        break;
+                }
+            } else if (duration === 'daily') {
+                option = document.createElement('option');
+                content = document.createTextNode(textMapping['text']);
+                option.setAttribute('value', textMapping['value']);
+                option.setAttribute('data-minimum', textMapping['min']);
+                option.appendChild(content);
+                fragment.appendChild(option);
+            } else if (duration === 'tick') {
+                option = document.createElement('option');
+                content = document.createTextNode(textMapping['text']);
+                option.setAttribute('value', textMapping['value']);
+                option.setAttribute('data-minimum', textMapping['min']);
+                option.appendChild(content);
+                fragment.appendChild(option);
+            }
+            target.appendChild(fragment);
+        }
+    }
+    durationPopulate();
+};
+
+var durationTextValueMappings = function (str) {
+    'use strict';
+    var mapping = {
+        s : 'seconds',
+        m : 'minutes',
+        h : 'hours',
+        d : 'days',
+        t : 'ticks'
+    };
+
+    var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [],
+        obj = {};
+
+    if (arry.length > 1) {
+        obj['value'] = arry[1];
+        obj['text'] = mapping[arry[1]];
+        obj['min'] = arry[0];
+    } else {
+        obj['value'] = 't';
+        obj['text'] = mapping['t'];
+        obj['min'] = arry[0];
+    }
+
+    return obj;
+};
+
+var durationPopulate = function () {
+    'use strict';
+
+    var unit = document.getElementById('duration_units');
+    if (isVisible(unit)) {
+        var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
+        document.getElementById('duration_amount').value = unitValue;
+        document.getElementById('duration_minimum').textContent = unitValue;
+        displayExpiryType(unit.value);
+    } else {
+        displayExpiryType();
+    }
+};
+
+var displayExpiryType = function (unit) {
+    'use strict';
+
+    var target = document.getElementById('expiry_type'),
+        fragment = document.createDocumentFragment();
+
+    var current_selected = target.value || 'duration',
+        id = current_selected,
+        hideId = (current_selected === 'duration') ? 'endtime' : 'duration';
+
+    id = document.getElementById('expiry_type_' + id);
+    if (id) {
+        id.style.display = 'flex';
+    }
+    // need to hide the non selected one
+    hideId = document.getElementById('expiry_type_' + hideId);
+    if (hideId) {
+        hideId.style.display = 'none';
+    }
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    var option = document.createElement('option'),
+        content = document.createTextNode('Durations');
+
+    option.setAttribute('value', 'duration');
+    if (current_selected === 'duration') {
+        option.setAttribute('selected', 'selected');
+    }
+    option.appendChild(content);
+    fragment.appendChild(option);
+
+    if (unit !== 't') {
+        option = document.createElement('option');
+        content = document.createTextNode('End Time');
+        option.setAttribute('value', 'endtime');
+        if (current_selected === 'endtime') {
+            option.setAttribute('selected', 'selected');
+        }
+        option.appendChild(content);
+        fragment.appendChild(option);
+    }
+    target.appendChild(fragment);
+};
+;/*
+ * attach event to market list, so when client change market we need to update form
+ * and request for new Contract details to populate the form and request price accordingly
+ */
+var marketNavElement = document.getElementById('contract_market_nav');
+if (marketNavElement) {
+    marketNavElement.addEventListener('click', function(e) {
+        if (e.target && e.target.nodeName === 'LI') {
+            sessionStorage.setItem('market', e.target.id);
+            marketChangeEvent(e.target.id);
+        }
+    });
+}
+
+var marketChangeEvent = function (market) {
+    'use strict';
+    processMarketOfferings(Offerings.offerings(), market);
+};
+
+/*
+ * attach event to form list, so when client click on different form we need to update form
+ * and request for new Contract details to populate the form and request price accordingly
+ */
+var formNavElement = document.getElementById('contract_form_name_nav');
+var removeActiveFormNav = function () {
+    var liElements = formNavElement.getElementsByTagName("li");
+    for (var i = 0, len = liElements.length; i < len; i++){
+        liElements[i].classList.remove('active');
+    }
+};
+
+if (formNavElement) {
+    formNavElement.addEventListener('click', function(e) {
+        if (e.target && e.target.nodeName === 'LI') {
+            removeActiveFormNav();
+            sessionStorage.setItem('formname', e.target.id);
+            e.target.classList.add('active');
+            contractFormEventChange(e.target.id);
+        }
+    });
+}
+
+var contractFormEventChange = function (formName) {
+    'use strict';
+
+    var market = sessionStorage.getItem('market') || 'Forex';
+
+    market = market.charAt(0).toUpperCase() + market.substring(1);
+
+    // pass the original offerings as we don't want to request offerings again and again
+    Offerings.details(Offerings.offerings(), market, formName);
+
+    // change only submarkets and underlyings as per formName change
+    displayOptions('submarket',Offerings.submarkets());
+    displayUnderlyings();
+
+    var underlying = document.getElementById('underlying').value;
+    sessionStorage.setItem('underlying', underlying);
+
+    // get the contract details based on underlying as formName has changed
+    TradeSocket.send({ contracts_for: underlying });
+};
+
+/*
+ * attach event to underlying change, event need to request new contract details and price
+ */
+var underlyingElement = document.getElementById('underlying');
+if (underlyingElement) {
+    underlyingElement.addEventListener('change', function(e) {
+        if (e.target) {
+            sessionStorage.setItem('underlying', e.target.value);
+            underlyingEventChange(e.target.value);
+        }
+    });
+}
+
+var underlyingEventChange = function (underlying) {
+    'use strict';
+    TradeSocket.send({ contracts_for: underlying });
+};
+
+/*
+ * bind event to change in duration amount, request new price
+ */
+var durationAmountElement = document.getElementById('duration_amount');
+if (durationAmountElement) {
+    durationAmountElement.addEventListener('input', function (e) {
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach event to expiry time change, event need to populate duration
+ * and request new price
+ */
+var expiryTypeElement = document.getElementById('expiry_type');
+if (expiryTypeElement) {
+    expiryTypeElement.addEventListener('change', function(e) {
+        durationPopulate();
+        if(e.target && e.target.value === 'endtime') {
+            var current_moment = moment().add(5, 'minutes').utc();
+            document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
+            document.getElementById('expiry_time').value = current_moment.format('HH:mm');
+        }
+        processPriceRequest();
+    });
+}
+
+/*
+ * bind event to change in duration units, populate duration and request price
+ */
+var durationUnitElement = document.getElementById('duration_units');
+if (durationUnitElement) {
+    durationUnitElement.addEventListener('change', function () {
+        durationPopulate();
+        processPriceRequest();
+    });
+}
+
+/*
+ * bind event to change in endtime date and time
+ */
+var endDateElement = document.getElementById('expiry_date');
+if (endDateElement) {
+    endDateElement.addEventListener('change', function () {
+        processPriceRequest();
+    });
+}
+
+var endTimeElement = document.getElementById('expiry_time');
+if (endTimeElement) {
+    endTimeElement.addEventListener('change', function () {
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach event to change in amount, request new price only
+ */
+var amountElement = document.getElementById('amount');
+if (amountElement) {
+    amountElement.addEventListener('input', function(e) {
+        sessionStorage.setItem('amount', e.target.value);
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach event to start time, display duration based on
+ * whether start time is forward starting or not and request
+ * new price
+ */
+var dateStartElement = document.getElementById('date_start');
+if (dateStartElement) {
+    dateStartElement.addEventListener('change', function (e) {
+        if (e.target && e.target.value === 'now') {
+            displayDurations('spot');
+        } else {
+            displayDurations('forward');
+        }
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach event to change in amount type that is whether its
+ * payout or stake and request new price
+ */
+var amountTypeElement = document.getElementById('amount_type');
+if (amountTypeElement) {
+    amountTypeElement.addEventListener('change', function (e) {
+        sessionStorage.setItem('amount_type', e.target.value);
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach event to change in submarkets. We need to disable
+ * underlyings that are not in selected seubmarkets
+ */
+var submarketElement = document.getElementById('submarket');
+if (submarketElement) {
+    submarketElement.addEventListener('change', function (e) {
+        if (e.target) {
+            var elem = document.getElementById('underlying');
+            var underlyings = elem.children;
+
+            for (var i = 0, len = underlyings.length; i < len; i++ ) {
+                if (e.target.value !== 'all' && e.target.value !== underlyings[i].className) {
+                    underlyings[i].disabled = true;
+                } else {
+                    underlyings[i].disabled = false;
+                }
+            }
+
+            // as submarket change has modified the underlying list so we need to manually
+            // fire change event for underlying
+            document.querySelectorAll('#underlying option:enabled')[0].selected = 'selected';
+            var event = new Event('change');
+            elem.dispatchEvent(event);
+        }
+    });
+}
+
+/*
+ * attach an event to change in currency
+ */
+var currencyElement = document.getElementById('currency');
+if (currencyElement) {
+    currencyElement.addEventListener('change', function (e) {
+        sessionStorage.setItem('currency', e.target.value);
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach event to purchase buttons to buy the current contract
+ */
+var purchaseContractEvent = function () {
+    var id = this.getAttribute('data-purchase-id'),
+        askPrice = this.getAttribute('data-ask-price');
+
+    if (id && askPrice) {
+        TradeSocket.send({buy: id, price: askPrice});
+    }
+};
+
+var purchaseButtonElements = document.getElementsByClassName('purchase_button');
+if (purchaseButtonElements) {
+    for (var i = 0, len = purchaseButtonElements.length; i < len; i++) {
+        purchaseButtonElements[i].addEventListener('click', purchaseContractEvent);
+    }
+}
+
+/*
+ * attach event to close icon for purchase container
+ */
+var closeContainerElement = document.getElementById('close_confirmation_container');
+if (closeContainerElement) {
+    closeContainerElement.addEventListener('click', function (e) {
+        if (e.target) {
+            e.preventDefault();
+            document.getElementById('contract_confirmation_container').style.display = 'none';
+        }
+    });
+}
+
+/*
+ * attach an event to change in barrier
+ */
+var barrierElement = document.getElementById('barrier');
+if (barrierElement) {
+    barrierElement.addEventListener('change', function (e) {
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach an event to change in low barrier
+ */
+var lowBarrierElement = document.getElementById('barrier_low');
+if (lowBarrierElement) {
+    lowBarrierElement.addEventListener('change', function (e) {
+        processPriceRequest();
+    });
+}
+
+/*
+ * attach an event to change in high barrier
+ */
+var highBarrierElement = document.getElementById('barrier_high');
+if (highBarrierElement) {
+    highBarrierElement.addEventListener('change', function (e) {
+        processPriceRequest();
+    });
+}
+;/*
+ * This Message object process the response from server and fire
+ * events based on type of response
+ */
+var Message = (function () {
+    'use strict';
+
+    var process = function (msg) {
+        var response = JSON.parse(msg.data);
+        console.log(response);
+        if (response) {
+            var type = response.msg_type;
+
+            if (type === 'offerings') {
+                var market = sessionStorage.getItem('market') || 'Forex';
+                processMarketOfferings(response, market);
+            } else if (type === 'contracts_for') {
+                processContractFormOfferings(response);
+                hideOverlayContainer();
+            } else if (type === 'payout_currencies') {
+                displayCurrencies(response);
+                processPriceRequest();
+            } else if (type === 'proposal') {
+                Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
+                hidePriceLoadingIcon();
+            } else if (type === 'open_receipt') {
+                Purchase.display(response);
+            }
+        } else {
+            console.log('some error occured');
+        }
+    };
+
+    return {
+        process: process,
+    };
+
+})();
+;/*
+ * Offerings object parses the offerings json that we get from socket.send({offerings: {hierachy :1 ...}}
+ * and outputs in usable form, like it gives markets, submarkets, underlyings, contractForms
+ *
+ *
+ * Usage:
+ *
+ * use `Offerings.details` to populate this object first
+ *
+ * then use
+ *
+ * `Offerings.markets` to get markets like Forex, Random etc
+ * `Offerings.contractForms` like risefall, higherlower
+ *
+ */
+var Offerings = (function () {
+    'use strict';
+
+    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
+
+    var details = function (data, market, formName, barrierCategory, submarket, underlying) {
+        responseData = data;
+        var selectors = data.offerings.selectors;
+        var offerings = data.offerings.offerings;
+
+        var submarketElements = {}, underlyingElements = {}, contractCategories = {};
+
+        submarketElements['all'] = 'All';
+
+        var formBarrier = getFormNameBarrierCategory(formName);
+        form = formName = formBarrier['formName'];
+        barrier = barrierCategory = formBarrier['barrierCategory'];
+
+        market_label:
+        for (var i = 0, offlen = offerings.length; i < offlen; i++) {
+            market = market || 'Forex';
+            var mkt = offerings[i].market;
+            if (mkt === market) {
+                submarket_label:
+                for(var j = 0, sbmktlen = offerings[i].available.length; j < sbmktlen; j++) {
+                    var loop_submarket = offerings[i].available[j].submarket;
+                    if (submarket && submarket !== loop_submarket) {
+                        continue submarket_label;
+                    }
+                    underlying_label:
+                    for (var k = 0, undrlylen = offerings[i].available[j].available.length; k < undrlylen; k++) {
+                        var loop_underlying = offerings[i].available[j].available[k];
+                        if(underlying && underlying !== loop_underlying.symbol) {
+                            continue underlying_label;
+                        }
+                        for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
+                            var contractCategory = offerings[i].available[j].available[k].available[l].contract_category, isBarrierUndefinedRequired = false;
+
+                            for (var m = 0, ctcategoryavalen = offerings[i].available[j].available[k].available[l].available.length; m < ctcategoryavalen; m++) {
+
+                                for (var property in  offerings[i].available[j].available[k].available[l].available[m]) {
+                                    if (offerings[i].available[j].available[k].available[l].available[m].hasOwnProperty(property)) {
+                                        var prop_value = offerings[i].available[j].available[k].available[l].available[m][property];
+                                        if (property === 'barrier_category') {
+                                            if (!barrierCategory) {
+                                                barrierCategory = prop_value;
+                                                isBarrierUndefinedRequired = true;
+                                            }
+                                            if (contractCategory && !contractCategories.hasOwnProperty(contractCategory)) {
+                                                if (contractCategory === 'callput') {
+                                                    if( prop_value === 'euro_atm') {
+                                                        contractCategories['risefall'] = 'risefall';
+                                                    } else {
+                                                        contractCategories['higherlower'] = 'higherlower';
+                                                    }
+                                                } else {
+                                                    contractCategories[contractCategory] = contractCategory;
+                                                }
+
+                                            }
+                                            if(formName === contractCategory && barrierCategory === prop_value) {
+                                                var submarketId = loop_submarket.toLowerCase().replace(/ /g, '_');
+                                                submarketElements[submarketId] = loop_submarket;
+                                                underlyingElements[loop_underlying.symbol] = {
+                                                    display: loop_underlying.symbol_display,
+                                                    classname: submarketId
+                                                };
+                                            }
+                                            if (isBarrierUndefinedRequired) {
+                                                barrierCategory = undefined;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if(underlying && underlying === loop_underlying.symbol) {
+                            break underlying_label;
+                        }
+                    }
+                    if (submarket && submarket === loop_submarket) {
+                        break submarket_label;
+                    }
+                }
+                break market_label;
+            } else {
+                continue;
+            }
+        }
+        tradeMarkets = Object.keys(selectors.market);
+        tradeContractForms = contractCategories;
+        tradeSubmarkets = submarketElements;
+        tradeUnderlyings = underlyingElements;
+    };
+
+    return {
+        details: details,
+        offerings: function () { return responseData; },
+        markets: function () { return tradeMarkets; },
+        submarkets: function () { return tradeSubmarkets; },
+        underlyings: function () { return tradeUnderlyings; },
+        contractForms: function () { return tradeContractForms; },
+        form: function (name) {
+            if (name) {
+                form = getFormNameBarrierCategory(name);
+                barrier(form['barrier']);
+                form = form['formName'];
+            }
+            return form;
+        },
+        barrier: function (name) {
+            if (name) {
+                barrier = name;
+            }
+            return barrier;
+        }
+    };
+
+})();
+;/*
+ * Price object handles all the functions we need to display prices
+ *
+ * We create Price proposal that we need to send to server to get price,
+ * longcode and all other information that we need to get the price for
+ * current contract
+ *
+ *
+ * Usage:
+ *
+ * `socket.send(Price.createProposal())` to send price proposal to sever
+ * `Price.display()` to display the price details returned from server
+ */
+var Price = (function () {
+    'use strict';
+
+    var typeDisplayIdMapping = {};
+
+    var createProposal = function (typeOfContract) {
+        var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
+            submarket = document.getElementById('submarket'),
+            contractType = typeOfContract,
+            amountType = document.getElementById('amount_type'),
+            currency = document.getElementById('currency'),
+            payout = document.getElementById('amount'),
+            startTime = document.getElementById('date_start'),
+            expiryType = document.getElementById('expiry_type'),
+            duration = document.getElementById('duration_amount'),
+            durationUnit = document.getElementById('duration_units'),
+            endDate = document.getElementById('expiry_date'),
+            endTime = document.getElementById('expiry_time'),
+            barrier = document.getElementById('barrier'),
+            highBarrier = document.getElementById('barrier_high'),
+            lowBarrier = document.getElementById('barrier_low');
+
+        if (payout && payout.value) {
+            proposal['amount_val'] = payout.value;
+        }
+        if (amountType && amountType.value) {
+            proposal['basis'] = amountType.value;
+        }
+        if (contractType) {
+            proposal['contract_type'] = typeOfContract;
+        }
+        if (currency && currency.value) {
+            proposal['currency'] = currency.value;
+        }
+        if (underlying && underlying.value) {
+            proposal['symbol'] = underlying.value;
+        }
+
+        if (startTime && isVisible(startTime) && startTime.value !== 'now') {
+            proposal['date_start'] = startTime.value;
+        }
+
+        if (expiryType && expiryType.value === 'duration') {
+            proposal['duration'] = duration.value;
+            proposal['duration_unit'] = durationUnit.value;
+        } else if (expiryType && expiryType.value === 'endtime') {
+            proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
+        }
+
+        if (barrier && isVisible(barrier) && barrier.value) {
+            proposal['barrier'] = barrier.value;
+        }
+
+        if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
+            proposal['barrier'] = highBarrier.value;
+        }
+
+        if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
+            proposal['barrier2'] = lowBarrier.value;
+        }
+
+        return proposal;
+    };
+
+    var display = function (details, contractType, spotElement) {
+        var proposal = details['proposal'],
+            params = details['echo_req'],
+            type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
+            h4 = document.createElement('h4'),
+            row = document.createElement('div'),
+            para = document.createElement('p'),
+            description = row.cloneNode(),
+            fragment = document.createDocumentFragment();
+
+        if (params && Object.getOwnPropertyNames(params).length > 0) {
+            typeDisplayIdMapping[proposal['id']] = type;
+        }
+
+        var position = contractTypeDisplayMapping(type),
+            container = document.getElementById('price_container_' + position),
+            description_container = document.getElementById('description_container_' + position),
+            purchase = document.getElementById('contract_purchase_' + position),
+            amount = document.createElement('div'),
+            currency = document.getElementById('currency');
+
+        var display = type ? (contractType ? contractType[type] : '') : '';
+
+        while (description_container && description_container.firstChild) {
+            description_container.removeChild(description_container.firstChild);
+        }
+
+        if (display) {
+            h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
+        }
+
+        h4.setAttribute('id', 'contract_heading_' + position);
+
+        description.setAttribute('class', 'contract_description big-col');
+        description.setAttribute('id', 'contract_description_' + position);
+        row.setAttribute('class', 'row');
+
+        var content = document.createTextNode(display);
+        h4.appendChild(content);
+        fragment.appendChild(h4);
+
+        amount.setAttribute('class', 'contract_amount col');
+        amount.setAttribute('id', 'contract_amount_' + position);
+
+        content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
+        amount.appendChild(content);
+
+        content = document.createTextNode(proposal['longcode']);
+        description.appendChild(content);
+        row.appendChild(amount);
+
+        if (proposal['error']) {
+            if (purchase) {
+                purchase.style.display = 'none';
+            }
+            row.appendChild(description);
+            fragment.appendChild(row);
+            content = document.createTextNode(proposal['error']['message']);
+            para.appendChild(content);
+            para.setAttribute('class', 'notice-msg');
+            fragment.appendChild(para);
+        } else {
+            var priceId = document.getElementById('purchase_button_' + position);
+
+            if (purchase) {
+                purchase.style.display = 'block';
+            }
+
+            // create unique id object that is send in response
+            priceId.setAttribute('data-purchase-id', proposal['id']);
+            priceId.setAttribute('data-ask-price', proposal['ask_price']);
+
+            row.appendChild(amount);
+            row.appendChild(description);
+
+            spotElement.textContent = proposal['spot'];
+            fragment.appendChild(row);
+        }
+
+        if (description_container) {
+            description_container.appendChild(fragment);
+        }
+        if (container) {
+            container.insertBefore(description_container, purchase);
+        }
+    };
+
+    var clearMapping = function () {
+        typeDisplayIdMapping = {};
+    };
+
+    return {
+        proposal: createProposal,
+        display: display,
+        clearMapping: clearMapping,
+        idDisplayMapping: function () { return typeDisplayIdMapping; }
+    };
+
+})();
+;var processMarketOfferings = function (offerings, market) {
+    'use strict';
+
+    // populate the Offerings object
+    Offerings.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
+
+    // display markets, submarket, underlyings corresponding to market selected
+    displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
+    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), sessionStorage.getItem('formname'));
+    displayOptions('submarket',Offerings.submarkets());
+    displayUnderlyings();
+
+    // get the underlying selected
+    var underlying = document.getElementById('underlying').value;
+    sessionStorage.setItem('underlying', underlying);
+
+    // get the contract details based on underlying as market has changed
+    TradeSocket.send({ contracts_for: underlying });
+};
+
+var processContractFormOfferings = function (contracts) {
+    'use strict';
+
+    Contract.details(contracts);
+
+    displayDurations('spot');
+
+    displayStartDates();
+
+    displayBarriers();
+
+    TradeSocket.send({ payout_currencies: 1 });
+};
+
+var processForgetPriceIds = function () {
+    'use strict';
+
+    Object.keys(Price.idDisplayMapping()).forEach(function (key) {
+        TradeSocket.send({ forget: key });
+    });
+};
+
+var processPriceRequest = function () {
+    'use strict';
+
+    showPriceLoadingIcon();
+    processForgetPriceIds();
+    Price.clearMapping();
+    for (var typeOfContract in Contract.contractType()[Offerings.form()]) {
+        if(Contract.contractType()[Offerings.form()].hasOwnProperty(typeOfContract)) {
+            TradeSocket.send(Price.proposal(typeOfContract));
+        }
+    }
+};
+;/*
+ * Purchase object that handles all the functions related to
+ * contract purchase response
+ */
+
+var Purchase = (function () {
+    'use strict';
+
+    var display = function (details) {
+        var receipt = details['open_receipt'],
+            container = document.getElementById('contract_confirmation_container'),
+            message_container = document.getElementById('confirmation_message_container'),
+            fragment = document.createDocumentFragment(),
+            h4 = document.createElement('h4'),
+            message = document.createElement('p'),
+            content = '';
+
+        while (message_container && message_container.firstChild) {
+            message_container.removeChild(message_container.firstChild);
+        }
+
+        h4.setAttribute('class', 'contract_purchase_heading');
+
+        if (receipt['error']) {
+            content = document.createTextNode(receipt['error']['message']);
+            message.appendChild(content);
+            fragment.appendChild(message);
+        } else {
+            var txnInfo = document.createElement('div');
+
+            content = document.createTextNode('Contract Confirmation');
+            h4.appendChild(content);
+            txnInfo.appendChild(h4);
+
+            content = document.createTextNode(receipt['longcode']);
+            message.appendChild(content);
+            txnInfo.appendChild(message);
+
+            content = document.createTextNode('Your transaction reference is ' + receipt['trx_id']);
+            message = document.createElement('p');
+            message.appendChild(content);
+            txnInfo.appendChild(message);
+
+            content = document.createTextNode('Your current balance is ' + receipt['balance_after']);
+            message = document.createElement('p');
+            message.appendChild(content);
+            txnInfo.appendChild(message);
+
+            fragment.appendChild(txnInfo);
+        }
+
+        if (message_container) {
+            message_container.appendChild(fragment);
+        }
+        if (container) {
+            container.style.display = 'block';
+            container.insertBefore(message_container, document.getElementById('confirmation_message_endelement'));
+        }
+    };
+
+    return {
+        display: display,
+    };
+
+})();
+;/*
+ * It provides a abstraction layer over native javascript Websocket.
+ *
+ * Provide additional functionality like if connection is close, open
+ * it again and process the buffered requests
+ *
+ *
+ * Usage:
+ *
+ * `TradeSocket.init()` to initiate the connection
+ * `TradeSocket.send({contracts_for : 1})` to send message to server
+ */
+var TradeSocket = (function () {
+    'use strict';
+
+    var tradeSocket,
+        socketUrl = "wss://ws.binary.com/websockets/contracts",
+        bufferedSends = [];
+
+    var status = function () {
+        return tradeSocket && tradeSocket.readyState;
+    };
+
+    var isReady = function () {
+        return tradeSocket && tradeSocket.readyState === 1;
+    };
+
+    var isClose = function () {
+        return !tradeSocket || tradeSocket.readyState === 3;
+    };
+
+    var sendBufferedSends = function () {
+        while (bufferedSends.length > 0) {
+            tradeSocket.send(JSON.stringify(bufferedSends.shift()));
+        }
+    };
+
+    var init = function () {
+        tradeSocket = new WebSocket(socketUrl);
+
+        tradeSocket.onopen = function (){
+            if($.cookie('login')) {
+                tradeSocket.send(JSON.stringify({authorize: $.cookie('login')}));
+            }
+            sendBufferedSends();
+        };
+
+        tradeSocket.onmessage = function (msg){
+            Message.process(msg);
+        };
+
+        tradeSocket.onclose = function (e) {
+            console.log('socket closed', e);
+        };
+
+        tradeSocket.onerror = function (error) {
+            console.log('socket error', error);
+        };
+    };
+
+    var send = function(data) {
+        if (isClose()) {
+            bufferedSends.push(data);
+            init();
+        } else if (isReady()) {
+            tradeSocket.send(JSON.stringify(data));
+        } else {
+            bufferedSends.push(data);
+        }
+    };
+
+    var close = function () {
+        if (tradeSocket) {
+            tradeSocket.close();
+        }
+    };
+
+    return {
+        init: init,
+        send: send,
+        close: close,
+        socket: function () { return tradeSocket; }
+    };
+
+})();
+;/*
+ * Handles start time display
+ *
+ * It process `Contract.startDates` in case of forward
+ * starting contracts and populate the start time select
+ * box
+ */
+
+function compareStartDate(a,b) {
+    'use strict';
+    if (a.date < b.date)
+        return -1;
+    if (a.date > b.date)
+        return 1;
+    return 0;
+}
+
+function displayStartDates() {
+    'use strict';
+
+    var startDates = Contract.startDates();
+
+    if (startDates) {
+        var target= document.getElementById('date_start'),
+            fragment =  document.createDocumentFragment(),
+            option = document.createElement('option'),
+            content = document.createTextNode('Now');
+
+        while (target && target.firstChild) {
+            target.removeChild(target.firstChild);
+        }
+
+        option.setAttribute('value', 'now');
+        option.appendChild(content);
+        fragment.appendChild(option);
+
+        startDates.sort(compareStartDate);
+
+        startDates.forEach(function (start_date) {
+            var a = moment.unix(start_date.open).utc();
+            var b = moment.unix(start_date.close).utc();
+
+            var ROUNDING = 5 * 60 * 1000;
+            var start = moment();
+            start = moment(Math.ceil((+start) / ROUNDING) * ROUNDING).utc();
+
+            if (moment(a, 'YYYY MM DD').isSame(moment(start ,'YYYY MM DD'), 'day')) {
+                a = start;
+            }
+
+            while(a.isBefore(b)) {
+                option = document.createElement('option');
+                option.setAttribute('value', a.utc().unix());
+                content = document.createTextNode(a.format('HH:mm ddd'));
+                option.appendChild(content);
+                fragment.appendChild(option);
+                a.add(5, 'minutes');
+            }
+        });
+        target.appendChild(fragment);
+    } else {
+        document.getElementById('date_start_row').style.display = 'none';
+    }
+}
 ;RealityCheck = (function ($) {
     "use strict";
 
