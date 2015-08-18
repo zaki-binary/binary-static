@@ -12,8 +12,7 @@ var Message = (function () {
             var type = response.msg_type;
 
             if (type === 'offerings') {
-                var market = sessionStorage.getItem('market') || 'Forex';
-                processMarketOfferings(response, market);
+                processMarketOfferings(response);
             } else if (type === 'contracts_for') {
                 processContractFormOfferings(response);
                 hideOverlayContainer();

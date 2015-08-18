@@ -1,6 +1,7 @@
-var processMarketOfferings = function (offerings, market) {
+var processMarketOfferings = function (offerings) {
     'use strict';
 
+    var market = sessionStorage.getItem('market') || 'forex';
     // populate the Offerings object
     Offerings.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
 

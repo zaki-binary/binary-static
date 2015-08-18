@@ -7,14 +7,14 @@ if (marketNavElement) {
     marketNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('market', e.target.id);
-            marketChangeEvent(e.target.id);
+            marketChangeEvent();
         }
     });
 }
 
-var marketChangeEvent = function (market) {
+var marketChangeEvent = function () {
     'use strict';
-    processMarketOfferings(Offerings.offerings(), market);
+    processMarketOfferings(Offerings.offerings());
 };
 
 /*
