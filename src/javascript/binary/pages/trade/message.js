@@ -10,16 +10,17 @@ var Message = (function () {
         console.log(response);
         if (response) {
             var type = response.msg_type;
-
-            if (type === 'offerings') {
+            if (type === 'authorize') {
+                TradeSocket.send({ payout_currencies: 1 });
+            } else if (type === 'offerings') {
                 sessionStorage.setItem('offerings', msg.data);
                 processMarketOfferings();
             } else if (type === 'contracts_for') {
                 processContractFormOfferings(response);
                 hideOverlayContainer();
             } else if (type === 'payout_currencies') {
-                displayCurrencies(response);
-                processPriceRequest();
+                sessionStorage.setItem('currencies', msg.data);
+                displayCurrencies();
             } else if (type === 'proposal') {
                 Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
                 hidePriceLoadingIcon();

@@ -33,7 +33,7 @@ var processContractFormOfferings = function (contracts) {
 
     displayBarriers();
 
-    TradeSocket.send({ payout_currencies: 1 });
+    processPriceRequest();
 };
 
 var processForgetPriceIds = function () {
