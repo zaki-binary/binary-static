@@ -7,6 +7,9 @@ if (marketNavElement) {
     marketNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('market', e.target.id);
+            // as different markets have different forms so remove from sessionStorage
+            // it will default to proper one
+            sessionStorage.removeItem('formname');
             marketChangeEvent();
         }
     });
