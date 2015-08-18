@@ -12,7 +12,8 @@ var Message = (function () {
             var type = response.msg_type;
 
             if (type === 'offerings') {
-                processMarketOfferings(response);
+                sessionStorage.setItem('offerings', msg.data);
+                processMarketOfferings();
             } else if (type === 'contracts_for') {
                 processContractFormOfferings(response);
                 hideOverlayContainer();

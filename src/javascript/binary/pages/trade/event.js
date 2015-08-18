@@ -14,7 +14,7 @@ if (marketNavElement) {
 
 var marketChangeEvent = function () {
     'use strict';
-    processMarketOfferings(Offerings.offerings());
+    processMarketOfferings();
 };
 
 /*

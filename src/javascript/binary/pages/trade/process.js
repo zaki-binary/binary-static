@@ -1,9 +1,11 @@
-var processMarketOfferings = function (offerings) {
+var processMarketOfferings = function () {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'forex';
+    var market = sessionStorage.getItem('market') || 'forex',
+        offerings = sessionStorage.getItem('offerings');
+
     // populate the Offerings object
-    Offerings.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
+    Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1));
 
     // display markets, submarket, underlyings corresponding to market selected
     displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
