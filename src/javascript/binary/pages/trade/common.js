@@ -142,6 +142,8 @@ var contractTypeDisplayMapping = function (type) {
         UPORDOWN: "bottom",
         ONETOUCH: "top",
         NOTOUCH: "bottom",
+        SPREADU: "top",
+        SPREADD: "bottom"
     };
 
     return type ? obj[type] : 'top';
