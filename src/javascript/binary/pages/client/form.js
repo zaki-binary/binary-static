@@ -141,26 +141,18 @@ ClientForm.prototype = {
     on_residence_change: function() {
         var that = this;
         $('#residence').on('change', function() {
-            var residence = $(this).val();
-            var c_config = page.settings.get('countries_list')[residence];
-
-            if (c_config['random_restricted'] && c_config['financial_company'] == 'maltainvest' && /new_real/.test(window.location.href)) {
-                window.location.href = page.url.url_for('new_financial', 'residence='+residence);
-                return;
-            }
-
-            that.set_idd_for_residence(residence);
+            that.set_idd_for_residence($(this).val());
             var address_state = $('#AddressState');
             var current_state = address_state.length > 0 ? address_state.val() : '';
 
             var postcodeLabel = $('label[for=AddressPostcode]');
-            if (residence == 'gb') {
+            if ($(this).val() == 'gb') {
                 postcodeLabel.prepend('<em class="required_asterisk">* </em>');
             } else {
                 postcodeLabel.find('em').remove();
             }
 
-            if(that.is_allowed_opening_account_country(residence)) {
+            if(that.is_allowed_opening_account_country($(this).val())) {
                 $.ajax({
                     crossDomain:true,
                     url: page.url.url_for('states_list'),
