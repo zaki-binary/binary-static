@@ -220,9 +220,9 @@ function compareMarkets(a, b) {
      var sortedContractCategory = {
          'risefall': 0,
          'higherlower': 1,
-         'endsinout': 2,
-         'staysinout': 3,
-         'touchnotouch': 4,
+         'touchnotouch': 2,
+         'endsinout': 3,
+         'staysinout': 4,
          'asian': 5,
          'digits': 6,
          'spreads': 7
