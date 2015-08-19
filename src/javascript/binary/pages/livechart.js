@@ -39,7 +39,7 @@ var build_markets_select = function() {
             market_select.append("<option class='ja-hide' id='opt_" + this.name + "' value='" + this.name + "'>" + this.translated_display_name() + "</option>");
         }
         else {
-            market_select.append("<span id='opt_" + this.name + "' value='" + this.name + "'>" + this.translated_display_name() + "</span>");
+            market_select.append("<option selected=selected id='opt_" + this.name + "' value='" + this.name + "'>" + this.translated_display_name() + "</option>");
         }
     });
 
