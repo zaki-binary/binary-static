@@ -225,6 +225,7 @@ var purchaseContractEvent = function () {
 
     if (id && askPrice) {
         TradeSocket.send({buy: id, price: askPrice});
+        processForgetPriceIds();
     }
 };
 
@@ -244,6 +245,7 @@ if (closeContainerElement) {
         if (e.target) {
             e.preventDefault();
             document.getElementById('contract_confirmation_container').style.display = 'none';
+            processPriceRequest();
         }
     });
 }
