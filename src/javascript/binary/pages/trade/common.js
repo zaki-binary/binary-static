@@ -218,23 +218,31 @@ function compareMarkets(a, b) {
 /*
  * function to assign sorting to contract category
  */
- function compareContractCategory(a, b) {
-     var sortedContractCategory = {
-         'risefall': 0,
-         'higherlower': 1,
-         'touchnotouch': 2,
-         'endsinout': 3,
-         'staysinout': 4,
-         'asian': 5,
-         'digits': 6,
-         'spreads': 7
-     };
+function compareContractCategory(a, b) {
+    var sortedContractCategory = {
+        'risefall': 0,
+        'higherlower': 1,
+        'touchnotouch': 2,
+        'endsinout': 3,
+        'staysinout': 4,
+        'asian': 5,
+        'digits': 6,
+        'spreads': 7
+    };
 
-     if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
-         return -1;
-     }
-     if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
-         return 1;
-     }
-     return 0;
- }
+    if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
+        return -1;
+    }
+    if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
+        return 1;
+    }
+    return 0;
+}
+
+/*
+ * function to get cookie javascript way (use if you don't want to use jquery)
+ */
+function getCookieItem(sKey) {
+    if (!sKey) { return null; }
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+}

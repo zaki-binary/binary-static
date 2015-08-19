@@ -39,8 +39,9 @@ var TradeSocket = (function () {
         tradeSocket = new WebSocket(socketUrl);
 
         tradeSocket.onopen = function (){
-            if($.cookie('login')) {
-                tradeSocket.send(JSON.stringify({authorize: $.cookie('login')}));
+            var loginToken = getCookieItem('login');
+            if(loginToken) {
+                tradeSocket.send(JSON.stringify({authorize: loginToken}));
             } else {
                 tradeSocket.send(JSON.stringify({ payout_currencies: 1 }));
             }
