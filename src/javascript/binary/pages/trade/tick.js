@@ -17,20 +17,36 @@
 var Tick = (function () {
     'use strict';
 
-    var quote, id, epoch;
+    var quote = '',
+        id = '',
+        epoch = '',
+        errorMessage = '';
 
     var details = function (data) {
         var tick = data['tick'] || '';
+        errorMessage = '';
+
         if (tick) {
-            quote = tick['quote'];
-            id = tick['id'];
-            epoch = tick['epoch'];
+            if (tick['error']) {
+                errorMessage = tick['error']['message'];
+            } else {
+                quote = tick['quote'];
+                id = tick['id'];
+                epoch = tick['epoch'];
+            }
         }
     };
 
     var display = function () {
         var spotElement = document.getElementById('spot');
-        spotElement.textContent = quote;
+        var message = '';
+        if (errorMessage) {
+            message = errorMessage;
+        } else {
+            message = quote;
+        }
+        displayPriceMovement(spotElement, spotElement.textContent, message);
+        spotElement.textContent = message;
     };
 
     return {
@@ -38,6 +54,7 @@ var Tick = (function () {
         display: display,
         quote: function () { return quote; },
         id: function () { return id; },
-        epoch: function () { return epoch; }
+        epoch: function () { return epoch; },
+        errorMessage: function () { return errorMessage; }
     };
 })();
