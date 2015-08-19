@@ -63,11 +63,11 @@
         .grd-grid-4
           %h1= l('Market Data')
           %ul
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("/charting/application")}= l('Chart Application')
             %li
               %a.pjaxload{:href=>url_for("/charting/livechart")}= l('Live Charts')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href => '//highcharts.binary.com'}= l('HighCharts')
         .grd-grid-4
           %h1.ja-hide= l('Partner With Us')
