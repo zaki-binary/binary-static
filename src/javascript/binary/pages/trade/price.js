@@ -117,10 +117,12 @@ var Price = (function () {
         fragment.appendChild(h4);
 
         amount.setAttribute('class', 'contract_amount col');
-        amount.setAttribute('id', 'contract_amount_' + position);
 
+        var span = document.createElement('span');
+        span.setAttribute('id', 'contract_amount_' + position);
         content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-        amount.appendChild(content);
+        span.appendChild(content);
+        amount.appendChild(span);
 
         content = document.createTextNode(proposal['longcode']);
         description.appendChild(content);
@@ -141,6 +143,10 @@ var Price = (function () {
 
             if (purchase) {
                 purchase.style.display = 'block';
+            }
+            var oldprice = priceId.getAttribute('data-ask-price');
+            if (oldprice) {
+                displayPriceMovement(span, oldprice, proposal['ask_price']);
             }
 
             // create unique id object that is send in response
