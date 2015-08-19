@@ -142,6 +142,8 @@ var contractTypeDisplayMapping = function (type) {
         UPORDOWN: "bottom",
         ONETOUCH: "top",
         NOTOUCH: "bottom",
+        SPREADU: "top",
+        SPREADD: "bottom"
     };
 
     return type ? obj[type] : 'top';
@@ -195,7 +197,7 @@ var hideOverlayContainer = function () {
 /*
  * function to assign sorting to market list
  */
-function compareMarkets(a, b) {
+var compareMarkets = function (a, b) {
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -211,28 +213,51 @@ function compareMarkets(a, b) {
         return 1;
     }
     return 0;
-}
+};
 
 /*
  * function to assign sorting to contract category
  */
- function compareContractCategory(a, b) {
-     var sortedContractCategory = {
-         'risefall': 0,
-         'higherlower': 1,
-         'endsinout': 2,
-         'staysinout': 3,
-         'touchnotouch': 4,
-         'asian': 5,
-         'digits': 6,
-         'spreads': 7
-     };
+var compareContractCategory = function (a, b) {
+    var sortedContractCategory = {
+        'risefall': 0,
+        'higherlower': 1,
+        'touchnotouch': 2,
+        'endsinout': 3,
+        'staysinout': 4,
+        'asian': 5,
+        'digits': 6,
+        'spreads': 7
+    };
 
-     if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
-         return -1;
-     }
-     if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
-         return 1;
-     }
-     return 0;
- }
+    if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
+        return -1;
+    }
+    if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
+        return 1;
+    }
+    return 0;
+};
+
+/*
+ * function to get cookie javascript way (use if you don't want to use jquery)
+ */
+var getCookieItem = function (sKey) {
+    if (!sKey) { return null; }
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+};
+
+/*
+ * Display price/spot movement variation to depict price moved up or down
+ */
+var displayPriceMovement = function (element, oldValue, currentValue) {
+    element.classList.remove('price_moved_down');
+    element.classList.remove('price_moved_up');
+    if (parseFloat(currentValue) > parseFloat(oldValue)) {
+        element.classList.remove('price_moved_down');
+        element.classList.add('price_moved_up');
+    } else if (parseFloat(currentValue) < parseFloat(oldValue)) {
+        element.classList.remove('price_moved_up');
+        element.classList.add('price_moved_down');
+    }
+};

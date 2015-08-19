@@ -3359,7 +3359,11 @@ pjax_config_page('trading', function () {
     return {
         onLoad: function () {
             TradeSocket.init();
-            TradeSocket.send({offerings: {contracts: 0}});
+            if (sessionStorage.getItem('offerings')) {
+                processMarketOfferings();
+            } else {
+                TradeSocket.send({offerings: {contracts: 0}});
+            }
         },
         onUnload: function() {
             TradeSocket.close();
@@ -9904,6 +9908,8 @@ var contractTypeDisplayMapping = function (type) {
         UPORDOWN: "bottom",
         ONETOUCH: "top",
         NOTOUCH: "bottom",
+        SPREADU: "top",
+        SPREADD: "bottom"
     };
 
     return type ? obj[type] : 'top';
@@ -9957,7 +9963,7 @@ var hideOverlayContainer = function () {
 /*
  * function to assign sorting to market list
  */
-function compareMarkets(a, b) {
+var compareMarkets = function (a, b) {
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -9973,31 +9979,54 @@ function compareMarkets(a, b) {
         return 1;
     }
     return 0;
-}
+};
 
 /*
  * function to assign sorting to contract category
  */
- function compareContractCategory(a, b) {
-     var sortedContractCategory = {
-         'risefall': 0,
-         'higherlower': 1,
-         'endsinout': 2,
-         'staysinout': 3,
-         'touchnotouch': 4,
-         'asian': 5,
-         'digits': 6,
-         'spreads': 7
-     };
+var compareContractCategory = function (a, b) {
+    var sortedContractCategory = {
+        'risefall': 0,
+        'higherlower': 1,
+        'touchnotouch': 2,
+        'endsinout': 3,
+        'staysinout': 4,
+        'asian': 5,
+        'digits': 6,
+        'spreads': 7
+    };
 
-     if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
-         return -1;
-     }
-     if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
-         return 1;
-     }
-     return 0;
- }
+    if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
+        return -1;
+    }
+    if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
+        return 1;
+    }
+    return 0;
+};
+
+/*
+ * function to get cookie javascript way (use if you don't want to use jquery)
+ */
+var getCookieItem = function (sKey) {
+    if (!sKey) { return null; }
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+};
+
+/*
+ * Display price/spot movement variation to depict price moved up or down
+ */
+var displayPriceMovement = function (element, oldValue, currentValue) {
+    element.classList.remove('price_moved_down');
+    element.classList.remove('price_moved_up');
+    if (parseFloat(currentValue) > parseFloat(oldValue)) {
+        element.classList.remove('price_moved_down');
+        element.classList.add('price_moved_up');
+    } else if (parseFloat(currentValue) < parseFloat(oldValue)) {
+        element.classList.remove('price_moved_up');
+        element.classList.add('price_moved_down');
+    }
+};
 ;/*
  * Contract object mocks the trading form we have on our website
  * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
@@ -10133,12 +10162,12 @@ var Contract = (function () {
  * It process 'socket.send({payout_currencies:1})` response
  * and display them
  */
-var displayCurrencies = function (input, selected) {
+var displayCurrencies = function (selected) {
     'use strict';
 
     var target = document.getElementById('currency'),
         fragment =  document.createDocumentFragment(),
-        currencies = input['payout_currencies'];
+        currencies = JSON.parse(sessionStorage.getItem('currencies'))['payout_currencies'];
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
@@ -10385,14 +10414,17 @@ if (marketNavElement) {
     marketNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('market', e.target.id);
-            marketChangeEvent(e.target.id);
+            // as different markets have different forms so remove from sessionStorage
+            // it will default to proper one
+            sessionStorage.removeItem('formname');
+            marketChangeEvent();
         }
     });
 }
 
-var marketChangeEvent = function (market) {
+var marketChangeEvent = function () {
     'use strict';
-    processMarketOfferings(Offerings.offerings(), market);
+    processMarketOfferings();
 };
 
 /*
@@ -10600,6 +10632,7 @@ var purchaseContractEvent = function () {
 
     if (id && askPrice) {
         TradeSocket.send({buy: id, price: askPrice});
+        processForgetPriceIds();
     }
 };
 
@@ -10619,6 +10652,7 @@ if (closeContainerElement) {
         if (e.target) {
             e.preventDefault();
             document.getElementById('contract_confirmation_container').style.display = 'none';
+            processPriceRequest();
         }
     });
 }
@@ -10664,21 +10698,24 @@ var Message = (function () {
         console.log(response);
         if (response) {
             var type = response.msg_type;
-
-            if (type === 'offerings') {
-                var market = sessionStorage.getItem('market') || 'Forex';
-                processMarketOfferings(response, market);
+            if (type === 'authorize') {
+                TradeSocket.send({ payout_currencies: 1 });
+            } else if (type === 'offerings') {
+                sessionStorage.setItem('offerings', msg.data);
+                processMarketOfferings();
             } else if (type === 'contracts_for') {
                 processContractFormOfferings(response);
                 hideOverlayContainer();
             } else if (type === 'payout_currencies') {
-                displayCurrencies(response);
-                processPriceRequest();
+                sessionStorage.setItem('currencies', msg.data);
+                displayCurrencies();
             } else if (type === 'proposal') {
-                Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
+                Price.display(response, Contract.contractType()[Offerings.form()]);
                 hidePriceLoadingIcon();
             } else if (type === 'open_receipt') {
                 Purchase.display(response);
+            } else if (type === 'tick') {
+                processTick(response);
             }
         } else {
             console.log('some error occured');
@@ -10901,7 +10938,7 @@ var Price = (function () {
         return proposal;
     };
 
-    var display = function (details, contractType, spotElement) {
+    var display = function (details, contractType) {
         var proposal = details['proposal'],
             params = details['echo_req'],
             type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
@@ -10943,10 +10980,12 @@ var Price = (function () {
         fragment.appendChild(h4);
 
         amount.setAttribute('class', 'contract_amount col');
-        amount.setAttribute('id', 'contract_amount_' + position);
 
+        var span = document.createElement('span');
+        span.setAttribute('id', 'contract_amount_' + position);
         content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-        amount.appendChild(content);
+        span.appendChild(content);
+        amount.appendChild(span);
 
         content = document.createTextNode(proposal['longcode']);
         description.appendChild(content);
@@ -10968,6 +11007,10 @@ var Price = (function () {
             if (purchase) {
                 purchase.style.display = 'block';
             }
+            var oldprice = priceId.getAttribute('data-ask-price');
+            if (oldprice) {
+                displayPriceMovement(span, oldprice, proposal['ask_price']);
+            }
 
             // create unique id object that is send in response
             priceId.setAttribute('data-purchase-id', proposal['id']);
@@ -10975,8 +11018,6 @@ var Price = (function () {
 
             row.appendChild(amount);
             row.appendChild(description);
-
-            spotElement.textContent = proposal['spot'];
             fragment.appendChild(row);
         }
 
@@ -11000,15 +11041,23 @@ var Price = (function () {
     };
 
 })();
-;var processMarketOfferings = function (offerings, market) {
+;/*
+ * Function to process offerings, this function is called
+ * when market is changed or for processing offerings response
+ */
+var processMarketOfferings = function () {
     'use strict';
 
+    var market = sessionStorage.getItem('market') || 'forex',
+        formname = sessionStorage.getItem('formname') || 'risefall',
+        offerings = sessionStorage.getItem('offerings');
+
     // populate the Offerings object
-    Offerings.details(offerings, market.charAt(0).toUpperCase() + market.substring(1));
+    Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
 
     // display markets, submarket, underlyings corresponding to market selected
     displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
-    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), sessionStorage.getItem('formname'));
+    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), formname);
     displayOptions('submarket',Offerings.submarkets());
     displayUnderlyings();
 
@@ -11020,10 +11069,18 @@ var Price = (function () {
     TradeSocket.send({ contracts_for: underlying });
 };
 
+/*
+ * Function to display contract form for current underlying
+ */
 var processContractFormOfferings = function (contracts) {
     'use strict';
 
     Contract.details(contracts);
+
+    // forget the old tick id i.e. close the old tick stream
+    processForgetTickId();
+    // get ticks for current underlying
+    TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
 
     displayDurations('spot');
 
@@ -11031,9 +11088,12 @@ var processContractFormOfferings = function (contracts) {
 
     displayBarriers();
 
-    TradeSocket.send({ payout_currencies: 1 });
+    processPriceRequest();
 };
 
+/*
+ * Function to request for cancelling the current price proposal
+ */
 var processForgetPriceIds = function () {
     'use strict';
 
@@ -11042,6 +11102,10 @@ var processForgetPriceIds = function () {
     });
 };
 
+/*
+ * Function to process and calculate price based on current form
+ * parameters or change in form parameters
+ */
 var processPriceRequest = function () {
     'use strict';
 
@@ -11053,6 +11117,28 @@ var processPriceRequest = function () {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
+};
+
+/*
+ * Function to cancel the current tick stream
+ * this need to be invoked before makin
+ */
+var processForgetTickId = function () {
+    'use strict';
+
+    if (Tick && Tick.id()) {
+        TradeSocket.send({ forget: Tick.id() });
+    }
+};
+
+/*
+ * Function to process ticks stream
+ */
+var processTick = function (tick) {
+    'use strict';
+
+    Tick.details(tick);
+    Tick.display();
 };
 ;/*
  * Purchase object that handles all the functions related to
@@ -11160,8 +11246,11 @@ var TradeSocket = (function () {
         tradeSocket = new WebSocket(socketUrl);
 
         tradeSocket.onopen = function (){
-            if($.cookie('login')) {
-                tradeSocket.send(JSON.stringify({authorize: $.cookie('login')}));
+            var loginToken = getCookieItem('login');
+            if(loginToken) {
+                tradeSocket.send(JSON.stringify({authorize: loginToken}));
+            } else {
+                tradeSocket.send(JSON.stringify({ payout_currencies: 1 }));
             }
             sendBufferedSends();
         };
@@ -11268,6 +11357,66 @@ function displayStartDates() {
         document.getElementById('date_start_row').style.display = 'none';
     }
 }
+;/*
+ * Tick object handles all the process/display related to tick streaming
+ *
+ * We request tick stream for particular underlying to update current spot
+ *
+ *
+ * Usage:
+ * use `Tick.detail` to populate this object
+ *
+ * then use
+ *
+ * `Tick.quote()` to get current spot quote
+ * `Tick.id()` to get the unique for current stream
+ * `Tick.epoch()` to get the tick epoch time
+ * 'Tick.display()` to display current spot
+ */
+var Tick = (function () {
+    'use strict';
+
+    var quote = '',
+        id = '',
+        epoch = '',
+        errorMessage = '';
+
+    var details = function (data) {
+        var tick = data['tick'] || '';
+        errorMessage = '';
+
+        if (tick) {
+            if (tick['error']) {
+                errorMessage = tick['error']['message'];
+            } else {
+                quote = tick['quote'];
+                id = tick['id'];
+                epoch = tick['epoch'];
+            }
+        }
+    };
+
+    var display = function () {
+        var spotElement = document.getElementById('spot');
+        var message = '';
+        if (errorMessage) {
+            message = errorMessage;
+        } else {
+            message = quote;
+        }
+        displayPriceMovement(spotElement, spotElement.textContent, message);
+        spotElement.textContent = message;
+    };
+
+    return {
+        details: details,
+        display: display,
+        quote: function () { return quote; },
+        id: function () { return id; },
+        epoch: function () { return epoch; },
+        errorMessage: function () { return errorMessage; }
+    };
+})();
 ;RealityCheck = (function ($) {
     "use strict";
 
