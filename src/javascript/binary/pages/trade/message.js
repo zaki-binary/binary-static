@@ -22,10 +22,12 @@ var Message = (function () {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
             } else if (type === 'proposal') {
-                Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
+                Price.display(response, Contract.contractType()[Offerings.form()]);
                 hidePriceLoadingIcon();
             } else if (type === 'open_receipt') {
                 Purchase.display(response);
+            } else if (type === 'tick') {
+                processTick(response);
             }
         } else {
             console.log('some error occured');

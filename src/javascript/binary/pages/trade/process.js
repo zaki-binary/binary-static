@@ -1,3 +1,7 @@
+/*
+ * Function to process offerings, this function is called
+ * when market is changed or for processing offerings response
+ */
 var processMarketOfferings = function () {
     'use strict';
 
@@ -22,10 +26,18 @@ var processMarketOfferings = function () {
     TradeSocket.send({ contracts_for: underlying });
 };
 
+/*
+ * Function to display contract form for current underlying
+ */
 var processContractFormOfferings = function (contracts) {
     'use strict';
 
     Contract.details(contracts);
+
+    // forget the old tick id i.e. close the old tick stream
+    processForgetTickId();
+    // get ticks for current underlying
+    TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
 
     displayDurations('spot');
 
@@ -36,6 +48,9 @@ var processContractFormOfferings = function (contracts) {
     processPriceRequest();
 };
 
+/*
+ * Function to request for cancelling the current price proposal
+ */
 var processForgetPriceIds = function () {
     'use strict';
 
@@ -44,6 +59,10 @@ var processForgetPriceIds = function () {
     });
 };
 
+/*
+ * Function to process and calculate price based on current form
+ * parameters or change in form parameters
+ */
 var processPriceRequest = function () {
     'use strict';
 
@@ -55,4 +74,26 @@ var processPriceRequest = function () {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
+};
+
+/*
+ * Function to cancel the current tick stream
+ * this need to be invoked before makin
+ */
+var processForgetTickId = function () {
+    'use strict';
+
+    if (Tick && Tick.id()) {
+        TradeSocket.send({ forget: Tick.id() });
+    }
+};
+
+/*
+ * Function to process ticks stream
+ */
+var processTick = function (tick) {
+    'use strict';
+
+    Tick.details(tick);
+    Tick.display();
 };
