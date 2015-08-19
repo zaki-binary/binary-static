@@ -213,7 +213,7 @@ var compareMarkets = function (a, b) {
         return 1;
     }
     return 0;
-}
+};
 
 /*
  * function to assign sorting to contract category
@@ -237,7 +237,7 @@ var compareContractCategory = function (a, b) {
         return 1;
     }
     return 0;
-}
+};
 
 /*
  * function to get cookie javascript way (use if you don't want to use jquery)
@@ -245,7 +245,7 @@ var compareContractCategory = function (a, b) {
 var getCookieItem = function (sKey) {
     if (!sKey) { return null; }
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-}
+};
 
 /*
  * Display price/spot movement variation to depict price moved up or down
