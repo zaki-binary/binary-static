@@ -197,7 +197,7 @@ var hideOverlayContainer = function () {
 /*
  * function to assign sorting to market list
  */
-function compareMarkets(a, b) {
+var compareMarkets = function (a, b) {
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -218,7 +218,7 @@ function compareMarkets(a, b) {
 /*
  * function to assign sorting to contract category
  */
-function compareContractCategory(a, b) {
+var compareContractCategory = function (a, b) {
     var sortedContractCategory = {
         'risefall': 0,
         'higherlower': 1,
@@ -242,7 +242,22 @@ function compareContractCategory(a, b) {
 /*
  * function to get cookie javascript way (use if you don't want to use jquery)
  */
-function getCookieItem(sKey) {
+var getCookieItem = function (sKey) {
     if (!sKey) { return null; }
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
+
+/*
+ * Display price/spot movement variation to depict price moved up or down
+ */
+var displayPriceMovement = function (element, oldValue, currentValue) {
+    element.classList.remove('price_moved_down');
+    element.classList.remove('price_moved_up');
+    if (parseFloat(currentValue) > parseFloat(oldValue)) {
+        element.classList.remove('price_moved_down');
+        element.classList.add('price_moved_up');
+    } else if (parseFloat(currentValue) < parseFloat(oldValue)) {
+        element.classList.remove('price_moved_up');
+        element.classList.add('price_moved_down');
+    }
+};
