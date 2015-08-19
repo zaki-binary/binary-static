@@ -4,12 +4,12 @@
  * It process 'socket.send({payout_currencies:1})` response
  * and display them
  */
-var displayCurrencies = function (input, selected) {
+var displayCurrencies = function (selected) {
     'use strict';
 
     var target = document.getElementById('currency'),
         fragment =  document.createDocumentFragment(),
-        currencies = input['payout_currencies'];
+        currencies = JSON.parse(sessionStorage.getItem('currencies'))['payout_currencies'];
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
