@@ -20,7 +20,7 @@ var select_user_country = function() {
                 dataType: "json"
             }).done(function(response) {
                 selected_country = response.country;
-                if (c_config[selected_country]['restricted']) {
+                if (c_config[selected_country]['gaming_company'] == 'none' && c_config[selected_country]['financial_company'] == 'none') {
                     selected_country = '';
                 }
                 $('#residence').val(selected_country).change();
