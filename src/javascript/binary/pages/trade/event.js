@@ -7,14 +7,17 @@ if (marketNavElement) {
     marketNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             sessionStorage.setItem('market', e.target.id);
-            marketChangeEvent(e.target.id);
+            // as different markets have different forms so remove from sessionStorage
+            // it will default to proper one
+            sessionStorage.removeItem('formname');
+            marketChangeEvent();
         }
     });
 }
 
-var marketChangeEvent = function (market) {
+var marketChangeEvent = function () {
     'use strict';
-    processMarketOfferings(Offerings.offerings(), market);
+    processMarketOfferings();
 };
 
 /*
@@ -222,6 +225,7 @@ var purchaseContractEvent = function () {
 
     if (id && askPrice) {
         TradeSocket.send({buy: id, price: askPrice});
+        processForgetPriceIds();
     }
 };
 
@@ -241,6 +245,7 @@ if (closeContainerElement) {
         if (e.target) {
             e.preventDefault();
             document.getElementById('contract_confirmation_container').style.display = 'none';
+            processPriceRequest();
         }
     });
 }
