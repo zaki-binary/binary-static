@@ -75,7 +75,7 @@ var Price = (function () {
         return proposal;
     };
 
-    var display = function (details, contractType, spotElement) {
+    var display = function (details, contractType) {
         var proposal = details['proposal'],
             params = details['echo_req'],
             type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
@@ -117,10 +117,12 @@ var Price = (function () {
         fragment.appendChild(h4);
 
         amount.setAttribute('class', 'contract_amount col');
-        amount.setAttribute('id', 'contract_amount_' + position);
 
+        var span = document.createElement('span');
+        span.setAttribute('id', 'contract_amount_' + position);
         content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-        amount.appendChild(content);
+        span.appendChild(content);
+        amount.appendChild(span);
 
         content = document.createTextNode(proposal['longcode']);
         description.appendChild(content);
@@ -142,6 +144,10 @@ var Price = (function () {
             if (purchase) {
                 purchase.style.display = 'block';
             }
+            var oldprice = priceId.getAttribute('data-ask-price');
+            if (oldprice) {
+                displayPriceMovement(span, oldprice, proposal['ask_price']);
+            }
 
             // create unique id object that is send in response
             priceId.setAttribute('data-purchase-id', proposal['id']);
@@ -149,8 +155,6 @@ var Price = (function () {
 
             row.appendChild(amount);
             row.appendChild(description);
-
-            spotElement.textContent = proposal['spot'];
             fragment.appendChild(row);
         }
 
