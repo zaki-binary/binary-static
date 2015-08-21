@@ -235,7 +235,7 @@ Menu.prototype = {
         this.hide_main_menu();
 
         var active = this.active_menu_top();
-        var trading = $('#menu-top li:eq(3)');
+        var trading = $('#menu-top li:eq(0)');
         if(active) {
             active.addClass('active');
             if(trading.is(active)) {
@@ -368,7 +368,7 @@ Menu.prototype = {
             }
             start_trading.attr("href", trade_url);
 
-            $('#menu-top li:eq(3) a').attr('href', trade_url);
+            $('#menu-top li:eq(0) a').attr('href', trade_url);
             $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
@@ -377,7 +377,7 @@ Menu.prototype = {
             load_with_pjax(trade_url);
         }).addClass('unbind_later');
 
-        $('#menu-top li:eq(3) a').on('click', function(event) {
+        $('#menu-top li:eq(0) a').on('click', function(event) {
             event.preventDefault();
             load_with_pjax(trade_url);
         }).addClass('unbind_later');
