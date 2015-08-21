@@ -84,8 +84,7 @@ var BetPrice = function() {
                     e.preventDefault();
                 }
                 var target = $(e.target);
-                var button = target.parents('a[class^="spread"]');
-                that.spread.disable(button);
+                that.hide_buy_buttons();
                 var form = $(e.target).parents('form');
                 that.buy_bet(form);
                 return false;
@@ -206,10 +205,6 @@ var BetPrice = function() {
                     }
 
                     return new_value;
-                },
-                disable: function(target) {
-                    var that = this;
-                    target.unbind('click');
                 },
                 on_sell: function(form) {
                     var that = this;
@@ -582,16 +577,20 @@ var BetPrice = function() {
                     return (display_id && display_id.val() == id);
                 },
                 hide_buy_button: function() {
-                    return $('button[name^="btn_buybet"]').parent().hide();
+                    $('button[name^="btn_buybet"]').parent().hide();
+                    $('a[class^="spread_"]').hide();
                 },
                 show_buy_button: function() {
-                    return $('button[name^="btn_buybet"]').parent().show();
+                    $('button[name^="btn_buybet"]').parent().show();
+                    $('a[class^="spread_"]').show();
                 },
                 disable_buy_buttons: function() {
                     $('button[name^="btn_buybet"]').attr('disabled','disabled');
+                    // unbind click event for spread since it is not a button
+                    $('a[class^="spread_"]').unbind('click');
                 },
                 enable_buy_buttons: function() {
-                    $('a[id^="spread"]').removeAttr('disabled');
+                    // nothing to enable for spreads since it is not a button
                     $('button[name^="btn_buybet"]').removeAttr('disabled');
                 },
                 update_from_stream: function(stream) {
