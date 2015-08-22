@@ -9,7 +9,9 @@ if (marketNavElement) {
             var clickedMarket = e.target;
             var isMarketActive = clickedMarket.classList.contains('active');
             sessionStorage.setItem('market', clickedMarket.id);
+
             setMarketPlaceholderContent();
+
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
             sessionStorage.removeItem('formname');
@@ -17,6 +19,10 @@ if (marketNavElement) {
             // if market is already active then no need to send same request again
             if (!isMarketActive) {
                 processMarketOfferings();
+            }
+            var marketFormCheckbox = document.getElementById('market_show_menu');
+            if (marketFormCheckbox) {
+                marketFormCheckbox.checked = false;
             }
         }
     });
@@ -33,11 +39,17 @@ if (formNavElement) {
             var clickedForm = e.target;
             var isFormActive = clickedForm.classList.contains('active');
             sessionStorage.setItem('formname', clickedForm.id);
+
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
             toggleMobileNavMenu(formNavElement, clickedForm);
+
             if (!isFormActive) {
                 contractFormEventChange(clickedForm.id);
+            }
+            var contractFormCheckbox = document.getElementById('contract_form_show_menu');
+            if (contractFormCheckbox) {
+                contractFormCheckbox.checked = false;
             }
         }
     });
