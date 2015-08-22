@@ -273,7 +273,7 @@ var toggleMobileNavMenu = function (nav, eventElement) {
         for (var i = 0, len = liElements.length; i < len; i++){
             liElements[i].classList.remove('active');
         }
-        classes.add('active')
+        classes.add('active');
     }
 };
 
