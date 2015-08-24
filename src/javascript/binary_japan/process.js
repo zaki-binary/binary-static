@@ -4,11 +4,10 @@ var processContractFormOfferings = function(contracts){
 
 	Contract.details(contracts);
 
-	displayDurations('spot');
-
-	displayStartDates();
-
-	displayBarriers();
+	// forget the old tick id i.e. close the old tick stream
+	processForgetTickId();
+	// get ticks for current underlying
+	TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
 
 	Periods.displayPeriods();
 
