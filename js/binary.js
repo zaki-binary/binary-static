@@ -616,6 +616,7 @@ var User = function() {
 
 var Client = function() {
     this.loginid =  $.cookie('loginid');
+    this.residence =  $.cookie('residence');
     this.is_logged_in = false;
     this.is_real = false;
     if(this.loginid === null || typeof this.loginid === "undefined") {
@@ -1193,12 +1194,12 @@ Contents.prototype = {
                 $('#topbar').addClass('dark-blue');
                 $('#topbar').removeClass('orange');
 
-                if (!/^Q?CR/.test(this.client.loginid)) {
+                if (!/^CR/.test(this.client.loginid)) {
                     $('#payment-agent-section').addClass('invisible');
                     $('#payment-agent-section').hide();
                 }
 
-                if (!/^Q?MF|MLT/.test(this.client.loginid)) {
+                if (!/^MF|MLT/.test(this.client.loginid)) {
                     $('#account-transfer-section').addClass('invisible');
                     $('#account-transfer-section').hide();
                 }
@@ -1239,17 +1240,30 @@ Contents.prototype = {
     topbar_message_visibility: function() {
         if(this.client.is_logged_in) {
             var loginid_array = this.user.loginid_array;
+            var c_config = page.settings.get('countries_list')[this.client.residence];
 
             if (!this.client.is_real) {
+                var show_upgrade = true;
                 for (var i=0;i<loginid_array.length;i++) {
                     if (loginid_array[i].real) {
                         $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-financial-upgrade-link').addClass('invisible');
+                        show_upgrade = false;
                         break;
+                    }
+                }
+                if (show_upgrade) {
+                    if (c_config && c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'maltainvest') {
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-financial-upgrade-link').removeClass('invisible');
+                    } else {
+                        $('#virtual-upgrade-link').removeClass('invisible');
+                        $('#vr-financial-upgrade-link').addClass('invisible');
                     }
                 }
             } else {
                 var show_financial = false;
-                if (/MLT/.test(this.client.loginid)) {
+                if (c_config && c_config['financial_company'] == 'maltainvest') {
                     show_financial = true;
                     for (var j=0;j<loginid_array.length;j++) {
                         if (loginid_array[j].financial) {
@@ -8524,16 +8538,17 @@ onLoad.queue_for_url(function() {
 };
 ;var client_form;
 onLoad.queue(function() {
-        client_form = new ClientForm({restricted_countries: page.settings.get('restricted_countries'), valid_loginids: page.settings.get('valid_loginids')});
+    client_form = new ClientForm({valid_loginids: page.settings.get('valid_loginids')});
 });
 
 var select_user_country = function() {
     if ($('#residence').length > 0) {
-        var restricted_countries = new RegExp(page.settings.get('restricted_countries'));
         var selected_country = $('#residence').val();
-
+        var c_config = page.settings.get('countries_list');
         if (selected_country.length > 0) {
-            selected_country = (restricted_countries.test(selected_country)) ? '' : selected_country;
+            if (c_config[selected_country]['gaming_company'] == 'none' && c_config[selected_country]['financial_company'] == 'none') {
+                selected_country = '';
+            }
             $('#residence').val(selected_country).change();
         } else {
             $.ajax({
@@ -8542,7 +8557,10 @@ var select_user_country = function() {
                 async: true,
                 dataType: "json"
             }).done(function(response) {
-                selected_country = (restricted_countries.test(response.country)) ? '' : response.country;
+                selected_country = response.country;
+                if (c_config[selected_country]['gaming_company'] == 'none' && c_config[selected_country]['financial_company'] == 'none') {
+                    selected_country = '';
+                }
                 $('#residence').val(selected_country).change();
             });
         }
@@ -8550,8 +8568,8 @@ var select_user_country = function() {
 };
 
 var disable_residence = function () {
-    var virtual_residence = $('#virtual_residence');
-    if (virtual_residence.length > 0 && virtual_residence.val() == $('#residence').val()) {
+    var vr_residence = page.client.residence;
+    if (vr_residence.length > 0 && vr_residence == $('#residence').val()) {
         $('#residence').attr('disabled', true);
     }
 };
@@ -8586,17 +8604,20 @@ pjax_config_page('new_real', function() {
 });
 
 var upgrade_investment_disabled_field = function () {
-    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
-    fields.forEach(function (element, index, array) {
-        var obj = $('#'+element);
-        if (obj.length > 0) {
-            $('#'+element).attr('disabled', true);
-        }
-    });
+    if (page.client.is_real) {
+        var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
+        fields.forEach(function (element, index, array) {
+            var obj = $('#'+element);
+            if (obj.length > 0) {
+                $('#'+element).attr('disabled', true);
+            }
+        });
+    } else {
+        $('#residence').attr('disabled', true);
+    }
 };
 
 var financial_enable_fields_form_submit = function () {
-    var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
     $('form#openAccForm').submit(function (event) {
         var field_error = false;
         $("form#openAccForm").find('p.errorfield:visible').each(function() {
@@ -8605,13 +8626,20 @@ var financial_enable_fields_form_submit = function () {
                 return false;
             }
         });
-        if (!field_error) {
+        if (field_error) {
+            return;
+        }
+
+        if (page.client.is_real) {
+            var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
             fields.forEach(function (element, index, array) {
                 var obj = $('#'+element);
                 if (obj.length > 0) {
                     obj.removeAttr('disabled');
                 }
             });
+        } else {
+            $('#residence').removeAttr('disabled');
         }
     });
 };
@@ -8626,6 +8654,10 @@ var hide_account_opening_for_risk_disclaimer = function () {
 pjax_config_page('new_financial', function() {
     return {
         onLoad: function() {
+            if (!page.client.is_real) {
+                client_form.on_residence_change();
+                select_user_country();
+            }
             upgrade_investment_disabled_field();
             financial_enable_fields_form_submit();
             hide_account_opening_for_risk_disclaimer();
@@ -8641,7 +8673,6 @@ pjax_config_page('user/assessment', function() {
     };
 });
 ;var ClientForm = function(init_params) {
-    this.restricted_countries = new RegExp(init_params['restricted_countries']);
     this.valid_loginids = new RegExp(init_params['valid_loginids']);
 };
 
@@ -8678,7 +8709,8 @@ ClientForm.prototype = {
     },
     is_allowed_opening_account_country: function(selected_country) {
         var error_residence = clearInputErrorField('errorresidence');
-        if (this.restricted_countries.test(selected_country)) {
+        var c_config = page.settings.get('countries_list')[selected_country];
+        if (c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'none') {
             error_residence.innerHTML = text.localize('We are not accepting accounts from residents of this country at the present time.');
             return false;
         }
