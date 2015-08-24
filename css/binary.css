@@ -235,8 +235,6 @@ fieldset {
   position: relative;
   border: 1px solid #E5E5E5;
   padding: 5px;
-  background: -moz-linear-gradient(top, white 30%, #f2f2f2 90%);
-  background: -webkit-linear-gradient(top, white 30%, #f2f2f2 90%);
   background: -ms-linear-gradient(top, white 30%, #f2f2f2 90%);
   border-bottom: 1px solid transparent;
 }
@@ -575,13 +573,19 @@ ul.checked li {
 }
 
 #page-wrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   min-height: 100vh;
 }
 
 #content-holder {
-  flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
 }
 
 *,
@@ -592,21 +596,25 @@ ul.checked li {
 
 @keyframes spinning {
   from {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 
 @-webkit-keyframes spinning {
   from {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 
@@ -660,13 +668,17 @@ ul.checked li {
 }
 
 .overlay .dialog {
+  transition: -webkit-transform .2s, height 0;
   transition: transform .2s, height 0;
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .overlay.hidden .dialog {
+  transition: -webkit-transform .2s, height 0 .2s;
   transition: transform .2s, height 0 .2s;
-  transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
 /* main style */
@@ -1429,9 +1441,6 @@ abbr {
 .home-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   display: block !important;
 }
@@ -1718,9 +1727,6 @@ abbr {
 .home2-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   display: block !important;
 }
@@ -1996,9 +2002,6 @@ abbr {
 .ad-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   display: block !important;
 }
@@ -2279,9 +2282,6 @@ abbr {
 .ad1-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   display: block !important;
 }
@@ -2562,9 +2562,6 @@ abbr {
 .ad2-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   display: block !important;
 }
@@ -2845,9 +2842,6 @@ abbr {
 .ad3-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
   display: block !important;
 }
@@ -5741,6 +5735,7 @@ table .loss, table .lower {
   font-weight: bold;
   font-size: 22px;
   transition-duration: 0.4s;
+  transition-property: -webkit-transform;
   transition-property: transform;
   box-shadow: 0 0 2px #dedede;
 }
@@ -5763,7 +5758,8 @@ table .loss, table .lower {
   }
 }
 .timeline .year:hover {
-  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   background: #e98024;
   color: #f2f2f2;
 }
@@ -5828,27 +5824,19 @@ table .loss, table .lower {
 
 @keyframes spinning {
   from {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes spinning {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 
 .spinner, .progress {
   -webkit-animation: spinning 1s infinite linear;
-  animation: spinning 1s infinite linear;
+          animation: spinning 1s infinite linear;
 }
 
 .progress {
@@ -5859,39 +5847,93 @@ table .loss, table .lower {
 }
 
 .row, .row-inner {
-  flex-direction: row;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
 }
 
 .col, .col-inner {
-  flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .vertical-row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.nav_placeholder {
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  background-color: #2a3052;
+  padding: 3px 0 3px 10px;
+  margin: 10px 0;
+  color: white;
+  text-transform: capitalize;
+}
+
+.nav_placeholder:after {
+  content: '\25BC';
+  font-size: 50%;
+  right: 0;
+  position: absolute;
+  margin-right: 10px;
+}
+
+input[type=checkbox].show_menu {
+  display: none;
+}
+
+input[type=checkbox]#market_show_menu:checked ~ #contract_market_nav {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 ul[role=segmented] {
   box-shadow: inset 0px 0px 0px 1px rgba(42, 48, 82, 0.2);
   background-color: #f2f2f2;
-  border-radius: 2px;
   color: #2a3052;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   margin-bottom: 1rem;
   width: 100%;
 }
 ul[role=segmented] li {
-  flex: 1;
-  text-align: center;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   cursor: pointer;
   margin: 0;
   text-transform: capitalize;
+  padding: 3px 0;
+  text-align: center;
 }
 ul[role=segmented] li.active {
   color: white;
@@ -5916,7 +5958,9 @@ ul[role=segmented] a:hover {
   padding: 10px 0;
 }
 #contract_container .big-col {
-  flex: 2;
+  -webkit-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
 }
 #contract_container #contract_form_container {
   border: 1px solid #dedede;
@@ -6007,36 +6051,32 @@ ul[role=segmented] a:hover {
   left: 45%;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-    opacity: 0.2;
-  }
-
-  50% {
-    transform: rotate(180deg);
-    opacity: 1;
-  }
-
-  to {
-    transform: rotate(360deg);
-    opacity: 0.2;
-  }
-}
-
 @media all and (max-width: 640px) {
   ul[role=segmented] {
-    flex-direction: column;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    display: none;
+  }
+
+  .nav_placeholder {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
 
   #contract_container.row {
-    flex-direction: column;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   #contract_container.row #contract_prices_container {
     margin-left: 0;
   }
   #contract_container.row .row-inner {
-    flex-direction: column;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   #contract_container.row .row-inner .col-inner {
     margin-bottom: 5px;
@@ -6227,22 +6267,16 @@ ul[role=segmented] a:hover {
 }
 
 .grd-container, .grd-container-12 {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 [class*="grd-grid-"][class*="grd-parent"] {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .grd-grid-0, .grd-grid-mobile-0, .grd-grid-tablet-0, .grd-grid-phablet-0, .grd-grid-1, .grd-grid-mobile-1, .grd-grid-tablet-1, .grd-grid-phablet-1, .grd-grid-2, .grd-grid-mobile-2, .grd-grid-tablet-2, .grd-grid-phablet-2, .grd-grid-3, .grd-grid-mobile-3, .grd-grid-tablet-3, .grd-grid-phablet-3, .grd-grid-4, .grd-grid-mobile-4, .grd-grid-tablet-4, .grd-grid-phablet-4, .grd-grid-5, .grd-grid-mobile-5, .grd-grid-tablet-5, .grd-grid-phablet-5, .grd-grid-6, .grd-grid-mobile-6, .grd-grid-tablet-6, .grd-grid-phablet-6, .grd-grid-7, .grd-grid-mobile-7, .grd-grid-tablet-7, .grd-grid-phablet-7, .grd-grid-8, .grd-grid-mobile-8, .grd-grid-tablet-8, .grd-grid-phablet-8, .grd-grid-9, .grd-grid-mobile-9, .grd-grid-tablet-9, .grd-grid-phablet-9, .grd-grid-10, .grd-grid-mobile-10, .grd-grid-tablet-10, .grd-grid-phablet-10, .grd-grid-11, .grd-grid-mobile-11, .grd-grid-tablet-11, .grd-grid-phablet-11, .grd-grid-12, .grd-grid-mobile-12, .grd-grid-tablet-12, .grd-grid-phablet-12 {
   display: inline-block;
   min-height: 1px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -7858,15 +7892,7 @@ img.img-with-height {
 .mm-fixed-top,
 .mm-fixed-bottom,
 .mm-menu.mm-horizontal > .mm-panel {
-  -webkit-transition: none 0.4s ease;
-  -moz-transition: none 0.4s ease;
-  -ms-transition: none 0.4s ease;
-  -o-transition: none 0.4s ease;
   transition: none 0.4s ease;
-  -webkit-transition-property: top, right, bottom, left, border;
-  -moz-transition-property: top, right, bottom, left, border;
-  -ms-transition-property: top, right, bottom, left, border;
-  -o-transition-property: top, right, bottom, left, border;
   transition-property: top, right, bottom, left, border;
 }
 
@@ -7903,8 +7929,6 @@ html.mm-opening #mm-blocker {
 
 html.mm-opened .mm-page,
 .mm-menu > .mm-panel {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
@@ -8136,9 +8160,6 @@ html.mm-blocking #mm-blocker {
   position: absolute;
   bottom: 50%;
   -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
 
@@ -8174,9 +8195,6 @@ html.mm-blocking #mm-blocker {
 
 .mm-menu.mm-vertical .mm-list > li.mm-opened > a.mm-subopen:after {
   -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
   transform: rotate(45deg);
   top: 16px;
   right: 16px;
@@ -8307,10 +8325,6 @@ html.mm-opened.mm-dragging .mm-page,
 html.mm-opened.mm-dragging .mm-fixed-top,
 html.mm-opened.mm-dragging .mm-fixed-bottom,
 html.mm-opened.mm-dragging #mm-blocker {
-  -webkit-transition-duration: 0s;
-  -moz-transition-duration: 0s;
-  -ms-transition-duration: 0s;
-  -o-transition-duration: 0s;
   transition-duration: 0s;
 }
 
@@ -8318,8 +8332,6 @@ html.mm-opened.mm-dragging #mm-blocker {
 	jQuery.mmenu header addon CSS
 */
 .mm-header {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
@@ -8348,8 +8360,6 @@ html.mm-opened.mm-dragging #mm-blocker {
 
 .mm-header .mm-prev,
 .mm-header .mm-next {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
@@ -8372,9 +8382,6 @@ html.mm-opened.mm-dragging #mm-blocker {
   position: absolute;
   bottom: 50%;
   -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
   margin-bottom: -15px;
 }
@@ -8481,9 +8488,6 @@ html.mm-opened.mm-dragging #mm-blocker {
 
 .mm-list > li.mm-label.mm-opened a.mm-subopen:after {
   -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
   transform: rotate(45deg);
   right: 17px;
 }
@@ -8501,8 +8505,6 @@ html.mm-opened.mm-dragging #mm-blocker {
 */
 .mm-search,
 .mm-search input {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
@@ -8573,238 +8575,144 @@ html.mm-opened.mm-dragging #mm-blocker {
 	jQuery.mmenu effects extension CSS
 */
 html.mm-slide .mm-menu {
-  -webkit-transition: -webkit-transform 0.4s ease;
-  -moz-transition: -moz-transform 0.4s ease;
-  -o-transition: -o-transform 0.4s ease;
+  transition: -webkit-transform 0.4s ease;
   transition: transform 0.4s ease;
 }
 
 html.mm-slide.mm-opened .mm-menu {
   -webkit-transform: translateX(-40%);
-  -moz-transform: translateX(-40%);
-  -ms-transform: translateX(-40%);
-  -o-transform: translateX(-40%);
   transform: translateX(-40%);
 }
 
 html.mm-slide.mm-opening .mm-menu {
   -webkit-transform: translateX(0%);
-  -moz-transform: translateX(0%);
-  -ms-transform: translateX(0%);
-  -o-transform: translateX(0%);
   transform: translateX(0%);
 }
 
 html.mm-slide.mm-right.mm-opened .mm-menu {
   -webkit-transform: translateX(40%);
-  -moz-transform: translateX(40%);
-  -ms-transform: translateX(40%);
-  -o-transform: translateX(40%);
   transform: translateX(40%);
 }
 
 html.mm-slide.mm-right.mm-opening .mm-menu {
   -webkit-transform: translateX(0%);
-  -moz-transform: translateX(0%);
-  -ms-transform: translateX(0%);
-  -o-transform: translateX(0%);
   transform: translateX(0%);
 }
 
 html.mm-slide.mm-top.mm-opened .mm-menu {
   -webkit-transform: translateY(-40%);
-  -moz-transform: translateY(-40%);
-  -ms-transform: translateY(-40%);
-  -o-transform: translateY(-40%);
   transform: translateY(-40%);
 }
 
 html.mm-slide.mm-top.mm-opening .mm-menu {
   -webkit-transform: translateY(0%);
-  -moz-transform: translateY(0%);
-  -ms-transform: translateY(0%);
-  -o-transform: translateY(0%);
   transform: translateY(0%);
 }
 
 html.mm-slide.mm-bottom.mm-opened .mm-menu {
   -webkit-transform: translateY(40%);
-  -moz-transform: translateY(40%);
-  -ms-transform: translateY(40%);
-  -o-transform: translateY(40%);
   transform: translateY(40%);
 }
 
 html.mm-slide.mm-bottom.mm-opening .mm-menu {
   -webkit-transform: translateY(0%);
-  -moz-transform: translateY(0%);
-  -ms-transform: translateY(0%);
-  -o-transform: translateY(0%);
   transform: translateY(0%);
 }
 
 html.mm-zoom-menu .mm-menu {
-  -webkit-transition: -webkit-transform 0.4s ease;
-  -moz-transition: -moz-transform 0.4s ease;
-  -o-transition: -o-transform 0.4s ease;
+  transition: -webkit-transform 0.4s ease;
   transition: transform 0.4s ease;
 }
 
 html.mm-zoom-menu.mm-opened .mm-menu {
   -webkit-transform: scale(0.7, 0.7) translateX(-40%);
-  -moz-transform: scale(0.7, 0.7) translateX(-40%);
-  -ms-transform: scale(0.7, 0.7) translateX(-40%);
-  -o-transform: scale(0.7, 0.7) translateX(-40%);
   transform: scale(0.7, 0.7) translateX(-40%);
   -webkit-transform-origin: left center;
-  -moz-transform-origin: left center;
-  -ms-transform-origin: left center;
-  -o-transform-origin: left center;
   transform-origin: left center;
 }
 
 html.mm-zoom-menu.mm-opening .mm-menu {
   -webkit-transform: scale(1, 1) translateX(0%);
-  -moz-transform: scale(1, 1) translateX(0%);
-  -ms-transform: scale(1, 1) translateX(0%);
-  -o-transform: scale(1, 1) translateX(0%);
   transform: scale(1, 1) translateX(0%);
 }
 
 html.mm-zoom-menu.mm-right.mm-opened .mm-menu {
   -webkit-transform: scale(0.7, 0.7) translateX(40%);
-  -moz-transform: scale(0.7, 0.7) translateX(40%);
-  -ms-transform: scale(0.7, 0.7) translateX(40%);
-  -o-transform: scale(0.7, 0.7) translateX(40%);
   transform: scale(0.7, 0.7) translateX(40%);
   -webkit-transform-origin: right center;
-  -moz-transform-origin: right center;
-  -ms-transform-origin: right center;
-  -o-transform-origin: right center;
   transform-origin: right center;
 }
 
 html.mm-zoom-menu.mm-right.mm-opening .mm-menu {
   -webkit-transform: scale(1, 1) translateX(0%);
-  -moz-transform: scale(1, 1) translateX(0%);
-  -ms-transform: scale(1, 1) translateX(0%);
-  -o-transform: scale(1, 1) translateX(0%);
   transform: scale(1, 1) translateX(0%);
 }
 
 html.mm-zoom-menu.mm-top.mm-opened .mm-menu {
   -webkit-transform: scale(0.7, 0.7) translateY(-40%);
-  -moz-transform: scale(0.7, 0.7) translateY(-40%);
-  -ms-transform: scale(0.7, 0.7) translateY(-40%);
-  -o-transform: scale(0.7, 0.7) translateY(-40%);
   transform: scale(0.7, 0.7) translateY(-40%);
   -webkit-transform-origin: center top;
-  -moz-transform-origin: center top;
-  -ms-transform-origin: center top;
-  -o-transform-origin: center top;
   transform-origin: center top;
 }
 
 html.mm-zoom-menu.mm-top.mm-opening .mm-menu {
   -webkit-transform: scale(1, 1) translateY(0%);
-  -moz-transform: scale(1, 1) translateY(0%);
-  -ms-transform: scale(1, 1) translateY(0%);
-  -o-transform: scale(1, 1) translateY(0%);
   transform: scale(1, 1) translateY(0%);
 }
 
 html.mm-zoom-menu.mm-bottom.mm-opened .mm-menu {
   -webkit-transform: scale(0.7, 0.7) translateY(40%);
-  -moz-transform: scale(0.7, 0.7) translateY(40%);
-  -ms-transform: scale(0.7, 0.7) translateY(40%);
-  -o-transform: scale(0.7, 0.7) translateY(40%);
   transform: scale(0.7, 0.7) translateY(40%);
   -webkit-transform-origin: center bottom;
-  -moz-transform-origin: center bottom;
-  -ms-transform-origin: center bottom;
-  -o-transform-origin: center bottom;
   transform-origin: center bottom;
 }
 
 html.mm-zoom-menu.mm-bottom.mm-opening .mm-menu {
   -webkit-transform: scale(1, 1) translateY(0%);
-  -moz-transform: scale(1, 1) translateY(0%);
-  -ms-transform: scale(1, 1) translateY(0%);
-  -o-transform: scale(1, 1) translateY(0%);
   transform: scale(1, 1) translateY(0%);
 }
 
 html.mm-zoom-page.mm-opened .mm-page {
   -webkit-transform: scale(1, 1);
-  -moz-transform: scale(1, 1);
-  -ms-transform: scale(1, 1);
-  -o-transform: scale(1, 1);
   transform: scale(1, 1);
   -webkit-transform-origin: left center;
-  -moz-transform-origin: left center;
-  -ms-transform-origin: left center;
-  -o-transform-origin: left center;
   transform-origin: left center;
 }
 
 html.mm-zoom-page.mm-opening .mm-page {
   -webkit-transform: scale(1.5, 1.5);
-  -moz-transform: scale(1.5, 1.5);
-  -ms-transform: scale(1.5, 1.5);
-  -o-transform: scale(1.5, 1.5);
   transform: scale(1.5, 1.5);
 }
 
 html.mm-zoom-page.mm-right.mm-opened .mm-page {
   -webkit-transform-origin: right center;
-  -moz-transform-origin: right center;
-  -ms-transform-origin: right center;
-  -o-transform-origin: right center;
   transform-origin: right center;
 }
 
 html.mm-zoom-page.mm-top.mm-opened .mm-page {
   -webkit-transform-origin: center top;
-  -moz-transform-origin: center top;
-  -ms-transform-origin: center top;
-  -o-transform-origin: center top;
   transform-origin: center top;
 }
 
 html.mm-zoom-page.mm-bottom.mm-opened .mm-page {
   -webkit-transform-origin: center bottom;
-  -moz-transform-origin: center bottom;
-  -ms-transform-origin: center bottom;
-  -o-transform-origin: center bottom;
   transform-origin: center bottom;
 }
 
 html.mm-zoom-panels .mm-panel {
   -webkit-transform: scale(1.5, 1.5);
-  -moz-transform: scale(1.5, 1.5);
-  -ms-transform: scale(1.5, 1.5);
-  -o-transform: scale(1.5, 1.5);
   transform: scale(1.5, 1.5);
   -webkit-transform-origin: left center;
-  -moz-transform-origin: left center;
-  -ms-transform-origin: left center;
-  -o-transform-origin: left center;
   transform-origin: left center;
 }
 
 html.mm-zoom-panels .mm-panel.mm-opened {
   -webkit-transform: scale(1, 1);
-  -moz-transform: scale(1, 1);
-  -ms-transform: scale(1, 1);
-  -o-transform: scale(1, 1);
   transform: scale(1, 1);
 }
 
 html.mm-zoom-panels .mm-panel.mm-opened.mm-subopened {
   -webkit-transform: scale(0.7, 0.7);
-  -moz-transform: scale(0.7, 0.7);
-  -ms-transform: scale(0.7, 0.7);
-  -o-transform: scale(0.7, 0.7);
   transform: scale(0.7, 0.7);
 }
 
@@ -9241,15 +9149,8 @@ html.mm-front.mm-opened .mm-page {
 
 .mm-menu.mm-front,
 .mm-menu.mm-next {
-  -webkit-transition: none 0.4s ease;
-  -moz-transition: none 0.4s ease;
-  -ms-transition: none 0.4s ease;
-  -o-transition: none 0.4s ease;
   transition: none 0.4s ease;
-  -webkit-transition-property: top, right, bottom, left, -webkit-transform;
-  -moz-transition-property: top, right, bottom, left, -moz-transform;
-  -ms-transition-property: top, right, bottom, left, -o-transform;
-  -o-transition-property: top, right, bottom, left, -o-transform;
+  transition-property: top, right, bottom, left, -webkit-transform;
   transition-property: top, right, bottom, left, transform;
 }
 

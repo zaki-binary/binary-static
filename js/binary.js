@@ -10027,6 +10027,41 @@ var displayPriceMovement = function (element, oldValue, currentValue) {
         element.classList.add('price_moved_down');
     }
 };
+
+/*
+ * function to toggle active class of menu
+ */
+var toggleMobileNavMenu = function (nav, eventElement) {
+    var liElements = nav.getElementsByTagName("li");
+    var classes = eventElement.classList;
+
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+        }
+        classes.add('active');
+    }
+};
+
+/*
+ * function to set placeholder text based on current market, used for mobile menu
+ */
+var setMarketPlaceholderContent = function (name) {
+    var marketPlaceholder = document.getElementById('market_nav_placeholder');
+    if (marketPlaceholder) {
+        marketPlaceholder.textContent = name || sessionStorage.getItem('market');
+    }
+};
+
+/*
+ * function to set placeholder text based on current form, used for mobile menu
+ */
+var setFormPlaceholderContent = function (name) {
+    var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
+    if (formPlaceholder) {
+        formPlaceholder.textContent = name || sessionStorage.getItem('formname');
+    }
+};
 ;/*
  * Contract object mocks the trading form we have on our website
  * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
@@ -10413,39 +10448,51 @@ var marketNavElement = document.getElementById('contract_market_nav');
 if (marketNavElement) {
     marketNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
-            sessionStorage.setItem('market', e.target.id);
+            var clickedMarket = e.target;
+            var isMarketActive = clickedMarket.classList.contains('active');
+            sessionStorage.setItem('market', clickedMarket.id);
+
+            setMarketPlaceholderContent();
+
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
             sessionStorage.removeItem('formname');
-            marketChangeEvent();
+            toggleMobileNavMenu(marketNavElement, clickedMarket);
+            // if market is already active then no need to send same request again
+            if (!isMarketActive) {
+                processMarketOfferings();
+            }
+            var marketFormCheckbox = document.getElementById('market_show_menu');
+            if (marketFormCheckbox) {
+                marketFormCheckbox.checked = false;
+            }
         }
     });
 }
-
-var marketChangeEvent = function () {
-    'use strict';
-    processMarketOfferings();
-};
 
 /*
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
 var formNavElement = document.getElementById('contract_form_name_nav');
-var removeActiveFormNav = function () {
-    var liElements = formNavElement.getElementsByTagName("li");
-    for (var i = 0, len = liElements.length; i < len; i++){
-        liElements[i].classList.remove('active');
-    }
-};
-
 if (formNavElement) {
     formNavElement.addEventListener('click', function(e) {
         if (e.target && e.target.nodeName === 'LI') {
-            removeActiveFormNav();
-            sessionStorage.setItem('formname', e.target.id);
-            e.target.classList.add('active');
-            contractFormEventChange(e.target.id);
+            var clickedForm = e.target;
+            var isFormActive = clickedForm.classList.contains('active');
+            sessionStorage.setItem('formname', clickedForm.id);
+
+            setFormPlaceholderContent();
+            // if form is already active then no need to send same request again
+            toggleMobileNavMenu(formNavElement, clickedForm);
+
+            if (!isFormActive) {
+                contractFormEventChange(clickedForm.id);
+            }
+            var contractFormCheckbox = document.getElementById('contract_form_show_menu');
+            if (contractFormCheckbox) {
+                contractFormCheckbox.checked = false;
+            }
         }
     });
 }
@@ -10705,11 +10752,11 @@ var Message = (function () {
                 processMarketOfferings();
             } else if (type === 'contracts_for') {
                 processContractFormOfferings(response);
-                hideOverlayContainer();
             } else if (type === 'payout_currencies') {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
             } else if (type === 'proposal') {
+                hideOverlayContainer();
                 Price.display(response, Contract.contractType()[Offerings.form()]);
                 hidePriceLoadingIcon();
             } else if (type === 'open_receipt') {
@@ -11055,9 +11102,16 @@ var processMarketOfferings = function () {
     // populate the Offerings object
     Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
 
+    // change the market placeholder content as per current market (used for mobile menu)
+    setMarketPlaceholderContent(market);
+
     // display markets, submarket, underlyings corresponding to market selected
     displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
     displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), formname);
+
+    // change the form placeholder content as per current form (used for mobile menu)
+    setFormPlaceholderContent(formname);
+
     displayOptions('submarket',Offerings.submarkets());
     displayUnderlyings();
 

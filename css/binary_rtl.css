@@ -5836,18 +5836,7 @@ table .loss, table .lower {
   }
 }
 
-@-webkit-keyframes spinning {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .spinner, .progress {
-  -webkit-animation: spinning 1s infinite linear;
   animation: spinning 1s infinite linear;
 }
 
@@ -5873,10 +5862,40 @@ table .loss, table .lower {
   flex-direction: column;
 }
 
+.nav_placeholder {
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  background-color: #2a3052;
+  padding: 3px 0 3px 10px;
+  margin: 10px 0;
+  color: white;
+  text-transform: capitalize;
+}
+
+.nav_placeholder:after {
+  content: '\25BC';
+  font-size: 50%;
+  right: 0;
+  position: absolute;
+  margin-right: 10px;
+}
+
+input[type=checkbox].show_menu {
+  display: none;
+}
+
+input[type=checkbox]#market_show_menu:checked ~ #contract_market_nav {
+  display: flex;
+}
+
+input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
+  display: flex;
+}
+
 ul[role=segmented] {
   box-shadow: inset 0px 0px 0px 1px rgba(42, 48, 82, 0.2);
   background-color: #f2f2f2;
-  border-radius: 2px;
   color: #2a3052;
   display: flex;
   overflow: hidden;
@@ -5885,13 +5904,13 @@ ul[role=segmented] {
 }
 ul[role=segmented] li {
   flex: 1;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   cursor: pointer;
   margin: 0;
   text-transform: capitalize;
+  padding: 3px 0;
+  text-align: center;
 }
 ul[role=segmented] li.active {
   color: white;
@@ -6007,26 +6026,14 @@ ul[role=segmented] a:hover {
   left: 45%;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-    opacity: 0.2;
-  }
-
-  50% {
-    transform: rotate(180deg);
-    opacity: 1;
-  }
-
-  to {
-    transform: rotate(360deg);
-    opacity: 0.2;
-  }
-}
-
 @media all and (max-width: 640px) {
   ul[role=segmented] {
     flex-direction: column;
+    display: none;
+  }
+
+  .nav_placeholder {
+    display: flex;
   }
 
   #contract_container.row {
