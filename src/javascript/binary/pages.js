@@ -33,9 +33,10 @@ var trading_times_init = function() {
 			                      
                             if (page.language() === 'JA') {	
                               trading_times.tabs("disable");
-			                      } else {
-				                      trading_times.tabs();
-			                      }
+			    } 
+			    else {
+			      trading_times.tabs();
+			    }
                             
                             page.url.update(url);
                          },
