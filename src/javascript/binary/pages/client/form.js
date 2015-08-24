@@ -1,4 +1,5 @@
 var ClientForm = function(init_params) {
+    this.restricted_countries = new RegExp(init_params['restricted_countries']);
     this.valid_loginids = new RegExp(init_params['valid_loginids']);
 };
 
@@ -35,8 +36,7 @@ ClientForm.prototype = {
     },
     is_allowed_opening_account_country: function(selected_country) {
         var error_residence = clearInputErrorField('errorresidence');
-        var c_config = page.settings.get('countries_list')[selected_country];
-        if (c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'none') {
+        if (this.restricted_countries.test(selected_country)) {
             error_residence.innerHTML = text.localize('We are not accepting accounts from residents of this country at the present time.');
             return false;
         }
