@@ -9,6 +9,12 @@ var processContractFormOfferings = function(contracts){
 	// get ticks for current underlying
 	TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
 
+	displayDurations('spot');
+
+	displayStartDates();
+
+	displayBarriers();
+
 	Periods.displayPeriods();
 
 	processPriceRequest();
