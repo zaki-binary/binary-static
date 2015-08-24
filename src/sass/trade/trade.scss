@@ -2,12 +2,7 @@
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
 }
-@-webkit-keyframes spinning {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
 .spinner {
-    -webkit-animation: spinning .2s * 5 infinite linear;
     animation: spinning .2s * 5 infinite linear;
 }
 
@@ -34,10 +29,40 @@
     flex-direction: column;
 }
 
+.nav_placeholder {
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    background-color: $COLOR_BLUE;
+    padding: 3px 0 3px 10px;
+    margin: 10px 0;
+    color: $COLOR_WHITE;
+    text-transform: capitalize;
+}
+
+.nav_placeholder:after {
+    content: '\25BC';
+    font-size: 50%;
+    right: 0;
+    position:absolute;
+    margin-right: 10px;
+}
+
+input[type=checkbox].show_menu {
+    display: none;
+}
+
+input[type=checkbox]#market_show_menu:checked ~ #contract_market_nav {
+    display: flex;
+}
+
+input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
+    display: flex;
+}
+
 ul[role=segmented] {
     box-shadow: inset 0px 0px 0px 1px rgba($COLOR_BLUE, 0.2);
     background-color: $COLOR_LIGHT_GRAY;
-    border-radius: $BORDER_RADIUS;
     color: $COLOR_BLUE;
     display: flex;
     overflow: hidden;
@@ -45,13 +70,13 @@ ul[role=segmented] {
     width: 100%;
     li {
         flex: 1;
-        text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         cursor: pointer;
         margin: 0;
         text-transform: capitalize;
+        padding: 3px 0;
+        text-align: center;
         &.active {
             color: white;
             background-color: $COLOR_BLUE;
@@ -78,7 +103,7 @@ ul[role=segmented] {
         padding: 10px 0;
     }
     .big-col {
-        flex: 2 0 0;
+        flex: 2;
     }
     #contract_form_container {
         .col {
@@ -172,16 +197,13 @@ ul[role=segmented] {
     left: 45%;
 }
 
-@keyframes spin
-{
-    from { transform: rotate(0deg); opacity: 0.2; }
-    50%  { transform: rotate(180deg); opacity: 1; }
-    to   { transform: rotate(360deg); opacity: 0.2; }
-}
-
 @media all and (max-width: 640px) {
     ul[role=segmented] {
         flex-direction: column;
+        display: none;
+    }
+    .nav_placeholder {
+        display: flex;
     }
     #contract_container.row {
         flex-direction: column;

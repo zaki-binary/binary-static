@@ -142,6 +142,8 @@ var contractTypeDisplayMapping = function (type) {
         UPORDOWN: "bottom",
         ONETOUCH: "top",
         NOTOUCH: "bottom",
+        SPREADU: "top",
+        SPREADD: "bottom"
     };
 
     return type ? obj[type] : 'top';
@@ -195,7 +197,7 @@ var hideOverlayContainer = function () {
 /*
  * function to assign sorting to market list
  */
-function compareMarkets(a, b) {
+var compareMarkets = function (a, b) {
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -211,28 +213,86 @@ function compareMarkets(a, b) {
         return 1;
     }
     return 0;
-}
+};
 
 /*
  * function to assign sorting to contract category
  */
- function compareContractCategory(a, b) {
-     var sortedContractCategory = {
-         'risefall': 0,
-         'higherlower': 1,
-         'endsinout': 2,
-         'staysinout': 3,
-         'touchnotouch': 4,
-         'asian': 5,
-         'digits': 6,
-         'spreads': 7
-     };
+var compareContractCategory = function (a, b) {
+    var sortedContractCategory = {
+        'risefall': 0,
+        'higherlower': 1,
+        'touchnotouch': 2,
+        'endsinout': 3,
+        'staysinout': 4,
+        'asian': 5,
+        'digits': 6,
+        'spreads': 7
+    };
 
-     if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
-         return -1;
-     }
-     if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
-         return 1;
-     }
-     return 0;
- }
+    if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
+        return -1;
+    }
+    if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
+        return 1;
+    }
+    return 0;
+};
+
+/*
+ * function to get cookie javascript way (use if you don't want to use jquery)
+ */
+var getCookieItem = function (sKey) {
+    if (!sKey) { return null; }
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+};
+
+/*
+ * Display price/spot movement variation to depict price moved up or down
+ */
+var displayPriceMovement = function (element, oldValue, currentValue) {
+    element.classList.remove('price_moved_down');
+    element.classList.remove('price_moved_up');
+    if (parseFloat(currentValue) > parseFloat(oldValue)) {
+        element.classList.remove('price_moved_down');
+        element.classList.add('price_moved_up');
+    } else if (parseFloat(currentValue) < parseFloat(oldValue)) {
+        element.classList.remove('price_moved_up');
+        element.classList.add('price_moved_down');
+    }
+};
+
+/*
+ * function to toggle active class of menu
+ */
+var toggleMobileNavMenu = function (nav, eventElement) {
+    var liElements = nav.getElementsByTagName("li");
+    var classes = eventElement.classList;
+
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+        }
+        classes.add('active');
+    }
+};
+
+/*
+ * function to set placeholder text based on current market, used for mobile menu
+ */
+var setMarketPlaceholderContent = function (name) {
+    var marketPlaceholder = document.getElementById('market_nav_placeholder');
+    if (marketPlaceholder) {
+        marketPlaceholder.textContent = name || sessionStorage.getItem('market');
+    }
+};
+
+/*
+ * function to set placeholder text based on current form, used for mobile menu
+ */
+var setFormPlaceholderContent = function (name) {
+    var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
+    if (formPlaceholder) {
+        formPlaceholder.textContent = name || sessionStorage.getItem('formname');
+    }
+};

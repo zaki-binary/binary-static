@@ -10,21 +10,24 @@ var Message = (function () {
         console.log(response);
         if (response) {
             var type = response.msg_type;
-
-            if (type === 'offerings') {
-                var market = sessionStorage.getItem('market') || 'Forex';
-                processMarketOfferings(response, market);
+            if (type === 'authorize') {
+                TradeSocket.send({ payout_currencies: 1 });
+            } else if (type === 'offerings') {
+                sessionStorage.setItem('offerings', msg.data);
+                processMarketOfferings();
             } else if (type === 'contracts_for') {
                 processContractFormOfferings(response);
-                hideOverlayContainer();
             } else if (type === 'payout_currencies') {
-                displayCurrencies(response);
-                processPriceRequest();
+                sessionStorage.setItem('currencies', msg.data);
+                displayCurrencies();
             } else if (type === 'proposal') {
-                Price.display(response, Contract.contractType()[Offerings.form()], document.getElementById('spot'));
+                hideOverlayContainer();
+                Price.display(response, Contract.contractType()[Offerings.form()]);
                 hidePriceLoadingIcon();
             } else if (type === 'open_receipt') {
                 Purchase.display(response);
+            } else if (type === 'tick') {
+                processTick(response);
             }
         } else {
             console.log('some error occured');
