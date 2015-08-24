@@ -12,7 +12,7 @@ Object.defineProperties(Offerings,{
 		var params = { 
 			offerings: { hierarchy: 1,
 			contract: 0,
-			market: 'forex',
+			market: 'FOREX',
 			submarket: 'Major Pairs',
 			start_type: 'spot' }
     	}
