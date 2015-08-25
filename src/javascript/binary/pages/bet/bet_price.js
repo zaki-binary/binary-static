@@ -110,6 +110,9 @@ var BetPrice = function() {
                 timeout : timeout,
                 success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR); },
                 error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp); },
+                complete: function () {
+                    that.order_form.show_buy_button();
+                }
             }));
             $('.price_box').fadeTo(200, 0.6);
         },
@@ -139,7 +142,6 @@ var BetPrice = function() {
             }
             $('.price_box').fadeTo(0, 1);
             BetPrice.order_form.enable_buy_buttons();
-            this.display_buy_buttons();
         },
         on_buy_bet_error: function (form, jqXHR, resp_status, exp) {
             var details = '' + exp;
@@ -154,7 +156,6 @@ var BetPrice = function() {
             this.display_buy_error('<div style="width: ' + width + 'px;"><h3>Error</h3><p>' + details + ' </p></div>', 1);
             $('.price_box').fadeTo(0, 1);
             BetPrice.order_form.enable_buy_buttons();
-            this.display_buy_buttons();
         },
         buy_response_container: function () {
             if (!_buy_response_container) {
@@ -505,10 +506,6 @@ var BetPrice = function() {
         hide_buy_buttons: function() {
             this.deregister();
             this.order_form.hide_buy_button();
-        },
-        display_buy_buttons: function() {
-            this.on_buy();
-            this.order_form.show_buy_button();
         },
         show_loading: function() {
             var image_link = page.settings.get('image_link');
