@@ -16,10 +16,11 @@
 var Offerings = (function () {
     'use strict';
 
-    var tradeMarkets = [], tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
+    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
 
     var details = function (data, market, formName, barrierCategory, submarket, underlying) {
         responseData = data;
+        tradeMarkets = [];
         var offerings = data.offerings.offerings;
 
         var submarketElements = {}, underlyingElements = {}, contractCategories = {};
