@@ -16,11 +16,10 @@
 var Offerings = (function () {
     'use strict';
 
-    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
+    var tradeMarkets = [], tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
 
     var details = function (data, market, formName, barrierCategory, submarket, underlying) {
         responseData = data;
-        var selectors = data.offerings.selectors;
         var offerings = data.offerings.offerings;
 
         var submarketElements = {}, underlyingElements = {}, contractCategories = {};
@@ -35,7 +34,8 @@ var Offerings = (function () {
         for (var i = 0, offlen = offerings.length; i < offlen; i++) {
             market = market || 'Forex';
             var mkt = offerings[i].market;
-            if (mkt === market) {
+            tradeMarkets.push(mkt);
+            if (mkt.toLowerCase() === market.toLowerCase()) {
                 submarket_label:
                 for(var j = 0, sbmktlen = offerings[i].available.length; j < sbmktlen; j++) {
                     var loop_submarket = offerings[i].available[j].submarket;
@@ -97,12 +97,10 @@ var Offerings = (function () {
                         break submarket_label;
                     }
                 }
-                break market_label;
             } else {
                 continue;
             }
         }
-        tradeMarkets = Object.keys(selectors.market);
         tradeContractForms = contractCategories;
         tradeSubmarkets = submarketElements;
         tradeUnderlyings = underlyingElements;
