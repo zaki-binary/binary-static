@@ -10986,8 +10986,8 @@ var Price = (function () {
     };
 
     var display = function (details, contractType) {
-        var proposal = details['proposal'],
-            params = details['echo_req'],
+        var proposal = details['proposal'] || details['error'];
+        var params = details['echo_req'],
             type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
@@ -11217,8 +11217,8 @@ var Purchase = (function () {
 
         h4.setAttribute('class', 'contract_purchase_heading');
 
-        if (receipt['error']) {
-            content = document.createTextNode(receipt['error']['message']);
+        if (details['error']) {
+            content = document.createTextNode(details['error']['message']);
             message.appendChild(content);
             fragment.appendChild(message);
         } else {
@@ -11436,13 +11436,13 @@ var Tick = (function () {
         errorMessage = '';
 
     var details = function (data) {
-        var tick = data['tick'] || '';
-        errorMessage = '';
+        var errorMessage = '';
 
-        if (tick) {
-            if (tick['error']) {
-                errorMessage = tick['error']['message'];
+        if (data) {
+            if (data['error']) {
+                errorMessage = data['error']['message'];
             } else {
+                var tick = data['tick'];
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
