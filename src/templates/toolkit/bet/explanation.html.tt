@@ -19,7 +19,7 @@
 
 <div class='grd-grid-12 grd-parent'>
 
-    <div class='[% IF show_image && image.$form_name %]grd-grid-8[% ELSE %]grd-grid-12[% END %]'>
+    <div class='[% IF show_image && image.$form_name %]grd-grid-9[% ELSE %]grd-grid-12[% END %]'>
         [% IF show_winning %]
             <h3>
                 [% l("Winning the contract") %]
@@ -33,7 +33,7 @@
         [% END %]
     </div>
     [% IF show_image && image.$form_name %]
-        <div class='grd-grid-4' id='padding-top'>
+        <div class='padding-top grd-grid-3'>
             [% FOREACH img_url IN image.$form_name %]
             <img class="responsive" src="[% img_url %]"/>
             [% END %]
