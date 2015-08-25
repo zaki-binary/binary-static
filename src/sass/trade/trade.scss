@@ -24,11 +24,6 @@
     flex: 1;
 }
 
-.vertical-row {
-    display: flex;
-    flex-direction: column;
-}
-
 .nav_placeholder {
     display: none;
     overflow: hidden;
@@ -66,7 +61,6 @@ ul[role=segmented] {
     color: $COLOR_BLUE;
     display: flex;
     overflow: hidden;
-    margin-bottom: 1rem;
     width: 100%;
     li {
         flex: 1;
@@ -78,11 +72,8 @@ ul[role=segmented] {
         padding: 3px 0;
         text-align: center;
         &.active {
-            color: white;
+            color: $COLOR_WHITE;
             background-color: $COLOR_BLUE;
-            a {
-                color: white;
-            }
         }
         &#risefall, &#higherlower, &#touchnotouch {
             background-image: none;
