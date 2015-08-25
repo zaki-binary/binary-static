@@ -98,81 +98,89 @@ ul[role=segmented] {
     }
 }
 
-#contract_container {
-    .row {
-        padding: 10px 0;
-    }
-    .big-col {
-        flex: 2;
-    }
-    #contract_form_container {
-        .col {
-            margin-right: 1rem;
+#trading_socket_container {
+    font-size: 85%;
+    #contract_container {
+        .row {
+            padding: 10px 0;
         }
-        border: 1px solid $COLOR_GRAY;
-    }
-    #contract_prices_container {
-        margin-left: 1rem;
-        position: relative;
-        .price_container {
+        .big-col {
+            flex: 2;
+        }
+        #contract_form_container {
+            .col {
+                margin-right: 1rem;
+            }
             border: 1px solid $COLOR_GRAY;
-            &#price_container_top {
-                margin-bottom: 1rem;
-            }
-            .contract_purchase {
-                margin-bottom: 5px;
-                padding-left: 6px;
-            }
         }
-        .description_container {
-            .contract_heading {
-                text-transform: capitalize;
-                padding: .7em 0 .7em 4em;
-                &.asian_up {
-                  background: url("../images/pages/trade/asian-u_1.svg") no-repeat 2% 75%;
+        #contract_prices_container {
+            margin-left: 1rem;
+            position: relative;
+            .price_container {
+                border: 1px solid $COLOR_GRAY;
+                &#price_container_top {
+                    margin-bottom: 1rem;
                 }
-                &.asian_down {
-                  background: url("../images/pages/trade/asian-d_1.svg") no-repeat 2% 75%;
-                }
-                &.differs {
-                  background: url("../images/pages/trade/differs_1.svg") no-repeat 2% 75%;
-                }
-                &.matches {
-                  background: url("../images/pages/trade/matches_1.svg") no-repeat 2% 75%;
-                }
-                &.rises {
-                  background: url("../images/pages/trade/rise_1.png") no-repeat 2% 75%;
-                }
-                &.falls {
-                  background: url("../images/pages/trade/fall_1.png") no-repeat 2% 75%;
-                }
-                &.higher {
-                  background: url("../images/pages/trade/higher_1.png") no-repeat 2% 75%;
-                }
-                &.lower {
-                  background: url("../images/pages/trade/lower_1.png") no-repeat 2% 75%;
-                }
-                &.touches {
-                  background: url("../images/pages/trade/touch_1.png") no-repeat 2% 75%;
-                }
-                &.does_not_touch {
-                  background: url("../images/pages/trade/no-touch_1.png") no-repeat 2% 75%;
-                }
-                &.stays_between {
-                  background: url("../images/pages/trade/stay-in-between_1.png") no-repeat 2% 75%;
-                }
-                &.goes_outside {
-                  background: url("../images/pages/trade/stay-out_1.png") no-repeat 2% 75%;
-                }
-                &.ends_between {
-                  background: url("../images/pages/trade/ends-between_1.png") no-repeat 2% 75%;
-                }
-                &.ends_outside {
-                  background: url("../images/pages/trade/ends-outside_1.png") no-repeat 2% 75%;
+                .contract_purchase {
+                    margin-bottom: 6px;
+                    padding-left: 6px;
                 }
             }
-            .contract_amount, .contract_description {
-                margin-left: 5px;
+            .description_container {
+                .contract_heading {
+                    text-transform: capitalize;
+                    font-weight: bold;
+                    padding: .7em 0 .7em 3.5em;
+                    &.asian_up {
+                      background: url("../images/pages/trade/asian-u_1.svg") no-repeat 2% 75%;
+                    }
+                    &.asian_down {
+                      background: url("../images/pages/trade/asian-d_1.svg") no-repeat 2% 75%;
+                    }
+                    &.differs {
+                      background: url("../images/pages/trade/differs_1.svg") no-repeat 2% 75%;
+                    }
+                    &.matches {
+                      background: url("../images/pages/trade/matches_1.svg") no-repeat 2% 75%;
+                    }
+                    &.rises {
+                      background: url("../images/pages/trade/rise_1.png") no-repeat 2% 75%;
+                    }
+                    &.falls {
+                      background: url("../images/pages/trade/fall_1.png") no-repeat 2% 75%;
+                    }
+                    &.higher {
+                      background: url("../images/pages/trade/higher_1.png") no-repeat 2% 75%;
+                    }
+                    &.lower {
+                      background: url("../images/pages/trade/lower_1.png") no-repeat 2% 75%;
+                    }
+                    &.touches {
+                      background: url("../images/pages/trade/touch_1.png") no-repeat 2% 75%;
+                    }
+                    &.does_not_touch {
+                      background: url("../images/pages/trade/no-touch_1.png") no-repeat 2% 75%;
+                    }
+                    &.stays_between {
+                      background: url("../images/pages/trade/stay-in-between_1.png") no-repeat 2% 75%;
+                    }
+                    &.goes_outside {
+                      background: url("../images/pages/trade/stay-out_1.png") no-repeat 2% 75%;
+                    }
+                    &.ends_between {
+                      background: url("../images/pages/trade/ends-between_1.png") no-repeat 2% 75%;
+                    }
+                    &.ends_outside {
+                      background: url("../images/pages/trade/ends-outside_1.png") no-repeat 2% 75%;
+                    }
+                }
+                .contract_amount, .contract_description {
+                    margin-left: 5px;
+                }
+                .contract_amount {
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                }
             }
         }
     }
