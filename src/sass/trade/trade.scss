@@ -89,6 +89,16 @@ ul[role=segmented] {
     }
 }
 
+#contract_form_name_nav {
+    li {
+        background-color: $COLOR_BLUE;
+        color: white;
+        &.active {
+            color: $COLOR_ORANGE;
+        }
+    }
+}
+
 #trading_socket_container {
     font-size: 85%;
     #contract_container {
@@ -102,19 +112,19 @@ ul[role=segmented] {
             .col {
                 margin-right: 1rem;
             }
-            border: 1px solid $COLOR_GRAY;
         }
         #contract_prices_container {
-            margin-left: 1rem;
             position: relative;
             .price_container {
                 border: 1px solid $COLOR_GRAY;
-                &#price_container_top {
-                    margin-bottom: 1rem;
+                .big-col {
+                    flex: 3;
                 }
                 .contract_purchase {
                     margin-bottom: 6px;
-                    padding-left: 6px;
+                }
+                &#price_container_top {
+                    margin-right: 1rem;
                 }
             }
             .description_container {
@@ -184,6 +194,7 @@ ul[role=segmented] {
     top: 0;
     left: 0;
     display: none;
+    background: rgba($COLOR_LIGHT_GRAY, 0.5);
 }
 
 #contract_confirmation_container {
@@ -193,8 +204,8 @@ ul[role=segmented] {
 
 #loading_icon {
     position: absolute;
-    top: 45%;
-    left: 45%;
+    top: 27%;
+    left: 47%;
 }
 
 @media all and (max-width: 640px) {
@@ -205,15 +216,44 @@ ul[role=segmented] {
     .nav_placeholder {
         display: flex;
     }
-    #contract_container.row {
-        flex-direction: column;
-        #contract_prices_container {
-            margin-left: 0;
+
+    #contract_form_name_nav {
+        li {
+            background-color: $COLOR_LIGHT_GRAY;
+            color: $COLOR_BLUE;
+            &.active {
+                color: $COLOR_WHITE;
+                background-color: $COLOR_BLUE;
+            }
         }
+    }
+
+    #contract_container {
         .row-inner {
             flex-direction: column;
             .col-inner {
                 margin-bottom: 5px;
+            }
+        }
+        #contract_prices_container {
+            #price_container_top {
+                margin-right: 0 !important;
+            }
+            .row {
+                flex-direction: column;
+                .col {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width: 767px) {
+    #contract_container {
+        #contract_form_container {
+            #contract_form_content > .row {
+                flex-direction: column;
             }
         }
     }
