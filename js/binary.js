@@ -4294,6 +4294,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     $('#amount_type').on('change', function() {
                         BetForm.amount.lost_focus();
                         BetForm.attributes.model.amount_type(this.value);
+                        BetPrice.container().hide();
                     }).addClass('unbind_later');
                 },
                 correct_selected_tab: function() {
