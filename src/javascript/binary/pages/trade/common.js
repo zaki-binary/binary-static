@@ -5,11 +5,19 @@
 /*
  * function to display the profit and return of bet under each trade container
  */
- var displayCommentPrice= function (id, type, payout) {
+var displayCommentPrice= function (id, currency, type, payout) {
     'use strict';
     var profit = payout - type,
-        return_percent = type/profit;
- }
+        return_percent = (profit/type)*100,
+        div = document.getElementById(id),
+        comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
+    
+    while (div && div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+
+    div.appendChild(comment);
+};
 
 /*
  * function to create list elements `<li>` and append to element with id `id`

@@ -128,6 +128,8 @@ var Price = (function () {
         description.appendChild(content);
         row.appendChild(amount);
 
+        displayCommentPrice('price_comment_' + position, document.getElementById('currency').value, proposal['ask_price'], document.getElementById('amount').value);
+
         if (proposal['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
@@ -157,8 +159,6 @@ var Price = (function () {
             row.appendChild(description);
             fragment.appendChild(row);
         }
-
-        displayCommentPrice('price_comment_' + position, proposal['ask_price'], getElementById('amount').value);
 
         if (description_container) {
             description_container.appendChild(fragment);
