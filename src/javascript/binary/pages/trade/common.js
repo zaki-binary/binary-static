@@ -3,6 +3,15 @@
  */
 
 /*
+ * function to display the profit and return of bet under each trade container
+ */
+ var displayCommentPrice= function (id, type, payout) {
+    'use strict';
+    var profit = payout - type,
+        return_percent = type/profit;
+ }
+
+/*
  * function to create list elements `<li>` and append to element with id `id`
  */
 var displayListElements = function (id, elements, selected) {

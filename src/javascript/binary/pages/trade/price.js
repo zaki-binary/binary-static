@@ -158,6 +158,8 @@ var Price = (function () {
             fragment.appendChild(row);
         }
 
+        displayCommentPrice('price_comment_' + position, proposal['ask_price'], getElementById('amount').value);
+
         if (description_container) {
             description_container.appendChild(fragment);
         }
