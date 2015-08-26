@@ -270,7 +270,7 @@ var BetPrice = function() {
                     }
                 },
                 paint_it: function(value, target) {
-                    var color = value > 0 ? 'profit' : 'loss';
+                    var color = parseInt(value) > 0 ? 'profit' : 'loss';
                     $(target).removeClass().addClass(color);
                 },
                 stream: function(channel) {
