@@ -306,7 +306,6 @@ var BetForm = function () {
                     BetPrice.clear_buy_results();
                     $('input#amount', BetForm.attributes.form_selector()).on('keyup', BetForm.amount.keyup).addClass('unbind_later');
                     $('input#amount', BetForm.attributes.form_selector()).on('change', BetForm.amount.lost_focus).addClass('unbind_later');
-                    BetPrice.container().hide();
                 },
                 on_amount_type_change: function() {
                     //Force recalculate minimumss and update price boxes
@@ -581,6 +580,7 @@ var BetForm = function () {
                     if ( this.valid(amount) ) {
                         this.calculation_value = amount;
                     }
+                    BetPrice.container().hide();
                 },
                 valid: function(amount) {
                     if (isNaN(amount)) {
