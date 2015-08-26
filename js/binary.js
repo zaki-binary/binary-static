@@ -4288,6 +4288,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     BetPrice.clear_buy_results();
                     $('input#amount', BetForm.attributes.form_selector()).on('keyup', BetForm.amount.keyup).addClass('unbind_later');
                     $('input#amount', BetForm.attributes.form_selector()).on('change', BetForm.amount.lost_focus).addClass('unbind_later');
+                    BetPrice.container().hide();
                 },
                 on_amount_type_change: function() {
                     //Force recalculate minimumss and update price boxes
