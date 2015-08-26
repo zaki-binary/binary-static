@@ -580,6 +580,7 @@ var BetForm = function () {
                     if ( this.valid(amount) ) {
                         this.calculation_value = amount;
                     }
+                    BetPrice.container().hide();
                 },
                 valid: function(amount) {
                     if (isNaN(amount)) {
