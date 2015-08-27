@@ -45,31 +45,48 @@
           %li!= l('<span>All market conditions:</span> up/down, touch/no-touch, stays in/goes out.')
           %li!= l('<span>All durations:</span> from 10 seconds to 365 days.')
           %li!= l('<span>All payouts:</span> from $1 to $100,000.')
-#xcta
-  #xreason
-    .grd-container
-      .grd-row-padding
-        %h1.center-aligned.xhead= l('Why choose us')
-        .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-12
-          %ul
-            %li.xlist1
-              %h3= l('Sharp prices')
-              %p= l('Binary.com\'s patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market.')
-            %li.xlist2
-              %h3= l('Your funds are safe')
-              %p= l('With Binary.com, your money is secure. We segregate and hold client funds in secure AAA-rated banks.')
-        .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-12
-          %ul
-            %li.xlist3
-              %h3= l('Trade your way')
-              %p= l('Don\'t limit yourself! Whatever your market view, Binary.com allows you to put your strategy to work and profit from your predictions.')
-            %li.xlist4
-              %h3= l('Go with the leader')
-              %p= l('Binary.com is the award-winning industry pioneer in online options trading.')
+#xreason
+  .grd-container
+    .grd-row-padding
+      %h1.center-aligned.xhead= l('Why choose us')
+      .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-12
+        %ul
+          %li.xlist1
+            %h3= l('Sharp prices')
+            %p= l('Binary.com\'s patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market.')
+          %li.xlist2
+            %h3= l('Your funds are safe')
+            %p= l('With Binary.com, your money is secure. We segregate and hold client funds in secure AAA-rated banks.')
+      .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-12
+        %ul
+          %li.xlist3
+            %h3= l('Trade your way')
+            %p= l('Don\'t limit yourself! Whatever your market view, Binary.com allows you to put your strategy to work and profit from your predictions.')
+          %li.xlist4
+            %h3= l('Go with the leader')
+            %p= l('Binary.com is the award-winning industry pioneer in online options trading.')
+#xacademy
+  .grd-container
+    .grd-row-padding
+      %h1.center-aligned.xhead= l('Education center')
+      .grd-grid-1.grd-grid-mobile-12.grd-grid-phablet-6
+      .grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-6.center
+        %img.responsive{:alt => "", :src => url_for("images/pages/home/academy-icon.svg")}
+      .grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-6
+        %ul.bullet
+          %li= l('Webinars')
+          %li= l('Daily market repots')
+          %li= l('E-books')
+          %li= l('And more!')
+      .grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.center
+        %p!= l('We’re here to help you enhance your trading skills at every stage of your journey.')
+        %p
+          %a{:href=>"http://blog.binary.com", :target => '_blank'}= l('Go to Binary.com Academy')
+      .grd-grid-1.grd-grid-mobile-12.grd-grid-phablet-6
 #xtestimonial
   .grd-container
     .grd-row-padding
-      %h1.center-aligned.xhead2= l('What our clients are saying')
+      %h1.center-aligned.xhead= l('What our clients are saying')
       .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-6
         .xquote
           %p!= l('&#8220;We have used www.binary.com for the last 8 years and highly recommend binary to all our members worldwide&#8221;')
@@ -85,7 +102,7 @@
 #xpayment.center-aligned.ja-hide
   .grd-container
     .grd-row-padding
-      %h1.center-aligned.xhead2= l('Payment methods')
+      %h1.center-aligned.xhead= l('Payment methods')
       .grd-grid-12
         %a.pjaxload{:href => url_for('/cashier')}
           #visa.inlined
