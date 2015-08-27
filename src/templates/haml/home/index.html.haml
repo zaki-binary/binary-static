@@ -68,21 +68,23 @@
 #xacademy
   .grd-container
     .grd-row-padding
-      %h1.center-aligned.xhead= l('Education center')
-      .grd-grid-1.grd-grid-mobile-12.grd-grid-phablet-6
+      %h1.center-aligned.head-academy= l('Binary.com academy')
+      .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-6.center
+        %p!= l('Improve your trading skills with our free educational & training resources.')
+      .grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-6
       .grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-6.center
         %img.responsive{:alt => "", :src => url_for("images/pages/home/academy-icon.svg")}
-      .grd-grid-3.grd-grid-mobile-12.grd-grid-phablet-6
-        %ul.bullet
-          %li= l('Webinars')
-          %li= l('Daily market repots')
-          %li= l('E-books')
-          %li= l('And more!')
-      .grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6.center
-        %p!= l('We’re here to help you enhance your trading skills at every stage of your journey.')
-        %p
-          %a{:href=>"http://blog.binary.com", :target => '_blank'}= l('Go to Binary.com Academy')
-      .grd-grid-1.grd-grid-mobile-12.grd-grid-phablet-6
+      .grd-grid-4.grd-grid-mobile-12.grd-grid-phablet-6
+        %ul.checked
+          %li= l('Free webinars')
+          %li= l('Free daily market report')
+          %li= l('Free E-books')
+          %li= l('Free trading charts')
+      .grd-grid-2.grd-grid-mobile-12.grd-grid-phablet-6
+      .grd-grid-12.grd-grid-mobile-12.grd-grid-phablet-6.center
+        %p.academy-cta
+          %a.button{:href=>"http://blog.binary.com", :target => '_blank'}
+            %span= l('Start learning')
 #xtestimonial
   .grd-container
     .grd-row-padding
