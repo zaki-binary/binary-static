@@ -5969,7 +5969,8 @@ BetForm.Time.EndTime.prototype = {
                     e.preventDefault();
                 }
                 var target = $(e.target);
-                that.hide_buy_buttons();
+                var button = target.parents('a[class^="spread"]');
+                that.spread.disable(button);
                 var form = $(e.target).parents('form');
                 that.buy_bet(form);
                 return false;
@@ -5995,9 +5996,6 @@ BetForm.Time.EndTime.prototype = {
                 timeout : timeout,
                 success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR); },
                 error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp); },
-                complete: function () {
-                    that.order_form.show_buy_button();
-                }
             }));
             $('.price_box').fadeTo(200, 0.6);
         },
@@ -6027,6 +6025,7 @@ BetForm.Time.EndTime.prototype = {
             }
             $('.price_box').fadeTo(0, 1);
             BetPrice.order_form.enable_buy_buttons();
+            this.display_buy_buttons();
         },
         on_buy_bet_error: function (form, jqXHR, resp_status, exp) {
             var details = '' + exp;
@@ -6041,6 +6040,7 @@ BetForm.Time.EndTime.prototype = {
             this.display_buy_error('<div style="width: ' + width + 'px;"><h3>Error</h3><p>' + details + ' </p></div>', 1);
             $('.price_box').fadeTo(0, 1);
             BetPrice.order_form.enable_buy_buttons();
+            this.display_buy_buttons();
         },
         buy_response_container: function () {
             if (!_buy_response_container) {
@@ -6091,6 +6091,10 @@ BetForm.Time.EndTime.prototype = {
                     }
 
                     return new_value;
+                },
+                disable: function(target) {
+                    var that = this;
+                    target.unbind('click');
                 },
                 on_sell: function(form) {
                     var that = this;
@@ -6155,7 +6159,7 @@ BetForm.Time.EndTime.prototype = {
                     }
                 },
                 paint_it: function(value, target) {
-                    var color = parseInt(value) > 0 ? 'profit' : 'loss';
+                    var color = value > 0 ? 'profit' : 'loss';
                     $(target).removeClass().addClass(color);
                 },
                 stream: function(channel) {
@@ -6392,6 +6396,10 @@ BetForm.Time.EndTime.prototype = {
             this.deregister();
             this.order_form.hide_buy_button();
         },
+        display_buy_buttons: function() {
+            this.on_buy();
+            this.order_form.show_buy_button();
+        },
         show_loading: function() {
             var image_link = page.settings.get('image_link');
             var loading_html = '<p id="loading-price">'+text.localize('loading...')+'<br /><img src="'+image_link['hourglass']+'" /></p>';
@@ -6460,20 +6468,16 @@ BetForm.Time.EndTime.prototype = {
                     return (display_id && display_id.val() == id);
                 },
                 hide_buy_button: function() {
-                    $('button[name^="btn_buybet"]').parent().hide();
-                    $('a[class^="spread_"]').hide();
+                    return $('button[name^="btn_buybet"]').parent().hide();
                 },
                 show_buy_button: function() {
-                    $('button[name^="btn_buybet"]').parent().show();
-                    $('a[class^="spread_"]').show();
+                    return $('button[name^="btn_buybet"]').parent().show();
                 },
                 disable_buy_buttons: function() {
                     $('button[name^="btn_buybet"]').attr('disabled','disabled');
-                    // unbind click event for spread since it is not a button
-                    $('a[class^="spread_"]').unbind('click');
                 },
                 enable_buy_buttons: function() {
-                    // nothing to enable for spreads since it is not a button
+                    $('a[id^="spread"]').removeAttr('disabled');
                     $('button[name^="btn_buybet"]').removeAttr('disabled');
                 },
                 update_from_stream: function(stream) {
