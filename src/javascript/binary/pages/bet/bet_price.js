@@ -623,7 +623,6 @@ var BetPrice = function() {
                     return prices;
                 },
                 prices_from_form: function () {
-                    
                     var prices = [],
                         order_forms = $('.orderform'),
                         order_forms_count = order_forms ? order_forms.length : 0,
@@ -631,7 +630,6 @@ var BetPrice = function() {
                         id,
                         prob,
                         error;
-                    
                     if (order_forms_count > 0 ) {
                         for (i = 0; i < order_forms_count; i++) {
                             id = $('input[name="display_id"]', form).val();
@@ -765,9 +763,17 @@ var BetPrice = function() {
                 },
                 update_description: function(id, payout, old_payout) {
                     $('#amount_for_' + id).siblings('.bet_description').each(function () {
-                            var payout_element = $('strong:first-child', $(this));
-                            payout_element.html(payout.value);
-                            price_moved(payout_element, old_payout.raw, payout.raw);
+                            var elm = $(this);
+                            if (elm) {
+                                var desc = elm.text();
+                                if (desc) {
+                                    desc = desc.trim();
+                                    if(/^([A-Z]{3}) \d+\.\d+/g.test(desc)) {
+                                        desc = desc.replace(/\d+\.\d+/g, payout.value);
+                                        elm.text(desc);
+                                    }
+                                }
+                            }
                     });
                 },
                 update_profit_roi: function(id, profit, roi) {
