@@ -521,7 +521,8 @@ var BetPrice = function() {
                     BetForm.spot.clear_sparkline();
                     this.stop();
                     update_from_stream = true;
-                    var url = this.url();
+                    var stream_channel = this.stream_channel();
+                    var url = window.location.protocol + '//' + page.settings.get('streaming_server')+'/push/price/'+stream_channel;
                     if(url && typeof (EventSource) !== "undefined") {
                         price_stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
@@ -542,8 +543,8 @@ var BetPrice = function() {
                 ignore_updates: function() {
                     update_from_stream = false;
                 },
-                url: function() {
-                    return $('#stream_url').html();
+                stream_channel: function() {
+                    return $('#stream_channel').html();
                 },
                 process_message: function(data) {
                     if(data == 'stop_bet') {
