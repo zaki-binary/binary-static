@@ -4294,7 +4294,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     $('#amount_type').on('change', function() {
                         BetForm.amount.lost_focus();
                         BetForm.attributes.model.amount_type(this.value);
-                        BetPrice.container().hide();
                     }).addClass('unbind_later');
                 },
                 correct_selected_tab: function() {
@@ -4562,7 +4561,6 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     if ( this.valid(amount) ) {
                         this.calculation_value = amount;
                     }
-                    BetPrice.container().hide();
                 },
                 valid: function(amount) {
                     if (isNaN(amount)) {
@@ -6493,7 +6491,6 @@ BetForm.Time.EndTime.prototype = {
                     return prices;
                 },
                 prices_from_form: function () {
-                    
                     var prices = [],
                         order_forms = $('.orderform'),
                         order_forms_count = order_forms ? order_forms.length : 0,
@@ -6501,7 +6498,6 @@ BetForm.Time.EndTime.prototype = {
                         id,
                         prob,
                         error;
-                    
                     if (order_forms_count > 0 ) {
                         for (i = 0; i < order_forms_count; i++) {
                             id = $('input[name="display_id"]', form).val();
@@ -6635,9 +6631,17 @@ BetForm.Time.EndTime.prototype = {
                 },
                 update_description: function(id, payout, old_payout) {
                     $('#amount_for_' + id).siblings('.bet_description').each(function () {
-                            var payout_element = $('strong:first-child', $(this));
-                            payout_element.html(payout.value);
-                            price_moved(payout_element, old_payout.raw, payout.raw);
+                            var elm = $(this);
+                            if (elm) {
+                                var desc = elm.text();
+                                if (desc) {
+                                    desc = desc.trim();
+                                    if(/^([A-Z]{3}) \d+\.\d+/.test(desc)) {
+                                        desc = desc.replace(/\d+\.\d+/, payout.value);
+                                        elm.text(desc);
+                                    }
+                                }
+                            }
                     });
                 },
                 update_profit_roi: function(id, profit, roi) {
