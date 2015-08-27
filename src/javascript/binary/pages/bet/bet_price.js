@@ -765,8 +765,8 @@ var BetPrice = function() {
                                 var desc = elm.text();
                                 if (desc) {
                                     desc = desc.trim();
-                                    if(/^([A-Z]{3}) \d+\.\d+/g.test(desc)) {
-                                        desc = desc.replace(/\d+\.\d+/g, payout.value);
+                                    if(/^([A-Z]{3}) \d+\.\d+/.test(desc)) {
+                                        desc = desc.replace(/\d+\.\d+/, payout.value);
                                         elm.text(desc);
                                     }
                                 }
