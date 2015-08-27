@@ -529,7 +529,8 @@ var BetPrice = function() {
                     BetForm.spot.clear_sparkline();
                     this.stop();
                     update_from_stream = true;
-                    var url = this.url();
+                    var stream_channel = this.stream_channel();
+                    var url = window.location.protocol + '//' + page.settings.get('streaming_server')+'/push/price/'+stream_channel;
                     if(url && typeof (EventSource) !== "undefined") {
                         price_stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
@@ -550,8 +551,8 @@ var BetPrice = function() {
                 ignore_updates: function() {
                     update_from_stream = false;
                 },
-                url: function() {
-                    return $('#stream_url').html();
+                stream_channel: function() {
+                    return $('#stream_channel').html();
                 },
                 process_message: function(data) {
                     if(data == 'stop_bet') {
@@ -623,7 +624,6 @@ var BetPrice = function() {
                     return prices;
                 },
                 prices_from_form: function () {
-                    
                     var prices = [],
                         order_forms = $('.orderform'),
                         order_forms_count = order_forms ? order_forms.length : 0,
@@ -631,7 +631,6 @@ var BetPrice = function() {
                         id,
                         prob,
                         error;
-                    
                     if (order_forms_count > 0 ) {
                         for (i = 0; i < order_forms_count; i++) {
                             id = $('input[name="display_id"]', form).val();
@@ -765,9 +764,17 @@ var BetPrice = function() {
                 },
                 update_description: function(id, payout, old_payout) {
                     $('#amount_for_' + id).siblings('.bet_description').each(function () {
-                            var payout_element = $('strong:first-child', $(this));
-                            payout_element.html(payout.value);
-                            price_moved(payout_element, old_payout.raw, payout.raw);
+                            var elm = $(this);
+                            if (elm) {
+                                var desc = elm.text();
+                                if (desc) {
+                                    desc = desc.trim();
+                                    if(/^([A-Z]{3}) \d+\.\d+/.test(desc)) {
+                                        desc = desc.replace(/\d+\.\d+/, payout.value);
+                                        elm.text(desc);
+                                    }
+                                }
+                            }
                     });
                 },
                 update_profit_roi: function(id, profit, roi) {
