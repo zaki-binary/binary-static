@@ -84,8 +84,7 @@ var BetPrice = function() {
                     e.preventDefault();
                 }
                 var target = $(e.target);
-                var button = target.parents('a[class^="spread"]');
-                that.spread.disable(button);
+                that.hide_buy_buttons();
                 var form = $(e.target).parents('form');
                 that.buy_bet(form);
                 return false;
@@ -111,6 +110,9 @@ var BetPrice = function() {
                 timeout : timeout,
                 success : function (resp, resp_status, jqXHR) { that.on_buy_bet_success(form, resp, resp_status, jqXHR); },
                 error   : function (jqXHR, resp_status, exp) { that.on_buy_bet_error(form, jqXHR, resp_status, exp); },
+                complete: function () {
+                    that.order_form.show_buy_button();
+                }
             }));
             $('.price_box').fadeTo(200, 0.6);
         },
@@ -140,7 +142,6 @@ var BetPrice = function() {
             }
             $('.price_box').fadeTo(0, 1);
             BetPrice.order_form.enable_buy_buttons();
-            this.display_buy_buttons();
         },
         on_buy_bet_error: function (form, jqXHR, resp_status, exp) {
             var details = '' + exp;
@@ -155,7 +156,6 @@ var BetPrice = function() {
             this.display_buy_error('<div style="width: ' + width + 'px;"><h3>Error</h3><p>' + details + ' </p></div>', 1);
             $('.price_box').fadeTo(0, 1);
             BetPrice.order_form.enable_buy_buttons();
-            this.display_buy_buttons();
         },
         buy_response_container: function () {
             if (!_buy_response_container) {
@@ -206,10 +206,6 @@ var BetPrice = function() {
                     }
 
                     return new_value;
-                },
-                disable: function(target) {
-                    var that = this;
-                    target.unbind('click');
                 },
                 on_sell: function(form) {
                     var that = this;
@@ -274,7 +270,7 @@ var BetPrice = function() {
                     }
                 },
                 paint_it: function(value, target) {
-                    var color = value > 0 ? 'profit' : 'loss';
+                    var color = parseInt(value) > 0 ? 'profit' : 'loss';
                     $(target).removeClass().addClass(color);
                 },
                 stream: function(channel) {
@@ -511,10 +507,6 @@ var BetPrice = function() {
             this.deregister();
             this.order_form.hide_buy_button();
         },
-        display_buy_buttons: function() {
-            this.on_buy();
-            this.order_form.show_buy_button();
-        },
         show_loading: function() {
             var image_link = page.settings.get('image_link');
             var loading_html = '<p id="loading-price">'+text.localize('loading...')+'<br /><img src="'+image_link['hourglass']+'" /></p>';
@@ -529,7 +521,8 @@ var BetPrice = function() {
                     BetForm.spot.clear_sparkline();
                     this.stop();
                     update_from_stream = true;
-                    var url = this.url();
+                    var stream_channel = this.stream_channel();
+                    var url = window.location.protocol + '//' + page.settings.get('streaming_server')+'/push/price/'+stream_channel;
                     if(url && typeof (EventSource) !== "undefined") {
                         price_stream = new EventSource(url, { retry: 18000000 });
                         var that = this;
@@ -550,8 +543,8 @@ var BetPrice = function() {
                 ignore_updates: function() {
                     update_from_stream = false;
                 },
-                url: function() {
-                    return $('#stream_url').html();
+                stream_channel: function() {
+                    return $('#stream_channel').html();
                 },
                 process_message: function(data) {
                     if(data == 'stop_bet') {
@@ -582,16 +575,20 @@ var BetPrice = function() {
                     return (display_id && display_id.val() == id);
                 },
                 hide_buy_button: function() {
-                    return $('button[name^="btn_buybet"]').parent().hide();
+                    $('button[name^="btn_buybet"]').parent().hide();
+                    $('a[class^="spread_"]').hide();
                 },
                 show_buy_button: function() {
-                    return $('button[name^="btn_buybet"]').parent().show();
+                    $('button[name^="btn_buybet"]').parent().show();
+                    $('a[class^="spread_"]').show();
                 },
                 disable_buy_buttons: function() {
                     $('button[name^="btn_buybet"]').attr('disabled','disabled');
+                    // unbind click event for spread since it is not a button
+                    $('a[class^="spread_"]').unbind('click');
                 },
                 enable_buy_buttons: function() {
-                    $('a[id^="spread"]').removeAttr('disabled');
+                    // nothing to enable for spreads since it is not a button
                     $('button[name^="btn_buybet"]').removeAttr('disabled');
                 },
                 update_from_stream: function(stream) {
@@ -623,7 +620,6 @@ var BetPrice = function() {
                     return prices;
                 },
                 prices_from_form: function () {
-                    
                     var prices = [],
                         order_forms = $('.orderform'),
                         order_forms_count = order_forms ? order_forms.length : 0,
@@ -631,7 +627,6 @@ var BetPrice = function() {
                         id,
                         prob,
                         error;
-                    
                     if (order_forms_count > 0 ) {
                         for (i = 0; i < order_forms_count; i++) {
                             id = $('input[name="display_id"]', form).val();
@@ -765,9 +760,17 @@ var BetPrice = function() {
                 },
                 update_description: function(id, payout, old_payout) {
                     $('#amount_for_' + id).siblings('.bet_description').each(function () {
-                            var payout_element = $('strong:first-child', $(this));
-                            payout_element.html(payout.value);
-                            price_moved(payout_element, old_payout.raw, payout.raw);
+                            var elm = $(this);
+                            if (elm) {
+                                var desc = elm.text();
+                                if (desc) {
+                                    desc = desc.trim();
+                                    if(/^([A-Z]{3}) \d+\.\d+/.test(desc)) {
+                                        desc = desc.replace(/\d+\.\d+/, payout.value);
+                                        elm.text(desc);
+                                    }
+                                }
+                            }
                     });
                 },
                 update_profit_roi: function(id, profit, roi) {
