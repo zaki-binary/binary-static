@@ -71,7 +71,7 @@ function loadAnalysisTab() {
     toggleActiveAnalysisTabs();
 
     if (currentTab === 'tab_graph') {
-        BetAnalysis.tab_live_chart.render()
+        BetAnalysis.tab_live_chart.render(true);
     } else {
         var url = currentLink.getAttribute('href');
         $.ajax({
