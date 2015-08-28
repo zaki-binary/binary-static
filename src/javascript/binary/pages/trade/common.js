@@ -265,7 +265,7 @@ var displayPriceMovement = function (element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
-var toggleMobileNavMenu = function (nav, eventElement) {
+var toggleActiveNavMenuElement = function (nav, eventElement) {
     var liElements = nav.getElementsByTagName("li");
     var classes = eventElement.classList;
 

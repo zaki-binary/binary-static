@@ -15,7 +15,7 @@ if (marketNavElement) {
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
             sessionStorage.removeItem('formname');
-            toggleMobileNavMenu(marketNavElement, clickedMarket);
+            toggleActiveNavMenuElement(marketNavElement, clickedMarket);
             // if market is already active then no need to send same request again
             if (!isMarketActive) {
                 processMarketOfferings();
@@ -42,7 +42,7 @@ if (formNavElement) {
 
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
-            toggleMobileNavMenu(formNavElement, clickedForm);
+            toggleActiveNavMenuElement(formNavElement, clickedForm);
 
             if (!isFormActive) {
                 contractFormEventChange(clickedForm.id);
