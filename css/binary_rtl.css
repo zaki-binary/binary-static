@@ -4766,6 +4766,11 @@ table .loss, table .lower {
   flex: 1;
 }
 
+.vertical-row {
+  flex-direction: column;
+  display: flex;
+}
+
 .nav_placeholder {
   display: none;
   overflow: hidden;
@@ -4832,7 +4837,7 @@ ul[role=segmented] a:hover {
 }
 
 #trading_socket_container {
-  font-size: 85%;
+  font-size: 1rem;
 }
 #trading_socket_container #contract_container .row {
   padding: 10px 0;
@@ -4857,6 +4862,12 @@ ul[role=segmented] a:hover {
 }
 #trading_socket_container #contract_container #contract_prices_container .price_container#price_container_top {
   margin-right: 1rem;
+}
+#trading_socket_container #contract_container #contract_prices_container #price_comment_top, #trading_socket_container #contract_container #contract_prices_container #price_comment_bottom {
+  background-color: #dedede;
+  line-height: 1.5rem;
+  font-size: 0.8rem;
+  flex: 1;
 }
 #trading_socket_container #contract_container #contract_prices_container .description_container .contract_heading {
   text-transform: capitalize;
@@ -4965,6 +4976,52 @@ ul[role=segmented] a:hover {
     flex-direction: column;
   }
 }
+/* these styles are for trade analysis and will be removed */
+#trading_bottom_content {
+  margin-top: 15px;
+  font-size: 1rem;
+}
+#trading_bottom_content .tab-menu {
+  background: transparent !important;
+  border: 0 !important;
+  height: auto !important;
+}
+#trading_bottom_content ul#betsBottomPage {
+  box-shadow: inset 0px 0px 0px 1px rgba(42, 48, 82, 0.2);
+  background-color: #f2f2f2;
+  color: #2a3052;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  font-size: 85%;
+  border-bottom: none;
+}
+#trading_bottom_content ul#betsBottomPage li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  margin: 0;
+  text-transform: capitalize;
+  padding: 3px 0;
+  text-align: center;
+  background: transparent;
+  border-radius: 0;
+}
+#trading_bottom_content ul#betsBottomPage li.active {
+  color: white;
+  background-color: #2a3052;
+}
+#trading_bottom_content ul#betsBottomPage li a {
+  line-height: 1;
+  top: 0;
+  font-size: 1rem;
+}
+#trading_bottom_content ul#betsBottomPage li.active a {
+  color: inherit;
+  background-image: none;
+}
+
 /* Language based rules */
 /* Specific rules for languages */
 .JA .ja-hide {

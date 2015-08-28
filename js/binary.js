@@ -3854,6 +3854,7 @@ BetAnalysis.DigitInfo.prototype = {
 BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
 ;BetAnalysis.tab_live_chart = function () {
     var live_chart_initialized = false;
+    var invoked_for_websocket  = false;
     return {
         reset: function() {
             if(typeof live_chart !== "undefined") {
@@ -3863,7 +3864,8 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                 }
             }
         },
-        render: function(hours_to_chart) {
+        render: function(calledForWebsocketTrading) {
+            invoked_for_websocket = calledForWebsocketTrading || false;
             if (live_chart_initialized && $('#live_chart_div').length > 0) {
                 this.update_live_chart();
             } else {
@@ -3905,10 +3907,12 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
 
             this.add_spot();
             var that = this;
-            BetForm.barriers.each(function(barrier) { that.add_barrier(barrier); });
+            if (!invoked_for_websocket) {
+                BetForm.barriers.each(function(barrier) { that.add_barrier(barrier); });
+            }
         },
         update_chart_config: function() {
-            var symbol = BetForm.attributes.underlying();
+            var symbol = invoked_for_websocket ? sessionStorage.getItem('underlying') : BetForm.attributes.underlying();
             var live = SessionStore.get('live_chart_duration') || this.get_duration() || '10min';
             if(!this.live_chart_config) {
                 this.live_chart_config = new LiveChartConfig({ renderTo: 'live_chart_div', symbol: symbol, live: live});
@@ -3952,7 +3956,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             live_chart.add_indicator(barrier);
         },
         get_duration: function () {
-            var duration_in_seconds = BetForm.attributes.duration_seconds();
+            var duration_in_seconds = invoked_for_websocket ? '600' : BetForm.attributes.duration_seconds();
             return $('#live_chart_duration').find('#' + this.corrected_hours_to_chart(duration_in_seconds)).data('live');
         },
         corrected_hours_to_chart: function(chart_duration) {
@@ -9758,6 +9762,129 @@ onLoad.queue_for_url(function () {
     });
 }, 'statement');
 ;/*
+ * This file contains the code related to loading of trading page bottom analysis
+ * content. It will contain jquery so as to compatible with old code and less rewrite
+ *
+ * Please note that this will be removed in near future
+ */
+
+/*
+ * This function is called whenever we change market, form
+ * or underlying to load bet analysis for that particular event
+ */
+function requestTradeAnalysis() {
+    'use strict';
+    $.ajax({
+        method: 'POST',
+        url: page.url.url_for('trade/trading_analysis'),
+        data: {
+            underlying: sessionStorage.getItem('underlying'),
+            formname: sessionStorage.getItem('formname'),
+            contract_category: Offerings.form(),
+            barrier: Offerings.barrier()
+        }
+    })
+    .done(function(data) {
+        var contentId = document.getElementById('trading_bottom_content');
+        contentId.innerHTML = data;
+        sessionStorage.setItem('currentAnalysisTab', getActiveTab());
+        bindAnalysisTabEvent();
+        loadAnalysisTab();
+    });
+}
+
+/*
+ * This function bind event to link elements of bottom content
+ * navigation
+ */
+function bindAnalysisTabEvent() {
+    'use strict';
+    var analysisNavElement = document.querySelector('#trading_bottom_content #betsBottomPage');
+    if (analysisNavElement) {
+        analysisNavElement.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName === 'A') {
+                e.preventDefault();
+
+                var clickedLink = e.target,
+                    clickedElement = clickedLink.parentElement,
+                    isTabActive = clickedElement.classList.contains('active');
+
+                sessionStorage.setItem('currentAnalysisTab', clickedElement.id);
+
+                if (!isTabActive) {
+                    loadAnalysisTab();
+                }
+            }
+        });
+    }
+}
+
+/*
+ * This function handles all the functionality on how to load
+ * tab according to current paramerted
+ */
+function loadAnalysisTab() {
+    'use strict';
+    var currentTab = getActiveTab(),
+        currentLink = document.querySelector('#' + currentTab + ' a'),
+        contentId = document.getElementById(currentTab + '-content');
+
+    var analysisNavElement = document.querySelector('#trading_bottom_content #betsBottomPage');
+    toggleActiveNavMenuElement(analysisNavElement, currentLink.parentElement);
+    toggleActiveAnalysisTabs();
+
+    if (currentTab === 'tab_graph') {
+        BetAnalysis.tab_live_chart.render(true);
+    } else {
+        var url = currentLink.getAttribute('href');
+        $.ajax({
+            method: 'GET',
+            url: url,
+        })
+        .done(function(data) {
+            contentId.innerHTML = data;
+        });
+    }
+}
+
+/*
+ * function to toggle the active element for analysis menu
+ */
+function toggleActiveAnalysisTabs() {
+    'use strict';
+    var currentTab = getActiveTab(),
+        analysisContainer = document.getElementById('bet_bottom_content');
+
+    if (analysisContainer) {
+        var childElements = analysisContainer.children,
+            currentTabElement = document.getElementById(currentTab + '-content'),
+            classes = currentTabElement.classList;
+
+        for (var i = 0, len = childElements.length; i < len; i++){
+            childElements[i].classList.remove('selectedTab');
+            childElements[i].classList.add('invisible');
+        }
+
+        classes.add('selectedTab');
+        classes.remove('invisible');
+    }
+}
+
+/*
+ * get the current active tab if its visible i.e allowed for current parameters
+ */
+function getActiveTab() {
+    var selectedTab = sessionStorage.getItem('currentAnalysisTab') || 'tab_explanation',
+        selectedElement = document.getElementById(selectedTab);
+
+    if (selectedElement && selectedElement.classList.contains('invisible')) {
+        selectedTab = 'tab_explanation';
+        sessionStorage.setItem('currentAnalysisTab', 'tab_explanation');
+    }
+
+    return selectedTab;
+}
+;/*
  * Handles barrier processing and display
  *
  * It process `Contract.barriers` and display them if its applicable
@@ -9804,7 +9931,7 @@ function displayBarriers (barrierCategory) {
     }
 }
 ;/*
- * This contains common functions we need for processing the respinse
+ * This contains common functions we need for processing the response
  */
 
 /*
@@ -10070,7 +10197,7 @@ var displayPriceMovement = function (element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
-var toggleMobileNavMenu = function (nav, eventElement) {
+var toggleActiveNavMenuElement = function (nav, eventElement) {
     var liElements = nav.getElementsByTagName("li");
     var classes = eventElement.classList;
 
@@ -10099,6 +10226,27 @@ var setFormPlaceholderContent = function (name) {
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
         formPlaceholder.textContent = name || sessionStorage.getItem('formname');
+    }
+};
+
+/*
+ * function to display the profit and return of bet under each trade container
+ */
+var displayCommentPrice = function (id, currency, type, payout) {
+    'use strict';
+
+    var div = document.getElementById(id);
+
+    while (div && div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+
+    if (div && type && payout) {
+        var profit = payout - type,
+            return_percent = (profit/type)*100,
+            comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
+
+        div.appendChild(comment);
     }
 };
 ;/*
@@ -10496,7 +10644,7 @@ if (marketNavElement) {
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
             sessionStorage.removeItem('formname');
-            toggleMobileNavMenu(marketNavElement, clickedMarket);
+            toggleActiveNavMenuElement(marketNavElement, clickedMarket);
             // if market is already active then no need to send same request again
             if (!isMarketActive) {
                 processMarketOfferings();
@@ -10523,7 +10671,7 @@ if (formNavElement) {
 
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
-            toggleMobileNavMenu(formNavElement, clickedForm);
+            toggleActiveNavMenuElement(formNavElement, clickedForm);
 
             if (!isFormActive) {
                 contractFormEventChange(clickedForm.id);
@@ -10553,6 +10701,7 @@ var contractFormEventChange = function (formName) {
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
 
+    requestTradeAnalysis();
     // get the contract details based on underlying as formName has changed
     TradeSocket.send({ contracts_for: underlying });
 };
@@ -10565,15 +10714,11 @@ if (underlyingElement) {
     underlyingElement.addEventListener('change', function(e) {
         if (e.target) {
             sessionStorage.setItem('underlying', e.target.value);
-            underlyingEventChange(e.target.value);
+            requestTradeAnalysis();
+            TradeSocket.send({ contracts_for: e.target.value });
         }
     });
 }
-
-var underlyingEventChange = function (underlying) {
-    'use strict';
-    TradeSocket.send({ contracts_for: underlying });
-};
 
 /*
  * bind event to change in duration amount, request new price
@@ -11076,6 +11221,8 @@ var Price = (function () {
         description.appendChild(content);
         row.appendChild(amount);
 
+        displayCommentPrice('price_comment_' + position, document.getElementById('currency').value, proposal['ask_price'], document.getElementById('amount').value);
+
         if (proposal['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
@@ -11156,9 +11303,11 @@ var processMarketOfferings = function () {
     // get the underlying selected
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
+    sessionStorage.setItem('formname', formname);
 
     // get the contract details based on underlying as market has changed
     TradeSocket.send({ contracts_for: underlying });
+    requestTradeAnalysis();
 };
 
 /*
