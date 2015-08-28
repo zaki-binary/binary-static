@@ -260,13 +260,25 @@ ul[role=segmented] {
 /* these styles are for trade analysis and will be removed */
 
 #trading_bottom_content {
+    margin-top: 15px;
+    .tab-menu {
+        background: transparent !important;
+        border:0 !important;
+        height: auto !important;
+    }
     ul#betsBottomPage {
         @include ul_segmented_navigation;
         font-size: 85%;
         border-bottom: none;
         li {
             @include li_segmented_element;
+            background: transparent;
             border-radius: 0;
+            a {
+                line-height: 1;
+                top: 0;
+                font-size: 1rem;
+            }
             &.active {
                 a {
                     color: inherit;
