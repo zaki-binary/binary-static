@@ -55,26 +55,34 @@ input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
     display: flex;
 }
 
-ul[role=segmented] {
+@mixin ul_segmented_navigation {
     box-shadow: inset 0px 0px 0px 1px rgba($COLOR_BLUE, 0.2);
     background-color: $COLOR_LIGHT_GRAY;
     color: $COLOR_BLUE;
     display: flex;
     overflow: hidden;
     width: 100%;
+}
+
+@mixin li_segmented_element {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 0;
+    text-transform: capitalize;
+    padding: 3px 0;
+    text-align: center;
+    &.active {
+        color: $COLOR_WHITE;
+        background-color: $COLOR_BLUE;
+    }
+}
+
+ul[role=segmented] {
+    @include ul_segmented_navigation;
     li {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        margin: 0;
-        text-transform: capitalize;
-        padding: 3px 0;
-        text-align: center;
-        &.active {
-            color: $COLOR_WHITE;
-            background-color: $COLOR_BLUE;
-        }
+        @include li_segmented_element;
         &#risefall, &#higherlower, &#touchnotouch {
             background-image: none;
         }
@@ -233,6 +241,26 @@ ul[role=segmented] {
         #contract_form_container {
             #contract_form_content > .row {
                 flex-direction: column;
+            }
+        }
+    }
+}
+
+/* these styles are for trade analysis and will be removed */
+
+#trading_bottom_content {
+    ul#betsBottomPage {
+        @include ul_segmented_navigation;
+        font-size: 85%;
+        border-bottom: none;
+        li {
+            @include li_segmented_element;
+            border-radius: 0;
+            &.active {
+                a {
+                    color: inherit;
+                    background-image: none;
+                }
             }
         }
     }
