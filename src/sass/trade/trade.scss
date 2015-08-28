@@ -24,6 +24,11 @@
     flex: 1;
 }
 
+.vertical-row {
+    flex-direction: column;
+    display: flex;
+}
+
 .nav_placeholder {
     display: none;
     overflow: hidden;
@@ -98,7 +103,7 @@ ul[role=segmented] {
 }
 
 #trading_socket_container {
-    font-size: 85%;
+    font-size: 1rem;
     #contract_container {
         .row {
             padding: 10px 0;
@@ -126,9 +131,10 @@ ul[role=segmented] {
                 }
             }
             #price_comment_top, #price_comment_bottom{
-                background-color: #dedede;
-                line-height: 1.8em;
-                font-size: .7em;
+                background-color: $COLOR_GRAY;
+                line-height: 1.5rem;
+                font-size: 0.8rem;
+                flex: 1;
             }
             .description_container {
                 .contract_heading {

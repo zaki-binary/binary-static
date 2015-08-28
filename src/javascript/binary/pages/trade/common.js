@@ -1,23 +1,6 @@
 /*
- * This contains common functions we need for processing the respinse
+ * This contains common functions we need for processing the response
  */
-
-/*
- * function to display the profit and return of bet under each trade container
- */
-var displayCommentPrice= function (id, currency, type, payout) {
-    'use strict';
-    var profit = payout - type,
-        return_percent = (profit/type)*100,
-        div = document.getElementById(id),
-        comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
-    
-    while (div && div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    div.appendChild(comment);
-};
 
 /*
  * function to create list elements `<li>` and append to element with id `id`
@@ -311,5 +294,26 @@ var setFormPlaceholderContent = function (name) {
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
         formPlaceholder.textContent = name || sessionStorage.getItem('formname');
+    }
+};
+
+/*
+ * function to display the profit and return of bet under each trade container
+ */
+var displayCommentPrice = function (id, currency, type, payout) {
+    'use strict';
+
+    var div = document.getElementById(id);
+
+    while (div && div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+
+    if (div && type && payout) {
+        var profit = payout - type,
+            return_percent = (profit/type)*100,
+            comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
+
+        div.appendChild(comment);
     }
 };
