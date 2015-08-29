@@ -10,11 +10,11 @@
 var displayDurations = function (startType) {
     'use strict';
 
-    var target= document.getElementById('duration_units'),
+    var target = document.getElementById('duration_units'),
         durations = Contract.durations(),
         formName = Offerings.form(),
         barrierCategory = Offerings.barrier(),
-        fragment =  document.createDocumentFragment(), durationContainer = {};
+        fragment = document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
@@ -52,7 +52,8 @@ var displayDurations = function (startType) {
 
     for (var duration in durationContainer) {
         if(durationContainer.hasOwnProperty(duration)) {
-            var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
+            var min = durationContainer[duration]['min_contract_duration'],
+                textMapping = durationTextValueMappings(min);
 
             var option, content;
             if (duration === 'intraday') {
@@ -62,6 +63,7 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
@@ -82,6 +84,7 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
