@@ -13,27 +13,43 @@ function displayBarriers (barrierCategory) {
     if (barriers && formName) {
         var barrier = barriers[formName];
         if(barrier) {
+            var unit = document.getElementById('duration_units');
+            var currentTick = Tick.quote();
             if (barrier.count === 1) {
                 document.getElementById('high_barrier_row').style.display = 'none';
                 document.getElementById('low_barrier_row').style.display = 'none';
                 document.getElementById('barrier_row').setAttribute('style', '');
 
                 var elm = document.getElementById('barrier');
-                elm.value = barrier.barrier;
-                elm.textContent = barrier.barrier;
+                if (unit && unit.value === 'd' && currentTick) {
+                    elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                } else {
+                    elm.value = barrier['barrier'];
+                    elm.textContent = barrier['barrier'];
+                }
                 return;
             } else if (barrier.count === 2) {
                 document.getElementById('barrier_row').style.display = 'none';
                 document.getElementById('high_barrier_row').setAttribute('style', '');
                 document.getElementById('low_barrier_row').setAttribute('style', '');
 
-                var high_elm = document.getElementById('barrier_high');
-                high_elm.value = barrier['barrier'];
-                high_elm.textContent = barrier['barrier'];
+                var high_elm = document.getElementById('barrier_high'),
+                    low_elm = document.getElementById('barrier_low');
 
-                var low_elm = document.getElementById('barrier_low');
-                low_elm.value = barrier['barrier1'];
-                low_elm.textContent = barrier['barrier1'];
+                if (unit && unit.value === 'd' && currentTick) {
+                    high_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    high_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+
+                    low_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
+                    low_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
+                } else {
+                    high_elm.value = barrier['barrier'];
+                    high_elm.textContent = barrier['barrier'];
+
+                    low_elm.value = barrier['barrier1'];
+                    low_elm.textContent = barrier['barrier1'];
+                }
                 return;
             }
         }

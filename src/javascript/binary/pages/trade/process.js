@@ -52,8 +52,6 @@ var processContractFormOfferings = function (contracts) {
 
     displayStartDates();
 
-    displayBarriers();
-
     processPriceRequest();
 };
 
