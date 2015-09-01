@@ -59,7 +59,7 @@ var Contract = (function(){
     }
 
     var getContracts = function(underlying){
-        var params = { contracts_for: { symbol: underlying, region: 'japan' } }
+        var params = {contracts_for: underlying, region: 'japan'}
         TradeSocket.send(params);
     }
 
