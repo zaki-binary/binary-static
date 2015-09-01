@@ -12,7 +12,7 @@ function displayDurations(startType) {
 
     var durations = Contract.durations();
     if(durations===false){
-        document.getElementById('expiry_type_duration').style.display = 'none';        
+        document.getElementById('expiry_row').style.display = 'none';        
         return false;
     }
 
