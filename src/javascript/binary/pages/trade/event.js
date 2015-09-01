@@ -229,17 +229,21 @@ if (currencyElement) {
  * attach event to purchase buttons to buy the current contract
  */
 var purchaseButtonElements = document.getElementsByClassName('purchase_button');
+
+// using function expression form here as it used inside for loop
+var purchaseContractEvent = function () {
+    var id = this.getAttribute('data-purchase-id'),
+        askPrice = this.getAttribute('data-ask-price');
+
+    if (id && askPrice) {
+        TradeSocket.send({buy: id, price: askPrice});
+        processForgetPriceIds();
+    }
+};
+
 if (purchaseButtonElements) {
     for (var i = 0, len = purchaseButtonElements.length; i < len; i++) {
-        purchaseButtonElements[i].addEventListener('click', function (e) {
-            var id = e.target.getAttribute('data-purchase-id'),
-                askPrice = e.target.getAttribute('data-ask-price');
-
-            if (id && askPrice) {
-                TradeSocket.send({buy: id, price: askPrice});
-                processForgetPriceIds();
-            }
-        });
+        purchaseButtonElements[i].addEventListener('click', purchaseContractEvent);
     }
 }
 
