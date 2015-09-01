@@ -13,8 +13,6 @@ var processContractFormOfferings = function(contracts){
 
 	displayStartDates();
 
-	displayBarriers();
-
 	Periods.displayPeriods();
 
 	processPriceRequest();
