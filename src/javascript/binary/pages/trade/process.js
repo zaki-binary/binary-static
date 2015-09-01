@@ -2,7 +2,7 @@
  * Function to process offerings, this function is called
  * when market is changed or for processing offerings response
  */
-var processMarketOfferings = function () {
+function processMarketOfferings() {
     'use strict';
 
     var market = sessionStorage.getItem('market') || 'forex',
@@ -33,12 +33,12 @@ var processMarketOfferings = function () {
     // get the contract details based on underlying as market has changed
     TradeSocket.send({ contracts_for: underlying });
     requestTradeAnalysis();
-};
+}
 
 /*
  * Function to display contract form for current underlying
  */
-var processContractFormOfferings = function (contracts) {
+function processContractFormOfferings(contracts) {
     'use strict';
 
     Contract.details(contracts);
@@ -53,24 +53,24 @@ var processContractFormOfferings = function (contracts) {
     displayStartDates();
 
     processPriceRequest();
-};
+}
 
 /*
  * Function to request for cancelling the current price proposal
  */
-var processForgetPriceIds = function () {
+function processForgetPriceIds() {
     'use strict';
 
     Object.keys(Price.idDisplayMapping()).forEach(function (key) {
         TradeSocket.send({ forget: key });
     });
-};
+}
 
 /*
  * Function to process and calculate price based on current form
  * parameters or change in form parameters
  */
-var processPriceRequest = function () {
+function processPriceRequest() {
     'use strict';
 
     showPriceLoadingIcon();
@@ -81,26 +81,26 @@ var processPriceRequest = function () {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
-};
+}
 
 /*
  * Function to cancel the current tick stream
  * this need to be invoked before makin
  */
-var processForgetTickId = function () {
+function processForgetTickId() {
     'use strict';
 
     if (Tick && Tick.id()) {
         TradeSocket.send({ forget: Tick.id() });
     }
-};
+}
 
 /*
  * Function to process ticks stream
  */
-var processTick = function (tick) {
+function processTick(tick) {
     'use strict';
 
     Tick.details(tick);
     Tick.display();
-};
+}

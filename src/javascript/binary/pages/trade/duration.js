@@ -7,7 +7,7 @@
  * It also populate expiry type select box i.e Durations and Endtime select
  *
  */
-var displayDurations = function (startType) {
+function displayDurations(startType) {
     'use strict';
 
     var target = document.getElementById('duration_units'),
@@ -130,9 +130,9 @@ var displayDurations = function (startType) {
         }
     }
     durationPopulate();
-};
+}
 
-var durationTextValueMappings = function (str) {
+function durationTextValueMappings(str) {
     'use strict';
     var mapping = {
         s : 'seconds',
@@ -156,9 +156,9 @@ var durationTextValueMappings = function (str) {
     }
 
     return obj;
-};
+}
 
-var durationPopulate = function () {
+function durationPopulate() {
     'use strict';
 
     var unit = document.getElementById('duration_units');
@@ -173,9 +173,9 @@ var durationPopulate = function () {
 
     // we need to call it here as for days we need to show absolute barriers
     displayBarriers();
-};
+}
 
-var displayExpiryType = function (unit) {
+function displayExpiryType(unit) {
     'use strict';
 
     var target = document.getElementById('expiry_type'),
@@ -220,4 +220,4 @@ var displayExpiryType = function (unit) {
         fragment.appendChild(option);
     }
     target.appendChild(fragment);
-};
+}
