@@ -322,6 +322,7 @@ function displayCommentPrice(id, currency, type, payout) {
  * function to filter out allowed markets from all markets
  */
 function getAllowedMarkets(marketArray) {
+    'use strict';
     if (marketArray && getCookieItem('loginid')) {
         var allowedMarkets = getCookieItem('allowed_markets');
         if (allowedMarkets) {
