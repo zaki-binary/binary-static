@@ -15,7 +15,7 @@ if (marketNavElement) {
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
             sessionStorage.removeItem('formname');
-            toggleMobileNavMenu(marketNavElement, clickedMarket);
+            toggleActiveNavMenuElement(marketNavElement, clickedMarket);
             // if market is already active then no need to send same request again
             if (!isMarketActive) {
                 processMarketOfferings();
@@ -42,7 +42,7 @@ if (formNavElement) {
 
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
-            toggleMobileNavMenu(formNavElement, clickedForm);
+            toggleActiveNavMenuElement(formNavElement, clickedForm);
 
             if (!isFormActive) {
                 contractFormEventChange(clickedForm.id);
@@ -72,6 +72,7 @@ var contractFormEventChange = function (formName) {
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
 
+    requestTradeAnalysis();
     // get the contract details based on underlying as formName has changed
     TradeSocket.send({ contracts_for: underlying });
 };
@@ -84,15 +85,11 @@ if (underlyingElement) {
     underlyingElement.addEventListener('change', function(e) {
         if (e.target) {
             sessionStorage.setItem('underlying', e.target.value);
-            underlyingEventChange(e.target.value);
+            requestTradeAnalysis();
+            TradeSocket.send({ contracts_for: e.target.value });
         }
     });
 }
-
-var underlyingEventChange = function (underlying) {
-    'use strict';
-    TradeSocket.send({ contracts_for: underlying });
-};
 
 /*
  * bind event to change in duration amount, request new price

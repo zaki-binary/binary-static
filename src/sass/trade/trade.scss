@@ -24,6 +24,11 @@
     flex: 1;
 }
 
+.vertical-row {
+    flex-direction: column;
+    display: flex;
+}
+
 .nav_placeholder {
     display: none;
     overflow: hidden;
@@ -55,26 +60,34 @@ input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
     display: flex;
 }
 
-ul[role=segmented] {
+@mixin ul_segmented_navigation {
     box-shadow: inset 0px 0px 0px 1px rgba($COLOR_BLUE, 0.2);
     background-color: $COLOR_LIGHT_GRAY;
     color: $COLOR_BLUE;
     display: flex;
     overflow: hidden;
     width: 100%;
+}
+
+@mixin li_segmented_element {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 0;
+    text-transform: capitalize;
+    padding: 3px 0;
+    text-align: center;
+    &.active {
+        color: $COLOR_WHITE;
+        background-color: $COLOR_BLUE;
+    }
+}
+
+ul[role=segmented] {
+    @include ul_segmented_navigation;
     li {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        margin: 0;
-        text-transform: capitalize;
-        padding: 3px 0;
-        text-align: center;
-        &.active {
-            color: $COLOR_WHITE;
-            background-color: $COLOR_BLUE;
-        }
+        @include li_segmented_element;
         &#risefall, &#higherlower, &#touchnotouch {
             background-image: none;
         }
@@ -90,7 +103,7 @@ ul[role=segmented] {
 }
 
 #trading_socket_container {
-    font-size: 85%;
+    font-size: 1rem;
     #contract_container {
         .row {
             padding: 10px 0;
@@ -116,6 +129,12 @@ ul[role=segmented] {
                 &#price_container_top {
                     margin-right: 1rem;
                 }
+            }
+            #price_comment_top, #price_comment_bottom{
+                background-color: $COLOR_GRAY;
+                line-height: 1.5rem;
+                font-size: 0.8rem;
+                flex: 1;
             }
             .description_container {
                 .contract_heading {
@@ -233,6 +252,39 @@ ul[role=segmented] {
         #contract_form_container {
             #contract_form_content > .row {
                 flex-direction: column;
+            }
+        }
+    }
+}
+
+/* these styles are for trade analysis and will be removed */
+
+#trading_bottom_content {
+    margin-top: 15px;
+    font-size: 1rem;
+    .tab-menu {
+        background: transparent !important;
+        border:0 !important;
+        height: auto !important;
+    }
+    ul#betsBottomPage {
+        @include ul_segmented_navigation;
+        font-size: 85%;
+        border-bottom: none;
+        li {
+            @include li_segmented_element;
+            background: transparent;
+            border-radius: 0;
+            a {
+                line-height: 1;
+                top: 0;
+                font-size: 1rem;
+            }
+            &.active {
+                a {
+                    color: inherit;
+                    background-image: none;
+                }
             }
         }
     }
