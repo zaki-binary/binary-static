@@ -337,6 +337,8 @@ function getAllowedMarkets(marketArray) {
 /*
  * This function loops through the available contracts and markets
  * that are not supposed to be shown are replaced
+ *
+ * this is TEMPORARY, it will be removed when we fix backend
  */
 function getAllowedContractCategory(contracts) {
     'use strict';

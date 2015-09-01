@@ -257,8 +257,11 @@ ul[role=segmented] {
     }
 }
 
-/* these styles are for trade analysis and will be removed */
-
+/*
+ * these styles are for trade analysis and will be removed
+ *
+ * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
+ */
 #trading_bottom_content {
     margin-top: 15px;
     font-size: 1rem;
@@ -290,3 +293,13 @@ ul[role=segmented] {
         }
     }
 }
+@media all and (max-width: 640px) {
+    #trading_bottom_content {
+        ul#betsBottomPage {
+            flex-direction: column;
+        }
+    }
+}
+/*
+ * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
+ */
