@@ -7,7 +7,7 @@
  * It also populate expiry type select box i.e Durations and Endtime select
  *
  */
-var displayDurations = function (startType) {
+function displayDurations(startType) {
     'use strict';
 
     var durations = Contract.durations();
@@ -16,10 +16,10 @@ var displayDurations = function (startType) {
         return false;
     }
 
-    var target= document.getElementById('duration_units'),
+    var target = document.getElementById('duration_units'),
         formName = Offerings.form(),
         barrierCategory = Offerings.barrier(),
-        fragment =  document.createDocumentFragment(), durationContainer = {};
+        fragment = document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
@@ -57,7 +57,8 @@ var displayDurations = function (startType) {
 
     for (var duration in durationContainer) {
         if(durationContainer.hasOwnProperty(duration)) {
-            var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
+            var min = durationContainer[duration]['min_contract_duration'],
+                textMapping = durationTextValueMappings(min);
 
             var option, content;
             if (duration === 'intraday') {
@@ -67,6 +68,7 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
@@ -87,6 +89,7 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
@@ -132,9 +135,9 @@ var displayDurations = function (startType) {
         }
     }
     durationPopulate();
-};
+}
 
-var durationTextValueMappings = function (str) {
+function durationTextValueMappings(str) {
     'use strict';
     var mapping = {
         s : 'seconds',
@@ -158,9 +161,9 @@ var durationTextValueMappings = function (str) {
     }
 
     return obj;
-};
+}
 
-var durationPopulate = function () {
+function durationPopulate() {
     'use strict';
 
     var unit = document.getElementById('duration_units');
@@ -172,9 +175,12 @@ var durationPopulate = function () {
     } else {
         displayExpiryType();
     }
-};
 
-var displayExpiryType = function (unit) {
+    // we need to call it here as for days we need to show absolute barriers
+    displayBarriers();
+}
+
+function displayExpiryType(unit) {
     'use strict';
 
     var target = document.getElementById('expiry_type'),
@@ -219,4 +225,4 @@ var displayExpiryType = function (unit) {
         fragment.appendChild(option);
     }
     target.appendChild(fragment);
-};
+}

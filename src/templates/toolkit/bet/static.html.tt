@@ -1,175 +1,187 @@
-<div id="contract_market_container">
-    <label for="market_show_menu" class="nav_placeholder" id="market_nav_placeholder"></label>
-    <input type="checkbox" class="show_menu" id="market_show_menu" role="button">
-    <ul class="nav" id="contract_market_nav" role="segmented">
-    </ul>
-</div>
+<div id="trading_socket_container">
+    <div id="contract_market_container">
+        <label for="market_show_menu" class="nav_placeholder" id="market_nav_placeholder"></label>
+        <input type="checkbox" class="show_menu" id="market_show_menu" role="button">
+        <ul class="nav" id="contract_market_nav" role="segmented">
+        </ul>
+    </div>
 
-<div id="contract_market_form_container">
-    <label for="contract_form_show_menu" class="nav_placeholder" id="contract_form_nav_placeholder"></label>
-    <input type="checkbox" class="show_menu" id="contract_form_show_menu" role="button">
-    <ul class="nav" id="contract_form_name_nav" role="segmented">
-    </ul>
-</div>
+    <div id="contract_market_form_container">
+        <label for="contract_form_show_menu" class="nav_placeholder" id="contract_form_nav_placeholder"></label>
+        <input type="checkbox" class="show_menu" id="contract_form_show_menu" role="button">
+        <ul class="nav" id="contract_form_name_nav" role="segmented">
+        </ul>
+    </div>
 
-<div class="row" id="contract_container">
-    <div id="contract_form_container" class="big-col">
-        <div id="contract_form_content">
+    <div id="contract_container">
+        <div id="contract_form_container">
+            <div id="contract_form_content">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col form_label">
+                                <select id="submarket" name="submarket">
+                                </select>
+                            </div>
+                            <div class="big-col">
+                                <select id="underlying" name="underlying">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" id="period_row">
+                            <div class="col form_label">
+                                <label for="period" id="period_label">Contract period:</label>
+                            </div>
+                            <div class="big-col">
+                                <select id="period"></select>
+                            </div>
+                        </div>
+                        <div class="row" id="date_start_row">
+                            <div class="col form_label">
+                                Start time:
+                            </div>
+                            <div class="big-col">
+                                <select id="date_start"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form_label">
+                                <select id="expiry_type"></select>
+                            </div>
+                            <div class="big-col">
+                                <div id="expiry_type_duration" class="row-inner">
+                                    <div class="col-inner">
+                                        <input id="duration_amount" type="text"/>
+                                    </div>
+                                    <div class="col-inner">
+                                        <select id="duration_units" class="col"></select>
+                                    </div>
+                                    <div class="col-inner">
+                                        <abbr rel="tooltip" title="minimum available duration" id="duration_tooltip">min:</abbr>
+                                        <span id="duration_minimum"></span>
+                                    </div>
+                                </div>
+                                <div id="expiry_type_endtime" class="row-inner">
+                                    <div class="col-inner">
+                                        <input id="expiry_date" type="date"></input>
+                                    </div>
+                                    <div class="col-inner">
+                                        <input id="expiry_time" type="time"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col form_label">
+                                <label for="spot" id="spot_label">Spot:</label>
+                            </div>
+                            <div class="big-col">
+                                <span id="spot"></span>
+                            </div>
+                        </div>
+                        <div class="row barrier_class" id="jbarrier_row">
+                            <div class="col form_label">
+                                <label for="jbarrier" id="jbarrier_label">Exercise price:</label>
+                            </div>
+                            <div class="big-col">
+                                <select id="jbarrier" name="H"></select>
+                            </div>
+                        </div>
+                        <div class="row barrier_class" id="barrier_row">
+                            <div class="col form_label">
+                                <label for="H" id="barrier_label">Barrier:</label>
+                            </div>
+                            <div class="big-col">
+                                <input id="barrier" type="text" name="H"/>
+                            </div>
+                        </div>
+                        <div class="row barrier_class" id="jhigh_barrier_row">
+                            <div class="col form_label">
+                                <label for="jbarrier_high" id="jbarrier_high_label">High barrier:</label>
+                            </div>
+                            <div class="big-col">
+                                <select id="jbarrier_high" type="text" name="H"></select>
+                            </div>
+                        </div>
+                        <div class="row barrier_class" id="high_barrier_row">
+                            <div class="col form_label">
+                                <label for="H" id="barrier_high_label">High barrier:</label>
+                            </div>
+                            <div class="big-col">
+                                <input id="barrier_high" type="text" name="H"/>
+                            </div>
+                        </div>
+                        <div class="row barrier_class" id="jlow_barrier_row">
+                            <div class="col form_label">
+                                <label for="jbarrier_low" id="jbarrier_low_label">Low barrier:</label>
+                            </div>
+                            <div class="big-col">
+                                <select id="jbarrier_low" type="text" name="H"></select>
+                            </div>
+                        </div>
+                        <div class="row barrier_class" id="low_barrier_row">
+                            <div class="col form_label">
+                                <label for="L" id="barrier_low_label">Low barrier:</label>
+                            </div>
+                            <div class="big-col">
+                                <input id="barrier_low" type="text" name="L"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form_label">
+                                <select id="amount_type">
+                                    <option value="payout">Payout</option>
+                                    <option value="stake">Stake</option>
+                                </select>
+                            </div>
+                            <div class="row-inner big-col">
+                                <div class="col-inner">
+                                    <select id="currency"></select>
+                                </div>
+                                <div class="col-inner big-col">
+                                    <input id="amount" type="text" value="10"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="contract_prices_container">
+            <div id="loading_container" class="overlay_container">
+                <div id="loading_icon" class="progress"></div>
+            </div>
+            <div id="contract_confirmation_container" class="overlay_container">
+                <a class="close" id="close_confirmation_container">x</a>
+                <div id="confirmation_message_container"></div>
+                <div id="confirmation_message_endelement"></div>
+            </div>
             <div class="row">
-                <div class="col form_label">
-                    <select id="submarket" name="submarket">
-                    </select>
-                </div>
-                <div class="big-col">
-                    <select id="underlying" name="underlying">
-                    </select>
-                </div>
-            </div>
-            <div class="row" id="period_row">
-                <div class="col form_label">
-                    <label for="period" id="period_label">Contract period:</label>
-                </div>
-                <div class="big-col">
-                    <select id="period"></select>
-                </div>
-            </div>
-            <div class="row" id="date_start_row">
-                <div class="col form_label">
-                    Start time:
-                </div>
-                <div class="big-col">
-                    <select id="date_start"></select>
-                </div>
-            </div>
-            <div class="row" id="duration_row">
-                <div class="col form_label">
-                    <select id="expiry_type"></select>
-                </div>
-                <div class="big-col">
-                    <div id="expiry_type_duration" class="row-inner">
-                        <div class="col-inner">
-                            <input id="duration_amount" type="text"/>
-                        </div>
-                        <div class="col-inner">
-                            <select id="duration_units" class="col"></select>
-                        </div>
-                        <div class="col-inner">
-                            <abbr rel="tooltip" title="minimum available duration" id="duration_tooltip">min:</abbr>
-                            <span id="duration_minimum"></span>
-                        </div>
+                <div class="col vertical-row price_container" id="price_container_top">
+                    <div class="description_container" id="description_container_top">
                     </div>
-                    <div id="expiry_type_endtime" class="row-inner">
-                        <div class="col-inner">
-                            <input id="expiry_date" type="date"></input>
-                        </div>
-                        <div class="col-inner">
-                            <input id="expiry_time" type="time"></input>
-                        </div>
+                    <div class="contract_purchase center-aligned" id="contract_purchase_top">
+                        <span class="button">
+                            <button class="purchase_button" id="purchase_button_top" value="purchase">Purchase</button>
+                        </span>
                     </div>
+                    <div class="center-aligned" id="price_comment_top"></div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col form_label">
-                    <label for="spot" id="spot_label">Spot:</label>
-                </div>
-                <div class="big-col">
-                    <span id="spot"></span>
-                </div>
-            </div>
-            <div class="row barrier_class" id="jbarrier_row">
-                <div class="col form_label">
-                    <label for="jbarrier" id="jbarrier_label">Exercise price:</label>
-                </div>
-                <div class="big-col">
-                    <select id="jbarrier" name="H"></select>
-                </div>
-            </div>
-            <div class="row barrier_class" id="barrier_row">
-                <div class="col form_label">
-                    <label for="H" id="barrier_label">Barrier:</label>
-                </div>
-                <div class="big-col">
-                    <input id="barrier" type="text" name="H"/>
-                </div>
-            </div>
-            <div class="row barrier_class" id="jhigh_barrier_row">
-                <div class="col form_label">
-                    <label for="jbarrier_high" id="jbarrier_high_label">High barrier:</label>
-                </div>
-                <div class="big-col">
-                    <select id="jbarrier_high" type="text" name="H"></select>
-                </div>
-            </div>
-            <div class="row barrier_class" id="high_barrier_row">
-                <div class="col form_label">
-                    <label for="H" id="barrier_high_label">High barrier:</label>
-                </div>
-                <div class="big-col">
-                    <input id="barrier_high" type="text" name="H"/>
-                </div>
-            </div>
-            <div class="row barrier_class" id="jlow_barrier_row">
-                <div class="col form_label">
-                    <label for="jbarrier_low" id="jbarrier_low_label">Low barrier:</label>
-                </div>
-                <div class="big-col">
-                    <select id="jbarrier_low" type="text" name="H"></select>
-                </div>
-            </div>
-            <div class="row barrier_class" id="low_barrier_row">
-                <div class="col form_label">
-                    <label for="L" id="barrier_low_label">Low barrier:</label>
-                </div>
-                <div class="big-col">
-                    <input id="barrier_low" type="text" name="L"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col form_label">
-                    <select id="amount_type">
-                        <option value="payout">Payout</option>
-                        <option value="stake">Stake</option>
-                    </select>
-                </div>
-                <div class="row-inner big-col">
-                    <div class="col-inner">
-                        <select id="currency"></select>
+                <div class="col vertical-row price_container" id="price_container_bottom">
+                    <div class="description_container" id="description_container_bottom">
                     </div>
-                    <div class="col-inner big-col">
-                        <input id="amount" type="text" value="10"/>
+                    <div class="contract_purchase center-aligned" id="contract_purchase_bottom">
+                        <span class="button">
+                            <button class="purchase_button" id="purchase_button_bottom" value="purchase">Purchase</button>
+                        </span>
                     </div>
+                    <div class="center-aligned" id="price_comment_bottom"></div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="contract_prices_container" class="col">
-        <div id="loading_container" class="overlay_container">
-            <div id="loading_icon" class="progress"></div>
-        </div>
-        <div id="contract_confirmation_container" class="overlay_container">
-            <a class="close" id="close_confirmation_container">x</a>
-            <div id="confirmation_message_container"></div>
-            <div id="confirmation_message_endelement"></div>
-        </div>
-        <div class="vertical-row">
-            <div class="col price_container" id="price_container_top">
-                <div class="description_container" id="description_container_top">
-                </div>
-                <div class="contract_purchase" id="contract_purchase_top">
-                    <span class="button">
-                        <button class="purchase_button" id="purchase_button_top" value="purchase">Purchase</button>
-                    </span>
-                </div>
-            </div>
-            <div class="col price_container" id="price_container_bottom">
-                <div class="description_container" id="description_container_bottom">
-                </div>
-                <div class="contract_purchase" id="contract_purchase_bottom">
-                    <span class="button">
-                        <button class="purchase_button" id="purchase_button_bottom" value="purchase">Purchase</button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+<div id="trading_bottom_content">
 </div>
