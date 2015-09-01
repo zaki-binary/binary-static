@@ -17,7 +17,7 @@ function processMarketOfferings() {
 
     // display markets, submarket, underlyings corresponding to market selected
     displayListElements('contract_market_nav', getAllowedMarkets(Offerings.markets().sort(compareMarkets)), market);
-    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), formname);
+    displayListElements('contract_form_name_nav', Object.keys(getAllowedContractCategory(Offerings.contractForms())).sort(compareContractCategory), formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
