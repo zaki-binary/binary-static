@@ -317,3 +317,19 @@ function displayCommentPrice(id, currency, type, payout) {
         div.appendChild(comment);
     }
 }
+
+/*
+ * function to filter out allowed markets from all markets
+ */
+function getAllowedMarkets(marketArray) {
+    if (marketArray && getCookieItem('loginid')) {
+        var allowedMarkets = getCookieItem('allowed_markets');
+        if (allowedMarkets) {
+            return marketArray.filter(function (element) {
+                var re = new RegExp(element, 'i');
+                return re.test(allowedMarkets);
+            });
+        }
+    }
+    return marketArray;
+}
