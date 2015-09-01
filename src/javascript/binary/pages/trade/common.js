@@ -5,7 +5,7 @@
 /*
  * function to create list elements `<li>` and append to element with id `id`
  */
-var displayListElements = function (id, elements, selected) {
+function displayListElements(id, elements, selected) {
     'use strict';
     var target = document.getElementById(id),
         fragment = document.createDocumentFragment(),
@@ -28,12 +28,12 @@ var displayListElements = function (id, elements, selected) {
     if (target) {
         target.appendChild(fragment);
     }
-};
+}
 
 /*
  * function to create `option` and append to select box with id `id`
  */
-var displayOptions = function (id, elements, selected) {
+function displayOptions(id, elements, selected) {
     'use strict';
     var target= document.getElementById(id),
         fragment =  document.createDocumentFragment();
@@ -56,7 +56,7 @@ var displayOptions = function (id, elements, selected) {
     if (target) {
         target.appendChild(fragment);
     }
-};
+}
 
 /*
  * function to display underlyings
@@ -64,7 +64,7 @@ var displayOptions = function (id, elements, selected) {
  * we need different function for this because we need to add submarket
  * name as classname to underlyings option
  */
-var displayUnderlyings = function (selected) {
+function displayUnderlyings(selected) {
     'use strict';
     var target= document.getElementById('underlying'),
         fragment =  document.createDocumentFragment(),
@@ -89,14 +89,14 @@ var displayUnderlyings = function (selected) {
     if (target) {
         target.appendChild(fragment);
     }
-};
+}
 
 /*
  * This maps the form name and barrierCategory we display on
  * trading form to the actual we send it to backend
  * for e.g risefall is mapped to callput with barrierCategory euro_atm
  */
-var getFormNameBarrierCategory = function (displayFormName) {
+function getFormNameBarrierCategory(displayFormName) {
     'use strict';
     var obj = {};
     if (displayFormName) {
@@ -118,7 +118,7 @@ var getFormNameBarrierCategory = function (displayFormName) {
         obj['barrierCategory'] = 'euro_atm';
     }
     return obj;
-};
+}
 
 /*
  * This maps the contract type to where we display on trading form
@@ -127,7 +127,7 @@ var getFormNameBarrierCategory = function (displayFormName) {
  *
  * for example we display CALL on top and PUT to bottom
  */
-var contractTypeDisplayMapping = function (type) {
+function contractTypeDisplayMapping(type) {
     'use strict';
     var obj = {
         CALL: "top",
@@ -147,7 +147,7 @@ var contractTypeDisplayMapping = function (type) {
     };
 
     return type ? obj[type] : 'top';
-};
+}
 
 
 /*
@@ -155,49 +155,49 @@ var contractTypeDisplayMapping = function (type) {
  *
  * alternative to jquery $('#id').is(':visible')
  */
-var isVisible = function (elem) {
+function isVisible(elem) {
     'use strict';
     if (elem.offsetWidth === 0 && elem.offsetHeight === 0) {
         return false;
     } else {
         return true;
     }
-};
+}
 
 /*
  * function to hide and display the loading icon for price container
  */
-var hidePriceLoadingIcon = function () {
+function hidePriceLoadingIcon() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
         elm.style.display = 'none';
     }
-};
+}
 
-var showPriceLoadingIcon = function () {
+function showPriceLoadingIcon() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
         elm.style.display = 'block';
     }
-};
+}
 
 /*
  * function to hide contract confirmation overlay container
  */
-var hideOverlayContainer = function () {
+function hideOverlayContainer() {
     'use strict';
     var elm = document.getElementById('contract_confirmation_container');
     if (elm) {
         elm.style.display = 'none';
     }
-};
+}
 
 /*
  * function to assign sorting to market list
  */
-var compareMarkets = function (a, b) {
+function compareMarkets(a, b) {
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -213,12 +213,12 @@ var compareMarkets = function (a, b) {
         return 1;
     }
     return 0;
-};
+}
 
 /*
  * function to assign sorting to contract category
  */
-var compareContractCategory = function (a, b) {
+function compareContractCategory(a, b) {
     var sortedContractCategory = {
         'risefall': 0,
         'higherlower': 1,
@@ -237,20 +237,20 @@ var compareContractCategory = function (a, b) {
         return 1;
     }
     return 0;
-};
+}
 
 /*
  * function to get cookie javascript way (use if you don't want to use jquery)
  */
-var getCookieItem = function (sKey) {
+function getCookieItem(sKey) {
     if (!sKey) { return null; }
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-};
+}
 
 /*
  * Display price/spot movement variation to depict price moved up or down
  */
-var displayPriceMovement = function (element, oldValue, currentValue) {
+function displayPriceMovement(element, oldValue, currentValue) {
     element.classList.remove('price_moved_down');
     element.classList.remove('price_moved_up');
     if (parseFloat(currentValue) > parseFloat(oldValue)) {
@@ -260,12 +260,12 @@ var displayPriceMovement = function (element, oldValue, currentValue) {
         element.classList.remove('price_moved_up');
         element.classList.add('price_moved_down');
     }
-};
+}
 
 /*
  * function to toggle active class of menu
  */
-var toggleActiveNavMenuElement = function (nav, eventElement) {
+function toggleActiveNavMenuElement(nav, eventElement) {
     var liElements = nav.getElementsByTagName("li");
     var classes = eventElement.classList;
 
@@ -275,32 +275,32 @@ var toggleActiveNavMenuElement = function (nav, eventElement) {
         }
         classes.add('active');
     }
-};
+}
 
 /*
  * function to set placeholder text based on current market, used for mobile menu
  */
-var setMarketPlaceholderContent = function (name) {
+function setMarketPlaceholderContent(name) {
     var marketPlaceholder = document.getElementById('market_nav_placeholder');
     if (marketPlaceholder) {
         marketPlaceholder.textContent = name || sessionStorage.getItem('market');
     }
-};
+}
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
  */
-var setFormPlaceholderContent = function (name) {
+function setFormPlaceholderContent(name) {
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
         formPlaceholder.textContent = name || sessionStorage.getItem('formname');
     }
-};
+}
 
 /*
  * function to display the profit and return of bet under each trade container
  */
-var displayCommentPrice = function (id, currency, type, payout) {
+function displayCommentPrice(id, currency, type, payout) {
     'use strict';
 
     var div = document.getElementById(id);
@@ -316,4 +316,4 @@ var displayCommentPrice = function (id, currency, type, payout) {
 
         div.appendChild(comment);
     }
-};
+}
