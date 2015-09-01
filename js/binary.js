@@ -9899,27 +9899,43 @@ function displayBarriers (barrierCategory) {
     if (barriers && formName) {
         var barrier = barriers[formName];
         if(barrier) {
+            var unit = document.getElementById('duration_units');
+            var currentTick = Tick.quote();
             if (barrier.count === 1) {
                 document.getElementById('high_barrier_row').style.display = 'none';
                 document.getElementById('low_barrier_row').style.display = 'none';
                 document.getElementById('barrier_row').setAttribute('style', '');
 
                 var elm = document.getElementById('barrier');
-                elm.value = barrier.barrier;
-                elm.textContent = barrier.barrier;
+                if (unit && unit.value === 'd' && currentTick) {
+                    elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                } else {
+                    elm.value = barrier['barrier'];
+                    elm.textContent = barrier['barrier'];
+                }
                 return;
             } else if (barrier.count === 2) {
                 document.getElementById('barrier_row').style.display = 'none';
                 document.getElementById('high_barrier_row').setAttribute('style', '');
                 document.getElementById('low_barrier_row').setAttribute('style', '');
 
-                var high_elm = document.getElementById('barrier_high');
-                high_elm.value = barrier['barrier'];
-                high_elm.textContent = barrier['barrier'];
+                var high_elm = document.getElementById('barrier_high'),
+                    low_elm = document.getElementById('barrier_low');
 
-                var low_elm = document.getElementById('barrier_low');
-                low_elm.value = barrier['barrier1'];
-                low_elm.textContent = barrier['barrier1'];
+                if (unit && unit.value === 'd' && currentTick) {
+                    high_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    high_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+
+                    low_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
+                    low_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
+                } else {
+                    high_elm.value = barrier['barrier'];
+                    high_elm.textContent = barrier['barrier'];
+
+                    low_elm.value = barrier['barrier1'];
+                    low_elm.textContent = barrier['barrier1'];
+                }
                 return;
             }
         }
@@ -9937,7 +9953,7 @@ function displayBarriers (barrierCategory) {
 /*
  * function to create list elements `<li>` and append to element with id `id`
  */
-var displayListElements = function (id, elements, selected) {
+function displayListElements(id, elements, selected) {
     'use strict';
     var target = document.getElementById(id),
         fragment = document.createDocumentFragment(),
@@ -9960,12 +9976,12 @@ var displayListElements = function (id, elements, selected) {
     if (target) {
         target.appendChild(fragment);
     }
-};
+}
 
 /*
  * function to create `option` and append to select box with id `id`
  */
-var displayOptions = function (id, elements, selected) {
+function displayOptions(id, elements, selected) {
     'use strict';
     var target= document.getElementById(id),
         fragment =  document.createDocumentFragment();
@@ -9988,7 +10004,7 @@ var displayOptions = function (id, elements, selected) {
     if (target) {
         target.appendChild(fragment);
     }
-};
+}
 
 /*
  * function to display underlyings
@@ -9996,7 +10012,7 @@ var displayOptions = function (id, elements, selected) {
  * we need different function for this because we need to add submarket
  * name as classname to underlyings option
  */
-var displayUnderlyings = function (selected) {
+function displayUnderlyings(selected) {
     'use strict';
     var target= document.getElementById('underlying'),
         fragment =  document.createDocumentFragment(),
@@ -10021,14 +10037,14 @@ var displayUnderlyings = function (selected) {
     if (target) {
         target.appendChild(fragment);
     }
-};
+}
 
 /*
  * This maps the form name and barrierCategory we display on
  * trading form to the actual we send it to backend
  * for e.g risefall is mapped to callput with barrierCategory euro_atm
  */
-var getFormNameBarrierCategory = function (displayFormName) {
+function getFormNameBarrierCategory(displayFormName) {
     'use strict';
     var obj = {};
     if (displayFormName) {
@@ -10050,7 +10066,7 @@ var getFormNameBarrierCategory = function (displayFormName) {
         obj['barrierCategory'] = 'euro_atm';
     }
     return obj;
-};
+}
 
 /*
  * This maps the contract type to where we display on trading form
@@ -10059,7 +10075,7 @@ var getFormNameBarrierCategory = function (displayFormName) {
  *
  * for example we display CALL on top and PUT to bottom
  */
-var contractTypeDisplayMapping = function (type) {
+function contractTypeDisplayMapping(type) {
     'use strict';
     var obj = {
         CALL: "top",
@@ -10079,7 +10095,7 @@ var contractTypeDisplayMapping = function (type) {
     };
 
     return type ? obj[type] : 'top';
-};
+}
 
 
 /*
@@ -10087,49 +10103,49 @@ var contractTypeDisplayMapping = function (type) {
  *
  * alternative to jquery $('#id').is(':visible')
  */
-var isVisible = function (elem) {
+function isVisible(elem) {
     'use strict';
     if (elem.offsetWidth === 0 && elem.offsetHeight === 0) {
         return false;
     } else {
         return true;
     }
-};
+}
 
 /*
  * function to hide and display the loading icon for price container
  */
-var hidePriceLoadingIcon = function () {
+function hidePriceLoadingIcon() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
         elm.style.display = 'none';
     }
-};
+}
 
-var showPriceLoadingIcon = function () {
+function showPriceLoadingIcon() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
         elm.style.display = 'block';
     }
-};
+}
 
 /*
  * function to hide contract confirmation overlay container
  */
-var hideOverlayContainer = function () {
+function hideOverlayContainer() {
     'use strict';
     var elm = document.getElementById('contract_confirmation_container');
     if (elm) {
         elm.style.display = 'none';
     }
-};
+}
 
 /*
  * function to assign sorting to market list
  */
-var compareMarkets = function (a, b) {
+function compareMarkets(a, b) {
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -10145,12 +10161,12 @@ var compareMarkets = function (a, b) {
         return 1;
     }
     return 0;
-};
+}
 
 /*
  * function to assign sorting to contract category
  */
-var compareContractCategory = function (a, b) {
+function compareContractCategory(a, b) {
     var sortedContractCategory = {
         'risefall': 0,
         'higherlower': 1,
@@ -10169,20 +10185,20 @@ var compareContractCategory = function (a, b) {
         return 1;
     }
     return 0;
-};
+}
 
 /*
  * function to get cookie javascript way (use if you don't want to use jquery)
  */
-var getCookieItem = function (sKey) {
+function getCookieItem(sKey) {
     if (!sKey) { return null; }
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-};
+}
 
 /*
  * Display price/spot movement variation to depict price moved up or down
  */
-var displayPriceMovement = function (element, oldValue, currentValue) {
+function displayPriceMovement(element, oldValue, currentValue) {
     element.classList.remove('price_moved_down');
     element.classList.remove('price_moved_up');
     if (parseFloat(currentValue) > parseFloat(oldValue)) {
@@ -10192,12 +10208,12 @@ var displayPriceMovement = function (element, oldValue, currentValue) {
         element.classList.remove('price_moved_up');
         element.classList.add('price_moved_down');
     }
-};
+}
 
 /*
  * function to toggle active class of menu
  */
-var toggleActiveNavMenuElement = function (nav, eventElement) {
+function toggleActiveNavMenuElement(nav, eventElement) {
     var liElements = nav.getElementsByTagName("li");
     var classes = eventElement.classList;
 
@@ -10207,32 +10223,32 @@ var toggleActiveNavMenuElement = function (nav, eventElement) {
         }
         classes.add('active');
     }
-};
+}
 
 /*
  * function to set placeholder text based on current market, used for mobile menu
  */
-var setMarketPlaceholderContent = function (name) {
+function setMarketPlaceholderContent(name) {
     var marketPlaceholder = document.getElementById('market_nav_placeholder');
     if (marketPlaceholder) {
         marketPlaceholder.textContent = name || sessionStorage.getItem('market');
     }
-};
+}
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
  */
-var setFormPlaceholderContent = function (name) {
+function setFormPlaceholderContent(name) {
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
         formPlaceholder.textContent = name || sessionStorage.getItem('formname');
     }
-};
+}
 
 /*
  * function to display the profit and return of bet under each trade container
  */
-var displayCommentPrice = function (id, currency, type, payout) {
+function displayCommentPrice(id, currency, type, payout) {
     'use strict';
 
     var div = document.getElementById(id);
@@ -10248,7 +10264,40 @@ var displayCommentPrice = function (id, currency, type, payout) {
 
         div.appendChild(comment);
     }
-};
+}
+
+/*
+ * function to filter out allowed markets from all markets
+ */
+function getAllowedMarkets(marketArray) {
+    if (marketArray && getCookieItem('loginid')) {
+        var allowedMarkets = getCookieItem('allowed_markets');
+        if (allowedMarkets) {
+            return marketArray.filter(function (element) {
+                var re = new RegExp(element, 'i');
+                return re.test(allowedMarkets);
+            });
+        }
+    }
+    return marketArray;
+}
+
+/*
+ * This function loops through the available contracts and markets
+ * that are not supposed to be shown are replaced
+ */
+function getAllowedContractCategory(contracts) {
+    'use strict';
+    var obj = {};
+    for(var key in contracts) {
+        if (contracts.hasOwnProperty(key)) {
+            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+                obj[key] = contracts[key];
+            }
+        }
+    }
+    return obj;
+}
 ;/*
  * Contract object mocks the trading form we have on our website
  * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
@@ -10384,7 +10433,7 @@ var Contract = (function () {
  * It process 'socket.send({payout_currencies:1})` response
  * and display them
  */
-var displayCurrencies = function (selected) {
+function displayCurrencies(selected) {
     'use strict';
 
     var target = document.getElementById('currency'),
@@ -10409,7 +10458,7 @@ var displayCurrencies = function (selected) {
     });
 
     target.appendChild(fragment);
-};
+}
 ;/*
  * Handles duration processing display
  *
@@ -10419,14 +10468,14 @@ var displayCurrencies = function (selected) {
  * It also populate expiry type select box i.e Durations and Endtime select
  *
  */
-var displayDurations = function (startType) {
+function displayDurations(startType) {
     'use strict';
 
-    var target= document.getElementById('duration_units'),
+    var target = document.getElementById('duration_units'),
         durations = Contract.durations(),
         formName = Offerings.form(),
         barrierCategory = Offerings.barrier(),
-        fragment =  document.createDocumentFragment(), durationContainer = {};
+        fragment = document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
@@ -10464,7 +10513,8 @@ var displayDurations = function (startType) {
 
     for (var duration in durationContainer) {
         if(durationContainer.hasOwnProperty(duration)) {
-            var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
+            var min = durationContainer[duration]['min_contract_duration'],
+                textMapping = durationTextValueMappings(min);
 
             var option, content;
             if (duration === 'intraday') {
@@ -10474,6 +10524,7 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
@@ -10494,6 +10545,7 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
@@ -10539,9 +10591,9 @@ var displayDurations = function (startType) {
         }
     }
     durationPopulate();
-};
+}
 
-var durationTextValueMappings = function (str) {
+function durationTextValueMappings(str) {
     'use strict';
     var mapping = {
         s : 'seconds',
@@ -10565,9 +10617,9 @@ var durationTextValueMappings = function (str) {
     }
 
     return obj;
-};
+}
 
-var durationPopulate = function () {
+function durationPopulate() {
     'use strict';
 
     var unit = document.getElementById('duration_units');
@@ -10579,9 +10631,12 @@ var durationPopulate = function () {
     } else {
         displayExpiryType();
     }
-};
 
-var displayExpiryType = function (unit) {
+    // we need to call it here as for days we need to show absolute barriers
+    displayBarriers();
+}
+
+function displayExpiryType(unit) {
     'use strict';
 
     var target = document.getElementById('expiry_type'),
@@ -10626,7 +10681,7 @@ var displayExpiryType = function (unit) {
         fragment.appendChild(option);
     }
     target.appendChild(fragment);
-};
+}
 ;/*
  * attach event to market list, so when client change market we need to update form
  * and request for new Contract details to populate the form and request price accordingly
@@ -10684,7 +10739,7 @@ if (formNavElement) {
     });
 }
 
-var contractFormEventChange = function (formName) {
+function contractFormEventChange(formName) {
     'use strict';
 
     var market = sessionStorage.getItem('market') || 'Forex';
@@ -10704,7 +10759,7 @@ var contractFormEventChange = function (formName) {
     requestTradeAnalysis();
     // get the contract details based on underlying as formName has changed
     TradeSocket.send({ contracts_for: underlying });
-};
+}
 
 /*
  * attach event to underlying change, event need to request new contract details and price
@@ -11277,7 +11332,7 @@ var Price = (function () {
  * Function to process offerings, this function is called
  * when market is changed or for processing offerings response
  */
-var processMarketOfferings = function () {
+function processMarketOfferings() {
     'use strict';
 
     var market = sessionStorage.getItem('market') || 'forex',
@@ -11291,8 +11346,8 @@ var processMarketOfferings = function () {
     setMarketPlaceholderContent(market);
 
     // display markets, submarket, underlyings corresponding to market selected
-    displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
-    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), formname);
+    displayListElements('contract_market_nav', getAllowedMarkets(Offerings.markets().sort(compareMarkets)), market);
+    displayListElements('contract_form_name_nav', Object.keys(getAllowedContractCategory(Offerings.contractForms())).sort(compareContractCategory), formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
@@ -11308,12 +11363,12 @@ var processMarketOfferings = function () {
     // get the contract details based on underlying as market has changed
     TradeSocket.send({ contracts_for: underlying });
     requestTradeAnalysis();
-};
+}
 
 /*
  * Function to display contract form for current underlying
  */
-var processContractFormOfferings = function (contracts) {
+function processContractFormOfferings(contracts) {
     'use strict';
 
     Contract.details(contracts);
@@ -11327,27 +11382,25 @@ var processContractFormOfferings = function (contracts) {
 
     displayStartDates();
 
-    displayBarriers();
-
     processPriceRequest();
-};
+}
 
 /*
  * Function to request for cancelling the current price proposal
  */
-var processForgetPriceIds = function () {
+function processForgetPriceIds() {
     'use strict';
 
     Object.keys(Price.idDisplayMapping()).forEach(function (key) {
         TradeSocket.send({ forget: key });
     });
-};
+}
 
 /*
  * Function to process and calculate price based on current form
  * parameters or change in form parameters
  */
-var processPriceRequest = function () {
+function processPriceRequest() {
     'use strict';
 
     showPriceLoadingIcon();
@@ -11358,29 +11411,29 @@ var processPriceRequest = function () {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
-};
+}
 
 /*
  * Function to cancel the current tick stream
  * this need to be invoked before makin
  */
-var processForgetTickId = function () {
+function processForgetTickId() {
     'use strict';
 
     if (Tick && Tick.id()) {
         TradeSocket.send({ forget: Tick.id() });
     }
-};
+}
 
 /*
  * Function to process ticks stream
  */
-var processTick = function (tick) {
+function processTick(tick) {
     'use strict';
 
     Tick.details(tick);
     Tick.display();
-};
+}
 ;/*
  * Purchase object that handles all the functions related to
  * contract purchase response
