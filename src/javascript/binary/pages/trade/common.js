@@ -333,3 +333,20 @@ function getAllowedMarkets(marketArray) {
     }
     return marketArray;
 }
+
+/*
+ * This function loops through the available contracts and markets
+ * that are not supposed to be shown are replaced
+ */
+function getAllowedContractCategory(contracts) {
+    'use strict';
+    var obj = {};
+    for(var key in contracts) {
+        if (contracts.hasOwnProperty(key)) {
+            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+                obj[key] = contracts[key];
+            }
+        }
+    }
+    return obj;
+}
