@@ -14,7 +14,8 @@
 var Price = (function () {
     'use strict';
 
-    var typeDisplayIdMapping = {};
+    var typeDisplayIdMapping = {},
+        bufferedIds = {};
 
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
@@ -78,7 +79,8 @@ var Price = (function () {
     var display = function (details, contractType) {
         var proposal = details['proposal'] || details['error'];
         var params = details['echo_req'],
-            type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
+            id = proposal['id'],
+            type = params['contract_type'] || typeDisplayIdMapping[id],
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
             para = document.createElement('p'),
@@ -86,7 +88,11 @@ var Price = (function () {
             fragment = document.createDocumentFragment();
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
-            typeDisplayIdMapping[proposal['id']] = type;
+            typeDisplayIdMapping[id] = type;
+
+            if (!bufferedIds.hasOwnProperty(id)) {
+                bufferedIds[id] = moment().utc().unix();
+            }
         }
 
         var position = contractTypeDisplayMapping(type),
@@ -152,7 +158,7 @@ var Price = (function () {
             }
 
             // create unique id object that is send in response
-            priceId.setAttribute('data-purchase-id', proposal['id']);
+            priceId.setAttribute('data-purchase-id', id);
             priceId.setAttribute('data-ask-price', proposal['ask_price']);
 
             row.appendChild(amount);
@@ -176,7 +182,8 @@ var Price = (function () {
         proposal: createProposal,
         display: display,
         clearMapping: clearMapping,
-        idDisplayMapping: function () { return typeDisplayIdMapping; }
+        idDisplayMapping: function () { return typeDisplayIdMapping; },
+        bufferedIds: function () { return bufferedIds; }
     };
 
 })();
