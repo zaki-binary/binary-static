@@ -4,7 +4,7 @@
  * It process 'socket.send({payout_currencies:1})` response
  * and display them
  */
-var displayCurrencies = function (selected) {
+function displayCurrencies(selected) {
     'use strict';
 
     var target = document.getElementById('currency'),
@@ -29,4 +29,4 @@ var displayCurrencies = function (selected) {
     });
 
     target.appendChild(fragment);
-};
+}
