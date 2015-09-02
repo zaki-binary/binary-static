@@ -341,18 +341,6 @@ pjax_config_page('/white-labels', function() {
     };
 });
 
-pjax_config_page('/partnerapi', function() {
-    return {
-        onLoad: function() {
-            var partnerapi = $('.partnerapi-content');
-            sidebar_scroll(partnerapi);
-        },
-        onUnload: function() {
-            $(window).off('scroll');
-        }
-    };
-});
-
 pjax_config_page('/get-started', function() {
     return {
         onLoad: function() {
