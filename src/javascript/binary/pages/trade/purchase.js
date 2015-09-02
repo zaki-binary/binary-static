@@ -21,9 +21,10 @@ var Purchase = (function () {
 
         h3.setAttribute('class', 'contract_purchase_heading');
 
-        if (details['error'] || details['open_receipt']['error']) {
-            var errorMsg = details['error']['message'] || details['open_receipt']['error'];
-            content = document.createTextNode(errorMsg);
+        // specific to v1 of websocket, should have consistent error structure
+        var error = details['error'] || details['open_receipt']['error'];
+        if (error) {
+            content = document.createTextNode(error['message']);
             message.appendChild(content);
             fragment.appendChild(message);
         } else {
