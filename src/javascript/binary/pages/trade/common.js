@@ -314,7 +314,12 @@ function displayCommentPrice(id, currency, type, payout) {
             return_percent = (profit/type)*100,
             comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
 
-        div.appendChild(comment);
+        if (isNaN(profit) || isNaN(return_percent)) {
+            div.style.display = 'none';
+        } else {
+            div.style.display = 'block';
+            div.appendChild(comment);
+        }
     }
 }
 
