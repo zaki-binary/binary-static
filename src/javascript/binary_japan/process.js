@@ -1,19 +1,21 @@
-var processContractFormOfferings = function(contracts){
-	
-	'use strict';
+if(JAPAN){
+	var processContractFormOfferings = function(contracts){
+		
+		'use strict';
 
-	Contract.details(contracts);
+		Contract.details(contracts);
 
-	// forget the old tick id i.e. close the old tick stream
-	processForgetTickId();
-	// get ticks for current underlying
-	TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
+		// forget the old tick id i.e. close the old tick stream
+		processForgetTickId();
+		// get ticks for current underlying
+		TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
 
-	displayDurations('spot');
+		displayDurations('spot');
 
-	displayStartDates();
+		displayStartDates();
 
-	Periods.displayPeriods();
+		Periods.displayPeriods();
 
-	processPriceRequest();
+		processPriceRequest();
+	}
 }
