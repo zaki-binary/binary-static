@@ -33,8 +33,7 @@
                             </div>
                         </div>
                         <div class="row" id="date_start_row">
-                            <div class="col form_label">
-                                Start time:
+                            <div class="col form_label" id="start_time_label">
                             </div>
                             <div class="big-col">
                                 <select id="date_start"></select>
@@ -53,7 +52,7 @@
                                         <select id="duration_units" class="col"></select>
                                     </div>
                                     <div class="col-inner">
-                                        <abbr rel="tooltip" title="minimum available duration" id="duration_tooltip">min:</abbr>
+                                        <abbr rel="tooltip" id="duration_tooltip"></abbr>
                                         <span id="duration_minimum"></span>
                                     </div>
                                 </div>
@@ -71,7 +70,7 @@
                     <div class="col">
                         <div class="row">
                             <div class="col form_label">
-                                <label for="spot" id="spot_label">Spot:</label>
+                                <label for="spot" id="spot_label"></label>
                             </div>
                             <div class="big-col">
                                 <span id="spot"></span>
@@ -79,7 +78,7 @@
                         </div>
                         <div class="row barrier_class" id="barrier_row">
                             <div class="col form_label">
-                                <label for="H" id="barrier_label">Barrier:</label>
+                                <label for="H" id="barrier_label"></label>
                             </div>
                             <div class="big-col">
                                 <input id="barrier" type="text" name="H"/>
@@ -87,7 +86,7 @@
                         </div>
                         <div class="row barrier_class" id="high_barrier_row">
                             <div class="col form_label">
-                                <label for="H" id="barrier_high_label">High barrier:</label>
+                                <label for="H" id="barrier_high_label"></label>
                             </div>
                             <div class="big-col">
                                 <input id="barrier_high" type="text" name="H"/>
@@ -95,7 +94,7 @@
                         </div>
                         <div class="row barrier_class" id="low_barrier_row">
                             <div class="col form_label">
-                                <label for="L" id="barrier_low_label">Low barrier:</label>
+                                <label for="L" id="barrier_low_label"></label>
                             </div>
                             <div class="big-col">
                                 <input id="barrier_low" type="text" name="L"/>
@@ -104,8 +103,8 @@
                         <div class="row">
                             <div class="col form_label">
                                 <select id="amount_type">
-                                    <option value="payout">Payout</option>
-                                    <option value="stake">Stake</option>
+                                    <option value="payout" id="payout_option"></option>
+                                    <option value="stake" id="stake_option"></option>
                                 </select>
                             </div>
                             <div class="row-inner big-col">
@@ -133,7 +132,7 @@
                     </div>
                     <div class="contract_purchase center-aligned" id="contract_purchase_top">
                         <span class="button">
-                            <button class="purchase_button" id="purchase_button_top" value="purchase">Purchase</button>
+                            <button class="purchase_button" id="purchase_button_top" value="purchase"></button>
                         </span>
                     </div>
                     <div class="center-aligned" id="price_comment_top"></div>
@@ -143,7 +142,7 @@
                     </div>
                     <div class="contract_purchase center-aligned" id="contract_purchase_bottom">
                         <span class="button">
-                            <button class="purchase_button" id="purchase_button_bottom" value="purchase">Purchase</button>
+                            <button class="purchase_button" id="purchase_button_bottom" value="purchase"></button>
                         </span>
                     </div>
                     <div class="center-aligned" id="price_comment_bottom"></div>
