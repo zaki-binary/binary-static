@@ -10,7 +10,8 @@ if(typeof JAPAN === 'function'){
 				return false;
 			}
 
-			var target= document.getElementById('period'),
+			var wrapper = document.getElementById('period_row'),
+				target= document.getElementById('period'),
 			    formName = Offerings.form(),
 			    underlying = document.getElementById('underlying').value,
 			    fragment =  document.createDocumentFragment();
@@ -22,6 +23,8 @@ if(typeof JAPAN === 'function'){
 			if(!periods[formName] || !periods[formName][underlying]){
 				return false;
 			}
+
+			wrapper.style.display = '';
 
 			var periods = periods[formName][underlying];
 			var list = Object.keys(periods);
@@ -107,7 +110,7 @@ if(typeof JAPAN === 'function'){
 			document.getElementById('low_barrier_row').style.display = 'none';
 
 			if(periods[formName][underlying][period].barriers==1){
-				document.getElementById('jbarrier_row').style.display = 'flex';
+				document.getElementById('jbarrier_row').style.display = '';
 				document.getElementById('jhigh_barrier_row').style.display = 'none';
 				document.getElementById('jlow_barrier_row').style.display = 'none';
 				var list = periods[formName][underlying][period].available_barriers;
@@ -124,8 +127,8 @@ if(typeof JAPAN === 'function'){
 			}
 			else{
 				document.getElementById('jbarrier_row').style.display = 'none';
-				document.getElementById('jhigh_barrier_row').style.display = 'flex';
-				document.getElementById('jlow_barrier_row').style.display = 'flex';
+				document.getElementById('jhigh_barrier_row').style.display = '';
+				document.getElementById('jlow_barrier_row').style.display = '';
 				var list2 = periods[formName][underlying][period].available_barriers[1];
 				list2.sort()
 				list2.forEach(function(barrier){
