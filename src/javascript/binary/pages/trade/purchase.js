@@ -21,8 +21,8 @@ var Purchase = (function () {
 
         h4.setAttribute('class', 'contract_purchase_heading');
 
-        if (details['error']) {
-            content = document.createTextNode(details['error']['message']);
+        if (receipt['error']) {
+            content = document.createTextNode(receipt['error']['message']);
             message.appendChild(content);
             fragment.appendChild(message);
         } else {

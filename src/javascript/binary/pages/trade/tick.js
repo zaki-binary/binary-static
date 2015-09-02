@@ -24,13 +24,13 @@ var Tick = (function () {
         bufferedIds = {};
 
     var details = function (data) {
-        var errorMessage = '';
+        errorMessage = '';
 
         if (data) {
-            if (data['error']) {
-                errorMessage = data['error']['message'];
+            var tick = data['tick'];
+            if (tick['error']) {
+                errorMessage = tick['error']['message'];
             } else {
-                var tick = data['tick'];
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
