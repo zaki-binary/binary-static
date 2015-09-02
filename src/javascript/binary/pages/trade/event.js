@@ -55,7 +55,7 @@ if (formNavElement) {
     });
 }
 
-var contractFormEventChange = function (formName) {
+function contractFormEventChange(formName) {
     'use strict';
 
     var market = sessionStorage.getItem('market') || 'Forex';
@@ -75,7 +75,7 @@ var contractFormEventChange = function (formName) {
     requestTradeAnalysis();
     // get the contract details based on underlying as formName has changed
     TradeSocket.send({ contracts_for: underlying });
-};
+}
 
 /*
  * attach event to underlying change, event need to request new contract details and price
