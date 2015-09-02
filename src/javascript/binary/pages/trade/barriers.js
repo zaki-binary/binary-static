@@ -22,8 +22,8 @@ function displayBarriers (barrierCategory) {
 
                 var elm = document.getElementById('barrier');
                 if (unit && unit.value === 'd' && currentTick) {
-                    elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
-                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']).toFixed(3);
                 } else {
                     elm.value = barrier['barrier'];
                     elm.textContent = barrier['barrier'];
@@ -38,11 +38,11 @@ function displayBarriers (barrierCategory) {
                     low_elm = document.getElementById('barrier_low');
 
                 if (unit && unit.value === 'd' && currentTick) {
-                    high_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
-                    high_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                    high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
 
-                    low_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
-                    low_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
+                    low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+                    low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
                 } else {
                     high_elm.value = barrier['barrier'];
                     high_elm.textContent = barrier['barrier'];
