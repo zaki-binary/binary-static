@@ -63,13 +63,13 @@ function displayDurations(startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
-                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
                         content = document.createTextNode('minutes');
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
