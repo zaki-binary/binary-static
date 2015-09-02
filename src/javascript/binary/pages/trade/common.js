@@ -353,3 +353,28 @@ function getAllowedContractCategory(contracts) {
     }
     return obj;
 }
+
+/*
+ * This function is used in case where we have input and we don't want to fire
+ * event on every change while user is typing for example in case of amount if
+ * we want to change 10 to 1000 i.e. two zeros so two input events will be fired
+ * normally, this function delay the event based on delay specified in milliseconds
+ *
+ * Reference
+ * http://davidwalsh.name/javascript-debounce-function
+ */
+function debounce(func, wait, immediate) {
+    var timeout;
+    var delay = wait || 500;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, delay);
+        if (callNow) func.apply(context, args);
+    };
+}

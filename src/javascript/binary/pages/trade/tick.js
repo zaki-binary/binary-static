@@ -34,6 +34,7 @@ var Tick = (function () {
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
+
                 if (!bufferedIds.hasOwnProperty(id)) {
                     bufferedIds[id] = moment().utc().unix();
                 }
