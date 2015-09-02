@@ -1,4 +1,8 @@
 <div id="trading_socket_container">
+    <div id="loading_container" class="overlay_container">
+        <div id="loading_icon" class="progress"></div>
+    </div>
+
     <div id="contract_market_container">
         <label for="market_show_menu" class="nav_placeholder" id="market_nav_placeholder"></label>
         <input type="checkbox" class="show_menu" id="market_show_menu" role="button">
@@ -118,9 +122,6 @@
             </div>
         </div>
         <div id="contract_prices_container">
-            <div id="loading_container" class="overlay_container">
-                <div id="loading_icon" class="progress"></div>
-            </div>
             <div id="contract_confirmation_container" class="overlay_container">
                 <a class="close" id="close_confirmation_container">x</a>
                 <div id="confirmation_message_container"></div>

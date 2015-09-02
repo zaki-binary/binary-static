@@ -104,6 +104,7 @@ ul[role=segmented] {
 
 #trading_socket_container {
     font-size: 1rem;
+    position: relative;
     #contract_container {
         .row {
             padding: 10px 0;
@@ -204,17 +205,21 @@ ul[role=segmented] {
     left: 0;
     display: none;
     background: rgba($COLOR_LIGHT_GRAY, 0.5);
+    z-index: 1;
 }
 
 #contract_confirmation_container {
     background-color: $COLOR_LIGHT_GRAY;
     text-align: center;
+    #confirmation_message_container {
+        margin-top: 15px;
+    }
 }
 
 #loading_icon {
     position: absolute;
-    top: 27%;
-    left: 47%;
+    top: 35%;
+    left: 46%;
 }
 
 @media all and (max-width: 640px) {
@@ -257,8 +262,11 @@ ul[role=segmented] {
     }
 }
 
-/* these styles are for trade analysis and will be removed */
-
+/*
+ * these styles are for trade analysis and will be removed
+ *
+ * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
+ */
 #trading_bottom_content {
     margin-top: 15px;
     font-size: 1rem;
@@ -290,3 +298,13 @@ ul[role=segmented] {
         }
     }
 }
+@media all and (max-width: 640px) {
+    #trading_bottom_content {
+        ul#betsBottomPage {
+            flex-direction: column;
+        }
+    }
+}
+/*
+ * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
+ */
