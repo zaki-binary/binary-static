@@ -4,7 +4,7 @@
  */
 var marketNavElement = document.getElementById('contract_market_nav');
 if (marketNavElement) {
-    marketNavElement.addEventListener('click', function(e) {
+    marketNavElement.addEventListener('click', debounce (function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             var clickedMarket = e.target;
             var isMarketActive = clickedMarket.classList.contains('active');
@@ -25,7 +25,7 @@ if (marketNavElement) {
                 marketFormCheckbox.checked = false;
             }
         }
-    });
+    }, 200 ));
 }
 
 /*
@@ -227,8 +227,6 @@ if (currencyElement) {
 /*
  * attach event to purchase buttons to buy the current contract
  */
-var purchaseButtonElements = document.getElementsByClassName('purchase_button');
-
 // using function expression form here as it used inside for loop
 var purchaseContractEvent = function () {
     var id = this.getAttribute('data-purchase-id'),
@@ -240,6 +238,7 @@ var purchaseContractEvent = function () {
     }
 };
 
+var purchaseButtonElements = document.getElementsByClassName('purchase_button');
 if (purchaseButtonElements) {
     for (var i = 0, len = purchaseButtonElements.length; i < len; i++) {
         purchaseButtonElements[i].addEventListener('click', purchaseContractEvent);

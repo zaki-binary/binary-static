@@ -122,19 +122,20 @@ var Price = (function () {
         h4.appendChild(content);
         fragment.appendChild(h4);
 
-        amount.setAttribute('class', 'contract_amount col');
-
         var span = document.createElement('span');
-        span.setAttribute('id', 'contract_amount_' + position);
-        content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-        span.appendChild(content);
-        amount.appendChild(span);
+        if (proposal['ask_price']) {
+            amount.setAttribute('class', 'contract_amount col');
+            span.setAttribute('id', 'contract_amount_' + position);
+            content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
+            span.appendChild(content);
+            amount.appendChild(span);
+        }
 
-        content = document.createTextNode(proposal['longcode']);
-        description.appendChild(content);
-        row.appendChild(amount);
-
-        displayCommentPrice('price_comment_' + position, document.getElementById('currency').value, proposal['ask_price'], document.getElementById('amount').value);
+        if (proposal['longcode']) {
+            content = document.createTextNode(proposal['longcode']);
+            description.appendChild(content);
+            row.appendChild(amount);
+        }
 
         if (proposal['error']) {
             if (purchase) {
@@ -147,6 +148,8 @@ var Price = (function () {
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
         } else {
+            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], document.getElementById('amount').value);
+
             var priceId = document.getElementById('purchase_button_' + position);
 
             if (purchase) {
