@@ -56,7 +56,27 @@
       %img.responsive{:src => url_for('images/pages/careers/careers-4.png')}
       .hint.right-aligned= l('Company trip to Phuket, Thailand')
   .grd-grid-12.grd-row-padding
-    .separator-line.grd-hide-mobile
+    .separator-line
+    %h1= l('Open positions')
+    %p= l('[_1] has been growing at the rate of 20-fold over the last 5 years and accordingly is constantly recruiting in all departments. We have open positions for the following roles:', stash->{website_name})
+  .grd-grid-6.grd-grid-mobile-12
+    %ul.checked
+      %li= l('Perl Developer')
+      %li= l('Javascript/front-end Developer')
+      %li= l('DevOps Engineer')
+      %li= l('Information Security Officer')
+      %li= l('Quantitative Analyst')
+      %li= l('Internal Auditor')
+  .grd-grid-6.grd-grid-mobile-12
+    %ul.checked
+      %li= l('Online Marketing Executive')
+      %li= l('Country Manager')
+      %li= l('Graphics Designer')
+      %li= l('Customer Support Officer')
+      %li= l('Compliance Executive')
+      %li= l('Payments Manager')
+  .grd-grid-12.grd-row-padding
+  .grd-grid-12.grd-row-padding
     %h1= l('Are you ready?')
     %p= l('If you are, we’d love to hear from you.')
     %p= l('Send us a CV and a covering letter that describes your career interests.')
