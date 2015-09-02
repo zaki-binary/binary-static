@@ -9,15 +9,17 @@ if(typeof JAPAN === 'function'){
 				return forms
 			}
 		},
-		value:function(underlying){
-			var params = { 
-				offerings: { hierarchy: 0,
-				contract: 0,
-				market: 'Forex',
-				submarket: 'Major Pairs',
-				start_type: 'spot' }
-	    	}
-			TradeSocket.send(params);
+		getOfferings: {
+			value:function(underlying){
+				var params = { 
+					offerings: { hierarchy: 0,
+					contract: 0,
+					market: 'Forex',
+					submarket: 'Major Pairs',
+					start_type: 'spot' }
+		    	}
+				TradeSocket.send(params);
+			}
 		}
 	})
 }
