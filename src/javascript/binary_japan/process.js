@@ -1,4 +1,4 @@
-if(JAPAN){
+if(typeof JAPAN === 'function'){
 	var processContractFormOfferings = function(contracts){
 		
 		'use strict';

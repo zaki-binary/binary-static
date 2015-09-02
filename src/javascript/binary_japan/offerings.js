@@ -1,4 +1,4 @@
-if(JAPAN){
+if(typeof JAPAN === 'function'){
 	var Offerings = Object.create(Offerings);
 	Object.defineProperties(Offerings,{
 		contractForms:{

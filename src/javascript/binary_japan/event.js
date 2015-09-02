@@ -1,4 +1,4 @@
-if(JAPAN){
+if(typeof JAPAN === 'function'){
     var lowBarrierElement = document.getElementById('barrier_low');
     if (lowBarrierElement) {
         lowBarrierElement.addEventListener('change', function (e) {

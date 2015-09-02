@@ -1,4 +1,4 @@
-if(JAPAN){
+if(typeof JAPAN === 'function'){
 	var Periods = (function(){
 		var barrier = 0,
 			barrier2 = 0;
