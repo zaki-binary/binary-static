@@ -11,7 +11,7 @@ var Purchase = (function () {
             container = document.getElementById('contract_confirmation_container'),
             message_container = document.getElementById('confirmation_message_container'),
             fragment = document.createDocumentFragment(),
-            h4 = document.createElement('h4'),
+            h3 = document.createElement('h3'),
             message = document.createElement('p'),
             content = '';
 
@@ -19,7 +19,7 @@ var Purchase = (function () {
             message_container.removeChild(message_container.firstChild);
         }
 
-        h4.setAttribute('class', 'contract_purchase_heading');
+        h3.setAttribute('class', 'contract_purchase_heading');
 
         if (details['error'] || details['open_receipt']['error']) {
             var errorMsg = details['error']['message'] || details['open_receipt']['error'];
@@ -30,8 +30,8 @@ var Purchase = (function () {
             var txnInfo = document.createElement('div');
 
             content = document.createTextNode('Contract Confirmation');
-            h4.appendChild(content);
-            txnInfo.appendChild(h4);
+            h3.appendChild(content);
+            txnInfo.appendChild(h3);
 
             content = document.createTextNode(receipt['longcode']);
             message.appendChild(content);
