@@ -12,7 +12,7 @@ if(typeof JAPAN === 'function'){
 		getOfferings: {
 			value:function(underlying){
 				var params = { 
-					offerings: { hierarchy: 0,
+					offerings: {
 					contract: 0,
 					market: 'Forex',
 					submarket: 'Major Pairs',

@@ -1,5 +1,8 @@
 if(typeof JAPAN === 'function'){
-	var processContractFormOfferings = function(contracts){
+
+	document.getElementById('contract_market_nav').style.display='none';	
+
+	function processContractFormOfferings(contracts){
 		
 		'use strict';
 
