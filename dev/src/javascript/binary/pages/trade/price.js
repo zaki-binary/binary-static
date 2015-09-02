@@ -14,7 +14,8 @@
 var Price = (function () {
     'use strict';
 
-    var typeDisplayIdMapping = {};
+    var typeDisplayIdMapping = {},
+        bufferedIds = {};
 
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
@@ -78,7 +79,8 @@ var Price = (function () {
     var display = function (details, contractType) {
         var proposal = details['proposal'] || details['error'];
         var params = details['echo_req'],
-            type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
+            id = proposal['id'],
+            type = params['contract_type'] || typeDisplayIdMapping[id],
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
             para = document.createElement('p'),
@@ -86,7 +88,11 @@ var Price = (function () {
             fragment = document.createDocumentFragment();
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
-            typeDisplayIdMapping[proposal['id']] = type;
+            typeDisplayIdMapping[id] = type;
+
+            if (!bufferedIds.hasOwnProperty(id)) {
+                bufferedIds[id] = moment().utc().unix();
+            }
         }
 
         var position = contractTypeDisplayMapping(type),
@@ -116,19 +122,20 @@ var Price = (function () {
         h4.appendChild(content);
         fragment.appendChild(h4);
 
-        amount.setAttribute('class', 'contract_amount col');
-
         var span = document.createElement('span');
-        span.setAttribute('id', 'contract_amount_' + position);
-        content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-        span.appendChild(content);
-        amount.appendChild(span);
+        if (proposal['ask_price']) {
+            amount.setAttribute('class', 'contract_amount col');
+            span.setAttribute('id', 'contract_amount_' + position);
+            content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
+            span.appendChild(content);
+            amount.appendChild(span);
+        }
 
-        content = document.createTextNode(proposal['longcode']);
-        description.appendChild(content);
-        row.appendChild(amount);
-
-        displayCommentPrice('price_comment_' + position, document.getElementById('currency').value, proposal['ask_price'], document.getElementById('amount').value);
+        if (proposal['longcode']) {
+            content = document.createTextNode(proposal['longcode']);
+            description.appendChild(content);
+            row.appendChild(amount);
+        }
 
         if (proposal['error']) {
             if (purchase) {
@@ -141,6 +148,8 @@ var Price = (function () {
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
         } else {
+            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], document.getElementById('amount').value);
+
             var priceId = document.getElementById('purchase_button_' + position);
 
             if (purchase) {
@@ -152,7 +161,7 @@ var Price = (function () {
             }
 
             // create unique id object that is send in response
-            priceId.setAttribute('data-purchase-id', proposal['id']);
+            priceId.setAttribute('data-purchase-id', id);
             priceId.setAttribute('data-ask-price', proposal['ask_price']);
 
             row.appendChild(amount);
@@ -176,7 +185,8 @@ var Price = (function () {
         proposal: createProposal,
         display: display,
         clearMapping: clearMapping,
-        idDisplayMapping: function () { return typeDisplayIdMapping; }
+        idDisplayMapping: function () { return typeDisplayIdMapping; },
+        bufferedIds: function () { return bufferedIds; }
     };
 
 })();

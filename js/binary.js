@@ -788,7 +788,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/partnerapi|\/bulk-trader-facility|\/partners$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -3161,7 +3161,14 @@ var trading_times_init = function() {
                   success: function(html){
                             trading_times.replaceWith(html);
                             trading_times = $("#trading-tabs");
-                            trading_times.tabs();
+			                      
+                            if (page.language() === 'JA') {	
+                              trading_times.tabs("disable");
+			    } 
+			    else {
+			      trading_times.tabs();
+			    }
+                            
                             page.url.update(url);
                          },
                   error: function(xhr, textStatus, errorThrown){
@@ -9211,18 +9218,6 @@ pjax_config_page('/white-labels', function() {
     };
 });
 
-pjax_config_page('/partnerapi', function() {
-    return {
-        onLoad: function() {
-            var partnerapi = $('.partnerapi-content');
-            sidebar_scroll(partnerapi);
-        },
-        onUnload: function() {
-            $(window).off('scroll');
-        }
-    };
-});
-
 pjax_config_page('/get-started', function() {
     return {
         onLoad: function() {
@@ -9908,8 +9903,8 @@ function displayBarriers (barrierCategory) {
 
                 var elm = document.getElementById('barrier');
                 if (unit && unit.value === 'd' && currentTick) {
-                    elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
-                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']).toFixed(3);
                 } else {
                     elm.value = barrier['barrier'];
                     elm.textContent = barrier['barrier'];
@@ -9924,11 +9919,11 @@ function displayBarriers (barrierCategory) {
                     low_elm = document.getElementById('barrier_low');
 
                 if (unit && unit.value === 'd' && currentTick) {
-                    high_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier']);
-                    high_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']);
+                    high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                    high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
 
-                    low_elm.value = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
-                    low_elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier1']);
+                    low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+                    low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
                 } else {
                     high_elm.value = barrier['barrier'];
                     high_elm.textContent = barrier['barrier'];
@@ -10262,7 +10257,12 @@ function displayCommentPrice(id, currency, type, payout) {
             return_percent = (profit/type)*100,
             comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
 
-        div.appendChild(comment);
+        if (isNaN(profit) || isNaN(return_percent)) {
+            div.style.display = 'none';
+        } else {
+            div.style.display = 'block';
+            div.appendChild(comment);
+        }
     }
 }
 
@@ -10270,6 +10270,7 @@ function displayCommentPrice(id, currency, type, payout) {
  * function to filter out allowed markets from all markets
  */
 function getAllowedMarkets(marketArray) {
+    'use strict';
     if (marketArray && getCookieItem('loginid')) {
         var allowedMarkets = getCookieItem('allowed_markets');
         if (allowedMarkets) {
@@ -10285,6 +10286,8 @@ function getAllowedMarkets(marketArray) {
 /*
  * This function loops through the available contracts and markets
  * that are not supposed to be shown are replaced
+ *
+ * this is TEMPORARY, it will be removed when we fix backend
  */
 function getAllowedContractCategory(contracts) {
     'use strict';
@@ -10297,6 +10300,31 @@ function getAllowedContractCategory(contracts) {
         }
     }
     return obj;
+}
+
+/*
+ * This function is used in case where we have input and we don't want to fire
+ * event on every change while user is typing for example in case of amount if
+ * we want to change 10 to 1000 i.e. two zeros so two input events will be fired
+ * normally, this function delay the event based on delay specified in milliseconds
+ *
+ * Reference
+ * http://davidwalsh.name/javascript-debounce-function
+ */
+function debounce(func, wait, immediate) {
+    var timeout;
+    var delay = wait || 500;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, delay);
+        if (callNow) func.apply(context, args);
+    };
 }
 ;/*
  * Contract object mocks the trading form we have on our website
@@ -10524,13 +10552,13 @@ function displayDurations(startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
-                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
                         content = document.createTextNode('minutes');
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
@@ -10688,7 +10716,7 @@ function displayExpiryType(unit) {
  */
 var marketNavElement = document.getElementById('contract_market_nav');
 if (marketNavElement) {
-    marketNavElement.addEventListener('click', function(e) {
+    marketNavElement.addEventListener('click', debounce (function(e) {
         if (e.target && e.target.nodeName === 'LI') {
             var clickedMarket = e.target;
             var isMarketActive = clickedMarket.classList.contains('active');
@@ -10709,13 +10737,34 @@ if (marketNavElement) {
                 marketFormCheckbox.checked = false;
             }
         }
-    });
+    }, 200 ));
 }
 
 /*
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
+var contractFormEventChange =  function (formName) {
+    'use strict';
+
+    var market = sessionStorage.getItem('market') || 'Forex';
+    market = market.charAt(0).toUpperCase() + market.substring(1);
+
+    // pass the original offerings as we don't want to request offerings again and again
+    Offerings.details(Offerings.offerings(), market, formName);
+
+    // change only submarkets and underlyings as per formName change
+    displayOptions('submarket',Offerings.submarkets());
+    displayUnderlyings();
+
+    var underlying = document.getElementById('underlying').value;
+    sessionStorage.setItem('underlying', underlying);
+
+    requestTradeAnalysis();
+    // get the contract details based on underlying as formName has changed
+    TradeSocket.send({ contracts_for: underlying });
+};
+
 var formNavElement = document.getElementById('contract_form_name_nav');
 if (formNavElement) {
     formNavElement.addEventListener('click', function(e) {
@@ -10739,28 +10788,6 @@ if (formNavElement) {
     });
 }
 
-function contractFormEventChange(formName) {
-    'use strict';
-
-    var market = sessionStorage.getItem('market') || 'Forex';
-
-    market = market.charAt(0).toUpperCase() + market.substring(1);
-
-    // pass the original offerings as we don't want to request offerings again and again
-    Offerings.details(Offerings.offerings(), market, formName);
-
-    // change only submarkets and underlyings as per formName change
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
-
-    var underlying = document.getElementById('underlying').value;
-    sessionStorage.setItem('underlying', underlying);
-
-    requestTradeAnalysis();
-    // get the contract details based on underlying as formName has changed
-    TradeSocket.send({ contracts_for: underlying });
-}
-
 /*
  * attach event to underlying change, event need to request new contract details and price
  */
@@ -10780,9 +10807,9 @@ if (underlyingElement) {
  */
 var durationAmountElement = document.getElementById('duration_amount');
 if (durationAmountElement) {
-    durationAmountElement.addEventListener('input', function (e) {
+    durationAmountElement.addEventListener('input', debounce (function (e) {
         processPriceRequest();
-    });
+    }));
 }
 
 /*
@@ -10835,10 +10862,10 @@ if (endTimeElement) {
  */
 var amountElement = document.getElementById('amount');
 if (amountElement) {
-    amountElement.addEventListener('input', function(e) {
+    amountElement.addEventListener('input', debounce( function(e) {
         sessionStorage.setItem('amount', e.target.value);
         processPriceRequest();
-    });
+    }));
 }
 
 /*
@@ -10912,6 +10939,7 @@ if (currencyElement) {
 /*
  * attach event to purchase buttons to buy the current contract
  */
+// using function expression form here as it used inside for loop
 var purchaseContractEvent = function () {
     var id = this.getAttribute('data-purchase-id'),
         askPrice = this.getAttribute('data-ask-price');
@@ -10948,9 +10976,9 @@ if (closeContainerElement) {
  */
 var barrierElement = document.getElementById('barrier');
 if (barrierElement) {
-    barrierElement.addEventListener('change', function (e) {
+    barrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
-    });
+    }));
 }
 
 /*
@@ -10958,9 +10986,9 @@ if (barrierElement) {
  */
 var lowBarrierElement = document.getElementById('barrier_low');
 if (lowBarrierElement) {
-    lowBarrierElement.addEventListener('change', function (e) {
+    lowBarrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
-    });
+    }));
 }
 
 /*
@@ -10968,9 +10996,9 @@ if (lowBarrierElement) {
  */
 var highBarrierElement = document.getElementById('barrier_high');
 if (highBarrierElement) {
-    highBarrierElement.addEventListener('change', function (e) {
+    highBarrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
-    });
+    }));
 }
 ;/*
  * This Message object process the response from server and fire
@@ -11162,7 +11190,8 @@ var Offerings = (function () {
 var Price = (function () {
     'use strict';
 
-    var typeDisplayIdMapping = {};
+    var typeDisplayIdMapping = {},
+        bufferedIds = {};
 
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
@@ -11226,7 +11255,8 @@ var Price = (function () {
     var display = function (details, contractType) {
         var proposal = details['proposal'] || details['error'];
         var params = details['echo_req'],
-            type = params['contract_type'] || typeDisplayIdMapping[proposal['id']],
+            id = proposal['id'],
+            type = params['contract_type'] || typeDisplayIdMapping[id],
             h4 = document.createElement('h4'),
             row = document.createElement('div'),
             para = document.createElement('p'),
@@ -11234,7 +11264,11 @@ var Price = (function () {
             fragment = document.createDocumentFragment();
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
-            typeDisplayIdMapping[proposal['id']] = type;
+            typeDisplayIdMapping[id] = type;
+
+            if (!bufferedIds.hasOwnProperty(id)) {
+                bufferedIds[id] = moment().utc().unix();
+            }
         }
 
         var position = contractTypeDisplayMapping(type),
@@ -11264,19 +11298,20 @@ var Price = (function () {
         h4.appendChild(content);
         fragment.appendChild(h4);
 
-        amount.setAttribute('class', 'contract_amount col');
-
         var span = document.createElement('span');
-        span.setAttribute('id', 'contract_amount_' + position);
-        content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-        span.appendChild(content);
-        amount.appendChild(span);
+        if (proposal['ask_price']) {
+            amount.setAttribute('class', 'contract_amount col');
+            span.setAttribute('id', 'contract_amount_' + position);
+            content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
+            span.appendChild(content);
+            amount.appendChild(span);
+        }
 
-        content = document.createTextNode(proposal['longcode']);
-        description.appendChild(content);
-        row.appendChild(amount);
-
-        displayCommentPrice('price_comment_' + position, document.getElementById('currency').value, proposal['ask_price'], document.getElementById('amount').value);
+        if (proposal['longcode']) {
+            content = document.createTextNode(proposal['longcode']);
+            description.appendChild(content);
+            row.appendChild(amount);
+        }
 
         if (proposal['error']) {
             if (purchase) {
@@ -11289,6 +11324,8 @@ var Price = (function () {
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
         } else {
+            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], document.getElementById('amount').value);
+
             var priceId = document.getElementById('purchase_button_' + position);
 
             if (purchase) {
@@ -11300,7 +11337,7 @@ var Price = (function () {
             }
 
             // create unique id object that is send in response
-            priceId.setAttribute('data-purchase-id', proposal['id']);
+            priceId.setAttribute('data-purchase-id', id);
             priceId.setAttribute('data-ask-price', proposal['ask_price']);
 
             row.appendChild(amount);
@@ -11324,7 +11361,8 @@ var Price = (function () {
         proposal: createProposal,
         display: display,
         clearMapping: clearMapping,
-        idDisplayMapping: function () { return typeDisplayIdMapping; }
+        idDisplayMapping: function () { return typeDisplayIdMapping; },
+        bufferedIds: function () { return bufferedIds; }
     };
 
 })();
@@ -11390,10 +11428,16 @@ function processContractFormOfferings(contracts) {
  */
 function processForgetPriceIds() {
     'use strict';
-
-    Object.keys(Price.idDisplayMapping()).forEach(function (key) {
-        TradeSocket.send({ forget: key });
-    });
+    if (Price) {
+        var priceIds = Price.bufferedIds();
+        for (var id in priceIds) {
+            if (priceIds.hasOwnProperty(id)) {
+                TradeSocket.send({ forget: id });
+                delete priceIds[id];
+            }
+        }
+        Price.clearMapping();
+    }
 }
 
 /*
@@ -11405,7 +11449,6 @@ function processPriceRequest() {
 
     showPriceLoadingIcon();
     processForgetPriceIds();
-    Price.clearMapping();
     for (var typeOfContract in Contract.contractType()[Offerings.form()]) {
         if(Contract.contractType()[Offerings.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
@@ -11419,9 +11462,14 @@ function processPriceRequest() {
  */
 function processForgetTickId() {
     'use strict';
-
-    if (Tick && Tick.id()) {
-        TradeSocket.send({ forget: Tick.id() });
+    if (Tick) {
+        var tickIds = Tick.bufferedIds();
+        for (var id in tickIds) {
+            if (tickIds.hasOwnProperty(id)) {
+                TradeSocket.send({ forget: id });
+                delete tickIds[id];
+            }
+        }
     }
 }
 
@@ -11430,7 +11478,6 @@ function processForgetTickId() {
  */
 function processTick(tick) {
     'use strict';
-
     Tick.details(tick);
     Tick.display();
 }
@@ -11447,7 +11494,7 @@ var Purchase = (function () {
             container = document.getElementById('contract_confirmation_container'),
             message_container = document.getElementById('confirmation_message_container'),
             fragment = document.createDocumentFragment(),
-            h4 = document.createElement('h4'),
+            h3 = document.createElement('h3'),
             message = document.createElement('p'),
             content = '';
 
@@ -11455,18 +11502,20 @@ var Purchase = (function () {
             message_container.removeChild(message_container.firstChild);
         }
 
-        h4.setAttribute('class', 'contract_purchase_heading');
+        h3.setAttribute('class', 'contract_purchase_heading');
 
-        if (details['error']) {
-            content = document.createTextNode(details['error']['message']);
+        // specific to v1 of websocket, should have consistent error structure
+        var error = details['error'] || details['open_receipt']['error'];
+        if (error) {
+            content = document.createTextNode(error['message']);
             message.appendChild(content);
             fragment.appendChild(message);
         } else {
             var txnInfo = document.createElement('div');
 
             content = document.createTextNode('Contract Confirmation');
-            h4.appendChild(content);
-            txnInfo.appendChild(h4);
+            h3.appendChild(content);
+            txnInfo.appendChild(h3);
 
             content = document.createTextNode(receipt['longcode']);
             message.appendChild(content);
@@ -11515,7 +11564,7 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://ws.binary.com/websockets/contracts",
+        socketUrl = "wss://ws.binary.com/websockets/v1",
         bufferedSends = [];
 
     var status = function () {
@@ -11673,19 +11722,24 @@ var Tick = (function () {
     var quote = '',
         id = '',
         epoch = '',
-        errorMessage = '';
+        errorMessage = '',
+        bufferedIds = {};
 
     var details = function (data) {
-        var errorMessage = '';
+        errorMessage = '';
 
         if (data) {
-            if (data['error']) {
-                errorMessage = data['error']['message'];
+            var tick = data['tick'];
+            if (tick['error']) {
+                errorMessage = tick['error']['message'];
             } else {
-                var tick = data['tick'];
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
+
+                if (!bufferedIds.hasOwnProperty(id)) {
+                    bufferedIds[id] = moment().utc().unix();
+                }
             }
         }
     };
@@ -11708,7 +11762,8 @@ var Tick = (function () {
         quote: function () { return quote; },
         id: function () { return id; },
         epoch: function () { return epoch; },
-        errorMessage: function () { return errorMessage; }
+        errorMessage: function () { return errorMessage; },
+        bufferedIds: function () { return bufferedIds; }
     };
 })();
 ;RealityCheck = (function ($) {

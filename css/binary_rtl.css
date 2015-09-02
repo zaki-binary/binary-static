@@ -1473,6 +1473,7 @@ abbr {
   border: 0;
   white-space: normal;
   font-size: 18px;
+  -webkit-appearance: none;
 }
 .home-content #open-account input[type=submit]:visited {
   color: white;
@@ -1511,11 +1512,12 @@ abbr {
 .home-content #xsection1 h1 {
   margin-top: 20px;
 }
+.home-content #xreason, .home-content #xacademy, .home-content #xtestimonial {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 .home-content #xreason {
-  padding-top: 20px;
-  padding-bottom: 20px;
   background-color: #f2f2f2;
-  padding-bottom: 40px;
 }
 .home-content #xtop {
   padding-top: 50px;
@@ -1536,18 +1538,12 @@ abbr {
 }
 .home-content .xhead {
   margin-bottom: 20px;
-  margin-top: 30px;
+  margin-top: 20px;
   padding-bottom: 15px;
   border-bottom: 1px solid #dedede;
 }
 .home-content .inlined {
   display: inline-block;
-}
-.home-content .xhead2 {
-  margin-top: 0px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #dedede;
 }
 .home-content .xlist1 {
   background: url(../images/pages/home/xicon-1.png) no-repeat;
@@ -1645,6 +1641,23 @@ abbr {
 .home-content .virtual-acc-right {
   margin-left: 40px;
 }
+.home-content #xacademy .head-academy {
+  margin-bottom: 10px;
+  margin-top: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dedede;
+}
+.home-content #xacademy ul {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.home-content #xacademy img {
+  max-width: 180px;
+}
+.home-content #xacademy .academy-cta {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
 .home-content .xtopcta {
   display: inline-block;
   width: 35%;
@@ -1663,9 +1676,6 @@ abbr {
 @media screen and (max-width: 480px) {
   .home-content #xtop {
     padding-top: 30px;
-  }
-  .home-content .xhead2 {
-    margin-top: 30px;
   }
   .home-content .virtual-acc-left {
     width: 80% !important;
@@ -4838,6 +4848,7 @@ ul[role=segmented] a:hover {
 
 #trading_socket_container {
   font-size: 1rem;
+  position: relative;
 }
 #trading_socket_container #contract_container .row {
   padding: 10px 0;
@@ -4932,17 +4943,21 @@ ul[role=segmented] a:hover {
   left: 0;
   display: none;
   background: rgba(242, 242, 242, 0.5);
+  z-index: 1;
 }
 
 #contract_confirmation_container {
   background-color: #f2f2f2;
   text-align: center;
 }
+#contract_confirmation_container #confirmation_message_container {
+  margin-top: 15px;
+}
 
 #loading_icon {
   position: absolute;
-  top: 27%;
-  left: 47%;
+  top: 35%;
+  left: 46%;
 }
 
 @media all and (max-width: 640px) {
@@ -4976,7 +4991,11 @@ ul[role=segmented] a:hover {
     flex-direction: column;
   }
 }
-/* these styles are for trade analysis and will be removed */
+/*
+ * these styles are for trade analysis and will be removed
+ *
+ * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
+ */
 #trading_bottom_content {
   margin-top: 15px;
   font-size: 1rem;
@@ -5023,10 +5042,30 @@ ul[role=segmented] a:hover {
   background-image: none;
 }
 
+@media all and (max-width: 640px) {
+  #trading_bottom_content ul#betsBottomPage {
+    flex-direction: column;
+  }
+}
+/*
+ * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
+ */
 /* Language based rules */
 /* Specific rules for languages */
 .JA .ja-hide {
   display: none !important;
+}
+.JA .ja-show {
+  display: inline !important;
+  visibility: visible !important;
+}
+.JA #header #menu-top li a.smaller-font, .JA #header ul#menu-top.smaller-font {
+  font-size: 90%;
+}
+@media screen and (max-width: 845px) {
+  .JA #header #menu-top li a.smaller-font, .JA #header ul#menu-top.smaller-font {
+    font-size: 75%;
+  }
 }
 
 /* media queries */
