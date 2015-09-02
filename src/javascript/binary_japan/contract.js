@@ -1,4 +1,4 @@
-if(JAPAN){
+if(typeof JAPAN === 'function'){
     var Contract = (function(){
     	'use strict';
         var open, close, contractDetails = [], periods={}, contractType = {};
