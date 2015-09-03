@@ -12,11 +12,10 @@ if(typeof JAPAN === 'function'){
 		getOfferings: {
 			value:function(underlying){
 				var params = { 
-					offerings: {
-					contract: 0,
+					offerings: 1,
 					market: 'Forex',
 					submarket: 'Major Pairs',
-					start_type: 'spot' }
+					start_type: 'spot'
 		    	}
 				TradeSocket.send(params);
 			}
