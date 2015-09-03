@@ -383,3 +383,19 @@ function debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 }
+
+/*
+ * function to see if market stored in cookie is allowed for current type of user
+ */
+function getDefaultMarket() {
+    var allowedMarkets = getCookieItem('allowed_markets');
+    var re = new RegExp(sessionStorage.getItem('market'), 'i');
+    if (re.test(allowedMarkets) && getCookieItem('loginid')) {
+        return sessionStorage.getItem('market');
+    } else {
+        var arr = allowedMarkets.replace(/\"/g, "");
+        arr = arr.split(",");
+        arr.sort(compareMarkets);
+        return arr[0];
+    }
+}
