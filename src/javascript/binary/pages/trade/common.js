@@ -385,7 +385,7 @@ function debounce(func, wait, immediate) {
 }
 
 /*
- * function to see if market stored in cookie is allowed for current type of user
+ * function to check if selected market is allowed for current user
  */
 function getDefaultMarket() {
    var mkt = sessionStorage.getItem('market') || 'forex';
@@ -398,6 +398,6 @@ function getDefaultMarket() {
            arr.sort(compareMarkets);
            return arr[0];
        }
-   } 
+   }
    return mkt;
 }

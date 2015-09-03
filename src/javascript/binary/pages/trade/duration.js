@@ -200,7 +200,7 @@ function displayExpiryType(unit) {
     }
 
     var option = document.createElement('option'),
-        content = document.createTextNode('Durations');
+        content = document.createTextNode(Content.localize().textDuration);
 
     option.setAttribute('value', 'duration');
     if (current_selected === 'duration') {
@@ -211,7 +211,7 @@ function displayExpiryType(unit) {
 
     if (unit !== 't') {
         option = document.createElement('option');
-        content = document.createTextNode('End Time');
+        content = document.createTextNode(Content.localize().textEndTime);
         option.setAttribute('value', 'endtime');
         if (current_selected === 'endtime') {
             option.setAttribute('selected', 'selected');
