@@ -20,13 +20,19 @@ function displayBarriers (barrierCategory) {
                 document.getElementById('low_barrier_row').style.display = 'none';
                 document.getElementById('barrier_row').setAttribute('style', '');
 
-                var elm = document.getElementById('barrier');
+                var elm = document.getElementById('barrier'),
+                    tooltip = document.getElementById('barrier_tooltip'),
+                    span = document.getElementById('barrier_span');
                 if (unit && unit.value === 'd' && currentTick) {
                     elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
                     elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']).toFixed(3);
+                    tooltip.style.display = 'none';
+                    span.style.display = 'inherit';
                 } else {
                     elm.value = barrier['barrier'];
                     elm.textContent = barrier['barrier'];
+                    span.style.display = 'none';
+                    tooltip.style.display = 'inherit';
                 }
                 return;
             } else if (barrier.count === 2) {
@@ -35,7 +41,11 @@ function displayBarriers (barrierCategory) {
                 document.getElementById('low_barrier_row').setAttribute('style', '');
 
                 var high_elm = document.getElementById('barrier_high'),
-                    low_elm = document.getElementById('barrier_low');
+                    low_elm = document.getElementById('barrier_low'),
+                    high_tooltip = document.getElementById('barrier_high_tooltip'),
+                    high_span = document.getElementById('barrier_high_span'),
+                    low_tooltip = document.getElementById('barrier_low_tooltip'),
+                    low_span = document.getElementById('barrier_low_span');
 
                 if (unit && unit.value === 'd' && currentTick) {
                     high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
@@ -43,12 +53,22 @@ function displayBarriers (barrierCategory) {
 
                     low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
                     low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+
+                    high_tooltip.style.display = 'none';
+                    high_span.style.display = 'inherit';
+                    low_tooltip.style.display = 'none';
+                    low_span.style.display = 'inherit';
                 } else {
                     high_elm.value = barrier['barrier'];
                     high_elm.textContent = barrier['barrier'];
 
                     low_elm.value = barrier['barrier1'];
                     low_elm.textContent = barrier['barrier1'];
+
+                    high_span.style.display = 'none';
+                    high_tooltip.style.display = 'inherit';
+                    low_span.style.display = 'none';
+                    low_tooltip.style.display = 'inherit';
                 }
                 return;
             }

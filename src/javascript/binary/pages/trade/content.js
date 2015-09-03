@@ -58,16 +58,29 @@ var Content = (function () {
             barrierTooltip.setAttribute('title', localize.textBarrierOffsetTooltip);
         }
 
+        var barrierSpan = document.getElementById('barrier_span');
+        if (barrierSpan) {
+            barrierSpan.textContent = localize.textBarrier;
+        }
+
         var barrierHighTooltip = document.getElementById('barrier_high_tooltip');
         if (barrierHighTooltip) {
             barrierHighTooltip.textContent = localize.textHighBarrierOffset;
             barrierHighTooltip.setAttribute('title', localize.textBarrierOffsetTooltip);
+        }
+        var barrierHighSpan = document.getElementById('barrier_high_span');
+        if (barrierHighSpan) {
+            barrierHighSpan.textContent = localize.textHighBarrier;
         }
 
         var barrierLowTooltip = document.getElementById('barrier_low_tooltip');
         if (barrierLowTooltip) {
             barrierLowTooltip.textContent = localize.textLowBarrierOffset;
             barrierLowTooltip.setAttribute('title', localize.textBarrierOffsetTooltip);
+        }
+        var barrierLowSpan = document.getElementById('barrier_low_span');
+        if (barrierLowSpan) {
+            barrierLowSpan.textContent = localize.textLowBarrier;
         }
 
         var payoutOption = document.getElementById('payout_option');
