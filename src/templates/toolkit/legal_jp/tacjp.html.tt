@@ -2,7 +2,6 @@
   selected_tab = request.param('selected_tab');
   IF NOT selected_tab; selected_tab = 'legal-tab'; END;
 %]
-[% IF request.country != 'JAPAN' %]
 <div class="content-tab-container">
   <div class="tab-menu">
     <div class="tab-menu-wrap grd-container">
@@ -15,7 +14,7 @@
             <span class="menu-wrap-b"><a href="#account-tab" class="tm-a first[% IF selected_tab == 'account-tab' || selected_tab == 'privacy-tab' || selected_tab == 'anti-social-connection-tab' || selected_tab == 'risk-tab' || selected_tab == 'risk-warning-tab' +%] a-active[% END +%]">[% l('Account Opening') %]</a></span>
           </span>
           <ul class="tm-ul-2">
-            <li id="privacy-tab" class="tm-li-2[% IF selected_tab == 'account-tab' || selected_tab == 'privacy-tab' +%] active[% END +%] first"><span class="tm-a-2[% IF selected_tab == 'account-tab' || selected_tab == 'privacy-tab' +%] a-active[% END +%]">[% l('Privacy Policy') %]</span></li>
+            <li id="privacy-tab" class="tm-li-2[% IF selected_tab == 'account-tab' || selected_tab == 'privacy-tab' +%] active[% END +%] first"><a href="?selected_tab=privacy-tab" class="tm-a-2[% IF selected_tab == 'account-tab' || selected_tab == 'privacy-tab' +%] a-active[% END +%]">[% l('Privacy Policy') %]</span></li>
             <li id="anti-social-connection-tab" class="tm-li-2[% IF selected_tab == 'anti-social-connection-tab' +%] active[% END +%]"><a href="?selected_tab=anti-social-connection-tab" class="tm-a-2[% IF selected_tab == 'anti-social-connection-tab' +%] a-active[% END +%]">[% l('No Connections with Antisocial Forces') %]</a></li>
             <li id="risk-tab" class="tm-li-2[% IF selected_tab == 'risk-tab' +%] active[% END +%]"><a href="?selected_tab=risk-tab" class="tm-a-2[% IF selected_tab == 'risk-tab' +%] a-active[% END +%]">[% l('Risk for Binary Option Trading') %]</a></li>
             <li id="risk-warning-tab" class="tm-li-2[% IF selected_tab == 'risk-warning-tab' +%] active[% END +%]"><a href="?selected_tab=risk-warning-tab" class="tm-a-2[% IF selected_tab == 'risk-warning-tab' +%] a-active[% END +%]">[% l('General Risk Warning') %]</a></li>
@@ -27,7 +26,7 @@
             <span class="menu-wrap-b"><a href="#ethics-tab" class="tm-a first[% IF selected_tab == 'ethics-tab' || selected_tab == 'ethics-code-tab' || selected_tab == 'anti-social-forces-tab' || selected_tab == 'solicitation-tab'|| selected_tab == 'liability-exclusion-tab' +%] a-active[% END +%]">[% l('Policies and Exclusion of Liability') %]</a></span>
           </span>
           <ul class="tm-ul-2">
-            <li id="ethics-code-tab" class="tm-li-2[% IF selected_tab == 'ethics-tab' || selected_tab == 'ethics-code-tab' +%] active[% END +%] first"><span class="tm-a-2[% IF selected_tab == 'ethics-tab' || selected_tab == 'ethics-code-tab' +%] a-active[% END +%]">[% l('Ethics Code') %]</span></li>
+            <li id="ethics-code-tab" class="tm-li-2[% IF selected_tab == 'ethics-tab' || selected_tab == 'ethics-code-tab' +%] active[% END +%] first"><a href="?selected_tab=ethics-code-tab" class="tm-a-2[% IF selected_tab == 'ethics-tab' || selected_tab == 'ethics-code-tab' +%] a-active[% END +%]">[% l('Ethics Code') %]</span></li>
             <li id="anti-social-forces-tab" class="tm-li-2[% IF selected_tab == 'anti-social-forces-tab' +%] active[% END +%]"><a href="?selected_tab=anti-social-forces-tab" class="tm-a-2[% IF selected_tab == 'anti-social-forces-tab' +%] a-active[% END +%]">[% l('Eliminating Antisocial Forces') %]</a></li>
             <li id="solicitation-tab" class="tm-li-2[% IF selected_tab == 'solicitation-tab' +%] active[% END +%]"><a href="?selected_tab=solicitation-tab" class="tm-a-2[% IF selected_tab == 'solicitation-tab' +%] a-active[% END +%]">[% l('Investment Solicitation Policy') %]</a></li>
             <li id="liability-exclusion-tab" class="tm-li-2[% IF selected_tab == 'liability-exclusion-tab' +%] active[% END +%]"><a href="?selected_tab=liability-exclusion-tab" class="tm-a-2[% IF selected_tab == 'liability-exclusion-tab' +%] a-active[% END +%]">[% l('Exclusion of Liability') %]</a></li>
@@ -71,4 +70,3 @@
     </div>
   </div>
 </div>
-[% END %]
