@@ -21,7 +21,15 @@ var Content = (function () {
             textEndTime: text.localize('End Time'),
             textMinDuration: text.localize('min'),
             textMinDurationTooltip: text.localize('minimum available duration'),
-            textBarrierOffsetTooltip: text.localize("Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received")
+            textBarrierOffsetTooltip: text.localize("Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"),
+            textDurationSeconds: text.localize('seconds'),
+            textDurationMinutes: text.localize('minutes'),
+            textDurationHours: text.localize('hours'),
+            textDurationDays: text.localize('days'),
+            textDurationTicks: text.localize('ticks'),
+            textNetProfit: text.localize('Net profit'),
+            textReturn: text.localize('Return'),
+            textNow: text.localize('Now'),
         };
 
         var starTime = document.getElementById('start_time_label');

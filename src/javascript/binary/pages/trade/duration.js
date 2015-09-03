@@ -66,14 +66,14 @@ function displayDurations(startType) {
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('minutes');
+                        content = document.createTextNode(Content.localize().textDurationMinutes);
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
                         option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('hours');
+                        content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
@@ -88,7 +88,7 @@ function displayDurations(startType) {
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('hours');
+                        content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
@@ -135,11 +135,11 @@ function displayDurations(startType) {
 function durationTextValueMappings(str) {
     'use strict';
     var mapping = {
-        s : 'seconds',
-        m : 'minutes',
-        h : 'hours',
-        d : 'days',
-        t : 'ticks'
+        s : Content.localize().textDurationSeconds,
+        m : Content.localize().textDurationMinutes,
+        h : Content.localize().textDurationHours,
+        d : Content.localize().textDurationDays,
+        t : Content.localize().textDurationTicks
     };
 
     var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [],
