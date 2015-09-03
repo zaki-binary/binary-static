@@ -57,10 +57,10 @@
                         <li class="ja-hide">
                             <a href="http://www.gamcare.org.uk/" target="_blank">[% l('GamCare') %]</a>
                         </li>
-                        <li class="blog">
+                        <li class="ja-hide blog">
                             <a href="http://blog.binary.com" target="_blank">[% l('Blog') %]</a>
                         </li>
-                        <li>
+                        <li class='ja-hide'>
                             <a href="http://blog.binary.com/en/webinar/" target="_blank">[% l('Webinars') %]</a>
                         </li>
                     </ul>
@@ -74,7 +74,7 @@
                             target %]"[% END %]>[% l('Pricing Table') %]</a>
                         </li>
                         <li>
-                            <a class="pjaxload" href="[% request.url_for('/resources/rise_fall_table') %]"[% IF target %]
+                            <a class="ja-hide pjaxload" href="[% request.url_for('/resources/rise_fall_table') %]"[% IF target %]
                             target="[% target %]"[% END %]>[% l('Rise/Fall Table') %]</a>
                         </li>
                         <li>
