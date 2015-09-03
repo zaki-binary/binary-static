@@ -4,8 +4,8 @@
  */
 function processMarketOfferings() {
     'use strict';
-
-    var market = sessionStorage.getItem('market') || 'forex',
+    
+    var market = getDefaultMarket(),
         formname = sessionStorage.getItem('formname') || 'risefall',
         offerings = sessionStorage.getItem('offerings');
 
