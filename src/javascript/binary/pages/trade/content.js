@@ -17,7 +17,7 @@ var Content = (function () {
             textPayout: text.localize('Payout'),
             textStake: text.localize('Stake'),
             textPurchase: text.localize('Purchase'),
-            textDuration: text.localize('Durations'),
+            textDuration: text.localize('Duration'),
             textEndTime: text.localize('End Time'),
             textMinDuration: text.localize('min'),
             textMinDurationTooltip: text.localize('minimum available duration'),
@@ -30,6 +30,10 @@ var Content = (function () {
             textNetProfit: text.localize('Net profit'),
             textReturn: text.localize('Return'),
             textNow: text.localize('Now'),
+            textContractConfirmationHeading: text.localize('Contract Confirmation'),
+            textContractConfirmationReference: text.localize('Your transaction reference is'),
+            textContractConfirmationBalance: text.localize('Your current balance is')
+
         };
 
         var starTime = document.getElementById('start_time_label');
