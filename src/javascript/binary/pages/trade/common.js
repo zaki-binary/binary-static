@@ -388,14 +388,16 @@ function debounce(func, wait, immediate) {
  * function to see if market stored in cookie is allowed for current type of user
  */
 function getDefaultMarket() {
-    var allowedMarkets = getCookieItem('allowed_markets');
-    var re = new RegExp(sessionStorage.getItem('market'), 'i');
-    if (re.test(allowedMarkets) && getCookieItem('loginid')) {
-        return sessionStorage.getItem('market');
-    } else {
-        var arr = allowedMarkets.replace(/\"/g, "");
-        arr = arr.split(",");
-        arr.sort(compareMarkets);
-        return arr[0];
-    }
+   var mkt = sessionStorage.getItem('market') || 'forex';
+   if (getCookieItem('loginid')) {
+       var allowedMarkets = getCookieItem('allowed_markets');
+       var re = new RegExp(mkt, 'i');
+       if (!re.test(allowedMarkets)) {
+           var arr = allowedMarkets.replace(/\"/g, "");
+           arr = arr.split(",");
+           arr.sort(compareMarkets);
+           return arr[0];
+       }
+   } 
+   return mkt;
 }
