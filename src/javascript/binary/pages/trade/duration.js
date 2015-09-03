@@ -172,7 +172,7 @@ function durationPopulate() {
     }
 
     // we need to call it here as for days we need to show absolute barriers
-    displayBarriers();
+    Barriers.display();
 }
 
 function displayExpiryType(unit) {
