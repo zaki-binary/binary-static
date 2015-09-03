@@ -1,10 +1,9 @@
 if(typeof JAPAN === 'function'){
-	var Offerings = Object.create(Offerings);
+	var _contractForms = Offerings.contractForms.bind({})
 	Object.defineProperties(Offerings,{
 		contractForms:{
 			value:function(){
-				parent = Object.getPrototypeOf(this);
-				var forms = parent.contractForms();
+				var forms = _contractForms();
 				delete forms['risefall']
 				return forms
 			}
