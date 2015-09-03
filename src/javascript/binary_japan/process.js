@@ -17,8 +17,10 @@ if(typeof JAPAN === 'function'){
 
 		displayStartDates();
 
-		Periods.displayPeriods();
-
+		if(Periods){
+			Periods.displayPeriods();
+		}
+		
 		processPriceRequest();
 	}
 }
