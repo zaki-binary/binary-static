@@ -27,10 +27,10 @@ var Tick = (function () {
         errorMessage = '';
 
         if (data) {
-            var tick = data['tick'];
-            if (tick['error']) {
-                errorMessage = tick['error']['message'];
+            if (data['error']) {
+                errorMessage = data['error']['message'];
             } else {
+                var tick = data['tick'];
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
