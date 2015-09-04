@@ -96,7 +96,7 @@ var Price = (function () {
         }
 
         var position = contractTypeDisplayMapping(type),
-            container = document.getElementById('price_container_' + position),
+            container = document.getElementById('price_description_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position),
             amount = document.createElement('div'),
