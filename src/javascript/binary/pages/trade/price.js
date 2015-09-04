@@ -77,7 +77,7 @@ var Price = (function () {
     };
 
     var display = function (details, contractType) {
-        var proposal = details['proposal'] || details['error'];
+        var proposal = details['proposal'];
         var params = details['echo_req'],
             id = proposal['id'],
             type = params['contract_type'] || typeDisplayIdMapping[id],
@@ -137,13 +137,13 @@ var Price = (function () {
             row.appendChild(amount);
         }
 
-        if (proposal['error']) {
+        if (details['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
             }
             row.appendChild(description);
             fragment.appendChild(row);
-            content = document.createTextNode(proposal['error']['message']);
+            content = document.createTextNode(details['error']['message']);
             para.appendChild(content);
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
