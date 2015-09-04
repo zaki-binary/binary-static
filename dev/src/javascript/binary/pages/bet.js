@@ -147,6 +147,7 @@ pjax_config_page('trading', function () {
             } else {
                 TradeSocket.send({offerings: {contracts: 0, selectors: 0}});
             }
+            Content.populate();
         },
         onUnload: function() {
             TradeSocket.close();

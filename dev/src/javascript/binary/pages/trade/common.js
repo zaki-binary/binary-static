@@ -312,7 +312,7 @@ function displayCommentPrice(id, currency, type, payout) {
     if (div && type && payout) {
         var profit = payout - type,
             return_percent = (profit/type)*100,
-            comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
+            comment = document.createTextNode(Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%');
 
         if (isNaN(profit) || isNaN(return_percent)) {
             div.style.display = 'none';
@@ -382,4 +382,22 @@ function debounce(func, wait, immediate) {
         timeout = setTimeout(later, delay);
         if (callNow) func.apply(context, args);
     };
+}
+
+/*
+ * function to check if selected market is allowed for current user
+ */
+function getDefaultMarket() {
+   var mkt = sessionStorage.getItem('market') || 'forex';
+   if (getCookieItem('loginid')) {
+       var allowedMarkets = getCookieItem('allowed_markets');
+       var re = new RegExp(mkt, 'i');
+       if (!re.test(allowedMarkets)) {
+           var arr = allowedMarkets.replace(/\"/g, "");
+           arr = arr.split(",");
+           arr.sort(compareMarkets);
+           return arr[0];
+       }
+   }
+   return mkt;
 }

@@ -3385,6 +3385,7 @@ pjax_config_page('trading', function () {
             } else {
                 TradeSocket.send({offerings: {contracts: 0, selectors: 0}});
             }
+            Content.populate();
         },
         onUnload: function() {
             TradeSocket.close();
@@ -9829,6 +9830,7 @@ function loadAnalysisTab() {
     toggleActiveAnalysisTabs();
 
     if (currentTab === 'tab_graph') {
+        BetAnalysis.tab_live_chart.reset();
         BetAnalysis.tab_live_chart.render(true);
     } else {
         var url = currentLink.getAttribute('href');
@@ -9885,62 +9887,95 @@ function getActiveTab() {
  * It process `Contract.barriers` and display them if its applicable
  * for current `Offerings.form()
  */
-function displayBarriers (barrierCategory) {
+
+var Barriers = (function () {
     'use strict';
 
-    var barriers = Contract.barriers(),
-        formName = Offerings.form();
+    var isBarrierUpdated = false;
 
-    if (barriers && formName) {
-        var barrier = barriers[formName];
-        if(barrier) {
-            var unit = document.getElementById('duration_units');
-            var currentTick = Tick.quote();
-            if (barrier.count === 1) {
-                document.getElementById('high_barrier_row').style.display = 'none';
-                document.getElementById('low_barrier_row').style.display = 'none';
-                document.getElementById('barrier_row').setAttribute('style', '');
+    var display = function (barrierCategory) {
+        var barriers = Contract.barriers(),
+            formName = Offerings.form();
 
-                var elm = document.getElementById('barrier');
-                if (unit && unit.value === 'd' && currentTick) {
-                    elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-                    elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']).toFixed(3);
-                } else {
-                    elm.value = barrier['barrier'];
-                    elm.textContent = barrier['barrier'];
+        if (barriers && formName) {
+            var barrier = barriers[formName];
+            if(barrier) {
+                var unit = document.getElementById('duration_units');
+                var currentTick = Tick.quote();
+                if (barrier.count === 1) {
+                    document.getElementById('high_barrier_row').style.display = 'none';
+                    document.getElementById('low_barrier_row').style.display = 'none';
+                    document.getElementById('barrier_row').setAttribute('style', '');
+
+                    var elm = document.getElementById('barrier'),
+                        tooltip = document.getElementById('barrier_tooltip'),
+                        span = document.getElementById('barrier_span');
+                    if (unit && unit.value === 'd' && currentTick) {
+                        elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                        elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']).toFixed(3);
+                        tooltip.style.display = 'none';
+                        span.style.display = 'inherit';
+                    } else {
+                        elm.value = barrier['barrier'];
+                        elm.textContent = barrier['barrier'];
+                        span.style.display = 'none';
+                        tooltip.style.display = 'inherit';
+                    }
+                    return;
+                } else if (barrier.count === 2) {
+                    document.getElementById('barrier_row').style.display = 'none';
+                    document.getElementById('high_barrier_row').setAttribute('style', '');
+                    document.getElementById('low_barrier_row').setAttribute('style', '');
+
+                    var high_elm = document.getElementById('barrier_high'),
+                        low_elm = document.getElementById('barrier_low'),
+                        high_tooltip = document.getElementById('barrier_high_tooltip'),
+                        high_span = document.getElementById('barrier_high_span'),
+                        low_tooltip = document.getElementById('barrier_low_tooltip'),
+                        low_span = document.getElementById('barrier_low_span');
+
+                    if (unit && unit.value === 'd' && currentTick) {
+                        high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                        high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+
+                        low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+                        low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+
+                        high_tooltip.style.display = 'none';
+                        high_span.style.display = 'inherit';
+                        low_tooltip.style.display = 'none';
+                        low_span.style.display = 'inherit';
+                    } else {
+                        high_elm.value = barrier['barrier'];
+                        high_elm.textContent = barrier['barrier'];
+
+                        low_elm.value = barrier['barrier1'];
+                        low_elm.textContent = barrier['barrier1'];
+
+                        high_span.style.display = 'none';
+                        high_tooltip.style.display = 'inherit';
+                        low_span.style.display = 'none';
+                        low_tooltip.style.display = 'inherit';
+                    }
+                    return;
                 }
-                return;
-            } else if (barrier.count === 2) {
-                document.getElementById('barrier_row').style.display = 'none';
-                document.getElementById('high_barrier_row').setAttribute('style', '');
-                document.getElementById('low_barrier_row').setAttribute('style', '');
-
-                var high_elm = document.getElementById('barrier_high'),
-                    low_elm = document.getElementById('barrier_low');
-
-                if (unit && unit.value === 'd' && currentTick) {
-                    high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-                    high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-
-                    low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
-                    low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
-                } else {
-                    high_elm.value = barrier['barrier'];
-                    high_elm.textContent = barrier['barrier'];
-
-                    low_elm.value = barrier['barrier1'];
-                    low_elm.textContent = barrier['barrier1'];
-                }
-                return;
             }
         }
-    }
 
-    var elements = document.getElementsByClassName('barrier_class');
-    for (var i = 0; i < elements.length; i++){
-        elements[i].style.display = 'none';
-    }
-}
+        var elements = document.getElementsByClassName('barrier_class');
+        for (var i = 0; i < elements.length; i++){
+            elements[i].style.display = 'none';
+        }
+    };
+
+    return {
+        display: display,
+        isBarrierUpdated: function () { return isBarrierUpdated; },
+        setBarrierUpdate: function (flag) {
+            isBarrierUpdated = flag;
+        }
+    };
+})();
 ;/*
  * This contains common functions we need for processing the response
  */
@@ -10255,7 +10290,7 @@ function displayCommentPrice(id, currency, type, payout) {
     if (div && type && payout) {
         var profit = payout - type,
             return_percent = (profit/type)*100,
-            comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
+            comment = document.createTextNode(Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%');
 
         if (isNaN(profit) || isNaN(return_percent)) {
             div.style.display = 'none';
@@ -10326,6 +10361,136 @@ function debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 }
+
+/*
+ * function to check if selected market is allowed for current user
+ */
+function getDefaultMarket() {
+   var mkt = sessionStorage.getItem('market') || 'forex';
+   if (getCookieItem('loginid')) {
+       var allowedMarkets = getCookieItem('allowed_markets');
+       var re = new RegExp(mkt, 'i');
+       if (!re.test(allowedMarkets)) {
+           var arr = allowedMarkets.replace(/\"/g, "");
+           arr = arr.split(",");
+           arr.sort(compareMarkets);
+           return arr[0];
+       }
+   }
+   return mkt;
+}
+;var Content = (function () {
+    'use strict';
+
+    var localize = {};
+
+    var populate = function () {
+
+        localize =  {
+            textStartTime: text.localize('Start time'),
+            textSpot: text.localize('Spot'),
+            textBarrier: text.localize('Barrier'),
+            textBarrierOffset: text.localize('Barrier offset'),
+            textHighBarrier: text.localize('High barrier'),
+            textHighBarrierOffset: text.localize('High barrier offset'),
+            textLowBarrier: text.localize('Low barrier'),
+            textLowBarrierOffset: text.localize('Low barrier offset'),
+            textPayout: text.localize('Payout'),
+            textStake: text.localize('Stake'),
+            textPurchase: text.localize('Purchase'),
+            textDuration: text.localize('Duration'),
+            textEndTime: text.localize('End Time'),
+            textMinDuration: text.localize('min'),
+            textMinDurationTooltip: text.localize('minimum available duration'),
+            textBarrierOffsetTooltip: text.localize("Enter the barrier in terms of the difference from the spot price. If you enter +0.005, then you will be purchasing a contract with a barrier 0.005 higher than the entry spot. The entry spot will be the next tick after your order has been received"),
+            textDurationSeconds: text.localize('seconds'),
+            textDurationMinutes: text.localize('minutes'),
+            textDurationHours: text.localize('hours'),
+            textDurationDays: text.localize('days'),
+            textDurationTicks: text.localize('ticks'),
+            textNetProfit: text.localize('Net profit'),
+            textReturn: text.localize('Return'),
+            textNow: text.localize('Now'),
+            textContractConfirmationHeading: text.localize('Contract Confirmation'),
+            textContractConfirmationReference: text.localize('Your transaction reference is'),
+            textContractConfirmationBalance: text.localize('Your current balance is')
+
+        };
+
+        var starTime = document.getElementById('start_time_label');
+        if (starTime) {
+            starTime.textContent = localize.textStartTime;
+        }
+
+        var minDurationTooltip = document.getElementById('duration_tooltip');
+        if (minDurationTooltip) {
+            minDurationTooltip.textContent = localize.textMinDuration;
+            minDurationTooltip.setAttribute('title', localize.textMinDurationTooltip);
+        }
+
+        var spotLabel = document.getElementById('spot_label');
+        if (spotLabel) {
+            spotLabel.textContent = localize.textSpot;
+        }
+
+        var barrierTooltip = document.getElementById('barrier_tooltip');
+        if (barrierTooltip) {
+            barrierTooltip.textContent = localize.textBarrierOffset;
+            barrierTooltip.setAttribute('title', localize.textBarrierOffsetTooltip);
+        }
+
+        var barrierSpan = document.getElementById('barrier_span');
+        if (barrierSpan) {
+            barrierSpan.textContent = localize.textBarrier;
+        }
+
+        var barrierHighTooltip = document.getElementById('barrier_high_tooltip');
+        if (barrierHighTooltip) {
+            barrierHighTooltip.textContent = localize.textHighBarrierOffset;
+            barrierHighTooltip.setAttribute('title', localize.textBarrierOffsetTooltip);
+        }
+        var barrierHighSpan = document.getElementById('barrier_high_span');
+        if (barrierHighSpan) {
+            barrierHighSpan.textContent = localize.textHighBarrier;
+        }
+
+        var barrierLowTooltip = document.getElementById('barrier_low_tooltip');
+        if (barrierLowTooltip) {
+            barrierLowTooltip.textContent = localize.textLowBarrierOffset;
+            barrierLowTooltip.setAttribute('title', localize.textBarrierOffsetTooltip);
+        }
+        var barrierLowSpan = document.getElementById('barrier_low_span');
+        if (barrierLowSpan) {
+            barrierLowSpan.textContent = localize.textLowBarrier;
+        }
+
+        var payoutOption = document.getElementById('payout_option');
+        if (payoutOption) {
+            payoutOption.textContent = localize.textPayout;
+        }
+
+        var stakeOption = document.getElementById('stake_option');
+        if (stakeOption) {
+            stakeOption.textContent = localize.textStake;
+        }
+
+        var purchaseButtonTop = document.getElementById('purchase_button_top');
+        if (purchaseButtonTop) {
+            purchaseButtonTop.textContent = localize.textPurchase;
+        }
+
+        var purchaseButtonBottom = document.getElementById('purchase_button_bottom');
+        if (purchaseButtonBottom) {
+            purchaseButtonBottom.textContent = localize.textPurchase;
+        }
+    };
+
+    return {
+        localize: function () { return localize; },
+        populate: populate
+    };
+
+})();
 ;/*
  * Contract object mocks the trading form we have on our website
  * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
@@ -10555,14 +10720,14 @@ function displayDurations(startType) {
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('minutes');
+                        content = document.createTextNode(Content.localize().textDurationMinutes);
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
                         option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('hours');
+                        content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
@@ -10577,7 +10742,7 @@ function displayDurations(startType) {
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('hours');
+                        content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
@@ -10624,11 +10789,11 @@ function displayDurations(startType) {
 function durationTextValueMappings(str) {
     'use strict';
     var mapping = {
-        s : 'seconds',
-        m : 'minutes',
-        h : 'hours',
-        d : 'days',
-        t : 'ticks'
+        s : Content.localize().textDurationSeconds,
+        m : Content.localize().textDurationMinutes,
+        h : Content.localize().textDurationHours,
+        d : Content.localize().textDurationDays,
+        t : Content.localize().textDurationTicks
     };
 
     var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [],
@@ -10661,7 +10826,7 @@ function durationPopulate() {
     }
 
     // we need to call it here as for days we need to show absolute barriers
-    displayBarriers();
+    Barriers.display();
 }
 
 function displayExpiryType(unit) {
@@ -10689,7 +10854,7 @@ function displayExpiryType(unit) {
     }
 
     var option = document.createElement('option'),
-        content = document.createTextNode('Durations');
+        content = document.createTextNode(Content.localize().textDuration);
 
     option.setAttribute('value', 'duration');
     if (current_selected === 'duration') {
@@ -10700,7 +10865,7 @@ function displayExpiryType(unit) {
 
     if (unit !== 't') {
         option = document.createElement('option');
-        content = document.createTextNode('End Time');
+        content = document.createTextNode(Content.localize().textEndTime);
         option.setAttribute('value', 'endtime');
         if (current_selected === 'endtime') {
             option.setAttribute('selected', 'selected');
@@ -11373,9 +11538,12 @@ var Price = (function () {
 function processMarketOfferings() {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'forex',
+    var market = getDefaultMarket(),
         formname = sessionStorage.getItem('formname') || 'risefall',
         offerings = sessionStorage.getItem('offerings');
+
+    // store the market
+    sessionStorage.setItem('market', market);
 
     // populate the Offerings object
     Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
@@ -11480,6 +11648,10 @@ function processTick(tick) {
     'use strict';
     Tick.details(tick);
     Tick.display();
+    if (!Barriers.isBarrierUpdated()) {
+        Barriers.display();
+        Barriers.setBarrierUpdate(true);
+    }
 }
 ;/*
  * Purchase object that handles all the functions related to
@@ -11513,7 +11685,7 @@ var Purchase = (function () {
         } else {
             var txnInfo = document.createElement('div');
 
-            content = document.createTextNode('Contract Confirmation');
+            content = document.createTextNode(Content.localize().textContractConfirmationHeading);
             h3.appendChild(content);
             txnInfo.appendChild(h3);
 
@@ -11521,12 +11693,12 @@ var Purchase = (function () {
             message.appendChild(content);
             txnInfo.appendChild(message);
 
-            content = document.createTextNode('Your transaction reference is ' + receipt['trx_id']);
+            content = document.createTextNode(Content.localize().textContractConfirmationReference + ' ' + receipt['trx_id']);
             message = document.createElement('p');
             message.appendChild(content);
             txnInfo.appendChild(message);
 
-            content = document.createTextNode('Your current balance is ' + receipt['balance_after']);
+            content = document.createTextNode(Content.localize().textContractConfirmationBalance + ' ' + receipt['balance_after']);
             message = document.createElement('p');
             message.appendChild(content);
             txnInfo.appendChild(message);
@@ -11662,7 +11834,7 @@ function displayStartDates() {
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
             option = document.createElement('option'),
-            content = document.createTextNode('Now');
+            content = document.createTextNode(Content.localize().textNow);
 
         while (target && target.firstChild) {
             target.removeChild(target.firstChild);

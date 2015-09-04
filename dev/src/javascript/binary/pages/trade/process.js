@@ -5,9 +5,12 @@
 function processMarketOfferings() {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'forex',
+    var market = getDefaultMarket(),
         formname = sessionStorage.getItem('formname') || 'risefall',
         offerings = sessionStorage.getItem('offerings');
+
+    // store the market
+    sessionStorage.setItem('market', market);
 
     // populate the Offerings object
     Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
@@ -112,4 +115,8 @@ function processTick(tick) {
     'use strict';
     Tick.details(tick);
     Tick.display();
+    if (!Barriers.isBarrierUpdated()) {
+        Barriers.display();
+        Barriers.setBarrierUpdate(true);
+    }
 }

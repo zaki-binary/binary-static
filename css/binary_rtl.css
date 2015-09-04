@@ -4767,13 +4767,23 @@ table .loss, table .lower {
 }
 
 .row, .row-inner {
-  flex-direction: row;
   display: flex;
   justify-content: space-around;
 }
 
 .col, .col-inner {
   flex: 1;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.row-inner {
+  flex-direction: column;
+}
+.row-inner .col-inner {
+  margin-bottom: 5px;
 }
 
 .vertical-row {
@@ -4970,12 +4980,6 @@ ul[role=segmented] a:hover {
     display: flex;
   }
 
-  #contract_container .row-inner {
-    flex-direction: column;
-  }
-  #contract_container .row-inner .col-inner {
-    margin-bottom: 5px;
-  }
   #contract_container #contract_prices_container #price_container_top {
     margin-right: 0 !important;
   }
@@ -5052,20 +5056,26 @@ ul[role=segmented] a:hover {
  */
 /* Language based rules */
 /* Specific rules for languages */
-.JA .ja-hide {
+/*Japan Language */
+body.JA .ja-hide {
   display: none !important;
 }
-.JA .ja-show {
+body.JA .ja-show {
   display: inline !important;
   visibility: visible !important;
 }
-.JA #header #menu-top li a.smaller-font, .JA #header ul#menu-top.smaller-font {
+body.JA #header #menu-top li a.smaller-font, body.JA #header ul#menu-top.smaller-font {
   font-size: 90%;
 }
 @media screen and (max-width: 845px) {
-  .JA #header #menu-top li a.smaller-font, .JA #header ul#menu-top.smaller-font {
+  body.JA #header #menu-top li a.smaller-font, body.JA #header ul#menu-top.smaller-font {
     font-size: 75%;
   }
+}
+
+/*Vietnamese Language */
+body.VI {
+  font-family: arial !important;
 }
 
 /* media queries */

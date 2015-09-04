@@ -30,7 +30,7 @@ var Purchase = (function () {
         } else {
             var txnInfo = document.createElement('div');
 
-            content = document.createTextNode('Contract Confirmation');
+            content = document.createTextNode(Content.localize().textContractConfirmationHeading);
             h3.appendChild(content);
             txnInfo.appendChild(h3);
 
@@ -38,12 +38,12 @@ var Purchase = (function () {
             message.appendChild(content);
             txnInfo.appendChild(message);
 
-            content = document.createTextNode('Your transaction reference is ' + receipt['trx_id']);
+            content = document.createTextNode(Content.localize().textContractConfirmationReference + ' ' + receipt['trx_id']);
             message = document.createElement('p');
             message.appendChild(content);
             txnInfo.appendChild(message);
 
-            content = document.createTextNode('Your current balance is ' + receipt['balance_after']);
+            content = document.createTextNode(Content.localize().textContractConfirmationBalance + ' ' + receipt['balance_after']);
             message = document.createElement('p');
             message.appendChild(content);
             txnInfo.appendChild(message);
