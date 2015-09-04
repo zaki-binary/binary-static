@@ -3383,7 +3383,11 @@ pjax_config_page('trading', function () {
             if (sessionStorage.getItem('offerings')) {
                 processMarketOfferings();
             } else {
-                TradeSocket.send({offerings: {contracts: 0, selectors: 0}});
+                TradeSocket.send({
+                    offerings: 1,
+                    contracts: 0,
+                    selectors: 0
+                });
             }
             Content.populate();
         },
@@ -11191,7 +11195,7 @@ var Message = (function () {
                 hideOverlayContainer();
                 Price.display(response, Contract.contractType()[Offerings.form()]);
                 hidePriceLoadingIcon();
-            } else if (type === 'open_receipt') {
+            } else if (type === 'buy') {
                 Purchase.display(response);
             } else if (type === 'tick') {
                 processTick(response);
@@ -11418,7 +11422,7 @@ var Price = (function () {
     };
 
     var display = function (details, contractType) {
-        var proposal = details['proposal'] || details['error'];
+        var proposal = details['proposal'];
         var params = details['echo_req'],
             id = proposal['id'],
             type = params['contract_type'] || typeDisplayIdMapping[id],
@@ -11437,7 +11441,7 @@ var Price = (function () {
         }
 
         var position = contractTypeDisplayMapping(type),
-            container = document.getElementById('price_container_' + position),
+            container = document.getElementById('price_description_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position),
             amount = document.createElement('div'),
@@ -11478,13 +11482,13 @@ var Price = (function () {
             row.appendChild(amount);
         }
 
-        if (proposal['error']) {
+        if (details['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
             }
             row.appendChild(description);
             fragment.appendChild(row);
-            content = document.createTextNode(proposal['error']['message']);
+            content = document.createTextNode(details['error']['message']);
             para.appendChild(content);
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
@@ -11662,7 +11666,7 @@ var Purchase = (function () {
     'use strict';
 
     var display = function (details) {
-        var receipt = details['open_receipt'],
+        var receipt = details['buy'],
             container = document.getElementById('contract_confirmation_container'),
             message_container = document.getElementById('confirmation_message_container'),
             fragment = document.createDocumentFragment(),
@@ -11676,8 +11680,7 @@ var Purchase = (function () {
 
         h3.setAttribute('class', 'contract_purchase_heading');
 
-        // specific to v1 of websocket, should have consistent error structure
-        var error = details['error'] || details['open_receipt']['error'];
+        var error = details['error'];
         if (error) {
             content = document.createTextNode(error['message']);
             message.appendChild(content);
@@ -11736,8 +11739,12 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://ws.binary.com/websockets/v1",
+        socketUrl = "wss://www.binary.com/websockets/v2",
         bufferedSends = [];
+
+    if (page.language()) {
+        socketUrl += '?l=' + page.language();
+    }
 
     var status = function () {
         return tradeSocket && tradeSocket.readyState;
@@ -11901,10 +11908,10 @@ var Tick = (function () {
         errorMessage = '';
 
         if (data) {
-            var tick = data['tick'];
-            if (tick['error']) {
-                errorMessage = tick['error']['message'];
+            if (data['error']) {
+                errorMessage = data['error']['message'];
             } else {
+                var tick = data['tick'];
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];

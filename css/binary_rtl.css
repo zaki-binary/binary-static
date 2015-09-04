@@ -4766,32 +4766,31 @@ table .loss, table .lower {
   height: 4rem;
 }
 
-.row, .row-inner {
+#trading_socket_container {
+  font-size: 1rem;
+  position: relative;
+}
+#trading_socket_container .row, #trading_socket_container .row-inner {
   display: flex;
   justify-content: space-around;
 }
-
-.col, .col-inner {
+#trading_socket_container .col, #trading_socket_container .col-inner {
   flex: 1;
 }
-
-.row {
+#trading_socket_container .row {
   flex-direction: row;
 }
-
-.row-inner {
+#trading_socket_container .row-inner {
   flex-direction: column;
 }
-.row-inner .col-inner {
+#trading_socket_container .row-inner .col-inner {
   margin-bottom: 5px;
 }
-
-.vertical-row {
+#trading_socket_container .vertical-row {
   flex-direction: column;
   display: flex;
 }
-
-.nav_placeholder {
+#trading_socket_container .nav_placeholder {
   display: none;
   overflow: hidden;
   width: 100%;
@@ -4801,28 +4800,14 @@ table .loss, table .lower {
   color: white;
   text-transform: capitalize;
 }
-
-.nav_placeholder:after {
+#trading_socket_container .nav_placeholder:after {
   content: '\25BC';
   font-size: 50%;
   right: 0;
   position: absolute;
   margin-right: 10px;
 }
-
-input[type=checkbox].show_menu {
-  display: none;
-}
-
-input[type=checkbox]#market_show_menu:checked ~ #contract_market_nav {
-  display: flex;
-}
-
-input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
-  display: flex;
-}
-
-ul[role=segmented] {
+#trading_socket_container ul[role=segmented] {
   box-shadow: inset 0px 0px 0px 1px rgba(42, 48, 82, 0.2);
   background-color: #f2f2f2;
   color: #2a3052;
@@ -4830,7 +4815,7 @@ ul[role=segmented] {
   overflow: hidden;
   width: 100%;
 }
-ul[role=segmented] li {
+#trading_socket_container ul[role=segmented] li {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -4840,25 +4825,29 @@ ul[role=segmented] li {
   padding: 3px 0;
   text-align: center;
 }
-ul[role=segmented] li.active {
+#trading_socket_container ul[role=segmented] li.active {
   color: white;
   background-color: #2a3052;
 }
-ul[role=segmented] li#risefall, ul[role=segmented] li#higherlower, ul[role=segmented] li#touchnotouch {
+#trading_socket_container ul[role=segmented] li#risefall, #trading_socket_container ul[role=segmented] li#higherlower, #trading_socket_container ul[role=segmented] li#touchnotouch {
   background-image: none;
 }
-ul[role=segmented] a {
+#trading_socket_container ul[role=segmented] a {
   text-decoration: none;
   font-weight: normal;
   padding: .5rem .25rem;
 }
-ul[role=segmented] a:hover {
+#trading_socket_container ul[role=segmented] a:hover {
   text-decoration: none;
 }
-
-#trading_socket_container {
-  font-size: 1rem;
-  position: relative;
+#trading_socket_container input[type=checkbox].show_menu {
+  display: none;
+}
+#trading_socket_container input[type=checkbox]#market_show_menu:checked ~ #contract_market_nav {
+  display: flex;
+}
+#trading_socket_container input[type=checkbox]#contract_form_show_menu:checked ~ #contract_form_name_nav {
+  display: flex;
 }
 #trading_socket_container #contract_container .row {
   padding: 10px 0;
@@ -4944,8 +4933,7 @@ ul[role=segmented] a:hover {
   font-weight: bold;
   font-size: 1.1rem;
 }
-
-.overlay_container {
+#trading_socket_container .overlay_container {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -4955,46 +4943,42 @@ ul[role=segmented] a:hover {
   background: rgba(242, 242, 242, 0.5);
   z-index: 1;
 }
-
-#contract_confirmation_container {
+#trading_socket_container #contract_confirmation_container {
   background-color: #f2f2f2;
   text-align: center;
 }
-#contract_confirmation_container #confirmation_message_container {
+#trading_socket_container #contract_confirmation_container #confirmation_message_container {
   margin-top: 15px;
 }
-
-#loading_icon {
+#trading_socket_container #loading_icon {
   position: absolute;
   top: 35%;
   left: 46%;
 }
-
 @media all and (max-width: 640px) {
-  ul[role=segmented] {
+  #trading_socket_container ul[role=segmented] {
     flex-direction: column;
     display: none;
   }
-
-  .nav_placeholder {
+  #trading_socket_container .nav_placeholder {
     display: flex;
   }
-
-  #contract_container #contract_prices_container #price_container_top {
+  #trading_socket_container #contract_container #contract_prices_container #price_container_top {
     margin-right: 0 !important;
   }
-  #contract_container #contract_prices_container .row {
+  #trading_socket_container #contract_container #contract_prices_container .row {
     flex-direction: column;
   }
-  #contract_container #contract_prices_container .row .col {
+  #trading_socket_container #contract_container #contract_prices_container .row .col {
     margin-bottom: 5px;
   }
 }
 @media all and (max-width: 768px) {
-  #contract_container #contract_form_container #contract_form_content > .row {
+  #trading_socket_container #contract_container #contract_form_container #contract_form_content > .row {
     flex-direction: column;
   }
 }
+
 /*
  * these styles are for trade analysis and will be removed
  *
