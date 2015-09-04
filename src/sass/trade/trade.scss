@@ -15,13 +15,23 @@
 }
 
 .row, .row-inner {
-    flex-direction: row;
     display: flex;
     justify-content: space-around;
 }
 
 .col, .col-inner {
     flex: 1;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.row-inner {
+    flex-direction: column;
+    .col-inner {
+        margin-bottom: 5px;
+    }
 }
 
 .vertical-row {
@@ -232,12 +242,6 @@ ul[role=segmented] {
     }
 
     #contract_container {
-        .row-inner {
-            flex-direction: column;
-            .col-inner {
-                margin-bottom: 5px;
-            }
-        }
         #contract_prices_container {
             #price_container_top {
                 margin-right: 0 !important;
