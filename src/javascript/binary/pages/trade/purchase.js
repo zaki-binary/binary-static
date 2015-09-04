@@ -7,7 +7,7 @@ var Purchase = (function () {
     'use strict';
 
     var display = function (details) {
-        var receipt = details['open_receipt'],
+        var receipt = details['buy'],
             container = document.getElementById('contract_confirmation_container'),
             message_container = document.getElementById('confirmation_message_container'),
             fragment = document.createDocumentFragment(),
@@ -21,8 +21,7 @@ var Purchase = (function () {
 
         h3.setAttribute('class', 'contract_purchase_heading');
 
-        // specific to v1 of websocket, should have consistent error structure
-        var error = details['error'] || details['open_receipt']['error'];
+        var error = details['error'];
         if (error) {
             content = document.createTextNode(error['message']);
             message.appendChild(content);
