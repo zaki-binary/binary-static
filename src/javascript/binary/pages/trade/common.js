@@ -401,3 +401,14 @@ function getDefaultMarket() {
    }
    return mkt;
 }
+
+/*
+ * function to stop page from refreshing when an input changes
+ */
+function addFormSubmitEventListener() {
+    var durationAmountForm = document.getElementById('duration_amount_form');
+    durationAmountForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+    });
+}
+

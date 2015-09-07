@@ -152,6 +152,7 @@ pjax_config_page('trading', function () {
                 });
             }
             Content.populate();
+            addFormSubmitEventListener();
         },
         onUnload: function() {
             TradeSocket.close();
