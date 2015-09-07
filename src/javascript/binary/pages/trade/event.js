@@ -97,15 +97,7 @@ var durationAmountElement = document.getElementById('duration_amount');
 if (durationAmountElement) {
     durationAmountElement.addEventListener('input', debounce (function (e) {
         if (!e.target.checkValidity()) {
-            var type = params['contract_type'],
-                position = contractTypeDisplayMapping(type),
-                purchase = document.getElementById('contract_purchase_' + position);
-            if (purchase) {
-                purchase.style.display = 'none';
-            }
-            var content = document.createTextNode('sample error');
-            amountElement.appendChild(content);
-            amountElement.setAttribute('class', 'notice-msg');
+            ('#duration_amount_form').find(':submit').click();
             processForgetPriceIds();
         } else {
             processPriceRequest();
