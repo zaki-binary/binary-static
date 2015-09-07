@@ -10013,6 +10013,44 @@ function displayListElements(id, elements, selected) {
 }
 
 /*
+ * function to display contract form
+ *
+ * We need this separate function because the contract obect has key value pair
+ * whereas markets is just an array
+ */
+function displayContractForms(id, elements, selected) {
+    'use strict';
+    var target = document.getElementById(id),
+        fragment = document.createDocumentFragment(),
+        len = elements.length;
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    if (elements) {
+        var keys = Object.keys(elements).sort(compareContractCategory);
+        keys.forEach(function (key) {
+            if (elements.hasOwnProperty(key)) {
+                var li = document.createElement('li'),
+                    content = document.createTextNode(elements[key]);
+                li.setAttribute('id', key.toLowerCase());
+                if (selected && selected === key) {
+                    li.setAttribute('class', 'active');
+                }
+                li.appendChild(content);
+                fragment.appendChild(li);
+            }
+        });
+
+        if (target) {
+            target.appendChild(fragment);
+        }
+    }
+}
+
+
+/*
  * function to create `option` and append to select box with id `id`
  */
 function displayOptions(id, elements, selected) {
@@ -10068,6 +10106,7 @@ function displayUnderlyings(selected) {
             fragment.appendChild(option);
         }
     }
+
     if (target) {
         target.appendChild(fragment);
     }
@@ -10417,8 +10456,9 @@ function getDefaultMarket() {
             textNow: text.localize('Now'),
             textContractConfirmationHeading: text.localize('Contract Confirmation'),
             textContractConfirmationReference: text.localize('Your transaction reference is'),
-            textContractConfirmationBalance: text.localize('Your current balance is')
-
+            textContractConfirmationBalance: text.localize('Your current balance is'),
+            textFormRiseFall: text.localize('Rise/Fall'),
+            textFormHigherLower: text.localize('Higher/Lower')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -11262,13 +11302,15 @@ var Offerings = (function () {
                             continue underlying_label;
                         }
                         for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
-                            var contractCategory = offerings[i].available[j].available[k].available[l].contract_category, isBarrierUndefinedRequired = false;
+                            var currentContract = offerings[i].available[j].available[k].available[l],
+                                contractCategory = currentContract['contract_category'],
+                                isBarrierUndefinedRequired = false;
 
-                            for (var m = 0, ctcategoryavalen = offerings[i].available[j].available[k].available[l].available.length; m < ctcategoryavalen; m++) {
+                            for (var m = 0, ctcategoryavalen = currentContract.available.length; m < ctcategoryavalen; m++) {
 
-                                for (var property in  offerings[i].available[j].available[k].available[l].available[m]) {
-                                    if (offerings[i].available[j].available[k].available[l].available[m].hasOwnProperty(property)) {
-                                        var prop_value = offerings[i].available[j].available[k].available[l].available[m][property];
+                                for (var property in  currentContract.available[m]) {
+                                    if (currentContract.available[m].hasOwnProperty(property)) {
+                                        var prop_value = currentContract.available[m][property];
                                         if (property === 'barrier_category') {
                                             if (!barrierCategory) {
                                                 barrierCategory = prop_value;
@@ -11277,12 +11319,12 @@ var Offerings = (function () {
                                             if (contractCategory && !contractCategories.hasOwnProperty(contractCategory)) {
                                                 if (contractCategory === 'callput') {
                                                     if( prop_value === 'euro_atm') {
-                                                        contractCategories['risefall'] = 'risefall';
+                                                        contractCategories['risefall'] = Content.localize().textFormRiseFall;
                                                     } else {
-                                                        contractCategories['higherlower'] = 'higherlower';
+                                                        contractCategories['higherlower'] = Content.localize().textFormHigherLower;
                                                     }
                                                 } else {
-                                                    contractCategories[contractCategory] = contractCategory;
+                                                    contractCategories[contractCategory] = currentContract['contract_category_display'];
                                                 }
 
                                             }
@@ -11557,7 +11599,7 @@ function processMarketOfferings() {
 
     // display markets, submarket, underlyings corresponding to market selected
     displayListElements('contract_market_nav', getAllowedMarkets(Offerings.markets().sort(compareMarkets)), market);
-    displayListElements('contract_form_name_nav', Object.keys(getAllowedContractCategory(Offerings.contractForms())).sort(compareContractCategory), formname);
+    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Offerings.contractForms()), formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
