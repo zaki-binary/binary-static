@@ -63,7 +63,6 @@ sub startup {
     $r->get('/timestamp')->to('page#timestamp');
     $r->get('/country')->to('page#country');
     $r->get('/why-us')->to('page#haml')->name('why-us');
-    $r->get('/partnerapi')->to('page#haml');
 
     #CRO - Matjaz
     $r->get('/home5')->to('page#haml')->name('home5');
