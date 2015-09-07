@@ -116,8 +116,7 @@ var Contract = (function () {
     };
 
     var getContracts = function(underlying){
-        var params = { contracts_for: underlying }
-        TradeSocket.send(params);
+        TradeSocket.send({ contracts_for: underlying });
     }
 
     return {

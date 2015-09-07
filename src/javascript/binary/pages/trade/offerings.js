@@ -109,8 +109,9 @@ var Offerings = (function () {
 
     var getOfferings = function(){
         TradeSocket.send({
-            "offerings": 1,
-            "selectors": 0,
+            offerings: 1,
+            contracts: 0,
+            selectors: 0
         });
     }
 
