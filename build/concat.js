@@ -18,7 +18,8 @@ module.exports = {
             ],
             'dist/js/binary.js': [
                 'src/javascript/binary/base/*.js',
-                'src/javascript/binary/**/*.js'
+                'src/javascript/binary/**/*.js',
+                'src/javascript/binary_japan/*.js'
             ]
         }
     }
