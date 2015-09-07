@@ -3383,11 +3383,7 @@ pjax_config_page('trading', function () {
             if (sessionStorage.getItem('offerings')) {
                 processMarketOfferings();
             } else {
-                TradeSocket.send({
-                    offerings: 1,
-                    contracts: 0,
-                    selectors: 0
-                });
+                Offerings.getOfferings();
             }
             Content.populate();
         },
@@ -10652,6 +10648,10 @@ var Contract = (function () {
         contractDetails = contractsArray;
     };
 
+    var getContracts = function(underlying){
+        TradeSocket.send({ contracts_for: underlying });
+    };
+
     return {
         details: details,
         open: function () { return open; },
@@ -10660,7 +10660,8 @@ var Contract = (function () {
         durations: function () { return durations; },
         startDates: function () { return startDates; },
         barriers: function () { return barriers; },
-        contractType: function () { return contractType; }
+        contractType: function () { return contractType; },
+        getContracts: getContracts
     };
 
 })();
@@ -10708,8 +10709,13 @@ function displayCurrencies(selected) {
 function displayDurations(startType) {
     'use strict';
 
+    var durations = Contract.durations();
+    if(durations===false){
+        document.getElementById('expiry_row').style.display = 'none';        
+        return false;
+    }
+
     var target = document.getElementById('duration_units'),
-        durations = Contract.durations(),
         formName = Offerings.form(),
         barrierCategory = Offerings.barrier(),
         fragment = document.createDocumentFragment(), durationContainer = {};
@@ -10971,7 +10977,7 @@ var contractFormEventChange =  function (formName) {
 
     requestTradeAnalysis();
     // get the contract details based on underlying as formName has changed
-    TradeSocket.send({ contracts_for: underlying });
+    Contract.getContracts(underlying);
 };
 
 var formNavElement = document.getElementById('contract_form_name_nav');
@@ -11006,7 +11012,7 @@ if (underlyingElement) {
         if (e.target) {
             sessionStorage.setItem('underlying', e.target.value);
             requestTradeAnalysis();
-            TradeSocket.send({ contracts_for: e.target.value });
+            Contract.getContracts(e.target.value);
         }
     });
 }
@@ -11361,6 +11367,14 @@ var Offerings = (function () {
         tradeUnderlyings = underlyingElements;
     };
 
+    var getOfferings = function(){
+        TradeSocket.send({
+            offerings: 1,
+            contracts: 0,
+            selectors: 0
+        });
+    };
+
     return {
         details: details,
         offerings: function () { return responseData; },
@@ -11368,6 +11382,7 @@ var Offerings = (function () {
         submarkets: function () { return tradeSubmarkets; },
         underlyings: function () { return tradeUnderlyings; },
         contractForms: function () { return tradeContractForms; },
+        getOfferings: getOfferings,
         form: function (name) {
             if (name) {
                 form = getFormNameBarrierCategory(name);
@@ -11613,7 +11628,7 @@ function processMarketOfferings() {
     sessionStorage.setItem('formname', formname);
 
     // get the contract details based on underlying as market has changed
-    TradeSocket.send({ contracts_for: underlying });
+    Contract.getContracts(underlying);
     requestTradeAnalysis();
 }
 
@@ -11781,7 +11796,7 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://www.binary.com/websockets/v2",
+        socketUrl = "wss://"+window.location.host+"/websockets/v2",
         bufferedSends = [];
 
     if (page.language()) {
@@ -12531,4 +12546,404 @@ function attach_tabs(element) {
         jqel.tabs(conf);
     });
     return targets;
+}
+;if(typeof JAPAN === 'function'){
+    var Contract = (function(){
+    	'use strict';
+        var open, close, contractDetails = [], periods={}, contractType = {};
+
+        var populate_periods = function (currentContract){
+        	if(!periods[currentContract.contract_category]){
+        		periods[currentContract.contract_category] = {};
+        	}
+
+        	if(!periods[currentContract.contract_category][currentContract.underlying_symbol]){
+        		periods[currentContract.contract_category][currentContract.underlying_symbol] = {};
+        	}
+
+        	var period = currentContract.trading_period.date_start.epoch+'_'+currentContract.trading_period.date_expiry.epoch;
+
+        	// console.log(period, currentContract.expiry_type,currentContract);
+            var d = new Date(currentContract.trading_period.date_start.epoch*1000);
+
+        	periods[currentContract.contract_category][currentContract.underlying_symbol][period] = {
+        		available_barriers: currentContract.available_barriers,
+        		barrier: currentContract.barrier,
+        		high_barrier: currentContract.high_barrier,
+        		low_barrier: currentContract.low_barrier,
+        		barriers: currentContract.barriers,
+        		// expiry_type: currentContract.expiry_type,
+        		date_start: currentContract.trading_period.date_start,
+        		date_expiry: currentContract.trading_period.date_expiry,
+        		duration: currentContract.trading_period.duration
+        	};
+        };
+
+        var details = function (contractObject) {
+        	var contracts = contractObject['contracts_for'],
+        	    contractsArray = [];
+
+        	open = contracts['open'];
+        	close = contracts['close'];
+
+        	var formName = Offerings.form(),
+        	    barrierCategory = Offerings.barrier();
+
+        	if (formName) {
+        		contracts.available.forEach(function (currentObj) {
+        			if (formName === currentObj['contract_category']) {
+
+        				populate_periods(currentObj);
+        				contractsArray.push(currentObj);
+
+        				if (!contractType[currentObj['contract_category']]) {
+        				    contractType[currentObj['contract_category']] = {};
+        				}
+
+        				if (!contractType[currentObj['contract_category']].hasOwnProperty(currentObj['contract_type'])) {
+        				    contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
+        				}
+        			}
+        		});
+        	}
+        	contractDetails = contractsArray;
+        };
+
+        var getContracts = function(underlying){
+            var params = {contracts_for: underlying, region: 'japan'};
+            TradeSocket.send(params);
+        };
+
+        return {
+            details: details,
+            open: function () { return open; },
+            close: function () { return close; },
+            contracts: function () { return contractDetails; },
+            durations: function(){ return false; },
+            startDates: function(){ return false; },
+            barriers: function () { return false; },
+            periods: function(){ return periods; },
+            contractType: function () { return contractType; },
+            getContracts: getContracts
+        };
+
+    })();
+};if(typeof JAPAN === 'function'){
+    var lowBarrierElement = document.getElementById('barrier_low');
+    if (lowBarrierElement) {
+        lowBarrierElement.addEventListener('change', function (e) {
+            processPriceRequest();
+        });
+    }
+
+    var jhighBarrierElement = document.getElementById('jbarrier_high');
+    if (jhighBarrierElement) {
+        jhighBarrierElement.addEventListener('change', function (e) {
+            processPriceRequest();
+        });
+    }
+
+
+    var jlowBarrierElement = document.getElementById('jbarrier_low');
+    if (jlowBarrierElement) {
+        jlowBarrierElement.addEventListener('change', function (e) {
+        	var options = jhighBarrierElement.getElementsByTagName('option');
+        	var f = 0;
+        	if(jhighBarrierElement.value > jlowBarrierElement.value){
+        		f = 1;
+        	}
+    		for(var i=0; i<options.length; i++){
+    			option = options[i];
+
+        		if(option.value <= jlowBarrierElement.value){
+        			option.setAttribute('disabled', true);
+        		}
+    		else{
+    			if(!f){
+    				jhighBarrierElement.value = option.value;
+    				f=1;
+    			}
+    			option.removeAttribute('disabled');
+    		}
+        	}
+            processPriceRequest();
+        });
+    }
+
+    var barrierElement = document.getElementById('jbarrier');
+    if (barrierElement) {
+        barrierElement.addEventListener('change', function (e) {
+            processPriceRequest();
+        });
+    }
+
+    var period = document.getElementById('period');
+    if(period){
+    	period.addEventListener('change', function (e) {
+    		Periods.displayBarriers();
+    		processPriceRequest();
+    	});
+    }
+
+    var amount_type = document.getElementById('amount_type');
+    var options = amount_type.getElementsByTagName('option');
+    for(var i=0; i<options.length; i++){
+        if(options[i].value!='payout'){
+            options[i].setAttribute('disabled', true);
+        }
+    }
+};var Japan = (function(){
+	
+})();;if(typeof JAPAN === 'function'){
+	var _contractForms = Offerings.contractForms.bind({});
+	Object.defineProperties(Offerings,{
+		contractForms:{
+			value:function(){
+				var forms = _contractForms();
+				delete forms['risefall'];
+				return forms;
+			}
+		},
+		getOfferings: {
+			value:function(underlying){
+				var params = { 
+					offerings: 1,
+					market: 'Forex',
+					submarket: 'Major Pairs',
+					start_type: 'spot'
+		    	};
+				TradeSocket.send(params);
+			}
+		}
+	});
+};if(typeof JAPAN === 'function'){
+	var Periods = (function(){
+		var barrier = 0,
+			barrier2 = 0;
+
+		var displayPeriods = function(){
+
+			var periods = Contract.periods();
+			if(!periods){
+				return false;
+			}
+
+			var wrapper = document.getElementById('period_row'),
+				target= document.getElementById('period'),
+			    formName = Offerings.form(),
+			    underlying = document.getElementById('underlying').value,
+			    fragment =  document.createDocumentFragment();
+
+			while (target && target.firstChild) {
+			    target.removeChild(target.firstChild);
+			}
+
+			if(!periods[formName] || !periods[formName][underlying]){
+				return false;
+			}
+
+			wrapper.style.display = 'flex';
+
+			periods = periods[formName][underlying];
+			var list = Object.keys(periods);
+			list.sort(function(a,b){
+				if(periods[a].date_expiry.epoch - periods[a].date_start.epoch > periods[b].date_expiry.epoch - periods[b].date_start.epoch){
+					return 1;
+				}
+				else if(periods[a].date_expiry.epoch - periods[a].date_start.epoch < periods[b].date_expiry.epoch - periods[b].date_start.epoch){
+					return -1;
+				}
+				else{
+					if(periods[a].date_start.epoch > periods[b].date_start.epoch){
+						return 1;
+					}
+					else {
+						return -1;
+					}
+				}
+			});
+
+			list.forEach(function(p){
+				var period = periods[p];
+				var option, content, text;
+				if(period.duration.match(/^\d+h$/)){
+					var match1 = period.date_start.date.match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2}):\d{2}$/);
+					var s_hours = match1[1];
+					var s_min = match1[2];
+
+					var match2 = period.date_expiry.date.match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2}):\d{2}$/);
+					var e_hours = match2[1];
+					var e_min = match2[2];
+
+					text = s_hours+":"+s_min+' - '+e_hours+":"+e_min+' ('+period.duration+')';
+				}
+				else{
+					text = period.date_expiry.date + ' ('+period.duration+')';
+				}
+				option = document.createElement('option');
+				content = document.createTextNode(text);
+				option.setAttribute('value', p);
+				option.appendChild(content);
+				fragment.appendChild(option);
+			});
+
+			target.appendChild(fragment);
+			displayBarriers();
+		};
+
+		var displayBarriers = function(){
+
+			var periods = Contract.periods();
+			if(!periods){
+				return false;
+			}
+
+			var target1= document.getElementById('jbarrier'),
+				target2= document.getElementById('jbarrier_high'),
+				target3= document.getElementById('jbarrier_low'),
+			    formName = Offerings.form(),
+			    underlying = document.getElementById('underlying').value,
+			    period = document.getElementById('period').value,
+			    fragment = document.createDocumentFragment();
+
+			while (target1 && target1.firstChild) {
+			    target1.removeChild(target1.firstChild);
+			}
+
+			while (target2 && target2.firstChild) {
+			    target2.removeChild(target2.firstChild);
+			}
+
+			while (target3 && target3.firstChild) {
+			    target3.removeChild(target3.firstChild);
+			}
+
+
+			if(!periods[formName] || !periods[formName][underlying] || !periods[formName][underlying][period]){
+				return false;
+			}
+
+			document.getElementById('barrier_row').style.display = 'none';
+			document.getElementById('high_barrier_row').style.display = 'none';
+			document.getElementById('low_barrier_row').style.display = 'none';
+
+			if(periods[formName][underlying][period].barriers==1){
+				document.getElementById('jbarrier_row').style.display = 'flex';
+				document.getElementById('jhigh_barrier_row').style.display = 'none';
+				document.getElementById('jlow_barrier_row').style.display = 'none';
+				var list = periods[formName][underlying][period].available_barriers;
+				list.sort();
+				list.forEach(function(barrier){
+					option = document.createElement('option');
+					content = document.createTextNode(barrier);
+					option.setAttribute('value', barrier);
+					option.appendChild(content);
+					fragment.appendChild(option);
+				});
+				target1.appendChild(fragment);
+				barrier = target1.value = periods[formName][underlying][period].barrier;
+			}
+			else{
+				document.getElementById('jbarrier_row').style.display = 'none';
+				document.getElementById('jhigh_barrier_row').style.display = 'flex';
+				document.getElementById('jlow_barrier_row').style.display = 'flex';
+				var list2 = periods[formName][underlying][period].available_barriers[1];
+				list2.sort();
+				list2.forEach(function(barrier){
+					option = document.createElement('option');
+					content = document.createTextNode(barrier);
+					option.setAttribute('value', barrier);
+					if(barrier <=  periods[formName][underlying][period].low_barrier){
+						option.setAttribute('disabled', true);
+					}
+					option.appendChild(content);
+					fragment.appendChild(option);
+				});
+				target2.appendChild(fragment);
+				barrier = target2.value = periods[formName][underlying][period].high_barrier;
+
+				var list3 = periods[formName][underlying][period].available_barriers[0];
+				list3.sort();
+				list3.forEach(function(barrier){
+					option = document.createElement('option');
+					content = document.createTextNode(barrier);
+					option.setAttribute('value', barrier);
+					option.appendChild(content);
+					fragment.appendChild(option);
+				});
+				target3.appendChild(fragment);
+				barrier2 = target3.value = periods[formName][underlying][period].low_barrier;
+			}
+		};
+
+		return {
+			barrier: function(){return barrier;},
+			barrier2: function(){return barrier2;},
+			displayPeriods: displayPeriods,
+			displayBarriers: displayBarriers
+		};
+	})();
+}
+;if(typeof JAPAN === 'function'){
+	var Price = Object.create(Price);
+	Object.defineProperties(Price,{
+		proposal:{
+			value:function(typeOfContract){
+				var parent = Object.getPrototypeOf(this);
+				var proposal = parent.proposal(typeOfContract);
+
+				var period = document.getElementById('period'),
+					barrier = document.getElementById('jbarrier'),
+					highBarrier = document.getElementById('jbarrier_high'),
+					lowBarrier = document.getElementById('jbarrier_low');
+
+				if (barrier && isVisible(barrier) && barrier.value) {
+				    proposal['barrier'] = barrier.value;
+
+				}
+
+				if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
+				    proposal['barrier'] = highBarrier.value;
+
+				}
+
+				if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
+				    proposal['barrier2'] = lowBarrier.value;
+				}
+
+				if (period && isVisible(period) && period.value) {
+					var p = period.value.match(/^\d+_(\d+)$/);
+					if(p){
+						proposal['date_expiry'] = p[1];
+					}				
+				}
+				return proposal;
+			}
+		}
+	});
+};if(typeof JAPAN === 'function'){
+
+	document.getElementById('contract_market_nav').style.display='none';	
+
+	var processContractFormOfferings = function (contracts){
+		
+		'use strict';
+
+		Contract.details(contracts);
+
+		// forget the old tick id i.e. close the old tick stream
+		processForgetTickId();
+		// get ticks for current underlying
+		TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
+
+		displayDurations('spot');
+
+		displayStartDates();
+
+		if(Periods){
+			Periods.displayPeriods();
+		}
+		
+		processPriceRequest();
+	};
 }

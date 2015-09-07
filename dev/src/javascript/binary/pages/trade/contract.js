@@ -115,6 +115,10 @@ var Contract = (function () {
         contractDetails = contractsArray;
     };
 
+    var getContracts = function(underlying){
+        TradeSocket.send({ contracts_for: underlying });
+    };
+
     return {
         details: details,
         open: function () { return open; },
@@ -123,7 +127,8 @@ var Contract = (function () {
         durations: function () { return durations; },
         startDates: function () { return startDates; },
         barriers: function () { return barriers; },
-        contractType: function () { return contractType; }
+        contractType: function () { return contractType; },
+        getContracts: getContracts
     };
 
 })();
