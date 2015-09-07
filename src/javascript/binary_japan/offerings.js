@@ -1,11 +1,11 @@
 if(typeof JAPAN === 'function'){
-	var _contractForms = Offerings.contractForms.bind({})
+	var _contractForms = Offerings.contractForms.bind({});
 	Object.defineProperties(Offerings,{
 		contractForms:{
 			value:function(){
 				var forms = _contractForms();
-				delete forms['risefall']
-				return forms
+				delete forms['risefall'];
+				return forms;
 			}
 		},
 		getOfferings: {
@@ -15,9 +15,9 @@ if(typeof JAPAN === 'function'){
 					market: 'Forex',
 					submarket: 'Major Pairs',
 					start_type: 'spot'
-		    	}
+		    	};
 				TradeSocket.send(params);
 			}
 		}
-	})
+	});
 }

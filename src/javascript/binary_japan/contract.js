@@ -15,6 +15,7 @@ if(typeof JAPAN === 'function'){
         	var period = currentContract.trading_period.date_start.epoch+'_'+currentContract.trading_period.date_expiry.epoch;
 
         	// console.log(period, currentContract.expiry_type,currentContract);
+            var d = new Date(currentContract.trading_period.date_start.epoch*1000);
 
         	periods[currentContract.contract_category][currentContract.underlying_symbol][period] = {
         		available_barriers: currentContract.available_barriers,
@@ -26,8 +27,8 @@ if(typeof JAPAN === 'function'){
         		date_start: currentContract.trading_period.date_start,
         		date_expiry: currentContract.trading_period.date_expiry,
         		duration: currentContract.trading_period.duration
-        	}
-        }
+        	};
+        };
 
         var details = function (contractObject) {
         	var contracts = contractObject['contracts_for'],
@@ -43,7 +44,7 @@ if(typeof JAPAN === 'function'){
         		contracts.available.forEach(function (currentObj) {
         			if (formName === currentObj['contract_category']) {
 
-        				populate_periods(currentObj)
+        				populate_periods(currentObj);
         				contractsArray.push(currentObj);
 
         				if (!contractType[currentObj['contract_category']]) {
@@ -54,28 +55,28 @@ if(typeof JAPAN === 'function'){
         				    contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
         				}
         			}
-        		})	
+        		});
         	}
         	contractDetails = contractsArray;
-        }
+        };
 
         var getContracts = function(underlying){
-            var params = {contracts_for: underlying, region: 'japan'}
+            var params = {contracts_for: underlying, region: 'japan'};
             TradeSocket.send(params);
-        }
+        };
 
         return {
             details: details,
-            open: function () { return open },
-            close: function () { return close },
-            contracts: function () { return contractDetails },
-            durations: function(){ return false },
-            startDates: function(){ return false },
-            barriers: function () { return false },
-            periods: function(){ return periods },
-            contractType: function () { return contractType },
+            open: function () { return open; },
+            close: function () { return close; },
+            contracts: function () { return contractDetails; },
+            durations: function(){ return false; },
+            startDates: function(){ return false; },
+            barriers: function () { return false; },
+            periods: function(){ return periods; },
+            contractType: function () { return contractType; },
             getContracts: getContracts
         };
 
-    })()
+    })();
 }

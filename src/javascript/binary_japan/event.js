@@ -52,7 +52,7 @@ if(typeof JAPAN === 'function'){
     	period.addEventListener('change', function (e) {
     		Periods.displayBarriers();
     		processPriceRequest();
-    	})
+    	});
     }
 
     var amount_type = document.getElementById('amount_type');
