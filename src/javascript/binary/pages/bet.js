@@ -147,6 +147,7 @@ pjax_config_page('trading', function () {
             } else {
                 Offerings.getOfferings();
             }
+            Content.populate();
         },
         onUnload: function() {
             TradeSocket.close();

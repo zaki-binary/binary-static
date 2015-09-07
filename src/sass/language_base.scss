@@ -1,6 +1,25 @@
 /* Specific rules for languages */
-.JA{
+
+/*Japan Language */
+body.JA{
 	.ja-hide{
 		display: none!important;
 	}
+	.ja-show{
+		display: inline!important;
+		visibility: visible!important;
+	}
+	#header #menu-top li a.smaller-font, #header ul#menu-top.smaller-font{
+		font-size: 90%;
+	}
+	@media screen and (max-width: 845px) {
+		#header #menu-top li a.smaller-font, #header ul#menu-top.smaller-font{
+			font-size: 75%;
+		}
+	}
 }
+/*Vietnamese Language */
+body.VI{
+		font-family: arial!important;
+}
+
