@@ -38,6 +38,7 @@ sub languages {
         'DE' => 'Deutsch',
         'ID' => 'Bahasa Indonesia',
         'ZH_CN' => decode_utf8('简体中文'),
+        'ZH_TW' => decode_utf8('繁體中文'),
         'PL' => 'Polish',
         'RU' => decode_utf8('Русский'),
         'PT' => decode_utf8('Português'),
