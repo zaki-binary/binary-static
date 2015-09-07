@@ -115,4 +115,8 @@ function processTick(tick) {
     'use strict';
     Tick.details(tick);
     Tick.display();
+    if (!Barriers.isBarrierUpdated()) {
+        Barriers.display();
+        Barriers.setBarrierUpdate(true);
+    }
 }
