@@ -85,7 +85,7 @@ if (underlyingElement) {
         if (e.target) {
             sessionStorage.setItem('underlying', e.target.value);
             requestTradeAnalysis();
-            Contract.getContracts(e.target.value)
+            Contract.getContracts(e.target.value);
         }
     });
 }

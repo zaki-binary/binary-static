@@ -26,7 +26,7 @@ if(typeof JAPAN === 'function'){
 
 			wrapper.style.display = 'flex';
 
-			var periods = periods[formName][underlying];
+			periods = periods[formName][underlying];
 			var list = Object.keys(periods);
 			list.sort(function(a,b){
 				if(periods[a].date_expiry.epoch - periods[a].date_start.epoch > periods[b].date_expiry.epoch - periods[b].date_start.epoch){
@@ -49,18 +49,18 @@ if(typeof JAPAN === 'function'){
 				var period = periods[p];
 				var option, content, text;
 				if(period.duration.match(/^\d+h$/)){
-					var match1 = period.date_start.date.match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2}):\d{2}$/)
+					var match1 = period.date_start.date.match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2}):\d{2}$/);
 					var s_hours = match1[1];
 					var s_min = match1[2];
 
-					var match2 = period.date_expiry.date.match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2}):\d{2}$/)
+					var match2 = period.date_expiry.date.match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2}):\d{2}$/);
 					var e_hours = match2[1];
 					var e_min = match2[2];
 
-					text = s_hours+":"+s_min+' - '+e_hours+":"+e_min+' ('+period.duration+')'
+					text = s_hours+":"+s_min+' - '+e_hours+":"+e_min+' ('+period.duration+')';
 				}
 				else{
-					text = period.date_expiry.date + ' ('+period.duration+')'
+					text = period.date_expiry.date + ' ('+period.duration+')';
 				}
 				option = document.createElement('option');
 				content = document.createTextNode(text);
@@ -71,7 +71,7 @@ if(typeof JAPAN === 'function'){
 
 			target.appendChild(fragment);
 			displayBarriers();
-		}
+		};
 
 		var displayBarriers = function(){
 
@@ -82,11 +82,11 @@ if(typeof JAPAN === 'function'){
 
 			var target1= document.getElementById('jbarrier'),
 				target2= document.getElementById('jbarrier_high'),
-				target3= document.getElementById('jbarrier_low')
+				target3= document.getElementById('jbarrier_low'),
 			    formName = Offerings.form(),
 			    underlying = document.getElementById('underlying').value,
 			    period = document.getElementById('period').value,
-			    fragment =  document.createDocumentFragment();
+			    fragment = document.createDocumentFragment();
 
 			while (target1 && target1.firstChild) {
 			    target1.removeChild(target1.firstChild);
@@ -121,7 +121,7 @@ if(typeof JAPAN === 'function'){
 					option.setAttribute('value', barrier);
 					option.appendChild(content);
 					fragment.appendChild(option);
-				})
+				});
 				target1.appendChild(fragment);
 				barrier = target1.value = periods[formName][underlying][period].barrier;
 			}
@@ -130,7 +130,7 @@ if(typeof JAPAN === 'function'){
 				document.getElementById('jhigh_barrier_row').style.display = 'flex';
 				document.getElementById('jlow_barrier_row').style.display = 'flex';
 				var list2 = periods[formName][underlying][period].available_barriers[1];
-				list2.sort()
+				list2.sort();
 				list2.forEach(function(barrier){
 					option = document.createElement('option');
 					content = document.createTextNode(barrier);
@@ -140,29 +140,29 @@ if(typeof JAPAN === 'function'){
 					}
 					option.appendChild(content);
 					fragment.appendChild(option);
-				})
+				});
 				target2.appendChild(fragment);
 				barrier = target2.value = periods[formName][underlying][period].high_barrier;
 
 				var list3 = periods[formName][underlying][period].available_barriers[0];
-				list3.sort()
+				list3.sort();
 				list3.forEach(function(barrier){
 					option = document.createElement('option');
 					content = document.createTextNode(barrier);
 					option.setAttribute('value', barrier);
 					option.appendChild(content);
 					fragment.appendChild(option);
-				})
-				target3.appendChild(fragment);;
+				});
+				target3.appendChild(fragment);
 				barrier2 = target3.value = periods[formName][underlying][period].low_barrier;
 			}
-		}
+		};
 
 		return {
-			barrier: function(){return barrier},
-			barrier2: function(){return barrier2},
+			barrier: function(){return barrier;},
+			barrier2: function(){return barrier2;},
 			displayPeriods: displayPeriods,
 			displayBarriers: displayBarriers
-		}
-	})()
+		};
+	})();
 }

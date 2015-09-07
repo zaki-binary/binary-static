@@ -31,8 +31,8 @@ if(typeof JAPAN === 'function'){
 						proposal['date_expiry'] = p[1];
 					}				
 				}
-				return proposal
+				return proposal;
 			}
 		}
-	})
+	});
 }

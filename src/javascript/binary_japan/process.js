@@ -2,7 +2,7 @@ if(typeof JAPAN === 'function'){
 
 	document.getElementById('contract_market_nav').style.display='none';	
 
-	function processContractFormOfferings(contracts){
+	var processContractFormOfferings = function (contracts){
 		
 		'use strict';
 
@@ -22,5 +22,5 @@ if(typeof JAPAN === 'function'){
 		}
 		
 		processPriceRequest();
-	}
+	};
 }

@@ -113,7 +113,7 @@ var Offerings = (function () {
             contracts: 0,
             selectors: 0
         });
-    }
+    };
 
     return {
         details: details,
