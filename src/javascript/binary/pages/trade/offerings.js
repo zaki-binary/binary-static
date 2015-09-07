@@ -109,6 +109,14 @@ var Offerings = (function () {
         tradeUnderlyings = underlyingElements;
     };
 
+    var getOfferings = function(){
+        TradeSocket.send({
+            offerings: 1,
+            contracts: 0,
+            selectors: 0
+        });
+    };
+
     return {
         details: details,
         offerings: function () { return responseData; },
@@ -116,6 +124,7 @@ var Offerings = (function () {
         submarkets: function () { return tradeSubmarkets; },
         underlyings: function () { return tradeUnderlyings; },
         contractForms: function () { return tradeContractForms; },
+        getOfferings: getOfferings,
         form: function (name) {
             if (name) {
                 form = getFormNameBarrierCategory(name);
