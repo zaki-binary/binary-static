@@ -50,7 +50,7 @@ var contractFormEventChange =  function (formName) {
 
     requestTradeAnalysis();
     // get the contract details based on underlying as formName has changed
-    TradeSocket.send({ contracts_for: underlying });
+    Contract.getContracts(underlying);
 };
 
 var formNavElement = document.getElementById('contract_form_name_nav');
@@ -85,7 +85,7 @@ if (underlyingElement) {
         if (e.target) {
             sessionStorage.setItem('underlying', e.target.value);
             requestTradeAnalysis();
-            TradeSocket.send({ contracts_for: e.target.value });
+            Contract.getContracts(e.target.value);
         }
     });
 }

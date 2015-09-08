@@ -50,13 +50,15 @@ var Offerings = (function () {
                             continue underlying_label;
                         }
                         for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
-                            var contractCategory = offerings[i].available[j].available[k].available[l].contract_category, isBarrierUndefinedRequired = false;
+                            var currentContract = offerings[i].available[j].available[k].available[l],
+                                contractCategory = currentContract['contract_category'],
+                                isBarrierUndefinedRequired = false;
 
-                            for (var m = 0, ctcategoryavalen = offerings[i].available[j].available[k].available[l].available.length; m < ctcategoryavalen; m++) {
+                            for (var m = 0, ctcategoryavalen = currentContract.available.length; m < ctcategoryavalen; m++) {
 
-                                for (var property in  offerings[i].available[j].available[k].available[l].available[m]) {
-                                    if (offerings[i].available[j].available[k].available[l].available[m].hasOwnProperty(property)) {
-                                        var prop_value = offerings[i].available[j].available[k].available[l].available[m][property];
+                                for (var property in  currentContract.available[m]) {
+                                    if (currentContract.available[m].hasOwnProperty(property)) {
+                                        var prop_value = currentContract.available[m][property];
                                         if (property === 'barrier_category') {
                                             if (!barrierCategory) {
                                                 barrierCategory = prop_value;
@@ -65,12 +67,12 @@ var Offerings = (function () {
                                             if (contractCategory && !contractCategories.hasOwnProperty(contractCategory)) {
                                                 if (contractCategory === 'callput') {
                                                     if( prop_value === 'euro_atm') {
-                                                        contractCategories['risefall'] = 'risefall';
+                                                        contractCategories['risefall'] = Content.localize().textFormRiseFall;
                                                     } else {
-                                                        contractCategories['higherlower'] = 'higherlower';
+                                                        contractCategories['higherlower'] = Content.localize().textFormHigherLower;
                                                     }
                                                 } else {
-                                                    contractCategories[contractCategory] = contractCategory;
+                                                    contractCategories[contractCategory] = currentContract['contract_category_display'];
                                                 }
 
                                             }
@@ -107,6 +109,14 @@ var Offerings = (function () {
         tradeUnderlyings = underlyingElements;
     };
 
+    var getOfferings = function(){
+        TradeSocket.send({
+            offerings: 1,
+            contracts: 0,
+            selectors: 0
+        });
+    };
+
     return {
         details: details,
         offerings: function () { return responseData; },
@@ -114,6 +124,7 @@ var Offerings = (function () {
         submarkets: function () { return tradeSubmarkets; },
         underlyings: function () { return tradeUnderlyings; },
         contractForms: function () { return tradeContractForms; },
+        getOfferings: getOfferings,
         form: function (name) {
             if (name) {
                 form = getFormNameBarrierCategory(name);

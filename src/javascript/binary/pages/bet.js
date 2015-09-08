@@ -141,18 +141,13 @@ pjax_config_page('chart_application', function () {
 pjax_config_page('trading', function () {
     return {
         onLoad: function () {
+            Content.populate();
             TradeSocket.init();
             if (sessionStorage.getItem('offerings')) {
                 processMarketOfferings();
             } else {
-                TradeSocket.send({
-                    offerings: 1,
-                    contracts: 0,
-                    selectors: 0
-                });
+                Offerings.getOfferings();
             }
-            Content.populate();
-            addEventListenerForm();
         },
         onUnload: function() {
             TradeSocket.close();

@@ -31,6 +31,44 @@ function displayListElements(id, elements, selected) {
 }
 
 /*
+ * function to display contract form
+ *
+ * We need this separate function because the contract obect has key value pair
+ * whereas markets is just an array
+ */
+function displayContractForms(id, elements, selected) {
+    'use strict';
+    var target = document.getElementById(id),
+        fragment = document.createDocumentFragment(),
+        len = elements.length;
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    if (elements) {
+        var keys = Object.keys(elements).sort(compareContractCategory);
+        keys.forEach(function (key) {
+            if (elements.hasOwnProperty(key)) {
+                var li = document.createElement('li'),
+                    content = document.createTextNode(elements[key]);
+                li.setAttribute('id', key.toLowerCase());
+                if (selected && selected === key) {
+                    li.setAttribute('class', 'active');
+                }
+                li.appendChild(content);
+                fragment.appendChild(li);
+            }
+        });
+
+        if (target) {
+            target.appendChild(fragment);
+        }
+    }
+}
+
+
+/*
  * function to create `option` and append to select box with id `id`
  */
 function displayOptions(id, elements, selected) {
@@ -86,6 +124,7 @@ function displayUnderlyings(selected) {
             fragment.appendChild(option);
         }
     }
+
     if (target) {
         target.appendChild(fragment);
     }
