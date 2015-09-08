@@ -46,11 +46,12 @@ function displayStartDates() {
 
             var ROUNDING = 5 * 60 * 1000;
             var start = moment();
-            start = moment(Math.ceil((+start) / ROUNDING) * ROUNDING).utc();
 
-            if (moment(a, 'YYYY MM DD').isSame(moment(start ,'YYYY MM DD'), 'day')) {
+            if(start > a){
                 a = start;
             }
+
+            a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
 
             while(a.isBefore(b)) {
                 option = document.createElement('option');
