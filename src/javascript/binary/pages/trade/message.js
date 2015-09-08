@@ -22,7 +22,7 @@ var Message = (function () {
                 displayCurrencies();
             } else if (type === 'proposal') {
                 hideOverlayContainer();
-                Price.display(response, Contract.contractType()[Offerings.form()]);
+                Price.display(response, Contract.contractType()[Contract.form()]);
                 hidePriceLoadingIcon();
             } else if (type === 'buy') {
                 Purchase.display(response);
