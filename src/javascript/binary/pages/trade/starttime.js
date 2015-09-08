@@ -47,7 +47,7 @@ function displayStartDates() {
             var ROUNDING = 5 * 60 * 1000;
             var start = moment();
 
-            if(start > a){
+            if(moment(start).isAfter(moment(a))){
                 a = start;
             }
 
