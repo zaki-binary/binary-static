@@ -20,7 +20,7 @@ function displayStartDates() {
 
     var startDates = Contract.startDates();
 
-    if (startDates && startDates.length && sessionStorage.formname !== 'higherlower') {
+    if (startDates && startDates.length) {
 
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
