@@ -402,13 +402,23 @@ function getDefaultMarket() {
    return mkt;
 }
 
-/*
- * function to stop page from refreshing when an input changes
- */
-function addFormSubmitEventListener() {
-    var durationAmountForm = document.getElementById('duration_amount_form');
-    durationAmountForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-    });
+function addEventListenerForm(){
+    document.getElementById('websocket_form').addEventListener("submit", function(evt){
+        evt.preventDefault();
+        return false;
+    }, false);
 }
 
+function submitForm(form) {
+    //get the form element's document to create the input control with
+    //(this way will work across windows in IE8)
+    var button = form.ownerDocument.createElement('input');
+    //make sure it can't be seen/disrupts layout (even momentarily)
+    button.style.display = 'none';
+    //make it such that it will invoke submit if clicked
+    button.type = 'submit';
+    //append it and click it
+    form.appendChild(button).click();
+    //if it was prevented, make sure we don't get a build up of buttons
+    form.removeChild(button);
+}
