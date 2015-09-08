@@ -38,6 +38,26 @@ function processMarketOfferings() {
     requestTradeAnalysis();
 }
 
+function processActiveSymbols() {
+    'use strict';
+
+    var activeSymbols = sessionStorage.getItem('active_symbols'),
+        market = getDefaultMarket();
+
+    // populate the Symbols object
+    Symbols.details(JSON.parse(activeSymbols));
+
+    displayOptions('markets', getAllowedMarkets(Symbols.markets()), market);
+    displayOptions('underlying', Symbols.underlyings()[market]);
+
+    var underlying = document.getElementById('underlying').value;
+    sessionStorage.setItem('underlying', underlying);
+
+    Contract.getContracts(underlying);
+
+    requestTradeAnalysis();
+}
+
 /*
  * Function to display contract form for current underlying
  */

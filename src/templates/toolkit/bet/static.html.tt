@@ -6,11 +6,17 @@
         <div id="loading_icon" class="progress"></div>
     </div>
 
-    <div id="contract_market_container">
-        <label for="market_show_menu" class="nav_placeholder" id="market_nav_placeholder"></label>
-        <input type="checkbox" class="show_menu" id="market_show_menu" role="button">
-        <ul class="nav" id="contract_market_nav" role="segmented">
-        </ul>
+    <div id="contract_symbol_container">
+        <div class="row">
+            <div class="col">
+                <select id="markets" name="markets">
+                </select>
+            </div>
+            <div class="col">
+                <select id="underlying" name="underlying">
+                </select>
+            </div>
+        </div>
     </div>
 
     <div id="contract_market_form_container">
@@ -25,16 +31,6 @@
             <div id="contract_form_content">
                 <div class="row">
                     <div class="col">
-                        <div class="row">
-                            <div class="col form_label">
-                                <select id="submarket" name="submarket">
-                                </select>
-                            </div>
-                            <div class="big-col">
-                                <select id="underlying" name="underlying">
-                                </select>
-                            </div>
-                        </div>
                         <div class="row" id="period_row">
                             <div class="col form_label">
                                 <label for="period" id="period_label">Contract period:</label>
