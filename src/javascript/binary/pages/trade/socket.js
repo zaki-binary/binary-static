@@ -14,9 +14,12 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        // socketUrl = "wss://ws.binary.com/websockets/contracts",
-        socketUrl = "wss://www.binaryqa09.com/websockets/contracts",
+        socketUrl = "wss://ws.binary.com/websockets/v2",
         bufferedSends = [];
+
+    if (page.language()) {
+        socketUrl += '?l=' + page.language();
+    }
 
     var status = function () {
         return tradeSocket && tradeSocket.readyState;

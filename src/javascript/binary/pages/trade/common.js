@@ -31,6 +31,44 @@ function displayListElements(id, elements, selected) {
 }
 
 /*
+ * function to display contract form
+ *
+ * We need this separate function because the contract obect has key value pair
+ * whereas markets is just an array
+ */
+function displayContractForms(id, elements, selected) {
+    'use strict';
+    var target = document.getElementById(id),
+        fragment = document.createDocumentFragment(),
+        len = elements.length;
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    if (elements) {
+        var keys = Object.keys(elements).sort(compareContractCategory);
+        keys.forEach(function (key) {
+            if (elements.hasOwnProperty(key)) {
+                var li = document.createElement('li'),
+                    content = document.createTextNode(elements[key]);
+                li.setAttribute('id', key.toLowerCase());
+                if (selected && selected === key) {
+                    li.setAttribute('class', 'active');
+                }
+                li.appendChild(content);
+                fragment.appendChild(li);
+            }
+        });
+
+        if (target) {
+            target.appendChild(fragment);
+        }
+    }
+}
+
+
+/*
  * function to create `option` and append to select box with id `id`
  */
 function displayOptions(id, elements, selected) {
@@ -86,6 +124,7 @@ function displayUnderlyings(selected) {
             fragment.appendChild(option);
         }
     }
+
     if (target) {
         target.appendChild(fragment);
     }
@@ -312,9 +351,14 @@ function displayCommentPrice(id, currency, type, payout) {
     if (div && type && payout) {
         var profit = payout - type,
             return_percent = (profit/type)*100,
-            comment = document.createTextNode('Net profit: ' + currency + ' ' + profit.toFixed(2) + ' | Return ' + return_percent.toFixed(0) + '%');
+            comment = document.createTextNode(Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%');
 
-        div.appendChild(comment);
+        if (isNaN(profit) || isNaN(return_percent)) {
+            div.style.display = 'none';
+        } else {
+            div.style.display = 'block';
+            div.appendChild(comment);
+        }
     }
 }
 
@@ -322,6 +366,7 @@ function displayCommentPrice(id, currency, type, payout) {
  * function to filter out allowed markets from all markets
  */
 function getAllowedMarkets(marketArray) {
+    'use strict';
     if (marketArray && getCookieItem('loginid')) {
         var allowedMarkets = getCookieItem('allowed_markets');
         if (allowedMarkets) {
@@ -337,6 +382,8 @@ function getAllowedMarkets(marketArray) {
 /*
  * This function loops through the available contracts and markets
  * that are not supposed to be shown are replaced
+ *
+ * this is TEMPORARY, it will be removed when we fix backend
  */
 function getAllowedContractCategory(contracts) {
     'use strict';
@@ -349,4 +396,47 @@ function getAllowedContractCategory(contracts) {
         }
     }
     return obj;
+}
+
+/*
+ * This function is used in case where we have input and we don't want to fire
+ * event on every change while user is typing for example in case of amount if
+ * we want to change 10 to 1000 i.e. two zeros so two input events will be fired
+ * normally, this function delay the event based on delay specified in milliseconds
+ *
+ * Reference
+ * http://davidwalsh.name/javascript-debounce-function
+ */
+function debounce(func, wait, immediate) {
+    var timeout;
+    var delay = wait || 500;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, delay);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+/*
+ * function to check if selected market is allowed for current user
+ */
+function getDefaultMarket() {
+   var mkt = sessionStorage.getItem('market') || 'forex';
+   if (getCookieItem('loginid')) {
+       var allowedMarkets = getCookieItem('allowed_markets');
+       var re = new RegExp(mkt, 'i');
+       if (!re.test(allowedMarkets)) {
+           var arr = allowedMarkets.replace(/\"/g, "");
+           arr = arr.split(",");
+           arr.sort(compareMarkets);
+           return arr[0];
+       }
+   }
+   return mkt;
 }
