@@ -14,7 +14,7 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://www.binary.com/websockets/v2",
+        socketUrl = "wss://ws.binary.com/websockets/v2",
         bufferedSends = [];
 
     if (page.language()) {
