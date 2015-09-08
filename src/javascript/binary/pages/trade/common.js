@@ -365,18 +365,24 @@ function displayCommentPrice(id, currency, type, payout) {
 /*
  * function to filter out allowed markets from all markets
  */
-function getAllowedMarkets(marketArray) {
+function getAllowedMarkets(markets) {
     'use strict';
-    if (marketArray && getCookieItem('loginid')) {
+    if (markets && getCookieItem('loginid')) {
+        var obj = {};
         var allowedMarkets = getCookieItem('allowed_markets');
         if (allowedMarkets) {
-            return marketArray.filter(function (element) {
-                var re = new RegExp(element, 'i');
-                return re.test(allowedMarkets);
-            });
+            for (var key in markets) {
+                if (markets.hasOwnProperty(key)) {
+                    var re = new RegExp(key, 'i');
+                    if (re.test(allowedMarkets)) {
+                        obj[key] = markets[key];
+                    }
+                }
+            }
+            return obj;
         }
     }
-    return marketArray;
+    return markets;
 }
 
 /*
