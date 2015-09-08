@@ -20,11 +20,15 @@ function displayStartDates() {
 
     var startDates = Contract.startDates();
 
-    if (startDates) {
+    if (startDates && startDates.length && sessionStorage.formname !== 'higherlower') {
+
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
             option = document.createElement('option'),
-            content = document.createTextNode(Content.localize().textNow);
+            content = document.createTextNode(Content.localize().textNow),
+            row = document.getElementById('date_start_row');
+
+        row.style.display = 'flex';
 
         while (target && target.firstChild) {
             target.removeChild(target.firstChild);
