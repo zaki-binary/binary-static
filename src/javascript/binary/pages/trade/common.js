@@ -49,16 +49,21 @@ function displayOptions(id, elements, selected) {
         target.removeChild(target.firstChild);
     }
 
-    for (var key in elements) {
-        if (elements.hasOwnProperty(key)){
-            var option = document.createElement('option'), content = document.createTextNode(elements[key]);
-            option.setAttribute('value', key);
-            if (selected && selected === key) {
-                option.setAttribute('selected', 'selected');
+    if (elements) {
+        var keys = Object.keys(elements).sort(function(a, b) {
+            return elements[a].localeCompare(elements[b]);
+        });
+        keys.forEach(function (key) {
+            if (elements.hasOwnProperty(key)){
+                var option = document.createElement('option'), content = document.createTextNode(elements[key]);
+                option.setAttribute('value', key);
+                if (selected && selected === key) {
+                    option.setAttribute('selected', 'selected');
+                }
+                option.appendChild(content);
+                fragment.appendChild(option);
             }
-            option.appendChild(content);
-            fragment.appendChild(option);
-        }
+        });
     }
     if (target) {
         target.appendChild(fragment);
