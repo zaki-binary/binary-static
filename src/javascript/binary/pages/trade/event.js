@@ -22,7 +22,7 @@ if (marketNavElement) {
 var contractFormEventChange = function () {
     'use strict';
 
-    processContractForm()
+    processContractForm();
     requestTradeAnalysis();
 };
 
