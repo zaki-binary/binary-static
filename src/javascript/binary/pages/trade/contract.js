@@ -65,7 +65,7 @@ var Contract = (function () {
                         populate_durations(currentObj);
                     }
 
-                    if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward') {
+                    if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
                         startDates = currentObj.forward_starting_options;
                     }
 
