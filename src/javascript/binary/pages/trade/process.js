@@ -64,6 +64,9 @@ function processContract(contracts) {
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
+    // change the form placeholder content as per current form (used for mobile menu)
+    setFormPlaceholderContent(formname);
+
     displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
 
     processContractForm();

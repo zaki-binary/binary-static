@@ -283,22 +283,13 @@ function toggleActiveNavMenuElement(nav, eventElement) {
 }
 
 /*
- * function to set placeholder text based on current market, used for mobile menu
- */
-function setMarketPlaceholderContent(name) {
-    var marketPlaceholder = document.getElementById('market_nav_placeholder');
-    if (marketPlaceholder) {
-        marketPlaceholder.textContent = name || sessionStorage.getItem('market');
-    }
-}
-
-/*
  * function to set placeholder text based on current form, used for mobile menu
  */
 function setFormPlaceholderContent(name) {
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
-        formPlaceholder.textContent = name || sessionStorage.getItem('formname');
+        name = name || sessionStorage.getItem('formname');
+        formPlaceholder.textContent = Contract.contractForms()[name];
     }
 }
 
