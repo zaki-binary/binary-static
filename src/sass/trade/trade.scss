@@ -119,7 +119,8 @@
 
     #contract_symbol_container {
         margin-bottom: 15px;
-        .form_label {
+        #contract_markets_container {
+            text-align: right;
             margin-right: 1rem;
         }
     }
@@ -241,6 +242,15 @@
     }
 
     @media all and (max-width: 640px) {
+        @mixin row_mobile {
+            .row {
+                flex-direction: column;
+                .col {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
         ul[role=segmented] {
             flex-direction: column;
             display: none;
@@ -249,18 +259,22 @@
             display: flex;
         }
 
+        #contract_symbol_container {
+            @include row_mobile;
+            text-align: center;
+            #contract_markets_container {
+                margin-right: 0;
+                text-align: inherit;
+            }
+        }
+
         #contract_container {
             #contract_prices_container {
                 #price_container_top {
                     margin-right: 0 !important;
                 }
-                .row {
-                    flex-direction: column;
-                    .col {
-                        margin-bottom: 5px;
-                    }
-                }
-            }
+                @include row_mobile;
+           }
         }
     }
 
