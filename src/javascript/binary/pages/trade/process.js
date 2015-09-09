@@ -89,16 +89,23 @@ function processMarketUnderlying() {
 /*
  * Function to display contract form for current underlying
  */
-function processContractFormOfferings(contracts) {
+function processContract(contracts) {
     'use strict';
 
     Contract.setContracts(contracts);
 
     var formname = sessionStorage.getItem('formname') || 'risefall';
 
+    // set form to session storage
+    sessionStorage.setItem('formname', formname);
+
     displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
 
-    Contract.details(formname);
+    processContractForm();
+}
+
+function processContractForm() {
+    Contract.details(sessionStorage.getItem('formname'));
 
     // forget the old tick id i.e. close the old tick stream
     processForgetTickId();

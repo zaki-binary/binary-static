@@ -16,7 +16,7 @@ var Message = (function () {
                 sessionStorage.setItem('active_symbols', msg.data);
                 processActiveSymbols();
             } else if (type === 'contracts_for') {
-                processContractFormOfferings(response);
+                processContract(response);
             } else if (type === 'payout_currencies') {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();

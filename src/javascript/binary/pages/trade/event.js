@@ -19,25 +19,11 @@ if (marketNavElement) {
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
-var contractFormEventChange = function (formName) {
+var contractFormEventChange = function () {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'Forex';
-    market = market.charAt(0).toUpperCase() + market.substring(1);
-
-    // pass the original offerings as we don't want to request offerings again and again
-    Offerings.details(Offerings.offerings(), market, formName);
-
-    // change only submarkets and underlyings as per formName change
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
-
-    var underlying = document.getElementById('underlying').value;
-    sessionStorage.setItem('underlying', underlying);
-
+    processContractForm()
     requestTradeAnalysis();
-    // get the contract details based on underlying as formName has changed
-    Contract.getContracts(underlying);
 };
 
 var formNavElement = document.getElementById('contract_form_name_nav');
@@ -53,7 +39,7 @@ if (formNavElement) {
             toggleActiveNavMenuElement(formNavElement, clickedForm);
 
             if (!isFormActive) {
-                contractFormEventChange(clickedForm.id);
+                contractFormEventChange();
             }
             var contractFormCheckbox = document.getElementById('contract_form_show_menu');
             if (contractFormCheckbox) {
