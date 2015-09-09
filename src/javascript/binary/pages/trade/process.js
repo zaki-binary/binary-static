@@ -1,44 +1,4 @@
 /*
- * Function to process offerings, this function is called
- * when market is changed or for processing offerings response
- */
-function processMarketOfferings() {
-    'use strict';
-
-    var market = getDefaultMarket(),
-        formname = sessionStorage.getItem('formname') || 'risefall',
-        offerings = sessionStorage.getItem('offerings');
-
-    // store the market
-    sessionStorage.setItem('market', market);
-
-    // populate the Offerings object
-    Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
-
-    // change the market placeholder content as per current market (used for mobile menu)
-    setMarketPlaceholderContent(market);
-
-    // display markets, submarket, underlyings corresponding to market selected
-    displayListElements('contract_market_nav', getAllowedMarkets(Offerings.markets().sort(compareMarkets)), market);
-    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Offerings.contractForms()), formname);
-
-    // change the form placeholder content as per current form (used for mobile menu)
-    setFormPlaceholderContent(formname);
-
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
-
-    // get the underlying selected
-    var underlying = document.getElementById('underlying').value;
-    sessionStorage.setItem('underlying', underlying);
-    sessionStorage.setItem('formname', formname);
-
-    // get the contract details based on underlying as market has changed
-    Contract.getContracts(underlying);
-    requestTradeAnalysis();
-}
-
-/*
  * This function process the active symbols to get markets
  * and underlying list
  */

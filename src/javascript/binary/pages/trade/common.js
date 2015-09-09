@@ -97,40 +97,6 @@ function displayOptions(id, elements, selected) {
 }
 
 /*
- * function to display underlyings
- *
- * we need different function for this because we need to add submarket
- * name as classname to underlyings option
- */
-function displayUnderlyings(selected) {
-    'use strict';
-    var target= document.getElementById('underlying'),
-        fragment =  document.createDocumentFragment(),
-        elements = Offerings.underlyings();
-
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
-
-    for (var key in elements) {
-        if (elements.hasOwnProperty(key)){
-            var option = document.createElement('option'), content = document.createTextNode(elements[key].display);
-            option.setAttribute('value', key);
-            option.setAttribute('class', elements[key].classname);
-            if (selected && selected === key) {
-                option.setAttribute('selected', 'selected');
-            }
-            option.appendChild(content);
-            fragment.appendChild(option);
-        }
-    }
-
-    if (target) {
-        target.appendChild(fragment);
-    }
-}
-
-/*
  * This maps the form name and barrierCategory we display on
  * trading form to the actual we send it to backend
  * for e.g risefall is mapped to callput with barrierCategory euro_atm
