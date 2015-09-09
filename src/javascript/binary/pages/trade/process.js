@@ -41,6 +41,11 @@ function processMarketUnderlying() {
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
 
+    // forget the old tick id i.e. close the old tick stream
+    processForgetTickId();
+    // get ticks for current underlying
+    TradeSocket.send({ ticks : underlying });
+
     Contract.getContracts(underlying);
 
     requestTradeAnalysis();
@@ -66,11 +71,6 @@ function processContract(contracts) {
 
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
-
-    // forget the old tick id i.e. close the old tick stream
-    processForgetTickId();
-    // get ticks for current underlying
-    TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
 
     displayDurations('spot');
 

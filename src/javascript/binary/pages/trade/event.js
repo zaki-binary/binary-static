@@ -5,13 +5,13 @@
 var marketNavElement = document.getElementById('contract_markets');
 if (marketNavElement) {
     marketNavElement.addEventListener('change', function(e) {
-            var clickedMarket = e.target;
-            sessionStorage.setItem('market', clickedMarket.value);
+        var clickedMarket = e.target;
+        sessionStorage.setItem('market', clickedMarket.value);
 
-            // as different markets have different forms so remove from sessionStorage
-            // it will default to proper one
-            sessionStorage.removeItem('formname');
-            processMarket();
+        // as different markets have different forms so remove from sessionStorage
+        // it will default to proper one
+        sessionStorage.removeItem('formname');
+        processMarket();
     });
 }
 
@@ -56,9 +56,16 @@ var underlyingElement = document.getElementById('underlying');
 if (underlyingElement) {
     underlyingElement.addEventListener('change', function(e) {
         if (e.target) {
-            sessionStorage.setItem('underlying', e.target.value);
+            var underlying = e.target.value;
+            sessionStorage.setItem('underlying', underlying);
             requestTradeAnalysis();
-            Contract.getContracts(e.target.value);
+
+            Contract.getContracts(underlying);
+
+            // forget the old tick id i.e. close the old tick stream
+            processForgetTickId();
+            // get ticks for current underlying
+            TradeSocket.send({ ticks : underlying });
         }
     });
 }
