@@ -177,7 +177,7 @@ function isVisible(elem) {
 /*
  * function to hide and display the loading icon for price container
  */
-function hidePriceLoadingIcon() {
+function hideLoadingOverlay() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
@@ -185,7 +185,7 @@ function hidePriceLoadingIcon() {
     }
 }
 
-function showPriceLoadingIcon() {
+function showLoadingOverlay() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
