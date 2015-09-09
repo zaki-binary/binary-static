@@ -49,6 +49,37 @@ function displayOptions(id, elements, selected) {
         target.removeChild(target.firstChild);
     }
 
+    for (var key in elements) {
+        if (elements.hasOwnProperty(key)){
+            var option = document.createElement('option'), content = document.createTextNode(elements[key]);
+            option.setAttribute('value', key);
+            if (selected && selected === key) {
+                option.setAttribute('selected', 'selected');
+            }
+            option.appendChild(content);
+            fragment.appendChild(option);
+        }
+    }
+    if (target) {
+        target.appendChild(fragment);
+    }
+}
+
+/*
+ * function to display underlyings
+ *
+ * we need separate function for this as sorting is different and later
+ * we may add submarket to it
+ */
+function displayUnderlyings(id, elements, selected) {
+    'use strict';
+    var target= document.getElementById(id),
+        fragment =  document.createDocumentFragment();
+
+    while (target && target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
     if (elements) {
         var keys = Object.keys(elements).sort(function(a, b) {
             return elements[a].localeCompare(elements[b]);

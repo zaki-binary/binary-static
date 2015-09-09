@@ -27,7 +27,7 @@ function processMarket() {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayOptions('underlying', Symbols.underlyings()[market]);
+    displayUnderlyings('underlying', Symbols.underlyings()[market]);
 
     processMarketUnderlying();
 }
