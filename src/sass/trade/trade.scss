@@ -1,20 +1,3 @@
-@keyframes spinning {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
-
-.spinner {
-    animation: spinning .2s * 5 infinite linear;
-}
-
-.progress {
-    @extend .spinner;
-    background-image: url('../images/pages/binary-symbol-logo.svg');
-    background-size: contain;
-    width: 4rem;
-    height: 4rem;
-}
-
 @mixin ul_segmented_navigation {
     box-shadow: inset 0px 0px 0px 1px rgba($COLOR_BLUE, 0.2);
     background-color: $COLOR_LIGHT_GRAY;
@@ -238,12 +221,6 @@
         #confirmation_message_container {
             margin-top: 15px;
         }
-    }
-
-    #loading_icon {
-        position: absolute;
-        top: 35%;
-        left: 46%;
     }
 
     @media all and (max-width: 640px) {
