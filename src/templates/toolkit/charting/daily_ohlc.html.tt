@@ -8,7 +8,7 @@ unchanged
 [% MACRO change_percent(change,final) GET (100 * change / ( final - change )) FILTER format('%.2f%%') %]
 
 <div class='grd-grid-6 grd-grid-mobile-12 grd-centered'>
-    <form class="smallfont" action="[% request.url_for('/trade/daily_prices') %]" method="post">
+    <form class="smallfont" action="[% request.url_for('/trade/daily_prices') %]" method="post" id="analysis_daily_prices_form">
         <input type="hidden" name="underlying_symbol" value="[% underlying.symbol %]"/>
         <input type="hidden" name="type" value="[% contract_type_inp %]"/>
         <div class="grd-grid-mobile-12">
@@ -18,7 +18,7 @@ unchanged
             <input type='text' size='3' value="[% days_to_display %]" name='days_to_display' id='days_to_display_input'/>
         </div>
         <div class="grd-grid-mobile-12">
-            <span class="button"><button class="button" value="[% l('View') %]" type="submit">[% l('View') %]</button></span>
+            <span class="button"><button class="button" value="[% l('View') %]" type="submit" id="daily_prices_submit">[% l('View') %]</button></span>
         </div>
     </form>
 </div>
