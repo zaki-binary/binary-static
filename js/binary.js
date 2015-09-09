@@ -9840,8 +9840,14 @@ function loadAnalysisTab() {
         })
         .done(function(data) {
             contentId.innerHTML = data;
+            if (currentTab === 'tab_intradayprices') {
+                bindSubmitForIntradayPrices();
+            } else if (currentTab === 'tab_ohlc') {
+                bindSubmitForDailyPrices();
+            }
         });
     }
+
 }
 
 /*
@@ -9880,6 +9886,56 @@ function getActiveTab() {
     }
 
     return selectedTab;
+}
+
+/*
+ * function to bind submit event for intraday prices
+ */
+function bindSubmitForIntradayPrices() {
+    var elm = document.getElementById('intraday_prices_submit');
+    if (elm) {
+        elm.addEventListener('click', function (e) {
+            e.preventDefault();
+            var formElement = document.getElementById('analysis_intraday_prices_form'),
+               contentTab = document.querySelector('#tab_intradayprices-content'),
+               underlyingSelected = contentTab.querySelector('select[name="underlying"]'),
+               dateSelected = contentTab.querySelector('select[name="date"]');
+
+            $.ajax({
+                method: 'GET',
+                url: formElement.getAttribute('action') + '&underlying=' + underlyingSelected.value + '&date=' + dateSelected.value,
+            })
+            .done(function(data) {
+                contentTab.innerHTML = data;
+                bindSubmitForIntradayPrices();
+            });
+        });
+    }
+}
+
+/*
+ * function to bind submit event for intraday prices
+ */
+function bindSubmitForDailyPrices() {
+    var elm = document.getElementById('daily_prices_submit');
+    if (elm) {
+        elm.addEventListener('click', function (e) {
+            e.preventDefault();
+            var formElement = document.getElementById('analysis_daily_prices_form'),
+               contentTab = document.querySelector('#tab_ohlc-content'),
+               underlyingSelected = sessionStorage.getItem('underlying'),
+               daysSelected = contentTab.querySelector('input[name="days_to_display"]');
+
+            $.ajax({
+                method: 'GET',
+                url: formElement.getAttribute('action') + '&underlying_symbol=' + underlyingSelected + '&days_to_display=' + daysSelected.value,
+            })
+            .done(function(data) {
+                contentTab.innerHTML = data;
+                bindSubmitForDailyPrices();
+            });
+        });
+    }
 }
 ;/*
  * Handles barrier processing and display
@@ -10598,7 +10654,7 @@ var Contract = (function () {
                         populate_durations(currentObj);
                     }
 
-                    if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward') {
+                    if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
                         startDates = currentObj.forward_starting_options;
                     }
 
@@ -11894,11 +11950,15 @@ function displayStartDates() {
 
     var startDates = Contract.startDates();
 
-    if (startDates) {
+    if (startDates && startDates.length) {
+
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
             option = document.createElement('option'),
-            content = document.createTextNode(Content.localize().textNow);
+            content = document.createTextNode(Content.localize().textNow),
+            row = document.getElementById('date_start_row');
+
+        row.style.display = 'flex';
 
         while (target && target.firstChild) {
             target.removeChild(target.firstChild);
@@ -11916,11 +11976,12 @@ function displayStartDates() {
 
             var ROUNDING = 5 * 60 * 1000;
             var start = moment();
-            start = moment(Math.ceil((+start) / ROUNDING) * ROUNDING).utc();
 
-            if (moment(a, 'YYYY MM DD').isSame(moment(start ,'YYYY MM DD'), 'day')) {
+            if(moment(start).isAfter(moment(a))){
                 a = start;
             }
+
+            a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
 
             while(a.isBefore(b)) {
                 option = document.createElement('option');
