@@ -3,38 +3,7 @@
  */
 
 /*
- * function to create list elements `<li>` and append to element with id `id`
- */
-function displayListElements(id, elements, selected) {
-    'use strict';
-    var target = document.getElementById(id),
-        fragment = document.createDocumentFragment(),
-        len = elements.length;
-
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
-
-    elements.forEach(function (element) {
-        var li = document.createElement('li'),
-            content = document.createTextNode(element);
-        li.setAttribute('id', element.toLowerCase());
-        if (selected && selected === element.toLowerCase()) {
-            li.setAttribute('class', 'active');
-        }
-        li.appendChild(content);
-        fragment.appendChild(li);
-    });
-    if (target) {
-        target.appendChild(fragment);
-    }
-}
-
-/*
- * function to display contract form
- *
- * We need this separate function because the contract obect has key value pair
- * whereas markets is just an array
+ * function to display contract form as element of ul
  */
 function displayContractForms(id, elements, selected) {
     'use strict';
