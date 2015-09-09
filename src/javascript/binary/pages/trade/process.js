@@ -38,17 +38,45 @@ function processMarketOfferings() {
     requestTradeAnalysis();
 }
 
+/*
+ * This function process the active symbols to get markets
+ * and underlying list
+ */
 function processActiveSymbols() {
     'use strict';
 
-    var activeSymbols = sessionStorage.getItem('active_symbols'),
-        market = getDefaultMarket();
-
     // populate the Symbols object
-    Symbols.details(JSON.parse(activeSymbols));
+    Symbols.details(JSON.parse(sessionStorage.getItem('active_symbols')));
 
-    displayOptions('markets', getAllowedMarkets(Symbols.markets()), market);
+    var market = getDefaultMarket();
+
+    // store the market
+    sessionStorage.setItem('market', market);
+
+    displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
+    processMarket();
+}
+
+
+/*
+ * Function to call when market has changed
+ */
+function processMarket() {
+    'use strict';
+
+    // we can get market from sessionStorage as allowed market
+    // is already set when this function is called
+    var market = sessionStorage.getItem('market');
     displayOptions('underlying', Symbols.underlyings()[market]);
+
+    processMarketUnderlying();
+}
+
+/*
+ * Function to call when underlying has changed
+ */
+function processMarketUnderlying() {
+    'use strict';
 
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
@@ -64,7 +92,13 @@ function processActiveSymbols() {
 function processContractFormOfferings(contracts) {
     'use strict';
 
-    Contract.details(contracts);
+    Contract.setContracts(contracts);
+
+    var formname = sessionStorage.getItem('formname') || 'risefall';
+
+    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
+
+    Contract.details(formname);
 
     // forget the old tick id i.e. close the old tick stream
     processForgetTickId();
@@ -104,8 +138,8 @@ function processPriceRequest() {
 
     showPriceLoadingIcon();
     processForgetPriceIds();
-    for (var typeOfContract in Contract.contractType()[Offerings.form()]) {
-        if(Contract.contractType()[Offerings.form()].hasOwnProperty(typeOfContract)) {
+    for (var typeOfContract in Contract.contractType()[Contract.form()]) {
+        if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
