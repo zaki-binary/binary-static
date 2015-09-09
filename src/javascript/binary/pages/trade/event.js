@@ -1,38 +1,25 @@
 /*
- * attach event to market list, so when client change market we need to update form
+ * attach event to market list, so when client change market we need to update undelryings
  * and request for new Contract details to populate the form and request price accordingly
  */
-var marketNavElement = document.getElementById('contract_market_nav');
+var marketNavElement = document.getElementById('contract_markets');
 if (marketNavElement) {
-    marketNavElement.addEventListener('click', debounce (function(e) {
-        if (e.target && e.target.nodeName === 'LI') {
+    marketNavElement.addEventListener('change', function(e) {
             var clickedMarket = e.target;
-            var isMarketActive = clickedMarket.classList.contains('active');
-            sessionStorage.setItem('market', clickedMarket.id);
-
-            setMarketPlaceholderContent();
+            sessionStorage.setItem('market', clickedMarket.value);
 
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
             sessionStorage.removeItem('formname');
-            toggleActiveNavMenuElement(marketNavElement, clickedMarket);
-            // if market is already active then no need to send same request again
-            if (!isMarketActive) {
-                processMarketOfferings();
-            }
-            var marketFormCheckbox = document.getElementById('market_show_menu');
-            if (marketFormCheckbox) {
-                marketFormCheckbox.checked = false;
-            }
-        }
-    }, 200 ));
+            processMarket();
+    });
 }
 
 /*
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
-var contractFormEventChange =  function (formName) {
+var contractFormEventChange = function (formName) {
     'use strict';
 
     var market = sessionStorage.getItem('market') || 'Forex';
