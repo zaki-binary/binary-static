@@ -70,13 +70,10 @@ function processContract(contracts) {
     if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
         formname = sessionStorage.getItem('formname');
     }
-    else if(contract_categories['risefall']){
-        formname = 'risefall';
-    }
     else{
-        formname = Object.keys(contract_categories)[0];
+        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
     }
-
+    
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
