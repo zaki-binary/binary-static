@@ -20,30 +20,30 @@
     color: $COLOR_WHITE;
     text-align: center;
     border-radius: 0;
-    margin-top: 10px;
+    margin-top: -15px;
     text-align: center;
-    padding: 0 0 0;
-    p {
-      line-height: 2em;
-      margin: 0;
-      background: $COLOR_DARK_BLUE;
-      font-size: 100%;
+    padding: 10px 0;
+    h3 {
+      color: $COLOR_DARK_BLUE;
+      padding: 15px 10px 0 10px;
     }
     #virtual-fields {
         input, select, textarea {
             border-radius: 3px;
+            margin-top:10px;
             padding: 0px;
         }
-        margin: 4px 0;
     }
     input[type=submit] {
       @include link-button;
+      width: 88%;
       background: $COLOR_BLUE;
       padding: 9px 10.83333%;
+      margin-top: 0;
+      margin-bottom: 15px;
       border: 0;
       white-space: normal;
-      font-size:18px;
-      -webkit-appearance:none;
+      font-size: 18px;
       &:hover {
                 text-decoration: none;
                 background-color: $COLOR_DARK_GREEN;
@@ -51,6 +51,7 @@
     }
     form {
         font-size: 100%;
+        margin: 5px 20px;
     }
     #signup_error {
         background: $COLOR_ORANGE;
@@ -79,17 +80,32 @@
 
 #xreason, #xacademy, #xtestimonial {
     padding-top: 10px;
-    padding-bottom: 10px;  
+    padding-bottom: 10px;
 }
 #xreason{
     background-color: $COLOR_LIGHT_GRAY;
 }
 #xtop {
-    padding-top: 50px;
+    padding-top: 30px;
+    padding-left: 10px;
     text-align: center;
-    p{
-      font-size:110%;
+    line-height: 1.5;
+    p {
+      font-size: 110%;
     }
+    ul li {
+      display: inline;
+      margin-left: 10px;
+    }
+}
+.break {
+    margin-top: 30px;
+}
+.no-break {
+    margin-top: 10px;
+}
+.boldtop {
+    font-size: 170%;
 }
 #xbadges {
     img {
@@ -103,7 +119,7 @@
 }
 .xhead {
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid $COLOR_GRAY;
 }
@@ -189,26 +205,19 @@
 
 #virtual-acc-form {
     input, select {
-        width: 35%;
+        width: 80%;
         display: inline-block;
-        margin-top: 15px;
+        margin-top: 10px;
         margin-bottom: 10px;
-        padding: 10px !important;
+        padding: 8px !important;
         font-size: 14px;
     }
     #residence {
-        height: 39px;
-        line-height: 39px;
-        width: 246px;
+        height: 35px;
+        line-height: 35px;
+        width: 87%;
         vertical-align: middle;
     }
-    #chooseapassword_2 {
-        visibility: hidden;
-    }
-}
-
-.virtual-acc-right {
-    margin-left: 40px;
 }
 #xacademy{
     .head-academy{
@@ -229,9 +238,10 @@
         margin-bottom: 0;
     }
 }
+
 .xtopcta {
     display: inline-block;
-    width: 35%;
+    width: 50%;
     margin-top: 5px;
     margin-bottom: 15px;
     padding: 15px!important;
@@ -245,21 +255,48 @@
 }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) {
     .home-content{
         #xtop {
             padding-top: 30px;
+            padding-left: 0;
+            line-height: 1;
+            ul li {
+              margin-left: 5px;
+            }
+        }
+        .break {
+          margin-top: 20px;
+          margin-bottom: 5px;
+        }
+        .no-break {
+          margin-top: 0px;
+        }
+        .xhead2 {
+            margin-top: 30px;
+        }
+        #open-account {
+            margin-left: 0;
+            margin-top: 20px;
+            padding:0;
+            h3 {
+                background: $COLOR_DARK_BLUE;
+                color: $COLOR_WHITE;
+                padding: 10px;
+            }
+            input[type=submit] {
+                width: 86% !important;
+            }
+            form {
+                margin: 5px 5px;
+            }
+        }
+        #residence {
+        width: 86% !important;
         }
         .virtual-acc-left {
             width: 80% !important;
             margin-right: 0;
-        }
-        .virtual-acc-right {
-            width: 80% !important;
-            margin-left: 0;
-        }
-        #residence {
-            width: 85% !important;
         }
         .xtopcta {
             width: 80%;
