@@ -34,7 +34,9 @@ var Content = (function () {
             textContractConfirmationReference: text.localize('Your transaction reference is'),
             textContractConfirmationBalance: text.localize('Your current balance is'),
             textFormRiseFall: text.localize('Rise/Fall'),
-            textFormHigherLower: text.localize('Higher/Lower')
+            textFormHigherLower: text.localize('Higher/Lower'),
+            textContractPeriod: text.localize('Contract period'),
+            textExercisePeriod: text.localize('Exercise period')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -102,6 +104,26 @@ var Content = (function () {
         var purchaseButtonBottom = document.getElementById('purchase_button_bottom');
         if (purchaseButtonBottom) {
             purchaseButtonBottom.textContent = localize.textPurchase;
+        }
+
+        var period_label = document.getElementById('period_label');
+        if (period_label) {
+            period_label.textContent = localize.textContractPeriod;
+        }
+
+        var jpbarrier_label = document.getElementById('jbarrier_label');
+        if (jpbarrier_label) {
+            jpbarrier_label.textContent = localize.textExercisePeriod;
+        }
+
+        var jpbarrier_high_label = document.getElementById('jbarrier_high_label');
+        if (jpbarrier_high_label) {
+            jpbarrier_high_label.textContent = localize.textHighBarrier;
+        }
+
+        var jpbarrier_low_label = document.getElementById('jbarrier_low_label');
+        if (jpbarrier_low_label) {
+            jpbarrier_low_label.textContent = localize.textLowBarrier;
         }
     };
 

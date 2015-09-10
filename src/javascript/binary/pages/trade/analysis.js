@@ -17,8 +17,8 @@ function requestTradeAnalysis() {
         data: {
             underlying: sessionStorage.getItem('underlying'),
             formname: sessionStorage.getItem('formname'),
-            contract_category: Offerings.form(),
-            barrier: Offerings.barrier()
+            contract_category: Contract.form(),
+            barrier: Contract.barrier()
         }
     })
     .done(function(data) {
