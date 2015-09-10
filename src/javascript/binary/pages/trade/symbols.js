@@ -35,7 +35,10 @@ var Symbols = (function () {
             }
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
-                tradeUnderlyings[currentMarket][currentUnderlying] = element['display_name'];
+                tradeUnderlyings[currentMarket][currentUnderlying] = {
+                    is_suspended: element['is_trading_suspended'],
+                    display: element['display_name']
+                };
             }
         });
     };
