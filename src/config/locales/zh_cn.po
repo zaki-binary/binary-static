@@ -9,8 +9,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-09-08 10:05+0200\n"
 "Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
-"Language-Team: Chinese (China) "
-"<https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
+"Language-Team: Chinese (China) <https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
 "Language: zh_cn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,9 +215,13 @@ msgstr "%1的价差合约需要可以制定客户最大损失限额的“止损�
 msgid "%1's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "利用%1受专利保护的报价技术，您可获得与银行间市场交易员同样的回报率。"
 
+#. (stash->{website_name})
+#: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
+msgid "%1's systems are now processing in excess of 1 million transactions/day (including virtual accounts)."
+msgstr ""
+
 #. (stash('broker_name')
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "%1: Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
 msgstr "%1：外汇、指数、大宗商品及智能指数的二元期权在线交易平台"
 
@@ -247,17 +250,16 @@ msgstr "%2提供虚拟资金账户，以便投资者掌握二元期权交易的�
 msgid "%ctx(If you look in the sky)You will see %plural(%1,one star, %d stars)."
 msgstr "%ctx（如果你仰望天空）你会看到 %plural(%1,一颗星星, %d 很多星星)。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:523
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:523
 msgid "%ctx(the return of investment of a contract)Return"
 msgstr "%ctx(投资合约的回报)回报"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "&#8220;Binary.com is one of the oldest and trustworthy partners we ever had. We have worked together for many years.&#8221;"
 msgstr "&#8220;Binary.com一向都是我们最长久和最伩赖的合作伙伴。我们已经有很多年的合作关系。&#8221;"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "&#8220;We have used www.binary.com for the last 8 years and highly recommend binary to all our members worldwide&#8221;"
 msgstr "&#8220;我们已经使用了 www.binary.com 达8年之久，非常乐意地向我们的全球会员推荐此网站&#8221;"
 
@@ -304,6 +306,10 @@ msgstr "0-1 年"
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3464
 msgid "0-5 transactions in the past 12 months"
 msgstr "过去12个月内0-5次交易"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/group_history.html.haml:1
+msgid "1 million transactions/day"
+msgstr ""
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3450
 msgid "1-2 years"
@@ -486,22 +492,18 @@ msgstr ""
 " </ul>"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All durations:</span> from 10 seconds to 365 days."
 msgstr "<span>所有合约期限:</span>从10 秒到 365 天。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All market conditions:</span> up/down, touch/no-touch, stays in/goes out."
 msgstr "<span>所有市场条件:</span>上涨/下跌，触及/未触及，范围内/范围外。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All markets:</span> currencies, stock indices, and commodities."
 msgstr "<span>所有市场:</span>外汇、股指和大宗商品。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All payouts:</span> from $1 to $100,000."
 msgstr "<span>所有赔付额:</span>从 1 美元到 10 万美元。"
 
@@ -540,6 +542,7 @@ msgid "<strong>Benchmarked prices</strong> - %1 benchmarks its prices daily agai
 msgstr "<strong>基准价格</strong> - %1 每日都对比银行间衍生品市场来制定基准价格。"
 
 #. (to_monetary_number_format($limit_price)
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1999
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1999
 msgid "<strong>Better execution price!</strong><br />  The price has moved in your favour from %1 to %2."
 msgstr "<strong>更好的成交价！</strong><br />  该价格变动对您有利，从 %1 变为 %2。"
@@ -1115,7 +1118,6 @@ msgid "And your weekends can take you to some of the world’s most exotic and b
 msgstr "周末到了，您可去世界上最奇特、最美丽的一些地方游玩。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Andrei Asavei <span>Top Binary Options Brokers</span>"
 msgstr "Andrei Asavei <span>顶尖二元期权代理</span>"
 
@@ -1238,8 +1240,8 @@ msgstr "资产"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Menu.pm:150
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Resources.pm:127
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2254
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2301
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2249
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2296
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/footer.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/footer.html.tt:83
@@ -1633,12 +1635,10 @@ msgid "Binary.com is an active proponent of the open-source movement and is in t
 msgstr "Binary.com是开源运动的积极倡导者，并正在开放一批代码库组件。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Binary.com is the award-winning industry pioneer in online options trading."
 msgstr "Binary.com是在线期权交易领域屡获殊荣的领先企业。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 msgid "Binary.com now requires your email and password to log in. If you have both a real-money and a virtual-money account, please use the password from your real-money account."
 msgstr "想要登录，Binary.com 现在请求您输入电子邮件地址和密码。如果您拥有真实资金和虚拟资金两种账户，请使用您的真实资金账户密码。"
 
@@ -1663,7 +1663,6 @@ msgid "Binary.com supports the <a target=\"_blank\" href=\"http://www.responsibl
 msgstr "Binary.com 支持<a target=\"_blank\" href=\"http://www.responsiblegamblingtrust.org.uk/\">负责任博采信托基金</a> (RGT) 。这是英国一家领先的慈善机构，致力于消除跟赌博有关的危害。该机构拨款资助教育活动、疾病预防和治疗服务以及委托进行各种协助人们进一步了解跟赌博危害有关的研究项目。它也创立了一个全国性电话服务专线，向寻求帮助的赌徒提供机密性咨询和情绪上的支持。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Binary.com's patented pricing technology allows you to benefit from the same rates of return as traders in the interbank market."
 msgstr "利用Binary.com受专利保护的报价技术，您可获得与银行间市场交易员同样的回报率。"
 
@@ -1870,6 +1869,7 @@ msgstr "更改密码"
 msgid "Change in account settings"
 msgstr "账户设置更改"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2032
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2032
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:671
 msgid "Chart"
@@ -1945,7 +1945,6 @@ msgid "Choose a duration from 10 seconds to 365 days."
 msgstr "合约期限的选择范围为10 秒到 365 天。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Choose a password"
 msgstr "选用密码"
 
@@ -2274,7 +2273,7 @@ msgid "Contract barrier must be positive."
 msgstr "合约障碍必须为正数。"
 
 #. ($end_of_bo->date)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2381
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2376
 msgid "Contract can not expire during the end-of-year holiday period. Select an expiry date after %1."
 msgstr "合约的到期日不能设置在年末节日期间。选择 %1 之后的一个到期日。"
 
@@ -2286,25 +2285,25 @@ msgstr "目前合约无法卖出。"
 msgid "Contract expired"
 msgstr "合约已到期"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2103
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2098
 msgid "Contract has already expired."
 msgstr "合约已经到期。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1410
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1405
 msgid "Contract market price is too close to final payout."
 msgstr "合约市场价格离最终赔付额太近。"
 
 #. ($eod_blackout_expiry->as_string)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2144
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2139
 msgid "Contract may not expire within the last %1 of trading."
 msgstr "合约不能在交易的最后%1内到期。"
 
 #. ($minimum_hold->as_string)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1978
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1973
 msgid "Contract must be held for %1 before resale is offered."
 msgstr "合同在提供转售前必须保留%1。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2112
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2107
 msgid "Contract must expire during trading hours."
 msgstr "合约必须在交易时段内到期。"
 
@@ -2344,12 +2343,12 @@ msgid "Contracts on %1 which both start and end between %2 and %3 on the same da
 msgstr "%1在同一天始于及结束于 %2 和 %3 之间的合约不可用。"
 
 #. ($underlying->translated_display_name()
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2160
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2155
 msgid "Contracts on %1 with duration more than 24 hours must expire at the end of a trading day."
 msgstr "期限超过24小时的%1合约必须在同一交易日到期。"
 
 #. ($underlying->translated_display_name()
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2130
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2125
 msgid "Contracts on %1 with durations under 24 hours must expire on the same trading day."
 msgstr "期限小于24小时的%1合约必须在同一交易日到期。"
 
@@ -2410,10 +2409,6 @@ msgid "Cover is made available on the basis of the depositor rather than on the 
 msgstr "所提供的补偿保障是根据存款个体，而不是根据存款次数。意思是说，如果某人拥有多个账户， 他将最多只能领取总金额为20,000欧元的补偿。任何超过此限额金额的款数将不提供保障，完全由投资者自行负责。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-msgid "Create account"
-msgstr "开立账户"
-
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Create free account"
 msgstr "开立免费账户"
 
@@ -2459,7 +2454,7 @@ msgstr "当前价位"
 msgid "Current Spot"
 msgstr "当前现货价格"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1928
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1923
 msgid "Current market price is 0."
 msgstr "当前市场价格是 0。"
 
@@ -2492,7 +2487,7 @@ msgstr "客户资金"
 msgid "Customer Support"
 msgstr "客户支持"
 
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "Customize your trades to meet your needs."
 msgstr "按需定制您的交易。"
 
@@ -2501,6 +2496,7 @@ msgstr "按需定制您的交易。"
 msgid "Daily"
 msgstr "毎日"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2055
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2055
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:31
 msgid "Daily Prices"
@@ -2755,6 +2751,7 @@ msgid "Deposit To Payment Agent"
 msgstr "存入支付代理"
 
 #. ($bet->currency, to_monetary_number_format($bet->ask_price)
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:477
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:477
 msgid "Deposit of %1 %2 is required. Current spread: %3 points"
 msgstr "需要%1 %2 定金。当前价差： %3 点"
@@ -2910,7 +2907,6 @@ msgid "Documents are required to verify your identity"
 msgstr "需要提交文件才能验证您的身份"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Don't limit yourself! Whatever your market view, Binary.com allows you to put your strategy to work and profit from your predictions."
 msgstr "不要局限自己！无论您的市场观点如何，Binary.com  都能让您的交易策略实现价值，让您能通过预测市场获利。"
 
@@ -2950,6 +2946,7 @@ msgstr ""
 msgid "Downloadable application"
 msgstr "可下载的应用程序"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm.tidyup:33
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm:33
 msgid "Dr"
 msgstr "博士"
@@ -2973,7 +2970,7 @@ msgid "Duration"
 msgstr "期限"
 
 #. ($shortest->as_string, $longest->as_string)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2265
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2260
 msgid "Duration must be between %1 and %2."
 msgstr "期限须在%1 与 %2之间。"
 
@@ -3059,7 +3056,6 @@ msgid "Eliminating Antisocial Forces"
 msgstr "Eliminating Antisocial Forces"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/header.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/payment_agent_further_info.html.tt:27
 #: /home/git/translations/binary-static/src/templates/toolkit/global/header.html.tt:76
@@ -3124,7 +3120,6 @@ msgid "Enter the barrier in terms of the difference from the spot price. If you 
 msgstr "请按与现货价格差额的形式输入障碍水平。如果您输入 +0.005 ，那么您将买入障碍水平比入市现价高 0.005 的合约。入市现价为收到您订单之后的下一个价格"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Enter your email"
 msgstr "请输入您的电子邮件"
 
@@ -3257,7 +3252,6 @@ msgid "Failed to update trade description."
 msgstr "无法更新交易描述。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/ticker.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/ticker.html.haml:1
 msgid "Fall"
 msgstr "下跌"
 
@@ -3440,7 +3434,6 @@ msgid "Forex trading frequency"
 msgstr "外汇交易频率"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 msgid "Forgot Login ID or Password?"
 msgstr "忘记登录 ID 或密码?"
 
@@ -3587,6 +3580,7 @@ msgstr "优厚的佣金结构"
 msgid "Get %1 when you deposit %2."
 msgstr "存 %2 奖 %1。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1179
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1179
 msgid "Get Prices"
 msgstr "获取报价"
@@ -3603,7 +3597,6 @@ msgid "Get started"
 msgstr "开始交易"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Get started now"
 msgstr "现在就开始"
 
@@ -3637,7 +3630,9 @@ msgstr "开始"
 
 #. (stash->{website_name})
 #: /home/git/translations/binary-static/src/templates/haml/static/bulk_trader_facility.html.haml:1
-msgid "Go to <a href='https://bulktrader.binary.com' target='_blank'>https://bulktrader.binary.com</a> and log in to the system using your %1 trading account."
+#, fuzzy
+#| msgid "Go to <a href='https://bulktrader.binary.com' target='_blank'>https://bulktrader.binary.com</a> and log in to the system using your %1 trading account."
+msgid "Go to <a href='https://www.binarybulktrader.com' target='_blank'>https://www.binarybulktrader.com</a> and log in to the system using your %1 trading account."
 msgstr "前往 <a href='https://bulktrader.binary.com' target='_blank'>https://bulktrader.binary.com</a>及使用您的%1交易账户登录系统。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/misc/landing_page.html.tt:9
@@ -3654,7 +3649,6 @@ msgid "Go to the <a href=\"https://login.binary.com/signup.php\">sign up page</a
 msgstr "前往<a href=\"https://login.binary.com/signup.php\">注册页面</a> 注册成为联盟会员 。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Go with the leader"
 msgstr "选择行业领军企业"
@@ -3840,7 +3834,6 @@ msgid "However, in order to increase your withdrawal limits, you are kindly requ
 msgstr "但是，为了提高取款限额，请您务必遵照以下要求行事。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Hundreds of deposit and withdrawal options."
 msgstr "数以千计的存款和取款选项。"
 
@@ -4302,6 +4295,7 @@ msgstr "释义"
 msgid "Intraday contracts may not cross market open."
 msgstr "日内合约不能跨越开市。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2067
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2067
 msgid "Intraday prices"
 msgstr "日内价格"
@@ -4344,7 +4338,7 @@ msgstr "无效的电子邮件地址"
 msgid "Invalid email and password combination."
 msgstr "无效的电子邮件地址和密码组合。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1854
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1849
 msgid "Invalid payout currency."
 msgstr "无效赔付币种。"
 
@@ -4357,7 +4351,7 @@ msgstr "无效期限输入！请输入在 0 和 #1 之间的期限"
 msgid "Invalid request"
 msgstr "无效请求"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1908
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1903
 msgid "Invalid stake"
 msgstr "无效投注金额"
 
@@ -4501,27 +4495,22 @@ msgid "Japan website Download Text for Terms and Conditions Document"
 msgstr "Japan website Download Text for Terms and Conditions Document"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_forces.html.tt:6
-#| msgid "Eliminating Antisocial Forces"
 msgid "Japan website Eliminating Antisocial Forces List item 1"
 msgstr "Japan website Eliminating Antisocial Forces List item 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_forces.html.tt:10
-#| msgid "Eliminating Antisocial Forces"
 msgid "Japan website Eliminating Antisocial Forces List item 2"
 msgstr "Japan website Eliminating Antisocial Forces List item 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_forces.html.tt:14
-#| msgid "Eliminating Antisocial Forces"
 msgid "Japan website Eliminating Antisocial Forces List item 3"
 msgstr "Japan website Eliminating Antisocial Forces List item 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_forces.html.tt:18
-#| msgid "Eliminating Antisocial Forces"
 msgid "Japan website Eliminating Antisocial Forces List item 4"
 msgstr "Japan website Eliminating Antisocial Forces List item 4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_forces.html.tt:22
-#| msgid "Eliminating Antisocial Forces"
 msgid "Japan website Eliminating Antisocial Forces List item 5"
 msgstr "Japan website Eliminating Antisocial Forces List item 5"
 
@@ -4630,347 +4619,279 @@ msgid "Japan website Ethics Code Paragraph 3"
 msgstr "Japan website Ethics Code Paragraph 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:6
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1"
 msgstr "Japan website Exclusion of Liability List item 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:10
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.1"
 msgstr "Japan website Exclusion of Liability List item 1.1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:46
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.10"
 msgstr "Japan website Exclusion of Liability List item 1.10"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:50
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.11"
 msgstr "Japan website Exclusion of Liability List item 1.11"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:54
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.12"
 msgstr "Japan website Exclusion of Liability List item 1.12"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:58
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.13"
 msgstr "Japan website Exclusion of Liability List item 1.13"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:14
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.2"
 msgstr "Japan website Exclusion of Liability List item 1.2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:18
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.3"
 msgstr "Japan website Exclusion of Liability List item 1.3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:22
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.4"
 msgstr "Japan website Exclusion of Liability List item 1.4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:26
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.5"
 msgstr "Japan website Exclusion of Liability List item 1.5"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:30
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.6"
 msgstr "Japan website Exclusion of Liability List item 1.6"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:34
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.7"
 msgstr "Japan website Exclusion of Liability List item 1.7"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:38
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.8"
 msgstr "Japan website Exclusion of Liability List item 1.8"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:42
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 1.9"
 msgstr "Japan website Exclusion of Liability List item 1.9"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:64
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 2"
 msgstr "Japan website Exclusion of Liability List item 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:68
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 2.1"
 msgstr "Japan website Exclusion of Liability List item 2.1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/liability_exclusion.html.tt:72
-#| msgid "Exclusion of Liability"
 msgid "Japan website Exclusion of Liability List item 2.2"
 msgstr "Japan website Exclusion of Liability List item 2.2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:6
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning List item 1"
 msgstr "Japan website General Risk Warning List item 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:10
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning List item 2"
 msgstr "Japan website General Risk Warning List item 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:14
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning List item 3"
 msgstr "Japan website General Risk Warning List item 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:18
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning List item 4"
 msgstr "Japan website General Risk Warning List item 4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:22
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning Paragraph 1"
 msgstr "Japan website General Risk Warning Paragraph 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:25
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning Paragraph 2"
 msgstr "Japan website General Risk Warning Paragraph 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk_warning.html.tt:28
-#| msgid "General Risk Warning"
 msgid "Japan website General Risk Warning Paragraph 3"
 msgstr "Japan website General Risk Warning Paragraph 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:9
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 1"
 msgstr "Japan website Investment Solicitation Policy Bold list item 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:63
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 10"
 msgstr "Japan website Investment Solicitation Policy Bold list item 10"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:69
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 11"
 msgstr "Japan website Investment Solicitation Policy Bold list item 11"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:15
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 2"
 msgstr "Japan website Investment Solicitation Policy Bold list item 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:21
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 3"
 msgstr "Japan website Investment Solicitation Policy Bold list item 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:27
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 4"
 msgstr "Japan website Investment Solicitation Policy Bold list item 4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:33
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 5"
 msgstr "Japan website Investment Solicitation Policy Bold list item 5"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:39
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 6"
 msgstr "Japan website Investment Solicitation Policy Bold list item 6"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:45
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 7"
 msgstr "Japan website Investment Solicitation Policy Bold list item 7"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:51
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 8"
 msgstr "Japan website Investment Solicitation Policy Bold list item 8"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:57
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Bold list item 9"
 msgstr "Japan website Investment Solicitation Policy Bold list item 9"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:11
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 1"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:65
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 10"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 10"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:71
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 11"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 11"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:17
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 2"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:23
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 3"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:29
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 4"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:35
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 5"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 5"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:41
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 6"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 6"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:47
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 7"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 7"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:53
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 8"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 8"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:59
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Explanation of item 9"
 msgstr "Japan website Investment Solicitation Policy Explanation of item 9"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/solicitation.html.tt:4
-#| msgid "Investment Solicitation Policy"
 msgid "Japan website Investment Solicitation Policy Paragraph 1"
 msgstr "Japan website Investment Solicitation Policy Paragraph 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_connection.html.tt:9
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:16
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 1"
 msgstr "Japan website No Connections With Antisocial Forces List item 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:52
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 10"
 msgstr "Japan website No Connections With Antisocial Forces List item 10"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:56
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 11"
 msgstr "Japan website No Connections With Antisocial Forces List item 11"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:60
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 12"
 msgstr "Japan website No Connections With Antisocial Forces List item 12"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:73
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 13"
 msgstr "Japan website No Connections With Antisocial Forces List item 13"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_connection.html.tt:13
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:20
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 2"
 msgstr "Japan website No Connections With Antisocial Forces List item 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:24
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 3"
 msgstr "Japan website No Connections With Antisocial Forces List item 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:28
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 4"
 msgstr "Japan website No Connections With Antisocial Forces List item 4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:32
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 5"
 msgstr "Japan website No Connections With Antisocial Forces List item 5"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:36
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 6"
 msgstr "Japan website No Connections With Antisocial Forces List item 6"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:40
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 7"
 msgstr "Japan website No Connections With Antisocial Forces List item 7"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:44
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 8"
 msgstr "Japan website No Connections With Antisocial Forces List item 8"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:48
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces List item 9"
 msgstr "Japan website No Connections With Antisocial Forces List item 9"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_connection.html.tt:15
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/antisocial_connection.html.tt:4
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:62
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 1"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:4
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 1.1"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 1.1"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:6
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 1.2"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 1.2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:8
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 1.3"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 1.3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:10
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 1.4"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 1.4"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:13
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:65
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 2"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 2"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/risk.html.tt:68
-#| msgid "No Connections With Antisocial Forces"
 msgid "Japan website No Connections With Antisocial Forces Paragraph 3"
 msgstr "Japan website No Connections With Antisocial Forces Paragraph 3"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal_jp/contract.html.tt:4
-#| msgid "Pre-contract Document"
 msgid "Japan website Pre-contract Document Paragraph 1"
 msgstr "Japan website Pre-contract Document Paragraph 1"
 
@@ -5150,7 +5071,6 @@ msgid "Join our analysts LIVE twice a week for a comprehensive analysis of recen
 msgstr "加入我们每周两次的分析师“实时在线分析”(LIVE)，对全球金融市场的最新发展和趋势进行全面分析。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Joshua Cavallaro <span> Markets And You Trader.</span>"
 msgstr "Joshua Cavallaro <span> 让您在交易市场得心应手。</span>"
 
@@ -5209,6 +5129,7 @@ msgstr "最新"
 msgid "Last Digit Prediction"
 msgstr "最后数字的预测"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2085
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2088
 msgid "Last Digit Stats"
 msgstr "最后数字的统计数据"
@@ -5382,7 +5303,6 @@ msgid "Logarithmic Scale"
 msgstr "对数刻度"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 msgid "Login"
 msgstr "登录"
 
@@ -5406,7 +5326,6 @@ msgid "Login Success"
 msgstr "登陆成功"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 msgid "Login Trouble"
 msgstr "登录故障"
 
@@ -5428,6 +5347,7 @@ msgstr "登录故障"
 msgid "Logout"
 msgstr "注销"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1428
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1428
 msgid "Long"
 msgstr "长仓"
@@ -5555,7 +5475,7 @@ msgid "Market exit price"
 msgstr "平仓价"
 
 #. ($safer_expiry->date)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2329
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2324
 msgid "Market holiday during the contract period. Select an expiry date after %1."
 msgstr "该合约期限内的市场假日。在 %1之后选择到期日。"
 
@@ -5693,6 +5613,7 @@ msgstr "最小: %1 最大: %2"
 msgid "Minimum"
 msgstr "最小"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm.tidyup:31
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm:31
 msgid "Miss"
 msgstr "遗漏"
@@ -5701,13 +5622,13 @@ msgstr "遗漏"
 msgid "Missing market data for contract duration"
 msgstr "合约期间的遗漏市场数据"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2212
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2207
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Role/ExpireAtEnd.pm:135
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Role/ExpireAtEnd.pm:76
 msgid "Missing market data for contract period."
 msgstr "合约期间的遗漏市场数据。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1166
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1161
 msgid "Missing market data for entry spot."
 msgstr "入市现价的遗漏市场数据。"
 
@@ -5799,14 +5720,17 @@ msgstr "移动平均线通过消除短期价格波动，提供了判断趋势方
 msgid "Moving averages provide an objective measure of trend direction by smoothing out short-term price fluctuations.In a Weighted Moving Average, the previous periods have less weight for periods further away in the past. In an n-day WMA the latest day has weight n, the second latest n-1, etc, down to zero.Shorter length moving averages are more sensitive and signals trends much faster than longer length MAs, but also give more false signals. A longer length MA is more reliable but only picks up the big trend."
 msgstr "移动平均线通过消除短期价格波动，提供了判断趋势方向的一个客观指标。在加权移动平均线中，前期的权重要比过去更早期的权重大。在n天加权移动平均线中，最新日期的权重为n，该日之前的日期为n-1，最后一直减少到0。期限较短的移动平均线更敏感，比期限较长的移动平均线能更快显示趋势，但也会发出更多错误信号。期限较长的移动平均线更可靠，但只能显示重大趋势。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm.tidyup:34
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm:34
 msgid "Mr"
 msgstr "先生"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm.tidyup:32
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm:32
 msgid "Mrs"
 msgstr "夫人"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm.tidyup:30
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm:30
 msgid "Ms"
 msgstr "女士"
@@ -5967,6 +5891,7 @@ msgstr "没有公司许可，不可发布任何广告材料。在您网站发布
 msgid "Note: Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price."
 msgstr "注：合约将在我们服务器收到请求时以当时的市场价格卖出。此价格可能会与报价有差异。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1146
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1146
 msgid "Note: During summer time (daylight saving), GMT is one hour behind BST (British Summer Time)"
 msgstr "注：在夏季（夏令时），格林威治标准时间 （GMT） 比英国夏令时（BST）晚1小时"
@@ -6024,7 +5949,7 @@ msgid "Number of ticks"
 msgstr "跳动点数目"
 
 #. ($min_tick, $max_tick)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2198
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2193
 msgid "Number of ticks must be between %1 and %2"
 msgstr "跳动点数目须在%1 与 %2之间"
 
@@ -6109,7 +6034,6 @@ msgid "Online Marketing"
 msgstr "在线市场营销"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/styles.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/styles.html.haml:1
 msgid "Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices"
 msgstr "可交易外汇、指数、大宗商品及智能指数的二元期权在线交易平台"
 
@@ -6153,7 +6077,6 @@ msgid "Open a free account"
 msgstr "开立免费账户"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 msgid "Open an Account"
 msgstr "开设账户"
 
@@ -6344,7 +6267,6 @@ msgstr "合作伙伴"
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Menu.pm:91
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3722
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/layouts/default/header.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/global/header.html.tt:77
 msgid "Password"
@@ -6403,7 +6325,6 @@ msgid "Payment Methods"
 msgstr "支付方式"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Payment methods"
 msgstr "支付方式"
 
@@ -6427,16 +6348,17 @@ msgid "Payout Currency"
 msgstr "赔付货币"
 
 #. (to_monetary_number_format($transaction_parameters->{payout})
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1644
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1644
 msgid "Payout has moved in your favour from %1 to %2."
 msgstr "赔付变得对您有利，从 %1 变为 %2。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1881
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1876
 msgid "Payout may not have more than two decimal places."
 msgstr "赔付额的小数点后不超过两位数。"
 
 #. (to_monetary_number_format($payout_min, 1)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1418
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1413
 msgid "Payout must be between %1 and %2."
 msgstr "赔付额须在%1 与 %2之间。"
 
@@ -6758,6 +6680,7 @@ msgstr "请指定您的国家。"
 msgid "Please switch accounts to trade this contract."
 msgstr "请换一个账户进行此合同交易。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:940
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:940
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1362
 msgid "Please switch accounts to trade this market."
@@ -6844,8 +6767,8 @@ msgstr "表示您证券组合中未平仓合约的最大总赔付额。如果达
 msgid "Prevailing market price cannot be determined at this time."
 msgstr "现行市价目前无法确定。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1179
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2409
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1174
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2404
 msgid "Prevailing market price cannot be determined."
 msgstr "现行市价无法确定。"
 
@@ -6863,6 +6786,7 @@ msgid "Price Oscillator"
 msgstr "价格摆动指标"
 
 #. (to_monetary_number_format($transaction_parameters->{price})
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1639
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1639
 msgid "Price has moved in your favour from %1 to %2."
 msgstr "该价格变动对您有利，从 %1 变为 %2。"
@@ -6871,6 +6795,7 @@ msgstr "该价格变动对您有利，从 %1 变为 %2。"
 msgid "Price the trade."
 msgstr "对交易进行报价。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2073
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2073
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Menu.pm:171
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Resources.pm:318
@@ -6917,6 +6842,7 @@ msgstr "执行"
 msgid "Processing Time"
 msgstr "处理时间"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm.tidyup:35
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Language.pm:35
 msgid "Prof"
 msgstr "教授"
@@ -6980,6 +6906,7 @@ msgstr "无偿向公司提供与公司有关的全部数据和信息（包括但
 msgid "Provide us with the following documentation:"
 msgstr "请向我们提供下列文件："
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1515
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1515
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:26
 msgid "Purchase"
@@ -7092,7 +7019,6 @@ msgstr "变动率"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1110
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Re-enter your password"
 msgstr "重新输入密码"
 
@@ -7113,7 +7039,7 @@ msgstr "真实账户"
 msgid "Real Money Account Opening"
 msgstr "开立真实资金账户"
 
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "Real-time Prices"
 msgstr "实时价格"
 
@@ -7233,26 +7159,26 @@ msgstr "表示您的投资组合中未平仓合约的最大数量。您投资组
 msgid "Represents the maximum volume of contracts that you may purchase in any given trading day."
 msgstr "表示任一给定交易日您可以买入的最大合约数量。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2380
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2375
 msgid "Resale of this contract is not offered due to end-of-year market holidays."
 msgstr "因为年底市场休假，该合约不能转售。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2328
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2323
 msgid "Resale of this contract is not offered due to market holiday during contract period."
 msgstr "因为合约期限内存在市场假日，该合约不能转售。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2349
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2344
 msgid "Resale of this contract is not offered due to market holidays during contract period."
 msgstr "因为合约期限内存在市场假日，该合约不能转售。"
 
 #. ($shortest->as_string)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2250
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2245
 msgid "Resale of this contract is not offered with less than %1 remaining."
 msgstr "不允许转售少于%1的合约。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1817
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2244
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2299
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1812
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2239
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2294
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Pricing/Engine/Role/StandardMarkup.pm:173
 msgid "Resale of this contract is not offered."
 msgstr "该合约不能转售。"
@@ -7294,12 +7220,11 @@ msgstr "重试"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home/ticker.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/ticker.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/sell_success_ajax.html.tt:12
 msgid "Return"
 msgstr "回报"
 
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "Returns above 100%"
 msgstr "高于100% 的回报"
 
@@ -7318,7 +7243,6 @@ msgid "Right click to add studies, lines, overlays and more. You can save your w
 msgstr "右击以添加技术分析、线条、覆盖指标及更多。您可从顶部菜单选择“工作区”保存您的工作"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/ticker.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/ticker.html.haml:1
 msgid "Rise"
 msgstr "上涨"
 
@@ -7574,6 +7498,9 @@ msgstr "设置"
 msgid "Settles"
 msgstr "结算"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2175
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:819
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:921
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2178
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:819
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:921
@@ -7582,11 +7509,11 @@ msgid "Sharp Prices. Smart Trading."
 msgstr "精准报价，智能交易。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Sharp prices"
 msgstr "精准报价"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1430
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1430
 msgid "Short"
 msgstr "短仓"
@@ -7719,6 +7646,7 @@ msgstr "对不起，不提供 %1的 OHLC。"
 msgid "Sorry, Payment Agent Transfer is temporarily disabled due to system maintenance. Please try again in 30 minutes."
 msgstr "对不起，由于系统维护，支付代理转账暂停使用。请 30 分钟后重试。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:794
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:794
 msgid "Sorry, an error occured with this trade.  Please try again in a few minutes.  If the problem persists, please contact customer support."
 msgstr "对不起，此交易发生错误。请几分钟后再试。如果问题持续出现，请联系客户支持人员。"
@@ -7866,6 +7794,7 @@ msgid "Sorry, you have exceeded the maximum allowable transfer amount for today.
 msgstr "对不起，您已超过今日允许的最大转账金额。"
 
 #. ($limit_excludeuntil)
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2166
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2169
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Hooks.pm:159
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1430
@@ -7935,7 +7864,7 @@ msgid "Stake"
 msgstr "投注资金"
 
 #. (to_monetary_number_format($stake_min, 1)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1411
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1406
 msgid "Stake must be between %1 and %2."
 msgstr "投注额须在%1 与 %2之间。"
 
@@ -7962,21 +7891,21 @@ msgstr "开始学习"
 msgid "Start time"
 msgstr "开始时间"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2010
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2005
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:411
 msgid "Start time is in the past"
 msgstr "开始时间是在过去"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2000
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1995
 msgid "Start time is invalid."
 msgstr "开始时间无效。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1990
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1985
 msgid "Start time must be before expiry time."
 msgstr "开始时间必须早于到期时间。"
 
 #. ($forward_starting_blackout->as_string)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2038
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2033
 msgid "Start time on forward-starting contracts must be more than %1 from now."
 msgstr "远期起点合约的开始时间必须距离现在超过 %1。"
 
@@ -8547,7 +8476,6 @@ msgid "The Performance indicator displays a security's price performance as a pe
 msgstr "表现指标以百分数的形式显示股票价格表现，有时候又被称为\"标准化\"图表。该指标表示自显示首期以来股票上涨的百分比。比如，如果表现指标为10，意味着股票价格在图表左侧显示首期后上涨了10%。同理，-10意味着价格的股票自显示首期后下跌了10%。表现图表非常有助于比较不同股票的价格变动。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "The Premier Platform for Binary Options Trading"
 msgstr "二元期权交易的首选平台"
 
@@ -8707,7 +8635,7 @@ msgstr "合约已到期"
 msgid "The contract is not available after %1 GMT."
 msgstr "该合约在格林威治标准时间 %1 过后失效。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:486
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:481
 msgid "The contract must expire on a trading day."
 msgstr "合约到期日必须为交易日。"
 
@@ -8732,7 +8660,6 @@ msgid "The duration is the length of a purchased trade (see 'contract period')."
 msgstr "期限是所买入交易的时间周期（参考“合约期限”’）。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "The easiest way to get started in the financial markets"
 msgstr "参与金融市场最简便的方法"
 
@@ -8801,7 +8728,7 @@ msgstr "306美元亏损是以退出和进场价位的相差额乘以每一点的
 msgid "The market exit price is the price in effect at the end of the contract period."
 msgstr "市场平仓价为合约期限到期时的有效价格。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2016
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2011
 msgid "The market must be open at the start time."
 msgstr "市场必须在开始时间已经开市。"
 
@@ -8885,6 +8812,7 @@ msgstr "投注金额即交易者为执行交易所必需支付的金额。"
 msgid "The stop-loss and stop-profit are guaranteed. The loss and profit are limited to the stop-loss and stop-profit respectively.  When the exit level touches either the stop-loss or stop-profit, the contract will be closed at the stop-loss or stop-profit level."
 msgstr "我们提供止损和止盈的保证。亏损和盈利分别受止损和止盈所限制。  当退出价位接触止损或止盈任何一项时，合约将在该止损或止盈价位平仓。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:792
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:792
 msgid "The system is missing critical pricing information. Please try again in a few minutes, or try a different market."
 msgstr "系统丢失关键定价信息。 请几分钟后再试，或尝试别的市场。"
@@ -9069,6 +8997,7 @@ msgstr "此 URL 无效。"
 
 #. ($r->url_for("contact")
 #. (request()
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2157
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2160
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Hooks.pm:150
 msgid "This account is unavailable. For any questions please contact <a href=\"%1\">Customer Support</a>."
@@ -9107,7 +9036,7 @@ msgstr "此合约已卖出。"
 msgid "This contract has expired."
 msgstr "此合约已到期。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1053
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1048
 msgid "This contract is affected by corporate action."
 msgstr "该合约已受共同行为所影响。"
 
@@ -9124,7 +9053,7 @@ msgstr "此账户不可交易该合约。"
 msgid "This contract lost"
 msgstr "此合约亏损"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1928
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1923
 msgid "This contract offers no return."
 msgstr "该合约不提供回报。"
 
@@ -9203,7 +9132,7 @@ msgstr "对太忙碌，没时间或专门知识不足以跟进市场走势的<a 
 msgid "This market closes early today at"
 msgstr "此市场今日在下列时间提前收市"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2016
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2011
 msgid "This market is presently closed."
 msgstr "此市场目前已收市。"
 
@@ -9237,7 +9166,7 @@ msgstr "此页不可用。"
 msgid "This promotion is only available to new Clients. Existing or former Clients do not qualify. It is only available once to each Client."
 msgstr "本促销活动仅适用于新客户。现有或以往客户不符合条件。每一客户仅能获得一次。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1818
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1813
 msgid "This trade is not offered."
 msgstr "不提供此交易。"
 
@@ -9349,7 +9278,7 @@ msgid "Today's Bet"
 msgstr "今日预测"
 
 #. ($safer_expiry->date)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2350
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2345
 msgid "Too many market holidays during the contract period. Select an expiry date after %1."
 msgstr "该合约期限内有太多市场假日，请在 %1之后选择到期日。"
 
@@ -9398,13 +9327,9 @@ msgstr "城镇/城市"
 msgid "Trade"
 msgstr "交易"
 
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
+#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 msgid "Trade 24/7, even on weekends."
 msgstr "全天均可执行交易，包括周末。"
-
-#: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-msgid "Trade 24/7, even on weekends. Customize your trades to meet your needs."
-msgstr "全天候进行交易，包括周末。按需定制您的交易。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/buy_success_ajax.html.tt:2
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/sell_success_ajax.html.tt:2
@@ -9424,7 +9349,6 @@ msgid "Trade all market conditions"
 msgstr "交易各种市况"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Trade in the world's financial markets in a simple, user-friendly platform."
 msgstr "在提供简单、人性化的全球性金融市场平台进行交易。"
 
@@ -9454,7 +9378,6 @@ msgid "Trade with ease with %1's wide range of deposit and withdrawal methods. Y
 msgstr "易进易出 - %1 提供广泛的存取款方式。您的资金均由 3A 级银行单独托管。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Trade your way"
 msgstr "以您的方式执行交易"
@@ -9487,11 +9410,11 @@ msgstr "交易规则"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Menu.pm:157
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Resources.pm:489
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1791
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2064
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2079
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2095
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2319
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1786
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2059
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2074
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2090
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2314
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 msgid "Trading Times"
@@ -9517,21 +9440,22 @@ msgstr "二元期权交易可能不适合每一个人。因此，请确保您完
 msgid "Trading in Binary Options is speculative and involves a high degree of risk that can result in the loss of your entire investment. Therefore, trading in Binary Options is appropriate only for persons that understand and are willing to assume the economic, legal and other risks involved in such transactions. You should be satisfied that Binary Options trading is suitable for you in light of your investment circumstances and attitude towards risk before trading. You should not engage in speculative Binary Options trading unless you understand the basic aspects of such trading and its risks. If you are in any doubt as to whether Binary Option trading is appropriate and suitable for you, please seek independent advice from a investment consulting professional. %1 does not provide such advice. It is your responsibility, taking into account your personal circumstances and investment resources, to take particular care and make careful considerations independently, both prior to applying to engage in Binary Options with %1, as well as prior to making any individual order. Where you do not understand the risks involved in applying for a trading account with %1 or in making any individual order, you should seek advice and consultation from an independent investment advisor. If you continue to not understand the risks involved in trading in Binary Options, you should not trade at all."
 msgstr "二元期权交易是投机活动，冒着很高的风险，可能会造成您的所有投资亏损。因此，进行二元期权交易活动只适合明白并愿意承担经济、法律和其他相关风险的人士。进行交易前，您必须事先评估并对您的投资情况和态度与二元期权交易的适合性感到满意。除非您已明白此类交易与风险的基本问题，不然您并不应参与二元期权的投机交易。如果您对二元期权交易是否对您合适感到迷惑，请寻求专业投资顾问的独立性建议。%1并不提供此类服务。在您通过%1进行二元期权交易前，以及下任何订单前，您有责任先考虑自身的个人情况和投资资源，并慎重地与独立性地再三加以考虑清楚。如果您对在%1开立交易账户或确定任何订单所牵涉到的风险有任何不解之处，请务必要向独立的投资顾问请教并寻求忠告。如果您还是对二元期权交易所冒的风险不甚了解，请别进行任何交易。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:769
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:769
 msgid "Trading is Suspended"
 msgstr "交易暂停"
 
 #. ($blackout_time)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2028
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2023
 msgid "Trading is available after the first %1 of the session."
 msgstr "交易在交易时段第一个 %1 后可用。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2300
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2295
 msgid "Trading is not offered for this duration."
 msgstr "不在此段期间提供交易。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1741
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1810
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1736
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1805
 msgid "Trading is suspended at the moment."
 msgstr "当前交易暂停。"
 
@@ -9543,9 +9467,9 @@ msgstr "此类合约不在%1提供交易。"
 #. ($underlying->translated_display_name()
 #. ($translated_name)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Trade.pm:449
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1749
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1758
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1789
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1744
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1753
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1784
 msgid "Trading on %1 is suspended at the moment."
 msgstr "%1 的当前交易暂停。"
 
@@ -9553,11 +9477,11 @@ msgstr "%1 的当前交易暂停。"
 #. ($self->underlying->translated_display_name()
 #. ($translated_name)
 #. ($bet->underlying->translated_display_name()
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1264
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1259
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:140
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1769
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1779
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2415
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1764
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1774
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2410
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:194
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:235
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Spread.pm:428
@@ -9565,12 +9489,12 @@ msgstr "%1 的当前交易暂停。"
 msgid "Trading on %1 is suspended due to missing market data."
 msgstr "由于市场数据丢失，%1 交易暂停。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2077
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2072
 msgid "Trading on this contract type is suspended for the last one hour of the session."
 msgstr "此种合约交易时段最后一小时暂停交易。"
 
 #. ($localized_eod_blackout_start->as_string)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2062
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2057
 msgid "Trading suspended for the last %1 of the session."
 msgstr "交易时段最后 %1 暂停交易。"
 
@@ -9638,8 +9562,8 @@ msgstr "立即体验"
 msgid "Try our downloadable charting application with an extensive range of indicators."
 msgstr "使用我们可以下载的图表应用程序与各种指标。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2021
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2029
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2016
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2024
 msgid "Try out the Random Indices which are always open."
 msgstr "尝试总是开放的随机指数。"
 
@@ -9820,6 +9744,7 @@ msgstr "版本37。最后修改时间为 2015年5月29日。"
 msgid "Vertical"
 msgstr "垂直的"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1303
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1303
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/intraday_prices.html.tt:16
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/daily_ohlc.html.tt:21
@@ -10003,7 +9928,7 @@ msgstr "在选择如何为您获取最佳执行方案时，我们须考虑到几
 msgid "We could not authenticate your account online. please proceed to the <a href=\"%1\">manual authentication section</a>. If you would like to register additional credit cards, please contact <a class=\"pjaxload\" href=\"%2\">customer support</a>."
 msgstr "我们未能在线验证您的账户。请继续<a href=\"%1\">手动验证</a>。如果您要注册额外的信用卡，请联系<a class=\"pjaxload\" href=\"%2\">客户支持人员</a>。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1333
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1328
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Digitdiff.pm:50
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract/Digitmatch.pm:51
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Role/BarrierBuilder.pm:26
@@ -10222,7 +10147,6 @@ msgid "What other reports can I generate?"
 msgstr "我还可以生成其他哪些报告？"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "What our clients are saying"
 msgstr "客户评语"
 
@@ -10369,7 +10293,6 @@ msgid "Why choose binary trading?"
 msgstr "为何选择二元期权交易？"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "Why choose us"
 msgstr "为何选择我们"
 
@@ -10465,7 +10388,6 @@ msgid "With %1, your money is secure."
 msgstr "通过 %1 交易，您的资金绝对安全无虞。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "With Binary.com, your money is secure. We segregate and hold client funds in secure AAA-rated banks."
 msgstr "您的资金在Binary.com非常安全。我们把客户资金交由安全的 3A 级银行独立托管。"
 
@@ -10571,6 +10493,7 @@ msgstr "您与我们都为独立订约人，本协议的任何规定均不得建
 msgid "You are advised that the Binary Options offered by %1 are not traded under the rules of any recognised, designated or regulated exchange. Consequently, engaging in Binary Options trading may expose you to substantially greater risks than investments which are so traded."
 msgstr "我们仅此通知您，%1所提供的二元期权交易并不受任何认可、指定或受监管的交易所规则所管制。其后果是，进行二元期权交易活动可能会使您承担比您所投入的交易金额更高的风险。"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2002
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2002
 msgid "You are being given the better price."
 msgstr "正在为您获取更好的价格。"
@@ -10977,7 +10900,6 @@ msgid "Your clients will love the %1 trading platform because we offer a complet
 msgstr "您的客户将会对 %1 热爱不已，因为我们针对需求对广泛交易者提供特制与完整的交易体验。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/login.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/login.html.haml:1
 msgid "Your details"
 msgstr "您的详细信息"
 
@@ -10994,7 +10916,6 @@ msgid "Your form has been submitted."
 msgstr "您的表格已提交。"
 
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
-#: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/static/why_us.html.haml:1
 msgid "Your funds are safe"
 msgstr "您的资金非常安全"
@@ -11018,11 +10939,13 @@ msgstr "在%1，您的资金永远安全。客户资金始终由3A级银行托�
 msgid "Your name/company"
 msgstr "您的姓名/公司"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1951
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1951
 msgid "Your new account balance is %s %s"
 msgstr "您的新账户余额为 %s %s"
 
 #. ($reference_number, $executed_price)
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2007
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2007
 msgid "Your order (Reference # <span id=\"reference_no\">%1</span>) has been executed at %2."
 msgstr "您的订单 (参考 # <span id=\"参考_编号\">%1</span>)已经于%2生效。"
@@ -11123,6 +11046,8 @@ msgid "Your trading statistics "
 msgstr "您的交易统计 "
 
 #. ($tradeRef)
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1596
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1967
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1596
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1967
 msgid "Your transaction reference number is %1"
@@ -11193,10 +11118,11 @@ msgstr "由于该人士的本网站活动导致本公司遭受任何金钱、财
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "对客户在特定时段买入任何合约的限制。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1720
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1715
 msgid "barrier"
 msgstr "障碍"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:1649
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1649
 msgid "better trade"
 msgstr "更佳交易"
@@ -11207,7 +11133,7 @@ msgid "binary options, forex, forex trading, online trading, financial trading, 
 msgstr "二元期权、外汇、外汇交易、在线交易、金融交易、二元期权交易、指数交易、交易指数、外汇交易、交易大宗商品、二元期权策略、二元经纪、二元投注、二元期权交易平台、二元策略、金融、股票、投资、交易"
 
 #. ($self->date_expiry->date)
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:752
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:747
 msgid "close on %1"
 msgstr "%1关闭"
 
@@ -11215,7 +11141,7 @@ msgstr "%1关闭"
 msgid "conflicts Policy"
 msgstr "冲突政策"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:746
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:741
 msgid "contract start time"
 msgstr "合约开始时间"
 
@@ -11263,11 +11189,12 @@ msgstr "入市现价加上 %plural(%1,1 点, %d 点)"
 msgid "equivalent"
 msgstr "相当于"
 
+#: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm.tidyup:2043
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:2043
 msgid "explanation"
 msgstr "说明"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:757
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:752
 msgid "first tick"
 msgstr "首个跳动点"
 
@@ -11281,7 +11208,7 @@ msgstr "自金融账户(%1)至博彩账户(%2)"
 msgid "from gaming account (%1) to financial account (%2)"
 msgstr "自博彩账户(%1)至金融账户(%2)"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1720
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1715
 msgid "high barrier"
 msgstr "高障碍"
 
@@ -11312,7 +11239,7 @@ msgstr "领先的二元期权交易平台。"
 msgid "loading..."
 msgstr "加载中……"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1720
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1715
 msgid "low barrier"
 msgstr "低障碍"
 
@@ -11338,7 +11265,7 @@ msgstr "最短可用期限"
 msgid "minimum is"
 msgstr "最小为"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1717
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1712
 msgid "minus"
 msgstr "减去"
 
@@ -11386,7 +11313,7 @@ msgstr "或请尝试下面的网站地图"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr "所有合约准确结算时间的页面。其他网站可能会有不同的惯例（比如一些网站采用纽约时间4点或伦敦时间5点）。由于不同的收盘时间惯例，在本网站上显示的开盘、高、低或收盘价可能跟其他网站不一致。"
 
-#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1717
+#: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:1712
 msgid "plus"
 msgstr "加"
 
@@ -11596,25 +11523,25 @@ msgstr "澳元/新加坡元"
 msgid "EUR/INR"
 msgstr "欧元/印度卢比"
 
-#: Underlying Symbol frxAUDBRL
-msgid "AUD/BRL"
-msgstr "澳元/巴西雷亚尔"
-
 #: Underlying Symbol frxGBPCNY
 msgid "GBP/CNY"
 msgstr "英镑/人民币"
+
+#: Underlying Symbol frxAUDBRL
+msgid "AUD/BRL"
+msgstr "澳元/巴西雷亚尔"
 
 #: Underlying Symbol frxUSDJPY
 msgid "USD/JPY"
 msgstr "美元/日元"
 
-#: Underlying Symbol frxGBPBRL
-msgid "GBP/BRL"
-msgstr "英镑/巴西里尔"
-
 #: Underlying Symbol frxUSDSGD
 msgid "USD/SGD"
 msgstr "美元/新加坡元"
+
+#: Underlying Symbol frxGBPBRL
+msgid "GBP/BRL"
+msgstr "英镑/巴西里尔"
 
 #: Underlying Symbol frxAUDNOK
 msgid "AUD/NOK"
@@ -11664,13 +11591,13 @@ msgstr "欧元/人民币"
 msgid "EUR/BRL"
 msgstr "欧元/巴西雷亚尔"
 
-#: Underlying Symbol frxNZDUSD
-msgid "NZD/USD"
-msgstr "新西兰元/美元"
-
 #: Underlying Symbol frxUSDDKK
 msgid "USD/DKK"
 msgstr "美元/丹麦克朗"
+
+#: Underlying Symbol frxNZDUSD
+msgid "NZD/USD"
+msgstr "新西兰元/美元"
 
 #: Underlying Symbol WLDUSD
 msgid "USD Index"
@@ -11760,13 +11687,13 @@ msgstr "英镑指数"
 msgid "GBP/NZD"
 msgstr "英镑/新西兰元"
 
-#: Underlying Symbol frxNZDJPY
-msgid "NZD/JPY"
-msgstr "纽元/日元"
-
 #: Underlying Symbol frxUSDPLN
 msgid "USD/PLN"
 msgstr "美元/波兰兹罗提"
+
+#: Underlying Symbol frxNZDJPY
+msgid "NZD/JPY"
+msgstr "纽元/日元"
 
 #: Underlying Symbol frxAUDSEK
 msgid "AUD/SEK"
@@ -11784,13 +11711,13 @@ msgstr "英镑/丹麦克朗"
 msgid "EUR/HKD"
 msgstr "欧元/港币"
 
-#: Underlying Symbol frxGBPAUD
-msgid "GBP/AUD"
-msgstr "英镑/澳元"
-
 #: Underlying Symbol frxGBPPLN
 msgid "GBP/PLN"
 msgstr "英镑/波兰兹罗提"
+
+#: Underlying Symbol frxGBPAUD
+msgid "GBP/AUD"
+msgstr "英镑/澳元"
 
 #: Underlying Symbol frxUSDSEK
 msgid "USD/SEK"
@@ -11884,13 +11811,13 @@ msgstr "澳大利亚指数"
 msgid "Euro 50 Smart Index"
 msgstr "欧洲 50 智能指数"
 
-#: Underlying Symbol SYNDJI
-msgid "Wall Street Smart Index"
-msgstr "华尔街智能指数"
-
 #: Underlying Symbol STI
 msgid "Singapore Index"
 msgstr "新加坡指数"
+
+#: Underlying Symbol SYNDJI
+msgid "Wall Street Smart Index"
+msgstr "华尔街智能指数"
 
 #: Underlying Symbol SYNPSI20
 msgid "Portuguese Smart Index"
@@ -12004,13 +11931,13 @@ msgstr "赛峰"
 msgid "Reliance Industries Ltd"
 msgstr "信实工业有限公司"
 
-#: Underlying Symbol AUBHP
-msgid "BHP Billiton Ltd"
-msgstr "必和必拓公司"
-
 #: Underlying Symbol JPTE
 msgid "Tokyo Electric Power Co. Inc"
 msgstr "东京电力公司"
+
+#: Underlying Symbol AUBHP
+msgid "BHP Billiton Ltd"
+msgstr "必和必拓公司"
 
 #: Underlying Symbol JPTM
 msgid "Toyota Motor"
@@ -12032,13 +11959,13 @@ msgstr "英国天然气集团公司"
 msgid "Air Liquide"
 msgstr "液化空气集团"
 
-#: Underlying Symbol NOYAR
-msgid "Yara International"
-msgstr "雅苒国际"
-
 #: Underlying Symbol UKIAG
 msgid "ICAG (British Airways)"
 msgstr "英国航空公司"
+
+#: Underlying Symbol NOYAR
+msgid "Yara International"
+msgstr "雅苒国际"
 
 #: Underlying Symbol DEALV
 msgid "Allianz SE"
@@ -12092,13 +12019,13 @@ msgstr "DNB"
 msgid "SoftBank Co."
 msgstr "软银公司"
 
-#: Underlying Symbol FPEDF
-msgid "Electricite de France"
-msgstr "法国电力公司"
-
 #: Underlying Symbol FPDG
 msgid "Vinci"
 msgstr "法国万喜集团"
+
+#: Underlying Symbol FPEDF
+msgid "Electricite de France"
+msgstr "法国电力公司"
 
 #: Underlying Symbol NOSTL
 msgid "Statoil"
@@ -12200,13 +12127,13 @@ msgstr "澳新银行集团有限公司"
 msgid "ASML Holding"
 msgstr "阿斯麦公司"
 
-#: Underlying Symbol KRSFG
-msgid "Shinhan Financial"
-msgstr "新韩金融"
-
 #: Underlying Symbol FPKER
 msgid "Kering"
 msgstr "开云集团"
+
+#: Underlying Symbol KRSFG
+msgid "Shinhan Financial"
+msgstr "新韩金融"
 
 #: Underlying Symbol UKBARC
 msgid "Barclays plc"
@@ -12244,13 +12171,13 @@ msgstr "施耐德电气公司"
 msgid "Vodafone"
 msgstr "沃达丰集团"
 
-#: Underlying Symbol KRSS
-msgid "Samsung Electronics"
-msgstr "三星电子"
-
 #: Underlying Symbol JPHT
 msgid "Hitachi Ltd"
 msgstr "日立公司"
+
+#: Underlying Symbol KRSS
+msgid "Samsung Electronics"
+msgstr "三星电子"
 
 #: Underlying Symbol USXOM
 msgid "ExxonMobil"
@@ -12296,13 +12223,13 @@ msgstr "道达尔公司"
 msgid "AXA"
 msgstr "法国安盛集团"
 
-#: Underlying Symbol USKO
-msgid "The Coca-Cola Company"
-msgstr "可口可乐"
-
 #: Underlying Symbol NOTEL
 msgid "Telenor"
 msgstr "挪威电信公司"
+
+#: Underlying Symbol USKO
+msgid "The Coca-Cola Company"
+msgstr "可口可乐"
 
 #: Underlying Symbol BBUCB
 msgid "UCB"
@@ -12316,13 +12243,13 @@ msgstr "葛兰素史克公司"
 msgid "Glencore Xstrat"
 msgstr "嘉能可超达"
 
-#: Underlying Symbol UKDGE
-msgid "Diageo plc"
-msgstr "英国帝亚吉欧公司"
-
 #: Underlying Symbol KRSKH
 msgid "SK Hynix Inc."
 msgstr "SK海力士半导体公司"
+
+#: Underlying Symbol UKDGE
+msgid "Diageo plc"
+msgstr "英国帝亚吉欧公司"
 
 #: Underlying Symbol FPRI
 msgid "Pernod Ricard"
@@ -13057,6 +12984,12 @@ msgstr "如果%3一直到%5时处于%7至%6之外，将获得%1%2的赔付额。
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "如果%3在%4过后一直到%5时处于%7与%6之外，将获得%1%2的赔付额。"
+
+#~ msgid "Create account"
+#~ msgstr "开立账户"
+
+#~ msgid "Trade 24/7, even on weekends. Customize your trades to meet your needs."
+#~ msgstr "全天候进行交易，包括周末。按需定制您的交易。"
 
 #~ msgid "%1 has been growing at the rate of 20-fold over the last 5 years and accordingly is constantly recruiting in all departments. We have open positions for the following roles:"
 #~ msgstr "%1 在过去5年中增长了20倍，所有部门都在陆续地征聘人员。当前我们有以下空缺："
