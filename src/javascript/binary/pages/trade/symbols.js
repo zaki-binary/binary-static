@@ -23,7 +23,7 @@ var Symbols = (function () {
         var allSymbols = data['active_symbols'];
 
         allSymbols.forEach(function (element) {
-            var currentMarket = element['market_name'],
+            var currentMarket = element['market'],
                 currentUnderlying = element['symbol'];
 
             if (!tradeMarkets.hasOwnProperty(currentMarket)) {
