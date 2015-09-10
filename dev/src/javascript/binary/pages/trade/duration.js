@@ -2,7 +2,7 @@
  * Handles duration processing display
  *
  * It process `Contract.durations()` and display them according to
- * the current `Offerings.form()` and `Offerings.barriers()`
+ * the current `Contract.form()` and `Contract.barriers()`
  *
  * It also populate expiry type select box i.e Durations and Endtime select
  *
@@ -11,14 +11,14 @@ function displayDurations(startType) {
     'use strict';
 
     var durations = Contract.durations();
-    if(durations===false){
-        document.getElementById('expiry_row').style.display = 'none';        
+    if (durations === false) {
+        document.getElementById('expiry_row').style.display = 'none';
         return false;
     }
 
     var target = document.getElementById('duration_units'),
-        formName = Offerings.form(),
-        barrierCategory = Offerings.barrier(),
+        formName = Contract.form(),
+        barrierCategory = Contract.barrier(),
         fragment = document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {

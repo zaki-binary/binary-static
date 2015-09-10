@@ -3381,10 +3381,10 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
-            if (sessionStorage.getItem('offerings')) {
-                processMarketOfferings();
+            if (sessionStorage.getItem('active_symbols')) {
+                processActiveSymbols();
             } else {
-                Offerings.getOfferings();
+                Symbols.getSymbols();
             }
         },
         onUnload: function() {
@@ -9776,8 +9776,8 @@ function requestTradeAnalysis() {
         data: {
             underlying: sessionStorage.getItem('underlying'),
             formname: sessionStorage.getItem('formname'),
-            contract_category: Offerings.form(),
-            barrier: Offerings.barrier()
+            contract_category: Contract.form(),
+            barrier: Contract.barrier()
         }
     })
     .done(function(data) {
@@ -9941,7 +9941,7 @@ function bindSubmitForDailyPrices() {
  * Handles barrier processing and display
  *
  * It process `Contract.barriers` and display them if its applicable
- * for current `Offerings.form()
+ * for current `Contract.form()
  */
 
 var Barriers = (function () {
@@ -9951,7 +9951,7 @@ var Barriers = (function () {
 
     var display = function (barrierCategory) {
         var barriers = Contract.barriers(),
-            formName = Offerings.form();
+            formName = Contract.form();
 
         if (barriers && formName) {
             var barrier = barriers[formName];
@@ -10037,38 +10037,7 @@ var Barriers = (function () {
  */
 
 /*
- * function to create list elements `<li>` and append to element with id `id`
- */
-function displayListElements(id, elements, selected) {
-    'use strict';
-    var target = document.getElementById(id),
-        fragment = document.createDocumentFragment(),
-        len = elements.length;
-
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
-
-    elements.forEach(function (element) {
-        var li = document.createElement('li'),
-            content = document.createTextNode(element);
-        li.setAttribute('id', element.toLowerCase());
-        if (selected && selected === element.toLowerCase()) {
-            li.setAttribute('class', 'active');
-        }
-        li.appendChild(content);
-        fragment.appendChild(li);
-    });
-    if (target) {
-        target.appendChild(fragment);
-    }
-}
-
-/*
- * function to display contract form
- *
- * We need this separate function because the contract obect has key value pair
- * whereas markets is just an array
+ * function to display contract form as element of ul
  */
 function displayContractForms(id, elements, selected) {
     'use strict';
@@ -10133,32 +10102,34 @@ function displayOptions(id, elements, selected) {
 /*
  * function to display underlyings
  *
- * we need different function for this because we need to add submarket
- * name as classname to underlyings option
+ * we need separate function for this as sorting is different and later
+ * we may add submarket to it
  */
-function displayUnderlyings(selected) {
+function displayUnderlyings(id, elements, selected) {
     'use strict';
-    var target= document.getElementById('underlying'),
-        fragment =  document.createDocumentFragment(),
-        elements = Offerings.underlyings();
+    var target= document.getElementById(id),
+        fragment =  document.createDocumentFragment();
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
     }
 
-    for (var key in elements) {
-        if (elements.hasOwnProperty(key)){
-            var option = document.createElement('option'), content = document.createTextNode(elements[key].display);
-            option.setAttribute('value', key);
-            option.setAttribute('class', elements[key].classname);
-            if (selected && selected === key) {
-                option.setAttribute('selected', 'selected');
+    if (elements) {
+        var keys = Object.keys(elements).sort(function(a, b) {
+            return elements[a].localeCompare(elements[b]);
+        });
+        keys.forEach(function (key) {
+            if (elements.hasOwnProperty(key)){
+                var option = document.createElement('option'), content = document.createTextNode(elements[key]);
+                option.setAttribute('value', key);
+                if (selected && selected === key) {
+                    option.setAttribute('selected', 'selected');
+                }
+                option.appendChild(content);
+                fragment.appendChild(option);
             }
-            option.appendChild(content);
-            fragment.appendChild(option);
-        }
+        });
     }
-
     if (target) {
         target.appendChild(fragment);
     }
@@ -10240,7 +10211,7 @@ function isVisible(elem) {
 /*
  * function to hide and display the loading icon for price container
  */
-function hidePriceLoadingIcon() {
+function hideLoadingOverlay() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
@@ -10248,7 +10219,7 @@ function hidePriceLoadingIcon() {
     }
 }
 
-function showPriceLoadingIcon() {
+function showLoadingOverlay() {
     'use strict';
     var elm = document.getElementById('loading_container');
     if (elm) {
@@ -10351,22 +10322,13 @@ function toggleActiveNavMenuElement(nav, eventElement) {
 }
 
 /*
- * function to set placeholder text based on current market, used for mobile menu
- */
-function setMarketPlaceholderContent(name) {
-    var marketPlaceholder = document.getElementById('market_nav_placeholder');
-    if (marketPlaceholder) {
-        marketPlaceholder.textContent = name || sessionStorage.getItem('market');
-    }
-}
-
-/*
  * function to set placeholder text based on current form, used for mobile menu
  */
 function setFormPlaceholderContent(name) {
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
-        formPlaceholder.textContent = name || sessionStorage.getItem('formname');
+        name = name || sessionStorage.getItem('formname');
+        formPlaceholder.textContent = Contract.contractForms()[name];
     }
 }
 
@@ -10399,18 +10361,24 @@ function displayCommentPrice(id, currency, type, payout) {
 /*
  * function to filter out allowed markets from all markets
  */
-function getAllowedMarkets(marketArray) {
+function getAllowedMarkets(markets) {
     'use strict';
-    if (marketArray && getCookieItem('loginid')) {
+    if (markets && getCookieItem('loginid')) {
+        var obj = {};
         var allowedMarkets = getCookieItem('allowed_markets');
         if (allowedMarkets) {
-            return marketArray.filter(function (element) {
-                var re = new RegExp(element, 'i');
-                return re.test(allowedMarkets);
-            });
+            for (var key in markets) {
+                if (markets.hasOwnProperty(key)) {
+                    var re = new RegExp(key, 'i');
+                    if (re.test(allowedMarkets)) {
+                        obj[key] = markets[key];
+                    }
+                }
+            }
+            return obj;
         }
     }
-    return marketArray;
+    return markets;
 }
 
 /*
@@ -10510,7 +10478,9 @@ function getDefaultMarket() {
             textContractConfirmationReference: text.localize('Your transaction reference is'),
             textContractConfirmationBalance: text.localize('Your current balance is'),
             textFormRiseFall: text.localize('Rise/Fall'),
-            textFormHigherLower: text.localize('Higher/Lower')
+            textFormHigherLower: text.localize('Higher/Lower'),
+            textContractPeriod: text.localize('Contract period'),
+            textExercisePeriod: text.localize('Exercise period')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -10579,6 +10549,26 @@ function getDefaultMarket() {
         if (purchaseButtonBottom) {
             purchaseButtonBottom.textContent = localize.textPurchase;
         }
+
+        var period_label = document.getElementById('period_label');
+        if (period_label) {
+            period_label.textContent = localize.textContractPeriod;
+        }
+
+        var jpbarrier_label = document.getElementById('jbarrier_label');
+        if (jpbarrier_label) {
+            jpbarrier_label.textContent = localize.textExercisePeriod;
+        }
+
+        var jpbarrier_high_label = document.getElementById('jbarrier_high_label');
+        if (jpbarrier_high_label) {
+            jpbarrier_high_label.textContent = localize.textHighBarrier;
+        }
+
+        var jpbarrier_low_label = document.getElementById('jbarrier_low_label');
+        if (jpbarrier_low_label) {
+            jpbarrier_low_label.textContent = localize.textLowBarrier;
+        }
     };
 
     return {
@@ -10606,110 +10596,127 @@ function getDefaultMarket() {
 var Contract = (function () {
     'use strict';
 
-    var open, close, contractDetails = [], durations = {}, startDates = [], barriers = {}, contractType = {};
+    var contractDetails = {}, durations = {}, startDates = [], barriers = {}, contractType = {},
+        open, close, form, barrier;
 
     var populate_durations = function (currentContract) {
+        var currentCategory = currentContract['contract_category'];
         if (!durations[currentContract['expiry_type']]) {
             durations[currentContract['expiry_type']] = {};
         }
 
-        if(!durations[currentContract['expiry_type']][currentContract['contract_category']]) {
-            durations[currentContract['expiry_type']][currentContract['contract_category']] = {};
+        if(!durations[currentContract['expiry_type']][currentCategory]) {
+            durations[currentContract['expiry_type']][currentCategory] = {};
         }
 
-        if(!durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']]) {
-            durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']] = {};
+        if(!durations[currentContract['expiry_type']][currentCategory][currentContract['barrier_category']]) {
+            durations[currentContract['expiry_type']][currentCategory][currentContract['barrier_category']] = {};
         }
 
-        if(!durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']]) {
-            durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']] = {};
+        if(!durations[currentContract['expiry_type']][currentCategory][currentContract['barrier_category']][currentContract['start_type']]) {
+            durations[currentContract['expiry_type']][currentCategory][currentContract['barrier_category']][currentContract['start_type']] = {};
         }
 
-        durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']]['max_contract_duration'] = currentContract['max_contract_duration'];
+        durations[currentContract['expiry_type']][currentCategory][currentContract['barrier_category']][currentContract['start_type']]['max_contract_duration'] = currentContract['max_contract_duration'];
 
-        durations[currentContract['expiry_type']][currentContract['contract_category']][currentContract['barrier_category']][currentContract['start_type']]['min_contract_duration'] = currentContract['min_contract_duration'];
+        durations[currentContract['expiry_type']][currentCategory][currentContract['barrier_category']][currentContract['start_type']]['min_contract_duration'] = currentContract['min_contract_duration'];
     };
 
-    var details = function (contractObject) {
-        var contracts = contractObject['contracts_for'],
-            contractsArray = [];
+    var details = function (formName) {
+        var contracts = Contract.contracts()['contracts_for'],
+            contractCategories = {},
+            barrierCategory;
 
         startDates = [];
         durations = {};
         open = contracts['open'];
         close = contracts['close'];
 
-        var formName = Offerings.form(),
-            barrierCategory = Offerings.barrier();
+        var formBarrier = getFormNameBarrierCategory(formName);
+            form = formName = formBarrier['formName'];
+            barrier = barrierCategory = formBarrier['barrierCategory'];
 
-        if (formName) {
-            contracts.available.forEach(function (currentObj) {
-                if (formName === currentObj['contract_category']) {
+        contracts.available.forEach(function (currentObj) {
+            var contractCategory = currentObj['contract_category'];
 
-                    if (barrierCategory) {
-                        if (barrierCategory === currentObj['barrier_category']) {
-                            populate_durations(currentObj);
-                        }
-                    } else {
+            if (formName && formName === contractCategory) {
+                if (barrierCategory) {
+                    if (barrierCategory === currentObj['barrier_category']) {
                         populate_durations(currentObj);
                     }
-
-                    if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
-                        startDates = currentObj.forward_starting_options;
-                    }
-
-                    contractsArray.push(currentObj);
-
-                    var barrier = {};
-                    if (currentObj.barriers === 1) {
-                        if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
-                            barrier['count'] = 1;
-                            barrier['barrier'] = currentObj['barrier'];
-                            barrier['barrier_category'] = currentObj['barrier_category'];
-                            barriers[formName] = barrier;
-                        }
-                    } else if (currentObj.barriers === 2) {
-                        if (!barriers.hasOwnProperty(currentObj['contract_category'])) {
-                            barrier['count'] = 2;
-                            barrier['barrier'] = currentObj['high_barrier'];
-                            barrier['barrier1'] = currentObj['low_barrier'];
-                            barrier['barrier_category'] = currentObj['barrier_category'];
-                            barriers[formName] = barrier;
-                        }
-                    }
-
-                    if (!contractType[currentObj['contract_category']]) {
-                        contractType[currentObj['contract_category']] = {};
-                    }
-
-                    if (!contractType[currentObj['contract_category']].hasOwnProperty(currentObj['contract_type'])) {
-                        contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
-                    }
-                }
-            });
-
-            if (barrierCategory) {
-                if (barriers && barriers[formName] && barriers[formName]['barrier_category'] !== barrierCategory) {
-                    barriers = {};
+                } else {
+                    populate_durations(currentObj);
                 }
 
-                var j = contractsArray.length;
-                while (j--) {
-                    if (barrierCategory !== contractsArray[j]['barrier_category']) {
-                        contractsArray.splice(j, 1);
+                if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
+                    startDates = currentObj.forward_starting_options;
+                }
+
+                var barrierObj = {};
+                if (currentObj.barriers === 1) {
+                    if (!barriers.hasOwnProperty(contractCategory)) {
+                        barrierObj['count'] = 1;
+                        barrierObj['barrier'] = currentObj['barrier'];
+                        barrierObj['barrier_category'] = currentObj['barrier_category'];
+                        barriers[formName] = barrierObj;
                     }
+                } else if (currentObj.barriers === 2) {
+                    if (!barriers.hasOwnProperty(contractCategory)) {
+                        barrierObj['count'] = 2;
+                        barrierObj['barrier'] = currentObj['high_barrier'];
+                        barrierObj['barrier1'] = currentObj['low_barrier'];
+                        barrierObj['barrier_category'] = currentObj['barrier_category'];
+                        barriers[formName] = barrierObj;
+                    }
+                }
+
+                if (!contractType[contractCategory]) {
+                    contractType[contractCategory] = {};
+                }
+
+                if (!contractType[contractCategory].hasOwnProperty(currentObj['contract_type'])) {
+                    contractType[contractCategory][currentObj['contract_type']] = currentObj['contract_display'];
                 }
             }
+        });
+
+        if (formName && barrierCategory) {
+            if (barriers && barriers[formName] && barriers[formName]['barrier_category'] !== barrierCategory) {
+                barriers = {};
+            }
         }
-        contractDetails = contractsArray;
     };
 
-    var getContracts = function(underlying){
+    var getContracts = function(underlying) {
         TradeSocket.send({ contracts_for: underlying });
+    };
+
+    var getContractForms = function() {
+        var contracts = Contract.contracts()['contracts_for'],
+            tradeContractForms = {};
+
+        contracts.available.forEach(function (currentObj) {
+            var contractCategory = currentObj['contract_category'];
+            if (contractCategory && !tradeContractForms.hasOwnProperty(contractCategory)) {
+                if (contractCategory === 'callput') {
+                    if( currentObj['barrier_category'] === 'euro_atm') {
+                        tradeContractForms['risefall'] = Content.localize().textFormRiseFall;
+                    } else {
+                        tradeContractForms['higherlower'] = Content.localize().textFormHigherLower;
+                    }
+                } else {
+                    tradeContractForms[contractCategory] = currentObj['contract_category_display'];
+                }
+            }
+        });
+
+        return tradeContractForms;
     };
 
     return {
         details: details,
+        getContracts: getContracts,
+        contractForms: getContractForms,
         open: function () { return open; },
         close: function () { return close; },
         contracts: function () { return contractDetails; },
@@ -10717,7 +10724,11 @@ var Contract = (function () {
         startDates: function () { return startDates; },
         barriers: function () { return barriers; },
         contractType: function () { return contractType; },
-        getContracts: getContracts
+        form: function () { return form; },
+        barrier: function () { return barrier; },
+        setContracts: function (data) {
+            contractDetails = data;
+        }
     };
 
 })();
@@ -10757,7 +10768,7 @@ function displayCurrencies(selected) {
  * Handles duration processing display
  *
  * It process `Contract.durations()` and display them according to
- * the current `Offerings.form()` and `Offerings.barriers()`
+ * the current `Contract.form()` and `Contract.barriers()`
  *
  * It also populate expiry type select box i.e Durations and Endtime select
  *
@@ -10766,14 +10777,14 @@ function displayDurations(startType) {
     'use strict';
 
     var durations = Contract.durations();
-    if(durations===false){
-        document.getElementById('expiry_row').style.display = 'none';        
+    if (durations === false) {
+        document.getElementById('expiry_row').style.display = 'none';
         return false;
     }
 
     var target = document.getElementById('duration_units'),
-        formName = Offerings.form(),
-        barrierCategory = Offerings.barrier(),
+        formName = Contract.form(),
+        barrierCategory = Contract.barrier(),
         fragment = document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
@@ -10982,58 +10993,31 @@ function displayExpiryType(unit) {
     target.appendChild(fragment);
 }
 ;/*
- * attach event to market list, so when client change market we need to update form
+ * attach event to market list, so when client change market we need to update undelryings
  * and request for new Contract details to populate the form and request price accordingly
  */
-var marketNavElement = document.getElementById('contract_market_nav');
+var marketNavElement = document.getElementById('contract_markets');
 if (marketNavElement) {
-    marketNavElement.addEventListener('click', debounce (function(e) {
-        if (e.target && e.target.nodeName === 'LI') {
-            var clickedMarket = e.target;
-            var isMarketActive = clickedMarket.classList.contains('active');
-            sessionStorage.setItem('market', clickedMarket.id);
+    marketNavElement.addEventListener('change', function(e) {
+        var clickedMarket = e.target;
+        sessionStorage.setItem('market', clickedMarket.value);
 
-            setMarketPlaceholderContent();
-
-            // as different markets have different forms so remove from sessionStorage
-            // it will default to proper one
-            sessionStorage.removeItem('formname');
-            toggleActiveNavMenuElement(marketNavElement, clickedMarket);
-            // if market is already active then no need to send same request again
-            if (!isMarketActive) {
-                processMarketOfferings();
-            }
-            var marketFormCheckbox = document.getElementById('market_show_menu');
-            if (marketFormCheckbox) {
-                marketFormCheckbox.checked = false;
-            }
-        }
-    }, 200 ));
+        // as different markets have different forms so remove from sessionStorage
+        // it will default to proper one
+        sessionStorage.removeItem('formname');
+        processMarket();
+    });
 }
 
 /*
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
-var contractFormEventChange =  function (formName) {
+var contractFormEventChange = function () {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'Forex';
-    market = market.charAt(0).toUpperCase() + market.substring(1);
-
-    // pass the original offerings as we don't want to request offerings again and again
-    Offerings.details(Offerings.offerings(), market, formName);
-
-    // change only submarkets and underlyings as per formName change
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
-
-    var underlying = document.getElementById('underlying').value;
-    sessionStorage.setItem('underlying', underlying);
-
+    processContractForm();
     requestTradeAnalysis();
-    // get the contract details based on underlying as formName has changed
-    Contract.getContracts(underlying);
 };
 
 var formNavElement = document.getElementById('contract_form_name_nav');
@@ -11049,7 +11033,7 @@ if (formNavElement) {
             toggleActiveNavMenuElement(formNavElement, clickedForm);
 
             if (!isFormActive) {
-                contractFormEventChange(clickedForm.id);
+                contractFormEventChange();
             }
             var contractFormCheckbox = document.getElementById('contract_form_show_menu');
             if (contractFormCheckbox) {
@@ -11066,9 +11050,16 @@ var underlyingElement = document.getElementById('underlying');
 if (underlyingElement) {
     underlyingElement.addEventListener('change', function(e) {
         if (e.target) {
-            sessionStorage.setItem('underlying', e.target.value);
+            var underlying = e.target.value;
+            sessionStorage.setItem('underlying', underlying);
             requestTradeAnalysis();
-            Contract.getContracts(e.target.value);
+
+            Contract.getContracts(underlying);
+
+            // forget the old tick id i.e. close the old tick stream
+            processForgetTickId();
+            // get ticks for current underlying
+            TradeSocket.send({ ticks : underlying });
         }
     });
 }
@@ -11285,18 +11276,18 @@ var Message = (function () {
             var type = response.msg_type;
             if (type === 'authorize') {
                 TradeSocket.send({ payout_currencies: 1 });
-            } else if (type === 'offerings') {
-                sessionStorage.setItem('offerings', msg.data);
-                processMarketOfferings();
+            } else if (type === 'active_symbols') {
+                sessionStorage.setItem('active_symbols', msg.data);
+                processActiveSymbols();
             } else if (type === 'contracts_for') {
-                processContractFormOfferings(response);
+                processContract(response);
             } else if (type === 'payout_currencies') {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
             } else if (type === 'proposal') {
                 hideOverlayContainer();
-                Price.display(response, Contract.contractType()[Offerings.form()]);
-                hidePriceLoadingIcon();
+                Price.display(response, Contract.contractType()[Contract.form()]);
+                hideLoadingOverlay();
             } else if (type === 'buy') {
                 Purchase.display(response);
             } else if (type === 'tick') {
@@ -11309,150 +11300,6 @@ var Message = (function () {
 
     return {
         process: process,
-    };
-
-})();
-;/*
- * Offerings object parses the offerings json that we get from socket.send({offerings: {hierachy :1 ...}}
- * and outputs in usable form, like it gives markets, submarkets, underlyings, contractForms
- *
- *
- * Usage:
- *
- * use `Offerings.details` to populate this object first
- *
- * then use
- *
- * `Offerings.markets` to get markets like Forex, Random etc
- * `Offerings.contractForms` like risefall, higherlower
- *
- */
-var Offerings = (function () {
-    'use strict';
-
-    var tradeMarkets, tradeSubmarkets, tradeUnderlyings, tradeContractForms, responseData, form, barrier;
-
-    var details = function (data, market, formName, barrierCategory, submarket, underlying) {
-        responseData = data;
-        tradeMarkets = [];
-        var offerings = data.offerings.offerings;
-
-        var submarketElements = {}, underlyingElements = {}, contractCategories = {};
-
-        submarketElements['all'] = 'All';
-
-        var formBarrier = getFormNameBarrierCategory(formName);
-        form = formName = formBarrier['formName'];
-        barrier = barrierCategory = formBarrier['barrierCategory'];
-
-        market_label:
-        for (var i = 0, offlen = offerings.length; i < offlen; i++) {
-            market = market || 'Forex';
-            var mkt = offerings[i].market;
-            tradeMarkets.push(mkt);
-            if (mkt.toLowerCase() === market.toLowerCase()) {
-                submarket_label:
-                for(var j = 0, sbmktlen = offerings[i].available.length; j < sbmktlen; j++) {
-                    var loop_submarket = offerings[i].available[j].submarket;
-                    if (submarket && submarket !== loop_submarket) {
-                        continue submarket_label;
-                    }
-                    underlying_label:
-                    for (var k = 0, undrlylen = offerings[i].available[j].available.length; k < undrlylen; k++) {
-                        var loop_underlying = offerings[i].available[j].available[k];
-                        if(underlying && underlying !== loop_underlying.symbol) {
-                            continue underlying_label;
-                        }
-                        for (var l = 0, ctcategorylen = offerings[i].available[j].available[k].available.length; l < ctcategorylen; l++) {
-                            var currentContract = offerings[i].available[j].available[k].available[l],
-                                contractCategory = currentContract['contract_category'],
-                                isBarrierUndefinedRequired = false;
-
-                            for (var m = 0, ctcategoryavalen = currentContract.available.length; m < ctcategoryavalen; m++) {
-
-                                for (var property in  currentContract.available[m]) {
-                                    if (currentContract.available[m].hasOwnProperty(property)) {
-                                        var prop_value = currentContract.available[m][property];
-                                        if (property === 'barrier_category') {
-                                            if (!barrierCategory) {
-                                                barrierCategory = prop_value;
-                                                isBarrierUndefinedRequired = true;
-                                            }
-                                            if (contractCategory && !contractCategories.hasOwnProperty(contractCategory)) {
-                                                if (contractCategory === 'callput') {
-                                                    if( prop_value === 'euro_atm') {
-                                                        contractCategories['risefall'] = Content.localize().textFormRiseFall;
-                                                    } else {
-                                                        contractCategories['higherlower'] = Content.localize().textFormHigherLower;
-                                                    }
-                                                } else {
-                                                    contractCategories[contractCategory] = currentContract['contract_category_display'];
-                                                }
-
-                                            }
-                                            if(formName === contractCategory && barrierCategory === prop_value) {
-                                                var submarketId = loop_submarket.toLowerCase().replace(/ /g, '_');
-                                                submarketElements[submarketId] = loop_submarket;
-                                                underlyingElements[loop_underlying.symbol] = {
-                                                    display: loop_underlying.symbol_display,
-                                                    classname: submarketId
-                                                };
-                                            }
-                                            if (isBarrierUndefinedRequired) {
-                                                barrierCategory = undefined;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if(underlying && underlying === loop_underlying.symbol) {
-                            break underlying_label;
-                        }
-                    }
-                    if (submarket && submarket === loop_submarket) {
-                        break submarket_label;
-                    }
-                }
-            } else {
-                continue;
-            }
-        }
-        tradeContractForms = contractCategories;
-        tradeSubmarkets = submarketElements;
-        tradeUnderlyings = underlyingElements;
-    };
-
-    var getOfferings = function(){
-        TradeSocket.send({
-            offerings: 1,
-            contracts: 0,
-            selectors: 0
-        });
-    };
-
-    return {
-        details: details,
-        offerings: function () { return responseData; },
-        markets: function () { return tradeMarkets; },
-        submarkets: function () { return tradeSubmarkets; },
-        underlyings: function () { return tradeUnderlyings; },
-        contractForms: function () { return tradeContractForms; },
-        getOfferings: getOfferings,
-        form: function (name) {
-            if (name) {
-                form = getFormNameBarrierCategory(name);
-                barrier(form['barrier']);
-                form = form['formName'];
-            }
-            return form;
-        },
-        barrier: function (name) {
-            if (name) {
-                barrier = name;
-            }
-            return barrier;
-        }
     };
 
 })();
@@ -11649,57 +11496,81 @@ var Price = (function () {
 
 })();
 ;/*
- * Function to process offerings, this function is called
- * when market is changed or for processing offerings response
+ * This function process the active symbols to get markets
+ * and underlying list
  */
-function processMarketOfferings() {
+function processActiveSymbols() {
     'use strict';
 
-    var market = getDefaultMarket(),
-        formname = sessionStorage.getItem('formname') || 'risefall',
-        offerings = sessionStorage.getItem('offerings');
+    // populate the Symbols object
+    Symbols.details(JSON.parse(sessionStorage.getItem('active_symbols')));
+
+    var market = getDefaultMarket();
 
     // store the market
     sessionStorage.setItem('market', market);
 
-    // populate the Offerings object
-    Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
+    displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
+    processMarket();
+}
 
-    // change the market placeholder content as per current market (used for mobile menu)
-    setMarketPlaceholderContent(market);
 
-    // display markets, submarket, underlyings corresponding to market selected
-    displayListElements('contract_market_nav', getAllowedMarkets(Offerings.markets().sort(compareMarkets)), market);
-    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Offerings.contractForms()), formname);
+/*
+ * Function to call when market has changed
+ */
+function processMarket() {
+    'use strict';
 
-    // change the form placeholder content as per current form (used for mobile menu)
-    setFormPlaceholderContent(formname);
+    // we can get market from sessionStorage as allowed market
+    // is already set when this function is called
+    var market = sessionStorage.getItem('market');
+    displayUnderlyings('underlying', Symbols.underlyings()[market]);
 
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
+    processMarketUnderlying();
+}
 
-    // get the underlying selected
+/*
+ * Function to call when underlying has changed
+ */
+function processMarketUnderlying() {
+    'use strict';
+
     var underlying = document.getElementById('underlying').value;
     sessionStorage.setItem('underlying', underlying);
-    sessionStorage.setItem('formname', formname);
 
-    // get the contract details based on underlying as market has changed
+    // forget the old tick id i.e. close the old tick stream
+    processForgetTickId();
+    // get ticks for current underlying
+    TradeSocket.send({ ticks : underlying });
+
     Contract.getContracts(underlying);
+
     requestTradeAnalysis();
 }
 
 /*
  * Function to display contract form for current underlying
  */
-function processContractFormOfferings(contracts) {
+function processContract(contracts) {
     'use strict';
 
-    Contract.details(contracts);
+    Contract.setContracts(contracts);
 
-    // forget the old tick id i.e. close the old tick stream
-    processForgetTickId();
-    // get ticks for current underlying
-    TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
+    var formname = sessionStorage.getItem('formname') || 'risefall';
+
+    // set form to session storage
+    sessionStorage.setItem('formname', formname);
+
+    // change the form placeholder content as per current form (used for mobile menu)
+    setFormPlaceholderContent(formname);
+
+    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
+
+    processContractForm();
+}
+
+function processContractForm() {
+    Contract.details(sessionStorage.getItem('formname'));
 
     displayDurations('spot');
 
@@ -11732,10 +11603,10 @@ function processForgetPriceIds() {
 function processPriceRequest() {
     'use strict';
 
-    showPriceLoadingIcon();
     processForgetPriceIds();
-    for (var typeOfContract in Contract.contractType()[Offerings.form()]) {
-        if(Contract.contractType()[Offerings.form()].hasOwnProperty(typeOfContract)) {
+    showLoadingOverlay();
+    for (var typeOfContract in Contract.contractType()[Contract.form()]) {
+        if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
@@ -11852,7 +11723,7 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://ws.binary.com/websockets/v2",
+        socketUrl = "wss://"+window.location.host+"/websockets/v2",
         bufferedSends = [];
 
     if (page.language()) {
@@ -11997,6 +11868,62 @@ function displayStartDates() {
         document.getElementById('date_start_row').style.display = 'none';
     }
 }
+;/*
+ * Symbols object parses the active_symbols json that we get from socket.send({active_symbols: 'brief'}
+ * and outputs in usable form, it gives markets, underlyings
+ *
+ *
+ * Usage:
+ *
+ * use `Symbols.details` to populate this object first
+ *
+ * then use
+ *
+ * `Symbols.markets` to get markets like Forex, Random etc
+ * `Symbols.underlyings` to get underlyings
+ *
+ */
+
+var Symbols = (function () {
+    'use strict';
+
+    var tradeMarkets = {}, tradeUnderlyings = {};
+
+    var details = function (data) {
+        var allSymbols = data['active_symbols'];
+
+        allSymbols.forEach(function (element) {
+            var currentMarket = element['market'],
+                currentUnderlying = element['symbol'];
+
+            if (!tradeMarkets.hasOwnProperty(currentMarket)) {
+                tradeMarkets[currentMarket] = element['market_display_name'];
+            }
+
+            if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
+                tradeUnderlyings[currentMarket] = {};
+            }
+
+            if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
+                tradeUnderlyings[currentMarket][currentUnderlying] = element['display_name'];
+            }
+        });
+    };
+
+    var getSymbols = function () {
+        TradeSocket.send({
+            active_symbols: "brief"
+        });
+    };
+
+    return {
+        details: details,
+        getSymbols: getSymbols,
+        markets: function () { return tradeMarkets; },
+        underlyings: function () { return tradeUnderlyings; }
+    };
+
+})();
 ;/*
  * Tick object handles all the process/display related to tick streaming
  *
