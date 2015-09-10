@@ -17,7 +17,7 @@
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {};
+    var tradeMarkets = {}, tradeUnderlyings = {}, reload = 1;
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -49,11 +49,19 @@ var Symbols = (function () {
         });
     };
 
+    var reloadPage = function(flag){
+        if(typeof flag !== 'undefined'){
+            reload = flag;
+        }
+        return reload;
+    }
+
     return {
         details: details,
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
-        underlyings: function () { return tradeUnderlyings; }
+        underlyings: function () { return tradeUnderlyings; },
+        reloadPage: reloadPage
     };
 
 })();

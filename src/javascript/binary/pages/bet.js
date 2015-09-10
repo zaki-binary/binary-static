@@ -143,6 +143,7 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
+            Symbols.reloadPage(1);
             if (sessionStorage.getItem('active_symbols')) {
                 processActiveSymbols();
             } else {

@@ -15,6 +15,10 @@ function processActiveSymbols() {
 
     displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
     processMarket();
+    setTimeout(function(){
+        Symbols.reloadPage(0);
+        Symbols.getSymbols();
+    }, 60*1000);
 }
 
 
@@ -29,7 +33,9 @@ function processMarket() {
     var market = sessionStorage.getItem('market');
     displayUnderlyings('underlying', Symbols.underlyings()[market]);
 
-    processMarketUnderlying();
+    if(Symbols.reloadPage()){
+        processMarketUnderlying();
+    }
 }
 
 /*
