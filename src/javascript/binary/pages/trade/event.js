@@ -134,6 +134,7 @@ if (amountElement) {
     amountElement.addEventListener('input', debounce( function(e) {
         sessionStorage.setItem('amount', e.target.value);
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -247,6 +248,7 @@ var barrierElement = document.getElementById('barrier');
 if (barrierElement) {
     barrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -257,6 +259,7 @@ var lowBarrierElement = document.getElementById('barrier_low');
 if (lowBarrierElement) {
     lowBarrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -267,5 +270,6 @@ var highBarrierElement = document.getElementById('barrier_high');
 if (highBarrierElement) {
     highBarrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
