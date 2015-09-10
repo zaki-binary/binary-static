@@ -143,6 +143,7 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
+            addEventListenerForm();
             if (sessionStorage.getItem('offerings')) {
                 processMarketOfferings();
             } else {
