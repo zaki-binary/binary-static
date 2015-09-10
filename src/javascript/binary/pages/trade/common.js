@@ -88,7 +88,7 @@ function displayUnderlyings(id, elements, selected) {
             if (elements.hasOwnProperty(key)){
                 var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
                 option.setAttribute('value', key);
-                if (elements[key]['is_suspended'] === 1) {
+                if (elements[key]['is_active'] !== 1) {
                     option.setAttribute('disabled', true);
                 }
                 if (selected && selected === key) {

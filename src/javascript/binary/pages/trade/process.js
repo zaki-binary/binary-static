@@ -65,7 +65,17 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var formname = sessionStorage.getItem('formname') || 'risefall';
+    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var formname;
+    if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
+        formname = sessionStorage.getItem('formname');
+    }
+    else if(contract_categories['risefall']){
+        formname = 'risefall';
+    }
+    else{
+        formname = Object.keys(contract_categories)[0];
+    }
 
     // set form to session storage
     sessionStorage.setItem('formname', formname);
@@ -73,7 +83,7 @@ function processContract(contracts) {
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
 
-    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
+    displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
 }
