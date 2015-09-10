@@ -12,18 +12,18 @@ var Message = (function () {
             var type = response.msg_type;
             if (type === 'authorize') {
                 TradeSocket.send({ payout_currencies: 1 });
-            } else if (type === 'offerings') {
-                sessionStorage.setItem('offerings', msg.data);
-                processMarketOfferings();
+            } else if (type === 'active_symbols') {
+                sessionStorage.setItem('active_symbols', msg.data);
+                processActiveSymbols();
             } else if (type === 'contracts_for') {
-                processContractFormOfferings(response);
+                processContract(response);
             } else if (type === 'payout_currencies') {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
             } else if (type === 'proposal') {
                 hideOverlayContainer();
-                Price.display(response, Contract.contractType()[Offerings.form()]);
-                hidePriceLoadingIcon();
+                Price.display(response, Contract.contractType()[Contract.form()]);
+                hideLoadingOverlay();
             } else if (type === 'buy') {
                 Purchase.display(response);
             } else if (type === 'tick') {

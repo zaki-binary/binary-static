@@ -144,10 +144,10 @@ pjax_config_page('trading', function () {
             Content.populate();
             TradeSocket.init();
             addEventListenerForm();
-            if (sessionStorage.getItem('offerings')) {
-                processMarketOfferings();
+            if (sessionStorage.getItem('active_symbols')) {
+                processActiveSymbols();
             } else {
-                Offerings.getOfferings();
+                Symbols.getSymbols();
             }
         },
         onUnload: function() {
