@@ -10116,12 +10116,15 @@ function displayUnderlyings(id, elements, selected) {
 
     if (elements) {
         var keys = Object.keys(elements).sort(function(a, b) {
-            return elements[a].localeCompare(elements[b]);
+            return elements[a]['display'].localeCompare(elements[b]['display']);
         });
         keys.forEach(function (key) {
             if (elements.hasOwnProperty(key)){
-                var option = document.createElement('option'), content = document.createTextNode(elements[key]);
+                var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
                 option.setAttribute('value', key);
+                if (elements[key]['is_suspended'] === 1) {
+                    option.setAttribute('disabled', true);
+                }
                 if (selected && selected === key) {
                     option.setAttribute('selected', 'selected');
                 }
@@ -11905,7 +11908,10 @@ var Symbols = (function () {
             }
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
-                tradeUnderlyings[currentMarket][currentUnderlying] = element['display_name'];
+                tradeUnderlyings[currentMarket][currentUnderlying] = {
+                    is_suspended: element['is_trading_suspended'],
+                    display: element['display_name']
+                };
             }
         });
     };
