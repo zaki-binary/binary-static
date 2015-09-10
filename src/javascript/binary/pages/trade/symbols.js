@@ -54,7 +54,7 @@ var Symbols = (function () {
             reload = flag;
         }
         return reload;
-    }
+    };
 
     return {
         details: details,
