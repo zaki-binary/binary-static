@@ -1,108 +1,159 @@
 /*
- * Function to process offerings, this function is called
- * when market is changed or for processing offerings response
+ * This function process the active symbols to get markets
+ * and underlying list
  */
-var processMarketOfferings = function () {
+function processActiveSymbols() {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'forex',
-        formname = sessionStorage.getItem('formname') || 'risefall',
-        offerings = sessionStorage.getItem('offerings');
+    // populate the Symbols object
+    Symbols.details(JSON.parse(sessionStorage.getItem('active_symbols')));
 
-    // populate the Offerings object
-    Offerings.details(JSON.parse(offerings), market.charAt(0).toUpperCase() + market.substring(1), formname);
+    var market = getDefaultMarket();
 
-    // change the market placeholder content as per current market (used for mobile menu)
-    setMarketPlaceholderContent(market);
+    // store the market
+    sessionStorage.setItem('market', market);
 
-    // display markets, submarket, underlyings corresponding to market selected
-    displayListElements('contract_market_nav', Offerings.markets().sort(compareMarkets), market);
-    displayListElements('contract_form_name_nav', Object.keys(Offerings.contractForms()).sort(compareContractCategory), formname);
+    displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
+    processMarket();
+    setTimeout(function(){
+        Symbols.reloadPage(0);
+        Symbols.getSymbols();
+    }, 60*1000);
+}
 
-    // change the form placeholder content as per current form (used for mobile menu)
-    setFormPlaceholderContent(formname);
-
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
-
-    // get the underlying selected
-    var underlying = document.getElementById('underlying').value;
-    sessionStorage.setItem('underlying', underlying);
-    sessionStorage.setItem('formname', formname);
-
-    // get the contract details based on underlying as market has changed
-    TradeSocket.send({ contracts_for: underlying });
-    requestTradeAnalysis();
-};
 
 /*
- * Function to display contract form for current underlying
+ * Function to call when market has changed
  */
-var processContractFormOfferings = function (contracts) {
+function processMarket() {
     'use strict';
 
-    Contract.details(contracts);
+    // we can get market from sessionStorage as allowed market
+    // is already set when this function is called
+    var market = sessionStorage.getItem('market');
+    displayUnderlyings('underlying', Symbols.underlyings()[market]);
+
+    if(Symbols.reloadPage()){
+        processMarketUnderlying();
+    }
+}
+
+/*
+ * Function to call when underlying has changed
+ */
+function processMarketUnderlying() {
+    'use strict';
+
+    var underlying = document.getElementById('underlying').value;
+    sessionStorage.setItem('underlying', underlying);
 
     // forget the old tick id i.e. close the old tick stream
     processForgetTickId();
     // get ticks for current underlying
-    TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
+    TradeSocket.send({ ticks : underlying });
+
+    Contract.getContracts(underlying);
+
+    requestTradeAnalysis();
+}
+
+/*
+ * Function to display contract form for current underlying
+ */
+function processContract(contracts) {
+    'use strict';
+
+    Contract.setContracts(contracts);
+
+    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var formname;
+    if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
+        formname = sessionStorage.getItem('formname');
+    }
+    else{
+        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+    }
+    
+    // set form to session storage
+    sessionStorage.setItem('formname', formname);
+
+    // change the form placeholder content as per current form (used for mobile menu)
+    setFormPlaceholderContent(formname);
+
+    displayContractForms('contract_form_name_nav', contract_categories, formname);
+
+    processContractForm();
+}
+
+function processContractForm() {
+    Contract.details(sessionStorage.getItem('formname'));
 
     displayDurations('spot');
 
     displayStartDates();
 
-    displayBarriers();
-
     processPriceRequest();
-};
+}
 
 /*
  * Function to request for cancelling the current price proposal
  */
-var processForgetPriceIds = function () {
+function processForgetPriceIds() {
     'use strict';
-
-    Object.keys(Price.idDisplayMapping()).forEach(function (key) {
-        TradeSocket.send({ forget: key });
-    });
-};
+    if (Price) {
+        var priceIds = Price.bufferedIds();
+        for (var id in priceIds) {
+            if (priceIds.hasOwnProperty(id)) {
+                TradeSocket.send({ forget: id });
+                delete priceIds[id];
+            }
+        }
+        Price.clearMapping();
+    }
+}
 
 /*
  * Function to process and calculate price based on current form
  * parameters or change in form parameters
  */
-var processPriceRequest = function () {
+function processPriceRequest() {
     'use strict';
 
-    showPriceLoadingIcon();
     processForgetPriceIds();
-    Price.clearMapping();
-    for (var typeOfContract in Contract.contractType()[Offerings.form()]) {
-        if(Contract.contractType()[Offerings.form()].hasOwnProperty(typeOfContract)) {
+    showLoadingOverlay();
+    for (var typeOfContract in Contract.contractType()[Contract.form()]) {
+        if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
         }
     }
-};
+}
 
 /*
  * Function to cancel the current tick stream
  * this need to be invoked before makin
  */
-var processForgetTickId = function () {
+function processForgetTickId() {
     'use strict';
-
-    if (Tick && Tick.id()) {
-        TradeSocket.send({ forget: Tick.id() });
+    if (Tick) {
+        var tickIds = Tick.bufferedIds();
+        for (var id in tickIds) {
+            if (tickIds.hasOwnProperty(id)) {
+                TradeSocket.send({ forget: id });
+                delete tickIds[id];
+            }
+        }
     }
-};
+}
 
 /*
  * Function to process ticks stream
  */
-var processTick = function (tick) {
+function processTick(tick) {
     'use strict';
-
     Tick.details(tick);
     Tick.display();
-};
+    if (!Barriers.isBarrierUpdated()) {
+        Barriers.display();
+        Barriers.setBarrierUpdate(true);
+    }
+}

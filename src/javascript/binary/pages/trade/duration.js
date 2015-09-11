@@ -2,19 +2,24 @@
  * Handles duration processing display
  *
  * It process `Contract.durations()` and display them according to
- * the current `Offerings.form()` and `Offerings.barriers()`
+ * the current `Contract.form()` and `Contract.barriers()`
  *
  * It also populate expiry type select box i.e Durations and Endtime select
  *
  */
-var displayDurations = function (startType) {
+function displayDurations(startType) {
     'use strict';
 
-    var target= document.getElementById('duration_units'),
-        durations = Contract.durations(),
-        formName = Offerings.form(),
-        barrierCategory = Offerings.barrier(),
-        fragment =  document.createDocumentFragment(), durationContainer = {};
+    var durations = Contract.durations();
+    if (durations === false) {
+        document.getElementById('expiry_row').style.display = 'none';
+        return false;
+    }
+
+    var target = document.getElementById('duration_units'),
+        formName = Contract.form(),
+        barrierCategory = Contract.barrier(),
+        fragment = document.createDocumentFragment(), durationContainer = {};
 
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
@@ -52,7 +57,8 @@ var displayDurations = function (startType) {
 
     for (var duration in durationContainer) {
         if(durationContainer.hasOwnProperty(duration)) {
-            var min = durationContainer[duration]['min_contract_duration'], max = durationContainer[duration]['min_contract_duration'], textMapping = durationTextValueMappings(min);
+            var min = durationContainer[duration]['min_contract_duration'],
+                textMapping = durationTextValueMappings(min);
 
             var option, content;
             if (duration === 'intraday') {
@@ -65,13 +71,14 @@ var displayDurations = function (startType) {
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('minutes');
+                        content = document.createTextNode(Content.localize().textDurationMinutes);
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('hours');
+                        content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
@@ -82,10 +89,11 @@ var displayDurations = function (startType) {
                         content = document.createTextNode(textMapping['text']);
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
+                        option.setAttribute('selected', 'selected');
                         option.appendChild(content);
                         fragment.appendChild(option);
                         option = document.createElement('option');
-                        content = document.createTextNode('hours');
+                        content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
@@ -127,16 +135,16 @@ var displayDurations = function (startType) {
         }
     }
     durationPopulate();
-};
+}
 
-var durationTextValueMappings = function (str) {
+function durationTextValueMappings(str) {
     'use strict';
     var mapping = {
-        s : 'seconds',
-        m : 'minutes',
-        h : 'hours',
-        d : 'days',
-        t : 'ticks'
+        s : Content.localize().textDurationSeconds,
+        m : Content.localize().textDurationMinutes,
+        h : Content.localize().textDurationHours,
+        d : Content.localize().textDurationDays,
+        t : Content.localize().textDurationTicks
     };
 
     var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [],
@@ -153,9 +161,9 @@ var durationTextValueMappings = function (str) {
     }
 
     return obj;
-};
+}
 
-var durationPopulate = function () {
+function durationPopulate() {
     'use strict';
 
     var unit = document.getElementById('duration_units');
@@ -167,9 +175,12 @@ var durationPopulate = function () {
     } else {
         displayExpiryType();
     }
-};
 
-var displayExpiryType = function (unit) {
+    // we need to call it here as for days we need to show absolute barriers
+    Barriers.display();
+}
+
+function displayExpiryType(unit) {
     'use strict';
 
     var target = document.getElementById('expiry_type'),
@@ -194,7 +205,7 @@ var displayExpiryType = function (unit) {
     }
 
     var option = document.createElement('option'),
-        content = document.createTextNode('Durations');
+        content = document.createTextNode(Content.localize().textDuration);
 
     option.setAttribute('value', 'duration');
     if (current_selected === 'duration') {
@@ -205,7 +216,7 @@ var displayExpiryType = function (unit) {
 
     if (unit !== 't') {
         option = document.createElement('option');
-        content = document.createTextNode('End Time');
+        content = document.createTextNode(Content.localize().textEndTime);
         option.setAttribute('value', 'endtime');
         if (current_selected === 'endtime') {
             option.setAttribute('selected', 'selected');
@@ -214,4 +225,4 @@ var displayExpiryType = function (unit) {
         fragment.appendChild(option);
     }
     target.appendChild(fragment);
-};
+}

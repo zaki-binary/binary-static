@@ -20,11 +20,15 @@ function displayStartDates() {
 
     var startDates = Contract.startDates();
 
-    if (startDates) {
+    if (startDates && startDates.length) {
+
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
             option = document.createElement('option'),
-            content = document.createTextNode('Now');
+            content = document.createTextNode(Content.localize().textNow),
+            row = document.getElementById('date_start_row');
+
+        row.style.display = 'flex';
 
         while (target && target.firstChild) {
             target.removeChild(target.firstChild);
@@ -42,11 +46,12 @@ function displayStartDates() {
 
             var ROUNDING = 5 * 60 * 1000;
             var start = moment();
-            start = moment(Math.ceil((+start) / ROUNDING) * ROUNDING).utc();
 
-            if (moment(a, 'YYYY MM DD').isSame(moment(start ,'YYYY MM DD'), 'day')) {
+            if(moment(start).isAfter(moment(a))){
                 a = start;
             }
+
+            a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
 
             while(a.isBefore(b)) {
                 option = document.createElement('option');
