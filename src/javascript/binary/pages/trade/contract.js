@@ -17,7 +17,7 @@
 var Contract = (function () {
     'use strict';
 
-    var contractDetails = {}, durations = {}, startDates = [], barriers = {}, contractType = {},
+    var contractDetails = {}, durations = {}, startDates = {}, barriers = {}, contractType = {},
         open, close, form, barrier;
 
     var populate_durations = function (currentContract) {
@@ -48,7 +48,7 @@ var Contract = (function () {
             contractCategories = {},
             barrierCategory;
 
-        startDates = [];
+        startDates = { has_spot:0, list:[] };
         durations = {};
         open = contracts['open'];
         close = contracts['close'];
@@ -70,7 +70,10 @@ var Contract = (function () {
                 }
 
                 if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
-                    startDates = currentObj.forward_starting_options;
+                    startDates.list = currentObj.forward_starting_options;                   
+                }
+                else if(currentObj.start_type==='spot'){
+                    startDates.has_spot = 1;
                 }
 
                 var barrierObj = {};

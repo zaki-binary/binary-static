@@ -20,12 +20,10 @@ function displayStartDates() {
 
     var startDates = Contract.startDates();
 
-    if (startDates && startDates.length) {
+    if (startDates && startDates.list.length) {
 
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
-            option = document.createElement('option'),
-            content = document.createTextNode(Content.localize().textNow),
             row = document.getElementById('date_start_row');
 
         row.style.display = 'flex';
@@ -34,13 +32,17 @@ function displayStartDates() {
             target.removeChild(target.firstChild);
         }
 
-        option.setAttribute('value', 'now');
-        option.appendChild(content);
-        fragment.appendChild(option);
+        if(startDates.has_spot){
+            var option = document.createElement('option'),
+            var content = document.createTextNode(Content.localize().textNow);
+            option.setAttribute('value', 'now');
+            option.appendChild(content);
+            fragment.appendChild(option);
+        }
 
-        startDates.sort(compareStartDate);
+        startDates.list.sort(compareStartDate);
 
-        startDates.forEach(function (start_date) {
+        startDates.list.forEach(function (start_date) {
             var a = moment.unix(start_date.open).utc();
             var b = moment.unix(start_date.close).utc();
 
