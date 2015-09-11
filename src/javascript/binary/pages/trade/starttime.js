@@ -33,7 +33,7 @@ function displayStartDates() {
         }
 
         if(startDates.has_spot){
-            var option = document.createElement('option'),
+            var option = document.createElement('option');
             var content = document.createTextNode(Content.localize().textNow);
             option.setAttribute('value', 'now');
             option.appendChild(content);
