@@ -7,7 +7,6 @@ var Message = (function () {
 
     var process = function (msg) {
         var response = JSON.parse(msg.data);
-        console.log(response);
         if (response) {
             var type = response.msg_type;
             if (type === 'authorize') {

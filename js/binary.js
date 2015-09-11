@@ -10359,29 +10359,6 @@ function displayCommentPrice(id, currency, type, payout) {
 }
 
 /*
- * function to filter out allowed markets from all markets
- */
-function getAllowedMarkets(markets) {
-    'use strict';
-    if (markets && getCookieItem('loginid')) {
-        var obj = {};
-        var allowedMarkets = getCookieItem('allowed_markets');
-        if (allowedMarkets) {
-            for (var key in markets) {
-                if (markets.hasOwnProperty(key)) {
-                    var re = new RegExp(key, 'i');
-                    if (re.test(allowedMarkets)) {
-                        obj[key] = markets[key];
-                    }
-                }
-            }
-            return obj;
-        }
-    }
-    return markets;
-}
-
-/*
  * This function loops through the available contracts and markets
  * that are not supposed to be shown are replaced
  *
@@ -11008,6 +10985,7 @@ if (marketNavElement) {
         // as different markets have different forms so remove from sessionStorage
         // it will default to proper one
         sessionStorage.removeItem('formname');
+        Symbols.currentSymbol('');
         processMarket();
     });
 }
@@ -11274,7 +11252,6 @@ var Message = (function () {
 
     var process = function (msg) {
         var response = JSON.parse(msg.data);
-        console.log(response);
         if (response) {
             var type = response.msg_type;
             if (type === 'authorize') {
@@ -11460,7 +11437,7 @@ var Price = (function () {
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
         } else {
-            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], document.getElementById('amount').value);
+            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
 
             var priceId = document.getElementById('purchase_button_' + position);
 
@@ -11517,7 +11494,7 @@ function processActiveSymbols() {
     // store the market
     sessionStorage.setItem('market', market);
 
-    displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
+    displayOptions('contract_markets', Symbols.markets(), market);
     processMarket();
     setTimeout(function(){
         var underlying = document.getElementById('underlying').value;
