@@ -3381,11 +3381,8 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
-            if (sessionStorage.getItem('active_symbols')) {
-                processActiveSymbols();
-            } else {
-                Symbols.getSymbols();
-            }
+            Symbols.reloadPage(1);
+            Symbols.getSymbols();
         },
         onUnload: function() {
             TradeSocket.close();
@@ -10122,7 +10119,7 @@ function displayUnderlyings(id, elements, selected) {
             if (elements.hasOwnProperty(key)){
                 var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
                 option.setAttribute('value', key);
-                if (elements[key]['is_suspended'] === 1) {
+                if (elements[key]['is_active'] !== 1) {
                     option.setAttribute('disabled', true);
                 }
                 if (selected && selected === key) {
@@ -11515,6 +11512,10 @@ function processActiveSymbols() {
 
     displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
     processMarket();
+    setTimeout(function(){
+        Symbols.reloadPage(0);
+        Symbols.getSymbols();
+    }, 60*1000);
 }
 
 
@@ -11529,7 +11530,9 @@ function processMarket() {
     var market = sessionStorage.getItem('market');
     displayUnderlyings('underlying', Symbols.underlyings()[market]);
 
-    processMarketUnderlying();
+    if(Symbols.reloadPage()){
+        processMarketUnderlying();
+    }
 }
 
 /*
@@ -11559,15 +11562,22 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var formname = sessionStorage.getItem('formname') || 'risefall';
-
+    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var formname;
+    if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
+        formname = sessionStorage.getItem('formname');
+    }
+    else{
+        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+    }
+    
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
 
-    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
+    displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
 }
@@ -11890,7 +11900,7 @@ function displayStartDates() {
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {};
+    var tradeMarkets = {}, tradeUnderlyings = {}, reload = 1;
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -11909,7 +11919,7 @@ var Symbols = (function () {
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
                 tradeUnderlyings[currentMarket][currentUnderlying] = {
-                    is_suspended: element['is_trading_suspended'],
+                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
                     display: element['display_name']
                 };
             }
@@ -11922,11 +11932,19 @@ var Symbols = (function () {
         });
     };
 
+    var reloadPage = function(flag){
+        if(typeof flag !== 'undefined'){
+            reload = flag;
+        }
+        return reload;
+    };
+
     return {
         details: details,
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
-        underlyings: function () { return tradeUnderlyings; }
+        underlyings: function () { return tradeUnderlyings; },
+        reloadPage: reloadPage
     };
 
 })();

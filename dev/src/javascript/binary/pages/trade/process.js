@@ -15,6 +15,10 @@ function processActiveSymbols() {
 
     displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
     processMarket();
+    setTimeout(function(){
+        Symbols.reloadPage(0);
+        Symbols.getSymbols();
+    }, 60*1000);
 }
 
 
@@ -29,7 +33,9 @@ function processMarket() {
     var market = sessionStorage.getItem('market');
     displayUnderlyings('underlying', Symbols.underlyings()[market]);
 
-    processMarketUnderlying();
+    if(Symbols.reloadPage()){
+        processMarketUnderlying();
+    }
 }
 
 /*
@@ -59,15 +65,22 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var formname = sessionStorage.getItem('formname') || 'risefall';
-
+    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var formname;
+    if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
+        formname = sessionStorage.getItem('formname');
+    }
+    else{
+        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+    }
+    
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
 
-    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
+    displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
 }
