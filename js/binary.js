@@ -10596,7 +10596,7 @@ function getDefaultMarket() {
 var Contract = (function () {
     'use strict';
 
-    var contractDetails = {}, durations = {}, startDates = [], barriers = {}, contractType = {},
+    var contractDetails = {}, durations = {}, startDates = {}, barriers = {}, contractType = {},
         open, close, form, barrier;
 
     var populate_durations = function (currentContract) {
@@ -10627,7 +10627,7 @@ var Contract = (function () {
             contractCategories = {},
             barrierCategory;
 
-        startDates = [];
+        startDates = { has_spot:0, list:[] };
         durations = {};
         open = contracts['open'];
         close = contracts['close'];
@@ -10649,7 +10649,10 @@ var Contract = (function () {
                 }
 
                 if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
-                    startDates = currentObj.forward_starting_options;
+                    startDates.list = currentObj.forward_starting_options;                   
+                }
+                else if(currentObj.start_type==='spot'){
+                    startDates.has_spot = 1;
                 }
 
                 var barrierObj = {};
@@ -11293,6 +11296,10 @@ var Message = (function () {
             } else if (type === 'tick') {
                 processTick(response);
             }
+
+            if(type !== 'tick' && type !== 'proposal'){
+                console.log(response);
+            }
         } else {
             console.log('some error occured');
         }
@@ -11513,7 +11520,8 @@ function processActiveSymbols() {
     displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
     processMarket();
     setTimeout(function(){
-        Symbols.reloadPage(0);
+        var underlying = document.getElementById('underlying').value;
+        Symbols.currentSymbol(underlying);
         Symbols.getSymbols();
     }, 60*1000);
 }
@@ -11528,9 +11536,9 @@ function processMarket() {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market]);
+    displayUnderlyings('underlying', Symbols.underlyings()[market], Symbols.currentSymbol());
 
-    if(Symbols.reloadPage()){
+    if(!Symbols.currentSymbol()){
         processMarketUnderlying();
     }
 }
@@ -11585,9 +11593,9 @@ function processContract(contracts) {
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
-    displayDurations('spot');
-
     displayStartDates();
+
+    displayDurations();
 
     processPriceRequest();
 }
@@ -11834,12 +11842,10 @@ function displayStartDates() {
 
     var startDates = Contract.startDates();
 
-    if (startDates && startDates.length) {
+    if (startDates && startDates.list.length) {
 
         var target= document.getElementById('date_start'),
             fragment =  document.createDocumentFragment(),
-            option = document.createElement('option'),
-            content = document.createTextNode(Content.localize().textNow),
             row = document.getElementById('date_start_row');
 
         row.style.display = 'flex';
@@ -11848,13 +11854,17 @@ function displayStartDates() {
             target.removeChild(target.firstChild);
         }
 
-        option.setAttribute('value', 'now');
-        option.appendChild(content);
-        fragment.appendChild(option);
+        if(startDates.has_spot){
+            var option = document.createElement('option');
+            var content = document.createTextNode(Content.localize().textNow);
+            option.setAttribute('value', 'now');
+            option.appendChild(content);
+            fragment.appendChild(option);
+        }
 
-        startDates.sort(compareStartDate);
+        startDates.list.sort(compareStartDate);
 
-        startDates.forEach(function (start_date) {
+        startDates.list.forEach(function (start_date) {
             var a = moment.unix(start_date.open).utc();
             var b = moment.unix(start_date.close).utc();
 
@@ -11900,7 +11910,7 @@ function displayStartDates() {
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {}, reload = 1;
+    var tradeMarkets = {}, tradeUnderlyings = {}, current = '';
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -11932,11 +11942,11 @@ var Symbols = (function () {
         });
     };
 
-    var reloadPage = function(flag){
-        if(typeof flag !== 'undefined'){
-            reload = flag;
+    var currentSymbol = function(symbol){
+        if(typeof symbol !== 'undefined'){
+            current = symbol;
         }
-        return reload;
+        return current;
     };
 
     return {
@@ -11944,7 +11954,7 @@ var Symbols = (function () {
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
-        reloadPage: reloadPage
+        currentSymbol: currentSymbol
     };
 
 })();

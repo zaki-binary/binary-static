@@ -16,7 +16,8 @@ function processActiveSymbols() {
     displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
     processMarket();
     setTimeout(function(){
-        Symbols.reloadPage(0);
+        var underlying = document.getElementById('underlying').value;
+        Symbols.currentSymbol(underlying);
         Symbols.getSymbols();
     }, 60*1000);
 }
@@ -31,9 +32,9 @@ function processMarket() {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market]);
+    displayUnderlyings('underlying', Symbols.underlyings()[market], Symbols.currentSymbol());
 
-    if(Symbols.reloadPage()){
+    if(!Symbols.currentSymbol()){
         processMarketUnderlying();
     }
 }
@@ -88,9 +89,9 @@ function processContract(contracts) {
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
-    displayDurations('spot');
-
     displayStartDates();
+
+    displayDurations();
 
     processPriceRequest();
 }

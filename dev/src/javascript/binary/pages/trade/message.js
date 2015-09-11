@@ -29,6 +29,10 @@ var Message = (function () {
             } else if (type === 'tick') {
                 processTick(response);
             }
+
+            if(type !== 'tick' && type !== 'proposal'){
+                console.log(response);
+            }
         } else {
             console.log('some error occured');
         }
