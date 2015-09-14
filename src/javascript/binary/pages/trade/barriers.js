@@ -2,7 +2,7 @@
  * Handles barrier processing and display
  *
  * It process `Contract.barriers` and display them if its applicable
- * for current `Offerings.form()
+ * for current `Contract.form()
  */
 
 var Barriers = (function () {
@@ -12,7 +12,7 @@ var Barriers = (function () {
 
     var display = function (barrierCategory) {
         var barriers = Contract.barriers(),
-            formName = Offerings.form();
+            formName = Contract.form();
 
         if (barriers && formName) {
             var barrier = barriers[formName];

@@ -1,56 +1,30 @@
 /*
- * attach event to market list, so when client change market we need to update form
+ * attach event to market list, so when client change market we need to update undelryings
  * and request for new Contract details to populate the form and request price accordingly
  */
-var marketNavElement = document.getElementById('contract_market_nav');
+var marketNavElement = document.getElementById('contract_markets');
 if (marketNavElement) {
-    marketNavElement.addEventListener('click', debounce (function(e) {
-        if (e.target && e.target.nodeName === 'LI') {
-            var clickedMarket = e.target;
-            var isMarketActive = clickedMarket.classList.contains('active');
-            sessionStorage.setItem('market', clickedMarket.id);
+    marketNavElement.addEventListener('change', function(e) {
+        var clickedMarket = e.target;
+        sessionStorage.setItem('market', clickedMarket.value);
 
-            setMarketPlaceholderContent();
-
-            // as different markets have different forms so remove from sessionStorage
-            // it will default to proper one
-            sessionStorage.removeItem('formname');
-            toggleActiveNavMenuElement(marketNavElement, clickedMarket);
-            // if market is already active then no need to send same request again
-            if (!isMarketActive) {
-                processMarketOfferings();
-            }
-            var marketFormCheckbox = document.getElementById('market_show_menu');
-            if (marketFormCheckbox) {
-                marketFormCheckbox.checked = false;
-            }
-        }
-    }, 200 ));
+        // as different markets have different forms so remove from sessionStorage
+        // it will default to proper one
+        sessionStorage.removeItem('formname');
+        Symbols.currentSymbol('');
+        processMarket();
+    });
 }
 
 /*
  * attach event to form list, so when client click on different form we need to update form
  * and request for new Contract details to populate the form and request price accordingly
  */
-var contractFormEventChange =  function (formName) {
+var contractFormEventChange = function () {
     'use strict';
 
-    var market = sessionStorage.getItem('market') || 'Forex';
-    market = market.charAt(0).toUpperCase() + market.substring(1);
-
-    // pass the original offerings as we don't want to request offerings again and again
-    Offerings.details(Offerings.offerings(), market, formName);
-
-    // change only submarkets and underlyings as per formName change
-    displayOptions('submarket',Offerings.submarkets());
-    displayUnderlyings();
-
-    var underlying = document.getElementById('underlying').value;
-    sessionStorage.setItem('underlying', underlying);
-
+    processContractForm();
     requestTradeAnalysis();
-    // get the contract details based on underlying as formName has changed
-    Contract.getContracts(underlying);
 };
 
 var formNavElement = document.getElementById('contract_form_name_nav');
@@ -66,7 +40,7 @@ if (formNavElement) {
             toggleActiveNavMenuElement(formNavElement, clickedForm);
 
             if (!isFormActive) {
-                contractFormEventChange(clickedForm.id);
+                contractFormEventChange();
             }
             var contractFormCheckbox = document.getElementById('contract_form_show_menu');
             if (contractFormCheckbox) {
@@ -83,9 +57,16 @@ var underlyingElement = document.getElementById('underlying');
 if (underlyingElement) {
     underlyingElement.addEventListener('change', function(e) {
         if (e.target) {
-            sessionStorage.setItem('underlying', e.target.value);
+            var underlying = e.target.value;
+            sessionStorage.setItem('underlying', underlying);
             requestTradeAnalysis();
-            Contract.getContracts(e.target.value);
+
+            Contract.getContracts(underlying);
+
+            // forget the old tick id i.e. close the old tick stream
+            processForgetTickId();
+            // get ticks for current underlying
+            TradeSocket.send({ ticks : underlying });
         }
     });
 }

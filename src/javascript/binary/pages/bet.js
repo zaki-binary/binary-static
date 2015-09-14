@@ -143,11 +143,8 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
-            if (sessionStorage.getItem('offerings')) {
-                processMarketOfferings();
-            } else {
-                Offerings.getOfferings();
-            }
+            Symbols.currentSymbol('');
+            Symbols.getSymbols();
         },
         onUnload: function() {
             TradeSocket.close();
