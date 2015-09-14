@@ -143,6 +143,8 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
+            Symbols.currentSymbol('');
+            Symbols.getSymbols();
             addEventListenerForm();
         },
         onUnload: function() {

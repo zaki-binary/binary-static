@@ -394,7 +394,6 @@ function getDefaultMarket() {
  */
 function addEventListenerForm(){
     document.getElementById('websocket_form').addEventListener("submit", function(evt){
-        evt.currentTarget.classList.add('submitted');
         evt.preventDefault();
         return false;
     }, false);
