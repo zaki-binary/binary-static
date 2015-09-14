@@ -3383,6 +3383,7 @@ pjax_config_page('trading', function () {
             TradeSocket.init();
             Symbols.currentSymbol('');
             Symbols.getSymbols();
+            addEventListenerForm();
         },
         onUnload: function() {
             TradeSocket.close();
@@ -10419,6 +10420,28 @@ function getDefaultMarket() {
    }
    return mkt;
 }
+
+/*
+ * this is invoked when submit button is clicked and prevents reloading of page
+ */
+function addEventListenerForm(){
+    document.getElementById('websocket_form').addEventListener("submit", function(evt){
+        evt.currentTarget.classList.add('submitted');
+        evt.preventDefault();
+        return false;
+    }, false);
+}
+
+/*
+ * this creates a button, clicks it, and destroys it to invoke the listener
+ */
+function submitForm(form) {
+    var button = form.ownerDocument.createElement('input');
+    button.style.display = 'none';
+    button.type = 'submit';
+    form.appendChild(button).click();
+    form.removeChild(button);
+}
 ;var Content = (function () {
     'use strict';
 
@@ -11052,6 +11075,7 @@ var durationAmountElement = document.getElementById('duration_amount');
 if (durationAmountElement) {
     durationAmountElement.addEventListener('input', debounce (function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -11108,6 +11132,7 @@ if (amountElement) {
     amountElement.addEventListener('input', debounce( function(e) {
         sessionStorage.setItem('amount', e.target.value);
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -11221,6 +11246,7 @@ var barrierElement = document.getElementById('barrier');
 if (barrierElement) {
     barrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -11231,6 +11257,7 @@ var lowBarrierElement = document.getElementById('barrier_low');
 if (lowBarrierElement) {
     lowBarrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 
@@ -11241,6 +11268,7 @@ var highBarrierElement = document.getElementById('barrier_high');
 if (highBarrierElement) {
     highBarrierElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
     }));
 }
 ;/*
@@ -11426,6 +11454,15 @@ var Price = (function () {
             row.appendChild(amount);
         }
 
+        if (!document.getElementById('websocket_form').checkValidity()) {
+            if (purchase) {
+                purchase.style.display = 'none';
+            }
+            if (description) {
+                description.style.display = 'none';
+            }
+        }
+
         if (details['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
@@ -11497,9 +11534,11 @@ function processActiveSymbols() {
     displayOptions('contract_markets', Symbols.markets(), market);
     processMarket();
     setTimeout(function(){
-        var underlying = document.getElementById('underlying').value;
-        Symbols.currentSymbol(underlying);
-        Symbols.getSymbols();
+        if(TradeSocket.socket().readyState === 1){
+            var underlying = document.getElementById('underlying').value;
+            Symbols.currentSymbol(underlying);
+            Symbols.getSymbols();
+        }
     }, 60*1000);
 }
 

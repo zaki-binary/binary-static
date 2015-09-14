@@ -137,6 +137,15 @@ var Price = (function () {
             row.appendChild(amount);
         }
 
+        if (!document.getElementById('websocket_form').checkValidity()) {
+            if (purchase) {
+                purchase.style.display = 'none';
+            }
+            if (description) {
+                description.style.display = 'none';
+            }
+        }
+
         if (details['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
