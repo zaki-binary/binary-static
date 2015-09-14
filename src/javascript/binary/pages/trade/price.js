@@ -153,6 +153,8 @@ var Price = (function () {
                    box.style.display = 'none';
                 }
                 processForgetPriceIds();
+            } else {
+                box.style.display = 'block';
             }
         } else {
             displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
