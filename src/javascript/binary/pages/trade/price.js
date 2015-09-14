@@ -99,6 +99,7 @@ var Price = (function () {
             container = document.getElementById('price_description_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position),
+            box = document.getElementById('price_container_' + position),
             amount = document.createElement('div'),
             currency = document.getElementById('currency');
 
@@ -137,25 +138,23 @@ var Price = (function () {
             row.appendChild(amount);
         }
 
-        if (!document.getElementById('websocket_form').checkValidity()) {
-            if (purchase) {
-                purchase.style.display = 'none';
-            }
-            if (description) {
-                description.style.display = 'none';
-            }
-        }
-
         if (details['error']) {
-            if (purchase) {
-                purchase.style.display = 'none';
+            if (!document.getElementById('websocket_form').checkValidity()) {
+                if (box) {
+                   box.style.display = 'none';
+                }
+                processForgetPriceIds();
+            } else {
+                if (purchase) {
+                    purchase.style.display = 'none';
+                }
+                row.appendChild(description);
+                fragment.appendChild(row);
+                content = document.createTextNode(details['error']['message']);
+                para.appendChild(content);
+                para.setAttribute('class', 'notice-msg');
+                fragment.appendChild(para);
             }
-            row.appendChild(description);
-            fragment.appendChild(row);
-            content = document.createTextNode(details['error']['message']);
-            para.appendChild(content);
-            para.setAttribute('class', 'notice-msg');
-            fragment.appendChild(para);
         } else {
             displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
 
