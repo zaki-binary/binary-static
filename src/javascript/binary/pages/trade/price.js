@@ -139,21 +139,20 @@ var Price = (function () {
         }
 
         if (details['error']) {
+            if (purchase) {
+                purchase.style.display = 'none';
+            }
+            row.appendChild(description);
+            fragment.appendChild(row);
+            content = document.createTextNode(details['error']['message']);
+            para.appendChild(content);
+            para.setAttribute('class', 'notice-msg');
+            fragment.appendChild(para);
             if (!document.getElementById('websocket_form').checkValidity()) {
                 if (box) {
                    box.style.display = 'none';
                 }
                 processForgetPriceIds();
-            } else {
-                if (purchase) {
-                    purchase.style.display = 'none';
-                }
-                row.appendChild(description);
-                fragment.appendChild(row);
-                content = document.createTextNode(details['error']['message']);
-                para.appendChild(content);
-                para.setAttribute('class', 'notice-msg');
-                fragment.appendChild(para);
             }
         } else {
             displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
@@ -161,6 +160,7 @@ var Price = (function () {
             var priceId = document.getElementById('purchase_button_' + position);
 
             if (purchase) {
+                box.style.display = 'block';
                 purchase.style.display = 'block';
             }
             var oldprice = priceId.getAttribute('data-ask-price');
