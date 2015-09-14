@@ -7,7 +7,6 @@ var Message = (function () {
 
     var process = function (msg) {
         var response = JSON.parse(msg.data);
-        console.log(response);
         if (response) {
             var type = response.msg_type;
             if (type === 'authorize') {
@@ -28,6 +27,10 @@ var Message = (function () {
                 Purchase.display(response);
             } else if (type === 'tick') {
                 processTick(response);
+            }
+
+            if(type !== 'tick' && type !== 'proposal'){
+                console.log(response);
             }
         } else {
             console.log('some error occured');
