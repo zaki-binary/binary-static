@@ -1,3 +1,0 @@
-var Japan = (function(){
-	
-})();
