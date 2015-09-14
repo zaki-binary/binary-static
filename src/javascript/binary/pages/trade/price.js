@@ -148,7 +148,7 @@ var Price = (function () {
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
         } else {
-            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], document.getElementById('amount').value);
+            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
 
             var priceId = document.getElementById('purchase_button_' + position);
 

@@ -17,7 +17,7 @@
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {};
+    var tradeMarkets = {}, tradeUnderlyings = {}, current = '';
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -35,7 +35,10 @@ var Symbols = (function () {
             }
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
-                tradeUnderlyings[currentMarket][currentUnderlying] = element['display_name'];
+                tradeUnderlyings[currentMarket][currentUnderlying] = {
+                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
+                    display: element['display_name']
+                };
             }
         });
     };
@@ -46,11 +49,19 @@ var Symbols = (function () {
         });
     };
 
+    var currentSymbol = function(symbol){
+        if(typeof symbol !== 'undefined'){
+            current = symbol;
+        }
+        return current;
+    };
+
     return {
         details: details,
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
-        underlyings: function () { return tradeUnderlyings; }
+        underlyings: function () { return tradeUnderlyings; },
+        currentSymbol: currentSymbol
     };
 
 })();

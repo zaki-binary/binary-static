@@ -82,12 +82,15 @@ function displayUnderlyings(id, elements, selected) {
 
     if (elements) {
         var keys = Object.keys(elements).sort(function(a, b) {
-            return elements[a].localeCompare(elements[b]);
+            return elements[a]['display'].localeCompare(elements[b]['display']);
         });
         keys.forEach(function (key) {
             if (elements.hasOwnProperty(key)){
-                var option = document.createElement('option'), content = document.createTextNode(elements[key]);
+                var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
                 option.setAttribute('value', key);
+                if (elements[key]['is_active'] !== 1) {
+                    option.setAttribute('disabled', true);
+                }
                 if (selected && selected === key) {
                     option.setAttribute('selected', 'selected');
                 }
@@ -322,29 +325,6 @@ function displayCommentPrice(id, currency, type, payout) {
             div.appendChild(comment);
         }
     }
-}
-
-/*
- * function to filter out allowed markets from all markets
- */
-function getAllowedMarkets(markets) {
-    'use strict';
-    if (markets && getCookieItem('loginid')) {
-        var obj = {};
-        var allowedMarkets = getCookieItem('allowed_markets');
-        if (allowedMarkets) {
-            for (var key in markets) {
-                if (markets.hasOwnProperty(key)) {
-                    var re = new RegExp(key, 'i');
-                    if (re.test(allowedMarkets)) {
-                        obj[key] = markets[key];
-                    }
-                }
-            }
-            return obj;
-        }
-    }
-    return markets;
 }
 
 /*
