@@ -99,6 +99,7 @@ var Price = (function () {
             container = document.getElementById('price_description_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position),
+            box = document.getElementById('price_container_' + position),
             amount = document.createElement('div'),
             currency = document.getElementById('currency');
 
@@ -138,11 +139,15 @@ var Price = (function () {
         }
 
         if (!document.getElementById('websocket_form').checkValidity()) {
-            if (purchase) {
-                purchase.style.display = 'none';
+            if (box) {
+                box.style.display = 'none';
             }
-            if (description) {
-                description.style.display = 'none';
+            processForgetPriceIds();
+        }
+
+        if (document.getElementById('websocket_form').checkValidity()) {
+            if (box) {
+                box.style.display = 'block';
             }
         }
 
