@@ -11416,6 +11416,7 @@ var Price = (function () {
             container = document.getElementById('price_description_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position),
+            box = document.getElementById('price_container_' + position),
             amount = document.createElement('div'),
             currency = document.getElementById('currency');
 
@@ -11455,11 +11456,15 @@ var Price = (function () {
         }
 
         if (!document.getElementById('websocket_form').checkValidity()) {
-            if (purchase) {
-                purchase.style.display = 'none';
+            if (box) {
+                box.style.display = 'none';
             }
-            if (description) {
-                description.style.display = 'none';
+            processForgetPriceIds();
+        }
+
+        if (document.getElementById('websocket_form').checkValidity()) {
+            if (box) {
+                box.style.display = 'block';
             }
         }
 
@@ -12585,88 +12590,115 @@ function attach_tabs(element) {
     });
     return targets;
 }
-;if(typeof JAPAN === 'function'){
-    var Contract = (function(){
-    	'use strict';
-        var open, close, contractDetails = [], periods={}, contractType = {};
+;if(typeof is_japan === 'function'){
+    var Contract = (function () {
+        'use strict';
+
+        var contractDetails = {}, contractType = {}, periods = {},
+            open, close, form, barrier;
 
         var populate_periods = function (currentContract){
-        	if(!periods[currentContract.contract_category]){
-        		periods[currentContract.contract_category] = {};
-        	}
+            var currentCategory = currentContract['contract_category'];
+            if(!periods[currentCategory]){
+                periods[currentCategory] = {};
+            }
 
-        	if(!periods[currentContract.contract_category][currentContract.underlying_symbol]){
-        		periods[currentContract.contract_category][currentContract.underlying_symbol] = {};
-        	}
+            if(!periods[currentCategory][currentContract.underlying_symbol]){
+                periods[currentCategory][currentContract.underlying_symbol] = {};
+            }
 
-        	var period = currentContract.trading_period.date_start.epoch+'_'+currentContract.trading_period.date_expiry.epoch;
+            var period = currentContract['trading_period']['date_start']['epoch']+'_'+currentContract['trading_period']['date_expiry']['epoch'];
 
-        	// console.log(period, currentContract.expiry_type,currentContract);
-            var d = new Date(currentContract.trading_period.date_start.epoch*1000);
-
-        	periods[currentContract.contract_category][currentContract.underlying_symbol][period] = {
-        		available_barriers: currentContract.available_barriers,
-        		barrier: currentContract.barrier,
-        		high_barrier: currentContract.high_barrier,
-        		low_barrier: currentContract.low_barrier,
-        		barriers: currentContract.barriers,
-        		// expiry_type: currentContract.expiry_type,
-        		date_start: currentContract.trading_period.date_start,
-        		date_expiry: currentContract.trading_period.date_expiry,
-        		duration: currentContract.trading_period.duration
-        	};
+            periods[currentCategory][currentContract['underlying_symbol']][period] = {
+                available_barriers: currentContract['available_barriers'],
+                barrier: currentContract['barrier'],
+                high_barrier: currentContract['high_barrier'],
+                low_barrier: currentContract['low_barrier'],
+                barriers: currentContract['barriers'],
+                date_start: currentContract['trading_period']['date_start'],
+                date_expiry: currentContract['trading_period']['date_expiry'],
+                duration: currentContract['trading_period']['duration']
+            };
         };
 
-        var details = function (contractObject) {
-        	var contracts = contractObject['contracts_for'],
-        	    contractsArray = [];
+        var details = function (formName) {
+            var contracts = Contract.contracts()['contracts_for'],
+                contractCategories = {},
+                barrierCategory;
 
-        	open = contracts['open'];
-        	close = contracts['close'];
+            open = contracts['open'];
+            close = contracts['close'];
 
-        	var formName = Offerings.form(),
-        	    barrierCategory = Offerings.barrier();
+            var formBarrier = getFormNameBarrierCategory(formName);
+                form = formName = formBarrier['formName'];
+                barrier = barrierCategory = formBarrier['barrierCategory'];
 
-        	if (formName) {
-        		contracts.available.forEach(function (currentObj) {
-        			if (formName === currentObj['contract_category']) {
+            contracts.available.forEach(function (currentObj) {
+                var contractCategory = currentObj['contract_category'];
 
-        				populate_periods(currentObj);
-        				contractsArray.push(currentObj);
+                if (formName && formName === contractCategory) {
 
-        				if (!contractType[currentObj['contract_category']]) {
-        				    contractType[currentObj['contract_category']] = {};
-        				}
+                    populate_periods(currentObj);
 
-        				if (!contractType[currentObj['contract_category']].hasOwnProperty(currentObj['contract_type'])) {
-        				    contractType[currentObj['contract_category']][currentObj['contract_type']] = currentObj['contract_display'];
-        				}
-        			}
-        		});
-        	}
-        	contractDetails = contractsArray;
+                    if (!contractType[contractCategory]) {
+                        contractType[contractCategory] = {};
+                    }
+
+                    if (!contractType[contractCategory].hasOwnProperty(currentObj['contract_type'])) {
+                        contractType[contractCategory][currentObj['contract_type']] = currentObj['contract_display'];
+                    }
+                }
+            });
         };
 
-        var getContracts = function(underlying){
-            var params = {contracts_for: underlying, region: 'japan'};
-            TradeSocket.send(params);
+        var getContracts = function(underlying) {
+            TradeSocket.send({ contracts_for: underlying, region: 'japan' });
+        };
+
+        var getContractForms = function() {
+            var contracts = Contract.contracts()['contracts_for'],
+                tradeContractForms = {};
+
+            contracts.available.forEach(function (currentObj) {
+                var contractCategory = currentObj['contract_category'];
+                if (contractCategory && !tradeContractForms.hasOwnProperty(contractCategory)) {
+                    if (contractCategory === 'callput') {
+                        if( currentObj['barrier_category'] === 'euro_atm') {
+                            tradeContractForms['risefall'] = Content.localize().textFormRiseFall;
+                        } else {
+                            tradeContractForms['higherlower'] = Content.localize().textFormHigherLower;
+                        }
+                    } else {
+                        tradeContractForms[contractCategory] = currentObj['contract_category_display'];
+                    }
+                }
+            });
+
+            return tradeContractForms;
         };
 
         return {
             details: details,
+            getContracts: getContracts,
+            contractForms: getContractForms,
             open: function () { return open; },
             close: function () { return close; },
             contracts: function () { return contractDetails; },
-            durations: function(){ return false; },
-            startDates: function(){ return false; },
+            durations: function () { return false; },
+            startDates: function () { return false; },
             barriers: function () { return false; },
             periods: function(){ return periods; },
             contractType: function () { return contractType; },
-            getContracts: getContracts
+            form: function () { return form; },
+            barrier: function () { return barrier; },
+            setContracts: function (data) {
+                contractDetails = data;
+            }
         };
 
     })();
-};if(typeof JAPAN === 'function'){
+}
+;if(typeof is_japan === 'function'){
     var lowBarrierElement = document.getElementById('barrier_low');
     if (lowBarrierElement) {
         lowBarrierElement.addEventListener('change', function (e) {
@@ -12730,31 +12762,7 @@ function attach_tabs(element) {
             options[i].setAttribute('disabled', true);
         }
     }
-};var Japan = (function(){
-	
-})();;if(typeof JAPAN === 'function'){
-	var _contractForms = Offerings.contractForms.bind({});
-	Object.defineProperties(Offerings,{
-		contractForms:{
-			value:function(){
-				var forms = _contractForms();
-				delete forms['risefall'];
-				return forms;
-			}
-		},
-		getOfferings: {
-			value:function(underlying){
-				var params = { 
-					offerings: 1,
-					market: 'Forex',
-					submarket: 'Major Pairs',
-					start_type: 'spot'
-		    	};
-				TradeSocket.send(params);
-			}
-		}
-	});
-};if(typeof JAPAN === 'function'){
+};if(typeof is_japan === 'function'){
 	var Periods = (function(){
 		var barrier = 0,
 			barrier2 = 0;
@@ -12765,10 +12773,9 @@ function attach_tabs(element) {
 			if(!periods){
 				return false;
 			}
-
 			var wrapper = document.getElementById('period_row'),
 				target= document.getElementById('period'),
-			    formName = Offerings.form(),
+			    formName = Contract.form(),
 			    underlying = document.getElementById('underlying').value,
 			    fragment =  document.createDocumentFragment();
 
@@ -12783,7 +12790,8 @@ function attach_tabs(element) {
 			wrapper.style.display = 'flex';
 
 			periods = periods[formName][underlying];
-			var list = Object.keys(periods);
+			list = Object.keys(periods);
+
 			list.sort(function(a,b){
 				if(periods[a].date_expiry.epoch - periods[a].date_start.epoch > periods[b].date_expiry.epoch - periods[b].date_start.epoch){
 					return 1;
@@ -12839,7 +12847,7 @@ function attach_tabs(element) {
 			var target1= document.getElementById('jbarrier'),
 				target2= document.getElementById('jbarrier_high'),
 				target3= document.getElementById('jbarrier_low'),
-			    formName = Offerings.form(),
+			    formName = Contract.form(),
 			    underlying = document.getElementById('underlying').value,
 			    period = document.getElementById('period').value,
 			    fragment = document.createDocumentFragment();
@@ -12922,7 +12930,7 @@ function attach_tabs(element) {
 		};
 	})();
 }
-;if(typeof JAPAN === 'function'){
+;if(typeof is_japan === 'function'){
 	var Price = Object.create(Price);
 	Object.defineProperties(Price,{
 		proposal:{
@@ -12959,29 +12967,40 @@ function attach_tabs(element) {
 			}
 		}
 	});
-};if(typeof JAPAN === 'function'){
+};if(typeof is_japan === 'function'){
 
-	document.getElementById('contract_market_nav').style.display='none';	
+	var processContractForm = function(){
+	    Contract.details(sessionStorage.getItem('formname'));
 
-	var processContractFormOfferings = function (contracts){
-		
-		'use strict';
+	    displayStartDates();
 
-		Contract.details(contracts);
-
-		// forget the old tick id i.e. close the old tick stream
-		processForgetTickId();
-		// get ticks for current underlying
-		TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
-
-		displayDurations('spot');
-
-		displayStartDates();
-
-		if(Periods){
-			Periods.displayPeriods();
-		}
-		
-		processPriceRequest();
+	    displayDurations();
+	    
+	    if(Periods){
+	    	Periods.displayPeriods();
+	    }
+	    
+	    processPriceRequest();
 	};
+
+}
+;if(typeof is_japan === 'function'){
+	Symbols._details = Symbols.details.bind({});
+
+	Object.defineProperties(Symbols,{
+		details:{
+			value:function(data){
+				var active_symbols = [];
+
+				data.active_symbols.forEach(function(symbol){
+					if(symbol.market==='forex' && symbol.submarket==='major_pairs'){
+						active_symbols.push(symbol);
+					}
+				});
+
+				data.active_symbols = active_symbols;
+				return Symbols._details(data);
+			}
+		}
+	});
 }

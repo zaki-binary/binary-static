@@ -1,4 +1,4 @@
-if(typeof JAPAN === 'function'){
+if(typeof is_japan === 'function'){
 	var Periods = (function(){
 		var barrier = 0,
 			barrier2 = 0;
@@ -9,10 +9,9 @@ if(typeof JAPAN === 'function'){
 			if(!periods){
 				return false;
 			}
-
 			var wrapper = document.getElementById('period_row'),
 				target= document.getElementById('period'),
-			    formName = Offerings.form(),
+			    formName = Contract.form(),
 			    underlying = document.getElementById('underlying').value,
 			    fragment =  document.createDocumentFragment();
 
@@ -27,7 +26,8 @@ if(typeof JAPAN === 'function'){
 			wrapper.style.display = 'flex';
 
 			periods = periods[formName][underlying];
-			var list = Object.keys(periods);
+			list = Object.keys(periods);
+
 			list.sort(function(a,b){
 				if(periods[a].date_expiry.epoch - periods[a].date_start.epoch > periods[b].date_expiry.epoch - periods[b].date_start.epoch){
 					return 1;
@@ -83,7 +83,7 @@ if(typeof JAPAN === 'function'){
 			var target1= document.getElementById('jbarrier'),
 				target2= document.getElementById('jbarrier_high'),
 				target3= document.getElementById('jbarrier_low'),
-			    formName = Offerings.form(),
+			    formName = Contract.form(),
 			    underlying = document.getElementById('underlying').value,
 			    period = document.getElementById('period').value,
 			    fragment = document.createDocumentFragment();
