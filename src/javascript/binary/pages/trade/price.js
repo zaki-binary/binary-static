@@ -99,6 +99,7 @@ var Price = (function () {
             container = document.getElementById('price_description_' + position),
             description_container = document.getElementById('description_container_' + position),
             purchase = document.getElementById('contract_purchase_' + position),
+            box = document.getElementById('price_container_' + position),
             amount = document.createElement('div'),
             currency = document.getElementById('currency');
 
@@ -137,6 +138,19 @@ var Price = (function () {
             row.appendChild(amount);
         }
 
+        if (!document.getElementById('websocket_form').checkValidity()) {
+            if (box) {
+                box.style.display = 'none';
+            }
+            processForgetPriceIds();
+        }
+
+        if (document.getElementById('websocket_form').checkValidity()) {
+            if (box) {
+                box.style.display = 'block';
+            }
+        }
+
         if (details['error']) {
             if (purchase) {
                 purchase.style.display = 'none';
@@ -148,7 +162,7 @@ var Price = (function () {
             para.setAttribute('class', 'notice-msg');
             fragment.appendChild(para);
         } else {
-            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], document.getElementById('amount').value);
+            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
 
             var priceId = document.getElementById('purchase_button_' + position);
 

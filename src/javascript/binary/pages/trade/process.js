@@ -13,8 +13,15 @@ function processActiveSymbols() {
     // store the market
     sessionStorage.setItem('market', market);
 
-    displayOptions('contract_markets', getAllowedMarkets(Symbols.markets()), market);
+    displayOptions('contract_markets', Symbols.markets(), market);
     processMarket();
+    setTimeout(function(){
+        if(TradeSocket.socket().readyState === 1){
+            var underlying = document.getElementById('underlying').value;
+            Symbols.currentSymbol(underlying);
+            Symbols.getSymbols();
+        }
+    }, 60*1000);
 }
 
 
@@ -27,9 +34,11 @@ function processMarket() {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market]);
+    displayUnderlyings('underlying', Symbols.underlyings()[market], Symbols.currentSymbol());
 
-    processMarketUnderlying();
+    if(!Symbols.currentSymbol()){
+        processMarketUnderlying();
+    }
 }
 
 /*
@@ -59,15 +68,22 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var formname = sessionStorage.getItem('formname') || 'risefall';
-
+    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var formname;
+    if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
+        formname = sessionStorage.getItem('formname');
+    }
+    else{
+        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+    }
+    
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
 
-    displayContractForms('contract_form_name_nav', getAllowedContractCategory(Contract.contractForms()), formname);
+    displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
 }
@@ -75,9 +91,9 @@ function processContract(contracts) {
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
-    displayDurations('spot');
-
     displayStartDates();
+
+    displayDurations();
 
     processPriceRequest();
 }

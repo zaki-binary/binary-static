@@ -88,7 +88,7 @@ function displayUnderlyings(id, elements, selected) {
             if (elements.hasOwnProperty(key)){
                 var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
                 option.setAttribute('value', key);
-                if (elements[key]['is_suspended'] === 1) {
+                if (elements[key]['is_active'] !== 1) {
                     option.setAttribute('disabled', true);
                 }
                 if (selected && selected === key) {
@@ -328,29 +328,6 @@ function displayCommentPrice(id, currency, type, payout) {
 }
 
 /*
- * function to filter out allowed markets from all markets
- */
-function getAllowedMarkets(markets) {
-    'use strict';
-    if (markets && getCookieItem('loginid')) {
-        var obj = {};
-        var allowedMarkets = getCookieItem('allowed_markets');
-        if (allowedMarkets) {
-            for (var key in markets) {
-                if (markets.hasOwnProperty(key)) {
-                    var re = new RegExp(key, 'i');
-                    if (re.test(allowedMarkets)) {
-                        obj[key] = markets[key];
-                    }
-                }
-            }
-            return obj;
-        }
-    }
-    return markets;
-}
-
-/*
  * This function loops through the available contracts and markets
  * that are not supposed to be shown are replaced
  *
@@ -410,4 +387,26 @@ function getDefaultMarket() {
        }
    }
    return mkt;
+}
+
+/*
+ * this is invoked when submit button is clicked and prevents reloading of page
+ */
+function addEventListenerForm(){
+    document.getElementById('websocket_form').addEventListener("submit", function(evt){
+        evt.currentTarget.classList.add('submitted');
+        evt.preventDefault();
+        return false;
+    }, false);
+}
+
+/*
+ * this creates a button, clicks it, and destroys it to invoke the listener
+ */
+function submitForm(form) {
+    var button = form.ownerDocument.createElement('input');
+    button.style.display = 'none';
+    button.type = 'submit';
+    form.appendChild(button).click();
+    form.removeChild(button);
 }

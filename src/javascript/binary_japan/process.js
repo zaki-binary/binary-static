@@ -1,26 +1,17 @@
-if(typeof JAPAN === 'function'){
+if(typeof is_japan === 'function'){
 
-	document.getElementById('contract_market_nav').style.display='none';	
+	var processContractForm = function(){
+	    Contract.details(sessionStorage.getItem('formname'));
 
-	var processContractFormOfferings = function (contracts){
-		
-		'use strict';
+	    displayStartDates();
 
-		Contract.details(contracts);
-
-		// forget the old tick id i.e. close the old tick stream
-		processForgetTickId();
-		// get ticks for current underlying
-		TradeSocket.send({ ticks : sessionStorage.getItem('underlying') });
-
-		displayDurations('spot');
-
-		displayStartDates();
-
-		if(Periods){
-			Periods.displayPeriods();
-		}
-		
-		processPriceRequest();
+	    displayDurations();
+	    
+	    if(Periods){
+	    	Periods.displayPeriods();
+	    }
+	    
+	    processPriceRequest();
 	};
+
 }
