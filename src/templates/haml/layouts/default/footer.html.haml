@@ -33,9 +33,9 @@
             %li.ja-hide
               %a{:href=>"http://blog.binary.com/en/webinar/", :target => "_blank"}= l('Webinars')
         .grd-grid-4
-          %h1= l('Trading')
+          %h1.ja-hide= l('Trading')
           %ul
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("/resources/pricing_table")}= l('Pricing Table')
             %li
               %a.ja-hide.pjaxload{:href=>url_for("/resources/rise_fall_table")}= l('Rise/Fall Table')
