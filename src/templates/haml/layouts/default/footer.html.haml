@@ -9,11 +9,11 @@
               %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('Group Information')
             %li
               %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("/legal/us_patents"), :class=>"us_patent_link"}= l('Patents')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("careers")}= l('Careers')
-            %li
+            %li.ja-hide
               %a{:href=>"http://binarycom.statuspage.io", :target => "_blank"}= l('Network Status')
             %li
               %a.pjaxload{:href=>url_for("contact")}= l('Contact Us')
