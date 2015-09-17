@@ -609,7 +609,6 @@ ul.checked li {
             transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spinning {
   from {
     -webkit-transform: rotate(0deg);
@@ -621,7 +620,6 @@ ul.checked li {
             transform: rotate(360deg);
   }
 }
-
 .spinner {
   -webkit-animation: spinning 1s infinite linear;
   animation: spinning 1s infinite linear;
@@ -640,7 +638,6 @@ ul.checked li {
     opacity: 1;
   }
 }
-
 @-webkit-keyframes pulsing {
   0% {
     opacity: 1;
@@ -654,7 +651,6 @@ ul.checked li {
     opacity: 1;
   }
 }
-
 .pulser {
   -webkit-animation: pulsing 3s infinite ease;
   animation: pulsing 3s infinite ease;
@@ -1448,7 +1444,7 @@ abbr {
 .home-content .xtopseparator {
   border: 0;
   height: 2px;
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(68, 72, 76, 0.5), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left, transparent, rgba(68, 72, 76, 0.5), transparent);
   display: block !important;
 }
 .home-content #open-account {
@@ -5091,7 +5087,7 @@ body.VI {
 @media screen and (max-width: 400px) {
   @-ms-viewport {
     width: device-width;
-}
+  }
 }
 .grd-grid-0 {
   width: 0%;
@@ -6709,7 +6705,7 @@ html.mm-opened #mm-blocker {
   left: 0;
   top: 0;
   margin: 0;
-  border: 0px solid rgba(0, 0, 0, 0);
+  border: 0px solid transparent;
 }
 
 html.mm-opening .mm-page,
