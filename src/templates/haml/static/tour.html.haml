@@ -15,10 +15,10 @@
       .grd-grid-12
         %h1= l('2-way pricing')
         %p= l('Simply change any of your parameters and the trade price instantly changes, giving you real-time knowledge of your stake. [_1] ensures fair and transparent pricing by showing you both sides of the trade.', stash->{website_name})
-      .grd-grid-6.grd-grid-mobile-12
+      .grd-grid-6.grd-grid-mobile-12.ja-hide
         %a.pjaxload.button{:href => url_for('trade.cgi')}
           %img.responsive#new-trader-icon{:src => url_for('images/pages/tour/tour-live-trade.svg')}
-      .grd-grid-6.grd-grid-mobile-12
+      .grd-grid-6.grd-grid-mobile-12.ja-hide
         %a.pjaxload.button{:href => url_for('trade.cgi')}
           %img.responsive#new-trader-icon{:src => url_for('images/pages/tour/tour-opposite-trade.svg')}
   .section
