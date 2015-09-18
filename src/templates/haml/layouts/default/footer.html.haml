@@ -9,11 +9,11 @@
               %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('Group Information')
             %li
               %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("/legal/us_patents"), :class=>"us_patent_link"}= l('Patents')
-            %li
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("careers")}= l('Careers')
-            %li
+            %li.ja-hide
               %a{:href=>"http://binarycom.statuspage.io", :target => "_blank"}= l('Network Status')
             %li
               %a.pjaxload{:href=>url_for("contact")}= l('Contact Us')
@@ -33,20 +33,20 @@
             %li.ja-hide
               %a{:href=>"http://blog.binary.com/en/webinar/", :target => "_blank"}= l('Webinars')
         .grd-grid-4
-          %h1= l('Trading')
-          %ul
-            %li
+          %h1.ja-hide= l('Trading')
+          %ul.ja-hide
+            %li.ja-hide
               %a.pjaxload{:href=>url_for("/resources/pricing_table")}= l('Pricing Table')
             %li
               %a.ja-hide.pjaxload{:href=>url_for("/resources/rise_fall_table")}= l('Rise/Fall Table')
             %li.ja-hide
               %a.pjaxload{:href=>url_for("/resources/asset_index")}= l('Asset Index')
-          .grd-row-padding
+          .grd-row-padding.ja-no-padding
             %h1= l('Banking')
             %ul
               %li
                 %a.pjaxload{:href=>url_for("/cashier")}= l('Cashier')
-              %li
+              %li.ja-hide
                 %a.pjaxload{:href=>url_for("/cashier/payment_methods")}= l('Payment Methods')
       .grd-grid-6.grd-grid-mobile-12.grd-parent
         .grd-grid-4
