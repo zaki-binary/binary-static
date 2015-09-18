@@ -2777,7 +2777,7 @@ LiveChartOHLC.prototype.process_tick = function(tickInput) {
                 this.resolution = this.best_resolution(this.from, this.to);
             }
         } else {
-            symbol = markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('R_100');
+            symbol = markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('frxAUDJPY');
             this.symbol = symbol.underlying;
             this.market = symbol.market;
             var from = params['from'] || LocalStore.get('live_chart.from');
@@ -9292,7 +9292,11 @@ var remove_highlight_chart_duration = function () {
 var build_markets_select = function() {
     var market_select = $("#market_select");
     markets.each(function() {
-        market_select.append("<option id='opt_" + this.name + "' value='" + this.name + "'>" + this.translated_display_name() + "</option>");
+        if (this.name == 'forex') {
+            market_select.append("<option id='opt_" + this.name + "' value='" + this.name + "'>" + this.translated_display_name() + "</option>");
+        } else {
+            market_select.append("<option class='ja-hide' id='opt_" + this.name + "' value='" + this.name + "'>" + this.translated_display_name() + "</option>");
+        }
     });
 
     $("#market_select").val(liveChartConfig.market.name);
