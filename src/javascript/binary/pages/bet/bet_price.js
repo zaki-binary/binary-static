@@ -446,6 +446,10 @@ var BetPrice = function() {
                     var last_digit = parseInt(last_tick.toString().substr(-1));
                     var potential_payout = parseFloat($('#outcome-payout').data('payout').toString().replace(',',''));
                     var cost = parseFloat($('#outcome-buyprice').data('buyprice').toString().replace(',',''));
+
+                    // buy price
+                    $('#contract-outcome-buyprice').text($('#outcome-buyprice').data('buyprice'));
+
                     var final_price;
 
                     if (prediction === 'match') {
