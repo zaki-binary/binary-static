@@ -398,10 +398,6 @@ var BetPrice = function() {
                                             $self.applicable_ticks.push(tick.quote);
                                             $self.digit_tick_count++;
                                             $self.info_for_display.push([$self.digit_tick_count,tick.epoch,tick.quote]);
-                                            var last_digit = tick.quote.toString().substr(-1);
-                                            if (!$('#digit-current').hasClass('flipper')) {
-                                                $('#digit-current').addClass('flipper focus');
-                                            }
                                             $self.update_display();
 
                                             if ($('#digit-contract-details').css('display') === 'none') {
