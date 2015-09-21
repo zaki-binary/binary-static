@@ -395,10 +395,16 @@ var BetPrice = function() {
                                             quote: data[i][2]
                                         };
                                         if (tick.epoch > start_moment.unix() && $self.digit_tick_count < how_many_ticks) {
-                                            $self.applicable_ticks.push(tick.quote);
-                                            $self.digit_tick_count++;
-                                            $self.info_for_display.push([$self.digit_tick_count,tick.epoch,tick.quote]);
-                                            $self.update_display();
+                                            // checking for duplicate entries and skip them if they exists
+                                            if ($self.applicable_ticks.length > 0) {
+                                                var previous_tick_epoch = $self.info_for_display[$self.info_for_display.length-1][1];
+                                                if (previous_tick_epoch !== tick.epoch) {
+                                                    $self.applicable_ticks.push(tick.quote);
+                                                    $self.digit_tick_count++;
+                                                    $self.info_for_display.push([$self.digit_tick_count,tick.epoch,tick.quote]);
+                                                    $self.update_display();
+                                                }
+                                            }
 
                                             if ($('#digit-contract-details').css('display') === 'none') {
                                                 $('#digit-contract-details').show();
