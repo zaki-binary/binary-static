@@ -45,7 +45,7 @@ var LiveChartConfig = function(params) {
                 this.resolution = this.best_resolution(this.from, this.to);
             }
         } else {
-            symbol = markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('R_100');
+            symbol = markets.by_symbol(params['symbol']) || markets.by_symbol(LocalStore.get('live_chart.symbol')) || markets.by_symbol('frxAUDJPY');
             this.symbol = symbol.underlying;
             this.market = symbol.market;
             var from = params['from'] || LocalStore.get('live_chart.from');
