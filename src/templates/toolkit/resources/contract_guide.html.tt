@@ -5,7 +5,7 @@
 
 <div id="bet_guide_content" itemscope itemtype="http://schema.org/Product">
     [% FOREACH bet_type IN bet_types %]
-    <div class="grd-grid-6 grd-grid-mobile-12" [% IF bet_type.id == 'risefall' %] class="ja-hide" [% END %]>
+    <div class="grd-grid-6 grd-grid-mobile-12">
         <a itemprop="name" href="[% bet_type.url %]" id="[% bet_type.id %]" class="li-boxes-content-icon">[% bet_type.title %]</a>
         <div class="li-2-boxes-content">
             <h2><a href="[% bet_type.url %]">[% bet_type.title %]</a></h2>
