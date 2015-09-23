@@ -13,7 +13,7 @@ function processActiveSymbols() {
     // store the market
     sessionStorage.setItem('market', market);
 
-    displayOptions('contract_markets', Symbols.markets(), market);
+    displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
     setTimeout(function(){
         if(TradeSocket.socket().readyState === 1){

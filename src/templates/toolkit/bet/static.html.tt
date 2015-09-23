@@ -2,7 +2,7 @@
 <script>function is_japan(){}</script>
 [% END %]
 
-<div id="trading_socket_container">
+<div id="trading_socket_container" class="tab-menu-wrap">
    <div id="loading_container" class="overlay_container">
    </div>
    <div class="row" id="contract_symbol_container">
@@ -163,7 +163,10 @@
                      </div>
                   </div>
                </div>
-               <div class="big-col contract_description"></div>
+               <div class="row-inner big-col">
+                  <div class="contract_description"></div>
+                  <div class="contract_error"></div>
+               </div>
                <div class="col price_comment"></div>
             </div>
             <div class="col price_container row" id="price_container_bottom">
@@ -178,7 +181,10 @@
                      </div>
                   </div>
                </div>
-               <div class="big-col contract_description"></div>
+               <div class="row-inner big-col">
+                  <div class="contract_description"></div>
+                  <div class="contract_error"></div>
+               </div>
                <div class="col price_comment"></div>
             </div>
          </div>

@@ -80,6 +80,9 @@
   .big-col {
     flex: 2;
   }
+  #contract_form_content_wrapper{
+    padding-top: 1em;
+  }
   #contract_symbol_container {
     display: inline-flex;
     padding-bottom: 0px;
@@ -101,16 +104,22 @@
     position: relative;
     flex: 1.5;
     margin-left: 1em;
-    margin-top: 24px;
+    margin-top: 28px;
     .price_container {
       border: 1px solid $COLOR_GRAY;
       align-items: stretch;
       padding: 0;
+      >.row-inner{
+        justify-content: space-between;
+      }
       .big-col {
         flex: 3;
       }
       .contract_purchase {
         margin-bottom: 6px;
+        .purchase_button{
+          cursor: pointer;
+        }
       }
     }
   }
@@ -127,9 +136,9 @@
       font-size: 0.8rem;
       flex: 1;
       padding: 5px;
-      &.error {
-        background-color: $COLOR_YELLOW;
-      }
+    }
+    .contract_error {
+      background-color: $COLOR_YELLOW;
     }
     .contract_heading {
       text-transform: capitalize;
@@ -179,7 +188,7 @@
         background: url("../images/pages/trade/ends-outside_1.png") no-repeat top center;
       }
     }
-    .contract_amount, .contract_description {
+    .contract_amount, .contract_description, .contract_error {
       padding: 10px 10px 10px 5px;
     }
     .contract_amount {
@@ -208,6 +217,7 @@
     text-align: center;
     align-items: center;
     width: 230px;
+
     div {
       padding: 0 5px;
     }
@@ -271,7 +281,6 @@
   ul#contract_form_name_nav {
     height: auto;
     > li {
-      cursor: pointer;
       float: none;
       width: 100%;
     }
@@ -298,6 +307,10 @@
 
 #trading_socket_container #contract_form_name_nav {
   border-bottom: none;
+  font-size: $FONT_SIZE_N;
+  > li {
+    cursor: pointer;
+  }
 }
 
 #content ul.tm-ul li {
@@ -315,7 +328,7 @@
     font-size: 85%;
   }
   .tm-ul-2 {
-    top: 27px;
+    top: 29px;
     margin-top: 0;
   }
 }

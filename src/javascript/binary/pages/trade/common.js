@@ -43,7 +43,7 @@
                  for(var j=0; j<el1[1].length; j++){
                      var el2 = el1[1][j];
                      var li2 = document.createElement('li'),
-                         a = document.createElement('a'),
+                         a2 = document.createElement('a'),
                          content2 = document.createTextNode(elements[el2]);
                      li2.classList.add('tm-li-2');
 
@@ -58,27 +58,27 @@
                      var span_class = '';
                      if (selected && selected === el2.toLowerCase()) {
                          li2.classList.add('active');
-                         a.classList.add('a-active');
+                         a2.classList.add('a-active');
                          flag = 1;
                      }
                      
-                     a.classList.add('tm-a-2');
-                     a.appendChild(content2);
-                     a.setAttribute('menuitem',el2.toLowerCase());
-                     a.setAttribute('id', el2.toLowerCase());
+                     a2.classList.add('tm-a-2');
+                     a2.appendChild(content2);
+                     a2.setAttribute('menuitem',el2.toLowerCase());
+                     a2.setAttribute('id', el2.toLowerCase());
 
-                     li2.appendChild(a);
+                     li2.appendChild(a2);
 
                      fragment2.appendChild(li2);
                  }
                  if(fragment2.hasChildNodes()){
                      var ul = document.createElement('ul'),
-                         a2 = document.createElement('a'),
+                         a = document.createElement('a'),
                          content = document.createTextNode(el1[0]);
 
-                     a2.appendChild(content);
-                     a2.setAttribute('class', 'tm-a');
-                     a2.setAttribute('menuitem',first);
+                     a.appendChild(content);
+                     a.setAttribute('class', 'tm-a');
+                     a.setAttribute('menuitem',first);
                      ul.appendChild(fragment2);
                      ul.setAttribute('class', 'tm-ul-2');
 
@@ -86,7 +86,7 @@
                         li.classList.add('active');
                      }
 
-                     li.appendChild(a2);
+                     li.appendChild(a);
                      li.appendChild(ul);
                  }
              }
@@ -110,11 +110,11 @@
              target.appendChild(fragment);
              var list = target.getElementsByClassName('tm-li');
              for(var k=0; k < list.length; k++){
-                 var li3 = list[k];
-                 li3.addEventListener("mouseover", function(){
+                 var li4 = list[k];
+                 li4.addEventListener("mouseover", function(){
                      this.classList.add('hover');
                  });
-                 li3.addEventListener("mouseout", function(){
+                 li4.addEventListener("mouseout", function(){
                      this.classList.remove('hover');
                  });
              }
@@ -123,6 +123,44 @@
  }
 
 
+ function displayMarkets(id, elements, selected) {
+     'use strict';
+     var target= document.getElementById(id),
+         fragment =  document.createDocumentFragment();
+
+     while (target && target.firstChild) {
+         target.removeChild(target.firstChild);
+     }
+
+     for (var key in elements) {
+         if (elements.hasOwnProperty(key)){
+             var option = document.createElement('option'), content = document.createTextNode(elements[key].name);
+             option.setAttribute('value', key);
+             if (selected && selected === key) {
+                 option.setAttribute('selected', 'selected');
+             }
+             option.appendChild(content);
+             fragment.appendChild(option);
+
+             if(elements[key].submarkets && Object.keys(elements[key].submarkets).length){
+                for(var key2 in elements[key].submarkets){
+                    if(key2){
+                        option = document.createElement('option');
+                        option.setAttribute('value', key2);
+                        if (selected && selected === key2) {
+                            option.setAttribute('selected', 'selected');
+                        } 
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        fragment.appendChild(option);
+                    }
+                }
+             }
+         }
+     }
+     if (target) {
+         target.appendChild(fragment);
+     }
+ }
 /*
  * function to create `option` and append to select box with id `id`
  */
@@ -377,7 +415,20 @@ function displayPriceMovement(element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
- function toggleActiveNavMenuElement(nav, eventElementId) {
+
+ function toggleActiveNavMenuElement(nav, eventElement) {
+     var liElements = nav.getElementsByTagName("li");
+     var classes = eventElement.classList;
+
+     if (!classes.contains('active')) {
+         for (var i = 0, len = liElements.length; i < len; i++){
+             liElements[i].classList.remove('active');
+         }
+         classes.add('active');
+     }
+ }
+
+ function toggleActiveCatMenuElement(nav, eventElementId) {
      var eventElement = document.getElementById(eventElementId);
      var liElements = nav.querySelectorAll('.active, .a-active');
      var classes = eventElement.classList;
@@ -443,9 +494,9 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            // if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
-            }
+            // }
         }
     }
     return obj;
@@ -509,7 +560,6 @@ function addEventListenerForm(){
  * this creates a button, clicks it, and destroys it to invoke the listener
  */
 function submitForm(form) {
-    
     // var button = form.ownerDocument.createElement('input');
     // button.style.display = 'none';
     // button.type = 'submit';

@@ -97,7 +97,8 @@ var Price = (function () {
             amount = container.getElementsByClassName('contract_amount')[0],
             purchase = container.getElementsByClassName('purchase_button')[0],
             description = container.getElementsByClassName('contract_description')[0],
-            comment = container.getElementsByClassName('price_comment')[0];
+            comment = container.getElementsByClassName('price_comment')[0],
+            error = container.getElementsByClassName('contract_error')[0];
             // betInput = document.getElementById('betInputBox'),
             // price_container = document.getElementById('price_container');
 
@@ -117,12 +118,14 @@ var Price = (function () {
 
         if (details['error']){
             purchase.hide();
-            comment.classList.add('error');
-            comment.textContent = details['error'].message;
+            comment.hide();
+            error.show();
+            error.textContent = details['error'].message;
         }
         else{
-            comment.classList.remove('error');
             purchase.show();
+            comment.show();
+            error.hide();
             displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
             var oldprice = purchase.getAttribute('data-ask-price');
             if (oldprice) {
@@ -131,15 +134,6 @@ var Price = (function () {
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
         }
-
-        // if(comment.offsetWidth < container.offsetWidth-2){
-        //     comment.style.minHeight = description.offsetHeight+'px';
-        //     betInput.style.minHeight = price_container.offsetHeight-2+'px';
-        // }
-        // else{
-        //     comment.style.minHeight = '';
-        //     betInput.style.minHeight = '';
-        // };
     };
 
     var clearMapping = function () {
