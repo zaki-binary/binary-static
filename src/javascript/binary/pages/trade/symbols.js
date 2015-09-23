@@ -24,18 +24,34 @@ var Symbols = (function () {
 
         allSymbols.forEach(function (element) {
             var currentMarket = element['market'],
+                currentSubMarket = element['submarket'],
                 currentUnderlying = element['symbol'];
 
-            if (!tradeMarkets.hasOwnProperty(currentMarket)) {
-                tradeMarkets[currentMarket] = element['market_display_name'];
-            }
+            // if (!tradeMarkets.hasOwnProperty(currentMarket)) {
+                if(!tradeMarkets[currentMarket]){
+                    tradeMarkets[currentMarket] = {name:'',submarkets:{}};
+                }
+                tradeMarkets[currentMarket]['name'] = element['market_display_name'];
+                tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = element['submarket_display_name'];
+            // }
 
             if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
                 tradeUnderlyings[currentMarket] = {};
             }
 
+            if (!tradeUnderlyings.hasOwnProperty(currentSubMarket)) {
+                tradeUnderlyings[currentSubMarket] = {};
+            }
+
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
                 tradeUnderlyings[currentMarket][currentUnderlying] = {
+                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
+                    display: element['display_name']
+                };
+            }
+
+            if (!tradeUnderlyings[currentSubMarket].hasOwnProperty(currentUnderlying)) {
+                tradeUnderlyings[currentSubMarket][currentUnderlying] = {
                     is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
                     display: element['display_name']
                 };

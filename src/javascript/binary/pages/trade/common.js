@@ -2,41 +2,165 @@
  * This contains common functions we need for processing the response
  */
 
+ Element.prototype.hide = function(){
+     this.style.display = 'none';
+ };
+
+ Element.prototype.show = function(){
+     this.style.display = '';
+ };
+
 /*
  * function to display contract form as element of ul
  */
-function displayContractForms(id, elements, selected) {
-    'use strict';
-    var target = document.getElementById(id),
-        fragment = document.createDocumentFragment(),
-        len = elements.length;
+ function displayContractForms(id, elements, selected) {
+     'use strict';
+     var target = document.getElementById(id),
+         fragment = document.createDocumentFragment(),
+         len = elements.length;
 
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
+     target.innerHTML = '';
 
-    if (elements) {
-        var keys = Object.keys(elements).sort(compareContractCategory);
-        keys.forEach(function (key) {
-            if (elements.hasOwnProperty(key)) {
-                var li = document.createElement('li'),
-                    content = document.createTextNode(elements[key]);
-                li.setAttribute('id', key.toLowerCase());
-                if (selected && selected === key) {
-                    li.setAttribute('class', 'active');
+     if (elements) {
+         var tree = getContractCategoryTree(elements);
+         for(var i=0;i<tree.length;i++){
+             
+             var el1 = tree[i];
+             var li = document.createElement('li');
+
+             li.classList.add('tm-li');
+             if(i===0){
+                 li.classList.add('first');
+             }
+             else if(i===tree.length-1){
+                 li.classList.add('last');
+             }
+
+             if(typeof el1 === 'object'){
+                 var fragment2 = document.createDocumentFragment();
+                 var flag = 0;
+                 var first = '';
+                 for(var j=0; j<el1[1].length; j++){
+                     var el2 = el1[1][j];
+                     var li2 = document.createElement('li'),
+                         a2 = document.createElement('a'),
+                         content2 = document.createTextNode(elements[el2]);
+                     li2.classList.add('tm-li-2');
+
+                     if(j===0){
+                        first = el2.toLowerCase();
+                        li2.classList.add('first');
+                     }
+                     else if(j===el1[1].length-1){
+                         li2.classList.add('last');
+                     }
+
+                     var span_class = '';
+                     if (selected && selected === el2.toLowerCase()) {
+                         li2.classList.add('active');
+                         a2.classList.add('a-active');
+                         flag = 1;
+                     }
+                     
+                     a2.classList.add('tm-a-2');
+                     a2.appendChild(content2);
+                     a2.setAttribute('menuitem',el2.toLowerCase());
+                     a2.setAttribute('id', el2.toLowerCase());
+
+                     li2.appendChild(a2);
+
+                     fragment2.appendChild(li2);
+                 }
+                 if(fragment2.hasChildNodes()){
+                     var ul = document.createElement('ul'),
+                         a = document.createElement('a'),
+                         content = document.createTextNode(el1[0]);
+
+                     a.appendChild(content);
+                     a.setAttribute('class', 'tm-a');
+                     a.setAttribute('menuitem',first);
+                     ul.appendChild(fragment2);
+                     ul.setAttribute('class', 'tm-ul-2');
+
+                     if(flag){
+                        li.classList.add('active');
+                     }
+
+                     li.appendChild(a);
+                     li.appendChild(ul);
+                 }
+             }
+             else{
+                 var content3 = document.createTextNode(elements[el1]),
+                     a3 = document.createElement('a');
+
+                 if (selected && selected === el1.toLowerCase()) {
+                     a3.classList.add('a-active');
+                     li.classList.add('active');
+                 }
+                 a3.appendChild(content3);
+                 a3.classList.add('tm-a');
+                 a3.setAttribute('menuitem',el1);
+                 a3.setAttribute('id', el1.toLowerCase());
+                 li.appendChild(a3);
+             }
+             fragment.appendChild(li);
+         }
+         if (target) {
+             target.appendChild(fragment);
+             var list = target.getElementsByClassName('tm-li');
+             for(var k=0; k < list.length; k++){
+                 var li4 = list[k];
+                 li4.addEventListener("mouseover", function(){
+                     this.classList.add('hover');
+                 });
+                 li4.addEventListener("mouseout", function(){
+                     this.classList.remove('hover');
+                 });
+             }
+         }
+     }
+ }
+
+
+ function displayMarkets(id, elements, selected) {
+     'use strict';
+     var target= document.getElementById(id),
+         fragment =  document.createDocumentFragment();
+
+     while (target && target.firstChild) {
+         target.removeChild(target.firstChild);
+     }
+
+     for (var key in elements) {
+         if (elements.hasOwnProperty(key)){
+             var option = document.createElement('option'), content = document.createTextNode(elements[key].name);
+             option.setAttribute('value', key);
+             if (selected && selected === key) {
+                 option.setAttribute('selected', 'selected');
+             }
+             option.appendChild(content);
+             fragment.appendChild(option);
+
+             if(elements[key].submarkets && Object.keys(elements[key].submarkets).length){
+                for(var key2 in elements[key].submarkets){
+                    if(key2){
+                        option = document.createElement('option');
+                        option.setAttribute('value', key2);
+                        if (selected && selected === key2) {
+                            option.setAttribute('selected', 'selected');
+                        } 
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        fragment.appendChild(option);
+                    }
                 }
-                li.appendChild(content);
-                fragment.appendChild(li);
-            }
-        });
-
-        if (target) {
-            target.appendChild(fragment);
-        }
-    }
-}
-
-
+             }
+         }
+     }
+     if (target) {
+         target.appendChild(fragment);
+     }
+ }
 /*
  * function to create `option` and append to select box with id `id`
  */
@@ -228,28 +352,41 @@ function compareMarkets(a, b) {
     return 0;
 }
 
-/*
- * function to assign sorting to contract category
- */
-function compareContractCategory(a, b) {
-    var sortedContractCategory = {
-        'risefall': 0,
-        'higherlower': 1,
-        'touchnotouch': 2,
-        'endsinout': 3,
-        'staysinout': 4,
-        'asian': 5,
-        'digits': 6,
-        'spreads': 7
-    };
+function getContractCategoryTree(elements){
 
-    if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
-        return -1;
+    var tree = [
+        ['updown',
+            ['risefall',
+            'higherlower']
+        ],
+        'touchnotouch',
+        ['inout',
+            ['endsinout',
+            'staysinout']
+        ],
+        'asian',
+        'digits',
+        'spreads'
+    ];
+
+    if(elements){
+        tree = tree.map(function(e){
+            if(typeof e === 'object'){
+                e[1] = e[1].filter(function(e1){
+                    return elements[e1];
+                });
+                if(!e[1].length){
+                    e = '';
+                }
+            }
+            else if(!elements[e]){
+                e = '';
+            }
+            return e;
+        });
+        tree = tree.filter(function(v){ return v.length; });   
     }
-    if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
-        return 1;
-    }
-    return 0;
+    return tree;
 }
 
 /*
@@ -278,17 +415,42 @@ function displayPriceMovement(element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
-function toggleActiveNavMenuElement(nav, eventElement) {
-    var liElements = nav.getElementsByTagName("li");
-    var classes = eventElement.classList;
 
-    if (!classes.contains('active')) {
-        for (var i = 0, len = liElements.length; i < len; i++){
-            liElements[i].classList.remove('active');
-        }
-        classes.add('active');
-    }
-}
+ function toggleActiveNavMenuElement(nav, eventElement) {
+     var liElements = nav.getElementsByTagName("li");
+     var classes = eventElement.classList;
+
+     if (!classes.contains('active')) {
+         for (var i = 0, len = liElements.length; i < len; i++){
+             liElements[i].classList.remove('active');
+         }
+         classes.add('active');
+     }
+ }
+
+ function toggleActiveCatMenuElement(nav, eventElementId) {
+     var eventElement = document.getElementById(eventElementId);
+     var liElements = nav.querySelectorAll('.active, .a-active');
+     var classes = eventElement.classList;
+
+     if (!classes.contains('active')) {
+         for (var i = 0, len = liElements.length; i < len; i++){
+             liElements[i].classList.remove('active');
+             liElements[i].classList.remove('a-active');
+         }
+         classes.add('a-active');
+
+         i = 0;
+         var parent;
+         while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
+             if(parent.tagName === 'LI'){
+                 parent.classList.add('active');
+             }
+             eventElement = parent;
+             i++;
+         }
+     }
+ }
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
@@ -304,28 +466,22 @@ function setFormPlaceholderContent(name) {
 /*
  * function to display the profit and return of bet under each trade container
  */
-function displayCommentPrice(id, currency, type, payout) {
-    'use strict';
+ function displayCommentPrice(node, currency, type, payout) {
+     'use strict';
 
-    var div = document.getElementById(id);
+     if (node && type && payout) {
+         var profit = payout - type,
+             return_percent = (profit/type)*100,
+             comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
 
-    while (div && div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    if (div && type && payout) {
-        var profit = payout - type,
-            return_percent = (profit/type)*100,
-            comment = document.createTextNode(Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%');
-
-        if (isNaN(profit) || isNaN(return_percent)) {
-            div.style.display = 'none';
-        } else {
-            div.style.display = 'block';
-            div.appendChild(comment);
-        }
-    }
-}
+         if (isNaN(profit) || isNaN(return_percent)) {
+             node.hide();
+         } else {
+             node.show();
+             node.textContent = comment;
+         }
+     }
+ }
 
 /*
  * This function loops through the available contracts and markets
@@ -338,9 +494,9 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            // if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
-            }
+            // }
         }
     }
     return obj;
@@ -404,9 +560,9 @@ function addEventListenerForm(){
  * this creates a button, clicks it, and destroys it to invoke the listener
  */
 function submitForm(form) {
-    var button = form.ownerDocument.createElement('input');
-    button.style.display = 'none';
-    button.type = 'submit';
-    form.appendChild(button).click();
-    form.removeChild(button);
+    // var button = form.ownerDocument.createElement('input');
+    // button.style.display = 'none';
+    // button.type = 'submit';
+    // form.appendChild(button).click();
+    // form.removeChild(button);
 }
