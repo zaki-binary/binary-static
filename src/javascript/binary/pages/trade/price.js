@@ -99,8 +99,6 @@ var Price = (function () {
             description = container.getElementsByClassName('contract_description')[0],
             comment = container.getElementsByClassName('price_comment')[0],
             error = container.getElementsByClassName('contract_error')[0];
-            // betInput = document.getElementById('betInputBox'),
-            // price_container = document.getElementById('price_container');
 
         var display = type ? (contractType ? contractType[type] : '') : '';
         if (display) {
@@ -114,6 +112,14 @@ var Price = (function () {
 
         if (proposal['longcode']) {
             description.textContent = proposal['longcode'];
+        }
+
+        if (!document.getElementById('websocket_form').checkValidity()) {
+            container.hide();
+            processForgetPriceIds();
+        }
+        else{
+            container.show();
         }
 
         if (details['error']){
