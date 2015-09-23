@@ -30,14 +30,14 @@ var contractFormEventChange = function () {
 var formNavElement = document.getElementById('contract_form_name_nav');
 if (formNavElement) {
     formNavElement.addEventListener('click', function(e) {
-        if (e.target && e.target.nodeName === 'LI') {
+        if (e.target && e.target.getAttribute('menuitem')) {
             var clickedForm = e.target;
             var isFormActive = clickedForm.classList.contains('active');
             sessionStorage.setItem('formname', clickedForm.id);
 
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
-            toggleActiveNavMenuElement(formNavElement, clickedForm);
+            toggleActiveNavMenuElement(formNavElement, e.target.getAttribute('menuitem'));
 
             if (!isFormActive) {
                 contractFormEventChange();

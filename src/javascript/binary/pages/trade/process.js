@@ -74,7 +74,15 @@ function processContract(contracts) {
         formname = sessionStorage.getItem('formname');
     }
     else{
-        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+        var tree = getContractCategoryTree(contract_categories);
+        if(tree[0]){
+            if(typeof tree[0] === 'object'){
+                formname = tree[0][1][0];
+            }
+            else{
+                formname = tree[0];
+            }
+        }
     }
     
     // set form to session storage
