@@ -10046,41 +10046,165 @@ var Barriers = (function () {
  * This contains common functions we need for processing the response
  */
 
+ Element.prototype.hide = function(){
+     this.style.display = 'none';
+ };
+
+ Element.prototype.show = function(){
+     this.style.display = '';
+ };
+
 /*
  * function to display contract form as element of ul
  */
-function displayContractForms(id, elements, selected) {
-    'use strict';
-    var target = document.getElementById(id),
-        fragment = document.createDocumentFragment(),
-        len = elements.length;
+ function displayContractForms(id, elements, selected) {
+     'use strict';
+     var target = document.getElementById(id),
+         fragment = document.createDocumentFragment(),
+         len = elements.length;
 
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
+     target.innerHTML = '';
 
-    if (elements) {
-        var keys = Object.keys(elements).sort(compareContractCategory);
-        keys.forEach(function (key) {
-            if (elements.hasOwnProperty(key)) {
-                var li = document.createElement('li'),
-                    content = document.createTextNode(elements[key]);
-                li.setAttribute('id', key.toLowerCase());
-                if (selected && selected === key) {
-                    li.setAttribute('class', 'active');
+     if (elements) {
+         var tree = getContractCategoryTree(elements);
+         for(var i=0;i<tree.length;i++){
+             
+             var el1 = tree[i];
+             var li = document.createElement('li');
+
+             li.classList.add('tm-li');
+             if(i===0){
+                 li.classList.add('first');
+             }
+             else if(i===tree.length-1){
+                 li.classList.add('last');
+             }
+
+             if(typeof el1 === 'object'){
+                 var fragment2 = document.createDocumentFragment();
+                 var flag = 0;
+                 var first = '';
+                 for(var j=0; j<el1[1].length; j++){
+                     var el2 = el1[1][j];
+                     var li2 = document.createElement('li'),
+                         a2 = document.createElement('a'),
+                         content2 = document.createTextNode(elements[el2]);
+                     li2.classList.add('tm-li-2');
+
+                     if(j===0){
+                        first = el2.toLowerCase();
+                        li2.classList.add('first');
+                     }
+                     else if(j===el1[1].length-1){
+                         li2.classList.add('last');
+                     }
+
+                     var span_class = '';
+                     if (selected && selected === el2.toLowerCase()) {
+                         li2.classList.add('active');
+                         a2.classList.add('a-active');
+                         flag = 1;
+                     }
+                     
+                     a2.classList.add('tm-a-2');
+                     a2.appendChild(content2);
+                     a2.setAttribute('menuitem',el2.toLowerCase());
+                     a2.setAttribute('id', el2.toLowerCase());
+
+                     li2.appendChild(a2);
+
+                     fragment2.appendChild(li2);
+                 }
+                 if(fragment2.hasChildNodes()){
+                     var ul = document.createElement('ul'),
+                         a = document.createElement('a'),
+                         content = document.createTextNode(el1[0]);
+
+                     a.appendChild(content);
+                     a.setAttribute('class', 'tm-a');
+                     a.setAttribute('menuitem',first);
+                     ul.appendChild(fragment2);
+                     ul.setAttribute('class', 'tm-ul-2');
+
+                     if(flag){
+                        li.classList.add('active');
+                     }
+
+                     li.appendChild(a);
+                     li.appendChild(ul);
+                 }
+             }
+             else{
+                 var content3 = document.createTextNode(elements[el1]),
+                     a3 = document.createElement('a');
+
+                 if (selected && selected === el1.toLowerCase()) {
+                     a3.classList.add('a-active');
+                     li.classList.add('active');
+                 }
+                 a3.appendChild(content3);
+                 a3.classList.add('tm-a');
+                 a3.setAttribute('menuitem',el1);
+                 a3.setAttribute('id', el1.toLowerCase());
+                 li.appendChild(a3);
+             }
+             fragment.appendChild(li);
+         }
+         if (target) {
+             target.appendChild(fragment);
+             var list = target.getElementsByClassName('tm-li');
+             for(var k=0; k < list.length; k++){
+                 var li4 = list[k];
+                 li4.addEventListener("mouseover", function(){
+                     this.classList.add('hover');
+                 });
+                 li4.addEventListener("mouseout", function(){
+                     this.classList.remove('hover');
+                 });
+             }
+         }
+     }
+ }
+
+
+ function displayMarkets(id, elements, selected) {
+     'use strict';
+     var target= document.getElementById(id),
+         fragment =  document.createDocumentFragment();
+
+     while (target && target.firstChild) {
+         target.removeChild(target.firstChild);
+     }
+
+     for (var key in elements) {
+         if (elements.hasOwnProperty(key)){
+             var option = document.createElement('option'), content = document.createTextNode(elements[key].name);
+             option.setAttribute('value', key);
+             if (selected && selected === key) {
+                 option.setAttribute('selected', 'selected');
+             }
+             option.appendChild(content);
+             fragment.appendChild(option);
+
+             if(elements[key].submarkets && Object.keys(elements[key].submarkets).length){
+                for(var key2 in elements[key].submarkets){
+                    if(key2){
+                        option = document.createElement('option');
+                        option.setAttribute('value', key2);
+                        if (selected && selected === key2) {
+                            option.setAttribute('selected', 'selected');
+                        } 
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        fragment.appendChild(option);
+                    }
                 }
-                li.appendChild(content);
-                fragment.appendChild(li);
-            }
-        });
-
-        if (target) {
-            target.appendChild(fragment);
-        }
-    }
-}
-
-
+             }
+         }
+     }
+     if (target) {
+         target.appendChild(fragment);
+     }
+ }
 /*
  * function to create `option` and append to select box with id `id`
  */
@@ -10272,28 +10396,41 @@ function compareMarkets(a, b) {
     return 0;
 }
 
-/*
- * function to assign sorting to contract category
- */
-function compareContractCategory(a, b) {
-    var sortedContractCategory = {
-        'risefall': 0,
-        'higherlower': 1,
-        'touchnotouch': 2,
-        'endsinout': 3,
-        'staysinout': 4,
-        'asian': 5,
-        'digits': 6,
-        'spreads': 7
-    };
+function getContractCategoryTree(elements){
 
-    if (sortedContractCategory[a.toLowerCase()] < sortedContractCategory[b.toLowerCase()]) {
-        return -1;
+    var tree = [
+        ['updown',
+            ['risefall',
+            'higherlower']
+        ],
+        'touchnotouch',
+        ['inout',
+            ['endsinout',
+            'staysinout']
+        ],
+        'asian',
+        'digits',
+        'spreads'
+    ];
+
+    if(elements){
+        tree = tree.map(function(e){
+            if(typeof e === 'object'){
+                e[1] = e[1].filter(function(e1){
+                    return elements[e1];
+                });
+                if(!e[1].length){
+                    e = '';
+                }
+            }
+            else if(!elements[e]){
+                e = '';
+            }
+            return e;
+        });
+        tree = tree.filter(function(v){ return v.length; });   
     }
-    if (sortedContractCategory[a.toLowerCase()] > sortedContractCategory[b.toLowerCase()]) {
-        return 1;
-    }
-    return 0;
+    return tree;
 }
 
 /*
@@ -10322,17 +10459,42 @@ function displayPriceMovement(element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
-function toggleActiveNavMenuElement(nav, eventElement) {
-    var liElements = nav.getElementsByTagName("li");
-    var classes = eventElement.classList;
 
-    if (!classes.contains('active')) {
-        for (var i = 0, len = liElements.length; i < len; i++){
-            liElements[i].classList.remove('active');
-        }
-        classes.add('active');
-    }
-}
+ function toggleActiveNavMenuElement(nav, eventElement) {
+     var liElements = nav.getElementsByTagName("li");
+     var classes = eventElement.classList;
+
+     if (!classes.contains('active')) {
+         for (var i = 0, len = liElements.length; i < len; i++){
+             liElements[i].classList.remove('active');
+         }
+         classes.add('active');
+     }
+ }
+
+ function toggleActiveCatMenuElement(nav, eventElementId) {
+     var eventElement = document.getElementById(eventElementId);
+     var liElements = nav.querySelectorAll('.active, .a-active');
+     var classes = eventElement.classList;
+
+     if (!classes.contains('active')) {
+         for (var i = 0, len = liElements.length; i < len; i++){
+             liElements[i].classList.remove('active');
+             liElements[i].classList.remove('a-active');
+         }
+         classes.add('a-active');
+
+         i = 0;
+         var parent;
+         while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
+             if(parent.tagName === 'LI'){
+                 parent.classList.add('active');
+             }
+             eventElement = parent;
+             i++;
+         }
+     }
+ }
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
@@ -10348,28 +10510,22 @@ function setFormPlaceholderContent(name) {
 /*
  * function to display the profit and return of bet under each trade container
  */
-function displayCommentPrice(id, currency, type, payout) {
-    'use strict';
+ function displayCommentPrice(node, currency, type, payout) {
+     'use strict';
 
-    var div = document.getElementById(id);
+     if (node && type && payout) {
+         var profit = payout - type,
+             return_percent = (profit/type)*100,
+             comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
 
-    while (div && div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-
-    if (div && type && payout) {
-        var profit = payout - type,
-            return_percent = (profit/type)*100,
-            comment = document.createTextNode(Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%');
-
-        if (isNaN(profit) || isNaN(return_percent)) {
-            div.style.display = 'none';
-        } else {
-            div.style.display = 'block';
-            div.appendChild(comment);
-        }
-    }
-}
+         if (isNaN(profit) || isNaN(return_percent)) {
+             node.hide();
+         } else {
+             node.show();
+             node.textContent = comment;
+         }
+     }
+ }
 
 /*
  * This function loops through the available contracts and markets
@@ -10382,9 +10538,9 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            // if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
-            }
+            // }
         }
     }
     return obj;
@@ -10448,11 +10604,11 @@ function addEventListenerForm(){
  * this creates a button, clicks it, and destroys it to invoke the listener
  */
 function submitForm(form) {
-    var button = form.ownerDocument.createElement('input');
-    button.style.display = 'none';
-    button.type = 'submit';
-    form.appendChild(button).click();
-    form.removeChild(button);
+    // var button = form.ownerDocument.createElement('input');
+    // button.style.display = 'none';
+    // button.type = 'submit';
+    // form.appendChild(button).click();
+    // form.removeChild(button);
 }
 ;var Content = (function () {
     'use strict';
@@ -11039,14 +11195,14 @@ var contractFormEventChange = function () {
 var formNavElement = document.getElementById('contract_form_name_nav');
 if (formNavElement) {
     formNavElement.addEventListener('click', function(e) {
-        if (e.target && e.target.nodeName === 'LI') {
+        if (e.target && e.target.getAttribute('menuitem')) {
             var clickedForm = e.target;
             var isFormActive = clickedForm.classList.contains('active');
-            sessionStorage.setItem('formname', clickedForm.id);
+            sessionStorage.setItem('formname', clickedForm.getAttribute('menuitem'));
 
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
-            toggleActiveNavMenuElement(formNavElement, clickedForm);
+            toggleActiveCatMenuElement(formNavElement, e.target.getAttribute('menuitem'));
 
             if (!isFormActive) {
                 contractFormEventChange();
@@ -11409,12 +11565,7 @@ var Price = (function () {
         var proposal = details['proposal'];
         var params = details['echo_req'],
             id = proposal['id'],
-            type = params['contract_type'] || typeDisplayIdMapping[id],
-            h4 = document.createElement('h4'),
-            row = document.createElement('div'),
-            para = document.createElement('p'),
-            description = row.cloneNode(),
-            fragment = document.createDocumentFragment();
+            type = params['contract_type'] || typeDisplayIdMapping[id];
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
             typeDisplayIdMapping[id] = type;
@@ -11424,99 +11575,55 @@ var Price = (function () {
             }
         }
 
-        var position = contractTypeDisplayMapping(type),
-            container = document.getElementById('price_description_' + position),
-            description_container = document.getElementById('description_container_' + position),
-            purchase = document.getElementById('contract_purchase_' + position),
-            box = document.getElementById('price_container_' + position),
-            amount = document.createElement('div'),
-            currency = document.getElementById('currency');
+        var position = contractTypeDisplayMapping(type);
+        var container = document.getElementById('price_container_'+position);
+
+        var h4 = container.getElementsByClassName('contract_heading')[0],
+            amount = container.getElementsByClassName('contract_amount')[0],
+            purchase = container.getElementsByClassName('purchase_button')[0],
+            description = container.getElementsByClassName('contract_description')[0],
+            comment = container.getElementsByClassName('price_comment')[0],
+            error = container.getElementsByClassName('contract_error')[0];
 
         var display = type ? (contractType ? contractType[type] : '') : '';
-
-        while (description_container && description_container.firstChild) {
-            description_container.removeChild(description_container.firstChild);
-        }
-
         if (display) {
             h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
+            h4.textContent = display;
         }
 
-        h4.setAttribute('id', 'contract_heading_' + position);
-
-        description.setAttribute('class', 'contract_description big-col');
-        description.setAttribute('id', 'contract_description_' + position);
-        row.setAttribute('class', 'row');
-
-        var content = document.createTextNode(display);
-        h4.appendChild(content);
-        fragment.appendChild(h4);
-
-        var span = document.createElement('span');
         if (proposal['ask_price']) {
-            amount.setAttribute('class', 'contract_amount col');
-            span.setAttribute('id', 'contract_amount_' + position);
-            content = document.createTextNode(currency.value + ' ' + proposal['ask_price']);
-            span.appendChild(content);
-            amount.appendChild(span);
+            amount.textContent = currency.value + ' ' + proposal['ask_price'];
         }
 
         if (proposal['longcode']) {
-            content = document.createTextNode(proposal['longcode']);
-            description.appendChild(content);
-            row.appendChild(amount);
+            description.textContent = proposal['longcode'];
         }
 
         if (!document.getElementById('websocket_form').checkValidity()) {
-            if (box) {
-                box.style.display = 'none';
-            }
+            container.hide();
             processForgetPriceIds();
         }
-
-        if (document.getElementById('websocket_form').checkValidity()) {
-            if (box) {
-                box.style.display = 'block';
-            }
+        else{
+            container.show();
         }
 
-        if (details['error']) {
-            if (purchase) {
-                purchase.style.display = 'none';
-            }
-            row.appendChild(description);
-            fragment.appendChild(row);
-            content = document.createTextNode(details['error']['message']);
-            para.appendChild(content);
-            para.setAttribute('class', 'notice-msg');
-            fragment.appendChild(para);
-        } else {
-            displayCommentPrice('price_comment_' + position, currency.value, proposal['ask_price'], proposal['payout']);
-
-            var priceId = document.getElementById('purchase_button_' + position);
-
-            if (purchase) {
-                purchase.style.display = 'block';
-            }
-            var oldprice = priceId.getAttribute('data-ask-price');
+        if (details['error']){
+            purchase.hide();
+            comment.hide();
+            error.show();
+            error.textContent = details['error'].message;
+        }
+        else{
+            purchase.show();
+            comment.show();
+            error.hide();
+            displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
+            var oldprice = purchase.getAttribute('data-ask-price');
             if (oldprice) {
-                displayPriceMovement(span, oldprice, proposal['ask_price']);
+                displayPriceMovement(amount, oldprice, proposal['ask_price']);
             }
-
-            // create unique id object that is send in response
-            priceId.setAttribute('data-purchase-id', id);
-            priceId.setAttribute('data-ask-price', proposal['ask_price']);
-
-            row.appendChild(amount);
-            row.appendChild(description);
-            fragment.appendChild(row);
-        }
-
-        if (description_container) {
-            description_container.appendChild(fragment);
-        }
-        if (container) {
-            container.insertBefore(description_container, purchase);
+            purchase.setAttribute('data-purchase-id', id);
+            purchase.setAttribute('data-ask-price', proposal['ask_price']);
         }
     };
 
@@ -11548,7 +11655,7 @@ function processActiveSymbols() {
     // store the market
     sessionStorage.setItem('market', market);
 
-    displayOptions('contract_markets', Symbols.markets(), market);
+    displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
     setTimeout(function(){
         if(TradeSocket.socket().readyState === 1){
@@ -11609,7 +11716,15 @@ function processContract(contracts) {
         formname = sessionStorage.getItem('formname');
     }
     else{
-        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+        var tree = getContractCategoryTree(contract_categories);
+        if(tree[0]){
+            if(typeof tree[0] === 'object'){
+                formname = tree[0][1][0];
+            }
+            else{
+                formname = tree[0];
+            }
+        }
     }
     
     // set form to session storage
@@ -11950,18 +12065,34 @@ var Symbols = (function () {
 
         allSymbols.forEach(function (element) {
             var currentMarket = element['market'],
+                currentSubMarket = element['submarket'],
                 currentUnderlying = element['symbol'];
 
-            if (!tradeMarkets.hasOwnProperty(currentMarket)) {
-                tradeMarkets[currentMarket] = element['market_display_name'];
-            }
+            // if (!tradeMarkets.hasOwnProperty(currentMarket)) {
+                if(!tradeMarkets[currentMarket]){
+                    tradeMarkets[currentMarket] = {name:'',submarkets:{}};
+                }
+                tradeMarkets[currentMarket]['name'] = element['market_display_name'];
+                tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = element['submarket_display_name'];
+            // }
 
             if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
                 tradeUnderlyings[currentMarket] = {};
             }
 
+            if (!tradeUnderlyings.hasOwnProperty(currentSubMarket)) {
+                tradeUnderlyings[currentSubMarket] = {};
+            }
+
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
                 tradeUnderlyings[currentMarket][currentUnderlying] = {
+                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
+                    display: element['display_name']
+                };
+            }
+
+            if (!tradeUnderlyings[currentSubMarket].hasOwnProperty(currentUnderlying)) {
+                tradeUnderlyings[currentSubMarket][currentUnderlying] = {
                     is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
                     display: element['display_name']
                 };
