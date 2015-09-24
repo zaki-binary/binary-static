@@ -114,14 +114,6 @@ var Price = (function () {
             description.textContent = proposal['longcode'];
         }
 
-        if (!document.getElementById('websocket_form').checkValidity()) {
-            container.hide();
-            processForgetPriceIds();
-        }
-        else{
-            container.show();
-        }
-
         if (details['error']){
             purchase.hide();
             comment.hide();
