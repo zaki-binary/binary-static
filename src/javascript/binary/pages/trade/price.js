@@ -132,6 +132,8 @@ var Price = (function () {
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
         }
+
+        document.getElementById('contract_container').style.minHeight = window.innerWidth <= 768 ? '' : document.getElementById('contract_prices_container').offsetHeight+'px';
     };
 
     var clearMapping = function () {
