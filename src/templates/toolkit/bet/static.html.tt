@@ -16,13 +16,13 @@
       </div>
    </div>
    <div class="row" id="contract_form_content_wrapper">
-      <div class="col">
+      <div class="col row-inner">
          <div id="contract_market_form_container">
             <!-- <label for="contract_form_show_menu" class="nav_placeholder" id="contract_form_nav_placeholder"></label>
                <input type="checkbox" class="show_menu" id="contract_form_show_menu" role="button"> -->
             <ul class="nav tm-ul" id="contract_form_name_nav"></ul>
          </div>
-         <div id="contract_container">
+         <div id="contract_container" class="col">
             <div id="contract_form_container">
                <div id="contract_form_content">
                   <form id='websocket_form'>
@@ -144,48 +144,48 @@
             </div>
          </div>
       </div>
-      <div id="contract_prices_container" class="big-col">
+      <div id="contract_prices_container" class="col">
          <div id="contract_confirmation_container" class="overlay_container">
             <a class="close" id="close_confirmation_container">x</a>
             <div id="confirmation_message_container"></div>
             <div id="confirmation_message_endelement"></div>
          </div>
          <div class="row-inner">
-            <div class="col price_container row" id="price_container_top">
-               <div class="price_wrapper row">
-                  <div>
-                     <h4 class="contract_heading"></h4>
-                  </div>
-                  <div class="amount_wrapper">
-                     <div class="contract_amount"></div>
-                     <div class="contract_purchase button">
-                        <button class="purchase_button" id="purchase_button_top" value="purchase"></button>
+            <div class="col price_container row-inner" id="price_container_top">
+               <div class="col row">
+                  <div class="price_wrapper row">
+                     <div>
+                        <h4 class="contract_heading"></h4>
+                     </div>
+                     <div class="amount_wrapper">
+                        <div class="contract_amount"></div>
+                        <div class="contract_purchase button">
+                           <button class="purchase_button" id="purchase_button_top" value="purchase"></button>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <div class="row-inner big-col">
-                  <div class="contract_description"></div>
-                  <div class="contract_error"></div>
+                  <div class="contract_description big-col"></div>  
                </div>
                <div class="col price_comment"></div>
+               <div class="col contract_error"></div>
             </div>
-            <div class="col price_container row" id="price_container_bottom">
-               <div class="price_wrapper row">
-                  <div>
-                     <h4 class="contract_heading"></h4>
-                  </div>
-                  <div class="amount_wrapper">
-                     <div class="contract_amount"></div>
-                     <div class="contract_purchase button">
-                        <button class="purchase_button" id="purchase_button_bottom" value="purchase"></button>
+            <div class="col price_container row-inner" id="price_container_bottom">
+               <div class="col row">
+                  <div class="price_wrapper row">
+                     <div>
+                        <h4 class="contract_heading"></h4>
+                     </div>
+                     <div class="amount_wrapper">
+                        <div class="contract_amount"></div>
+                        <div class="contract_purchase button">
+                           <button class="purchase_button" id="purchase_button_bottom" value="purchase"></button>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <div class="row-inner big-col">
-                  <div class="contract_description"></div>
-                  <div class="contract_error"></div>
+                  <div class="contract_description big-col"></div>  
                </div>
                <div class="col price_comment"></div>
+               <div class="col contract_error"></div>
             </div>
          </div>
       </div>
