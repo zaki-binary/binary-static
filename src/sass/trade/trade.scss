@@ -102,15 +102,14 @@
   }
   #contract_prices_container {
     position: relative;
-    flex: 1.5;
     margin-left: 1em;
     margin-top: 28px;
     .price_container {
       border: 1px solid $COLOR_GRAY;
       align-items: stretch;
       padding: 0;
-      >.row-inner{
-        justify-content: space-between;
+      >.row{
+        padding: 0;
       }
       .big-col {
         flex: 3;
@@ -130,7 +129,7 @@
     .price_container#price_container_top {
       margin-bottom: 1rem;
     }
-    .price_comment {
+    .price_comment,.contract_error{
       background-color: $COLOR_GRAY;
       line-height: 1.5rem;
       font-size: 0.8rem;
@@ -188,8 +187,10 @@
         background: url("../images/pages/trade/ends-outside_1.png") no-repeat top center;
       }
     }
-    .contract_amount, .contract_description, .contract_error {
+    .contract_amount, .contract_description {
       padding: 10px 10px 10px 5px;
+      line-height: 1.5;
+      font-size: $FONT_SIZE_S;
     }
     .contract_amount {
       font-weight: bold;
@@ -264,8 +265,8 @@
       #price_container_top {
         margin-right: 0 !important;
       }
-      .price_container.row > .row {
-        flex-direction: row;
+      .price_wrapper {
+        flex-direction: row !important;
       }
       .row {
         flex-direction: column;
