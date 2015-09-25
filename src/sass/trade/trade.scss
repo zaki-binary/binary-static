@@ -88,6 +88,9 @@
   .big-col {
     flex: 1.5;
   }
+  #expiry_type_endtime{
+    flex-wrap: wrap;
+  }
   #contract_form_content_wrapper{
     padding-top: 1em;
   }
@@ -254,7 +257,6 @@
   #period_row, #jbarrier_row, #jhigh_barrier_row, #jlow_barrier_row {
     display: none;
   }
-  #expiry_time,
   #duration_units{
     margin-left: 5px;
   }
@@ -272,7 +274,12 @@
     margin-bottom: 5px;
   }
   #expiry_date{
-    width: 180px;
+    width: 175px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+  #expiry_time{
+    width: 80px;
   }
   .barrier_class input, #jhigh_barrier_row select, #jlow_barrier_row select, #jbarrier_row select, #period{
     width: 175px;
@@ -294,6 +301,9 @@
 
 @media all and (max-width: 640px) {
   #trading_socket_container {
+    #expiry_time{
+      width: 175px;
+    }
     #contract_form_content{
       margin-top: 0px;
     }
