@@ -50,7 +50,13 @@ var Tick = (function () {
         } else {
             message = quote;
         }
-        displayPriceMovement(spotElement, spotElement.textContent, message);
+        if(parseFloat(message)!=message){
+            spotElement.className = 'error';
+        }
+        else{
+            spotElement.classList.remove('error');
+            displayPriceMovement(spotElement, spotElement.textContent, message);
+        }
         spotElement.textContent = message;
     };
 
