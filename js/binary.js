@@ -3381,8 +3381,7 @@ pjax_config_page('trading', function () {
         onLoad: function () {
             Content.populate();
             TradeSocket.init();
-            Symbols.currentSymbol('');
-            Symbols.getSymbols();
+            Symbols.getSymbols(1);
             addEventListenerForm();
         },
         onUnload: function() {
@@ -10538,9 +10537,9 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            // if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
-            // }
+            }
         }
     }
     return obj;
@@ -11176,7 +11175,6 @@ if (marketNavElement) {
         // as different markets have different forms so remove from sessionStorage
         // it will default to proper one
         sessionStorage.removeItem('formname');
-        Symbols.currentSymbol('');
         processMarket();
     });
 }
@@ -11599,14 +11597,6 @@ var Price = (function () {
             description.textContent = proposal['longcode'];
         }
 
-        if (!document.getElementById('websocket_form').checkValidity()) {
-            container.hide();
-            processForgetPriceIds();
-        }
-        else{
-            container.show();
-        }
-
         if (details['error']){
             purchase.hide();
             comment.hide();
@@ -11660,8 +11650,7 @@ function processActiveSymbols() {
     setTimeout(function(){
         if(TradeSocket.socket().readyState === 1){
             var underlying = document.getElementById('underlying').value;
-            Symbols.currentSymbol(underlying);
-            Symbols.getSymbols();
+            Symbols.getSymbols(0);
         }
     }, 60*1000);
 }
@@ -11676,9 +11665,9 @@ function processMarket() {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market], Symbols.currentSymbol());
+    displayUnderlyings('underlying', Symbols.underlyings()[market], sessionStorage.getItem('underlying'));
 
-    if(!Symbols.currentSymbol()){
+    if(Symbols.need_page_update()){
         processMarketUnderlying();
     }
 }
@@ -12058,7 +12047,7 @@ function displayStartDates() {
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {}, current = '';
+    var tradeMarkets = {}, tradeUnderlyings = {}, current = '', need_page_update = 1;
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -12068,13 +12057,15 @@ var Symbols = (function () {
                 currentSubMarket = element['submarket'],
                 currentUnderlying = element['symbol'];
 
-            // if (!tradeMarkets.hasOwnProperty(currentMarket)) {
+            var is_active = !element['is_trading_suspended'] && element['exchange_is_open'];
+
+            if(is_active){
                 if(!tradeMarkets[currentMarket]){
                     tradeMarkets[currentMarket] = {name:'',submarkets:{}};
                 }
                 tradeMarkets[currentMarket]['name'] = element['market_display_name'];
                 tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = element['submarket_display_name'];
-            // }
+            }
 
             if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
                 tradeUnderlyings[currentMarket] = {};
@@ -12093,24 +12084,18 @@ var Symbols = (function () {
 
             if (!tradeUnderlyings[currentSubMarket].hasOwnProperty(currentUnderlying)) {
                 tradeUnderlyings[currentSubMarket][currentUnderlying] = {
-                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
+                    is_active: is_active,
                     display: element['display_name']
                 };
             }
         });
     };
 
-    var getSymbols = function () {
+    var getSymbols = function (update) {
         TradeSocket.send({
             active_symbols: "brief"
         });
-    };
-
-    var currentSymbol = function(symbol){
-        if(typeof symbol !== 'undefined'){
-            current = symbol;
-        }
-        return current;
+        need_page_update = update;
     };
 
     return {
@@ -12118,7 +12103,7 @@ var Symbols = (function () {
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
-        currentSymbol: currentSymbol
+        need_page_update: function () { return need_page_update; }
     };
 
 })();
@@ -12174,7 +12159,13 @@ var Tick = (function () {
         } else {
             message = quote;
         }
-        displayPriceMovement(spotElement, spotElement.textContent, message);
+        if(parseFloat(message)!=message){
+            spotElement.className = 'error';
+        }
+        else{
+            spotElement.classList.remove('error');
+            displayPriceMovement(spotElement, spotElement.textContent, message);
+        }
         spotElement.textContent = message;
     };
 
