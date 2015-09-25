@@ -11175,7 +11175,7 @@ if (marketNavElement) {
         // as different markets have different forms so remove from sessionStorage
         // it will default to proper one
         sessionStorage.removeItem('formname');
-        processMarket();
+        processMarket(1);
     });
 }
 
@@ -11659,7 +11659,7 @@ function processActiveSymbols() {
 /*
  * Function to call when market has changed
  */
-function processMarket() {
+function processMarket(flag) {
     'use strict';
 
     // we can get market from sessionStorage as allowed market
@@ -11667,7 +11667,7 @@ function processMarket() {
     var market = sessionStorage.getItem('market');
     displayUnderlyings('underlying', Symbols.underlyings()[market], sessionStorage.getItem('underlying'));
 
-    if(Symbols.need_page_update()){
+    if(Symbols.need_page_update() || flag){
         processMarketUnderlying();
     }
 }
