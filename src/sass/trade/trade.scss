@@ -100,6 +100,7 @@
     }
   }
   #contract_container {
+    align-items: center;
     #contract_form_container .col {
       margin-right: 1rem;
     }
@@ -128,7 +129,8 @@
     }
   }
   #contract_form_content {
-    padding: 20px 10px 10px 10px;
+    // padding: 20px 10px 10px 10px;
+    padding: 0 10px;
   }
   #contract_prices_container {
     .price_container#price_container_top {
@@ -203,6 +205,7 @@
     .contract_amount {
       font-weight: bold;
       font-size: 1.1rem;
+      border-radius: 5px;
     }
   }
   .overlay_container {
@@ -265,6 +268,13 @@
   }
   #amount,#duration_units{
     width: 105px;
+  }
+  #underlying{
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+  #spot_label{
+    display: none;
   }
 }
 
@@ -333,6 +343,8 @@
 #spot {
   line-height: 25px;
   white-space: nowrap;
+  padding: 3px;
+  border-radius: 5px;
   &.error{
     font-style: italic;
   }
