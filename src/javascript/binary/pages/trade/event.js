@@ -11,8 +11,7 @@ if (marketNavElement) {
         // as different markets have different forms so remove from sessionStorage
         // it will default to proper one
         sessionStorage.removeItem('formname');
-        Symbols.currentSymbol('');
-        processMarket();
+        processMarket(1);
     });
 }
 

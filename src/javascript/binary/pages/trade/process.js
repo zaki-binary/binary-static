@@ -18,8 +18,7 @@ function processActiveSymbols() {
     setTimeout(function(){
         if(TradeSocket.socket().readyState === 1){
             var underlying = document.getElementById('underlying').value;
-            Symbols.currentSymbol(underlying);
-            Symbols.getSymbols();
+            Symbols.getSymbols(0);
         }
     }, 60*1000);
 }
@@ -28,15 +27,15 @@ function processActiveSymbols() {
 /*
  * Function to call when market has changed
  */
-function processMarket() {
+function processMarket(flag) {
     'use strict';
 
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market], Symbols.currentSymbol());
+    displayUnderlyings('underlying', Symbols.underlyings()[market], sessionStorage.getItem('underlying'));
 
-    if(!Symbols.currentSymbol()){
+    if(Symbols.need_page_update() || flag){
         processMarketUnderlying();
     }
 }
