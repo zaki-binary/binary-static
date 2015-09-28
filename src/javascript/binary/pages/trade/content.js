@@ -36,7 +36,7 @@ var Content = (function () {
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
             textContractPeriod: text.localize('Contract period'),
-            textExercisePeriod: text.localize('Exercise period')
+            textExercisePeriod: text.localize('Exercise price')
         };
 
         var starTime = document.getElementById('start_time_label');
