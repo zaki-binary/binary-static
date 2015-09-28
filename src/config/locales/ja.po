@@ -9,8 +9,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-09-24 21:23+0200\n"
 "Last-Translator: Haruna Sekiya <hrnmyrn@gmail.com>\n"
-"Language-Team: Japanese "
-"<https://hosted.weblate.org/projects/binary/static/ja/>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/binary/static/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5561,9 +5560,7 @@ msgstr "トレードの取引期間に市場の休日が存在します。トレ
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/betting_rules.html.tt:31
 msgid "Market prices are updated at most once per second.  For any given second, the market price will be updated to the first tick, if any, received in that particular second on the company datafeed."
-msgstr ""
-"市場価格は最高で１秒に１回の頻度で更新されます。どの任意の秒数でも市場価格にはその最初のティックの値、または特定の秒数に当社のデータフィードに受信された値"
-"が更新されます。"
+msgstr "市場価格は最高で１秒に１回の頻度で更新されます。どの任意の秒数でも市場価格にはその最初のティックの値、または特定の秒数に当社のデータフィードに受信された値が更新されます。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
 msgid "Market-closing times: Please refer to"
@@ -8956,7 +8953,9 @@ msgid "The system is missing critical pricing information. Please try again in a
 msgstr "重要な価格決定に関する情報をシステム上で検知することができませんでした。数分後、改めてトレードを実施して頂くか、他の市場のトレードをお試し下さい。"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:11
-msgid "The term \"the Company\" shall denote either Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Malta Gaming Authority in Malta for the Gaming products, licence no MGA/CL2/118/2000 dated 26th May 2010 and for UK clients by (2) the UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Malta Financial Services Authority for Investment products, holder of a Category 3 Investment Services licence no IS/ 70156; or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
+#, fuzzy
+#| msgid "The term \"the Company\" shall denote either Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Malta Gaming Authority in Malta for the Gaming products, licence no MGA/CL2/118/2000 dated 26th May 2010 and for UK clients by (2) the UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Malta Financial Services Authority for Investment products, holder of a Category 3 Investment Services licence no IS/ 70156; or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
+msgid "The term \"the Company\" shall denote either Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licensed and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licensed and regulated by (1) the Malta Gaming Authority in Malta for the Gaming products, licence no MGA/CL2/118/2000 dated 26th May 2010 and for UK clients by (2) the UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Malta Financial Services Authority for Investment products, holder of a Category 3 Investment Services licence no IS/ 70156; or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
 msgstr ""
 "（本約款の趣旨）\n"
 "第１条　この約款（以下「本約款」といいます。）はお客さまが、Binary株式会社（以下「当社」といいます。）との間で行う店頭通貨バイナリーオプション取引（以下「本取引」といいます。）に関して、当社の取引システム（以下「本システム」といいます。）によりお客さまに提供するサービス（以下「本サービス」といいます。）の特徴、仕組み、取引条件、リスク、並びに本取引における権利義務関係に関するお客さまと当社との間の取り決めです。\n"
@@ -13041,6 +13040,43 @@ msgstr "Asian アップ"
 msgid "%1 %2 payout if the last tick of %3 is strictly higher than the average of the [plural,_5,%d tick,%d ticks]."
 msgstr "%3の最後の値が[plural,_5,%d tick,%d ticks]の平均よりも正確に高い場合に、%1 %2のペイアウトをお受け取りいただけます。"
 
+#: Translation for contract type "CALL"
+msgid "higher"
+msgstr "ラダー高"
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (CALL - daily)
+msgid "%1 %2 payout if %3 is strictly higher than %6 at %5."
+msgstr "%3が%5の時点で%6よりも正確に高い場合に%1 %2のペイアウトをお受け取りいただけます。"
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (CALL - intraday)
+msgid "%1 %2 payout if %3 is strictly higher than %6 at %5 after %4."
+msgstr "%3が%4後の%5の時点で%6より正確に高い場合に%1 %2のペイアウトをお受け取りいただけます。"
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (CALL - tick)
+msgid "%1 %2 payout if %3 after [plural,_5,%d tick,%d ticks] is strictly higher than %6."
+msgstr "%3が [plural,_5,%d tick,%d ticks]後に%6よりも正確に高い場合に、%1 %2のペイアウトをお受け取りいただけます。"
+
 #: Translation for contract type "DIGITDIFF"
 msgid "differs"
 msgstr "アンマッチ"
@@ -13315,18 +13351,6 @@ msgstr "%3が%5までに%7と%6の範囲外で終了した場合、%1 %2のペ�
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "%3が%4後の%5までに%7と%6の範囲外にある場合、%1 %2のペイアウトをお受け取りいただけます。"
-
-#~ msgid "higher"
-#~ msgstr "ラダー高"
-
-#~ msgid "%1 %2 payout if %3 is strictly higher than %6 at %5."
-#~ msgstr "%3が%5の時点で%6よりも正確に高い場合に%1 %2のペイアウトをお受け取りいただけます。"
-
-#~ msgid "%1 %2 payout if %3 is strictly higher than %6 at %5 after %4."
-#~ msgstr "%3が%4後の%5の時点で%6より正確に高い場合に%1 %2のペイアウトをお受け取りいただけます。"
-
-#~ msgid "%1 %2 payout if %3 after [plural,_5,%d tick,%d ticks] is strictly higher than %6."
-#~ msgstr "%3が [plural,_5,%d tick,%d ticks]後に%6よりも正確に高い場合に、%1 %2のペイアウトをお受け取りいただけます。"
 
 #~ msgid "Japan website No Connections With Antisocial Forces List item 10"
 #~ msgstr "反社会的勢力リスト項目10と日本ウェブサイトは関わりはありません。"
