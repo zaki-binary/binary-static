@@ -35,6 +35,8 @@ var Content = (function () {
             textContractConfirmationBalance: text.localize('Your current balance is'),
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
+            textFormUpDown: text.localize('Up/Down'),
+            textFormInOut: text.localize('In/Out'),
             textContractPeriod: text.localize('Contract period'),
             textExercisePeriod: text.localize('Exercise price')
         };

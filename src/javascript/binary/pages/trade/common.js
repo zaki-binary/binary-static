@@ -74,7 +74,7 @@
                  if(fragment2.hasChildNodes()){
                      var ul = document.createElement('ul'),
                          a = document.createElement('a'),
-                         content = document.createTextNode(el1[0]);
+                         content = document.createTextNode(elements[el1[0]]);
 
                      a.appendChild(content);
                      a.setAttribute('class', 'tm-a');

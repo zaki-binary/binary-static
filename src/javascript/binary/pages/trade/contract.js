@@ -134,6 +134,14 @@ var Contract = (function () {
             }
         });
 
+        if(tradeContractForms.risefall){
+            tradeContractForms['updown'] = Content.localize().textFormUpDown;
+        }
+
+        if(tradeContractForms.endsinout || tradeContractForms.staysinout){
+            tradeContractForms['inout'] = Content.localize().textFormInOut;
+        }
+
         return tradeContractForms;
     };
 
