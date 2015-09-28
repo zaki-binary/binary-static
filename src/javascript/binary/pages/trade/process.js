@@ -13,13 +13,12 @@ function processActiveSymbols() {
     // store the market
     sessionStorage.setItem('market', market);
 
-    displayOptions('contract_markets', Symbols.markets(), market);
+    displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
     setTimeout(function(){
         if(TradeSocket.socket().readyState === 1){
             var underlying = document.getElementById('underlying').value;
-            Symbols.currentSymbol(underlying);
-            Symbols.getSymbols();
+            Symbols.getSymbols(0);
         }
     }, 60*1000);
 }
@@ -28,15 +27,15 @@ function processActiveSymbols() {
 /*
  * Function to call when market has changed
  */
-function processMarket() {
+function processMarket(flag) {
     'use strict';
 
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market], Symbols.currentSymbol());
+    displayUnderlyings('underlying', Symbols.underlyings()[market], sessionStorage.getItem('underlying'));
 
-    if(!Symbols.currentSymbol()){
+    if(Symbols.need_page_update() || flag){
         processMarketUnderlying();
     }
 }
@@ -74,7 +73,15 @@ function processContract(contracts) {
         formname = sessionStorage.getItem('formname');
     }
     else{
-        formname = Object.keys(contract_categories).sort(compareContractCategory)[0];
+        var tree = getContractCategoryTree(contract_categories);
+        if(tree[0]){
+            if(typeof tree[0] === 'object'){
+                formname = tree[0][1][0];
+            }
+            else{
+                formname = tree[0];
+            }
+        }
     }
     
     // set form to session storage
