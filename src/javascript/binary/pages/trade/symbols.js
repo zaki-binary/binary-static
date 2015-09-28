@@ -17,21 +17,32 @@
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {}, current = '';
+    var tradeMarkets = {}, tradeUnderlyings = {}, current = '', need_page_update = 1;
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
 
         allSymbols.forEach(function (element) {
             var currentMarket = element['market'],
+                currentSubMarket = element['submarket'],
                 currentUnderlying = element['symbol'];
 
-            if (!tradeMarkets.hasOwnProperty(currentMarket)) {
-                tradeMarkets[currentMarket] = element['market_display_name'];
+            var is_active = !element['is_trading_suspended'] && element['exchange_is_open'];
+
+            if(is_active){
+                if(!tradeMarkets[currentMarket]){
+                    tradeMarkets[currentMarket] = {name:'',submarkets:{}};
+                }
+                tradeMarkets[currentMarket]['name'] = element['market_display_name'];
+                tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = element['submarket_display_name'];
             }
 
             if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
                 tradeUnderlyings[currentMarket] = {};
+            }
+
+            if (!tradeUnderlyings.hasOwnProperty(currentSubMarket)) {
+                tradeUnderlyings[currentSubMarket] = {};
             }
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
@@ -40,20 +51,21 @@ var Symbols = (function () {
                     display: element['display_name']
                 };
             }
+
+            if (!tradeUnderlyings[currentSubMarket].hasOwnProperty(currentUnderlying)) {
+                tradeUnderlyings[currentSubMarket][currentUnderlying] = {
+                    is_active: is_active,
+                    display: element['display_name']
+                };
+            }
         });
     };
 
-    var getSymbols = function () {
+    var getSymbols = function (update) {
         TradeSocket.send({
             active_symbols: "brief"
         });
-    };
-
-    var currentSymbol = function(symbol){
-        if(typeof symbol !== 'undefined'){
-            current = symbol;
-        }
-        return current;
+        need_page_update = update;
     };
 
     return {
@@ -61,7 +73,7 @@ var Symbols = (function () {
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
-        currentSymbol: currentSymbol
+        need_page_update: function () { return need_page_update; }
     };
 
 })();

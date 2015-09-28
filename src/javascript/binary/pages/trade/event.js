@@ -11,8 +11,7 @@ if (marketNavElement) {
         // as different markets have different forms so remove from sessionStorage
         // it will default to proper one
         sessionStorage.removeItem('formname');
-        Symbols.currentSymbol('');
-        processMarket();
+        processMarket(1);
     });
 }
 
@@ -30,14 +29,14 @@ var contractFormEventChange = function () {
 var formNavElement = document.getElementById('contract_form_name_nav');
 if (formNavElement) {
     formNavElement.addEventListener('click', function(e) {
-        if (e.target && e.target.nodeName === 'LI') {
+        if (e.target && e.target.getAttribute('menuitem')) {
             var clickedForm = e.target;
             var isFormActive = clickedForm.classList.contains('active');
-            sessionStorage.setItem('formname', clickedForm.id);
+            sessionStorage.setItem('formname', clickedForm.getAttribute('menuitem'));
 
             setFormPlaceholderContent();
             // if form is already active then no need to send same request again
-            toggleActiveNavMenuElement(formNavElement, clickedForm);
+            toggleActiveCatMenuElement(formNavElement, e.target.getAttribute('menuitem'));
 
             if (!isFormActive) {
                 contractFormEventChange();

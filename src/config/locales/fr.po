@@ -8931,7 +8931,9 @@ msgid "The system is missing critical pricing information. Please try again in a
 msgstr "Le système ne possède pas les informations d'évaluation critiques. Veuillez réessayer dans quelques minutes, ou essayer un marché différent."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:11
-msgid "The term \"the Company\" shall denote either Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Malta Gaming Authority in Malta for the Gaming products, licence no MGA/CL2/118/2000 dated 26th May 2010 and for UK clients by (2) the UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Malta Financial Services Authority for Investment products, holder of a Category 3 Investment Services licence no IS/ 70156; or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
+#, fuzzy
+#| msgid "The term \"the Company\" shall denote either Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Malta Gaming Authority in Malta for the Gaming products, licence no MGA/CL2/118/2000 dated 26th May 2010 and for UK clients by (2) the UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Malta Financial Services Authority for Investment products, holder of a Category 3 Investment Services licence no IS/ 70156; or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
+msgid "The term \"the Company\" shall denote either Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licensed and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licensed and regulated by (1) the Malta Gaming Authority in Malta for the Gaming products, licence no MGA/CL2/118/2000 dated 26th May 2010 and for UK clients by (2) the UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, regulated by the Malta Financial Services Authority for Investment products, holder of a Category 3 Investment Services licence no IS/ 70156; or Binary (CR) S.A., depending on the jurisdiction to which a Client's account has been attached in accordance with the account opening procedures of the website and as detailed in the About Us section of the website."
 msgstr "Le nom \"Société\" dénote ou bien Binary (IOM) Ltd., premier étage, Millennium House, Victoria Road, Douglas, IM2 4RW, Ile de Man, Grande-Bretagne, sous licence et réglementé par (1) la Gambling Supervision Commission de l'Ile de Man, les îles Britanniques, la licence de jeu en ligne actuelle obtenue le 31 août 2012, et pour les clients du Royaume-Uni par (2) la UK Gambling Commission; Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malte, sous licence et réglementé par (1) Malta Gaming Authority à Malte, licence n°MGA/CL2/118/2000, le 26 mai 2010 et pour les clients du Royaume-Uni par (2) la UK Gambling Commission; Binary Investments (Europe) Ltd Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, régulé par le Malta Financial Services Authority for Investment products, déteneur d'une licence Category 3 Investment Services no IS/ 70156; or Binary (CR) S.A., en fonction de la juridiction à laquelle un compte d'un Client a été attaché suivant les procédures d'ouverture de compte du site web et comme détaillé dans la section À Propos de Nous du site web."
 
 #. (time_now, time_zone, underlying)
@@ -12952,6 +12954,49 @@ msgstr "haut asiatique"
 msgid "%1 %2 payout if the last tick of %3 is strictly higher than the average of the [plural,_5,%d tick,%d ticks]."
 msgstr "%1 <strong>%2</strong> de gain si le <strong>dernier intervalle</strong>de %3 est strictement <strong>supérieur</strong>à la<strong>moyenne</strong>des<strong>%5 intervalles</strong>."
 
+#: Translation for contract type "CALL"
+msgid "higher"
+msgstr "supérieur"
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (CALL - daily)
+#, fuzzy
+#| msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5."
+msgid "%1 %2 payout if %3 is strictly higher than %6 at %5."
+msgstr "%1 <strong>%2</strong> de gain si %3 est strictement <strong>plus haut</strong> que <strong> %6</strong> à %5."
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (CALL - intraday)
+#, fuzzy
+#| msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5 after %4."
+msgid "%1 %2 payout if %3 is strictly higher than %6 at %5 after %4."
+msgstr "%1 <strong>%2</strong> de gain si %3 est strictement <strong>plus haut</strong> que <strong> %6</strong> à %5 après %4."
+
+#. %1 - Payout Currency (example USD)
+#. %2 - Payout value (example 100)
+#. %3 - Underlying name (example USD/JPY)
+#. %4 - Starting datetime (may be 'contract start')
+#. %5 - Expiration datetime
+#. %6 - High (or single) barrier
+#. %7 - Low barrier (when present)
+#: Translation for contract type description (CALL - tick)
+#, fuzzy
+#| msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5."
+msgid "%1 %2 payout if %3 after [plural,_5,%d tick,%d ticks] is strictly higher than %6."
+msgstr "%1 <strong>%2</strong> de gain si %3 est strictement <strong>plus haut</strong> que <strong> %6</strong> à %5."
+
 #: Translation for contract type "DIGITDIFF"
 msgid "differs"
 msgstr "diffère"
@@ -13270,19 +13315,6 @@ msgstr "%1 <strong>%2</strong> de gain si %3 <strong>sort de%7</strong> à <stro
 #| msgid "%1 <strong>%2</strong> payout if %3 <strong>goes outside %7</strong> and <strong>%6</strong> through %5 after %4."
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "%1 <strong>%2</strong> de gain si %3 <strong>sort de%7</strong> et <strong>%6</strong> jusqu'à %5 après %4."
-
-#~ msgid "higher"
-#~ msgstr "supérieur"
-
-#, fuzzy
-#~| msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5."
-#~ msgid "%1 %2 payout if %3 is strictly higher than %6 at %5."
-#~ msgstr "%1 <strong>%2</strong> de gain si %3 est strictement <strong>plus haut</strong> que <strong> %6</strong> à %5."
-
-#, fuzzy
-#~| msgid "%1 <strong>%2</strong> payout if %3 is strictly <strong>higher</strong> than <strong>%6</strong> at %5 after %4."
-#~ msgid "%1 %2 payout if %3 is strictly higher than %6 at %5 after %4."
-#~ msgstr "%1 <strong>%2</strong> de gain si %3 est strictement <strong>plus haut</strong> que <strong> %6</strong> à %5 après %4."
 
 #~| msgid "No Connections With Antisocial Forces"
 #~ msgid "Japan website No Connections With Antisocial Forces List item 10"
