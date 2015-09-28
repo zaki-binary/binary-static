@@ -35,8 +35,10 @@ var Content = (function () {
             textContractConfirmationBalance: text.localize('Your current balance is'),
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
+            textFormUpDown: text.localize('Up/Down'),
+            textFormInOut: text.localize('In/Out'),
             textContractPeriod: text.localize('Contract period'),
-            textExercisePeriod: text.localize('Exercise period')
+            textExercisePeriod: text.localize('Exercise price')
         };
 
         var starTime = document.getElementById('start_time_label');

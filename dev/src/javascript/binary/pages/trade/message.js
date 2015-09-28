@@ -12,8 +12,7 @@ var Message = (function () {
             if (type === 'authorize') {
                 TradeSocket.send({ payout_currencies: 1 });
             } else if (type === 'active_symbols') {
-                sessionStorage.setItem('active_symbols', msg.data);
-                processActiveSymbols();
+                processActiveSymbols(response);
             } else if (type === 'contracts_for') {
                 processContract(response);
             } else if (type === 'payout_currencies') {

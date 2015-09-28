@@ -10117,7 +10117,7 @@ var Barriers = (function () {
                  if(fragment2.hasChildNodes()){
                      var ul = document.createElement('ul'),
                          a = document.createElement('a'),
-                         content = document.createTextNode(el1[0]);
+                         content = document.createTextNode(elements[el1[0]]);
 
                      a.appendChild(content);
                      a.setAttribute('class', 'tm-a');
@@ -10646,8 +10646,10 @@ function submitForm(form) {
             textContractConfirmationBalance: text.localize('Your current balance is'),
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
+            textFormUpDown: text.localize('Up/Down'),
+            textFormInOut: text.localize('In/Out'),
             textContractPeriod: text.localize('Contract period'),
-            textExercisePeriod: text.localize('Exercise period')
+            textExercisePeriod: text.localize('Exercise price')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -10879,6 +10881,14 @@ var Contract = (function () {
                 }
             }
         });
+
+        if(tradeContractForms.risefall){
+            tradeContractForms['updown'] = Content.localize().textFormUpDown;
+        }
+
+        if(tradeContractForms.endsinout || tradeContractForms.staysinout){
+            tradeContractForms['inout'] = Content.localize().textFormInOut;
+        }
 
         return tradeContractForms;
     };
@@ -11167,17 +11177,24 @@ function displayExpiryType(unit) {
  * and request for new Contract details to populate the form and request price accordingly
  */
 var marketNavElement = document.getElementById('contract_markets');
+var onMarketChange = function(market){
+    sessionStorage.setItem('market', market);
+
+    // as different markets have different forms so remove from sessionStorage
+    // it will default to proper one
+    sessionStorage.removeItem('formname');
+    sessionStorage.removeItem('underlying');
+    processMarket(1);
+};
+
 if (marketNavElement) {
     marketNavElement.addEventListener('change', function(e) {
         var clickedMarket = e.target;
-        sessionStorage.setItem('market', clickedMarket.value);
-
-        // as different markets have different forms so remove from sessionStorage
-        // it will default to proper one
-        sessionStorage.removeItem('formname');
-        processMarket(1);
+        onMarketChange(clickedMarket.value);
     });
 }
+
+
 
 /*
  * attach event to form list, so when client click on different form we need to update form
@@ -11451,8 +11468,7 @@ var Message = (function () {
             if (type === 'authorize') {
                 TradeSocket.send({ payout_currencies: 1 });
             } else if (type === 'active_symbols') {
-                sessionStorage.setItem('active_symbols', msg.data);
-                processActiveSymbols();
+                processActiveSymbols(response);
             } else if (type === 'contracts_for') {
                 processContract(response);
             } else if (type === 'payout_currencies') {
@@ -11634,11 +11650,11 @@ var Price = (function () {
  * This function process the active symbols to get markets
  * and underlying list
  */
-function processActiveSymbols() {
+function processActiveSymbols(data) {
     'use strict';
 
     // populate the Symbols object
-    Symbols.details(JSON.parse(sessionStorage.getItem('active_symbols')));
+    Symbols.details(data);
 
     var market = getDefaultMarket();
 
@@ -11665,9 +11681,17 @@ function processMarket(flag) {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market], sessionStorage.getItem('underlying'));
+    var symbol = sessionStorage.getItem('underlying');
+    var update_page = Symbols.need_page_update() || flag;
 
-    if(Symbols.need_page_update() || flag){
+    if(!update_page && market && symbol && !Symbols.underlyings()[market][symbol].is_active){
+        onMarketChange('random');
+        return false;
+    }
+    
+    displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
+
+    if(update_page){
         processMarketUnderlying();
     }
 }
@@ -12077,7 +12101,7 @@ var Symbols = (function () {
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
                 tradeUnderlyings[currentMarket][currentUnderlying] = {
-                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
+                    is_active: is_active,
                     display: element['display_name']
                 };
             }
