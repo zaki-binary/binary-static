@@ -494,7 +494,7 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            if (!(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
             }
         }

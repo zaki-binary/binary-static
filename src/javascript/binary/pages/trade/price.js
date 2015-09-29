@@ -32,7 +32,8 @@ var Price = (function () {
             endTime = document.getElementById('expiry_time'),
             barrier = document.getElementById('barrier'),
             highBarrier = document.getElementById('barrier_high'),
-            lowBarrier = document.getElementById('barrier_low');
+            lowBarrier = document.getElementById('barrier_low'),
+            prediction = document.getElementById('prediction');
 
         if (payout && payout.value) {
             proposal['amount_val'] = payout.value;
@@ -73,6 +74,9 @@ var Price = (function () {
             proposal['barrier2'] = lowBarrier.value;
         }
 
+        if(prediction && isVisible(prediction)){
+            proposal['barrier'] = prediction.value;
+        }
         return proposal;
     };
 

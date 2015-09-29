@@ -280,3 +280,11 @@ if (highBarrierElement) {
         submitForm(document.getElementById('websocket_form'));
     }));
 }
+
+var predictionElement = document.getElementById('prediction');
+if (predictionElement) {
+    predictionElement.addEventListener('input', debounce( function (e) {
+        processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
+    }));
+}

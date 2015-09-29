@@ -110,7 +110,19 @@ function processContractForm() {
 
     displayDurations();
 
+    displayPrediction();
+
     processPriceRequest();
+}
+
+function displayPrediction(){
+    var predictionElement = document.getElementById('prediction_row');
+    if(sessionStorage.getItem('formname') === 'digits'){
+        predictionElement.show();
+    }
+    else{
+        predictionElement.hide();
+    }
 }
 
 /*
