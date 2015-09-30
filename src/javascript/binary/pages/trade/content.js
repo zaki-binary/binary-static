@@ -39,7 +39,10 @@ var Content = (function () {
             textFormInOut: text.localize('In/Out'),
             textContractPeriod: text.localize('Contract period'),
             textExercisePeriod: text.localize('Exercise price'),
-            predictionLabel: text.localize('Last Digit Prediction')
+            predictionLabel: text.localize('Last Digit Prediction'),
+            textContractConfirmationPayout: text.localize('Potential Payout'),
+            textContractConfirmationCost: text.localize('Total Cost'),
+            textContractConfirmationProfit: text.localize('Potential Profit')
         };
 
         var starTime = document.getElementById('start_time_label');

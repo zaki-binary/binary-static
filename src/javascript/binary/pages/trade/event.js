@@ -226,7 +226,7 @@ var purchaseContractEvent = function () {
         if(this.attributes[attr].name){
             var m = this.attributes[attr].name.match(/data\-(.+)/);
 
-            if(m && m[1] && m[1]!=="purchase-id" && m[1]!=="ask-price"){
+            if(m && m[1] && m[1]!=="purchase-id"){
                 params.form_data[m[1]] = this.attributes[attr].value;
             }
         }
