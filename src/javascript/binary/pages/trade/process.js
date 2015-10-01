@@ -36,8 +36,8 @@ function processMarket(flag) {
     var symbol = sessionStorage.getItem('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
-    if(!update_page && market && symbol && !Symbols.underlyings()[market][symbol].is_active){
-        onMarketChange('random');
+    if(!update_page && market && symbol && (!Symbols.underlyings()[market] || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
+        onMarketChange(Object.keys(Symbols.underlyings())[0]);
         return false;
     }
     
