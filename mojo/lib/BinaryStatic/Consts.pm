@@ -45,6 +45,7 @@ sub languages {
         'ES' => decode_utf8('Español'),
         'FR' => decode_utf8('Français'),
         'EN' => 'English',
+        'IT' => 'Italiano',
     }
 }
 
