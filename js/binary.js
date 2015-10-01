@@ -10372,6 +10372,10 @@ function hideOverlayContainer() {
     if (elm) {
         elm.style.display = 'none';
     }
+    var elm2 = document.getElementById('contracts_list');
+    if (elm2) {
+        elm2.style.display = 'flex';
+    }
 }
 
 /*
@@ -10537,7 +10541,7 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            if (!(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
             }
         }
@@ -10649,7 +10653,11 @@ function submitForm(form) {
             textFormUpDown: text.localize('Up/Down'),
             textFormInOut: text.localize('In/Out'),
             textContractPeriod: text.localize('Contract period'),
-            textExercisePeriod: text.localize('Exercise price')
+            textExercisePeriod: text.localize('Exercise price'),
+            predictionLabel: text.localize('Last Digit Prediction'),
+            textContractConfirmationPayout: text.localize('Potential Payout'),
+            textContractConfirmationCost: text.localize('Total Cost'),
+            textContractConfirmationProfit: text.localize('Potential Profit')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -10697,6 +10705,11 @@ function submitForm(form) {
         var barrierLowSpan = document.getElementById('barrier_low_span');
         if (barrierLowSpan) {
             barrierLowSpan.textContent = localize.textLowBarrier;
+        }
+
+        var predictionLabel = document.getElementById('prediction_label');
+        if(predictionLabel){
+            predictionLabel.textContent = localize.predictionLabel;
         }
 
         var payoutOption = document.getElementById('payout_option');
@@ -10825,20 +10838,22 @@ var Contract = (function () {
                 }
 
                 var barrierObj = {};
-                if (currentObj.barriers === 1) {
-                    if (!barriers.hasOwnProperty(contractCategory)) {
-                        barrierObj['count'] = 1;
-                        barrierObj['barrier'] = currentObj['barrier'];
-                        barrierObj['barrier_category'] = currentObj['barrier_category'];
-                        barriers[formName] = barrierObj;
-                    }
-                } else if (currentObj.barriers === 2) {
-                    if (!barriers.hasOwnProperty(contractCategory)) {
-                        barrierObj['count'] = 2;
-                        barrierObj['barrier'] = currentObj['high_barrier'];
-                        barrierObj['barrier1'] = currentObj['low_barrier'];
-                        barrierObj['barrier_category'] = currentObj['barrier_category'];
-                        barriers[formName] = barrierObj;
+                if(currentObj.barrier_category && currentObj.barrier_category !== "non_financial"){
+                    if (currentObj.barriers === 1) {
+                        if (!barriers.hasOwnProperty(contractCategory)) {
+                            barrierObj['count'] = 1;
+                            barrierObj['barrier'] = currentObj['barrier'];
+                            barrierObj['barrier_category'] = currentObj['barrier_category'];
+                            barriers[formName] = barrierObj;
+                        }
+                    } else if (currentObj.barriers === 2) {
+                        if (!barriers.hasOwnProperty(contractCategory)) {
+                            barrierObj['count'] = 2;
+                            barrierObj['barrier'] = currentObj['high_barrier'];
+                            barrierObj['barrier1'] = currentObj['low_barrier'];
+                            barrierObj['barrier_category'] = currentObj['barrier_category'];
+                            barriers[formName] = barrierObj;
+                        }
                     }
                 }
 
@@ -11395,8 +11410,18 @@ var purchaseContractEvent = function () {
     var id = this.getAttribute('data-purchase-id'),
         askPrice = this.getAttribute('data-ask-price');
 
+    var params = {buy: id, price: askPrice, form_data:{}};
+    for(var attr in this.attributes){
+        if(this.attributes[attr].name){
+            var m = this.attributes[attr].name.match(/data\-(.+)/);
+
+            if(m && m[1] && m[1]!=="purchase-id"){
+                params.form_data[m[1]] = this.attributes[attr].value;
+            }
+        }
+    }
     if (id && askPrice) {
-        TradeSocket.send({buy: id, price: askPrice});
+        TradeSocket.send(params);
         processForgetPriceIds();
     }
 };
@@ -11417,6 +11442,7 @@ if (closeContainerElement) {
         if (e.target) {
             e.preventDefault();
             document.getElementById('contract_confirmation_container').style.display = 'none';
+            document.getElementById('contracts_list').style.display = 'flex';
             processPriceRequest();
         }
     });
@@ -11450,6 +11476,14 @@ if (lowBarrierElement) {
 var highBarrierElement = document.getElementById('barrier_high');
 if (highBarrierElement) {
     highBarrierElement.addEventListener('input', debounce( function (e) {
+        processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
+    }));
+}
+
+var predictionElement = document.getElementById('prediction');
+if (predictionElement) {
+    predictionElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
         submitForm(document.getElementById('websocket_form'));
     }));
@@ -11514,7 +11548,8 @@ var Price = (function () {
     'use strict';
 
     var typeDisplayIdMapping = {},
-        bufferedIds = {};
+        bufferedIds = {},
+        bufferRequests = {};
 
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
@@ -11531,7 +11566,8 @@ var Price = (function () {
             endTime = document.getElementById('expiry_time'),
             barrier = document.getElementById('barrier'),
             highBarrier = document.getElementById('barrier_high'),
-            lowBarrier = document.getElementById('barrier_low');
+            lowBarrier = document.getElementById('barrier_low'),
+            prediction = document.getElementById('prediction');
 
         if (payout && payout.value) {
             proposal['amount_val'] = payout.value;
@@ -11572,6 +11608,9 @@ var Price = (function () {
             proposal['barrier2'] = lowBarrier.value;
         }
 
+        if(prediction && isVisible(prediction)){
+            proposal['barrier'] = prediction.value;
+        }
         return proposal;
     };
 
@@ -11586,6 +11625,10 @@ var Price = (function () {
 
             if (!bufferedIds.hasOwnProperty(id)) {
                 bufferedIds[id] = moment().utc().unix();
+            }
+
+            if (!bufferRequests.hasOwnProperty(id)) {
+                bufferRequests[id] = params;
             }
         }
 
@@ -11630,6 +11673,12 @@ var Price = (function () {
             }
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
+            purchase.setAttribute('data-symbol', id);
+            for(var key in bufferRequests[id]){
+                if(key && key !== 'proposal'){
+                    purchase.setAttribute('data-'+key, bufferRequests[id][key]);
+                }
+            }
         }
     };
 
@@ -11684,8 +11733,8 @@ function processMarket(flag) {
     var symbol = sessionStorage.getItem('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
-    if(!update_page && market && symbol && !Symbols.underlyings()[market][symbol].is_active){
-        onMarketChange('random');
+    if(!update_page && market && symbol && (!Symbols.underlyings()[market] || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
+        onMarketChange(Object.keys(Symbols.underlyings())[0]);
         return false;
     }
     
@@ -11758,7 +11807,19 @@ function processContractForm() {
 
     displayDurations();
 
+    displayPrediction();
+
     processPriceRequest();
+}
+
+function displayPrediction(){
+    var predictionElement = document.getElementById('prediction_row');
+    if(sessionStorage.getItem('formname') === 'digits'){
+        predictionElement.show();
+    }
+    else{
+        predictionElement.hide();
+    }
 }
 
 /*
@@ -11818,6 +11879,8 @@ function processTick(tick) {
     'use strict';
     Tick.details(tick);
     Tick.display();
+    TickDisplay.updateChart(tick);
+    Purchase.update_spot_list(tick);
     if (!Barriers.isBarrierUpdated()) {
         Barriers.display();
         Barriers.setBarrierUpdate(true);
@@ -11831,61 +11894,146 @@ function processTick(tick) {
 var Purchase = (function () {
     'use strict';
 
+    var purchase_data = {};
+
     var display = function (details) {
+        purchase_data = details;
+
         var receipt = details['buy'],
+            form_data = details['echo_req']['form_data'],
             container = document.getElementById('contract_confirmation_container'),
-            message_container = document.getElementById('confirmation_message_container'),
-            fragment = document.createDocumentFragment(),
-            h3 = document.createElement('h3'),
-            message = document.createElement('p'),
-            content = '';
-
-        while (message_container && message_container.firstChild) {
-            message_container.removeChild(message_container.firstChild);
-        }
-
-        h3.setAttribute('class', 'contract_purchase_heading');
+            message_container = document.getElementById('confirmation_message'),
+            heading = document.getElementById('contract_purchase_heading'),
+            descr = document.getElementById('contract_purchase_descr'),
+            reference = document.getElementById('contract_purchase_reference'),
+            chart = document.getElementById('tick_chart'),
+            balance = document.getElementById('contract_purchase_balance'),
+            payout = document.getElementById('contract_purchase_payout'),
+            cost = document.getElementById('contract_purchase_cost'),
+            profit = document.getElementById('contract_purchase_profit'),
+            spots = document.getElementById('contract_purchase_spots'),
+            confirmation_error = document.getElementById('confirmation_error'),
+            contracts_list = document.getElementById('contracts_list');
 
         var error = details['error'];
+        var show_chart = !error && form_data['duration']<=10 && form_data['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower');
+
+        container.style.display = 'block';
+        contracts_list.style.display = 'none';
+
         if (error) {
-            content = document.createTextNode(error['message']);
-            message.appendChild(content);
-            fragment.appendChild(message);
+            message_container.hide();
+            confirmation_error.show();
+            confirmation_error.textContent = error['message'];
         } else {
-            var txnInfo = document.createElement('div');
+            message_container.show();
+            confirmation_error.hide();
 
-            content = document.createTextNode(Content.localize().textContractConfirmationHeading);
-            h3.appendChild(content);
-            txnInfo.appendChild(h3);
+            heading.textContent = Content.localize().textContractConfirmationHeading;
+            descr.textContent = receipt['longcode'];
 
-            content = document.createTextNode(receipt['longcode']);
-            message.appendChild(content);
-            txnInfo.appendChild(message);
+            var payout_value, cost_value, profit_value;
+            if(form_data.basis === "payout"){
+                payout_value = form_data.amount_val;
+                cost_value = form_data['ask-price'];
+            }
+            else{
+                cost_value = form_data.amount_val;
+                var match = receipt['longcode'].match(/\d+\.\d\d/);
+                payout_value = match[0];
+            }
+            profit_value = Math.round((payout_value - cost_value)*100)/100;
 
-            content = document.createTextNode(Content.localize().textContractConfirmationReference + ' ' + receipt['trx_id']);
-            message = document.createElement('p');
-            message.appendChild(content);
-            txnInfo.appendChild(message);
+            payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
+            cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
+            profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
 
-            content = document.createTextNode(Content.localize().textContractConfirmationBalance + ' ' + receipt['balance_after']);
-            message = document.createElement('p');
-            message.appendChild(content);
-            txnInfo.appendChild(message);
+            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + Math.round(receipt['balance_after']*100)/100;
 
-            fragment.appendChild(txnInfo);
+            if(show_chart){
+                chart.show();
+            }
+            else{
+                chart.hide();
+            }
+
+            if(sessionStorage.formname === 'digits'){
+                spots.textContent = '';
+                spots.show();
+            }
+            else{
+                spots.hide();
+            }
+            
         }
 
-        if (message_container) {
-            message_container.appendChild(fragment);
+        if(show_chart){
+            TickDisplay.initialize({
+                "symbol":form_data.symbol,
+                "number_of_ticks":form_data.duration,
+                "previous_tick_epoch":receipt['start_time'],
+                "contract_category":"callput",
+
+                "display_symbol":Symbols.getName(form_data.symbol),
+                "contract_start":receipt['start_time'],
+                "decimal":3,
+                "contract_sentiment":(form_data['contract_type']==='CALL' ? 'up' : 'down'),
+                "price":form_data['ask-price'],
+                "payout":form_data['amount_val'],
+                "show_contract_result":1
+            });
         }
-        if (container) {
-            container.style.display = 'block';
-            container.insertBefore(message_container, document.getElementById('confirmation_message_endelement'));
+    };
+
+    var update_spot_list = function(data){
+        var spots = document.getElementById('contract_purchase_spots');
+        if(isVisible(spots) && purchase_data.echo_req.form_data.duration && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
+            var fragment = document.createElement('div');
+            fragment.classList.add('row');
+
+            var el1 = document.createElement('div');
+            el1.classList.add('col');
+            el1.textContent = 'Tick '+ (spots.getElementsByClassName('row').length+1);
+            fragment.appendChild(el1);
+
+            var el2 = document.createElement('div');
+            el2.classList.add('col');
+            var date = new Date(data.tick.epoch*1000);
+            var hours = date.getUTCHours() < 10 ? '0'+date.getUTCHours() : date.getUTCHours();
+            var minutes = date.getUTCMinutes() < 10 ? '0'+date.getUTCMinutes() : date.getUTCMinutes();
+            var seconds = date.getUTCSeconds() < 10 ? '0'+date.getUTCSeconds() : date.getUTCSeconds();
+            el2.textContent = hours+':'+minutes+':'+seconds;
+            fragment.appendChild(el2);
+
+            var d1;
+            var tick = data.tick.quote.replace(/\d$/,function(d){d1 = d; return '<b>'+d+'</b>';});
+            var el3 = document.createElement('div');
+            el3.classList.add('col');
+            el3.innerHTML = tick;
+            fragment.appendChild(el3);
+
+            spots.appendChild(fragment);
+            
+            if(d1){
+                var contract_status;
+                if(d1==purchase_data.echo_req.form_data.barrier){
+                    spots.className = 'won';
+                    contract_status = 'This contract won';
+                }
+                else{
+                    spots.className = 'lost';
+                    contract_status = 'This contract lost';
+                }
+                document.getElementById('contract_purchase_heading').textContent = text.localize(contract_status);
+            }
+
+            purchase_data.echo_req.form_data.duration--;
         }
     };
 
     return {
         display: display,
+        update_spot_list: update_spot_list
     };
 
 })();
@@ -12071,7 +12219,7 @@ function displayStartDates() {
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {}, current = '', need_page_update = 1;
+    var tradeMarkets = {}, tradeUnderlyings = {}, current = '', need_page_update = 1, names = {};
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -12112,6 +12260,8 @@ var Symbols = (function () {
                     display: element['display_name']
                 };
             }
+
+            names[currentUnderlying]=element['display_name'];
         });
     };
 
@@ -12127,6 +12277,7 @@ var Symbols = (function () {
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
+        getName: function(symbol){ return names[symbol]; },
         need_page_update: function () { return need_page_update; }
     };
 
@@ -12203,7 +12354,55 @@ var Tick = (function () {
         bufferedIds: function () { return bufferedIds; }
     };
 })();
-;RealityCheck = (function ($) {
+;TickDisplay.plot = function(plot_from, plot_to){
+	var $self = this;
+
+	$self.contract_start_moment = moment($self.contract_start_ms).utc();
+	$self.counter = 0;
+	$self.applicable_ticks = [];
+};
+
+TickDisplay.updateChart = function(data){
+
+	var $self = this;
+
+	var chart = document.getElementById('tick_chart');
+	if(!chart || !isVisible(chart) || !data || !data.tick){
+		return;
+	}
+
+    var tick = {
+        epoch: parseInt(data.tick.epoch),
+        quote: parseFloat(data.tick.quote)
+    };
+
+    if (tick.epoch > $self.contract_start_moment.unix()) {
+        if ($self.applicable_ticks.length >= $self.ticks_needed) {
+            $self.evaluate_contract_outcome();
+            return;
+        } else {
+            if (!$self.chart) return;
+            if (!$self.chart.series) return;
+            $self.chart.series[0].addPoint([$self.counter, tick.quote], true, false);
+            $self.applicable_ticks.push(tick);
+            var indicator_key = '_' + $self.counter;
+            if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
+                $self.x_indicators[indicator_key]['index'] = $self.counter;
+                $self.add($self.x_indicators[indicator_key]);
+            }
+
+            $self.add_barrier();
+            $self.apply_chart_background_color(tick);
+            $self.counter++;
+        }
+    }	        
+};
+
+TickDisplay.update_ui = function(final_price, pnl, contract_status) {
+    var $self = this;
+
+    $('#contract_purchase_heading').text(text.localize(contract_status));
+};;RealityCheck = (function ($) {
     "use strict";
 
     var reality_check_url = page.url.url_for('user/reality_check');
