@@ -6,7 +6,11 @@
 var Purchase = (function () {
     'use strict';
 
+    var purchase_data = {};
+
     var display = function (details) {
+        purchase_data = details;
+
         var receipt = details['buy'],
             form_data = details['echo_req']['form_data'],
             container = document.getElementById('contract_confirmation_container'),
@@ -19,6 +23,7 @@ var Purchase = (function () {
             payout = document.getElementById('contract_purchase_payout'),
             cost = document.getElementById('contract_purchase_cost'),
             profit = document.getElementById('contract_purchase_profit'),
+            spots = document.getElementById('contract_purchase_spots'),
             confirmation_error = document.getElementById('confirmation_error'),
             contracts_list = document.getElementById('contracts_list');
 
@@ -55,13 +60,21 @@ var Purchase = (function () {
             cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
             profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
 
-            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + receipt['balance_after'];
+            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + Math.round(receipt['balance_after']*100)/100;
 
             if(show_chart){
                 chart.show();
             }
             else{
                 chart.hide();
+            }
+
+            if(sessionStorage.formname === 'digits'){
+                spots.textContent = '';
+                spots.show();
+            }
+            else{
+                spots.hide();
             }
             
         }
@@ -84,8 +97,55 @@ var Purchase = (function () {
         }
     };
 
+    var update_spot_list = function(data){
+        var spots = document.getElementById('contract_purchase_spots');
+        if(isVisible(spots) && purchase_data.echo_req.form_data.duration && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
+            var fragment = document.createElement('div');
+            fragment.classList.add('row');
+
+            var el1 = document.createElement('div');
+            el1.classList.add('col');
+            el1.textContent = 'Tick '+ (spots.getElementsByClassName('row').length+1);
+            fragment.appendChild(el1);
+
+            var el1 = document.createElement('div');
+            el1.classList.add('col');
+            var date = new Date(data.tick.epoch*1000);
+            var hours = date.getUTCHours() < 10 ? '0'+date.getUTCHours() : date.getUTCHours();
+            var minutes = date.getUTCMinutes() < 10 ? '0'+date.getUTCMinutes() : date.getUTCMinutes();
+            var seconds = date.getUTCSeconds() < 10 ? '0'+date.getUTCSeconds() : date.getUTCSeconds();
+            el1.textContent = hours+':'+minutes+':'+seconds;
+            fragment.appendChild(el1);
+
+            var d1;
+            var tick = data.tick.quote.replace(/\d$/,function(d){d1 = d; return '<b>'+d+'</b>';});
+            var el1 = document.createElement('div');
+            el1.classList.add('col');
+            el1.innerHTML = tick;
+            fragment.appendChild(el1);
+
+            spots.appendChild(fragment);
+            
+            if(d1){
+                var contract_status;
+                if(d1==purchase_data.echo_req.form_data.barrier){
+                    spots.className = 'won';
+                    contract_status = 'This contract won';
+                }
+                else{
+                    spots.className = 'lost';
+                    contract_status = 'This contract lost';
+                }
+                document.getElementById('contract_purchase_heading').textContent = text.localize(contract_status);
+            }
+
+            purchase_data.echo_req.form_data.duration--;
+        }
+    }
+
     return {
         display: display,
+        update_spot_list: update_spot_list
     };
 
 })();

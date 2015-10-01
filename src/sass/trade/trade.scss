@@ -177,8 +177,22 @@
       padding: 10px 5px;
       text-align: justify;
     }
-    #contract_purchase_profit_list{
+    #contract_purchase_profit_list,
+    #contract_purchase_spots .row{
       flex-direction: row !important;
+    }
+    #contract_purchase_spots{
+      max-height: 180px;
+      overflow: hidden;
+      &.won{
+        background-color: rgba(46, 136, 54, 0.196078);
+      }
+      &.lost{
+        background-color: rgba(204, 0, 0, 0.0980392);
+      }
+      b{
+        font-weight: bold;
+      }
     }
     #contract_purchase_heading{
       padding-bottom: 10px;
@@ -341,6 +355,9 @@
 
 @media all and (max-width: 640px) {
   #trading_socket_container {
+    #contract_purchase_spots{
+      max-height: 205px;
+    }
     #expiry_time{
       width: 175px;
     }

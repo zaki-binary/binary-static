@@ -183,6 +183,7 @@ function processTick(tick) {
     Tick.details(tick);
     Tick.display();
     TickDisplay.updateChart(tick);
+    Purchase.update_spot_list(tick);
     if (!Barriers.isBarrierUpdated()) {
         Barriers.display();
         Barriers.setBarrierUpdate(true);
