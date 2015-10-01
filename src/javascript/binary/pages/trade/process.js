@@ -2,11 +2,11 @@
  * This function process the active symbols to get markets
  * and underlying list
  */
-function processActiveSymbols() {
+function processActiveSymbols(data) {
     'use strict';
 
     // populate the Symbols object
-    Symbols.details(JSON.parse(sessionStorage.getItem('active_symbols')));
+    Symbols.details(data);
 
     var market = getDefaultMarket();
 
@@ -33,9 +33,17 @@ function processMarket(flag) {
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
     var market = sessionStorage.getItem('market');
-    displayUnderlyings('underlying', Symbols.underlyings()[market], sessionStorage.getItem('underlying'));
+    var symbol = sessionStorage.getItem('underlying');
+    var update_page = Symbols.need_page_update() || flag;
 
-    if(Symbols.need_page_update() || flag){
+    if(!update_page && market && symbol && !Symbols.underlyings()[market][symbol].is_active){
+        onMarketChange('random');
+        return false;
+    }
+    
+    displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
+
+    if(update_page){
         processMarketUnderlying();
     }
 }
