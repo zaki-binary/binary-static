@@ -329,6 +329,10 @@ function hideOverlayContainer() {
     if (elm) {
         elm.style.display = 'none';
     }
+    var elm2 = document.getElementById('contracts_list');
+    if (elm2) {
+        elm2.style.display = 'flex';
+    }
 }
 
 /*

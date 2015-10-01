@@ -253,6 +253,7 @@ if (closeContainerElement) {
         if (e.target) {
             e.preventDefault();
             document.getElementById('contract_confirmation_container').style.display = 'none';
+            document.getElementById('contracts_list').style.display = 'flex';
             processPriceRequest();
         }
     });

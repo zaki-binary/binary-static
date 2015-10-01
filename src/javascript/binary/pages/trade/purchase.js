@@ -19,12 +19,14 @@ var Purchase = (function () {
             payout = document.getElementById('contract_purchase_payout'),
             cost = document.getElementById('contract_purchase_cost'),
             profit = document.getElementById('contract_purchase_profit'),
-            confirmation_error = document.getElementById('confirmation_error');
+            confirmation_error = document.getElementById('confirmation_error'),
+            contracts_list = document.getElementById('contracts_list');
 
         var error = details['error'];
         var show_chart = !error && form_data['duration']<=10 && form_data['duration_unit']==='t';
 
         container.style.display = 'block';
+        contracts_list.style.display = 'none';
 
         if (error) {
             message_container.hide();
@@ -49,9 +51,9 @@ var Purchase = (function () {
             }
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
-            payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <span>' + payout_value + '</span>';
-            cost.innerHTML = Content.localize().textContractConfirmationCost + ' <span>' + cost_value + '</span>';
-            profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <span>' + profit_value + '</span>';
+            payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
+            cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
+            profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
 
             balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + receipt['balance_after'];
 
