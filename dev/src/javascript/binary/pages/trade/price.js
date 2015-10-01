@@ -120,7 +120,8 @@ var Price = (function () {
         }
 
         if (proposal['longcode']) {
-            description.textContent = proposal['longcode'];
+            proposal['longcode'] = proposal['longcode'].replace(/\d+\.\d\d/,function(x){return '<b>'+x+'</b>';});
+            description.innerHTML = proposal['longcode'];
         }
 
         if (details['error']){
