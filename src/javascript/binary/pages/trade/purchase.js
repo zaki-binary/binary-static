@@ -23,7 +23,7 @@ var Purchase = (function () {
             contracts_list = document.getElementById('contracts_list');
 
         var error = details['error'];
-        var show_chart = !error && form_data['duration']<=10 && form_data['duration_unit']==='t';
+        var show_chart = !error && form_data['duration']<=10 && form_data['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower');
 
         container.style.display = 'block';
         contracts_list.style.display = 'none';
