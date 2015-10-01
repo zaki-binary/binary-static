@@ -3,17 +3,24 @@
  * and request for new Contract details to populate the form and request price accordingly
  */
 var marketNavElement = document.getElementById('contract_markets');
+var onMarketChange = function(market){
+    sessionStorage.setItem('market', market);
+
+    // as different markets have different forms so remove from sessionStorage
+    // it will default to proper one
+    sessionStorage.removeItem('formname');
+    sessionStorage.removeItem('underlying');
+    processMarket(1);
+};
+
 if (marketNavElement) {
     marketNavElement.addEventListener('change', function(e) {
         var clickedMarket = e.target;
-        sessionStorage.setItem('market', clickedMarket.value);
-
-        // as different markets have different forms so remove from sessionStorage
-        // it will default to proper one
-        sessionStorage.removeItem('formname');
-        processMarket(1);
+        onMarketChange(clickedMarket.value);
     });
 }
+
+
 
 /*
  * attach event to form list, so when client click on different form we need to update form

@@ -47,7 +47,7 @@ var Symbols = (function () {
 
             if (!tradeUnderlyings[currentMarket].hasOwnProperty(currentUnderlying)) {
                 tradeUnderlyings[currentMarket][currentUnderlying] = {
-                    is_active: (!element['is_trading_suspended'] && element['exchange_is_open']),
+                    is_active: is_active,
                     display: element['display_name']
                 };
             }
