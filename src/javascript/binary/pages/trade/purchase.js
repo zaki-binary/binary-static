@@ -93,7 +93,7 @@ var Purchase = (function () {
                 "price":form_data['ask-price'],
                 "payout":form_data['amount_val'],
                 "show_contract_result":1
-            })
+            });
         }
     };
 
@@ -108,21 +108,21 @@ var Purchase = (function () {
             el1.textContent = 'Tick '+ (spots.getElementsByClassName('row').length+1);
             fragment.appendChild(el1);
 
-            var el1 = document.createElement('div');
-            el1.classList.add('col');
+            var el2 = document.createElement('div');
+            el2.classList.add('col');
             var date = new Date(data.tick.epoch*1000);
             var hours = date.getUTCHours() < 10 ? '0'+date.getUTCHours() : date.getUTCHours();
             var minutes = date.getUTCMinutes() < 10 ? '0'+date.getUTCMinutes() : date.getUTCMinutes();
             var seconds = date.getUTCSeconds() < 10 ? '0'+date.getUTCSeconds() : date.getUTCSeconds();
-            el1.textContent = hours+':'+minutes+':'+seconds;
-            fragment.appendChild(el1);
+            el2.textContent = hours+':'+minutes+':'+seconds;
+            fragment.appendChild(el2);
 
             var d1;
             var tick = data.tick.quote.replace(/\d$/,function(d){d1 = d; return '<b>'+d+'</b>';});
-            var el1 = document.createElement('div');
-            el1.classList.add('col');
-            el1.innerHTML = tick;
-            fragment.appendChild(el1);
+            var el3 = document.createElement('div');
+            el3.classList.add('col');
+            el3.innerHTML = tick;
+            fragment.appendChild(el3);
 
             spots.appendChild(fragment);
             
@@ -141,7 +141,7 @@ var Purchase = (function () {
 
             purchase_data.echo_req.form_data.duration--;
         }
-    }
+    };
 
     return {
         display: display,

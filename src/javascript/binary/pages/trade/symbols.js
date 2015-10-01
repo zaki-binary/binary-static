@@ -75,7 +75,7 @@ var Symbols = (function () {
         getSymbols: getSymbols,
         markets: function () { return tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
-        getName: function(symbol){ return names[symbol]},
+        getName: function(symbol){ return names[symbol]; },
         need_page_update: function () { return need_page_update; }
     };
 
