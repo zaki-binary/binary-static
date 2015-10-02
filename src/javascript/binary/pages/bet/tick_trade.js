@@ -125,7 +125,7 @@ var TickDisplay = function() {
         },
         plot: function(plot_from, plot_to) {
             var $self = this;
-            console.log('lol');
+
             var plot_from_moment = moment(plot_from).utc();
             var plot_to_moment = moment(plot_to).utc();
             var contract_start_moment = moment($self.contract_start_ms).utc();
