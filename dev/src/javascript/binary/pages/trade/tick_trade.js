@@ -1,19 +1,22 @@
-TickDisplay.plot = function(plot_from, plot_to){
-	var $self = this;
-
-	$self.contract_start_moment = moment($self.contract_start_ms).utc();
-	$self.counter = 0;
-	$self.applicable_ticks = [];
+var WSTickDisplay = Object.create(TickDisplay);
+WSTickDisplay.plot = function(plot_from, plot_to){
+    var $self = this;
+    $self.contract_start_moment = moment($self.contract_start_ms).utc();
+    $self.counter = 0;
+    $self.applicable_ticks = [];
 };
+WSTickDisplay.update_ui = function(final_price, pnl, contract_status) {
+    var $self = this;
+    $('#contract_purchase_heading').text(text.localize(contract_status));
+};
+WSTickDisplay.updateChart = function(data){
 
-TickDisplay.updateChart = function(data){
+    var $self = this;
 
-	var $self = this;
-
-	var chart = document.getElementById('tick_chart');
-	if(!chart || !isVisible(chart) || !data || !data.tick){
-		return;
-	}
+    var chart = document.getElementById('tick_chart');
+    if(!chart || !isVisible(chart) || !data || !data.tick){
+        return;
+    }
 
     var tick = {
         epoch: parseInt(data.tick.epoch),
@@ -39,11 +42,6 @@ TickDisplay.updateChart = function(data){
             $self.apply_chart_background_color(tick);
             $self.counter++;
         }
-    }	        
+    }           
 };
 
-TickDisplay.update_ui = function(final_price, pnl, contract_status) {
-    var $self = this;
-
-    $('#contract_purchase_heading').text(text.localize(contract_status));
-};

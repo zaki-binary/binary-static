@@ -80,7 +80,7 @@ var Purchase = (function () {
         }
 
         if(show_chart){
-            TickDisplay.initialize({
+            WSTickDisplay.initialize({
                 "symbol":form_data.symbol,
                 "number_of_ticks":form_data.duration,
                 "previous_tick_epoch":receipt['start_time'],
