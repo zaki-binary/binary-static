@@ -721,7 +721,7 @@ Contents.prototype = {
 
                 // also allow UK MLT client to open MF account
                 if ( (c_config && c_config['financial_company'] == 'maltainvest') ||
-                     (this.client.residence == 'gb' && /^MLT/.test(this.client.loginid) )
+                     (this.client.residence == 'gb' && /^MLT/.test(this.client.loginid)) )
                 {
                     show_financial = true;
                     for (var j=0;j<loginid_array.length;j++) {
