@@ -182,7 +182,7 @@ function processTick(tick) {
     'use strict';
     Tick.details(tick);
     Tick.display();
-    TickDisplay.updateChart(tick);
+    WSTickDisplay.updateChart(tick);
     Purchase.update_spot_list(tick);
     if (!Barriers.isBarrierUpdated()) {
         Barriers.display();
