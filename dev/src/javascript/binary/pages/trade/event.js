@@ -223,7 +223,7 @@ var purchaseContractEvent = function () {
 
     var params = {buy: id, price: askPrice, form_data:{}};
     for(var attr in this.attributes){
-        if(this.attributes[attr].name){
+        if(attr && this.attributes[attr] && this.attributes[attr].name){
             var m = this.attributes[attr].name.match(/data\-(.+)/);
 
             if(m && m[1] && m[1]!=="purchase-id"){

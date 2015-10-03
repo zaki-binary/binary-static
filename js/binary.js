@@ -10578,16 +10578,10 @@ function debounce(func, wait, immediate) {
  * function to check if selected market is allowed for current user
  */
 function getDefaultMarket() {
-   var mkt = sessionStorage.getItem('market') || 'forex';
-   if (getCookieItem('loginid')) {
-       var allowedMarkets = getCookieItem('allowed_markets');
-       var re = new RegExp(mkt, 'i');
-       if (!re.test(allowedMarkets)) {
-           var arr = allowedMarkets.replace(/\"/g, "");
-           arr = arr.split(",");
-           arr.sort(compareMarkets);
-           return arr[0];
-       }
+   var mkt = sessionStorage.getItem('market');
+   var markets = Symbols.markets();
+   if(!mkt ||  !markets[mkt]){
+        mkt = Object.keys(markets)[0];
    }
    return mkt;
 }
@@ -11412,7 +11406,7 @@ var purchaseContractEvent = function () {
 
     var params = {buy: id, price: askPrice, form_data:{}};
     for(var attr in this.attributes){
-        if(this.attributes[attr].name){
+        if(attr && this.attributes[attr] && this.attributes[attr].name){
             var m = this.attributes[attr].name.match(/data\-(.+)/);
 
             if(m && m[1] && m[1]!=="purchase-id"){
@@ -11649,7 +11643,7 @@ var Price = (function () {
         }
 
         if (proposal['ask_price']) {
-            amount.textContent = currency.value + ' ' + proposal['ask_price'];
+            amount.textContent = document.getElementById('currency').value + ' ' + proposal['ask_price'];
         }
 
         if (proposal['longcode']) {
@@ -11667,7 +11661,7 @@ var Price = (function () {
             purchase.show();
             comment.show();
             error.hide();
-            displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
+            displayCommentPrice(comment, document.getElementById('currency').value, proposal['ask_price'], proposal['payout']);
             var oldprice = purchase.getAttribute('data-ask-price');
             if (oldprice) {
                 displayPriceMovement(amount, oldprice, proposal['ask_price']);
@@ -11734,9 +11728,8 @@ function processMarket(flag) {
     var symbol = sessionStorage.getItem('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
-    if(!update_page && market && symbol && (!Symbols.underlyings()[market] || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
-        onMarketChange(Object.keys(Symbols.underlyings())[0]);
-        return false;
+    if(update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
+        symbol = undefined;
     }
     
     displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
