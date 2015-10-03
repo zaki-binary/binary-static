@@ -116,7 +116,7 @@ var Price = (function () {
         }
 
         if (proposal['ask_price']) {
-            amount.textContent = currency.value + ' ' + proposal['ask_price'];
+            amount.textContent = document.getElementById('currency').value + ' ' + proposal['ask_price'];
         }
 
         if (proposal['longcode']) {
@@ -134,7 +134,7 @@ var Price = (function () {
             purchase.show();
             comment.show();
             error.hide();
-            displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
+            displayCommentPrice(comment, document.getElementById('currency').value, proposal['ask_price'], proposal['payout']);
             var oldprice = purchase.getAttribute('data-ask-price');
             if (oldprice) {
                 displayPriceMovement(amount, oldprice, proposal['ask_price']);

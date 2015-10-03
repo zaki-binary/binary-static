@@ -535,16 +535,10 @@ function debounce(func, wait, immediate) {
  * function to check if selected market is allowed for current user
  */
 function getDefaultMarket() {
-   var mkt = sessionStorage.getItem('market') || 'forex';
-   if (getCookieItem('loginid')) {
-       var allowedMarkets = getCookieItem('allowed_markets');
-       var re = new RegExp(mkt, 'i');
-       if (!re.test(allowedMarkets)) {
-           var arr = allowedMarkets.replace(/\"/g, "");
-           arr = arr.split(",");
-           arr.sort(compareMarkets);
-           return arr[0];
-       }
+   var mkt = sessionStorage.getItem('market');
+   var markets = Symbols.markets();
+   if(!mkt ||  !markets[mkt]){
+        mkt = Object.keys(markets)[0];
    }
    return mkt;
 }
