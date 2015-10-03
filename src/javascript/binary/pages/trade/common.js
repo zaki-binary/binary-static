@@ -320,6 +320,22 @@ function showLoadingOverlay() {
     }
 }
 
+function showPriceOverlay() {
+    'use strict';
+    var elm = document.getElementById('loading_container2');
+    if (elm) {
+        elm.style.display = 'block';
+    }
+}
+
+function hidePriceOverlay() {
+    'use strict';
+    var elm = document.getElementById('loading_container2');
+    if (elm) {
+        elm.style.display = 'none';
+    }
+}
+
 /*
  * function to hide contract confirmation overlay container
  */
