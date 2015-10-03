@@ -10363,6 +10363,22 @@ function showLoadingOverlay() {
     }
 }
 
+function showPriceOverlay() {
+    'use strict';
+    var elm = document.getElementById('loading_container2');
+    if (elm) {
+        elm.style.display = 'block';
+    }
+}
+
+function hidePriceOverlay() {
+    'use strict';
+    var elm = document.getElementById('loading_container2');
+    if (elm) {
+        elm.style.display = 'none';
+    }
+}
+
 /*
  * function to hide contract confirmation overlay container
  */
@@ -11505,7 +11521,7 @@ var Message = (function () {
             } else if (type === 'proposal') {
                 hideOverlayContainer();
                 Price.display(response, Contract.contractType()[Contract.form()]);
-                hideLoadingOverlay();
+                hidePriceOverlay();
             } else if (type === 'buy') {
                 Purchase.display(response);
             } else if (type === 'tick') {
@@ -11841,7 +11857,7 @@ function processPriceRequest() {
     'use strict';
 
     processForgetPriceIds();
-    showLoadingOverlay();
+    showPriceOverlay();
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
         if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
