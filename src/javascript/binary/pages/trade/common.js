@@ -320,6 +320,22 @@ function showLoadingOverlay() {
     }
 }
 
+function showPriceOverlay() {
+    'use strict';
+    var elm = document.getElementById('loading_container2');
+    if (elm) {
+        elm.style.display = 'block';
+    }
+}
+
+function hidePriceOverlay() {
+    'use strict';
+    var elm = document.getElementById('loading_container2');
+    if (elm) {
+        elm.style.display = 'none';
+    }
+}
+
 /*
  * function to hide contract confirmation overlay container
  */
@@ -328,6 +344,10 @@ function hideOverlayContainer() {
     var elm = document.getElementById('contract_confirmation_container');
     if (elm) {
         elm.style.display = 'none';
+    }
+    var elm2 = document.getElementById('contracts_list');
+    if (elm2) {
+        elm2.style.display = 'flex';
     }
 }
 
@@ -494,7 +514,7 @@ function getAllowedContractCategory(contracts) {
     var obj = {};
     for(var key in contracts) {
         if (contracts.hasOwnProperty(key)) {
-            if (!(/digits/i.test(contracts[key])) && !(/spreads/i.test(contracts[key]))) {
+            if (!(/spreads/i.test(contracts[key]))) {
                 obj[key] = contracts[key];
             }
         }
@@ -531,16 +551,10 @@ function debounce(func, wait, immediate) {
  * function to check if selected market is allowed for current user
  */
 function getDefaultMarket() {
-   var mkt = sessionStorage.getItem('market') || 'forex';
-   if (getCookieItem('loginid')) {
-       var allowedMarkets = getCookieItem('allowed_markets');
-       var re = new RegExp(mkt, 'i');
-       if (!re.test(allowedMarkets)) {
-           var arr = allowedMarkets.replace(/\"/g, "");
-           arr = arr.split(",");
-           arr.sort(compareMarkets);
-           return arr[0];
-       }
+   var mkt = sessionStorage.getItem('market');
+   var markets = Symbols.markets();
+   if(!mkt ||  !markets[mkt]){
+        mkt = Object.keys(markets)[0];
    }
    return mkt;
 }
