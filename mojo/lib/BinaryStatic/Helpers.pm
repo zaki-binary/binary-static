@@ -392,7 +392,7 @@ sub _main_menu_charting {
         link_class => 'pjaxload',
     };
 
-    $charting_items_ref->{'sub_items'} = [$bomchart_ref, $live_charts_ref, $highcharts_ref];
+    $charting_items_ref->{'sub_items'} = [$live_charts_ref, $highcharts_ref];
 
     return $charting_items_ref;
 }
