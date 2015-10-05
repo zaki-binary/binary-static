@@ -376,13 +376,6 @@ sub _main_menu_charting {
         link_class => 'pjaxload',
     };
 
-    my $bomchart_ref = {
-        url        => $self->c->url_for('/charting/application'),
-        text       => $self->c->l('Java Charts'),
-        id         => 'topMenuInteractiveChartid',
-        link_class => 'pjaxload',
-    };
-
     # live charts
     my $live_charts_ref = {
         id         => 'topMenuLiveCharts',
