@@ -36,9 +36,8 @@ function processMarket(flag) {
     var symbol = sessionStorage.getItem('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
-    if(!update_page && market && symbol && !Symbols.underlyings()[market][symbol].is_active){
-        onMarketChange('random');
-        return false;
+    if(update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
+        symbol = undefined;
     }
     
     displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
@@ -110,7 +109,19 @@ function processContractForm() {
 
     displayDurations();
 
+    displayPrediction();
+
     processPriceRequest();
+}
+
+function displayPrediction(){
+    var predictionElement = document.getElementById('prediction_row');
+    if(sessionStorage.getItem('formname') === 'digits'){
+        predictionElement.show();
+    }
+    else{
+        predictionElement.hide();
+    }
 }
 
 /*
@@ -138,7 +149,7 @@ function processPriceRequest() {
     'use strict';
 
     processForgetPriceIds();
-    showLoadingOverlay();
+    showPriceOverlay();
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
         if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
@@ -170,6 +181,8 @@ function processTick(tick) {
     'use strict';
     Tick.details(tick);
     Tick.display();
+    WSTickDisplay.updateChart(tick);
+    Purchase.update_spot_list(tick);
     if (!Barriers.isBarrierUpdated()) {
         Barriers.display();
         Barriers.setBarrierUpdate(true);

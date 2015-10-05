@@ -21,7 +21,7 @@ var Message = (function () {
             } else if (type === 'proposal') {
                 hideOverlayContainer();
                 Price.display(response, Contract.contractType()[Contract.form()]);
-                hideLoadingOverlay();
+                hidePriceOverlay();
             } else if (type === 'buy') {
                 Purchase.display(response);
             } else if (type === 'tick') {
