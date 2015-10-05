@@ -1,0 +1,14 @@
+<h1>Authorize application</h1>
+
+<h2>[% application.display_name %] would like permission to access your account [% client.loginid %]</h2>
+
+<form method="POST">
+<ul>
+[% FOREACH scope IN scopes %]
+    <li> [% scope.scope %] </li>
+[% END %]
+</ul>
+
+<input type="hidden" name="csrftoken" value="[% csrftoken %]" />
+<input type="submit" name="confirm_scopes" value="Grant" />
+</form>
