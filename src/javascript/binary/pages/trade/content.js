@@ -42,7 +42,8 @@ var Content = (function () {
             predictionLabel: text.localize('Last Digit Prediction'),
             textContractConfirmationPayout: text.localize('Potential Payout'),
             textContractConfirmationCost: text.localize('Total Cost'),
-            textContractConfirmationProfit: text.localize('Potential Profit')
+            textContractConfirmationProfit: text.localize('Potential Profit'),
+            textContractConfirmationButton: text.localize('View')
         };
 
         var starTime = document.getElementById('start_time_label');
