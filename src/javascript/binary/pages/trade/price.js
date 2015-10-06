@@ -37,7 +37,7 @@ var Price = (function () {
             prediction = document.getElementById('prediction');
 
         if (payout && payout.value) {
-            proposal['amount_val'] = payout.value;
+            proposal['amount_val'] = parseFloat(payout.value);
         }
         if (amountType && amountType.value) {
             proposal['basis'] = amountType.value;
@@ -57,26 +57,26 @@ var Price = (function () {
         }
 
         if (expiryType && expiryType.value === 'duration') {
-            proposal['duration'] = duration.value;
+            proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && expiryType.value === 'endtime') {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
-            proposal['barrier'] = barrier.value;
+            proposal['barrier'] = parseFloat(barrier.value);
         }
 
         if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
-            proposal['barrier'] = highBarrier.value;
+            proposal['barrier'] = parseFloat(highBarrier.value);
         }
 
         if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
-            proposal['barrier2'] = lowBarrier.value;
+            proposal['barrier2'] = parseFloat(lowBarrier.value);
         }
 
         if(prediction && isVisible(prediction)){
-            proposal['barrier'] = prediction.value;
+            proposal['barrier'] = parseInt(prediction.value);
         }
         return proposal;
     };
