@@ -47,7 +47,8 @@ var Content = (function () {
             textStopLoss: text.localize('Stop-loss'),
             textStopProfit: text.localize('Stop-profit'),
             textStopType: text.localize('Stop-type'),
-            textStopTypePoints: text.localize('Points')
+            textStopTypePoints: text.localize('Points'),
+            textContractConfirmationButton: text.localize('View')
         };
 
         var starTime = document.getElementById('start_time_label');
