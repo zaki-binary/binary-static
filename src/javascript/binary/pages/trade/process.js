@@ -111,16 +111,42 @@ function processContractForm() {
 
     displayPrediction();
 
+    displaySpreads();
+
     processPriceRequest();
 }
 
-function displayPrediction(){
+function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
     }
     else{
         predictionElement.hide();
+    }
+}
+
+function displaySpreads() {
+    var amountType = document.getElementById('amount_type'),
+        amountPerPointLabel = document.getElementById('amount_per_point_label'),
+        amount = document.getElementById('amount'),
+        amountPerPoint = document.getElementById('amount_per_point'),
+        spreadContainer = document.getElementById('spread_element_container'),
+        stopTypeDollarLabel = document.getElementById('stop_type_dollar_label');
+
+    if(sessionStorage.getItem('formname') === 'spreads'){
+        amountType.hide();
+        amount.hide();
+        amountPerPointLabel.show();
+        amountPerPoint.show();
+        spreadContainer.show();
+        stopTypeDollarLabel.textContent = document.getElementById('currency').value;
+    } else {
+        amountPerPointLabel.hide();
+        amountPerPoint.hide();
+        spreadContainer.hide();
+        amountType.show();
+        amount.show();
     }
 }
 
