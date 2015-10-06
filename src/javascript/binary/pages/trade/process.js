@@ -74,7 +74,7 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var contract_categories = Contract.contractForms();
     var formname;
     if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
         formname = sessionStorage.getItem('formname');
