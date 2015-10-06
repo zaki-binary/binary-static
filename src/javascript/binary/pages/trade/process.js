@@ -90,7 +90,7 @@ function processContract(contracts) {
             }
         }
     }
-    
+
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
