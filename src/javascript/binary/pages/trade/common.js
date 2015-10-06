@@ -139,6 +139,9 @@
              if (selected && selected === key) {
                  option.setAttribute('selected', 'selected');
              }
+             if(!elements[key].is_active){
+                option.setAttribute('disabled', '');
+             }
              option.appendChild(content);
              fragment.appendChild(option);
 
@@ -149,8 +152,11 @@
                         option.setAttribute('value', key2);
                         if (selected && selected === key2) {
                             option.setAttribute('selected', 'selected');
-                        } 
-                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        }
+                        if(!elements[key].submarkets[key2].is_active){
+                           option.setAttribute('disabled', '');
+                        }
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2].name;
                         fragment.appendChild(option);
                     }
                 }
@@ -552,7 +558,7 @@ function debounce(func, wait, immediate) {
  */
 function getDefaultMarket() {
    var mkt = sessionStorage.getItem('market');
-   var markets = Symbols.markets();
+   var markets = Symbols.markets(1);
    if(!mkt ||  !markets[mkt]){
         mkt = Object.keys(markets)[0];
    }
