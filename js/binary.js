@@ -10186,6 +10186,9 @@ var Barriers = (function () {
              if (selected && selected === key) {
                  option.setAttribute('selected', 'selected');
              }
+             if(!elements[key].is_active){
+                option.setAttribute('disabled', '');
+             }
              option.appendChild(content);
              fragment.appendChild(option);
 
@@ -10196,8 +10199,11 @@ var Barriers = (function () {
                         option.setAttribute('value', key2);
                         if (selected && selected === key2) {
                             option.setAttribute('selected', 'selected');
-                        } 
-                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        }
+                        if(!elements[key].submarkets[key2].is_active){
+                           option.setAttribute('disabled', '');
+                        }
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2].name;
                         fragment.appendChild(option);
                     }
                 }
@@ -10599,7 +10605,7 @@ function debounce(func, wait, immediate) {
  */
 function getDefaultMarket() {
    var mkt = sessionStorage.getItem('market');
-   var markets = Symbols.markets();
+   var markets = Symbols.markets(1);
    if(!mkt ||  !markets[mkt]){
         mkt = Object.keys(markets)[0];
    }
@@ -11585,7 +11591,7 @@ var Price = (function () {
             prediction = document.getElementById('prediction');
 
         if (payout && payout.value) {
-            proposal['amount_val'] = payout.value;
+            proposal['amount_val'] = parseFloat(payout.value);
         }
         if (amountType && amountType.value) {
             proposal['basis'] = amountType.value;
@@ -11605,26 +11611,26 @@ var Price = (function () {
         }
 
         if (expiryType && expiryType.value === 'duration') {
-            proposal['duration'] = duration.value;
+            proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && expiryType.value === 'endtime') {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
-            proposal['barrier'] = barrier.value;
+            proposal['barrier'] = parseFloat(barrier.value);
         }
 
         if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
-            proposal['barrier'] = highBarrier.value;
+            proposal['barrier'] = parseFloat(highBarrier.value);
         }
 
         if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
-            proposal['barrier2'] = lowBarrier.value;
+            proposal['barrier2'] = parseFloat(lowBarrier.value);
         }
 
         if(prediction && isVisible(prediction)){
-            proposal['barrier'] = prediction.value;
+            proposal['barrier'] = parseInt(prediction.value);
         }
         return proposal;
     };
@@ -12254,7 +12260,7 @@ function displayStartDates() {
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {}, current = '', need_page_update = 1, names = {};
+    var tradeMarkets = {}, tradeMarketsList = {}, tradeUnderlyings = {}, current = '', need_page_update = 1, names = {};
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -12265,14 +12271,20 @@ var Symbols = (function () {
                 currentUnderlying = element['symbol'];
 
             var is_active = !element['is_trading_suspended'] && element['exchange_is_open'];
-
-            if(is_active){
-                if(!tradeMarkets[currentMarket]){
-                    tradeMarkets[currentMarket] = {name:'',submarkets:{}};
-                }
-                tradeMarkets[currentMarket]['name'] = element['market_display_name'];
-                tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = element['submarket_display_name'];
+ 
+            if(!tradeMarkets[currentMarket]){
+                tradeMarkets[currentMarket] = {name:'',is_active:0,submarkets:{}};
             }
+            tradeMarkets[currentMarket]['name'] = element['market_display_name'];
+            tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = {name: element['submarket_display_name']};
+            
+            if(is_active){
+                tradeMarkets[currentMarket]['is_active'] = 1;
+                tradeMarkets[currentMarket]['submarkets'][currentSubMarket]['is_active'] = 1;
+            }
+
+            tradeMarketsList[currentMarket] = tradeMarkets[currentMarket];
+            tradeMarketsList[currentSubMarket] = tradeMarkets[currentMarket]['submarkets'][currentSubMarket];
 
             if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
                 tradeUnderlyings[currentMarket] = {};
@@ -12310,7 +12322,7 @@ var Symbols = (function () {
     return {
         details: details,
         getSymbols: getSymbols,
-        markets: function () { return tradeMarkets; },
+        markets: function (list) { return list ? tradeMarketsList : tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
         getName: function(symbol){ return names[symbol]; },
         need_page_update: function () { return need_page_update; }
