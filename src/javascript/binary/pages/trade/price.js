@@ -34,20 +34,28 @@ var Price = (function () {
             barrier = document.getElementById('barrier'),
             highBarrier = document.getElementById('barrier_high'),
             lowBarrier = document.getElementById('barrier_low'),
-            prediction = document.getElementById('prediction');
+            prediction = document.getElementById('prediction'),
+            amountPerPoint = document.getElementById('amount_per_point'),
+            stopType = document.querySelector('input[name="stop_type"]:checked'),
+            stopLoss = document.getElementById('stop_loss'),
+            stopProfit = document.getElementById('stop_profit');
 
-        if (payout && payout.value) {
+        if (payout && isVisible(payout) && payout.value) {
             proposal['amount_val'] = payout.value;
         }
-        if (amountType && amountType.value) {
+
+        if (amountType && isVisible(amountType) && amountType.value) {
             proposal['basis'] = amountType.value;
         }
+
         if (contractType) {
             proposal['contract_type'] = typeOfContract;
         }
+
         if (currency && currency.value) {
             proposal['currency'] = currency.value;
         }
+
         if (underlying && underlying.value) {
             proposal['symbol'] = underlying.value;
         }
@@ -78,6 +86,23 @@ var Price = (function () {
         if(prediction && isVisible(prediction)){
             proposal['barrier'] = prediction.value;
         }
+
+        if (amountPerPoint && isVisible(amountPerPoint)) {
+            proposal['amount_per_point'] = amountPerPoint.value;
+        }
+
+        if (stopType && isVisible(stopType)) {
+            proposal['stop_type'] = stopType.value;
+        }
+
+        if (stopLoss && isVisible(stopLoss)) {
+            proposal['stop_loss'] = stopLoss.value;
+        }
+
+        if (stopProfit && isVisible(stopProfit)) {
+            proposal['stop_profit'] = stopProfit.value;
+        }
+
         return proposal;
     };
 
