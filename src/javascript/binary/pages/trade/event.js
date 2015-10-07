@@ -221,19 +221,22 @@ var purchaseContractEvent = function () {
     var id = this.getAttribute('data-purchase-id'),
         askPrice = this.getAttribute('data-ask-price');
 
-    var params = {buy: id, price: askPrice, form_data:{}};
-    for(var attr in this.attributes){
-        if(attr && this.attributes[attr] && this.attributes[attr].name){
-            var m = this.attributes[attr].name.match(/data\-(.+)/);
+    var params = {buy: id, price: askPrice, passthrough:{}};
+    var ids = Price.bufferedIds();
+    if(ids[id]){
+        for(var attr in this.attributes){
+            if(attr && this.attributes[attr] && this.attributes[attr].name){
+                var m = this.attributes[attr].name.match(/data\-(.+)/);
 
-            if(m && m[1] && m[1]!=="purchase-id"){
-                params.form_data[m[1]] = this.attributes[attr].value;
+                if(m && m[1] && m[1]!=="purchase-id"){
+                    params.passthrough[m[1]] = this.attributes[attr].value;
+                }
             }
         }
-    }
-    if (id && askPrice) {
-        TradeSocket.send(params);
-        processForgetPriceIds();
+        if (id && askPrice) {
+            TradeSocket.send(params);
+            processForgetPriceIds();
+        }
     }
 };
 
