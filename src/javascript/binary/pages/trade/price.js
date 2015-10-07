@@ -41,7 +41,7 @@ var Price = (function () {
             stopProfit = document.getElementById('stop_profit');
 
         if (payout && isVisible(payout) && payout.value) {
-            proposal['amount_val'] = parseFloat(payout.value);
+            proposal['amount'] = parseFloat(payout.value);
         }
 
         if (amountType && isVisible(amountType) && amountType.value) {
