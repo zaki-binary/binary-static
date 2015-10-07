@@ -278,16 +278,22 @@
   #expiry_type_duration{
     flex-wrap: wrap;
   }
+  #contracts_list{
+    position: relative;
+  }
   .overlay_container {
     width: 100%;
     display: none;
     background: transparent;
     z-index: 9999;
-  }
-  #loading_container2{
-    background: $COLOR_LIGHT_GRAY;
-    opacity: 0.5;
-    display: block;
+    &#loading_container2{
+      background: $COLOR_LIGHT_GRAY;
+      opacity: 0.5;
+      display: block;
+      position: absolute;
+      height: 100%;
+      flex: 1 0 auto;
+    }
   }
   #contract_confirmation_container {
     background-color: $COLOR_LIGHT_GRAY;
