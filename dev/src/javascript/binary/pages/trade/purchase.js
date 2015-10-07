@@ -48,12 +48,12 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
-            if(passthrough['basis'] === "payout"){
-                payout_value = passthrough['amount'];
+            if(passthrough.basis === "payout"){
+                payout_value = passthrough.amount_val;
                 cost_value = passthrough['ask-price'];
             }
             else{
-                cost_value = passthrough['amount'];
+                cost_value = passthrough.amount_val;
                 var match = receipt['longcode'].match(/\d+\.\d\d/);
                 payout_value = match[0];
             }

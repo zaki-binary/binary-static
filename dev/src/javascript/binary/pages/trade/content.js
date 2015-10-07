@@ -43,11 +43,6 @@ var Content = (function () {
             textContractConfirmationPayout: text.localize('Potential Payout'),
             textContractConfirmationCost: text.localize('Total Cost'),
             textContractConfirmationProfit: text.localize('Potential Profit'),
-            textAmountPerPoint: text.localize('Amount per point'),
-            textStopLoss: text.localize('Stop-loss'),
-            textStopProfit: text.localize('Stop-profit'),
-            textStopType: text.localize('Stop-type'),
-            textStopTypePoints: text.localize('Points'),
             textContractConfirmationButton: text.localize('View')
         };
 
@@ -126,31 +121,6 @@ var Content = (function () {
         var period_label = document.getElementById('period_label');
         if (period_label) {
             period_label.textContent = localize.textContractPeriod;
-        }
-
-        var amount_per_point_label = document.getElementById('amount_per_point_label');
-        if (amount_per_point_label) {
-            amount_per_point_label.textContent = localize.textAmountPerPoint;
-        }
-
-        var stop_loss_label = document.getElementById('stop_loss_label');
-        if (stop_loss_label) {
-            stop_loss_label.textContent = localize.textStopLoss;
-        }
-
-        var stop_profit_label = document.getElementById('stop_profit_label');
-        if (stop_profit_label) {
-            stop_profit_label.textContent = localize.textStopProfit;
-        }
-
-        var stop_type_label = document.getElementById('stop_type_label');
-        if (stop_type_label) {
-            stop_type_label.textContent = localize.textStopType;
-        }
-
-        var stop_type_points = document.getElementById('stop_type_points_label');
-        if (stop_type_points) {
-            stop_type_points.textContent = localize.textStopTypePoints;
         }
 
         var jpbarrier_label = document.getElementById('jbarrier_label');

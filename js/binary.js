@@ -10071,6 +10071,7 @@ var Barriers = (function () {
      if (elements) {
          var tree = getContractCategoryTree(elements);
          for(var i=0;i<tree.length;i++){
+             
              var el1 = tree[i];
              var li = document.createElement('li');
 
@@ -10556,6 +10557,25 @@ function setFormPlaceholderContent(name) {
  }
 
 /*
+ * This function loops through the available contracts and markets
+ * that are not supposed to be shown are replaced
+ *
+ * this is TEMPORARY, it will be removed when we fix backend
+ */
+function getAllowedContractCategory(contracts) {
+    'use strict';
+    var obj = {};
+    for(var key in contracts) {
+        if (contracts.hasOwnProperty(key)) {
+            if (!(/spreads/i.test(contracts[key]))) {
+                obj[key] = contracts[key];
+            }
+        }
+    }
+    return obj;
+}
+
+/*
  * This function is used in case where we have input and we don't want to fire
  * event on every change while user is typing for example in case of amount if
  * we want to change 10 to 1000 i.e. two zeros so two input events will be fired
@@ -10658,11 +10678,6 @@ function submitForm(form) {
             textContractConfirmationPayout: text.localize('Potential Payout'),
             textContractConfirmationCost: text.localize('Total Cost'),
             textContractConfirmationProfit: text.localize('Potential Profit'),
-            textAmountPerPoint: text.localize('Amount per point'),
-            textStopLoss: text.localize('Stop-loss'),
-            textStopProfit: text.localize('Stop-profit'),
-            textStopType: text.localize('Stop-type'),
-            textStopTypePoints: text.localize('Points'),
             textContractConfirmationButton: text.localize('View')
         };
 
@@ -10741,31 +10756,6 @@ function submitForm(form) {
         var period_label = document.getElementById('period_label');
         if (period_label) {
             period_label.textContent = localize.textContractPeriod;
-        }
-
-        var amount_per_point_label = document.getElementById('amount_per_point_label');
-        if (amount_per_point_label) {
-            amount_per_point_label.textContent = localize.textAmountPerPoint;
-        }
-
-        var stop_loss_label = document.getElementById('stop_loss_label');
-        if (stop_loss_label) {
-            stop_loss_label.textContent = localize.textStopLoss;
-        }
-
-        var stop_profit_label = document.getElementById('stop_profit_label');
-        if (stop_profit_label) {
-            stop_profit_label.textContent = localize.textStopProfit;
-        }
-
-        var stop_type_label = document.getElementById('stop_type_label');
-        if (stop_type_label) {
-            stop_type_label.textContent = localize.textStopType;
-        }
-
-        var stop_type_points = document.getElementById('stop_type_points_label');
-        if (stop_type_points) {
-            stop_type_points.textContent = localize.textStopTypePoints;
         }
 
         var jpbarrier_label = document.getElementById('jbarrier_label');
@@ -11429,10 +11419,6 @@ var currencyElement = document.getElementById('currency');
 if (currencyElement) {
     currencyElement.addEventListener('change', function (e) {
         sessionStorage.setItem('currency', e.target.value);
-        var stopTypeDollarLabel = document.getElementById('stop_type_dollar_label');
-        if (stopTypeDollarLabel && isVisible(stopTypeDollarLabel)) {
-            stopTypeDollarLabel.textContent = e.target.value;
-        }
         processPriceRequest();
     });
 }
@@ -11519,59 +11505,9 @@ if (highBarrierElement) {
     }));
 }
 
-/*
- * attach an event to change in digit prediction input
- */
 var predictionElement = document.getElementById('prediction');
 if (predictionElement) {
     predictionElement.addEventListener('input', debounce( function (e) {
-        processPriceRequest();
-        submitForm(document.getElementById('websocket_form'));
-    }));
-}
-
-/*
- * attach an event to change in amount per point for spreads
- */
-var amountPerPointElement = document.getElementById('amount_per_point');
-if (amountPerPointElement) {
-    amountPerPointElement.addEventListener('input', debounce( function (e) {
-        processPriceRequest();
-        submitForm(document.getElementById('websocket_form'));
-    }));
-}
-
-/*
- * attach an event to change in stop type for spreads
- */
-var stopTypeEvent = function () {
-    processPriceRequest();
-};
-
-var stopTypeElement = document.querySelectorAll('input[name="stop_type"]');
-if (stopTypeElement) {
-    for (var i = 0, len = stopTypeElement.length; i < len; i++) {
-        stopTypeElement[i].addEventListener('click', stopTypeEvent);
-    }
-}
-
-/*
- * attach an event to change in stop loss input value
- */
-var stopLossElement = document.getElementById('stop_loss');
-if (stopLossElement) {
-    stopLossElement.addEventListener('input', debounce( function (e) {
-        processPriceRequest();
-        submitForm(document.getElementById('websocket_form'));
-    }));
-}
-
-/*
- * attach an event to change in stop profit input value
- */
-var stopProfitElement = document.getElementById('stop_profit');
-if (stopProfitElement) {
-    stopProfitElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
         submitForm(document.getElementById('websocket_form'));
     }));
@@ -11654,28 +11590,20 @@ var Price = (function () {
             barrier = document.getElementById('barrier'),
             highBarrier = document.getElementById('barrier_high'),
             lowBarrier = document.getElementById('barrier_low'),
-            prediction = document.getElementById('prediction'),
-            amountPerPoint = document.getElementById('amount_per_point'),
-            stopType = document.querySelector('input[name="stop_type"]:checked'),
-            stopLoss = document.getElementById('stop_loss'),
-            stopProfit = document.getElementById('stop_profit');
+            prediction = document.getElementById('prediction');
 
-        if (payout && isVisible(payout) && payout.value) {
-            proposal['amount'] = parseFloat(payout.value);
+        if (payout && payout.value) {
+            proposal['amount_val'] = parseFloat(payout.value);
         }
-
-        if (amountType && isVisible(amountType) && amountType.value) {
+        if (amountType && amountType.value) {
             proposal['basis'] = amountType.value;
         }
-
         if (contractType) {
             proposal['contract_type'] = typeOfContract;
         }
-
         if (currency && currency.value) {
             proposal['currency'] = currency.value;
         }
-
         if (underlying && underlying.value) {
             proposal['symbol'] = underlying.value;
         }
@@ -11684,45 +11612,28 @@ var Price = (function () {
             proposal['date_start'] = startTime.value;
         }
 
-        if (expiryType && isVisible(expiryType) && expiryType.value === 'duration') {
+        if (expiryType && expiryType.value === 'duration') {
             proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
-        } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
+        } else if (expiryType && expiryType.value === 'endtime') {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
-            proposal['barrier'] = barrier.value;
+            proposal['barrier'] = parseFloat(barrier.value);
         }
 
         if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
-            proposal['barrier'] = highBarrier.value;
+            proposal['barrier'] = parseFloat(highBarrier.value);
         }
 
         if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
-            proposal['barrier2'] = lowBarrier.value;
+            proposal['barrier2'] = parseFloat(lowBarrier.value);
         }
 
         if(prediction && isVisible(prediction)){
             proposal['barrier'] = parseInt(prediction.value);
         }
-
-        if (amountPerPoint && isVisible(amountPerPoint)) {
-            proposal['amount_per_point'] = parseFloat(amountPerPoint.value);
-        }
-
-        if (stopType && isVisible(stopType)) {
-            proposal['stop_type'] = stopType.value;
-        }
-
-        if (stopLoss && isVisible(stopLoss)) {
-            proposal['stop_loss'] = parseFloat(stopLoss.value);
-        }
-
-        if (stopProfit && isVisible(stopProfit)) {
-            proposal['stop_profit'] = parseFloat(stopProfit.value);
-        }
-
         return proposal;
     };
 
@@ -11884,7 +11795,7 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var contract_categories = Contract.contractForms();
+    var contract_categories = getAllowedContractCategory(Contract.contractForms());
     var formname;
     if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
         formname = sessionStorage.getItem('formname');
@@ -11900,7 +11811,7 @@ function processContract(contracts) {
             }
         }
     }
-
+    
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
@@ -11921,45 +11832,16 @@ function processContractForm() {
 
     displayPrediction();
 
-    displaySpreads();
-
     processPriceRequest();
 }
 
-function displayPrediction() {
+function displayPrediction(){
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
     }
     else{
         predictionElement.hide();
-    }
-}
-
-function displaySpreads() {
-    var amountType = document.getElementById('amount_type'),
-        amountPerPointLabel = document.getElementById('amount_per_point_label'),
-        amount = document.getElementById('amount'),
-        amountPerPoint = document.getElementById('amount_per_point'),
-        spreadContainer = document.getElementById('spread_element_container'),
-        stopTypeDollarLabel = document.getElementById('stop_type_dollar_label'),
-        expiryTypeRow = document.getElementById('expiry_row');
-
-    if(sessionStorage.getItem('formname') === 'spreads'){
-        amountType.hide();
-        amount.hide();
-        expiryTypeRow.hide();
-        amountPerPointLabel.show();
-        amountPerPoint.show();
-        spreadContainer.show();
-        stopTypeDollarLabel.textContent = document.getElementById('currency').value;
-    } else {
-        amountPerPointLabel.hide();
-        amountPerPoint.hide();
-        spreadContainer.hide();
-        expiryTypeRow.show();
-        amountType.show();
-        amount.show();
     }
 }
 
@@ -12088,12 +11970,12 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
-            if(passthrough['basis'] === "payout"){
-                payout_value = passthrough['amount'];
+            if(passthrough.basis === "payout"){
+                payout_value = passthrough.amount_val;
                 cost_value = passthrough['ask-price'];
             }
             else{
-                cost_value = passthrough['amount'];
+                cost_value = passthrough.amount_val;
                 var match = receipt['longcode'].match(/\d+\.\d\d/);
                 payout_value = match[0];
             }
@@ -12404,13 +12286,13 @@ var Symbols = (function () {
                 currentUnderlying = element['symbol'];
 
             var is_active = !element['is_trading_suspended'] && element['exchange_is_open'];
-
+ 
             if(!tradeMarkets[currentMarket]){
                 tradeMarkets[currentMarket] = {name:'',is_active:0,submarkets:{}};
             }
             tradeMarkets[currentMarket]['name'] = element['market_display_name'];
             tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = {name: element['submarket_display_name']};
-
+            
             if(is_active){
                 tradeMarkets[currentMarket]['is_active'] = 1;
                 tradeMarkets[currentMarket]['submarkets'][currentSubMarket]['is_active'] = 1;
