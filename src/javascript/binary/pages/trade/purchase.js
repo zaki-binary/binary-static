@@ -7,6 +7,7 @@ var Purchase = (function () {
     'use strict';
 
     var purchase_data = {};
+    BetSell.register();
 
     var display = function (details) {
         purchase_data = details;
@@ -47,12 +48,12 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
-            if(passthrough.basis === "payout"){
-                payout_value = passthrough.amount_val;
+            if(passthrough['basis'] === "payout"){
+                payout_value = passthrough['amount'];
                 cost_value = passthrough['ask-price'];
             }
             else{
-                cost_value = passthrough.amount_val;
+                cost_value = passthrough['amount'];
                 var match = receipt['longcode'].match(/\d+\.\d\d/);
                 payout_value = match[0];
             }
@@ -89,7 +90,8 @@ var Purchase = (function () {
                 purchase_price: cost_value,
                 purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
                 qty:1,
-                url:'https://www.binary.com/trade/analyse_contract?l=EN'
+                shortcode:receipt['shortcode'],
+                url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
             };
             for(var k in button_attrs){
                 if(k){
