@@ -209,6 +209,10 @@ var currencyElement = document.getElementById('currency');
 if (currencyElement) {
     currencyElement.addEventListener('change', function (e) {
         sessionStorage.setItem('currency', e.target.value);
+        var stopTypeDollarLabel = document.getElementById('stop_type_dollar_label');
+        if (stopTypeDollarLabel && isVisible(stopTypeDollarLabel)) {
+            stopTypeDollarLabel.textContent = e.target.value;
+        }
         processPriceRequest();
     });
 }
