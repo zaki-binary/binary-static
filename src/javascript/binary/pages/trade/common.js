@@ -24,7 +24,6 @@
      if (elements) {
          var tree = getContractCategoryTree(elements);
          for(var i=0;i<tree.length;i++){
-             
              var el1 = tree[i];
              var li = document.createElement('li');
 
@@ -139,6 +138,9 @@
              if (selected && selected === key) {
                  option.setAttribute('selected', 'selected');
              }
+             if(!elements[key].is_active){
+                option.setAttribute('disabled', '');
+             }
              option.appendChild(content);
              fragment.appendChild(option);
 
@@ -149,8 +151,11 @@
                         option.setAttribute('value', key2);
                         if (selected && selected === key2) {
                             option.setAttribute('selected', 'selected');
-                        } 
-                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        }
+                        if(!elements[key].submarkets[key2].is_active){
+                           option.setAttribute('disabled', '');
+                        }
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2].name;
                         fragment.appendChild(option);
                     }
                 }
@@ -504,25 +509,6 @@ function setFormPlaceholderContent(name) {
  }
 
 /*
- * This function loops through the available contracts and markets
- * that are not supposed to be shown are replaced
- *
- * this is TEMPORARY, it will be removed when we fix backend
- */
-function getAllowedContractCategory(contracts) {
-    'use strict';
-    var obj = {};
-    for(var key in contracts) {
-        if (contracts.hasOwnProperty(key)) {
-            if (!(/spreads/i.test(contracts[key]))) {
-                obj[key] = contracts[key];
-            }
-        }
-    }
-    return obj;
-}
-
-/*
  * This function is used in case where we have input and we don't want to fire
  * event on every change while user is typing for example in case of amount if
  * we want to change 10 to 1000 i.e. two zeros so two input events will be fired
@@ -552,7 +538,7 @@ function debounce(func, wait, immediate) {
  */
 function getDefaultMarket() {
    var mkt = sessionStorage.getItem('market');
-   var markets = Symbols.markets();
+   var markets = Symbols.markets(1);
    if(!mkt ||  !markets[mkt]){
         mkt = Object.keys(markets)[0];
    }

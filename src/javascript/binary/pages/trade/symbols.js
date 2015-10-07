@@ -17,7 +17,7 @@
 var Symbols = (function () {
     'use strict';
 
-    var tradeMarkets = {}, tradeUnderlyings = {}, current = '', need_page_update = 1, names = {};
+    var tradeMarkets = {}, tradeMarketsList = {}, tradeUnderlyings = {}, current = '', need_page_update = 1, names = {};
 
     var details = function (data) {
         var allSymbols = data['active_symbols'];
@@ -29,13 +29,19 @@ var Symbols = (function () {
 
             var is_active = !element['is_trading_suspended'] && element['exchange_is_open'];
 
-            if(is_active){
-                if(!tradeMarkets[currentMarket]){
-                    tradeMarkets[currentMarket] = {name:'',submarkets:{}};
-                }
-                tradeMarkets[currentMarket]['name'] = element['market_display_name'];
-                tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = element['submarket_display_name'];
+            if(!tradeMarkets[currentMarket]){
+                tradeMarkets[currentMarket] = {name:'',is_active:0,submarkets:{}};
             }
+            tradeMarkets[currentMarket]['name'] = element['market_display_name'];
+            tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = {name: element['submarket_display_name']};
+
+            if(is_active){
+                tradeMarkets[currentMarket]['is_active'] = 1;
+                tradeMarkets[currentMarket]['submarkets'][currentSubMarket]['is_active'] = 1;
+            }
+
+            tradeMarketsList[currentMarket] = tradeMarkets[currentMarket];
+            tradeMarketsList[currentSubMarket] = tradeMarkets[currentMarket]['submarkets'][currentSubMarket];
 
             if (!tradeUnderlyings.hasOwnProperty(currentMarket)) {
                 tradeUnderlyings[currentMarket] = {};
@@ -73,7 +79,7 @@ var Symbols = (function () {
     return {
         details: details,
         getSymbols: getSymbols,
-        markets: function () { return tradeMarkets; },
+        markets: function (list) { return list ? tradeMarketsList : tradeMarkets; },
         underlyings: function () { return tradeUnderlyings; },
         getName: function(symbol){ return names[symbol]; },
         need_page_update: function () { return need_page_update; }

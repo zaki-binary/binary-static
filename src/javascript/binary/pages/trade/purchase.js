@@ -7,12 +7,13 @@ var Purchase = (function () {
     'use strict';
 
     var purchase_data = {};
+    BetSell.register();
 
     var display = function (details) {
         purchase_data = details;
 
         var receipt = details['buy'],
-            form_data = details['echo_req']['form_data'],
+            passthrough = details['echo_req']['passthrough'],
             container = document.getElementById('contract_confirmation_container'),
             message_container = document.getElementById('confirmation_message'),
             heading = document.getElementById('contract_purchase_heading'),
@@ -25,10 +26,11 @@ var Purchase = (function () {
             profit = document.getElementById('contract_purchase_profit'),
             spots = document.getElementById('contract_purchase_spots'),
             confirmation_error = document.getElementById('confirmation_error'),
-            contracts_list = document.getElementById('contracts_list');
+            contracts_list = document.getElementById('contracts_list'),
+            button = document.getElementById('contract_purchase_button');
 
         var error = details['error'];
-        var show_chart = !error && form_data['duration']<=10 && form_data['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower');
+        var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower');
 
         container.style.display = 'block';
         contracts_list.style.display = 'none';
@@ -43,14 +45,15 @@ var Purchase = (function () {
 
             heading.textContent = Content.localize().textContractConfirmationHeading;
             descr.textContent = receipt['longcode'];
+            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
-            if(form_data.basis === "payout"){
-                payout_value = form_data.amount_val;
-                cost_value = form_data['ask-price'];
+            if(passthrough['basis'] === "payout"){
+                payout_value = passthrough['amount'];
+                cost_value = passthrough['ask-price'];
             }
             else{
-                cost_value = form_data.amount_val;
+                cost_value = passthrough['amount'];
                 var match = receipt['longcode'].match(/\d+\.\d\d/);
                 payout_value = match[0];
             }
@@ -76,22 +79,41 @@ var Purchase = (function () {
             else{
                 spots.hide();
             }
+
+            button.textContent = Content.localize().textContractConfirmationButton;
+            var purchase_date = new Date(receipt['purchase_time']*1000);
+            var button_attrs = {
+                contract_id: receipt['fmb_id'],
+                controller_action: 'sell',
+                currency: document.getElementById('currency').value,
+                payout: payout_value,
+                purchase_price: cost_value,
+                purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
+                qty:1,
+                shortcode:receipt['shortcode'],
+                url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
+            };
+            for(var k in button_attrs){
+                if(k){
+                    button.setAttribute(k,button_attrs[k]);
+                }
+            }
             
         }
 
         if(show_chart){
             WSTickDisplay.initialize({
-                "symbol":form_data.symbol,
-                "number_of_ticks":form_data.duration,
+                "symbol":passthrough.symbol,
+                "number_of_ticks":passthrough.duration,
                 "previous_tick_epoch":receipt['start_time'],
                 "contract_category":"callput",
 
-                "display_symbol":Symbols.getName(form_data.symbol),
+                "display_symbol":Symbols.getName(passthrough.symbol),
                 "contract_start":receipt['start_time'],
                 "decimal":3,
-                "contract_sentiment":(form_data['contract_type']==='CALL' ? 'up' : 'down'),
-                "price":form_data['ask-price'],
-                "payout":form_data['amount_val'],
+                "contract_sentiment":(passthrough['contract_type']==='CALL' ? 'up' : 'down'),
+                "price":passthrough['ask-price'],
+                "payout":passthrough['amount_val'],
                 "show_contract_result":1
             });
         }
@@ -99,7 +121,7 @@ var Purchase = (function () {
 
     var update_spot_list = function(data){
         var spots = document.getElementById('contract_purchase_spots');
-        if(isVisible(spots) && purchase_data.echo_req.form_data.duration && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
+        if(isVisible(spots) && purchase_data.echo_req.passthrough.duration && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
             var fragment = document.createElement('div');
             fragment.classList.add('row');
 
@@ -128,7 +150,7 @@ var Purchase = (function () {
             
             if(d1){
                 var contract_status;
-                if(d1==purchase_data.echo_req.form_data.barrier){
+                if(d1==purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
                     contract_status = 'This contract won';
                 }
@@ -139,7 +161,7 @@ var Purchase = (function () {
                 document.getElementById('contract_purchase_heading').textContent = text.localize(contract_status);
             }
 
-            purchase_data.echo_req.form_data.duration--;
+            purchase_data.echo_req.passthrough.duration--;
         }
     };
 
