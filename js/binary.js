@@ -11684,10 +11684,10 @@ var Price = (function () {
             proposal['date_start'] = startTime.value;
         }
 
-        if (expiryType && expiryType.value === 'duration') {
+        if (expiryType && isVisible(expiryType) && expiryType.value === 'duration') {
             proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
-        } else if (expiryType && expiryType.value === 'endtime') {
+        } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
@@ -11942,11 +11942,13 @@ function displaySpreads() {
         amount = document.getElementById('amount'),
         amountPerPoint = document.getElementById('amount_per_point'),
         spreadContainer = document.getElementById('spread_element_container'),
-        stopTypeDollarLabel = document.getElementById('stop_type_dollar_label');
+        stopTypeDollarLabel = document.getElementById('stop_type_dollar_label'),
+        expiryTypeRow = document.getElementById('expiry_row');
 
     if(sessionStorage.getItem('formname') === 'spreads'){
         amountType.hide();
         amount.hide();
+        expiryTypeRow.hide();
         amountPerPointLabel.show();
         amountPerPoint.show();
         spreadContainer.show();
@@ -11955,6 +11957,7 @@ function displaySpreads() {
         amountPerPointLabel.hide();
         amountPerPoint.hide();
         spreadContainer.hide();
+        expiryTypeRow.show();
         amountType.show();
         amount.show();
     }
