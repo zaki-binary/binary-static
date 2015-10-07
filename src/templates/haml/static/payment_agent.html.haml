@@ -33,7 +33,7 @@
             .grd-grid-4.grd-grid-mobile-8
               %img.responsive{:src => url_for('images/pages/payment_agent/payment_agents.svg')}
             .grd-grid-12
-              %p.faded= l("Note: Payment Agent transfers are only available on CR broker in US dollars.")
+              %p.faded= l("Payment Agent transfers are only available for accounts registered with Binary (CR) SA. Transactions are accepted only in US dollars.")
             .clearfix
       .section
         %a#why-choose-payment-agents
@@ -41,13 +41,11 @@
           #section-2
             .grd-grid-12
               %h1= l("Why do Clients choose to use Payment Agents?")
-              %p= l('Clients choose Payment Agents for two key reasons: convenience, and privacy. Payment Agents:')
               %ul.checked
                 %li= l('Allow Clients to use e-wallets, which are not available directly on [_1]', stash->{website_name})
                 %li= l('Accept local bank wires')
                 %li= l('Avoid the need to have an e-wallet')
                 %li= l('Allow Clients to deposit with lower amounts (via local currency)')
-                %li= l('Have generally lower KYC (‘know your customer’) requirements than for normal e-wallets')
             .clearfix
       .section
         %a#who-can-apply-payment-agent
