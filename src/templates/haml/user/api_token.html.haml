@@ -2,12 +2,9 @@
 .grd-grid-12
   %h1= stash->{title}
   %p= l('[_1] provides Application Programming Interface (API) facilities to third-party developers.', stash->{website_name})
-  %p= l('To provide access to your account to a third-party application, you may use the following API token:')
-  %span!= "<span class='notice-msg'>$token</span>"
   %p= l('Notice: please only share your API token with third-parties which you trust.')
 
-
-  - if ($tokens) {
+  - if ($tokens and @$tokens) {
 
     .grd-parent.grd-grid-12.table-header.grd-row-padding
       %div.grd-grid-4.grd-hide-mobile.grd-grid-phablet-3= l('Display Name')
@@ -28,26 +25,27 @@
         .grd-grid-3.grd-hide-mobile.grd-grid-phablet-3
           - my $delete_url = url_for('/user/api_token', { token => $tr->{token}, csrftoken => $csrftoken, action => 'delete'});
           %a.pjaxload{:href => $delete_url}= l('Delete')
-          - my $revoke_url = url_for('/user/api_token', { token => $tr->{token}, csrftoken => $csrftoken, action => 'revoke'});
-          %a.pjaxload{:href => $revoke_url}= l('Revoke')
     - }
 
   - }
 
-  %h3= l('Create New Token')
-  %form{:action => url_for('user/api_token'), :method => 'POST'}
-    %input{:type => 'hidden', :name => 'csrftoken', :value => stash('csrftoken')}
-    %fieldset
-      .grd-parent.grd-grid-12.grd-row-padding
-        .grd-grid-4.form_label
-          %label{:for => "display_name"}= l('Display Name')
-        .grd-grid-8
-          %input#display_name{:type => 'text', :name => 'display_name', :max_length => 64}
-          - if (stash('error') and stash('error')->{display_name}) {
-            %p.errorfield= stash('error')->{display_name}
-          - }
-      .grd-parent.grd-grid-12
-        .grd-grid-4
-        .grd-grid-8
-          %span.button
-            %button#submit.button{:name => "submit" :type => "submit"}= l('Create')
+  - if (! ($tokens and length(@$tokens) >= 20)) {
+    .grd-grid-12.grd-row-padding
+      %h3= l('Create New Token')
+      %form{:action => url_for('user/api_token'), :method => 'POST'}
+        %input{:type => 'hidden', :name => 'csrftoken', :value => stash('csrftoken')}
+        %fieldset
+          .grd-parent.grd-grid-12.grd-row-padding
+            .grd-grid-4.form_label
+              %label{:for => "display_name"}= l('Display Name')
+            .grd-grid-8
+              %input#display_name{:type => 'text', :name => 'display_name', :max_length => 64}
+              - if (stash('error') and stash('error')->{display_name}) {
+                %p.errorfield= stash('error')->{display_name}
+              - }
+          .grd-parent.grd-grid-12
+            .grd-grid-4
+            .grd-grid-8
+              %span.button
+                %button#submit.button{:name => "submit" :type => "submit"}= l('Create')
+  - }
