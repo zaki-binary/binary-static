@@ -64,10 +64,10 @@ var Price = (function () {
             proposal['date_start'] = startTime.value;
         }
 
-        if (expiryType && expiryType.value === 'duration') {
+        if (expiryType && isVisible(expiryType) && expiryType.value === 'duration') {
             proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
-        } else if (expiryType && expiryType.value === 'endtime') {
+        } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
             proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
         }
 
