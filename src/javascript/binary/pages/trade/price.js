@@ -88,7 +88,7 @@ var Price = (function () {
         }
 
         if (amountPerPoint && isVisible(amountPerPoint)) {
-            proposal['amount_per_point'] = amountPerPoint.value;
+            proposal['amount_per_point'] = parseFloat(amountPerPoint.value);
         }
 
         if (stopType && isVisible(stopType)) {
@@ -96,11 +96,11 @@ var Price = (function () {
         }
 
         if (stopLoss && isVisible(stopLoss)) {
-            proposal['stop_loss'] = stopLoss.value;
+            proposal['stop_loss'] = parseFloat(stopLoss.value);
         }
 
         if (stopProfit && isVisible(stopProfit)) {
-            proposal['stop_profit'] = stopProfit.value;
+            proposal['stop_profit'] = parseFloat(stopProfit.value);
         }
 
         return proposal;
