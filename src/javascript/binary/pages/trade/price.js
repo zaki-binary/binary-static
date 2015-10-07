@@ -37,7 +37,7 @@ var Price = (function () {
             prediction = document.getElementById('prediction');
 
         if (payout && payout.value) {
-            proposal['amount_val'] = parseFloat(payout.value);
+            proposal['amount'] = parseFloat(payout.value);
         }
         if (amountType && amountType.value) {
             proposal['basis'] = amountType.value;
