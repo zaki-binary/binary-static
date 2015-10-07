@@ -64,15 +64,15 @@ var Price = (function () {
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
-            proposal['barrier'] = parseFloat(barrier.value);
+            proposal['barrier'] = barrier.value;
         }
 
         if (highBarrier && isVisible(highBarrier) && highBarrier.value) {
-            proposal['barrier'] = parseFloat(highBarrier.value);
+            proposal['barrier'] = highBarrier.value;
         }
 
         if (lowBarrier && isVisible(lowBarrier) && lowBarrier.value) {
-            proposal['barrier2'] = parseFloat(lowBarrier.value);
+            proposal['barrier2'] = lowBarrier.value;
         }
 
         if(prediction && isVisible(prediction)){
