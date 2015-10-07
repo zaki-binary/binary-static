@@ -7433,7 +7433,7 @@ BetForm.Time.EndTime.prototype = {
         },
         register: function () {
             var that = this;
-            $('#profit-table, #portfolio-table, #bet_container, #statement-table').on('click', '.open_contract_details', function (e) {
+            $('#profit-table, #portfolio-table, #bet_container, #statement-table, #trading_socket_container').on('click', '.open_contract_details', function (e) {
                 var $this = $(this);
                 e.preventDefault();
                 _previous_button_clicked = this;
@@ -11432,18 +11432,21 @@ var purchaseContractEvent = function () {
         askPrice = this.getAttribute('data-ask-price');
 
     var params = {buy: id, price: askPrice, passthrough:{}};
-    for(var attr in this.attributes){
-        if(attr && this.attributes[attr] && this.attributes[attr].name){
-            var m = this.attributes[attr].name.match(/data\-(.+)/);
+    var ids = Price.bufferedIds();
+    if(ids[id]){
+        for(var attr in this.attributes){
+            if(attr && this.attributes[attr] && this.attributes[attr].name){
+                var m = this.attributes[attr].name.match(/data\-(.+)/);
 
-            if(m && m[1] && m[1]!=="purchase-id"){
-                params.passthrough[m[1]] = this.attributes[attr].value;
+                if(m && m[1] && m[1]!=="purchase-id"){
+                    params.passthrough[m[1]] = this.attributes[attr].value;
+                }
             }
         }
-    }
-    if (id && askPrice) {
-        TradeSocket.send(params);
-        processForgetPriceIds();
+        if (id && askPrice) {
+            TradeSocket.send(params);
+            processForgetPriceIds();
+        }
     }
 };
 
@@ -11530,16 +11533,15 @@ var Message = (function () {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
             } else if (type === 'proposal') {
-                hideOverlayContainer();
-                Price.display(response, Contract.contractType()[Contract.form()]);
-                hidePriceOverlay();
+                processProposal(response);
             } else if (type === 'buy') {
                 Purchase.display(response);
             } else if (type === 'tick') {
                 processTick(response);
             }
 
-            if(type !== 'tick' && type !== 'proposal'){
+            // if(type !== 'tick' && type !== 'proposal'){
+            if(type !== 'tick'){
                 console.log(response);
             }
         } else {
@@ -11849,11 +11851,12 @@ function displayPrediction(){
 function processForgetPriceIds() {
     'use strict';
     if (Price) {
+        showPriceOverlay();
         var priceIds = Price.bufferedIds();
         for (var id in priceIds) {
-            if (priceIds.hasOwnProperty(id)) {
+            if (priceIds.hasOwnProperty(id) && priceIds[id]!==-1) {
                 TradeSocket.send({ forget: id });
-                delete priceIds[id];
+                priceIds[id] = -1;
             }
         }
         Price.clearMapping();
@@ -11907,6 +11910,16 @@ function processTick(tick) {
         Barriers.setBarrierUpdate(true);
     }
 }
+
+function processProposal(response){
+    'use strict';
+    var price_ids = Price.bufferedIds();
+    if(price_ids[response.proposal.id]!==-1){
+        hideOverlayContainer();
+        Price.display(response, Contract.contractType()[Contract.form()]);
+        hidePriceOverlay();
+    }
+}
 ;/*
  * Purchase object that handles all the functions related to
  * contract purchase response
@@ -11916,6 +11929,7 @@ var Purchase = (function () {
     'use strict';
 
     var purchase_data = {};
+    BetSell.register();
 
     var display = function (details) {
         purchase_data = details;
@@ -11998,7 +12012,8 @@ var Purchase = (function () {
                 purchase_price: cost_value,
                 purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
                 qty:1,
-                url:'https://www.binary.com/trade/analyse_contract?l=EN'
+                shortcode:receipt['shortcode'],
+                url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
             };
             for(var k in button_attrs){
                 if(k){
