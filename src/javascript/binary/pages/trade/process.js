@@ -130,6 +130,7 @@ function displayPrediction(){
 function processForgetPriceIds() {
     'use strict';
     if (Price) {
+        showPriceOverlay();
         var priceIds = Price.bufferedIds();
         for (var id in priceIds) {
             if (priceIds.hasOwnProperty(id)) {
