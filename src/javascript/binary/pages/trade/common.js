@@ -566,3 +566,14 @@ function submitForm(form) {
     // form.appendChild(button).click();
     // form.removeChild(button);
 }
+
+function durationOrder(duration){
+    var order = {
+        t:1,
+        s:2,
+        m:3,
+        h:4,
+        d:5
+    };
+    return order[duration];
+}

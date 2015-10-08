@@ -32,7 +32,7 @@ var Content = (function () {
             textNow: text.localize('Now'),
             textContractConfirmationHeading: text.localize('Contract Confirmation'),
             textContractConfirmationReference: text.localize('Your transaction reference is'),
-            textContractConfirmationBalance: text.localize('Your current balance is'),
+            textContractConfirmationBalance: text.localize('Account balance:'),
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
             textFormUpDown: text.localize('Up/Down'),
