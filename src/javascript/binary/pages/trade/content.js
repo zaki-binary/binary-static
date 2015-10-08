@@ -48,7 +48,8 @@ var Content = (function () {
             textStopProfit: text.localize('Stop-profit'),
             textStopType: text.localize('Stop-type'),
             textStopTypePoints: text.localize('Points'),
-            textContractConfirmationButton: text.localize('View')
+            textContractConfirmationButton: text.localize('View'),
+            textIndicativeBarrierTooltip: text.localize('This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset.')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -151,6 +152,21 @@ var Content = (function () {
         var stop_type_points = document.getElementById('stop_type_points_label');
         if (stop_type_points) {
             stop_type_points.textContent = localize.textStopTypePoints;
+        }
+
+        var indicative_barrier_tooltip = document.getElementById('indicative_barrier_tooltip');
+        if (indicative_barrier_tooltip) {
+            indicative_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
+        var indicative_high_barrier_tooltip = document.getElementById('indicative_high_barrier_tooltip');
+        if (indicative_high_barrier_tooltip) {
+            indicative_high_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
+        var indicative_low_barrier_tooltip = document.getElementById('indicative_low_barrier_tooltip');
+        if (indicative_low_barrier_tooltip) {
+            indicative_low_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
         }
 
         var jpbarrier_label = document.getElementById('jbarrier_label');
