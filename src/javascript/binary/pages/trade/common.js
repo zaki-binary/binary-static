@@ -597,3 +597,17 @@ function displayIndicativeBarrier() {
         indicativeLowBarrierTooltip.textContent = '';
     }
 }
+
+/*
+ * function to sort the duration in ascending order
+ */
+function durationOrder(duration){
+    var order = {
+        t:1,
+        s:2,
+        m:3,
+        h:4,
+        d:5
+    };
+    return order[duration];
+}
