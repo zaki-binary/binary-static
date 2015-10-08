@@ -226,5 +226,9 @@ function processProposal(response){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
+        if(Object.keys(Price.bufferedIds()).length == 2){
+            document.getElementById('trading_socket_container').classList.add('show');
+            document.getElementById('trading_init_progress').style.display = 'none';
+        }
     }
 }

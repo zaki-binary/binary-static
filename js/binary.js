@@ -3386,7 +3386,9 @@ pjax_config_page('trading', function () {
             Content.populate();
             TradeSocket.init();
             Symbols.getSymbols(1);
-            addEventListenerForm();
+            if (document.getElementById('websocket_form')) {
+                addEventListenerForm();
+            }
         },
         onUnload: function() {
             TradeSocket.close();
@@ -9980,8 +9982,12 @@ var Barriers = (function () {
         if (barriers && formName) {
             var barrier = barriers[formName];
             if(barrier) {
-                var unit = document.getElementById('duration_units');
-                var currentTick = Tick.quote();
+                var unit = document.getElementById('duration_units'),
+                    currentTick = Tick.quote(),
+                    indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
+                    indicativeHighBarrierTooltip = document.getElementById('indicative_high_barrier_tooltip'),
+                    indicativeLowBarrierTooltip = document.getElementById('indicative_low_barrier_tooltip');
+
                 if (barrier.count === 1) {
                     document.getElementById('high_barrier_row').style.display = 'none';
                     document.getElementById('low_barrier_row').style.display = 'none';
@@ -9992,14 +9998,17 @@ var Barriers = (function () {
                         span = document.getElementById('barrier_span');
                     if (unit && unit.value === 'd' && currentTick) {
                         elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-                        elm.textContent = parseFloat(currentTick) + parseFloat(barrier['barrier']).toFixed(3);
+                        elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
                         tooltip.style.display = 'none';
                         span.style.display = 'inherit';
+                        // no need to display indicative barrier in case of absolute barrier
+                        indicativeBarrierTooltip.textContent = '';
                     } else {
                         elm.value = barrier['barrier'];
                         elm.textContent = barrier['barrier'];
                         span.style.display = 'none';
                         tooltip.style.display = 'inherit';
+                        indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
                     }
                     return;
                 } else if (barrier.count === 2) {
@@ -10025,6 +10034,9 @@ var Barriers = (function () {
                         high_span.style.display = 'inherit';
                         low_tooltip.style.display = 'none';
                         low_span.style.display = 'inherit';
+
+                        indicativeHighBarrierTooltip.textContent = '';
+                        indicativeLowBarrierTooltip.textContent = '';
                     } else {
                         high_elm.value = barrier['barrier'];
                         high_elm.textContent = barrier['barrier'];
@@ -10036,6 +10048,9 @@ var Barriers = (function () {
                         high_tooltip.style.display = 'inherit';
                         low_span.style.display = 'none';
                         low_tooltip.style.display = 'inherit';
+
+                        indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                        indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
                     }
                     return;
                 }
@@ -10498,42 +10513,41 @@ function displayPriceMovement(element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
+function toggleActiveNavMenuElement(nav, eventElement) {
+    var liElements = nav.getElementsByTagName("li");
+    var classes = eventElement.classList;
 
- function toggleActiveNavMenuElement(nav, eventElement) {
-     var liElements = nav.getElementsByTagName("li");
-     var classes = eventElement.classList;
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+        }
+        classes.add('active');
+    }
+}
 
-     if (!classes.contains('active')) {
-         for (var i = 0, len = liElements.length; i < len; i++){
-             liElements[i].classList.remove('active');
-         }
-         classes.add('active');
-     }
- }
+function toggleActiveCatMenuElement(nav, eventElementId) {
+    var eventElement = document.getElementById(eventElementId);
+    var liElements = nav.querySelectorAll('.active, .a-active');
+    var classes = eventElement.classList;
 
- function toggleActiveCatMenuElement(nav, eventElementId) {
-     var eventElement = document.getElementById(eventElementId);
-     var liElements = nav.querySelectorAll('.active, .a-active');
-     var classes = eventElement.classList;
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+            liElements[i].classList.remove('a-active');
+        }
+        classes.add('a-active');
 
-     if (!classes.contains('active')) {
-         for (var i = 0, len = liElements.length; i < len; i++){
-             liElements[i].classList.remove('active');
-             liElements[i].classList.remove('a-active');
-         }
-         classes.add('a-active');
-
-         i = 0;
-         var parent;
-         while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
-             if(parent.tagName === 'LI'){
-                 parent.classList.add('active');
-             }
-             eventElement = parent;
-             i++;
-         }
-     }
- }
+        i = 0;
+        var parent;
+        while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
+            if(parent.tagName === 'LI'){
+                parent.classList.add('active');
+            }
+            eventElement = parent;
+            i++;
+        }
+    }
+}
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
@@ -10549,22 +10563,22 @@ function setFormPlaceholderContent(name) {
 /*
  * function to display the profit and return of bet under each trade container
  */
- function displayCommentPrice(node, currency, type, payout) {
-     'use strict';
+function displayCommentPrice(node, currency, type, payout) {
+    'use strict';
 
-     if (node && type && payout) {
-         var profit = payout - type,
-             return_percent = (profit/type)*100,
-             comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
+    if (node && type && payout) {
+        var profit = payout - type,
+            return_percent = (profit/type)*100,
+            comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
 
-         if (isNaN(profit) || isNaN(return_percent)) {
-             node.hide();
-         } else {
-             node.show();
-             node.textContent = comment;
-         }
-     }
- }
+        if (isNaN(profit) || isNaN(return_percent)) {
+            node.hide();
+        } else {
+            node.show();
+            node.textContent = comment;
+        }
+    }
+}
 
 /*
  * This function is used in case where we have input and we don't want to fire
@@ -10624,6 +10638,52 @@ function submitForm(form) {
     // form.appendChild(button).click();
     // form.removeChild(button);
 }
+
+/*
+ * function to display indicative barrier
+ */
+function displayIndicativeBarrier() {
+    var unit = document.getElementById('duration_units'),
+        currentTick = Tick.quote(),
+        indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
+        indicativeHighBarrierTooltip = document.getElementById('indicative_high_barrier_tooltip'),
+        indicativeLowBarrierTooltip = document.getElementById('indicative_low_barrier_tooltip'),
+        barrierElement = document.getElementById('barrier'),
+        highBarrierElement = document.getElementById('barrier_high'),
+        lowBarrierElement = document.getElementById('barrier_low');
+
+    if (unit && unit.value !== 'd' && currentTick) {
+        if (indicativeBarrierTooltip && isVisible(indicativeBarrierTooltip)) {
+            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(3);
+        }
+
+        if (indicativeHighBarrierTooltip && isVisible(indicativeHighBarrierTooltip)) {
+            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(3);
+        }
+
+        if (indicativeLowBarrierTooltip && isVisible(indicativeLowBarrierTooltip)) {
+            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(3);
+        }
+    } else {
+        indicativeBarrierTooltip.textContent = '';
+        indicativeHighBarrierTooltip.textContent = '';
+        indicativeLowBarrierTooltip.textContent = '';
+    }
+}
+
+/*
+ * function to sort the duration in ascending order
+ */
+function durationOrder(duration){
+    var order = {
+        t:1,
+        s:2,
+        m:3,
+        h:4,
+        d:5
+    };
+    return order[duration];
+}
 ;var Content = (function () {
     'use strict';
 
@@ -10658,7 +10718,7 @@ function submitForm(form) {
             textNow: text.localize('Now'),
             textContractConfirmationHeading: text.localize('Contract Confirmation'),
             textContractConfirmationReference: text.localize('Your transaction reference is'),
-            textContractConfirmationBalance: text.localize('Your current balance is'),
+            textContractConfirmationBalance: text.localize('Account balance:'),
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
             textFormUpDown: text.localize('Up/Down'),
@@ -10674,7 +10734,8 @@ function submitForm(form) {
             textStopProfit: text.localize('Stop-profit'),
             textStopType: text.localize('Stop-type'),
             textStopTypePoints: text.localize('Points'),
-            textContractConfirmationButton: text.localize('View')
+            textContractConfirmationButton: text.localize('View'),
+            textIndicativeBarrierTooltip: text.localize('This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset.')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -10777,6 +10838,21 @@ function submitForm(form) {
         var stop_type_points = document.getElementById('stop_type_points_label');
         if (stop_type_points) {
             stop_type_points.textContent = localize.textStopTypePoints;
+        }
+
+        var indicative_barrier_tooltip = document.getElementById('indicative_barrier_tooltip');
+        if (indicative_barrier_tooltip) {
+            indicative_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
+        var indicative_high_barrier_tooltip = document.getElementById('indicative_high_barrier_tooltip');
+        if (indicative_high_barrier_tooltip) {
+            indicative_high_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
+        var indicative_low_barrier_tooltip = document.getElementById('indicative_low_barrier_tooltip');
+        if (indicative_low_barrier_tooltip) {
+            indicative_low_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
         }
 
         var jpbarrier_label = document.getElementById('jbarrier_label');
@@ -11058,6 +11134,7 @@ function displayDurations(startType) {
         }
     }
 
+    var duration_list = {};
     for (var duration in durationContainer) {
         if(durationContainer.hasOwnProperty(duration)) {
             var min = durationContainer[duration]['min_contract_duration'],
@@ -11072,20 +11149,20 @@ function displayDurations(startType) {
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list[textMapping['value']]=option;
                         option = document.createElement('option');
                         content = document.createTextNode(Content.localize().textDurationMinutes);
                         option.setAttribute('value', 'm');
                         option.setAttribute('data-minimum', 1);
                         option.setAttribute('selected', 'selected');
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list['m']=option;
                         option = document.createElement('option');
                         content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list['h']=option;
                         break;
                     case 'm':
                         option = document.createElement('option');
@@ -11094,13 +11171,13 @@ function displayDurations(startType) {
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.setAttribute('selected', 'selected');
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list[textMapping['value']]=option;
                         option = document.createElement('option');
                         content = document.createTextNode(Content.localize().textDurationHours);
                         option.setAttribute('value', 'h');
                         option.setAttribute('data-minimum', 1);
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list['h']=option;
                         break;
                     case 'h':
                         option = document.createElement('option');
@@ -11108,7 +11185,7 @@ function displayDurations(startType) {
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list[textMapping['value']]=option;
                         break;
                     default :
                         option = document.createElement('option');
@@ -11116,7 +11193,7 @@ function displayDurations(startType) {
                         option.setAttribute('value', textMapping['value']);
                         option.setAttribute('data-minimum', textMapping['min']);
                         option.appendChild(content);
-                        fragment.appendChild(option);
+                        duration_list[textMapping['value']]=option;
                         break;
                 }
             } else if (duration === 'daily') {
@@ -11125,18 +11202,33 @@ function displayDurations(startType) {
                 option.setAttribute('value', textMapping['value']);
                 option.setAttribute('data-minimum', textMapping['min']);
                 option.appendChild(content);
-                fragment.appendChild(option);
+                duration_list[textMapping['value']]=option;
             } else if (duration === 'tick') {
                 option = document.createElement('option');
                 content = document.createTextNode(textMapping['text']);
                 option.setAttribute('value', textMapping['value']);
                 option.setAttribute('data-minimum', textMapping['min']);
                 option.appendChild(content);
-                fragment.appendChild(option);
+                duration_list[textMapping['value']]=option;
             }
-            target.appendChild(fragment);
+            
         }
     }
+    var list = Object.keys(duration_list).sort(function(a,b){
+        if(durationOrder(a)>durationOrder(b)){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    });
+    for(var k=0; k<list.length; k++){
+        var d = list[k];
+        if(duration_list.hasOwnProperty(d)){
+            target.appendChild(duration_list[d]);
+        }
+    }
+
     durationPopulate();
 }
 
@@ -11599,6 +11691,7 @@ var Message = (function () {
         if (response) {
             var type = response.msg_type;
             if (type === 'authorize') {
+                User.set(response.authorize);
                 TradeSocket.send({ payout_currencies: 1 });
             } else if (type === 'active_symbols') {
                 processActiveSymbols(response);
@@ -12047,6 +12140,10 @@ function processProposal(response){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
+        if(Object.keys(Price.bufferedIds()).length == 2){
+            document.getElementById('trading_socket_container').classList.add('show');
+            document.getElementById('trading_init_progress').style.display = 'none';
+        }
     }
 }
 ;/*
@@ -12099,6 +12196,7 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
+
             if(passthrough['basis'] === "payout"){
                 payout_value = passthrough['amount'];
                 cost_value = passthrough['ask-price'];
@@ -12114,7 +12212,8 @@ var Purchase = (function () {
             cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
             profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
 
-            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + Math.round(receipt['balance_after']*100)/100;
+
+            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + User.get().currency + ' ' + Math.round(receipt['balance_after']*100)/100;
 
             if(show_chart){
                 chart.show();
@@ -12415,10 +12514,11 @@ var Symbols = (function () {
             var is_active = !element['is_trading_suspended'] && element['exchange_is_open'];
 
             if(!tradeMarkets[currentMarket]){
-                tradeMarkets[currentMarket] = {name:'',is_active:0,submarkets:{}};
+                tradeMarkets[currentMarket] = {name:element['market_display_name'],is_active:0,submarkets:{}};
             }
-            tradeMarkets[currentMarket]['name'] = element['market_display_name'];
-            tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = {name: element['submarket_display_name']};
+            if(!tradeMarkets[currentMarket]['submarkets'][currentSubMarket]){
+                tradeMarkets[currentMarket]['submarkets'][currentSubMarket] = {name: element['submarket_display_name'],is_active:0};
+            }
 
             if(is_active){
                 tradeMarkets[currentMarket]['is_active'] = 1;
@@ -12523,13 +12623,15 @@ var Tick = (function () {
         } else {
             message = quote;
         }
-        if(parseFloat(message)!=message){
+
+        if(parseFloat(message) != message){
             spotElement.className = 'error';
-        }
-        else{
+        } else{
             spotElement.classList.remove('error');
             displayPriceMovement(spotElement, spotElement.textContent, message);
+            displayIndicativeBarrier();
         }
+
         spotElement.textContent = message;
     };
 
@@ -12590,7 +12692,13 @@ WSTickDisplay.updateChart = function(data){
     }           
 };
 
-;RealityCheck = (function ($) {
+;var User = (function () {
+    var data = {};
+    return {
+        set: function(a){ data = a; },
+        get: function(){ return data; }
+    };
+})();;RealityCheck = (function ($) {
     "use strict";
 
     var reality_check_url = page.url.url_for('user/reality_check');
@@ -13524,6 +13632,8 @@ function attach_tabs(element) {
 	    if(Periods){
 	    	Periods.displayPeriods();
 	    }
+
+	    displayPrediction();
 	    
 	    processPriceRequest();
 	};

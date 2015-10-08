@@ -48,6 +48,7 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
+
             if(passthrough['basis'] === "payout"){
                 payout_value = passthrough['amount'];
                 cost_value = passthrough['ask-price'];
@@ -63,7 +64,8 @@ var Purchase = (function () {
             cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
             profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
 
-            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + Math.round(receipt['balance_after']*100)/100;
+
+            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + User.get().currency + ' ' + Math.round(receipt['balance_after']*100)/100;
 
             if(show_chart){
                 chart.show();
