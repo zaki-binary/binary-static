@@ -160,13 +160,18 @@ function processForgetPriceIds() {
     'use strict';
     if (Price) {
         showPriceOverlay();
-        var priceIds = Price.bufferedIds();
-        for (var id in priceIds) {
-            if (priceIds.hasOwnProperty(id) && priceIds[id]!==-1) {
+        var price_data = Price.bufferRequests();
+        var form_id = Price.getFormId();
+        var price_id = Price.bufferedIds();
+
+        for (var id in price_data) {
+            if(price_data[id] && price_data[id].passthrough.form_id!==form_id){
                 TradeSocket.send({ forget: id });
-                priceIds[id] = -1;
+                delete price_data[id];
+                delete price_id[id];
             }
         }
+
         Price.clearMapping();
     }
 }
@@ -178,8 +183,9 @@ function processForgetPriceIds() {
 function processPriceRequest() {
     'use strict';
 
+    Price.incrFormId();
     processForgetPriceIds();
-    showPriceOverlay();
+    showPriceOverlay(); 
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
         if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
@@ -221,12 +227,14 @@ function processTick(tick) {
 
 function processProposal(response){
     'use strict';
-    var price_ids = Price.bufferedIds();
-    if(price_ids[response.proposal.id]!==-1){
+    var price_data = Price.bufferRequests();
+    var form_id = Price.getFormId();
+    // This is crazy condition but there is no way
+    if((!price_data[response.proposal.id] && response.echo_req.passthrough && response.echo_req.passthrough.form_id === form_id) || price_data[response.proposal.id].passthrough.form_id === Price.form_id){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
-        if(Object.keys(Price.bufferedIds()).length == 2){
+        if(form_id===1){
             document.getElementById('trading_socket_container').classList.add('show');
             document.getElementById('trading_init_progress').style.display = 'none';
         }
