@@ -559,11 +559,11 @@ function addEventListenerForm(){
  * this creates a button, clicks it, and destroys it to invoke the listener
  */
 function submitForm(form) {
-    // var button = form.ownerDocument.createElement('input');
-    // button.style.display = 'none';
-    // button.type = 'submit';
-    // form.appendChild(button).click();
-    // form.removeChild(button);
+    var button = form.ownerDocument.createElement('input');
+    button.style.display = 'none';
+    button.type = 'submit';
+    form.appendChild(button).click();
+    form.removeChild(button);
 }
 
 /*
