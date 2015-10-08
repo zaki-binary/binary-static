@@ -22,9 +22,42 @@
     }
 }
 
+@keyframes spinning {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+.spinner {
+    animation: spinning .2s * 5 infinite linear;
+}
+
+#trading_init_progress {
+    @extend .spinner;
+    background-image: url('../images/pages/binary-symbol-logo.svg');
+    background-size: contain;
+    width: 12rem;
+    height: 12rem;
+    position: absolute;
+    left: 50%;
+    top: 250px;
+    margin-left: -6rem;
+}
+
 #trading_socket_container {
+
   font-size: 1rem;
   position: relative;
+  opacity: 0;
+  &.show{
+    animation: fade 1s;
+    animation-fill-mode: forwards;
+  }
   select,input{
     border-radius: 5px;
     box-sizing: border-box;
@@ -35,6 +68,9 @@
   }
   label{
     line-height: 28px;
+  }
+  .button button{
+    cursor: pointer;
   }
   .submitted input:invalid + label::after {
     content: 'invalid input';
@@ -150,6 +186,9 @@
     padding: 0 10px;
   }
   #contract_prices_container {
+    #contract_purchase_reference{
+      margin-bottom: 10px;
+    }
     #confirmation_error{
       padding: 20px;
       font-style: italic;
@@ -275,15 +314,22 @@
   #expiry_type_duration{
     flex-wrap: wrap;
   }
+  #contracts_list{
+    position: relative;
+  }
   .overlay_container {
     width: 100%;
     display: none;
     background: transparent;
     z-index: 9999;
-  }
-  #loading_container2{
-    background: $COLOR_LIGHT_GRAY;
-    opacity: 0.5;
+    &#loading_container2{
+      background: $COLOR_LIGHT_GRAY;
+      opacity: 0.5;
+      display: block;
+      position: absolute;
+      height: 100%;
+      flex: 1 0 auto;
+    }
   }
   #contract_confirmation_container {
     background-color: $COLOR_LIGHT_GRAY;
@@ -326,7 +372,7 @@
     line-height: 28px;
     white-space: nowrap;
   }
-  #duration_amount,#currency,#prediction{
+  .small_width_input {
     width: 70px;
   }
   #currency{
@@ -349,7 +395,7 @@
   #period{
     font-size: 80%;
   }
-  #amount,#duration_units{
+  .medium_width_input {
     width: 100px;
   }
   #amount{
@@ -361,6 +407,9 @@
   }
   #spot_label{
     display: none;
+  }
+  .radio_label {
+    margin: 0 10px;
   }
 }
 

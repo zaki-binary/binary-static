@@ -74,7 +74,7 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var contract_categories = Contract.contractForms();
     var formname;
     if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
         formname = sessionStorage.getItem('formname');
@@ -90,7 +90,7 @@ function processContract(contracts) {
             }
         }
     }
-    
+
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
@@ -111,10 +111,12 @@ function processContractForm() {
 
     displayPrediction();
 
+    displaySpreads();
+
     processPriceRequest();
 }
 
-function displayPrediction(){
+function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
@@ -124,17 +126,45 @@ function displayPrediction(){
     }
 }
 
+function displaySpreads() {
+    var amountType = document.getElementById('amount_type'),
+        amountPerPointLabel = document.getElementById('amount_per_point_label'),
+        amount = document.getElementById('amount'),
+        amountPerPoint = document.getElementById('amount_per_point'),
+        spreadContainer = document.getElementById('spread_element_container'),
+        stopTypeDollarLabel = document.getElementById('stop_type_dollar_label'),
+        expiryTypeRow = document.getElementById('expiry_row');
+
+    if(sessionStorage.getItem('formname') === 'spreads'){
+        amountType.hide();
+        amount.hide();
+        expiryTypeRow.hide();
+        amountPerPointLabel.show();
+        amountPerPoint.show();
+        spreadContainer.show();
+        stopTypeDollarLabel.textContent = document.getElementById('currency').value;
+    } else {
+        amountPerPointLabel.hide();
+        amountPerPoint.hide();
+        spreadContainer.hide();
+        expiryTypeRow.show();
+        amountType.show();
+        amount.show();
+    }
+}
+
 /*
  * Function to request for cancelling the current price proposal
  */
 function processForgetPriceIds() {
     'use strict';
     if (Price) {
+        showPriceOverlay();
         var priceIds = Price.bufferedIds();
         for (var id in priceIds) {
-            if (priceIds.hasOwnProperty(id)) {
+            if (priceIds.hasOwnProperty(id) && priceIds[id]!==-1) {
                 TradeSocket.send({ forget: id });
-                delete priceIds[id];
+                priceIds[id] = -1;
             }
         }
         Price.clearMapping();
@@ -186,5 +216,19 @@ function processTick(tick) {
     if (!Barriers.isBarrierUpdated()) {
         Barriers.display();
         Barriers.setBarrierUpdate(true);
+    }
+}
+
+function processProposal(response){
+    'use strict';
+    var price_ids = Price.bufferedIds();
+    if(price_ids[response.proposal.id]!==-1){
+        hideOverlayContainer();
+        Price.display(response, Contract.contractType()[Contract.form()]);
+        hidePriceOverlay();
+        if(Object.keys(Price.bufferedIds()).length == 2){
+            document.getElementById('trading_socket_container').classList.add('show');
+            document.getElementById('trading_init_progress').style.display = 'none';
+        }
     }
 }

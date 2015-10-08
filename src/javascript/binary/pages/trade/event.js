@@ -209,6 +209,10 @@ var currencyElement = document.getElementById('currency');
 if (currencyElement) {
     currencyElement.addEventListener('change', function (e) {
         sessionStorage.setItem('currency', e.target.value);
+        var stopTypeDollarLabel = document.getElementById('stop_type_dollar_label');
+        if (stopTypeDollarLabel && isVisible(stopTypeDollarLabel)) {
+            stopTypeDollarLabel.textContent = e.target.value;
+        }
         processPriceRequest();
     });
 }
@@ -221,19 +225,22 @@ var purchaseContractEvent = function () {
     var id = this.getAttribute('data-purchase-id'),
         askPrice = this.getAttribute('data-ask-price');
 
-    var params = {buy: id, price: askPrice, form_data:{}};
-    for(var attr in this.attributes){
-        if(attr && this.attributes[attr] && this.attributes[attr].name){
-            var m = this.attributes[attr].name.match(/data\-(.+)/);
+    var params = {buy: id, price: askPrice, passthrough:{}};
+    var ids = Price.bufferedIds();
+    if(ids[id]){
+        for(var attr in this.attributes){
+            if(attr && this.attributes[attr] && this.attributes[attr].name){
+                var m = this.attributes[attr].name.match(/data\-(.+)/);
 
-            if(m && m[1] && m[1]!=="purchase-id"){
-                params.form_data[m[1]] = this.attributes[attr].value;
+                if(m && m[1] && m[1]!=="purchase-id"){
+                    params.passthrough[m[1]] = this.attributes[attr].value;
+                }
             }
         }
-    }
-    if (id && askPrice) {
-        TradeSocket.send(params);
-        processForgetPriceIds();
+        if (id && askPrice) {
+            TradeSocket.send(params);
+            processForgetPriceIds();
+        }
     }
 };
 
@@ -292,9 +299,59 @@ if (highBarrierElement) {
     }));
 }
 
+/*
+ * attach an event to change in digit prediction input
+ */
 var predictionElement = document.getElementById('prediction');
 if (predictionElement) {
     predictionElement.addEventListener('input', debounce( function (e) {
+        processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
+    }));
+}
+
+/*
+ * attach an event to change in amount per point for spreads
+ */
+var amountPerPointElement = document.getElementById('amount_per_point');
+if (amountPerPointElement) {
+    amountPerPointElement.addEventListener('input', debounce( function (e) {
+        processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
+    }));
+}
+
+/*
+ * attach an event to change in stop type for spreads
+ */
+var stopTypeEvent = function () {
+    processPriceRequest();
+};
+
+var stopTypeElement = document.querySelectorAll('input[name="stop_type"]');
+if (stopTypeElement) {
+    for (var i = 0, len = stopTypeElement.length; i < len; i++) {
+        stopTypeElement[i].addEventListener('click', stopTypeEvent);
+    }
+}
+
+/*
+ * attach an event to change in stop loss input value
+ */
+var stopLossElement = document.getElementById('stop_loss');
+if (stopLossElement) {
+    stopLossElement.addEventListener('input', debounce( function (e) {
+        processPriceRequest();
+        submitForm(document.getElementById('websocket_form'));
+    }));
+}
+
+/*
+ * attach an event to change in stop profit input value
+ */
+var stopProfitElement = document.getElementById('stop_profit');
+if (stopProfitElement) {
+    stopProfitElement.addEventListener('input', debounce( function (e) {
         processPriceRequest();
         submitForm(document.getElementById('websocket_form'));
     }));
