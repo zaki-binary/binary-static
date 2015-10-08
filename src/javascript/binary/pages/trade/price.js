@@ -68,7 +68,12 @@ var Price = (function () {
             proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
-            proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
+            var endDate2 = endDate.value;
+            var endTime2 = endTime.value;
+            if(!isVisible(endTime)){
+                endTime2="23:59:59";
+            }
+            proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
