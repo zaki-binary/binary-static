@@ -48,12 +48,13 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
-            if(passthrough.basis === "payout"){
-                payout_value = passthrough.amount;
+
+            if(passthrough['basis'] === "payout"){
+                payout_value = passthrough['amount'];
                 cost_value = passthrough['ask-price'];
             }
             else{
-                cost_value = passthrough.amount;
+                cost_value = passthrough['amount'];
                 var match = receipt['longcode'].match(/\d+\.\d\d/);
                 payout_value = match[0];
             }
@@ -99,7 +100,6 @@ var Purchase = (function () {
                     button.setAttribute(k,button_attrs[k]);
                 }
             }
-            
         }
 
         if(show_chart){
@@ -122,7 +122,7 @@ var Purchase = (function () {
 
     var update_spot_list = function(data){
         var spots = document.getElementById('contract_purchase_spots');
-        if(isVisible(spots) && purchase_data.echo_req.passthrough.duration && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
+        if(isVisible(spots) && purchase_data.echo_req.passthrough['duration'] && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
             var fragment = document.createElement('div');
             fragment.classList.add('row');
 
@@ -148,10 +148,9 @@ var Purchase = (function () {
             fragment.appendChild(el3);
 
             spots.appendChild(fragment);
-            
             if(d1){
                 var contract_status;
-                if(d1==purchase_data.echo_req.passthrough.barrier){
+                if(d1==purchase_data.echo_req.passthrough['barrier']){
                     spots.className = 'won';
                     contract_status = 'This contract won';
                 }
@@ -162,7 +161,7 @@ var Purchase = (function () {
                 document.getElementById('contract_purchase_heading').textContent = text.localize(contract_status);
             }
 
-            purchase_data.echo_req.passthrough.duration--;
+            purchase_data.echo_req.passthrough['duration']--;
         }
     };
 

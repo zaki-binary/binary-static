@@ -24,7 +24,6 @@
      if (elements) {
          var tree = getContractCategoryTree(elements);
          for(var i=0;i<tree.length;i++){
-             
              var el1 = tree[i];
              var li = document.createElement('li');
 
@@ -508,25 +507,6 @@ function setFormPlaceholderContent(name) {
          }
      }
  }
-
-/*
- * This function loops through the available contracts and markets
- * that are not supposed to be shown are replaced
- *
- * this is TEMPORARY, it will be removed when we fix backend
- */
-function getAllowedContractCategory(contracts) {
-    'use strict';
-    var obj = {};
-    for(var key in contracts) {
-        if (contracts.hasOwnProperty(key)) {
-            if (!(/spreads/i.test(contracts[key]))) {
-                obj[key] = contracts[key];
-            }
-        }
-    }
-    return obj;
-}
 
 /*
  * This function is used in case where we have input and we don't want to fire
