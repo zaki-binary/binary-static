@@ -49,11 +49,11 @@ var Purchase = (function () {
 
             var payout_value, cost_value, profit_value;
             if(passthrough.basis === "payout"){
-                payout_value = passthrough.amount_val;
+                payout_value = passthrough.amount;
                 cost_value = passthrough['ask-price'];
             }
             else{
-                cost_value = passthrough.amount_val;
+                cost_value = passthrough.amount;
                 var match = receipt['longcode'].match(/\d+\.\d\d/);
                 payout_value = match[0];
             }
@@ -114,7 +114,7 @@ var Purchase = (function () {
                 "decimal":3,
                 "contract_sentiment":(passthrough['contract_type']==='CALL' ? 'up' : 'down'),
                 "price":passthrough['ask-price'],
-                "payout":passthrough['amount_val'],
+                "payout":passthrough['amount'],
                 "show_contract_result":1
             });
         }
