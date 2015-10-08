@@ -74,7 +74,8 @@
                            </label>
                         </div>
                         <div class="big-col">
-                           <input id="barrier" type="text" name="H" pattern="^\+\d+(\.\d{1,3})?|\d+(\.\d{1,3})?$" title="0.001 format" /><label></label>
+                           <input id="barrier" type="text" name="H" pattern="^\+\d+(\.\d{1,3})?|\d+(\.\d{1,3})?$" title="0.001 format" />
+                           <abbr rel="tooltip" id="indicative_barrier_tooltip"></abbr>
                         </div>
                      </div>
                      <div class="row" id="jhigh_barrier_row">
@@ -93,7 +94,8 @@
                            </label>
                         </div>
                         <div class="big-col">
-                           <input id="barrier_high" type="text" name="H" pattern="^\+\d+(\.\d{1,3})?|\d+(\.\d{1,3})?$" title="0.001 format" /><label></label>
+                           <input id="barrier_high" type="text" name="H" pattern="^\+\d+(\.\d{1,3})?|\d+(\.\d{1,3})?$" title="0.001 format" />
+                           <abbr rel="tooltip" id="indicative_high_barrier_tooltip"></abbr>
                         </div>
                      </div>
                      <div class="row" id="jlow_barrier_row">
@@ -112,7 +114,8 @@
                            </label>
                         </div>
                         <div class="big-col">
-                           <input id="barrier_low" type="text" name="L" pattern="^\-\d+(\.\d{1,3})?|\d+(\.\d{1,3})?$" title="0.001 format" /><label></label>
+                           <input id="barrier_low" type="text" name="L" pattern="^\-\d+(\.\d{1,3})?|\d+(\.\d{1,3})?$" title="0.001 format" />
+                           <abbr rel="tooltip" id="indicative_low_barrier_tooltip"></abbr>
                         </div>
                      </div>
                      <div class="row" id="prediction_row">
@@ -250,3 +253,4 @@
    </div>
 </div>
 <div id="trading_bottom_content"></div>
+<div id="trading_init_progress"></div>
