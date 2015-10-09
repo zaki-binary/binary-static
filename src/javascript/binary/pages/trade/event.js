@@ -16,6 +16,7 @@ var TradingEvents = (function () {
          */
         var marketNavElement = document.getElementById('contract_markets');
         var onMarketChange = function(market){
+            showPriceOverlay();
             sessionStorage.setItem('market', market);
 
             // as different markets have different forms so remove from sessionStorage
@@ -71,6 +72,7 @@ var TradingEvents = (function () {
         if (underlyingElement) {
             underlyingElement.addEventListener('change', function(e) {
                 if (e.target) {
+                    showPriceOverlay();
                     var underlying = e.target.value;
                     sessionStorage.setItem('underlying', underlying);
                     requestTradeAnalysis();
