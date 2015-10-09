@@ -11842,7 +11842,7 @@ var Price = (function () {
             var endDate2 = endDate.value;
             var endTime2 = endTime.value;
             if(!isVisible(endTime)){
-                endTime2="23:59:59";
+                endTime2="00:00:00";
             }
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
