@@ -16,7 +16,8 @@ var Price = (function () {
 
     var typeDisplayIdMapping = {},
         bufferedIds = {},
-        bufferRequests = {};
+        bufferRequests = {},
+        form_id = 0;
 
     var createProposal = function (typeOfContract) {
         var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
@@ -68,7 +69,12 @@ var Price = (function () {
             proposal['duration'] = parseInt(duration.value);
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
-            proposal['date_expiry'] = moment.utc(endDate.value + " " + endTime.value).unix();
+            var endDate2 = endDate.value;
+            var endTime2 = endTime.value;
+            if(!isVisible(endTime)){
+                endTime2="23:59:59";
+            }
+            proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
@@ -102,6 +108,12 @@ var Price = (function () {
         if (stopProfit && isVisible(stopProfit)) {
             proposal['stop_profit'] = parseFloat(stopProfit.value);
         }
+
+        if (contractType) {
+            proposal['contract_type'] = typeOfContract;
+        }
+
+        proposal['passthrough'] = {form_id:form_id};
 
         return proposal;
     };
@@ -179,12 +191,20 @@ var Price = (function () {
         typeDisplayIdMapping = {};
     };
 
+    var clearBuffer = function () {
+        bufferedIds = {};
+    };
+
     return {
         proposal: createProposal,
         display: display,
         clearMapping: clearMapping,
         idDisplayMapping: function () { return typeDisplayIdMapping; },
-        bufferedIds: function () { return bufferedIds; }
+        bufferedIds: function () { return bufferedIds; },
+        bufferRequests: function () { return bufferRequests; },
+        getFormId: function(){ return form_id; },
+        incrFormId: function(){ form_id++; },
+        clearBufferIds: clearBuffer
     };
 
 })();
