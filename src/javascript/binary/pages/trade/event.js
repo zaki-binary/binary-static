@@ -114,6 +114,17 @@ var TradingEvents = (function () {
         }
 
         /*
+         * bind event to change in duration units, populate duration and request price
+         */
+        var durationUnitElement = document.getElementById('duration_units');
+        if (durationUnitElement) {
+            durationUnitElement.addEventListener('change', function () {
+                durationPopulate();
+                processPriceRequest();
+            });
+        }
+
+        /*
          * bind event to change in endtime date and time
          */
         var endDateElement = document.getElementById('expiry_date');
@@ -144,17 +155,6 @@ var TradingEvents = (function () {
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
             endTimeElement.addEventListener('change', function () {
-                processPriceRequest();
-            });
-        }
-
-        /*
-         * bind event to change in duration units, populate duration and request price
-         */
-        var durationUnitElement = document.getElementById('duration_units');
-        if (durationUnitElement) {
-            durationUnitElement.addEventListener('change', function () {
-                durationPopulate();
                 processPriceRequest();
             });
         }
