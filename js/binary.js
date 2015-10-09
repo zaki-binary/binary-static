@@ -11582,7 +11582,7 @@ var TradingEvents = (function () {
                     if(attr && this.attributes[attr] && this.attributes[attr].name){
                         var m = this.attributes[attr].name.match(/data\-(.+)/);
 
-                        if(m && m[1] && m[1]!=="purchase-id"){
+                        if(m && m[1] && m[1]!=="purchase-id" && m[1]!=="passthrough"){
                             params.passthrough[m[1]] = this.attributes[attr].value;
                         }
                     }
