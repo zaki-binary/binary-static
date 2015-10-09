@@ -11708,6 +11708,16 @@ var TradingEvents = (function () {
                 submitForm(document.getElementById('websocket_form'));
             }));
         }
+
+        var init_logo = document.getElementById('trading_init_progress');
+        if(init_logo){
+            init_logo.addEventListener('click', debounce( function (e) {
+                delete sessionStorage['market'];
+                delete sessionStorage['formname'];
+                delete sessionStorage['underlying'];
+                location.reload();
+            }));
+        }
     };
 
     return {
