@@ -611,3 +611,19 @@ function durationOrder(duration){
     };
     return order[duration];
 }
+
+function displayTooltip(market, symbol){
+    var tip = document.getElementById('symbol_tip');
+    if(market.match(/^random/)){
+        tip.show();
+        tip.setAttribute('href','https://www.binary.com/get-started/random-markets');
+    }
+    else if(symbol.match(/^SYN/)){
+        tip.show();
+        tip.setAttribute('href','https://www.binary.com/smart-indices');
+    }
+    else{
+        console.log('message');
+        tip.hide();
+    }
+}
