@@ -148,9 +148,8 @@ var Purchase = (function () {
             fragment.appendChild(el3);
 
             spots.appendChild(fragment);
-
             spots.scrollTop = spots.scrollHeight;
-
+            
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status;
                 if(d1==purchase_data.echo_req.passthrough['barrier']){
