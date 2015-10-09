@@ -184,12 +184,17 @@ var Price = (function () {
         typeDisplayIdMapping = {};
     };
 
+    var clearBuffer = function () {
+        bufferedIds = {};
+    };
+
     return {
         proposal: createProposal,
         display: display,
         clearMapping: clearMapping,
         idDisplayMapping: function () { return typeDisplayIdMapping; },
-        bufferedIds: function () { return bufferedIds; }
+        bufferedIds: function () { return bufferedIds; },
+        clearBufferIds: clearBuffer
     };
 
 })();
