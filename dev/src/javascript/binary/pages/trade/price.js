@@ -193,6 +193,7 @@ var Price = (function () {
 
     var clearBuffer = function () {
         bufferedIds = {};
+        form_id = 0;
     };
 
     return {
