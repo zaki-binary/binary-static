@@ -388,9 +388,9 @@ var TradingEvents = (function () {
         var init_logo = document.getElementById('trading_init_progress');
         if(init_logo){
             init_logo.addEventListener('click', debounce( function (e) {
-                delete sessionStorage['market'];
-                delete sessionStorage['formname'];
-                delete sessionStorage['underlying'];
+                sessionStorage.removeItem('market');
+                sessionStorage.removeItem('formname');
+                sessionStorage.removeItem('underlying');
                 location.reload();
             }));
         }
