@@ -130,7 +130,25 @@ var TradingEvents = (function () {
         var endDateElement = document.getElementById('expiry_date');
         if (endDateElement) {
             endDateElement.addEventListener('change', function () {
-                processPriceRequest();
+                var input = this.value;
+                var match = input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+                if(match){
+                    var date1 = new Date();
+                    date1.setUTCFullYear(match[1]);
+                    date1.setUTCMonth(match[2]-1);
+                    date1.setUTCDate(match[3]);
+
+                    var date2 = new Date();
+                    var diff = date1.getTime() - date2.getTime();
+                    var expiry_time = document.getElementById('expiry_time');
+                    if(diff > 24*60*60*1000){
+                        expiry_time.hide();
+                    }
+                    else{
+                        expiry_time.show();
+                    }
+                    processPriceRequest();
+                }
             });
         }
 
