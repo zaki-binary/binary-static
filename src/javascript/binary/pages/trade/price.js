@@ -186,6 +186,10 @@ var Price = (function () {
         typeDisplayIdMapping = {};
     };
 
+    var clearBuffer = function () {
+        bufferedIds = {};
+    };
+
     return {
         proposal: createProposal,
         display: display,
@@ -194,7 +198,8 @@ var Price = (function () {
         bufferedIds: function () { return bufferedIds; },
         bufferRequests: function () { return bufferRequests; },
         getFormId: function(){ return form_id; },
-        incrFormId: function(){ form_id++; }
+        incrFormId: function(){ form_id++; },
+        clearBufferIds: clearBuffer
     };
 
 })();

@@ -39,7 +39,6 @@ function processMarket(flag) {
     if(update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
         symbol = undefined;
     }
-    
     displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
 
     if(update_page){
