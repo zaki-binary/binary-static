@@ -440,42 +440,41 @@ function displayPriceMovement(element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
+function toggleActiveNavMenuElement(nav, eventElement) {
+    var liElements = nav.getElementsByTagName("li");
+    var classes = eventElement.classList;
 
- function toggleActiveNavMenuElement(nav, eventElement) {
-     var liElements = nav.getElementsByTagName("li");
-     var classes = eventElement.classList;
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+        }
+        classes.add('active');
+    }
+}
 
-     if (!classes.contains('active')) {
-         for (var i = 0, len = liElements.length; i < len; i++){
-             liElements[i].classList.remove('active');
-         }
-         classes.add('active');
-     }
- }
+function toggleActiveCatMenuElement(nav, eventElementId) {
+    var eventElement = document.getElementById(eventElementId);
+    var liElements = nav.querySelectorAll('.active, .a-active');
+    var classes = eventElement.classList;
 
- function toggleActiveCatMenuElement(nav, eventElementId) {
-     var eventElement = document.getElementById(eventElementId);
-     var liElements = nav.querySelectorAll('.active, .a-active');
-     var classes = eventElement.classList;
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+            liElements[i].classList.remove('a-active');
+        }
+        classes.add('a-active');
 
-     if (!classes.contains('active')) {
-         for (var i = 0, len = liElements.length; i < len; i++){
-             liElements[i].classList.remove('active');
-             liElements[i].classList.remove('a-active');
-         }
-         classes.add('a-active');
-
-         i = 0;
-         var parent;
-         while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
-             if(parent.tagName === 'LI'){
-                 parent.classList.add('active');
-             }
-             eventElement = parent;
-             i++;
-         }
-     }
- }
+        i = 0;
+        var parent;
+        while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
+            if(parent.tagName === 'LI'){
+                parent.classList.add('active');
+            }
+            eventElement = parent;
+            i++;
+        }
+    }
+}
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
@@ -491,22 +490,22 @@ function setFormPlaceholderContent(name) {
 /*
  * function to display the profit and return of bet under each trade container
  */
- function displayCommentPrice(node, currency, type, payout) {
-     'use strict';
+function displayCommentPrice(node, currency, type, payout) {
+    'use strict';
 
-     if (node && type && payout) {
-         var profit = payout - type,
-             return_percent = (profit/type)*100,
-             comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
+    if (node && type && payout) {
+        var profit = payout - type,
+            return_percent = (profit/type)*100,
+            comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
 
-         if (isNaN(profit) || isNaN(return_percent)) {
-             node.hide();
-         } else {
-             node.show();
-             node.textContent = comment;
-         }
-     }
- }
+        if (isNaN(profit) || isNaN(return_percent)) {
+            node.hide();
+        } else {
+            node.show();
+            node.textContent = comment;
+        }
+    }
+}
 
 /*
  * This function is used in case where we have input and we don't want to fire
@@ -567,6 +566,41 @@ function submitForm(form) {
     // form.removeChild(button);
 }
 
+/*
+ * function to display indicative barrier
+ */
+function displayIndicativeBarrier() {
+    var unit = document.getElementById('duration_units'),
+        currentTick = Tick.quote(),
+        indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
+        indicativeHighBarrierTooltip = document.getElementById('indicative_high_barrier_tooltip'),
+        indicativeLowBarrierTooltip = document.getElementById('indicative_low_barrier_tooltip'),
+        barrierElement = document.getElementById('barrier'),
+        highBarrierElement = document.getElementById('barrier_high'),
+        lowBarrierElement = document.getElementById('barrier_low');
+
+    if (unit && unit.value !== 'd' && currentTick) {
+        if (indicativeBarrierTooltip && isVisible(indicativeBarrierTooltip)) {
+            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(3);
+        }
+
+        if (indicativeHighBarrierTooltip && isVisible(indicativeHighBarrierTooltip)) {
+            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(3);
+        }
+
+        if (indicativeLowBarrierTooltip && isVisible(indicativeLowBarrierTooltip)) {
+            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(3);
+        }
+    } else {
+        indicativeBarrierTooltip.textContent = '';
+        indicativeHighBarrierTooltip.textContent = '';
+        indicativeLowBarrierTooltip.textContent = '';
+    }
+}
+
+/*
+ * function to sort the duration in ascending order
+ */
 function durationOrder(duration){
     var order = {
         t:1,
