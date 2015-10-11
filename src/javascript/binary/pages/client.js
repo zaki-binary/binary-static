@@ -113,6 +113,17 @@ var hide_account_opening_for_risk_disclaimer = function () {
     }
 };
 
+var toggle_hedging_assets = function() {
+    var trading_purpose = $('#trading_purpose');
+    var hedging_assets_fields = $('.hedging_assets');
+
+    if (trading_purpose.val() === 'Hedging') {
+        hedging_assets_fields.show();
+    } else {
+        hedging_assets_fields.hide();
+    }
+};
+
 pjax_config_page('new_account/maltainvest', function() {
     return {
         onLoad: function() {
@@ -123,6 +134,17 @@ pjax_config_page('new_account/maltainvest', function() {
             upgrade_investment_disabled_field();
             financial_enable_fields_form_submit();
             hide_account_opening_for_risk_disclaimer();
+        }
+    };
+});
+
+pjax_config_page('new_account/japan', function() {
+    return {
+        onLoad: function() {
+            toggle_hedging_assets();
+            $('#trading_purpose').on('change', function() {
+                toggle_hedging_assets();
+            });
         }
     };
 });
