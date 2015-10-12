@@ -1,10 +1,4 @@
-onLoad.queue_for_url(function() {
-    $('#statement-date').on('change', function() {
-        $('#submit-date').removeClass('invisible');
-    });
-}, 'statement');
-
-pjax_config_page("statement", function(){
+function(){
     "use strict";
     function genericEventHandler(event){
         const payload = JSON.parse(event.data);
@@ -52,4 +46,4 @@ pjax_config_page("statement", function(){
     $(document).ready(function(){
         initPage();
     });
-});
+};

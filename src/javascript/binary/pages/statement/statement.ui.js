@@ -2,11 +2,12 @@ const StatementUI = (function(){
     "use strict";
     const $statementTable = $("#statement-table");
     const $statementTableFooter = $("#statement-table-footer");
+    const $statementTableBody = $("#statement-table-body");
     const $datePickerWidget = $("#statement-date");
     
     function setStatementTable(statementData){
-        clearStatementTable();
-        
+        clearStatementTableBody();
+                
         const transactions = statementData.transactions;
         appendTransactionsToTable(transactions, $statementTable);
 
@@ -27,21 +28,21 @@ const StatementUI = (function(){
             .children(".bal-col-item")
             .text(balance[0].balance);
     }
-    function clearStatementTable(){
-        $statementTable
+    function clearStatementTableBody(){
+        
+        $statementTableBody
             .children()
-            .not(".header").not(".footer")
             .remove();
     };
     function appendTransactionsToTable(transactions, $tableDOM){
 
         for (var i = 0 ; i < transactions.length ; i ++) {
             const rowDOM = generateTransactionDOM(transactions[i]);
-            rowDOM.insertBefore($statementTableFooter);
+            rowDOM.appendTo($statementTableBody);
         }
     }
     function generateTransactionDOM(transaction){
-        const $rowDom = $("<div></div>", {class: "flex-table-row"});
+        const $rowDom = $("<tr></tr>", {class: "flex-table-row"});
 
         const dateObj = new Date(transaction["transaction_time"] * 1000);
         const momentObj = moment(dateObj);
@@ -59,32 +60,32 @@ const StatementUI = (function(){
 
         const balance = transaction["balance_after"];
 
-        const dateDom = $("<div></div>", {
+        const dateDom = $("<td></td>", {
             class: "flex-table-row-item breakline date-col-item",
             text: dateStr + "\n" + timeStr
         }).appendTo($rowDom);
 
-        const refDom = $("<div></div>", {
+        const refDom = $("<td></td>", {
             class: "flex-table-row-item ref-col-item",
             text: ref
         }).appendTo($rowDom);
 
-        const actionDom = $("<div></div>", {
+        const actionDom = $("<td></td>", {
             class: "flex-table-row-item action-col-item",
             text: action
         }).appendTo($rowDom);
 
-        const descDom = $("<div></div>", {
+        const descDom = $("<td></td>", {
             class: "flex-table-row-item desc-col-item",
             text: desc
         }).appendTo($rowDom);
 
-        const creditDebitDom = $("<div></div>", {
+        const creditDebitDom = $("<td></td>", {
             class: "flex-table-row-item credit-col-item" + creditDebitType,
             text: amount
         }).appendTo($rowDom);
 
-        const balanceDom = $("<div></div>", {
+        const balanceDom = $("<td></td>", {
             class: "flex-table-row-item bal-col-item",
             text: balance
         }).appendTo($rowDom);
@@ -109,7 +110,7 @@ const StatementUI = (function(){
         setDatePickerDefault: datepickerDefault,
         showButtonOnDateChange: showButtonOnDateChange,
         setStatementTableFooterBalance: setStatementTableFooterBalance,
-        clearStatementTable: clearStatementTable
+        clearStatementTableBody: clearStatementTableBody
     }
     
     return publicMethods;

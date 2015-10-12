@@ -1,12 +1,12 @@
 const StatementData = (function(){
     "use strict";
     
-    let token = "4xHEZxVyhKMcxMn3CaABE6DKMgmkkj6tIxX3dE8Zel2Ymi1S"
-    let authorized = false;
-    let dataHandler = function(){
+    var token = "8V9AOHhd0J4l2JZR5ZIWIhcybOBcDXfkavQD7xMcpi8vJThO"
+    var authorized = false;
+    var dataHandler = function(){
         throw "no data handler registered";
     };
-    let errHandler = function(){
+    var errHandler = function(){
         throw "no error handler registered";
     };
     const ws = new WebSocket("wss://www.binary.com/websockets/v2");
@@ -59,7 +59,7 @@ const StatementData = (function(){
     }
     
     function getStatement(opts){
-        let req = {statement: 1, description: 1};
+        var req = {statement: 1, description: 1};
         if(opts){
             console.log("opts : ", opts);   
             $.extend(true, req, opts);    

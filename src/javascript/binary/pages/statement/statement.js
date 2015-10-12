@@ -24,8 +24,8 @@
     function reloadPageOnDateSubmit(){
         const submitButton = $("#submit-date");
         submitButton.click(function(){
-            let date = $("#statement-date").datepicker("getDate");
-            let epoch = Math.floor(date.getTime()/1000);
+            var date = $("#statement-date").datepicker("getDate");
+            var epoch = Math.floor(date.getTime()/1000);
             StatementData.getStatement({dt_to: epoch});
             submitButton.addClass("invisible");
         });    
