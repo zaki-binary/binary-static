@@ -1,4 +1,4 @@
-function(){
+const StatementWS = (function(){
     "use strict";
     function genericEventHandler(event){
         const payload = JSON.parse(event.data);
@@ -43,7 +43,5 @@ function(){
         loadPage();
     }
     
-    $(document).ready(function(){
-        initPage();
-    });
-};
+    return {init: initPage};
+}());
