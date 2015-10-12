@@ -141,6 +141,7 @@ pjax_config_page('chart_application', function () {
 pjax_config_page('trading', function () {
     return {
         onLoad: function () {
+            TradingEvents.init();
             Content.populate();
             TradeSocket.init();
             Symbols.getSymbols(1);
