@@ -157,7 +157,7 @@ var Price = (function () {
         }
 
         if (proposal['longcode']) {
-            proposal['longcode'] = proposal['longcode'].replace(/\d+\.\d\d/,function(x){return '<b>'+x+'</b>';});
+            proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = proposal['longcode'];
         }
 
