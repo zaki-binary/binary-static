@@ -149,11 +149,23 @@ var Price = (function () {
         var display = type ? (contractType ? contractType[type] : '') : '';
         if (display) {
             h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
-            h4.textContent = display;
+            if (/^SPREAD/.test(type)) {
+                if (position === "top") {
+                    h4.textContent = Content.localize().textSpreadTypeLong;
+                } else {
+                    h4.textContent = Content.localize().textSpreadTypeShort;
+                }
+            } else {
+                h4.textContent = display;
+            }
         }
 
         if (proposal['ask_price']) {
-            amount.textContent = document.getElementById('currency').value + ' ' + proposal['ask_price'];
+            if (/^SPREAD/.test(type)) {
+                amount.textContent = proposal['ask_price'];
+            } else {
+                amount.textContent = document.getElementById('currency').value + ' ' + proposal['ask_price'];
+            }
         }
 
         if (proposal['longcode']) {
