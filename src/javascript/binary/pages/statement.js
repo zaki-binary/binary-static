@@ -4,7 +4,7 @@ onLoad.queue_for_url(function() {
     });
 }, 'statement');
 
-pjax_config_page("statement", function(){
+pjax_config_page("statementws", function(){
     return {
         onLoad: function(){
             console.log("statement page loaded");

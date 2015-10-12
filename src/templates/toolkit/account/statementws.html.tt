@@ -1,0 +1,36 @@
+<div id="statement-ws-container">
+    <div class="page-title" id="statement-title">
+        <h1>Statement</h1>
+        <br>
+    </div>
+
+    <label for="date-picker">Jump To</label>
+    <input id="statement-date" class="has-date-picker" name="date-picker"/>
+    <button class="button invisible" id="submit-date">Go</button>
+    <div id="statement-table-container">
+        <table id="statement-table" class="flex-table scrollable">
+            <thead>
+                <tr id="statement-table-header" class="flex-table-row">
+                    <th class="flex-table-row-item">Date</th>
+                    <th class="flex-table-row-item">Ref.</th>
+                    <th class="flex-table-row-item">Action</th>
+                    <th class="flex-table-row-item">Description</th>
+                    <th class="flex-table-row-item">Credit/Debit</th>
+                    <th class="flex-table-row-item">Balance(USD)</th>
+                </tr>
+            </thead>
+            <tbody id="statement-table-body">
+            </tbody>
+            <tfoot>
+                <tr id="statement-table-footer" class="flex-table-row">
+                    <td class="flex-table-row-item date-col-item"></td>
+                    <td class="flex-table-row-item ref-col-item"></td>
+                    <td class="flex-table-row-item action-col-item"></td>
+                    <td class="flex-table-row-item desc-col-item"></td>
+                    <td class="flex-table-row-item credit-col-item"></td>
+                    <td class="flex-table-row-item bal-col-item"></td>
+                </tr>
+            </tfoot>    
+        </table>
+    </div>
+</div>
