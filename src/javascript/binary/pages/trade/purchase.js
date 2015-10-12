@@ -48,6 +48,7 @@ var Purchase = (function () {
             reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
 
             var payout_value, cost_value, profit_value;
+
             if(passthrough['basis'] === "payout"){
                 payout_value = passthrough['amount'];
                 cost_value = passthrough['ask-price'];
@@ -63,7 +64,8 @@ var Purchase = (function () {
             cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
             profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
 
-            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + Math.round(receipt['balance_after']*100)/100;
+
+            balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + User.get().currency + ' ' + Math.round(receipt['balance_after']*100)/100;
 
             if(show_chart){
                 chart.show();
@@ -98,7 +100,6 @@ var Purchase = (function () {
                     button.setAttribute(k,button_attrs[k]);
                 }
             }
-            
         }
 
         if(show_chart){
@@ -113,7 +114,7 @@ var Purchase = (function () {
                 "decimal":3,
                 "contract_sentiment":(passthrough['contract_type']==='CALL' ? 'up' : 'down'),
                 "price":passthrough['ask-price'],
-                "payout":passthrough['amount_val'],
+                "payout":passthrough['amount'],
                 "show_contract_result":1
             });
         }
@@ -121,7 +122,7 @@ var Purchase = (function () {
 
     var update_spot_list = function(data){
         var spots = document.getElementById('contract_purchase_spots');
-        if(isVisible(spots) && purchase_data.echo_req.passthrough.duration && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
+        if(isVisible(spots) && purchase_data.echo_req.passthrough['duration'] && data.tick.epoch && data.tick.epoch > purchase_data.buy.start_time){
             var fragment = document.createElement('div');
             fragment.classList.add('row');
 
@@ -147,10 +148,11 @@ var Purchase = (function () {
             fragment.appendChild(el3);
 
             spots.appendChild(fragment);
+            spots.scrollTop = spots.scrollHeight;
             
-            if(d1){
+            if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status;
-                if(d1==purchase_data.echo_req.passthrough.barrier){
+                if(d1==purchase_data.echo_req.passthrough['barrier']){
                     spots.className = 'won';
                     contract_status = 'This contract won';
                 }
@@ -161,7 +163,7 @@ var Purchase = (function () {
                 document.getElementById('contract_purchase_heading').textContent = text.localize(contract_status);
             }
 
-            purchase_data.echo_req.passthrough.duration--;
+            purchase_data.echo_req.passthrough['duration']--;
         }
     };
 
