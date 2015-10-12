@@ -70,9 +70,11 @@ var Price = (function () {
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
             var endDate2 = endDate.value;
-            var endTime2 = endTime.value;
-            if(!isVisible(endTime)){
-                endTime2="00:00:00";
+            var endTime2 = Durations.getTime();
+            if(!endTime2){
+                var trading_times = Durations.trading_times();
+                if(trading_times.hasOwnProperty(endDate2))
+                endTime2 = trading_times[endDate2][underlying.value];
             }
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }

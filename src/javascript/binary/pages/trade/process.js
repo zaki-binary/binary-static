@@ -108,7 +108,7 @@ function processContractForm() {
 
     displayStartDates();
 
-    displayDurations();
+    Durations.display();
 
     displayPrediction();
 
@@ -240,4 +240,21 @@ function processProposal(response){
             document.getElementById('trading_init_progress').style.display = 'none';
         }
     }
+}
+
+function processTradingTimesRequest(date){
+    var trading_times = Durations.trading_times();
+    if(trading_times.hasOwnProperty(date)){
+        processPriceRequest();
+    }
+    else{
+        showPriceOverlay();
+        TradeSocket.send({ trading_times: date });
+    }
+}
+
+function processTradingTimes(response){
+    var trading_times = Durations.trading_times();
+    Durations.processTradingTimesAnswer(response);
+    processPriceRequest();
 }
