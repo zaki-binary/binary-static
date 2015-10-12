@@ -62,6 +62,8 @@ function processMarketUnderlying() {
 
     Contract.getContracts(underlying);
 
+    displayTooltip(sessionStorage.getItem('market'),underlying);
+
     requestTradeAnalysis();
 }
 
