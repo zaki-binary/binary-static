@@ -10434,6 +10434,7 @@ function hideOverlayContainer() {
  * function to assign sorting to market list
  */
 function compareMarkets(a, b) {
+    'use strict';
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -10452,6 +10453,7 @@ function compareMarkets(a, b) {
 }
 
 function getContractCategoryTree(elements){
+    'use strict';
 
     var tree = [
         ['updown',
@@ -10492,6 +10494,7 @@ function getContractCategoryTree(elements){
  * function to get cookie javascript way (use if you don't want to use jquery)
  */
 function getCookieItem(sKey) {
+    'use strict';
     if (!sKey) { return null; }
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
@@ -10500,6 +10503,7 @@ function getCookieItem(sKey) {
  * Display price/spot movement variation to depict price moved up or down
  */
 function displayPriceMovement(element, oldValue, currentValue) {
+    'use strict';
     element.classList.remove('price_moved_down');
     element.classList.remove('price_moved_up');
     if (parseFloat(currentValue) > parseFloat(oldValue)) {
@@ -10515,6 +10519,7 @@ function displayPriceMovement(element, oldValue, currentValue) {
  * function to toggle active class of menu
  */
 function toggleActiveNavMenuElement(nav, eventElement) {
+    'use strict';
     var liElements = nav.getElementsByTagName("li");
     var classes = eventElement.classList;
 
@@ -10527,6 +10532,7 @@ function toggleActiveNavMenuElement(nav, eventElement) {
 }
 
 function toggleActiveCatMenuElement(nav, eventElementId) {
+    'use strict';
     var eventElement = document.getElementById(eventElementId);
     var liElements = nav.querySelectorAll('.active, .a-active');
     var classes = eventElement.classList;
@@ -10554,6 +10560,7 @@ function toggleActiveCatMenuElement(nav, eventElementId) {
  * function to set placeholder text based on current form, used for mobile menu
  */
 function setFormPlaceholderContent(name) {
+    'use strict';
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
         name = name || sessionStorage.getItem('formname');
@@ -10562,7 +10569,7 @@ function setFormPlaceholderContent(name) {
 }
 
 /*
- * function to display the profit and return of bet under each trade container
+ * function to display the profit and return of bet under each trade container except spreads
  */
 function displayCommentPrice(node, currency, type, payout) {
     'use strict';
@@ -10582,6 +10589,31 @@ function displayCommentPrice(node, currency, type, payout) {
 }
 
 /*
+ * function to display comment for spreads
+ */
+function displayCommentSpreads(node, currency, point) {
+    'use strict';
+
+    if (node && point) {
+        var amountPerPoint = document.getElementById('amount_per_point').value,
+            stopType = document.querySelector('input[name="stop_type"]:checked').value,
+            stopLoss = document.getElementById('stop_loss').value,
+            displayAmount = 0;
+
+        if (isNaN(stopLoss) || isNaN(amountPerPoint)) {
+            node.hide();
+        } else {
+            if (stopType === 'point') {
+                displayAmount = parseFloat(parseFloat(amountPerPoint) * parseFloat(stopLoss));
+            } else {
+                displayAmount = parseFloat(stopLoss);
+            }
+            node.textContent = Content.localize().textSpreadDepositComment + " " + currency + " " + displayAmount + " " + Content.localize().textSpreadRequiredComment + ": " + point + " " + Content.localize().textSpreadPointsComment;
+        }
+    }
+}
+
+/*
  * This function is used in case where we have input and we don't want to fire
  * event on every change while user is typing for example in case of amount if
  * we want to change 10 to 1000 i.e. two zeros so two input events will be fired
@@ -10591,6 +10623,7 @@ function displayCommentPrice(node, currency, type, payout) {
  * http://davidwalsh.name/javascript-debounce-function
  */
 function debounce(func, wait, immediate) {
+    'use strict';
     var timeout;
     var delay = wait || 500;
     return function() {
@@ -10610,6 +10643,7 @@ function debounce(func, wait, immediate) {
  * function to check if selected market is allowed for current user
  */
 function getDefaultMarket() {
+    'use strict';
    var mkt = sessionStorage.getItem('market');
    var markets = Symbols.markets(1);
    if(!mkt ||  !markets[mkt]){
@@ -10622,6 +10656,7 @@ function getDefaultMarket() {
  * this is invoked when submit button is clicked and prevents reloading of page
  */
 function addEventListenerForm(){
+    'use strict';
     document.getElementById('websocket_form').addEventListener("submit", function(evt){
         evt.currentTarget.classList.add('submitted');
         evt.preventDefault();
@@ -10633,6 +10668,7 @@ function addEventListenerForm(){
  * this creates a button, clicks it, and destroys it to invoke the listener
  */
 function submitForm(form) {
+    'use strict';
     // var button = form.ownerDocument.createElement('input');
     // button.style.display = 'none';
     // button.type = 'submit';
@@ -10644,6 +10680,7 @@ function submitForm(form) {
  * function to display indicative barrier
  */
 function displayIndicativeBarrier() {
+    'use strict';
     var unit = document.getElementById('duration_units'),
         currentTick = Tick.quote(),
         indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
@@ -10676,6 +10713,7 @@ function displayIndicativeBarrier() {
  * function to sort the duration in ascending order
  */
 function durationOrder(duration){
+    'use strict';
     var order = {
         t:1,
         s:2,
@@ -10684,6 +10722,22 @@ function durationOrder(duration){
         d:5
     };
     return order[duration];
+}
+
+function displayTooltip(market, symbol){
+    'use strict';
+    var tip = document.getElementById('symbol_tip');
+    if(market.match(/^random/)){
+        tip.show();
+        tip.setAttribute('href','https://www.binary.com/get-started/random-markets');
+    }
+    else if(symbol.match(/^SYN/)){
+        tip.show();
+        tip.setAttribute('href','https://www.binary.com/smart-indices');
+    }
+    else{
+        tip.hide();
+    }
 }
 ;var Content = (function () {
     'use strict';
@@ -10736,7 +10790,12 @@ function durationOrder(duration){
             textStopType: text.localize('Stop-type'),
             textStopTypePoints: text.localize('Points'),
             textContractConfirmationButton: text.localize('View'),
-            textIndicativeBarrierTooltip: text.localize('This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset.')
+            textIndicativeBarrierTooltip: text.localize('This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset.'),
+            textSpreadTypeLong: text.localize('Long'),
+            textSpreadTypeShort: text.localize('Short'),
+            textSpreadDepositComment: text.localize('Deposit of'),
+            textSpreadRequiredComment: text.localize('is required. Current spread'),
+            textSpreadPointsComment: text.localize('points')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -11753,11 +11812,6 @@ var Message = (function () {
             } else if (type === 'tick') {
                 processTick(response);
             }
-
-            // if(type !== 'tick' && type !== 'proposal'){
-            if(type !== 'tick'){
-                console.log(response);
-            }
         } else {
             console.log('some error occured');
         }
@@ -11892,7 +11946,8 @@ var Price = (function () {
         var proposal = details['proposal'];
         var params = details['echo_req'],
             id = proposal['id'],
-            type = params['contract_type'] || typeDisplayIdMapping[id];
+            type = params['contract_type'] || typeDisplayIdMapping[id],
+            is_spread = proposal['spread'] ? true : false;
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
             typeDisplayIdMapping[id] = type;
@@ -11914,20 +11969,33 @@ var Price = (function () {
             purchase = container.getElementsByClassName('purchase_button')[0],
             description = container.getElementsByClassName('contract_description')[0],
             comment = container.getElementsByClassName('price_comment')[0],
-            error = container.getElementsByClassName('contract_error')[0];
+            error = container.getElementsByClassName('contract_error')[0],
+            currency = document.getElementById('currency');
 
         var display = type ? (contractType ? contractType[type] : '') : '';
         if (display) {
             h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
-            h4.textContent = display;
+            if (is_spread) {
+                if (position === "top") {
+                    h4.textContent = Content.localize().textSpreadTypeLong;
+                } else {
+                    h4.textContent = Content.localize().textSpreadTypeShort;
+                }
+            } else {
+                h4.textContent = display;
+            }
         }
 
         if (proposal['ask_price']) {
-            amount.textContent = document.getElementById('currency').value + ' ' + proposal['ask_price'];
+            if (is_spread) {
+                amount.textContent = proposal['ask_price'];
+            } else {
+                amount.textContent = currency.value + ' ' + proposal['ask_price'];
+            }
         }
 
         if (proposal['longcode']) {
-            proposal['longcode'] = proposal['longcode'].replace(/\d+\.\d\d/,function(x){return '<b>'+x+'</b>';});
+            proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = proposal['longcode'];
         }
 
@@ -11941,7 +12009,11 @@ var Price = (function () {
             purchase.show();
             comment.show();
             error.hide();
-            displayCommentPrice(comment, document.getElementById('currency').value, proposal['ask_price'], proposal['payout']);
+            if (is_spread) {
+                displayCommentSpreads(comment, currency.value, proposal['spread']);
+            } else {
+                displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
+            }
             var oldprice = purchase.getAttribute('data-ask-price');
             if (oldprice) {
                 displayPriceMovement(amount, oldprice, proposal['ask_price']);
@@ -12042,6 +12114,8 @@ function processMarketUnderlying() {
     TradeSocket.send({ ticks : underlying });
 
     Contract.getContracts(underlying);
+
+    displayTooltip(sessionStorage.getItem('market'),underlying);
 
     requestTradeAnalysis();
 }
@@ -12210,7 +12284,7 @@ function processProposal(response){
     var price_data = Price.bufferRequests();
     var form_id = Price.getFormId();
     // This is crazy condition but there is no way
-    if((!price_data[response.proposal.id] && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('form_id') && response.echo_req.passthrough.form_id === form_id) || (price_data[response.proposal.id] && price_data[response.proposal.id].passthrough.form_id === Price.form_id)){
+    if((!price_data[response.proposal.id] && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('form_id') && response.echo_req.passthrough.form_id === form_id) || (price_data[response.proposal.id] && price_data[response.proposal.id].passthrough.form_id === Price.getFormId())){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();

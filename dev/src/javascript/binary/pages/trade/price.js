@@ -122,7 +122,8 @@ var Price = (function () {
         var proposal = details['proposal'];
         var params = details['echo_req'],
             id = proposal['id'],
-            type = params['contract_type'] || typeDisplayIdMapping[id];
+            type = params['contract_type'] || typeDisplayIdMapping[id],
+            is_spread = proposal['spread'] ? true : false;
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
             typeDisplayIdMapping[id] = type;
@@ -144,20 +145,33 @@ var Price = (function () {
             purchase = container.getElementsByClassName('purchase_button')[0],
             description = container.getElementsByClassName('contract_description')[0],
             comment = container.getElementsByClassName('price_comment')[0],
-            error = container.getElementsByClassName('contract_error')[0];
+            error = container.getElementsByClassName('contract_error')[0],
+            currency = document.getElementById('currency');
 
         var display = type ? (contractType ? contractType[type] : '') : '';
         if (display) {
             h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
-            h4.textContent = display;
+            if (is_spread) {
+                if (position === "top") {
+                    h4.textContent = Content.localize().textSpreadTypeLong;
+                } else {
+                    h4.textContent = Content.localize().textSpreadTypeShort;
+                }
+            } else {
+                h4.textContent = display;
+            }
         }
 
         if (proposal['ask_price']) {
-            amount.textContent = document.getElementById('currency').value + ' ' + proposal['ask_price'];
+            if (is_spread) {
+                amount.textContent = proposal['ask_price'];
+            } else {
+                amount.textContent = currency.value + ' ' + proposal['ask_price'];
+            }
         }
 
         if (proposal['longcode']) {
-            proposal['longcode'] = proposal['longcode'].replace(/\d+\.\d\d/,function(x){return '<b>'+x+'</b>';});
+            proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = proposal['longcode'];
         }
 
@@ -171,7 +185,11 @@ var Price = (function () {
             purchase.show();
             comment.show();
             error.hide();
-            displayCommentPrice(comment, document.getElementById('currency').value, proposal['ask_price'], proposal['payout']);
+            if (is_spread) {
+                displayCommentSpreads(comment, currency.value, proposal['spread']);
+            } else {
+                displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
+            }
             var oldprice = purchase.getAttribute('data-ask-price');
             if (oldprice) {
                 displayPriceMovement(amount, oldprice, proposal['ask_price']);

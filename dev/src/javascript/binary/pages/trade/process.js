@@ -62,6 +62,8 @@ function processMarketUnderlying() {
 
     Contract.getContracts(underlying);
 
+    displayTooltip(sessionStorage.getItem('market'),underlying);
+
     requestTradeAnalysis();
 }
 
@@ -229,7 +231,7 @@ function processProposal(response){
     var price_data = Price.bufferRequests();
     var form_id = Price.getFormId();
     // This is crazy condition but there is no way
-    if((!price_data[response.proposal.id] && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('form_id') && response.echo_req.passthrough.form_id === form_id) || (price_data[response.proposal.id] && price_data[response.proposal.id].passthrough.form_id === Price.form_id)){
+    if((!price_data[response.proposal.id] && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('form_id') && response.echo_req.passthrough.form_id === form_id) || (price_data[response.proposal.id] && price_data[response.proposal.id].passthrough.form_id === Price.getFormId())){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
