@@ -267,6 +267,7 @@ var TradingEvents = (function () {
                 }
                 if (id && askPrice) {
                     TradeSocket.send(params);
+                    Price.incrFormId();
                     processForgetPriceIds();
                 }
             }
