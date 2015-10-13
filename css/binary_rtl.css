@@ -4513,7 +4513,7 @@ table .loss, table .lower {
   }
 }
 .spinner, #trading_init_progress {
-  animation: spinning 1s infinite linear;
+  animation: spinning 0.5s infinite linear;
 }
 
 #trading_init_progress {
@@ -4532,6 +4532,9 @@ table .loss, table .lower {
   font-size: 1rem;
   position: relative;
   opacity: 0;
+}
+#trading_socket_container abbr {
+  text-decoration: none;
 }
 #trading_socket_container.show {
   animation: fade 1s;

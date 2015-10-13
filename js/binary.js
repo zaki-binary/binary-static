@@ -11146,45 +11146,52 @@ function displayCurrencies(selected) {
  * It also populate expiry type select box i.e Durations and Endtime select
  *
  */
-function displayDurations(startType) {
-    'use strict';
 
-    var durations = Contract.durations();
-    if (durations === false) {
-        document.getElementById('expiry_row').style.display = 'none';
-        return false;
-    }
+var Durations = (function(){
+    
+    var trading_times = {};
+    var expiry_time = '';
 
-    var target = document.getElementById('duration_units'),
-        formName = Contract.form(),
-        barrierCategory = Contract.barrier(),
-        fragment = document.createDocumentFragment(), durationContainer = {};
+    var displayDurations = function(startType) {
+        'use strict';
 
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
+        var durations = Contract.durations();
+        if (durations === false) {
+            document.getElementById('expiry_row').style.display = 'none';
+            return false;
+        }
 
-    for (var key in durations) {
-        if (durations.hasOwnProperty(key)) {
-            for (var form in durations[key][formName]) {
-                if (durations[key][formName].hasOwnProperty(form)) {
-                    var obj = {};
-                    if (barrierCategory) {
-                        obj = durations[key][formName][barrierCategory];
-                    } else {
-                        obj = durations[key][formName][form];
-                    }
-                    for (var type in obj) {
-                        if (obj.hasOwnProperty(type)) {
-                            if (startType) {
-                                if (startType === type) {
-                                    if(!durationContainer.hasOwnProperty(startType)) {
-                                        durationContainer[key] = obj[startType];
+        var target = document.getElementById('duration_units'),
+            formName = Contract.form(),
+            barrierCategory = Contract.barrier(),
+            fragment = document.createDocumentFragment(), durationContainer = {};
+
+        while (target && target.firstChild) {
+            target.removeChild(target.firstChild);
+        }
+
+        for (var key in durations) {
+            if (durations.hasOwnProperty(key)) {
+                for (var form in durations[key][formName]) {
+                    if (durations[key][formName].hasOwnProperty(form)) {
+                        var obj = {};
+                        if (barrierCategory) {
+                            obj = durations[key][formName][barrierCategory];
+                        } else {
+                            obj = durations[key][formName][form];
+                        }
+                        for (var type in obj) {
+                            if (obj.hasOwnProperty(type)) {
+                                if (startType) {
+                                    if (startType === type) {
+                                        if(!durationContainer.hasOwnProperty(startType)) {
+                                            durationContainer[key] = obj[startType];
+                                        }
                                     }
-                                }
-                            } else {
-                                if(!durationContainer.hasOwnProperty(type)) {
-                                    durationContainer[key] = obj[type];
+                                } else {
+                                    if(!durationContainer.hasOwnProperty(type)) {
+                                        durationContainer[key] = obj[type];
+                                    }
                                 }
                             }
                         }
@@ -11192,195 +11199,227 @@ function displayDurations(startType) {
                 }
             }
         }
-    }
 
-    var duration_list = {};
-    for (var duration in durationContainer) {
-        if(durationContainer.hasOwnProperty(duration)) {
-            var min = durationContainer[duration]['min_contract_duration'],
-                textMapping = durationTextValueMappings(min);
+        var duration_list = {};
+        for (var duration in durationContainer) {
+            if(durationContainer.hasOwnProperty(duration)) {
+                var min = durationContainer[duration]['min_contract_duration'],
+                    textMapping = durationTextValueMappings(min);
 
-            var option, content;
-            if (duration === 'intraday') {
-                switch (textMapping['value']) {
-                    case 's':
-                        option = document.createElement('option');
-                        content = document.createTextNode(textMapping['text']);
-                        option.setAttribute('value', textMapping['value']);
-                        option.setAttribute('data-minimum', textMapping['min']);
-                        option.appendChild(content);
-                        duration_list[textMapping['value']]=option;
-                        option = document.createElement('option');
-                        content = document.createTextNode(Content.localize().textDurationMinutes);
-                        option.setAttribute('value', 'm');
-                        option.setAttribute('data-minimum', 1);
-                        option.setAttribute('selected', 'selected');
-                        option.appendChild(content);
-                        duration_list['m']=option;
-                        option = document.createElement('option');
-                        content = document.createTextNode(Content.localize().textDurationHours);
-                        option.setAttribute('value', 'h');
-                        option.setAttribute('data-minimum', 1);
-                        option.appendChild(content);
-                        duration_list['h']=option;
-                        break;
-                    case 'm':
-                        option = document.createElement('option');
-                        content = document.createTextNode(textMapping['text']);
-                        option.setAttribute('value', textMapping['value']);
-                        option.setAttribute('data-minimum', textMapping['min']);
-                        option.setAttribute('selected', 'selected');
-                        option.appendChild(content);
-                        duration_list[textMapping['value']]=option;
-                        option = document.createElement('option');
-                        content = document.createTextNode(Content.localize().textDurationHours);
-                        option.setAttribute('value', 'h');
-                        option.setAttribute('data-minimum', 1);
-                        option.appendChild(content);
-                        duration_list['h']=option;
-                        break;
-                    case 'h':
-                        option = document.createElement('option');
-                        content = document.createTextNode(textMapping['text']);
-                        option.setAttribute('value', textMapping['value']);
-                        option.setAttribute('data-minimum', textMapping['min']);
-                        option.appendChild(content);
-                        duration_list[textMapping['value']]=option;
-                        break;
-                    default :
-                        option = document.createElement('option');
-                        content = document.createTextNode(textMapping['text']);
-                        option.setAttribute('value', textMapping['value']);
-                        option.setAttribute('data-minimum', textMapping['min']);
-                        option.appendChild(content);
-                        duration_list[textMapping['value']]=option;
-                        break;
+                var option, content;
+                if (duration === 'intraday') {
+                    switch (textMapping['value']) {
+                        case 's':
+                            option = document.createElement('option');
+                            content = document.createTextNode(textMapping['text']);
+                            option.setAttribute('value', textMapping['value']);
+                            option.setAttribute('data-minimum', textMapping['min']);
+                            option.appendChild(content);
+                            duration_list[textMapping['value']]=option;
+                            option = document.createElement('option');
+                            content = document.createTextNode(Content.localize().textDurationMinutes);
+                            option.setAttribute('value', 'm');
+                            option.setAttribute('data-minimum', 1);
+                            option.setAttribute('selected', 'selected');
+                            option.appendChild(content);
+                            duration_list['m']=option;
+                            option = document.createElement('option');
+                            content = document.createTextNode(Content.localize().textDurationHours);
+                            option.setAttribute('value', 'h');
+                            option.setAttribute('data-minimum', 1);
+                            option.appendChild(content);
+                            duration_list['h']=option;
+                            break;
+                        case 'm':
+                            option = document.createElement('option');
+                            content = document.createTextNode(textMapping['text']);
+                            option.setAttribute('value', textMapping['value']);
+                            option.setAttribute('data-minimum', textMapping['min']);
+                            option.setAttribute('selected', 'selected');
+                            option.appendChild(content);
+                            duration_list[textMapping['value']]=option;
+                            option = document.createElement('option');
+                            content = document.createTextNode(Content.localize().textDurationHours);
+                            option.setAttribute('value', 'h');
+                            option.setAttribute('data-minimum', 1);
+                            option.appendChild(content);
+                            duration_list['h']=option;
+                            break;
+                        case 'h':
+                            option = document.createElement('option');
+                            content = document.createTextNode(textMapping['text']);
+                            option.setAttribute('value', textMapping['value']);
+                            option.setAttribute('data-minimum', textMapping['min']);
+                            option.appendChild(content);
+                            duration_list[textMapping['value']]=option;
+                            break;
+                        default :
+                            option = document.createElement('option');
+                            content = document.createTextNode(textMapping['text']);
+                            option.setAttribute('value', textMapping['value']);
+                            option.setAttribute('data-minimum', textMapping['min']);
+                            option.appendChild(content);
+                            duration_list[textMapping['value']]=option;
+                            break;
+                    }
+                } else if (duration === 'daily') {
+                    option = document.createElement('option');
+                    content = document.createTextNode(textMapping['text']);
+                    option.setAttribute('value', textMapping['value']);
+                    option.setAttribute('data-minimum', textMapping['min']);
+                    option.appendChild(content);
+                    duration_list[textMapping['value']]=option;
+                } else if (duration === 'tick') {
+                    option = document.createElement('option');
+                    content = document.createTextNode(textMapping['text']);
+                    option.setAttribute('value', textMapping['value']);
+                    option.setAttribute('data-minimum', textMapping['min']);
+                    option.appendChild(content);
+                    duration_list[textMapping['value']]=option;
                 }
-            } else if (duration === 'daily') {
-                option = document.createElement('option');
-                content = document.createTextNode(textMapping['text']);
-                option.setAttribute('value', textMapping['value']);
-                option.setAttribute('data-minimum', textMapping['min']);
-                option.appendChild(content);
-                duration_list[textMapping['value']]=option;
-            } else if (duration === 'tick') {
-                option = document.createElement('option');
-                content = document.createTextNode(textMapping['text']);
-                option.setAttribute('value', textMapping['value']);
-                option.setAttribute('data-minimum', textMapping['min']);
-                option.appendChild(content);
-                duration_list[textMapping['value']]=option;
+                
             }
-            
         }
-    }
-    var list = Object.keys(duration_list).sort(function(a,b){
-        if(durationOrder(a)>durationOrder(b)){
-            return 1;
+        var list = Object.keys(duration_list).sort(function(a,b){
+            if(durationOrder(a)>durationOrder(b)){
+                return 1;
+            }
+            else{
+                return -1;
+            }
+        });
+        for(var k=0; k<list.length; k++){
+            var d = list[k];
+            if(duration_list.hasOwnProperty(d)){
+                target.appendChild(duration_list[d]);
+            }
         }
-        else{
-            return -1;
-        }
-    });
-    for(var k=0; k<list.length; k++){
-        var d = list[k];
-        if(duration_list.hasOwnProperty(d)){
-            target.appendChild(duration_list[d]);
-        }
-    }
 
-    durationPopulate();
-}
-
-function durationTextValueMappings(str) {
-    'use strict';
-    var mapping = {
-        s : Content.localize().textDurationSeconds,
-        m : Content.localize().textDurationMinutes,
-        h : Content.localize().textDurationHours,
-        d : Content.localize().textDurationDays,
-        t : Content.localize().textDurationTicks
+        durationPopulate();
     };
 
-    var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [],
-        obj = {};
+    var durationTextValueMappings = function(str) {
+        'use strict';
+        var mapping = {
+            s : Content.localize().textDurationSeconds,
+            m : Content.localize().textDurationMinutes,
+            h : Content.localize().textDurationHours,
+            d : Content.localize().textDurationDays,
+            t : Content.localize().textDurationTicks
+        };
 
-    if (arry.length > 1) {
-        obj['value'] = arry[1];
-        obj['text'] = mapping[arry[1]];
-        obj['min'] = arry[0];
-    } else {
-        obj['value'] = 't';
-        obj['text'] = mapping['t'];
-        obj['min'] = arry[0];
-    }
+        var arry = str ? str.toString().match(/[a-zA-Z]+|[0-9]+/g) : [],
+            obj = {};
 
-    return obj;
-}
+        if (arry.length > 1) {
+            obj['value'] = arry[1];
+            obj['text'] = mapping[arry[1]];
+            obj['min'] = arry[0];
+        } else {
+            obj['value'] = 't';
+            obj['text'] = mapping['t'];
+            obj['min'] = arry[0];
+        }
 
-function durationPopulate() {
-    'use strict';
+        return obj;
+    };
 
-    var unit = document.getElementById('duration_units');
-    if (isVisible(unit)) {
-        var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-        document.getElementById('duration_amount').value = unitValue;
-        document.getElementById('duration_minimum').textContent = unitValue;
-        displayExpiryType(unit.value);
-    } else {
-        displayExpiryType();
-    }
+    var durationPopulate = function() {
+        'use strict';
 
-    // we need to call it here as for days we need to show absolute barriers
-    Barriers.display();
-}
+        var unit = document.getElementById('duration_units');
+        if (isVisible(unit)) {
+            var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
+            document.getElementById('duration_amount').value = unitValue;
+            document.getElementById('duration_minimum').textContent = unitValue;
+            displayExpiryType(unit.value);
+        } else {
+            displayExpiryType();
+        }
 
-function displayExpiryType(unit) {
-    'use strict';
+        // we need to call it here as for days we need to show absolute barriers
+        Barriers.display();
+    };
 
-    var target = document.getElementById('expiry_type'),
-        fragment = document.createDocumentFragment();
+    var displayExpiryType = function(unit) {
+        'use strict';
 
-    var current_selected = target.value || 'duration',
-        id = current_selected,
-        hideId = (current_selected === 'duration') ? 'endtime' : 'duration';
+        var target = document.getElementById('expiry_type'),
+            fragment = document.createDocumentFragment();
 
-    id = document.getElementById('expiry_type_' + id);
-    if (id) {
-        id.style.display = 'flex';
-    }
-    // need to hide the non selected one
-    hideId = document.getElementById('expiry_type_' + hideId);
-    if (hideId) {
-        hideId.style.display = 'none';
-    }
+        var current_selected = target.value || 'duration',
+            id = current_selected,
+            hideId = (current_selected === 'duration') ? 'endtime' : 'duration';
 
-    while (target && target.firstChild) {
-        target.removeChild(target.firstChild);
-    }
+        id = document.getElementById('expiry_type_' + id);
+        if (id) {
+            id.style.display = 'flex';
+        }
+        // need to hide the non selected one
+        hideId = document.getElementById('expiry_type_' + hideId);
+        if (hideId) {
+            hideId.style.display = 'none';
+        }
 
-    var option = document.createElement('option'),
-        content = document.createTextNode(Content.localize().textDuration);
+        while (target && target.firstChild) {
+            target.removeChild(target.firstChild);
+        }
 
-    option.setAttribute('value', 'duration');
-    if (current_selected === 'duration') {
-        option.setAttribute('selected', 'selected');
-    }
-    option.appendChild(content);
-    fragment.appendChild(option);
+        var option = document.createElement('option'),
+            content = document.createTextNode(Content.localize().textDuration);
 
-    if (unit !== 't') {
-        option = document.createElement('option');
-        content = document.createTextNode(Content.localize().textEndTime);
-        option.setAttribute('value', 'endtime');
-        if (current_selected === 'endtime') {
+        option.setAttribute('value', 'duration');
+        if (current_selected === 'duration') {
             option.setAttribute('selected', 'selected');
         }
         option.appendChild(content);
         fragment.appendChild(option);
-    }
-    target.appendChild(fragment);
-}
+
+        if (unit !== 't') {
+            option = document.createElement('option');
+            content = document.createTextNode(Content.localize().textEndTime);
+            option.setAttribute('value', 'endtime');
+            if (current_selected === 'endtime') {
+                option.setAttribute('selected', 'selected');
+            }
+            option.appendChild(content);
+            fragment.appendChild(option);
+        }
+        target.appendChild(fragment);
+    };
+
+    var processTradingTimesAnswer = function(response){
+        if(!trading_times.hasOwnProperty(response.echo_req.trading_times) && response.hasOwnProperty('trading_times') && response.trading_times.hasOwnProperty('markets')){
+            for(var i=0; i<response.trading_times.markets.length; i++){
+                var submarkets = response.trading_times.markets[i].submarkets;
+                if(submarkets){
+                    for(var j=0; j<submarkets.length; j++){
+                        var symbols = submarkets[j].symbols;
+                        if(symbols){
+                            for(var k=0; k<symbols.length; k++){
+                                var symbol = symbols[k];
+                                if(!trading_times[response.echo_req.trading_times]){
+                                    trading_times[response.echo_req.trading_times] = {};
+                                }
+                                trading_times[response.echo_req.trading_times][symbol.symbol] = symbol.times.close;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    return {
+        display: displayDurations,
+        populate: durationPopulate,
+        setTime: function(time){ expiry_time = time; },
+        getTime: function(){ return expiry_time; },
+        processTradingTimesAnswer: processTradingTimesAnswer,
+        trading_times: function(){ return trading_times; }
+    };
+})();
+
 ;/*
  * TradingEvents object contains all the event handler function required for
  * websocket trading page
@@ -11488,11 +11527,12 @@ var TradingEvents = (function () {
         var expiryTypeElement = document.getElementById('expiry_type');
         if (expiryTypeElement) {
             expiryTypeElement.addEventListener('change', function(e) {
-                durationPopulate();
+                Durations.populate();
                 if(e.target && e.target.value === 'endtime') {
                     var current_moment = moment().add(5, 'minutes').utc();
                     document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
                     document.getElementById('expiry_time').value = current_moment.format('HH:mm');
+                    Durations.setTime(current_moment.format('HH:mm'));
                 }
                 processPriceRequest();
             });
@@ -11504,7 +11544,7 @@ var TradingEvents = (function () {
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
             durationUnitElement.addEventListener('change', function () {
-                durationPopulate();
+                Durations.populate();
                 processPriceRequest();
             });
         }
@@ -11527,12 +11567,14 @@ var TradingEvents = (function () {
                     var diff = date1.getTime() - date2.getTime();
                     var expiry_time = document.getElementById('expiry_time');
                     if(diff > 24*60*60*1000){
+                        Durations.setTime('');
                         expiry_time.hide();
                     }
                     else{
+                        Durations.setTime(expiry_time.value);
                         expiry_time.show();
                     }
-                    processPriceRequest();
+                    processTradingTimesRequest(input);
                 }
             });
         }
@@ -11540,6 +11582,7 @@ var TradingEvents = (function () {
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
             endTimeElement.addEventListener('change', function () {
+                Durations.setTime(endTimeElement.value);
                 processPriceRequest();
             });
         }
@@ -11565,9 +11608,9 @@ var TradingEvents = (function () {
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
                 if (e.target && e.target.value === 'now') {
-                    displayDurations('spot');
+                    Durations.display('spot');
                 } else {
-                    displayDurations('forward');
+                    Durations.display('forward');
                 }
                 processPriceRequest();
             });
@@ -11650,6 +11693,7 @@ var TradingEvents = (function () {
                 }
                 if (id && askPrice) {
                     TradeSocket.send(params);
+                    Price.incrFormId();
                     processForgetPriceIds();
                 }
             }
@@ -11811,6 +11855,8 @@ var Message = (function () {
                 Purchase.display(response);
             } else if (type === 'tick') {
                 processTick(response);
+            } else if (type === 'trading_times'){
+                processTradingTimes(response);
             }
         } else {
             console.log('some error occured');
@@ -11894,9 +11940,11 @@ var Price = (function () {
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
             var endDate2 = endDate.value;
-            var endTime2 = endTime.value;
-            if(!isVisible(endTime)){
-                endTime2="00:00:00";
+            var endTime2 = Durations.getTime();
+            if(!endTime2){
+                var trading_times = Durations.trading_times();
+                if(trading_times.hasOwnProperty(endDate2))
+                endTime2 = trading_times[endDate2][underlying.value];
             }
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
@@ -12161,7 +12209,7 @@ function processContractForm() {
 
     displayStartDates();
 
-    displayDurations();
+    Durations.display();
 
     displayPrediction();
 
@@ -12293,6 +12341,23 @@ function processProposal(response){
             document.getElementById('trading_init_progress').style.display = 'none';
         }
     }
+}
+
+function processTradingTimesRequest(date){
+    var trading_times = Durations.trading_times();
+    if(trading_times.hasOwnProperty(date)){
+        processPriceRequest();
+    }
+    else{
+        showPriceOverlay();
+        TradeSocket.send({ trading_times: date });
+    }
+}
+
+function processTradingTimes(response){
+    var trading_times = Durations.trading_times();
+    Durations.processTradingTimesAnswer(response);
+    processPriceRequest();
 }
 ;/*
  * Purchase object that handles all the functions related to
@@ -13786,7 +13851,7 @@ function attach_tabs(element) {
 
 	    displayStartDates();
 
-	    displayDurations();
+	    Durations.display();
 	    
 	    if(Periods){
 	    	Periods.displayPeriods();
