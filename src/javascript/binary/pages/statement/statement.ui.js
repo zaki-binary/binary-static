@@ -93,11 +93,12 @@ const StatementUI = (function(){
         return $rowDom;
     }
     function datepickerDefault(date){
-        const utcMoment = moment.utc(date).format("MM/DD/YYYY");
-
+        const utcMoment = moment.utc(date).format("MM/DD/YYYY").toString();
+        const utcDate = Date.parse(utcMoment);
+        
         $(".has-date-picker").
-            datepicker({defaultDate: utcMoment}).
-            datepicker("setDate", utcMoment);
+            datepicker({defaultDate: utcDate}).
+            datepicker("setDate", utcDate);
     }
     function showButtonOnDateChange(){
         $datePickerWidget.on("change", function() {

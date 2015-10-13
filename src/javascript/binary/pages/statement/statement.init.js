@@ -5,7 +5,7 @@ const StatementWS = (function(){
         const type = payload.msg_type;
 
         switch(type) {
-            case "statement" : 
+            case "statement" :
                 StatementUI.setStatementTable(payload.statement);
                 break;
             case "balance" :
@@ -36,6 +36,7 @@ const StatementWS = (function(){
     
     function initPage(){
         StatementData.registerHandler(genericEventHandler, StatementError.genericErrHandler);
+        
         StatementUI.setDatePickerDefault(new Date());
         StatementUI.showButtonOnDateChange();
         reloadPageOnDateSubmit();

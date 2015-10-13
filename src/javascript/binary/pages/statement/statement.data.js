@@ -60,8 +60,7 @@ const StatementData = (function(){
     
     function getStatement(opts){
         var req = {statement: 1, description: 1};
-        if(opts){
-            console.log("opts : ", opts);   
+        if(opts){ 
             $.extend(true, req, opts);    
         }
         wsSend(req);
