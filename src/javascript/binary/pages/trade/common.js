@@ -595,11 +595,11 @@ function addEventListenerForm(){
  */
 function submitForm(form) {
     'use strict';
-    // var button = form.ownerDocument.createElement('input');
-    // button.style.display = 'none';
-    // button.type = 'submit';
-    // form.appendChild(button).click();
-    // form.removeChild(button);
+    var button = form.ownerDocument.createElement('input');
+    button.style.display = 'none';
+    button.type = 'submit';
+    form.appendChild(button).click();
+    form.removeChild(button);
 }
 
 /*
