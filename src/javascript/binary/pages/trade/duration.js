@@ -193,6 +193,22 @@ var Durations = (function(){
             displayExpiryType();
         }
 
+        // jquery for datepicker
+        var amountElement = $('#duration_amount');
+        if (unit.value === 'd') {
+            amountElement.datepicker({
+                onSelect: function() {
+                    var date = $(this).datepicker('getDate');
+                    var today = new Date();
+                    var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
+                    amountElement.val(dayDiff);
+                    amountElement.trigger('change');
+                }
+            });
+        } else {
+            amountElement.datepicker("destroy");
+        }
+
         // we need to call it here as for days we need to show absolute barriers
         Barriers.display();
     };
