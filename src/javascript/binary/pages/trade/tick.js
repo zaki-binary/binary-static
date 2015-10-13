@@ -62,6 +62,10 @@ var Tick = (function () {
         spotElement.textContent = message;
     };
 
+    var clearBuffer = function () {
+        bufferedIds = {};
+    };
+
     return {
         details: details,
         display: display,
@@ -69,6 +73,7 @@ var Tick = (function () {
         id: function () { return id; },
         epoch: function () { return epoch; },
         errorMessage: function () { return errorMessage; },
-        bufferedIds: function () { return bufferedIds; }
+        bufferedIds: function () { return bufferedIds; },
+        clearBufferIds: clearBuffer
     };
 })();
