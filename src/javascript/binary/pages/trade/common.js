@@ -665,3 +665,18 @@ function displayTooltip(market, symbol){
         tip.hide();
     }
 }
+
+/*
+ * count number of decimal places in spot so that we can make barrier to same decimal places
+ */
+function countDecimalPlaces(num) {
+    'use strict';
+    if (!isNaN(num)) {
+        var str = num.toString();
+        if (str.indexOf('.') !== -1) {
+            return str.split('.')[1].length;
+        } else {
+            return 0;
+        }
+    }
+}
