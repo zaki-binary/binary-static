@@ -11,7 +11,8 @@ const CommonUI = (function(){
     *
     * @param {Object} data
     * @param {Object} metadata
-    * @return {DOM} tableRow <tr>
+    * @param {Boolean} header
+    * @return {Object} tableRow <tr>
     */
     function generateTableRow(data, metadata, header){
        if (data.length !== metadata.length) {
@@ -21,7 +22,8 @@ const CommonUI = (function(){
        const $row = $("<tr></tr>");
 
        for (var i = 0; i < metadata.length ; i++) {
-           generateTableData(data[i], metadata[i], header).appendTo($row);
+           const className = metadata[i].replace(/\s+/g, "-");
+           generateTableData(data[i], className, header).appendTo($row);
        }
        return $row;
     }
@@ -34,13 +36,15 @@ const CommonUI = (function(){
      *  class = "date-col";
      * @param {String} data
      * @param {String} classnames
-     * @return {DOM} tableData <td>
+     * @param {Boolean} header
+     * @return {Object} tableData <td>
      */
     function generateTableData(data, classnames, header){
         const domString = (header === true) ? "<th></th>" : "<td></td>";
+        const elementText = (header === true) ? CommonUtility.toTitleCase(data.toString()) : data.toString();
         const $rowItem = $(domString, {
             class: classnames,
-            text: data
+            text: elementText
         });
 
         return $rowItem;
@@ -60,22 +64,29 @@ const CommonUI = (function(){
      *  }
      * @param {Object} data
      * @param {Object} metadata
-     * @param {Boolean} header
-     * @return {DOM} table <table>
+     * @param {Array} headerTitles
+     * @return {Object} table <table>
      */
-    function generateTable(data, metadata, header){
-        const classString = (metadata.class) ? metadata.class.join(" ") : "";
+    function generateTable(data, metadata, headerTitles){
+        const classString = (metadata.class) ? metadata.class : "";
         const idString = (metadata.id) ? metadata.id : "";
         const $table = $("<table></table>", {class: classString, id: idString});
-        if (header === true) {
+
+        if (headerTitles) {
+            if (headerTitles.length !== metadata.cols.length) {
+                throw "Header does not match metadata";
+            }
             const $header = $("<thead></thead>");
-            generateTableRow(metadata.cols, metadata.cols, true).appendTo($header);
+            generateTableRow(headerTitles, metadata.cols, true).appendTo($header);
             $header.appendTo($table);
         }
+
+        const $tbody = $("<tbody></tbody>");
         for (var i = 0 ; i < data.length ; i++) {
-            generateTableRow(data[i], metadata.cols, false).appendTo($table);
+            generateTableRow(data[i], metadata.cols, false).appendTo($tbody);
         }
 
+        $tbody.appendTo($table);
         return $table;
     }
 
