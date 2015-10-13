@@ -3136,18 +3136,6 @@ $(function() { onLoad.fire(); });
 ;// json to hold all the events loaded on trading page
 var trade_event_bindings = {};
 
-function contract_guide_popup() {
-    $('#bet_guide_content').on('click', 'a.bet_demo_link', function (e){
-        e.preventDefault();
-        var ip = new InPagePopup();
-        ip.ajax_conf = { url: this.href, data: 'ajax_only=1' };
-        ip.fetch_remote_content(true, '', function (data) {
-            attach_tabs('#contract_demo_container');
-            return data;
-        });
-    });
-}
-
 var trading_times_init = function() {
       var tabset_name = "#trading-tabs";
 
@@ -3226,7 +3214,6 @@ function get_login_page_url() {
     return 'https://' + page.settings.get('domains')['private'] + '/login' + params;
 }
 
-onLoad.queue_for_url(contract_guide_popup, 'contract_guide');
 onLoad.queue_for_url(trading_times_init, 'trading_times');
 onLoad.queue_for_url(asset_index_init, 'asset_index');
 onLoad.queue_for_url(confirm_popup_action, 'my_account|confirm_popup');
@@ -10692,11 +10679,11 @@ function addEventListenerForm(){
  */
 function submitForm(form) {
     'use strict';
-    // var button = form.ownerDocument.createElement('input');
-    // button.style.display = 'none';
-    // button.type = 'submit';
-    // form.appendChild(button).click();
-    // form.removeChild(button);
+    var button = form.ownerDocument.createElement('input');
+    button.style.display = 'none';
+    button.type = 'submit';
+    form.appendChild(button).click();
+    form.removeChild(button);
 }
 
 /*
@@ -12050,6 +12037,7 @@ var Price = (function () {
 
         var position = contractTypeDisplayMapping(type);
         var container = document.getElementById('price_container_'+position);
+        var box = document.getElementById('price_container_' + position);
 
         var h4 = container.getElementsByClassName('contract_heading')[0],
             amount = container.getElementsByClassName('contract_amount')[0],
@@ -12084,6 +12072,22 @@ var Price = (function () {
         if (proposal['longcode']) {
             proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = proposal['longcode'];
+        }
+
+        if (document.getElementById('websocket_form')) {
+
+            if (!document.getElementById('websocket_form').checkValidity()) {
+                if (box) {
+                    box.style.display = 'none';
+                }
+                processForgetPriceIds();
+            }
+
+            else if (document.getElementById('websocket_form').checkValidity()) {
+                if (box) {
+                    box.style.display = 'block';
+                }
+            }
         }
 
         if (details['error']){
