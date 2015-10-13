@@ -616,17 +616,18 @@ function displayIndicativeBarrier() {
         highBarrierElement = document.getElementById('barrier_high'),
         lowBarrierElement = document.getElementById('barrier_low');
 
-    if (unit && unit.value !== 'd' && currentTick) {
+    if (unit && unit.value !== 'd' && currentTick && !isNaN(currentTick)) {
+        var decimalPlaces = countDecimalPlaces(currentTick);
         if (indicativeBarrierTooltip && isVisible(indicativeBarrierTooltip)) {
-            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(3);
+            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(decimalPlaces);
         }
 
         if (indicativeHighBarrierTooltip && isVisible(indicativeHighBarrierTooltip)) {
-            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(3);
+            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(decimalPlaces);
         }
 
         if (indicativeLowBarrierTooltip && isVisible(indicativeLowBarrierTooltip)) {
-            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(3);
+            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(decimalPlaces);
         }
     } else {
         indicativeBarrierTooltip.textContent = '';
@@ -663,5 +664,20 @@ function displayTooltip(market, symbol){
     }
     else{
         tip.hide();
+    }
+}
+
+/*
+ * count number of decimal places in spot so that we can make barrier to same decimal places
+ */
+function countDecimalPlaces(num) {
+    'use strict';
+    if (!isNaN(num)) {
+        var str = num.toString();
+        if (str.indexOf('.') !== -1) {
+            return str.split('.')[1].length;
+        } else {
+            return 0;
+        }
     }
 }

@@ -9987,7 +9987,8 @@ var Barriers = (function () {
                     currentTick = Tick.quote(),
                     indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
                     indicativeHighBarrierTooltip = document.getElementById('indicative_high_barrier_tooltip'),
-                    indicativeLowBarrierTooltip = document.getElementById('indicative_low_barrier_tooltip');
+                    indicativeLowBarrierTooltip = document.getElementById('indicative_low_barrier_tooltip'),
+                    decimalPlaces = countDecimalPlaces(currentTick);
 
                 if (barrier.count === 1) {
                     document.getElementById('high_barrier_row').style.display = 'none';
@@ -9997,9 +9998,14 @@ var Barriers = (function () {
                     var elm = document.getElementById('barrier'),
                         tooltip = document.getElementById('barrier_tooltip'),
                         span = document.getElementById('barrier_span');
-                    if (unit && unit.value === 'd' && currentTick) {
-                        elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-                        elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                    if (unit && unit.value === 'd') {
+                        if (currentTick && !isNaN(currentTick)) {
+                            elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                            elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                        } else {
+                            elm.value = parseFloat(barrier['barrier']);
+                            elm.textContent = parseFloat(barrier['barrier']);
+                        }
                         tooltip.style.display = 'none';
                         span.style.display = 'inherit';
                         // no need to display indicative barrier in case of absolute barrier
@@ -10009,7 +10015,11 @@ var Barriers = (function () {
                         elm.textContent = barrier['barrier'];
                         span.style.display = 'none';
                         tooltip.style.display = 'inherit';
-                        indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                        if (currentTick && !isNaN(currentTick)) {
+                            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                        } else {
+                            indicativeBarrierTooltip.textContent = '';
+                        }
                     }
                     return;
                 } else if (barrier.count === 2) {
@@ -10024,12 +10034,20 @@ var Barriers = (function () {
                         low_tooltip = document.getElementById('barrier_low_tooltip'),
                         low_span = document.getElementById('barrier_low_span');
 
-                    if (unit && unit.value === 'd' && currentTick) {
-                        high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-                        high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
+                    if (unit && unit.value === 'd') {
+                        if (currentTick && !isNaN(currentTick)) {
+                            high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                            high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
 
-                        low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
-                        low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+                            low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(decimalPlaces);
+                            low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(decimalPlaces);
+                        } else {
+                            high_elm.value = parseFloat(barrier['barrier']);
+                            high_elm.textContent = parseFloat(barrier['barrier']);
+
+                            low_elm.value = parseFloat(barrier['barrier1']);
+                            low_elm.textContent = parseFloat(barrier['barrier1']);
+                        }
 
                         high_tooltip.style.display = 'none';
                         high_span.style.display = 'inherit';
@@ -10050,8 +10068,13 @@ var Barriers = (function () {
                         low_span.style.display = 'none';
                         low_tooltip.style.display = 'inherit';
 
-                        indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(3);
-                        indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(3);
+                        if (currentTick && !isNaN(currentTick)) {
+                            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(decimalPlaces);
+                        } else {
+                            indicativeHighBarrierTooltip.textContent = '';
+                            indicativeLowBarrierTooltip.textContent = '';
+                        }
                     }
                     return;
                 }
@@ -10690,17 +10713,18 @@ function displayIndicativeBarrier() {
         highBarrierElement = document.getElementById('barrier_high'),
         lowBarrierElement = document.getElementById('barrier_low');
 
-    if (unit && unit.value !== 'd' && currentTick) {
+    if (unit && unit.value !== 'd' && currentTick && !isNaN(currentTick)) {
+        var decimalPlaces = countDecimalPlaces(currentTick);
         if (indicativeBarrierTooltip && isVisible(indicativeBarrierTooltip)) {
-            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(3);
+            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(decimalPlaces);
         }
 
         if (indicativeHighBarrierTooltip && isVisible(indicativeHighBarrierTooltip)) {
-            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(3);
+            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(decimalPlaces);
         }
 
         if (indicativeLowBarrierTooltip && isVisible(indicativeLowBarrierTooltip)) {
-            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(3);
+            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(decimalPlaces);
         }
     } else {
         indicativeBarrierTooltip.textContent = '';
@@ -10737,6 +10761,21 @@ function displayTooltip(market, symbol){
     }
     else{
         tip.hide();
+    }
+}
+
+/*
+ * count number of decimal places in spot so that we can make barrier to same decimal places
+ */
+function countDecimalPlaces(num) {
+    'use strict';
+    if (!isNaN(num)) {
+        var str = num.toString();
+        if (str.indexOf('.') !== -1) {
+            return str.split('.')[1].length;
+        } else {
+            return 0;
+        }
     }
 }
 ;var Content = (function () {
