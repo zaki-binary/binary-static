@@ -399,6 +399,16 @@ var TradingEvents = (function () {
                 location.reload();
             }));
         }
+
+        /*
+         * attach datepicker and timepicker to end time durations
+         * have to use jquery
+         */
+        $("#expiry_date" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        $("#expiry_time" ).timepicker();
+
     };
 
     return {
