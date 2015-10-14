@@ -38,7 +38,7 @@
 
   - if (! ($tokens and length(@$tokens) >= 20)) {
     .grd-grid-12.grd-row-padding
-      %form{:action => url_for('user/api_token'), :method => 'POST'} 
+      %form{:action => url_for('user/api_token'), :method => 'POST'}
         %input{:type => 'hidden', :name => 'csrftoken', :value => stash('csrftoken')}
         %fieldset
           %legend= l('Create New Token')
@@ -46,7 +46,7 @@
             .grd-grid-4.form_label
               %label{:for => "display_name"}= l('Choose a Name:')
             .grd-grid-8
-              %input#display_name{:type => 'text', :name => 'display_name', :required => 'required', :pattern => '^[\-a-zA-Z0-9]{1}[\-a-zA-Z0-9\s]{2,19}$', :title => 'alphanumeric with space and dash, 3-20 characters'}
+              %input#display_name{:type => 'text', :name => 'display_name', :required => 'required', :pattern => '^[\-a-zA-Z0-9]{1}[\-a-zA-Z0-9\s]{2,32}$', :title => 'alphanumeric with space and dash, 2-32 characters'}
               - if (stash('error') and stash('error')->{display_name}) {
                 %p.errorfield= stash('error')->{display_name}
               - }
