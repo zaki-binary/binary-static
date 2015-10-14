@@ -90,9 +90,48 @@ const CommonUI = (function(){
         return $table;
     }
 
+    /***
+     * create a datepicker with submit function
+     * @param {Date} date
+     * @param {Object} metadata
+     * @param {Function} onSubmit
+     * @returns {*|jQuery|HTMLElement}
+     */
+    function generateDatePicker(date, metadata, onSubmit){
+        const classString = (metadata.class) ? metadata.class.join(" ") : "";
+        const idString = (metadata.id) ? metadata.id : "";
+
+        const utcMoment = moment.utc(date).format("MM/DD/YYYY").toString();
+        const utcDate = Date.parse(utcMoment);
+
+        const $datePickerDiv = $("<div></div>", {class: classString, id: idString});
+        const $label = $("<label></label>", {for: idString, text: "Jump To"});
+        const $datePicker = $("<div></div>", {class: "has-date-picker"}).
+            datepicker({defaultDate: utcDate}).
+            datepicker("setDate", utcDate);
+        const $button = $("<button></button>", {class: "invisible"});
+
+        $datePicker.on("change", function(){
+            $button.removeClass("invisible");
+        });
+
+        $button.click(function () {
+            const dateSelected = $datePicker.datepicker("getDate");
+            const epoch = Math.floor(dateSelected.getTime()/1000);
+            onSubmit(epoch);
+        });
+
+        $label.appendTo($datePickerDiv);
+        $datePicker.appendTo($datePickerDiv);
+        $button.appendTo($datePickerDiv);
+
+        return $datePickerDiv;
+    }
+
     return {
         generateTableRow: generateTableRow,
         generateTableData: generateTableData,
-        generateTable: generateTable
+        generateTable: generateTable,
+        generateDatePicker: generateDatePicker
     };
 }());

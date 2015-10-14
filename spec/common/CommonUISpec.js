@@ -130,3 +130,31 @@ describe("generateTable",function(){
         expect($thead).toContainText("Gender");
     });
 });
+
+describe("generateDatePicker", function () {
+    it("should create a div containing label, datepicker widget and submit button", function () {
+
+        const d = new Date();
+        const md = {id: "test-date-picker"};
+        const dp = CommonUI.generateDatePicker(d, md, function(){});
+
+        expect(dp).toBeMatchedBy("#test-date-picker");
+        expect(dp).toContainElement("label");
+        expect(dp).toContainElement("div");
+        expect(dp).toContainElement("button");
+
+        expect(dp.find("label").attr("for")).toBe("test-date-picker");
+    });
+
+    it("should call onSubmit function with that particular time", function(){
+        const md = {id: "test-date-picker"};
+        function doNothing(d){};
+        const $dp = CommonUI.generateDatePicker(new Date(), md, doNothing);
+
+        spyOn(window, doNothing);
+
+        $dp.find("div").datepicker("setDate", new Date());
+
+        expect(window.doNothing).toHaveBeenCalled();
+    });
+});

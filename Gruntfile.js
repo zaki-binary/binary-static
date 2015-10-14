@@ -13,12 +13,10 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         jasmine: {
-            src: "src/javascript/**/*.js",
+            src: "src/javascript/binary/**/*.js",
             options: {
                 vendor: [
-                    "src/javascript/lib/*.js",
-                    "bower_components/jquery/dist/jquery.js",
-                    "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
+                    "src/javascript/lib/**/*.js"
                 ],
                 specs: "spec/**/*.js"
             }

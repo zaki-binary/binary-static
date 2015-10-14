@@ -16,4 +16,6 @@ const ProfitTableUI = (function(){
 
         return CommonUI.generateTable(data, metadata, false);
     }
+
+
 }());
