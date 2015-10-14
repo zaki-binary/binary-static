@@ -117,6 +117,9 @@ const CommonUI = (function(){
 
         $button.click(function () {
             const dateSelected = $datePicker.datepicker("getDate");
+
+            console.info("date on picker", dateSelected);
+
             const epoch = Math.floor(dateSelected.getTime()/1000);
             onSubmit(epoch);
         });

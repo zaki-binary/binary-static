@@ -148,13 +148,19 @@ describe("generateDatePicker", function () {
 
     it("should call onSubmit function with that particular time", function(){
         const md = {id: "test-date-picker"};
-        function doNothing(d){};
-        const $dp = CommonUI.generateDatePicker(new Date(), md, doNothing);
 
-        spyOn(window, doNothing);
+        var currentDate = new Date();
+        var dateOnSubmit;
+        function doNothing(d){
+            dateOnSubmit = d;
+        };
 
-        $dp.find("div").datepicker("setDate", new Date());
+        const $dp = CommonUI.generateDatePicker(currentDate, md, doNothing);
 
-        expect(window.doNothing).toHaveBeenCalled();
+        $dp.find("div").datepicker("setDate", currentDate);
+
+        $dp.find("button").trigger("click");
+
+        expect(dateOnSubmit).toBeLessThan(Math.floor(currentDate.getTime()/1000));
     });
 });
