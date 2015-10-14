@@ -46,7 +46,7 @@
             .grd-grid-4.form_label
               %label{:for => "display_name"}= l('Choose a Name:')
             .grd-grid-8
-              %input#display_name{:type => 'text', :name => 'display_name', :required => 'required', :pattern => '^[\-a-zA-Z0-9\s]{3,20}$', :title => 'alphanumeric with space and dash, 3-20 characters'}
+              %input#display_name{:type => 'text', :name => 'display_name', :required => 'required', :pattern => '^[\-a-zA-Z0-9]{1}[\-a-zA-Z0-9\s]{2,19}$', :title => 'alphanumeric with space and dash, 3-20 characters'}
               - if (stash('error') and stash('error')->{display_name}) {
                 %p.errorfield= stash('error')->{display_name}
               - }
