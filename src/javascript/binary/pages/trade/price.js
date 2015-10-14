@@ -70,9 +70,11 @@ var Price = (function () {
             proposal['duration_unit'] = durationUnit.value;
         } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
             var endDate2 = endDate.value;
-            var endTime2 = endTime.value;
-            if(!isVisible(endTime)){
-                endTime2="00:00:00";
+            var endTime2 = Durations.getTime();
+            if(!endTime2){
+                var trading_times = Durations.trading_times();
+                if(trading_times.hasOwnProperty(endDate2))
+                endTime2 = trading_times[endDate2][underlying.value];
             }
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
@@ -139,6 +141,7 @@ var Price = (function () {
 
         var position = contractTypeDisplayMapping(type);
         var container = document.getElementById('price_container_'+position);
+        var box = document.getElementById('price_container_' + position);
 
         var h4 = container.getElementsByClassName('contract_heading')[0],
             amount = container.getElementsByClassName('contract_amount')[0],
@@ -173,6 +176,22 @@ var Price = (function () {
         if (proposal['longcode']) {
             proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = proposal['longcode'];
+        }
+
+        if (document.getElementById('websocket_form')) {
+
+            if (!document.getElementById('websocket_form').checkValidity()) {
+                if (box) {
+                    box.style.display = 'none';
+                }
+                processForgetPriceIds();
+            }
+
+            else if (document.getElementById('websocket_form').checkValidity()) {
+                if (box) {
+                    box.style.display = 'block';
+                }
+            }
         }
 
         if (details['error']){
