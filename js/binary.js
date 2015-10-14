@@ -10740,11 +10740,11 @@ function displayTooltip(market, symbol){
     var tip = document.getElementById('symbol_tip');
     if(market.match(/^random/)){
         tip.show();
-        tip.setAttribute('href','https://www.binary.com/get-started/random-markets');
+        tip.setAttribute('target','/get-started/random-markets');
     }
     else if(symbol.match(/^SYN/)){
         tip.show();
-        tip.setAttribute('href','https://www.binary.com/smart-indices');
+        tip.setAttribute('target','/smart-indices');
     }
     else{
         tip.hide();
@@ -11845,6 +11845,14 @@ var TradingEvents = (function () {
                 sessionStorage.removeItem('formname');
                 sessionStorage.removeItem('underlying');
                 location.reload();
+            }));
+        }
+
+        var tip = document.getElementById('symbol_tip');
+        if(init_logo){
+            tip.addEventListener('click', debounce( function (e) {
+                var url = e.target.getAttribute('target');
+                load_with_pjax(url);
             }));
         }
     };
