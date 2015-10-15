@@ -100,6 +100,7 @@ var Purchase = (function () {
                     button.setAttribute(k,button_attrs[k]);
                 }
             }
+            BetSell.register();
         }
 
         if(show_chart){
