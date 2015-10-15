@@ -11,7 +11,7 @@ const StatementData = (function(){
     };
     const ws = new WebSocket("wss://www.binary.com/websockets/v2");
     const wsRequestQueue = [];
-    
+
     function wsSend(request){
 
         function pendingResponse(msg){
@@ -53,9 +53,13 @@ const StatementData = (function(){
             }
         }
     }
-    
+
+    TradeSocket.init();
+
+
     function getBalance(){
-        wsSend({balance: 1});
+        //wsSend({balance: 1});
+        TradeSocket.send({balance: 1});
     }
     
     function getStatement(opts){
@@ -63,7 +67,8 @@ const StatementData = (function(){
         if(opts){ 
             $.extend(true, req, opts);    
         }
-        wsSend(req);
+        //wsSend(req);
+        TradeSocket.send(req);
     }
     
     const publicMethods = {

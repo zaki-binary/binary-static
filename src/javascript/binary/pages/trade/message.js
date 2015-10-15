@@ -27,6 +27,10 @@ var Message = (function () {
                 processTick(response);
             } else if (type === 'trading_times'){
                 processTradingTimes(response);
+            } else if (type === 'statement'){
+                StatementUI.setStatementTable(response.statement);
+            } else if (type === 'balance'){
+                StatementUI.setStatementTableFooterBalance(response.balance);
             }
         } else {
             console.log('some error occured');
@@ -34,7 +38,7 @@ var Message = (function () {
     };
 
     return {
-        process: process,
+        process: process
     };
 
 })();

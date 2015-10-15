@@ -6,7 +6,7 @@ const StatementError = (function(){
     function wsRequestErrorHandler(wsErrorPayload){
         StatementUI.clearStatementTableBody();
         console.log(wsErrorPayload);
-        const $errorDiv = $("<div></div>", {class: "error-msg", text: wsErrorPayload.error.message});
+        const $errorDiv = $("<div></div>", {class: "error-msg", text: wsErrorPayload.message});
         $errorDiv.insertBefore($("#statement-table-footer"));
     }
     

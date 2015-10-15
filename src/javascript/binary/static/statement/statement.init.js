@@ -12,7 +12,7 @@ const StatementWS = (function(){
                 StatementUI.setStatementTableFooterBalance(payload.balance);
                 break;
             case "error" :
-                StatementError.wsReqErrHandler(payload);
+                StatementError.wsReqErrHandler(payload.error);
                 break;
             default:
                 throw "Unhandled case " + type;
