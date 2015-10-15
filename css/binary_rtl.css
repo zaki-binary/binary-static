@@ -588,6 +588,10 @@ ul.checked li {
   outline: 0;
 }
 
+.empty-space {
+  margin-top: 137px;
+}
+
 *,
 *:after,
 *:before {
@@ -5066,6 +5070,28 @@ table .loss, table .lower {
 /*
  * DO NOT ADD ANY COMMON STYLING BELOW THIS. ALL OTHER STYLING GO ABOVE THIS
  */
+.career .xquote {
+  background-color: #F2F2F2;
+  padding: 20px 20px;
+  margin: 30px 0;
+}
+.career .xquote div {
+  overflow: hidden;
+}
+.career .xquote div .picture {
+  float: left;
+  padding-right: 20px;
+  width: 15%;
+}
+.career .xquote div .text {
+  margin-top: 5%;
+}
+@media screen and (max-width: 767px) {
+  .career .xquote .text {
+    margin-top: 2% !important;
+  }
+}
+
 /* Language based rules */
 /* Specific rules for languages */
 /*Japan Language */
@@ -5148,7 +5174,28 @@ body.ID .regulatory-logo {
   display: none !important;
 }
 body.ID #regulatory-text {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+body.ID #footer #social-networks {
+  padding-top: 0px;
+}
+body.ID .id-hide {
+  display: none !important;
+}
+body.ID .empty-space {
+  margin-top: 0px;
+}
+body.ID .extra-space {
+  margin-top: 127px;
+}
+@media screen and (max-width: 480px) {
+  body.ID .empty-space {
+    margin-top: 0 !important;
+  }
+  body.ID .extra-space {
+    margin-top: 0 !important;
+  }
 }
 
 /*Italian Language */
@@ -5178,6 +5225,10 @@ body.IT h1, body.IT h2, body.IT h3, body.IT h4, body.IT h5, body.IT h6 {
 
   #footer-regulatory #social-networks {
     text-align: center;
+  }
+
+  .empty-space {
+    margin-top: 90px;
   }
 }
 @media screen and (max-width: 640px) {
@@ -5220,6 +5271,11 @@ body.IT h1, body.IT h2, body.IT h3, body.IT h4, body.IT h5, body.IT h6 {
     z-index: 0 !important;
     margin-top: 0px !important;
     background: #fff;
+  }
+}
+@media screen and (max-width: 480px) {
+  .empty-space {
+    margin-top: 0;
   }
 }
 /* external stylesheets
