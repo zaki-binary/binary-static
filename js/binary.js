@@ -11174,13 +11174,12 @@ function displayCurrencies(selected) {
  */
 
 var Durations = (function(){
-    
+    'use strict';
+
     var trading_times = {};
     var expiry_time = '';
 
     var displayDurations = function(startType) {
-        'use strict';
-
         var durations = Contract.durations();
         if (durations === false) {
             document.getElementById('expiry_row').style.display = 'none';
@@ -11303,7 +11302,6 @@ var Durations = (function(){
                     option.appendChild(content);
                     duration_list[textMapping['value']]=option;
                 }
-                
             }
         }
         var list = Object.keys(duration_list).sort(function(a,b){
@@ -11325,7 +11323,6 @@ var Durations = (function(){
     };
 
     var durationTextValueMappings = function(str) {
-        'use strict';
         var mapping = {
             s : Content.localize().textDurationSeconds,
             m : Content.localize().textDurationMinutes,
@@ -11351,8 +11348,6 @@ var Durations = (function(){
     };
 
     var durationPopulate = function() {
-        'use strict';
-
         var unit = document.getElementById('duration_units');
         if (isVisible(unit)) {
             var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
@@ -11363,13 +11358,27 @@ var Durations = (function(){
             displayExpiryType();
         }
 
+        // jquery for datepicker
+        var amountElement = $('#duration_amount');
+        if (unit.value === 'd') {
+            amountElement.datepicker({
+                onSelect: function() {
+                    var date = $(this).datepicker('getDate');
+                    var today = new Date();
+                    var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
+                    amountElement.val(dayDiff);
+                    amountElement.trigger('change');
+                }
+            });
+        } else {
+            amountElement.datepicker("destroy");
+        }
+
         // we need to call it here as for days we need to show absolute barriers
         Barriers.display();
     };
 
     var displayExpiryType = function(unit) {
-        'use strict';
-
         var target = document.getElementById('expiry_type'),
             fragment = document.createDocumentFragment();
 
@@ -11540,7 +11549,8 @@ var TradingEvents = (function () {
          */
         var durationAmountElement = document.getElementById('duration_amount');
         if (durationAmountElement) {
-            durationAmountElement.addEventListener('input', debounce (function (e) {
+            // jquery needed for datepicker
+            $('#duration_amount').on('change', debounce(function (e) {
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -11580,7 +11590,9 @@ var TradingEvents = (function () {
          */
         var endDateElement = document.getElementById('expiry_date');
         if (endDateElement) {
-            endDateElement.addEventListener('change', function () {
+            // need to use jquery as datepicker is used, if we switch to some other
+            // datepicker we can move back to javascript
+            $('#expiry_date').on('change', function () {
                 var input = this.value;
                 var match = input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
                 if(match){
@@ -11607,7 +11619,7 @@ var TradingEvents = (function () {
 
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
-            endTimeElement.addEventListener('change', function () {
+            $('#expiry_time').on('change', function () {
                 Durations.setTime(endTimeElement.value);
                 processPriceRequest();
             });
@@ -11855,6 +11867,15 @@ var TradingEvents = (function () {
                 load_with_pjax(url);
             }));
         }
+
+        /*
+         * attach datepicker and timepicker to end time durations
+         * have to use jquery
+         */
+        $(".pickadate").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        $(".pickatime" ).timepicker();
     };
 
     return {
