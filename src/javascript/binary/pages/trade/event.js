@@ -403,6 +403,14 @@ var TradingEvents = (function () {
             }));
         }
 
+        var tip = document.getElementById('symbol_tip');
+        if(init_logo){
+            tip.addEventListener('click', debounce( function (e) {
+                var url = e.target.getAttribute('target');
+                load_with_pjax(url);
+            }));
+        }
+
         /*
          * attach datepicker and timepicker to end time durations
          * have to use jquery
