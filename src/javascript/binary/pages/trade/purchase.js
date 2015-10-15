@@ -30,7 +30,7 @@ var Purchase = (function () {
             button = document.getElementById('contract_purchase_button');
 
         var error = details['error'];
-        var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower');
+        var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower' || sessionStorage.formname === 'asian');
 
         container.style.display = 'block';
         contracts_list.style.display = 'none';
