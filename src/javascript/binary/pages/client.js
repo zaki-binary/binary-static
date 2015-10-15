@@ -141,6 +141,7 @@ pjax_config_page('new_account/maltainvest', function() {
 pjax_config_page('new_account/japan', function() {
     return {
         onLoad: function() {
+            client_form.set_idd_for_residence('jp');
             toggle_hedging_assets();
             $('#trading_purpose').on('change', function() {
                 toggle_hedging_assets();
