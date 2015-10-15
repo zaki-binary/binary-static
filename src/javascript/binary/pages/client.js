@@ -113,7 +113,7 @@ var hide_account_opening_for_risk_disclaimer = function () {
     }
 };
 
-var toggle_hedging_assets = function() {
+var toggle_hedging_assets_japan = function() {
     var trading_purpose = $('#trading_purpose');
     var hedging_assets_fields = $('.hedging_assets');
 
@@ -142,9 +142,9 @@ pjax_config_page('new_account/japan', function() {
     return {
         onLoad: function() {
             client_form.set_idd_for_residence('jp');
-            toggle_hedging_assets();
+            toggle_hedging_assets_japan();
             $('#trading_purpose').on('change', function() {
-                toggle_hedging_assets();
+                toggle_hedging_assets_japan();
             });
         }
     };
