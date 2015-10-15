@@ -43,8 +43,6 @@ const GlobalSocket = (function () {
         }
     };
 
-    api.onMessage = 
-
     return autoAuthorizedSocket;
 
 }());

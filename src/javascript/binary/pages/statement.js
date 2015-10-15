@@ -3,12 +3,3 @@ onLoad.queue_for_url(function() {
         $('#submit-date').removeClass('invisible');
     });
 }, 'statement');
-
-pjax_config_page("statementws", function(){
-    return {
-        onLoad: function(){
-            console.log("statement page loaded");
-            StatementWS.init();
-        }
-    }
-});
