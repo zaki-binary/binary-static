@@ -28,12 +28,18 @@
   .grd-grid-12
     .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-6
       %div.xquote
-        %img.responsive{:src => url_for('images/pages/careers/corporate-culture.svg')}
-        %a{:href => 'http://blog.wobb.my/project/binary/', :target => '_blank'}= l('Learn more about our corporate culture')
+        %div
+          %div.picture
+            %img.responsive{:src => url_for('images/pages/careers/corporate-culture.svg')}
+          %div.text
+            %a{:href => 'http://blog.wobb.my/project/binary/', :target => '_blank'}= l('Learn more about our corporate culture')
     .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-6
       %div.xquote
-        %img.responsive{:src => url_for('images/pages/careers/handbook.svg')}
-        %a{:href => url_for('templates/haml/static/download/HB-employee-FA.pdf'), :target => '_blank'}= ('Employee handbook')
+        %div
+          %div.picture
+            %img.responsive{:src => url_for('images/pages/careers/handbook.svg')}
+          %div.text
+            %a{:href => url_for('/templates/haml/static/download/HB-employee-FA.pdf'), :download => true}= ('Employee handbook')
   .grd-grid-12.grd-hide-mobile
     .separator-line
   .grd-grid-12.grd-parent
