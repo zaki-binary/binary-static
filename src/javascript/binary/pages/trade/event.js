@@ -92,7 +92,8 @@ var TradingEvents = (function () {
          */
         var durationAmountElement = document.getElementById('duration_amount');
         if (durationAmountElement) {
-            durationAmountElement.addEventListener('input', debounce (function (e) {
+            // jquery needed for datepicker
+            $('#duration_amount').on('change', debounce(function (e) {
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -105,11 +106,12 @@ var TradingEvents = (function () {
         var expiryTypeElement = document.getElementById('expiry_type');
         if (expiryTypeElement) {
             expiryTypeElement.addEventListener('change', function(e) {
-                durationPopulate();
+                Durations.populate();
                 if(e.target && e.target.value === 'endtime') {
                     var current_moment = moment().add(5, 'minutes').utc();
                     document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
                     document.getElementById('expiry_time').value = current_moment.format('HH:mm');
+                    Durations.setTime(current_moment.format('HH:mm'));
                 }
                 processPriceRequest();
             });
@@ -121,7 +123,7 @@ var TradingEvents = (function () {
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
             durationUnitElement.addEventListener('change', function () {
-                durationPopulate();
+                Durations.populate();
                 processPriceRequest();
             });
         }
@@ -131,7 +133,9 @@ var TradingEvents = (function () {
          */
         var endDateElement = document.getElementById('expiry_date');
         if (endDateElement) {
-            endDateElement.addEventListener('change', function () {
+            // need to use jquery as datepicker is used, if we switch to some other
+            // datepicker we can move back to javascript
+            $('#expiry_date').on('change', function () {
                 var input = this.value;
                 var match = input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
                 if(match){
@@ -144,19 +148,22 @@ var TradingEvents = (function () {
                     var diff = date1.getTime() - date2.getTime();
                     var expiry_time = document.getElementById('expiry_time');
                     if(diff > 24*60*60*1000){
+                        Durations.setTime('');
                         expiry_time.hide();
                     }
                     else{
+                        Durations.setTime(expiry_time.value);
                         expiry_time.show();
                     }
-                    processPriceRequest();
+                    processTradingTimesRequest(input);
                 }
             });
         }
 
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
-            endTimeElement.addEventListener('change', function () {
+            $('#expiry_time').on('change', function () {
+                Durations.setTime(endTimeElement.value);
                 processPriceRequest();
             });
         }
@@ -182,9 +189,9 @@ var TradingEvents = (function () {
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
                 if (e.target && e.target.value === 'now') {
-                    displayDurations('spot');
+                    Durations.display('spot');
                 } else {
-                    displayDurations('forward');
+                    Durations.display('forward');
                 }
                 processPriceRequest();
             });
@@ -395,6 +402,23 @@ var TradingEvents = (function () {
                 location.reload();
             }));
         }
+
+        var tip = document.getElementById('symbol_tip');
+        if(init_logo){
+            tip.addEventListener('click', debounce( function (e) {
+                var url = e.target.getAttribute('target');
+                load_with_pjax(url);
+            }));
+        }
+
+        /*
+         * attach datepicker and timepicker to end time durations
+         * have to use jquery
+         */
+        $(".pickadate").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        $(".pickatime" ).timepicker();
     };
 
     return {
