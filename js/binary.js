@@ -7137,12 +7137,19 @@ BetForm.Time.EndTime.prototype = {
             this.cancel_previous_analyse_request();
             var attr = this.data_attr(element);
             var params = this.get_params(element);
+            var $loading = $('#trading_init_progress');
+            if($loading){
+                $loading.show();
+            }
             _analyse_request = $.ajax(ajax_loggedin({
                 url     : attr.url(),
                 type    : 'POST',
                 async   : true,
                 data    : params,
                 success : function (data) {
+                    if($loading){
+                        $loading.hide();
+                    }
                     var con = that.show_sell_at_market(data);
                     var server_data = that.server_data();
                     $('.tab_menu_container').tabs({
@@ -12463,7 +12470,7 @@ var Purchase = (function () {
             button = document.getElementById('contract_purchase_button');
 
         var error = details['error'];
-        var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower');
+        var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower' || sessionStorage.formname === 'asian');
 
         container.style.display = 'block';
         contracts_list.style.display = 'none';
@@ -12533,6 +12540,7 @@ var Purchase = (function () {
                     button.setAttribute(k,button_attrs[k]);
                 }
             }
+            BetSell.register();
         }
 
         if(show_chart){
