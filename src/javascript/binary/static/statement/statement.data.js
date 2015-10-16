@@ -56,13 +56,13 @@ const StatementData = (function(){
 
     TradeSocket.init();
 
-
     function getBalance(){
         //wsSend({balance: 1});
         TradeSocket.send({balance: 1});
     }
     
     function getStatement(opts){
+        console.info("requesting statement");
         var req = {statement: 1, description: 1};
         if(opts){ 
             $.extend(true, req, opts);    
@@ -71,14 +71,12 @@ const StatementData = (function(){
         TradeSocket.send(req);
     }
     
-    const publicMethods = {
-        registerHandler: function(datahandler, errhandler){ 
-            dataHandler = datahandler; 
+    return {
+        registerHandler: function(datahandler, errhandler){
+            dataHandler = datahandler;
             errHandler = errhandler;
         },
         getStatement: getStatement,
         getBalance: getBalance
     };
-    
-    return publicMethods;
 }());

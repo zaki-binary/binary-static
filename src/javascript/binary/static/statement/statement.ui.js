@@ -4,10 +4,21 @@ const StatementUI = (function(){
     const $statementTableFooter = $("#statement-table-footer");
     const $statementTableBody = $("#statement-table-body");
     const $datePickerWidget = $("#statement-date");
-    
-    function setStatementTable(statementData){
+
+    function setDescColSpan(spanNo){
+        $(".desc-col-item").attr("colspan", spanNo);
+    }
+
+    function setStatementTable(statementResponse){
+
+        const dateReq = new Date(statementResponse.echo_req.dt_to * 1000);
+        //TODO : need to check if there' newer or older and show the button accordingly
+
+        const statementData = statementResponse.statement;
+
+        console.info("rendering table");
         clearStatementTableBody();
-                
+
         const transactions = statementData.transactions;
         appendTransactionsToTable(transactions, $statementTable);
 
@@ -21,15 +32,21 @@ const StatementUI = (function(){
         
         $statementTableFooter
             .children(".credit-col-item")
-            .text(creditTotal);
+            .text(Number(creditTotal).toFixed(2));
+
+        $("#statement-table-container").floatingScroll();
+        //setDescColSpan(2);
     }    
-    function setStatementTableFooterBalance(balance){
+    function setStatementTableFooterBalance(balanceObj){
+        const balance = Number(balanceObj[0].balance).toFixed(2);
         $statementTableFooter
             .children(".bal-col-item")
-            .text(balance[0].balance);
+            .text(balance);
     }
     function clearStatementTableBody(){
-        
+        $statementTableFooter
+            .children(".credit-col-item")
+            .text("");
         $statementTableBody
             .children()
             .remove();
@@ -55,10 +72,10 @@ const StatementUI = (function(){
 
         const desc = transaction["description"];
 
-        const amount = transaction["amount"];
-        const creditDebitType = (parseInt(amount) < 0) ? "credit" : "debit";
+        const amount = Number(parseFloat(transaction["amount"])).toFixed(2);
+        const creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
 
-        const balance = transaction["balance_after"];
+        const balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
 
         const dateDom = $("<td></td>", {
             class: "flex-table-row-item breakline date-col-item",
@@ -81,7 +98,7 @@ const StatementUI = (function(){
         }).appendTo($rowDom);
 
         const creditDebitDom = $("<td></td>", {
-            class: "flex-table-row-item credit-col-item" + creditDebitType,
+            class: "flex-table-row-item credit-col-item " + creditDebitType,
             text: amount
         }).appendTo($rowDom);
 

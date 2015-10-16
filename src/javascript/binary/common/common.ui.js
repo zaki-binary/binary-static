@@ -51,9 +51,9 @@ const CommonUI = (function(){
     }
 
     /***
-     * Generate Table DOM using data and metadata provided
+     * Generate Table DOM using rowsdata and metadata provided
      * eg.
-     *  data = [
+     *  rowsdata = [
      *      ["row1a", "row1b"],
      *      ["row2a", "row2b"]
      *  ];
@@ -62,12 +62,12 @@ const CommonUI = (function(){
      *      id: "unique-table",
      *      cols: ["col1", "col2"]
      *  }
-     * @param {Object} data
+     * @param {Object} rowsdata
      * @param {Object} metadata
      * @param {Array} headerTitles
      * @return {Object} table <table>
      */
-    function generateTable(data, metadata, headerTitles){
+    function generateTable(rowsdata, metadata, headerTitles){
         const classString = (metadata.class) ? metadata.class : "";
         const idString = (metadata.id) ? metadata.id : "";
         const $table = $("<table></table>", {class: classString, id: idString});
@@ -82,8 +82,8 @@ const CommonUI = (function(){
         }
 
         const $tbody = $("<tbody></tbody>");
-        for (var i = 0 ; i < data.length ; i++) {
-            generateTableRow(data[i], metadata.cols, false).appendTo($tbody);
+        for (var i = 0 ; i < rowsdata.length ; i++) {
+            generateTableRow(rowsdata[i], metadata.cols, false).appendTo($tbody);
         }
 
         $tbody.appendTo($table);
