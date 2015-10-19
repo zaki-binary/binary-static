@@ -95,7 +95,6 @@ var TradingEvents = (function () {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -176,7 +175,6 @@ var TradingEvents = (function () {
             amountElement.addEventListener('input', debounce( function(e) {
                 sessionStorage.setItem('amount', e.target.value);
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -309,7 +307,6 @@ var TradingEvents = (function () {
         if (barrierElement) {
             barrierElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -320,7 +317,6 @@ var TradingEvents = (function () {
         if (lowBarrierElement) {
             lowBarrierElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -331,7 +327,6 @@ var TradingEvents = (function () {
         if (highBarrierElement) {
             highBarrierElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -342,7 +337,6 @@ var TradingEvents = (function () {
         if (predictionElement) {
             predictionElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -353,7 +347,6 @@ var TradingEvents = (function () {
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -378,7 +371,6 @@ var TradingEvents = (function () {
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 
@@ -389,7 +381,6 @@ var TradingEvents = (function () {
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
                 processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
             }));
         }
 

@@ -579,30 +579,6 @@ function getDefaultMarket() {
 }
 
 /*
- * this is invoked when submit button is clicked and prevents reloading of page
- */
-function addEventListenerForm(){
-    'use strict';
-    document.getElementById('websocket_form').addEventListener("submit", function(evt){
-        evt.currentTarget.classList.add('submitted');
-        evt.preventDefault();
-        return false;
-    }, false);
-}
-
-/*
- * this creates a button, clicks it, and destroys it to invoke the listener
- */
-function submitForm(form) {
-    'use strict';
-    var button = form.ownerDocument.createElement('input');
-    button.style.display = 'none';
-    button.type = 'submit';
-    form.appendChild(button).click();
-    form.removeChild(button);
-}
-
-/*
  * function to display indicative barrier
  */
 function displayIndicativeBarrier() {
