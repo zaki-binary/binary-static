@@ -15,7 +15,11 @@ const StatementData = (function(){
 
         TradeSocket.send(req);
     }
-    
+
+    function websocketResponseToTable(statementResponse){
+        
+    }
+
     return {
         getStatement: getStatement,
         getBalance: getBalance
