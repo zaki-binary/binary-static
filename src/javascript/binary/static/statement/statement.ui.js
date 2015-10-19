@@ -1,24 +1,24 @@
-const StatementUI = (function(){
+var StatementUI = (function(){
     "use strict";
-    const $statementTable = $("#statement-table");
-    const $statementTableFooter = $("#statement-table-footer");
-    const $statementTableBody = $("#statement-table-body");
-    const $datePickerWidget = $("#statement-date");
+    var $statementTable = $("#statement-table");
+    var $statementTableFooter = $("#statement-table-footer");
+    var $statementTableBody = $("#statement-table-body");
+    var $datePickerWidget = $("#statement-date");
 
     function setStatementTable(statementResponse){
 
-        const dateReq = new Date(statementResponse.echo_req.dt_to * 1000);
+        var dateReq = new Date(statementResponse.echo_req.dt_to * 1000);
         //TODO : need to check if there' newer or older and show the button accordingly
 
-        const statementData = statementResponse.statement;
+        var statementData = statementResponse.statement;
 
         console.info("rendering table");
         clearStatementTableBody();
 
-        const transactions = statementData.transactions;
+        var transactions = statementData.transactions;
         appendTransactionsToTable(transactions, $statementTable);
 
-        const creditTotal = transactions.reduce(function(previousValue, currentValue){
+        var creditTotal = transactions.reduce(function(previousValue, currentValue){
             return previousValue + parseFloat(currentValue.amount);
         }, 0);
 
@@ -34,7 +34,7 @@ const StatementUI = (function(){
         //setDescColSpan(2);
     }    
     function setStatementTableFooterBalance(balanceObj){
-        const balance = Number(balanceObj[0].balance).toFixed(2);
+        var balance = Number(balanceObj[0].balance).toFixed(2);
         $statementTableFooter
             .children(".bal-col-item")
             .text(balance);
@@ -50,55 +50,55 @@ const StatementUI = (function(){
     function appendTransactionsToTable(transactions, $tableDOM){
 
         for (var i = 0 ; i < transactions.length ; i ++) {
-            const rowDOM = generateTransactionDOM(transactions[i]);
+            var rowDOM = generateTransactionDOM(transactions[i]);
             rowDOM.appendTo($statementTableBody);
         }
     }
     function generateTransactionDOM(transaction){
-        const $rowDom = $("<tr></tr>", {class: "flex-table-row"});
+        var $rowDom = $("<tr></tr>", {class: "flex-table-row"});
 
-        const dateObj = new Date(transaction["transaction_time"] * 1000);
-        const momentObj = moment(dateObj);
-        const dateStr = momentObj.format("YYYY-MM-DD");
-        const timeStr = momentObj.format("HH:mm:ss");
+        var dateObj = new Date(transaction["transaction_time"] * 1000);
+        var momentObj = moment(dateObj);
+        var dateStr = momentObj.format("YYYY-MM-DD");
+        var timeStr = momentObj.format("HH:mm:ss");
 
-        const ref = transaction["transaction_id"];
+        var ref = transaction["transaction_id"];
 
-        const action = transaction["action_type"];
+        var action = transaction["action_type"];
 
-        const desc = transaction["description"];
+        var desc = transaction["description"];
 
-        const amount = Number(parseFloat(transaction["amount"])).toFixed(2);
-        const creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
+        var amount = Number(parseFloat(transaction["amount"])).toFixed(2);
+        var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
 
-        const balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
+        var balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
 
-        const dateDom = $("<td></td>", {
+        var dateDom = $("<td></td>", {
             class: "flex-table-row-item breakline date-col-item",
             text: dateStr + "\n" + timeStr
         }).appendTo($rowDom);
 
-        const refDom = $("<td></td>", {
+        var refDom = $("<td></td>", {
             class: "flex-table-row-item ref-col-item",
             text: ref
         }).appendTo($rowDom);
 
-        const actionDom = $("<td></td>", {
+        var actionDom = $("<td></td>", {
             class: "flex-table-row-item action-col-item",
             text: action
         }).appendTo($rowDom);
 
-        const descDom = $("<td></td>", {
+        var descDom = $("<td></td>", {
             class: "flex-table-row-item desc-col-item",
             text: desc
         }).appendTo($rowDom);
 
-        const creditDebitDom = $("<td></td>", {
+        var creditDebitDom = $("<td></td>", {
             class: "flex-table-row-item credit-col-item " + creditDebitType,
             text: amount
         }).appendTo($rowDom);
 
-        const balanceDom = $("<td></td>", {
+        var balanceDom = $("<td></td>", {
             class: "flex-table-row-item bal-col-item",
             text: balance
         }).appendTo($rowDom);
@@ -106,8 +106,8 @@ const StatementUI = (function(){
         return $rowDom;
     }
     function datepickerDefault(date){
-        const utcMoment = moment.utc(date).format("MM/DD/YYYY").toString();
-        const utcDate = Date.parse(utcMoment);
+        var utcMoment = moment.utc(date).format("MM/DD/YYYY").toString();
+        var utcDate = Date.parse(utcMoment);
         
         $(".has-date-picker").
             datepicker({defaultDate: utcDate}).
@@ -119,7 +119,7 @@ const StatementUI = (function(){
         });
     }
     
-    const publicMethods = {
+    var publicMethods = {
         setStatementTable: setStatementTable,
         setDatePickerDefault: datepickerDefault,
         showButtonOnDateChange: showButtonOnDateChange,

@@ -1,8 +1,8 @@
-const StatementWS = (function(){
+var StatementWS = (function(){
     "use strict";
 
     function reloadPageOnDateSubmit(){
-        const submitButton = $("#submit-date");
+        var submitButton = $("#submit-date");
         submitButton.click(function(){
             var date = $("#statement-date").datepicker("getDate");
             date.setDate(date.getDate() + 1);

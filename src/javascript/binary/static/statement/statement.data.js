@@ -1,4 +1,4 @@
-const StatementData = (function(){
+var StatementData = (function(){
     "use strict";
 
     TradeSocket.init();

@@ -1,7 +1,7 @@
 /**
  * Created by qingwei on 16/10/2015.
  */
-const DomTable = (function(){
+var DomTable = (function(){
     "use strict";
     /***
      *
@@ -16,21 +16,21 @@ const DomTable = (function(){
      */
     function createFlexTable(body, metadata, header, footer){
 
-        const tableClasses = (metadata.tableClass) ? metadata.tableClass + " flex-table" : "flex-table";
+        var tableClasses = (metadata.tableClass) ? metadata.tableClass + " flex-table" : "flex-table";
 
-        const $tableContainer = $("<div></div>", {class: "flex-table-container"});
-        const $table = $("<table></table>", {class: tableClasses, id: metadata.id});
-        const $body = createFlexTableTopGroup(body, metadata.cols, "body");
+        var $tableContainer = $("<div></div>", {class: "flex-table-container"});
+        var $table = $("<table></table>", {class: tableClasses, id: metadata.id});
+        var $body = createFlexTableTopGroup(body, metadata.cols, "body");
 
         if (header) {
-            const $header = createFlexTableTopGroup(header, metadata.cols, "header");
+            var $header = createFlexTableTopGroup(header, metadata.cols, "header");
             $header.appendTo($table);
         }
 
         $body.appendTo($table);
 
         if (footer) {
-            const $footer = createFlexTableTopGroup(footer, metadata.cols, "footer");
+            var $footer = createFlexTableTopGroup(footer, metadata.cols, "footer");
             $footer.appendTo($table);
         }
 
@@ -48,7 +48,7 @@ const DomTable = (function(){
      */
     function createFlexTableTopGroup(data, metadata, opt){
 
-        const $outer = function(){
+        var $outer = function(){
             switch (opt) {
                 case "body":
                     return $("<tbody></tbody>");
@@ -62,8 +62,8 @@ const DomTable = (function(){
         }();
 
         for (var i = 0 ; i < data.length ; i++){
-            const innerType = (opt === "body") ? "data" : "header";
-            const $tr = createFlexTableRow(data[i], metadata, innerType);
+            var innerType = (opt === "body") ? "data" : "header";
+            var $tr = createFlexTableRow(data[i], metadata, innerType);
             $tr.appendTo($outer);
         }
 
@@ -81,12 +81,12 @@ const DomTable = (function(){
             throw new Error("metadata and data does not match");
         }
 
-        const isData = (opt === "data");
+        var isData = (opt === "data");
 
-        const $tr = $("<tr></tr>", {class: "flex-tr"});
+        var $tr = $("<tr></tr>", {class: "flex-tr"});
         for (var i = 0 ; i < data.length ; i++){
-            const className = metadata[i].toLowerCase().replace(/\s/g, "-") + " flex-tr-child";
-            const rowElement = (isData) ?
+            var className = metadata[i].toLowerCase().replace(/\s/g, "-") + " flex-tr-child";
+            var rowElement = (isData) ?
                 $("<td></td>", {class: className, text: data[i]}) :
                 $("<th></th>", {class: className, text: data[i]});
             rowElement.appendTo($tr);
