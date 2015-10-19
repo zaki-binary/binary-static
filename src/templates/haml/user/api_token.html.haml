@@ -36,7 +36,7 @@
         - }
   - }
 
-  - if (! ($tokens and length(@$tokens) >= 20)) {
+  - if (! ($tokens and scalar(@$tokens) >= 30)) {
     .grd-grid-12.grd-row-padding
       %form{:action => url_for('user/api_token'), :method => 'POST'}
         %input{:type => 'hidden', :name => 'csrftoken', :value => stash('csrftoken')}
