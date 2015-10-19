@@ -1,23 +1,5 @@
 const StatementWS = (function(){
     "use strict";
-    function genericEventHandler(event){
-        const payload = JSON.parse(event.data);
-        const type = payload.msg_type;
-
-        switch(type) {
-            case "statement" :
-                StatementUI.setStatementTable(payload.statement);
-                break;
-            case "balance" :
-                StatementUI.setStatementTableFooterBalance(payload.balance);
-                break;
-            case "error" :
-                StatementError.wsReqErrHandler(payload.error);
-                break;
-            default:
-                throw "Unhandled case " + type;
-        }
-    }
 
     function reloadPageOnDateSubmit(){
         const submitButton = $("#submit-date");
@@ -41,8 +23,7 @@ const StatementWS = (function(){
     }
 
     function initPage(){
-        StatementData.registerHandler(genericEventHandler, StatementError.genericErrHandler);
-        
+
         StatementUI.setDatePickerDefault(new Date());
         StatementUI.showButtonOnDateChange();
         reloadPageOnDateSubmit();

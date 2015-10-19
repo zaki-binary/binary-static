@@ -5,10 +5,6 @@ const StatementUI = (function(){
     const $statementTableBody = $("#statement-table-body");
     const $datePickerWidget = $("#statement-date");
 
-    function setDescColSpan(spanNo){
-        $(".desc-col-item").attr("colspan", spanNo);
-    }
-
     function setStatementTable(statementResponse){
 
         const dateReq = new Date(statementResponse.echo_req.dt_to * 1000);

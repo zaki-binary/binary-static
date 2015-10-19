@@ -7,9 +7,6 @@ var Message = (function () {
 
     var process = function (msg) {
         var response = JSON.parse(msg.data);
-
-        console.info("Response: ", response);
-
         if (response) {
             var type = response.msg_type;
             if (type === 'authorize') {
@@ -33,11 +30,7 @@ var Message = (function () {
             } else if (type === 'statement'){
                 StatementUI.setStatementTable(response);
             } else if (type === 'balance'){
-                if (response.echo_req.passthrough === "balance-popup") {
-                    //do popup instead
-                } else {
-                    StatementUI.setStatementTableFooterBalance(response.balance);
-                }
+                StatementUI.setStatementTableFooterBalance(response.balance);
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
             }
