@@ -180,6 +180,7 @@ onLoad.queue(function () {
         }
     }
 
+    ViewBalance.init();
 });
 
 onLoad.queue(function () {
@@ -200,3 +201,5 @@ $(window).on('storage', function (jq_event) {
         location.href = page.url.url_for('user/my_account?loginid=' + LocalStore.get('active_loginid'));
     }, 2000);
 });
+
+

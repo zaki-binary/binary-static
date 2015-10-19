@@ -96,6 +96,7 @@ var DomTable = (function(){
     }
 
     return {
-        createFlexTable: createFlexTable
-    }
+        createFlexTable: createFlexTable,
+        createFlexTableRow: createFlexTableRow
+    };
 }())
