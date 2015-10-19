@@ -46,7 +46,7 @@ const StatementUI = (function(){
         $statementTableBody
             .children()
             .remove();
-    };
+    }
     function appendTransactionsToTable(transactions, $tableDOM){
 
         for (var i = 0 ; i < transactions.length ; i ++) {
@@ -125,7 +125,7 @@ const StatementUI = (function(){
         showButtonOnDateChange: showButtonOnDateChange,
         setStatementTableFooterBalance: setStatementTableFooterBalance,
         clearStatementTableBody: clearStatementTableBody
-    }
+    };
     
     return publicMethods;
 }());
