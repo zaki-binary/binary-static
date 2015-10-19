@@ -30,13 +30,14 @@ var Message = (function () {
             } else if (type === 'statement'){
                 StatementUI.setStatementTable(response);
             } else if (type === 'balance'){
-                if (response.passthrough === "popup"){
+                if (response.echo_req.passthrough.purpose === "popup"){
                     ViewBalanceUI.updateBalances(response.balance);
                 } else {
                     StatementUI.setStatementTableFooterBalance(response.balance);
                 }
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
+                console.log("Request failed", response.error);
             }
         } else {
 

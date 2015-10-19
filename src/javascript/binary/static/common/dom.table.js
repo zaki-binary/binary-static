@@ -23,14 +23,14 @@ var DomTable = (function(){
         var $body = createFlexTableTopGroup(body, metadata.cols, "body");
 
         if (header) {
-            var $header = createFlexTableTopGroup(header, metadata.cols, "header");
+            var $header = createFlexTableTopGroup([header], metadata.cols, "header");
             $header.appendTo($table);
         }
 
         $body.appendTo($table);
 
         if (footer) {
-            var $footer = createFlexTableTopGroup(footer, metadata.cols, "footer");
+            var $footer = createFlexTableTopGroup([footer], metadata.cols, "footer");
             $footer.appendTo($table);
         }
 
@@ -77,7 +77,7 @@ var DomTable = (function(){
      * @param {"header"|"data"} opt optional, default to "header"
      */
     function createFlexTableRow(data, metadata, opt){
-        if (data.length === metadata.length) {
+        if (data.length !== metadata.length) {
             throw new Error("metadata and data does not match");
         }
 

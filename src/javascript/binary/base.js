@@ -180,7 +180,6 @@ onLoad.queue(function () {
         }
     }
 
-    ViewBalance.init();
 });
 
 onLoad.queue(function () {

@@ -3,18 +3,18 @@
  */
 var ViewBalance = (function () {
     function showViewBalancePopup(){
-        $("#balance-content").removeClass("invisible");
-    }
-
-    function closeViewBalancePopup(){
-        $("#balance-content").addClass("invisible");
+        ViewBalanceData.getLatestBalances();
+        $("#balance-content").bPopup({
+            positionStyle: "fixed",
+            opacity: 0.6,
+            position: ["auto", "auto"]
+        });
     }
 
     function init(){
-        ViewBalanceUI.createBalancePopup();
+        $div = ViewBalanceUI.createBalancePopup();
+        $div.appendTo(document.body);
         $("#view-balances").click(showViewBalancePopup);
-        $("#close-balances").click(closeViewBalancePopup);
-        console.info("view balance init");
     }
 
     return {

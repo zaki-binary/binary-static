@@ -3,10 +3,10 @@
  */
 var ViewBalanceData = (function(){
     function getLatestBalances(){
-        TradeSocket.send({balance: 1, passthrough: "popup"});
+        TradeSocket.send({balance: 1, passthrough: {purpose: "popup"}});
+        console.info("requested balance");
     }
 
-    TradeSocket.init();
     return {
         getLatestBalances: getLatestBalances
     };
