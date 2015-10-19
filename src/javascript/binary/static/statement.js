@@ -4,5 +4,5 @@ pjax_config_page("statementws", function(){
             console.log("statement page loaded");
             StatementWS.init();
         }
-    }
+    };
 });
