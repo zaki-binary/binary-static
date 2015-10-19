@@ -145,6 +145,9 @@ pjax_config_page('trading', function () {
             Content.populate();
             TradeSocket.init();
             Symbols.getSymbols(1);
+            if (document.getElementById('websocket_form')) {
+                addEventListenerForm();
+            }
         },
         onUnload: function() {
             TradeSocket.close();
