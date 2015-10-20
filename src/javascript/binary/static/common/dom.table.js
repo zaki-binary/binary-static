@@ -56,7 +56,7 @@ var DomTable = (function(){
                     return $("<tfoot></tfoot>");
                 default :
                     return $("<thead></thead>");
-            };
+            }
         }();
 
         for (var i = 0 ; i < data.length ; i++){
@@ -97,4 +97,4 @@ var DomTable = (function(){
         createFlexTable: createFlexTable,
         createFlexTableRow: createFlexTableRow
     };
-}())
+}());
