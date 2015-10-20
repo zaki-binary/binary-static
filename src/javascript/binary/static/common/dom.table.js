@@ -52,10 +52,8 @@ var DomTable = (function(){
             switch (opt) {
                 case "body":
                     return $("<tbody></tbody>");
-                    break;
                 case "footer":
                     return $("<tfoot></tfoot>");
-                    break;
                 default :
                     return $("<thead></thead>");
             };
