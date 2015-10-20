@@ -215,6 +215,7 @@ var Price = (function () {
             }
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
+            purchase.setAttribute('data-display_value', proposal['display_value']);
             purchase.setAttribute('data-symbol', id);
             for(var key in bufferRequests[id]){
                 if(key && key !== 'proposal'){
