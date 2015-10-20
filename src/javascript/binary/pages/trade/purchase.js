@@ -60,10 +60,23 @@ var Purchase = (function () {
             }
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
-            payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
-            cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
-            profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
+            if(sessionStorage.get('formname')==='spreads'){
+                payout.hide();
+                cost.hide();
+                profit.hide();
 
+                // payout.innerHTML = Content.localize().textStopLoss + ' <p>' + payout_value + '</p>';
+                // cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + cost_value + '</p>';
+                // profit.innerHTML = Content.localize().textStopProfit + ' <p>' + profit_value + '</p>';
+            }
+            else {
+                payout.show();
+                cost.show();
+                profit.show();
+                payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
+                cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
+                profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
+            }
 
             balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + User.get().currency + ' ' + Math.round(receipt['balance_after']*100)/100;
 
