@@ -12,7 +12,6 @@ var StatementUI = (function(){
 
         var statementData = statementResponse.statement;
 
-        console.info("rendering table");
         clearStatementTableBody();
 
         var transactions = statementData.transactions;
