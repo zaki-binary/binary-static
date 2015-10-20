@@ -118,7 +118,22 @@ var StatementUI = (function(){
             $("#submit-date").removeClass("invisible");
         });
     }
-    
+
+    function createEmptyStatementTable(){
+        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance(USD)"];
+        var footer = ["", "", "", "", "", ""];
+        var metadata = {
+            id: "statement-table",
+            cols: ["date", "ref", "act", "desc", "credit", "bal"]
+        };
+        var data = [];
+        return DomTable.createFlexTable(data, metadata, header, footer);
+    }
+
+    function updateStatementTable(statements){
+        
+    }
+
     var publicMethods = {
         setStatementTable: setStatementTable,
         setDatePickerDefault: datepickerDefault,
