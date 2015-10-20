@@ -104,6 +104,13 @@ var Purchase = (function () {
         }
 
         if(show_chart){
+            var contract_sentiment;
+            if(passthrough['contract_type']==='CALL' || passthrough['contract_type']==='ASIANU'){
+                contract_sentiment = 'up';
+            }
+            else{
+                contract_sentiment = 'down';
+            }
             WSTickDisplay.initialize({
                 "symbol":passthrough.symbol,
                 "number_of_ticks":passthrough.duration,
@@ -113,7 +120,7 @@ var Purchase = (function () {
                 "display_symbol":Symbols.getName(passthrough.symbol),
                 "contract_start":receipt['start_time'],
                 "decimal":3,
-                "contract_sentiment":(passthrough['contract_type']==='CALL' ? 'up' : 'down'),
+                "contract_sentiment":contract_sentiment,
                 "price":passthrough['ask-price'],
                 "payout":passthrough['amount'],
                 "show_contract_result":1
