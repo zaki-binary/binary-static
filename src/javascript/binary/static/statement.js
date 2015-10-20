@@ -3,5 +3,5 @@ pjax_config_page("statementws", function(){
         onLoad: function() {
             StatementWS.init();
         }
-    }
+    };
 });

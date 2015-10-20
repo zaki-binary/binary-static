@@ -52,13 +52,11 @@ var DomTable = (function(){
             switch (opt) {
                 case "body":
                     return $("<tbody></tbody>");
-                    break;
                 case "footer":
                     return $("<tfoot></tfoot>");
-                    break;
                 default :
                     return $("<thead></thead>");
-            };
+            }
         }();
 
         for (var i = 0 ; i < data.length ; i++){
@@ -99,4 +97,4 @@ var DomTable = (function(){
         createFlexTable: createFlexTable,
         createFlexTableRow: createFlexTableRow
     };
-}())
+}());
