@@ -656,11 +656,11 @@ function displayTooltip(market, symbol){
     var tip = document.getElementById('symbol_tip');
     if(market.match(/^random/)){
         tip.show();
-        tip.setAttribute('target','/get-started/random-markets');
+        tip.setAttribute('href','/get-started/random-markets');
     }
     else if(symbol.match(/^SYN/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices');
+        tip.setAttribute('href','/smart-indices');
     }
     else{
         tip.hide();
