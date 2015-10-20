@@ -95,23 +95,29 @@ var Purchase = (function () {
                 spots.hide();
             }
 
-            button.textContent = Content.localize().textContractConfirmationButton;
-            var purchase_date = new Date(receipt['purchase_time']*1000);
-            var button_attrs = {
-                contract_id: receipt['fmb_id'],
-                controller_action: 'sell',
-                currency: document.getElementById('currency').value,
-                payout: payout_value,
-                purchase_price: cost_value,
-                purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
-                qty:1,
-                shortcode:receipt['shortcode'],
-                url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
-            };
-            for(var k in button_attrs){
-                if(k){
-                    button.setAttribute(k,button_attrs[k]);
+            if(sessionStorage.formname !== 'digits' && !show_chart){
+                button.show();
+                button.textContent = Content.localize().textContractConfirmationButton;
+                var purchase_date = new Date(receipt['purchase_time']*1000);
+                var button_attrs = {
+                    contract_id: receipt['fmb_id'],
+                    controller_action: 'sell',
+                    currency: document.getElementById('currency').value,
+                    payout: payout_value,
+                    purchase_price: cost_value,
+                    purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
+                    qty:1,
+                    shortcode:receipt['shortcode'],
+                    url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
+                };
+                for(var k in button_attrs){
+                    if(k){
+                        button.setAttribute(k,button_attrs[k]);
+                    }
                 }
+            }
+            else{
+                button.hide();
             }
         }
 
