@@ -3750,7 +3750,7 @@ BetAnalysis.DigitInfo.prototype = {
     },
     on_latest: function() {
         var that = this;
-        var tab = $('#' + this.id + "-content");
+        var tab = $('#tab_last_digit-content');
         var form = tab.find('form:first');
         form.on('submit', function(event) {
             event.preventDefault();
@@ -6867,6 +6867,7 @@ BetForm.Time.EndTime.prototype = {
                     sessionStorage.setItem('error_message', field.attr('error_message'));
                     data['error_message'] = field.attr('error_message');
                 }
+                data['sell_channel'] = field.attr('sell_channel');
                 data['barrier'] = field.attr('barrier');
                 data['barrier2'] = field.attr('barrier2');
                 data['is_immediate'] = field.attr('is_immediate');
@@ -7231,7 +7232,7 @@ BetForm.Time.EndTime.prototype = {
                     that.clear_warnings();
                     var now_time_con = con.find('#now_time_container');
                     if (now_time_con.length > 0 ) {
-                        var stream_url = server_data.stream_url + '/' + attr.model.sell_channel();
+                        var stream_url = server_data.stream_url + '/' + server_data.sell_channel;
                         that.streaming.start(stream_url);
                         that.start_now_timer(con, 'now_time_container', 'trade_date_now'); // now timer
                         that.create_date_timer(con.find('#trade_details_now_date'));
@@ -9865,7 +9866,12 @@ function loadAnalysisTab() {
                 bindSubmitForIntradayPrices();
             } else if (currentTab === 'tab_ohlc') {
                 bindSubmitForDailyPrices();
+            } else if (currentTab == 'tab_last_digit') {
+                var digitInfo = new BetAnalysis.DigitInfo();
+                digitInfo.on_latest();
+                digitInfo.show_chart(sessionStorage.getItem('underlying'));
             }
+
         });
     }
 
@@ -10747,11 +10753,11 @@ function displayTooltip(market, symbol){
     var tip = document.getElementById('symbol_tip');
     if(market.match(/^random/)){
         tip.show();
-        tip.setAttribute('target','/get-started/random-markets');
+        tip.setAttribute('href','/get-started/random-markets');
     }
     else if(symbol.match(/^SYN/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices');
+        tip.setAttribute('href','/smart-indices');
     }
     else{
         tip.hide();
@@ -11875,6 +11881,14 @@ var TradingEvents = (function () {
             }));
         }
 
+        var view_button = document.getElementById('contract_purchase_button');
+        if(view_button){
+            tip.addEventListener('click', debounce( function (e) {
+                BetSell.sell_at_market($(e.traget)[0]);
+            }));
+        }
+
+
         /*
          * attach datepicker and timepicker to end time durations
          * have to use jquery
@@ -12097,11 +12111,11 @@ var Price = (function () {
             }
         }
 
-        if (proposal['ask_price']) {
+        if (proposal['display_value']) {
             if (is_spread) {
-                amount.textContent = proposal['ask_price'];
+                amount.textContent = proposal['display_value'];
             } else {
-                amount.textContent = currency.value + ' ' + proposal['ask_price'];
+                amount.textContent = currency.value + ' ' + proposal['display_value'];
             }
         }
 
@@ -12141,9 +12155,9 @@ var Price = (function () {
             } else {
                 displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
             }
-            var oldprice = purchase.getAttribute('data-ask-price');
+            var oldprice = purchase.getAttribute('data-display_value');
             if (oldprice) {
-                displayPriceMovement(amount, oldprice, proposal['ask_price']);
+                displayPriceMovement(amount, oldprice, proposal['display_value']);
             }
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
@@ -12500,10 +12514,23 @@ var Purchase = (function () {
             }
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
-            payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
-            cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
-            profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
+            if(sessionStorage.getItem('formname')==='spreads'){
+                payout.hide();
+                cost.hide();
+                profit.hide();
 
+                // payout.innerHTML = Content.localize().textStopLoss + ' <p>' + payout_value + '</p>';
+                // cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + cost_value + '</p>';
+                // profit.innerHTML = Content.localize().textStopProfit + ' <p>' + profit_value + '</p>';
+            }
+            else {
+                payout.show();
+                cost.show();
+                profit.show();
+                payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
+                cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
+                profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
+            }
 
             balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + User.get().currency + ' ' + Math.round(receipt['balance_after']*100)/100;
 
@@ -12540,10 +12567,16 @@ var Purchase = (function () {
                     button.setAttribute(k,button_attrs[k]);
                 }
             }
-            BetSell.register();
         }
 
         if(show_chart){
+            var contract_sentiment;
+            if(passthrough['contract_type']==='CALL' || passthrough['contract_type']==='ASIANU'){
+                contract_sentiment = 'up';
+            }
+            else{
+                contract_sentiment = 'down';
+            }
             WSTickDisplay.initialize({
                 "symbol":passthrough.symbol,
                 "number_of_ticks":passthrough.duration,
@@ -12553,7 +12586,7 @@ var Purchase = (function () {
                 "display_symbol":Symbols.getName(passthrough.symbol),
                 "contract_start":receipt['start_time'],
                 "decimal":3,
-                "contract_sentiment":(passthrough['contract_type']==='CALL' ? 'up' : 'down'),
+                "contract_sentiment":contract_sentiment,
                 "price":passthrough['ask-price'],
                 "payout":passthrough['amount'],
                 "show_contract_result":1
