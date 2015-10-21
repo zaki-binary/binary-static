@@ -60,7 +60,7 @@
                   != l('Published in English, Japanese, Chinese, Arabic, Polish, German, French, Spanish, Portuguese, Italian and Russian')
   .grd-container
     .grd-grid-12.grd-parent
-    %p
-      != l('[_1] is owned and operated by the Binary Ltd. group of companies. For more information, <a href="[_2]">visit our history page</a>.', stash->{website_name}, url_for('/group-history'))
-    %p
-      != l('In the UK and Isle of Man, our clients trade through Binary (IOM) Ltd. In the European Union (except UK), they trade through Binary (Europe) Ltd and Binary Investments (Europe) Ltd. In the rest of the world, they trade through Binary (C.R.) S.A. <a href="[_1]">Click here</a> for more information.', url_for('/binary-licences'))
+      %p
+        != l('[_1] is owned and operated by the Binary Ltd. group of companies. For more information, <a href="[_2]">visit our history page</a>.', stash->{website_name}, url_for('/group-history'))
+      %p
+        != l('In the UK and Isle of Man, our clients trade through Binary (IOM) Ltd. In the European Union (except UK), they trade through Binary (Europe) Ltd and Binary Investments (Europe) Ltd. In the rest of the world, they trade through Binary (C.R.) S.A. <span class="ar-hide id-hide"><a href="[_1]">Click here</a> for more information.</span>', url_for('/binary-licences'))
