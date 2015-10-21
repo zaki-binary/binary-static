@@ -27,9 +27,6 @@
                             %]"[% END %]>[% l('Group History') %]</a>
                         </li>
                         <li class="ja-hide">
-                            <a href="[% request.url_for('/legal/us_patents') %]" class="us_patent_link pjaxload">[% l('Patents') %]</a>
-                        </li>
-                        <li class="ja-hide">
                             <a class="pjaxload" href="[% request.url_for('careers') %]">[% l('Careers') %]</a>
                         </li>
                         <li class="ja-hide">
@@ -138,6 +135,9 @@
                         <li class="ja-hide">
                         <a class="pjaxload" href="[% request.url_for('/terms-and-conditions', {selected_tab => 'complaints-disputes-tac-tab'}) %]"[% IF target %]
                             target="[% target %]"[% END %]>[% l('Complaints and Disputes') %]</a>
+                        </li>
+                        <li class="ja-hide">
+                            <a href="[% request.url_for('/legal/us_patents') %]" class="us_patent_link pjaxload">[% l('Patents') %]</a>
                         </li>
                     </ul>
                 </div>

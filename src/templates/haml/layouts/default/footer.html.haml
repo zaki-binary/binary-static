@@ -12,8 +12,6 @@
             %li
               %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
             %li.ja-hide
-              %a.pjaxload{:href=>url_for("/legal/us_patents"), :class=>"us_patent_link"}= l('Patents')
-            %li.ja-hide
               %a.pjaxload{:href=>url_for("careers")}= l('Careers')
             %li.ja-hide
               %a{:href=>"http://binarycom.statuspage.io", :target => "_blank"}= l('Network Status')
@@ -66,6 +64,8 @@
                   %a.pjaxload{:href=>url_for("responsible-trading")}= l('Responsible Trading')
                 %li.ja-hide
                   %a.pjaxload{:href=>url_for("/terms-and-conditions?selected_tab=complaints-disputes-tac-tab")}= l('Complaints and Disputes')
+                %li.ja-hide
+                  %a.pjaxload{:href=>url_for("/legal/us_patents"), :class=>"us_patent_link"}= l('Patents')
         .grd-grid-4
           %h1= l('Market Data')
           %ul
