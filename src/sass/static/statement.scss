@@ -1,31 +1,5 @@
 
 #statement-ws-container {
-    min-width: 100px;
-    overflow-x: auto;
-    th {
-        text-align: left !important;
-        border-bottom: none !important;
-    }
-
-    .flex-table {
-        min-width: 700px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-
-    .breakline {
-        white-space: pre-line;
-    }
-
-    .flex-table-row {
-        display: flex;
-        flex-wrap: wrap;
-        flex: 1 1 100px;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: stretch;
-    }
 
     #date-nav-panel {
         display: flex;
@@ -34,20 +8,12 @@
         align-items: stretch;
     }
 
-    .flex-table-row-item {
-        flex: 1 1 50px;
-    }
-
-    td.flex-table-row-item {
-        padding-left: 12px;
-    }
-
-    .flex-table-row-item.desc-col-item {
+    .desc {
         flex: 2 1 100px;
         padding-right: 20px;
     }
 
-    .flex-table-row-item.action-col-item {
+    .action {
         flex: 0.8 1 35px;
     }
 
@@ -68,5 +34,10 @@
 
     label[for="date-picker"] {
         left: 30%;
+    }
+
+    #ending-note {
+        font-size: 80%;
+        color: #0000ff;
     }
 }
