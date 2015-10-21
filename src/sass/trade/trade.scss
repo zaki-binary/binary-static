@@ -80,10 +80,6 @@
   .button button{
     cursor: pointer;
   }
-  .submitted input:invalid + label::after {
-    content: 'invalid input';
-    padding-left: 10px;
-  }
   .row, .row-inner {
     display: flex;
     justify-content: space-around;
@@ -424,6 +420,7 @@
   #symbol_tip{
     padding-right: 8px;
     padding-bottom: 5px;
+    cursor: pointer;
   }
   #spot_label{
     display: none;
@@ -586,6 +583,10 @@
                 }
             }
         }
+    }
+    #last_digit_histo_form {
+        overflow: hidden;
+        margin-bottom: 20px;
     }
 }
 @media all and (max-width: 640px) {
