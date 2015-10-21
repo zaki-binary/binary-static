@@ -99,16 +99,27 @@ var Purchase = (function () {
                 button.show();
                 button.textContent = Content.localize().textContractConfirmationButton;
                 var purchase_date = new Date(receipt['purchase_time']*1000);
+
+                var url,spread_bet;
+                if(sessionStorage.getItem('formname')==='spreads'){
+                    url = 'https://'+window.location.host+'/trade/analyse_spread_contract';
+                    spread_bet = 1;
+                    cost_value = passthrough.stop_loss;
+                }
+                else{
+                    url = 'https://'+window.location.host+'/trade/analyse_contract';
+                    spread_bet = 0;
+                }
                 var button_attrs = {
                     contract_id: receipt['fmb_id'],
-                    controller_action: 'sell',
                     currency: document.getElementById('currency').value,
-                    payout: payout_value,
                     purchase_price: cost_value,
                     purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
-                    qty:1,
                     shortcode:receipt['shortcode'],
-                    url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
+                    spread_bet:spread_bet,
+                    broker_code:receipt.broker_code,
+                    language:page.language(),
+                    url:url
                 };
                 for(var k in button_attrs){
                     if(k){
