@@ -2,18 +2,15 @@ var StatementUI = (function(){
     "use strict";
     var tableID = "statement-table";
     var columns = ["date", "ref", "act", "desc", "credit", "bal"];
-    var $datePickerWidget = $("#statement-date");
 
     function datepickerDefault(date){
-        var utcMoment = moment.utc(date).format("MM/DD/YYYY").toString();
-        var utcDate = Date.parse(utcMoment);
+        var utcMoment = moment.utc(date).format("YYYY-MM-DD").toString();
+        //var utcDate = Date.parse(utcMoment);
         
-        $(".has-date-picker").
-            datepicker({defaultDate: utcDate}).
-            datepicker("setDate", utcDate);
+        $("#statement-date").val(utcMoment);
     }
     function showButtonOnDateChange(){
-        $datePickerWidget.on("change", function() {
+        $("#statement-date").on("change", function() {
             $("#submit-date").removeClass("invisible");
         });
     }
@@ -34,6 +31,8 @@ var StatementUI = (function(){
     function clearTableContent(){
         var $tbody = $("#" + tableID + "> tbody");
         $tbody.children("tr").remove();
+
+        $("tfoot > tr > th").text(" ");
     }
 
     function updateStatementTable(statement){

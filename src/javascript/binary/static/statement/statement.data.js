@@ -1,6 +1,5 @@
 var StatementData = (function(){
     "use strict";
-    var currentLastTransaction;
     var hasOlder = true;
 
     function getStatement(opts){
@@ -14,7 +13,6 @@ var StatementData = (function(){
 
     return {
         getStatement: getStatement,
-        currentLastTransaction: currentLastTransaction,
         hasOlder: hasOlder
     };
 }());
