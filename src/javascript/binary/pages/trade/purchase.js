@@ -175,10 +175,13 @@ var Purchase = (function () {
 
             spots.appendChild(fragment);
             spots.scrollTop = spots.scrollHeight;
+            spots.className = '';
             
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status;
-                if(d1==purchase_data.echo_req.passthrough['barrier']){
+
+                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier  
+                    || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
                     contract_status = 'This contract won';
                 }
