@@ -89,6 +89,7 @@ var Purchase = (function () {
 
             if(sessionStorage.formname === 'digits'){
                 spots.textContent = '';
+                spots.className = '';
                 spots.show();
             }
             else{
@@ -186,7 +187,6 @@ var Purchase = (function () {
 
             spots.appendChild(fragment);
             spots.scrollTop = spots.scrollHeight;
-            spots.className = '';
 
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status;
