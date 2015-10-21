@@ -1,12 +1,8 @@
 var StatementData = (function(){
     "use strict";
+    var currentLastTransaction;
+    var hasOlder = true;
 
-    TradeSocket.init();
-
-    function getBalance(){
-        TradeSocket.send({balance: 1});
-    }
-    
     function getStatement(opts){
         var req = {statement: 1, description: 1};
         if(opts){ 
@@ -16,12 +12,9 @@ var StatementData = (function(){
         TradeSocket.send(req);
     }
 
-    function websocketResponseToTable(statementResponse){
-        
-    }
-
     return {
         getStatement: getStatement,
-        getBalance: getBalance
+        currentLastTransaction: currentLastTransaction,
+        hasOlder: hasOlder
     };
 }());
