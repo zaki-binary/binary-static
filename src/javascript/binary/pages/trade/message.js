@@ -27,10 +27,16 @@ var Message = (function () {
                 processTick(response);
             } else if (type === 'trading_times'){
                 processTradingTimes(response);
-            } else if (type === 'statement'){
-                StatementUI.setStatementTable(response);
+            } else if (type === 'statement'){       //this handler should be abstracted out to somewhere else
+                //store the transaction time of oldest transaction returned
+                StatementWS.statementHandler(response.statement);
             } else if (type === 'balance'){
-                StatementUI.setStatementTableFooterBalance(response.balance);
+                var passthroughObj = response.echo_req.passthrough;
+                if (passthroughObj){
+                    switch (passthroughObj.purpose) {
+                        //TODO: should get from view_balance_ws
+                    }
+                }
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
             }
