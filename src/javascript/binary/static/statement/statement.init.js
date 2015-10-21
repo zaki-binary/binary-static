@@ -85,7 +85,7 @@ var StatementWS = (function(){
 
             if (pFromTop >= hidableHeight(70)) {
                 getNextChunkStatement();
-                $("#ending-note").text("");
+                $("#ending-note").text("Table loading...");
             }
         });
     }
