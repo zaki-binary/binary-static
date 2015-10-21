@@ -3,10 +3,12 @@
     .grd-container.grd-default-container
       .grd-grid-6.grd-grid-mobile-12.grd-parent
         .grd-grid-4
-          %h1= l('About Us')
+          %h1= l('Our Company')
           %ul
             %li
-              %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('Group Information')
+              %a.pjaxload{:href=>url_for("about-us"), :class => 'pjaxload'}= l('About Us')
+            %li
+              %a.id-hide.ar-hide.pjaxload{:href=>url_for("group-information"), :class => 'pjaxload'}= l('Group Information')
             %li
               %a.pjaxload{:href=>url_for("group-history"), :class => 'pjaxload'}= l('Group History')
             %li.ja-hide
