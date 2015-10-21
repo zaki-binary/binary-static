@@ -25,42 +25,42 @@
               .grd-grid-6.center.border-right-top
                 %img.responsive{:src => url_for('images/pages/about/founded.svg')}
                 %p
-                  != l('Founded October 1999')
+                  = l('Founded October 1999')
               .grd-grid-6.center.border-right-top
                 %img.responsive{:src => url_for('images/pages/about/debt-free.svg')}
                 %p
-                  != l('Debt-free')
+                  = l('Debt-free')
             .grd-grid-6.grd-grid-mobile-12
               .grd-grid-6.center.border-right-top
                 %img.responsive{:src => url_for('images/pages/about/staff.svg')}
                 %p
-                  != l('Over 90 staff and contractors worldwide')
+                  = l('Over 90 staff and contractors worldwide')
               .grd-grid-6.center
                 %img.responsive{:src => url_for('images/pages/about/1mil.svg')}
                 %p
-                  != l('Over 1 million registered accounts worldwide')
+                  = l('Over 1 million registered accounts worldwide')
           .grd-grid-12.grd-parent
             .grd-grid-6.grd-grid-mobile-12
               .grd-grid-6.center.border-right-bottom
                 %img.responsive{:src => url_for('images/pages/about/transacts.svg')}
                 %p
-                  != l('Binary’s platform transacts on average 15 transactions per second, 24/7')
+                  != l('Binary’s platform transacts on average 15 <a href="http://binarycom.statuspage.io/">transactions</a> per second, 24/7')
               .grd-grid-6.center.border-right-bottom
                 %img.responsive{:src => url_for('images/pages/about/locations.svg')}
                 %p
-                  != l('Offices in Malta, Malaysia and Japan')
+                  != l('<a href="[_1]">Offices</a> in Malta, Malaysia and Japan', url_for('/contact'))
             .grd-grid-6.grd-grid-mobile-12
               .grd-grid-6.center.border-right-bottom
                 %img.responsive{:src => url_for('images/pages/about/license.svg')}
                 %p
-                  != l('Licensed and regulated in Malta, the United Kingdom, the Isle of Man, and Ireland')
+                  = l('Licensed and regulated in Malta, the United Kingdom, the Isle of Man, and Ireland')
               .grd-grid-6.center.align
                 %img.responsive{:src => url_for('images/pages/about/languages.svg')}
                 %p
-                  != l('Published in English, Japanese, Chinese, Arabic, Polish, German, French, Spanish, Portuguese, Italian and Russian')
+                  = l('Published in English, Japanese, Chinese, Arabic, Polish, German, French, Spanish, Portuguese, Italian and Russian')
   .grd-container
     .grd-grid-12.grd-parent
       %p
         != l('[_1] is owned and operated by the Binary Ltd. group of companies. For more information, <a href="[_2]">visit our history page</a>.', stash->{website_name}, url_for('/group-history'))
       %p
-        != l('In the UK and Isle of Man, our clients trade through Binary (IOM) Ltd. In the European Union (except UK), they trade through Binary (Europe) Ltd and Binary Investments (Europe) Ltd. In the rest of the world, they trade through Binary (C.R.) S.A. <span class="ar-hide id-hide"><a href="[_1]">Click here</a> for more information.</span>', url_for('/binary-licences'))
+        = l('In the UK and Isle of Man, our clients trade through Binary (IOM) Ltd. In the European Union (except UK), they trade through Binary (Europe) Ltd and Binary Investments (Europe) Ltd. In the rest of the world, they trade through Binary (C.R.) S.A.')
