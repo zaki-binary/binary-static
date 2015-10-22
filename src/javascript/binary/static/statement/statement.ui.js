@@ -5,8 +5,14 @@ var StatementUI = (function(){
 
     function datepickerDefault(date){
         var utcMoment = moment.utc(date).format("YYYY-MM-DD").toString();
-        //var utcDate = Date.parse(utcMoment);
-        
+
+        if (!Modernizr.inputtypes.date) {
+            var utcDate = Date.parse(utcMoment);
+            $('input[type=date]').datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
+
+            return;
+        }
+
         $("#statement-date").val(utcMoment);
     }
     function showButtonOnDateChange(){
