@@ -124,6 +124,19 @@ var toggle_hedging_assets_japan = function() {
     }
 };
 
+var validate_hedging_fields_form_submit = function () {
+    $('form#openAccForm').submit(function (event) {
+        if ($('#trading_purpose').val() === 'Hedging') {
+            if ($('#hedge_asset').val() === '') {
+                $('#error_hedge_asset').text(text.localize('Please select a value.'));
+            }
+            if ($('#hedge_asset_amount').val() === '') {
+                $('#error_hedge_asset_amount').text(text.localize('Please enter amount.'));
+            }
+        }
+    });
+};
+
 pjax_config_page('new_account/maltainvest', function() {
     return {
         onLoad: function() {
@@ -146,6 +159,7 @@ pjax_config_page('new_account/japan', function() {
             $('#trading_purpose').on('change', function() {
                 toggle_hedging_assets_japan();
             });
+            validate_hedging_fields_form_submit();
         }
     };
 });
