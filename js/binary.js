@@ -7462,7 +7462,9 @@ BetForm.Time.EndTime.prototype = {
                     var con = that.show_spread_popup(data);
                     var contract_status = con.find('#status').text();
                     if (contract_status === 'Open') {
-                        BetPrice.spread.stream(attr.model.sell_channel());
+                        var field = $('#sell_extra_info_data');
+                        var sell_channel = field.attr('sell_channel');
+                        BetPrice.spread.stream(attr.model.sell_channel() ? attr.model.sell_channel() : sell_channel);
                     }
                },
             })).always(function () {
@@ -11883,7 +11885,7 @@ var TradingEvents = (function () {
 
         var view_button = document.getElementById('contract_purchase_button');
         if(view_button){
-            tip.addEventListener('click', debounce( function (e) {
+            view_button.addEventListener('click', debounce( function (e) {
                 BetSell.sell_at_market($(e.traget)[0]);
             }));
         }
@@ -12516,18 +12518,11 @@ var Purchase = (function () {
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
             if(sessionStorage.getItem('formname')==='spreads'){
-                payout.hide();
-                cost.hide();
-                profit.hide();
-
-                // payout.innerHTML = Content.localize().textStopLoss + ' <p>' + payout_value + '</p>';
-                // cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + cost_value + '</p>';
-                // profit.innerHTML = Content.localize().textStopProfit + ' <p>' + profit_value + '</p>';
+                payout.innerHTML = Content.localize().textStopLoss + ' <p>' + receipt.stop_loss_level + '</p>';
+                cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + receipt.amount_per_point + '</p>';
+                profit.innerHTML = Content.localize().textStopProfit + ' <p>' + receipt.stop_profit_level + '</p>';
             }
             else {
-                payout.show();
-                cost.show();
-                profit.show();
                 payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
                 cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
                 profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
@@ -12544,6 +12539,7 @@ var Purchase = (function () {
 
             if(sessionStorage.formname === 'digits'){
                 spots.textContent = '';
+                spots.className = '';
                 spots.show();
             }
             else{
@@ -12554,16 +12550,27 @@ var Purchase = (function () {
                 button.show();
                 button.textContent = Content.localize().textContractConfirmationButton;
                 var purchase_date = new Date(receipt['purchase_time']*1000);
+
+                var url,spread_bet;
+                if(sessionStorage.getItem('formname')==='spreads'){
+                    url = 'https://'+window.location.host+'/trade/analyse_spread_contract';
+                    spread_bet = 1;
+                    cost_value = passthrough.stop_loss;
+                }
+                else{
+                    url = 'https://'+window.location.host+'/trade/analyse_contract';
+                    spread_bet = 0;
+                }
                 var button_attrs = {
                     contract_id: receipt['fmb_id'],
-                    controller_action: 'sell',
                     currency: document.getElementById('currency').value,
-                    payout: payout_value,
                     purchase_price: cost_value,
                     purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
-                    qty:1,
                     shortcode:receipt['shortcode'],
-                    url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
+                    spread_bet:spread_bet,
+                    broker_code:receipt.broker_code,
+                    language:page.language(),
+                    url:url
                 };
                 for(var k in button_attrs){
                     if(k){
@@ -12630,10 +12637,11 @@ var Purchase = (function () {
 
             spots.appendChild(fragment);
             spots.scrollTop = spots.scrollHeight;
-            
+
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status;
-                if(d1==purchase_data.echo_req.passthrough['barrier']){
+
+                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
                     contract_status = 'This contract won';
                 }
