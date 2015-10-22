@@ -24,12 +24,16 @@
     .flex-tr {
       display: flex;
       flex-wrap: wrap;
-      flex: 1 1 100px;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 100px;
       flex-direction: row;
       align-items: stretch;
 
       .flex-tr-child {
-        flex: 1 1 50px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 50px;
       }
     }
   }
