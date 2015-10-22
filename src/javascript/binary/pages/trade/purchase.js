@@ -60,10 +60,23 @@ var Purchase = (function () {
             }
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
-            payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
-            cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
-            profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
+            if(sessionStorage.getItem('formname')==='spreads'){
+                payout.hide();
+                cost.hide();
+                profit.hide();
 
+                // payout.innerHTML = Content.localize().textStopLoss + ' <p>' + payout_value + '</p>';
+                // cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + cost_value + '</p>';
+                // profit.innerHTML = Content.localize().textStopProfit + ' <p>' + profit_value + '</p>';
+            }
+            else {
+                payout.show();
+                cost.show();
+                profit.show();
+                payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
+                cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
+                profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
+            }
 
             balance.textContent = Content.localize().textContractConfirmationBalance + ' ' + User.get().currency + ' ' + Math.round(receipt['balance_after']*100)/100;
 
@@ -76,34 +89,58 @@ var Purchase = (function () {
 
             if(sessionStorage.formname === 'digits'){
                 spots.textContent = '';
+                spots.className = '';
                 spots.show();
             }
             else{
                 spots.hide();
             }
 
-            button.textContent = Content.localize().textContractConfirmationButton;
-            var purchase_date = new Date(receipt['purchase_time']*1000);
-            var button_attrs = {
-                contract_id: receipt['fmb_id'],
-                controller_action: 'sell',
-                currency: document.getElementById('currency').value,
-                payout: payout_value,
-                purchase_price: cost_value,
-                purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
-                qty:1,
-                shortcode:receipt['shortcode'],
-                url:'https://'+window.location.host+'/trade/analyse_contract?l=EN'
-            };
-            for(var k in button_attrs){
-                if(k){
-                    button.setAttribute(k,button_attrs[k]);
+            if(sessionStorage.formname !== 'digits' && !show_chart){
+                button.show();
+                button.textContent = Content.localize().textContractConfirmationButton;
+                var purchase_date = new Date(receipt['purchase_time']*1000);
+
+                var url,spread_bet;
+                if(sessionStorage.getItem('formname')==='spreads'){
+                    url = 'https://'+window.location.host+'/trade/analyse_spread_contract';
+                    spread_bet = 1;
+                    cost_value = passthrough.stop_loss;
+                }
+                else{
+                    url = 'https://'+window.location.host+'/trade/analyse_contract';
+                    spread_bet = 0;
+                }
+                var button_attrs = {
+                    contract_id: receipt['fmb_id'],
+                    currency: document.getElementById('currency').value,
+                    purchase_price: cost_value,
+                    purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
+                    shortcode:receipt['shortcode'],
+                    spread_bet:spread_bet,
+                    broker_code:receipt.broker_code,
+                    language:page.language(),
+                    url:url
+                };
+                for(var k in button_attrs){
+                    if(k){
+                        button.setAttribute(k,button_attrs[k]);
+                    }
                 }
             }
-            BetSell.register();
+            else{
+                button.hide();
+            }
         }
 
         if(show_chart){
+            var contract_sentiment;
+            if(passthrough['contract_type']==='CALL' || passthrough['contract_type']==='ASIANU'){
+                contract_sentiment = 'up';
+            }
+            else{
+                contract_sentiment = 'down';
+            }
             WSTickDisplay.initialize({
                 "symbol":passthrough.symbol,
                 "number_of_ticks":passthrough.duration,
@@ -113,7 +150,7 @@ var Purchase = (function () {
                 "display_symbol":Symbols.getName(passthrough.symbol),
                 "contract_start":receipt['start_time'],
                 "decimal":3,
-                "contract_sentiment":(passthrough['contract_type']==='CALL' ? 'up' : 'down'),
+                "contract_sentiment":contract_sentiment,
                 "price":passthrough['ask-price'],
                 "payout":passthrough['amount'],
                 "show_contract_result":1
@@ -150,10 +187,11 @@ var Purchase = (function () {
 
             spots.appendChild(fragment);
             spots.scrollTop = spots.scrollHeight;
-            
+
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status;
-                if(d1==purchase_data.echo_req.passthrough['barrier']){
+
+                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
                     contract_status = 'This contract won';
                 }
