@@ -231,10 +231,11 @@
     }
     #contract_purchase_profit_list,
     #contract_purchase_spots .row{
+      padding: 3px 0;
       flex-direction: row !important;
     }
     #contract_purchase_spots{
-      max-height: 180px;
+      height: 110px;
       overflow: hidden;
       &.won{
         background-color: rgba(46, 136, 54, 0.196078);
@@ -316,6 +317,9 @@
       line-height: 1.5;
       font-size: 90%;
       flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .contract_amount {
       font-weight: bold;
@@ -354,6 +358,10 @@
     text-align: center;
     align-items: center;
     width: 230px;
+
+    &.small{
+      width: 95px;
+    }
 
     div {
       padding: 0 5px;
@@ -435,9 +443,6 @@
     #contract_market_form_container{
       height: auto;
     }
-    #contract_purchase_spots{
-      max-height: 205px;
-    }
     #expiry_time{
       width: 175px;
     }
@@ -464,11 +469,17 @@
       }
     }
     #contract_prices_container {
+      #contract_purchase_spots{
+        height: auto;
+      }
       #price_container_top {
         margin-right: 0 !important;
       }
       .price_wrapper {
         flex-direction: row !important;
+         &.small{
+          width: auto;
+        }
       }
       .row {
         flex-direction: column;
@@ -490,6 +501,9 @@
   }
   #trading_socket_container #contract_prices_container .price_container .price_wrapper {
     width: 100%;
+     &.small{
+      width: auto;
+    }
   }
 }
 
