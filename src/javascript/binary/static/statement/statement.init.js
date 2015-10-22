@@ -25,8 +25,6 @@ var StatementWS = (function(){
 
     function getStatementForCurrentSelectedDate(){
 
-        console.log("Current Selected Date is : ", getCurrentSelectedDate());
-
         var fromDate = getCurrentSelectedDate();
         var tillDate = getCurrentSelectedDate();
         tillDate.setDate(fromDate.getDate() + 1);
