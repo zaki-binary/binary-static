@@ -139,10 +139,6 @@ var StatementWS = (function(){
     }
 
     function cleanStatementPageState(){
-        //$(document).off("scroll");
-        //$("#submit-date").off("click");
-        //$("#older-date").off("click");
-        //$("#newer-date").off("click");
         initTable();
     }
 
