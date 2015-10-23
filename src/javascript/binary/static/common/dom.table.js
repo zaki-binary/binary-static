@@ -1,6 +1,4 @@
-/**
- * Created by qingwei on 16/10/2015.
- */
+
 var DomTable = (function(){
     "use strict";
     /***
