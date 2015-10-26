@@ -18,7 +18,8 @@ var StatementWS = (function(){
             shouldNotLoadMore = true;
             var totalRow = $("#statement-table > tbody > tr").length;
             var currentDate = moment.utc($("#statement-date").val());
-            $(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
+            //$(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
+            $(".notice-msg").text("End of table");
         }
     }
 
@@ -71,7 +72,8 @@ var StatementWS = (function(){
                     shouldNotLoadMore = true;
                     var totalRow = $("#statement-table > tbody > tr").length;
                     var currentDate = moment.utc($("#statement-date").val());
-                    $(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
+                    //$(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
+                    $(".notice-msg").text("End of table");
                 }
             }
         });
