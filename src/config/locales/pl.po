@@ -7,14 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-10-23 13:40+0200\n"
-"Last-Translator: Anna Płochocka <plochocka.anna@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/binary/static/pl/>\n"
+"PO-Revision-Date: 2015-10-26 19:31+0200\n"
+"Last-Translator: Ewelina Bruździak <e.bruzdziak@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/binary/static/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.5-dev\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -392,16 +394,14 @@ msgid "3. Choose how you want to Trade the Market"
 msgstr "3. Wybierz sposób handlowania"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1946
-#, fuzzy
 #| msgid "7-day limit on losses"
 msgid "30-day limit on losses"
-msgstr "7-dniowy limit strat"
+msgstr "30-dniowy limit strat"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1911
-#, fuzzy
 #| msgid "7-day turnover limit"
 msgid "30-day turnover limit"
-msgstr "7-dniowy maksymalny obrót"
+msgstr "30-dniowy maksymalny obrót"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/charting/livechart_duration.html.tt:34
 msgid "3m"
@@ -5710,10 +5710,9 @@ msgid "Maximum account cash balance is currently set to <strong>%1 %2</strong>"
 msgstr "Maksymalne saldo gotówki na koncie jest obecnie ustalone na poziomie <strong>%2 %1</strong>"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1932
-#, fuzzy
 #| msgid "Maximum aggregate contract purchases over a 7-day period."
 msgid "Maximum aggregate contract purchases over a 30-day period."
-msgstr "Maksymalne 7-dniowe łączne zakupy kontraktów."
+msgstr "Maksymalne łączne zakupy kontraktów w okresie 30 dni."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1862
 msgid "Maximum aggregate contract purchases over a 7-day period."
@@ -5724,10 +5723,9 @@ msgid "Maximum aggregate contract purchases per day."
 msgstr "Maksymalne dzienne zagregowane zakupy kontraktów."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1967
-#, fuzzy
 #| msgid "Maximum aggregate loss over a 7-day period."
 msgid "Maximum aggregate loss over a 30-day period."
-msgstr "Maksymalna łączna strata dozwolona w okresie 7-dniowym."
+msgstr "Maksymalna łączna strata dozwolona w okresie 30-dni."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1897
 msgid "Maximum aggregate loss over a 7-day period."
@@ -7181,10 +7179,11 @@ msgstr "Zakup tego kontaktu spowoduje przekroczenie naszego limitu wypłat dla o
 
 #. ($currency, $limit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1009
-#, fuzzy
 #| msgid "Purchase of this contract would cause you to exceed your 7-day turnover limit of %1%2."
 msgid "Purchase of this contract would cause you to exceed your 30-day turnover limit of %1%2."
-msgstr "Zakup tego kontraktu spowoduje przekroczenie 7-dniowego limitu obrotów w wysokości %2 %1."
+msgstr ""
+"Zakup tego kontraktu spowoduje przekroczenie 30-dniowego limitu obrotów w "
+"wysokości %2 %1."
 
 #. ($currency, $limit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:966
@@ -7725,10 +7724,9 @@ msgstr "Podsumowanie usług"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2032
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2182
-#, fuzzy
 #| msgid "Session duration limit cannot be more than 1440 minutes."
 msgid "Session duration limit cannot be more than 6 weeks."
-msgstr "Limit czasu sesji nie może przekroczyć 1440 min."
+msgstr "Limit czasu sesji nie może przekroczyć 6 tygodni."
 
 #. ($self_exclusion->session_duration_limit)
 #: /home/git/regentmarkets/bom-backoffice/f_setting_selfexclusion.cgi:78
@@ -8064,6 +8062,8 @@ msgstr "Niestety masz jeszcze otwarte pozycje. Zamknij wszystkie otwarte pozycje
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Hooks.pm:176
 msgid "Sorry, you have reached your session duration limit of %plural(%1,%d minute,%d minutes)."
 msgstr ""
+"Przepraszamy, zakończył się dozwolony czas trwania sesji: %plural(%1,%d "
+"minuta,%d minut(y))."
 
 #. (request()
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Account.pm:150
@@ -10919,10 +10919,9 @@ msgstr "Przekroczono dzienny limit dla tego typu kontraktów."
 
 #. ($currency, $limit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1025
-#, fuzzy
 #| msgid "You have exceeded your 7-day limit on losses of %1%2."
 msgid "You have exceeded your 30-day limit on losses of %1%2."
-msgstr "Przekroczono 7-dniowy limit straty: %2 %1."
+msgstr "Przekroczono 30-dniowy limit straty: %2 %1."
 
 #. ($currency, $limit)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:982
