@@ -12,7 +12,6 @@ var StartDates = (function(){
     var hasNow = 0;
 
     var compareStartDate = function(a,b) {
-        'use strict';
         if (a.date < b.date)
             return -1;
         if (a.date > b.date)
@@ -21,12 +20,10 @@ var StartDates = (function(){
     };
 
     var getElement = function(){
-        'use strict';
         return document.getElementById('date_start');
-    }
+    };
 
     var displayStartDates = function() {
-        'use strict';
 
         var startDates = Contract.startDates();
 
@@ -89,7 +86,7 @@ var StartDates = (function(){
             var element = getElement();
             element.value = 'now';
         }
-    } 
+    } ;
 
     return {
         display: displayStartDates,
