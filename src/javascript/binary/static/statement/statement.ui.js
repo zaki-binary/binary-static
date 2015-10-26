@@ -41,28 +41,35 @@ var StatementUI = (function(){
         $("tfoot > tr > th").text(" ");
     }
 
-    function updateStatementTable(statement){
+    function updateStatementTable(transactions){
         var $tbody = $("#" + tableID + "> tbody");
-        statement.transactions.map(function(transaction){
+        transactions.map(function(transaction){
             var $newRow = createStatementRow(transaction);
             $newRow.appendTo($tbody);
         });
 
-        updateStatementFooter(statement);
+        updateStatementFooter(transactions);
+
+        Translation.statement();
     }
 
-    function updateStatementFooter(statement){
-        var totalCredit = statement.transactions.reduce(function(previousValue, currentValue){
-            return previousValue + parseFloat(currentValue.amount);
-        }, 0);
-        var totalBalance = statement.transactions[0].balance_after;
+    function updateStatementFooter(transactions){
+        var allCredit = [].slice.call(document.querySelectorAll("td.credit"));
+        allCredit = allCredit.map(function(node){return node.textContent;});
+
+        var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
+        var latestBal = $("#statement-table > tbody > tr").first().children(".bal").text();
 
         totalCredit = Number(totalCredit).toFixed(2);
-        totalBalance= Number(totalBalance).toFixed(2);
+        latestBal= Number(parseFloat(latestBal)).toFixed(2);
 
         var $footerRow = $("#" + tableID + " > tfoot").children("tr").first();
         $footerRow.children(".credit").text(totalCredit);
-        $footerRow.children(".bal").text(totalBalance);
+        $footerRow.children(".bal").text(latestBal);
+
+        var creditType = (totalCredit >= 0) ? "profit" : "loss";
+        $footerRow.children(".credit").removeClass("profit").removeClass("loss");
+        $footerRow.children(".credit").addClass(creditType);
     }
 
     function createStatementRow(transaction){
@@ -74,7 +81,7 @@ var StatementUI = (function(){
         var date = dateStr + "\n" + timeStr;
         var ref = transaction["transaction_id"];
         var action = CommonUtility.toTitleCase(transaction["action_type"]);
-        var desc = transaction["description"];
+        var desc = transaction["longcode"];
         var amount = Number(parseFloat(transaction["amount"])).toFixed(2);
         var balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
 

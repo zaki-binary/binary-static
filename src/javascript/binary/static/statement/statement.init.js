@@ -3,108 +3,97 @@ var StatementWS = (function(){
 
     var shouldNotLoadMore = false;
     var chunkPerLoad = 10;
-
-    var sentTillTime;
-    var receivedOldestTransactionTime;
+    var transactionsCurrentDate = [];
+    var dataLoaded = false;
 
     function statementHandler(response){
         var statement = response.statement;
-        if (statement.transactions.length < chunkPerLoad) {
-            StatementData.hasOlder = false;
-        } else {
-            StatementData.hasOlder = true;
+        transactionsCurrentDate = statement.transactions;
+        var top10 = getNextChunkStatement();
+        StatementUI.updateStatementTable(top10);
+
+        dataLoaded = true;
+
+        if (top10.length < 10){
+            shouldNotLoadMore = true;
+            var totalRow = $("#statement-table > tbody > tr").length;
+            var currentDate = moment.utc($("#statement-date").val());
+            $(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
         }
-        receivedOldestTransactionTime = statement.transactions[statement.transactions.length - 1].transaction_time;
-
-        StatementUI.updateStatementTable(statement);
-    }
-
-    function getCurrentSelectedDate() {
-        return new Date($("#statement-date").val());
     }
 
     function getStatementForCurrentSelectedDate(){
 
-        var fromDate = getCurrentSelectedDate();
-        var tillDate = getCurrentSelectedDate();
-        tillDate.setDate(fromDate.getDate() + 1);
+        var fromDate = moment.utc($("#statement-date").val());
+        var tillDate = moment.utc($("#statement-date").val());
+        tillDate.add(1, "d");
 
-        var fromEpoch = Math.floor(fromDate.getTime()/1000);
-        var tillEpoch = Math.floor(tillDate.getTime()/1000);
+        var fromEpoch = fromDate.unix();
+        var tillEpoch = tillDate.unix();
 
-        StatementData.getStatement({dt_to: tillEpoch, dt_fm: fromEpoch, limit: chunkPerLoad});
+        StatementData.getStatement({dt_to: tillEpoch});
     }
 
     function getNextChunkStatement(){
-        var fromDate = getCurrentSelectedDate();
-        var fromEpoch = Math.floor(fromDate.getTime()/1000);
-        var tillEpoch = receivedOldestTransactionTime;
-
-        $(".error-msg").text("");
-        StatementData.getStatement({dt_to: tillEpoch, dt_fm: fromEpoch, limit: chunkPerLoad});
-        sentTillTime = receivedOldestTransactionTime;
+        return transactionsCurrentDate.splice(0, chunkPerLoad);
     }
 
     function initTable(){
-        sentTillTime = undefined;
-        receivedOldestTransactionTime = undefined;
         shouldNotLoadMore = false;
-        StatementData.hasOlder = true;
+        transactionsCurrentDate = [];
 
         $(".error-msg").text("");
         StatementUI.clearTableContent();
-        $("#ending-note").text("");
+        $(".notice-msg").text("");
     }
 
     function loadStatementChunkWhenScroll(){
         //Attention: attach event to GLOBAL document : BAD!!
         $(document).scroll(function(){
 
-            if (shouldNotLoadMore || !receivedOldestTransactionTime || (sentTillTime && sentTillTime === receivedOldestTransactionTime)) {
+            if (!dataLoaded || shouldNotLoadMore) {
                 return;
             }
-
-            if (!StatementData.hasOlder) {
-                shouldNotLoadMore = true;
-                var totalRow = $("#statement-table > tbody > tr").length;
-                var currentDate = getCurrentSelectedDate();
-                $("#ending-note").text("You've made " + totalRow + " transaction(s) on " + moment(currentDate).format("YYYY-MM-DD"));
-                return;
-            }
-
-            var $document = $(document);
-            var pFromTop = $document.scrollTop();
-            var totalHeight = $document.height();
 
             function hidableHeight(percentage){
                 var totalHidable = $document.height() - $(window).height();
                 return Math.floor(totalHidable * percentage / 100);
             }
 
+            var $document = $(document);
+            var pFromTop = $document.scrollTop();
+            var totalHeight = $document.height();
+
             if (pFromTop >= hidableHeight(70)) {
-                getNextChunkStatement();
-                $("#ending-note").text("Table loading...");
+                var top10 = getNextChunkStatement();
+                StatementUI.updateStatementTable(top10);
+                if (top10.length < 10){
+                    shouldNotLoadMore = true;
+                    var totalRow = $("#statement-table > tbody > tr").length;
+                    var currentDate = moment.utc($("#statement-date").val());
+                    $(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
+                }
             }
         });
     }
 
     function getStatementOneDayBefore(){
-        var currentSelectedDate = getCurrentSelectedDate();
-        var oneDayBefore = getCurrentSelectedDate();
-        oneDayBefore.setDate(currentSelectedDate.getDate() - 1);
+        var currentSelectedDate = moment.utc($("#statement-date").val());
+        var oneDayBefore = moment.utc($("#statement-date").val());
+        oneDayBefore.subtract(1, "d");
 
-        oneDayBefore = moment(oneDayBefore).format("YYYY-MM-DD").toString();
+        oneDayBefore = oneDayBefore.format("YYYY-MM-DD").toString();
 
         $("#statement-date").val(oneDayBefore);
         getStatementForCurrentSelectedDate();
     }
 
     function getStatementOneDayAfter(){
-        var currentSelectedDate = getCurrentSelectedDate();
-        var oneDayAfter = getCurrentSelectedDate();
-        oneDayAfter.setDate(currentSelectedDate.getDate() + 1);
+        var currentSelectedDate = moment.utc($("#statement-date").val());
+        var oneDayAfter = moment.utc($("#statement-date").val());
+        oneDayAfter.add(1,"d");
 
-        oneDayAfter = moment(oneDayAfter).format("YYYY-MM-DD").toString();
+        oneDayAfter = oneDayAfter.format("YYYY-MM-DD").toString();
 
         $("#statement-date").val(oneDayAfter);
         getStatementForCurrentSelectedDate();
@@ -130,8 +119,7 @@ var StatementWS = (function(){
 
         StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
         $("<div></div>", {
-            id: "ending-note",
-            text: "Table loading..."
+            class: "notice-msg"
         }).appendTo("#statement-ws-container");
 
         getStatementForCurrentSelectedDate();
