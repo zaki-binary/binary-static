@@ -45,7 +45,7 @@ var Purchase = (function () {
 
             heading.textContent = Content.localize().textContractConfirmationHeading;
             descr.textContent = receipt['longcode'];
-            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['fmb_id'];
+            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['contract_id'];
 
             var payout_value, cost_value, profit_value;
 
@@ -61,18 +61,11 @@ var Purchase = (function () {
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
             if(sessionStorage.getItem('formname')==='spreads'){
-                payout.hide();
-                cost.hide();
-                profit.hide();
-
-                // payout.innerHTML = Content.localize().textStopLoss + ' <p>' + payout_value + '</p>';
-                // cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + cost_value + '</p>';
-                // profit.innerHTML = Content.localize().textStopProfit + ' <p>' + profit_value + '</p>';
+                payout.innerHTML = Content.localize().textStopLoss + ' <p>' + receipt.stop_loss_level + '</p>';
+                cost.innerHTML = Content.localize().textAmountPerPoint + ' <p>' + receipt.amount_per_point + '</p>';
+                profit.innerHTML = Content.localize().textStopProfit + ' <p>' + receipt.stop_profit_level + '</p>';
             }
             else {
-                payout.show();
-                cost.show();
-                profit.show();
                 payout.innerHTML = Content.localize().textContractConfirmationPayout + ' <p>' + payout_value + '</p>';
                 cost.innerHTML = Content.localize().textContractConfirmationCost + ' <p>' + cost_value + '</p>';
                 profit.innerHTML = Content.localize().textContractConfirmationProfit + ' <p>' + profit_value + '</p>';
@@ -112,13 +105,12 @@ var Purchase = (function () {
                     spread_bet = 0;
                 }
                 var button_attrs = {
-                    contract_id: receipt['fmb_id'],
+                    contract_id: receipt['contract_id'],
                     currency: document.getElementById('currency').value,
                     purchase_price: cost_value,
                     purchase_time: (purchase_date.getUTCFullYear()+'-'+(purchase_date.getUTCMonth()+1)+'-'+purchase_date.getUTCDate()+' '+purchase_date.getUTCHours()+':'+purchase_date.getUTCMinutes()+':'+purchase_date.getUTCSeconds()),
                     shortcode:receipt['shortcode'],
                     spread_bet:spread_bet,
-                    broker_code:receipt.broker_code,
                     language:page.language(),
                     url:url
                 };
