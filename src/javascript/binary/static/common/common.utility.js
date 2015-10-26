@@ -1,6 +1,3 @@
-/**
- * Created by qingwei on 10/13/15.
- */
 
 var CommonUtility = (function(){
     function toTitleCase(str){
@@ -9,11 +6,6 @@ var CommonUtility = (function(){
         });
     }
 
-    /***
-     *
-     * @param {Date} date
-     * @returns {*[]}
-     */
     function dateToStringWithoutTime(date){
         return [date.getDate(), date.getMonth()+1, date.getFullYear()].join("/");
     }

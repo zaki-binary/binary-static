@@ -1,6 +1,6 @@
 /***
  * this function will replace text based on the text for the whole container
- * @param id element's id
+ * @param dom dom element , not jquery object!!
  * @param replacementFunction is a function that takes in the text found
  */
 function replaceAllTextInElement(dom, replacementFunction){
@@ -15,6 +15,12 @@ function replaceAllTextInElement(dom, replacementFunction){
     }
 }
 
+
+/***
+ * To add any new translation, one can follow the similar code as below,
+ * it will call text.localize all every single text exists in the DOM
+ * you pass in
+ */
 var Translation = (function(){
 
     function statementPage(){
