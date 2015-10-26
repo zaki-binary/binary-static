@@ -11632,25 +11632,18 @@ var TradingEvents = (function () {
             // datepicker we can move back to javascript
             $('#expiry_date').on('change', function () {
                 var input = this.value;
-                var match = input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-                if(match){
-                    var date1 = new Date();
-                    date1.setUTCFullYear(match[1]);
-                    date1.setUTCMonth(match[2]-1);
-                    date1.setUTCDate(match[3]);
+                if(moment(input).isAfter(moment(),'day')){
+                    Durations.setTime('');
+                    StartDates.setNow();
+                    expiry_time.hide();
+                    var date_start = StartDates.node();
 
-                    var date2 = new Date();
-                    var diff = date1.getTime() - date2.getTime();
-                    var expiry_time = document.getElementById('expiry_time');
-                    if(diff > 24*60*60*1000){
-                        Durations.setTime('');
-                        expiry_time.hide();
-                    }
-                    else{
-                        Durations.setTime(expiry_time.value);
-                        expiry_time.show();
-                    }
                     processTradingTimesRequest(input);
+                }
+                else{
+                    Durations.setTime(expiry_time.value);
+                    expiry_time.show();
+                    processPriceRequest();
                 }
             });
         }
@@ -11680,7 +11673,7 @@ var TradingEvents = (function () {
          * whether start time is forward starting or not and request
          * new price
          */
-        var dateStartElement = document.getElementById('date_start');
+        var dateStartElement = StartDates.node();
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
                 if (e.target && e.target.value === 'now') {
@@ -11924,6 +11917,7 @@ var TradingEvents = (function () {
          * have to use jquery
          */
         $(".pickadate").datepicker({
+            minDate: new Date(),
             dateFormat: "yy-mm-dd"
         });
         $(".pickatime" ).timepicker();
@@ -12002,7 +11996,7 @@ var Price = (function () {
             amountType = document.getElementById('amount_type'),
             currency = document.getElementById('currency'),
             payout = document.getElementById('amount'),
-            startTime = document.getElementById('date_start'),
+            startTime = StartDates.node(),
             expiryType = document.getElementById('expiry_type'),
             duration = document.getElementById('duration_amount'),
             durationUnit = document.getElementById('duration_units'),
@@ -12117,7 +12111,6 @@ var Price = (function () {
 
         var position = contractTypeDisplayMapping(type);
         var container = document.getElementById('price_container_'+position);
-        var box = document.getElementById('price_container_' + position);
 
         var h4 = container.getElementsByClassName('contract_heading')[0],
             amount = container.getElementsByClassName('contract_amount')[0],
@@ -12154,22 +12147,6 @@ var Price = (function () {
         if (proposal['longcode']) {
             proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = '<div>'+proposal['longcode']+'</div>';
-        }
-
-        if (document.getElementById('websocket_form')) {
-
-            if (!document.getElementById('websocket_form').checkValidity()) {
-                if (box) {
-                    box.style.display = 'none';
-                }
-                processForgetPriceIds();
-            }
-
-            else if (document.getElementById('websocket_form').checkValidity()) {
-                if (box) {
-                    box.style.display = 'block';
-                }
-            }
         }
 
         if (details['error']){
@@ -12337,7 +12314,7 @@ function processContract(contracts) {
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
-    displayStartDates();
+    StartDates.display();
 
     Durations.display();
 
@@ -12799,69 +12776,95 @@ var TradeSocket = (function () {
  * box
  */
 
-function compareStartDate(a,b) {
-    'use strict';
-    if (a.date < b.date)
-        return -1;
-    if (a.date > b.date)
-        return 1;
-    return 0;
-}
-
-function displayStartDates() {
+var StartDates = (function(){
     'use strict';
 
-    var startDates = Contract.startDates();
+    var hasNow = 0;
 
-    if (startDates && startDates.list.length) {
+    var compareStartDate = function(a,b) {
+        if (a.date < b.date)
+            return -1;
+        if (a.date > b.date)
+            return 1;
+        return 0;
+    };
 
-        var target= document.getElementById('date_start'),
-            fragment =  document.createDocumentFragment(),
-            row = document.getElementById('date_start_row');
+    var getElement = function(){
+        return document.getElementById('date_start');
+    };
 
-        row.style.display = 'flex';
+    var displayStartDates = function() {
 
-        while (target && target.firstChild) {
-            target.removeChild(target.firstChild);
-        }
+        var startDates = Contract.startDates();
 
-        if(startDates.has_spot){
-            var option = document.createElement('option');
-            var content = document.createTextNode(Content.localize().textNow);
-            option.setAttribute('value', 'now');
-            option.appendChild(content);
-            fragment.appendChild(option);
-        }
+        if (startDates && startDates.list.length) {
 
-        startDates.list.sort(compareStartDate);
+            var target= getElement(),
+                fragment =  document.createDocumentFragment(),
+                row = document.getElementById('date_start_row');
 
-        startDates.list.forEach(function (start_date) {
-            var a = moment.unix(start_date.open).utc();
-            var b = moment.unix(start_date.close).utc();
+            row.style.display = 'flex';
 
-            var ROUNDING = 5 * 60 * 1000;
-            var start = moment();
-
-            if(moment(start).isAfter(moment(a))){
-                a = start;
+            while (target && target.firstChild) {
+                target.removeChild(target.firstChild);
             }
 
-            a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
-
-            while(a.isBefore(b)) {
-                option = document.createElement('option');
-                option.setAttribute('value', a.utc().unix());
-                content = document.createTextNode(a.format('HH:mm ddd'));
+            if(startDates.has_spot){
+                var option = document.createElement('option');
+                var content = document.createTextNode(Content.localize().textNow);
+                option.setAttribute('value', 'now');
                 option.appendChild(content);
                 fragment.appendChild(option);
-                a.add(5, 'minutes');
+                hasNow = 1;
             }
-        });
-        target.appendChild(fragment);
-    } else {
-        document.getElementById('date_start_row').style.display = 'none';
-    }
-}
+            else{
+                hasNow = 0;
+            }
+
+            startDates.list.sort(compareStartDate);
+
+            startDates.list.forEach(function (start_date) {
+                var a = moment.unix(start_date.open).utc();
+                var b = moment.unix(start_date.close).utc();
+
+                var ROUNDING = 5 * 60 * 1000;
+                var start = moment();
+
+                if(moment(start).isAfter(moment(a))){
+                    a = start;
+                }
+
+                a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
+
+                while(a.isBefore(b)) {
+                    option = document.createElement('option');
+                    option.setAttribute('value', a.utc().unix());
+                    content = document.createTextNode(a.format('HH:mm ddd'));
+                    option.appendChild(content);
+                    fragment.appendChild(option);
+                    a.add(5, 'minutes');
+                }
+            });
+            target.appendChild(fragment);
+        } else {
+            document.getElementById('date_start_row').style.display = 'none';
+        }
+    };
+
+    var setNow = function(){
+        if(hasNow){
+            var element = getElement();
+            element.value = 'now';
+        }
+    } ;
+
+    return {
+        display: displayStartDates,
+        node: getElement,
+        setNow: setNow
+    };
+
+})();
 ;/*
  * Symbols object parses the active_symbols json that we get from socket.send({active_symbols: 'brief'}
  * and outputs in usable form, it gives markets, underlyings
@@ -14138,7 +14141,7 @@ function attach_tabs(element) {
 	var processContractForm = function(){
 	    Contract.details(sessionStorage.getItem('formname'));
 
-	    displayStartDates();
+	    StartDates.display();
 
 	    Durations.display();
 	    
