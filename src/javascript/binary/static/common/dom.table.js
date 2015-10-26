@@ -33,7 +33,6 @@ var DomTable = (function(){
         }
 
         $table.appendTo($tableContainer);
-        $tableContainer.floatingScroll();
 
         return $tableContainer;
     }

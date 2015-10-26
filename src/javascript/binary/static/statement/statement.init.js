@@ -16,11 +16,11 @@ var StatementWS = (function(){
 
         if (top10.length < 10){
             shouldNotLoadMore = true;
-            var totalRow = $("#statement-table > tbody > tr").length;
-            var currentDate = moment.utc($("#statement-date").val());
-            //$(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
             $(".notice-msg").text("End of table");
         }
+
+        $("#overlay_background").hide();
+        $("#loading_in_progress").hide();
     }
 
     function getStatementForCurrentSelectedDate(){
@@ -70,9 +70,6 @@ var StatementWS = (function(){
                 StatementUI.updateStatementTable(top10);
                 if (top10.length < 10){
                     shouldNotLoadMore = true;
-                    var totalRow = $("#statement-table > tbody > tr").length;
-                    var currentDate = moment.utc($("#statement-date").val());
-                    //$(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
                     $(".notice-msg").text("End of table");
                 }
             }
@@ -101,20 +98,32 @@ var StatementWS = (function(){
         getStatementForCurrentSelectedDate();
     }
 
+    function showIsLoading(){
+        $("#overlay_background").show();
+        $("#loading_in_progress").show();
+    }
+
     function initPage(){
+        showIsLoading();
+
         StatementUI.setDatePickerDefault(new Date());
         StatementUI.showButtonOnDateChange();
 
         $("#submit-date").click(function(){
+            showIsLoading();
             initTable();
             getStatementForCurrentSelectedDate();
             $("#submit-date").addClass("invisible");
         });
+
         $("#older-date").click(function(){
+            showIsLoading();
             initTable();
             getStatementOneDayBefore();
         });
+
         $("#newer-date").click(function(){
+            showIsLoading();
             initTable();
             getStatementOneDayAfter();
         });
