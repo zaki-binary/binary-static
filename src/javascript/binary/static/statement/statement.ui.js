@@ -4,15 +4,18 @@ var StatementUI = (function(){
     var columns = ["date", "ref", "act", "desc", "credit", "bal"];
 
     function datepickerDefault(date){
-        var utcMoment = moment.utc(date).format("YYYY-MM-DD").toString();
+        var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
+        var utcValue = moment.utc(date).startOf("day");
 
         if (!Modernizr.inputtypes.date) {
-            var utcDate = Date.parse(utcMoment);
-            $('input[type=date]').datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
+            $("#statement-date").data("date", utcValue);
 
+            var utcDate = Date.parse(utcMoment);
+            $("#statement-date").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
             return;
         }
 
+        $("#statement-date").data("date", utcValue);
         $("#statement-date").val(utcMoment);
     }
     function showButtonOnDateChange(){
@@ -58,14 +61,16 @@ var StatementUI = (function(){
         allCredit = allCredit.map(function(node){return node.textContent;});
 
         var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
-        var latestBal = $("#statement-table > tbody > tr").first().children(".bal").text();
+        //var latestBal = $("#statement-table > tbody > tr").first().children(".bal").text();
+
+        TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
 
         totalCredit = Number(totalCredit).toFixed(2);
-        latestBal= Number(parseFloat(latestBal)).toFixed(2);
+        //latestBal= Number(parseFloat(latestBal)).toFixed(2);
 
         var $footerRow = $("#" + tableID + " > tfoot").children("tr").first();
         $footerRow.children(".credit").text(totalCredit);
-        $footerRow.children(".bal").text(latestBal);
+        //$footerRow.children(".bal").text(latestBal);
 
         var creditType = (totalCredit >= 0) ? "profit" : "loss";
         $footerRow.children(".credit").removeClass("profit").removeClass("loss");

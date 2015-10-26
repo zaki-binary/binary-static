@@ -23,10 +23,16 @@ var StatementWS = (function(){
         $("#loading_in_progress").hide();
     }
 
+
+    function getCurrentSelectedDate() {
+        //return $("#statement-date").data("date").startOf("day");
+        return moment.utc($("#statement-date").val());
+    }
+
     function getStatementForCurrentSelectedDate(){
 
-        var fromDate = moment.utc($("#statement-date").val());
-        var tillDate = moment.utc($("#statement-date").val());
+        var fromDate = getCurrentSelectedDate();
+        var tillDate = moment(fromDate);
         tillDate.add(1, "d");
 
         var fromEpoch = fromDate.unix();
@@ -77,24 +83,24 @@ var StatementWS = (function(){
     }
 
     function getStatementOneDayBefore(){
-        var currentSelectedDate = moment.utc($("#statement-date").val());
-        var oneDayBefore = moment.utc($("#statement-date").val());
+        var oneDayBefore = getCurrentSelectedDate();
         oneDayBefore.subtract(1, "d");
 
-        oneDayBefore = oneDayBefore.format("YYYY-MM-DD").toString();
+        var oneDayBeforeString = oneDayBefore.locale("en").format("YYYY-MM-DD").toString();
 
-        $("#statement-date").val(oneDayBefore);
+        $("#statement-date").val(oneDayBeforeString);       //set view
+        $("#statement-date").data("date", oneDayBefore);    //store data
         getStatementForCurrentSelectedDate();
     }
 
     function getStatementOneDayAfter(){
-        var currentSelectedDate = moment.utc($("#statement-date").val());
-        var oneDayAfter = moment.utc($("#statement-date").val());
+        var oneDayAfter = getCurrentSelectedDate();
         oneDayAfter.add(1,"d");
 
-        oneDayAfter = oneDayAfter.format("YYYY-MM-DD").toString();
+        var oneDayAfterString = oneDayAfter.locale("en").format("YYYY-MM-DD").toString();
 
-        $("#statement-date").val(oneDayAfter);
+        $("#statement-date").val(oneDayAfterString);      //set view
+        $("#statement-date").data("date", oneDayAfter);     //store data
         getStatementForCurrentSelectedDate();
     }
 

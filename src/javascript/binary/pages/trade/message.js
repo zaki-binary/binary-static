@@ -33,7 +33,15 @@ var Message = (function () {
                 var passthroughObj = response.echo_req.passthrough;
                 if (passthroughObj){
                     switch (passthroughObj.purpose) {
-                        //TODO: should get from view_balance_ws
+                        case "statement_footer":
+                            var bal = response.balance[0].balance;
+                            $("#statement-table > tfoot > tr").
+                                first().
+                                children(".bal").
+                                text(Number(parseFloat(bal)).toFixed(2));
+                            break;
+                        default :
+                            //do nothing
                     }
                 }
             } else if (type === 'error') {
