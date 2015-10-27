@@ -190,35 +190,23 @@ var Content = (function () {
         }
     };
 
+    function localizeTextContentById(id){
+        var element = document.getElementById(id);
+        var textContent = element.textContent;
+        element.textContent = text.localize(textContent);
+    }
+
     var statementTranslation = function(){
         var titleElement = document.getElementById("statement-title").firstElementChild;
         var title = titleElement.textContent;
         titleElement.textContent = text.localize(title);
 
-        var errElement = document.getElementById("err");
-        var err = errElement.textContent;
-        errElement.textContent = text.localize(err);
-
-        var newerDateElement = document.getElementById("newer-date");
-        var newerDate = newerDateElement.textContent;
-        newerDateElement.textContent = text.localize(newerDate);
-
-        var olderDateElement = document.getElementById("older-date");
-        var olderDate = olderDateElement.textContent;
-        olderDateElement.textContent = text.localize(olderDate);
-
-        var dateLabelElement = document.getElementById("date-label");
-        var dateLabel = dateLabelElement.textContent;
-        dateLabelElement.textContent = text.localize(dateLabel);
-
-        var submitDateElement = document.getElementById("submit-date");
-        var submitDate = submitDateElement.textContent;
-        submitDateElement.textContent = text.localize(submitDate);
-
-        var endOfTableElement = document.getElementById("end-of-table");
-        var endOfTable = endOfTableElement.textContent;
-        endOfTableElement.textContent = text.localize(endOfTable);
-
+        localizeTextContentById("err");
+        localizeTextContentById("newer-date");
+        localizeTextContentById("older-date");
+        localizeTextContentById("date-label");
+        localizeTextContentById("submit-date");
+        localizeTextContentById("end-of-table");
     }
 
     return {
