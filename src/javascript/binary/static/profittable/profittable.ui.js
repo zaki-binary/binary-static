@@ -32,10 +32,12 @@ var ProfitTableUI = (function(){
             id: profitTableID
         };
         var $tableContainer = DomTable.createFlexTable(data, metadata, header, footer);
+
         var $pltotal = $tableContainer.
             children("table").
             children("tfoot").
-            children("tr").attr("id", "pl-total");
+            children("tr").
+            attr("id", "pl-total").hide();
 
         mergeRows(0, 5, $pltotal);
 
@@ -48,19 +50,19 @@ var ProfitTableUI = (function(){
         return $tableContainer;
     }
 
-    function updateProfitTable(profitTable){
+    function updateProfitTable(transactions){
         //update body
         var $tbody = $("#" + profitTableID + "> tbody");
-        profitTable.transactions.map(function(transaction){
+        transactions.map(function(transaction){
             var $newRow = createProfitTableRow(transaction);
             $newRow.appendTo($tbody);
         });
 
-        updateFooter(profitTable);
+        updateFooter(transactions);
     }
 
-    function updateFooter(profitTable){
-        var subTotal = profitTable.transactions.reduce(function(previous, current){
+    function updateFooter(transactions){
+        var subTotal = transactions.reduce(function(previous, current){
             var buyPrice = Number(parseFloat(current["buy_price"])).toFixed(2);
             var sellPrice = Number(parseFloat(current["sell_price"])).toFixed(2);
             var pl = sellPrice - buyPrice
@@ -90,9 +92,9 @@ var ProfitTableUI = (function(){
         var ref = transaction["transaction_id"];
         var contract = transaction["longcode"];
         var buyPrice = Number(parseFloat(transaction["buy_price"])).toFixed(2);
-        var sellDate = transaction["sell_time"].replace(/\s/g, "\n");
+        var sellDate = transaction["sell_time"].replace(/\s/g, "\n");       //change whitespace to newline
         var sellPrice = Number(parseFloat(transaction["sell_price"])).toFixed(2);
-        var pl = sellPrice - buyPrice;
+        var pl = Number(sellPrice - buyPrice).toFixed(2);
 
         var plType = (pl >= 0) ? "profit" : "loss";
 
@@ -106,11 +108,11 @@ var ProfitTableUI = (function(){
     }
 
     function setDatepicker(date){
-        var utcMoment = moment.utc(date).format("YYYY-MM-DD").toString();
+        var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
 
         if (!Modernizr.inputtypes.date) {
             var utcDate = Date.parse(utcMoment);
-            $('input[type=date]').datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
+            $("#profit-table-date").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
 
             return;
         }

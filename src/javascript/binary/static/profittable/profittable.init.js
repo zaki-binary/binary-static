@@ -1,77 +1,80 @@
 
 var ProfitTableWS = (function () {
     var chunkPerLoad = 10;
-    var hasOlder = true;
     var shouldNotLoadMore = false;
 
-    var sentTillTime;
-    var receivedOldestTime;
+    var transactionsCurrentDate = [];
+    var dataLoaded = false;
 
     function initTable(){
-        hasOlder = true;
+        transactionsCurrentDate = [];
+        dataLoaded = false;
         shouldNotLoadMore = false;
-        sentTillTime = undefined;
-        receivedOldestTime = undefined;
         ProfitTableUI.cleanTableContent();
     }
 
     function profitTableHandler(response){
-
         var profitTable = response.profit_table;
-        receivedOldestTime = moment.utc(profitTable.transactions[profitTable.transactions.length - 1].purchase_time).unix();
-        ProfitTableUI.updateProfitTable(profitTable);
+
+        dataLoaded = true;
+        transactionsCurrentDate = profitTable.transactions;
+
+        var firstChunk = getNextChunk();
+
+        ProfitTableUI.updateProfitTable(firstChunk);
+
+        if (firstChunk.length < chunkPerLoad) {
+            shouldNotLoadMore = true;
+            $("#ending-note").show();
+        }
+
+        $("#overlay_background").hide();
+        $("#loading_in_progress").hide();
+    }
+
+    function getCurrentSelectedDate() {
+        return moment.utc($("#profit-table-date").val());
     }
 
     function getProfitTableForCurrentSelectedDate(){
-        var from = moment.utc($("#profit-table-date").val());
-        var till = moment.utc($("#profit-table-date").val());
+        var from = getCurrentSelectedDate();
+        var till = moment(from);
         till.add(1, "d");
 
         var fromEpoch = from.unix();
         var tillEpoch = till.unix();
 
-
-        ProfitTableData.getProfitTable({dt_to: tillEpoch, dt_fm: fromEpoch, limit: chunkPerLoad});
+        ProfitTableData.getProfitTable({dt_to: tillEpoch, dt_fm: fromEpoch});
     }
 
     function getProfitTableOneDayBefore(){
-        var before = moment.utc($("#profit-table-date").val());
+        var before = getCurrentSelectedDate();
         before.subtract(1, "d");
-        before = before.format("YYYY-MM-DD").toString();
 
-        $("#profit-table-date").val(before);
+        var beforeString = before.locale("en").format("YYYY-MM-DD").toString();
+
+        $("#profit-table-date").val(beforeString);
         getProfitTableForCurrentSelectedDate();
     }
 
     function getProfitTableOneDayAfter(){
-        var after = moment.utc($("#profit-table-date").val());
+        var after = getCurrentSelectedDate();
         after.add(1, "d");
-        after = after.format("YYYY-MM-DD").toString();
 
-        $("#profit-table-date").val(after);
+        var afterString = after.locale("en").format("YYYY-MM-DD").toString();
+
+        $("#profit-table-date").val(afterString);
         getProfitTableForCurrentSelectedDate();
     }
 
     function getNextChunk(){
-        var fromDate = moment.utc($("#profit-table-date").val());
-        var fromEpoch = fromDate.unix();
-        var tillEpoch = receivedOldestTime - 1;
-
-        ProfitTableData.getProfitTable({dt_to: tillEpoch, dt_fm: fromEpoch, limit: chunkPerLoad});
+        return transactionsCurrentDate.splice(0, chunkPerLoad);
     }
 
     function onScrollLoad(){
         $(document).scroll(function(){
 
-            if (shouldNotLoadMore || !receivedOldestTime || (sentTillTime && sentTillTime === receivedOldestTime)) {
-                return;
-            }
-
-            if (!hasOlder) {
-                shouldNotLoadMore = true;
-                var totalRow = $("#profit-table > tbody > tr").length;
-                var currentDate = moment.utc($("#profit-table-date").val());
-                $("#ending-note").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
+            if (shouldNotLoadMore || !dataLoaded) {
                 return;
             }
 
@@ -85,7 +88,12 @@ var ProfitTableWS = (function () {
             }
 
             if (pFromTop >= hidableHeight(70)) {
-                getNextChunk();
+                var nextChunk = getNextChunk();
+                ProfitTableUI.updateProfitTable(nextChunk);
+                if (nextChunk.length < chunkPerLoad) {
+                    shouldNotLoadMore = true;
+                    $("#ending-note").show();
+                }
             }
         });
     }
@@ -93,8 +101,7 @@ var ProfitTableWS = (function () {
     function init(){
 
         var now = new Date();
-        $("#profit-table-date").val(moment.utc(now).format("YYYY-MM-DD"));
-
+        ProfitTableUI.setDatepicker(now);
 
         $("#profit-table-date").on("change", function() {
             $("#submit-date").removeClass("invisible");
@@ -119,6 +126,7 @@ var ProfitTableWS = (function () {
 
         $("<div></div>", {
             id: "ending-note",
+            class: "notice-msg"
         }).appendTo("#profit-table-ws-container");
 
         getProfitTableForCurrentSelectedDate();

@@ -73,7 +73,7 @@ var StatementWS = (function(){
             if (pFromTop >= hidableHeight(70)) {
                 var top10 = getNextChunkStatement();
                 StatementUI.updateStatementTable(top10);
-                if (top10.length < 10){
+                if (top10.length < chunkPerLoad){
                     shouldNotLoadMore = true;
                     $("#end-of-table").show();
                 }
