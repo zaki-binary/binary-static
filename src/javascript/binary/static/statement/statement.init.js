@@ -154,6 +154,7 @@ var StatementWS = (function(){
             initTable();
             getStatementForCurrentSelectedDate();
             $("#submit-date").addClass("invisible");
+            limitDateSelection();
         });
         $("#older-date").click(function(){
             initTable();
