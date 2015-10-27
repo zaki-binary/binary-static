@@ -10005,6 +10005,7 @@ var Barriers = (function () {
             var barrier = barriers[formName];
             if(barrier) {
                 var unit = document.getElementById('duration_units'),
+                    end_time = document.getElementById('expiry_date'),
                     currentTick = Tick.quote(),
                     indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
                     indicativeHighBarrierTooltip = document.getElementById('indicative_high_barrier_tooltip'),
@@ -10019,7 +10020,7 @@ var Barriers = (function () {
                     var elm = document.getElementById('barrier'),
                         tooltip = document.getElementById('barrier_tooltip'),
                         span = document.getElementById('barrier_span');
-                    if (unit && unit.value === 'd') {
+                    if ((unit && unit.value === 'd') || (end_time && moment(end_time.value).isAfter(moment(),'day'))) {
                         if (currentTick && !isNaN(currentTick)) {
                             elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
                             elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
@@ -11645,6 +11646,7 @@ var TradingEvents = (function () {
                     expiry_time.show();
                     processPriceRequest();
                 }
+                Barriers.display();
             });
         }
 
@@ -12514,7 +12516,7 @@ var Purchase = (function () {
 
             heading.textContent = Content.localize().textContractConfirmationHeading;
             descr.textContent = receipt['longcode'];
-            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['contract_id'];
+            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['transaction_id'];
 
             var payout_value, cost_value, profit_value;
 
