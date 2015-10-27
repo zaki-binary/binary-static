@@ -5,17 +5,13 @@ var StatementUI = (function(){
 
     function datepickerDefault(date){
         var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
-        var utcValue = moment.utc(date).startOf("day");
 
         if (!Modernizr.inputtypes.date) {
-            $("#statement-date").data("date", utcValue);
-
             var utcDate = Date.parse(utcMoment);
             $("#statement-date").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
             return;
         }
 
-        $("#statement-date").data("date", utcValue);
         $("#statement-date").val(utcMoment);
     }
     function showButtonOnDateChange(){

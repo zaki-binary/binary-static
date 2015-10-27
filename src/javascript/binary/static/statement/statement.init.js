@@ -88,7 +88,6 @@ var StatementWS = (function(){
         var oneDayBeforeString = oneDayBefore.locale("en").format("YYYY-MM-DD").toString();
 
         $("#statement-date").val(oneDayBeforeString);       //set view
-        $("#statement-date").data("date", oneDayBefore);    //store data
         getStatementForCurrentSelectedDate();
     }
 
@@ -99,7 +98,6 @@ var StatementWS = (function(){
         var oneDayAfterString = oneDayAfter.locale("en").format("YYYY-MM-DD").toString();
 
         $("#statement-date").val(oneDayAfterString);      //set view
-        $("#statement-date").data("date", oneDayAfter);     //store data
         getStatementForCurrentSelectedDate();
     }
 
