@@ -21,7 +21,8 @@ var StatementUI = (function(){
     }
 
     function createEmptyStatementTable(){
-        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance(USD)"];
+        var currency = User.get().currency;
+        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ currency +")"];
         var footer = ["", "", "", "", "", ""];
         var metadata = {
             id: tableID,
@@ -60,16 +61,13 @@ var StatementUI = (function(){
         allCredit = allCredit.map(function(node){return node.textContent;});
 
         var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
-        //var latestBal = $("#statement-table > tbody > tr").first().children(".bal").text();
 
         TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
 
         totalCredit = Number(totalCredit).toFixed(2);
-        //latestBal= Number(parseFloat(latestBal)).toFixed(2);
 
         var $footerRow = $("#" + tableID + " > tfoot").children("tr").first();
         $footerRow.children(".credit").text(totalCredit);
-        //$footerRow.children(".bal").text(latestBal);
 
         var creditType = (totalCredit >= 0) ? "profit" : "loss";
         $footerRow.children(".credit").removeClass("profit").removeClass("loss");
