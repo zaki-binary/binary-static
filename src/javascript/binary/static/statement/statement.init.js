@@ -17,7 +17,7 @@ var StatementWS = (function(){
 
         if (top10.length < 10){
             shouldNotLoadMore = true;
-            $("#end-of-table").attr("display", "block");
+            $("#end-of-table").show();
         }
 
         $("#overlay_background").hide();
@@ -75,7 +75,7 @@ var StatementWS = (function(){
                 StatementUI.updateStatementTable(top10);
                 if (top10.length < 10){
                     shouldNotLoadMore = true;
-                    $(".notice-msg").attr("display", "block");
+                    $("#end-of-table").show();
                 }
             }
         });
@@ -135,9 +135,10 @@ var StatementWS = (function(){
         $("<div></div>", {
             class: "notice-msg",
             id: "end-of-table",
-            display: "none",
             text: "End of the table"
         }).appendTo("#statement-ws-container");
+
+        $("#end-of-table").hide();
 
         getStatementForCurrentSelectedDate();
         loadStatementChunkWhenScroll();
