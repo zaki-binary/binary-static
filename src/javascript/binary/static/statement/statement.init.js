@@ -3,50 +3,50 @@ var StatementWS = (function(){
 
     var shouldNotLoadMore = false;
     var chunkPerLoad = 10;
-    var hasOlder = true;
 
-    var sentTillTime;
-    var receivedOldestTransactionTime;
-
+    var transactionsCurrentDate = [];
+    var dataLoaded = false;
 
     function statementHandler(response){
         var statement = response.statement;
-        if (statement.transactions.length < chunkPerLoad) {
-            hasOlder = false;
-        } else {
-            hasOlder = true;
-        }
-        receivedOldestTransactionTime = statement.transactions[statement.transactions.length - 1].transaction_time;
+        transactionsCurrentDate = statement.transactions;
+        var top10 = getNextChunkStatement();
+        StatementUI.updateStatementTable(top10);
 
-        StatementUI.updateStatementTable(statement);
+        dataLoaded = true;
+
+        if (top10.length < 10){
+            shouldNotLoadMore = true;
+            $(".notice-msg").text("End of table");
+        }
+
+        $("#overlay_background").hide();
+        $("#loading_in_progress").hide();
+    }
+
+    function getCurrentSelectedDate() {
+        return moment.utc($("#statement-date").val());
     }
 
     function getStatementForCurrentSelectedDate(){
 
-        var fromDate = moment.utc($("#statement-date").val());
-        var tillDate = moment.utc($("#statement-date").val());
+        var fromDate = getCurrentSelectedDate();
+        var tillDate = moment(fromDate);
         tillDate.add(1, "d");
 
         var fromEpoch = fromDate.unix();
         var tillEpoch = tillDate.unix();
 
-        StatementData.getStatement({dt_to: tillEpoch, dt_fm: fromEpoch, limit: chunkPerLoad});
+        StatementData.getStatement({dt_to: tillEpoch, dt_fm: fromEpoch});
     }
 
     function getNextChunkStatement(){
-        var fromDate = moment.utc($("#statement-date").val());
-        var fromEpoch = fromDate.unix();
-        var tillEpoch = receivedOldestTransactionTime;
-
-        StatementData.getStatement({dt_to: tillEpoch, dt_fm: fromEpoch, limit: chunkPerLoad});
-        sentTillTime = receivedOldestTransactionTime;
+        return transactionsCurrentDate.splice(0, chunkPerLoad);
     }
 
     function initTable(){
-        sentTillTime = undefined;
-        receivedOldestTransactionTime = undefined;
         shouldNotLoadMore = false;
-        hasOlder = true;
+        transactionsCurrentDate = [];
 
         $(".error-msg").text("");
         StatementUI.clearTableContent();
@@ -57,80 +57,92 @@ var StatementWS = (function(){
         //Attention: attach event to GLOBAL document : BAD!!
         $(document).scroll(function(){
 
-            if (shouldNotLoadMore || !receivedOldestTransactionTime || (sentTillTime && sentTillTime === receivedOldestTransactionTime)) {
+            if (!dataLoaded || shouldNotLoadMore) {
                 return;
             }
-
-            if (!hasOlder) {
-                shouldNotLoadMore = true;
-                var totalRow = $("#statement-table > tbody > tr").length;
-                var currentDate = moment.utc($("#statement-date").val());
-                $(".notice-msg").text("You've made " + totalRow + " transaction(s) on " + currentDate.format("YYYY-MM-DD"));
-                return;
-            }
-
-            var $document = $(document);
-            var pFromTop = $document.scrollTop();
-            var totalHeight = $document.height();
 
             function hidableHeight(percentage){
                 var totalHidable = $document.height() - $(window).height();
                 return Math.floor(totalHidable * percentage / 100);
             }
 
+            var $document = $(document);
+            var pFromTop = $document.scrollTop();
+            var totalHeight = $document.height();
+
             if (pFromTop >= hidableHeight(70)) {
-                getNextChunkStatement();
+                var top10 = getNextChunkStatement();
+                StatementUI.updateStatementTable(top10);
+                if (top10.length < 10){
+                    shouldNotLoadMore = true;
+                    $(".notice-msg").text("End of table");
+                }
             }
         });
     }
 
     function getStatementOneDayBefore(){
-        var currentSelectedDate = moment.utc($("#statement-date").val());
-        var oneDayBefore = moment.utc($("#statement-date").val());
+        var oneDayBefore = getCurrentSelectedDate();
         oneDayBefore.subtract(1, "d");
 
-        oneDayBefore = oneDayBefore.format("YYYY-MM-DD").toString();
+        var oneDayBeforeString = oneDayBefore.locale("en").format("YYYY-MM-DD").toString();
 
-        $("#statement-date").val(oneDayBefore);
+        $("#statement-date").val(oneDayBeforeString);       //set view
+        $("#statement-date").data("date", oneDayBefore);    //store data
         getStatementForCurrentSelectedDate();
     }
 
     function getStatementOneDayAfter(){
-        var currentSelectedDate = moment.utc($("#statement-date").val());
-        var oneDayAfter = moment.utc($("#statement-date").val());
+        var oneDayAfter = getCurrentSelectedDate();
         oneDayAfter.add(1,"d");
 
-        oneDayAfter = oneDayAfter.format("YYYY-MM-DD").toString();
+        var oneDayAfterString = oneDayAfter.locale("en").format("YYYY-MM-DD").toString();
 
-        $("#statement-date").val(oneDayAfter);
+        $("#statement-date").val(oneDayAfterString);      //set view
+        $("#statement-date").data("date", oneDayAfter);     //store data
         getStatementForCurrentSelectedDate();
     }
 
+    function showIsLoading(){
+        $("#overlay_background").show();
+        $("#loading_in_progress").show();
+    }
+
     function initPage(){
+        showIsLoading();
+
         StatementUI.setDatePickerDefault(new Date());
         StatementUI.showButtonOnDateChange();
 
         $("#submit-date").click(function(){
+            showIsLoading();
             initTable();
             getStatementForCurrentSelectedDate();
             $("#submit-date").addClass("invisible");
         });
+
         $("#older-date").click(function(){
+            showIsLoading();
             initTable();
             getStatementOneDayBefore();
         });
+
         $("#newer-date").click(function(){
+            showIsLoading();
             initTable();
             getStatementOneDayAfter();
         });
 
         StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
         $("<div></div>", {
-            class: "notice-msg"
+            class: "notice-msg",
+            id: "end-of-table"
         }).appendTo("#statement-ws-container");
 
         getStatementForCurrentSelectedDate();
         loadStatementChunkWhenScroll();
+
+        Content.statementTranslation();
     }
 
     function cleanStatementPageState(){
