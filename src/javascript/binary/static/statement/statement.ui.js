@@ -45,11 +45,16 @@ var StatementUI = (function(){
     }
 
     function updateStatementTable(transactions){
-        var $tbody = $("#" + tableID + "> tbody");
+        var $tbody = $("#"+ tableID + "> tbody");
+
+        var $docFrag = $(document.createDocumentFragment());
+
         transactions.map(function(transaction){
             var $newRow = createStatementRow(transaction);
-            $newRow.appendTo($tbody);
+            $newRow.appendTo($docFrag);
         });
+
+        $tbody.append($docFrag);
 
         updateStatementFooter(transactions);
     }
