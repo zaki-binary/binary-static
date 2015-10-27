@@ -52,8 +52,6 @@ var StatementUI = (function(){
         });
 
         updateStatementFooter(transactions);
-
-        Translation.statement();
     }
 
     function updateStatementFooter(transactions){
@@ -85,7 +83,7 @@ var StatementUI = (function(){
 
         var date = dateStr + "\n" + timeStr;
         var ref = transaction["transaction_id"];
-        var action = CommonUtility.toTitleCase(transaction["action_type"]);
+        var action = StringUtil.toTitleCase(transaction["action_type"]);
         var desc = transaction["longcode"];
         var amount = Number(parseFloat(transaction["amount"])).toFixed(2);
         var balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);

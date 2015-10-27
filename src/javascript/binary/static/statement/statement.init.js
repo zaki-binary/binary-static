@@ -25,7 +25,6 @@ var StatementWS = (function(){
 
 
     function getCurrentSelectedDate() {
-        //return $("#statement-date").data("date").startOf("day");
         return moment.utc($("#statement-date").val());
     }
 
@@ -136,11 +135,14 @@ var StatementWS = (function(){
 
         StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
         $("<div></div>", {
-            class: "notice-msg"
+            class: "notice-msg",
+            id: "end-of-table"
         }).appendTo("#statement-ws-container");
 
         getStatementForCurrentSelectedDate();
         loadStatementChunkWhenScroll();
+
+        Content.statementTranslation();
     }
 
     function cleanStatementPageState(){

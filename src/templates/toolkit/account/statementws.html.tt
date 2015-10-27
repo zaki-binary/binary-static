@@ -2,7 +2,7 @@
     <div class="page-title" id="statement-title">
         <h1>Statement</h1>
         <br>
-        <p class="error-msg"></p>
+        <p class="error-msg" id="err"></p>
     </div>
 
     <div id="date-nav-panel">
@@ -10,7 +10,7 @@
             <button class="button" id="newer-date">Next Day</button>
         </div>
         <div id="date-picker-container" class="center">
-            <label for="date-picker" class="left_aligned">Jump To</label>
+            <label for="date-picker" class="left_aligned" id="date-label">Jump To</label>
             <input id="statement-date" type="date" name="date-picker"/>
             <button class="button invisible" id="submit-date">Go</button>
         </div>
@@ -21,5 +21,4 @@
 
     <div id="overlay_background"></div>
     <div id="loading_in_progress"></div>
-
 </div>
