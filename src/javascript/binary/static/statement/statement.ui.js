@@ -8,11 +8,14 @@ var StatementUI = (function(){
 
         if (!Modernizr.inputtypes.date) {
             var utcDate = Date.parse(utcMoment);
-            $("#statement-date").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
+            $("#statement-date").
+                datepicker({maxDate: 0, dateFormat: 'yy-mm-dd'}).
+                datepicker("setDate", utcDate);
             return;
         }
 
         $("#statement-date").val(utcMoment);
+        $("#statement-date").attr("max", utcMoment);
     }
     function showButtonOnDateChange(){
         $("#statement-date").on("change", function() {
@@ -21,7 +24,8 @@ var StatementUI = (function(){
     }
 
     function createEmptyStatementTable(){
-        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance(USD)"];
+        var currency = User.get().currency;
+        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ currency +")"];
         var footer = ["", "", "", "", "", ""];
         var metadata = {
             id: tableID,
@@ -36,8 +40,6 @@ var StatementUI = (function(){
     function clearTableContent(){
         var $tbody = $("#" + tableID + "> tbody");
         $tbody.children("tr").remove();
-
-        $("tfoot > tr > th").text(" ");
     }
 
     function updateStatementTable(transactions){
@@ -60,16 +62,13 @@ var StatementUI = (function(){
         allCredit = allCredit.map(function(node){return node.textContent;});
 
         var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
-        //var latestBal = $("#statement-table > tbody > tr").first().children(".bal").text();
 
         TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
 
         totalCredit = Number(totalCredit).toFixed(2);
-        //latestBal= Number(parseFloat(latestBal)).toFixed(2);
 
         var $footerRow = $("#" + tableID + " > tfoot").children("tr").first();
         $footerRow.children(".credit").text(totalCredit);
-        //$footerRow.children(".bal").text(latestBal);
 
         var creditType = (totalCredit >= 0) ? "profit" : "loss";
         $footerRow.children(".credit").removeClass("profit").removeClass("loss");

@@ -1,13 +1,37 @@
 var StatementWS = (function(){
     "use strict";
 
-    var shouldNotLoadMore = false;
     var chunkPerLoad = 10;
+    var tableCreated = false;
 
+    var shouldNotLoadMore = false;
     var transactionsCurrentDate = [];
     var dataLoaded = false;
 
+    function hideIsLoading() {
+        $("#overlay_background").hide();
+        $("#loading_in_progress").hide();
+    }
+
+    function showIsLoading(){
+        $("#overlay_background").show();
+        $("#loading_in_progress").show();
+    }
+
     function statementHandler(response){
+        if (!tableCreated) {
+            StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
+            $("<div></div>", {
+                class: "notice-msg",
+                id: "end-of-table",
+                text: "End of the table"
+            }).appendTo("#statement-ws-container");
+
+            $("#end-of-table").hide();
+
+            tableCreated = true;
+        }
+
         var statement = response.statement;
         transactionsCurrentDate = statement.transactions;
         var top10 = getNextChunkStatement();
@@ -20,8 +44,8 @@ var StatementWS = (function(){
             $("#end-of-table").show();
         }
 
-        $("#overlay_background").hide();
-        $("#loading_in_progress").hide();
+        Content.statementTranslation();
+        hideIsLoading();
     }
 
     function getCurrentSelectedDate() {
@@ -44,14 +68,6 @@ var StatementWS = (function(){
         return transactionsCurrentDate.splice(0, chunkPerLoad);
     }
 
-    function initTable(){
-        shouldNotLoadMore = false;
-        transactionsCurrentDate = [];
-
-        $(".error-msg").text("");
-        StatementUI.clearTableContent();
-        $(".notice-msg").attr("display", "none");
-    }
 
     function loadStatementChunkWhenScroll(){
         //Attention: attach event to GLOBAL document : BAD!!
@@ -101,49 +117,59 @@ var StatementWS = (function(){
         getStatementForCurrentSelectedDate();
     }
 
-    function showIsLoading(){
-        $("#overlay_background").show();
-        $("#loading_in_progress").show();
+    function initTable(){
+        shouldNotLoadMore = false;
+        transactionsCurrentDate = [];
+        dataLoaded = false;
+
+        $(".error-msg").text("");
+        StatementUI.clearTableContent();
+
+        window.setTimeout(function(){
+            if (dataLoaded) {
+                return;
+            }
+            showIsLoading();
+            $("#end-of-table").hide();
+        }, 500);
+    }
+
+    function limitDateSelection(){
+        var selectedDate = getCurrentSelectedDate();
+        if (selectedDate.isSame(moment.utc(), "day") || selectedDate.isAfter(moment.utc(), "day")) {
+            $("#newer-date").hide();
+        } else {
+            $("#newer-date").show();
+        }
     }
 
     function initPage(){
-        showIsLoading();
+
 
         StatementUI.setDatePickerDefault(new Date());
         StatementUI.showButtonOnDateChange();
 
         $("#submit-date").click(function(){
-            showIsLoading();
             initTable();
             getStatementForCurrentSelectedDate();
             $("#submit-date").addClass("invisible");
+            limitDateSelection();
         });
-
         $("#older-date").click(function(){
-            showIsLoading();
             initTable();
             getStatementOneDayBefore();
+            limitDateSelection();
         });
-
         $("#newer-date").click(function(){
-            showIsLoading();
             initTable();
             getStatementOneDayAfter();
+            limitDateSelection();
         });
 
-        StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
-        $("<div></div>", {
-            class: "notice-msg",
-            id: "end-of-table",
-            text: "End of the table"
-        }).appendTo("#statement-ws-container");
-
-        $("#end-of-table").hide();
-
+        initTable();
+        limitDateSelection();
         getStatementForCurrentSelectedDate();
         loadStatementChunkWhenScroll();
-
-        Content.statementTranslation();
     }
 
     function cleanStatementPageState(){
