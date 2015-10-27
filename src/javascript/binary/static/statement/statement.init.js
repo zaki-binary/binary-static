@@ -17,7 +17,7 @@ var StatementWS = (function(){
 
         if (top10.length < 10){
             shouldNotLoadMore = true;
-            $(".notice-msg").text("End of table");
+            $("#end-of-table").attr("display", "block");
         }
 
         $("#overlay_background").hide();
@@ -50,7 +50,7 @@ var StatementWS = (function(){
 
         $(".error-msg").text("");
         StatementUI.clearTableContent();
-        $(".notice-msg").text("");
+        $(".notice-msg").attr("display", "none");
     }
 
     function loadStatementChunkWhenScroll(){
@@ -75,7 +75,7 @@ var StatementWS = (function(){
                 StatementUI.updateStatementTable(top10);
                 if (top10.length < 10){
                     shouldNotLoadMore = true;
-                    $(".notice-msg").text("End of table");
+                    $(".notice-msg").attr("display", "block");
                 }
             }
         });
@@ -134,7 +134,9 @@ var StatementWS = (function(){
         StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
         $("<div></div>", {
             class: "notice-msg",
-            id: "end-of-table"
+            id: "end-of-table",
+            display: "none",
+            text: "End of the table"
         }).appendTo("#statement-ws-container");
 
         getStatementForCurrentSelectedDate();

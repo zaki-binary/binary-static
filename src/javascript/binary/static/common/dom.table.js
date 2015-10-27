@@ -82,8 +82,8 @@ var DomTable = (function(){
         for (var i = 0 ; i < data.length ; i++){
             var className = metadata[i].toLowerCase().replace(/\s/g, "-") + " flex-tr-child";
             var rowElement = (isData) ?
-                $("<td></td>", {class: className, text: text.localize(data[i])}) :
-                $("<th></th>", {class: className, text: text.localize(data[i])});
+                $("<td></td>", {class: className, text: data[i]}) :
+                $("<th></th>", {class: className, text: data[i]});
             rowElement.appendTo($tr);
         }
 
