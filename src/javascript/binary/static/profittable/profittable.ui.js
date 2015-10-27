@@ -17,7 +17,11 @@ var ProfitTableUI = (function(){
                 }
             }).toArray().join(" ");
 
-            $row.children().eq(start).text(texts).attr("colspan", end - start + 1);
+            $row.
+                children().
+                eq(start).
+                text(texts).
+                attr("colspan", end - start + 1);
         }
 
         var header = ["Purchase Date", "Ref.", "Contract", "Purchase Price", "Sale Date", "Sale Price", "Profit/Loss"];
