@@ -45,7 +45,7 @@ var Purchase = (function () {
 
             heading.textContent = Content.localize().textContractConfirmationHeading;
             descr.textContent = receipt['longcode'];
-            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['contract_id'];
+            reference.textContent = Content.localize().textContractConfirmationReference + ' ' + receipt['transaction_id'];
 
             var payout_value, cost_value, profit_value;
 
