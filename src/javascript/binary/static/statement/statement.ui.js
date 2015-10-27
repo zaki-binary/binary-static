@@ -8,11 +8,14 @@ var StatementUI = (function(){
 
         if (!Modernizr.inputtypes.date) {
             var utcDate = Date.parse(utcMoment);
-            $("#statement-date").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
+            $("#statement-date").
+                datepicker({maxDate: 0, dateFormat: 'yy-mm-dd'}).
+                datepicker("setDate", utcDate);
             return;
         }
 
         $("#statement-date").val(utcMoment);
+        $("#statement-date").attr("max", utcMoment);
     }
     function showButtonOnDateChange(){
         $("#statement-date").on("change", function() {
@@ -38,7 +41,7 @@ var StatementUI = (function(){
         var $tbody = $("#" + tableID + "> tbody");
         $tbody.children("tr").remove();
 
-        $("tfoot > tr > th").text(" ");
+        //$("tfoot > tr > th").text(" ");
     }
 
     function updateStatementTable(transactions){
