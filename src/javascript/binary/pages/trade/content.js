@@ -209,10 +209,23 @@ var Content = (function () {
         localizeTextContentById("end-of-table");
     }
 
+    var profitTableTranslation = function(){
+        var titleElement = document.getElementById("profit-table-title").firstElementChild;
+        var title = titleElement.textContent;
+        titleElement.textContent = text.localize(title);
+
+        localizeTextContentById("newer-date");
+        localizeTextContentById("older-date");
+        localizeTextContentById("date-label");
+        localizeTextContentById("submit-date");
+        localizeTextContentById("ending-note");
+    }
+
     return {
         localize: function () { return localize; },
         populate: populate,
-        statementTranslation: statementTranslation
+        statementTranslation: statementTranslation,
+        profitTableTranslation: profitTableTranslation
     };
 
 })();

@@ -1,19 +1,50 @@
 
 var ProfitTableWS = (function () {
     var chunkPerLoad = 10;
-    var shouldNotLoadMore = false;
+    var tableCreated = false;
 
+    var shouldNotLoadMore = false;
     var transactionsCurrentDate = [];
     var dataLoaded = false;
+
+    function hideIsLoading() {
+        $("#overlay_background").hide();
+        $("#loading_in_progress").hide();
+    }
+
+    function showIsLoading(){
+        $("#overlay_background").show();
+        $("#loading_in_progress").show();
+    }
 
     function initTable(){
         transactionsCurrentDate = [];
         dataLoaded = false;
         shouldNotLoadMore = false;
+        $(".error-msg").text("");
         ProfitTableUI.cleanTableContent();
+
+        window.setTimeout(function(){
+            if (dataLoaded) {
+                return;
+            }
+            showIsLoading();
+            $("#end-of-table").hide();
+        }, 500);
     }
 
     function profitTableHandler(response){
+        if (!tableCreated){
+            ProfitTableUI.createEmptyTable().appendTo("#profit-table-ws-container");
+
+            $("<div></div>", {
+                id: "ending-note",
+                class: "notice-msg"
+            }).appendTo("#profit-table-ws-container");
+
+            tableCreated = true;
+        }
+
         var profitTable = response.profit_table;
 
         dataLoaded = true;
@@ -28,8 +59,8 @@ var ProfitTableWS = (function () {
             $("#ending-note").show();
         }
 
-        $("#overlay_background").hide();
-        $("#loading_in_progress").hide();
+        hideIsLoading();
+        Content.profitTableTranslation();
     }
 
     function getCurrentSelectedDate() {
@@ -90,12 +121,22 @@ var ProfitTableWS = (function () {
             if (pFromTop >= hidableHeight(70)) {
                 var nextChunk = getNextChunk();
                 ProfitTableUI.updateProfitTable(nextChunk);
+
                 if (nextChunk.length < chunkPerLoad) {
                     shouldNotLoadMore = true;
                     $("#ending-note").show();
                 }
             }
         });
+    }
+
+    function limitDateSelection(){
+        var selectedDate = getCurrentSelectedDate();
+        if (selectedDate.isSame(moment.utc(), "day") || selectedDate.isAfter(moment.utc(), "day")) {
+            $("#newer-date").hide();
+        } else {
+            $("#newer-date").show();
+        }
     }
 
     function init(){
@@ -108,26 +149,25 @@ var ProfitTableWS = (function () {
         });
 
         $("#submit-date").click(function(){
+            initTable();
             getProfitTableForCurrentSelectedDate();
             $("#submit-date").addClass("invisible");
+            limitDateSelection();
         });
 
         $("#older-date").click(function(){
             initTable();
             getProfitTableOneDayBefore();
+            limitDateSelection();
         });
 
         $("#newer-date").click(function(){
             initTable();
             getProfitTableOneDayAfter();
+            limitDateSelection();
         });
 
-        ProfitTableUI.createEmptyTable().appendTo("#profit-table-ws-container");
 
-        $("<div></div>", {
-            id: "ending-note",
-            class: "notice-msg"
-        }).appendTo("#profit-table-ws-container");
 
         getProfitTableForCurrentSelectedDate();
 
