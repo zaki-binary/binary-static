@@ -26,7 +26,7 @@ var Price = (function () {
             amountType = document.getElementById('amount_type'),
             currency = document.getElementById('currency'),
             payout = document.getElementById('amount'),
-            startTime = document.getElementById('date_start'),
+            startTime = StartDates.node(),
             expiryType = document.getElementById('expiry_type'),
             duration = document.getElementById('duration_amount'),
             durationUnit = document.getElementById('duration_units'),
@@ -141,7 +141,6 @@ var Price = (function () {
 
         var position = contractTypeDisplayMapping(type);
         var container = document.getElementById('price_container_'+position);
-        var box = document.getElementById('price_container_' + position);
 
         var h4 = container.getElementsByClassName('contract_heading')[0],
             amount = container.getElementsByClassName('contract_amount')[0],
@@ -149,6 +148,8 @@ var Price = (function () {
             description = container.getElementsByClassName('contract_description')[0],
             comment = container.getElementsByClassName('price_comment')[0],
             error = container.getElementsByClassName('contract_error')[0],
+            amount_wrapper = container.getElementsByClassName('amount_wrapper')[0],
+            price_wrapper = container.getElementsByClassName('price_wrapper')[0],
             currency = document.getElementById('currency');
 
         var display = type ? (contractType ? contractType[type] : '') : '';
@@ -165,56 +166,45 @@ var Price = (function () {
             }
         }
 
-        if (proposal['ask_price']) {
+        if (proposal['display_value']) {
             if (is_spread) {
-                amount.textContent = proposal['ask_price'];
+                amount.textContent = proposal['display_value'];
             } else {
-                amount.textContent = currency.value + ' ' + proposal['ask_price'];
+                amount.textContent = currency.value + ' ' + proposal['display_value'];
             }
         }
 
         if (proposal['longcode']) {
             proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
-            description.innerHTML = proposal['longcode'];
-        }
-
-        if (document.getElementById('websocket_form')) {
-
-            if (!document.getElementById('websocket_form').checkValidity()) {
-                if (box) {
-                    box.style.display = 'none';
-                }
-                processForgetPriceIds();
-            }
-
-            else if (document.getElementById('websocket_form').checkValidity()) {
-                if (box) {
-                    box.style.display = 'block';
-                }
-            }
+            description.innerHTML = '<div>'+proposal['longcode']+'</div>';
         }
 
         if (details['error']){
             purchase.hide();
             comment.hide();
+            amount_wrapper.hide();
+            price_wrapper.classList.add('small');
             error.show();
             error.textContent = details['error'].message;
         }
         else{
             purchase.show();
             comment.show();
+            amount_wrapper.show();
+            price_wrapper.classList.remove('small');
             error.hide();
             if (is_spread) {
                 displayCommentSpreads(comment, currency.value, proposal['spread']);
             } else {
                 displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
             }
-            var oldprice = purchase.getAttribute('data-ask-price');
+            var oldprice = purchase.getAttribute('data-display_value');
             if (oldprice) {
-                displayPriceMovement(amount, oldprice, proposal['ask_price']);
+                displayPriceMovement(amount, oldprice, proposal['display_value']);
             }
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
+            purchase.setAttribute('data-display_value', proposal['display_value']);
             purchase.setAttribute('data-symbol', id);
             for(var key in bufferRequests[id]){
                 if(key && key !== 'proposal'){
