@@ -25,6 +25,7 @@ var ProfitTableUI = (function(){
         }
 
         var header = ["Purchase Date", "Ref.", "Contract", "Purchase Price", "Sale Date", "Sale Price", "Profit/Loss"];
+        header = header.map(function(t){return text.localize(t);});
         var footer = ["Total Profit/Loss", "", "", "", "", "", ""];
         var data = [];
         var metadata = {
@@ -107,17 +108,20 @@ var ProfitTableUI = (function(){
         return $row;
     }
 
-    function setDatepicker(date){
-        var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
+    function initDatepicker(){
+        var utcMoment = moment.utc().locale("en").format("YYYY-MM-DD").toString();
 
         if (!Modernizr.inputtypes.date) {
             var utcDate = Date.parse(utcMoment);
-            $("#profit-table-date").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", utcDate);
+            $("#profit-table-date").
+                datepicker({maxDate: 0, dateFormat: 'yy-mm-dd'}).
+                datepicker("setDate", utcDate);
 
             return;
         }
 
         $("#profit-table-date").val(utcMoment);
+        $("#profit-table-date").attr("max", utcMoment);
     }
 
     function clearTableContent(){
@@ -130,7 +134,7 @@ var ProfitTableUI = (function(){
     return {
         createEmptyTable: createEmptyTable,
         updateProfitTable: updateProfitTable,
-        setDatepicker: setDatepicker,
+        initDatepicker: initDatepicker,
         cleanTableContent: clearTableContent
     };
 }());

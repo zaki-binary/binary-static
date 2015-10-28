@@ -39,9 +39,10 @@ var ProfitTableWS = (function () {
 
             $("<div></div>", {
                 id: "ending-note",
-                class: "notice-msg"
+                class: "notice-msg",
+                text: "End of the table"
             }).appendTo("#profit-table-ws-container");
-
+            $("#ending-note").hide();
             tableCreated = true;
         }
 
@@ -70,7 +71,7 @@ var ProfitTableWS = (function () {
     function getProfitTableForCurrentSelectedDate(){
         var from = getCurrentSelectedDate();
         var till = moment(from);
-        till.add(1, "d");
+        //till.add(1, "d");
 
         var fromEpoch = from.unix();
         var tillEpoch = till.unix();
@@ -141,8 +142,7 @@ var ProfitTableWS = (function () {
 
     function init(){
 
-        var now = new Date();
-        ProfitTableUI.setDatepicker(now);
+        ProfitTableUI.initDatepicker(moment.utc());
 
         $("#profit-table-date").on("change", function() {
             $("#submit-date").removeClass("invisible");
