@@ -157,21 +157,21 @@ function displaySpreads() {
 /*
  * Function to request for cancelling the current price proposal
  */
-function processForgetPriceIds(id) {
+function processForgetPriceIds(forget_id) {
     'use strict';
     showPriceOverlay();
     var form_id = Price.getFormId();
     var forget_ids = [];
     var price_id = Price.bufferedIds();
-    if(id){
-        forget_ids.push(id);
+    if(forget_id){
+        forget_ids.push(forget_id);
     }
     else{
         forget_ids = Object.keys(price_id);
         Price.clearMapping();
     }
 
-    for (var i in forget_ids) {
+    for (var i=0; i<forget_ids.length;i++) {
         var id = forget_ids[i];
         TradeSocket.send({ forget: id });
         delete price_id[id];
