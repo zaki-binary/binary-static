@@ -220,7 +220,7 @@ var Content = (function () {
         localizeTextContentById("submit-date");
         localizeTextContentById("ending-note");
     };
-    
+
     return {
         localize: function () { return localize; },
         populate: populate,
