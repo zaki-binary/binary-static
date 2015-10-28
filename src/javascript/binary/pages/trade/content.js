@@ -207,7 +207,7 @@ var Content = (function () {
         localizeTextContentById("date-label");
         localizeTextContentById("submit-date");
         localizeTextContentById("end-of-table");
-    }
+    };
 
     return {
         localize: function () { return localize; },
