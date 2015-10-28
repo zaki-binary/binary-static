@@ -126,9 +126,9 @@ var Contract = (function () {
             if (contractCategory && !tradeContractForms.hasOwnProperty(contractCategory)) {
                 if (contractCategory === 'callput') {
                     if( currentObj['barrier_category'] === 'euro_atm') {
-                        tradeContractForms['risefall'] = text.localize('Rise/Fall');
+                        tradeContractForms['risefall'] = Content.localize().textFormRiseFall;
                     } else {
-                        tradeContractForms['higherlower'] = text.localize('Higher/Lower');
+                        tradeContractForms['higherlower'] = Content.localize().textFormHigherLower;
                     }
                 } else {
                     tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
@@ -137,11 +137,11 @@ var Contract = (function () {
         });
 
         if(tradeContractForms.risefall){
-            tradeContractForms['updown'] = text.localize('Up/Down');
+            tradeContractForms['updown'] = Content.localize().textFormUpDown;
         }
 
         if(tradeContractForms.endsinout || tradeContractForms.staysinout){
-            tradeContractForms['inout'] = text.localize('In/Out');
+            tradeContractForms['inout'] = Content.localize().textFormInOut;
         }
 
         return tradeContractForms;
