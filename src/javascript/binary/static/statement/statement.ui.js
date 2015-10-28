@@ -25,8 +25,6 @@ var StatementUI = (function(){
         });
     }
 
-
-
     function clearTableContent(){
         var $tbody = $("#" + tableID + "> tbody");
         $tbody.children("tr").remove();
