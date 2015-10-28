@@ -2,23 +2,32 @@ var StatementUI = (function(){
     "use strict";
     var tableID = "statement-table";
     var columns = ["date", "ref", "act", "desc", "credit", "bal"];
-    var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ User.get().currency +")"];
+    var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance"];
     var footer = ["", "", "", "", "", ""];
 
     function createEmptyStatementTable(){
         var localizedHeader = header.map(function(t){ return text.localize(t); });
+        localizedHeader[5] = localizedHeader[5] + "(" + TUser.get().currency + ")";
+
         var metadata = {
             id: tableID,
             cols: columns
         };
         var data = [];
-        var $tableContainer = TableCreator.createFlexTable(data, metadata, localizedHeader, footer);
+        var $tableContainer = Table.createFlexTable(data, metadata, localizedHeader, footer);
         return $tableContainer;
     }
 
-    function initDatepicker(){
-        DatepickerUtil.initDatepicker(tableID, moment.utc(), null, 0);
+    function updateStatementTable(transactions){
+        Table.overwriteTableBody(tableID, transactions, createStatementRow);
+        updateStatementFooter(transactions);
+        $("#" + tableID +">tfoot").show();
     }
+
+    function initDatepicker(){
+        DatepickerUtil.initDatepicker("statement-date", moment.utc(), null, 0);
+    }
+
     function showButtonOnDateChange(){
         $("#statement-date").on("change", function() {
             $("#submit-date").removeClass("invisible");
@@ -26,41 +35,28 @@ var StatementUI = (function(){
     }
 
     function clearTableContent(){
-        var $tbody = $("#" + tableID + "> tbody");
-        $tbody.children("tr").remove();
+        Table.clearTableBody(tableID);
+        $("#" + tableID +">tfoot").hide();
     }
 
-    function updateStatementTable(transactions){
-        var $tbody = $("#"+ tableID + "> tbody");
 
-        var $docFrag = $(document.createDocumentFragment());
-
-        transactions.map(function(transaction){
-            var $newRow = createStatementRow(transaction);
-            $newRow.appendTo($docFrag);
-        });
-
-        $tbody.append($docFrag);
-
-        updateStatementFooter(transactions);
-    }
 
     function updateStatementFooter(transactions){
+        TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
+
         var allCredit = [].slice.call(document.querySelectorAll("td.credit"));
         allCredit = allCredit.map(function(node){return node.textContent;});
 
         var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
-
-        TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
-
         totalCredit = Number(totalCredit).toFixed(2);
 
-        var $footerRow = $("#" + tableID + " > tfoot").children("tr").first();
-        $footerRow.children(".credit").text(totalCredit);
-
+        var $footerRow = $("#" + tableID + " > tfoot > tr").first();
+        var creditCell = $footerRow.children(".credit");
         var creditType = (totalCredit >= 0) ? "profit" : "loss";
-        $footerRow.children(".credit").removeClass("profit").removeClass("loss");
-        $footerRow.children(".credit").addClass(creditType);
+
+        creditCell.text(totalCredit);
+        creditCell.removeClass("profit").removeClass("loss");
+        creditCell.addClass(creditType);
     }
 
     function createStatementRow(transaction){
@@ -78,11 +74,11 @@ var StatementUI = (function(){
 
         var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
 
-        var $statementRow = TableCreator.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
+        var $statementRow = Table.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
         $statementRow.children(".credit").addClass(creditDebitType);
         $statementRow.children(".date").addClass("break-line");
 
-        return $statementRow;
+        return $statementRow[0];        //return DOM instead of jquery object
     }
     
     return {

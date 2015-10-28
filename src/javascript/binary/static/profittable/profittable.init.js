@@ -22,7 +22,10 @@ var ProfitTableWS = (function () {
         dataLoaded = false;
         shouldNotLoadMore = false;
         $(".error-msg").text("");
-        ProfitTableUI.cleanTableContent();
+
+        if (tableCreated) {
+            ProfitTableUI.cleanTableContent();
+        }
 
         window.setTimeout(function(){
             if (dataLoaded) {
@@ -30,7 +33,7 @@ var ProfitTableWS = (function () {
             }
             showIsLoading();
             $("#end-of-table").hide();
-        }, 500);
+        }, 300);
     }
 
     function profitTableHandler(response){
@@ -71,12 +74,11 @@ var ProfitTableWS = (function () {
     function getProfitTableForCurrentSelectedDate(){
         var from = getCurrentSelectedDate();
         var till = moment(from);
-        //till.add(1, "d");
 
         var fromEpoch = from.unix();
         var tillEpoch = till.unix();
 
-        ProfitTableData.getProfitTable({dt_to: tillEpoch, dt_fm: fromEpoch});
+        ProfitTableData.getProfitTable({date_to: tillEpoch, date_from: fromEpoch});
     }
 
     function getProfitTableOneDayBefore(){
@@ -141,7 +143,7 @@ var ProfitTableWS = (function () {
     }
 
     function init(){
-
+        showIsLoading();
         ProfitTableUI.initDatepicker(moment.utc());
 
         $("#profit-table-date").on("change", function() {
@@ -167,8 +169,7 @@ var ProfitTableWS = (function () {
             limitDateSelection();
         });
 
-
-
+        initTable();
         getProfitTableForCurrentSelectedDate();
 
         onScrollLoad();

@@ -4,6 +4,8 @@ var ProfitTableUI = (function(){
 
     var profitTableID = "profit-table";
     var cols = ["buy-date", "ref", "contract", "buy-price", "sell-date", "sell-price", "pl"];
+    var header = ["Purchase Date", "Ref.", "Contract", "Purchase Price", "Sale Date", "Sale Price", "Profit/Loss"];
+    var footer = ["Intraday Profit/Loss", "", "", "", "", "", ""];
 
     function createEmptyTable(){
         function mergeRows(start, end, $row){
@@ -24,41 +26,28 @@ var ProfitTableUI = (function(){
                 attr("colspan", end - start + 1);
         }
 
-        var header = ["Purchase Date", "Ref.", "Contract", "Purchase Price", "Sale Date", "Sale Price", "Profit/Loss"];
-        header = header.map(function(t){return text.localize(t);});
-        var footer = ["Total Profit/Loss", "", "", "", "", "", ""];
+        var localizedHeader = header.map(function(t){return text.localize(t);});
+
         var data = [];
         var metadata = {
             cols: cols,
             id: profitTableID
         };
-        var $tableContainer = TableCreator.createFlexTable(data, metadata, header, footer);
+        var $tableContainer = Table.createFlexTable(data, metadata, header, footer);
 
         var $pltotal = $tableContainer.
             children("table").
             children("tfoot").
             children("tr").
-            attr("id", "pl-total").hide();
+            attr("id", "pl-day-total").hide();
 
         mergeRows(0, 5, $pltotal);
-
-        var $subTotal = TableCreator.createFlexTableRow(["Intraday Profit/Loss", "", "", "", "", "", ""], cols, "header");
-        $subTotal.attr("id", "pl-day-total");
-        $subTotal.insertBefore($pltotal);
-
-        mergeRows(0, 5, $subTotal);
 
         return $tableContainer;
     }
 
     function updateProfitTable(transactions){
-        //update body
-        var $tbody = $("#" + profitTableID + "> tbody");
-        transactions.map(function(transaction){
-            var $newRow = createProfitTableRow(transaction);
-            $newRow.appendTo($tbody);
-        });
-
+        Table.overwriteTableBody(profitTableID, transactions, createProfitTableRow);
         updateFooter(transactions);
     }
 
@@ -70,53 +59,53 @@ var ProfitTableUI = (function(){
             return previous + pl;
         }, 0);
 
-        var total = "Anything but total";  //TODO need api to get information
-
         $("#pl-day-total > .pl").text(Number(subTotal).toFixed(2));
-        $("#pl-total > .pl").text(total);
-
         $("#pl-day-total > .buy-date").text("Intra-day Profit/Loss");
-        $("#pl-total > .buy-date").text("Total Profit/Loss");
 
         var subTotalType = (subTotal >= 0 ) ? "profit" : "loss";
-        var totalType = (total >= 0 ) ? "profit" : "loss";
-
         $("#pl-day-total > .pl").removeClass("profit").removeClass("loss");
-        $("#pl-total > .pl").removeClass("profit").removeClass("loss");
-
         $("#pl-day-total > .pl").addClass(subTotalType);
-        $("#pl-total > .pl").addClass(totalType);
+
+        $("#" + profitTableID + ">tfoot").show();
     }
 
     function createProfitTableRow(transaction){
-        var buyDate = transaction["purchase_time"].replace(/\s/g, "\n");
+        var buyDate = moment.
+            utc(transaction["purchase_time"] * 1000).
+            locale("en").
+            format("YYYY-MM-DD HH:mm:ss").replace(/\s/g, "\n");
+
+        var sellDate = moment.
+            utc(transaction["sell_time"] * 1000).
+            locale("en").
+            format("YYYY-MM-DD\nHH:mm:ss").replace(/\s/g, "\n");
+
+
         var ref = transaction["transaction_id"];
         var contract = transaction["longcode"];
         var buyPrice = Number(parseFloat(transaction["buy_price"])).toFixed(2);
-        var sellDate = transaction["sell_time"].replace(/\s/g, "\n");       //change whitespace to newline
         var sellPrice = Number(parseFloat(transaction["sell_price"])).toFixed(2);
+
         var pl = Number(sellPrice - buyPrice).toFixed(2);
 
         var plType = (pl >= 0) ? "profit" : "loss";
 
         var data = [buyDate, ref, contract, buyPrice, sellDate, sellPrice, pl];
-        var $row = TableCreator.createFlexTableRow(data, cols, "data");
+        var $row = Table.createFlexTableRow(data, cols, "data");
 
         $row.children(".buy-date").addClass("break-line");
         $row.children(".pl").addClass(plType);
 
-        return $row;
+        return $row[0];
     }
 
     function initDatepicker(){
-        DatepickerUtil.initDatepicker(profitTableID, moment.utc(), null, 0);
+        DatepickerUtil.initDatepicker("profit-table-date", moment.utc(), null, 0);
     }
 
     function clearTableContent(){
-        var $tbody = $("#" + profitTableID + "> tbody");
-        $tbody.children("tr").remove();
-
-        $("tfoot > tr > th").text(" ");
+        Table.clearTableBody(profitTableID);
+        $("#" + profitTableID + ">tfoot").hide();
     }
 
     return {

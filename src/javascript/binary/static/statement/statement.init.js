@@ -123,7 +123,9 @@ var StatementWS = (function(){
         dataLoaded = false;
 
         $(".error-msg").text("");
-        StatementUI.clearTableContent();
+        if (tableCreated){
+            StatementUI.clearTableContent();
+        }
 
         window.setTimeout(function(){
             if (dataLoaded) {
