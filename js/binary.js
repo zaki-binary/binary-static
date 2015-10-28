@@ -10341,7 +10341,7 @@ function displayUnderlyings(id, elements, selected) {
         });
         keys.forEach(function (key) {
             if (elements.hasOwnProperty(key)){
-                var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
+                var option = document.createElement('option'), content = document.createTextNode(text.localize(elements[key]['display']));
                 option.setAttribute('value', key);
                 if (elements[key]['is_active'] !== 1) {
                     option.setAttribute('disabled', true);
@@ -10863,7 +10863,10 @@ function countDecimalPlaces(num) {
             textSpreadTypeShort: text.localize('Short'),
             textSpreadDepositComment: text.localize('Deposit of'),
             textSpreadRequiredComment: text.localize('is required. Current spread'),
-            textSpreadPointsComment: text.localize('points')
+            textSpreadPointsComment: text.localize('points'),
+            textContractStatusWon: text.localize('This contract won'),
+            textContractStatusLost: text.localize('This contract lost'),
+            textTickResultLabel: text.localize('Tick')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -11097,7 +11100,7 @@ var Contract = (function () {
                 }
 
                 if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
-                    startDates.list = currentObj.forward_starting_options;                   
+                    startDates.list = currentObj.forward_starting_options;
                 }
                 else if(currentObj.start_type==='spot'){
                     startDates.has_spot = 1;
@@ -11128,7 +11131,7 @@ var Contract = (function () {
                 }
 
                 if (!contractType[contractCategory].hasOwnProperty(currentObj['contract_type'])) {
-                    contractType[contractCategory][currentObj['contract_type']] = currentObj['contract_display'];
+                    contractType[contractCategory][currentObj['contract_type']] = text.localize(currentObj['contract_display']);
                 }
             }
         });
@@ -11158,7 +11161,7 @@ var Contract = (function () {
                         tradeContractForms['higherlower'] = Content.localize().textFormHigherLower;
                     }
                 } else {
-                    tradeContractForms[contractCategory] = currentObj['contract_category_display'];
+                    tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
                 }
             }
         });
@@ -12222,7 +12225,7 @@ var Price = (function () {
 
         var display = type ? (contractType ? contractType[type] : '') : '';
         if (display) {
-            h4.setAttribute('class', 'contract_heading ' + display.toLowerCase().replace(/ /g, '_'));
+            h4.setAttribute('class', 'contract_heading ' + type);
             if (is_spread) {
                 if (position === "top") {
                     h4.textContent = Content.localize().textSpreadTypeLong;
@@ -12492,7 +12495,7 @@ function processPriceRequest() {
 
     Price.incrFormId();
     processForgetPriceIds();
-    showPriceOverlay(); 
+    showPriceOverlay();
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
         if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
             TradeSocket.send(Price.proposal(typeOfContract));
@@ -12725,7 +12728,7 @@ var Purchase = (function () {
 
             var el1 = document.createElement('div');
             el1.classList.add('col');
-            el1.textContent = 'Tick '+ (spots.getElementsByClassName('row').length+1);
+            el1.textContent = Content.localize().textTickResultLabel + " " + (spots.getElementsByClassName('row').length+1);
             fragment.appendChild(el1);
 
             var el2 = document.createElement('div');
@@ -12752,13 +12755,13 @@ var Purchase = (function () {
 
                 if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
-                    contract_status = 'This contract won';
+                    contract_status = Content.localize().textContractStatusWon;
                 }
                 else{
                     spots.className = 'lost';
-                    contract_status = 'This contract lost';
+                    contract_status = Content.localize().textContractStatusLost;
                 }
-                document.getElementById('contract_purchase_heading').textContent = text.localize(contract_status);
+                document.getElementById('contract_purchase_heading').textContent = contract_status;
             }
 
             purchase_data.echo_req.passthrough['duration']--;
