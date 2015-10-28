@@ -16,19 +16,8 @@ var StatementUI = (function(){
         return $tableContainer;
     }
 
-    function datepickerDefault(date){
-        var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
-
-        if (!Modernizr.inputtypes.date) {
-            var utcDate = Date.parse(utcMoment);
-            $("#statement-date").
-                datepicker({maxDate: 0, dateFormat: 'yy-mm-dd'}).
-                datepicker("setDate", utcDate);
-            return;
-        }
-
-        $("#statement-date").val(utcMoment);
-        $("#statement-date").attr("max", utcMoment);
+    function initDatepicker(){
+        DatepickerUtil.initDatepicker(tableID, moment.utc(), null, 0);
     }
     function showButtonOnDateChange(){
         $("#statement-date").on("change", function() {
@@ -100,7 +89,7 @@ var StatementUI = (function(){
     
     return {
         clearTableContent: clearTableContent,
-        setDatePickerDefault: datepickerDefault,
+        setDatePickerDefault: initDatepicker,
         showButtonOnDateChange: showButtonOnDateChange,
         createEmptyStatementTable: createEmptyStatementTable,
         updateStatementTable: updateStatementTable

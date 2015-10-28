@@ -109,19 +109,7 @@ var ProfitTableUI = (function(){
     }
 
     function initDatepicker(){
-        var utcMoment = moment.utc().locale("en").format("YYYY-MM-DD").toString();
-
-        if (!Modernizr.inputtypes.date) {
-            var utcDate = Date.parse(utcMoment);
-            $("#profit-table-date").
-                datepicker({maxDate: 0, dateFormat: 'yy-mm-dd'}).
-                datepicker("setDate", utcDate);
-
-            return;
-        }
-
-        $("#profit-table-date").val(utcMoment);
-        $("#profit-table-date").attr("max", utcMoment);
+        DatepickerUtil.initDatepicker(profitTableID, moment.utc(), null, 0);
     }
 
     function clearTableContent(){
