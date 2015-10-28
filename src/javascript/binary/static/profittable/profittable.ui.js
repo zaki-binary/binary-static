@@ -32,7 +32,7 @@ var ProfitTableUI = (function(){
             cols: cols,
             id: profitTableID
         };
-        var $tableContainer = DomTable.createFlexTable(data, metadata, header, footer);
+        var $tableContainer = TableCreator.createFlexTable(data, metadata, header, footer);
 
         var $pltotal = $tableContainer.
             children("table").
@@ -42,7 +42,7 @@ var ProfitTableUI = (function(){
 
         mergeRows(0, 5, $pltotal);
 
-        var $subTotal = DomTable.createFlexTableRow(["Intraday Profit/Loss", "", "", "", "", "", ""], cols, "header");
+        var $subTotal = TableCreator.createFlexTableRow(["Intraday Profit/Loss", "", "", "", "", "", ""], cols, "header");
         $subTotal.attr("id", "pl-day-total");
         $subTotal.insertBefore($pltotal);
 
@@ -100,7 +100,7 @@ var ProfitTableUI = (function(){
         var plType = (pl >= 0) ? "profit" : "loss";
 
         var data = [buyDate, ref, contract, buyPrice, sellDate, sellPrice, pl];
-        var $row = DomTable.createFlexTableRow(data, cols, "data");
+        var $row = TableCreator.createFlexTableRow(data, cols, "data");
 
         $row.children(".buy-date").addClass("break-line");
         $row.children(".pl").addClass(plType);

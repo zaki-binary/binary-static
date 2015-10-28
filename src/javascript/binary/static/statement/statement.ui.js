@@ -2,6 +2,19 @@ var StatementUI = (function(){
     "use strict";
     var tableID = "statement-table";
     var columns = ["date", "ref", "act", "desc", "credit", "bal"];
+    var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ User.get().currency +")"];
+    var footer = ["", "", "", "", "", ""];
+
+    function createEmptyStatementTable(){
+        var localizedHeader = header.map(function(t){ return text.localize(t); });
+        var metadata = {
+            id: tableID,
+            cols: columns
+        };
+        var data = [];
+        var $tableContainer = TableCreator.createFlexTable(data, metadata, localizedHeader, footer);
+        return $tableContainer;
+    }
 
     function datepickerDefault(date){
         var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
@@ -23,20 +36,7 @@ var StatementUI = (function(){
         });
     }
 
-    function createEmptyStatementTable(){
-        var currency = User.get().currency;
-        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ currency +")"];
-        header = header.map(function(t){ return text.localize(t); });
-        var footer = ["", "", "", "", "", ""];
-        var metadata = {
-            id: tableID,
-            cols: columns
-        };
-        var data = [];
-        var $tableContainer = DomTable.createFlexTable(data, metadata, header, footer);
 
-        return $tableContainer;
-    }
 
     function clearTableContent(){
         var $tbody = $("#" + tableID + "> tbody");
@@ -91,7 +91,7 @@ var StatementUI = (function(){
 
         var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
 
-        var $statementRow = DomTable.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
+        var $statementRow = TableCreator.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
         $statementRow.children(".credit").addClass(creditDebitType);
         $statementRow.children(".date").addClass("break-line");
 

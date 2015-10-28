@@ -1,5 +1,5 @@
 
-var DomTable = (function(){
+var TableCreator = (function(){
     "use strict";
     /***
      *
@@ -89,6 +89,9 @@ var DomTable = (function(){
 
         return $tr;
     }
+
+
+
 
     return {
         createFlexTable: createFlexTable,
