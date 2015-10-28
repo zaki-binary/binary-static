@@ -207,7 +207,7 @@ var Content = (function () {
         localizeTextContentById("date-label");
         localizeTextContentById("submit-date");
         localizeTextContentById("end-of-table");
-    }
+    };
 
     var profitTableTranslation = function(){
         var titleElement = document.getElementById("profit-table-title").firstElementChild;
@@ -219,7 +219,7 @@ var Content = (function () {
         localizeTextContentById("date-label");
         localizeTextContentById("submit-date");
         localizeTextContentById("ending-note");
-    }
+    };
 
     return {
         localize: function () { return localize; },
