@@ -33,10 +33,6 @@ var Content = (function () {
             textContractConfirmationHeading: text.localize('Contract Confirmation'),
             textContractConfirmationReference: text.localize('Your transaction reference is'),
             textContractConfirmationBalance: text.localize('Account balance:'),
-            textFormRiseFall: text.localize('Rise/Fall'),
-            textFormHigherLower: text.localize('Higher/Lower'),
-            textFormUpDown: text.localize('Up/Down'),
-            textFormInOut: text.localize('In/Out'),
             textContractPeriod: text.localize('Contract period'),
             textExercisePeriod: text.localize('Exercise price'),
             predictionLabel: text.localize('Last Digit Prediction'),
@@ -54,7 +50,10 @@ var Content = (function () {
             textSpreadTypeShort: text.localize('Short'),
             textSpreadDepositComment: text.localize('Deposit of'),
             textSpreadRequiredComment: text.localize('is required. Current spread'),
-            textSpreadPointsComment: text.localize('points')
+            textSpreadPointsComment: text.localize('points'),
+            textContractStatusWon: text.localize('This contract won'),
+            textContractStatusLost: text.localize('This contract lost'),
+            textTickResultLabel: text.localize('Tick')
         };
 
         var starTime = document.getElementById('start_time_label');

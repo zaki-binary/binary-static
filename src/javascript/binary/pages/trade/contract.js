@@ -70,7 +70,7 @@ var Contract = (function () {
                 }
 
                 if (currentObj.forward_starting_options && currentObj['start_type'] === 'forward' && sessionStorage.formname !== 'higherlower') {
-                    startDates.list = currentObj.forward_starting_options;                   
+                    startDates.list = currentObj.forward_starting_options;
                 }
                 else if(currentObj.start_type==='spot'){
                     startDates.has_spot = 1;
@@ -126,22 +126,22 @@ var Contract = (function () {
             if (contractCategory && !tradeContractForms.hasOwnProperty(contractCategory)) {
                 if (contractCategory === 'callput') {
                     if( currentObj['barrier_category'] === 'euro_atm') {
-                        tradeContractForms['risefall'] = Content.localize().textFormRiseFall;
+                        tradeContractForms['risefall'] = text.localize('Rise/Fall');
                     } else {
-                        tradeContractForms['higherlower'] = Content.localize().textFormHigherLower;
+                        tradeContractForms['higherlower'] = text.localize('Higher/Lower');
                     }
                 } else {
-                    tradeContractForms[contractCategory] = currentObj['contract_category_display'];
+                    tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
                 }
             }
         });
 
         if(tradeContractForms.risefall){
-            tradeContractForms['updown'] = Content.localize().textFormUpDown;
+            tradeContractForms['updown'] = text.localize('Up/Down');
         }
 
         if(tradeContractForms.endsinout || tradeContractForms.staysinout){
-            tradeContractForms['inout'] = Content.localize().textFormInOut;
+            tradeContractForms['inout'] = text.localize('In/Out');
         }
 
         return tradeContractForms;
