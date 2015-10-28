@@ -91,7 +91,7 @@ var TableCreator = (function(){
     }
 
 
-
+    
 
     return {
         createFlexTable: createFlexTable,

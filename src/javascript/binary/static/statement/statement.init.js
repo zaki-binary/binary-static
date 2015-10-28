@@ -146,7 +146,7 @@ var StatementWS = (function(){
     function initPage(){
 
 
-        StatementUI.setDatePickerDefault(moment.utc());
+        StatementUI.initDatepicker(moment.utc());
         StatementUI.showButtonOnDateChange();
 
         $("#submit-date").click(function(){

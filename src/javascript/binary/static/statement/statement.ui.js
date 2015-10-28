@@ -89,7 +89,7 @@ var StatementUI = (function(){
     
     return {
         clearTableContent: clearTableContent,
-        setDatePickerDefault: initDatepicker,
+        initDatepicker: initDatepicker,
         showButtonOnDateChange: showButtonOnDateChange,
         createEmptyStatementTable: createEmptyStatementTable,
         updateStatementTable: updateStatementTable
