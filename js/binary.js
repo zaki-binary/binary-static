@@ -13651,7 +13651,7 @@ var StringUtil = (function(){
         var fromEpoch = fromDate.unix();
         var tillEpoch = tillDate.unix();
 
-        StatementData.getStatement({dt_to: tillEpoch, dt_fm: fromEpoch});
+        StatementData.getStatement({date_to: tillEpoch, date_from: fromEpoch});
     }
 
     function getNextChunkStatement(){
@@ -13798,7 +13798,7 @@ var StringUtil = (function(){
     }
 
     function createEmptyStatementTable(){
-        var currency = User.get().currency;
+        var currency = TUser.get().currency;
         var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ currency +")"];
         header = header.map(function(t){ return text.localize(t); });
         var footer = ["", "", "", "", "", ""];
