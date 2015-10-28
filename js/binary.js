@@ -9470,6 +9470,13 @@ $(function() {
     }
 
 });
+;$(function() {
+    $( "#accordion" ).accordion({
+      heightStyle: "content",
+      collapsible: true,
+      active: false
+    });
+});
 ;function currencyConvertorCalculator()
 {
     var currencyto = document.getElementById('currencyto');
@@ -11234,7 +11241,7 @@ var Durations = (function(){
     var trading_times = {};
     var expiry_time = '';
 
-    var displayDurations = function(startType) {
+    var displayDurations = function(startType, expiry_type, duration_amount, duration_units, expiry_time) {
         var durations = Contract.durations();
         if (durations === false) {
             document.getElementById('expiry_row').style.display = 'none';
@@ -11619,6 +11626,7 @@ var TradingEvents = (function () {
             var value = getEventValue(e);
             processPriceRequest();
             submitForm(document.getElementById('websocket_form'));
+            sessionStorage.setItem('duration_amount',value);
         };
         var durationAmountElement = document.getElementById('duration_amount');
         if (durationAmountElement) {
@@ -11640,6 +11648,7 @@ var TradingEvents = (function () {
                 document.getElementById('expiry_time').value = current_moment.format('HH:mm');
                 Durations.setTime(current_moment.format('HH:mm'));
             }
+            sessionStorage.setItem('expiry_type',value);
             processPriceRequest();
         };
         var expiryTypeElement = document.getElementById('expiry_type');
@@ -11654,6 +11663,7 @@ var TradingEvents = (function () {
             var value = getEventValue(e);
             Durations.populate();
             processPriceRequest();
+            sessionStorage.setItem('duration_units',value);
         };
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
@@ -11678,6 +11688,7 @@ var TradingEvents = (function () {
                 expiry_time.show();
                 processPriceRequest();
             }
+            sessionStorage.setItem('expiry_date',value);
             Barriers.display();
         };
         var endDateElement = document.getElementById('expiry_date');
@@ -12400,7 +12411,7 @@ function processContract(contracts) {
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
-    StartDates.display();
+    StartDates.display(sessionStorage.getItem('date_start'));
 
     Durations.display();
 
@@ -12881,7 +12892,7 @@ var StartDates = (function(){
         return document.getElementById('date_start');
     };
 
-    var displayStartDates = function() {
+    var displayStartDates = function(select) {
 
         var startDates = Contract.startDates();
 
@@ -12926,7 +12937,11 @@ var StartDates = (function(){
 
                 while(a.isBefore(b)) {
                     option = document.createElement('option');
-                    option.setAttribute('value', a.utc().unix());
+                    var value = a.utc().unix();
+                    option.setAttribute('value', value);
+                    if(value==select){
+                        option.setAttribute('selected', 'selected');
+                    }
                     content = document.createTextNode(a.format('HH:mm ddd'));
                     option.appendChild(content);
                     fragment.appendChild(option);
@@ -13168,7 +13183,7 @@ WSTickDisplay.updateChart = function(data){
     }           
 };
 
-;var User = (function () {
+;var TUser = (function () {
     var data = {};
     return {
         set: function(a){ data = a; },
