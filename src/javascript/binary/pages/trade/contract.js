@@ -101,7 +101,7 @@ var Contract = (function () {
                 }
 
                 if (!contractType[contractCategory].hasOwnProperty(currentObj['contract_type'])) {
-                    contractType[contractCategory][currentObj['contract_type']] = currentObj['contract_display'];
+                    contractType[contractCategory][currentObj['contract_type']] = text.localize(currentObj['contract_display']);
                 }
             }
         });
