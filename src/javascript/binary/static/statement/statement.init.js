@@ -75,7 +75,9 @@ var StatementWS = (function(){
                 return;
             }
 
-            StatementUI.updateStatementTable(getNextChunkStatement());
+            if (!finishedConsumed()){
+                StatementUI.updateStatementTable(getNextChunkStatement());
+            }
         });
     }
 
