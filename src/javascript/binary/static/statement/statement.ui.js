@@ -24,12 +24,24 @@ var StatementUI = (function(){
         $("#" + tableID +">tfoot").show();
     }
 
-
     function clearTableContent(){
         Table.clearTableBody(tableID);
         $("#" + tableID +">tfoot").hide();
     }
 
+
+    function updateStatementFooterBalance(balances){
+        var accDropDown = document.getElementById("client_loginid");
+        var acc = accDropDown.options[accDropDown.selectedIndex].value;
+        var bal = balances.filter(function(element){
+            return element.loginid === acc;
+        });
+
+        $("#statement-table > tfoot > tr").
+            first().
+            children(".bal").
+            text(Number(parseFloat(bal[0].balance)).toFixed(2));
+    }
 
     function updateStatementFooter(transactions){
         TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
@@ -78,6 +90,7 @@ var StatementUI = (function(){
     return {
         clearTableContent: clearTableContent,
         createEmptyStatementTable: createEmptyStatementTable,
-        updateStatementTable: updateStatementTable
+        updateStatementTable: updateStatementTable,
+        updateStatementFooterBalance: updateStatementFooterBalance
     };
 }());
