@@ -1,10 +1,7 @@
 pjax_config_page("statementws", function(){
     return {
         onLoad: function() {
-<<<<<<< HEAD
-=======
             TradeSocket.init();
->>>>>>> upstream/master
             StatementWS.init();
         },
         onUnload: function(){
@@ -12,9 +9,4 @@ pjax_config_page("statementws", function(){
             TradeSocket.close();
         }
     };
-<<<<<<< HEAD
 });
-=======
-});
-
->>>>>>> upstream/master

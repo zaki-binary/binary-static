@@ -2,6 +2,8 @@
  * Created by qingwei on 19/10/2015.
  */
 var ViewBalance = (function () {
+    var initialized = false;
+
     function showViewBalancePopup(){
         ViewBalanceData.getLatestBalances();
         $("#balance-container").bPopup({
@@ -12,11 +14,9 @@ var ViewBalance = (function () {
     }
 
     function hidePopup(){
-        //depends on bpopup
         $("#balance-container").bPopup().close();
     }
 
-    var initialized = false;
     function init(){
         if (initialized) {
             return;

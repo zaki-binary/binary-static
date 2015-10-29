@@ -34,11 +34,10 @@ var Message = (function () {
                 if (passthroughObj){
                     switch (passthroughObj.purpose) {
                         case "statement_footer":
-                            var bal = response.balance[0].balance;
-                            $("#statement-table > tfoot > tr").
-                                first().
-                                children(".bal").
-                                text(Number(parseFloat(bal)).toFixed(2));
+                            StatementUI.updateStatementFooterBalance(response.balance);
+                            break;
+                        case "balance_popup":
+                            ViewBalanceUI.updateBalances(response.balance);
                             break;
                         default :
                             //do nothing

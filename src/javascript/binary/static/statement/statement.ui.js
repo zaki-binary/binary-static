@@ -30,6 +30,14 @@ var StatementUI = (function(){
     }
 
 
+    function updateStatementFooterBalance(balances){
+        var bal = response.balance[0].balance;
+        $("#statement-table > tfoot > tr").
+            first().
+            children(".bal").
+            text(Number(parseFloat(bal)).toFixed(2));
+    }
+
     function updateStatementFooter(transactions){
         TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
         var accCredit = document.querySelector("#statement-table > tfoot > tr > .credit").textContent;
@@ -77,6 +85,7 @@ var StatementUI = (function(){
     return {
         clearTableContent: clearTableContent,
         createEmptyStatementTable: createEmptyStatementTable,
-        updateStatementTable: updateStatementTable
+        updateStatementTable: updateStatementTable,
+        updateStatementFooterBalance: updateStatementFooterBalance
     };
 }());

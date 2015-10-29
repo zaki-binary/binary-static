@@ -3,23 +3,32 @@
  */
 var ViewBalanceUI = (function(){
     var colsName = ["loginid", "currency", "balance"];
+    var header = ["Login ID", "Currency", "Balance"];
+
     function createEmptyBalanceTable(){
-        var header = ["Login ID", "Currency", "Balance"];
         var metadata = {
             cols: colsName,
             id: "bal-table"
         };
         var data = [];
-        var $table = DomTable.createFlexTable(data, metadata, header);
+        var localizedHeader = header.map(function (h){
+            return text.localize(h);
+        });
+        var $table = Table.createFlexTable(data, metadata, localizedHeader);
 
         return $table;
     }
 
     function createBalancePopup(){
         var $popupDiv = $("<div></div>", {class: "popup-div", id: "balance-container"});
-        var $balTitle = $("<h1>Balances</h1>");
+        var $balTitle = $("<h1></h1>", {text: text.localize("Balances")});
         var $table = createEmptyBalanceTable();
-        var $button = $("<button></button>", {class: "button", id: "close-balances", text:"Continue Trading"});
+
+        var $button = $("<button></button>", {
+            class: "button",
+            id: "close-balances",
+            text:text.localize("Continue Trading")
+        });
 
         $popupDiv.append($balTitle).append($table).append($button);
 
@@ -30,11 +39,12 @@ var ViewBalanceUI = (function(){
         $("#bal-table > tbody").children().remove("tr");
 
         var data = balances.map(function(bal){
-            return [bal.loginid, bal.currency, bal.balance];
-        });
-
-        data.map(function(row){
-            var $tr = DomTable.createFlexTableRow(row, colsName, "data");
+            var row = [
+                bal.loginid,
+                bal.currency,
+                Number(parseFloat(bal.balance)).toFixed(2)
+            ];
+            var $tr = Table.createFlexTableRow(row, colsName, "data");
             $("#bal-table").children("tbody").append($tr);
         });
     }
