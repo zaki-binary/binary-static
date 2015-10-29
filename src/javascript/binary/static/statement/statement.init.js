@@ -48,7 +48,6 @@ var StatementWS = (function(){
         hideIsLoading();
     }
 
-
     function getCurrentSelectedDate() {
         return moment.utc($("#statement-date").val());
     }
@@ -90,7 +89,7 @@ var StatementWS = (function(){
             if (pFromTop >= hidableHeight(70)) {
                 var top10 = getNextChunkStatement();
                 StatementUI.updateStatementTable(top10);
-                if (top10.length < 10){
+                if (top10.length < chunkPerLoad){
                     shouldNotLoadMore = true;
                     $("#end-of-table").show();
                 }
@@ -124,7 +123,9 @@ var StatementWS = (function(){
         dataLoaded = false;
 
         $(".error-msg").text("");
-        StatementUI.clearTableContent();
+        if (tableCreated){
+            StatementUI.clearTableContent();
+        }
 
         window.setTimeout(function(){
             if (dataLoaded) {
@@ -147,7 +148,7 @@ var StatementWS = (function(){
     function initPage(){
 
 
-        StatementUI.setDatePickerDefault(moment.utc());
+        StatementUI.initDatepicker(moment.utc());
         StatementUI.showButtonOnDateChange();
 
         $("#submit-date").click(function(){
