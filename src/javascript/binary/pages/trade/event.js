@@ -77,6 +77,10 @@ var TradingEvents = (function () {
                     sessionStorage.setItem('underlying', underlying);
                     requestTradeAnalysis();
 
+                    Tick.clean();
+                    
+                    updateWarmChart();
+
                     Contract.getContracts(underlying);
 
                     // forget the old tick id i.e. close the old tick stream
