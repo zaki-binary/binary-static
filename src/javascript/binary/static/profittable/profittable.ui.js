@@ -5,7 +5,7 @@ var ProfitTableUI = (function(){
     var profitTableID = "profit-table";
     var cols = ["buy-date", "ref", "contract", "buy-price", "sell-date", "sell-price", "pl"];
     var header = ["Purchase Date", "Ref.", "Contract", "Purchase Price", "Sale Date", "Sale Price", "Profit/Loss"];
-    var footer = ["Intraday Profit/Loss", "", "", "", "", "", ""];
+    var footer = ["Total Profit/Loss", "", "", "", "", "", ""];
 
     function createEmptyTable(){
         function mergeRows(start, end, $row){
@@ -39,7 +39,7 @@ var ProfitTableUI = (function(){
             children("table").
             children("tfoot").
             children("tr").
-            attr("id", "pl-day-total").hide();
+            attr("id", "pl-day-total");
 
         mergeRows(0, 5, $pltotal);
 
@@ -47,26 +47,31 @@ var ProfitTableUI = (function(){
     }
 
     function updateProfitTable(transactions){
-        Table.overwriteTableBody(profitTableID, transactions, createProfitTableRow);
+        Table.appendTableBody(profitTableID, transactions, createProfitTableRow);
         updateFooter(transactions);
     }
 
     function updateFooter(transactions){
-        var subTotal = transactions.reduce(function(previous, current){
+        var accTotal = document.querySelector("#pl-day-total > .pl").textContent;
+        accTotal = parseFloat(accTotal);
+        if (isNaN(accTotal)) {
+            accTotal = 0;
+        }
+
+        var currentTotal = transactions.reduce(function(previous, current){
             var buyPrice = Number(parseFloat(current["buy_price"])).toFixed(2);
             var sellPrice = Number(parseFloat(current["sell_price"])).toFixed(2);
             var pl = sellPrice - buyPrice
             return previous + pl;
         }, 0);
 
-        $("#pl-day-total > .pl").text(Number(subTotal).toFixed(2));
-        $("#pl-day-total > .buy-date").text("Intra-day Profit/Loss");
+        var total = accTotal + currentTotal;
 
-        var subTotalType = (subTotal >= 0 ) ? "profit" : "loss";
+        $("#pl-day-total > .pl").text(Number(total).toFixed(2));
+
+        var subTotalType = (total >= 0 ) ? "profit" : "loss";
         $("#pl-day-total > .pl").removeClass("profit").removeClass("loss");
         $("#pl-day-total > .pl").addClass(subTotalType);
-
-        $("#" + profitTableID + ">tfoot").show();
     }
 
     function createProfitTableRow(transaction){
