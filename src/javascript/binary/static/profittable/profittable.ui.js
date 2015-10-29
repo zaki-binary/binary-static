@@ -33,7 +33,7 @@ var ProfitTableUI = (function(){
             cols: cols,
             id: profitTableID
         };
-        var $tableContainer = Table.createFlexTable(data, metadata, header, footer);
+        var $tableContainer = Table.createFlexTable(data, metadata, localizedHeader, footer);
 
         var $pltotal = $tableContainer.
             children("table").
