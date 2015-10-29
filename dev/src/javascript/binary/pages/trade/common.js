@@ -699,3 +699,28 @@ function selectOption(option, select){
         return false;
     }
 }
+
+function updateWarmChart(){
+    var $chart = $('#trading_worm_chart');
+    var spots = Tick.spots();
+    var chart_config = {
+        type: 'line',
+        lineColor: '#606060',
+        fillColor: false,
+        spotColor: '#00f000',
+        minSpotColor: '#f00000',
+        maxSpotColor: '#0000f0',
+        highlightSpotColor: '#ffff00',
+        highlightLineColor: '#000000',
+        spotRadius: 1.25
+    };
+    if($chart){
+        $chart.sparkline(spots, chart_config);
+        if(spots.length){     
+            $chart.show();
+        }
+        else{
+            $chart.hide();
+        }  
+    }  
+}

@@ -10825,6 +10825,31 @@ function selectOption(option, select){
         return false;
     }
 }
+
+function updateWarmChart(){
+    var $chart = $('#trading_worm_chart');
+    var spots = Tick.spots();
+    var chart_config = {
+        type: 'line',
+        lineColor: '#606060',
+        fillColor: false,
+        spotColor: '#00f000',
+        minSpotColor: '#f00000',
+        maxSpotColor: '#0000f0',
+        highlightSpotColor: '#ffff00',
+        highlightLineColor: '#000000',
+        spotRadius: 1.25
+    };
+    if($chart){
+        $chart.sparkline(spots, chart_config);
+        if(spots.length){     
+            $chart.show();
+        }
+        else{
+            $chart.hide();
+        }  
+    }  
+}
 ;var Content = (function () {
     'use strict';
 
@@ -11032,7 +11057,6 @@ function selectOption(option, select){
         titleElement.textContent = text.localize(title);
 
         localizeTextContentById("err");
-        localizeTextContentById("end-of-table");
     };
 
     return {
@@ -11637,6 +11661,10 @@ var TradingEvents = (function () {
                     var underlying = e.target.value;
                     sessionStorage.setItem('underlying', underlying);
                     requestTradeAnalysis();
+
+                    Tick.clean();
+                    
+                    updateWarmChart();
 
                     Contract.getContracts(underlying);
 
@@ -12352,6 +12380,10 @@ function processMarketUnderlying() {
     // get ticks for current underlying
     TradeSocket.send({ ticks : underlying });
 
+    Tick.clean();
+    
+    updateWarmChart();
+
     Contract.getContracts(underlying);
 
     displayTooltip(sessionStorage.getItem('market'),underlying);
@@ -12509,13 +12541,16 @@ function processForgetTickId() {
  */
 function processTick(tick) {
     'use strict';
-    Tick.details(tick);
-    Tick.display();
-    WSTickDisplay.updateChart(tick);
-    Purchase.update_spot_list(tick);
-    if (!Barriers.isBarrierUpdated()) {
-        Barriers.display();
-        Barriers.setBarrierUpdate(true);
+    if(tick.echo_req.ticks === sessionStorage.getItem('underlying')){
+        Tick.details(tick);
+        Tick.display();
+        WSTickDisplay.updateChart(tick);
+        Purchase.update_spot_list(tick);
+        if (!Barriers.isBarrierUpdated()) {
+            Barriers.display();
+            Barriers.setBarrierUpdate(true);
+        }
+        updateWarmChart();
     }
 }
 
@@ -13063,7 +13098,9 @@ var Tick = (function () {
         id = '',
         epoch = '',
         errorMessage = '',
-        bufferedIds = {};
+        bufferedIds = {},
+        spots = [],
+        keep_number = 20;
 
     var details = function (data) {
         errorMessage = '';
@@ -13076,6 +13113,11 @@ var Tick = (function () {
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
+
+                if(spots.length === keep_number){
+                    spots.shift();
+                }
+                spots.push(quote);
 
                 if (!bufferedIds.hasOwnProperty(id)) {
                     bufferedIds[id] = moment().utc().unix();
@@ -13116,7 +13158,9 @@ var Tick = (function () {
         epoch: function () { return epoch; },
         errorMessage: function () { return errorMessage; },
         bufferedIds: function () { return bufferedIds; },
-        clearBufferIds: clearBuffer
+        clean: function(){ spots = [];},
+        clearBufferIds: clearBuffer,
+        spots: function(){ return spots;}
     };
 })();
 ;var WSTickDisplay = Object.create(TickDisplay);
@@ -13643,7 +13687,7 @@ var Table = (function(){
     //receive means receive from ws service
     //consume means consume by UI and displayed to page
 
-    var batchSize = 100;
+    var batchSize = 50;
     var chunkSize = batchSize/2;
 
     var noMoreData = false;
@@ -13672,7 +13716,6 @@ var Table = (function(){
 
         if (!tableExist()) {
             StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
-            addNoticeMsg();
             StatementUI.updateStatementTable(getNextChunkStatement());
             Content.statementTranslation();
         }
@@ -13708,16 +13751,14 @@ var Table = (function(){
                 return;
             }
 
-            if (finishedConsumed()) {
-                if (noMoreData) {
-                    $("#end-of-table").show();
-                } else if (!pending){
-                    getNextBatchStatement();
-                }
+            if (finishedConsumed() && !noMoreData && !pending) {
+                getNextBatchStatement();
                 return;
             }
 
-            StatementUI.updateStatementTable(getNextChunkStatement());
+            if (!finishedConsumed()){
+                StatementUI.updateStatementTable(getNextChunkStatement());
+            }
         });
     }
 
@@ -13731,16 +13772,6 @@ var Table = (function(){
         $(".error-msg").text("");
 
         StatementUI.clearTableContent();
-    }
-
-    function addNoticeMsg(){
-        $("<div></div>", {
-            class: "notice-msg",
-            id: "end-of-table",
-            text: "End of the table"
-        }).appendTo("#statement-ws-container");
-
-        $("#end-of-table").hide();
     }
 
     function initPage(){
