@@ -12,6 +12,7 @@ var Durations = (function(){
     'use strict';
 
     var trading_times = {};
+    var selected_duration = {};
     var expiry_time = '';
     var has_end_date = 0;
 
@@ -159,6 +160,10 @@ var Durations = (function(){
             }
         }
 
+        if(selected_duration.unit){
+            selectOption(selected_duration.unit,target);
+        }
+
         durationPopulate();
     };
 
@@ -191,8 +196,11 @@ var Durations = (function(){
         var unit = document.getElementById('duration_units');
         if (isVisible(unit)) {
             var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-            document.getElementById('duration_amount').value = unitValue;
             document.getElementById('duration_minimum').textContent = unitValue;
+            if(selected_duration.amount && selected_duration.unit > unitValue){
+                unitValue = selected_duration.amount;
+            }
+            document.getElementById('duration_amount').value = unitValue;
             displayExpiryType(unit.value);
         } else {
             displayExpiryType();
@@ -295,7 +303,9 @@ var Durations = (function(){
         setTime: function(time){ expiry_time = time; },
         getTime: function(){ return expiry_time; },
         processTradingTimesAnswer: processTradingTimesAnswer,
-        trading_times: function(){ return trading_times; }
+        trading_times: function(){ return trading_times; },
+        select_amount: function(a){ selected_duration.amount = a; },
+        select_unit: function(u){ selected_duration.unit = u; }        
     };
 })();
 

@@ -94,6 +94,7 @@ var TradingEvents = (function () {
         if (durationAmountElement) {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
+                Durations.select_amount(e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -122,7 +123,8 @@ var TradingEvents = (function () {
          */
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
-            durationUnitElement.addEventListener('change', function () {
+            durationUnitElement.addEventListener('change', function (e) {
+                Durations.select_unit(e.target.value);
                 Durations.populate();
                 processPriceRequest();
             });
