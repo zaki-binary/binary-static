@@ -10,6 +10,7 @@ var StatementWS = (function(){
     var chunkSize = batchSize/2;
 
     var noMoreData = false;
+    var pending = false;            //serve as a lock to prevent ws request is sequential
     var currentBatch = [];
     var transactionsReceived = 0;
     var transactionsConsumed = 0;
@@ -22,9 +23,15 @@ var StatementWS = (function(){
     };
 
     function statementHandler(response){
+        pending = false;
+
         var statement = response.statement;
         currentBatch = statement.transactions;
         transactionsReceived += currentBatch.length;
+
+        if (currentBatch.length < batchSize){
+            noMoreData = true;
+        }
 
         if (!tableExist()) {
             StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
@@ -32,14 +39,11 @@ var StatementWS = (function(){
             StatementUI.updateStatementTable(getNextChunkStatement());
             Content.statementTranslation();
         }
-
-        if (currentBatch.length < batchSize){
-            noMoreData = true;
-        }
     }
 
     function getNextBatchStatement(){
         StatementData.getStatement({offset: transactionsReceived, limit: batchSize});
+        pending = true;
     }
 
     function getNextChunkStatement(){
@@ -53,32 +57,36 @@ var StatementWS = (function(){
         $(document).scroll(function(){
 
             function hidableHeight(percentage){
-                var totalHidable = $document.height() - $(window).height();
+                var totalHidable = $(document).height() - $(window).height();
                 return Math.floor(totalHidable * percentage / 100);
             }
 
-            var $document = $(document);
-            var pFromTop = $document.scrollTop();
+            var pFromTop = $(document).scrollTop();
 
-            if (pFromTop >= hidableHeight(70)) {
-                if (finishedConsumed()) {
-                    if (noMoreData) {
-                        $("#end-of-table").show();
-                    } else {
-                        getNextBatchStatement();
-                    }
-                } else {
-                    var chunk = getNextChunkStatement();
-                    if (chunk.length > 0) {
-                        StatementUI.updateStatementTable(chunk);
-                    }
-                }
+            if (!tableExist()){
+                return;
             }
+
+            if (pFromTop < hidableHeight(70)) {
+                return;
+            }
+
+            if (finishedConsumed()) {
+                if (noMoreData) {
+                    $("#end-of-table").show();
+                } else if (!pending){
+                    getNextBatchStatement();
+                }
+                return;
+            }
+
+            StatementUI.updateStatementTable(getNextChunkStatement());
         });
     }
 
 
     function initTable(){
+        pending = false;
         currentBatch = [];
         transactionsReceived = 0;
         noMoreData = false;

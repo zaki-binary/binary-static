@@ -19,7 +19,7 @@ var StatementUI = (function(){
     }
 
     function updateStatementTable(transactions){
-        Table.overwriteTableBody(tableID, transactions, createStatementRow);
+        Table.appendTableBody(tableID, transactions, createStatementRow);
         updateStatementFooter(transactions);
         $("#" + tableID +">tfoot").show();
     }
