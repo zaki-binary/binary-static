@@ -61,7 +61,7 @@ var ProfitTableUI = (function(){
         var currentTotal = transactions.reduce(function(previous, current){
             var buyPrice = Number(parseFloat(current["buy_price"])).toFixed(2);
             var sellPrice = Number(parseFloat(current["sell_price"])).toFixed(2);
-            var pl = sellPrice - buyPrice
+            var pl = sellPrice - buyPrice;
             return previous + pl;
         }, 0);
 

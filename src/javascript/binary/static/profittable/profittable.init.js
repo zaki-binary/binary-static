@@ -11,7 +11,7 @@ var ProfitTableWS = (function () {
     var currentBatch = [];
 
     var tableExist = function(){
-        return document.getElementById("profit-table")
+        return document.getElementById("profit-table");
     };
 
     var finishedConsumed = function(){
