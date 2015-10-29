@@ -8,16 +8,19 @@ var ProfitTableUI = (function(){
     var footer = ["Total Profit/Loss", "", "", "", "", "", ""];
 
     function createEmptyTable(){
-        function mergeRows(start, end, $row){
-            var texts = $row.children().map(function (i, obj) {
-                if (i >= start && i <= end) {
-                    var text = obj.textContent;
-                    if (i !== start) {
-                        obj.remove();
-                    }
-                    return text;
-                }
+        function mergeElementInRow(start, end, $row){
+
+            var texts = $row.children().map(function(i, obj){
+                return obj.textContent;
+            }).filter(function(i, obj){
+                return (i >= start && i <= end);
             }).toArray().join(" ");
+
+            $row.map(function(i, obj){
+               if (i > start && i <= end){
+                   obj.remove();
+               }
+            });
 
             $row.
                 children().
@@ -41,7 +44,7 @@ var ProfitTableUI = (function(){
             children("tr").
             attr("id", "pl-day-total");
 
-        mergeRows(0, 5, $pltotal);
+        mergeElementInRow(0, 5, $pltotal);
 
         return $tableContainer;
     }
@@ -77,13 +80,11 @@ var ProfitTableUI = (function(){
     function createProfitTableRow(transaction){
         var buyDate = moment.
             utc(transaction["purchase_time"] * 1000).
-            locale("en").
             format("YYYY-MM-DD HH:mm:ss").replace(/\s/g, "\n");
 
         var sellDate = moment.
             utc(transaction["sell_time"] * 1000).
-            locale("en").
-            format("YYYY-MM-DD\nHH:mm:ss").replace(/\s/g, "\n");
+            format("YYYY-MM-DD HH:mm:ss").replace(/\s/g, "\n");
 
 
         var ref = transaction["transaction_id"];
