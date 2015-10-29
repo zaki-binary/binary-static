@@ -681,3 +681,21 @@ function countDecimalPlaces(num) {
         }
     }
 }
+
+function selectOption(option, select){
+    var options = select.getElementsByTagName('option');
+    var contains = 0; 
+    for(var i = 0; i < options.length; i++){
+        if(options[i].value==option && !options[i].hasAttribute('disabled')){
+            contains = 1;
+            break;
+        }
+    }
+    if(contains){
+        select.value = option;
+        return true;
+    }
+    else{
+        return false;
+    }
+}

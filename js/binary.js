@@ -10807,6 +10807,24 @@ function countDecimalPlaces(num) {
         }
     }
 }
+
+function selectOption(option, select){
+    var options = select.getElementsByTagName('option');
+    var contains = 0; 
+    for(var i = 0; i < options.length; i++){
+        if(options[i].value==option && !options[i].hasAttribute('disabled')){
+            contains = 1;
+            break;
+        }
+    }
+    if(contains){
+        select.value = option;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 ;var Content = (function () {
     'use strict';
 
@@ -11014,10 +11032,6 @@ function countDecimalPlaces(num) {
         titleElement.textContent = text.localize(title);
 
         localizeTextContentById("err");
-        localizeTextContentById("newer-date");
-        localizeTextContentById("older-date");
-        localizeTextContentById("date-label");
-        localizeTextContentById("submit-date");
         localizeTextContentById("end-of-table");
     };
 
@@ -11209,6 +11223,10 @@ function displayCurrencies(selected) {
         fragment =  document.createDocumentFragment(),
         currencies = JSON.parse(sessionStorage.getItem('currencies'))['payout_currencies'];
 
+    if (!target) {
+        return;
+    }
+
     while (target && target.firstChild) {
         target.removeChild(target.firstChild);
     }
@@ -11242,7 +11260,9 @@ var Durations = (function(){
     'use strict';
 
     var trading_times = {};
+    var selected_duration = {};
     var expiry_time = '';
+    var has_end_date = 0;
 
     var displayDurations = function(startType) {
         var durations = Contract.durations();
@@ -11377,11 +11397,19 @@ var Durations = (function(){
                 return -1;
             }
         });
+        has_end_date = 0;
         for(var k=0; k<list.length; k++){
             var d = list[k];
+            if(d!=='t'){
+                has_end_date = 1;
+            }
             if(duration_list.hasOwnProperty(d)){
                 target.appendChild(duration_list[d]);
             }
+        }
+
+        if(selected_duration.unit){
+            selectOption(selected_duration.unit,target);
         }
 
         durationPopulate();
@@ -11416,8 +11444,11 @@ var Durations = (function(){
         var unit = document.getElementById('duration_units');
         if (isVisible(unit)) {
             var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-            document.getElementById('duration_amount').value = unitValue;
             document.getElementById('duration_minimum').textContent = unitValue;
+            if(selected_duration.amount && selected_duration.unit > unitValue){
+                unitValue = selected_duration.amount;
+            }
+            document.getElementById('duration_amount').value = unitValue;
             displayExpiryType(unit.value);
         } else {
             displayExpiryType();
@@ -11479,7 +11510,7 @@ var Durations = (function(){
         option.appendChild(content);
         fragment.appendChild(option);
 
-        if (unit !== 't') {
+        if (has_end_date) {
             option = document.createElement('option');
             content = document.createTextNode(Content.localize().textEndTime);
             option.setAttribute('value', 'endtime');
@@ -11520,7 +11551,9 @@ var Durations = (function(){
         setTime: function(time){ expiry_time = time; },
         getTime: function(){ return expiry_time; },
         processTradingTimesAnswer: processTradingTimesAnswer,
-        trading_times: function(){ return trading_times; }
+        trading_times: function(){ return trading_times; },
+        select_amount: function(a){ selected_duration.amount = a; },
+        select_unit: function(u){ selected_duration.unit = u; }        
     };
 })();
 
@@ -11620,6 +11653,7 @@ var TradingEvents = (function () {
         if (durationAmountElement) {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
+                Durations.select_amount(e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -11648,7 +11682,8 @@ var TradingEvents = (function () {
          */
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
-            durationUnitElement.addEventListener('change', function () {
+            durationUnitElement.addEventListener('change', function (e) {
+                Durations.select_unit(e.target.value);
                 Durations.populate();
                 processPriceRequest();
             });
@@ -13391,7 +13426,49 @@ $(document).ready(function () {
         getApiToken: getApiToken
     };
 }());;
-var DomTable = (function(){
+var StringUtil = (function(){
+    function toTitleCase(str){
+        return str.replace(/\w[^\s\/\\]*/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
+    function dateToStringWithoutTime(date){
+        return [date.getDate(), date.getMonth()+1, date.getFullYear()].join("/");
+    }
+
+    //Time should be in SECOND !!!
+    function timeStampToDateString(time){
+        var dateObj = new Date(time * 1000);
+        var momentObj = moment.utc(dateObj);
+        return momentObj.format("YYYY-MM-DD");
+    }
+
+    //Time should be in SECOND !!!
+    function timeStampToTimeString(time){
+        var dateObj = new Date(time * 1000);
+        var momentObj = moment.utc(dateObj);
+        return momentObj.format("HH:mm:ss");
+    }
+
+    //Time should be in SECOND !!!
+    function timeStampToDateTimeString(time){
+        var dateObj = new Date(time * 1000);
+        var momentObj = moment.utc(dateObj);
+        return momentObj.toString();
+    }
+
+    return {
+        toTitleCase: toTitleCase,
+        dateToStringWithoutTime: dateToStringWithoutTime,
+        unixTimeToDateString: timeStampToDateString,
+        unixTimeToTimeString: timeStampToTimeString,
+        unixTimeToDateTimeString: timeStampToDateTimeString
+    };
+}());
+
+;
+var Table = (function(){
     "use strict";
     /***
      *
@@ -13482,35 +13559,58 @@ var DomTable = (function(){
         return $tr;
     }
 
+
+    function clearTableBody(id){
+        var tbody = document.querySelector("#" + id +">tbody");
+        while (tbody.firstElementChild){
+            tbody.removeChild(tbody.firstElementChild);
+        }
+    }
+
+    /***
+     *
+     * @param {String} id table id
+     * @param {Object[]} data array of data to be transform to row
+     * @param {Function} rowGenerator takes in one arg, and convert it into row to be append to table body
+     */
+    function appendTableBody(id, data, rowGenerator){
+        var tbody = document.querySelector("#" + id +">tbody");
+        var docFrag = document.createDocumentFragment();
+        data.map(function(ele){
+            var row = rowGenerator(ele);
+            docFrag.appendChild(row);
+        });
+
+        tbody.appendChild(docFrag);
+    }
+
+    /***
+     *
+     * @param {String} id table id
+     * @param {Object[]} data array of data to be transform to row
+     * @param {Function} rowGenerator takes in one arg, and convert it into row to be append to table body
+     */
+    function overwriteTableBody(id, data, rowGenerator){
+        clearTableBody(id);
+        appendTableBody(id, data, rowGenerator);
+    }
+
     return {
         createFlexTable: createFlexTable,
-        createFlexTableRow: createFlexTableRow
+        createFlexTableRow: createFlexTableRow,
+        overwriteTableBody: overwriteTableBody,
+        clearTableBody: clearTableBody,
+        appendTableBody: appendTableBody
     };
-}());;
-var StringUtil = (function(){
-    function toTitleCase(str){
-        return str.replace(/\w[^\s\/\\]*/g, function(txt){
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-    }
-
-    function dateToStringWithoutTime(date){
-        return [date.getDate(), date.getMonth()+1, date.getFullYear()].join("/");
-    }
-
-    return {
-        toTitleCase: toTitleCase,
-        dateToStringWithoutTime: dateToStringWithoutTime
-    };
-}());
-
-;pjax_config_page("statementws", function(){
+}());;pjax_config_page("statementws", function(){
     return {
         onLoad: function() {
+            TradeSocket.init();
             StatementWS.init();
         },
         onUnload: function(){
             StatementWS.clean();
+            TradeSocket.close();
         }
     };
 });
@@ -13536,175 +13636,113 @@ var StringUtil = (function(){
 ;var StatementWS = (function(){
     "use strict";
 
-    var chunkPerLoad = 10;
-    var tableCreated = false;
+    //Batch refer to number of data get from ws service per request
+    //chunk refer to number of data populate to ui for each append
+    //receive means receive from ws service
+    //consume means consume by UI and displayed to page
 
-    var shouldNotLoadMore = false;
-    var transactionsCurrentDate = [];
-    var dataLoaded = false;
+    var batchSize = 100;
+    var chunkSize = batchSize/2;
 
-    function hideIsLoading() {
-        $("#overlay_background").hide();
-        $("#loading_in_progress").hide();
-    }
+    var noMoreData = false;
+    var pending = false;            //serve as a lock to prevent ws request is sequential
+    var currentBatch = [];
+    var transactionsReceived = 0;
+    var transactionsConsumed = 0;
 
-    function showIsLoading(){
-        $("#overlay_background").show();
-        $("#loading_in_progress").show();
-    }
+    var tableExist = function(){
+        return document.getElementById("statement-table");
+    };
+    var finishedConsumed = function(){
+        return transactionsConsumed === transactionsReceived;
+    };
 
     function statementHandler(response){
-        if (!tableCreated) {
-            StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
-            $("<div></div>", {
-                class: "notice-msg",
-                id: "end-of-table",
-                text: "End of the table"
-            }).appendTo("#statement-ws-container");
-
-            $("#end-of-table").hide();
-
-            tableCreated = true;
-        }
+        pending = false;
 
         var statement = response.statement;
-        transactionsCurrentDate = statement.transactions;
-        var top10 = getNextChunkStatement();
-        StatementUI.updateStatementTable(top10);
+        currentBatch = statement.transactions;
+        transactionsReceived += currentBatch.length;
 
-        dataLoaded = true;
-
-        if (top10.length < 10){
-            shouldNotLoadMore = true;
-            $("#end-of-table").show();
+        if (currentBatch.length < batchSize){
+            noMoreData = true;
         }
 
-        Content.statementTranslation();
-        hideIsLoading();
+        if (!tableExist()) {
+            StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
+            addNoticeMsg();
+            StatementUI.updateStatementTable(getNextChunkStatement());
+            Content.statementTranslation();
+        }
     }
 
-
-    function getCurrentSelectedDate() {
-        return moment.utc($("#statement-date").val());
-    }
-
-    function getStatementForCurrentSelectedDate(){
-
-        var fromDate = getCurrentSelectedDate();
-        var tillDate = moment(fromDate);
-        tillDate.add(1, "d");
-
-        var fromEpoch = fromDate.unix();
-        var tillEpoch = tillDate.unix();
-
-        StatementData.getStatement({date_to: tillEpoch, date_from: fromEpoch});
+    function getNextBatchStatement(){
+        StatementData.getStatement({offset: transactionsReceived, limit: batchSize});
+        pending = true;
     }
 
     function getNextChunkStatement(){
-        return transactionsCurrentDate.splice(0, chunkPerLoad);
+        var chunk = currentBatch.splice(0, chunkSize);
+        transactionsConsumed += chunk.length;
+        return chunk;
     }
 
 
     function loadStatementChunkWhenScroll(){
-        //Attention: attach event to GLOBAL document : BAD!!
         $(document).scroll(function(){
 
-            if (!dataLoaded || shouldNotLoadMore) {
-                return;
-            }
-
             function hidableHeight(percentage){
-                var totalHidable = $document.height() - $(window).height();
+                var totalHidable = $(document).height() - $(window).height();
                 return Math.floor(totalHidable * percentage / 100);
             }
 
-            var $document = $(document);
-            var pFromTop = $document.scrollTop();
-            var totalHeight = $document.height();
+            var pFromTop = $(document).scrollTop();
 
-            if (pFromTop >= hidableHeight(70)) {
-                var top10 = getNextChunkStatement();
-                StatementUI.updateStatementTable(top10);
-                if (top10.length < 10){
-                    shouldNotLoadMore = true;
-                    $("#end-of-table").show();
-                }
+            if (!tableExist()){
+                return;
             }
+
+            if (pFromTop < hidableHeight(70)) {
+                return;
+            }
+
+            if (finishedConsumed()) {
+                if (noMoreData) {
+                    $("#end-of-table").show();
+                } else if (!pending){
+                    getNextBatchStatement();
+                }
+                return;
+            }
+
+            StatementUI.updateStatementTable(getNextChunkStatement());
         });
     }
 
-    function getStatementOneDayBefore(){
-        var oneDayBefore = getCurrentSelectedDate();
-        oneDayBefore.subtract(1, "d");
-
-        var oneDayBeforeString = oneDayBefore.locale("en").format("YYYY-MM-DD").toString();
-
-        $("#statement-date").val(oneDayBeforeString);       //set view
-        getStatementForCurrentSelectedDate();
-    }
-
-    function getStatementOneDayAfter(){
-        var oneDayAfter = getCurrentSelectedDate();
-        oneDayAfter.add(1,"d");
-
-        var oneDayAfterString = oneDayAfter.locale("en").format("YYYY-MM-DD").toString();
-
-        $("#statement-date").val(oneDayAfterString);      //set view
-        getStatementForCurrentSelectedDate();
-    }
 
     function initTable(){
-        shouldNotLoadMore = false;
-        transactionsCurrentDate = [];
-        dataLoaded = false;
-
+        pending = false;
+        currentBatch = [];
+        transactionsReceived = 0;
+        noMoreData = false;
+        transactionsConsumed = 0;
         $(".error-msg").text("");
-        StatementUI.clearTableContent();
 
-        window.setTimeout(function(){
-            if (dataLoaded) {
-                return;
-            }
-            showIsLoading();
-            $("#end-of-table").hide();
-        }, 500);
+        StatementUI.clearTableContent();
     }
 
-    function limitDateSelection(){
-        var selectedDate = getCurrentSelectedDate();
-        if (selectedDate.isSame(moment.utc(), "day") || selectedDate.isAfter(moment.utc(), "day")) {
-            $("#newer-date").hide();
-        } else {
-            $("#newer-date").show();
-        }
+    function addNoticeMsg(){
+        $("<div></div>", {
+            class: "notice-msg",
+            id: "end-of-table",
+            text: "End of the table"
+        }).appendTo("#statement-ws-container");
+
+        $("#end-of-table").hide();
     }
 
     function initPage(){
-
-
-        StatementUI.setDatePickerDefault(moment.utc());
-        StatementUI.showButtonOnDateChange();
-
-        $("#submit-date").click(function(){
-            initTable();
-            getStatementForCurrentSelectedDate();
-            $("#submit-date").addClass("invisible");
-            limitDateSelection();
-        });
-        $("#older-date").click(function(){
-            initTable();
-            getStatementOneDayBefore();
-            limitDateSelection();
-        });
-        $("#newer-date").click(function(){
-            initTable();
-            getStatementOneDayAfter();
-            limitDateSelection();
-        });
-
-        initTable();
-        limitDateSelection();
-        getStatementForCurrentSelectedDate();
+        getNextBatchStatement();
         loadStatementChunkWhenScroll();
     }
 
@@ -13722,78 +13760,54 @@ var StringUtil = (function(){
     "use strict";
     var tableID = "statement-table";
     var columns = ["date", "ref", "act", "desc", "credit", "bal"];
-
-    function datepickerDefault(date){
-        var utcMoment = moment.utc(date).locale("en").format("YYYY-MM-DD").toString();
-
-        if (!Modernizr.inputtypes.date) {
-            var utcDate = Date.parse(utcMoment);
-            $("#statement-date").
-                datepicker({maxDate: 0, dateFormat: 'yy-mm-dd'}).
-                datepicker("setDate", utcDate);
-            return;
-        }
-
-        $("#statement-date").val(utcMoment);
-        $("#statement-date").attr("max", utcMoment);
-    }
-    function showButtonOnDateChange(){
-        $("#statement-date").on("change", function() {
-            $("#submit-date").removeClass("invisible");
-        });
-    }
+    var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance"];
+    var footer = ["", "", "", "", "", ""];
 
     function createEmptyStatementTable(){
-        var currency = TUser.get().currency;
-        var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance("+ currency +")"];
-        header = header.map(function(t){ return text.localize(t); });
-        var footer = ["", "", "", "", "", ""];
+        var localizedHeader = header.map(function(t){ return text.localize(t); });
+        localizedHeader[5] = localizedHeader[5] + "(" + TUser.get().currency + ")";
+
         var metadata = {
             id: tableID,
             cols: columns
         };
         var data = [];
-        var $tableContainer = DomTable.createFlexTable(data, metadata, header, footer);
-
+        var $tableContainer = Table.createFlexTable(data, metadata, localizedHeader, footer);
         return $tableContainer;
     }
 
-    function clearTableContent(){
-        var $tbody = $("#" + tableID + "> tbody");
-        $tbody.children("tr").remove();
-    }
-
     function updateStatementTable(transactions){
-        var $tbody = $("#"+ tableID + "> tbody");
-
-        var $docFrag = $(document.createDocumentFragment());
-
-        transactions.map(function(transaction){
-            var $newRow = createStatementRow(transaction);
-            $newRow.appendTo($docFrag);
-        });
-
-        $tbody.append($docFrag);
-
+        Table.appendTableBody(tableID, transactions, createStatementRow);
         updateStatementFooter(transactions);
+        $("#" + tableID +">tfoot").show();
     }
+
+    function clearTableContent(){
+        Table.clearTableBody(tableID);
+        $("#" + tableID +">tfoot").hide();
+    }
+
 
     function updateStatementFooter(transactions){
-        var allCredit = [].slice.call(document.querySelectorAll("td.credit"));
-        allCredit = allCredit.map(function(node){return node.textContent;});
-
-        var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
-
         TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
+        var accCredit = document.querySelector("#statement-table > tfoot > tr > .credit").textContent;
+        accCredit = parseFloat(accCredit);
+        if (isNaN(accCredit)) {
+            accCredit = 0;
+        }
 
+        var newCredits = transactions.reduce(function(p, c){ return p + parseFloat(c.amount); }, 0);
+
+        var totalCredit = accCredit + newCredits;
         totalCredit = Number(totalCredit).toFixed(2);
 
-        var $footerRow = $("#" + tableID + " > tfoot").children("tr").first();
-        $footerRow.children(".credit").text(totalCredit);
-
+        var $footerRow = $("#" + tableID + " > tfoot > tr").first();
+        var creditCell = $footerRow.children(".credit");
         var creditType = (totalCredit >= 0) ? "profit" : "loss";
-        $footerRow.children(".credit").removeClass("profit").removeClass("loss");
-        $footerRow.children(".credit").addClass(creditType);
+
+        creditCell.text(totalCredit);
+        creditCell.removeClass("profit").removeClass("loss");
+        creditCell.addClass(creditType);
     }
 
     function createStatementRow(transaction){
@@ -13811,17 +13825,15 @@ var StringUtil = (function(){
 
         var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
 
-        var $statementRow = DomTable.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
+        var $statementRow = Table.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
         $statementRow.children(".credit").addClass(creditDebitType);
         $statementRow.children(".date").addClass("break-line");
 
-        return $statementRow;
+        return $statementRow[0];        //return DOM instead of jquery object
     }
     
     return {
         clearTableContent: clearTableContent,
-        setDatePickerDefault: datepickerDefault,
-        showButtonOnDateChange: showButtonOnDateChange,
         createEmptyStatementTable: createEmptyStatementTable,
         updateStatementTable: updateStatementTable
     };
