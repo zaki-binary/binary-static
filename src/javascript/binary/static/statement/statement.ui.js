@@ -24,21 +24,10 @@ var StatementUI = (function(){
         $("#" + tableID +">tfoot").show();
     }
 
-    function initDatepicker(){
-        DatepickerUtil.initDatepicker("statement-date", moment.utc(), null, 0);
-    }
-
-    function showButtonOnDateChange(){
-        $("#statement-date").on("change", function() {
-            $("#submit-date").removeClass("invisible");
-        });
-    }
-
     function clearTableContent(){
         Table.clearTableBody(tableID);
         $("#" + tableID +">tfoot").hide();
     }
-
 
 
     function updateStatementFooter(transactions){
@@ -83,8 +72,6 @@ var StatementUI = (function(){
     
     return {
         clearTableContent: clearTableContent,
-        initDatepicker: initDatepicker,
-        showButtonOnDateChange: showButtonOnDateChange,
         createEmptyStatementTable: createEmptyStatementTable,
         updateStatementTable: updateStatementTable
     };
