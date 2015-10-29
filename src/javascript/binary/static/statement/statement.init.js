@@ -6,7 +6,7 @@ var StatementWS = (function(){
     //receive means receive from ws service
     //consume means consume by UI and displayed to page
 
-    var batchSize = 100;
+    var batchSize = 50;
     var chunkSize = batchSize/2;
 
     var noMoreData = false;
@@ -35,7 +35,6 @@ var StatementWS = (function(){
 
         if (!tableExist()) {
             StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
-            addNoticeMsg();
             StatementUI.updateStatementTable(getNextChunkStatement());
             Content.statementTranslation();
         }
@@ -71,12 +70,8 @@ var StatementWS = (function(){
                 return;
             }
 
-            if (finishedConsumed()) {
-                if (noMoreData) {
-                    $("#end-of-table").show();
-                } else if (!pending){
-                    getNextBatchStatement();
-                }
+            if (finishedConsumed() && !noMoreData && !pending) {
+                getNextBatchStatement();
                 return;
             }
 
@@ -94,16 +89,6 @@ var StatementWS = (function(){
         $(".error-msg").text("");
 
         StatementUI.clearTableContent();
-    }
-
-    function addNoticeMsg(){
-        $("<div></div>", {
-            class: "notice-msg",
-            id: "end-of-table",
-            text: "End of the table"
-        }).appendTo("#statement-ws-container");
-
-        $("#end-of-table").hide();
     }
 
     function initPage(){
