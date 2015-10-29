@@ -161,7 +161,9 @@ var Durations = (function(){
         }
 
         if(selected_duration.unit){
-            selectOption(selected_duration.unit,target);
+            if(!selectOption(selected_duration.unit,target)){
+                selected_duration = {};
+            }
         }
 
         durationPopulate();
