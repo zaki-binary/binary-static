@@ -64,7 +64,7 @@ var TradeSocket = (function () {
             Tick.clearBufferIds();
             // if not closed on navigation start it again as server may have closed it
             if (!isClosedOnNavigation) {
-                init();
+                processMarketUnderlying();
             }
             // set it again to false as it class variables
             isClosedOnNavigation = false;
