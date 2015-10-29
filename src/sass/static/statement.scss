@@ -1,30 +1,29 @@
 
 #statement-ws-container {
-    min-width: 100px;
-    overflow-x: auto;
-    th {
-        text-align: left !important;
-        border-bottom: none !important;
+
+    #overlay_background {
+        position: absolute;
+        display: none;
+        z-index: 10;
+        width: 100%;
+        min-height: 50%;
+        background-color: white;
     }
 
-    .flex-table {
-        min-width: 700px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-
-    .breakline {
-        white-space: pre-line;
-    }
-
-    .flex-table-row {
-        display: flex;
-        flex-wrap: wrap;
-        flex: 1 1 100px;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: stretch;
+    #loading_in_progress {
+        cursor: pointer;
+        @extend .spinner;
+        background-image: url('../images/pages/binary-symbol-logo.png');
+        background-image: url('../images/pages/binary-symbol-logo.svg'), none;
+        background-size: contain;
+        width: 10rem;
+        height: 10rem;
+        position: absolute;
+        left: 50%;
+        top: 350px;
+        margin-left: -5rem;
+        display: none;
+        z-index: 11;
     }
 
     #date-nav-panel {
@@ -34,20 +33,12 @@
         align-items: stretch;
     }
 
-    .flex-table-row-item {
-        flex: 1 1 50px;
-    }
-
-    td.flex-table-row-item {
-        padding-left: 12px;
-    }
-
-    .flex-table-row-item.desc-col-item {
+    .desc {
         flex: 2 1 100px;
         padding-right: 20px;
     }
 
-    .flex-table-row-item.action-col-item {
+    .act {
         flex: 0.8 1 35px;
     }
 

@@ -80,10 +80,6 @@
   .button button{
     cursor: pointer;
   }
-  .submitted input:invalid + label::after {
-    content: 'invalid input';
-    padding-left: 10px;
-  }
   .row, .row-inner {
     display: flex;
     justify-content: space-around;
@@ -235,10 +231,11 @@
     }
     #contract_purchase_profit_list,
     #contract_purchase_spots .row{
+      padding: 3px 0;
       flex-direction: row !important;
     }
     #contract_purchase_spots{
-      max-height: 180px;
+      height: 110px;
       overflow: hidden;
       &.won{
         background-color: rgba(46, 136, 54, 0.196078);
@@ -264,53 +261,47 @@
       font-weight: bold;
       padding-top: 2.4em;
       text-align: center;
-      &.asian_up {
+      &.ASIANU {
         background: url("../images/pages/trade/asian-u_1.svg") no-repeat top center;
       }
-      &.asian_down {
+      &.ASIAND {
         background: url("../images/pages/trade/asian-d_1.svg") no-repeat top center;
       }
-      &.differs {
+      &.DIGITDIFF {
         background: url("../images/pages/trade/differs_1.svg") no-repeat top center;
       }
-      &.matches {
+      &.DIGITMATCH {
         background: url("../images/pages/trade/matches_1.svg") no-repeat top center;
       }
-      &.rises {
+      &.CALL {
         background: url("../images/pages/trade/rise_1.png") no-repeat top center;
       }
-      &.falls {
+      &.PUT {
         background: url("../images/pages/trade/fall_1.png") no-repeat top center;
       }
-      &.higher {
-        background: url("../images/pages/trade/higher_1.png") no-repeat top center;
-      }
-      &.lower {
-        background: url("../images/pages/trade/lower_1.png") no-repeat top center;
-      }
-      &.touches {
+      &.ONETOUCH {
         background: url("../images/pages/trade/touch_1.png") no-repeat top center;
       }
-      &.does_not_touch {
+      &.NOTOUCH {
         background: url("../images/pages/trade/no-touch_1.png") no-repeat top center;
       }
-      &.stays_between {
+      &.RANGE {
         background: url("../images/pages/trade/stay-in-between_1.png") no-repeat top center;
       }
-      &.goes_outside {
+      &.UPORDOWN {
         background: url("../images/pages/trade/stay-out_1.png") no-repeat top center;
       }
-      &.ends_between {
+      &.EXPIRYRANGE {
         background: url("../images/pages/trade/ends-between_1.png") no-repeat top center;
       }
-      &.ends_outside {
+      &.EXPIRYMISS {
         background: url("../images/pages/trade/ends-outside_1.png") no-repeat top center;
       }
-      &.spread_up {
+      &.SPREADU {
         background: url("../images/pages/trade/spreads.svg") no-repeat top center;
         background-size: 40%;
       }
-      &.spread_down {
+      &.SPREADD {
         background: url("../images/pages/trade/spreads.svg") no-repeat top center;
         background-size: 40%;
       }
@@ -320,6 +311,9 @@
       line-height: 1.5;
       font-size: 90%;
       flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .contract_amount {
       font-weight: bold;
@@ -358,6 +352,10 @@
     text-align: center;
     align-items: center;
     width: 230px;
+
+    &.small{
+      width: 95px;
+    }
 
     div {
       padding: 0 5px;
@@ -424,6 +422,7 @@
   #symbol_tip{
     padding-right: 8px;
     padding-bottom: 5px;
+    cursor: pointer;
   }
   #spot_label{
     display: none;
@@ -437,9 +436,6 @@
   #trading_socket_container {
     #contract_market_form_container{
       height: auto;
-    }
-    #contract_purchase_spots{
-      max-height: 205px;
     }
     #expiry_time{
       width: 175px;
@@ -467,11 +463,17 @@
       }
     }
     #contract_prices_container {
+      #contract_purchase_spots{
+        height: auto;
+      }
       #price_container_top {
         margin-right: 0 !important;
       }
       .price_wrapper {
         flex-direction: row !important;
+         &.small{
+          width: auto;
+        }
       }
       .row {
         flex-direction: column;
@@ -493,6 +495,9 @@
   }
   #trading_socket_container #contract_prices_container .price_container .price_wrapper {
     width: 100%;
+     &.small{
+      width: auto;
+    }
   }
 }
 
@@ -551,6 +556,13 @@
   }
 }
 
+#analysis_daily_prices_form {
+  text-align: center;
+  input {
+    margin: 0 10px;
+  }
+}
+
 
 /*
  * these styles are for trade analysis and will be removed
@@ -586,6 +598,10 @@
                 }
             }
         }
+    }
+    #last_digit_histo_form {
+        overflow: hidden;
+        margin-bottom: 20px;
     }
 }
 @media all and (max-width: 640px) {

@@ -10,7 +10,7 @@ var Message = (function () {
         if (response) {
             var type = response.msg_type;
             if (type === 'authorize') {
-                User.set(response.authorize);
+                TUser.set(response.authorize);
                 TradeSocket.send({ payout_currencies: 1 });
             } else if (type === 'active_symbols') {
                 processActiveSymbols(response);
@@ -28,12 +28,21 @@ var Message = (function () {
             } else if (type === 'trading_times'){
                 processTradingTimes(response);
             } else if (type === 'statement'){
-                StatementUI.setStatementTable(response);
+                StatementWS.statementHandler(response);
             } else if (type === 'balance'){
-                if (response.echo_req.passthrough.purpose === "popup"){
-                    ViewBalanceUI.updateBalances(response.balance);
-                } else {
-                    StatementUI.setStatementTableFooterBalance(response.balance);
+                var passthroughObj = response.echo_req.passthrough;
+                if (passthroughObj){
+                    switch (passthroughObj.purpose) {
+                        case "statement_footer":
+                            var bal = response.balance[0].balance;
+                            $("#statement-table > tfoot > tr").
+                                first().
+                                children(".bal").
+                                text(Number(parseFloat(bal)).toFixed(2));
+                            break;
+                        default :
+                            //do nothing
+                    }
                 }
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);

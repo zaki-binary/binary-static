@@ -1,130 +1,82 @@
 var StatementUI = (function(){
     "use strict";
-    var $statementTable = $("#statement-table");
-    var $statementTableFooter = $("#statement-table-footer");
-    var $statementTableBody = $("#statement-table-body");
-    var $datePickerWidget = $("#statement-date");
+    var tableID = "statement-table";
+    var columns = ["date", "ref", "act", "desc", "credit", "bal"];
+    var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance"];
+    var footer = ["", "", "", "", "", ""];
 
-    function setStatementTable(statementResponse){
+    function createEmptyStatementTable(){
+        var localizedHeader = header.map(function(t){ return text.localize(t); });
+        localizedHeader[5] = localizedHeader[5] + "(" + TUser.get().currency + ")";
 
-        var dateReq = new Date(statementResponse.echo_req.dt_to * 1000);
-        //TODO : need to check if there' newer or older and show the button accordingly
-
-        var statementData = statementResponse.statement;
-
-        clearStatementTableBody();
-
-        var transactions = statementData.transactions;
-        appendTransactionsToTable(transactions, $statementTable);
-
-        var creditTotal = transactions.reduce(function(previousValue, currentValue){
-            return previousValue + parseFloat(currentValue.amount);
-        }, 0);
-
-        $statementTableFooter
-            .children(".date-col-item")
-            .text(moment.utc().format("YYYY-MM-DD"));
-        
-        $statementTableFooter
-            .children(".credit-col-item")
-            .text(Number(creditTotal).toFixed(2));
-
-        $("#statement-table-container").floatingScroll();
-        //setDescColSpan(2);
-    }    
-    function setStatementTableFooterBalance(balanceObj){
-        var balance = Number(balanceObj[0].balance).toFixed(2);
-        $statementTableFooter
-            .children(".bal-col-item")
-            .text(balance);
+        var metadata = {
+            id: tableID,
+            cols: columns
+        };
+        var data = [];
+        var $tableContainer = Table.createFlexTable(data, metadata, localizedHeader, footer);
+        return $tableContainer;
     }
-    function clearStatementTableBody(){
-        $statementTableFooter
-            .children(".credit-col-item")
-            .text("");
-        $statementTableBody
-            .children()
-            .remove();
-    }
-    function appendTransactionsToTable(transactions, $tableDOM){
 
-        for (var i = 0 ; i < transactions.length ; i ++) {
-            var rowDOM = generateTransactionDOM(transactions[i]);
-            rowDOM.appendTo($statementTableBody);
+    function updateStatementTable(transactions){
+        Table.appendTableBody(tableID, transactions, createStatementRow);
+        updateStatementFooter(transactions);
+        $("#" + tableID +">tfoot").show();
+    }
+
+    function clearTableContent(){
+        Table.clearTableBody(tableID);
+        $("#" + tableID +">tfoot").hide();
+    }
+
+
+    function updateStatementFooter(transactions){
+        TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
+        var accCredit = document.querySelector("#statement-table > tfoot > tr > .credit").textContent;
+        accCredit = parseFloat(accCredit);
+        if (isNaN(accCredit)) {
+            accCredit = 0;
         }
-    }
-    function generateTransactionDOM(transaction){
-        var $rowDom = $("<tr></tr>", {class: "flex-table-row"});
 
+        var newCredits = transactions.reduce(function(p, c){ return p + parseFloat(c.amount); }, 0);
+
+        var totalCredit = accCredit + newCredits;
+        totalCredit = Number(totalCredit).toFixed(2);
+
+        var $footerRow = $("#" + tableID + " > tfoot > tr").first();
+        var creditCell = $footerRow.children(".credit");
+        var creditType = (totalCredit >= 0) ? "profit" : "loss";
+
+        creditCell.text(totalCredit);
+        creditCell.removeClass("profit").removeClass("loss");
+        creditCell.addClass(creditType);
+    }
+
+    function createStatementRow(transaction){
         var dateObj = new Date(transaction["transaction_time"] * 1000);
-        var momentObj = moment(dateObj);
+        var momentObj = moment.utc(dateObj);
         var dateStr = momentObj.format("YYYY-MM-DD");
         var timeStr = momentObj.format("HH:mm:ss");
 
+        var date = dateStr + "\n" + timeStr;
         var ref = transaction["transaction_id"];
-
-        var action = transaction["action_type"];
-
-        var desc = transaction["description"];
-
+        var action = StringUtil.toTitleCase(transaction["action_type"]);
+        var desc = transaction["longcode"];
         var amount = Number(parseFloat(transaction["amount"])).toFixed(2);
-        var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
-
         var balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
 
-        var dateDom = $("<td></td>", {
-            class: "flex-table-row-item breakline date-col-item",
-            text: dateStr + "\n" + timeStr
-        }).appendTo($rowDom);
+        var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
 
-        var refDom = $("<td></td>", {
-            class: "flex-table-row-item ref-col-item",
-            text: ref
-        }).appendTo($rowDom);
+        var $statementRow = Table.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
+        $statementRow.children(".credit").addClass(creditDebitType);
+        $statementRow.children(".date").addClass("break-line");
 
-        var actionDom = $("<td></td>", {
-            class: "flex-table-row-item action-col-item",
-            text: action
-        }).appendTo($rowDom);
-
-        var descDom = $("<td></td>", {
-            class: "flex-table-row-item desc-col-item",
-            text: desc
-        }).appendTo($rowDom);
-
-        var creditDebitDom = $("<td></td>", {
-            class: "flex-table-row-item credit-col-item " + creditDebitType,
-            text: amount
-        }).appendTo($rowDom);
-
-        var balanceDom = $("<td></td>", {
-            class: "flex-table-row-item bal-col-item",
-            text: balance
-        }).appendTo($rowDom);
-
-        return $rowDom;
-    }
-    function datepickerDefault(date){
-        var utcMoment = moment.utc(date).format("MM/DD/YYYY").toString();
-        var utcDate = Date.parse(utcMoment);
-        
-        $(".has-date-picker").
-            datepicker({defaultDate: utcDate}).
-            datepicker("setDate", utcDate);
-    }
-    function showButtonOnDateChange(){
-        $datePickerWidget.on("change", function() {
-            $("#submit-date").removeClass("invisible");
-        });
+        return $statementRow[0];        //return DOM instead of jquery object
     }
     
-    var publicMethods = {
-        setStatementTable: setStatementTable,
-        setDatePickerDefault: datepickerDefault,
-        showButtonOnDateChange: showButtonOnDateChange,
-        setStatementTableFooterBalance: setStatementTableFooterBalance,
-        clearStatementTableBody: clearStatementTableBody
+    return {
+        clearTableContent: clearTableContent,
+        createEmptyStatementTable: createEmptyStatementTable,
+        updateStatementTable: updateStatementTable
     };
-    
-    return publicMethods;
 }());
