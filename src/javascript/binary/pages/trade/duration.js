@@ -13,8 +13,9 @@ var Durations = (function(){
 
     var trading_times = {};
     var expiry_time = '';
+    var has_end_date = 0;
 
-    var displayDurations = function(startType, expiry_type, duration_amount, duration_units, expiry_time) {
+    var displayDurations = function(startType) {
         var durations = Contract.durations();
         if (durations === false) {
             document.getElementById('expiry_row').style.display = 'none';
@@ -147,8 +148,12 @@ var Durations = (function(){
                 return -1;
             }
         });
+        has_end_date = 0;
         for(var k=0; k<list.length; k++){
             var d = list[k];
+            if(d!=='t'){
+                has_end_date = 1;
+            }
             if(duration_list.hasOwnProperty(d)){
                 target.appendChild(duration_list[d]);
             }
@@ -249,7 +254,7 @@ var Durations = (function(){
         option.appendChild(content);
         fragment.appendChild(option);
 
-        if (unit !== 't') {
+        if (has_end_date) {
             option = document.createElement('option');
             content = document.createTextNode(Content.localize().textEndTime);
             option.setAttribute('value', 'endtime');
