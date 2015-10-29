@@ -11,6 +11,7 @@ var Message = (function () {
             var type = response.msg_type;
             if (type === 'authorize') {
                 TUser.set(response.authorize);
+                TradeSocket.send({ payout_currencies: 1 });
             } else if (type === 'active_symbols') {
                 processActiveSymbols(response);
             } else if (type === 'contracts_for') {
