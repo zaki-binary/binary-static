@@ -32,11 +32,15 @@ var StatementUI = (function(){
 
     function updateStatementFooter(transactions){
         TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
+        var accCredit = document.querySelector("#statement-table > tfoot > tr > .credit").textContent;
+        accCredit = parseFloat(accCredit);
+        if (isNaN(accCredit)) {
+            accCredit = 0;
+        }
 
-        var allCredit = [].slice.call(document.querySelectorAll("td.credit"));
-        allCredit = allCredit.map(function(node){return node.textContent;});
+        var newCredits = transactions.reduce(function(p, c){ return p + parseFloat(c.amount); }, 0);
 
-        var totalCredit = allCredit.reduce(function(p, c){return p + parseFloat(c);}, 0);
+        var totalCredit = accCredit + newCredits;
         totalCredit = Number(totalCredit).toFixed(2);
 
         var $footerRow = $("#" + tableID + " > tfoot > tr").first();
