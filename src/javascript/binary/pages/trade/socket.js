@@ -67,7 +67,7 @@ var TradeSocket = (function () {
                 init();
             }
             // set it again to false as it class variables
-            setClosedFlag(false);
+            isClosedOnNavigation = false;
         };
 
         tradeSocket.onerror = function (error) {
@@ -96,8 +96,8 @@ var TradeSocket = (function () {
         init: init,
         send: send,
         close: close,
-        socket: function () { return tradeSocket; }
-        setClosedFlag: function (flag) { isClosedOnNavigation = flag };
+        socket: function () { return tradeSocket; },
+        setClosedFlag: function (flag) { isClosedOnNavigation = flag; }
     };
 
 })();
