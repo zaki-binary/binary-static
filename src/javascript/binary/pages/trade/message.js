@@ -29,6 +29,8 @@ var Message = (function () {
                 processTradingTimes(response);
             } else if (type === 'statement'){
                 StatementWS.statementHandler(response);
+            } else if (type === 'profit_table'){
+                ProfitTableWS.profitTableHandler(response);
             } else if (type === 'balance'){
                 var passthroughObj = response.echo_req.passthrough;
                 if (passthroughObj){
@@ -45,7 +47,6 @@ var Message = (function () {
                 }
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
-                console.log("Request failed", response.error);
             }
         } else {
 

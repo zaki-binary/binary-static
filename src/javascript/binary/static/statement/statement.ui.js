@@ -2,19 +2,25 @@ var StatementUI = (function(){
     "use strict";
     var tableID = "statement-table";
     var columns = ["date", "ref", "act", "desc", "credit", "bal"];
-    var header = ["Date", "Ref.", "Action", "Description", "Credit/Debit", "Balance"];
-    var footer = ["", "", "", "", "", ""];
 
     function createEmptyStatementTable(){
-        var localizedHeader = header.map(function(t){ return text.localize(t); });
-        localizedHeader[5] = localizedHeader[5] + "(" + TUser.get().currency + ")";
+        var header = [
+            Content.localize().textPurchaseDate,
+            Content.localize().textRef,
+            Content.localize().textAction,
+            Content.localize().textDescription,
+            Content.localize().textCreditDebit,
+            Content.localize().textBalance
+        ];
+        var footer = ["", "", "", "", "", ""];
+        header[5] = header[5] + "(" + TUser.get().currency + ")";
 
         var metadata = {
             id: tableID,
             cols: columns
         };
         var data = [];
-        var $tableContainer = Table.createFlexTable(data, metadata, localizedHeader, footer);
+        var $tableContainer = Table.createFlexTable(data, metadata, header, footer);
         return $tableContainer;
     }
 
@@ -31,11 +37,16 @@ var StatementUI = (function(){
 
 
     function updateStatementFooterBalance(balances){
-        var bal = response.balance[0].balance;
+        var accDropDown = document.getElementById("client_loginid");
+        var acc = accDropDown.options[accDropDown.selectedIndex].value;
+        var bal = balances.filter(function(element){
+            return element.loginid === acc;
+        });
+
         $("#statement-table > tfoot > tr").
             first().
             children(".bal").
-            text(Number(parseFloat(bal)).toFixed(2));
+            text(Number(parseFloat(bal[0].balance)).toFixed(2));
     }
 
     function updateStatementFooter(transactions){
