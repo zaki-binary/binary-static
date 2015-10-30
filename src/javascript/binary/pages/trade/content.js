@@ -205,11 +205,6 @@ var Content = (function () {
         titleElement.textContent = text.localize(title);
 
         localizeTextContentById("err");
-        localizeTextContentById("newer-date");
-        localizeTextContentById("older-date");
-        localizeTextContentById("date-label");
-        localizeTextContentById("submit-date");
-        localizeTextContentById("end-of-table");
     };
 
     return {
