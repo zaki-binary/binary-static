@@ -211,7 +211,7 @@ var Content = (function () {
         var titleElement = document.getElementById("statement-title").firstElementChild;
         titleElement.textContent = localize.textStatement;
     };
-
+    
     var profitTableTranslation = function(){
         var titleElement = document.getElementById("profit-table-title").firstElementChild;
         titleElement.textContent = localize.textProfitTable;
