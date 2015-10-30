@@ -44,7 +44,6 @@ var Message = (function () {
                 }
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
-                console.log("Request failed", response.error);
             }
         } else {
 

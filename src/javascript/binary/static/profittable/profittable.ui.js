@@ -4,18 +4,25 @@ var ProfitTableUI = (function(){
 
     var profitTableID = "profit-table";
     var cols = ["buy-date", "ref", "contract", "buy-price", "sell-date", "sell-price", "pl"];
-    var header = ["Purchase Date", "Ref.", "Contract", "Purchase Price", "Sale Date", "Sale Price", "Profit/Loss"];
-    var footer = ["Total Profit/Loss", "", "", "", "", "", ""];
 
     function createEmptyTable(){
-        var localizedHeader = header.map(function(t){return text.localize(t);});
+        var header = [
+            Content.localize().textPurchaseDate,
+            Content.localize().textRef,
+            Content.localize().textContract,
+            Content.localize().textPurchasePrice,
+            Content.localize().textSaleDate,
+            Content.localize().textSalePrice,
+            Content.localize().textProfitLoss
+        ];
+        var footer = [Content.localize().textTotalProfitLoss, "", "", "", "", "", ""];
 
         var data = [];
         var metadata = {
             cols: cols,
             id: profitTableID
         };
-        var $tableContainer = Table.createFlexTable(data, metadata, localizedHeader, footer);
+        var $tableContainer = Table.createFlexTable(data, metadata, header, footer);
 
         var $pltotal = $tableContainer.
             children("table").
@@ -55,14 +62,11 @@ var ProfitTableUI = (function(){
     }
 
     function createProfitTableRow(transaction){
-        var buyDate = moment.
-            utc(transaction["purchase_time"] * 1000).
-            format("YYYY-MM-DD HH:mm:ss").replace(/\s/g, "\n");
+        var buyMoment = moment.utc(transaction["purchase_time"] * 1000);
+        var sellMoment = moment.utc(transaction["sell_time"] * 1000);
 
-        var sellDate = moment.
-            utc(transaction["sell_time"] * 1000).
-            format("YYYY-MM-DD HH:mm:ss").replace(/\s/g, "\n");
-
+        var buyDate = buyMoment.format("YYYY-MM-DD") + "\n" + buyMoment.format("HH:mm:ss");
+        var sellDate = sellMoment.format("YYYY-MM-DD") + "\n" + sellMoment.format("HH:mm:ss");
 
         var ref = transaction["transaction_id"];
         var contract = transaction["longcode"];
