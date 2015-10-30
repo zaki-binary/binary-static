@@ -12696,8 +12696,8 @@ var Purchase = (function () {
             }
             else{
                 cost_value = passthrough['amount'];
-                var match = receipt['longcode'].match(/\d+\.\d\d/);
-                payout_value = match[0];
+                var match = receipt['longcode'].match(/[\d\,]+\.\d\d/);
+                payout_value = match[0].replace(',','');
             }
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
