@@ -739,12 +739,19 @@ var BetSell = function() {
             this.cancel_previous_analyse_request();
             var attr = this.data_attr(element);
             var params = this.get_params(element);
+            var $loading = $('#trading_init_progress');
+            if($loading){
+                $loading.show();
+            }
             _analyse_request = $.ajax(ajax_loggedin({
                 url     : attr.url(),
                 type    : 'POST',
                 async   : true,
                 data    : params,
                 success : function (data) {
+                    if($loading){
+                        $loading.hide();
+                    }
                     var con = that.show_spread_popup(data);
                     var contract_status = con.find('#status').text();
                     if (contract_status === 'Open') {
