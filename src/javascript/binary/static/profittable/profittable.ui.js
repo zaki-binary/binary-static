@@ -8,27 +8,6 @@ var ProfitTableUI = (function(){
     var footer = ["Total Profit/Loss", "", "", "", "", "", ""];
 
     function createEmptyTable(){
-        function mergeElementInRow(start, end, $row){
-
-            var texts = $row.children().map(function(i, obj){
-                return obj.textContent;
-            }).filter(function(i, obj){
-                return (i >= start && i <= end);
-            }).toArray().join(" ");
-
-            $row.map(function(i, obj){
-               if (i > start && i <= end){
-                   obj.remove();
-               }
-            });
-
-            $row.
-                children().
-                eq(start).
-                text(texts).
-                attr("colspan", end - start + 1);
-        }
-
         var localizedHeader = header.map(function(t){return text.localize(t);});
 
         var data = [];
@@ -43,8 +22,6 @@ var ProfitTableUI = (function(){
             children("tfoot").
             children("tr").
             attr("id", "pl-day-total");
-
-        mergeElementInRow(0, 5, $pltotal);
 
         return $tableContainer;
     }
