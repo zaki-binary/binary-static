@@ -1247,6 +1247,7 @@ Contents.prototype = {
                 for (var i=0;i<loginid_array.length;i++) {
                     if (loginid_array[i].real) {
                         $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-japan-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').addClass('invisible');
                         show_upgrade = false;
                         break;
@@ -1254,10 +1255,16 @@ Contents.prototype = {
                 }
                 if (show_upgrade) {
                     if (c_config && c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'maltainvest') {
-                        $('#virtual-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').removeClass('invisible');
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-japan-upgrade-link').addClass('invisible');
+                    } else if (c_config && c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'japan') {
+                        $('#vr-japan-upgrade-link').removeClass('invisible');
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-financial-upgrade-link').addClass('invisible');
                     } else {
                         $('#virtual-upgrade-link').removeClass('invisible');
+                        $('#vr-japan-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').addClass('invisible');
                     }
                 }
@@ -3397,6 +3404,7 @@ pjax_config_page('trading', function () {
             }
         },
         onUnload: function() {
+            TradeSocket.setClosedFlag(true);
             TradeSocket.close();
         }
     };
@@ -7471,19 +7479,26 @@ BetForm.Time.EndTime.prototype = {
             this.cancel_previous_analyse_request();
             var attr = this.data_attr(element);
             var params = this.get_params(element);
+            var $loading = $('#trading_init_progress');
+            if($loading){
+                $loading.show();
+            }
             _analyse_request = $.ajax(ajax_loggedin({
                 url     : attr.url(),
                 type    : 'POST',
                 async   : true,
                 data    : params,
                 success : function (data) {
+                    if($loading){
+                        $loading.hide();
+                    }
                     var con = that.show_spread_popup(data);
                     var contract_status = con.find('#status').text();
-                    if (contract_status === 'Open') {
+                    // if (contract_status === 'Open') {
                         var field = $('#sell_extra_info_data');
                         var sell_channel = field.attr('sell_channel');
                         BetPrice.spread.stream(attr.model.sell_channel() ? attr.model.sell_channel() : sell_channel);
-                    }
+                    // }
                },
             })).always(function () {
                 that.enable_button(dom_element);
@@ -8697,6 +8712,30 @@ var hide_account_opening_for_risk_disclaimer = function () {
     }
 };
 
+var toggle_hedging_assets_japan = function() {
+    var trading_purpose = $('#trading_purpose');
+    var hedging_assets_fields = $('.hedging_assets');
+
+    if (trading_purpose.val() === 'Hedging') {
+        hedging_assets_fields.show();
+    } else {
+        hedging_assets_fields.hide();
+    }
+};
+
+var validate_hedging_fields_form_submit = function () {
+    $('form#openAccForm').submit(function (event) {
+        if ($('#trading_purpose').val() === 'Hedging') {
+            if ($('#hedge_asset').val() === '') {
+                $('#error_hedge_asset').text(text.localize('Please select a value.'));
+            }
+            if ($('#hedge_asset_amount').val() === '') {
+                $('#error_hedge_asset_amount').text(text.localize('Please enter amount.'));
+            }
+        }
+    });
+};
+
 pjax_config_page('new_account/maltainvest', function() {
     return {
         onLoad: function() {
@@ -8707,6 +8746,19 @@ pjax_config_page('new_account/maltainvest', function() {
             upgrade_investment_disabled_field();
             financial_enable_fields_form_submit();
             hide_account_opening_for_risk_disclaimer();
+        }
+    };
+});
+
+pjax_config_page('new_account/japan', function() {
+    return {
+        onLoad: function() {
+            client_form.set_idd_for_residence('jp');
+            toggle_hedging_assets_japan();
+            $('#trading_purpose').on('change', function() {
+                toggle_hedging_assets_japan();
+            });
+            validate_hedging_fields_form_submit();
         }
     };
 });
@@ -12810,7 +12862,8 @@ var TradeSocket = (function () {
 
     var tradeSocket,
         socketUrl = "wss://"+window.location.host+"/websockets/v3",
-        bufferedSends = [];
+        bufferedSends = [],
+        isClosedOnNavigation = false;
 
     if (page.language()) {
         socketUrl += '?l=' + page.language();
@@ -12856,7 +12909,12 @@ var TradeSocket = (function () {
             Price.clearMapping();
             Price.clearBufferIds();
             Tick.clearBufferIds();
-            console.log('socket closed', e);
+            // if not closed on navigation start it again as server may have closed it
+            if (!isClosedOnNavigation) {
+                processMarketUnderlying();
+            }
+            // set it again to false as it class variables
+            isClosedOnNavigation = false;
         };
 
         tradeSocket.onerror = function (error) {
@@ -12885,7 +12943,8 @@ var TradeSocket = (function () {
         init: init,
         send: send,
         close: close,
-        socket: function () { return tradeSocket; }
+        socket: function () { return tradeSocket; },
+        setClosedFlag: function (flag) { isClosedOnNavigation = flag; }
     };
 
 })();
