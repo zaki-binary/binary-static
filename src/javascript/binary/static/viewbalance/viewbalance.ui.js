@@ -1,36 +1,37 @@
-/**
- * Created by qingwei on 19/10/2015.
- */
+
 var ViewBalanceUI = (function(){
     var colsName = ["loginid", "currency", "balance"];
-    var header = ["Login ID", "Currency", "Balance"];
 
     function createEmptyBalanceTable(){
+        var header = [
+            Content.localize().textLoginID,
+            Content.localize().textCurrency,
+            Content.localize().textBalance
+        ];
         var metadata = {
             cols: colsName,
             id: "bal-table"
         };
         var data = [];
-        var localizedHeader = header.map(function (h){
-            return text.localize(h);
-        });
-        var $table = Table.createFlexTable(data, metadata, localizedHeader);
+        var $table = Table.createFlexTable(data, metadata, header);
 
         return $table;
     }
 
     function createBalancePopup(){
         var $popupDiv = $("<div></div>", {class: "popup-div", id: "balance-container"});
-        var $balTitle = $("<h1></h1>", {text: text.localize("Balances")});
+        var $balTitle = $("<h1></h1>", {text: Content.localize().textBalances});
         var $table = createEmptyBalanceTable();
 
+        var $span = $("<span></span>", {class: "button"});
         var $button = $("<button></button>", {
             class: "button",
             id: "close-balances",
-            text:text.localize("Continue Trading")
+            text:Content.localize().textContinueTrading
         });
+        $span.append($button);
 
-        $popupDiv.append($balTitle).append($table).append($button);
+        $popupDiv.append($balTitle).append($table).append($span);
 
         return $popupDiv;
     }

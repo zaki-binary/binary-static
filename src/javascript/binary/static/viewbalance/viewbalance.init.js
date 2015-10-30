@@ -1,6 +1,4 @@
-/**
- * Created by qingwei on 19/10/2015.
- */
+
 var ViewBalance = (function () {
     var initialized = false;
 
@@ -21,6 +19,8 @@ var ViewBalance = (function () {
         if (initialized) {
             return;
         }
+        TradeSocket.init();
+        Content.populate();
         initialized = true;
         $div = ViewBalanceUI.createBalancePopup();
         $div.appendTo(document.body);

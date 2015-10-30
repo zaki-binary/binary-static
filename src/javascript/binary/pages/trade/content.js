@@ -71,7 +71,11 @@ var Content = (function () {
             textSaleDate: text.localize('Sale Date'),
             textSalePrice: text.localize('Sale Price'),
             textProfitLoss: text.localize('Profit/Loss'),
-            textTotalProfitLoss: text.localize('Total Profit/Loss')
+            textTotalProfitLoss: text.localize('Total Profit/Loss'),
+            textLoginID: text.localize('Login ID'),
+            textCurrency: text.localize('Currency'),
+            textBalances: text.localize('Balances'),
+            textContinueTrading: text.localize('Continue Trading')
         };
 
         var starTime = document.getElementById('start_time_label');
