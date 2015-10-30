@@ -104,6 +104,14 @@ function processContract(contracts) {
 
     displayContractForms('contract_form_name_nav', contract_categories, formname);
 
+    var menu = document.getElementById('contract_form_name_nav');
+    if(menu.offsetHeight > 28){
+        menu.classList.add('small');
+    }
+    else{
+        menu.classList.remove('small');
+    }
+
     processContractForm();
 }
 
