@@ -205,7 +205,6 @@ var Content = (function () {
         titleElement.textContent = text.localize(title);
 
         localizeTextContentById("err");
-        localizeTextContentById("end-of-table");
     };
 
     return {
