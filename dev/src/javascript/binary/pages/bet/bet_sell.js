@@ -15,6 +15,7 @@ var BetSell = function() {
         reload_page_on_close: false,
     };
     return {
+        change_prev_button:function(prev_button){_previous_button_clicked = prev_button;},
         _init: function () {
             _sell_request = null;
             _analyse_request = null;
