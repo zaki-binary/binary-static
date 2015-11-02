@@ -21,6 +21,7 @@ var ViewBalanceUI = (function(){
     function createBalancePopup(){
         var $popupDiv = $("<div></div>", {class: "popup-div", id: "balance-container"});
         var $balTitle = $("<h1></h1>", {text: Content.localize().textBalances});
+        var $br = $("<br>");
         var $table = createEmptyBalanceTable();
 
         var $span = $("<span></span>", {class: "button"});
@@ -31,7 +32,7 @@ var ViewBalanceUI = (function(){
         });
         $span.append($button);
 
-        $popupDiv.append($balTitle).append($table).append($span);
+        $popupDiv.append($balTitle).append($br).append($table).append($span);
 
         return $popupDiv;
     }
