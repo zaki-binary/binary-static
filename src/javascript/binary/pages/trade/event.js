@@ -158,6 +158,7 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
+                e.target.value = parseFloat(e.target.value).toFixed(2);
                 sessionStorage.setItem('amount', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -366,6 +367,7 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
+                e.target.value = parseFloat(e.target.value).toFixed(2);
                 sessionStorage.setItem('stop_loss',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -378,6 +380,7 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
+                e.target.value = parseFloat(e.target.value).toFixed(2);
                 sessionStorage.setItem('stop_profit',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
