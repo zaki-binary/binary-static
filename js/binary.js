@@ -1750,11 +1750,12 @@ Localizable.prototype = {
 ;// for IE (before 10) we use a jquery plugin called jQuery.XDomainRequest. Explained here,
 //http://stackoverflow.com/questions/11487216/cors-with-jquery-and-xdomainrequest-in-ie8-9
 //
-$(document).ajaxSuccess(function () {
-    var contents = new Contents(page.client, page.user);
-    contents.on_load();
+$(function(){
+    $(document).ajaxSuccess(function () {
+        var contents = new Contents(page.client, page.user);
+        contents.on_load();
+    });
 });
-
 
 var onLoad = new PjaxExecQueue();
 var onUnload = new PjaxExecQueue();
@@ -9878,16 +9879,6 @@ var TradingAnalysis = (function(){
     
     var requestTradeAnalysis = function() {
         'use strict';
-        console.log({
-            method: 'POST',
-            url: page.url.url_for('trade/trading_analysis'),
-            data: {
-                underlying: sessionStorage.getItem('underlying'),
-                formname: sessionStorage.getItem('formname'),
-                contract_category: Contract.form(),
-                barrier: Contract.barrier()
-            }
-        });
         $.ajax({
             method: 'POST',
             url: page.url.url_for('trade/trading_analysis'),
@@ -11584,8 +11575,8 @@ var Durations = (function(){
 
             amountElement.datepicker({
                 minDate: tomorrow,
-                onSelect: function() {
-                    var date = $(this).datepicker('getDate');
+                onSelect: function(value) {
+                    var date = new Date(value);
                     var today = new Date();
                     var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
                     amountElement.val(dayDiff);
@@ -11667,6 +11658,25 @@ var Durations = (function(){
         }
     };
 
+    var selectEndDate = function(end_date){
+        var expiry_time = document.getElementById('expiry_time');
+        if(moment(end_date).isAfter(moment(),'day')){
+            Durations.setTime('');
+            StartDates.setNow();
+            expiry_time.hide();
+            var date_start = StartDates.node();
+
+            processTradingTimesRequest(end_date);
+        }
+        else{
+            Durations.setTime(expiry_time.value);
+            expiry_time.show();
+            processPriceRequest();
+        }
+        sessionStorage.setItem('end_date',end_date);
+        Barriers.display();
+    };
+
     return {
         display: displayDurations,
         displayEndTime: displayEndTime,
@@ -11676,7 +11686,8 @@ var Durations = (function(){
         processTradingTimesAnswer: processTradingTimesAnswer,
         trading_times: function(){ return trading_times; },
         select_amount: function(a){ selected_duration.amount = a; },
-        select_unit: function(u){ selected_duration.unit = u; }        
+        select_unit: function(u){ selected_duration.unit = u; } ,
+        selectEndDate: selectEndDate       
     };
 })();
 
@@ -11780,6 +11791,7 @@ var TradingEvents = (function () {
         if (durationAmountElement) {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
+                sessionStorage.setItem('duration_amount',e.target.value);
                 Durations.select_amount(e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -11805,9 +11817,11 @@ var TradingEvents = (function () {
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
             durationUnitElement.addEventListener('change', function (e) {
+                sessionStorage.setItem('duration_units',e.target.value);
                 Durations.select_unit(e.target.value);
                 Durations.populate();
                 processPriceRequest();
+                sessionStorage.setItem('duration_amount',document.getElementById('duration_amount').value);
             });
         }
 
@@ -11819,21 +11833,7 @@ var TradingEvents = (function () {
             // need to use jquery as datepicker is used, if we switch to some other
             // datepicker we can move back to javascript
             $('#expiry_date').on('change', function () {
-                var input = this.value;
-                if(moment(input).isAfter(moment(),'day')){
-                    Durations.setTime('');
-                    StartDates.setNow();
-                    expiry_time.hide();
-                    var date_start = StartDates.node();
-
-                    processTradingTimesRequest(input);
-                }
-                else{
-                    Durations.setTime(expiry_time.value);
-                    expiry_time.show();
-                    processPriceRequest();
-                }
-                Barriers.display();
+                Durations.selectEndDate(this.value);
             });
         }
 
@@ -11869,6 +11869,7 @@ var TradingEvents = (function () {
                     Durations.display('spot');
                 } else {
                     Durations.display('forward');
+                    sessionStorage.setItem('date_start', e.target.value);
                 }
                 processPriceRequest();
             });
@@ -12017,7 +12018,8 @@ var TradingEvents = (function () {
          */
         var predictionElement = document.getElementById('prediction');
         if (predictionElement) {
-            predictionElement.addEventListener('input', debounce( function (e) {
+
+            predictionElement.addEventListener('change', debounce( function (e) {
                 sessionStorage.setItem('prediction',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -12091,6 +12093,9 @@ var TradingEvents = (function () {
                 sessionStorage.removeItem('amount');
                 sessionStorage.removeItem('amount_type');
                 sessionStorage.removeItem('currency');
+                sessionStorage.removeItem('duration_units');
+                sessionStorage.removeItem('diration_value');
+                sessionStorage.removeItem('date_start');
 
                 location.reload();
             }));
@@ -12538,11 +12543,9 @@ function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
-  
-    Durations.display();
-    if(sessionStorage.getItem('expiry_type')==='endtime'){
-        var is_selected = selectOption('endtime', document.getElementById('expiry_type'));
-        Durations.displayEndTime();
+
+    if(sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
+        selectOption(sessionStorage.getItem('date_start'), document.getElementById('date_start'));
     }
 
     displayPrediction();
@@ -12557,7 +12560,33 @@ function processContractForm() {
         selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
     }
 
-    processPriceRequest();
+    Durations.display();
+    var no_price_request;
+    if(sessionStorage.getItem('expiry_type')==='endtime'){
+        var is_selected = selectOption('endtime', document.getElementById('expiry_type'));
+        if(is_selected){
+            Durations.displayEndTime();
+            if(sessionStorage.getItem('end_date') && moment(sessionStorage.getItem('end_date')).isAfter(moment())){
+                $( "#expiry_date" ).datepicker( "setDate", sessionStorage.getItem('end_date') );
+                Durations.selectEndDate(sessionStorage.getItem('end_date'));
+
+                no_price_request = 1;
+            }
+        }
+    }
+    else{
+        if(sessionStorage.getItem('duration_units')){
+            selectOption(sessionStorage.getItem('duration_units'), document.getElementById('duration_units'));
+        }
+        Durations.populate();
+        if(sessionStorage.getItem('duration_amount')){
+            document.getElementById('duration_amount').value = sessionStorage.getItem('duration_amount');       
+        }
+    }
+
+    if(!no_price_request){
+        processPriceRequest();
+    }
 }
 
 function displayPrediction() {
