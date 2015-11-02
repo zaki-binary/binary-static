@@ -243,7 +243,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/signup$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -702,6 +702,7 @@ Contents.prototype = {
                 for (var i=0;i<loginid_array.length;i++) {
                     if (loginid_array[i].real) {
                         $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-japan-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').addClass('invisible');
                         show_upgrade = false;
                         break;
@@ -709,16 +710,26 @@ Contents.prototype = {
                 }
                 if (show_upgrade) {
                     if (c_config && c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'maltainvest') {
-                        $('#virtual-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').removeClass('invisible');
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-japan-upgrade-link').addClass('invisible');
+                    } else if (c_config && c_config['gaming_company'] == 'none' && c_config['financial_company'] == 'japan') {
+                        $('#vr-japan-upgrade-link').removeClass('invisible');
+                        $('#virtual-upgrade-link').addClass('invisible');
+                        $('#vr-financial-upgrade-link').addClass('invisible');
                     } else {
                         $('#virtual-upgrade-link').removeClass('invisible');
+                        $('#vr-japan-upgrade-link').addClass('invisible');
                         $('#vr-financial-upgrade-link').addClass('invisible');
                     }
                 }
             } else {
                 var show_financial = false;
-                if (c_config && c_config['financial_company'] == 'maltainvest') {
+
+                // also allow UK MLT client to open MF account
+                if ( (c_config && c_config['financial_company'] == 'maltainvest') ||
+                     (this.client.residence == 'gb' && /^MLT/.test(this.client.loginid)) )
+                {
                     show_financial = true;
                     for (var j=0;j<loginid_array.length;j++) {
                         if (loginid_array[j].financial) {
@@ -789,7 +800,6 @@ Page.prototype = {
     on_change_loginid: function() {
         var that = this;
         $('#client_loginid').on('change', function() {
-            LocalStore.set('active_loginid', $(this).val());
             $('#loginid-switch-form').submit();
         });
     },

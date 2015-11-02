@@ -4,8 +4,7 @@ var Content = (function () {
     var localize = {};
 
     var populate = function () {
-
-        localize =  {
+        localize = {
             textStartTime: text.localize('Start time'),
             textSpot: text.localize('Spot'),
             textBarrier: text.localize('Barrier'),
@@ -32,7 +31,7 @@ var Content = (function () {
             textNow: text.localize('Now'),
             textContractConfirmationHeading: text.localize('Contract Confirmation'),
             textContractConfirmationReference: text.localize('Your transaction reference is'),
-            textContractConfirmationBalance: text.localize('Your current balance is'),
+            textContractConfirmationBalance: text.localize('Account balance:'),
             textFormRiseFall: text.localize('Rise/Fall'),
             textFormHigherLower: text.localize('Higher/Lower'),
             textFormUpDown: text.localize('Up/Down'),
@@ -42,7 +41,37 @@ var Content = (function () {
             predictionLabel: text.localize('Last Digit Prediction'),
             textContractConfirmationPayout: text.localize('Potential Payout'),
             textContractConfirmationCost: text.localize('Total Cost'),
-            textContractConfirmationProfit: text.localize('Potential Profit')
+            textContractConfirmationProfit: text.localize('Potential Profit'),
+            textAmountPerPoint: text.localize('Amount per point'),
+            textStopLoss: text.localize('Stop-loss'),
+            textStopProfit: text.localize('Stop-profit'),
+            textStopType: text.localize('Stop-type'),
+            textStopTypePoints: text.localize('Points'),
+            textContractConfirmationButton: text.localize('View'),
+            textIndicativeBarrierTooltip: text.localize('This is an indicative barrier. Actual barrier will be the entry spot plus the barrier offset.'),
+            textSpreadTypeLong: text.localize('Long'),
+            textSpreadTypeShort: text.localize('Short'),
+            textSpreadDepositComment: text.localize('Deposit of'),
+            textSpreadRequiredComment: text.localize('is required. Current spread'),
+            textSpreadPointsComment: text.localize('points'),
+            textContractStatusWon: text.localize('This contract won'),
+            textContractStatusLost: text.localize('This contract lost'),
+            textTickResultLabel: text.localize('Tick'),
+            textStatement: text.localize('Statement'),
+            textDate: text.localize('Date'),
+            textRef: text.localize('Ref.'),
+            textAction: text.localize('Action'),
+            textDescription: text.localize('Description'),
+            textCreditDebit: text.localize('Credit/Debit'),
+            textBalance: text.localize('Balance'),
+            textProfitTable: text.localize('Profit Table'),
+            textPurchaseDate: text.localize('Purchase Date'),
+            textContract: text.localize('Contract'),
+            textPurchasePrice: text.localize('Purchase Price'),
+            textSaleDate: text.localize('Sale Date'),
+            textSalePrice: text.localize('Sale Price'),
+            textProfitLoss: text.localize('Profit/Loss'),
+            textTotalProfitLoss: text.localize('Total Profit/Loss')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -122,6 +151,46 @@ var Content = (function () {
             period_label.textContent = localize.textContractPeriod;
         }
 
+        var amount_per_point_label = document.getElementById('amount_per_point_label');
+        if (amount_per_point_label) {
+            amount_per_point_label.textContent = localize.textAmountPerPoint;
+        }
+
+        var stop_loss_label = document.getElementById('stop_loss_label');
+        if (stop_loss_label) {
+            stop_loss_label.textContent = localize.textStopLoss;
+        }
+
+        var stop_profit_label = document.getElementById('stop_profit_label');
+        if (stop_profit_label) {
+            stop_profit_label.textContent = localize.textStopProfit;
+        }
+
+        var stop_type_label = document.getElementById('stop_type_label');
+        if (stop_type_label) {
+            stop_type_label.textContent = localize.textStopType;
+        }
+
+        var stop_type_points = document.getElementById('stop_type_points_label');
+        if (stop_type_points) {
+            stop_type_points.textContent = localize.textStopTypePoints;
+        }
+
+        var indicative_barrier_tooltip = document.getElementById('indicative_barrier_tooltip');
+        if (indicative_barrier_tooltip) {
+            indicative_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
+        var indicative_high_barrier_tooltip = document.getElementById('indicative_high_barrier_tooltip');
+        if (indicative_high_barrier_tooltip) {
+            indicative_high_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
+        var indicative_low_barrier_tooltip = document.getElementById('indicative_low_barrier_tooltip');
+        if (indicative_low_barrier_tooltip) {
+            indicative_low_barrier_tooltip.setAttribute('title', localize.textIndicativeBarrierTooltip);
+        }
+
         var jpbarrier_label = document.getElementById('jbarrier_label');
         if (jpbarrier_label) {
             jpbarrier_label.textContent = localize.textExercisePeriod;
@@ -138,9 +207,21 @@ var Content = (function () {
         }
     };
 
+    var statementTranslation = function(){
+        var titleElement = document.getElementById("statement-title").firstElementChild;
+        titleElement.textContent = localize.textStatement;
+    };
+    
+    var profitTableTranslation = function(){
+        var titleElement = document.getElementById("profit-table-title").firstElementChild;
+        titleElement.textContent = localize.textProfitTable;
+    };
+
     return {
         localize: function () { return localize; },
-        populate: populate
+        populate: populate,
+        statementTranslation: statementTranslation,
+        profitTableTranslation: profitTableTranslation
     };
 
 })();

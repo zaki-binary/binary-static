@@ -24,7 +24,6 @@
      if (elements) {
          var tree = getContractCategoryTree(elements);
          for(var i=0;i<tree.length;i++){
-             
              var el1 = tree[i];
              var li = document.createElement('li');
 
@@ -139,6 +138,9 @@
              if (selected && selected === key) {
                  option.setAttribute('selected', 'selected');
              }
+             if(!elements[key].is_active){
+                option.setAttribute('disabled', '');
+             }
              option.appendChild(content);
              fragment.appendChild(option);
 
@@ -149,8 +151,11 @@
                         option.setAttribute('value', key2);
                         if (selected && selected === key2) {
                             option.setAttribute('selected', 'selected');
-                        } 
-                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2];
+                        }
+                        if(!elements[key].submarkets[key2].is_active){
+                           option.setAttribute('disabled', '');
+                        }
+                        option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2].name;
                         fragment.appendChild(option);
                     }
                 }
@@ -210,7 +215,7 @@ function displayUnderlyings(id, elements, selected) {
         });
         keys.forEach(function (key) {
             if (elements.hasOwnProperty(key)){
-                var option = document.createElement('option'), content = document.createTextNode(elements[key]['display']);
+                var option = document.createElement('option'), content = document.createTextNode(text.localize(elements[key]['display']));
                 option.setAttribute('value', key);
                 if (elements[key]['is_active'] !== 1) {
                     option.setAttribute('disabled', true);
@@ -355,6 +360,7 @@ function hideOverlayContainer() {
  * function to assign sorting to market list
  */
 function compareMarkets(a, b) {
+    'use strict';
     var sortedMarkets = {
         'forex': 0,
         'indices': 1,
@@ -373,6 +379,7 @@ function compareMarkets(a, b) {
 }
 
 function getContractCategoryTree(elements){
+    'use strict';
 
     var tree = [
         ['updown',
@@ -413,6 +420,7 @@ function getContractCategoryTree(elements){
  * function to get cookie javascript way (use if you don't want to use jquery)
  */
 function getCookieItem(sKey) {
+    'use strict';
     if (!sKey) { return null; }
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
@@ -421,6 +429,7 @@ function getCookieItem(sKey) {
  * Display price/spot movement variation to depict price moved up or down
  */
 function displayPriceMovement(element, oldValue, currentValue) {
+    'use strict';
     element.classList.remove('price_moved_down');
     element.classList.remove('price_moved_up');
     if (parseFloat(currentValue) > parseFloat(oldValue)) {
@@ -435,47 +444,49 @@ function displayPriceMovement(element, oldValue, currentValue) {
 /*
  * function to toggle active class of menu
  */
+function toggleActiveNavMenuElement(nav, eventElement) {
+    'use strict';
+    var liElements = nav.getElementsByTagName("li");
+    var classes = eventElement.classList;
 
- function toggleActiveNavMenuElement(nav, eventElement) {
-     var liElements = nav.getElementsByTagName("li");
-     var classes = eventElement.classList;
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+        }
+        classes.add('active');
+    }
+}
 
-     if (!classes.contains('active')) {
-         for (var i = 0, len = liElements.length; i < len; i++){
-             liElements[i].classList.remove('active');
-         }
-         classes.add('active');
-     }
- }
+function toggleActiveCatMenuElement(nav, eventElementId) {
+    'use strict';
+    var eventElement = document.getElementById(eventElementId);
+    var liElements = nav.querySelectorAll('.active, .a-active');
+    var classes = eventElement.classList;
 
- function toggleActiveCatMenuElement(nav, eventElementId) {
-     var eventElement = document.getElementById(eventElementId);
-     var liElements = nav.querySelectorAll('.active, .a-active');
-     var classes = eventElement.classList;
+    if (!classes.contains('active')) {
+        for (var i = 0, len = liElements.length; i < len; i++){
+            liElements[i].classList.remove('active');
+            liElements[i].classList.remove('a-active');
+        }
+        classes.add('a-active');
 
-     if (!classes.contains('active')) {
-         for (var i = 0, len = liElements.length; i < len; i++){
-             liElements[i].classList.remove('active');
-             liElements[i].classList.remove('a-active');
-         }
-         classes.add('a-active');
-
-         i = 0;
-         var parent;
-         while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
-             if(parent.tagName === 'LI'){
-                 parent.classList.add('active');
-             }
-             eventElement = parent;
-             i++;
-         }
-     }
- }
+        i = 0;
+        var parent;
+        while((parent = eventElement.parentElement) && parent.id !== nav.id && i < 10){
+            if(parent.tagName === 'LI'){
+                parent.classList.add('active');
+            }
+            eventElement = parent;
+            i++;
+        }
+    }
+}
 
 /*
  * function to set placeholder text based on current form, used for mobile menu
  */
 function setFormPlaceholderContent(name) {
+    'use strict';
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
         name = name || sessionStorage.getItem('formname');
@@ -484,42 +495,48 @@ function setFormPlaceholderContent(name) {
 }
 
 /*
- * function to display the profit and return of bet under each trade container
+ * function to display the profit and return of bet under each trade container except spreads
  */
- function displayCommentPrice(node, currency, type, payout) {
-     'use strict';
-
-     if (node && type && payout) {
-         var profit = payout - type,
-             return_percent = (profit/type)*100,
-             comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
-
-         if (isNaN(profit) || isNaN(return_percent)) {
-             node.hide();
-         } else {
-             node.show();
-             node.textContent = comment;
-         }
-     }
- }
-
-/*
- * This function loops through the available contracts and markets
- * that are not supposed to be shown are replaced
- *
- * this is TEMPORARY, it will be removed when we fix backend
- */
-function getAllowedContractCategory(contracts) {
+function displayCommentPrice(node, currency, type, payout) {
     'use strict';
-    var obj = {};
-    for(var key in contracts) {
-        if (contracts.hasOwnProperty(key)) {
-            if (!(/spreads/i.test(contracts[key]))) {
-                obj[key] = contracts[key];
-            }
+
+    if (node && type && payout) {
+        var profit = payout - type,
+            return_percent = (profit/type)*100,
+            comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
+
+        if (isNaN(profit) || isNaN(return_percent)) {
+            node.hide();
+        } else {
+            node.show();
+            node.textContent = comment;
         }
     }
-    return obj;
+}
+
+/*
+ * function to display comment for spreads
+ */
+function displayCommentSpreads(node, currency, point) {
+    'use strict';
+
+    if (node && point) {
+        var amountPerPoint = document.getElementById('amount_per_point').value,
+            stopType = document.querySelector('input[name="stop_type"]:checked').value,
+            stopLoss = document.getElementById('stop_loss').value,
+            displayAmount = 0;
+
+        if (isNaN(stopLoss) || isNaN(amountPerPoint)) {
+            node.hide();
+        } else {
+            if (stopType === 'point') {
+                displayAmount = parseFloat(parseFloat(amountPerPoint) * parseFloat(stopLoss));
+            } else {
+                displayAmount = parseFloat(stopLoss);
+            }
+            node.textContent = Content.localize().textSpreadDepositComment + " " + currency + " " + displayAmount + " " + Content.localize().textSpreadRequiredComment + ": " + point + " " + Content.localize().textSpreadPointsComment;
+        }
+    }
 }
 
 /*
@@ -532,6 +549,7 @@ function getAllowedContractCategory(contracts) {
  * http://davidwalsh.name/javascript-debounce-function
  */
 function debounce(func, wait, immediate) {
+    'use strict';
     var timeout;
     var delay = wait || 500;
     return function() {
@@ -551,8 +569,9 @@ function debounce(func, wait, immediate) {
  * function to check if selected market is allowed for current user
  */
 function getDefaultMarket() {
+    'use strict';
    var mkt = sessionStorage.getItem('market');
-   var markets = Symbols.markets();
+   var markets = Symbols.markets(1);
    if(!mkt ||  !markets[mkt]){
         mkt = Object.keys(markets)[0];
    }
@@ -563,6 +582,7 @@ function getDefaultMarket() {
  * this is invoked when submit button is clicked and prevents reloading of page
  */
 function addEventListenerForm(){
+    'use strict';
     document.getElementById('websocket_form').addEventListener("submit", function(evt){
         evt.currentTarget.classList.add('submitted');
         evt.preventDefault();
@@ -574,9 +594,133 @@ function addEventListenerForm(){
  * this creates a button, clicks it, and destroys it to invoke the listener
  */
 function submitForm(form) {
-    // var button = form.ownerDocument.createElement('input');
-    // button.style.display = 'none';
-    // button.type = 'submit';
-    // form.appendChild(button).click();
-    // form.removeChild(button);
+    'use strict';
+    var button = form.ownerDocument.createElement('input');
+    button.style.display = 'none';
+    button.type = 'submit';
+    form.appendChild(button).click();
+    form.removeChild(button);
+}
+
+/*
+ * function to display indicative barrier
+ */
+function displayIndicativeBarrier() {
+    'use strict';
+    var unit = document.getElementById('duration_units'),
+        currentTick = Tick.quote(),
+        indicativeBarrierTooltip = document.getElementById('indicative_barrier_tooltip'),
+        indicativeHighBarrierTooltip = document.getElementById('indicative_high_barrier_tooltip'),
+        indicativeLowBarrierTooltip = document.getElementById('indicative_low_barrier_tooltip'),
+        barrierElement = document.getElementById('barrier'),
+        highBarrierElement = document.getElementById('barrier_high'),
+        lowBarrierElement = document.getElementById('barrier_low');
+
+    if (unit && unit.value !== 'd' && currentTick && !isNaN(currentTick)) {
+        var decimalPlaces = countDecimalPlaces(currentTick);
+        if (indicativeBarrierTooltip && isVisible(indicativeBarrierTooltip)) {
+            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(decimalPlaces);
+        }
+
+        if (indicativeHighBarrierTooltip && isVisible(indicativeHighBarrierTooltip)) {
+            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(highBarrierElement.value)).toFixed(decimalPlaces);
+        }
+
+        if (indicativeLowBarrierTooltip && isVisible(indicativeLowBarrierTooltip)) {
+            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(lowBarrierElement.value)).toFixed(decimalPlaces);
+        }
+    } else {
+        indicativeBarrierTooltip.textContent = '';
+        indicativeHighBarrierTooltip.textContent = '';
+        indicativeLowBarrierTooltip.textContent = '';
+    }
+}
+
+/*
+ * function to sort the duration in ascending order
+ */
+function durationOrder(duration){
+    'use strict';
+    var order = {
+        t:1,
+        s:2,
+        m:3,
+        h:4,
+        d:5
+    };
+    return order[duration];
+}
+
+function displayTooltip(market, symbol){
+    'use strict';
+    var tip = document.getElementById('symbol_tip');
+    if(market.match(/^random/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets');
+    }
+    else if(symbol.match(/^SYN/)){
+        tip.show();
+        tip.setAttribute('target','/smart-indices');
+    }
+    else{
+        tip.hide();
+    }
+}
+
+/*
+ * count number of decimal places in spot so that we can make barrier to same decimal places
+ */
+function countDecimalPlaces(num) {
+    'use strict';
+    if (!isNaN(num)) {
+        var str = num.toString();
+        if (str.indexOf('.') !== -1) {
+            return str.split('.')[1].length;
+        } else {
+            return 0;
+        }
+    }
+}
+
+function selectOption(option, select){
+    var options = select.getElementsByTagName('option');
+    var contains = 0; 
+    for(var i = 0; i < options.length; i++){
+        if(options[i].value==option && !options[i].hasAttribute('disabled')){
+            contains = 1;
+            break;
+        }
+    }
+    if(contains){
+        select.value = option;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function updateWarmChart(){
+    var $chart = $('#trading_worm_chart');
+    var spots = Tick.spots();
+    var chart_config = {
+        type: 'line',
+        lineColor: '#606060',
+        fillColor: false,
+        spotColor: '#00f000',
+        minSpotColor: '#f00000',
+        maxSpotColor: '#0000f0',
+        highlightSpotColor: '#ffff00',
+        highlightLineColor: '#000000',
+        spotRadius: 1.25
+    };
+    if($chart){
+        $chart.sparkline(spots, chart_config);
+        if(spots.length){     
+            $chart.show();
+        }
+        else{
+            $chart.hide();
+        }  
+    }  
 }

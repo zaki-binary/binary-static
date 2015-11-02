@@ -21,7 +21,9 @@ var Tick = (function () {
         id = '',
         epoch = '',
         errorMessage = '',
-        bufferedIds = {};
+        bufferedIds = {},
+        spots = [],
+        keep_number = 20;
 
     var details = function (data) {
         errorMessage = '';
@@ -34,6 +36,11 @@ var Tick = (function () {
                 quote = tick['quote'];
                 id = tick['id'];
                 epoch = tick['epoch'];
+
+                if(spots.length === keep_number){
+                    spots.shift();
+                }
+                spots.push(quote);
 
                 if (!bufferedIds.hasOwnProperty(id)) {
                     bufferedIds[id] = moment().utc().unix();
@@ -50,14 +57,20 @@ var Tick = (function () {
         } else {
             message = quote;
         }
-        if(parseFloat(message)!=message){
+
+        if(parseFloat(message) != message){
             spotElement.className = 'error';
-        }
-        else{
+        } else{
             spotElement.classList.remove('error');
             displayPriceMovement(spotElement, spotElement.textContent, message);
+            displayIndicativeBarrier();
         }
+
         spotElement.textContent = message;
+    };
+
+    var clearBuffer = function () {
+        bufferedIds = {};
     };
 
     return {
@@ -67,6 +80,9 @@ var Tick = (function () {
         id: function () { return id; },
         epoch: function () { return epoch; },
         errorMessage: function () { return errorMessage; },
-        bufferedIds: function () { return bufferedIds; }
+        bufferedIds: function () { return bufferedIds; },
+        clean: function(){ spots = [];},
+        clearBufferIds: clearBuffer,
+        spots: function(){ return spots;}
     };
 })();

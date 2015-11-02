@@ -14,8 +14,9 @@ var TradeSocket = (function () {
     'use strict';
 
     var tradeSocket,
-        socketUrl = "wss://"+window.location.host+"/websockets/v2",
-        bufferedSends = [];
+        socketUrl = "wss://"+window.location.host+"/websockets/v3",
+        bufferedSends = [],
+        isClosedOnNavigation = false;
 
     if (page.language()) {
         socketUrl += '?l=' + page.language();
@@ -57,7 +58,16 @@ var TradeSocket = (function () {
         };
 
         tradeSocket.onclose = function (e) {
-            console.log('socket closed', e);
+            // clear buffer ids of price and ticks as connection is closed
+            Price.clearMapping();
+            Price.clearBufferIds();
+            Tick.clearBufferIds();
+            // if not closed on navigation start it again as server may have closed it
+            if (!isClosedOnNavigation) {
+                processMarketUnderlying();
+            }
+            // set it again to false as it class variables
+            isClosedOnNavigation = false;
         };
 
         tradeSocket.onerror = function (error) {
@@ -86,7 +96,8 @@ var TradeSocket = (function () {
         init: init,
         send: send,
         close: close,
-        socket: function () { return tradeSocket; }
+        socket: function () { return tradeSocket; },
+        setClosedFlag: function (flag) { isClosedOnNavigation = flag; }
     };
 
 })();

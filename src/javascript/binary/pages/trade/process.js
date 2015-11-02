@@ -39,7 +39,6 @@ function processMarket(flag) {
     if(update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
         symbol = undefined;
     }
-    
     displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
 
     if(update_page){
@@ -61,9 +60,13 @@ function processMarketUnderlying() {
     // get ticks for current underlying
     TradeSocket.send({ ticks : underlying });
 
+    Tick.clean();
+    
+    updateWarmChart();
+
     Contract.getContracts(underlying);
 
-    requestTradeAnalysis();
+    displayTooltip(sessionStorage.getItem('market'),underlying);
 }
 
 /*
@@ -74,7 +77,7 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    var contract_categories = getAllowedContractCategory(Contract.contractForms());
+    var contract_categories = Contract.contractForms();
     var formname;
     if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
         formname = sessionStorage.getItem('formname');
@@ -90,7 +93,7 @@ function processContract(contracts) {
             }
         }
     }
-    
+
     // set form to session storage
     sessionStorage.setItem('formname', formname);
 
@@ -100,21 +103,25 @@ function processContract(contracts) {
     displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
+
+    TradingAnalysis.request();
 }
 
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
-    displayStartDates();
+    StartDates.display();
 
-    displayDurations();
+    Durations.display();
 
     displayPrediction();
+
+    displaySpreads();
 
     processPriceRequest();
 }
 
-function displayPrediction(){
+function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
@@ -124,21 +131,55 @@ function displayPrediction(){
     }
 }
 
+function displaySpreads() {
+    var amountType = document.getElementById('amount_type'),
+        amountPerPointLabel = document.getElementById('amount_per_point_label'),
+        amount = document.getElementById('amount'),
+        amountPerPoint = document.getElementById('amount_per_point'),
+        spreadContainer = document.getElementById('spread_element_container'),
+        stopTypeDollarLabel = document.getElementById('stop_type_dollar_label'),
+        expiryTypeRow = document.getElementById('expiry_row');
+
+    if(sessionStorage.getItem('formname') === 'spreads'){
+        amountType.hide();
+        amount.hide();
+        expiryTypeRow.hide();
+        amountPerPointLabel.show();
+        amountPerPoint.show();
+        spreadContainer.show();
+        stopTypeDollarLabel.textContent = document.getElementById('currency').value;
+    } else {
+        amountPerPointLabel.hide();
+        amountPerPoint.hide();
+        spreadContainer.hide();
+        expiryTypeRow.show();
+        amountType.show();
+        amount.show();
+    }
+}
+
 /*
  * Function to request for cancelling the current price proposal
  */
-function processForgetPriceIds() {
+function processForgetPriceIds(forget_id) {
     'use strict';
-    if (Price) {
-        var priceIds = Price.bufferedIds();
-        for (var id in priceIds) {
-            if (priceIds.hasOwnProperty(id)) {
-                TradeSocket.send({ forget: id });
-                delete priceIds[id];
-            }
-        }
+    showPriceOverlay();
+    var form_id = Price.getFormId();
+    var forget_ids = [];
+    var price_id = Price.bufferedIds();
+    if(forget_id){
+        forget_ids.push(forget_id);
+    }
+    else{
+        forget_ids = Object.keys(price_id);
         Price.clearMapping();
     }
+
+    for (var i=0; i<forget_ids.length;i++) {
+        var id = forget_ids[i];
+        TradeSocket.send({ forget: id });
+        delete price_id[id];
+    }    
 }
 
 /*
@@ -148,6 +189,7 @@ function processForgetPriceIds() {
 function processPriceRequest() {
     'use strict';
 
+    Price.incrFormId();
     processForgetPriceIds();
     showPriceOverlay();
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
@@ -179,12 +221,54 @@ function processForgetTickId() {
  */
 function processTick(tick) {
     'use strict';
-    Tick.details(tick);
-    Tick.display();
-    WSTickDisplay.updateChart(tick);
-    Purchase.update_spot_list(tick);
-    if (!Barriers.isBarrierUpdated()) {
-        Barriers.display();
-        Barriers.setBarrierUpdate(true);
+    var symbol = sessionStorage.getItem('underlying');
+    if(tick.echo_req.ticks === symbol){
+        Tick.details(tick);
+        Tick.display();
+        var digit_info = TradingAnalysis.digit_info();
+        if(digit_info && tick.tick){
+            digit_info.update(symbol,tick.tick.quote);
+        }
+        WSTickDisplay.updateChart(tick);
+        Purchase.update_spot_list(tick);
+        if (!Barriers.isBarrierUpdated()) {
+            Barriers.display();
+            Barriers.setBarrierUpdate(true);
+        }
+        updateWarmChart();
     }
+}
+
+function processProposal(response){
+    'use strict';
+    var form_id = Price.getFormId();
+    if(response.echo_req.passthrough.form_id===form_id){
+        hideOverlayContainer();
+        Price.display(response, Contract.contractType()[Contract.form()]);
+        hidePriceOverlay();
+        if(form_id===1){
+            document.getElementById('trading_socket_container').classList.add('show');
+            document.getElementById('trading_init_progress').style.display = 'none';
+        }
+    }
+    else{
+        processForgetPriceIds(response.proposal.id);
+    }
+}
+
+function processTradingTimesRequest(date){
+    var trading_times = Durations.trading_times();
+    if(trading_times.hasOwnProperty(date)){
+        processPriceRequest();
+    }
+    else{
+        showPriceOverlay();
+        TradeSocket.send({ trading_times: date });
+    }
+}
+
+function processTradingTimes(response){
+    var trading_times = Durations.trading_times();
+    Durations.processTradingTimesAnswer(response);
+    processPriceRequest();
 }

@@ -3,13 +3,15 @@ if(typeof is_japan === 'function'){
 	var processContractForm = function(){
 	    Contract.details(sessionStorage.getItem('formname'));
 
-	    displayStartDates();
+	    StartDates.display();
 
-	    displayDurations();
+	    Durations.display();
 	    
 	    if(Periods){
 	    	Periods.displayPeriods();
 	    }
+
+	    displayPrediction();
 	    
 	    processPriceRequest();
 	};
