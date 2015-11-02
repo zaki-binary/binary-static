@@ -39,7 +39,7 @@ var TradingEvents = (function () {
          */
         var contractFormEventChange = function () {
             processContractForm();
-            requestTradeAnalysis();
+            TradingAnalysis.request();
         };
 
         var formNavElement = document.getElementById('contract_form_name_nav');
@@ -75,7 +75,7 @@ var TradingEvents = (function () {
                     showPriceOverlay();
                     var underlying = e.target.value;
                     sessionStorage.setItem('underlying', underlying);
-                    requestTradeAnalysis();
+                    TradingAnalysis.request();
 
                     Tick.clean();
                     
