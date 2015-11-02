@@ -7494,12 +7494,13 @@ BetForm.Time.EndTime.prototype = {
                         $loading.hide();
                     }
                     var con = that.show_spread_popup(data);
-                    var contract_status = con.find('#status').text();
-                    // if (contract_status === 'Open') {
+                    var closed = con.find('#status').hasClass('loss');
+                    if (!closed) {
+                        console.log('test');
                         var field = $('#sell_extra_info_data');
                         var sell_channel = field.attr('sell_channel');
                         BetPrice.spread.stream(attr.model.sell_channel() ? attr.model.sell_channel() : sell_channel);
-                    // }
+                    }
                },
             })).always(function () {
                 that.enable_button(dom_element);
