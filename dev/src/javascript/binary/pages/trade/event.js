@@ -399,6 +399,17 @@ var TradingEvents = (function () {
                 sessionStorage.removeItem('market');
                 sessionStorage.removeItem('formname');
                 sessionStorage.removeItem('underlying');
+
+                sessionStorage.removeItem('expiry_type');
+                sessionStorage.removeItem('stop_loss');
+                sessionStorage.removeItem('stop_type');
+                sessionStorage.removeItem('stop_profit');
+                sessionStorage.removeItem('amount_per_point');
+                sessionStorage.removeItem('prediction');
+                sessionStorage.removeItem('amount');
+                sessionStorage.removeItem('amount_type');
+                sessionStorage.removeItem('currency');
+
                 location.reload();
             }));
         }
