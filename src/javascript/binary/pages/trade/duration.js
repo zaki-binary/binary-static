@@ -176,7 +176,7 @@ var Durations = (function(){
         Durations.setTime(current_moment.format('HH:mm'));
 
         durationPopulate();
-    }
+    };
 
     var durationTextValueMappings = function(str) {
         var mapping = {
