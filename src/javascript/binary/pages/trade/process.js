@@ -67,8 +67,6 @@ function processMarketUnderlying() {
     Contract.getContracts(underlying);
 
     displayTooltip(sessionStorage.getItem('market'),underlying);
-
-    requestTradeAnalysis();
 }
 
 /*
@@ -105,18 +103,32 @@ function processContract(contracts) {
     displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
+
+    TradingAnalysis.request();
 }
 
 function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
-
+  
     Durations.display();
+    if(sessionStorage.getItem('expiry_type')==='endtime'){
+        var is_selected = selectOption('endtime', document.getElementById('expiry_type'));
+        Durations.displayEndTime();
+    }
 
     displayPrediction();
 
-    displaySpreads();
+    displaySpreads();  
+ 
+    if(sessionStorage.getItem('amount')){
+        document.getElementById('amount').value = sessionStorage.getItem('amount');       
+    }
+
+    if(sessionStorage.getItem('amount_type')){
+        selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
+    }
 
     processPriceRequest();
 }
@@ -125,6 +137,9 @@ function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
+        if(sessionStorage.getItem('prediction')){
+            selectOption(sessionStorage.getItem('prediction'),document.getElementById('prediction'));
+        }
     }
     else{
         predictionElement.hide();
@@ -155,6 +170,22 @@ function displaySpreads() {
         expiryTypeRow.show();
         amountType.show();
         amount.show();
+    }
+    if(sessionStorage.getItem('stop_type')){
+       var el = document.querySelectorAll('input[name="stop_type"][value="'+sessionStorage.getItem('stop_type')+'"]');
+       if(el){
+            console.log(el);
+            el[0].setAttribute('checked','checked');
+       }
+    }
+    if(sessionStorage.getItem('amount_per_point')){
+        document.getElementById('amount_per_point').value = sessionStorage.getItem('amount_per_point');
+    }
+    if(sessionStorage.getItem('stop_loss')){
+        document.getElementById('stop_loss').value = sessionStorage.getItem('stop_loss');
+    }
+    if(sessionStorage.getItem('stop_profit')){
+        document.getElementById('stop_profit').value = sessionStorage.getItem('stop_profit');
     }
 }
 
@@ -221,9 +252,14 @@ function processForgetTickId() {
  */
 function processTick(tick) {
     'use strict';
-    if(tick.echo_req.ticks === sessionStorage.getItem('underlying')){
+    var symbol = sessionStorage.getItem('underlying');
+    if(tick.echo_req.ticks === symbol){
         Tick.details(tick);
         Tick.display();
+        var digit_info = TradingAnalysis.digit_info();
+        if(digit_info && tick.tick){
+            digit_info.update(symbol,tick.tick.quote);
+        }
         WSTickDisplay.updateChart(tick);
         Purchase.update_spot_list(tick);
         if (!Barriers.isBarrierUpdated()) {
