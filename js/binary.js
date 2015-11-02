@@ -11528,6 +11528,15 @@ var Durations = (function(){
         durationPopulate();
     };
 
+    var displayEndTime = function(){
+        var current_moment = moment().add(5, 'minutes').utc();
+        document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
+        document.getElementById('expiry_time').value = current_moment.format('HH:mm');
+        Durations.setTime(current_moment.format('HH:mm'));
+
+        durationPopulate();
+    };
+
     var durationTextValueMappings = function(str) {
         var mapping = {
             s : Content.localize().textDurationSeconds,
@@ -11660,6 +11669,7 @@ var Durations = (function(){
 
     return {
         display: displayDurations,
+        displayEndTime: displayEndTime,
         populate: durationPopulate,
         setTime: function(time){ expiry_time = time; },
         getTime: function(){ return expiry_time; },
@@ -11783,13 +11793,8 @@ var TradingEvents = (function () {
         var expiryTypeElement = document.getElementById('expiry_type');
         if (expiryTypeElement) {
             expiryTypeElement.addEventListener('change', function(e) {
-                Durations.populate();
-                if(e.target && e.target.value === 'endtime') {
-                    var current_moment = moment().add(5, 'minutes').utc();
-                    document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
-                    document.getElementById('expiry_time').value = current_moment.format('HH:mm');
-                    Durations.setTime(current_moment.format('HH:mm'));
-                }
+                sessionStorage.setItem('expiry_type',e.target.value);
+                Durations.displayEndTime();
                 processPriceRequest();
             });
         }
@@ -12013,6 +12018,7 @@ var TradingEvents = (function () {
         var predictionElement = document.getElementById('prediction');
         if (predictionElement) {
             predictionElement.addEventListener('input', debounce( function (e) {
+                sessionStorage.setItem('prediction',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -12024,6 +12030,7 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
+                sessionStorage.setItem('amount_per_point',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -12032,7 +12039,8 @@ var TradingEvents = (function () {
         /*
          * attach an event to change in stop type for spreads
          */
-        var stopTypeEvent = function () {
+        var stopTypeEvent = function (e) {
+            sessionStorage.setItem('stop_type',e.target.value);
             processPriceRequest();
         };
 
@@ -12049,6 +12057,7 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
+                sessionStorage.setItem('stop_loss',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -12060,6 +12069,7 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
+                sessionStorage.setItem('stop_profit',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -12517,12 +12527,24 @@ function processContractForm() {
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
-
+  
     Durations.display();
+    if(sessionStorage.getItem('expiry_type')==='endtime'){
+        var is_selected = selectOption('endtime', document.getElementById('expiry_type'));
+        Durations.displayEndTime();
+    }
 
     displayPrediction();
 
-    displaySpreads();
+    displaySpreads();  
+ 
+    if(sessionStorage.getItem('amount')){
+        document.getElementById('amount').value = sessionStorage.getItem('amount');       
+    }
+
+    if(sessionStorage.getItem('amount_type')){
+        selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
+    }
 
     processPriceRequest();
 }
@@ -12531,6 +12553,9 @@ function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
+        if(sessionStorage.getItem('prediction')){
+            selectOption(sessionStorage.getItem('prediction'),document.getElementById('prediction'));
+        }
     }
     else{
         predictionElement.hide();
@@ -12561,6 +12586,22 @@ function displaySpreads() {
         expiryTypeRow.show();
         amountType.show();
         amount.show();
+    }
+    if(sessionStorage.getItem('stop_type')){
+       var el = document.querySelectorAll('input[name="stop_type"][value="'+sessionStorage.getItem('stop_type')+'"]');
+       if(el){
+            console.log(el);
+            el[0].setAttribute('checked','checked');
+       }
+    }
+    if(sessionStorage.getItem('amount_per_point')){
+        document.getElementById('amount_per_point').value = sessionStorage.getItem('amount_per_point');
+    }
+    if(sessionStorage.getItem('stop_loss')){
+        document.getElementById('stop_loss').value = sessionStorage.getItem('stop_loss');
+    }
+    if(sessionStorage.getItem('stop_profit')){
+        document.getElementById('stop_profit').value = sessionStorage.getItem('stop_profit');
     }
 }
 
