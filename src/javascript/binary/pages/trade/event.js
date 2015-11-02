@@ -335,7 +335,8 @@ var TradingEvents = (function () {
          */
         var predictionElement = document.getElementById('prediction');
         if (predictionElement) {
-            predictionElement.addEventListener('input', debounce( function (e) {
+
+            predictionElement.addEventListener('change', debounce( function (e) {
                 sessionStorage.setItem('prediction',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
