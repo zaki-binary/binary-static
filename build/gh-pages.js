@@ -2,7 +2,7 @@ module.exports = {
     all: {
         options: {
             base: 'dist',
-            add: true,
+            // add: true,
             message: 'Auto-generated commit',
         },
         src: ['**']
