@@ -67,8 +67,6 @@ function processMarketUnderlying() {
     Contract.getContracts(underlying);
 
     displayTooltip(sessionStorage.getItem('market'),underlying);
-
-    requestTradeAnalysis();
 }
 
 /*
@@ -105,6 +103,8 @@ function processContract(contracts) {
     displayContractForms('contract_form_name_nav', contract_categories, formname);
 
     processContractForm();
+
+    TradingAnalysis.request();
 }
 
 function processContractForm() {
@@ -112,19 +112,58 @@ function processContractForm() {
 
     StartDates.display();
 
-    Durations.display();
+    if(sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
+        selectOption(sessionStorage.getItem('date_start'), document.getElementById('date_start'));
+    }
 
     displayPrediction();
 
-    displaySpreads();
+    displaySpreads();  
+ 
+    if(sessionStorage.getItem('amount')){
+        document.getElementById('amount').value = sessionStorage.getItem('amount');       
+    }
 
-    processPriceRequest();
+    if(sessionStorage.getItem('amount_type')){
+        selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
+    }
+
+    Durations.display();
+    var no_price_request;
+    if(sessionStorage.getItem('expiry_type')==='endtime'){
+        var is_selected = selectOption('endtime', document.getElementById('expiry_type'));
+        if(is_selected){
+            Durations.displayEndTime();
+            if(sessionStorage.getItem('end_date') && moment(sessionStorage.getItem('end_date')).isAfter(moment())){
+                $( "#expiry_date" ).datepicker( "setDate", sessionStorage.getItem('end_date') );
+                Durations.selectEndDate(sessionStorage.getItem('end_date'));
+
+                no_price_request = 1;
+            }
+        }
+    }
+    else{
+        if(sessionStorage.getItem('duration_units')){
+            selectOption(sessionStorage.getItem('duration_units'), document.getElementById('duration_units'));
+        }
+        Durations.populate();
+        if(sessionStorage.getItem('duration_amount')){
+            document.getElementById('duration_amount').value = sessionStorage.getItem('duration_amount');       
+        }
+    }
+
+    if(!no_price_request){
+        processPriceRequest();
+    }
 }
 
 function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if(sessionStorage.getItem('formname') === 'digits'){
         predictionElement.show();
+        if(sessionStorage.getItem('prediction')){
+            selectOption(sessionStorage.getItem('prediction'),document.getElementById('prediction'));
+        }
     }
     else{
         predictionElement.hide();
@@ -155,6 +194,22 @@ function displaySpreads() {
         expiryTypeRow.show();
         amountType.show();
         amount.show();
+    }
+    if(sessionStorage.getItem('stop_type')){
+       var el = document.querySelectorAll('input[name="stop_type"][value="'+sessionStorage.getItem('stop_type')+'"]');
+       if(el){
+            console.log(el);
+            el[0].setAttribute('checked','checked');
+       }
+    }
+    if(sessionStorage.getItem('amount_per_point')){
+        document.getElementById('amount_per_point').value = sessionStorage.getItem('amount_per_point');
+    }
+    if(sessionStorage.getItem('stop_loss')){
+        document.getElementById('stop_loss').value = sessionStorage.getItem('stop_loss');
+    }
+    if(sessionStorage.getItem('stop_profit')){
+        document.getElementById('stop_profit').value = sessionStorage.getItem('stop_profit');
     }
 }
 
@@ -221,9 +276,14 @@ function processForgetTickId() {
  */
 function processTick(tick) {
     'use strict';
-    if(tick.echo_req.ticks === sessionStorage.getItem('underlying')){
+    var symbol = sessionStorage.getItem('underlying');
+    if(tick.echo_req.ticks === symbol){
         Tick.details(tick);
         Tick.display();
+        var digit_info = TradingAnalysis.digit_info();
+        if(digit_info && tick.tick){
+            digit_info.update(symbol,tick.tick.quote);
+        }
         WSTickDisplay.updateChart(tick);
         Purchase.update_spot_list(tick);
         if (!Barriers.isBarrierUpdated()) {
