@@ -60317,7 +60317,7 @@ var TradingEvents = (function () {
                     Contract.getContracts(underlying);
 
                     // forget the old tick id i.e. close the old tick stream
-                    processForgetTickId();
+                    processForgetTicks();
                     // get ticks for current underlying
                     TradeSocket.send({ ticks : underlying });
                 }
@@ -60480,22 +60480,19 @@ var TradingEvents = (function () {
                 askPrice = this.getAttribute('data-ask-price');
 
             var params = {buy: id, price: askPrice, passthrough:{}};
-            var ids = Price.bufferedIds();
-            if(ids[id]){
-                for(var attr in this.attributes){
-                    if(attr && this.attributes[attr] && this.attributes[attr].name){
-                        var m = this.attributes[attr].name.match(/data\-(.+)/);
+            for(var attr in this.attributes){
+                if(attr && this.attributes[attr] && this.attributes[attr].name){
+                    var m = this.attributes[attr].name.match(/data\-(.+)/);
 
-                        if(m && m[1] && m[1]!=="purchase-id" && m[1]!=="passthrough"){
-                            params.passthrough[m[1]] = this.attributes[attr].value;
-                        }
+                    if(m && m[1] && m[1]!=="purchase-id" && m[1]!=="passthrough"){
+                        params.passthrough[m[1]] = this.attributes[attr].value;
                     }
                 }
-                if (id && askPrice) {
-                    TradeSocket.send(params);
-                    Price.incrFormId();
-                    processForgetPriceIds();
-                }
+            }
+            if (id && askPrice) {
+                TradeSocket.send(params);
+                Price.incrFormId();
+                processForgetProposals();
             }
         };
 
@@ -60758,7 +60755,6 @@ var Price = (function () {
     'use strict';
 
     var typeDisplayIdMapping = {},
-        bufferedIds = {},
         form_id = 0;
 
     var createProposal = function (typeOfContract) {
@@ -60871,10 +60867,6 @@ var Price = (function () {
 
         if (params && Object.getOwnPropertyNames(params).length > 0) {
             typeDisplayIdMapping[id] = type;
-
-            if (!bufferedIds.hasOwnProperty(id)) {
-                bufferedIds[id] = moment().utc().unix();
-            }
         }
 
         var position = contractTypeDisplayMapping(type);
@@ -60956,8 +60948,7 @@ var Price = (function () {
         typeDisplayIdMapping = {};
     };
 
-    var clearBuffer = function () {
-        bufferedIds = {};
+    var clearFormId = function () {
         form_id = 0;
     };
 
@@ -60966,10 +60957,9 @@ var Price = (function () {
         display: display,
         clearMapping: clearMapping,
         idDisplayMapping: function () { return typeDisplayIdMapping; },
-        bufferedIds: function () { return bufferedIds; },
         getFormId: function(){ return form_id; },
         incrFormId: function(){ form_id++; },
-        clearBufferIds: clearBuffer
+        clearFormId: clearFormId
     };
 
 })();
@@ -61031,7 +61021,7 @@ function processMarketUnderlying() {
     sessionStorage.setItem('underlying', underlying);
 
     // forget the old tick id i.e. close the old tick stream
-    processForgetTickId();
+    processForgetTicks();
     // get ticks for current underlying
     TradeSocket.send({ ticks : underlying });
 
@@ -61191,25 +61181,11 @@ function displaySpreads() {
 /*
  * Function to request for cancelling the current price proposal
  */
-function processForgetPriceIds(forget_id) {
+function processForgetProposals() {
     'use strict';
     showPriceOverlay();
-    var form_id = Price.getFormId();
-    var forget_ids = [];
-    var price_id = Price.bufferedIds();
-    if(forget_id){
-        forget_ids.push(forget_id);
-    }
-    else{
-        forget_ids = Object.keys(price_id);
-        Price.clearMapping();
-    }
-
-    for (var i=0; i<forget_ids.length;i++) {
-        var id = forget_ids[i];
-        TradeSocket.send({ forget: id });
-        delete price_id[id];
-    }    
+    TradeSocket.send({forget_all: "proposal"});
+    Price.clearMapping();   
 }
 
 /*
@@ -61220,7 +61196,7 @@ function processPriceRequest() {
     'use strict';
 
     Price.incrFormId();
-    processForgetPriceIds();
+    processForgetProposals();
     showPriceOverlay();
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
         if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
@@ -61233,17 +61209,9 @@ function processPriceRequest() {
  * Function to cancel the current tick stream
  * this need to be invoked before makin
  */
-function processForgetTickId() {
+function processForgetTicks() {
     'use strict';
-    if (Tick) {
-        var tickIds = Tick.bufferedIds();
-        for (var id in tickIds) {
-            if (tickIds.hasOwnProperty(id)) {
-                TradeSocket.send({ forget: id });
-                delete tickIds[id];
-            }
-        }
-    }
+    TradeSocket.send({ forget_all: 'ticks' });
 }
 
 /*
@@ -61280,9 +61248,6 @@ function processProposal(response){
             document.getElementById('trading_socket_container').classList.add('show');
             document.getElementById('trading_init_progress').style.display = 'none';
         }
-    }
-    else{
-        processForgetPriceIds(response.proposal.id);
     }
 }
 
@@ -61571,7 +61536,7 @@ var TradeSocket = (function () {
         tradeSocket.onclose = function (e) {
             // clear buffer ids of price and ticks as connection is closed
             Price.clearMapping();
-            Price.clearBufferIds();
+            Price.clearFormId();
             Tick.clearBufferIds();
             // if not closed on navigation start it again as server may have closed it
             if (!isClosedOnNavigation) {
@@ -61821,7 +61786,6 @@ var Tick = (function () {
         id = '',
         epoch = '',
         errorMessage = '',
-        bufferedIds = {},
         spots = [],
         keep_number = 20;
 
@@ -61841,10 +61805,6 @@ var Tick = (function () {
                     spots.shift();
                 }
                 spots.push(quote);
-
-                if (!bufferedIds.hasOwnProperty(id)) {
-                    bufferedIds[id] = moment().utc().unix();
-                }
             }
         }
     };
@@ -61869,10 +61829,6 @@ var Tick = (function () {
         spotElement.textContent = message;
     };
 
-    var clearBuffer = function () {
-        bufferedIds = {};
-    };
-
     return {
         details: details,
         display: display,
@@ -61880,9 +61836,7 @@ var Tick = (function () {
         id: function () { return id; },
         epoch: function () { return epoch; },
         errorMessage: function () { return errorMessage; },
-        bufferedIds: function () { return bufferedIds; },
         clean: function(){ spots = [];},
-        clearBufferIds: clearBuffer,
         spots: function(){ return spots;}
     };
 })();
