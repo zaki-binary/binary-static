@@ -54674,7 +54674,7 @@ BetForm.Time.EndTime.prototype = {
                             e.preventDefault();
                         }
                         var target = $(e.target);
-                        BetSell.model.reload_page_on_close(true);
+                        BetSell.model.reload_page_on_close($('trading_socket_container') ? false : true);
                         that.spread_con().find('#sell_level').parent().hide();
                         that.sell_bet(target);
                         return false;
@@ -62790,17 +62790,15 @@ var ProfitTableUI = (function(){
     }
 
 
-    function updateStatementFooterBalance(balances){
-        var accDropDown = document.getElementById("client_loginid");
-        var acc = accDropDown.options[accDropDown.selectedIndex].value;
-        var bal = balances.filter(function(element){
-            return element.loginid === acc;
-        });
+    function updateStatementFooterBalance(balance){
+        if (!document.getElementById("statement-table")){
+            return;
+        }
 
         $("#statement-table > tfoot > tr").
             first().
             children(".bal").
-            text(Number(parseFloat(bal[0].balance)).toFixed(2));
+            text(Number(parseFloat(balance.balance)).toFixed(2));
     }
 
     function updateStatementFooter(transactions){
