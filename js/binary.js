@@ -1949,26 +1949,28 @@ onLoad.queue(function () {
 
 // onLoad.queue does not work on the home page.
 // jQuery's ready function works always.
-$(document).ready(function () {
-    // $.cookie is not always available.
-    // So, fall back to a more basic solution.
-    var match = document.cookie.match(/\bloginid=(\w+)/);
-    match = match ? match[1] : '';
+if (!/backoffice/.test(document.URL)) { // exclude BO
+    $(document).ready(function () {
+        // $.cookie is not always available.
+        // So, fall back to a more basic solution.
+        var match = document.cookie.match(/\bloginid=(\w+)/);
+        match = match ? match[1] : '';
 
-    $(window).on('storage', function (jq_event) {
-        if (jq_event.originalEvent.key !== 'active_loginid') return;
-        if (jq_event.originalEvent.newValue === match) return;
-        if (jq_event.originalEvent.newValue === '') {
-            // logged out
-            location.href = page.url.url_for('home');
-        } else {
-            // loginid switch
-            location.href = page.url.url_for('user/my_account?loginid=' + jq_event.originalEvent.newValue);
-        }
+        $(window).on('storage', function (jq_event) {
+            if (jq_event.originalEvent.key !== 'active_loginid') return;
+            if (jq_event.originalEvent.newValue === match) return;
+            if (jq_event.originalEvent.newValue === '') {
+                // logged out
+                location.href = page.url.url_for('home');
+            } else {
+                // loginid switch
+                location.href = page.url.url_for('user/my_account?loginid=' + jq_event.originalEvent.newValue);
+            }
+        });
+
+        LocalStore.set('active_loginid', match);
     });
-
-    LocalStore.set('active_loginid', match);
-});
+}
 ;DatePicker = function(component_id, select_type) {
     this.component_id = component_id;
     this.select_type = (typeof select_type === "undefined") ? "date" : select_type;
@@ -11851,6 +11853,7 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
+                e.target.value = parseFloat(e.target.value).toFixed(2);
                 sessionStorage.setItem('amount', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -12059,6 +12062,7 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
+                e.target.value = parseFloat(e.target.value).toFixed(2);
                 sessionStorage.setItem('stop_loss',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -12071,6 +12075,7 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
+                e.target.value = parseFloat(e.target.value).toFixed(2);
                 sessionStorage.setItem('stop_profit',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -13630,12 +13635,15 @@ WSTickDisplay.updateChart = function(data){
     return RealityCheck;
 }(jQuery));
 
-$(document).ready(function () {
-    // console.log('About to create reality-check object');
+if (!/backoffice/.test(document.URL)) { // exclude BO
+    $(document).ready(function () {
+        // console.log('About to create reality-check object');
 
-    if (window.reality_check_object) return;
-    window.reality_check_object = new RealityCheck('reality_check', LocalStore);
-});
+        if (window.reality_check_object) return;
+        window.reality_check_object = new RealityCheck('reality_check',
+                                                       LocalStore);
+    });
+}
 ;var CommonData = (function(){
     function getCookieItem(sKey) {
         if (!sKey) { return null; }
