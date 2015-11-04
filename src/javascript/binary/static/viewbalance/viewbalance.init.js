@@ -6,10 +6,9 @@ var ViewBalance = (function () {
         if (initialized) {
             return;
         }
-        TradeSocket.init();
         Content.populate();
         initialized = true;
-        ViewBalanceData.getLatestBalances();
+        ViewBalanceData.subscribeToBalanceStream(ViewBalanceUI.updateBalances);
     }
 
     return {

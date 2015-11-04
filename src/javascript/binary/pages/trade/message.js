@@ -31,8 +31,6 @@ var Message = (function () {
                 StatementWS.statementHandler(response);
             } else if (type === 'profit_table'){
                 ProfitTableWS.profitTableHandler(response);
-            } else if (type === 'balance'){
-                ViewBalanceUI.updateBalances(response.balance);
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
             }
