@@ -40,7 +40,7 @@ var Price = (function () {
             stopProfit = document.getElementById('stop_profit');
 
         if (payout && isVisible(payout) && payout.value) {
-            proposal['amount'] = parseFloat(payout.value).toFixed(2);
+            proposal['amount'] = parseFloat(payout.value);
         }
 
         if (amountType && isVisible(amountType) && amountType.value) {
@@ -94,7 +94,7 @@ var Price = (function () {
         }
 
         if (amountPerPoint && isVisible(amountPerPoint)) {
-            proposal['amount_per_point'] = parseFloat(amountPerPoint.value).toFixed(2);
+            proposal['amount_per_point'] = parseFloat(amountPerPoint.value);
         }
 
         if (stopType && isVisible(stopType)) {
@@ -102,11 +102,11 @@ var Price = (function () {
         }
 
         if (stopLoss && isVisible(stopLoss)) {
-            proposal['stop_loss'] = parseFloat(stopLoss.value).toFixed(2);
+            proposal['stop_loss'] = parseFloat(stopLoss.value);
         }
 
         if (stopProfit && isVisible(stopProfit)) {
-            proposal['stop_profit'] = parseFloat(stopProfit.value).toFixed(2);
+            proposal['stop_profit'] = parseFloat(stopProfit.value);
         }
 
         if (contractType) {
