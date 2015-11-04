@@ -4,8 +4,6 @@ module.exports = {
             separator: ';',
         },
         files: {
-            'dist/js/lib.js': [],
-            'dist/js/data.js': [],
             'dist/js/binary.js': [
                 'src/javascript/lib/jquery.js', 
                 'src/javascript/lib/highstock/highstock.js', 
