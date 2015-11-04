@@ -26,19 +26,19 @@ var ViewBalanceData = (function(){
                 console.log("balance received");
                 cb(response.balance);
             }
-        }
+        };
 
         balanceSocket.onclose = function(){
             initialized = false;
             subscribeToBalanceStream(cb);
-        }
+        };
 
         balanceSocket.onopen = function () {
             var loginToken = getCookieItem('login');
             if (loginToken) {
                 balanceSocket.send(JSON.stringify({authorize: loginToken}));
             }
-        }
+        };
     }
     return {
         subscribeToBalanceStream: subscribeToBalanceStream
