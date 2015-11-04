@@ -61102,12 +61102,11 @@ function processContractForm() {
             if(sessionStorage.getItem('end_date') && moment(sessionStorage.getItem('end_date')).isAfter(moment())){
                 $( "#expiry_date" ).datepicker( "setDate", sessionStorage.getItem('end_date') );
                 Durations.selectEndDate(sessionStorage.getItem('end_date'));
-
                 no_price_request = 1;
             }
         }
     }
-    else{
+    if(!no_price_request){
         if(sessionStorage.getItem('duration_units')){
             selectOption(sessionStorage.getItem('duration_units'), document.getElementById('duration_units'));
         }
