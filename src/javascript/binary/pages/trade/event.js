@@ -339,11 +339,9 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
-                console.log("Before ", e.target.value);
                 if (e.target.value % 1 !== 0 ) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
-                console.log(e.target.value);
                 sessionStorage.setItem('amount_per_point',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
