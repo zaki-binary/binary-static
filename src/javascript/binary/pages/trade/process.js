@@ -60,7 +60,7 @@ function processMarketUnderlying() {
     sessionStorage.setItem('underlying', underlying);
 
     // forget the old tick id i.e. close the old tick stream
-    processForgetTickId();
+    processForgetTicks();
     // get ticks for current underlying
     TradeSocket.send({ ticks : underlying });
 
@@ -141,12 +141,11 @@ function processContractForm() {
             if(sessionStorage.getItem('end_date') && moment(sessionStorage.getItem('end_date')).isAfter(moment())){
                 $( "#expiry_date" ).datepicker( "setDate", sessionStorage.getItem('end_date') );
                 Durations.selectEndDate(sessionStorage.getItem('end_date'));
-
                 no_price_request = 1;
             }
         }
     }
-    else{
+    if(!no_price_request){
         if(sessionStorage.getItem('duration_units')){
             selectOption(sessionStorage.getItem('duration_units'), document.getElementById('duration_units'));
         }
@@ -220,25 +219,11 @@ function displaySpreads() {
 /*
  * Function to request for cancelling the current price proposal
  */
-function processForgetPriceIds(forget_id) {
+function processForgetProposals() {
     'use strict';
     showPriceOverlay();
-    var form_id = Price.getFormId();
-    var forget_ids = [];
-    var price_id = Price.bufferedIds();
-    if(forget_id){
-        forget_ids.push(forget_id);
-    }
-    else{
-        forget_ids = Object.keys(price_id);
-        Price.clearMapping();
-    }
-
-    for (var i=0; i<forget_ids.length;i++) {
-        var id = forget_ids[i];
-        TradeSocket.send({ forget: id });
-        delete price_id[id];
-    }    
+    TradeSocket.send({forget_all: "proposal"});
+    Price.clearMapping();   
 }
 
 /*
@@ -249,7 +234,7 @@ function processPriceRequest() {
     'use strict';
 
     Price.incrFormId();
-    processForgetPriceIds();
+    processForgetProposals();
     showPriceOverlay();
     for (var typeOfContract in Contract.contractType()[Contract.form()]) {
         if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
@@ -262,17 +247,9 @@ function processPriceRequest() {
  * Function to cancel the current tick stream
  * this need to be invoked before makin
  */
-function processForgetTickId() {
+function processForgetTicks() {
     'use strict';
-    if (Tick) {
-        var tickIds = Tick.bufferedIds();
-        for (var id in tickIds) {
-            if (tickIds.hasOwnProperty(id)) {
-                TradeSocket.send({ forget: id });
-                delete tickIds[id];
-            }
-        }
-    }
+    TradeSocket.send({ forget_all: 'ticks' });
 }
 
 /*
@@ -309,9 +286,6 @@ function processProposal(response){
             document.getElementById('trading_socket_container').classList.add('show');
             document.getElementById('trading_init_progress').style.display = 'none';
         }
-    }
-    else{
-        processForgetPriceIds(response.proposal.id);
     }
 }
 
