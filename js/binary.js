@@ -54208,7 +54208,7 @@ BetForm.TradingTime.prototype = {
         }
 
         var that = this;
-        if(typeof this.trading_info[underlying_symbol][date] === "undefined") {
+        if(typeof this.trading_info[underlying_symbol] === 'undefined' || typeof this.trading_info[underlying_symbol][date] === "undefined") {
             this.trading_info[underlying_symbol][date] = { trading: 0 };
         }
 
@@ -61536,7 +61536,6 @@ var TradeSocket = (function () {
             // clear buffer ids of price and ticks as connection is closed
             Price.clearMapping();
             Price.clearFormId();
-            Tick.clearBufferIds();
             // if not closed on navigation start it again as server may have closed it
             if (!isClosedOnNavigation) {
                 processMarketUnderlying();
