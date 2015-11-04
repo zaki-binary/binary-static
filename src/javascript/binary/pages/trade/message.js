@@ -32,19 +32,7 @@ var Message = (function () {
             } else if (type === 'profit_table'){
                 ProfitTableWS.profitTableHandler(response);
             } else if (type === 'balance'){
-                var passthroughObj = response.echo_req.passthrough;
-                if (passthroughObj){
-                    switch (passthroughObj.purpose) {
-                        case "statement_footer":
-                            StatementUI.updateStatementFooterBalance(response.balance);
-                            break;
-                        case "balance_popup":
-                            ViewBalanceUI.updateBalances(response.balance);
-                            break;
-                        default :
-                            //do nothing
-                    }
-                }
+                ViewBalanceUI.updateBalances(response.balance);
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
             }

@@ -783,7 +783,7 @@ Page.prototype = {
         this.record_affiliate_exposure();
         this.contents.on_load();
         this.on_click_acc_transfer();
-        this.on_click_view_balances();
+        ViewBalance.init();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -813,9 +813,6 @@ Page.prototype = {
             }
             $('#acc_transfer_submit').submit();
         });
-    },
-    on_click_view_balances: function(){
-        ViewBalance.init();
     },
 
     localize_for: function(language) {
