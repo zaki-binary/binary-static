@@ -59267,7 +59267,7 @@ function displayCommentSpreads(node, currency, point) {
             } else {
                 displayAmount = parseFloat(stopLoss);
             }
-            node.textContent = Content.localize().textSpreadDepositComment + " " + currency + " " + displayAmount + " " + Content.localize().textSpreadRequiredComment + ": " + point + " " + Content.localize().textSpreadPointsComment;
+            node.textContent = Content.localize().textSpreadDepositComment + " " + currency + " " + displayAmount.toFixed(2) + " " + Content.localize().textSpreadRequiredComment + ": " + point + " " + Content.localize().textSpreadPointsComment;
         }
     }
 }
@@ -60391,7 +60391,9 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                e.target.value = parseFloat(e.target.value).toFixed(2);
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('amount', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -60570,6 +60572,9 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('amount_per_point',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -60597,7 +60602,9 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
-                e.target.value = parseFloat(e.target.value).toFixed(2);
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('stop_loss',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -60610,7 +60617,9 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
-                e.target.value = parseFloat(e.target.value).toFixed(2);
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('stop_profit',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -60713,17 +60722,6 @@ var Message = (function () {
                 StatementWS.statementHandler(response);
             } else if (type === 'profit_table'){
                 ProfitTableWS.profitTableHandler(response);
-            } else if (type === 'balance'){
-                var passthroughObj = response.echo_req.passthrough;
-                if (passthroughObj){
-                    switch (passthroughObj.purpose) {
-                        case "statement_footer":
-                            StatementUI.updateStatementFooterBalance(response.balance);
-                            break;
-                        default :
-                            //do nothing
-                    }
-                }
             } else if (type === 'error') {
                 $(".error-msg").text(response.error.message);
             }
@@ -62718,7 +62716,7 @@ var ProfitTableUI = (function(){
             Content.localize().textCreditDebit,
             Content.localize().textBalance
         ];
-        var footer = ["", "", "", "", "", ""];
+
         header[5] = header[5] + "(" + TUser.get().currency + ")";
 
         var metadata = {
@@ -62726,53 +62724,17 @@ var ProfitTableUI = (function(){
             cols: columns
         };
         var data = [];
-        var $tableContainer = Table.createFlexTable(data, metadata, header, footer);
+        var $tableContainer = Table.createFlexTable(data, metadata, header);
         return $tableContainer;
     }
 
     function updateStatementTable(transactions){
         Table.appendTableBody(tableID, transactions, createStatementRow);
-        updateStatementFooter(transactions);
-        $("#" + tableID +">tfoot").show();
     }
 
     function clearTableContent(){
         Table.clearTableBody(tableID);
         $("#" + tableID +">tfoot").hide();
-    }
-
-
-    function updateStatementFooterBalance(balance){
-        if (!document.getElementById("statement-table")){
-            return;
-        }
-
-        $("#statement-table > tfoot > tr").
-            first().
-            children(".bal").
-            text(Number(parseFloat(balance.balance)).toFixed(2));
-    }
-
-    function updateStatementFooter(transactions){
-        TradeSocket.send({balance: 1, passthrough: {purpose: "statement_footer"}});
-        var accCredit = document.querySelector("#statement-table > tfoot > tr > .credit").textContent;
-        accCredit = parseFloat(accCredit);
-        if (isNaN(accCredit)) {
-            accCredit = 0;
-        }
-
-        var newCredits = transactions.reduce(function(p, c){ return p + parseFloat(c.amount); }, 0);
-
-        var totalCredit = accCredit + newCredits;
-        totalCredit = Number(totalCredit).toFixed(2);
-
-        var $footerRow = $("#" + tableID + " > tfoot > tr").first();
-        var creditCell = $footerRow.children(".credit");
-        var creditType = (totalCredit >= 0) ? "profit" : "loss";
-
-        creditCell.text(totalCredit);
-        creditCell.removeClass("profit").removeClass("loss");
-        creditCell.addClass(creditType);
     }
 
     function createStatementRow(transaction){
@@ -62800,8 +62762,7 @@ var ProfitTableUI = (function(){
     return {
         clearTableContent: clearTableContent,
         createEmptyStatementTable: createEmptyStatementTable,
-        updateStatementTable: updateStatementTable,
-        updateStatementFooterBalance: updateStatementFooterBalance
+        updateStatementTable: updateStatementTable
     };
 }());
 ;//////////////////////////////////////////////////////////////////
