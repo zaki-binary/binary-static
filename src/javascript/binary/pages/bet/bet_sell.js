@@ -836,19 +836,9 @@ var BetSell = function() {
             return {
                 selector: dom_element,
                 url: function() { return dom_element.attr('url'); },
-                model: {
-                    shortcode: function() { return dom_element.attr('shortcode'); },
-                    currency: function () { return dom_element.attr('currency'); },
-                    purchase_price: function() { return dom_element.attr('purchase_price'); },
-                    payout: function() { return dom_element.attr('payout'); },
-                    sell_channel: function() { return dom_element.attr('sell_channel'); },
-                    controller_action: function () { return dom_element.attr('controller_action'); },
-                    tick_expiry: function() { return dom_element.attr('tick_expiry') || 0; },
-                    spread_bet: function() { return dom_element.attr('spread_bet') || 0; },
-                    is_expired: function() { return dom_element.attr('is_expired') || 0; }
-                }, // data_attr.model
+                contract_id: function() { return dom_element.attr('contract_id') }
             };
-        }, // data_attr
+        },
         streaming: function() {
             var _stream = null;
             var _update_from_stream = false;
