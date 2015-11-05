@@ -723,6 +723,28 @@ var BetSell = function() {
                 e.preventDefault();
                 _previous_button_clicked = this;
                 that.disable_button($this);
+                that.cancel_previous_analyse_request();
+                var attr = this.data_attr(element);
+                var params = this.get_params(element);
+                var $loading = $('#trading_init_progress');
+                if($loading){
+                    $loading.show();
+                }
+                _analyse_request = $.ajax(ajax_loggedin({
+                    url     : attr.url(),
+                    type    : 'POST',
+                    data    : params,
+                    success : function (data) {
+                    },
+                })).always(function () {
+                    if($loading){
+                        $loading.hide();
+                    }
+                    that.enable_button($this);
+                });
+
+
+
                 if (that.data_attr(this).model.tick_expiry()) {
                     that.only_show_chart(this);
                 } else if (that.data_attr(this).model.spread_bet()) {
@@ -730,7 +752,6 @@ var BetSell = function() {
                 } else {
                     that.sell_at_market(this);
                 }
-                that.enable_button($this);
                 return false;
             });
         },
