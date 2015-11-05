@@ -811,25 +811,9 @@ var BetSell = function() {
             this.reposition_confirmation();
             return con;
         },
-        only_show_chart: function(element) {
-            var that = this;
-            var attr = that.data_attr(element);
-            var params = that.get_params(element);
-
-            _analyse_request = $.ajax(ajax_loggedin({
-                url     : attr.url(),
-                type    : 'POST',
-                async   : true,
-                data    : params,
-                success : function (ajax_data) {
-                    var data = ajax_data;
-                    that.show_inpage_popup('<div class="inpage_popup_content_box"><div class="popup_bet_desc drag-handle">'+data.longcode+'</div><div id="tick_chart"></div></div>');
-                    TickDisplay.initialize(data);
-                },
-            })).always(function() {
-                that.enable_button($(element));
-            });
-
+        only_show_chart: function(data) {
+            this.show_inpage_popup('<div class="inpage_popup_content_box"><div class="popup_bet_desc drag-handle">'+data.longcode+'</div><div id="tick_chart"></div></div>');
+            TickDisplay.initialize(data);
         },
         data_attr: function (element) {
             var dom_element = $(element);
