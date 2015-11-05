@@ -423,7 +423,7 @@ var BetSell = function() {
                 // invoke submit after 2 seconds so settlement time differ from expiry date
             });
         },
-        sell_at_market: function (element) {
+        sell_at_market: function (data) {
             var that = this;
             var con = that.show_sell_at_market(data);
             var server_data = that.server_data();
@@ -703,27 +703,24 @@ var BetSell = function() {
         register: function () {
             var that = this;
             $('#profit-table, #portfolio-table, #bet_container, #statement-table').on('click', '.open_contract_details', function (e) {
-                var $this = $(this);
                 e.preventDefault();
                 _previous_button_clicked = this;
-                that.disable_button($this);
-                that.cancel_previous_analyse_request();
-                var attr = this.data_attr(element);
-                var params = this.get_params(element);
+                that.disable_button($(this));
                 var $loading = $('#trading_init_progress');
-                if($loading){
+                if($loading.length){
                     $loading.show();
                 }
                 _analyse_request = $.ajax(ajax_loggedin({
-                    url     : attr.url(),
+                    context : this,
+                    url     : page.url.url_for('trade/analyse_contract'),
                     type    : 'POST',
-                    data    : params,
+                    data    : "contract_id=" + encodeURIComponent($(this).attr('contract_id')),
                     success : function (data, textStatus, jqXHR) {
                         if (jqXHR.responseJSON) {
                             that.only_show_chart(data);
                         } else {
                             var html = $.parseHTML(data);
-                            if ($(html).find('#is_spread_contract')) {
+                            if ($(html).find('#is_spread_contract').length) {
                                 that.show_buy_sell(data);
                             } else {
                                 that.sell_at_market(data);
@@ -731,15 +728,15 @@ var BetSell = function() {
                         }
                     },
                 })).always(function () {
-                    if($loading){
+                    if($loading.length){
                         $loading.hide();
                     }
-                    that.enable_button($this);
+                    that.enable_button($(this));
                 });
             });
         },
         show_buy_sell: function(data) {
-            var con = that.show_spread_popup(data);
+            var con = this.show_spread_popup(data);
             if (con && !con.find('#status').hasClass('loss')) {
                 BetPrice.spread.stream($('#sell_extra_info_data').attr('sell_channel'));
             }
