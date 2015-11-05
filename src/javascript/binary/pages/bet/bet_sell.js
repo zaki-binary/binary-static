@@ -651,7 +651,6 @@ var BetSell = function() {
         sell_bet: function (element) {
             var that = this;
             var timeout = 60000;
-            var attr = this.data_attr(element);
             var data = this.get_params(element) + '&ajax_only=1';
             data += '&price=' + $('input[name="price"]', $('#sell_price_container')).val();
             this.cancel_previous_sell_request();
@@ -768,14 +767,6 @@ var BetSell = function() {
         only_show_chart: function(data) {
             this.show_inpage_popup('<div class="inpage_popup_content_box"><div class="popup_bet_desc drag-handle">'+data.longcode+'</div><div id="tick_chart"></div></div>');
             TickDisplay.initialize(data);
-        },
-        data_attr: function (element) {
-            var dom_element = $(element);
-            return {
-                selector: dom_element,
-                url: function() { return dom_element.attr('url'); },
-                contract_id: function() { return dom_element.attr('contract_id') }
-            };
         },
         streaming: function() {
             var _stream = null;
