@@ -701,10 +701,11 @@ var BetSell = function() {
         },
         register: function () {
             var that = this;
-            $('#profit-table, #portfolio-table, #bet_container, #statement-table').on('click', '.open_contract_details', function (e) {
+            $('#profit-table, #portfolio-table, #bet_container, #statement-table, #contract_confirmation_container').on('click', '.open_contract_details', function (e) {
                 e.preventDefault();
                 _previous_button_clicked = this;
                 that.disable_button($(this));
+                that.cancel_previous_analyse_request();
                 var $loading = $('#trading_init_progress');
                 if($loading.length){
                     $loading.show();
