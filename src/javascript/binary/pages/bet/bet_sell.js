@@ -755,37 +755,11 @@ var BetSell = function() {
                 return false;
             });
         },
-        show_buy_sell: function(element) {
-            var that = this;
-            var dom_element = $(element);
-            this.cancel_previous_analyse_request();
-            var attr = this.data_attr(element);
-            var params = this.get_params(element);
-            var $loading = $('#trading_init_progress');
-            if($loading){
-                $loading.show();
+        show_buy_sell: function(data) {
+            var con = that.show_spread_popup(data);
+            if (con && !con.find('#status').hasClass('loss')) {
+                BetPrice.spread.stream($('#sell_extra_info_data').attr('sell_channel'));
             }
-            _analyse_request = $.ajax(ajax_loggedin({
-                url     : attr.url(),
-                type    : 'POST',
-                async   : true,
-                data    : params,
-                success : function (data) {
-                    if($loading){
-                        $loading.hide();
-                    }
-                    var con = that.show_spread_popup(data);
-                    var closed = con.find('#status').hasClass('loss');
-                    if (!closed) {
-                        console.log('test');
-                        var field = $('#sell_extra_info_data');
-                        var sell_channel = field.attr('sell_channel');
-                        BetPrice.spread.stream(attr.model.sell_channel() ? attr.model.sell_channel() : sell_channel);
-                    }
-               },
-            })).always(function () {
-                that.enable_button(dom_element);
-            });
         },
         show_spread_popup: function(data) {
             var that = this;
