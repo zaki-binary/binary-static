@@ -161,6 +161,10 @@ var BetSell = function() {
                 data['is_negative'] = field.attr('is_negative');
                 data['is_forward_starting'] = field.attr('is_forward_starting');
                 data['trade_feed_delay'] = field.attr('trade_feed_delay');
+                data['currency'] = field.attr('currency');
+                data['purchase_price'] = field.attr('purchase_price');
+                data['shortcode'] = field.attr('shortcode');
+                data['payout'] = field.attr('payout');
             }
             return data;
         },
@@ -496,10 +500,10 @@ var BetSell = function() {
                    }
                 }
             });
-            that.model.currency(attr.model.currency());
-            that.model.shortcode(attr.model.shortcode());
-            that.model.payout(attr.model.payout());
-            that.model.purchase_price(attr.model.purchase_price());
+            that.model.currency(server_data.currency);
+            that.model.shortcode(server_data.shortcode);
+            that.model.payout(server_data.payout);
+            that.model.purchase_price(server_data.purchase_price);
             that.clear_warnings();
             var now_time_con = con.find('#now_time_container');
             if (now_time_con.length > 0 ) {
