@@ -714,7 +714,17 @@ var BetSell = function() {
                     url     : attr.url(),
                     type    : 'POST',
                     data    : params,
-                    success : function (data) {
+                    success : function (data, textStatus, jqXHR) {
+                        if (jqXHR.responseJSON) {
+                            that.only_show_chart(data);
+                        } else {
+                            var html = $.parseHTML(data);
+                            if ($(html).find('#is_spread_contract')) {
+                                that.show_buy_sell(data);
+                            } else {
+                                that.sell_at_market(data);
+                            }
+                        }
                     },
                 })).always(function () {
                     if($loading){
@@ -722,17 +732,6 @@ var BetSell = function() {
                     }
                     that.enable_button($this);
                 });
-
-
-
-                if (that.data_attr(this).model.tick_expiry()) {
-                    that.only_show_chart(this);
-                } else if (that.data_attr(this).model.spread_bet()) {
-                    that.show_buy_sell(this);
-                } else {
-                    that.sell_at_market(this);
-                }
-                return false;
             });
         },
         show_buy_sell: function(data) {
