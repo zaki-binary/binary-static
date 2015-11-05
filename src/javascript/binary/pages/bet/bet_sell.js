@@ -421,129 +421,109 @@ var BetSell = function() {
         },
         sell_at_market: function (element) {
             var that = this;
-            var dom_element = $(element);
-            this.cancel_previous_analyse_request();
-            var attr = this.data_attr(element);
-            var params = this.get_params(element);
-            var $loading = $('#trading_init_progress');
-            if($loading){
-                $loading.show();
-            }
-            _analyse_request = $.ajax(ajax_loggedin({
-                url     : attr.url(),
-                type    : 'POST',
-                async   : true,
-                data    : params,
-                success : function (data) {
-                    if($loading){
-                        $loading.hide();
-                    }
-                    var con = that.show_sell_at_market(data);
-                    var server_data = that.server_data();
-                    $('.tab_menu_container').tabs({
-                        load: function(event, ui){
-                           var load_live_chart = ui.tab.find(".ui-tabs-anchor").attr('load_live_chart');
-                           if (load_live_chart && load_live_chart == 1) {
-                               var symbol = ui.tab.find(".ui-tabs-anchor").attr('underlying_symbol');
-                               var liveChartConfig = new LiveChartConfig({ renderTo: 'analysis_live_chart', symbol: symbol, with_trades: 0, shift: 0});
-                               var time_obj = that.get_time_interval();
-                               if(time_obj['is_live'] && time_obj['is_live'] === 1) {
-                                    liveChartConfig.update( {
-                                        live: '10min'
-                                    });
-                               } else {
-                                   var from_date, to_date;
-                                   if (server_data.is_forward_starting > 0) {
-                                       if(server_data.trade_feed_delay > 0) {
-                                           from_date = that.get_date_from_seconds(time_obj['from_time'] - parseInt(server_data.trade_feed_delay));
-                                           to_date = that.get_date_from_seconds(time_obj['to_time'] + parseInt(server_data.trade_feed_delay));
-                                       }
-                                   } else {
-                                       from_date = that.get_date_from_seconds(time_obj['from_time'] - 5);
-                                       to_date = that.get_date_from_seconds(time_obj['to_time']);
-                                   }
+            var con = that.show_sell_at_market(data);
+            var server_data = that.server_data();
 
-                                   var display_marker = false;
-                                   if(time_obj['to_time'] - time_obj['from_time'] <= _diff_end_start_time) {
-                                       display_marker = true;
-                                   }
-
-                                   if(time_obj['force_tick']) {
-                                       liveChartConfig.update({
-                                           force_tick: true,
-                                       });
-                                   }
-
-                                   liveChartConfig.update({
-                                       interval: {
-                                           from: from_date,
-                                           to: to_date
-                                       },
-                                       with_markers: display_marker,
-                                   });
+            $('.tab_menu_container').tabs({
+                load: function(event, ui){
+                   var load_live_chart = ui.tab.find(".ui-tabs-anchor").attr('load_live_chart');
+                   if (load_live_chart && load_live_chart == 1) {
+                       var symbol = ui.tab.find(".ui-tabs-anchor").attr('underlying_symbol');
+                       var liveChartConfig = new LiveChartConfig({ renderTo: 'analysis_live_chart', symbol: symbol, with_trades: 0, shift: 0});
+                       var time_obj = that.get_time_interval();
+                       if(time_obj['is_live'] && time_obj['is_live'] === 1) {
+                            liveChartConfig.update( {
+                                live: '10min'
+                            });
+                       } else {
+                           var from_date, to_date;
+                           if (server_data.is_forward_starting > 0) {
+                               if(server_data.trade_feed_delay > 0) {
+                                   from_date = that.get_date_from_seconds(time_obj['from_time'] - parseInt(server_data.trade_feed_delay));
+                                   to_date = that.get_date_from_seconds(time_obj['to_time'] + parseInt(server_data.trade_feed_delay));
                                }
-                               configure_livechart();
-                               updateLiveChart(liveChartConfig);
-                               var barrier,
-                                   purchase_time = $('#trade_details_purchase_date').attr('epoch_time');
-                               if (!purchase_time) { // dont add barrier if its forward starting
-                                   if(server_data.barrier && server_data.barrier2) {
-                                       if (liveChartConfig.has_indicator('high')) {
-                                           live_chart.remove_indicator('high');
-                                       }
-                                       barrier = new LiveChartIndicator.Barrier({ name: "high", value: server_data.barrier, color: 'green', label: text.localize('High Barrier')});
-                                       live_chart.add_indicator(barrier);
-
-                                       if (liveChartConfig.has_indicator('low')) {
-                                           live_chart.remove_indicator('low');
-                                       }
-                                       barrier = new LiveChartIndicator.Barrier({ name: "low", value: server_data.barrier2, color: 'red', label: text.localize('Low Barrier')});
-                                       live_chart.add_indicator(barrier);
-
-                                   } else {
-                                       if (liveChartConfig.has_indicator('barrier')) {
-                                           live_chart.remove_indicator('barrier');
-                                       }
-                                       barrier = new LiveChartIndicator.Barrier({ name: "barrier", value: server_data.barrier, color: 'green', label: text.localize('Barrier')});
-                                       live_chart.add_indicator(barrier);
-                                   }
-                               }
-                               that.add_time_indicators(liveChartConfig);
+                           } else {
+                               from_date = that.get_date_from_seconds(time_obj['from_time'] - 5);
+                               to_date = that.get_date_from_seconds(time_obj['to_time']);
                            }
-                        }
-                    });
-                    that.model.currency(attr.model.currency());
-                    that.model.shortcode(attr.model.shortcode());
-                    that.model.payout(attr.model.payout());
-                    that.model.purchase_price(attr.model.purchase_price());
-                    that.clear_warnings();
-                    var now_time_con = con.find('#now_time_container');
-                    if (now_time_con.length > 0 ) {
-                        var stream_url = server_data.stream_url + '/' + server_data.sell_channel;
-                        that.streaming.start(stream_url);
-                        that.start_now_timer(con, 'now_time_container', 'trade_date_now'); // now timer
-                        that.create_date_timer(con.find('#trade_details_now_date'));
 
-                        var duration = now_time_con.attr('duration'); // need now duration to subtract from end duration
-                        if(parseInt(duration) > 0) { // if now duration is positive then start the timer for end date
-                            if(con.find('#end_time_container').attr('duration') !== '') {
-                                duration = parseInt(con.find('#end_time_container').attr('duration')) - parseInt(duration);
-                                if (duration > 0) {
-                                    that.start_end_timer(con, 'end_time_container', 'now_time_container', 'trade_date_end', duration); // end timer
-                                }
-                            }
+                           var display_marker = false;
+                           if(time_obj['to_time'] - time_obj['from_time'] <= _diff_end_start_time) {
+                               display_marker = true;
+                           }
+
+                           if(time_obj['force_tick']) {
+                               liveChartConfig.update({
+                                   force_tick: true,
+                               });
+                           }
+
+                           liveChartConfig.update({
+                               interval: {
+                                   from: from_date,
+                                   to: to_date
+                               },
+                               with_markers: display_marker,
+                           });
+                       }
+                       configure_livechart();
+                       updateLiveChart(liveChartConfig);
+                       var barrier,
+                           purchase_time = $('#trade_details_purchase_date').attr('epoch_time');
+                       if (!purchase_time) { // dont add barrier if its forward starting
+                           if(server_data.barrier && server_data.barrier2) {
+                               if (liveChartConfig.has_indicator('high')) {
+                                   live_chart.remove_indicator('high');
+                               }
+                               barrier = new LiveChartIndicator.Barrier({ name: "high", value: server_data.barrier, color: 'green', label: text.localize('High Barrier')});
+                               live_chart.add_indicator(barrier);
+
+                               if (liveChartConfig.has_indicator('low')) {
+                                   live_chart.remove_indicator('low');
+                               }
+                               barrier = new LiveChartIndicator.Barrier({ name: "low", value: server_data.barrier2, color: 'red', label: text.localize('Low Barrier')});
+                               live_chart.add_indicator(barrier);
+
+                           } else {
+                               if (liveChartConfig.has_indicator('barrier')) {
+                                   live_chart.remove_indicator('barrier');
+                               }
+                               barrier = new LiveChartIndicator.Barrier({ name: "barrier", value: server_data.barrier, color: 'green', label: text.localize('Barrier')});
+                               live_chart.add_indicator(barrier);
+                           }
+                       }
+                       that.add_time_indicators(liveChartConfig);
+                   }
+                }
+            });
+            that.model.currency(attr.model.currency());
+            that.model.shortcode(attr.model.shortcode());
+            that.model.payout(attr.model.payout());
+            that.model.purchase_price(attr.model.purchase_price());
+            that.clear_warnings();
+            var now_time_con = con.find('#now_time_container');
+            if (now_time_con.length > 0 ) {
+                var stream_url = server_data.stream_url + '/' + server_data.sell_channel;
+                that.streaming.start(stream_url);
+                that.start_now_timer(con, 'now_time_container', 'trade_date_now'); // now timer
+                that.create_date_timer(con.find('#trade_details_now_date'));
+
+                var duration = now_time_con.attr('duration'); // need now duration to subtract from end duration
+                if(parseInt(duration) > 0) { // if now duration is positive then start the timer for end date
+                    if(con.find('#end_time_container').attr('duration') !== '') {
+                        duration = parseInt(con.find('#end_time_container').attr('duration')) - parseInt(duration);
+                        if (duration > 0) {
+                            that.start_end_timer(con, 'end_time_container', 'now_time_container', 'trade_date_end', duration); // end timer
                         }
                     }
-                    if (con.find($('#sell_price_container')).length > 0) {
-                        that.sparkline.init(55);
-                        con.on('click', '#sell_at_market', function (e) { e.preventDefault(); that.on_sell_button_click('#sell_at_market', element); return false; });
-                    }
-                    that.update_high_low(true);
-                    that.reposition_confirmation();
-               },
-            })).always(function () {
-                that.enable_button(dom_element);
-            });
+                }
+            }
+            if (con.find($('#sell_price_container')).length > 0) {
+                that.sparkline.init(55);
+                con.on('click', '#sell_at_market', function (e) { e.preventDefault(); that.on_sell_button_click('#sell_at_market', element); return false; });
+            }
+            that.update_high_low(true);
+            that.reposition_confirmation();
         },
         start_end_timer: function (con, end_attr_selector_id, now_attr_selector_id, container_id, duration) {
             var that = this;
