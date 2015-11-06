@@ -525,7 +525,7 @@ var BetSell = function() {
             }
             if (con.find($('#sell_price_container')).length > 0) {
                 that.sparkline.init(55);
-                con.on('click', '#sell_at_market', function (e) { e.preventDefault(); that.on_sell_button_click('#sell_at_market', element); return false; });
+                con.on('click', '#sell_at_market', function (e) { e.preventDefault(); that.on_sell_button_click('#sell_at_market'); return false; });
             }
             that.update_high_low(true);
             that.reposition_confirmation();
@@ -620,12 +620,12 @@ var BetSell = function() {
         show_sell_at_market: function (data) {
             return this.show_inpage_popup('<div class="inpage_popup_content_box">' + data + '</div>');
         },
-        on_sell_button_click: function (target, element) {
+        on_sell_button_click: function (target) {
             this.disable_sell_button(target, true);
             this.streaming.stop();
             this.model.reload_page_on_close(true);
             this.show_loading();
-            this.sell_bet(element);
+            this.sell_bet();
         },
         cancel_previous_sell_request: function() {
             if (_sell_request) {
@@ -649,18 +649,18 @@ var BetSell = function() {
             var con = this.container();
             con.find('.loading').each( function () { $(this).hide().remove(); } );
         },
-        sell_bet: function (element) {
+        get_sell_bet_data: function () {
+            return 'controller_action=sell&purchase_price=' + this.server_data().purchase_price + '&currency=' + this.server_data().currency + '&shortcode=' + this.server_data().shortcode + '&contract_id=' + this.server_data().contract_id + '&payout=' + this.server_data().payout + '&price=' + $('input[name="price"]', $('#sell_price_container')).val() + '&ajax_only=1';
+        },
+        sell_bet: function () {
             var that = this;
             var timeout = 60000;
-            var data = this.get_params(element) + '&ajax_only=1';
-            data += '&price=' + $('input[name="price"]', $('#sell_price_container')).val();
             this.cancel_previous_sell_request();
-            var submit_url = this.server_data().submit_url;
             _sell_request = $.ajax(ajax_loggedin({
-                url     : submit_url,
+                url     : this.server_data().submit_url,
                 type    : 'POST',
                 async   : true,
-                data    : data,
+                data    : that.get_sell_bet_data(),
                 timeout : timeout,
                 success : function (resp, resp_status, jqXHR) {
                     that.on_sell_bet_success(resp, resp_status, jqXHR);
