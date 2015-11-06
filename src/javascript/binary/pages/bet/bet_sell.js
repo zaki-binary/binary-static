@@ -5,7 +5,6 @@ var BetSell = function() {
     var _sell_button_disabled = false;
     var _timer_interval_obj = {};
     var _timeout_variables = {};
-    var _previous_button_clicked = null;
     var _diff_end_start_time = 300; // we show point markers if end time start time difference is <= than this (5 minutes default)
     var _model = {
         currency: null,
@@ -15,7 +14,6 @@ var BetSell = function() {
         reload_page_on_close: false,
     };
     return {
-        change_prev_button:function(prev_button){_previous_button_clicked = prev_button;},
         _init: function () {
             _sell_request = null;
             _analyse_request = null;
@@ -23,7 +21,6 @@ var BetSell = function() {
             _sell_button_disabled = false;
             _timer_interval_obj = {};
             _timeout_variables = {};
-            _previous_button_clicked = null;
             _model = {
                 currency: null,
                 shortcode: null,
@@ -417,9 +414,10 @@ var BetSell = function() {
             this.add_overlay();
             $('#reload_sell_container').show();
             $('#reload_sell_container').on('click', '#reload_sell', function () {
+                var contractId = that.server_data().contract_id;
                 that.close_container();
                 _timeout_variables[Object.keys(_timeout_variables).length] = setTimeout(function() {
-                    that.sell_at_market(_previous_button_clicked);
+                    that.get_analyse_contract(contractId);
                 }, 2000);
                 // invoke submit after 2 seconds so settlement time differ from expiry date
             });
@@ -700,40 +698,46 @@ var BetSell = function() {
             }
             this.show_warning(details, true);
         },
+        get_analyse_contract: function (contract_id, clicked_button) {
+            if (clicked_button) {
+                this.disable_button($(clicked_button));
+            }
+            this.cancel_previous_analyse_request();
+            var $loading = $('#trading_init_progress');
+            if($loading.length){
+                $loading.show();
+            }
+            _analyse_request = $.ajax(ajax_loggedin({
+                context : this,
+                url     : page.url.url_for('trade/analyse_contract'),
+                type    : 'POST',
+                data    : "contract_id=" + encodeURIComponent(contract_id),
+                success : function (data, textStatus, jqXHR) {
+                    if (jqXHR.responseJSON) {
+                        this.only_show_chart(data);
+                    } else {
+                        var html = $.parseHTML(data);
+                        if ($(html).find('#is_spread_contract').length) {
+                            this.show_buy_sell(data);
+                        } else {
+                            this.sell_at_market(data);
+                        }
+                    }
+                },
+            })).always(function () {
+                if($loading.length){
+                    $loading.hide();
+                }
+                if (clicked_button) {
+                    this.enable_button($(clicked_button));
+                }
+            });
+        },
         register: function () {
             var that = this;
-            $('#profit-table, #portfolio-table, #bet_container, #statement-table, #contract_confirmation_container').on('click', '.open_contract_details', function (e) {
+            $('#profit-table, #portfolio-table, #bet_calculation_container, #statement-table, #contract_confirmation_container').on('click', '.open_contract_details', function (e) {
                 e.preventDefault();
-                _previous_button_clicked = this;
-                that.disable_button($(this));
-                that.cancel_previous_analyse_request();
-                var $loading = $('#trading_init_progress');
-                if($loading.length){
-                    $loading.show();
-                }
-                _analyse_request = $.ajax(ajax_loggedin({
-                    context : this,
-                    url     : page.url.url_for('trade/analyse_contract'),
-                    type    : 'POST',
-                    data    : "contract_id=" + encodeURIComponent($(this).attr('contract_id')),
-                    success : function (data, textStatus, jqXHR) {
-                        if (jqXHR.responseJSON) {
-                            that.only_show_chart(data);
-                        } else {
-                            var html = $.parseHTML(data);
-                            if ($(html).find('#is_spread_contract').length) {
-                                that.show_buy_sell(data);
-                            } else {
-                                that.sell_at_market(data);
-                            }
-                        }
-                    },
-                })).always(function () {
-                    if($loading.length){
-                        $loading.hide();
-                    }
-                    that.enable_button($(this));
-                });
+                that.get_analyse_contract($(this).attr('contract_id'), this);
             });
         },
         show_buy_sell: function(data) {
