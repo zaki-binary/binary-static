@@ -6,7 +6,7 @@ var ViewBalanceUI = (function(){
         var currency = balance.currency;
         var view = currency.toString() + " " + bal.toString();
 
-        $("#balance").text(Content.localize().textBalance + ": " + view);
+        $("#balance").text(view);
     }
 
     return {
