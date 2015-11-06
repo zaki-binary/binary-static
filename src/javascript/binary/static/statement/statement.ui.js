@@ -52,6 +52,20 @@ var StatementUI = (function(){
         $statementRow.children(".credit").addClass(creditDebitType);
         $statementRow.children(".date").addClass("break-line");
 
+        //create view button and append
+        var $viewButtonSpan = Button.createBinaryStyledButton();
+        var $viewButton = $viewButtonSpan.children(".button").first();
+        $viewButton.text(text.localize("View"));
+        $viewButton.addClass("open_contract_details");
+        $viewButton.attr("contract_id", transaction["contract_id"]);
+
+        $statementRow.
+            children(".desc").
+            first().
+            append("<br>").
+            append($viewButtonSpan);
+
+
         return $statementRow[0];        //return DOM instead of jquery object
     }
     
