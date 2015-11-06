@@ -655,7 +655,7 @@ var BetSell = function() {
             var timeout = 60000;
             this.cancel_previous_sell_request();
             _sell_request = $.ajax(ajax_loggedin({
-                url     : this.server_data().submit_url,
+                url     : that.server_data().submit_url,
                 type    : 'POST',
                 async   : true,
                 data    : that.get_sell_bet_data(),
@@ -723,6 +723,9 @@ var BetSell = function() {
                             this.sell_at_market(data);
                         }
                     }
+                },
+                error   : function (jqXHR, resp_status, exp) {
+                    this.show_sell_at_market(text.localize("Please try again."));
                 },
             })).always(function () {
                 if($loading.length){
