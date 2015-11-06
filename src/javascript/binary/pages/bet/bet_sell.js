@@ -165,6 +165,7 @@ var BetSell = function() {
                 data['purchase_price'] = field.attr('purchase_price');
                 data['shortcode'] = field.attr('shortcode');
                 data['payout'] = field.attr('payout');
+                data['contract_id'] = field.attr('contract_id');
             }
             return data;
         },
