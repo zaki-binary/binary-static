@@ -158,7 +158,9 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                e.target.value = parseFloat(e.target.value).toFixed(2);
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('amount', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -337,6 +339,9 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('amount_per_point',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -364,7 +369,9 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
-                e.target.value = parseFloat(e.target.value).toFixed(2);
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('stop_loss',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -377,7 +384,9 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
-                e.target.value = parseFloat(e.target.value).toFixed(2);
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = parseFloat(e.target.value).toFixed(2);
+                }
                 sessionStorage.setItem('stop_profit',e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
@@ -415,20 +424,6 @@ var TradingEvents = (function () {
                 load_with_pjax(url);
             }));
         }
-
-        var view_button = document.getElementById('contract_purchase_button');
-        if(view_button){
-            view_button.addEventListener('click', debounce( function (e) {
-                BetSell.change_prev_button(e.target);
-                if(sessionStorage.getItem('formname')==='spreads'){
-                    BetSell.show_buy_sell(e.target);
-                }
-                else{
-                    BetSell.sell_at_market(e.target);           
-                }
-            }));
-        }
-
 
         /*
          * attach datepicker and timepicker to end time durations
