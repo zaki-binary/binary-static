@@ -55978,7 +55978,7 @@ BetForm.Time.EndTime.prototype = {
             }
             this.show_warning(details, true);
         },
-        get_analyse_contract: function (contract_id, clicked_button) {
+        get_analyse_contract: function (contract_id, bologinid, clicked_button) {
             if (clicked_button) {
                 this.disable_button($(clicked_button));
             }
@@ -55987,11 +55987,15 @@ BetForm.Time.EndTime.prototype = {
             if($loading.length){
                 $loading.show();
             }
+            var data = "contract_id=" + encodeURIComponent(contract_id);
+            if (bologinid) {
+                data += '&bo_client=' + encodeURIComponent(bologinid);
+            }
             _analyse_request = $.ajax(ajax_loggedin({
                 context : this,
                 url     : page.url.url_for('trade/analyse_contract'),
                 type    : 'POST',
-                data    : "contract_id=" + encodeURIComponent(contract_id),
+                data    : data,
                 success : function (data, textStatus, jqXHR) {
                     if (jqXHR.responseJSON) {
                         this.only_show_chart(data);
@@ -56020,7 +56024,7 @@ BetForm.Time.EndTime.prototype = {
             var that = this;
             $('#profit-table, #portfolio-table, #bet_calculation_container, #statement-table, #contract_confirmation_container').on('click', '.open_contract_details', function (e) {
                 e.preventDefault();
-                that.get_analyse_contract($(this).attr('contract_id'), this);
+                that.get_analyse_contract($(this).attr('contract_id'), $(this).attr('bo_client'), this);
             });
         },
         show_buy_sell: function(data) {
