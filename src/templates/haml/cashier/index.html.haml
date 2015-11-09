@@ -27,13 +27,13 @@
 #payment-agent-section.grd-row-padding.table-body.ja-hide
   .grd-grid-2.grd-grid-mobile-4
     .grd-grid-12
-      %a.pjaxload{:href => url_for('/cashier/payment_agent_list'), :id => 'payment_agent'}
+      %a{:href => url_for('/cashier/payment_agent_list'), :id => 'payment_agent'}
         %img#payment_agent_icon.responsive.charting-page-icon{:src => url_for('images/pages/cashier/payment-agents.svg')}
   .grd-grid-5.grd-grid-mobile-12
     %p= l('You can use an authorized payment agent to process deposits and withdrawals for e-cash methods or local currencies not supported by [_1].', stash->{website_name})
   .grd-grid-5.grd-grid-mobile-12
     .grd-row-padding
-      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/payment_agent_list')}
+      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/payment_agent_list')}
         %span= l('Deposit To Payment Agent')
     .grd-row-padding
       %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/paymentagent/withdraw')}
