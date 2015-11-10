@@ -17,10 +17,10 @@
     %a.pjaxload.ja-hide#view_payment_methods{:href=>url_for('cashier/payment_methods')}= l('View available payment methods')
   .grd-grid-5.grd-grid-mobile-12
     .grd-row-padding
-      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies.button_cashier{ :href => stash('deposit_url') }
+      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies{ :href => stash('deposit_url') }
         %span= l('Deposit')
     .grd-row-padding
-      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies.button_cashier{ :href => stash('withdraw_url') }
+      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies{ :href => stash('withdraw_url') }
         %span= l('Withdraw')
 
 .grd-row-padding
@@ -38,10 +38,10 @@
     %p.faded= l('Note: Withdrawal via payment agent is available only if you deposit exclusively via payment agent')
   .grd-grid-5.grd-grid-mobile-12
     .grd-row-padding
-      %a.button.button_large.by_client_type.client_real.with_login_cookies.button_cashier{:href => url_for('/cashier/payment_agent_list')}
+      %a.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/cashier/payment_agent_list')}
         %span= l('Deposit')
     .grd-row-padding
-      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies.button_cashier{:href => url_for('/paymentagent/withdraw')}
+      %a.pjaxload.button.button_large.by_client_type.client_real.with_login_cookies{:href => url_for('/paymentagent/withdraw')}
         %span= l('Withdraw')
 
 #account-transfer-section.grd-row-padding.table-body.ja-hide
