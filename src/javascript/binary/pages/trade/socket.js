@@ -41,42 +41,48 @@ var TradeSocket = (function () {
     };
 
     var init = function () {
-        if(!isClose()){
-            return;
+        if(typeof tradeSocket === 'undefined'){
+            tradeSocket = new WebSocket(socketUrl);
+
+            tradeSocket.onopen = function (){
+                var loginToken = getCookieItem('login');
+                if(loginToken) {
+                    tradeSocket.send(JSON.stringify({authorize: loginToken}));
+                } else {
+                    tradeSocket.send(JSON.stringify({ payout_currencies: 1 }));
+                }
+                sendBufferedSends();
+            };
+
+            tradeSocket.onmessage = function (msg){
+                Message.process(msg);
+            };
+
+            tradeSocket.onclose = function (e) {
+                // clear buffer ids of price and ticks as connection is closed
+                Price.clearMapping();
+                Price.clearFormId();
+
+                if(e===1){
+                    isClosedOnNavigation = true;
+                }
+                // if not closed on navigation start it again as server may have closed it
+                else if(!isClosedOnNavigation){
+                    processMarketUnderlying();
+                }
+                // set it again to false as it class variables
+                else{
+                    isClosedOnNavigation = false;
+                }
+            };
+
+            tradeSocket.onerror = function (error) {
+                console.log('socket error', error);
+            };
         }
-
-        tradeSocket = new WebSocket(socketUrl);
-
-        tradeSocket.onopen = function (){
-            var loginToken = getCookieItem('login');
-            if(loginToken) {
-                tradeSocket.send(JSON.stringify({authorize: loginToken}));
-            } else {
-                tradeSocket.send(JSON.stringify({ payout_currencies: 1 }));
-            }
-            sendBufferedSends();
-        };
-
-        tradeSocket.onmessage = function (msg){
-            Message.process(msg);
-        };
-
-        tradeSocket.onclose = function (e) {
-            // clear buffer ids of price and ticks as connection is closed
-            Price.clearMapping();
-            Price.clearFormId();
-            // if not closed on navigation start it again as server may have closed it
-            if (!isClosedOnNavigation) {
-                processMarketUnderlying();
-            }
-            // set it again to false as it class variables
-            isClosedOnNavigation = false;
-            init();
-        };
-
-        tradeSocket.onerror = function (error) {
-            console.log('socket error', error);
-        };
+        else {
+            tradeSocket.onopen();
+        }
     };
 
     var send = function(data) {
