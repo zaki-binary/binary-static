@@ -44,7 +44,7 @@ var TradeSocket = (function () {
         if(!isClose()){
             return;
         }
-
+        
         tradeSocket = new WebSocket(socketUrl);
 
         tradeSocket.onopen = function (){
@@ -84,7 +84,6 @@ var TradeSocket = (function () {
         tradeSocket.onerror = function (error) {
             console.log('socket error', error);
         };
-
     };
 
     var send = function(data) {
