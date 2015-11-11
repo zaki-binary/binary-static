@@ -41,6 +41,10 @@ var TradeSocket = (function () {
     };
 
     var init = function () {
+        if(!isClose()){
+            return;
+        }
+
         tradeSocket = new WebSocket(socketUrl);
 
         tradeSocket.onopen = function (){
@@ -67,6 +71,7 @@ var TradeSocket = (function () {
             }
             // set it again to false as it class variables
             isClosedOnNavigation = false;
+            init();
         };
 
         tradeSocket.onerror = function (error) {
