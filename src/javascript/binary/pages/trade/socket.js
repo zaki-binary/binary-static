@@ -78,6 +78,8 @@ var TradeSocket = (function () {
                 else{
                     isClosedOnNavigation = false;
                 }
+
+                init();
             };
 
             tradeSocket.onerror = function (error) {
