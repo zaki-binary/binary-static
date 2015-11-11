@@ -51937,17 +51937,17 @@ pjax_config_page('chart_application', function () {
 pjax_config_page('trading', function () {
     return {
         onLoad: function () {
+            TradeSocket.init();
             TradingEvents.init();
             Content.populate();
-            TradeSocket.init();
             Symbols.getSymbols(1);
             if (document.getElementById('websocket_form')) {
                 addEventListenerForm();
             }
         },
         onUnload: function() {
-            TradeSocket.setClosedFlag(true);
-            TradeSocket.close();
+            forgetTradingStreams();
+            TradeSocket.socket().onclose(1);
         }
     };
 });
@@ -58350,11 +58350,6 @@ onLoad.queue_for_url(function () {
     self_exclusion_date_picker();
     self_exclusion_validate_date();
 }, 'self_exclusion');
-;onLoad.queue_for_url(function() {
-    $('#statement-date').on('change', function() {
-        $('#submit-date').removeClass('invisible');
-    });
-}, 'statement');
 ;/*
  * This file contains the code related to loading of trading page bottom analysis
  * content. It will contain jquery so as to compatible with old code and less rewrite
@@ -60918,8 +60913,7 @@ function processActiveSymbols(data) {
     displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
     setTimeout(function(){
-        if(TradeSocket.socket().readyState === 1){
-            var underlying = document.getElementById('underlying').value;
+        if(document.getElementById('underlying')){
             Symbols.getSymbols(0);
         }
     }, 60*1000);
@@ -61118,6 +61112,10 @@ function displaySpreads() {
     }
 }
 
+function forgetTradingStreams(){
+    processForgetProposals();
+    processForgetTicks();
+}
 /*
  * Function to request for cancelling the current price proposal
  */
@@ -61429,37 +61427,48 @@ var TradeSocket = (function () {
     };
 
     var init = function () {
-        tradeSocket = new WebSocket(socketUrl);
+        if(typeof tradeSocket === 'undefined'){
+            tradeSocket = new WebSocket(socketUrl);
 
-        tradeSocket.onopen = function (){
-            var loginToken = getCookieItem('login');
-            if(loginToken) {
-                tradeSocket.send(JSON.stringify({authorize: loginToken}));
-            } else {
-                tradeSocket.send(JSON.stringify({ payout_currencies: 1 }));
-            }
-            sendBufferedSends();
-        };
+            tradeSocket.onopen = function (){
+                var loginToken = getCookieItem('login');
+                if(loginToken) {
+                    tradeSocket.send(JSON.stringify({authorize: loginToken}));
+                } else {
+                    tradeSocket.send(JSON.stringify({ payout_currencies: 1 }));
+                }
+                sendBufferedSends();
+            };
 
-        tradeSocket.onmessage = function (msg){
-            Message.process(msg);
-        };
+            tradeSocket.onmessage = function (msg){
+                Message.process(msg);
+            };
 
-        tradeSocket.onclose = function (e) {
-            // clear buffer ids of price and ticks as connection is closed
-            Price.clearMapping();
-            Price.clearFormId();
-            // if not closed on navigation start it again as server may have closed it
-            if (!isClosedOnNavigation) {
-                processMarketUnderlying();
-            }
-            // set it again to false as it class variables
-            isClosedOnNavigation = false;
-        };
+            tradeSocket.onclose = function (e) {
+                // clear buffer ids of price and ticks as connection is closed
+                Price.clearMapping();
+                Price.clearFormId();
 
-        tradeSocket.onerror = function (error) {
-            console.log('socket error', error);
-        };
+                if(e===1){
+                    isClosedOnNavigation = true;
+                }
+                // if not closed on navigation start it again as server may have closed it
+                else if(!isClosedOnNavigation){
+                    processMarketUnderlying();
+                }
+                // set it again to false as it class variables
+                else{
+                    isClosedOnNavigation = false;
+                }
+            };
+
+            tradeSocket.onerror = function (error) {
+                console.log('socket error', error);
+            };
+        }
+        else {
+            tradeSocket.onopen();
+        }
     };
 
     var send = function(data) {
@@ -62257,12 +62266,11 @@ var Table = (function(){
 pjax_config_page("profit_tablews", function(){
     return {
         onLoad: function() {
-            Content.populate();
             TradeSocket.init();
+            Content.populate();
             ProfitTableWS.init();
         },
         onUnload: function(){
-            TradeSocket.close();
             ProfitTableWS.clean();
         }
     };
@@ -62499,16 +62507,15 @@ var ProfitTableUI = (function(){
         initDatepicker: initDatepicker,
         cleanTableContent: clearTableContent
     };
-}());;pjax_config_page("statementws", function(){
+}());;pjax_config_page("statement", function(){
     return {
         onLoad: function() {
-            Content.populate();
             TradeSocket.init();
+            Content.populate();
             StatementWS.init();
         },
         onUnload: function(){
             StatementWS.clean();
-            TradeSocket.close();
         }
     };
 });
