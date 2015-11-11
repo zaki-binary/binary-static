@@ -41,6 +41,10 @@ var TradeSocket = (function () {
     };
 
     var init = function () {
+        if(!isClose()){
+            return;
+        }
+
         if(typeof tradeSocket === 'undefined'){
             tradeSocket = new WebSocket(socketUrl);
 
@@ -74,6 +78,8 @@ var TradeSocket = (function () {
                 else{
                     isClosedOnNavigation = false;
                 }
+
+                init();
             };
 
             tradeSocket.onerror = function (error) {
