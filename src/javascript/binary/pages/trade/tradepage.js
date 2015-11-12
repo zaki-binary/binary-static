@@ -1,12 +1,23 @@
 var TradePage = (function(){
 	
 	var onLoad = function(){
+		if(sessionStorage.getItem('currencies')){
+			displayCurrencies();
+		}		
 		BinarySocket.init({
 			onmessage: function(msg){
 				Message.process(msg);
 			},
 			onclose: function(){
 				processMarketUnderlying();
+			},
+			onauth: function(){
+				if(!sessionStorage.getItem('currencies')){
+					BinarySocket.send({ payout_currencies: 1 });
+				}
+				else{
+					displayCurrencies();
+				}			
 			}
 		});
 		Price.clearFormId();

@@ -52,15 +52,6 @@ var BinarySocket = (function () {
         }
     };
 
-    var sendAuth = function(){
-        var loginToken = getCookieItem('login');
-        if(loginToken) {
-            send({authorize: loginToken});
-        } else {
-            send({payout_currencies: 1});
-        }
-    };
-
     var init = function (es) {
 
         if(!es){
@@ -75,21 +66,34 @@ var BinarySocket = (function () {
         if(isClose()){
             binarySocket = new WebSocket(socketUrl);
         }
-        else{
-            sendAuth();
-        }
         
         binarySocket.onopen = function (){
-            sendAuth();
-            sendBufferedSends();
+            var loginToken = getCookieItem('login');
+            if(loginToken) {
+                send({authorize: loginToken});
+            }
+            else{
+                sendBufferedSends();
+            }
             if(typeof events.onopen === 'function'){
                 events.onopen();
             }
         };
 
         binarySocket.onmessage = function (msg){
-            if(typeof events.onmessage === 'function'){
-                events.onmessage(msg);
+            var response = JSON.parse(msg.data);
+            if (response) {
+                var type = response.msg_type;
+                if (type === 'authorize') {
+                    TUser.set(response.authorize);
+                    if(typeof events.onauth === 'function'){
+                        events.onauth();
+                    }
+                    sendBufferedSends();
+                }
+                if(typeof events.onmessage === 'function'){
+                    events.onmessage(msg);
+                }
             }
         };
 
