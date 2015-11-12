@@ -1,5 +1,5 @@
 
-pjax_config_page("profit_table", function(){
+pjax_config_page("profit_tablews", function(){
     return {
         onLoad: function() {
             TradeSocket.init();
