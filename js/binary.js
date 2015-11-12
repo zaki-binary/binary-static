@@ -58312,11 +58312,6 @@ function initialize_pricing_table() {
 }
 
 onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
-;onLoad.queue_for_url(function() {
-    $('#profit-table-date').on('change', function() {
-        $('#submit-date').removeClass('invisible');
-    });
-}, 'profit_table');
 ;
 var self_exclusion_date_picker = function () {
     // 6 months from now
@@ -62327,7 +62322,7 @@ var Table = (function(){
         appendTableBody: appendTableBody
     };
 }());;
-pjax_config_page("profit_tablews", function(){
+pjax_config_page("profit_table", function(){
     return {
         onLoad: function() {
             TradeSocket.init();
