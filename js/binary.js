@@ -58350,7 +58350,11 @@ onLoad.queue_for_url(function () {
     self_exclusion_date_picker();
     self_exclusion_validate_date();
 }, 'self_exclusion');
-;/*
+;onLoad.queue_for_url(function() {
+    $('#statement-date').on('change', function() {
+        $('#submit-date').removeClass('invisible');
+    });
+}, 'statement');;/*
  * This file contains the code related to loading of trading page bottom analysis
  * content. It will contain jquery so as to compatible with old code and less rewrite
  *
@@ -62323,7 +62327,7 @@ var Table = (function(){
         appendTableBody: appendTableBody
     };
 }());;
-pjax_config_page("profit_table", function(){
+pjax_config_page("profit_tablews", function(){
     return {
         onLoad: function() {
             TradeSocket.init();
@@ -62567,7 +62571,7 @@ var ProfitTableUI = (function(){
         initDatepicker: initDatepicker,
         cleanTableContent: clearTableContent
     };
-}());;pjax_config_page("statement", function(){
+}());;pjax_config_page("statementws", function(){
     return {
         onLoad: function() {
             TradeSocket.init();
