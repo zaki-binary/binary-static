@@ -86,10 +86,10 @@ var BinarySocket = (function () {
                 var type = response.msg_type;
                 if (type === 'authorize') {
                     TUser.set(response.authorize);
-                    sendBufferedSends();
                     if(typeof events.onauth === 'function'){
                         events.onauth();
                     }
+                    sendBufferedSends();
                 }
                 if(typeof events.onmessage === 'function'){
                     events.onmessage(msg);
