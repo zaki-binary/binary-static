@@ -9,12 +9,6 @@ var TradePage = (function(){
 				processMarketUnderlying();
 			}
 		});
-		var loginToken = getCookieItem('login');
-		if(loginToken) {
-		    BinarySocket.send({authorize: loginToken});
-		} else {
-		    BinarySocket.send({payout_currencies: 1});
-		}
 		Price.clearFormId();
 		TradingEvents.init();
 		Content.populate();
