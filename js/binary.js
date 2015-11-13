@@ -49866,7 +49866,7 @@ Page.prototype = {
         this.record_affiliate_exposure();
         this.contents.on_load();
         this.on_click_acc_transfer();
-        this.on_click_view_balances();
+        ViewBalance.init();
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
@@ -49895,34 +49895,6 @@ Page.prototype = {
                 return false;
             }
             $('#acc_transfer_submit').submit();
-        });
-    },
-    on_click_view_balances: function() {
-        $('#view-balances').on('click', function(event) {
-            event.preventDefault();
-            if ($(this).hasClass("disabled")) {
-                return false;
-            }
-            $(this).addClass("disabled");
-
-            $.ajax({
-                url: page.url.url_for('user/balance'),
-                dataType: 'text',
-                success: function (data) {
-                    var outer = $('#client-balances');
-                    if (outer) outer.remove();
-
-                    outer = $("<div id='client-balances' class='lightbox'></div>").appendTo('body');
-                    middle = $('<div />').appendTo(outer);
-                    $('<div>' + data + '</div>').appendTo(middle);
-
-                    $('#client-balances [bcont=1]').on('click', function () {
-                        $('#client-balances').remove();
-                    });
-                },
-            }).always(function() {
-                $('#view-balances').removeClass("disabled");
-            });
         });
     },
 
@@ -62047,7 +62019,8 @@ var BinarySocket = (function () {
         socketUrl = "wss://"+window.location.host+"/websockets/v3",
         bufferedSends = [],
         manualClosed = false,
-        events = {};
+        events = {},
+        authorized = false;
 
     if (page.language()) {
         socketUrl += '?l=' + page.language();
@@ -62072,9 +62045,12 @@ var BinarySocket = (function () {
     };
 
     var send = function(data) {
+
         if (isClose()) {
             bufferedSends.push(data);
             init(1);
+        } else if (!authorized){
+            bufferedSends.push(data);
         } else if (isReady()) {
             binarySocket.send(JSON.stringify(data));
         } else {
@@ -62098,29 +62074,37 @@ var BinarySocket = (function () {
         }
         
         binarySocket.onopen = function (){
+
             var loginToken = getCookieItem('login');
             if(loginToken) {
-                send({authorize: loginToken});
+                binarySocket.send(JSON.stringify({authorize: loginToken}));
             }
-            else{
+            else {
                 sendBufferedSends();
             }
+
             if(typeof events.onopen === 'function'){
                 events.onopen();
             }
         };
 
         binarySocket.onmessage = function (msg){
+
             var response = JSON.parse(msg.data);
             if (response) {
                 var type = response.msg_type;
                 if (type === 'authorize') {
+                    authorized = true;
                     TUser.set(response.authorize);
                     if(typeof events.onauth === 'function'){
                         events.onauth();
                     }
+                    send({balance:1, subscribe: 1});
                     sendBufferedSends();
+                } else if (type === 'balance') {
+                    ViewBalanceUI.updateBalances(response.balance);
                 }
+
                 if(typeof events.onmessage === 'function'){
                     events.onmessage(msg);
                 }
@@ -62128,6 +62112,9 @@ var BinarySocket = (function () {
         };
 
         binarySocket.onclose = function (e) {
+
+            authorized = false;
+
             if(!manualClosed){
                 init(1);
             }
@@ -62327,7 +62314,6 @@ var Table = (function(){
 
         return $tr;
     }
-
 
     function clearTableBody(id){
         var tbody = document.querySelector("#" + id +">tbody");
@@ -62632,7 +62618,6 @@ var ProfitTableUI = (function(){
         }
     };
 });
-
 ;var StatementData = (function(){
     "use strict";
     var hasOlder = true;
@@ -62840,6 +62825,34 @@ var ProfitTableUI = (function(){
         clearTableContent: clearTableContent,
         createEmptyStatementTable: createEmptyStatementTable,
         updateStatementTable: updateStatementTable
+    };
+}());
+;
+var ViewBalance = (function () {
+    function init(){
+        BinarySocket.init(1);
+    }
+
+    return {
+        init: init
+    };
+}());;
+var ViewBalanceUI = (function(){
+
+    function updateBalances(balance){
+        var bal = Number(parseFloat(balance.balance)).toFixed(2);
+        var currency = balance.currency;
+        var view = currency.toString() + " " + bal.toString();
+
+        if(!currency){
+            return;
+        }
+
+        $("#balance").text(view);
+    }
+
+    return {
+        updateBalances: updateBalances
     };
 }());
 ;//////////////////////////////////////////////////////////////////
