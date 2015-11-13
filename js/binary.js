@@ -62369,11 +62369,21 @@ var Table = (function(){
         appendTableBody: appendTableBody
     };
 }());;
+
 pjax_config_page("profit_table", function(){
     return {
         onLoad: function() {
             BinarySocket.init({
-                onmessage: Message.process
+                onmessage: function(msg){
+                    var response = JSON.parse(msg.data);
+
+                    if (response) {
+                        var type = response.msg_type;
+                        if (type === 'profit_table'){
+                            ProfitTableWS.profitTableHandler(response);
+                        }
+                    }
+                }
             });
             Content.populate();
             ProfitTableWS.init();
@@ -62471,7 +62481,7 @@ var ProfitTableWS = (function () {
                 return;
             }
 
-            if (pFromTop < hidableHeight(70)) {
+            if (pFromTop < hidableHeight(50)) {
                 return;
             }
 
@@ -62619,7 +62629,16 @@ var ProfitTableUI = (function(){
     return {
         onLoad: function() {
             BinarySocket.init({
-                onmessage: Message.process
+                onmessage: function(msg){
+                    var response = JSON.parse(msg.data);
+
+                    if (response) {
+                        var type = response.msg_type;
+                        if (type === 'statement'){
+                            StatementWS.statementHandler(response);
+                        }
+                    }
+                }
             });
             Content.populate();
             StatementWS.init();
