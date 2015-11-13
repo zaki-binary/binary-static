@@ -7,8 +7,11 @@ var Message = (function () {
 
     var process = function (msg) {
         var response = JSON.parse(msg.data);
-        if(TradePage.is_trading_page()){
+        if(!TradePage.is_trading_page()){
             return;
+        }
+        else{
+            forgetTradingStreams();
         }
         if (response) {
             var type = response.msg_type;

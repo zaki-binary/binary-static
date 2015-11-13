@@ -32,7 +32,7 @@ var BinarySocket = (function () {
     };
 
     var isClose = function () {
-        return !binarySocket || binarySocket.readyState === 3;
+        return !binarySocket || binarySocket.readyState === 2 || binarySocket.readyState === 3;
     };
 
     var sendBufferedSends = function () {
