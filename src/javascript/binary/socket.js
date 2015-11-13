@@ -81,6 +81,7 @@ var BinarySocket = (function () {
         };
 
         binarySocket.onmessage = function (msg){
+
             var response = JSON.parse(msg.data);
             if (response) {
                 var type = response.msg_type;
@@ -90,7 +91,12 @@ var BinarySocket = (function () {
                         events.onauth();
                     }
                     sendBufferedSends();
+                    send({balance:1, subscribe: 1});
+                } else if (type === 'balance') {
+
+                    ViewBalanceUI.updateBalances(response.balance);
                 }
+
                 if(typeof events.onmessage === 'function'){
                     events.onmessage(msg);
                 }
@@ -98,6 +104,7 @@ var BinarySocket = (function () {
         };
 
         binarySocket.onclose = function (e) {
+
             if(!manualClosed){
                 init(1);
             }
