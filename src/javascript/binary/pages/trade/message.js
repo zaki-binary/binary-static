@@ -9,16 +9,14 @@ var Message = (function () {
         var response = JSON.parse(msg.data);
         if (response) {
             var type = response.msg_type;
-            if (type === 'authorize') {
-                TUser.set(response.authorize);
-                TradeSocket.send({ payout_currencies: 1 });
-            } else if (type === 'active_symbols') {
+            if (type === 'active_symbols') {
                 processActiveSymbols(response);
             } else if (type === 'contracts_for') {
                 processContract(response);
             } else if (type === 'payout_currencies') {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
+                Symbols.getSymbols(1);
             } else if (type === 'proposal') {
                 processProposal(response);
             } else if (type === 'buy') {

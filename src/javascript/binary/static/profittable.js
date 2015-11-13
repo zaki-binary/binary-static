@@ -1,13 +1,14 @@
 
-pjax_config_page("profit_tablews", function(){
+pjax_config_page("profit_table", function(){
     return {
         onLoad: function() {
+            BinarySocket.init({
+                onmessage: Message.process
+            });
             Content.populate();
-            TradeSocket.init();
             ProfitTableWS.init();
         },
         onUnload: function(){
-            TradeSocket.close();
             ProfitTableWS.clean();
         }
     };
