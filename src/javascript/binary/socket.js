@@ -17,7 +17,8 @@ var BinarySocket = (function () {
         socketUrl = "wss://"+window.location.host+"/websockets/v3",
         bufferedSends = [],
         manualClosed = false,
-        events = {};
+        events = {},
+        authorized = false;
 
     if (page.language()) {
         socketUrl += '?l=' + page.language();
@@ -42,9 +43,12 @@ var BinarySocket = (function () {
     };
 
     var send = function(data) {
+
         if (isClose()) {
             bufferedSends.push(data);
             init(1);
+        } else if (!authorized){
+            bufferedSends.push(data);
         } else if (isReady()) {
             binarySocket.send(JSON.stringify(data));
         } else {
@@ -68,13 +72,15 @@ var BinarySocket = (function () {
         }
         
         binarySocket.onopen = function (){
+
             var loginToken = getCookieItem('login');
             if(loginToken) {
-                send({authorize: loginToken});
+                binarySocket.send(JSON.stringify({authorize: loginToken}));
             }
-            else{
+            else {
                 sendBufferedSends();
             }
+
             if(typeof events.onopen === 'function'){
                 events.onopen();
             }
@@ -86,14 +92,14 @@ var BinarySocket = (function () {
             if (response) {
                 var type = response.msg_type;
                 if (type === 'authorize') {
+                    authorized = true;
                     TUser.set(response.authorize);
                     if(typeof events.onauth === 'function'){
                         events.onauth();
                     }
-                    sendBufferedSends();
                     send({balance:1, subscribe: 1});
+                    sendBufferedSends();
                 } else if (type === 'balance') {
-
                     ViewBalanceUI.updateBalances(response.balance);
                 }
 
@@ -104,6 +110,8 @@ var BinarySocket = (function () {
         };
 
         binarySocket.onclose = function (e) {
+
+            authorized = false;
 
             if(!manualClosed){
                 init(1);
