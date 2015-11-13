@@ -4,23 +4,46 @@
   th {
     text-align: left !important;
     border-bottom: none !important;
+    overflow:hidden;
   }
   td {
     text-align: left !important;
     padding-left: 10px;
+    overflow:hidden;
+
   }
   .break-line {
     white-space: pre-line;
   }
-  .flex-table {
-
+  @media(max-width: $md){
+    td{
+      padding-left : 5px !important;
+      padding-right : 5px !important
+    }
+    th{
+      padding-left : 5px !important;
+      padding-right : 5px !important;
+    }
+  }
+  #statement-table{
     .flex-tr {     
       @media (max-width : $md){
         & > th:nth-child(4){ display : none !important; }
         & > td:nth-child(4){ display : none !important; }
         .flex-tr-child {
-           white-space:nowrap;
-           font-size : 12px;
+          font-size : 12px;
+        }
+      }
+    }
+  }
+  #profit-table{
+
+    .flex-tr {     
+      @media (max-width : $md){
+        & > th:nth-child(3){ display : none !important; }
+        & > td:nth-child(3){ display : none !important; }
+        .flex-tr-child {
+          font-size : 12px;
         }
       }
     }
