@@ -47,7 +47,7 @@ var BinarySocket = (function () {
         if (isClose()) {
             bufferedSends.push(data);
             init(1);
-        } else if (!authorized){
+        } else if (!authorized && !TradePage.is_trading_page()){
             bufferedSends.push(data);
         } else if (isReady()) {
             binarySocket.send(JSON.stringify(data));
