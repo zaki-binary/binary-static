@@ -60239,6 +60239,9 @@ var TradingEvents = (function () {
         if (durationAmountElement) {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = Math.floor(e.target.value);
+                }
                 sessionStorage.setItem('duration_amount',e.target.value);
                 Durations.select_amount(e.target.value);
                 processPriceRequest();
@@ -62369,11 +62372,6 @@ var Table = (function(){
 pjax_config_page("profit_table", function(){
     return {
         onLoad: function() {
-            if (!getCookieItem("login")) {
-                window.location.href = page.url.url_for('login');
-                return;
-            }
-
             BinarySocket.init({
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
@@ -62393,7 +62391,8 @@ pjax_config_page("profit_table", function(){
             ProfitTableWS.clean();
         }
     };
-});;
+});
+;
 var ProfitTableData = (function(){
     function getProfitTable(opts){
         var req = {profit_table: 1, description: 1};

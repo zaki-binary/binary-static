@@ -98,6 +98,9 @@ var TradingEvents = (function () {
         if (durationAmountElement) {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = Math.floor(e.target.value);
+                }
                 sessionStorage.setItem('duration_amount',e.target.value);
                 Durations.select_amount(e.target.value);
                 processPriceRequest();
