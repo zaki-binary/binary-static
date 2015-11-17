@@ -59406,6 +59406,22 @@ function selectOption(option, select){
     }
 }
 
+function updatePurchaseStatus(final_price, pnl, contract_status){
+    $('#contract_purchase_heading').text(text.localize(contract_status));
+    $payout = $('#contract_purchase_payout');
+    $cost = $('#contract_purchase_cost');
+    $profit = $('#contract_purchase_profit');
+
+    $payout.html(Content.localize().textBuyPrice + '<p>'+Math.abs(pnl)+'</p>');
+    $cost.html(Content.localize().textFinalPrice + '<p>'+final_price+'</p>');
+    if(!final_price){
+        $profit.html(Content.localize().textLoss + '<p>'+pnl+'</p>');
+    }
+    else{
+        $profit.html(Content.localize().textProfit + '<p>'+(Math.round((final_price-pnl)*100)/100)+'</p>');        
+    }
+}
+
 function updateWarmChart(){
     var $chart = $('#trading_worm_chart');
     var spots = Tick.spots();
@@ -59503,7 +59519,11 @@ function updateWarmChart(){
             textSaleDate: text.localize('Sale Date'),
             textSalePrice: text.localize('Sale Price'),
             textProfitLoss: text.localize('Profit/Loss'),
-            textTotalProfitLoss: text.localize('Total Profit/Loss')
+            textTotalProfitLoss: text.localize('Total Profit/Loss'),
+            textBuyPrice: text.localize('Buy price'),
+            textFinalPrice: text.localize('Final price'),
+            textLoss: text.localize('Loss'),
+            textProfit: text.localize('Profit')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -61466,17 +61486,24 @@ var Purchase = (function () {
             spots.scrollTop = spots.scrollHeight;
 
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
-                var contract_status;
+                var contract_status,
+                    final_price, 
+                    pnl;
 
                 if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
+                    final_price = $('#contract_purchase_payout p').text();
+                    pnl = $('#contract_purchase_cost p').text();
                     contract_status = Content.localize().textContractStatusWon;
                 }
                 else{
                     spots.className = 'lost';
+                    final_price = 0;
+                    pnl = -$('#contract_purchase_cost p').text();
                     contract_status = Content.localize().textContractStatusLost;
                 }
-                document.getElementById('contract_purchase_heading').textContent = contract_status;
+
+                updatePurchaseStatus(final_price, pnl, contract_status);
             }
 
             purchase_data.echo_req.passthrough['duration']--;
@@ -61771,8 +61798,9 @@ WSTickDisplay.plot = function(plot_from, plot_to){
 };
 WSTickDisplay.update_ui = function(final_price, pnl, contract_status) {
     var $self = this;
-    $('#contract_purchase_heading').text(text.localize(contract_status));
+    updatePurchaseStatus(final_price, pnl, contract_status);
 };
+
 WSTickDisplay.updateChart = function(data){
 
     var $self = this;
