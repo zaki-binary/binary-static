@@ -71,7 +71,11 @@ var Content = (function () {
             textSaleDate: text.localize('Sale Date'),
             textSalePrice: text.localize('Sale Price'),
             textProfitLoss: text.localize('Profit/Loss'),
-            textTotalProfitLoss: text.localize('Total Profit/Loss')
+            textTotalProfitLoss: text.localize('Total Profit/Loss'),
+            textlimits: text.localize('Trading and Withdrawal Limits'),
+            textItem: text.localize('Item'),
+            textLimit: text.localize('Limit'),
+            textMaxOpenPosition: text.localize('Maximum number of open positions')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -215,6 +219,11 @@ var Content = (function () {
     var profitTableTranslation = function(){
         var titleElement = document.getElementById("profit-table-title").firstElementChild;
         titleElement.textContent = localize.textProfitTable;
+    };
+
+    var limitsTranslation = function(){
+        var titleElement = document.getElementById("limits-title").firstElementChild;
+        titleElement.textContent = localize.textLimits;
     };
 
     return {
