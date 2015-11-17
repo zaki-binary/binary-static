@@ -171,7 +171,7 @@ var Purchase = (function () {
                     contract_status = Content.localize().textContractStatusLost;
                 }
 
-                updatePurchaseStatus(final_price, pnl, contract_status)
+                updatePurchaseStatus(final_price, pnl, contract_status);
             }
 
             purchase_data.echo_req.passthrough['duration']--;
