@@ -154,17 +154,24 @@ var Purchase = (function () {
             spots.scrollTop = spots.scrollHeight;
 
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
-                var contract_status;
+                var contract_status,
+                    final_price, 
+                    pnl;
 
                 if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
+                    final_price = $('#contract_purchase_payout p').text();
+                    pnl = $('#contract_purchase_cost p').text();
                     contract_status = Content.localize().textContractStatusWon;
                 }
                 else{
                     spots.className = 'lost';
+                    final_price = 0;
+                    pnl = -$('#contract_purchase_cost p').text();
                     contract_status = Content.localize().textContractStatusLost;
                 }
-                document.getElementById('contract_purchase_heading').textContent = contract_status;
+
+                updatePurchaseStatus(final_price, pnl, contract_status)
             }
 
             purchase_data.echo_req.passthrough['duration']--;

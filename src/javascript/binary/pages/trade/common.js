@@ -764,6 +764,22 @@ function selectOption(option, select){
     }
 }
 
+function updatePurchaseStatus(final_price, pnl, contract_status){
+    $('#contract_purchase_heading').text(text.localize(contract_status));
+    $payout = $('#contract_purchase_payout');
+    $cost = $('#contract_purchase_cost');
+    $profit = $('#contract_purchase_profit');
+
+    $payout.html(Content.localize().textBuyPrice + '<p>'+Math.abs(pnl)+'</p>');
+    $cost.html(Content.localize().textFinalPrice + '<p>'+final_price+'</p>');
+    if(!final_price){
+        $profit.html(Content.localize().textLoss + '<p>'+pnl+'</p>');
+    }
+    else{
+        $profit.html(Content.localize().textProfit + '<p>'+(Math.round((final_price-pnl)*100)/100)+'</p>');        
+    }
+}
+
 function updateWarmChart(){
     var $chart = $('#trading_worm_chart');
     var spots = Tick.spots();
