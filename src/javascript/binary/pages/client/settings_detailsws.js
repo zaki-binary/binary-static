@@ -66,8 +66,8 @@ var SettingsDetailsWS = (function(){
     var populateStates = function(response){
         $(fieldIDs.state).empty();
         var states = response.states_list;
-        for(var state in states){
-            $(fieldIDs.state).append($('<option/>', {value: states[state].value, text: states[state].text}));
+        for(var i = 0; i < states.length; i++){
+            $(fieldIDs.state).append($('<option/>', {value: states[i].value, text: states[i].text}));
         }
         // set Current value
         $(fieldIDs.state).val(response.echo_req.passthrough.value);
