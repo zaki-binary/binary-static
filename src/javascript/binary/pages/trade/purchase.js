@@ -158,13 +158,7 @@ var Purchase = (function () {
                     final_price, 
                     pnl;
 
-                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier 
-                    || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier
-                    || purchase_data.echo_req.passthrough.contract_type==="DIGITEVEN" && !(d1%2)
-                    || purchase_data.echo_req.passthrough.contract_type==="DIGITODD" && d1%2
-                    || purchase_data.echo_req.passthrough.contract_type==="DIGITOVER" && d1>purchase_data.echo_req.passthrough.barrier
-                    || purchase_data.echo_req.passthrough.contract_type==="DIGITUNDER" && d1<purchase_data.echo_req.passthrough.barrier
-                ){
+                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITEVEN" && d1%2===0 || purchase_data.echo_req.passthrough.contract_type==="DIGITODD" && d1%2 || purchase_data.echo_req.passthrough.contract_type==="DIGITOVER" && d1>purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITUNDER" && d1<purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
                     final_price = $('#contract_purchase_payout p').text();
                     pnl = $('#contract_purchase_cost p').text();
