@@ -158,8 +158,23 @@
   #contract_container {
     align-items: center;
     padding-top: 25px;
+    position: relative;
     #contract_form_container .col {
       margin-right: 1rem;
+    }
+    .overlay_container {
+    width: 100%;
+    display: none;
+    background: transparent;
+    z-index: 9999;
+    &#loading_container3{
+        background: $COLOR_LIGHT_GRAY;
+        opacity: 0.5;
+        display: block;
+        position: absolute;
+        height: 100%;
+        margin-top: -25px;
+      }
     }
     border: 1px solid $COLOR_GRAY;
     flex: 1 0 auto;
@@ -558,7 +573,8 @@
   }
   .tm-ul-2 {
     top: 29px;
-    margin-top: 0;
+    margin-top: -1px;
+    border-top: 1px solid $COLOR_GRAY;
   }
 }
 
