@@ -36,6 +36,19 @@ var StatementWS = (function(){
         if (!tableExist()) {
             StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
             StatementUI.updateStatementTable(getNextChunkStatement());
+
+            // Show a message when the table is empty
+            if(transactionsReceived === 0) {
+                $('#statement-table tbody')
+                    .empty()
+                    .append($('<tr/>', {class: "flex-tr"})
+                        .append($('<td/>', {colspan: 6})
+                            .append($('<p/>', {class: "notice-msg center", text: text.localize("Your first trade will appear here, once you've purchased it.")})
+                            )
+                        )
+                    );
+            }
+
             Content.statementTranslation();
         }
     }
