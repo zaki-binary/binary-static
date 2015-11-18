@@ -80,6 +80,7 @@
                      a.setAttribute('menuitem',first);
                      ul.appendChild(fragment2);
                      ul.setAttribute('class', 'tm-ul-2');
+                     ul.setAttribute('id', el1[0]+'-submenu');
 
                      if(flag){
                         li.classList.add('active');
@@ -260,6 +261,9 @@ function getFormNameBarrierCategory(displayFormName) {
         } else if (displayFormName === 'callput'){
             obj['formName'] = displayFormName;
             obj['barrierCategory'] = 'euro_atm';
+        } else if (displayFormName === 'overunder' || displayFormName === 'evenodd' || displayFormName === 'matchdiff'){
+            obj['formName'] = 'digits';
+            obj['barrierCategory'] = '';
         } else {
             obj['formName'] = displayFormName;
             obj['barrierCategory'] = '';
@@ -287,6 +291,10 @@ function contractTypeDisplayMapping(type) {
         ASIAND: "bottom",
         DIGITMATCH: "top",
         DIGITDIFF: "bottom",
+        DIGITEVEN: "top",
+        DIGITODD: "bottom",
+        DIGITOVER: "top",
+        DIGITUNDER: "bottom",
         EXPIRYRANGE: "top",
         EXPIRYMISS: "bottom",
         RANGE: "top",
@@ -418,7 +426,11 @@ function getContractCategoryTree(elements){
             'staysinout']
         ],
         'asian',
-        'digits',
+        ['digits',
+            ['matchdiff',
+            'evenodd',
+            'overunder']
+        ],
         'spreads'
     ];
 

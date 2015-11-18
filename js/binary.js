@@ -58872,6 +58872,7 @@ var Barriers = (function () {
                      a.setAttribute('menuitem',first);
                      ul.appendChild(fragment2);
                      ul.setAttribute('class', 'tm-ul-2');
+                     ul.setAttribute('id', el1[0]+'-submenu');
 
                      if(flag){
                         li.classList.add('active');
@@ -59052,6 +59053,9 @@ function getFormNameBarrierCategory(displayFormName) {
         } else if (displayFormName === 'callput'){
             obj['formName'] = displayFormName;
             obj['barrierCategory'] = 'euro_atm';
+        } else if (displayFormName === 'overunder' || displayFormName === 'evenodd' || displayFormName === 'matchdiff'){
+            obj['formName'] = 'digits';
+            obj['barrierCategory'] = '';
         } else {
             obj['formName'] = displayFormName;
             obj['barrierCategory'] = '';
@@ -59079,6 +59083,10 @@ function contractTypeDisplayMapping(type) {
         ASIAND: "bottom",
         DIGITMATCH: "top",
         DIGITDIFF: "bottom",
+        DIGITEVEN: "top",
+        DIGITODD: "bottom",
+        DIGITOVER: "top",
+        DIGITUNDER: "bottom",
         EXPIRYRANGE: "top",
         EXPIRYMISS: "bottom",
         RANGE: "top",
@@ -59210,7 +59218,11 @@ function getContractCategoryTree(elements){
             'staysinout']
         ],
         'asian',
-        'digits',
+        ['digits',
+            ['matchdiff',
+            'evenodd',
+            'overunder']
+        ],
         'spreads'
     ];
 
@@ -59673,7 +59685,10 @@ function updateWarmChart(){
             textBuyPrice: text.localize('Buy price'),
             textFinalPrice: text.localize('Final price'),
             textLoss: text.localize('Loss'),
-            textProfit: text.localize('Profit')
+            textProfit: text.localize('Profit'),
+            textFormMatchesDiffers: text.localize('Matches/Differs'),
+            textFormEvenOdd: text.localize('Even/Odd'),
+            textFormOverUnder: text.localize('Over/Under')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -59960,8 +59975,14 @@ var Contract = (function () {
                     } else {
                         tradeContractForms['higherlower'] = Content.localize().textFormHigherLower;
                     }
-                } else {
+                } 
+                else {
                     tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
+                    if (contractCategory === 'digits') {
+                        tradeContractForms['matchdiff'] = Content.localize().textFormMatchesDiffers;
+                        tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
+                        tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
+                    } 
                 }
             }
         });
@@ -61333,7 +61354,7 @@ function processContractForm() {
 
 function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
-    if(sessionStorage.getItem('formname') === 'digits'){
+    if(Contract.form() === 'digits' && sessionStorage.getItem('formname')!=='evenodd'){
         predictionElement.show();
         if(sessionStorage.getItem('prediction')){
             selectOption(sessionStorage.getItem('prediction'),document.getElementById('prediction'));
@@ -61411,8 +61432,21 @@ function processPriceRequest() {
     Price.incrFormId();
     processForgetProposals();
     showPriceOverlay();
-    for (var typeOfContract in Contract.contractType()[Contract.form()]) {
-        if(Contract.contractType()[Contract.form()].hasOwnProperty(typeOfContract)) {
+    var types = Contract.contractType()[Contract.form()];
+    if(Contract.form()==='digits'){
+        switch(sessionStorage.getItem('formname')) {
+            case 'matchdiff':
+                types = {'DIGITMATCH':1, 'DIGITDIFF':1};
+                break;
+            case 'evenodd':
+                types = {'DIGITEVEN':1, 'DIGITODD':1};
+                break;
+            case 'overunder':
+                types = {'DIGITOVER':1, 'DIGITUNDER':1};
+        }
+    }
+    for (var typeOfContract in types) {
+        if(types.hasOwnProperty(typeOfContract)) {
             BinarySocket.send(Price.proposal(typeOfContract));
         }
     }
@@ -61561,7 +61595,7 @@ var Purchase = (function () {
                 chart.hide();
             }
 
-            if(sessionStorage.formname === 'digits'){
+            if(Contract.form() === 'digits'){
                 spots.textContent = '';
                 spots.className = '';
                 spots.show();
@@ -61570,7 +61604,7 @@ var Purchase = (function () {
                 spots.hide();
             }
 
-            if(sessionStorage.formname !== 'digits' && !show_chart){
+            if(Contract.form() !== 'digits' && !show_chart){
                 button.textContent = Content.localize().textContractConfirmationButton;
                 button.setAttribute('contract_id', receipt['contract_id']);
                 button.show();
@@ -61640,7 +61674,7 @@ var Purchase = (function () {
                     final_price, 
                     pnl;
 
-                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier){
+                if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITEVEN" && d1%2===0 || purchase_data.echo_req.passthrough.contract_type==="DIGITODD" && d1%2 || purchase_data.echo_req.passthrough.contract_type==="DIGITOVER" && d1>purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITUNDER" && d1<purchase_data.echo_req.passthrough.barrier){
                     spots.className = 'won';
                     final_price = $('#contract_purchase_payout p').text();
                     pnl = $('#contract_purchase_cost p').text();
