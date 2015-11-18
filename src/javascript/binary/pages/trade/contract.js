@@ -136,8 +136,8 @@ var Contract = (function () {
                     tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
                     if (contractCategory === 'digits') {
                         tradeContractForms['matchdiff'] = Content.localize().textFormMatchesDiffers;
-                        tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
-                        tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
+                        // tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
+                        // tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
                     } 
                 }
             }
