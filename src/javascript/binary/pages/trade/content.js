@@ -96,6 +96,13 @@ var Content = (function () {
             textInAggregateOverLifetime: text.localize('in aggregate over the lifetime of your account.'),
             textNotAllowedToWithdraw: text.localize('Therefore you may not withdraw any additional funds.'),
             textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR')
+            textBuyPrice: text.localize('Buy price'),
+            textFinalPrice: text.localize('Final price'),
+            textLoss: text.localize('Loss'),
+            textProfit: text.localize('Profit'),
+            textFormMatchesDiffers: text.localize('Matches/Differs'),
+            textFormEvenOdd: text.localize('Even/Odd'),
+            textFormOverUnder: text.localize('Over/Under')
         };
 
         var starTime = document.getElementById('start_time_label');
