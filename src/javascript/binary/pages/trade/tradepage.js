@@ -1,6 +1,9 @@
 var TradePage = (function(){
 	
+	var trading_page = 0;
+
 	var onLoad = function(){
+		trading_page = 1;
 		if(sessionStorage.getItem('currencies')){
 			displayCurrencies();
 		}		
@@ -10,32 +13,34 @@ var TradePage = (function(){
 			},
 			onclose: function(){
 				processMarketUnderlying();
-			},
-			onauth: function(){
-				if(!sessionStorage.getItem('currencies')){
-					BinarySocket.send({ payout_currencies: 1 });
-				}
-				else{
-					displayCurrencies();
-				}			
 			}
 		});
 		Price.clearFormId();
 		TradingEvents.init();
 		Content.populate();
-		Symbols.getSymbols(1);
+		
+		if(sessionStorage.getItem('currencies')){
+			displayCurrencies();
+			Symbols.getSymbols(1);
+		}
+		else {
+			BinarySocket.send({ payout_currencies: 1 });
+		}
+		
 		if (document.getElementById('websocket_form')) {
 		    addEventListenerForm();
 		}
 	};
 
 	var onUnload = function(){
+		trading_page = 0;
 		forgetTradingStreams();
 		BinarySocket.clear();
 	};
 
 	return {
 		onLoad: onLoad,
-		onUnload : onUnload
+		onUnload : onUnload,
+		is_trading_page: function(){return trading_page;}
 	};
 })();

@@ -7,6 +7,10 @@ var Message = (function () {
 
     var process = function (msg) {
         var response = JSON.parse(msg.data);
+        if(!TradePage.is_trading_page()){
+            forgetTradingStreams();
+            return;
+        }
         if (response) {
             var type = response.msg_type;
             if (type === 'active_symbols') {
@@ -16,6 +20,7 @@ var Message = (function () {
             } else if (type === 'payout_currencies') {
                 sessionStorage.setItem('currencies', msg.data);
                 displayCurrencies();
+                Symbols.getSymbols(1);
             } else if (type === 'proposal') {
                 processProposal(response);
             } else if (type === 'buy') {
