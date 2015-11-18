@@ -62596,7 +62596,7 @@ var Table = (function(){
 
     function clearTableBody(id){
         var tbody = document.querySelector("#" + id +">tbody");
-        while (tbody.firstElementChild){
+        while (tbody && tbody.firstElementChild){
             tbody.removeChild(tbody.firstElementChild);
         }
     }
@@ -62636,7 +62636,8 @@ var Table = (function(){
         clearTableBody: clearTableBody,
         appendTableBody: appendTableBody
     };
-}());;
+}());
+;
 
 pjax_config_page("profit_table", function(){
     return {
