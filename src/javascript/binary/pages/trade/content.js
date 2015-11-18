@@ -95,7 +95,7 @@ var Content = (function () {
             textWithdrawalForEntireDuration: text.localize('Your withdrawal limit for the entire duration of the account is currently: EUR'),
             textInAggregateOverLifetime: text.localize('in aggregate over the lifetime of your account.'),
             textNotAllowedToWithdraw: text.localize('Therefore you may not withdraw any additional funds.'),
-            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR')
+            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR'),
             textBuyPrice: text.localize('Buy price'),
             textFinalPrice: text.localize('Final price'),
             textLoss: text.localize('Loss'),
