@@ -60001,8 +60001,8 @@ var Contract = (function () {
                     tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
                     if (contractCategory === 'digits') {
                         tradeContractForms['matchdiff'] = Content.localize().textFormMatchesDiffers;
-                        tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
-                        tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
+                        // tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
+                        // tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
                     } 
                 }
             }
@@ -61314,8 +61314,10 @@ function processContractForm() {
 
     StartDates.display();
 
-    if(sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
+    var forward = 0;
+    if($('#date_start:visible') && sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
         selectOption(sessionStorage.getItem('date_start'), document.getElementById('date_start'));
+        forward = 1;
     }
 
     displayPrediction();
@@ -61329,7 +61331,6 @@ function processContractForm() {
     if(sessionStorage.getItem('amount_type')){
         selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
     }
-
     Durations.display();
     var no_price_request;
     if(sessionStorage.getItem('expiry_type')==='endtime'){
