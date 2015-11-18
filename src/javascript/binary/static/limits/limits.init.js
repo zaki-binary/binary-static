@@ -1,18 +1,13 @@
 var LimitsWS = (function(){
     "use strict";
 
-    var tableExist = function(){
-        return document.getElementById("client-limits");
-    };
-
     function limitsHandler(response){
-        var limits = response.limits;
+        var limits = response.get_limits;
 
-        if (!tableExist()) {
-            LimitsUI.createEmptyLimitsTable().appendTo("#limits-ws-container");
-            Content.limitsTranslation();
-            LimitsUI.createLimitsRow(limits);
-        }
+        LimitsUI.fillLimitsTable(limits);
+        Content.limitsTranslation();
+        document.getElementById("lifetime-limit").textContent = limits["lifetime_limit"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById("already-withdraw").textContent = limits["withdrawal_since_inception_monetary"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ".";
     }
 
     function initTable(){
@@ -20,8 +15,13 @@ var LimitsWS = (function(){
         LimitsUI.clearTableContent();
     }
 
+    function initPage(){
+        LimitsData.getLimits();
+    }
+
     return {
-        LimitsHandler: LimitsHandler,
-        clean: initTable
+        limitsHandler: limitsHandler,
+        clean: initTable,
+        init: initPage
     };
-});
+}());

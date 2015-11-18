@@ -1,4 +1,4 @@
-pjax_config_page("trading_withdrawal_limitws", function(){
+pjax_config_page("limitws", function(){
     return {
         onLoad: function() {
             BinarySocket.init({
