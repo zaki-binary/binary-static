@@ -816,3 +816,24 @@ function updateWarmChart(){
         }  
     }  
 }
+
+function reloadPage(){
+    sessionStorage.removeItem('market');
+    sessionStorage.removeItem('formname');
+    sessionStorage.removeItem('underlying');
+
+    sessionStorage.removeItem('expiry_type');
+    sessionStorage.removeItem('stop_loss');
+    sessionStorage.removeItem('stop_type');
+    sessionStorage.removeItem('stop_profit');
+    sessionStorage.removeItem('amount_per_point');
+    sessionStorage.removeItem('prediction');
+    sessionStorage.removeItem('amount');
+    sessionStorage.removeItem('amount_type');
+    sessionStorage.removeItem('currency');
+    sessionStorage.removeItem('duration_units');
+    sessionStorage.removeItem('diration_value');
+    sessionStorage.removeItem('date_start');
+
+    location.reload();
+}

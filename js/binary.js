@@ -59608,6 +59608,27 @@ function updateWarmChart(){
         }  
     }  
 }
+
+function reloadPage(){
+    sessionStorage.removeItem('market');
+    sessionStorage.removeItem('formname');
+    sessionStorage.removeItem('underlying');
+
+    sessionStorage.removeItem('expiry_type');
+    sessionStorage.removeItem('stop_loss');
+    sessionStorage.removeItem('stop_type');
+    sessionStorage.removeItem('stop_profit');
+    sessionStorage.removeItem('amount_per_point');
+    sessionStorage.removeItem('prediction');
+    sessionStorage.removeItem('amount');
+    sessionStorage.removeItem('amount_type');
+    sessionStorage.removeItem('currency');
+    sessionStorage.removeItem('duration_units');
+    sessionStorage.removeItem('diration_value');
+    sessionStorage.removeItem('date_start');
+
+    location.reload();
+}
 ;var Content = (function () {
     'use strict';
 
@@ -60857,24 +60878,7 @@ var TradingEvents = (function () {
         var init_logo = document.getElementById('trading_init_progress');
         if(init_logo){
             init_logo.addEventListener('click', debounce( function (e) {
-                sessionStorage.removeItem('market');
-                sessionStorage.removeItem('formname');
-                sessionStorage.removeItem('underlying');
-
-                sessionStorage.removeItem('expiry_type');
-                sessionStorage.removeItem('stop_loss');
-                sessionStorage.removeItem('stop_type');
-                sessionStorage.removeItem('stop_profit');
-                sessionStorage.removeItem('amount_per_point');
-                sessionStorage.removeItem('prediction');
-                sessionStorage.removeItem('amount');
-                sessionStorage.removeItem('amount_type');
-                sessionStorage.removeItem('currency');
-                sessionStorage.removeItem('duration_units');
-                sessionStorage.removeItem('diration_value');
-                sessionStorage.removeItem('date_start');
-
-                location.reload();
+                reloadPage();
             }));
         }
 
@@ -61025,9 +61029,11 @@ var Price = (function () {
             var endTime2 = Durations.getTime();
             if(!endTime2){
                 var trading_times = Durations.trading_times();
-                if(trading_times.hasOwnProperty(endDate2))
-                endTime2 = trading_times[endDate2][underlying.value];
+                if(trading_times.hasOwnProperty(endDate2) && typeof trading_times[endDate2][underlying.value] === 'string'){
+                    endTime2 = trading_times[endDate2][underlying.value];
+                }
             }
+
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
 
