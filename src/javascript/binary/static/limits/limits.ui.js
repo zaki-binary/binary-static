@@ -2,10 +2,10 @@ var LimitsUI = (function(){
     "use strict";
 
     function fillLimitsTable(limits){
-        var open_positions = (limits['open_positions']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        var account_balance = (limits['account_balance']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        var daily_turnover = (limits['daily_turnover']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        var payout = (limits['payout']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var open_positions = addComma(limits['open_positions']);
+        var account_balance = addComma(limits['account_balance']);
+        var daily_turnover = addComma(limits['daily_turnover']);
+        var payout = addComma(limits['payout']);
 
         document.getElementById('item').textContent = Content.localize().textItem;
         
@@ -34,11 +34,16 @@ var LimitsUI = (function(){
 
     function clearTableContent(){
         Table.clearTableBody(tableID);
-        $("#" + tableID +">tfoot").hide();
+        $("#limits-title>tfoot").hide();
+    }
+
+    function addComma(num){
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
     return {
         clearTableContent: clearTableContent,
-        fillLimitsTable: fillLimitsTable
+        fillLimitsTable: fillLimitsTable,
+        addComma: addComma
     };
 }());

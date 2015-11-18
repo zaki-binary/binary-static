@@ -87,7 +87,15 @@ var Content = (function () {
             textWithdrawalTitle: text.localize('Withdrawal Limits'),
             textWithdrawalLimits: text.localize('Your withdrawal limit is EUR'),
             textCurrencyEquivalent: text.localize('or equivalent in other currency'),
-            textWithrawalAmount: text.localize('You have already withdrawn the equivalent of EUR')
+            textWithrawalAmount: text.localize('You have already withdrawn the equivalent of EUR'),
+            textYour: text.localize('Your'),
+            textDayWithdrawalLimit: text.localize('day withdrawal limit is currently EUR'),
+            textAuthenticatedWithdrawal: text.localize('Your account is fully authenticated and your withdrawal limits have been lifted.'),
+            textAggregateOverLast: text.localize('in aggregate over the last'),
+            textWithdrawalForEntireDuration: text.localize('Your withdrawal limit for the entire duration of the account is currently: EUR'),
+            textInAggregateOverLifetime: text.localize('in aggregate over the lifetime of your account.'),
+            textNotAllowedToWithdraw: text.localize('Therefore you may not withdraw any additional funds.'),
+            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -242,15 +250,6 @@ var Content = (function () {
         
         var withdrawalTitle = document.getElementById("withdrawal-title");
         withdrawalTitle.textContent = TUser.get().loginid + " - " + localize.textWithdrawalTitle;
-        
-        var withdrawalLimits = document.getElementById("withdrawal-limits");
-        withdrawalLimits.textContent = localize.textWithdrawalLimits + " ";
-        
-        var currencyEquivalent = document.getElementById("equivalent-currency");
-        currencyEquivalent.textContent = " (" + localize.textCurrencyEquivalent + ").";
-        
-        var withrawalAmount = document.getElementById("withrawal-amount");
-        withrawalAmount.textContent = " " + localize.textWithrawalAmount;
     };
 
     return {

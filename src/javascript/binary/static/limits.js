@@ -9,6 +9,8 @@ pjax_config_page("limitws", function(){
                         var type = response.msg_type;
                         if (type === 'get_limits'){
                             LimitsWS.limitsHandler(response);
+                        } else if (type === 'get_account_status') {
+                            LimitsWS.authHandler(response);
                         }
                     }
                 }
