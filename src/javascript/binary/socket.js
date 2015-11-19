@@ -33,7 +33,7 @@ var BinarySocket = (function () {
                 delete timeouts[k];
             }
         }
-    }
+    };
 
     var status = function () {
         return binarySocket && binarySocket.readyState;
@@ -67,7 +67,7 @@ var BinarySocket = (function () {
                 if(typeof reloadPage === 'function'){
                     var r = confirm("The server didn't respond. Reload page?");
                     console.log(data,'Last Error Request');
-                    if (r == true) {
+                    if (r === true) {
                         reloadPage();
                     } 
                 }
