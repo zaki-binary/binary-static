@@ -9,6 +9,23 @@
 var TradingEvents = (function () {
     'use strict';
 
+
+    var onStartDateChange = function(value){
+
+        if(!value){
+            return;
+        }
+
+        $('#date_start').val(value);
+
+        if (value === 'now') {
+            Durations.display('spot');
+        } else {
+            Durations.display('forward');
+            sessionStorage.setItem('date_start', e.target.value);
+        }
+    }
+
     var initiate = function () {
         /*
          * attach event to market list, so when client change market we need to update undelryings
@@ -179,12 +196,7 @@ var TradingEvents = (function () {
         var dateStartElement = StartDates.node();
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
-                if (e.target && e.target.value === 'now') {
-                    Durations.display('spot');
-                } else {
-                    Durations.display('forward');
-                    sessionStorage.setItem('date_start', e.target.value);
-                }
+                onStartDateChange(e.target.value);
                 processPriceRequest();
             });
         }
