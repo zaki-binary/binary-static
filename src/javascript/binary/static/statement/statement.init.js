@@ -43,7 +43,7 @@ var StatementWS = (function(){
                     .empty()
                     .append($('<tr/>', {class: "flex-tr"})
                         .append($('<td/>', {colspan: 6})
-                            .append($('<p/>', {class: "notice-msg center", text: text.localize("Your first trade will appear here, once you've purchased it.")})
+                            .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})
                             )
                         )
                     );
