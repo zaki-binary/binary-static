@@ -38,9 +38,8 @@ var StatementWS = (function(){
             StatementUI.updateStatementTable(getNextChunkStatement());
 
             // Show a message when the table is empty
-            if(transactionsReceived === 0) {
+            if($('#statement-table tbody tr').length === 0) {
                 $('#statement-table tbody')
-                    .empty()
                     .append($('<tr/>', {class: "flex-tr"})
                         .append($('<td/>', {colspan: 6})
                             .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})

@@ -47,9 +47,8 @@ var ProfitTableWS = (function () {
             ProfitTableUI.updateProfitTable(getNextChunk());
 
             // Show a message when the table is empty
-            if(transactionsReceived === 0) {
+            if($('#profit-table tbody tr').length === 0) {
                 $('#profit-table tbody')
-                    .empty()
                     .append($('<tr/>', {class: "flex-tr"})
                         .append($('<td/>', {colspan: 7})
                             .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})
