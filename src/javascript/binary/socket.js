@@ -65,7 +65,7 @@ var BinarySocket = (function () {
             data.passthrough.req_number = ++req_number;
             timeouts[req_number] = setInterval(function(){
                 if(typeof reloadPage === 'function'){
-                    var r = confirm("Something went wrong :'( Reload page?");
+                    var r = confirm("The server didn't respond. Reload page?");
                     console.log(data,'Last Error Request');
                     if (r == true) {
                         reloadPage();
