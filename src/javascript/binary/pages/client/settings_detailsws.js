@@ -65,11 +65,16 @@ var SettingsDetailsWS = (function(){
     var populateStates = function(response){
         $(fieldIDs.state).empty();
         var states = response.states_list;
-        for(var i = 0; i < states.length; i++){
-            $(fieldIDs.state).append($('<option/>', {value: states[i].value, text: states[i].text}));
+        if(states) {
+            for(var i = 0; i < states.length; i++){
+                $(fieldIDs.state).append($('<option/>', {value: states[i].value, text: states[i].text}));
+            }
+            // set Current value
+            $(fieldIDs.state).val(response.echo_req.passthrough.value);
         }
-        // set Current value
-        $(fieldIDs.state).val(response.echo_req.passthrough.value);
+        else {
+            $('#State'). closest('.grd-row-padding').addClass('hidden');
+        }
     };
 
 
@@ -133,7 +138,8 @@ var SettingsDetailsWS = (function(){
         if(!formData)
             return false;
 
-        BinarySocket.send({
+        var req = 
+        {
             "set_settings"    : 1,
             "address_line_1"  : formData.address1,
             "address_line_2"  : formData.address2,
@@ -141,7 +147,11 @@ var SettingsDetailsWS = (function(){
             "address_state"   : formData.state,
             "address_postcode": formData.postcode,
             "phone"           : formData.phone
-        });
+        };
+        if(!formData.state){
+            delete req.address_state;
+        }
+        BinarySocket.send(req);
     };
 
     var setDetailsResponse = function(response){
