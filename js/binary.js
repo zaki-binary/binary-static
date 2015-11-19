@@ -62342,11 +62342,22 @@ var BinarySocket = (function () {
         bufferedSends = [],
         manualClosed = false,
         events = {},
-        authorized = false;
+        authorized = false,
+        timeouts = {},
+        req_number = 0;
 
     if (page.language()) {
         socketUrl += '?l=' + page.language();
     }
+
+    var clearTimeouts = function(){
+        for(var k in timeouts){
+            if(timeouts.hasOwnProperty(k)){
+                clearInterval(timeouts[k]);
+                delete timeouts[k];
+            }
+        }
+    };
 
     var status = function () {
         return binarySocket && binarySocket.readyState;
@@ -62372,6 +62383,19 @@ var BinarySocket = (function () {
             bufferedSends.push(data);
             init(1);
         } else if (isReady() && (authorized || TradePage.is_trading_page())) {
+            if(!data.hasOwnProperty('passthrough')){
+                data.passthrough = {};
+            }
+            data.passthrough.req_number = ++req_number;
+            timeouts[req_number] = setInterval(function(){
+                if(typeof reloadPage === 'function'){
+                    var r = confirm("The server didn't respond. Reload page?");
+                    console.log(data,'Last Error Request');
+                    if (r === true) {
+                        reloadPage();
+                    } 
+                }
+            }, 7*1000);
             binarySocket.send(JSON.stringify(data));
         } else {
             bufferedSends.push(data);
@@ -62387,6 +62411,7 @@ var BinarySocket = (function () {
             bufferedSends = [];
             manualClosed = false;
             events = es;
+            clearTimeouts();
         }
 
         if(isClose()){
@@ -62412,6 +62437,10 @@ var BinarySocket = (function () {
 
             var response = JSON.parse(msg.data);
             if (response) {
+                if(response.hasOwnProperty('echo_req') && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('req_number')){
+                    clearInterval(timeouts[response.echo_req.passthrough.req_number]);
+                    delete timeouts[response.echo_req.passthrough.req_number];
+                }
                 var type = response.msg_type;
                 if (type === 'authorize') {
                     authorized = true;
@@ -62434,6 +62463,7 @@ var BinarySocket = (function () {
         binarySocket.onclose = function (e) {
 
             authorized = false;
+            clearTimeouts();
 
             if(!manualClosed){
                 init(1);
