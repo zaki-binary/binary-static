@@ -35,7 +35,7 @@ var SettingsDetailsWS = (function(){
         } 
         else { // Real Account
             BinarySocket.send({"authorize": $.cookie('login')});
-            $('#lblBirthDate').text(data.date_of_birth.format("YYYY-MM-DD"));
+            $('#lblBirthDate').text(moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD"));
             $(fieldIDs.address1).val(data.address_line_1);
             $(fieldIDs.address2).val(data.address_line_2);
             $(fieldIDs.city).val(data.address_city);
