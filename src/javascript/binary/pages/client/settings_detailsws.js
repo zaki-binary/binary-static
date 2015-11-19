@@ -35,8 +35,7 @@ var SettingsDetailsWS = (function(){
         } 
         else { // Real Account
             BinarySocket.send({"authorize": $.cookie('login')});
-            // Currently, none of APIs have the BirthDate in response
-            //$('#lblBirthDate').text(data.email);
+            $('#lblBirthDate').text(data.date_of_birth.format("YYYY-MM-DD"));
             $(fieldIDs.address1).val(data.address_line_1);
             $(fieldIDs.address2).val(data.address_line_2);
             $(fieldIDs.city).val(data.address_city);
