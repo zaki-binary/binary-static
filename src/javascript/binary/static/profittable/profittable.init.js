@@ -50,7 +50,7 @@ var ProfitTableWS = (function () {
             if($('#profit-table tbody tr').length === 0) {
                 $('#profit-table tbody')
                     .append($('<tr/>', {class: "flex-tr"})
-                        .append($('<td/>', {colspan: 7})
+                        .append($('<td/>', {colspan: 7}) 
                             .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})
                             )
                         )
