@@ -78,7 +78,12 @@ var Content = (function () {
             textProfit: text.localize('Profit'),
             textFormMatchesDiffers: text.localize('Matches/Differs'),
             textFormEvenOdd: text.localize('Even/Odd'),
-            textFormOverUnder: text.localize('Over/Under')
+            textFormOverUnder: text.localize('Over/Under'),
+            textAsset: text.localize('Asset'),
+            textOpens: text.localize('Opens'),
+            textCloses: text.localize('Closes'),
+            textSettles: text.localize('Settles'),
+            textUpcomingEvents: text.localize('Upcoming Events')
         };
 
         var starTime = document.getElementById('start_time_label');
