@@ -315,14 +315,15 @@ var Durations = (function(){
             StartDates.setNow();
             expiry_time.hide();
             var date_start = StartDates.node();
-
             processTradingTimesRequest(end_date);
+            $('#expiry_date').val(end_date);
         }
         else{
             Durations.setTime(expiry_time.value);
             expiry_time.show();
             processPriceRequest();
         }
+
         sessionStorage.setItem('end_date',end_date);
         Barriers.display();
     };

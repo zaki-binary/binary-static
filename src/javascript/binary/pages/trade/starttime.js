@@ -10,6 +10,7 @@ var StartDates = (function(){
     'use strict';
 
     var hasNow = 0;
+    var displayed = 0;
 
     var compareStartDate = function(a,b) {
         if (a.date < b.date)
@@ -76,7 +77,9 @@ var StartDates = (function(){
                 }
             });
             target.appendChild(fragment);
+            displayed = 1;
         } else {
+            displayed = 0;
             document.getElementById('date_start_row').style.display = 'none';
         }
     };
@@ -91,7 +94,8 @@ var StartDates = (function(){
     return {
         display: displayStartDates,
         node: getElement,
-        setNow: setNow
+        setNow: setNow,
+        displayed: function(){ return displayed; }
     };
 
 })();
