@@ -65,7 +65,7 @@ var SettingsDetailsWS = (function(){
     var populateStates = function(response){
         $(fieldIDs.state).empty();
         var states = response.states_list;
-        if(states) {
+        if(states.length > 0) {
             for(var i = 0; i < states.length; i++){
                 $(fieldIDs.state).append($('<option/>', {value: states[i].value, text: states[i].text}));
             }
