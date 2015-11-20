@@ -20,7 +20,6 @@ var SettingsDetailsWS = (function(){
         BinarySocket.send({"get_settings": "1"});
     };
 
-
     var getDetails = function(response){
         var data = response.get_settings;
 
@@ -64,19 +63,19 @@ var SettingsDetailsWS = (function(){
 
     var populateStates = function(response){
         $(fieldIDs.state).empty();
+        var defaultValue = response.echo_req.passthrough.value;
         var states = response.states_list;
         if(states.length > 0) {
             for(var i = 0; i < states.length; i++){
                 $(fieldIDs.state).append($('<option/>', {value: states[i].value, text: states[i].text}));
             }
             // set Current value
-            $(fieldIDs.state).val(response.echo_req.passthrough.value);
+            $(fieldIDs.state).val(defaultValue);
         }
         else {
-            $('#State'). closest('.grd-row-padding').addClass('hidden');
+            $(fieldIDs.state).replaceWith($('<input/>', {id: 'State', type: 'text', maxlength: '35', value: defaultValue}));
         }
     };
-
 
     var formValidate = function(){
         clearError();
@@ -94,6 +93,9 @@ var SettingsDetailsWS = (function(){
         }
         if(!(/.+/).test(city)){
             showError(fieldIDs.city, text.localize('Please enter a town or city.'));
+        }
+        if(!(/.+/).test(state)){
+            showError(fieldIDs.state, text.localize('Please enter a state.'));
         }
         if((/^.{1,3}$/).test(postcode) || !(/^.{0,20}$/).test(postcode)){
             showError(fieldIDs.postcode, text.localize('Postcode is invalid.'));
@@ -132,14 +134,12 @@ var SettingsDetailsWS = (function(){
         $(fieldID ? fieldID : formID + ' .' + errorClass).remove();
     };
 
-
     var setDetails = function(){
         var formData = formValidate();
         if(!formData)
             return false;
 
-        var req = 
-        {
+        BinarySocket.send({
             "set_settings"    : 1,
             "address_line_1"  : formData.address1,
             "address_line_2"  : formData.address2,
@@ -147,19 +147,16 @@ var SettingsDetailsWS = (function(){
             "address_state"   : formData.state,
             "address_postcode": formData.postcode,
             "phone"           : formData.phone
-        };
-        if(!formData.state){
-            delete req.address_state;
-        }
-        BinarySocket.send(req);
+        });
     };
 
     var setDetailsResponse = function(response){
         var isError = response.set_settings !== 1;
         $('#formMessage')
-            .attr('class', isError ? 'error-msg' : 'success-msg')
+            .attr('class', isError ? 'errorfield' : 'success-msg')
             .text(text.localize(isError ? 'Sorry, an error occurred while processing your account.' : 'Your settings have been updated successfully.'));
     };
+
 
     return {
         init: init,
@@ -200,7 +197,7 @@ pjax_config_page("settings/detailsws", function(){
                                 SettingsDetailsWS.populateStates(response);
                                 break;
                             case "error":
-                                $('#formMessage').attr('class', 'error-msg').text(response.error.message);
+                                $('#formMessage').attr('class', 'errorfield').text(response.error.message);
                                 break;
                             default:
                                 break;
