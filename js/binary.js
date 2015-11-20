@@ -51889,7 +51889,7 @@ pjax_config_page('rise_fall_table', function() {
 });
 
 pjax_config_page('portfolio|trade.cgi|statement|f_manager_statement|f_manager_history|' +
-    'f_profit_table|profit_table|trading|statementws|profit_tablews', function() {
+    'f_profit_table|profit_table|trading|legacy-statement|legacy-profittable', function() {
     return {
         onLoad: function() {
             BetSell.register();
@@ -58463,6 +58463,11 @@ onLoad.queue_for_url(function () {
     self_exclusion_date_picker();
     self_exclusion_validate_date();
 }, 'self_exclusion');
+;onLoad.queue_for_url(function() {
+    $('#statement-date').on('change', function() {
+        $('#submit-date').removeClass('invisible');
+    });
+}, 'legacy-statement');
 ;/*
  * This file contains the code related to loading of trading page bottom analysis
  * content. It will contain jquery so as to compatible with old code and less rewrite
@@ -61098,6 +61103,9 @@ var Price = (function () {
         }
         
         var container = document.getElementById('price_container_'+position);
+        if(!$(container).is(":visible")){
+            $(container).fadeIn(200);
+        }
 
         var h4 = container.getElementsByClassName('contract_heading')[0],
             amount = container.getElementsByClassName('contract_amount')[0],
@@ -61272,6 +61280,9 @@ function processMarketUnderlying() {
 function processContract(contracts) {
     'use strict';
 
+    document.getElementById('trading_socket_container').classList.add('show');
+    document.getElementById('trading_init_progress').style.display = 'none';
+
     Contract.setContracts(contracts);
 
     if(typeof contracts.contracts_for !== 'undefined'){
@@ -61428,7 +61439,7 @@ function processForgetProposals() {
     'use strict';
     showPriceOverlay();
     BinarySocket.send({forget_all: "proposal"});
-    Price.clearMapping();   
+    Price.clearMapping(); 
 }
 
 /*
@@ -61500,10 +61511,6 @@ function processProposal(response){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
-        if(form_id===1){
-            document.getElementById('trading_socket_container').classList.add('show');
-            document.getElementById('trading_init_progress').style.display = 'none';
-        }
     }
 }
 
@@ -62802,6 +62809,18 @@ var ProfitTableWS = (function () {
         if (!tableExist()) {
             ProfitTableUI.createEmptyTable().appendTo("#profit-table-ws-container");
             ProfitTableUI.updateProfitTable(getNextChunk());
+
+            // Show a message when the table is empty
+            if($('#profit-table tbody tr').length === 0) {
+                $('#profit-table tbody')
+                    .append($('<tr/>', {class: "flex-tr"})
+                        .append($('<td/>', {colspan: 7}) 
+                            .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})
+                            )
+                        )
+                    );
+            }
+
             Content.profitTableTranslation();
         }
     }
@@ -63058,6 +63077,18 @@ var ProfitTableUI = (function(){
         if (!tableExist()) {
             StatementUI.createEmptyStatementTable().appendTo("#statement-ws-container");
             StatementUI.updateStatementTable(getNextChunkStatement());
+
+            // Show a message when the table is empty
+            if($('#statement-table tbody tr').length === 0) {
+                $('#statement-table tbody')
+                    .append($('<tr/>', {class: "flex-tr"})
+                        .append($('<td/>', {colspan: 6})
+                            .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})
+                            )
+                        )
+                    );
+            }
+
             Content.statementTranslation();
         }
     }
@@ -63148,7 +63179,7 @@ var ProfitTableUI = (function(){
             Content.localize().textBalance
         ];
 
-        header[5] = header[5] + "(" + TUser.get().currency + ")";
+        header[5] = header[5] + (TUser.get().currency ? "(" + TUser.get().currency + ")" : "");
 
         var metadata = {
             id: tableID,
