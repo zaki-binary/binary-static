@@ -369,6 +369,7 @@ Menu.prototype = {
             }
             start_trading.attr("href", trade_url);
 
+            $('#menu-top li:eq(3) a').attr('href', trade_url);
             $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
@@ -376,6 +377,12 @@ Menu.prototype = {
             event.preventDefault();
             load_with_pjax(trade_url);
         }).addClass('unbind_later');
+
+        $('#menu-top li:eq(3) a').on('click', function(event) {
+            event.preventDefault();
+            load_with_pjax(trade_url);
+        }).addClass('unbind_later');
+
     }
 };
 
@@ -776,7 +783,9 @@ Page.prototype = {
         this.record_affiliate_exposure();
         this.contents.on_load();
         this.on_click_acc_transfer();
-        ViewBalance.init();
+        if(getCookieItem('login')){
+            ViewBalance.init();
+        }
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
     on_unload: function() {
