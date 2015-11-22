@@ -393,28 +393,7 @@ var Header = function(params) {
     this.menu = new Menu(params['url']);
     this.clock_started = false;
 };
-function initTime(){
 
-    function init(){
-        BinarySocket.send({ "time": 1});
-    };
-
-    BinarySocket.init({
-    onmessage : function(msg){
-        var response = JSON.parse(msg.data);
-
-        console.log("The time is ", response.time);
-    }
-    });
-
-    var run = function(){
-        var time = setInterval(init, 60000);
-    };
-
-    // var run = this.run();
-
-    return{ run : run };
-};
 Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
@@ -492,36 +471,34 @@ Header.prototype = {
         this.menu.register_dynamic_links();
     },
     start_clock_ws : function(){
-        //this.initTime();
-        //this.initTime.run();
         var that = this;
         var clock_handle;
         var query_start_time;
         var clock = $('#gmt-clock');
-        var init = function(){
-            BinarySocket.send({ "time": 1});
-            query_start_time = (new Date().getTime());
-        }
-        var startTime = function(){
-            init();
-            BinarySocket.init({
-                onmessage : function(msg){
-                    var response = JSON.parse(msg.data);
 
-                    console.log("The time is ", moment(response.time).utc().format("YYYY-MM-DD HH:mm") + " GMT");
-
-                    if (response && response.msg_type === 'time') {
-
-                        responseMsg(response);
-                    }
-                }
-            });
+        function init(){
+            try{
+                BinarySocket.send({ "time": 1});
+                query_start_time = (new Date().getTime());
+            }catch(err){
+                console.log(err);
+                that.start_clock();
+                return;
+            }
         };
-
+      
+        BinarySocket.init({
+            onmessage : function(msg){
+                var response = JSON.parse(msg.data);
+                if (response && response.msg_type === 'time') {
+                    responseMsg(response);
+                }
+            }
+        });
         function responseMsg(response){
             var start_timestamp = response.time;
-
-            that.time_now = (start_timestamp + ((new Date().getTime()) - query_start_time));
+            
+            that.time_now = ((start_timestamp * 1000)+ ((new Date().getTime()) - query_start_time));
             var increase_time_by = function(interval) {
                 that.time_now += interval;
             };
@@ -540,21 +517,24 @@ Header.prototype = {
             }, 1000);
         }
 
-        this.run = function(){
-            var time = setInterval(init(), 30000);
+        that.run = function(){
+            setInterval(init, 900000);
         };
         
-        startTime();
-        this.run();
+        
+        init();
+        that.run();
         this.clock_started = true;
-
+        
+         
+        return;
     },
     start_clock: function() {
         var clock = $('#gmt-clock');
         if (clock.length === 0) {
             return;
         }
-
+        
         var that = this;
         var clock_handle;
         var sync = function() {
