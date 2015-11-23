@@ -40,7 +40,6 @@ var LimitsWS = (function(){
 
     function initPage(){
         LimitsData.getLimits();
-        LimitsData.getAuth();
     }
 
     return {

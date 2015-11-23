@@ -11,8 +11,17 @@ var LimitsUI = (function(){
         
         var currency = TUser.get().currency;
         if (currency === "") {
-            currency = "USD";
+            var login = TUser.get().loginid;
+
+            if (/^CR.*$/.test(login)) {
+                currency = "USD";
+            } else if (/^MF.*$/.test(login) || /^MLT.*$/.test(login)){
+                currency = "EUR";
+            } else if (/^MX.*$/.test(login)) {
+                currency = "GBP";
+            }
         }
+        
         document.getElementById('limit').textContent = Content.localize().textLimit + " (" + currency + ")";
         
         $('#max-open-position').prepend(Content.localize().textMaxOpenPosition);
@@ -38,6 +47,9 @@ var LimitsUI = (function(){
     }
 
     function addComma(num){
+        if (num % 1 !== 0) {
+            num = num.toFixed(2);
+        }
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
