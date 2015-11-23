@@ -844,3 +844,10 @@ function addComma(num){
     }
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function validateEmail(mail) {  
+    if (/^\w+([\+\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){  
+        return true;
+    }  
+    return false;
+}

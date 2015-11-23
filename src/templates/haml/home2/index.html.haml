@@ -25,9 +25,9 @@
             .grd-parent
               %span.grd-grid-12.grd-no-gutter
                 %input.virtual-acc-left{:id => 'email', :placeholder => stash('emailtext')}
-                %p.error-message{:display => 'none'}
+                %p.error-message#signup_error{:style => 'display:none'}
             %span.grd-grid-12.grd-no-gutter
-              %input.button.xtopcta{:id => 'btn_acc_opening', :value => stash('createacc')}
+              %input.button.xtopcta{:id => 'btn_acc_opening', :type => 'submit', :value => stash('createacc')}
       .grd-grid-0.grd-hide-mobile.grd-grid-phablet-2
 .grd-container
   %hr.xtopseparator
