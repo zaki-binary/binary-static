@@ -80,6 +80,9 @@ function processMarketUnderlying() {
 function processContract(contracts) {
     'use strict';
 
+    document.getElementById('trading_socket_container').classList.add('show');
+    document.getElementById('trading_init_progress').style.display = 'none';
+
     Contract.setContracts(contracts);
 
     if(typeof contracts.contracts_for !== 'undefined'){
@@ -124,8 +127,10 @@ function processContractForm() {
 
     StartDates.display();
 
-    if(sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
+    var forward = 0;
+    if($('#date_start:visible') && sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
         selectOption(sessionStorage.getItem('date_start'), document.getElementById('date_start'));
+        forward = 1;
     }
 
     displayPrediction();
@@ -139,7 +144,6 @@ function processContractForm() {
     if(sessionStorage.getItem('amount_type')){
         selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
     }
-
     Durations.display();
     var no_price_request;
     if(sessionStorage.getItem('expiry_type')==='endtime'){
@@ -235,7 +239,7 @@ function processForgetProposals() {
     'use strict';
     showPriceOverlay();
     BinarySocket.send({forget_all: "proposal"});
-    Price.clearMapping();   
+    Price.clearMapping(); 
 }
 
 /*
@@ -307,10 +311,6 @@ function processProposal(response){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
-        if(form_id===1){
-            document.getElementById('trading_socket_container').classList.add('show');
-            document.getElementById('trading_init_progress').style.display = 'none';
-        }
     }
 }
 
