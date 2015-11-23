@@ -72,6 +72,7 @@ var TradingEvents = (function () {
         if (underlyingElement) {
             underlyingElement.addEventListener('change', function(e) {
                 if (e.target) {
+                    showFormOverlay();
                     showPriceOverlay();
                     var underlying = e.target.value;
                     sessionStorage.setItem('underlying', underlying);
@@ -98,6 +99,9 @@ var TradingEvents = (function () {
         if (durationAmountElement) {
             // jquery needed for datepicker
             $('#duration_amount').on('change', debounce(function (e) {
+                if (e.target.value % 1 !== 0 ) {
+                    e.target.value = Math.floor(e.target.value);
+                }
                 sessionStorage.setItem('duration_amount',e.target.value);
                 Durations.select_amount(e.target.value);
                 processPriceRequest();
@@ -455,24 +459,7 @@ var TradingEvents = (function () {
         var init_logo = document.getElementById('trading_init_progress');
         if(init_logo){
             init_logo.addEventListener('click', debounce( function (e) {
-                sessionStorage.removeItem('market');
-                sessionStorage.removeItem('formname');
-                sessionStorage.removeItem('underlying');
-
-                sessionStorage.removeItem('expiry_type');
-                sessionStorage.removeItem('stop_loss');
-                sessionStorage.removeItem('stop_type');
-                sessionStorage.removeItem('stop_profit');
-                sessionStorage.removeItem('amount_per_point');
-                sessionStorage.removeItem('prediction');
-                sessionStorage.removeItem('amount');
-                sessionStorage.removeItem('amount_type');
-                sessionStorage.removeItem('currency');
-                sessionStorage.removeItem('duration_units');
-                sessionStorage.removeItem('diration_value');
-                sessionStorage.removeItem('date_start');
-
-                location.reload();
+                reloadPage();
             }));
         }
 
