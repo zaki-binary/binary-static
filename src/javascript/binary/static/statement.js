@@ -1,7 +1,22 @@
 pjax_config_page("statement", function(){
     return {
         onLoad: function() {
-            TradeSocket.init();
+            if (!getCookieItem('login')) {
+                window.location.href = page.url.url_for('login');
+                return;
+            }
+            BinarySocket.init({
+                onmessage: function(msg){
+                    var response = JSON.parse(msg.data);
+
+                    if (response) {
+                        var type = response.msg_type;
+                        if (type === 'statement'){
+                            StatementWS.statementHandler(response);
+                        }
+                    }
+                }
+            });
             Content.populate();
             StatementWS.init();
         },
@@ -10,4 +25,3 @@ pjax_config_page("statement", function(){
         }
     };
 });
-

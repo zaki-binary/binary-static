@@ -120,7 +120,7 @@ pjax_config_page('rise_fall_table', function() {
 });
 
 pjax_config_page('portfoliows|portfolio|trade.cgi|statement|f_manager_statement|f_manager_history|' +
-    'f_profit_table|profit_table|trading|statementws|profit_tablews', function() {
+    'f_profit_table|profit_table|trading|legacy-statement|legacy-profittable', function() {
     return {
         onLoad: function() {
             BetSell.register();
@@ -141,18 +141,7 @@ pjax_config_page('chart_application', function () {
 
 pjax_config_page('trading', function () {
     return {
-        onLoad: function () {
-            TradeSocket.init();
-            TradingEvents.init();
-            Content.populate();
-            Symbols.getSymbols(1);
-            if (document.getElementById('websocket_form')) {
-                addEventListenerForm();
-            }
-        },
-        onUnload: function() {
-            forgetTradingStreams();
-            TradeSocket.socket().onclose(1);
-        }
+        onLoad: function(){TradePage.onLoad();},
+        onUnload: function(){TradePage.onUnload();}
     };
 });
