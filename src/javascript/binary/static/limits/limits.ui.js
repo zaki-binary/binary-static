@@ -38,16 +38,10 @@ var LimitsUI = (function(){
         $("#limits-title>tfoot").hide();
     }
 
-    function addComma(num){
-        if (num % 1 !== 0) {
-            num = num.toFixed(2);
-        }
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    
     
     return {
         clearTableContent: clearTableContent,
-        fillLimitsTable: fillLimitsTable,
-        addComma: addComma
+        fillLimitsTable: fillLimitsTable
     };
 }());
