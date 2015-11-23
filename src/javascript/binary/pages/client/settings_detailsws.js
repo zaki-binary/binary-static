@@ -147,7 +147,7 @@ var SettingsDetailsWS = (function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test(fieldID.val().trim())){
+        if(!(/.+/).test($(fieldID).val().trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
@@ -156,7 +156,7 @@ var SettingsDetailsWS = (function() {
     }
 
     var isCountError = function(fieldID, min, max) {
-        fieldValue = fieldID.val().trim();
+        var fieldValue = $(fieldID).val().trim();
         if((fieldValue.length > 0 && fieldValue.length < min) || fieldValue.length > max) {
             showError(fieldID, Content.errorMessage('range', '(' + min + '-' + max + ')'));
             return true;
@@ -172,7 +172,6 @@ var SettingsDetailsWS = (function() {
 
     var clearError = function(fieldID) {
         $(fieldID ? fieldID : formID + ' .' + errorClass).remove();
-        $('#formMessage').empty();
     };
 
     var setDetails = function() {
@@ -252,6 +251,7 @@ pjax_config_page("settings/detailsws", function() {
                 }
             });
 
+            Content.populate();
             SettingsDetailsWS.init();
         }
     };
