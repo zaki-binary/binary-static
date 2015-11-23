@@ -10,20 +10,12 @@ var LimitsUI = (function(){
         document.getElementById('item').textContent = Content.localize().textItem;
         
         var currency = TUser.get().currency;
+        var limit = document.getElementById('limit');
         if (currency === "") {
-            var login = TUser.get().loginid;
-
-            if (/^CR.*$/.test(login)) {
-                currency = "USD";
-            } else if (/^MF.*$/.test(login) || /^MLT.*$/.test(login)){
-                currency = "EUR";
-            } else if (/^MX.*$/.test(login)) {
-                currency = "GBP";
-            }
+            limit.textContent = Content.localize().textLimit;
+        } else {
+            limit.textContent = Content.localize().textLimit + " (" + currency + ")";
         }
-        
-        document.getElementById('limit').textContent = Content.localize().textLimit + " (" + currency + ")";
-        
         $('#max-open-position').prepend(Content.localize().textMaxOpenPosition);
         document.getElementById('max-open-position-tooltip').setAttribute('title', Content.localize().textMaxOpenPositionTooltip);
         document.getElementById('open-positions').textContent = open_positions;
