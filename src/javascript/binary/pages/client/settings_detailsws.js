@@ -1,4 +1,4 @@
-var SettingsDetailsWS = (function(){
+var SettingsDetailsWS = (function() {
     "use strict";
 
     var formID = '#frmPersonalDetails';
@@ -16,11 +16,11 @@ var SettingsDetailsWS = (function(){
     var isValid;
 
 
-    var init = function(){
+    var init = function() {
         BinarySocket.send({"get_settings": "1"});
     };
 
-    var getDetails = function(response){
+    var getDetails = function(response) {
         var data = response.get_settings;
 
         // Check if it is a real account or not
@@ -54,14 +54,15 @@ var SettingsDetailsWS = (function(){
                 return setDetails();
             });
         }
-
+        
+        $(formID).removeClass('hidden');
     };
 
-    var setFullName = function(response){
+    var setFullName = function(response) {
         $('#lblName').text(response.authorize.fullname);
     };
 
-    var populateStates = function(response){
+    var populateStates = function(response) {
         $(fieldIDs.state).empty();
         var defaultValue = response.echo_req.passthrough.value;
         var states = response.states_list;
@@ -77,40 +78,60 @@ var SettingsDetailsWS = (function(){
         }
     };
 
-    var formValidate = function(){
+    var formValidate = function() {
         clearError();
         isValid = true;
 
-        var address1 = $(fieldIDs.address1).val(),
-            address2 = $(fieldIDs.address2).val(),
-            city     = $(fieldIDs.city).val(),
-            state    = $(fieldIDs.state).val(),
-            postcode = $(fieldIDs.postcode).val(),
-            phone    = $(fieldIDs.phone).val();
-
-        if(!(/.+/).test(address1)){
-            showError(fieldIDs.address1, text.localize('Please enter the first line of your home address.'));
-        }
-        if(!(/.+/).test(city)){
-            showError(fieldIDs.city, text.localize('Please enter a town or city.'));
-        }
-        if(!(/.+/).test(state)){
-            showError(fieldIDs.state, text.localize('Please enter a state.'));
-        }
-        if((/^.{1,3}$/).test(postcode) || !(/^.{0,20}$/).test(postcode)){
-            showError(fieldIDs.postcode, text.localize('Postcode is invalid.'));
-        } else if(!(/(^[\w\s-]+$)/).test(postcode)){
-            showError(fieldIDs.postcode, text.localize('Please use only alphanumeric characters or spaces.'));
-        }
-        if(!(/^(|.{6}.*)$/).test(phone)){
-            showError(fieldIDs.phone, text.localize('Invalid telephone number (too short).'));
-        } else if(!(/^.{0,35}$/).test(phone)){
-            showError(fieldIDs.phone, text.localize('Invalid telephone number (too long).'));
-        } else if(!(/^(|\+?[0-9\s]+)$/).test(phone)){
-            showError(fieldIDs.phone, text.localize('Invalid telephone number.'));
+        var address1 = $(fieldIDs.address1).val().trim(),
+            address2 = $(fieldIDs.address2).val().trim(),
+            city     = $(fieldIDs.city).val().trim(),
+            state    = $(fieldIDs.state).val().trim(),
+            postcode = $(fieldIDs.postcode).val().trim(),
+            phone    = $(fieldIDs.phone).val().trim();
+        
+        var letters = Content.localize().textLetters,
+            numbers = Content.localize().textNumbers,
+            space   = Content.localize().textSpace,
+            period  = Content.localize().textPeriod,
+            comma   = Content.localize().textComma;
+        
+        // address 1
+        if(!isRequiredError(fieldIDs.address1) 
+            && !(/^[\w\s\,\.\-\/\(\)#']+$/).test(address1)) {
+                showError(fieldIDs.address1, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
         }
 
-        if(isValid){
+        // address line 2
+        if(!(/^[\w\s\,\.\-\/\(\)#']*$/).test(address2)) {
+            showError(fieldIDs.address2, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
+        }
+
+        // town/city
+        if(!isRequiredError(fieldIDs.city) 
+            && !(/^[a-zA-Z\s\-']+$/).test(city)) {
+                showError(fieldIDs.city, Content.errorMessage('reg', [letters, space, '- \'']));
+        }
+
+        // state
+        if(!isRequiredError(fieldIDs.state) 
+            && !(/^[a-zA-Z\s\-']+$/).test(state)) {
+                showError(fieldIDs.state, Content.errorMessage('reg', [letters, space, '- \'']));
+        }
+
+        // postcode
+        if(!isRequiredError(fieldIDs.postcode)
+            && !isCountError(fieldIDs.postcode, 4, 20) 
+            && !(/(^[\w\s\-\/]+$)/).test(postcode)) {
+                showError(fieldIDs.postcode, Content.errorMessage('reg', [letters, numbers, space, '- /']));
+        }
+
+        // telephone
+        if(!isCountError(fieldIDs.phone, 6, 20) 
+            && !(/^(|\+?[0-9\s\-]+)$/).test(phone)) {
+                showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '- /']));
+        }
+
+        if(isValid) {
             return {
                 address1 : address1,
                 address2 : address2,
@@ -125,16 +146,36 @@ var SettingsDetailsWS = (function(){
         }
     };
 
-    var showError = function(fieldID, errMsg){
+    var isRequiredError = function(fieldID) {
+        if(!(/.+/).test(fieldID.val().trim())){
+            showError(fieldID, Content.errorMessage('req'));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    var isCountError = function(fieldID, min, max) {
+        fieldValue = fieldID.val().trim();
+        if((fieldValue.length > 0 && fieldValue.length < min) || fieldValue.length > max) {
+            showError(fieldID, Content.errorMessage('range', '(' + min + '-' + max + ')'));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    var showError = function(fieldID, errMsg) {
         $(fieldID).after($('<p/>', {class: errorClass, text: errMsg}));
         isValid = false;
     };
 
-    var clearError = function(fieldID){
+    var clearError = function(fieldID) {
         $(fieldID ? fieldID : formID + ' .' + errorClass).remove();
+        $('#formMessage').empty();
     };
 
-    var setDetails = function(){
+    var setDetails = function() {
         var formData = formValidate();
         if(!formData)
             return false;
@@ -150,13 +191,15 @@ var SettingsDetailsWS = (function(){
         });
     };
 
-    var setDetailsResponse = function(response){
+    var setDetailsResponse = function(response) {
         var isError = response.set_settings !== 1;
-        $('#formMessage')
+        $('#formMessage').css('display', '')
             .attr('class', isError ? 'errorfield' : 'success-msg')
-            .text(text.localize(isError ? 'Sorry, an error occurred while processing your account.' : 'Your settings have been updated successfully.'));
+            .html(text.localize(isError ? 'Sorry, an error occurred while processing your account.' : '<ul class="checked"><li>Your settings have been updated successfully.</li></ul>'));
+            .delay(3000)
+            .fadeOut(1000);
     };
-
+   
 
     return {
         init: init,
@@ -170,7 +213,7 @@ var SettingsDetailsWS = (function(){
 
 
 
-pjax_config_page("settings/detailsws", function(){
+pjax_config_page("settings/detailsws", function() {
     return {
         onLoad: function() {
             if (!$.cookie('login')) {
@@ -179,7 +222,7 @@ pjax_config_page("settings/detailsws", function(){
             }
 
             BinarySocket.init({
-                onmessage: function(msg){
+                onmessage: function(msg) {
                     var response = JSON.parse(msg.data);
                     if (response) {
                         var type = response.msg_type;

@@ -78,7 +78,15 @@ var Content = (function () {
             textProfit: text.localize('Profit'),
             textFormMatchesDiffers: text.localize('Matches/Differs'),
             textFormEvenOdd: text.localize('Even/Odd'),
-            textFormOverUnder: text.localize('Over/Under')
+            textFormOverUnder: text.localize('Over/Under'),
+            textMessageRequired: text.localize('This field is required.'),
+            textMessageCountLimit: text.localize('You should enter between %LIMIT% characters.'), // %LIMIT% should be replaced by a range. sample: (6-20)
+            textMessageJustAllowed: text.localize('Only %ALLOWED% are allowed.'), // %ALLOWED% should be replaced by values including: letters, numbers, space, period, ...
+            textLetters: text.localize('letters'),
+            textNumbers: text.localize('numbers'),
+            textSpace: text.localize('space'),
+            textPeriod: text.localize('period'),
+            textComma: text.localize('comma')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -224,11 +232,33 @@ var Content = (function () {
         titleElement.textContent = localize.textProfitTable;
     };
 
+    var errorMessage = function(messageType, param){
+        var msg = "",
+            separator = ', ';
+        switch(messageType){
+            case 'req':
+                msg = localize.textMessageRequired;
+                break;
+            case 'reg':
+                if(param)
+                    msg = localize.textMessageJustAllowed.replace('%ALLOWED%', param.join(separator));
+                break;
+            case 'range':
+                if(param)
+                    msg = localize.textMessageCountLimit.replace('%LIMIT%', param);
+                break;
+            default:
+                break;
+        }
+        return msg;
+    };
+
     return {
         localize: function () { return localize; },
         populate: populate,
         statementTranslation: statementTranslation,
-        profitTableTranslation: profitTableTranslation
+        profitTableTranslation: profitTableTranslation,
+        errorMessage: errorMessage
     };
 
 })();
