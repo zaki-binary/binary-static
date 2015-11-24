@@ -130,17 +130,18 @@ function processContractForm() {
 
     StartDates.display();
 
+    displayPrediction();
+
+    displaySpreads(); 
+
+    var r1;
     if(StartDates.displayed() && sessionStorage.getItem('date_start')){
-        var r1 = TradingEvents.onStartDateChange(sessionStorage.getItem('date_start'));
+        r1 = TradingEvents.onStartDateChange(sessionStorage.getItem('date_start'));
         if(!r1) Durations.display();
     }
     else{
         Durations.display();
-    }
-
-    displayPrediction();
-
-    displaySpreads();  
+    } 
 
     var expiry_type = sessionStorage.getItem('expiry_type') ? sessionStorage.getItem('expiry_type') : 'duration';
     var make_price_request = TradingEvents.onExpiryTypeChange(expiry_type);
