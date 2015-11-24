@@ -315,7 +315,7 @@ var Durations = (function(){
             StartDates.setNow();
             expiry_time.hide();
             var date_start = StartDates.node();
-
+            $('#expiry_date').val(end_date);
             processTradingTimesRequest(end_date);
         }
         else{
@@ -323,6 +323,7 @@ var Durations = (function(){
             expiry_time.show();
             processPriceRequest();
         }
+
         sessionStorage.setItem('end_date',end_date);
         Barriers.display();
     };
