@@ -37,7 +37,7 @@ var TradingEvents = (function () {
         $('#expiry_type').val(value);
 
         sessionStorage.setItem('expiry_type',value);
-        var make_price_request;
+        var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
             if(sessionStorage.getItem('end_date')){
