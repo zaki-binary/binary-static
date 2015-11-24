@@ -1,7 +1,22 @@
 <div class='grd-grid-12'>
     <h1>[% l('Create New Account') %]</h1>
     <div class="grd-parent grd-row-padding">
-    	<form id="virtual-acc-opening">
+    	<p>
+    		[% l('We have sent you an Email containing the verification token. Please fill in the form below to create an account:') %]
+    	</p>
+    	<form id="virtual-form">
+    		<input type="email" id="email" name="email" required placeholder="Enter your email"></input>
+    		<br>
+    		<input type="password" id="password" name="password" required placeholder="Choose a password"></input>
+    		<br>
+    		<input type="password" id="r-password" required placeholder="Re-enter your password"></input>
+    		<br>
+    		<select name="residence" id="residence" required></select>
+    		<br>
+    		<input type="text" id="token" required placeholder="Enter your token"></input>
+    		<br>
+    		<input type="submit" id="btn_registration" class="button"></input>
+            <p class="error-message" style="display:none"></p>
     	</form>
     </div>
 </div>

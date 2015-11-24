@@ -1,16 +1,11 @@
 var VirtualAccOpeningWS = (function(){
     "use strict";
 
-    function virtualAccOpeningHandler(response){
-        
-    }
-
-    function initPage(email){
-        VirtualAccOpeningData.getVirtualAccOpening(email);
+    function initPage(email, password, residence, token){
+        VirtualAccOpeningData.getDetails(email, password, residence, token);
     }
 
     return {
-        virtualAccOpeningHandler: virtualAccOpeningHandler,
         init: initPage
     };
 }());

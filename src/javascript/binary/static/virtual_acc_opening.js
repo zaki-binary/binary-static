@@ -1,35 +1,45 @@
-if(document.getElementById('virtual-acc-form')) {
+pjax_config_page("virtualws", function(){
+	
+	return {
+		onLoad: function() {
+        	get_residence_list();
 
-    document.getElementById('btn_acc_opening').addEventListener('click', function(evt){
-    	evt.preventDefault();
-    	var email = document.getElementById('email');
-    	var error = document.getElementsByClassName('error-message');
+			var form = document.getElementById('virtual-form');
+			if (form) {
 
-    	if(email.value === "") {
-    		//waiting on Mohammad's branch to use his centralized error messages
-    		error[0].textContent = 'Please fill the required field.';
-    		error[0].setAttribute('style', 'display:block');
-    	} else if(!validateEmail(email.value)) {
-    		error[0].textContent = 'Please submit a valid Email address.';
-    		error[0].setAttribute('style', 'display:block');
-    	} else {
-    		error[0].textContent = "";
-    		error[0].setAttribute('style', 'display:none');
-    		BinarySocket.init({
-		        onmessage: function(msg){
-		            var response = JSON.parse(msg.data);
+				$('#virtual-form').submit(function(evt){
+					evt.preventDefault();
 
-		            if (response) {
-		                var type = response.msg_type;
-		                if (type === 'verify_email'){
-		                    //wait for shuwn yuan to implemenet 1 and 0 system if email taken
-		                    window.location = "";
-		                }
-		            }
-		        }
-		    });
-		    VirtualAccOpeningWS.init(email.value);
-    	}
-    });
-}
-        
+					if (form.checkValidity()) {
+						var error = document.getElementsByClassName('error-message')[0];
+						var password = document.getElementById('password').value;
+						var rPassword = document.getElementById('r-password').value;
+				
+						if (VirtualAccOpeningUI.checkPassword(password, rPassword)) {
+							BinarySocket.init({
+						        onmessage: function(msg){
+						            var response = JSON.parse(msg.data);
+
+						            if (response) {
+						                var type = response.msg_type;
+						                if (type === 'new_account_virtual'){
+						                    form.setAttribute('action', '/login');
+											form.setAttribute('method', 'POST');
+											$('#virtual-form').unbind('submit');
+											form.submit();
+						                }
+						            }
+						        }
+						    });
+						    var email = document.getElementById('email').value;
+						    var residence = document.getElementById('residence').value;
+						    var token = document.getElementById('token').value;
+						    
+						    VirtualAccOpeningWS.init(email, password, residence, token);
+						}
+					}
+				});
+			}
+		}
+	};
+});
