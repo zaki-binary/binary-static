@@ -68,6 +68,8 @@ function processMarketUnderlying() {
     Tick.clean();
     
     updateWarmChart();
+
+    BinarySocket.clearTimeouts();
     
     Contract.getContracts(underlying);
 
