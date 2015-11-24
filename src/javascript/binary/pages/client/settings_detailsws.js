@@ -122,7 +122,7 @@ var SettingsDetailsWS = (function() {
 
         // telephone
         if(!isCountError(fieldIDs.phone, 6, 20) && !(/^(|\+?[0-9\s\-]+)$/).test(phone)) {
-            showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '- /']));
+            showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '-']));
         }
 
         if(isValid) {
