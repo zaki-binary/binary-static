@@ -147,7 +147,7 @@ function processContractForm() {
     if(sessionStorage.getItem('amount_type')) selectOption(sessionStorage.getItem('amount_type'),document.getElementById('amount_type'));
     if(sessionStorage.getItem('currency')) selectOption(sessionStorage.getItem('currency'),document.getElementById('currency'));
 
-    if(make_price_request > 0){
+    if(make_price_request >= 0){
         processPriceRequest();
     }
 }
@@ -306,7 +306,7 @@ function processTradingTimesRequest(date){
 }
 
 function processTradingTimes(response){
-    var trading_times = Durations.trading_times();
     Durations.processTradingTimesAnswer(response);
+
     processPriceRequest();
 }

@@ -315,8 +315,8 @@ var Durations = (function(){
             StartDates.setNow();
             expiry_time.hide();
             var date_start = StartDates.node();
-            processTradingTimesRequest(end_date);
             $('#expiry_date').val(end_date);
+            processTradingTimesRequest(end_date);
         }
         else{
             Durations.setTime(expiry_time.value);

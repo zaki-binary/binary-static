@@ -19,6 +19,7 @@ var TradingEvents = (function () {
 
         if (value === 'now') {
             Durations.display('spot');
+            sessionStorage.removeItem('date_start');
         } else {
             Durations.display('forward');
             sessionStorage.setItem('date_start', value);
@@ -30,13 +31,12 @@ var TradingEvents = (function () {
     var onExpiryTypeChange = function(value){
         
         if(!value || !$('#expiry_type').find('option[value='+value+']').length){
-            return 0;
+            value = 'duration';
         }
 
         $('#expiry_type').val(value);
 
         sessionStorage.setItem('expiry_type',value);
-        
         var make_price_request;
         if(value === 'endtime'){
             Durations.displayEndTime();
@@ -46,6 +46,7 @@ var TradingEvents = (function () {
             }
         }
         else{
+            Durations.display();
             if(sessionStorage.getItem('duration_units')){
                 TradingEvents.onDurationUnitChange(sessionStorage.getItem('duration_units'));
             }

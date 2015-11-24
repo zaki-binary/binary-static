@@ -59,7 +59,7 @@ var StartDates = (function(){
                 var b = moment.unix(start_date.close).utc();
 
                 var ROUNDING = 5 * 60 * 1000;
-                var start = moment();
+                var start = moment.utc();
 
                 if(moment(start).isAfter(moment(a))){
                     a = start;
@@ -68,11 +68,13 @@ var StartDates = (function(){
                 a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
 
                 while(a.isBefore(b)) {
-                    option = document.createElement('option');
-                    option.setAttribute('value', a.utc().unix());
-                    content = document.createTextNode(a.format('HH:mm ddd'));
-                    option.appendChild(content);
-                    fragment.appendChild(option);
+                    if(a.unix()-start.unix()>5*60){
+                        option = document.createElement('option');
+                        option.setAttribute('value', a.utc().unix());
+                        content = document.createTextNode(a.format('HH:mm ddd'));
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                    } 
                     a.add(5, 'minutes');
                 }
             });
