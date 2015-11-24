@@ -3,6 +3,7 @@ pjax_config_page("virtualws", function(){
 	return {
 		onLoad: function() {
         	get_residence_list();
+        	Content.populate();
 
 			var form = document.getElementById('virtual-form');
 			if (form) {

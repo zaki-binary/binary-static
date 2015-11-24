@@ -5,26 +5,32 @@ var VirtualAccOpeningUI = (function(){
         var error = document.getElementsByClassName('error-message')[0];
         if (!/^.+$/.test(password)) {
             error.setAttribute('style', 'display:block');
-            error.textContent = 'Please enter a password.';
+            error.textContent = Content.errorMessage('req');
 
             return false;
+
         } else if (password !== rPassword) {
             error.setAttribute('style', 'display:block');
-            error.textContent = 'The two passwords that you entered do not match.';
+            error.textContent = Content.localize().textPasswordsNotMatching;
 
             return false;
+
         } else if (!/^[^-~\s]+$/.test(password)) { 
             error.setAttribute('style', 'display:block');
-            error.textContent = 'Your password contains invalid characters.';
+            error.textContent = Content.errorMessage('valid', Content.localize().textPassword);
 
             return false;
+
         } else if (password.length < 6 || password.length > 25) {
             error.setAttribute('style', 'display:block');
-            error.textContent = 'Password length should be between 6 and 25 characters';
+            error.textContent = Content.errorMessage('range', '6-25 ' + Content.localize().textPassword);
 
             return false;
+
         }
+
         return true;
+
     }
 
     return {

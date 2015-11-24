@@ -106,11 +106,16 @@ var Content = (function () {
             textMessageRequired: text.localize('This field is required.'),
             textMessageCountLimit: text.localize('You should enter between %LIMIT% characters.'), // %LIMIT% should be replaced by a range. sample: (6-20)
             textMessageJustAllowed: text.localize('Only %ALLOWED% are allowed.'), // %ALLOWED% should be replaced by values including: letters, numbers, space, period, ...
+            textMessageValid: text.localize('Please submit a valid %FIELD%.'), // %FIELD% should be replaced by values such as Email address
             textLetters: text.localize('letters'),
             textNumbers: text.localize('numbers'),
             textSpace: text.localize('space'),
             textPeriod: text.localize('period'),
-            textComma: text.localize('comma')
+            textComma: text.localize('comma'),
+            textPassword: text.localize('password'),
+            textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
+            textEmailAddress: text.localize('Email address')
+
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -281,6 +286,10 @@ var Content = (function () {
             case 'range':
                 if(param)
                     msg = localize.textMessageCountLimit.replace('%LIMIT%', param);
+                break;
+            case 'valid':
+                if(param)
+                    msg = localize.textMessageValid.replace('%FIELD%', param);
                 break;
             default:
                 break;
