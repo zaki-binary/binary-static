@@ -96,9 +96,8 @@ var SettingsDetailsWS = (function() {
             comma   = Content.localize().textComma;
         
         // address 1
-        if(!isRequiredError(fieldIDs.address1) 
-            && !(/^[\w\s\,\.\-\/\(\)#']+$/).test(address1)) {
-                showError(fieldIDs.address1, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
+        if(!isRequiredError(fieldIDs.address1) && !(/^[\w\s\,\.\-\/\(\)#']+$/).test(address1)) {
+            showError(fieldIDs.address1, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
         }
 
         // address line 2
@@ -107,28 +106,23 @@ var SettingsDetailsWS = (function() {
         }
 
         // town/city
-        if(!isRequiredError(fieldIDs.city) 
-            && !(/^[a-zA-Z\s\-']+$/).test(city)) {
-                showError(fieldIDs.city, Content.errorMessage('reg', [letters, space, '- \'']));
+        if(!isRequiredError(fieldIDs.city) && !(/^[a-zA-Z\s\-']+$/).test(city)) {
+            showError(fieldIDs.city, Content.errorMessage('reg', [letters, space, '- \'']));
         }
 
         // state
-        if(!isRequiredError(fieldIDs.state) 
-            && !(/^[a-zA-Z\s\-']+$/).test(state)) {
-                showError(fieldIDs.state, Content.errorMessage('reg', [letters, space, '- \'']));
+        if(!isRequiredError(fieldIDs.state) && !(/^[a-zA-Z\s\-']+$/).test(state)) {
+            showError(fieldIDs.state, Content.errorMessage('reg', [letters, space, '- \'']));
         }
 
         // postcode
-        if(!isRequiredError(fieldIDs.postcode)
-            && !isCountError(fieldIDs.postcode, 4, 20) 
-            && !(/(^[\w\s\-\/]+$)/).test(postcode)) {
-                showError(fieldIDs.postcode, Content.errorMessage('reg', [letters, numbers, space, '- /']));
+        if(!isRequiredError(fieldIDs.postcode) && !isCountError(fieldIDs.postcode, 4, 20) && !(/(^[\w\s\-\/]+$)/).test(postcode)) {
+            showError(fieldIDs.postcode, Content.errorMessage('reg', [letters, numbers, space, '- /']));
         }
 
         // telephone
-        if(!isCountError(fieldIDs.phone, 6, 20) 
-            && !(/^(|\+?[0-9\s\-]+)$/).test(phone)) {
-                showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '- /']));
+        if(!isCountError(fieldIDs.phone, 6, 20) && !(/^(|\+?[0-9\s\-]+)$/).test(phone)) {
+            showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '- /']));
         }
 
         if(isValid) {
@@ -153,7 +147,7 @@ var SettingsDetailsWS = (function() {
         } else {
             return false;
         }
-    }
+    };
 
     var isCountError = function(fieldID, min, max) {
         var fieldValue = $(fieldID).val().trim();
@@ -163,7 +157,7 @@ var SettingsDetailsWS = (function() {
         } else {
             return false;
         }
-    }
+    };
 
     var showError = function(fieldID, errMsg) {
         $(fieldID).after($('<p/>', {class: errorClass, text: errMsg}));
