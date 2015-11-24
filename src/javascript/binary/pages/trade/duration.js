@@ -226,13 +226,14 @@ var Durations = (function(){
             amountElement.datepicker({
                 minDate: tomorrow,
                 onSelect: function(value) {
+                    var dayDiff;
                     if($('#duration_amount').val()){
                         dayDiff = $('#duration_amount').val();
                     }
                     else{
                         var date = new Date(value);
                         var today = new Date();
-                        var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
+                        dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
                     }                    
                     amountElement.val(dayDiff);
                     amountElement.trigger('change');
