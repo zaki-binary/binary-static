@@ -178,7 +178,8 @@ var BinarySocket = (function () {
         send: send,
         close: close,
         socket: function () { return binarySocket; },
-        clear: clear
+        clear: clear,
+        clearTimeouts: clearTimeouts
     };
 
 })();

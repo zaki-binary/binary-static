@@ -60833,9 +60833,15 @@ var Durations = (function(){
             amountElement.datepicker({
                 minDate: tomorrow,
                 onSelect: function(value) {
-                    var date = new Date(value);
-                    var today = new Date();
-                    var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
+                    var dayDiff;
+                    if($('#duration_amount').val()){
+                        dayDiff = $('#duration_amount').val();
+                    }
+                    else{
+                        var date = new Date(value);
+                        var today = new Date();
+                        dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
+                    }                    
                     amountElement.val(dayDiff);
                     amountElement.trigger('change');
                 }
@@ -60988,7 +60994,7 @@ var TradingEvents = (function () {
         $('#expiry_type').val(value);
 
         sessionStorage.setItem('expiry_type',value);
-        var make_price_request;
+        var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
             if(sessionStorage.getItem('end_date')){
@@ -61850,6 +61856,8 @@ function processMarketUnderlying() {
     Tick.clean();
     
     updateWarmChart();
+
+    BinarySocket.clearTimeouts();
     
     Contract.getContracts(underlying);
 
@@ -63079,7 +63087,8 @@ var BinarySocket = (function () {
         send: send,
         close: close,
         socket: function () { return binarySocket; },
-        clear: clear
+        clear: clear,
+        clearTimeouts: clearTimeouts
     };
 
 })();
