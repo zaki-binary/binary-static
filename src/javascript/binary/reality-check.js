@@ -172,7 +172,6 @@ RealityCheck = (function ($) {
         var obj = document.getElementById('realityDuration');
         this.isNumericValue(obj);
     };
-
     //
     //limit textBox to Numeric Only
     //
@@ -183,25 +182,7 @@ RealityCheck = (function ($) {
             $('#realityDuration').on('input', function (event) { 
                  this.value = this.value.replace(/[^0-9]/g, '');
             });
-
         }
-        else{
-            $('#realityDuration').on('keypress',function(e){
-                var deleteCode = 8;  var backspaceCode = 46;
-                var key = e.which;
-                if ((key>=48 && key<=57) || key === deleteCode || key === backspaceCode || (key>=37 &&  key<=40) || key===0)    
-                {    
-                    character = String.fromCharCode(key);
-                    if( character != '.' && character != '%' && character != '&' && character != '(' && character != '\'' ) 
-                    { 
-                        return true; 
-                    }
-                    else { return false; }
-                 }
-                 else   { return false; }
-            });
-        }
-
     };
 
     // On session start we need to ask for the reality-check interval.
