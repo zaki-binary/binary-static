@@ -316,12 +316,12 @@ var Durations = (function(){
 
     var selectEndDate = function(end_date){
         var expiry_time = document.getElementById('expiry_time');
+        $('#expiry_date').val(end_date);
         if(moment(end_date).isAfter(moment(),'day')){
             Durations.setTime('');
             StartDates.setNow();
             expiry_time.hide();
             var date_start = StartDates.node();
-            $('#expiry_date').val(end_date);
             processTradingTimesRequest(end_date);
         }
         else{
@@ -338,7 +338,7 @@ var Durations = (function(){
         display: displayDurations,
         displayEndTime: displayEndTime,
         populate: durationPopulate,
-        setTime: function(time){ expiry_time = time; },
+        setTime: function(time){ $('#expiry_time').val(time); expiry_time = time; },
         getTime: function(){ return expiry_time; },
         processTradingTimesAnswer: processTradingTimesAnswer,
         trading_times: function(){ return trading_times; },
