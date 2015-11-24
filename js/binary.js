@@ -57570,6 +57570,258 @@ ClientForm.prototype = {
         $('#Email').disableSelection();
     }
 };
+;var SettingsDetailsWS = (function() {
+    "use strict";
+
+    var formID = '#frmPersonalDetails';
+    var frmBtn = formID + ' button',
+        RealAccElements = '.RealAcc',
+        errorClass = 'errorfield';
+    var fieldIDs = {
+        address1 : '#Address1',
+        address2 : '#Address2',
+        city     : '#City',
+        state    : '#State',
+        postcode : '#Postcode',
+        phone    : '#Phone'
+    };
+    var isValid;
+
+
+    var init = function() {
+        BinarySocket.send({"get_settings": "1"});
+    };
+
+    var getDetails = function(response) {
+        var data = response.get_settings;
+
+        // Check if it is a real account or not
+        var isReal = !(/VRT/.test($.cookie('loginid')));
+
+        $('#lblCountry').text(data.country);
+        $('#lblEmail').text(data.email);
+
+        if(!isReal){ // Virtual Account
+            $(RealAccElements).remove();
+        } 
+        else { // Real Account
+            BinarySocket.send({"authorize": $.cookie('login')});
+            $('#lblBirthDate').text(moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD"));
+            $(fieldIDs.address1).val(data.address_line_1);
+            $(fieldIDs.address2).val(data.address_line_2);
+            $(fieldIDs.city).val(data.address_city);
+
+            // Generate states list
+            var residence = $.cookie('residence');
+            BinarySocket.send({"states_list": residence, "passthrough": {"value": data.address_state}});
+            
+            $(fieldIDs.postcode).val(data.address_postcode);
+            $(fieldIDs.phone).val(data.phone);
+
+            $(RealAccElements).removeClass('hidden');
+
+            $(frmBtn).click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                return setDetails();
+            });
+        }
+
+        $(formID).removeClass('hidden');
+    };
+
+    var setFullName = function(response) {
+        $('#lblName').text(response.authorize.fullname);
+    };
+
+    var populateStates = function(response) {
+        $(fieldIDs.state).empty();
+        var defaultValue = response.echo_req.passthrough.value;
+        var states = response.states_list;
+        if(states.length > 0) {
+            for(var i = 0; i < states.length; i++){
+                $(fieldIDs.state).append($('<option/>', {value: states[i].value, text: states[i].text}));
+            }
+            // set Current value
+            $(fieldIDs.state).val(defaultValue);
+        }
+        else {
+            $(fieldIDs.state).replaceWith($('<input/>', {id: 'State', type: 'text', maxlength: '35', value: defaultValue}));
+        }
+    };
+
+    var formValidate = function() {
+        clearError();
+        isValid = true;
+
+        var address1 = $(fieldIDs.address1).val().trim(),
+            address2 = $(fieldIDs.address2).val().trim(),
+            city     = $(fieldIDs.city).val().trim(),
+            state    = $(fieldIDs.state).val().trim(),
+            postcode = $(fieldIDs.postcode).val().trim(),
+            phone    = $(fieldIDs.phone).val().trim();
+        
+        var letters = Content.localize().textLetters,
+            numbers = Content.localize().textNumbers,
+            space   = Content.localize().textSpace,
+            period  = Content.localize().textPeriod,
+            comma   = Content.localize().textComma;
+        
+        // address 1
+        if(!isRequiredError(fieldIDs.address1) && !(/^[a-zA-Z0-9\s\,\.\-\/\(\)#']+$/).test(address1)) {
+            showError(fieldIDs.address1, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
+        }
+
+        // address line 2
+        if(!(/^[a-zA-Z0-9\s\,\.\-\/\(\)#']*$/).test(address2)) {
+            showError(fieldIDs.address2, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
+        }
+
+        // town/city
+        if(!isRequiredError(fieldIDs.city) && !(/^[a-zA-Z\s\-']+$/).test(city)) {
+            showError(fieldIDs.city, Content.errorMessage('reg', [letters, space, '- \'']));
+        }
+
+        // state
+        if(!isRequiredError(fieldIDs.state) && !(/^[a-zA-Z\s\-']+$/).test(state)) {
+            showError(fieldIDs.state, Content.errorMessage('reg', [letters, space, '- \'']));
+        }
+
+        // postcode
+        if(!isRequiredError(fieldIDs.postcode) && !isCountError(fieldIDs.postcode, 4, 20) && !(/(^[a-zA-Z0-9\s\-\/]+$)/).test(postcode)) {
+            showError(fieldIDs.postcode, Content.errorMessage('reg', [letters, numbers, space, '- /']));
+        }
+
+        // telephone
+        if(!isCountError(fieldIDs.phone, 6, 20) && !(/^(|\+?[0-9\s\-]+)$/).test(phone)) {
+            showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '-']));
+        }
+
+        if(isValid) {
+            return {
+                address1 : address1,
+                address2 : address2,
+                city     : city,
+                state    : state,
+                postcode : postcode,
+                phone    : phone
+            };
+        }
+        else {
+            return false;
+        }
+    };
+
+    var isRequiredError = function(fieldID) {
+        if(!(/.+/).test($(fieldID).val().trim())){
+            showError(fieldID, Content.errorMessage('req'));
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    var isCountError = function(fieldID, min, max) {
+        var fieldValue = $(fieldID).val().trim();
+        if((fieldValue.length > 0 && fieldValue.length < min) || fieldValue.length > max) {
+            showError(fieldID, Content.errorMessage('range', '(' + min + '-' + max + ')'));
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    var showError = function(fieldID, errMsg) {
+        $(fieldID).after($('<p/>', {class: errorClass, text: errMsg}));
+        isValid = false;
+    };
+
+    var clearError = function(fieldID) {
+        $(fieldID ? fieldID : formID + ' .' + errorClass).remove();
+    };
+
+    var setDetails = function() {
+        var formData = formValidate();
+        if(!formData)
+            return false;
+
+        BinarySocket.send({
+            "set_settings"    : 1,
+            "address_line_1"  : formData.address1,
+            "address_line_2"  : formData.address2,
+            "address_city"    : formData.city,
+            "address_state"   : formData.state,
+            "address_postcode": formData.postcode,
+            "phone"           : formData.phone
+        });
+    };
+
+    var setDetailsResponse = function(response) {
+        var isError = response.set_settings !== 1;
+        $('#formMessage').css('display', '')
+            .attr('class', isError ? 'errorfield' : 'success-msg')
+            .html(text.localize(isError ? 'Sorry, an error occurred while processing your account.' : '<ul class="checked"><li>Your settings have been updated successfully.</li></ul>'))
+            .delay(3000)
+            .fadeOut(1000);
+    };
+   
+
+    return {
+        init: init,
+        getDetails: getDetails,
+        setDetails: setDetails,
+        setDetailsResponse: setDetailsResponse,
+        setFullName: setFullName,
+        populateStates: populateStates
+    };
+}());
+
+
+
+pjax_config_page("settings/detailsws", function() {
+    return {
+        onLoad: function() {
+            if (!$.cookie('login')) {
+                window.location.href = page.url.url_for('login');
+                return;
+            }
+
+            BinarySocket.init({
+                onmessage: function(msg) {
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        var type = response.msg_type;
+                        switch(type){
+                            case "get_settings":
+                                SettingsDetailsWS.getDetails(response);
+                                break;
+                            case "set_settings":
+                                SettingsDetailsWS.setDetailsResponse(response);
+                                break;
+                            case "authorize":
+                                SettingsDetailsWS.setFullName(response);
+                                break;
+                            case "states_list":
+                                SettingsDetailsWS.populateStates(response);
+                                break;
+                            case "error":
+                                $('#formMessage').attr('class', 'errorfield').text(response.error.message);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+                        console.log('some error occured');
+                    }
+                }
+            });
+
+            Content.populate();
+            SettingsDetailsWS.init();
+        }
+    };
+});
 ;var sidebar_scroll = function(elm_selector) {
     elm_selector.on('click', '#sidebar-nav li', function() {
         var clicked_li = $(this);
@@ -59747,7 +59999,15 @@ function addComma(num){
             textProfit: text.localize('Profit'),
             textFormMatchesDiffers: text.localize('Matches/Differs'),
             textFormEvenOdd: text.localize('Even/Odd'),
-            textFormOverUnder: text.localize('Over/Under')
+            textFormOverUnder: text.localize('Over/Under'),
+            textMessageRequired: text.localize('This field is required.'),
+            textMessageCountLimit: text.localize('You should enter between %LIMIT% characters.'), // %LIMIT% should be replaced by a range. sample: (6-20)
+            textMessageJustAllowed: text.localize('Only %ALLOWED% are allowed.'), // %ALLOWED% should be replaced by values including: letters, numbers, space, period, ...
+            textLetters: text.localize('letters'),
+            textNumbers: text.localize('numbers'),
+            textSpace: text.localize('space'),
+            textPeriod: text.localize('period'),
+            textComma: text.localize('comma')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -59904,12 +60164,34 @@ function addComma(num){
         withdrawalTitle.textContent = TUser.get().loginid + " - " + localize.textWithdrawalTitle;
     };
 
+    var errorMessage = function(messageType, param){
+        var msg = "",
+            separator = ', ';
+        switch(messageType){
+            case 'req':
+                msg = localize.textMessageRequired;
+                break;
+            case 'reg':
+                if(param)
+                    msg = localize.textMessageJustAllowed.replace('%ALLOWED%', param.join(separator));
+                break;
+            case 'range':
+                if(param)
+                    msg = localize.textMessageCountLimit.replace('%LIMIT%', param);
+                break;
+            default:
+                break;
+        }
+        return msg;
+    };
+
     return {
         localize: function () { return localize; },
         populate: populate,
         statementTranslation: statementTranslation,
         profitTableTranslation: profitTableTranslation,
-        limitsTranslation: limitsTranslation
+        limitsTranslation: limitsTranslation,
+        errorMessage: errorMessage
     };
 
 })();
@@ -60441,7 +60723,7 @@ var Durations = (function(){
             StartDates.setNow();
             expiry_time.hide();
             var date_start = StartDates.node();
-
+            $('#expiry_date').val(end_date);
             processTradingTimesRequest(end_date);
         }
         else{
@@ -60449,6 +60731,7 @@ var Durations = (function(){
             expiry_time.show();
             processPriceRequest();
         }
+
         sessionStorage.setItem('end_date',end_date);
         Barriers.display();
     };
@@ -60477,6 +60760,70 @@ var Durations = (function(){
  */
 var TradingEvents = (function () {
     'use strict';
+
+
+    var onStartDateChange = function(value){
+
+        if(!value || !$('#date_start').find('option[value='+value+']').length){
+            return 0;
+        }
+        $('#date_start').val(value);
+
+        if (value === 'now') {
+            Durations.display('spot');
+            sessionStorage.removeItem('date_start');
+        } else {
+            Durations.display('forward');
+            sessionStorage.setItem('date_start', value);
+        }
+
+        return 1;
+    };
+
+    var onExpiryTypeChange = function(value){
+        
+        if(!value || !$('#expiry_type').find('option[value='+value+']').length){
+            value = 'duration';
+        }
+
+        $('#expiry_type').val(value);
+
+        sessionStorage.setItem('expiry_type',value);
+        var make_price_request;
+        if(value === 'endtime'){
+            Durations.displayEndTime();
+            if(sessionStorage.getItem('end_date')){
+                Durations.selectEndDate(sessionStorage.getItem('end_date'));
+                make_price_request = -1;
+            }
+        }
+        else{
+            Durations.display();
+            if(sessionStorage.getItem('duration_units')){
+                TradingEvents.onDurationUnitChange(sessionStorage.getItem('duration_units'));
+            }
+            if(sessionStorage.getItem('duration_amount') && sessionStorage.getItem('duration_amount') > $('#duration_minimum').text()){
+                $('#duration_amount').val(sessionStorage.getItem('duration_amount'));
+            }
+            make_price_request = 1;
+        }
+
+        return make_price_request;
+    };
+
+    var onDurationUnitChange = function(value){
+
+        if(!value || !$('#duration_units').find('option[value='+value+']').length){
+            return 0;
+        }
+        $('#duration_units').val(value);
+
+        sessionStorage.setItem('duration_units',value);
+        Durations.select_unit(value);
+        Durations.populate();
+
+        return 1;
+    };
 
     var initiate = function () {
         /*
@@ -60585,8 +60932,7 @@ var TradingEvents = (function () {
         var expiryTypeElement = document.getElementById('expiry_type');
         if (expiryTypeElement) {
             expiryTypeElement.addEventListener('change', function(e) {
-                sessionStorage.setItem('expiry_type',e.target.value);
-                Durations.displayEndTime();
+                onExpiryTypeChange(e.target.value);
                 processPriceRequest();
             });
         }
@@ -60597,11 +60943,8 @@ var TradingEvents = (function () {
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
             durationUnitElement.addEventListener('change', function (e) {
-                sessionStorage.setItem('duration_units',e.target.value);
-                Durations.select_unit(e.target.value);
-                Durations.populate();
+                onDurationUnitChange(e.target.value);
                 processPriceRequest();
-                sessionStorage.setItem('duration_amount',document.getElementById('duration_amount').value);
             });
         }
 
@@ -60648,12 +60991,7 @@ var TradingEvents = (function () {
         var dateStartElement = StartDates.node();
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
-                if (e.target && e.target.value === 'now') {
-                    Durations.display('spot');
-                } else {
-                    Durations.display('forward');
-                    sessionStorage.setItem('date_start', e.target.value);
-                }
+                onStartDateChange(e.target.value);
                 processPriceRequest();
             });
         }
@@ -60953,7 +61291,10 @@ var TradingEvents = (function () {
     };
 
     return {
-        init: initiate
+        init: initiate,
+        onStartDateChange: onStartDateChange,
+        onExpiryTypeChange: onExpiryTypeChange,
+        onDurationUnitChange: onDurationUnitChange
     };
 })();
 
@@ -61079,7 +61420,7 @@ var Price = (function () {
             var endTime2 = Durations.getTime();
             if(!endTime2){
                 var trading_times = Durations.trading_times();
-                if(trading_times.hasOwnProperty(endDate2) && typeof trading_times[endDate2][underlying.value] === 'string'){
+                if(trading_times.hasOwnProperty(endDate2) && typeof trading_times[endDate2][underlying.value] === 'object' && trading_times[endDate2][underlying.value].length  && trading_times[endDate2][underlying.value][0]!=='--'){
                     endTime2 = trading_times[endDate2][underlying.value];
                 }
             }
@@ -61366,51 +61707,31 @@ function processContract(contracts) {
 }
 
 function processContractForm() {
+    
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
 
-    var forward = 0;
-    if($('#date_start:visible') && sessionStorage.getItem('date_start') && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment(),'minutes')){
-        selectOption(sessionStorage.getItem('date_start'), document.getElementById('date_start'));
-        forward = 1;
+    if(StartDates.displayed() && sessionStorage.getItem('date_start')){
+        var r1 = TradingEvents.onStartDateChange(sessionStorage.getItem('date_start'));
+        if(!r1) Durations.display();
+    }
+    else{
+        Durations.display();
     }
 
     displayPrediction();
 
     displaySpreads();  
- 
-    if(sessionStorage.getItem('amount')){
-        document.getElementById('amount').value = sessionStorage.getItem('amount');       
-    }
 
-    if(sessionStorage.getItem('amount_type')){
-        selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
-    }
-    Durations.display();
-    var no_price_request;
-    if(sessionStorage.getItem('expiry_type')==='endtime'){
-        var is_selected = selectOption('endtime', document.getElementById('expiry_type'));
-        if(is_selected){
-            Durations.displayEndTime();
-            if(sessionStorage.getItem('end_date') && moment(sessionStorage.getItem('end_date')).isAfter(moment())){
-                $( "#expiry_date" ).datepicker( "setDate", sessionStorage.getItem('end_date') );
-                Durations.selectEndDate(sessionStorage.getItem('end_date'));
-                no_price_request = 1;
-            }
-        }
-    }
-    if(!no_price_request){
-        if(sessionStorage.getItem('duration_units')){
-            selectOption(sessionStorage.getItem('duration_units'), document.getElementById('duration_units'));
-        }
-        Durations.populate();
-        if(sessionStorage.getItem('duration_amount')){
-            document.getElementById('duration_amount').value = sessionStorage.getItem('duration_amount');       
-        }
-    }
+    var expiry_type = sessionStorage.getItem('expiry_type') ? sessionStorage.getItem('expiry_type') : 'duration';
+    var make_price_request = TradingEvents.onExpiryTypeChange(expiry_type);
 
-    if(!no_price_request){
+    if(sessionStorage.getItem('amount')) $('#amount').val(sessionStorage.getItem('amount'));
+    if(sessionStorage.getItem('amount_type')) selectOption(sessionStorage.getItem('amount_type'),document.getElementById('amount_type'));
+    if(sessionStorage.getItem('currency')) selectOption(sessionStorage.getItem('currency'),document.getElementById('currency'));
+
+    if(make_price_request >= 0){
         processPriceRequest();
     }
 }
@@ -61569,8 +61890,8 @@ function processTradingTimesRequest(date){
 }
 
 function processTradingTimes(response){
-    var trading_times = Durations.trading_times();
     Durations.processTradingTimesAnswer(response);
+
     processPriceRequest();
 }
 ;/*
@@ -61771,6 +62092,7 @@ var StartDates = (function(){
     'use strict';
 
     var hasNow = 0;
+    var displayed = 0;
 
     var compareStartDate = function(a,b) {
         if (a.date < b.date)
@@ -61819,7 +62141,7 @@ var StartDates = (function(){
                 var b = moment.unix(start_date.close).utc();
 
                 var ROUNDING = 5 * 60 * 1000;
-                var start = moment();
+                var start = moment.utc();
 
                 if(moment(start).isAfter(moment(a))){
                     a = start;
@@ -61828,16 +62150,20 @@ var StartDates = (function(){
                 a = moment(Math.ceil((+a) / ROUNDING) * ROUNDING).utc();
 
                 while(a.isBefore(b)) {
-                    option = document.createElement('option');
-                    option.setAttribute('value', a.utc().unix());
-                    content = document.createTextNode(a.format('HH:mm ddd'));
-                    option.appendChild(content);
-                    fragment.appendChild(option);
+                    if(a.unix()-start.unix()>5*60){
+                        option = document.createElement('option');
+                        option.setAttribute('value', a.utc().unix());
+                        content = document.createTextNode(a.format('HH:mm ddd'));
+                        option.appendChild(content);
+                        fragment.appendChild(option);
+                    } 
                     a.add(5, 'minutes');
                 }
             });
             target.appendChild(fragment);
+            displayed = 1;
         } else {
+            displayed = 0;
             document.getElementById('date_start_row').style.display = 'none';
         }
     };
@@ -61852,7 +62178,8 @@ var StartDates = (function(){
     return {
         display: displayStartDates,
         node: getElement,
-        setNow: setNow
+        setNow: setNow,
+        displayed: function(){ return displayed; }
     };
 
 })();
@@ -62405,7 +62732,7 @@ var BinarySocket = (function () {
     var clearTimeouts = function(){
         for(var k in timeouts){
             if(timeouts.hasOwnProperty(k)){
-                clearInterval(timeouts[k]);
+                clearTimeout(timeouts[k]);
                 delete timeouts[k];
             }
         }
@@ -62438,14 +62765,16 @@ var BinarySocket = (function () {
             if(!data.hasOwnProperty('passthrough')){
                 data.passthrough = {};
             }
+            // temporary check
             if(data.contracts_for || data.proposal){
                 data.passthrough.req_number = ++req_number;
-                timeouts[req_number] = setInterval(function(){
-                    if(typeof reloadPage === 'function'){
-                        var r = confirm("The server didn't respond to the request:\n\n"+JSON.stringify(data)+"\n\nReload page?");
-                        if (r === true) {
-                            reloadPage();
-                        } 
+                timeouts[req_number] = setTimeout(function(){
+                    if(typeof reloadPage === 'function' && data.contracts_for){
+                        alert("The server didn't respond to the request:\n\n"+JSON.stringify(data)+"\n\n");
+                        reloadPage();
+                    }
+                    else{
+                        $('.price_container').hide();
                     }
                 }, 7*1000);
             }
