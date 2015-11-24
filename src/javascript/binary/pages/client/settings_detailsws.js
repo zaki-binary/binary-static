@@ -96,12 +96,12 @@ var SettingsDetailsWS = (function() {
             comma   = Content.localize().textComma;
         
         // address 1
-        if(!isRequiredError(fieldIDs.address1) && !(/^[\w\s\,\.\-\/\(\)#']+$/).test(address1)) {
+        if(!isRequiredError(fieldIDs.address1) && !(/^[a-zA-Z0-9\s\,\.\-\/\(\)#']+$/).test(address1)) {
             showError(fieldIDs.address1, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
         }
 
         // address line 2
-        if(!(/^[\w\s\,\.\-\/\(\)#']*$/).test(address2)) {
+        if(!(/^[a-zA-Z0-9\s\,\.\-\/\(\)#']*$/).test(address2)) {
             showError(fieldIDs.address2, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
         }
 
@@ -116,7 +116,7 @@ var SettingsDetailsWS = (function() {
         }
 
         // postcode
-        if(!isRequiredError(fieldIDs.postcode) && !isCountError(fieldIDs.postcode, 4, 20) && !(/(^[\w\s\-\/]+$)/).test(postcode)) {
+        if(!isRequiredError(fieldIDs.postcode) && !isCountError(fieldIDs.postcode, 4, 20) && !(/(^[a-zA-Z0-9\s\-\/]+$)/).test(postcode)) {
             showError(fieldIDs.postcode, Content.errorMessage('reg', [letters, numbers, space, '- /']));
         }
 
