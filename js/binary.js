@@ -58584,7 +58584,7 @@ pjax_config_page("user/portfoliows", function() {
                             break;
 
                         default:
-                            throw new Error("No method exits to handle api message of type '" + msg_type + "'.");
+                            // msg_type is not what PortfolioWS handles, so ignore it.
 
                     }
 
@@ -60623,7 +60623,16 @@ var Durations = (function(){
     var expiry_time = '';
     var has_end_date = 0;
 
-    var displayDurations = function(startType) {
+    var displayDurations = function() {
+
+        var startType;
+        if(sessionStorage.getItem('date_start') && StartDates.displayed()){
+            startType = 'forward';
+        }
+        else {
+            startType = 'spot';
+        }
+
         var durations = Contract.durations();
         if (durations === false) {
             document.getElementById('expiry_row').style.display = 'none';
@@ -60976,17 +60985,16 @@ var TradingEvents = (function () {
 
         var make_price_request = 1;
         if (value === 'now') {
-            Durations.display('spot');
             sessionStorage.removeItem('date_start');
         } else {
             make_price_request = -1;
             var end_time = moment(value*1000).utc().add(15,'minutes');
             Durations.setTime(end_time.format("hh:mm"));
             Durations.selectEndDate(end_time.format("YYYY-MM-DD"));
-
-            Durations.display('forward');
             sessionStorage.setItem('date_start', value);
         }
+
+        Durations.display();
 
         return make_price_request;
     };
