@@ -11,10 +11,9 @@ var SelfExlusionWS = (function(){
         $form.find("button").on("click", function(e){
             e.preventDefault();
             e.stopPropagation();
-            if(!validateForm($form)){
+            if(validateForm($form) === false){
                 return false;
             }
-            validateDate();
             BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "set_self_exclusion"}});
         });
 
@@ -27,44 +26,55 @@ var SelfExlusionWS = (function(){
     var resetError = function(){
         //reset error to empty
         $("p.errorfield").each(function(ind,element){
-
             $(element).text("");
         });
     };
     var resetForm = function(){
         $(":text").each(function(ind,element){
-            if(!isNormalInteger($(element).val()) && $(element).val())
-            {
-                if(!/EXCLUDEUNTIL/.test($(element).attr("id")))
-                {
-                    $(element).val("");
-                }
-            }
+            $(element).val("");
         });
-
     };
     var validateForm = function(frm){
         var isValid = true;
        
         resetError();
       
-
+        //Validate number/integer textboxes
         $(":text").each(function(ind,element){
             if(!isNormalInteger($(element).val()) && $(element).val())
             {
                 if(!/EXCLUDEUNTIL/.test($(element).attr("id")))
                 {
-                    $("#error"+$(element).attr("id")).text("Please enter an integer value");
+                    $("#error"+$(element).attr("id")).text(text.localize("Please enter an integer value"));
                     isValid = false;
                 }
             }
         });
 
-        if(!isValid)
+
+        if(validateDate() === false){
+            isValid = false;
+        }
+
+        if(isValid === false){
+
             return false;
+        }
 
     };
     var isAuthorized =  function(response){
+
+        if("error" in response) {
+
+            if("message" in response.error) {
+                console.log(response.error.message);
+            }
+            console.log("issue with authorization");
+
+            $("#invalidinputfound").text(errorMsg);
+            return false;
+        }
+
         if(response.echo_req.passthrough){
             var option= response.echo_req.passthrough.value ;
 
@@ -77,21 +87,6 @@ var SelfExlusionWS = (function(){
                         break;                   
             }
         }
-        /*
-        console.log("The response echo is", response.echo_req.passthrough);
-        if(typeof response.echo_req.passthrough.value !== 'undefined'){
-            var option= response.echo_req.passthrough.value ;
-
-            switch(option){
-                case   "get_self_exclusion" :
-                        BinarySocket.send({"get_self_exclusion": 1});
-                        break;
-                case   "set_self_exclusion" :
-                        sendRequest();
-                        break;                   
-            }
-        }
-        */
    
     };
     var validateDate = function(){
@@ -103,6 +98,17 @@ var SelfExlusionWS = (function(){
 
         //Reset form to empty.
         //resetForm();
+
+        //check for error in response
+        if("error" in response) {
+            var errorMsg = text.localize("Sorry, there is an issue getting your record.");
+
+            if("message" in response.error) {
+                console.log(response.error.message);
+            }
+            $("#invalidinputfound").text(errorMsg);
+            return false;
+        }
 
         data.max_balance = $("#MAXCASHBAL").val();
         data.max_turnover = $("#DAILYTURNOVERLIMIT").val();
@@ -190,7 +196,7 @@ var SelfExlusionWS = (function(){
                 hasChages = true ;
         }); 
         if(!hasChages){
-            $("#invalidinputfound").text("Please provide at least one self-exclusion setting");
+            $("#invalidinputfound").text(text.localize("Please provide at least one self-exclusion setting"));
             return false;
         }
 
@@ -214,17 +220,21 @@ var SelfExlusionWS = (function(){
 
     };
     var responseMessage = function(response){
-        //msg_type: "error"
-        if(response.msg_type === "error"){
-            $("#invalidinputfound").text("Operation failed");
-            console.log("Find the issue in the object : ", response.echo_req);
+        if("error" in response) {
+            var errorMsg = text.localize("Operation failed.");
+
+            if("message" in response.error) {
+                console.log(response.error.message);
+            }
+            $("#invalidinputfound").text(errorMsg);
+
             return false;
         }
-
         window.location.href = window.location.href;
     };
     var apiResponse = function(response){
         var type = response.msg_type;
+    
         if (type === "get_self_exclusion" || (type === "error" && "get_self_exclusion" in response.echo_req)){
             populateForm(response);
         }else if(type === "set_self_exclusion" || (type === "error" && "set_self_exclusion" in response.echo_req))
@@ -269,8 +279,6 @@ pjax_config_page("user/self_exclusionws", function() {
                     }
                 }
             });	
-           
-            // date picker for self exclusion
                 
            // date picker for self exclusion
             Exclusion.self_exclusion_date_picker();
