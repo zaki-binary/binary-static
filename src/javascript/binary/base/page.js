@@ -405,6 +405,7 @@ Header.prototype = {
     },
     on_unload: function() {
         this.menu.reset();
+        if (!this.clock_started) this.start_clock_ws();
     },
     show_or_hide_login_form: function() {
         if (this.user.is_logged_in && this.client.is_logged_in) {
@@ -477,14 +478,8 @@ Header.prototype = {
         var clock = $('#gmt-clock');
 
         function init(){
-            try{
-                BinarySocket.send({ "time": 1});
-                query_start_time = (new Date().getTime());
-            }catch(err){
-                console.log(err);
-                that.start_clock();
-                return;
-            }
+            BinarySocket.send({ "time": 1});
+            query_start_time = (new Date().getTime());  
         };
       
         BinarySocket.init({
@@ -521,11 +516,11 @@ Header.prototype = {
             setInterval(init, 900000);
         };
         
-        
-        init();
-        that.run();
-        this.clock_started = true;
-        
+        if(BinarySocket.isReady()){
+            init();
+            that.run();
+            this.clock_started = true;
+        }
          
         return;
     },
