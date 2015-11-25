@@ -19,7 +19,7 @@ var Durations = (function(){
     var displayDurations = function() {
 
         var startType;
-        if(sessionStorage.getItem('date_start') && StartDates.displayed()){
+        if(sessionStorage.getItem('date_start') && StartDates.displayed() && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment()) ){
             startType = 'forward';
         }
         else {
