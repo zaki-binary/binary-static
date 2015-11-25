@@ -29,7 +29,7 @@ var BinarySocket = (function () {
     var clearTimeouts = function(){
         for(var k in timeouts){
             if(timeouts.hasOwnProperty(k)){
-                clearInterval(timeouts[k]);
+                clearTimeout(timeouts[k]);
                 delete timeouts[k];
             }
         }
@@ -62,16 +62,20 @@ var BinarySocket = (function () {
             if(!data.hasOwnProperty('passthrough')){
                 data.passthrough = {};
             }
-            data.passthrough.req_number = ++req_number;
-            timeouts[req_number] = setInterval(function(){
-                if(typeof reloadPage === 'function'){
-                    var r = confirm("The server didn't respond. Reload page?");
-                    console.log(data,'Last Error Request');
-                    if (r === true) {
+            // temporary check
+            if(data.contracts_for || data.proposal){
+                data.passthrough.req_number = ++req_number;
+                timeouts[req_number] = setTimeout(function(){
+                    if(typeof reloadPage === 'function' && data.contracts_for){
+                        alert("The server didn't respond to the request:\n\n"+JSON.stringify(data)+"\n\n");
                         reloadPage();
-                    } 
-                }
-            }, 7*1000);
+                    }
+                    else{
+                        $('.price_container').hide();
+                    }
+                }, 7*1000);
+            }
+            
             binarySocket.send(JSON.stringify(data));
         } else {
             bufferedSends.push(data);
@@ -174,7 +178,8 @@ var BinarySocket = (function () {
         send: send,
         close: close,
         socket: function () { return binarySocket; },
-        clear: clear
+        clear: clear,
+        clearTimeouts: clearTimeouts
     };
 
 })();
