@@ -35,7 +35,7 @@ var TradingTimesWS = (function() {
             var tabID = 'tradingtimes-' + markets[m].name.toLowerCase();
 
             // tabs
-            $ul.append($('<li/>', {class: 'ja-hide' + (m > 0 ? '' : ' active')}).append($('<a/>', {href: '#' + tabID, text: markets[m].name})));
+            $ul.append($('<li/>', {class: 'ja-hide'}).append($('<a/>', {href: '#' + tabID, text: markets[m].name, id: 'outline'})));
 
             // contents
             var $market = $('<div/>', {id: tabID});
@@ -46,7 +46,7 @@ var TradingTimesWS = (function() {
         $container
             .empty()
             .append($ul)
-            //.append($('<div/>', {class: 'grd-row-padding'}))
+            .append($('<div/>', {class: 'grd-row-padding'}))
             .append($contents.children());
 
         $container.tabs('destroy').tabs();
