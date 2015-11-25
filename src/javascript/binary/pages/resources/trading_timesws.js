@@ -10,7 +10,7 @@ var TradingTimesWS = (function() {
         showLoadingImage($container);
         sendRequest('today');
 
-        $date.val(moment.utc(new Date()).format('YYYY-MM-DD'))
+        $date.val(moment.utc(new Date()).format('YYYY-MM-DD'));
         $date.datepicker({minDate: 0, maxDate: '+1y', dateFormat: 'yy-mm-dd', autoSize: true});
         $date.change(function() {
             $container.empty();
