@@ -71,7 +71,6 @@ var SelfExlusionWS = (function(){
             }
             console.log("issue with authorization");
 
-            $("#invalidinputfound").text(errorMsg);
             return false;
         }
 
@@ -282,7 +281,8 @@ pjax_config_page("user/self_exclusionws", function() {
                 
            // date picker for self exclusion
             Exclusion.self_exclusion_date_picker();
-           
+
+            //init commands
             SelfExlusionWS.init();
         }
     };
