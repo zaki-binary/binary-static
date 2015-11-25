@@ -78,7 +78,7 @@ var TradingTimesWS = (function() {
 
     var createSubmarketHeader = function(submarketName) {
         return $('<tr/>', {class: 'flex-tr'})
-            .append($('<th/>', {class: 'flex-tr-child', colspan: columns.length, text: submarketName}));
+            .append($('<th/>', {class: 'flex-tr-child submarket-name', colspan: columns.length, text: submarketName}));
     };
 
     var createSubmarketTableRow = function(marketName, submarketName, symbol) {
