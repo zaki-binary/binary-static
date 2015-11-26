@@ -58,6 +58,11 @@ var TradingTimesWS = (function() {
         // submarkets of this market
         var submarkets = market.submarkets;
         for(var s = 0; s < submarkets.length; s++) {
+            // just show "Major Pairs" when the language is JA
+            if(page.language().toLowerCase() === 'ja' && submarkets[s].name !== '主要ペア'){
+                continue;
+            }
+
             // submarket table
             var $submarketTable = createEmptyTable(market.name + '-' + s);
 
