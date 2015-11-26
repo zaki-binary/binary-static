@@ -1,7 +1,7 @@
 var VirtualAccOpeningUI = (function(){
     "use strict";
 
-    function setLabel(details, email, password, rPassword, residence, token, submit){
+    function setLabel(details, email, password, rPassword, residence, token, btn_submit){
 
         var labels = document.getElementsByTagName('LABEL');
         for (var i = 0; i < labels.length; i++) {
@@ -18,10 +18,18 @@ var VirtualAccOpeningUI = (function(){
         rPassword.label.innerHTML = StringUtil.toTitleCase(Content.localize().textRepeatPassword);
         residence.label.innerHTML = StringUtil.toTitleCase(Content.localize().textResidence);
         token.label.innerHTML = StringUtil.toTitleCase(Content.localize().textToken);
-        submit.textContent = StringUtil.toTitleCase(Content.localize().textSubmit);
+        btn_submit.textContent = StringUtil.toTitleCase(Content.localize().textCreateNewAccount);
+    }
+
+    function checkErrors(password, rPassword){
+        var errorPassword = document.getElementById('error-password'),
+            errorRPassword = document.getElementById('error-r-password');
+
+        return Validate.errorMessagePassword(password.value, rPassword.value, errorPassword, errorRPassword);
     }
 
     return {
-        setLabel: setLabel
+        setLabel: setLabel,
+        checkErrors: checkErrors
     };
 }());

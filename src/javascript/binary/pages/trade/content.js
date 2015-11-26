@@ -119,7 +119,7 @@ var Content = (function () {
             textResidence: text.localize('country of residence'),
             textToken: text.localize('verification token'),
             textDetails: text.localize('details'),
-            textSubmit: text.localize('submit'),
+            textCreateNewAccount: text.localize('create new account'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
             textOpens: text.localize('Opens'),

@@ -6,36 +6,29 @@ pjax_config_page("virtualws", function(){
         	Content.populate();
 
 			var form = document.getElementById('virtual-form');
-			var allError = document.getElementsByClassName('errorfield');
 
 			var details = document.getElementById('details'),
 				email = document.getElementById('email'),
-				password = document.getElementById('password'),
-				rPassword = document.getElementById('r-password'),
-		    	residence = document.getElementById('residence'),
 		    	token = document.getElementById('token'),
-		    	submit = document.getElementById('submit');
+		    	btn_submit = document.getElementById('btn_submit'),
+		    	residence = document.getElementById('residence'),
+		    	password = document.getElementById('password'),
+				rPassword = document.getElementById('r-password');
 
-		    VirtualAccOpeningUI.setLabel(details, email, password, rPassword, residence, token, submit);
+			var errorToken = document.getElementById('error-token');
+
+		    VirtualAccOpeningUI.setLabel(details, email, password, rPassword, residence, token, btn_submit);
 
 			if (form) {
 
 				$('#virtual-form').submit( function(evt) {
 					evt.preventDefault();
-					Validate.hideErrorMessageAll(allError);
+					Validate.hideErrorMessage(errorToken);
 
-					var errorEmail = document.getElementById('error-email'),
-						errorPassword = document.getElementById('error-password'),
-						errorRPassword = document.getElementById('error-r-password'),
-						errorResidence = document.getElementById('error-residence'),
-						errorToken = document.getElementById('error-token');
+					var password = document.getElementById('password'),
+						rPassword = document.getElementById('r-password');
 
-					var errorMessageEmail = Validate.errorMessageEmail(email.value, errorEmail),
-						errorMessagePassword = Validate.errorMessagePassword(password.value, rPassword.value, errorPassword, errorRPassword),
-						errorMessageResidence = Validate.errorMessageResidence(residence.value, errorResidence),
-						errorMessageToken = Validate.errorMessageToken(token.value, errorToken);
-
-					if (!(errorMessageEmail || errorMessagePassword || errorMessageResidence || errorMessageToken)) {
+					if (VirtualAccOpeningUI.checkErrors(password, rPassword)) {
 						
 						BinarySocket.init({
 					        onmessage: function(msg){
@@ -44,18 +37,26 @@ pjax_config_page("virtualws", function(){
 					            if (response) {
 					                var type = response.msg_type;
 					                var error = response.error;
-					                if (type === 'new_account_virtual' && !error){
+
+					                if (type === 'new_account_virtual'){
+
+					                	if (error) {
+					                		if (/email address is already in use/.test(error.message)) {
+					                			errorToken.textContent = Content.localize().textDuplicatedEmail;
+					                			Validate.displayErrorMessage(errorToken);
+					                			return false;
+					                		}
+					                	}
+
 					                    form.setAttribute('action', '/login');
 										form.setAttribute('method', 'POST');
+
 										$('#virtual-form').unbind('submit');
 										form.submit();
-					                } else if (error.length > 0) {
-					                	if (/email address is already in use/.test(error.message)) {
-					                		errorToken.textContent = Content.localize().textDuplicatedEmail;
-					                	} else {
-				                			errorToken.textContent = Content.errorMessage('valid', Content.localize().textToken);
-				                		}
-				                		Validate.displayErrorMessage(errorToken);
+
+					                } else if (type === 'error') {
+										errorToken.textContent = Content.errorMessage('valid', Content.localize().textToken);
+										Validate.displayErrorMessage(errorToken);
 					                }
 					            }
 					        }
