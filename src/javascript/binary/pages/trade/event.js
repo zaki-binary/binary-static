@@ -17,15 +17,20 @@ var TradingEvents = (function () {
         }
         $('#date_start').val(value);
 
+        var make_price_request = 1;
         if (value === 'now') {
-            Durations.display('spot');
             sessionStorage.removeItem('date_start');
         } else {
-            Durations.display('forward');
+            make_price_request = -1;
+            var end_time = moment(value*1000).utc().add(15,'minutes');
+            Durations.setTime(end_time.format("hh:mm"));
+            Durations.selectEndDate(end_time.format("YYYY-MM-DD"));
             sessionStorage.setItem('date_start', value);
         }
 
-        return 1;
+        Durations.display();
+
+        return make_price_request;
     };
 
     var onExpiryTypeChange = function(value){
@@ -239,8 +244,10 @@ var TradingEvents = (function () {
         var dateStartElement = StartDates.node();
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
-                onStartDateChange(e.target.value);
-                processPriceRequest();
+                var r = onStartDateChange(e.target.value);
+                if(r>=0){
+                    processPriceRequest();
+                }
             });
         }
 
