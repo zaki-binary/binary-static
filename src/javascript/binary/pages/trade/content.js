@@ -114,7 +114,13 @@ var Content = (function () {
             textComma: text.localize('comma'),
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
-            textEmailAddress: text.localize('Email address')
+            textEmailAddress: text.localize('Email address'),
+            textRepeatPassword: text.localize('re-enter password'),
+            textResidence: text.localize('country of residence'),
+            textToken: text.localize('verification token'),
+            textDetails: text.localize('details'),
+            textSubmit: text.localize('submit'),
+            textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID')
 
         };
 

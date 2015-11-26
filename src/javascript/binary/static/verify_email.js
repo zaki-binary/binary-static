@@ -3,19 +3,11 @@ if(document.getElementById('btn-verify-email')) {
 
     document.getElementById('btn-verify-email').addEventListener('click', function(evt){
     	evt.preventDefault();
-    	var email = document.getElementById('email');
+    	var email = document.getElementById('email').value;
     	var error = document.getElementsByClassName('error-message')[0];
         Content.populate();
 
-    	if(email.value === "") {
-    		error.textContent = Content.errorMessage('req');
-    		error.setAttribute('style', 'display:block');
-
-    	} else if(!validateEmail(email.value)) {
-    		error.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress + '.');
-    		error.setAttribute('style', 'display:block');
-
-    	} else {
+    	if(!Validate.errorMessageEmail(email, error)) {
     		error.textContent = "";
     		error.setAttribute('style', 'display:none');
 
@@ -31,7 +23,7 @@ if(document.getElementById('btn-verify-email')) {
 		            }
 		        }
 		    });
-		    VerifyEmailWS.init(email.value);
+		    VerifyEmailWS.init(email);
     	}
     });
 }
