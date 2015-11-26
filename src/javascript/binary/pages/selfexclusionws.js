@@ -63,6 +63,7 @@ var SelfExlusionWS = (function(){
 
     };
     var isAuthorized =  function(response){
+        /*
 
         if("error" in response) {
 
@@ -72,7 +73,7 @@ var SelfExlusionWS = (function(){
             console.log("issue with authorization");
 
             return false;
-        }
+        }*/
 
         if(response.echo_req.passthrough){
             var option= response.echo_req.passthrough.value ;
