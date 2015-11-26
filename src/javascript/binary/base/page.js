@@ -398,9 +398,8 @@ Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
         this.register_dynamic_links();
-        //if (!this.clock_started) this.start_clock();
-        if (!this.clock_started) this.start_clock_ws();
         //start_clock_ws
+        if (!this.clock_started) this.start_clock_ws();
         this.simulate_input_placeholder_for_ie();
     },
     on_unload: function() {
@@ -480,8 +479,7 @@ Header.prototype = {
         function init(){
             BinarySocket.send({ "time": 1});
             query_start_time = (new Date().getTime());  
-        };
-      
+        }
         BinarySocket.init({
             onmessage : function(msg){
                 var response = JSON.parse(msg.data);
@@ -497,11 +495,9 @@ Header.prototype = {
             var increase_time_by = function(interval) {
                 that.time_now += interval;
             };
-
             var update_time = function() {
                  clock.html(moment(that.time_now).utc().format("YYYY-MM-DD HH:mm") + " GMT");
             };
-
             update_time();
 
             clearInterval(clock_handle);
@@ -511,17 +507,14 @@ Header.prototype = {
                 update_time();
             }, 1000);
         }
-
         that.run = function(){
             setInterval(init, 900000);
         };
-        
         if(BinarySocket.isReady()){
             init();
             that.run();
             this.clock_started = true;
         }
-         
         return;
     },
     start_clock: function() {
@@ -529,7 +522,6 @@ Header.prototype = {
         if (clock.length === 0) {
             return;
         }
-        
         var that = this;
         var clock_handle;
         var sync = function() {
