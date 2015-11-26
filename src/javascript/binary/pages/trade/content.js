@@ -120,8 +120,12 @@ var Content = (function () {
             textToken: text.localize('verification token'),
             textDetails: text.localize('details'),
             textSubmit: text.localize('submit'),
-            textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID')
-
+            textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
+            textAsset: text.localize('Asset'),
+            textOpens: text.localize('Opens'),
+            textCloses: text.localize('Closes'),
+            textSettles: text.localize('Settles'),
+            textUpcomingEvents: text.localize('Upcoming Events')
         };
 
         var starTime = document.getElementById('start_time_label');

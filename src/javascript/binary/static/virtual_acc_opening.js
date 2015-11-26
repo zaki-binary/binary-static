@@ -43,14 +43,14 @@ pjax_config_page("virtualws", function(){
 
 					            if (response) {
 					                var type = response.msg_type;
-					                var error = response.error.message;
-					                if (type === 'new_account_virtual' && error.length == 0){
+					                var error = response.error;
+					                if (type === 'new_account_virtual' && !error){
 					                    form.setAttribute('action', '/login');
 										form.setAttribute('method', 'POST');
-										form.unbind('submit');
+										$('#virtual-form').unbind('submit');
 										form.submit();
 					                } else if (error.length > 0) {
-					                	if (/email address is already in use/.test(error)) {
+					                	if (/email address is already in use/.test(error.message)) {
 					                		errorToken.textContent = Content.localize().textDuplicatedEmail;
 					                	} else {
 				                			errorToken.textContent = Content.errorMessage('valid', Content.localize().textToken);
