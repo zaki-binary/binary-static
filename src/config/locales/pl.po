@@ -7,14 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-11-24 20:38+0000\n"
+"PO-Revision-Date: 2015-11-26 16:57+0000\n"
 "Last-Translator: Ewelina Bruździak <e.bruzdziak@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/binary/static/pl/>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/binary/static/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.5-dev\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1773,10 +1775,9 @@ msgid "Binary's Maltese subsidiary Binary Investments (Europe) Ltd. is granted a
 msgstr "Urząd ds. Usług Finansowych (Malta Financial Services Authority) na Malcie przyznał maltańskiej spółce zależnej firmy Binary, Binary Investments (Europe) Ltd., licencję dla podmiotów świadczących usługi inwestycyjne kategorii 3."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/resources/trading_timesws.html.tt:2
-#, fuzzy
 #| msgid "View Trading Times"
 msgid "Binary.com - Trading Times"
-msgstr "Zobacz godziny handlu"
+msgstr "Binary.com – godziny handlu"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Binary.com Open-Source Projects"
@@ -3075,10 +3076,9 @@ msgid "Description"
 msgstr "Opis"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:8
-#, fuzzy
 #| msgid "details"
 msgid "Details"
-msgstr "szczegóły"
+msgstr "Szczegóły"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:571
 msgid "Detrended Price Osc"
@@ -4697,7 +4697,7 @@ msgstr "Nieprawidłowa kwota. Minimalna kwota przelewu to 0,10, do dwóch miejsc
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:184
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:390
 msgid "Invalid amount. minimum is 10, maximum is 2000."
-msgstr ""
+msgstr "Nieprawidłowa wartość. minimum 10, maksimum 2000."
 
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/MarketDiscovery.pm:234
 msgid "Invalid candles request"
@@ -8353,17 +8353,15 @@ msgstr "Przepraszamy, $ nie jest domyślną walutą dla pośrednika płatności.
 
 #. ($currency, $client_to->loginid)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:211
-#, fuzzy
 #| msgid "Sorry, $currency is not default currency for client "
 msgid "Sorry, %1 is not default currency for client %2"
-msgstr "Przepraszamy, $ nie jest domyślną walutą dla klienta. "
+msgstr "Przepraszamy, %1 nie jest domyślną walutą dla klienta %2"
 
 #. ($currency, $client_fm->loginid)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:207
-#, fuzzy
 #| msgid "Sorry, $currency is not default currency for payment agent "
 msgid "Sorry, %1 is not default currency for payment agent %2"
-msgstr "Przepraszamy, $ nie jest domyślną walutą dla pośrednika płatności. "
+msgstr "Przepraszamy, %1 nie jest domyślną walutą dla pośrednika płatności %2"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1331
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:167
@@ -8450,10 +8448,11 @@ msgstr "Przepraszamy, waluta pośrednika płatności "
 
 #. ($pa_client->currency)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:413
-#, fuzzy
 #| msgid "Sorry, the Payment Agent is unavailable for your region."
 msgid "Sorry, the Payment Agent's currency %1 is unavailable for Payment Agent Withdrawal"
-msgstr "Przepraszamy, pośrednik płatności jest niedostępny dla Twojej lokalizacji."
+msgstr ""
+"Przepraszamy, ale waluta pośrednika płatności: %1 jest niedostępna dla "
+"wypłaty za pośrednictwem pośrednika płatności."
 
 #. ($limit, $currency)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:922
@@ -8510,10 +8509,9 @@ msgstr "Przepraszamy, nie możesz wypłacać."
 
 #. ($currency, $balance)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:612
-#, fuzzy
 #| msgid "Sorry, your account cash balance is too high (%1). Your maximum account balance is %2."
 msgid "Sorry, you cannot withdraw. Your account balance is %1 %2."
-msgstr "Przepraszamy, Twoje saldo jest za wysokie (%1). Maksymalne dozwolone saldo konta wynosi %2."
+msgstr "Przepraszamy, ale nie można dokonać wypłaty. Twoje saldo wynosi: %2 %1."
 
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/User.pm:72
 msgid "Sorry, you have already had too many unsuccessful attempts. Please try again in 5 minutes."
@@ -8592,10 +8590,11 @@ msgstr "Przepraszamy, Twoja waluta "
 
 #. ($client->currency)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:405
-#, fuzzy
 #| msgid "Sorry, $currency is not default currency for payment agent "
 msgid "Sorry, your currency of %1 is unavailable for Payment Agent Withdrawal"
-msgstr "Przepraszamy, $ nie jest domyślną walutą dla pośrednika płatności. "
+msgstr ""
+"Przepraszamy, ale Twoja waluta dla %1 nie jest dostępna w przypadku wypłat "
+"za pośrednictwem pośrednika płatności"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1875
 msgid "Sorry, your payment could not be processed at this time."
@@ -9763,10 +9762,11 @@ msgid "Therefore you may not withdraw any additional funds."
 msgstr "Nie możesz więc wypłacać żadnych środków."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:242
-#, fuzzy
 #| msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR %1 (or %2 in other currency)."
 msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR"
-msgstr "Dlatego w chwili obecnej Twoja maksymalna natychmiastowa wypłata (o ile posiadasz na koncie wystarczające środki) wynosi %1 EUR (lub %2 w innej walucie)."
+msgstr ""
+"Dlatego w chwili obecnej Twoja maksymalna natychmiastowa wypłata (o ile "
+"posiadasz na koncie wystarczające środki) wynosi EUR"
 
 #. (remainder_monetary, equivalent_remainder)
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:77
@@ -10106,10 +10106,12 @@ msgstr "To begin Binary option trading, you will first need to read all these do
 
 #. (request.url_for("contact"))
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:132
-#, fuzzy
 #| msgid "To change your name, date of birth, country of residence, or email, please contact Customer Support."
 msgid "To change your name, date of birth, country of residence, or email, please contact <a href=\"%1\">Customer Support</a>."
-msgstr "W celu zmiany imienia i nazwiska, daty urodzenia, kraju zamieszkania lub adresu e-mail, prosimy o kontakt z działem obsługi klienta."
+msgstr ""
+"W celu zmiany imienia i nazwiska, daty urodzenia, kraju zamieszkania lub "
+"adresu e-mail, prosimy o kontakt z <a href=\"%1\">działem obsługi "
+"klienta</a>."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:420
 msgid "To change your name, date of birth, country of residence, or email, please contact Customer Support."
@@ -10162,10 +10164,9 @@ msgid "Too many market holidays during the contract period. Select an expiry dat
 msgstr "Zbyt wiele dni wolnych podczas trwania kontraktu. Wybierz datę wygaśnięcia po %1."
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:1291
-#, fuzzy
 #| msgid "Connection failure. Please try again later."
 msgid "Too many recent attempts.  Try again later."
-msgstr "Błąd połączenia. Prosimy spróbować później."
+msgstr "Zbyt wiele prób w ostatnim czasie.  Prosimy spróbować później."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:181
 msgid "Total Cost"
@@ -10970,7 +10971,6 @@ msgstr ""
 
 #. ($currency, $amount, $payment_agent->payment_agent_name, $website->display_name)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:312
-#, fuzzy
 #| msgid ""
 #| "We would like to inform you that the transfer of %1 %2 via %3 has been processed.\n"
 #| "    The funds have been credited into your account.\n"
@@ -10986,12 +10986,13 @@ msgid ""
 "\n"
 "The %4 team."
 msgstr ""
-"Chcielibyśmy poinformować Cię, że przelew %2 %1 za pośrednictwem %3 został zakończony.\n"
-"    Środki zostały przypisane do Twojego konta.\n"
+"Chcielibyśmy poinformować Cię, że przelew %2 %1 za pośrednictwem %3 został "
+"zakończony.\n"
+"Środki zostały przypisane do Twojego konta.\n"
 "\n"
-"    Z poważaniem,\n"
+"Z poważaniem,\n"
 "\n"
-"    Zespół portalu %4."
+"Zespół portalu %4."
 
 #. ($currency, $amount, $client_name, $client_loginid, $paymentagent_loginid, $website->display_name)
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1825
@@ -11402,7 +11403,6 @@ msgid "Withdrawal"
 msgstr "Wypłata"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:231
-#, fuzzy
 #| msgid "Withdrawal limits"
 msgid "Withdrawal Limits"
 msgstr "Limity wypłat"
@@ -11566,10 +11566,9 @@ msgid "You have already claimed a bonus in the past."
 msgstr "Wniosek o bonus został już wcześniej zgłoszony."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:234
-#, fuzzy
 #| msgid "You have already withdrawn the equivalent of EUR %1."
 msgid "You have already withdrawn the equivalent of EUR"
-msgstr "Już wypłaciłeś ekwiwalent %1 EUR."
+msgstr "Już wypłaciłeś ekwiwalent EUR"
 
 #. (withdrawal_for_x_days_monetary, num_of_days)
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:45
@@ -11816,10 +11815,11 @@ msgstr "Twoje saldo(%2 %1) jest za niskie, aby kupić ten kontrakt (%3 %1)."
 
 #. ($currency, $balance, $withdrawal_limits->{'max_withdrawal'})
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:619
-#, fuzzy
 #| msgid "Maximum withdrawal by all other means:"
 msgid "Your account balance is %1 %2. Maximum withdrawal by all other means is %1 %3."
-msgstr "Maksymalna wypłata za pomocą innych metod:"
+msgstr ""
+"Saldo Twojego konta wynosi %2 %1. Maksymalna wypłata za pomocą innych metod "
+"wynosi %3 %1."
 
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Transaction.pm:929
 msgid "Your account has exceeded the trading limit with free promo code, please deposit if you wish to continue trading."
@@ -11895,10 +11895,9 @@ msgid "Your cashier is locked"
 msgstr "Twoja sekcja Kasjer jest zablokowana"
 
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:175
-#, fuzzy
 #| msgid "Your cashier is locked by password."
 msgid "Your cashier is locked as per your request"
-msgstr "Twoja sekcja Kasjer jest zablokowana hasłem."
+msgstr "Twoja sekcja Kasjer została zablokowana na Twoją prośbę"
 
 #. ($r->url_for('/user/settings/security')
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:118
@@ -11912,10 +11911,9 @@ msgid "Your cashier is locked as per your request - to unlock it, please enter t
 msgstr "Sekcja Kasjer została zablokowana na Twoją prośbę - jeśli chcesz ją odblokować, prosimy o podanie hasła."
 
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:375
-#, fuzzy
 #| msgid "Your cashier is locked by password."
 msgid "Your cashier is locked as per your request."
-msgstr "Twoja sekcja Kasjer jest zablokowana hasłem."
+msgstr "Twoja sekcja Kasjer została zablokowana na Twoją prośbę."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1421
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/v3/Cashier.pm:226
@@ -12142,10 +12140,9 @@ msgid "Your withdrawal limit for the entire duration of the account is currently
 msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: <b>%1 EUR</b> (lub %2 w innej walucie.)"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:239
-#, fuzzy
 #| msgid "Your withdrawal limit for the entire duration of the account is currently: <b>EUR %1</b> (or %2 in other currency.)"
 msgid "Your withdrawal limit for the entire duration of the account is currently: EUR"
-msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: <b>%1 EUR</b> (lub %2 w innej walucie.)"
+msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: EUR"
 
 #. (num_of_days_limit_monetary, num_of_days_limit_equivalent)
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:17
@@ -12153,10 +12150,9 @@ msgid "Your withdrawal limit is <strong>EUR %1</strong> (or %2 in other currency
 msgstr "Twój limit wypłat to <strong>%1 EUR</strong> (lub %2 w innej walucie)."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:232
-#, fuzzy
 #| msgid "withdrawal limits"
 msgid "Your withdrawal limit is EUR"
-msgstr "limity wypłat"
+msgstr "Twój limit wypłat wynosi EUR"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You’ll be surprised by the returns you can make."
@@ -12238,10 +12234,9 @@ msgid "day"
 msgstr "dzień"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:236
-#, fuzzy
 #| msgid "withdrawal limits"
 msgid "day withdrawal limit is currently EUR"
-msgstr "limity wypłat"
+msgstr "dzienny limit wypłat wynosi obecnie EUR"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:167
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:472
@@ -12322,13 +12317,12 @@ msgstr "godziny"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:238
 msgid "in aggregate over the last"
-msgstr ""
+msgstr "ogółem przez ostatnie"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:240
-#, fuzzy
 #| msgid "You have already withdrawn the equivalent of EUR %1 in aggregate over the lifetime of your account."
 msgid "in aggregate over the lifetime of your account."
-msgstr "Zagregowany ekwiwalent %1 EUR został już wypłacony w okresie działania Twojego konta."
+msgstr "ogółem w okresie działania Twojego konta."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/reality_check_frequency.html.haml:1
 msgid "in minutes"
@@ -12419,10 +12413,9 @@ msgid "or Email us at"
 msgstr "lub napisz do nas na adres"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:233
-#, fuzzy
 #| msgid "in other currency"
 msgid "or equivalent in other currency"
-msgstr "w innej walucie"
+msgstr "lub ekwiwalent w innej walucie"
 
 #: /home/git/translations/binary-static/src/templates/haml/not_found.html.haml:1
 msgid "or please try the site map below"
