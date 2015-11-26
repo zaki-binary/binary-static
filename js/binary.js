@@ -56418,12 +56418,8 @@ BetForm.Time.EndTime.prototype = {
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_category = data.contract_category;
             $self.set_barrier = ($self.contract_category.match('digits')) ? false : true;
-            $self.display_decimal = 0;
+            $self.display_decimals = data.display_decimals;
             var tick_frequency = 5;
-
-            if (typeof data.decimal !== 'undefined') {
-                $self.number_of_decimal = parseInt(data.decimal) + 1; //calculated barrier is rounded to one more decimal place
-            }
 
             if (data.show_contract_result) {
                 $self.show_contract_result = true;
@@ -56433,7 +56429,7 @@ BetForm.Time.EndTime.prototype = {
             }
 
             var minimize = data.show_contract_result;
-            
+
             $self.set_x_indicators();
             $self.initialize_chart({
                 plot_from: data.previous_tick_epoch * 1000,
@@ -56494,10 +56490,7 @@ BetForm.Time.EndTime.prototype = {
                 tooltip: {
                     formatter: function () {
                         var that = this;
-                        var new_decimal = that.y.toString().split('.')[1].length;
-                        var decimal_places = Math.max( $self.display_decimal, new_decimal);
-                        $self.display_decimal = decimal_places;
-                        var new_y = that.y.toFixed(decimal_places);
+                        var new_y = that.y.toFixed($self.display_decimals);
                         var mom = moment.utc($self.applicable_ticks[that.x].epoch*1000).format("dddd, MMM D, HH:mm:ss");
                         return mom + "<br/>" + $self.display_symbol + " " + new_y;
                     },
@@ -56631,7 +56624,7 @@ BetForm.Time.EndTime.prototype = {
                     total += parseFloat($self.applicable_ticks[i].quote);
                 }
                 var calc_barrier =  total/$self.applicable_ticks.length;
-                calc_barrier = calc_barrier.toFixed($self.number_of_decimal); // round calculated barrier
+                calc_barrier = calc_barrier.toFixed(parseInt($self.display_decimals) + 1); // round calculated barrier
 
                 $self.chart.yAxis[0].removePlotLine('tick-barrier');
                 $self.chart.yAxis[0].addPlotLine({
