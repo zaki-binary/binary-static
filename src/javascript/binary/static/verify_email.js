@@ -18,7 +18,7 @@ if(document.getElementById('btn-verify-email')) {
 		            if (response) {
 		                var type = response.msg_type;
 		                if (type === 'verify_email'){
-		                    window.location = "../new_account/virtualws";
+		                    VerifyEmailWS.emailHandler(error);
 		                }
 		            }
 		        }

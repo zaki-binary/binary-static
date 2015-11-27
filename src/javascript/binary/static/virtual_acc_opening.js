@@ -6,7 +6,7 @@ pjax_config_page("virtualws", function(){
         	Content.populate();
 
 			var form = document.getElementById('virtual-form');
-			var errorToken = document.getElementById('error-token');
+			var errorEmail = document.getElementById('error-email');
 
 		    VirtualAccOpeningUI.setLabel();
 
@@ -14,10 +14,9 @@ pjax_config_page("virtualws", function(){
 
 				$('#virtual-form').submit( function(evt) {
 					evt.preventDefault();
-					Validate.hideErrorMessage(errorToken);
+					Validate.hideErrorMessage(errorEmail);
 
 					var email = document.getElementById('email').value,
-				    	token = document.getElementById('token').value,
 				    	residence = document.getElementById('residence').value,
 				    	password = document.getElementById('password').value,
 						rPassword = document.getElementById('r-password').value;
@@ -32,19 +31,7 @@ pjax_config_page("virtualws", function(){
 					                var type = response.msg_type;
 					                var error = response.error;
 
-					                if (type === 'new_account_virtual'){
-
-					                	if (error) {
-					                		if (/email address is already in use/.test(error.message)) {
-					                			errorToken.textContent = Content.localize().textDuplicatedEmail;
-					                			Validate.displayErrorMessage(errorToken);
-					                			return false;
-					                		} else if (/email address is unverified/.test(error.message)) {
-					                			errorToken.textContent = Content.errorMessage('valid', Content.localize().textToken);
-												Validate.displayErrorMessage(errorToken);
-												return false;
-					                		}
-					                	}
+					                if (type === 'new_account_virtual' && !error){
 
 					                    form.setAttribute('action', '/login');
 										form.setAttribute('method', 'POST');
@@ -52,15 +39,21 @@ pjax_config_page("virtualws", function(){
 										$('#virtual-form').unbind('submit');
 										form.submit();
 
-					                } else if (type === 'error') {
-										errorToken.textContent = Content.errorMessage('valid', Content.localize().textToken);
-										Validate.displayErrorMessage(errorToken);
+					                } else if (type === 'error' || error){
+					                	if (/email address is already in use/.test(error.message)) {
+				                			errorEmail.textContent = Content.localize().textDuplicatedEmail;
+				                		} else if (/required/.test(error.message)) {
+				                			errorEmail.textContent = Content.localize().textTokenMissing;
+				                		} else { 
+				                			errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+				                		}
+				                		Validate.displayErrorMessage(errorEmail);
 					                }
 					            }
 					        }
 					    });
 
-					    VirtualAccOpeningWS.init(email, password, residence, token);
+					    VirtualAccOpeningData.getDetails(email, password, residence);
 					}
 					
 				});

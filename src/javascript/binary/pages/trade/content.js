@@ -117,7 +117,7 @@ var Content = (function () {
             textEmailAddress: text.localize('Email address'),
             textRepeatPassword: text.localize('re-enter password'),
             textResidence: text.localize('country of residence'),
-            textToken: text.localize('verification token'),
+            textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your Email and make sure you are not already logged in.'),
             textDetails: text.localize('details'),
             textCreateNewAccount: text.localize('create new account'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
@@ -125,7 +125,8 @@ var Content = (function () {
             textOpens: text.localize('Opens'),
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
-            textUpcomingEvents: text.localize('Upcoming Events')
+            textUpcomingEvents: text.localize('Upcoming Events'),
+            textEmailSent: text.localize('Please check your Email for the next step.')
         };
 
         var starTime = document.getElementById('start_time_label');

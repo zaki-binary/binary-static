@@ -14,7 +14,6 @@ var VirtualAccOpeningUI = (function(){
 
         var details = document.getElementById('details'),
             email = document.getElementById('email'),
-            token = document.getElementById('token'),
             btn_submit = document.getElementById('btn_submit'),
             residence = document.getElementById('residence'),
             password = document.getElementById('password'),
@@ -25,7 +24,6 @@ var VirtualAccOpeningUI = (function(){
         password.label.innerHTML = StringUtil.toTitleCase(Content.localize().textPassword);
         rPassword.label.innerHTML = StringUtil.toTitleCase(Content.localize().textRepeatPassword);
         residence.label.innerHTML = StringUtil.toTitleCase(Content.localize().textResidence);
-        token.label.innerHTML = StringUtil.toTitleCase(Content.localize().textToken);
         btn_submit.textContent = StringUtil.toTitleCase(Content.localize().textCreateNewAccount);
     }
 
