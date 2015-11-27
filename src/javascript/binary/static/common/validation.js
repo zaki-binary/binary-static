@@ -10,6 +10,34 @@ var Validate = (function(){
     	error.setAttribute('style', 'display:none');
     }
 
+    //check validity of email
+    function validateEmail(mail) {
+
+        if (/^\w+([\+\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){  
+        
+            return true;
+        }  
+        
+        return false;
+    }
+
+    //give error message for invalid email, needs DOM element of error and value of email
+    function errorMessageEmail(email, error) {
+        if (email === "") {
+            error.textContent = Content.errorMessage('req');
+            displayErrorMessage(error);
+            return true;
+
+        } else if (!validateEmail(email)) {
+            error.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+            displayErrorMessage(error);
+            return true;
+
+        }
+        hideErrorMessage(error);
+        return false;
+    }
+
     //give error message for invalid password, needs value of password, repeat of password, and DOM element of error
     function errorMessagePassword(password, rPassword, error, rError) {
         if (!/^.+$/.test(password)) {
@@ -57,6 +85,7 @@ var Validate = (function(){
 	return {
 		displayErrorMessage: displayErrorMessage,
         hideErrorMessage: hideErrorMessage,
+        errorMessageEmail: errorMessageEmail,
         errorMessagePassword: errorMessagePassword
     };
 }());

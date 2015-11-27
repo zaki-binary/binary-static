@@ -6,18 +6,9 @@ pjax_config_page("virtualws", function(){
         	Content.populate();
 
 			var form = document.getElementById('virtual-form');
-
-			var details = document.getElementById('details'),
-				email = document.getElementById('email'),
-		    	token = document.getElementById('token'),
-		    	btn_submit = document.getElementById('btn_submit'),
-		    	residence = document.getElementById('residence'),
-		    	password = document.getElementById('password'),
-				rPassword = document.getElementById('r-password');
-
 			var errorToken = document.getElementById('error-token');
 
-		    VirtualAccOpeningUI.setLabel(details, email, password, rPassword, residence, token, btn_submit);
+		    VirtualAccOpeningUI.setLabel();
 
 			if (form) {
 
@@ -25,10 +16,13 @@ pjax_config_page("virtualws", function(){
 					evt.preventDefault();
 					Validate.hideErrorMessage(errorToken);
 
-					var password = document.getElementById('password'),
-						rPassword = document.getElementById('r-password');
+					var email = document.getElementById('email').value,
+				    	token = document.getElementById('token').value,
+				    	residence = document.getElementById('residence').value,
+				    	password = document.getElementById('password').value,
+						rPassword = document.getElementById('r-password').value;
 
-					if (VirtualAccOpeningUI.checkErrors(password, rPassword)) {
+					if (VirtualAccOpeningUI.checkPassword(password, rPassword)) {
 						
 						BinarySocket.init({
 					        onmessage: function(msg){
@@ -45,6 +39,10 @@ pjax_config_page("virtualws", function(){
 					                			errorToken.textContent = Content.localize().textDuplicatedEmail;
 					                			Validate.displayErrorMessage(errorToken);
 					                			return false;
+					                		} else if (/email address is unverified/.test(error.message)) {
+					                			errorToken.textContent = Content.errorMessage('valid', Content.localize().textToken);
+												Validate.displayErrorMessage(errorToken);
+												return false;
 					                		}
 					                	}
 
@@ -62,7 +60,7 @@ pjax_config_page("virtualws", function(){
 					        }
 					    });
 
-					    VirtualAccOpeningWS.init(email.value, password.value, residence.value, token.value);
+					    VirtualAccOpeningWS.init(email, password, residence, token);
 					}
 					
 				});
