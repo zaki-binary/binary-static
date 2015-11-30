@@ -398,7 +398,6 @@ Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
         this.register_dynamic_links();
-        //start_clock_ws
         if (!this.clock_started) this.start_clock_ws();
         this.simulate_input_placeholder_for_ie();
     },
