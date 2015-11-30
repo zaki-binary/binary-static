@@ -8,8 +8,9 @@
         </div>
 
         <div id="viewSuccess" class="viewItem hidden">
+            <p id="successMessage"></p>
             <p>
-                <a class="button" href="[% request.url_for('/user/statement', {currency => $currency}) %]">
+                <a class="button" href="[% request.url_for('/user/statement') %]">
                     <span class="button">[% l('View your statement') %]</span>
                 </a>
             </p>
@@ -35,17 +36,17 @@
                             <label for="ddlAgents">[% l('Transfer to Payment Agent') %]</label>
                         </div>
                         <div class="grd-grid-8">
-                            <select id="ddlAgents" />
+                            <select id="ddlAgents"></select>
                         </div>
                     </div>
 
                     <div class="grd-row-padding row clear">
                         <div class="grd-grid-4 form_label">
                             <label for="txtAmount">[% l('Amount') %]</label>
-                            <div class="hint">[% l('Min: 10 Max: 2000') %]</div>
                         </div>
                         <div class="grd-grid-8">
                             USD <input type="text" id="txtAmount" />
+                            <div class="hint">[% l('Min: 10 Max: 2000') %]</div>
                         </div>
                     </div>
 

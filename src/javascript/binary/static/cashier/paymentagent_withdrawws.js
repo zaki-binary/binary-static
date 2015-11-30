@@ -53,10 +53,11 @@ var PaymentAgentWithdrawWS = (function() {
         $ddlAgents.empty();
         var paList = response.paymentagent_list.list;
         if(paList.length > 0) {
-            insertListOption($ddlAgents, text.localize('Please select a payment agent'));
+            insertListOption($ddlAgents, text.localize('Please select a payment agent'), '');
             for(var i = 0; i < paList.length; i++){
                 insertListOption($ddlAgents, paList[i].name, paList[i].paymentagent_loginid);
             }
+            setActiveView(viewIDs.form);
         }
         else {
             showPageError(text.localize('The Payment Agent facility is currently not available in your country.'));
@@ -78,25 +79,31 @@ var PaymentAgentWithdrawWS = (function() {
             amount = $(fieldIDs.txtAmount).val().trim(),
             desc   = $(fieldIDs.txtDesc).val().trim();
         
-        var numbers = Content.localize().textNumbers;
+        var letters = Content.localize().textLetters,
+            numbers = Content.localize().textNumbers,
+            space   = Content.localize().textSpace,
+            period  = Content.localize().textPeriod,
+            comma   = Content.localize().textComma;
         
         // Payment Agent
         isRequiredError(fieldIDs.ddlAgents);
 
         // Amount
-        if(!isRequiredError(fieldIDs.txtAmount) && !(/^[0-9\.]+$/).test(amount)) {
-            showError(fieldIDs.txtAmount, Content.errorMessage('reg', [numbers]));
-        }
-        else if(amount < minAmount) {
-            showError(fieldIDs.txtAmount, text.localize('Invalid amount, minimum is') + ' ' + withdrawCurrency + ' ' + minAmount);
-        }
-        else if(amount > maxAmount) {
-            showError(fieldIDs.txtAmount, text.localize('Invalid amount, maximum is') + ' ' + withdrawCurrency + ' ' + maxAmount);
+        if(!isRequiredError(fieldIDs.txtAmount)){
+            if(!(/(^[0-9\.]+$)/).test(amount) || !$.isNumeric(amount)) {
+                showError(fieldIDs.txtAmount, Content.errorMessage('reg', [numbers]));
+            }
+            else if(amount < minAmount) {
+                showError(fieldIDs.txtAmount, text.localize('Invalid amount, minimum is') + ' ' + withdrawCurrency + ' ' + minAmount);
+            }
+            else if(amount > maxAmount) {
+                showError(fieldIDs.txtAmount, text.localize('Invalid amount, maximum is') + ' ' + withdrawCurrency + ' ' + maxAmount);
+            }
         }
 
         // Description
-        if(!isRequiredError(fieldIDs.txtDesc) && !(/^[a-zA-Z0-9\s\-']$/).test(desc)) {
-            showError(fieldIDs.txtDesc, Content.errorMessage('reg', [letters, numbers, space, '- \'']));
+        if(!(/^[a-zA-Z0-9\s\.\,\-']*$/).test(desc)) {
+            showError(fieldIDs.txtDesc, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- \'']));
         }
 
         if(isValid) {
@@ -151,8 +158,8 @@ var PaymentAgentWithdrawWS = (function() {
     var withdrawResponse = function(response) {
         var responseCode = response.paymentagent_withdraw;
         switch(responseCode){
-            case "2": // dry_run success: showing the confirmation page
-                setActiveView(views.confirm);
+            case 2: // dry_run success: showing the confirmation page
+                setActiveView(viewIDs.confirm);
 
                 $('#lblAgentName').text(formData.agentname);
                 $('#lblCurrency').text(formData.currency);
@@ -166,20 +173,30 @@ var PaymentAgentWithdrawWS = (function() {
                 });
                 break;
 
-            case "1": // withdrawal success
-                $('#formMessage').css('display', '')
+            case 1: // withdrawal success
+                setActiveView(viewIDs.success);
+                $('#successMessage').css('display', '')
                     .attr('class', 'success-msg')
                     .html(
-                        '<ul class="checked"><li>' 
-                        + text.localize('Your settings have been updated successfully.') 
-                        + '</li></ul>'
+                        '<ul class="checked"><li>' +
+                        text.localize('Your request to withdraw [_1] [_2] from your account [_3] to Payment Agent [_4] account has been successfully processed.')
+                            .replace('[_1]', formData.currency)
+                            .replace('[_2]', formData.amount)
+                            .replace('[_3]', $.cookie('loginid'))
+                            .replace('[_4]', formData.agentname) +
+                        '</li></ul>'
                     );
                 break;
 
-            case "0": // error
-                $('#formMessage').css('display', '')
-                    .attr('class', errorClass)
-                    .html(response.error.message);
+            default: // error
+                if(response.echo_req.dry_run === 1) {
+                    setActiveView(viewIDs.form);
+                    $('#formMessage').css('display', '')
+                        .attr('class', errorClass)
+                        .html(response.error.message);
+                } else {
+                    showPageError(response.error.message);
+                }
                 break;
         }
     };
@@ -193,12 +210,12 @@ var PaymentAgentWithdrawWS = (function() {
     };
 
     var showError = function(fieldID, errMsg) {
-        $(fieldID).after($('<p/>', {class: errorClass, text: errMsg}));
+        $(fieldID).parent().append($('<p/>', {class: errorClass, text: errMsg}));
         isValid = false;
     };
 
     var clearError = function(fieldID) {
-        $(fieldID ? fieldID : formID + ' .' + errorClass).remove();
+        $(fieldID ? fieldID : viewIDs.form + ' .' + errorClass).remove();
     };
 
     // ----- View Control -----
