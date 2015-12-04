@@ -34,7 +34,7 @@ var TradingTimesWS = (function() {
         }
     };
 
-    var getTradingTimes = function(response) {response.trading_times
+    var getTradingTimes = function(response) {
         tradingTimes = response.trading_times;
         if(activeSymbols) {
             populateTable();
@@ -135,7 +135,7 @@ var TradingTimesWS = (function() {
         return activeSymbols.filter(function(sy) {
             return sy.submarket_display_name === submarketname;
         });
-    }
+    };
 
     var createEventsText = function(events) {
         var result = '';
