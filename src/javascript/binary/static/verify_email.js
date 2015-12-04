@@ -1,4 +1,3 @@
-//get gtm layer from ashkan before release
 if(document.getElementById('btn-verify-email')) {
 
     document.getElementById('btn-verify-email').addEventListener('click', function(evt){
