@@ -59005,6 +59005,7 @@ function initialize_pricing_table() {
     select_underlying_change();
     select_strike_type();
     expiry_date_picker();
+    $("#from_expiry").keydown(false);
 }
 
 onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
@@ -60490,16 +60491,27 @@ function addComma(num){
             textMessageRequired: text.localize('This field is required.'),
             textMessageCountLimit: text.localize('You should enter between %LIMIT% characters.'), // %LIMIT% should be replaced by a range. sample: (6-20)
             textMessageJustAllowed: text.localize('Only %ALLOWED% are allowed.'), // %ALLOWED% should be replaced by values including: letters, numbers, space, period, ...
+            textMessageValid: text.localize('Please submit a valid %FIELD%.'), // %FIELD% should be replaced by values such as Email address
             textLetters: text.localize('letters'),
             textNumbers: text.localize('numbers'),
             textSpace: text.localize('space'),
             textPeriod: text.localize('period'),
             textComma: text.localize('comma'),
+            textPassword: text.localize('password'),
+            textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
+            textEmailAddress: text.localize('Email address'),
+            textRepeatPassword: text.localize('re-enter password'),
+            textResidence: text.localize('country of residence'),
+            textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your Email and make sure you are not already logged in.'),
+            textDetails: text.localize('details'),
+            textCreateNewAccount: text.localize('create new account'),
+            textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
             textOpens: text.localize('Opens'),
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
-            textUpcomingEvents: text.localize('Upcoming Events')
+            textUpcomingEvents: text.localize('Upcoming Events'),
+            textEmailSent: text.localize('Please check your Email for the next step.')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -60670,6 +60682,10 @@ function addComma(num){
             case 'range':
                 if(param)
                     msg = localize.textMessageCountLimit.replace('%LIMIT%', param);
+                break;
+            case 'valid':
+                if(param)
+                    msg = localize.textMessageValid.replace('%FIELD%', param);
                 break;
             default:
                 break;
@@ -63884,7 +63900,97 @@ var Table = (function(){
         appendTableBody: appendTableBody
     };
 }());
-;pjax_config_page("limitws", function(){
+;var Validate = (function(){
+
+	//give DOM element of error to display
+	function displayErrorMessage(error){
+        error.setAttribute('style', 'display:block');
+    }
+
+    //give DOM element or error to hide
+    function hideErrorMessage(error){
+    	error.setAttribute('style', 'display:none');
+    }
+
+    //check validity of email
+    function validateEmail(mail) {
+
+        if (/^\w+([\+\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){  
+        
+            return true;
+        }  
+        
+        return false;
+    }
+
+    //give error message for invalid email, needs DOM element of error and value of email
+    function errorMessageEmail(email, error) {
+        if (email === "") {
+            error.textContent = Content.errorMessage('req');
+            displayErrorMessage(error);
+            return true;
+
+        } else if (!validateEmail(email)) {
+            error.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+            displayErrorMessage(error);
+            return true;
+
+        }
+        hideErrorMessage(error);
+        return false;
+    }
+
+    //give error message for invalid password, needs value of password, repeat of password, and DOM element of error
+    function errorMessagePassword(password, rPassword, error, rError) {
+        if (!/^.+$/.test(password)) {
+            hideErrorMessage(rError);
+            error.textContent = Content.errorMessage('req');
+            displayErrorMessage(error);
+
+        	if (!/^.+$/.test(rPassword)) {
+	            rError.textContent = Content.errorMessage('req');
+	            displayErrorMessage(rError);
+
+	            return false;
+
+	        }
+            return false;
+
+        } else if (password !== rPassword) {
+            hideErrorMessage(error);
+            rError.textContent = Content.localize().textPasswordsNotMatching;
+            displayErrorMessage(rError);
+
+            return false;
+
+        } else if (!/^[^-~\s]+$/.test(password)) {
+            hideErrorMessage(rError);
+            error.textContent = Content.errorMessage('valid', Content.localize().textPassword);
+            displayErrorMessage(error);
+
+            return false;
+
+        } else if (password.length < 6 || password.length > 25) {
+            hideErrorMessage(rError);
+            error.textContent = Content.errorMessage('range', '6-25 ' + Content.localize().textPassword);
+            displayErrorMessage(error);
+
+            return false;
+
+        }
+		hideErrorMessage(error);
+        hideErrorMessage(rError);
+        return true;
+
+    }
+
+	return {
+		displayErrorMessage: displayErrorMessage,
+        hideErrorMessage: hideErrorMessage,
+        errorMessageEmail: errorMessageEmail,
+        errorMessagePassword: errorMessagePassword
+    };
+}());;pjax_config_page("limitws", function(){
     return {
         onLoad: function() {
             BinarySocket.init({
@@ -64543,6 +64649,65 @@ var ProfitTableUI = (function(){
         updateStatementTable: updateStatementTable
     };
 }());
+;if(document.getElementById('btn-verify-email')) {
+
+    document.getElementById('btn-verify-email').addEventListener('click', function(evt){
+    	evt.preventDefault();
+    	var email = document.getElementById('email').value;
+    	var error = document.getElementsByClassName('error-message')[0];
+        Content.populate();
+
+    	if(!Validate.errorMessageEmail(email, error)) {
+    		error.textContent = "";
+    		error.setAttribute('style', 'display:none');
+
+    		BinarySocket.init({
+		        onmessage: function(msg){
+		            var response = JSON.parse(msg.data);
+
+		            if (response) {
+		                var type = response.msg_type;
+		                if (type === 'verify_email'){
+		                    VerifyEmailWS.emailHandler(error);
+		                }
+		            }
+		        }
+		    });
+		    VerifyEmailWS.init(email);
+    	}
+    });
+}
+        
+;var VerifyEmailData = (function(){
+    "use strict";
+
+    function getEmail(email){
+        var req = {verify_email: email};
+
+        BinarySocket.send(req);
+    }
+
+    return {
+        getEmail: getEmail
+    };
+}());
+;var VerifyEmailWS = (function(){
+    "use strict";
+
+    function emailHandler(error) {
+    	error.textContent = Content.localize().textEmailSent;
+    	error.setAttribute('style', 'display:block');
+    }
+
+    function initPage(email){
+        VerifyEmailData.getEmail(email);
+    }
+
+    return {
+    	emailHandler: emailHandler,
+        init: initPage
+    };
+}());
 ;
 var ViewBalance = (function () {
     function init(){
@@ -64569,6 +64734,129 @@ var ViewBalanceUI = (function(){
 
     return {
         updateBalances: updateBalances
+    };
+}());
+;pjax_config_page("virtualws", function(){
+	
+	return {
+		onLoad: function() {
+        	get_residence_list();
+        	Content.populate();
+
+			var form = document.getElementById('virtual-form');
+			var errorEmail = document.getElementById('error-email');
+
+		    VirtualAccOpeningUI.setLabel();
+
+			if (form) {
+
+				$('#virtual-form').submit( function(evt) {
+					evt.preventDefault();
+					Validate.hideErrorMessage(errorEmail);
+
+					var email = document.getElementById('email').value,
+				    	residence = document.getElementById('residence').value,
+				    	password = document.getElementById('password').value,
+						rPassword = document.getElementById('r-password').value;
+
+					if (VirtualAccOpeningUI.checkPassword(password, rPassword)) {
+						
+						BinarySocket.init({
+					        onmessage: function(msg){
+					            var response = JSON.parse(msg.data);
+
+					            if (response) {
+					                var type = response.msg_type;
+					                var error = response.error;
+
+					                if (type === 'new_account_virtual' && !error){
+
+					                    form.setAttribute('action', '/login');
+										form.setAttribute('method', 'POST');
+
+										$('#virtual-form').unbind('submit');
+										form.submit();
+
+					                } else if (type === 'error' || error){
+					                	if (/email address is already in use/.test(error.message)) {
+				                			errorEmail.textContent = Content.localize().textDuplicatedEmail;
+				                		} else if (/required/.test(error.message)) {
+				                			errorEmail.textContent = Content.localize().textTokenMissing;
+				                		} else { 
+				                			errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+				                		}
+				                		Validate.displayErrorMessage(errorEmail);
+					                }
+					            }
+					        }
+					    });
+
+					    VirtualAccOpeningData.getDetails(email, password, residence);
+					}
+					
+				});
+			}
+		}
+	};
+});
+;var VirtualAccOpeningData = (function(){
+    "use strict";
+
+    function getDetails(email, password, residence){
+        var req = {
+                    new_account_virtual: 1, 
+                    email: email, 
+                    client_password: password, 
+                    residence: residence, 
+                    verification_code: $.cookie('verify_token')
+                };
+
+        BinarySocket.send(req);
+    }
+
+    return {
+        getDetails: getDetails
+    };
+}());
+;var VirtualAccOpeningUI = (function(){
+    "use strict";
+
+    function setLabel(){
+
+        var labels = document.getElementsByTagName('LABEL');
+        for (var i = 0; i < labels.length; i++) {
+            if (labels[i].htmlFor !== '') {
+                var elem = document.getElementById(labels[i].htmlFor);
+                if (elem)
+                    elem.label = labels[i];         
+            }
+        }
+
+        var details = document.getElementById('details'),
+            email = document.getElementById('email'),
+            btn_submit = document.getElementById('btn_submit'),
+            residence = document.getElementById('residence'),
+            password = document.getElementById('password'),
+            rPassword = document.getElementById('r-password');
+
+        details.textContent = StringUtil.toTitleCase(Content.localize().textDetails);
+        email.label.innerHTML = StringUtil.toTitleCase(Content.localize().textEmailAddress);
+        password.label.innerHTML = StringUtil.toTitleCase(Content.localize().textPassword);
+        rPassword.label.innerHTML = StringUtil.toTitleCase(Content.localize().textRepeatPassword);
+        residence.label.innerHTML = StringUtil.toTitleCase(Content.localize().textResidence);
+        btn_submit.textContent = StringUtil.toTitleCase(Content.localize().textCreateNewAccount);
+    }
+
+    function checkPassword(password, rPassword){
+        var errorPassword = document.getElementById('error-password'),
+            errorRPassword = document.getElementById('error-r-password');
+
+        return Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword);
+    }
+
+    return {
+        setLabel: setLabel,
+        checkPassword: checkPassword
     };
 }());
 ;//////////////////////////////////////////////////////////////////
