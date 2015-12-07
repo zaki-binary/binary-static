@@ -1,32 +1,31 @@
 var AssetIndexWS = (function() {
     "use strict";
 
-    var $container = $('#asset-index'),
+    var $container,
         $tabs,
         $contents;
+    
     var activeSymbols,
-        assetIndex;
-    var marketColumns = {};
-    // TODO: refactor all hardcoded indexes
-    // var idxAssets = {
-    //   symbol: 0,
-    //   displayName: 1,
-    //   cells: 2,
-        //   cellName: 0,
-        //   cellDisplayName: 1,
-        //   cellFrom: 2,
-        //   cellTo: 3
-    //};
-
-    // Search
-    var getSymbolInfo = function(qSymbol) {
-        return activeSymbols.filter(function(sy) {
-            return sy.symbol === qSymbol;
-        });
+        assetIndex,
+        marketColumns;
+    
+    // index of items in asset_index response
+    var idx = {
+        symbol: 0,
+        displayName: 1,
+        cells : 2,
+            cellName: 0,
+            cellDisplayName: 1,
+            cellFrom: 2,
+            cellTo  : 3,
+        symInfo: 3,
+        values : 4
     };
 
     var init = function() {
+        $container = $('#asset-index');
         showLoadingImage($container);
+        marketColumns = {};
         BinarySocket.send({"active_symbols": "brief"});
         BinarySocket.send({"asset_index": 1});
     };
@@ -45,8 +44,56 @@ var AssetIndexWS = (function() {
         }
     };
 
+    // Search and Remove (to decrease the next search count)
+    var getSymbolInfo = function(qSymbol) {
+        return activeSymbols.filter(function(sy, id) {
+            if(sy.symbol === qSymbol) {
+                activeSymbols.splice(id, 1);
+                return true;
+            }
+        });
+    };
+
+    /*
+     * This method generates headers for all tables of each market
+     * should include headers exist in all assets of each market and its submarkets
+     */
+    var organizeData = function() {
+        for(var i = 0; i < assetIndex.length; i++) {
+            var assetItem = assetIndex[i];
+            var symbolInfo = getSymbolInfo(assetItem[idx.symbol])[0];
+            var market = symbolInfo.market;
+
+            assetItem.push(symbolInfo);
+
+            // Generate market columns to use in all this market's submarket tables
+            if(!(market in marketColumns)) {
+                marketColumns[market] = {
+                    header : [''],
+                    columns: ['']
+                };
+            }
+
+            var assetCells = assetItem[idx.cells],
+                values = {};
+            for(var j = 0; j < assetCells.length; j++) {
+                var col  = assetCells[j][idx.cellName];
+                
+                values[col] = assetCells[j][idx.cellFrom] + ' - ' + assetCells[j][idx.cellTo];
+                
+                var marketCols = marketColumns[market];
+                if($.inArray(col, marketCols.columns) === -1) {
+                    marketCols.header.push(text.localize(assetCells[j][idx.cellDisplayName]));
+                    marketCols.columns.push(col);
+                }
+            }
+            assetItem.push(values);
+        }
+    };
+
     var populateTable = function() {
         $('#errorMsg').addClass('hidden');
+        organizeData();
 
         var isJapan = page.language().toLowerCase() === 'ja';
         
@@ -54,8 +101,8 @@ var AssetIndexWS = (function() {
         $contents = $('<div/>');
 
         for(var i = 0; i < assetIndex.length; i++) {
-            var assetItem = assetIndex[i];
-            var symbolInfo = getSymbolInfo(assetItem[0])[0];
+            var assetItem  = assetIndex[i];
+            var symbolInfo = assetItem[idx.symInfo];
 
             // just show "Major Pairs" when the language is JA
             if(isJapan && symbolInfo.submarket !== 'major_pairs') {
@@ -76,7 +123,7 @@ var AssetIndexWS = (function() {
     };
 
     var getSubmarketTable = function(assetItem, symbolInfo) {
-        var marketID = 'market-' + symbolInfo.market;
+        var marketID    = 'market-'    + symbolInfo.market;
         var submarketID = 'submarket-' + symbolInfo.submarket;
         
         var $table = $contents.find('#' + submarketID);
@@ -100,44 +147,21 @@ var AssetIndexWS = (function() {
         var cells   = [symbolInfo.display_name],
             columns = ["asset"];
 
-        var assetCells = assetItem[2];
-        for(var i = 0; i < assetCells.length; i++) {
-            cells.push(assetCells[i][2] + ' - ' + assetCells[i][3]);
-            columns.push(assetCells[i][0]);
-        }
-        // Remained empty cells
-        for(var i = assetCells.length; i < marketColumns[symbolInfo.market].columns.length - 1; i++) {
-            cells.push("");
-            columns.push(marketColumns[symbolInfo.market].columns[i]);
+        var marketCols = marketColumns[symbolInfo.market],
+            assetCells = assetItem[idx.values];
+        for(var i = 1; i < marketCols.columns.length; i++) {
+            var prop = marketCols.columns[i];
+            if(prop.length > 0) {
+                cells.push(prop in assetCells ? assetCells[prop] : '');
+                columns.push(prop);
+            }
         }
 
         return Table.createFlexTableRow(cells, columns, "data");
     };
 
     var createEmptyTable = function(assetItem, symbolInfo, submarketID) {
-        var assetCells = assetItem[2];
         var market = symbolInfo.market;
-
-        // Generate market coulmns to use in all this market's submarket tables
-        if(!(market in marketColumns)) {
-            marketColumns[market] = {
-                header: [""],
-                columns: [""]
-            };
-
-            for(var i = 0; i < assetCells.length; i++) {
-                marketColumns[market].header.push(text.localize(assetCells[i][1]));
-                marketColumns[market].columns.push(assetCells[i][0]);
-            }
-        }
-        else if (marketColumns[market].columns.length < assetCells.length) {
-            for(var i = 0; i < assetCells.length; i++) {
-                if(!(assetCells[i][1] in marketColumns[market].columns)) {
-                    marketColumns[market].header.push(text.localize(assetCells[i][1]));
-                    marketColumns[market].columns.push(assetCells[i][0]);
-                }
-            }
-        }
 
         var metadata = {
             id: submarketID,
