@@ -1,5 +1,5 @@
 var text;
-
+var clock_started = false;
 var gtm_data_layer_info = function() {
     var gtm_data_layer_info = [];
     $('.gtm_data_layer').each(function() {
@@ -391,21 +391,20 @@ var Header = function(params) {
     this.client = params['client'];
     this.settings = params['settings'];
     this.menu = new Menu(params['url']);
-    this.clock_started = false;
 };
 
 Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
         this.register_dynamic_links();
-        if (!this.clock_started) {
+        if (!clock_started) {
             this.start_clock_ws();
         }
         this.simulate_input_placeholder_for_ie();
     },
     on_unload: function() {
         this.menu.reset();
-        if (!this.clock_started){
+        if (!clock_started){
             this.start_clock_ws();
         }
     },
@@ -480,6 +479,7 @@ Header.prototype = {
         var clock = $('#gmt-clock');
 
         function init(){
+            clock_started = true;
             BinarySocket.send({ "time": 1,"passthrough":{"client_time" :  moment.utc().unix()}});
         }
 
@@ -518,7 +518,6 @@ Header.prototype = {
         if(BinarySocket.isReady() === true){
             init();
             that.run();
-            this.clock_started = true;
         }
         return;
     },
@@ -562,7 +561,7 @@ Header.prototype = {
             sync();
         }, 900000);
 
-        this.clock_started = true;
+        clock_started = true;
         return;
     },
 };
