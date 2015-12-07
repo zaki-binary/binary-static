@@ -206,7 +206,7 @@ if (!/backoffice/.test(document.URL)) { // exclude BO
         // So, fall back to a more basic solution.
         var match = document.cookie.match(/\bloginid=(\w+)/);
         match = match ? match[1] : '';
-
+        
         $(window).on('storage', function (jq_event) {
             if (jq_event.originalEvent.key !== 'active_loginid') return;
             if (jq_event.originalEvent.newValue === match) return;
@@ -225,10 +225,10 @@ if (!/backoffice/.test(document.URL)) { // exclude BO
         var tabChanged = function() {
 
             if (document.hidden || document.webkitHidden) {
-                start_time = new Date().getTime();
+                start_time = moment().valueOf();
                 time_now = page.header.time_now;
             }else {
-                time_now = ( time_now) + ((new Date().getTime() - start_time));
+                time_now = (time_now + (moment().valueOf() - start_time));
                 page.header.time_now = time_now;
             }
         };
