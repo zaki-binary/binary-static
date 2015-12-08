@@ -59038,10 +59038,13 @@ onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
     var $date      = $('#trading-date');
     var $container = $('#trading-times');
     var columns    = ['Asset', 'Opens', 'Closes', 'Settles', 'UpcomingEvents'];
+    var activeSymbols, 
+        tradingTimes;
 
 
     var init = function() {
         showLoadingImage($container);
+        BinarySocket.send({"active_symbols": "brief"});
         sendRequest('today');
 
         $date.val(moment.utc(new Date()).format('YYYY-MM-DD'));
@@ -59054,26 +59057,45 @@ onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
     };
 
     var sendRequest = function(date) {
+        tradingTimes = null;
         BinarySocket.send({"trading_times": (date ? date : $date.val())});
     };
 
-    var populateTable = function(response) {
+    var getActiveSymbols = function(response) {
+        activeSymbols = response.active_symbols;
+        if(tradingTimes) {
+            populateTable();
+        }
+    };
+
+    var getTradingTimes = function(response) {
+        tradingTimes = response.trading_times;
+        if(activeSymbols) {
+            populateTable();
+        }
+    };
+
+    var populateTable = function() {
         $('#errorMsg').addClass('hidden');
 
-        var markets = response.trading_times.markets;
+        var isJapan = page.language().toLowerCase() === 'ja';
 
-        var $ul = $('<ul/>');
+        var markets = tradingTimes.markets;
+
+        var $ul = $('<ul/>', {class: isJapan ? 'hidden' : ''});
         var $contents = $('<div/>');
 
         for(var m = 0; m < markets.length; m++) {
             var tabID = 'tradingtimes-' + markets[m].name.toLowerCase();
 
             // tabs
-            $ul.append($('<li/>', {class: 'ja-hide'}).append($('<a/>', {href: '#' + tabID, text: markets[m].name, id: 'outline'})));
+            if(!isJapan) {
+                $ul.append($('<li/>').append($('<a/>', {href: '#' + tabID, text: markets[m].name, id: 'outline'})));
+            }
 
             // contents
             var $market = $('<div/>', {id: tabID});
-            $market.append(createMarketTables(markets[m]));
+            $market.append(createMarketTables(markets[m], isJapan));
             $contents.append($market);
         }
 
@@ -59086,15 +59108,18 @@ onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
         $container.tabs('destroy').tabs();
     };
 
-    var createMarketTables = function(market) {
+    var createMarketTables = function(market, isJapan) {
         var $marketTables = $('<div/>');
 
         // submarkets of this market
         var submarkets = market.submarkets;
         for(var s = 0; s < submarkets.length; s++) {
             // just show "Major Pairs" when the language is JA
-            if(page.language().toLowerCase() === 'ja' && submarkets[s].name !== '主要ペア'){
-                continue;
+            if(isJapan) {
+                var symbolInfo = symbolSearch(submarkets[s].name);
+                if(symbolInfo.length > 0 && symbolInfo[0].submarket !== 'major_pairs') {
+                    continue;
+                }
             }
 
             // submarket table
@@ -59140,6 +59165,12 @@ onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
         return $tableRow;
     };
 
+    var symbolSearch = function(submarketname) {
+        return activeSymbols.filter(function(sy) {
+            return sy.submarket_display_name === submarketname;
+        });
+    };
+
     var createEventsText = function(events) {
         var result = '';
         for(var i = 0; i < events.length; i++) {
@@ -59168,13 +59199,14 @@ onLoad.queue_for_url(initialize_pricing_table, 'pricing_table');
 
     return {
         init: init,
-        populateTable: populateTable
+        getTradingTimes : getTradingTimes,
+        getActiveSymbols: getActiveSymbols
     };
 }());
 
 
 
-pjax_config_page("resources/trading_timesws", function() {
+pjax_config_page("trading_timesws", function() {
     return {
         onLoad: function() {
             BinarySocket.init({
@@ -59182,7 +59214,10 @@ pjax_config_page("resources/trading_timesws", function() {
                     var response = JSON.parse(msg.data);
                     if (response) {
                         if (response.msg_type === "trading_times") {
-                            TradingTimesWS.populateTable(response);
+                            TradingTimesWS.getTradingTimes(response);
+                        }
+                        else if (response.msg_type === "active_symbols") {
+                            TradingTimesWS.getActiveSymbols(response);
                         }
                     }
                 }
@@ -64260,7 +64295,7 @@ var ProfitTableWS = (function () {
             ProfitTableUI.updateProfitTable(getNextChunk());
 
             // Show a message when the table is empty
-            if($('#profit-table tbody tr').length === 0) {
+            if((transactionsReceived === 0) && (currentBatch.length === 0)) {
                 $('#profit-table tbody')
                     .append($('<tr/>', {class: "flex-tr"})
                         .append($('<td/>', {colspan: 7}) 
@@ -64528,7 +64563,7 @@ var ProfitTableUI = (function(){
             StatementUI.updateStatementTable(getNextChunkStatement());
 
             // Show a message when the table is empty
-            if($('#statement-table tbody tr').length === 0) {
+            if ((transactionsReceived === 0) && (currentBatch.length === 0)) {
                 $('#statement-table tbody')
                     .append($('<tr/>', {class: "flex-tr"})
                         .append($('<td/>', {colspan: 6})
