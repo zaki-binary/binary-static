@@ -143,6 +143,11 @@ var BinarySocket = (function () {
                     events.onmessage(msg);
                 }
             }
+            if(isReady()=== true){
+                if (clock_started === false) {
+                    page.header.start_clock_ws();
+                }
+            }
         };
 
         binarySocket.onclose = function (e) {
@@ -162,7 +167,7 @@ var BinarySocket = (function () {
             console.log('socket error', error);
         };
     };
-
+    
     var close = function () {
         manualClosed = true;
         bufferedSends = [];

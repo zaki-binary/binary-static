@@ -397,16 +397,10 @@ Header.prototype = {
     on_load: function() {
         this.show_or_hide_login_form();
         this.register_dynamic_links();
-        if (!clock_started) {
-            this.start_clock_ws();
-        }
         this.simulate_input_placeholder_for_ie();
     },
     on_unload: function() {
         this.menu.reset();
-        if (!clock_started){
-            this.start_clock_ws();
-        }
     },
     show_or_hide_login_form: function() {
         if (this.user.is_logged_in && this.client.is_logged_in) {
@@ -475,7 +469,6 @@ Header.prototype = {
     start_clock_ws : function(){
         var that = this;
         var clock_handle;
-        var query_start_time;
         var clock = $('#gmt-clock');
 
         function init(){
@@ -515,10 +508,10 @@ Header.prototype = {
         that.run = function(){
             setInterval(init, 900000);
         };
-        if(BinarySocket.isReady() === true){
-            init();
-            that.run();
-        }
+        
+        init();
+        that.run();
+        
         return;
     },
     start_clock: function() {
