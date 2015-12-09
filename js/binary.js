@@ -55717,9 +55717,10 @@ BetForm.Time.EndTime.prototype = {
                     }
                 }
 
-                var final = [text_arr[0]];
-                if(typeof text_arr[1] !== 'undefined'){
-                    final.push(text_arr[1]);
+                var final = [text_arr[0],text_arr[1]];
+                if(typeof text_arr[2] !== 'undefined'){
+                    final.push(text_arr[2]);
+                    final.push(text_arr[3]);
                 }
 
                 container.text(final.join(' '));
