@@ -7,25 +7,26 @@ var AssetIndexWS = (function() {
     
     var activeSymbols,
         assetIndex,
-        marketColumns;
-    
-    // index of items in asset_index response
-    var idx = {
-        symbol: 0,
-        displayName: 1,
-        cells : 2,
-            cellName: 0,
-            cellDisplayName: 1,
-            cellFrom: 2,
-            cellTo  : 3,
-        symInfo: 3,
-        values : 4
-    };
+        marketColumns,
+        idx;
 
     var init = function() {
         $container = $('#asset-index');
         showLoadingImage($container);
         marketColumns = {};
+        // index of items in asset_index response
+        idx = {
+            symbol: 0,
+            displayName: 1,
+            cells : 2,
+                cellName: 0,
+                cellDisplayName: 1,
+                cellFrom: 2,
+                cellTo  : 3,
+            symInfo: 3,
+            values : 4
+        };
+
         BinarySocket.send({"active_symbols": "brief"});
         BinarySocket.send({"asset_index": 1});
     };
@@ -56,7 +57,7 @@ var AssetIndexWS = (function() {
 
     /*
      * This method generates headers for all tables of each market
-     * should include headers exist in all assets of each market and its submarkets
+     * should include headers existed in all assets of each market and its submarkets
      */
     var organizeData = function() {
         for(var i = 0; i < assetIndex.length; i++) {
