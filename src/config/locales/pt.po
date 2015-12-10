@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: BOM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-12-07 19:06+0000\n"
+"PO-Revision-Date: 2015-12-10 18:10+0000\n"
 "Last-Translator: Alcino Jorge <alcino@binary.com>\n"
 "Language-Team: Portuguese "
 "<https://hosted.weblate.org/projects/binary/static/pt/>\n"
@@ -6057,7 +6057,7 @@ msgstr "Aquisições máximas de contratos agregados durante um período de 7 di
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1765
 msgid "Maximum aggregate contract purchases per day."
-msgstr "Compras máximas de contratos agregados por dia."
+msgstr "Máximo de aquisições agregadas de contratos por dia."
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:1910
 msgid "Maximum aggregate loss over a 30-day period."
@@ -6074,7 +6074,7 @@ msgstr "Perda agregada máxima por dia."
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:228
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/betting_limits.html.tt:23
 msgid "Maximum aggregate payouts on open positions"
-msgstr "Pagamentos máximos de agregados sobre posições em aberto"
+msgstr "Máximo de pagamentos agregados sobre posições em aberto"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:226
 #: /home/git/translations/binary-static/src/templates/toolkit/cashier/betting_limits.html.tt:19
@@ -6581,7 +6581,14 @@ msgstr "Pontualidade no pagamento"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:17
 msgid "Once stray ticks have been removed, a very short-term smoothing algorithm is applied to the data feed. This smoothing algorithm removes a little of the \"random noise\" surrounding the data feed, and ensures that clients who buy path-dependent contracts (such as the one-touch or barrier-range contracts) will not have their contracts knocked-in or knocked-out by random short-term market noise that does not reflect the true market price."
-msgstr "Após a remoção dos ticks extraviados, é aplicado ao feed de dados um algoritmo de suavização a muito curto prazo. Este algoritmo de suavização remove um pouco do \"ruído aleatório\" em torno do feed de dados e garante que os clientes que compram contratos dependentes dos percursos (como os contratos de Um-Toque ou de intervalo de barreira) não verão os seus contratos serem ativados ou desativados por ruídos de mercado de curto prazo aleatórios, que não reflitam o verdadeiro preço de mercado."
+msgstr ""
+"Após a remoção dos tique-taques extraviados, é aplicado ao feed de dados um "
+"algoritmo de suavização a muito curto prazo. Este algoritmo de suavização "
+"remove um pouco do \"ruído aleatório\" em torno do feed de dados e garante "
+"que os clientes que compram contratos dependentes dos percursos (como os "
+"contratos de um-toque ou de intervalo de barreira) não verão os seus "
+"contratos serem ativados ou desativados por ruídos de mercado de curto prazo "
+"aleatórios, que não reflitam o verdadeiro preço de mercado."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:20
 msgid "Once the bonus is credited to your account, you may withdraw the bonus and any winnings generated from it at any time."
@@ -6809,7 +6816,15 @@ msgstr "As nossas políticas de segurança de dados assentam nas melhores práti
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:10
 msgid "Our servers apply a tick filtering algorithm. The purpose of this filtering algorithm is to strip the feed of stray ticks. Stray ticks are ticks that manifestly fall outside of the current trading range of the market; such ticks are often due to communication delays with the exchanges or banks that provide quotes, human error, or database problems at any point between the originator of the quote and our servers."
-msgstr "Os nossos servidores aplicam um algoritmo de filtragem de ticks. O objetivo deste algoritmo de filtragem é cortar o feed de ticks extraviados. Os ticks extraviados são movimentos mínimos que caem manifestamente fora do intervalo de negociação atual do mercado; estes ticks são muitas vezes resultantes de atrasos de comunicação com as bolsas de valores ou bancos que fornecem as cotações, de erro humano ou de problemas com bases de dados em qualquer ponto entre o autor da cotação e os nossos servidores."
+msgstr ""
+"Os nossos servidores aplicam um algoritmo de filtragem de tique-taques. O "
+"objetivo deste algoritmo de filtragem é cortar o feed de tique-taques "
+"extraviados. Os tique-taques extraviados são movimentos mínimos que caem "
+"manifestamente fora do intervalo de negociação atual do mercado; estes tique-"
+"taques são muitas vezes resultantes de atrasos de comunicação com as bolsas "
+"de valores ou bancos que fornecem as cotações, de erro humano ou de "
+"problemas com bases de dados em qualquer ponto entre o autor da cotação e os "
+"nossos servidores."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:19
 msgid "Our services are provided on an execution only basis. We do not provide investment advice in relation to our products or services. We sometimes provide factual information or research recommendations about a market, information about transaction procedures and information about the potential risks involved and how those risks may be minimised. However, any decision to use our products or services is made by you."
@@ -7393,10 +7408,9 @@ msgid "Please specify your preferred reality-check interval"
 msgstr "Especifique o seu intervalo preferido para o balanço da realidade"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:255
-#, fuzzy
 #| msgid "Please input a valid date."
 msgid "Please submit a valid %1."
-msgstr "Introduza uma data válida."
+msgstr "Insira um %1 válido."
 
 #: /home/git/translations/binary-static/src/templates/haml/static/payment_agent.html.haml:1
 msgid "Please submit the above information to <a href='mailto:affiliates@binary.com'>affiliates@binary.com</a>."
@@ -8708,7 +8722,7 @@ msgstr "Instruções específicas"
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:149
 #: /home/git/translations/binary-static/src/templates/toolkit/bet/form/spot.html.tt:3
 msgid "Spot"
-msgstr "Preço Atual do Mercado"
+msgstr "Preço atual"
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/glossary.html.haml:1
 msgid "Spot price"
@@ -12490,10 +12504,9 @@ msgid "it is the leading binary option trading platform."
 msgstr "é a plataforma líder de negociação de opções binárias."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:248
-#, fuzzy
 #| msgid "Hotter"
 msgid "letters"
-msgstr "Mais Quente"
+msgstr "caracteres"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:55
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:422
