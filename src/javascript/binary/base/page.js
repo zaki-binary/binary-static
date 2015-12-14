@@ -506,49 +506,6 @@ Header.prototype = {
             update_time();
         }, 1000);
     },
-    start_clock: function() {
-        var clock = $('#gmt-clock');
-        if (clock.length === 0) {
-            return;
-        }
-        var that = this;
-        var clock_handle;
-        var sync = function() {
-            var query_start_time = (new Date().getTime());
-            $.ajax({crossDomain: true, url: page.url.url_for('timestamp'), async: true, dataType: "json"}).done(function(response) {
-                var start_timestamp = response.timestamp;
-
-                //time now is timestamp from server + ping time.
-                //ping time = roundtrip time / 2
-                //roundtrip time = time at start of request - time after response.
-                that.time_now = (start_timestamp * 1000) + (((new Date().getTime()) - query_start_time)/2);
-                var increase_time_by = function(interval) {
-                    that.time_now += interval;
-                };
-
-                var update_time = function() {
-                    clock.html(moment(that.time_now).utc().format("YYYY-MM-DD HH:mm") + " GMT");
-                };
-
-                update_time();
-
-                clearInterval(clock_handle);
-
-                clock_handle = setInterval(function() {
-                    increase_time_by(1000);
-                    update_time();
-                }, 1000);
-            });
-        };
-
-        sync();
-        setInterval(function() {
-            sync();
-        }, 900000);
-
-        clock_started = true;
-        return;
-    },
 };
 
 var ToolTip = function() {
