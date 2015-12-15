@@ -807,7 +807,7 @@ var EnjoyHint = function (_options) {
 
                     that.$next_btn.css({
                         left: label_x,
-                        top: label_y + label_height + 20
+                        top: label_y + label_height + 15
                     });
                     var left_skip = label_x + that.$next_btn.width() + 10;
                     console.log(that.nextBtn);
@@ -817,7 +817,7 @@ var EnjoyHint = function (_options) {
 
                     that.$skip_btn.css({
                         left: left_skip,
-                        top: label_y + label_height + 20
+                        top: label_y + label_height + 15
                     });
                     that.$close_btn.css({
                         right : 10,

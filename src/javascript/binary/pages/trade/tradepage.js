@@ -37,42 +37,42 @@ var TradePage = (function(){
 			{
 				selector	: '#contract_markets',
 				event_type  : 'next',
-				description : '<h1>Step 1</h1><br />Select your market',
+				description : '<h1>Step 1</h1>Select your market',
           		nextButton  : btnNext,
 				showSkip    : false
 			},
 			{
 				selector	: '#underlying',
 				event_type  : 'next',
-				description : '<h1>Step 2</h1><br />Select your underlying asset',
+				description : '<h1>Step 2</h1>Select your underlying asset',
           		nextButton  : btnNext,
 				showSkip    : false
 			},
 			{
 				selector    : '#contract_form_name_nav',
 				event_type  : 'next',
-				description : '<h1>Step 3</h1><br />Select your trade type',
+				description : '<h1>Step 3</h1>Select your trade type',
           		nextButton  : btnNext,
 				showSkip    : false
 			},
 			{
 				selector    : '#expiry_row',
 				event_type  : 'next',
-				description : '<h1>Step 4</h1><br />Adjust time parameters',
+				description : '<h1>Step 4</h1>Adjust time parameters',
           		nextButton  : btnNext,
 				showSkip    : false
 			},
 			{
 				selector    : '#payout_amount',
 				event_type  : 'next',
-				description : '<h1>Step 5</h1><br />Define your payout amount',
+				description : '<h1>Step 5</h1>Define your payout amount',
           		nextButton  : btnNext,
 				showSkip    : false
 			},
 			{
 				selector    : '#contracts_list',
 				event_type  : 'next',
-				description : '<h1>Step 6</h1><br />Predict the direction and purchase',
+				description : '<h1>Step 6</h1>Predict the direction<br />and purchase',
 				nextButton  : {className: "button btnFinish", html: '<span>' + text.localize('Finish') + '</span>'},
 				showSkip    : false
 			}
