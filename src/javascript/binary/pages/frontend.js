@@ -298,6 +298,69 @@ function hide_if_logged_in() {
     }
 }
 
+// populate drop down list of Titles, pass in select id
+function setTitles(selectId){
+    var select = document.getElementById(selectId);
+
+    var option = document.createElement("option");
+    option.text = Content.localize().textMr;
+    option.value = 'Mr';
+    select.appendChild(option);
+
+    var option = document.createElement("option");
+    option.text = Content.localize().textMrs;
+    option.value = 'Mrs';
+    select.appendChild(option);
+
+    var option = document.createElement("option");
+    option.text = Content.localize().textMs;
+    option.value = 'Ms';
+    select.appendChild(option);
+
+    var option = document.createElement("option");
+    option.text = Content.localize().textMiss;
+    option.value = 'Miss';
+    select.appendChild(option);
+
+    var option = document.createElement("option");
+    option.text = Content.localize().textDr;
+    option.value = 'Dr';
+    select.appendChild(option);
+
+    var option = document.createElement("option");
+    option.text = Content.localize().textProf;
+    option.value = 'Prof';
+    select.appendChild(option);
+}
+
+// append numbers to a drop down menu, eg 1-30
+function dropDownNumbers(selectId, startNum, endNum) {
+    var select = document.getElementById(selectId);
+    $select.append($('<option></option>');
+
+    for (i = startNum; i <= endNum; i++){
+        $select.append($('<option></option>').val(i).html(i));
+    }
+
+}
+
+function dropDownMonths(selectId) {
+    var select = document.getElementById(selectId);
+}
+
+function generateBirthDate(daysId, monthsId, yearId){
+    //days
+    dropDownNumbers(daysId, 1, 31);
+    //months
+    dropDownMonths(monthsId, 1, 12);
+
+    var currentYear = new Date().getFullYear();
+    var endYear = currentYear - 17;
+
+    //years
+    dropDownNumbers(yearId, 1915, endYear);
+}
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {

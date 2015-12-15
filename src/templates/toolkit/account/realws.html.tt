@@ -1,0 +1,67 @@
+<div class='grd-grid-12'>
+    <h1>[% l('Real Money Account Opening') %]</h1>
+    <div class="grd-parent grd-row-padding">
+    	
+        <div class="rbox form">
+            <div class="rbox-wrap">
+
+                <form id="real-form">
+                    <fieldset>
+                        <legend id="details"></legend>
+                        <div class="grd-row-padding row clear">
+                            <div class="grd-grid-4  form_label">
+                                <label for="title"></label>
+                            </div>
+                            <div class="grd-grid-8">
+                                <select id="title" name="title"></select>
+                            </div>
+                        </div>
+                        <div class="grd-row-padding row clear">
+                            <div class="grd-grid-4  form_label">
+                                <label for="fname"></label>
+                            </div>
+                            <div class="grd-grid-8">
+                                <input type="text" id="fname" name="fname" maxlength="30" required></input>
+                            </div>
+                        </div>
+                        <div class="grd-row-padding row clear">
+                            <div class="grd-grid-4  form_label">
+                                <label for="lname"></label>
+                            </div>
+                            <div class="grd-grid-8">
+                                <input type="text" id="lname" name="lname" maxlength="30" required></input>
+                            </div>
+                        </div>
+                        <div class="grd-row-padding row clear">
+                            <div class="grd-grid-4  form_label">
+                                <label for="dobdd"></label>
+                            </div>
+                            <div class="grd-grid-8">
+                                <select name="dobdd" id="dobdd" required></select>
+                                <select name="dobmm" id="dobdd" required></select>
+                                <select name="dobyy" id="dobdd" required></select>
+                            </div>
+                        </div>
+                        [%# <div class="grd-row-padding row clear">
+                            <div class="grd-grid-4  form_label">
+                                <label for="residence"></label>
+                            </div>
+                            <div class="grd-grid-8">
+                                <select name="residence" id="residence" required></select>
+                                <p class="errorfield" id="error-residence" style="display:none"></p>
+                            </div>
+                        </div>%]
+                    </fieldset>
+                        
+                    <fieldset class="center-aligned" id="formlayout">
+                        <span class="button button-focus">
+                            <input type="hidden" name="account" value="new real account"></input>
+                            <button class="button button-focus" id="btn_submit" type="submit"></button>
+                        </span>
+                    </fieldset>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

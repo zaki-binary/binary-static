@@ -126,7 +126,17 @@ var Content = (function () {
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
-            textEmailSent: text.localize('Please check your Email for the next step.')
+            textEmailSent: text.localize('Please check your Email for the next step.'),
+            textTitle: text.localize('Title'),
+            textOpenAccount: text.localize('Open Account'),
+            textMr: text.localize('Mr'),
+            textMrs: text.localize('Mrs'),
+            textMs: text.localize('Ms'),
+            textMiss: text.localize('Miss'),
+            textDr: text.localize('Dr'),
+            textProf: text.localize('Prof'),
+            textFirstName: text.localize('First Name'),
+            textLastName: text.localize('Last Name')
         };
 
         var starTime = document.getElementById('start_time_label');
