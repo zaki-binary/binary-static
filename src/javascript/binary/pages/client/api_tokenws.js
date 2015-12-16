@@ -5,7 +5,8 @@ var APITokenWS = (function() {
         errorClass,
         hideClass,
         isValid,
-        tableContainer;
+        tableContainer,
+        maxTokens;
 
 
     var init = function() {
@@ -13,6 +14,7 @@ var APITokenWS = (function() {
         errorClass  = 'errorfield';
         hideClass   = 'dynamic';
         tableContainer = '#tokens_list';
+        maxTokens = 30;
 
         showLoadingImage($(tableContainer));
 
@@ -30,6 +32,8 @@ var APITokenWS = (function() {
             showMessage(response.error.message, false);
             return false;
         }
+
+        clearMessages();
 
         var rebuildTable = true;
         var api_token = response.api_token;
@@ -52,7 +56,7 @@ var APITokenWS = (function() {
                 $('#' + deletedToken).parents('tr').removeClass('new').addClass('deleting').fadeOut(700, function(){
                     $(this).remove();
                     // Hide the table if there is no Token remained
-                    if($(tableContainer + ' tr').length === 1) {
+                    if(api_token.tokens.length === 0) {
                         $(tableContainer).addClass(hideClass);
                     }
                 });
@@ -61,6 +65,15 @@ var APITokenWS = (function() {
 
         if(rebuildTable) {
             populateTokensList(api_token, newToken);
+        }
+
+        // Hide form if tokens count reached the maximum limit
+        if(api_token.tokens.length >= maxTokens) { 
+            $('#token_form').addClass(hideClass);
+            showMessage(text.localize('The maximum number of tokens (%1) has been reached.').replace('%1', maxTokens), false);
+        }
+        else {
+            $('#token_form').removeClass(hideClass);
         }
     };
 
