@@ -9,14 +9,12 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-12-16 09:14+0000\n"
 "Last-Translator: Alina Demidova <alinademidova1@gmail.com>\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/binary/static/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/binary/static/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.5-dev\n"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:1080
@@ -576,10 +574,6 @@ msgstr ""
 "  <li>Конкретное текстовое сообщение.</li>\n"
 " </ul>"
 
-#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
-msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-msgstr "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All durations:</span> from 10 seconds to 365 days."
@@ -975,8 +969,10 @@ msgstr "Письмо для проверки отправлено на %1."
 msgid "API"
 msgstr "API"
 
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1864
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:2
 msgid "API Token"
 msgstr "Токен API"
 
@@ -2002,7 +1998,6 @@ msgstr "Рассчитать"
 
 #. ($res->error_message)
 #: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:306
-#| msgid "Call me now"
 msgid "Call error."
 msgstr "Ошибка вызова."
 
@@ -2160,6 +2155,7 @@ msgid "Choose Touch / No Touch when you want to profit from the market touching 
 msgstr "Выберите \"Касание/Нет касания\", если Вы желаете получить прибыль от касания или отсутствия касания рынком выбранного барьера в течение периода продолжительности контракта."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:22
 msgid "Choose a Name:"
 msgstr "Выберите имя:"
 
@@ -2662,6 +2658,7 @@ msgid "Cover is made available on the basis of the depositor rather than on the 
 msgstr "Страховое покрытие предоставляется самому вкладчику, а не на основе количества внесённых им депозитов. Это означает, что если клиент открыл несколько счетов, общая сумма страховой компенсации составит €20,000. Любая сумма, превышающая данный порог, не будет защищена страховкой и должна вноситься на страх и риск инвестора."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:40
 msgid "Create"
 msgstr "Создать"
 
@@ -2675,6 +2672,7 @@ msgid "Create New Account"
 msgstr "Открыть новый счет"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:18
 msgid "Create New Token"
 msgstr "Создать новый токен"
 
@@ -3388,6 +3386,12 @@ msgstr "Не предоставлен эл.адрес."
 #: /home/git/translations/binary-static/src/templates/haml/static/bulk_trader_facility.html.haml:1
 msgid "Email the token to your account manager."
 msgstr "Вышлите токен по электронной почте управляющему Вашим счетом."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
+#, fuzzy
+#| msgid "Email"
+msgid "Email: "
+msgstr "Email"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Employee handbook"
@@ -5558,6 +5562,7 @@ msgid "LOG OUT"
 msgstr "ВЫХОД"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:6
 msgid "Label your API tokens so as to recognise them easily at a later time."
 msgstr "Промаркируйте свои API токены, чтобы позже Вам было легче их распознать."
 
@@ -7032,6 +7037,7 @@ msgid "Perl modules"
 msgstr "Модули Perl"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1283
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1855
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:3
 msgid "Personal Details"
@@ -8316,6 +8322,7 @@ msgid "Should you need help or support, please contact our <a href=\"%1\">Custom
 msgstr "Если Вам нужна помощь, свяжитесь с нашей <a href=\"%1\">службой поддержки</a>, и один из наших представителей поможет Вам, как только сможет."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:5
 msgid "Should you not need any of the API tokens that you’ve already generated, you may simply delete them from the list."
 msgstr "Если Вам не нужны API токены, которые Вы уже создали, просто удалите их из списка."
 
@@ -10085,6 +10092,7 @@ msgid "To"
 msgstr "До"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:4
 msgid "To access a third party application, such as a mobile app, you are required to generate an API Token and to copy and paste it into your app. Click on “Create” to generate your API token."
 msgstr "Чтобы открыть приложение от третьей стороны (например, мобильное приложение), Вы должны создать API токен, а затем скопировать и вставить его в своё приложение. Нажмите “Создать”, чтобы получить API токен."
 
@@ -14270,6 +14278,9 @@ msgstr "Получить выплату %1 %2, если %3 выйдет за г�
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "Получить выплату %1 %2, если %3 выйдет за пределы %7 и %6 в любое время раньше, чем %5 после %4."
+
+#~ msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
+#~ msgstr "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
 
 #~ msgid "Your password should be at least 5 characters."
 #~ msgstr "Пароль должен содержать хотя бы 5 знаков. Просим убедиться, что клавиатура переключена на латиницу."

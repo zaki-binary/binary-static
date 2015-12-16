@@ -578,10 +578,6 @@ msgstr ""
 "  <li>Spezifische Mitteilung, die das Banner enthalten soll.</li>\n"
 " </ul>"
 
-#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
-msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-msgstr "<span class='grd-grid-4 grd-no-gutter'>E-Mail: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All durations:</span> from 10 seconds to 365 days."
@@ -977,8 +973,10 @@ msgstr "Es wurde eine Verifizierungsmail gesendet an %1."
 msgid "API"
 msgstr "API"
 
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1864
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:2
 msgid "API Token"
 msgstr "API Token"
 
@@ -2163,6 +2161,7 @@ msgid "Choose Touch / No Touch when you want to profit from the market touching 
 msgstr "Wählen Sie Ziel/Kein Ziel aus, wenn Sie daran verdienen möchten, dass der Kurs während der Kontraktlaufzeit jederzeit einen Zielkurs erreicht oder nicht."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:22
 msgid "Choose a Name:"
 msgstr "Wählen Sie einen Namen aus:"
 
@@ -2664,6 +2663,7 @@ msgid "Cover is made available on the basis of the depositor rather than on the 
 msgstr "Die Deckung steht auf der Grundlage des Einzahlers anstatt der Anzahl von Guthaben zur Verfügung. Dies bedeutet, dass, wenn eine Einzelperson mehrere Konten unterhält, nur ein Gesamtbetrag von 20.000 € geschützt ist. Jeder Betrag, der diesen Grenzwert übersteigt, ist nicht geschützt und muss vom Anleger getragen werden."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:40
 msgid "Create"
 msgstr "Erstellen"
 
@@ -2677,6 +2677,7 @@ msgid "Create New Account"
 msgstr "Neues Konto einrichten"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:18
 msgid "Create New Token"
 msgstr "Neuen Token erstellen"
 
@@ -3394,6 +3395,12 @@ msgstr "E-Mail nicht angegeben."
 #: /home/git/translations/binary-static/src/templates/haml/static/bulk_trader_facility.html.haml:1
 msgid "Email the token to your account manager."
 msgstr "Mailen Sie den Token an Ihren Account Manager."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
+#, fuzzy
+#| msgid "Email"
+msgid "Email: "
+msgstr "E-Mail"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Employee handbook"
@@ -5566,6 +5573,7 @@ msgid "LOG OUT"
 msgstr "AUSLOGGEN"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:6
 msgid "Label your API tokens so as to recognise them easily at a later time."
 msgstr "Kennzeichnen Sie Ihre API-Token, damit Sie sie später leichter erkennen können."
 
@@ -7031,6 +7039,7 @@ msgid "Perl modules"
 msgstr "Perl Module"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1283
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1855
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:3
 msgid "Personal Details"
@@ -8311,6 +8320,7 @@ msgid "Should you need help or support, please contact our <a href=\"%1\">Custom
 msgstr "Falls Sie Hilfe oder Unterstützung benötigen, setzen Sie sich bitte mit unserer <a href=\"%1\">Kundendienstabteilung</a> in Verbindung. Einer unserer Mitarbeiter wird Ihnen so schnell wie möglich weiterhelfen."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:5
 msgid "Should you not need any of the API tokens that you’ve already generated, you may simply delete them from the list."
 msgstr "Wenn Sie API-Token, die Sie schon erzeugt haben, nicht mehr benötigen, können Sie diese einfach in der Liste löschen."
 
@@ -10073,6 +10083,7 @@ msgid "To"
 msgstr "An"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:4
 msgid "To access a third party application, such as a mobile app, you are required to generate an API Token and to copy and paste it into your app. Click on “Create” to generate your API token."
 msgstr "Damit Sie auf eine Drittanbieteranwenung, wie eine Smartphone App, zugreifen können, müssen Sie einen API-Token erzeugen und diesen in Ihre App einfügen. Klicken Sie auf \"Generieren\", um Ihren API-Token zu erstellen."
 
@@ -14255,6 +14266,9 @@ msgstr "%1 %2 Auszahlung, wenn sich %3 zum %5 außerhalb von %7 bis %6 bewegt ha
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "%1 %2 Auszahlung, wenn sich %3 nach dem %4 bis zum %5 außerhalb von %7 und %6 bewegt hat."
+
+#~ msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
+#~ msgstr "<span class='grd-grid-4 grd-no-gutter'>E-Mail: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
 
 #~ msgid "Your password should be at least 5 characters."
 #~ msgstr "Ihr Passwort muss aus mindestens 5 Zeichen bestehen."
