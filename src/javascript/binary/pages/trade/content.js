@@ -116,9 +116,9 @@ var Content = (function () {
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
             textEmailAddress: text.localize('Email address'),
             textRepeatPassword: text.localize('re-enter password'),
-            textResidence: text.localize('country of residence'),
+            textResidence: text.localize('Country of residence'),
             textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your Email and make sure you are not already logged in.'),
-            textDetails: text.localize('details'),
+            textDetails: text.localize('Details'),
             textCreateNewAccount: text.localize('create new account'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
@@ -126,7 +126,7 @@ var Content = (function () {
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
-            textEmailSent: text.localize('Please check your Email for the next step.'),
+            textEmailSent: text.localize('Please check your email for the next step.'),
             textTitle: text.localize('Title'),
             textOpenAccount: text.localize('Open Account'),
             textMr: text.localize('Mr'),
@@ -135,8 +135,18 @@ var Content = (function () {
             textMiss: text.localize('Miss'),
             textDr: text.localize('Dr'),
             textProf: text.localize('Prof'),
-            textFirstName: text.localize('First Name'),
-            textLastName: text.localize('Last Name')
+            textFirstName: text.localize('First name'),
+            textLastName: text.localize('Family name'),
+            textDateOfBirth: text.localize('Date of birth'),
+            textErrorBirthdate: text.localize('Please input a valid date'),
+            textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
+            textAddress: text.localize('Address'),
+            textFirstLineAddress: text.localize('First line of home address'),
+            textSecondLineAddress: text.localize('Second line of home address'),
+            textTownCity: text.localize('Town/City'),
+            textProvince: text.localize('State/Province'),
+            textPostalCode: text.localize('Postal code / ZIP'),
+            textSelect: text.localize('Please select')
         };
 
         var starTime = document.getElementById('start_time_label');

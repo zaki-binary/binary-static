@@ -298,67 +298,121 @@ function hide_if_logged_in() {
     }
 }
 
+// use function to generate elements and append them
+// e.g. element is select and element to append is option
+function appendTextValueChild(element, text, value){
+    var option = document.createElement("option");
+
+    option.text = text;
+    option.value = value;
+    element.appendChild(option);
+}
+
 // populate drop down list of Titles, pass in select id
 function setTitles(selectId){
     var select = document.getElementById(selectId);
 
-    var option = document.createElement("option");
-    option.text = Content.localize().textMr;
-    option.value = 'Mr';
-    select.appendChild(option);
+    appendTextValueChild(select, Content.localize().textMr, 'Mr');
+    appendTextValueChild(select, Content.localize().textMrs, 'Mrs');
+    appendTextValueChild(select, Content.localize().textMs, 'Ms');
+    appendTextValueChild(select, Content.localize().textMiss, 'Miss');
+    appendTextValueChild(select, Content.localize().textDr, 'Dr');
+    appendTextValueChild(select, Content.localize().textProf, 'Prof');
 
-    var option = document.createElement("option");
-    option.text = Content.localize().textMrs;
-    option.value = 'Mrs';
-    select.appendChild(option);
-
-    var option = document.createElement("option");
-    option.text = Content.localize().textMs;
-    option.value = 'Ms';
-    select.appendChild(option);
-
-    var option = document.createElement("option");
-    option.text = Content.localize().textMiss;
-    option.value = 'Miss';
-    select.appendChild(option);
-
-    var option = document.createElement("option");
-    option.text = Content.localize().textDr;
-    option.value = 'Dr';
-    select.appendChild(option);
-
-    var option = document.createElement("option");
-    option.text = Content.localize().textProf;
-    option.value = 'Prof';
-    select.appendChild(option);
 }
 
 // append numbers to a drop down menu, eg 1-30
-function dropDownNumbers(selectId, startNum, endNum) {
-    var select = document.getElementById(selectId);
-    $select.append($('<option></option>');
+function dropDownNumbers(select, startNum, endNum) {
+    select.appendChild(document.createElement("option"));
 
     for (i = startNum; i <= endNum; i++){
-        $select.append($('<option></option>').val(i).html(i));
+        var option = document.createElement("option");
+        option.text = i;
+        option.value = i;
+        select.appendChild(option);
     }
 
 }
 
-function dropDownMonths(selectId) {
-    var select = document.getElementById(selectId);
+function dropDownMonths(select, startNum, endNum) {
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    select.appendChild(document.createElement("option"));
+    for (i = startNum; i <= endNum; i++){
+        var option = document.createElement("option");
+        if (i <= '9') {
+            option.value = '0' + i;
+        } else {
+            option.value = i;
+        }
+
+        for (j = i; j <= i; j++) {
+            option.text = months[j-1];
+        }
+
+        select.appendChild(option);
+    }
 }
 
-function generateBirthDate(daysId, monthsId, yearId){
+function generateBirthDate(days, months, year){
     //days
-    dropDownNumbers(daysId, 1, 31);
+    dropDownNumbers(days, 1, 31);
     //months
-    dropDownMonths(monthsId, 1, 12);
+    dropDownMonths(months, 1, 12);
 
     var currentYear = new Date().getFullYear();
+    var startYear = currentYear - 100;
     var endYear = currentYear - 17;
 
     //years
-    dropDownNumbers(yearId, 1915, endYear);
+    dropDownNumbers(year, startYear, endYear);
+}
+
+function isValidDate(day, month, year){
+    // Assume not leap year by default (note zero index for Jan)
+    var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    // If evenly divisible by 4 and not evenly divisible by 100,
+    // or is evenly divisible by 400, then a leap year
+    if ( (!(year % 4) && year % 100) || !(year % 400)) {
+        daysInMonth[1] = 29;
+    }
+    return day <= daysInMonth[--month];
+}
+
+function setResidence(residenceElement){
+    get_residence_list();
+    $('#residence').val($.cookie('residence'));
+}
+
+function generateState(selectId) {
+    var select = document.getElementById(selectId);
+
+    appendTextValueChild(select, Content.localize().textSelect, '');
+
+    BinarySocket.init({
+        onmessage: function(msg){
+            var response = JSON.parse(msg.data);
+
+            if (response) {
+                var type = response.msg_type;
+
+                if (type === 'states_list'){
+                    var states_list = response.states_list;
+
+                    if (states_list.length > 0){
+                        for (i = 0; i < states_list.length; i++) {
+                            appendTextValueChild(select, states_list[i].text, states_list[i].value)
+                        }
+                    }
+                    select.setAttribute('style', 'display:block');
+                }
+            }
+        }
+    });
+
+    BinarySocket.send({ states_list: $.cookie('residence') });
+
 }
 
 pjax_config_page('/$|/home', function() {
