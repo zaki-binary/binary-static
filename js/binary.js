@@ -64569,7 +64569,7 @@ var Table = (function(){
 
             return false;
 
-        } else if (!/^[^-~\s]+$/.test(password)) {
+        } else if (!/^[ -~]+$/.test(password)) {
             hideErrorMessage(rError);
             error.textContent = Content.errorMessage('valid', Content.localize().textPassword);
             displayErrorMessage(error);
@@ -64596,7 +64596,8 @@ var Table = (function(){
         errorMessageEmail: errorMessageEmail,
         errorMessagePassword: errorMessagePassword
     };
-}());;pjax_config_page("limitws", function(){
+}());
+;pjax_config_page("limitws", function(){
     return {
         onLoad: function() {
             BinarySocket.init({
