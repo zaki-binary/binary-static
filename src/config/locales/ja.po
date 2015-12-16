@@ -577,10 +577,6 @@ msgstr ""
 "<li>バナーに含めたい特定のメッセージ情報</li>\n"
 "</ul>"
 
-#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
-msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-msgstr "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All durations:</span> from 10 seconds to 365 days."
@@ -976,8 +972,10 @@ msgstr "確認メールが%1に送信されました。"
 msgid "API"
 msgstr "API"
 
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1864
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:2
 msgid "API Token"
 msgstr "APIトークン"
 
@@ -2174,6 +2172,7 @@ msgid "Choose Touch / No Touch when you want to profit from the market touching 
 msgstr "取引期間中に設定したバリア価格に「タッチするか」「タッチしないか」を予想し、取引をしたい場合は「タッチ/ノータッチ」を選択して下さい。"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:22
 msgid "Choose a Name:"
 msgstr "名前を選択："
 
@@ -2683,6 +2682,7 @@ msgid "Cover is made available on the basis of the depositor rather than on the 
 msgstr "補償は入金額ではなく、入金者に基いて利用が可能となります。これは個人が複数の口座を保持していた場合、統額€20,000までのみ補償されます。この閾値を超える額は保護されず、投資家が負担する必要があります。"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:40
 msgid "Create"
 msgstr "作成"
 
@@ -2696,6 +2696,7 @@ msgid "Create New Account"
 msgstr "無料口座開設"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:18
 msgid "Create New Token"
 msgstr "新しいトークンを作成"
 
@@ -3412,6 +3413,12 @@ msgstr "Eメールアドレスが入力されていません。"
 #: /home/git/translations/binary-static/src/templates/haml/static/bulk_trader_facility.html.haml:1
 msgid "Email the token to your account manager."
 msgstr "お客様のアカウントマネージャーへトークンをメールで送信。"
+
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
+#, fuzzy
+#| msgid "Email"
+msgid "Email: "
+msgstr "メール"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Employee handbook"
@@ -5598,6 +5605,7 @@ msgid "LOG OUT"
 msgstr "ログアウト"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:6
 msgid "Label your API tokens so as to recognise them easily at a later time."
 msgstr "あとで簡単に認識できるよう、APIトークンにラベル付しましょう。"
 
@@ -7073,6 +7081,7 @@ msgid "Perl modules"
 msgstr "Perl モジュール"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1283
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1855
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:3
 msgid "Personal Details"
@@ -8353,6 +8362,7 @@ msgid "Should you need help or support, please contact our <a href=\"%1\">Custom
 msgstr "お問い合わせ事項がございましたら、お気軽に<a href=\"%1\">カスタマーサービス</a>までお問い合わせ下さい。"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:5
 msgid "Should you not need any of the API tokens that you’ve already generated, you may simply delete them from the list."
 msgstr "既に作成したAPIトークンに不要なものがある場合、リストから簡単に削除いただけます。"
 
@@ -10224,6 +10234,7 @@ msgid "To"
 msgstr "終了"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:4
 msgid "To access a third party application, such as a mobile app, you are required to generate an API Token and to copy and paste it into your app. Click on “Create” to generate your API token."
 msgstr "モバイルアプリのようなサードパーティ製アプリケーションにアクセスするには、APIトークンを作成し、あなたのアプリにトークンをコピーして貼り付ける必要があります。APIトークンを作成するには「作成」をクリックしてください。"
 
@@ -14448,6 +14459,9 @@ msgstr "%3が%5までに%7と%6のレンジ外で終了した場合、%1 %2の�
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "%3が%4後の%5までに%7と%6のレンジ外にある場合、%1 %2のペイアウトをお受け取りいただけます。"
+
+#~ msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
+#~ msgstr "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
 
 #~ msgid "Your password should be at least 5 characters."
 #~ msgstr "パスワードは５文字以上でご指定して下さい。"

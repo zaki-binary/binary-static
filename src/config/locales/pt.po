@@ -574,10 +574,6 @@ msgstr ""
 "   <li>Mensagem específica que o banner deve incluir.</li>\n"
 "    </ul>"
 
-#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
-msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-msgstr "<span class='grd-grid-4 grd-no-gutter'>E-mail: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
-
 #: /home/git/translations/binary-static/src/templates/haml/home/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/home2/index.html.haml:1
 msgid "<span>All durations:</span> from 10 seconds to 365 days."
@@ -973,8 +969,10 @@ msgstr "Um e-mail de verificação foi enviado para %1."
 msgid "API"
 msgstr "API"
 
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1864
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:2
 msgid "API Token"
 msgstr "Token de API"
 
@@ -2159,6 +2157,7 @@ msgid "Choose Touch / No Touch when you want to profit from the market touching 
 msgstr "Escolha Toque/Sem Toque para lucrar quando o mercado tocar ou não tocar um preço-alvo durante qualquer momento de duração do contrato."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:22
 msgid "Choose a Name:"
 msgstr "Escolha um nome:"
 
@@ -2660,6 +2659,7 @@ msgid "Cover is made available on the basis of the depositor rather than on the 
 msgstr "A cobertura é disponibilizada com base no depositante, em vez de com base no número de depósitos, significando que se um indivíduo possuir várias contas, ele apenas será coberto até 20.000€ do valor global. Qualquer outro valor que exceder tal limite não será protegido e portanto terá de ser suportado pelo investidor."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:40
 msgid "Create"
 msgstr "Criar"
 
@@ -2673,6 +2673,7 @@ msgid "Create New Account"
 msgstr "Criar uma conta nova"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:18
 msgid "Create New Token"
 msgstr "Criar um novo token"
 
@@ -3391,6 +3392,12 @@ msgstr "E-mail não fornecido."
 #: /home/git/translations/binary-static/src/templates/haml/static/bulk_trader_facility.html.haml:1
 msgid "Email the token to your account manager."
 msgstr "Envie o token por e-mail ao seu gerente de contas."
+
+#: /home/git/translations/binary-static/src/templates/haml/static/contact.html.haml:1
+#, fuzzy
+#| msgid "Email"
+msgid "Email: "
+msgstr "E-mail"
 
 #: /home/git/translations/binary-static/src/templates/haml/static/careers.html.haml:1
 msgid "Employee handbook"
@@ -5561,6 +5568,7 @@ msgid "LOG OUT"
 msgstr "SAIR"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:6
 msgid "Label your API tokens so as to recognise them easily at a later time."
 msgstr "Forneça etiquetas aos seus tokens de API para que possam ser facilmente identificados no future."
 
@@ -7026,6 +7034,7 @@ msgid "Perl modules"
 msgstr "Módulos Perl"
 
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1283
+#: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1855
 #: /home/git/translations/binary-static/src/templates/haml/user/settings.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:3
 msgid "Personal Details"
@@ -8306,6 +8315,7 @@ msgid "Should you need help or support, please contact our <a href=\"%1\">Custom
 msgstr "Caso precise de ajuda ou apoio, por favor contate o nosso <a href=\"%1\">Departamento de Apoio ao Cliente</a> e um dos nossos representantes irá atendê-lo o mais rápido possível."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:5
 msgid "Should you not need any of the API tokens that you’ve already generated, you may simply delete them from the list."
 msgstr "Caso você não necessite de quaisquer dos tokens de API que já gerou, pode simplesmente excluí-los da lista."
 
@@ -10068,6 +10078,7 @@ msgid "To"
 msgstr "Para"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:4
 msgid "To access a third party application, such as a mobile app, you are required to generate an API Token and to copy and paste it into your app. Click on “Create” to generate your API token."
 msgstr "Para aceder a um aplicativo de terceiros, tal como um aplicativo móvel, é necessário gerar um token de API e copiar e colá-lo no seu aplicativo. Clique em \"Criar\" para gerar seu token de API."
 
@@ -14244,6 +14255,9 @@ msgstr "Prêmio de %1 %2 se %3 sair fora de %7 a %6 até %5."
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "Prêmio de %1 %2 se %3 sair fora de %7 e %6 até %5 depois de %4."
+
+#~ msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
+#~ msgstr "<span class='grd-grid-4 grd-no-gutter'>E-mail: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
 
 #~ msgid "Your password should be at least 5 characters."
 #~ msgstr "A sua senha deve ter pelo menos 5 caracteres."
