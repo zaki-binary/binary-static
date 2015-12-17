@@ -653,4 +653,59 @@ a.close {
       margin-bottom: 0px;
     }
   }
+  #introBtn {
+    display: none;
+  }
+}
+
+#introBtn {
+  display: inline-block;
+  background-color: $COLOR_LIGHT_GRAY;
+  padding: 5px 20px;
+  position: relative;
+  float: if($LANGUAGE_DIRECTION == ltr, right, left);
+
+  span {
+    display: none;
+    color: red;
+    font-size: 0.8em;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    @if $LANGUAGE_DIRECTION == ltr {
+      right: 4px;
+    }
+    @else {
+      left: 4px;
+    }
+  }
+  &:hover {
+    span {
+      display: block;
+    }
+  }
+
+  a {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 23px;
+    @if $LANGUAGE_DIRECTION == ltr {
+      background: url('../images/pages/trade/guide-icon.svg') transparent no-repeat left center;
+      padding-left: 30px;
+    }
+    @else {
+      background: url('../images/pages/trade/guide-icon_rtl.svg') transparent no-repeat right center;
+      padding-right: 30px;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+  }
+
+  &.highlight {
+    background-color: $COLOR_BLUE;
+    a {
+      color: $COLOR_WHITE;
+    }
+  }
 }

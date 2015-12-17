@@ -19,7 +19,10 @@
          </div>
       </div>
       <div class="grd-grid-4">
-         <a id="introBtn" href="javascript:;">[% l('Guide Me') %]</a>
+         <div id="introBtn" class="grd-hide-mobile">
+            <span>X</span>
+            <a href="javascript:;">[% l('Walkthrough Guide') %]</a>
+         </div>
       </div>
    </div>
    <div class="row" id="contract_form_content_wrapper">
@@ -145,7 +148,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="row" id="payout_amount">
+                     <div class="row">
                         <div class="col form_label">
                            <select id="amount_type">
                               <option value="payout" id="payout_option"></option>

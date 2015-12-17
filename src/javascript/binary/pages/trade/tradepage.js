@@ -32,6 +32,11 @@ var TradePage = (function(){
 		}
 
 		// Introduction Tour
+		if($.cookie('hide_guide') === 'true'){
+			$('#introBtn').remove();
+			return;
+		}
+
 		var btnNext = {className: "button", html: '<span>' + text.localize('Next') + '</span>'};
 		var enjoyhint_script_data = [
 			{
@@ -56,35 +61,46 @@ var TradePage = (function(){
 				showSkip    : false
 			},
 			{
-				selector    : '#expiry_row',
+				selector    : '#websocket_form',
 				event_type  : 'next',
-				description : '<h1>Step 4</h1>Adjust time parameters',
-          		nextButton  : btnNext,
-				showSkip    : false
-			},
-			{
-				selector    : '#payout_amount',
-				event_type  : 'next',
-				description : '<h1>Step 5</h1>Define your payout amount',
+				description : '<h1>Step 4</h1>Adjust trade parameters',
           		nextButton  : btnNext,
 				showSkip    : false
 			},
 			{
 				selector    : '#contracts_list',
 				event_type  : 'next',
-				description : '<h1>Step 6</h1>Predict the direction<br />and purchase',
+				description : '<h1>Step 5</h1>Predict the direction<br />and purchase',
 				nextButton  : {className: "button btnFinish", html: '<span>' + text.localize('Finish') + '</span>'},
 				showSkip    : false
 			}
 		];
 
-    	$('#introBtn').click(function(){
-	    	var enjoyhint_instance = null;
-	    	enjoyhint_instance = new EnjoyHint({});
-	    	enjoyhint_instance.setScript(enjoyhint_script_data);
-	    	enjoyhint_instance.runScript();
-	    });
-
+		$('#introBtn a').click(function(){
+			var enjoyhint_instance = null;
+			enjoyhint_instance = new EnjoyHint({});
+			enjoyhint_instance.setScript(enjoyhint_script_data);
+			enjoyhint_instance.runScript();
+		});
+		// Close button
+		$('#introBtn span').click(function(){
+			$.cookie('hide_guide', 'true');
+			$('#introBtn').remove();
+		});
+		// Blink
+		var blinkClass = 'highlight',
+			inDelay    = 200,
+			outDelay   = 200,
+			times      = 5;
+		var blink = function(){
+			$('#introBtn').addClass(blinkClass).delay(inDelay).queue(function(){
+				$(this).removeClass(blinkClass).delay(outDelay).dequeue();
+			});
+		}
+		$(document).ready(function(){
+			var i = setInterval(blink, (inDelay + outDelay));
+			setTimeout(function(){ clearInterval(i); }, (inDelay + outDelay) * times);
+		});
 	};
 
 	var onUnload = function(){
