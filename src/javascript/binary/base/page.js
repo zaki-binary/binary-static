@@ -398,6 +398,7 @@ Header.prototype = {
         this.show_or_hide_login_form();
         this.register_dynamic_links();
         this.simulate_input_placeholder_for_ie();
+        this.logout_handler();
     },
     on_unload: function() {
         this.menu.reset();
@@ -505,6 +506,28 @@ Header.prototype = {
             increase_time_by(1000);
             update_time();
         }, 1000);
+    },
+    logout_handler : function(){
+        BinarySocket.init({
+            onmessage: function(msg){
+                var response = JSON.parse(msg.data);
+                if (response && response.msg_type === "logout"){
+                    if("logout" in response && response.logout === 1){
+
+                        var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
+                        var current_domain = window.location.hostname.replace('www', '');
+                        cookies.map(function(c){
+                            $.removeCookie(c, {path: '/', domain: current_domain});
+                        });
+                        
+                        window.location.href = '/';
+                    }
+                }
+            }
+        });
+        $('a.logout').click(function(){
+            BinarySocket.send({"logout": "1"});
+        });
     },
 };
 
