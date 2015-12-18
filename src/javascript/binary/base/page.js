@@ -498,10 +498,7 @@ Header.prototype = {
 
         clearInterval(clock_handle);
 
-        clock_handle = setInterval(function() {
-            increase_time_by(1000);
-            update_time();
-        }, 1000);
+        clock_handle = setInterval(update_time, 1000);
     },
 };
 
