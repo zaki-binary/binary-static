@@ -38,7 +38,8 @@ var securityws = (function(){
     
     var validateForm = function(){
         var isValid = true;
-      
+        var regexp = new RegExp('^[ -~]+$');
+
         clearErrors();
 
         var pwd1 = $("#cashierlockpassword1").val();
@@ -54,6 +55,9 @@ var securityws = (function(){
             isValid = false;
         }else if(pwd1.length < 6 ){
             $("#errorcashierlockpassword1").text(text.localize("Your password should be at least 6 characters."));
+            isValid = false;
+        }else if(!regexp.test(pwd1)){
+            $("#errorcashierlockpassword1").text(text.localize("Your password contains invalid characters."));
             isValid = false;
         }
         
