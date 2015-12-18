@@ -508,26 +508,20 @@ Header.prototype = {
         }, 1000);
     },
     logout_handler : function(){
-        BinarySocket.init({
-            onmessage: function(msg){
-                var response = JSON.parse(msg.data);
-                if (response && response.msg_type === "logout"){
-                    if("logout" in response && response.logout === 1){
-
-                        var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
-                        var current_domain = window.location.hostname.replace('www', '');
-                        cookies.map(function(c){
-                            $.removeCookie(c, {path: '/', domain: current_domain});
-                        });
-                        
-                        window.location.href = '/';
-                    }
-                }
-            }
-        });
-        $('a.logout').click(function(){
+        $('a.logout').unbind('click').click(function(){
             BinarySocket.send({"logout": "1"});
         });
+    },
+    do_logout : function(response){
+        if("logout" in response && response.logout === 1){
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
+            var current_domain = window.location.hostname.replace('www', '');
+            cookies.map(function(c){
+                $.removeCookie(c, {path: '/', domain: current_domain});
+            });
+            
+            window.location.href = page.url.url_for(''); //redirect to homepage
+        }
     },
 };
 
