@@ -3,32 +3,46 @@ pjax_config_page("new_account/realws", function(){
 	return {
 		onLoad: function() {
 			Content.populate();
-			var error = document.getElementById('client_message');
-			error.setAttribute('style', 'display:none');
+			get_residence_list('residence-disabled');
+			var residenceValue = $.cookie('residence');
 
-			if ($.cookie('residence')) {
-				setResidence('residence');
-				RealAccOpeningUI.setLabel();
-				setTitles('title');
+			if (residenceValue) {
 
-				var dobdd = document.getElementById('dobdd'),
-				    dobmm = document.getElementById('dobmm'),
-				    dobyy = document.getElementById('dobyy');
+				var title     = document.getElementById('title'),
+					dobdd     = document.getElementById('dobdd'),
+				    dobmm     = document.getElementById('dobmm'),
+				    dobyy     = document.getElementById('dobyy'),
+				    residence = document.getElementById('residence-disabled'),
+				    state     = document.getElementById('address-state'),
+				    question  = document.getElementById('secret-question');
 
-				RealAccOpeningUI.setValues(dobdd, dobmm, dobyy);
-
-				var errorBirthdate = document.getElementById('error-birthdate');
+				setTitles(title);
+				RealAccOpeningUI.setValues(dobdd, dobmm, dobyy, state, question);
+				$(window).load(function(e) {
+					residence.value = residenceValue;
+				});
 
 				$('#real-form').submit(function(evt) {
 					evt.preventDefault();
 
-					if ($.cookie('residence')) {
-						if(!isValidDate(dobdd.value, dobmm.value, dobyy.value)) {	
-							errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
-							errorBirthdate.setAttribute('style', 'display:block');
-						} else {
-							errorBirthdate.setAttribute('style', 'display:none');
+					if (residenceValue) {
+						if (RealAccOpeningUI.checkValidity()){
+
+							BinarySocket.init({
+						        onmessage: function(msg){
+						            var response = JSON.parse(msg.data);
+						            if (response) {
+						                var type = response.msg_type;
+
+						                if (type === 'new_account_real'){
+						                    console.log('new account real');
+						                    //window.location.href = page.url.url_for('user/my_account');
+						                }
+						            }
+						        }
+						    });
 						}
+
 					} else {
 						RealAccOpeningUI.showError(error);
 					}
@@ -37,5 +51,5 @@ pjax_config_page("new_account/realws", function(){
 				RealAccOpeningUI.showError(error);
 			}
 		}
-	}
+	};
 });

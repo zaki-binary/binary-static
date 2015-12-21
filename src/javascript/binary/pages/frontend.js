@@ -229,7 +229,7 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
-var get_residence_list = function() {
+var get_residence_list = function(residenceId) {
     var url = page.url.url_for('residence_list');
     $.getJSON(url, function(data) {
         var countries = [];
@@ -242,7 +242,11 @@ var get_residence_list = function() {
                 selected = ' selected="selected" ';
             }
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
-            $("#residence").html(countries.join(''));
+            if(residenceId){
+                $("#" + residenceId).html(countries.join(''));
+            } else {
+                $("#residence").html(countries.join(''));
+            }
 
             $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
@@ -308,17 +312,14 @@ function appendTextValueChild(element, text, value){
     element.appendChild(option);
 }
 
-// populate drop down list of Titles, pass in select id
-function setTitles(selectId){
-    var select = document.getElementById(selectId);
-
+// populate drop down list of Titles, pass in select element
+function setTitles(select){
     appendTextValueChild(select, Content.localize().textMr, 'Mr');
     appendTextValueChild(select, Content.localize().textMrs, 'Mrs');
     appendTextValueChild(select, Content.localize().textMs, 'Ms');
     appendTextValueChild(select, Content.localize().textMiss, 'Miss');
     appendTextValueChild(select, Content.localize().textDr, 'Dr');
     appendTextValueChild(select, Content.localize().textProf, 'Prof');
-
 }
 
 // append numbers to a drop down menu, eg 1-30
@@ -380,39 +381,28 @@ function isValidDate(day, month, year){
     return day <= daysInMonth[--month];
 }
 
-function setResidence(residenceElement){
-    get_residence_list();
-    $('#residence').val($.cookie('residence'));
-}
-
-function generateState(selectId) {
-    var select = document.getElementById(selectId);
-
+//pass select element to generate list of states
+function generateState(select) {
     appendTextValueChild(select, Content.localize().textSelect, '');
 
     BinarySocket.init({
         onmessage: function(msg){
             var response = JSON.parse(msg.data);
-
             if (response) {
                 var type = response.msg_type;
-
                 if (type === 'states_list'){
                     var states_list = response.states_list;
-
                     if (states_list.length > 0){
                         for (i = 0; i < states_list.length; i++) {
-                            appendTextValueChild(select, states_list[i].text, states_list[i].value)
+                            appendTextValueChild(select, states_list[i].text, states_list[i].value);
                         }
                     }
-                    select.setAttribute('style', 'display:block');
+                    select.parentNode.parentNode.setAttribute('style', 'display:block');
                 }
             }
         }
     });
-
     BinarySocket.send({ states_list: $.cookie('residence') });
-
 }
 
 pjax_config_page('/$|/home', function() {

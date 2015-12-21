@@ -112,6 +112,8 @@ var Content = (function () {
             textSpace: text.localize('space'),
             textPeriod: text.localize('period'),
             textComma: text.localize('comma'),
+            textHyphen: text.localize('hyphen'),
+            textApost: text.localize('apostrophe'),
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
             textEmailAddress: text.localize('Email address'),
@@ -127,26 +129,16 @@ var Content = (function () {
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
             textEmailSent: text.localize('Please check your email for the next step.'),
-            textTitle: text.localize('Title'),
-            textOpenAccount: text.localize('Open Account'),
             textMr: text.localize('Mr'),
             textMrs: text.localize('Mrs'),
             textMs: text.localize('Ms'),
             textMiss: text.localize('Miss'),
             textDr: text.localize('Dr'),
             textProf: text.localize('Prof'),
-            textFirstName: text.localize('First name'),
-            textLastName: text.localize('Family name'),
-            textDateOfBirth: text.localize('Date of birth'),
             textErrorBirthdate: text.localize('Please input a valid date'),
+            textSelect: text.localize('Please select'),
             textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
-            textAddress: text.localize('Address'),
-            textFirstLineAddress: text.localize('First line of home address'),
-            textSecondLineAddress: text.localize('Second line of home address'),
-            textTownCity: text.localize('Town/City'),
-            textProvince: text.localize('State/Province'),
-            textPostalCode: text.localize('Postal code / ZIP'),
-            textSelect: text.localize('Please select')
+            textMessageMinRequired: text.localize('Minimum of %1 characters required.')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -321,6 +313,10 @@ var Content = (function () {
             case 'valid':
                 if(param)
                     msg = localize.textMessageValid.replace('%1', param);
+                break;
+            case 'min':
+                if(param)
+                    msg = localize.textMessageMinRequired.replace('%1', param);
                 break;
             default:
                 break;
