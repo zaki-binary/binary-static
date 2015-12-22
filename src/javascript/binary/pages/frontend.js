@@ -524,22 +524,36 @@ pjax_config_page('user/my_account', function() {
     return {
         onLoad: function() {
             gtm_data_layer_info();
-            if (window.location.search.indexOf('loginid=CR') > -1) {
+            if (window.location.search.indexOf('loginid=') > -1) {
                 var loginid = getUrlVars()["loginid"];
-                for (i = 0; i < page.user.loginid_array.length; i++){
-                    if (/^CR/.test(page.user.loginid_array[i].id)){
-                        var real = true;
-                        var disabled = false;
-                        var id_obj = { 'id':loginid, 'real':real, 'disabled':disabled };
+                var real = true;
+                var disabled = false;
+                var id_obj = { 'id':loginid, 'real':real, 'disabled':disabled };
+                var counter = 0;
+
+                for (i = 0; i < page.user.loginid_array.length; i++){  
+                    if (/^MLT/.test(page.user.loginid_array[i].id)){
+                        id_obj['non_financial'] = true
+                        counter++;
+                    }
+                    if (/^MF/.test(page.user.loginid_array[i].id)) {
+                        id_obj['financial']= true;
+                        counter++;
+                    }
+                    if (/^CR/.test(page.user.loginid_array[i].id) || /^MX/.test(page.user.loginid_array[i].id)) {
+                        counter++;
+                    }
+                    if (counter < 2){
                         page.user.loginid_array.unshift(id_obj);
                     }
                 }
-                if (!/^CR/.test($.cookie('loginid_list'))){
+                if (!/^CR/.test($.cookie('loginid_list')) && !/^MX/.test($.cookie('loginid_list')) && !/^MLT/.test($.cookie('loginid_list')) && !/^MF/.test($.cookie('loginid_list'))){
                     var oldCookieValue = $.cookie('loginid_list');
                     $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
                 }
                 $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
             }
+
             page.header.show_or_hide_login_form();
         }
     };
