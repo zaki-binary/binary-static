@@ -18,7 +18,7 @@ var RealAccOpeningUI = (function(){
 
         for (i = 0; i < secretQuestions.length; i++) {
             appendTextValueChild(question, secretQuestions[i], secretQuestions[i]);
-        };
+        }
 
     }
 

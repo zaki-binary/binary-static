@@ -375,7 +375,7 @@ function isValidDate(day, month, year){
 
     // If evenly divisible by 4 and not evenly divisible by 100,
     // or is evenly divisible by 400, then a leap year
-    if ( (!(year % 4) && year % 100) || !(year % 400)) {
+    if ( ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0) ) {
         daysInMonth[1] = 29;
     }
     return day <= daysInMonth[--month];
