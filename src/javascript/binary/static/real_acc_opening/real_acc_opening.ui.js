@@ -22,10 +22,11 @@ var RealAccOpeningUI = (function(){
 
     }
 
-    function showError(error){
+    function showError(){
         $('#real-form').remove();
-        document.getElementsByClassName('notice-msg')[0].innerHTML = Content.localize().textUnavailableReal;
-        error.setAttribute('style', 'display:block');
+        var error = document.getElementsByClassName('notice-msg')[0];
+        error.innerHTML = Content.localize().textUnavailableReal;
+        error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
     }
 
     function hideAllErrors(allErrors) {
@@ -141,7 +142,7 @@ var RealAccOpeningUI = (function(){
             errorCounter++;
         }
 
-        if(state.value === '') {
+        if(state.offsetParent !== null && state.value === '') {
             errorState.innerHTML = Content.errorMessage('req');
             Validate.displayErrorMessage(errorState);
             errorCounter++;

@@ -396,13 +396,21 @@ function generateState(select) {
                         for (i = 0; i < states_list.length; i++) {
                             appendTextValueChild(select, states_list[i].text, states_list[i].value);
                         }
+                        select.parentNode.parentNode.setAttribute('style', 'display:block');
                     }
-                    select.parentNode.parentNode.setAttribute('style', 'display:block');
                 }
             }
         }
     });
     BinarySocket.send({ states_list: $.cookie('residence') });
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }
 
 pjax_config_page('/$|/home', function() {
@@ -509,6 +517,30 @@ pjax_config_page('/bulk-trader-facility', function() {
         },
         onUnload: function() {
             $(window).off('scroll');
+        }
+    };
+});
+pjax_config_page('user/my_account', function() {
+    return {
+        onLoad: function() {
+            gtm_data_layer_info();
+            if (window.location.search.indexOf('loginid=CR') > -1) {
+                var loginid = getUrlVars()["loginid"];
+                for (i = 0; i < page.user.loginid_array.length; i++){
+                    if (/^CR/.test(page.user.loginid_array[i].id)){
+                        var real = true;
+                        var disabled = false;
+                        var id_obj = { 'id':loginid, 'real':real, 'disabled':disabled };
+                        page.user.loginid_array.unshift(id_obj);
+                    }
+                }
+                if (!/^CR/.test($.cookie('loginid_list'))){
+                    var oldCookieValue = $.cookie('loginid_list');
+                    $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
+                }
+                $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+            }
+            page.header.show_or_hide_login_form();
         }
     };
 });
