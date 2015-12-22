@@ -57205,7 +57205,7 @@ var select_user_country = function() {
     if ($('#residence').length > 0) {
         var selected_country = $('#residence').val();
         var c_config = page.settings.get('countries_list');
-        if (selected_country.length > 0) {
+        if (selected_country && selected_country.length > 0) {
             if (c_config[selected_country]['gaming_company'] == 'none' && c_config[selected_country]['financial_company'] == 'none') {
                 selected_country = '';
             }
@@ -57218,7 +57218,7 @@ var select_user_country = function() {
                 dataType: "json"
             }).done(function(response) {
                 selected_country = response.country;
-                if (c_config[selected_country]['gaming_company'] == 'none' && c_config[selected_country]['financial_company'] == 'none') {
+                if (selected_country && c_config[selected_country]['gaming_company'] == 'none' && c_config[selected_country]['financial_company'] == 'none') {
                     selected_country = '';
                 }
                 $('#residence').val(selected_country).change();
@@ -58478,7 +58478,7 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
-var get_residence_list = function() {
+var get_residence_list = function(residenceId) {
     var url = page.url.url_for('residence_list');
     $.getJSON(url, function(data) {
         var countries = [];
@@ -58491,7 +58491,11 @@ var get_residence_list = function() {
                 selected = ' selected="selected" ';
             }
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
-            $("#residence").html(countries.join(''));
+            if(residenceId){
+                $("#" + residenceId).html(countries.join(''));
+            } else {
+                $("#residence").html(countries.join(''));
+            }
 
             $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
@@ -58545,6 +58549,117 @@ function hide_if_logged_in() {
     if (page.client.is_logged_in) {
         $('.client_logged_out').remove();
     }
+}
+
+// use function to generate elements and append them
+// e.g. element is select and element to append is option
+function appendTextValueChild(element, text, value){
+    var option = document.createElement("option");
+
+    option.text = text;
+    option.value = value;
+    element.appendChild(option);
+}
+
+// populate drop down list of Titles, pass in select element
+function setTitles(select){
+    appendTextValueChild(select, Content.localize().textMr, 'Mr');
+    appendTextValueChild(select, Content.localize().textMrs, 'Mrs');
+    appendTextValueChild(select, Content.localize().textMs, 'Ms');
+    appendTextValueChild(select, Content.localize().textMiss, 'Miss');
+    appendTextValueChild(select, Content.localize().textDr, 'Dr');
+    appendTextValueChild(select, Content.localize().textProf, 'Prof');
+}
+
+// append numbers to a drop down menu, eg 1-30
+function dropDownNumbers(select, startNum, endNum) {
+    select.appendChild(document.createElement("option"));
+
+    for (i = startNum; i <= endNum; i++){
+        var option = document.createElement("option");
+        option.text = i;
+        option.value = i;
+        select.appendChild(option);
+    }
+
+}
+
+function dropDownMonths(select, startNum, endNum) {
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    select.appendChild(document.createElement("option"));
+    for (i = startNum; i <= endNum; i++){
+        var option = document.createElement("option");
+        if (i <= '9') {
+            option.value = '0' + i;
+        } else {
+            option.value = i;
+        }
+
+        for (j = i; j <= i; j++) {
+            option.text = months[j-1];
+        }
+
+        select.appendChild(option);
+    }
+}
+
+function generateBirthDate(days, months, year){
+    //days
+    dropDownNumbers(days, 1, 31);
+    //months
+    dropDownMonths(months, 1, 12);
+
+    var currentYear = new Date().getFullYear();
+    var startYear = currentYear - 100;
+    var endYear = currentYear - 17;
+
+    //years
+    dropDownNumbers(year, startYear, endYear);
+}
+
+function isValidDate(day, month, year){
+    // Assume not leap year by default (note zero index for Jan)
+    var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    // If evenly divisible by 4 and not evenly divisible by 100,
+    // or is evenly divisible by 400, then a leap year
+    if ( ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0) ) {
+        daysInMonth[1] = 29;
+    }
+    return day <= daysInMonth[--month];
+}
+
+//pass select element to generate list of states
+function generateState(select) {
+    appendTextValueChild(select, Content.localize().textSelect, '');
+
+    BinarySocket.init({
+        onmessage: function(msg){
+            var response = JSON.parse(msg.data);
+            if (response) {
+                var type = response.msg_type;
+                if (type === 'states_list'){
+                    var states_list = response.states_list;
+                    if (states_list.length > 0){
+                        for (i = 0; i < states_list.length; i++) {
+                            appendTextValueChild(select, states_list[i].text, states_list[i].value);
+                        }
+                        select.parentNode.parentNode.setAttribute('style', 'display:block');
+                    }
+                }
+            }
+        }
+    });
+    BinarySocket.send({ states_list: $.cookie('residence') });
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }
 
 pjax_config_page('/$|/home', function() {
@@ -58651,6 +58766,36 @@ pjax_config_page('/bulk-trader-facility', function() {
         },
         onUnload: function() {
             $(window).off('scroll');
+        }
+    };
+});
+pjax_config_page('user/my_account', function() {
+    return {
+        onLoad: function() {
+            gtm_data_layer_info();
+            if (window.location.search.indexOf('loginid=') > -1) {
+                var loginid = getUrlVars()["loginid"];
+                var id_obj = { 'id':loginid, 'real':true, 'disabled':false };
+                var counter = 0;
+                var regex = new RegExp(loginid);
+
+                for (i = 0; i < page.user.loginid_array.length; i++){
+                    if (regex.test(page.user.loginid_array[i].id)) {
+                        counter++;
+                    }
+                }
+                if (counter === 0){
+                    page.user.loginid_array.unshift(id_obj);
+                }
+                if (!(regex.test($.cookie('loginid_list')))) {
+                    var oldCookieValue = $.cookie('loginid_list');
+                    $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
+                    $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+                    page.header.show_or_hide_login_form();
+                    location.reload();
+                }
+                
+            }
         }
     };
 });
@@ -61369,13 +61514,15 @@ function addComma(num){
             textSpace: text.localize('space'),
             textPeriod: text.localize('period'),
             textComma: text.localize('comma'),
+            textHyphen: text.localize('hyphen'),
+            textApost: text.localize('apostrophe'),
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
             textEmailAddress: text.localize('Email address'),
             textRepeatPassword: text.localize('re-enter password'),
-            textResidence: text.localize('country of residence'),
+            textResidence: text.localize('Country of residence'),
             textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your Email and make sure you are not already logged in.'),
-            textDetails: text.localize('details'),
+            textDetails: text.localize('Details'),
             textCreateNewAccount: text.localize('create new account'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
@@ -61383,7 +61530,17 @@ function addComma(num){
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
-            textEmailSent: text.localize('Please check your Email for the next step.'),
+            textEmailSent: text.localize('Please check your email for the next step.'),
+            textMr: text.localize('Mr'),
+            textMrs: text.localize('Mrs'),
+            textMs: text.localize('Ms'),
+            textMiss: text.localize('Miss'),
+            textDr: text.localize('Dr'),
+            textProf: text.localize('Prof'),
+            textErrorBirthdate: text.localize('Please input a valid date'),
+            textSelect: text.localize('Please select'),
+            textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
+            textMessageMinRequired: text.localize('Minimum of %1 characters required.'),
             textFeatureUnavailable: text.localize('Sorry, this feature is not available.')
         };
 
@@ -61563,6 +61720,10 @@ function addComma(num){
             case 'valid':
                 if(param)
                     msg = localize.textMessageValid.replace('%1', param);
+                break;
+            case 'min':
+                if(param)
+                    msg = localize.textMessageMinRequired.replace('%1', param);
                 break;
             default:
                 break;
@@ -65023,6 +65184,7 @@ var Table = (function(){
 
     //give DOM element or error to hide
     function hideErrorMessage(error){
+        error.innerHTML = '';
     	error.setAttribute('style', 'display:none');
     }
 
@@ -65511,7 +65673,294 @@ var ProfitTableUI = (function(){
         initDatepicker: initDatepicker,
         cleanTableContent: clearTableContent
     };
-}());;pjax_config_page("user/statement", function(){
+}());;pjax_config_page("new_account/realws", function(){
+	
+	return {
+		onLoad: function() {
+			Content.populate();
+			get_residence_list('residence-disabled');
+			var residenceValue = $.cookie('residence');
+
+			$(window).load(function() {
+				if (residenceValue && /^VRT/.test(TUser.get().loginid)) {
+
+					var title     = document.getElementById('title'),
+						dobdd     = document.getElementById('dobdd'),
+					    dobmm     = document.getElementById('dobmm'),
+					    dobyy     = document.getElementById('dobyy'),
+					    residence = document.getElementById('residence-disabled'),
+					    state     = document.getElementById('address-state'),
+					    question  = document.getElementById('secret-question');
+
+					setTitles(title);
+					RealAccOpeningUI.setValues(dobdd, dobmm, dobyy, state, question);
+					residence.value = residenceValue;
+
+					$('#real-form').submit(function(evt) {
+						evt.preventDefault();
+
+						if (residenceValue) {
+							if (RealAccOpeningUI.checkValidity()){
+
+								BinarySocket.init({
+							        onmessage: function(msg){
+							            var response = JSON.parse(msg.data);
+							            if (response) {
+							                var type = response.msg_type;
+							                var error = response.error;
+
+							                if (type === 'new_account_real' && !error){
+							                    window.location.href = page.url.url_for('user/my_account') + '&newaccounttype=real&login=true&loginid=' + response.new_account_real.client_id;
+							                } else if (error) {
+							                	RealAccOpeningUI.showError();
+							                }
+							            }
+							        }
+							    });
+							}
+
+						} else {
+							RealAccOpeningUI.showError();
+						}
+					});
+				} else {
+					RealAccOpeningUI.showError();
+				}
+			});
+		}
+	};
+});
+;var RealAccOpeningData = (function(){
+    function getRealAcc(arr){
+        var req = {
+            new_account_real: 1,
+            salutation: arr[0],
+            first_name: arr[1],
+            last_name: arr[2],
+            date_of_birth: arr[3],
+            residence: arr[4],
+            address_line_1: arr[5],
+            address_line_2: arr[6],
+            address_city: arr[7],
+            address_state: arr[8],
+            address_postcode: arr[9],
+            phone: arr[10],
+            secret_question: arr[11],
+            secret_answer: arr[12]
+        };
+
+        BinarySocket.send(req);
+    }
+
+    return {
+        getRealAcc: getRealAcc
+    };
+}());
+;var RealAccOpeningUI = (function(){
+    "use strict";
+
+    function setValues(dobdd, dobmm, dobyy, state, question){
+        generateBirthDate(dobdd, dobmm, dobyy);
+        generateState(state);
+
+        var secretQuestions = [
+            "Mother's maiden name",
+            "Name of your pet",
+            "Name of first love",
+            "Memorable town/city",
+            "Memorable date",
+            "Favourite dish",
+            "Brand of first car",
+            "Favourite artist"
+        ];
+
+        for (i = 0; i < secretQuestions.length; i++) {
+            appendTextValueChild(question, secretQuestions[i], secretQuestions[i]);
+        }
+
+    }
+
+    function showError(){
+        $('#real-form').remove();
+        var error = document.getElementsByClassName('notice-msg')[0];
+        error.innerHTML = Content.localize().textUnavailableReal;
+        error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
+    }
+
+    function hideAllErrors(allErrors) {
+        for (i = 0; i < allErrors.length; i++) {
+            Validate.hideErrorMessage(allErrors[i]);
+        }
+    }
+
+    function checkValidity(){
+        var errorCounter = 0;
+
+        var letters = Content.localize().textLetters,
+            numbers = Content.localize().textNumbers,
+            space   = Content.localize().textSpace,
+            hyphen  = Content.localize().textHyphen,
+            period  = Content.localize().textPeriod,
+            apost   = Content.localize().textApost;
+
+        var title     = document.getElementById('title'),
+            fname     = document.getElementById('fname'),
+            lname     = document.getElementById('lname'),
+            dobdd     = document.getElementById('dobdd'),
+            dobmm     = document.getElementById('dobmm'),
+            dobyy     = document.getElementById('dobyy'),
+            residence = document.getElementById('residence-disabled'),
+            address1  = document.getElementById('address1'),
+            address2  = document.getElementById('address2'),
+            town      = document.getElementById('address-town'),
+            state     = document.getElementById('address-state'),
+            postcode  = document.getElementById('address-postcode'),
+            tel       = document.getElementById('tel'),
+            question  = document.getElementById('secret-question'),
+            answer    = document.getElementById('secret-answer'),
+            tnc       = document.getElementById('tnc');
+
+        var arr = [ 
+                    title.value,
+                    fname.value,
+                    lname.value,
+                    dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
+                    $.cookie('residence'),
+                    address1.value,
+                    address2.value,
+                    town.value,
+                    state.value,
+                    postcode.value,
+                    tel.value,
+                    question.value,
+                    answer.value
+                ];
+
+        var errorTitle     = document.getElementById('error-title'),
+            errorFname     = document.getElementById('error-fname'),
+            errorLname     = document.getElementById('error-lname'),
+            errorBirthdate = document.getElementById('error-birthdate'),
+            errorResidence = document.getElementById('error-residence'),
+            errorAddress1  = document.getElementById('error-address1'),
+            errorAddress2  = document.getElementById('error-address2'),
+            errorTown      = document.getElementById('error-town'),
+            errorState     = document.getElementById('error-state'),
+            errorPostcode  = document.getElementById('error-postcode'),
+            errorTel       = document.getElementById('error-tel'),
+            errorQuestion  = document.getElementById('error-question'),
+            errorAnswer    = document.getElementById('error-answer'),
+            errorTnc       = document.getElementById('error-tnc');
+        
+        var allErrors = [
+                            errorTitle, 
+                            errorFname, 
+                            errorLname, 
+                            errorBirthdate, 
+                            errorResidence, 
+                            errorAddress1, 
+                            errorAddress2, 
+                            errorTown, 
+                            errorState, 
+                            errorPostcode, 
+                            errorTel, 
+                            errorQuestion, 
+                            errorAnswer,
+                            errorTnc
+                        ];
+
+        hideAllErrors(allErrors);
+
+        if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(fname.value)){
+            errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
+            Validate.displayErrorMessage(errorFname);
+            errorCounter++;
+        }
+
+        if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(lname.value)){
+            errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
+            Validate.displayErrorMessage(errorLname);
+            errorCounter++;
+        }
+
+        if (!isValidDate(dobdd.value, dobmm.value, dobyy.value)) {   
+            errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
+            Validate.displayErrorMessage(errorBirthdate);
+            errorCounter++;
+        }
+
+        if (!/^[a-zA-Z|\d]+(\s|-|.|'[a-zA-Z]*)*$/.test(address1.value)){
+            errorAddress1.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
+            Validate.displayErrorMessage(errorAddress1);
+            errorCounter++;
+        }
+
+        if (!/^[a-zA-Z]+(\s|-|.[a-zA-Z]*)*$/.test(town.value)){
+            errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, ' ']);
+            Validate.displayErrorMessage(errorTown);
+            errorCounter++;
+        }
+
+        if(state.offsetParent !== null && state.value === '') {
+            errorState.innerHTML = Content.errorMessage('req');
+            Validate.displayErrorMessage(errorState);
+            errorCounter++;
+        }
+
+        if (!/^\d+(-|\d]*)*$/.test(postcode.value)){
+            errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+            Validate.displayErrorMessage(errorPostcode);
+            errorCounter++;
+        }
+
+        if (tel.value.length < 6) {
+            errorTel.innerHTML = Content.errorMessage('min', 6);
+            Validate.displayErrorMessage(errorTel);
+            errorCounter++;
+        } else if (!/^\+?\d{6,35}$/.test(tel.value)){
+            errorTel.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+            Validate.displayErrorMessage(errorTel);
+            errorCounter++;
+        }
+
+        if (answer.value.length < 4) {
+            errorAnswer.innerHTML = Content.errorMessage('min', 4);
+            Validate.displayErrorMessage(errorAnswer);
+            errorCounter++;
+        } else if (!/^[a-zA-Z0-9]*(\s|-|.[a-zA-Z0-9]*){4,60}$/.test(answer.value)){
+            errorAnswer.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+            Validate.displayErrorMessage(errorAnswer);
+            errorCounter++;
+        }
+
+        if (!tnc.checked){
+            errorTnc.innerHTML = Content.errorMessage('req');
+            Validate.displayErrorMessage(errorTnc);
+            errorCounter++;
+        }
+
+        for (i = 0; i < arr.length; i++){
+            if (/^$/.test(arr[i]) && i !== 8){
+                allErrors[i].innerHTML = Content.errorMessage('req');
+                Validate.displayErrorMessage(allErrors[i]);
+                errorCounter++;
+            }
+        }
+
+        if (errorCounter === 0) {
+            RealAccOpeningData.getRealAcc(arr);
+            hideAllErrors(allErrors);
+            return 1;
+        }
+        
+        return 0;
+    }
+
+    return {
+        setValues: setValues,
+        showError: showError,
+        checkValidity: checkValidity
+    };
+})();;pjax_config_page("user/statement", function(){
     return {
         onLoad: function() {
             if (!getCookieItem('login')) {
