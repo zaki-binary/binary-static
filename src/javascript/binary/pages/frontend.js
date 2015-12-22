@@ -541,11 +541,12 @@ pjax_config_page('user/my_account', function() {
                 if (!(regex.test($.cookie('loginid_list')))) {
                     var oldCookieValue = $.cookie('loginid_list');
                     $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
+                    $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+                    page.header.show_or_hide_login_form();
+                    location.reload();
                 }
-                $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+                
             }
-
-            page.header.show_or_hide_login_form();
         }
     };
 });
