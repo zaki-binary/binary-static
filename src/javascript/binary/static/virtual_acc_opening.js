@@ -53,7 +53,7 @@ pjax_config_page("virtualws", function(){
               VirtualAccOpeningData.getDetails(email, password, residence);
             } else if (testPassword(password)[0] < 30) {
               tooltipPassword.innerHTML = testPassword(password)[1];
-              tooltipPassword.setAttribute('title', text.localize('Try adding upper and lower letters, special characters, and numbers.'))
+              tooltipPassword.setAttribute('title', text.localize('Try adding upper and lower letters, special characters, and numbers.'));
               errorPassword.setAttribute('style', 'display:block');
             }
           }
