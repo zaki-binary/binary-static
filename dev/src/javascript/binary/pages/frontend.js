@@ -524,8 +524,8 @@ pjax_config_page('user/my_account', function() {
     return {
         onLoad: function() {
             gtm_data_layer_info();
-            if (window.location.search.indexOf('loginid=') > -1) {
-                var loginid = getUrlVars()["loginid"];
+            if (window.location.search.indexOf('id=') > -1) {
+                var loginid = getUrlVars()["id"];
                 var id_obj = { 'id':loginid, 'real':true, 'disabled':false };
                 var counter = 0;
                 var regex = new RegExp(loginid);
@@ -543,7 +543,6 @@ pjax_config_page('user/my_account', function() {
                     $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
                     $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
                     page.header.show_or_hide_login_form();
-                    location.reload();
                 }
                 
             }
