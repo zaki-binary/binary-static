@@ -22,10 +22,14 @@ var RealAccOpeningUI = (function(){
 
     }
 
-    function showError(){
+    function showError(opt){
         $('#real-form').remove();
         var error = document.getElementsByClassName('notice-msg')[0];
-        error.innerHTML = Content.localize().textUnavailableReal;
+        if (opt === 'duplicate') {
+            error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you don't remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>";
+        } else {
+            error.innerHTML = Content.localize().textUnavailableReal;
+        }
         error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
     }
 
@@ -181,7 +185,7 @@ var RealAccOpeningUI = (function(){
         }
 
         for (i = 0; i < arr.length; i++){
-            if (/^$/.test(arr[i]) && i !== 8){
+            if (/^$/.test(arr[i]) && i !== 6 && i !== 8){
                 allErrors[i].innerHTML = Content.errorMessage('req');
                 Validate.displayErrorMessage(allErrors[i]);
                 errorCounter++;
