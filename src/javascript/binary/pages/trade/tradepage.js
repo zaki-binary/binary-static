@@ -96,7 +96,7 @@ var TradePage = (function(){
 			$('#introBtn').addClass(blinkClass).delay(inDelay).queue(function(){
 				$(this).removeClass(blinkClass).delay(outDelay).dequeue();
 			});
-		}
+		};
 		$(document).ready(function(){
 			var i = setInterval(blink, (inDelay + outDelay));
 			setTimeout(function(){ clearInterval(i); }, (inDelay + outDelay) * times);
