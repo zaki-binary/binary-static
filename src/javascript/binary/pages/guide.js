@@ -20,8 +20,8 @@ var Guide = (function() {
 			guideBtnID     : '#guideBtn',
 			btnText        : text.localize('Walkthrough Guide'),  // guide start button's text
 			blink_class    : 'highlight',
-			blink_inDelay  : 200,
-			blink_outDelay : 200,
+			blink_inDelay  : 1000,
+			blink_outDelay : 1000,
 			blink_interval : 3000,    // 0: continous blinking (blink_inDelay + blink_outDelay)
 			blink_count    : 0        // 0: infinite
 		};
@@ -76,21 +76,19 @@ var Guide = (function() {
 		}
 
 		$(opt.guideBtnID)
-			.addClass('grd-hide-mobile')
-			.append($('<span/>', {text: 'X'}))
-			.append($('<a/>', {href: '#', text: opt.btnText}));
+			.addClass('grd-hide-mobile pulser')
+			.append($('<span/>', {class: 'close', text: 'X'}))
+			.append($('<strong/>'));
+		$(opt.guideBtnID + ' strong').html('<span></span>' + opt.btnText);
 
 		setEvents();
-		blinkBtn();
 	};
 
 	/*
 	 *  both buttons' click event
 	 */
 	var setEvents = function() {
-		$(opt.guideBtnID + ' a').click(function(e){
-			e.preventDefault();
-			e.stopPropagation();
+		$(opt.guideBtnID + ' strong').click(function(e){
 			var enjoyhint_instance = null;
 			enjoyhint_instance = new EnjoyHint({});
 			enjoyhint_instance.setScript(getScript(opt.script));
@@ -102,43 +100,11 @@ var Guide = (function() {
 		}
 
 		// Hide button
-		$(opt.guideBtnID + ' span').click(function(){
+		$(opt.guideBtnID + ' span.close').click(function(){
 			setDisabled();
 			$(opt.guideBtnID).remove();
 		});
 	};
-
-	/*
-	 *  make the blinking effect
-	 */
-	var blinkBtn = function() {
-		var do_blink = function() {
-			$(opt.guideBtnID)
-				.addClass(opt.blink_class)
-				.delay(opt.blink_inDelay)
-				.queue(function(){
-					$(this)
-					.removeClass(opt.blink_class)
-					.delay(opt.blink_outDelay)
-					.dequeue();
-				});
-		};
-
-		$(document).ready(function() {
-			var interval = opt.blink_interval > 0 ? 
-				opt.blink_interval : 
-				(opt.blink_inDelay + opt.blink_outDelay);
-
-			var i = setInterval(do_blink, interval);
-
-			if(opt.blink_count > 0) {
-				window.setTimeout(function() { 
-					clearInterval(i);
-				}, interval * opt.blink_count);
-			}
-		});
-	};
-
 
 	/*
 	 *  each page's script

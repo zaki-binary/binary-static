@@ -4,7 +4,7 @@
     padding: 5px 20px;
     position: relative;
 
-    span {
+    span.close {
         display: none;
         color: red;
         font-size: 0.8em;
@@ -19,35 +19,35 @@
         }
     }
     &:hover {
-        span {
+        span.close {
             display: block;
         }
     }
 
-    a {
+    strong {
+        color: $COLOR_BLUE;
+        cursor: pointer;
         display: inline-block;
         white-space: nowrap;
-        line-height: 23px;
-        background-repeat: no-repeat;
-        @if $LANGUAGE_DIRECTION == ltr {
-            background-image: url('../images/pages/trade/guide-icon.svg');
-            background-position: left center;
-            padding-left: 30px;
-        }
-        @else {
-            background-image: url('../images/pages/trade/guide-icon_rtl.svg');
-            background-position: right center;
-            padding-right: 30px;
+        line-height: 22px;
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            width: 22px;
+            height: 22px;
+            background-repeat: no-repeat;
+            background-position: center;
+            @if $LANGUAGE_DIRECTION == ltr {
+                background-image: url('../images/pages/trade/guide-icon.svg');
+                margin-right: 7px;
+            }
+            @else {
+                background-image: url('../images/pages/trade/guide-icon_rtl.svg');
+                margin-left: 7px;
+            }
         }
         &:hover {
             text-decoration: underline;
-        }
-    }
-
-    &.highlight {
-        background-color: $COLOR_BLUE;
-        a {
-            color: $COLOR_WHITE;
         }
     }
 }
