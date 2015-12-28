@@ -1,3 +1,6 @@
+// https://github.com/xbsoftware/enjoyhint
+// (+ some custom changes for binary.com)
+
 var EnjoyHint = function (_options) {
     var that = this;
     // Some options
@@ -108,10 +111,10 @@ var EnjoyHint = function (_options) {
                     if (step_data.showNext == true){
                         $body.enjoyhint('show_next');
                     }
-                    if (step_data.showSkip == false){
-                        $body.enjoyhint('hide_skip');
-                    }else{
+                    if (step_data.showSkip == true){
                         $body.enjoyhint('show_skip');
+                    }else{
+                        $body.enjoyhint('hide_skip');
                     }
                     if (step_data.showSkip == true){
 

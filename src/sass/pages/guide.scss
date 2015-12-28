@@ -1,0 +1,66 @@
+#guideBtn {
+    display: inline-block;
+    background-color: $COLOR_LIGHT_GRAY;
+    padding: 5px 20px;
+    position: relative;
+
+    span {
+        display: none;
+        color: red;
+        font-size: 0.8em;
+        cursor: pointer;
+        position: absolute;
+        top: 2px;
+        @if $LANGUAGE_DIRECTION == ltr {
+            right: 4px;
+        }
+        @else {
+            left: 4px;
+        }
+    }
+    &:hover {
+        span {
+            display: block;
+        }
+    }
+
+    a {
+        display: inline-block;
+        white-space: nowrap;
+        line-height: 23px;
+        background-repeat: no-repeat;
+        @if $LANGUAGE_DIRECTION == ltr {
+            background-image: url('../images/pages/trade/guide-icon.svg');
+            background-position: left center;
+            padding-left: 30px;
+        }
+        @else {
+            background-image: url('../images/pages/trade/guide-icon_rtl.svg');
+            background-position: right center;
+            padding-right: 30px;
+        }
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &.highlight {
+        background-color: $COLOR_BLUE;
+        a {
+            color: $COLOR_WHITE;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    #guideBtn {
+        display: none;
+    }
+}
+
+/* trading page */
+#trading_socket_container {
+    #guideBtn {
+        float: if($LANGUAGE_DIRECTION == ltr, right, left);
+    }
+}
