@@ -60,7 +60,7 @@
                          a2.classList.add('a-active');
                          flag = 1;
                      }
-                     
+
                      a2.classList.add('tm-a-2');
                      a2.appendChild(content2);
                      a2.setAttribute('menuitem',el2.toLowerCase());
@@ -134,7 +134,7 @@
 
      var keys1 = Object.keys(elements).sort(marketSort);
      for (var i=0; i<keys1.length; i++) {
-         var key = keys1[i]; 
+         var key = keys1[i];
          var option = document.createElement('option'), content = document.createTextNode(elements[key].name);
          option.setAttribute('value', key);
          if (selected && selected === key) {
@@ -149,7 +149,7 @@
          if(elements[key].submarkets && Object.keys(elements[key].submarkets).length){
             var keys2 = Object.keys(elements[key].submarkets).sort(marketSort);
             for (var j=0; j<keys2.length; j++) {
-                var key2 = keys2[j]; 
+                var key2 = keys2[j];
                 option = document.createElement('option');
                 option.setAttribute('value', key2);
                 if (selected && selected === key2) {
@@ -356,7 +356,7 @@ function hidePriceOverlay() {
     if (elm) {
         elm.style.display = 'none';
     }
-    
+
 }
 
 function hideFormOverlay(){
@@ -449,7 +449,7 @@ function getContractCategoryTree(elements){
             }
             return e;
         });
-        tree = tree.filter(function(v){ return v.length; });   
+        tree = tree.filter(function(v){ return v.length; });
     }
     return tree;
 }
@@ -760,7 +760,7 @@ function countDecimalPlaces(num) {
 
 function selectOption(option, select){
     var options = select.getElementsByTagName('option');
-    var contains = 0; 
+    var contains = 0;
     for(var i = 0; i < options.length; i++){
         if(options[i].value==option && !options[i].hasAttribute('disabled')){
             contains = 1;
@@ -788,7 +788,7 @@ function updatePurchaseStatus(final_price, pnl, contract_status){
         $profit.html(Content.localize().textLoss + '<p>'+pnl+'</p>');
     }
     else{
-        $profit.html(Content.localize().textProfit + '<p>'+(Math.round((final_price-pnl)*100)/100)+'</p>');        
+        $profit.html(Content.localize().textProfit + '<p>'+(Math.round((final_price-pnl)*100)/100)+'</p>');
     }
 }
 
@@ -808,13 +808,13 @@ function updateWarmChart(){
     };
     if($chart){
         $chart.sparkline(spots, chart_config);
-        if(spots.length){     
+        if(spots.length){
             $chart.show();
         }
         else{
             $chart.hide();
-        }  
-    }  
+        }
+    }
 }
 
 function reloadPage(){
@@ -843,4 +843,79 @@ function addComma(num){
         num = num.toFixed(2);
     }
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function setMinMaxTime(){
+     var duration = document.getElementById('time_amount'),
+         period = document.getElementById('time_period');
+     if (duration && period){
+       if (!duration.value) {
+           duration.value = 1;
+           period.value = 'd';
+       }
+       if (period.value === 'm') {
+           duration.setAttribute('min', 1);
+           duration.setAttribute('max', 59);
+           if (duration.value > 59) {
+               duration.value = 15;
+           }
+       } else if (period.value === 'h') {
+           duration.setAttribute('min', 1);
+           duration.setAttribute('max', 23);
+           if (duration.value > 23) {
+               duration.value = 1;
+           }
+       } else if (period.value === 'd') {
+           duration.setAttribute('min', 1);
+           duration.setAttribute('max', 3);
+           if (duration.value > 3) {
+               duration.value = 1;
+           }
+       }
+       return [duration, period]; 
+     }
+ }
+
+ function setUnderlyingTime() {
+     var instrumentCode = document.getElementById('underlying');
+     var contractMarkets = document.getElementById('bet_underlying');
+     if (instrumentCode) {
+         chartFrameSource(instrumentCode.value);
+     } else if (contractMarkets) {
+         chartFrameSource(contractMarkets.value);
+     }
+ }
+
+ function chartFrameSource(underlying){
+   setMinMaxTime();
+   var timeAmount = setMinMaxTime()[0],
+       timePeriod = setMinMaxTime()[1],
+       time =  timeAmount.value + timePeriod.value;
+
+   if (document.getElementById('underlying')) {
+     var instrumentCode = document.getElementById('underlying');
+     instrumentCode.addEventListener("change", function(){
+       setUnderlyingTime();
+     });
+   } else if (document.getElementById('bet_underlying')) {
+      var contractMarkets = document.getElementById('bet_underlying');
+      contractMarkets.addEventListener("change", function(){
+          setUnderlyingTime();
+      });
+      document.getElementById('submarket').addEventListener("change", function(){
+          setUnderlyingTime();
+      });
+   }
+
+  timePeriod.addEventListener("change", function(){
+      chartFrameSource(underlying);
+  });
+  timeAmount.addEventListener("change", function(){
+      chartFrameSource(underlying);
+  });
+  timeAmount.addEventListener("keyup", function(){
+      chartFrameSource(underlying);
+  });
+
+  document.getElementById('chart_frame').src = 'https://highcharts.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + time + '&gtm=0';
 }

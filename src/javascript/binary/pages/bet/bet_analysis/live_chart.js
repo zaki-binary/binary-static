@@ -21,10 +21,11 @@ BetAnalysis.tab_live_chart = function () {
         get_live_chart: function() {
             var that = this;
             $.ajax(ajax_loggedin({
-                url     : '/d/trade_livechart.cgi?l=' + page.language(),
+                url     : '/d/trade_highchart.cgi?l=' + page.language(),
                 dataType: 'html',
                 success : function (data) {
-                            that.set_live_chart(data);
+                            document.getElementById('trade_live_chart').innerHTML = data;
+                            setUnderlyingTime();
                           },
             }));
         },
