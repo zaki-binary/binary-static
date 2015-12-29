@@ -3,6 +3,7 @@ var account_transferws = (function(){
     var $form ;
     var account_from , account_to ,account_bal;
     var currType, MLTBal,MFBal,MLCurrType,MFCurrType;
+    var availableCurr= {} ;
     
     var init = function(){
         $form = $('#account_transfer');
@@ -11,6 +12,7 @@ var account_transferws = (function(){
         account_bal = 0;
 
         BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "initValues"}});
+        BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "payout_currencies"}})
 
         $form.find("button").on("click", function(e){
             e.preventDefault();
@@ -56,8 +58,7 @@ var account_transferws = (function(){
             $form.find("#invalid_amount").text(text.localize("Invalid amount. Minimum transfer amount is 0.10, and up to 2 decimal places."));
             isValid = false;
         }
-        
-        if((/USD/.test(currType) === false) && (/EUR/.test(currType) === false) )
+        if($.inArray(currType, availableCurr) == -1)
         {
             $form.find("#invalid_amount").text(text.localize("Invalid currency."));
             isValid = false;
@@ -72,7 +73,7 @@ var account_transferws = (function(){
            responseMessage(response);
 
         }
-        else if(type === "balance" || (type === "error" && "balance" in response.echo_req))
+        else if(type === "payout_currencies" || (type === "error" && "payout_currencies" in response.echo_req))
         {
             responseMessage(response);
         }
@@ -102,7 +103,12 @@ var account_transferws = (function(){
                             "currency": currType,
                             "amount": amt
                         });
-                        break;       
+                        break; 
+                case   "payout_currencies" :
+                        BinarySocket.send({ 
+                            "payout_currencies": "1"
+                        });
+                        break;              
             }
 
         }
@@ -111,9 +117,9 @@ var account_transferws = (function(){
     var responseMessage = function(response) {
         var resvalue ;
         var str;
-
         if("error" in response) {
                 if("message" in response.error) {
+                    console.log("Its a backend error");
                     $("#client_message").show();
                     $("#client_message p").html(text.localize(response.error.message));
                     $("#success_form").hide();
@@ -121,6 +127,11 @@ var account_transferws = (function(){
                     return false;
                 }
                 return false;
+        }
+        else if("payout_currencies" in response){
+
+            availableCurr = response.payout_currencies;
+
         }
         else if ("transfer_between_accounts" in response){
 
