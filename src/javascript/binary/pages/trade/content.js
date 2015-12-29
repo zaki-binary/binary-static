@@ -112,13 +112,15 @@ var Content = (function () {
             textSpace: text.localize('space'),
             textPeriod: text.localize('period'),
             textComma: text.localize('comma'),
+            textHyphen: text.localize('hyphen'),
+            textApost: text.localize('apostrophe'),
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
             textEmailAddress: text.localize('Email address'),
             textRepeatPassword: text.localize('re-enter password'),
-            textResidence: text.localize('country of residence'),
+            textResidence: text.localize('Country of residence'),
             textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your Email and make sure you are not already logged in.'),
-            textDetails: text.localize('details'),
+            textDetails: text.localize('Details'),
             textCreateNewAccount: text.localize('create new account'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
@@ -126,7 +128,18 @@ var Content = (function () {
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
-            textEmailSent: text.localize('Please check your Email for the next step.')
+            textEmailSent: text.localize('Please check your email for the next step.'),
+            textMr: text.localize('Mr'),
+            textMrs: text.localize('Mrs'),
+            textMs: text.localize('Ms'),
+            textMiss: text.localize('Miss'),
+            textDr: text.localize('Dr'),
+            textProf: text.localize('Prof'),
+            textErrorBirthdate: text.localize('Please input a valid date'),
+            textSelect: text.localize('Please select'),
+            textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
+            textMessageMinRequired: text.localize('Minimum of %1 characters required.'),
+            textFeatureUnavailable: text.localize('Sorry, this feature is not available.')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -276,11 +289,15 @@ var Content = (function () {
         var titleElement = document.getElementById("limits-title").firstElementChild;
         titleElement.textContent = localize.textLimits;
         
-        var tradingLimits = document.getElementById("trading-limits");
-        tradingLimits.textContent = TUser.get().loginid + " - " + localize.textTradingLimits;
-        
-        var withdrawalTitle = document.getElementById("withdrawal-title");
-        withdrawalTitle.textContent = TUser.get().loginid + " - " + localize.textWithdrawalTitle;
+        if(TUser.get().loginid){
+            var loginId = TUser.get().loginid;
+
+            var tradingLimits = document.getElementById("trading-limits");
+            tradingLimits.textContent = loginId + " - " + localize.textTradingLimits;
+            
+            var withdrawalTitle = document.getElementById("withdrawal-title");
+            withdrawalTitle.textContent = loginId + " - " + localize.textWithdrawalTitle;
+        }
     };
 
     var errorMessage = function(messageType, param){
@@ -301,6 +318,10 @@ var Content = (function () {
             case 'valid':
                 if(param)
                     msg = localize.textMessageValid.replace('%1', param);
+                break;
+            case 'min':
+                if(param)
+                    msg = localize.textMessageMinRequired.replace('%1', param);
                 break;
             default:
                 break;
