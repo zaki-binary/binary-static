@@ -64707,7 +64707,7 @@ var Purchase = (function () {
         var error = details['error'];
         var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower' || sessionStorage.formname === 'asian');
 
-        container.style.display = 'block';
+        container.style.display = 'table-row';
         contracts_list.style.display = 'none';
 
         if (error) {
@@ -64831,7 +64831,7 @@ var Purchase = (function () {
 
             if(d1 && purchase_data.echo_req.passthrough['duration']===1){
                 var contract_status,
-                    final_price, 
+                    final_price,
                     pnl;
 
                 if  (  purchase_data.echo_req.passthrough.contract_type==="DIGITMATCH" && d1==purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITDIFF" && d1!=purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITEVEN" && d1%2===0 || purchase_data.echo_req.passthrough.contract_type==="DIGITODD" && d1%2 || purchase_data.echo_req.passthrough.contract_type==="DIGITOVER" && d1>purchase_data.echo_req.passthrough.barrier || purchase_data.echo_req.passthrough.contract_type==="DIGITUNDER" && d1<purchase_data.echo_req.passthrough.barrier){
@@ -66708,7 +66708,7 @@ var ProfitTableWS = (function () {
             if((transactionsReceived === 0) && (currentBatch.length === 0)) {
                 $('#profit-table tbody')
                     .append($('<tr/>', {class: "flex-tr"})
-                        .append($('<td/>', {colspan: 7}) 
+                        .append($('<td/>', {colspan: 7})
                             .append($('<p/>', {class: "notice-msg center", text: text.localize("Your account has no trading activity.")})
                             )
                         )
@@ -66788,6 +66788,9 @@ var ProfitTableUI = (function(){
             Content.localize().textSalePrice,
             Content.localize().textProfitLoss
         ];
+
+        header[6] = header[6] + (TUser.get().currency ? "(" + TUser.get().currency + ")" : "");
+
         var footer = [Content.localize().textTotalProfitLoss, "", "", "", "", "", ""];
 
         var data = [];
@@ -66888,7 +66891,8 @@ var ProfitTableUI = (function(){
         initDatepicker: initDatepicker,
         cleanTableContent: clearTableContent
     };
-}());;pjax_config_page("new_account/realws", function(){
+}());
+;pjax_config_page("new_account/realws", function(){
 	
 	return {
 		onLoad: function() {
