@@ -75,14 +75,8 @@ var TradingAnalysis = (function(){
         toggleActiveAnalysisTabs();
 
         if (currentTab === 'tab_graph') {
-          $.ajax(ajax_loggedin({
-            url     : '/d/trade_highchart.cgi?l=' + page.language(),
-            dataType: 'html',
-            success : function (data) {
-              document.getElementById('trade_live_chart').innerHTML = data;
-              setUnderlyingTime();
-            },
-          }));
+          showHighchart();
+          setUnderlyingTime();
         } else {
             var url = currentLink.getAttribute('href');
             $.ajax({

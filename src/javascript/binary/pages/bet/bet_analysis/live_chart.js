@@ -19,15 +19,8 @@ BetAnalysis.tab_live_chart = function () {
             }
         },
         get_live_chart: function() {
-            var that = this;
-            $.ajax(ajax_loggedin({
-                url     : '/d/trade_highchart.cgi?l=' + page.language(),
-                dataType: 'html',
-                success : function (data) {
-                            document.getElementById('trade_live_chart').innerHTML = data;
-                            setUnderlyingTime();
-                          },
-            }));
+          showHighchart();
+          setUnderlyingTime();
         },
         set_live_chart: function (data) {
             $('#trade_live_chart').html(data);

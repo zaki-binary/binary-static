@@ -845,6 +845,42 @@ function addComma(num){
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function showHighchart(){
+  var div = document.createElement('div');
+  div.className = 'grd-grid-12 chart_div';
+
+  div.innerHTML = '<table width="600px" align="center">\
+    <tr id="highchart_duration">\
+      <td align="right" width="25%">' + Content.localize().textDuration + ':</td>\
+        <td align="left" width="25%">\
+          <select id="time_period">\
+            <option value="1t">1 ' + Content.localize().textTickResultLabel.toLowerCase() +'</option>\
+            <option value="1m">1 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="2m">2 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="3m">3 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="5m">5 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="10m">10 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="15m">15 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="30m">30 ' + Content.localize().textDurationMinutes.toLowerCase() +'</option>\
+            <option value="1h">1 ' + Content.localize().textDurationHours.toLowerCase() +'</option>\
+            <option value="2h">2 ' + Content.localize().textDurationHours.toLowerCase() +'</option>\
+            <option value="4h">4 ' + Content.localize().textDurationHours.toLowerCase() +'</option>\
+            <option value="8h">8 ' + Content.localize().textDurationHours.toLowerCase() +'</option>\
+            <option value="1d">1 ' + Content.localize().textDurationDays.toLowerCase() +'</option>\
+          </select>\
+        </td>\
+      </td>\
+    </tr>\
+    <tr align="center">\
+      <td colspan="4">\
+        <iframe src="" width="100%" height="520" id="chart_frame" style="overflow-y : hidden;" scrolling="no"></iframe>\
+      </td>\
+    </tr>\
+  </table>';
+
+   document.getElementById('trade_live_chart').appendChild(div);
+}
+
 function setUnderlyingTime() {
    var instrumentCode = document.getElementById('underlying'),
        contractMarkets = document.getElementById('bet_underlying'),
