@@ -846,6 +846,7 @@ function addComma(num){
 }
 
 function showHighchart(){
+  Content.populate();
   var div = document.createElement('div');
   div.className = 'grd-grid-12 chart_div';
 
