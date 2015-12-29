@@ -27,7 +27,7 @@ var PortfolioWS =  (function() {
         }
         BinarySocket.send({"portfolio":1});
     };
-    
+
     /**
      * Updates portfolio table
     **/
@@ -104,7 +104,7 @@ var PortfolioWS =  (function() {
                 $td.html(data.proposal_open_contract.currency+' <strong class="indicative_price price_moved_down">'+data.proposal_open_contract.bid_price+'</strong>');
             } else if(old_indicative < new_indicative) {
                 $td.html(data.proposal_open_contract.currency+' <strong class="indicative_price price_moved_up">'+data.proposal_open_contract.bid_price+'</strong>');
-            }            
+            }
         }
 
         var indicative_sum = 0, indicative_price = 0, up_down;
@@ -142,7 +142,7 @@ var PortfolioWS =  (function() {
         }
         return str;
     };
- 
+
     return {
         init: init,
         updateBalance: updateBalance,
@@ -152,7 +152,7 @@ var PortfolioWS =  (function() {
 
 })();
 
-pjax_config_page("user/portfoliows", function() {
+pjax_config_page("user/openpositionsws", function() {
     return {
         onLoad: function() {
             if (!getCookieItem('login')) {
@@ -173,7 +173,7 @@ pjax_config_page("user/portfoliows", function() {
                     }
 
                     var msg_type = response.msg_type;
-            
+
                     switch(msg_type) {
 
                         case "balance":
@@ -194,7 +194,7 @@ pjax_config_page("user/portfoliows", function() {
                     }
 
                 }
-            });      
+            });
             PortfolioWS.init();
         }
     };
