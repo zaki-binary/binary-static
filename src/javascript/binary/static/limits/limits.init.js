@@ -14,7 +14,7 @@ var LimitsWS = (function(){
             withdrawal_limit.textContent = Content.localize().textAuthenticatedWithdrawal;
         } else if(limits['num_of_days_limit'] === limits['lifetime_limit']) {
             withdrawal_limit.textContent = Content.localize().textWithdrawalLimits.replace('%1', addComma(limits['num_of_days_limit']));
-            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', addComma(limits["withdrawal_since_inception_monetary"]) + '.';
+            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', addComma(limits["withdrawal_since_inception_monetary"])) + '.';
         } else {
             withdrawal_limit.textContent = Content.localize().textDayWithdrawalLimit.replace('%1', limits['num_of_days']).replace('%2', addComma(limits['num_of_days_limit']));
             already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', limits['withdrawal_for_x_days_monetary']) + " " + Content.localize().textAggregateOverLast + " " + limits['num_of_days'] + " " + Content.localize().textDurationDays;
