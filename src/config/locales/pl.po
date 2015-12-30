@@ -9,14 +9,12 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2015-12-29 14:27+0000\n"
 "Last-Translator: Ewelina Bruździak <e.bruzdziak@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/binary/static/pl/>"
-"\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/binary/static/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.5-dev\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1065,10 +1063,10 @@ msgstr "Otwarcie konta"
 msgid "Account Transfer"
 msgstr "Saldo konta"
 
-#. ("", "")
 #. (currency, to_monetary_number_format(balance))
+#. ("", "")
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:9
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:5
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:9
 msgid "Account balance : %1 %2"
 msgstr "Saldo konta: %2 %1"
 
@@ -1795,10 +1793,6 @@ msgstr "Spółka zależna firmy Binary, Binary KK, otwiera biuro w Tokio i rozpo
 msgid "Binary's Maltese subsidiary Binary Investments (Europe) Ltd. is granted a Category 3 Investment Services license by the Malta Financial Services Authority."
 msgstr "Urząd ds. Usług Finansowych (Malta Financial Services Authority) na Malcie przyznał maltańskiej spółce zależnej firmy Binary, Binary Investments (Europe) Ltd., licencję dla podmiotów świadczących usługi inwestycyjne kategorii 3."
 
-#: /home/git/translations/binary-static/src/templates/toolkit/resources/trading_timesws.html.tt:2
-msgid "Binary.com - Trading Times"
-msgstr "Binary.com – godziny handlu"
-
 #: /home/git/translations/binary-static/src/templates/haml/static/open_source_projects.html.haml:1
 msgid "Binary.com Open-Source Projects"
 msgstr "Projekty open source na Binary.com"
@@ -2003,7 +1997,7 @@ msgid "Calculating"
 msgstr "Obliczanie"
 
 #. ($res->error_message)
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:351
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:459
 msgid "Call error."
 msgstr "Błąd wywoływania."
 
@@ -2162,7 +2156,7 @@ msgid "Choose Touch / No Touch when you want to profit from the market touching 
 msgstr "Wybierz zakład typu \"osiągnie/nie osiągnie\", jeśli chcesz zyskać w zależności od tego, czy rynek osiągnie czy nie osiągnie ceny docelowej w dowolnym momencie trwania kontraktu."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
-#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:22
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:15
 msgid "Choose a Name:"
 msgstr "Wybierz nazwę:"
 
@@ -2500,8 +2494,8 @@ msgstr "Contract / Temporary / Part Time"
 msgid "Contract Confirmation"
 msgstr "Potwierdzenie kontraktu"
 
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:29
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:24
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:29
 msgid "Contract Details"
 msgstr "Szczegóły kontraktu"
 
@@ -2660,7 +2654,6 @@ msgid "Country of Residence"
 msgstr "Kraj zamieszkania"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/realws.html.tt:51
-#| msgid "country of residence"
 msgid "Country of residence"
 msgstr "Kraj zamieszkania"
 
@@ -2669,7 +2662,7 @@ msgid "Cover is made available on the basis of the depositor rather than on the 
 msgstr "Pokrycie obejmuje deponenta, nie zaś liczbę jego depozytów. Oznacza to, że w przypadku posiadania kilku kont przez jedną osobę, deponent uzyskuje pokrycie do całościowej kwoty 20 000 €. Pozostałe kwoty, niezależnie od ich wysokości, które przekraczają ten próg nie są objęte ochroną i w związku z tym pokrywa je inwestor."
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
-#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:40
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:33
 msgid "Create"
 msgstr "Utwórz"
 
@@ -2683,7 +2676,7 @@ msgid "Create New Account"
 msgstr "Załóż nowe konto"
 
 #: /home/git/translations/binary-static/src/templates/haml/user/api_token.html.haml:1
-#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:18
+#: /home/git/translations/binary-static/src/templates/toolkit/account/api_tokenws.html.tt:11
 msgid "Create New Token"
 msgstr "Utwórz nowy token"
 
@@ -2864,22 +2857,6 @@ msgstr "Szanowny użytkowniku %1 %2 %3,"
 
 #. ($client_name, $support_email)
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Client/IDAuthentication.pm:197
-#| msgid ""
-#| "Dear %1,\n"
-#| "\n"
-#| "I am writing to you regarding your account with Binary.com.\n"
-#| "\n"
-#| "We are legally required to verify that clients are over the age of 18, and so we request that you forward scanned copies of one of the following to helpdesk@binary.com:\n"
-#| "\n"
-#| "- Valid Passport or Driving licence or National ID card\n"
-#| "\n"
-#| "In order to comply with licencing regulations, you will be unable to make further deposits or withdrawals or to trade on the account until we receive this document.\n"
-#| "\n"
-#| "I look forward to hearing from you soon.\n"
-#| "\n"
-#| "Kind regards,\n"
-#| "\n"
-#| "%2\n"
 msgid ""
 "Dear %1,\n"
 "\n"
@@ -2901,15 +2878,11 @@ msgstr ""
 "\n"
 "Kontaktujemy się z Panem\\Panią w sprawie konta na Binary.com.\n"
 "\n"
-"Jesteśmy zobowiązani prawnie do weryfikacji, czy klienci mają skończone 18 "
-"lat, dlatego prosimy o przesłanie skanów następujących dokumentów na adres "
-"e-mail: %2:\n"
+"Jesteśmy zobowiązani prawnie do weryfikacji, czy klienci mają skończone 18 lat, dlatego prosimy o przesłanie skanów następujących dokumentów na adres e-mail: %2:\n"
 "\n"
 "- Aktualny paszport lub prawo jazdy lub dowód osobisty\n"
 "\n"
-"Zgodnie z przepisami licencyjnymi, nie będzie Pan\\Pani miał(a) możliwości "
-"dokonywania dalszych wpłat ani wypłat do momentu otrzymania przez nas tych "
-"dokumentów. Oczekujemy na odpowiedź.\n"
+"Zgodnie z przepisami licencyjnymi, nie będzie Pan\\Pani miał(a) możliwości dokonywania dalszych wpłat ani wypłat do momentu otrzymania przez nas tych dokumentów. Oczekujemy na odpowiedź.\n"
 "\n"
 "Z poważaniem,\n"
 "\n"
@@ -3136,7 +3109,7 @@ msgstr "Instrumenty pochodne, takie jak Opcje binarne oraz związane z nimi rynk
 msgid "Description"
 msgstr "Opis"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:261
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:259
 #: /home/git/translations/binary-static/src/templates/toolkit/account/realws.html.tt:10
 #: /home/git/translations/binary-static/src/templates/toolkit/account/settings_detailsws.html.tt:8
 msgid "Details"
@@ -3277,7 +3250,7 @@ msgstr "Konta zawieszone i nieaktywne"
 msgid "Dot Chart"
 msgstr "Wykres punktowy"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:275
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:273
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:35
 msgid "Dr"
 msgstr "Dr"
@@ -3409,7 +3382,7 @@ msgstr "E-mail"
 msgid "Email Verification"
 msgstr "E-mail weryfikacyjny"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:258
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:256
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2771
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:3453
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:1245
@@ -3632,7 +3605,6 @@ msgid "Family Name"
 msgstr "Nazwisko"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/realws.html.tt:31
-#| msgid "Family Name"
 msgid "Family name"
 msgstr "Nazwisko"
 
@@ -3732,7 +3704,6 @@ msgid "First line of home address"
 msgstr "Pierwsza część adresu zamieszkania"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/realws.html.tt:22
-#| msgid "First Name"
 msgid "First name"
 msgstr "Imię"
 
@@ -4639,9 +4610,9 @@ msgstr "Nieprawidłowy e-mail lub hasło."
 msgid "Indemnity and Liability"
 msgstr "Odpowiedzialność i odszkodowanie"
 
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:31
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:27
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:48
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:31
 msgid "Indicative"
 msgstr "Orientacyjny"
 
@@ -4707,7 +4678,7 @@ msgstr "Informacje dotyczące wcześniejszej wydajności jakiegokolwiek instrume
 msgid "Input error."
 msgstr "Błąd wpisu."
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:242
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:333
 msgid "Input validation failed: "
 msgstr "Weryfikacja danych wejściowych nie powiodła się: "
 
@@ -4788,7 +4759,7 @@ msgstr "Nieprawidłowa kwota"
 msgid "Invalid amount. Minimum transfer amount is 0.10, and up to 2 decimal places."
 msgstr "Nieprawidłowa kwota. Minimalna kwota przelewu to 0,10, do dwóch miejsc po przecinku."
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:252
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:345
 msgid "Invalid client account."
 msgstr "Nieprawidłowe konto klienta."
 
@@ -5946,8 +5917,8 @@ msgstr "Sygnał MACD"
 msgid "Maintain your Site and promote %1 in an appropriate manner and contact us if you are changing design or layout or adding material that may influence our opinion as to whether you are a suitable affiliate partner."
 msgstr "Dbaj o utrzymanie swojej strony i promuj %1 w odpowiedni sposób, a w przypadku zmiany wyglądu i układu lub dodania materiałów, co może wpłynąć na opinię Firmy w kwestii tego, czy Twoja firma jest odpowiednią firmą partnerską, skontaktuj się z nami."
 
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:14
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:9
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:14
 #: /home/git/translations/binary-static/src/templates/toolkit/account/statement.html.tt:112
 msgid "Make a Deposit"
 msgstr "Wpłać środki"
@@ -6184,11 +6155,11 @@ msgstr "Min: 10 Max: 2000"
 msgid "Minimum"
 msgstr "Minimum"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:280
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:278
 msgid "Minimum of %1 characters required."
 msgstr "Minimalna liczba znaków %1."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:274
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:272
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:33
 msgid "Miss"
 msgstr "Pani"
@@ -6299,17 +6270,17 @@ msgstr "Średnie kroczące zapewniają obiektywną miarę kierunku trendu poprze
 msgid "Moving averages provide an objective measure of trend direction by smoothing out short-term price fluctuations.In a Weighted Moving Average, the previous periods have less weight for periods further away in the past. In an n-day WMA the latest day has weight n, the second latest n-1, etc, down to zero.Shorter length moving averages are more sensitive and signals trends much faster than longer length MAs, but also give more false signals. A longer length MA is more reliable but only picks up the big trend."
 msgstr "Średnie kroczące zapewniają obiektywną miarę kierunku trendu poprzez wygładzanie krótkoterminowych wahań cen. W przypadku ważonej średniej kroczącej wcześniejsze okresy mają mniejszą wagę. W ważonej średniej kroczącej z n dni ostatni dzień ma wagę n, drugi najnowszy n-1 itd., aż do zera. Krótsze średnie kroczące są bardziej wrażliwe, a sygnały trendów dużo szybsze niż dłuższe średnie kroczące, jednak dają też więcej fałszywych sygnałów. Dłuższa średnia krocząca jest bardziej wiarygodna, ale tylko podnosi główny trend."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:271
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:269
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:36
 msgid "Mr"
 msgstr "Pan"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:272
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:270
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:34
 msgid "Mrs"
 msgstr "Pani"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:273
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:271
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:32
 msgid "Ms"
 msgstr "Pani"
@@ -6465,8 +6436,8 @@ msgstr "Bez ukrytych opłat i prowizji."
 msgid "No matter the market – rising or falling, quiet or volatile – you’ll find a trade to suit your outlook."
 msgstr "Niezależnie od rynku – o tendencji zwyżkowej czy zniżkowej, spokojnego czy zmiennego - znajdziesz zakład odpowiadający Twoim wymaganiom."
 
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:21
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:18
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:21
 msgid "No open positions."
 msgstr "Brak otwartych pozycji."
 
@@ -6666,7 +6637,7 @@ msgstr "Internetowa platforma handlowa umożliwiająca handel opcjami binarnymi 
 msgid "Online currency exchangers "
 msgstr "Kantory walutowe online "
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:247
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:245
 msgid "Only %1 are allowed."
 msgstr "Dozwolone są tylko %1."
 
@@ -6858,7 +6829,7 @@ msgstr "Świadczone przez nas usługi polegają wyłącznie na realizacji zlece�
 msgid "Our site can be filtered using a number of filtering systems available on the market which could be used to restrict one’s access to our site."
 msgstr "Możliwe jest korzystanie z różnych systemów filtrujących dostępnych na rynku w celu ograniczenia dostępu do naszej strony."
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:288
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:391
 msgid "Output validation failed: "
 msgstr "Weryfikacja danych wyjściowych nie powiodła się: "
 
@@ -6924,7 +6895,7 @@ msgstr "Nie znaleziono strony"
 msgid "Parabolic SAR"
 msgstr "Paraboliczny SAR"
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:402
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:511
 msgid "Parameters sanity check failed."
 msgstr "Sprawdzanie poprawności parametrów nie powiodło się."
 
@@ -7125,8 +7096,7 @@ msgstr "Zanim przejdziesz dalej, musisz zaakceptować zastrzeżenie dotyczące r
 msgid "Please agree to the terms in order to proceed."
 msgstr "Please agree to the terms in order to proceed."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:265
-#| msgid "Please check your Email for the next step."
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:263
 msgid "Please check your email for the next step."
 msgstr "Informacje na temat kolejnych kroków zostały wysłane na adres e-mail."
 
@@ -7273,8 +7243,7 @@ msgstr "Wpisz swoje nazwisko."
 msgid "Please fill in the Login ID and Amount you wish to transfer to your Client in the form below:"
 msgstr "W formularzu poniżej wpisz login i kwotę, którą chcesz przekazać swojemu Klientowi:"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:277
-#| msgid "Please input a valid date."
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:275
 msgid "Please input a valid date"
 msgstr "Wpisz poprawną datę"
 
@@ -7289,7 +7258,7 @@ msgstr "Wpisz poprawną datę"
 msgid "Please input a valid date."
 msgstr "Wpisz poprawną datę."
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:268
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:365
 msgid "Please log in."
 msgstr "Proszę się zalogować."
 
@@ -7355,7 +7324,7 @@ msgstr "Prosimy o zapoznanie się z następującym planem prowizyjnym."
 msgid "Please remember at all times that trading binary options can be an exciting activity, but we have a moral duty to remind you of the risks you may run. Options trading can become a real addiction, as can any other activity pushed to its limits. We kindly ask you to engage in a careful self-analysis to check if you are at risk. To avoid the danger of such an addiction, it is important that you follow some basic principles and guidelines."
 msgstr "Należy pamiętać, że handlowanie opcjami binarnymi może dawać wiele satysfakcji, ale naszym moralnym obowiązkiem jest przypomnienie Państwu o związanym z nim ryzyku. Handel opcjami może stać się poważnym uzależnieniem, tak jak wszystkie inne czynności, którym poświęcamy zbyt wiele czasu. Zachęcamy do zastanowienia się, czy mogą być Państwo zagrożeni tym ryzykiem. Aby uniknąć niebezpieczeństwa uzależnienia, warto przestrzegać podstawowych zasad i zaleceń."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:278
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:276
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:135
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:2698
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form/japan.pm:240
@@ -7418,7 +7387,7 @@ msgstr "Podaj swój kraj."
 msgid "Please specify your preferred reality-check interval in minutes "
 msgstr "Proszę określić w minutach preferowany odstęp czasu pomiędzy sprawdzaniem kont "
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:255
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:253
 msgid "Please submit a valid %1."
 msgstr "Podaj poprawny %1."
 
@@ -7476,8 +7445,8 @@ msgstr "Policies and Exclusion of Liability"
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Menu.pm:70
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:417
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/User.pm:434
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:5
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:2
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:5
 #: /home/git/translations/binary-static/src/templates/toolkit/homepage/logged_in.html.tt:74
 msgid "Portfolio"
 msgstr "Portfolio"
@@ -7489,7 +7458,6 @@ msgid "Postal Code / ZIP"
 msgstr "Kod pocztowy"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/realws.html.tt:100
-#| msgid "Postal Code / ZIP"
 msgid "Postal code/ZIP"
 msgstr "Kod pocztowy"
 
@@ -7619,7 +7587,7 @@ msgstr "Kontynuuj"
 msgid "Processing Time"
 msgstr "Czas przetwarzania"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:276
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:274
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:37
 msgid "Prof"
 msgstr "Prof."
@@ -7700,8 +7668,8 @@ msgstr "Dostępność w języku angielskim, japońskim, chińskim, arabskim, pol
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:158
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Controller/Bet.pm:1483
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:30
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:26
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:30
 msgid "Purchase"
 msgstr "Kup"
 
@@ -7878,8 +7846,8 @@ msgid "Reap the rewards of trading binaries, knowing your funds are always safe.
 msgstr "Zgarniaj nagrody z handlu opcjami binarnymi, wiedząc, że Twoje środki są zawsze bezpieczne."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:196
+#: /home/git/translations/binary-static/src/templates/toolkit/account/openpositionsws.html.tt:28
 #: /home/git/translations/binary-static/src/templates/toolkit/account/portfolio.html.tt:23
-#: /home/git/translations/binary-static/src/templates/toolkit/account/portfoliows.html.tt:28
 #: /home/git/translations/binary-static/src/templates/toolkit/account/profit_table.html.tt:88
 #: /home/git/translations/binary-static/src/templates/toolkit/account/statement.html.tt:125
 #: /home/git/translations/binary-static/src/templates/toolkit/account/statement.html.tt:143
@@ -8023,8 +7991,8 @@ msgstr "Zresetuj hasło"
 msgid "Resources"
 msgstr "Środki"
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:124
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:368
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:128
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:476
 msgid "Response too large."
 msgstr "Odpowiedź jest za długa."
 
@@ -8494,7 +8462,7 @@ msgstr "Przepraszamy, $ nie jest domyślną walutą dla pośrednika płatności.
 msgid "Sorry, Payment Agent Transfer is temporarily disabled due to system maintenance. Please try again in 30 minutes."
 msgstr "Przepraszamy, transfer do pośredników płatności jest czasowo wyłączony z powodu konserwacji systemu. Prosimy spróbować ponownie za 30 min."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:279
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:277
 #: /home/git/regentmarkets/bom-platform/lib/BOM/Platform/Locale.pm:150
 msgid "Sorry, account opening is unavailable."
 msgstr "Przepraszamy, otwarcie konta jest niemożliwe."
@@ -8597,7 +8565,7 @@ msgstr "Przepraszamy, wystąpił problem z potwierdzeniem Twoich danych osobowyc
 msgid "Sorry, this feature is available to virtual accounts only"
 msgstr "Przepraszamy, ta funkcja jest dostępna tylko dla kont wirtualnych"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:281
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:279
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Cashier.pm:939
 msgid "Sorry, this feature is not available."
 msgstr "Przepraszamy, wybrana funkcja jest niedostępna."
@@ -8658,7 +8626,7 @@ msgid "Sorry, you have excluded yourself from the website until %1."
 msgstr "Przepraszamy, wybrałeś/aś opcję wyłączenia z korzystania z portalu do %1."
 
 #. ($lim)
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:263
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:360
 msgid "Sorry, you have excluded yourself until %1."
 msgstr "Przepraszamy, wybrałeś/aś opcję wyłączenia do %1."
 
@@ -9444,7 +9412,7 @@ msgstr "Kwota zysku/straty na punkt wzrostu/spadku jest pomnożona przez kwotę 
 msgid "The anti-money laundering processes have the following effects on Clients:"
 msgstr "Proces przeciwdziałania praniu brudnych pieniędzy ma następujący wpływ na Klientów:"
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:118
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:122
 msgid "The application sent an invalid request."
 msgstr "Aplikacja wysłała niewłaściwe żądanie."
 
@@ -9508,15 +9476,8 @@ msgid "The company holds customer funds in separate bank accounts to the operati
 msgstr "Firma przechowuje środki klientów na innych rachunkach bankowych niż rachunek operacyjny. W przypadku niewypłacalności firmy rachunki te nie będą stanowiły jej aktywów. Tym samym spełnione zostają wymagania instytucji Gambling Commission dotyczące oddzielenia funduszy klientów na następującym poziomie: <strong>średnia ochrona</strong>."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/terms_and_conditions.html.tt:71
-#| msgid "The company holds customer funds in separate bank accounts to the operational accounts which would not, in the event of insolvency, form part of the Company's assets. This meets the Gambling Commission’s requirements for the segregation of customer funds at the level: medium protection."
 msgid "The company holds customer funds in separate bank accounts to the operational accounts; and arrangements have been made to ensure assets in the customer accounts are distributed to customers in the event of insolvency. This meets the Gambling Commission’s requirements for the segregation of customer funds at the level: medium protection."
-msgstr ""
-"Firma przechowuje środki klientów na innych rachunkach bankowych niż "
-"rachunek operacyjny Podjęto również działania, aby zapewnić, że aktywa "
-"zgromadzone na kontach klientów zostaną zwrócone klientom w przypadku "
-"niewypłacalności firmy. Tym samym spełnione zostają wymagania instytucji "
-"Gambling Commission dotyczące oddzielenia funduszy klientów na następującym "
-"poziomie: średnia ochrona."
+msgstr "Firma przechowuje środki klientów na innych rachunkach bankowych niż rachunek operacyjny Podjęto również działania, aby zapewnić, że aktywa zgromadzone na kontach klientów zostaną zwrócone klientom w przypadku niewypłacalności firmy. Tym samym spełnione zostają wymagania instytucji Gambling Commission dotyczące oddzielenia funduszy klientów na następującym poziomie: średnia ochrona."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:35
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/promocode.html.tt:61
@@ -9752,7 +9713,7 @@ msgid "The transactions performed on this site and the relationship between Clie
 msgstr "Transakcje zawierane na niniejszym portalu, jak również relacje między Klientami a Firmą podlegają prawu państwa, w którym znajduje się siedziba Firmy, i będzie to prawo Wyspy Man, Malty lub Kostaryki, zgodnie z którym będą interpretowane („Jurysdykcja”). Użytkownik zgadza się, aby sądy podlegające tej Jurysdykcji miały wyłączne prawdo rozstrzygania wszelkich sporów, które mogą powstać w odniesieniu do niniejszej Umowy. W tych celach użytkownik nieodwołalnie poddaje się orzecznictwu sądów niniejszej Jurysdykcji w odniesieniu do wszelkich sporów oraz zgadza się, że wszelkie roszczenia, jakie użytkownik może mieć względem Firmy będą rozpatrywane przed sądami niniejszej Jurysdykcji. Więcej informacji na temat skarg i sporów można znaleźć w sekcji Skargi i spory."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:143
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:257
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:255
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:458
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:527
 #: /home/git/regentmarkets/bom-web/lib/BOM/Web/Form.pm:677
@@ -9836,12 +9797,12 @@ msgstr "Wystąpił błąd i nie byliśmy w stanie przetworzyć Twojego wniosku."
 msgid "There was an error processing the request."
 msgstr "Wystąpił błąd podczas przetwarzania Twojego wniosku."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:241
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:239
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:73
 msgid "Therefore you may not withdraw any additional funds."
 msgstr "Nie możesz więc wypłacać żadnych środków."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:242
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:240
 msgid "Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR"
 msgstr "Dlatego w chwili obecnej Twoja maksymalna natychmiastowa wypłata (o ile posiadasz na koncie wystarczające środki) wynosi EUR"
 
@@ -9927,7 +9888,7 @@ msgstr "Sekcja kasjer tego pośrednika płatności jest zablokowana."
 msgid "This URL is invalid."
 msgstr "Adres URL jest niepoprawny."
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:253
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:347
 msgid "This account is unavailable."
 msgstr "To konto jest niedostępne."
 
@@ -10009,7 +9970,7 @@ msgstr "Cena tego kontraktu wynosi: %2 %1. Cena zakupu kontraktów nabywanych z 
 msgid "This document (the \"Agreement\") sets out the terms and conditions between \"the Company\" which is Binary Services Ltd, and you (the person who applied for this program; \"you\" or \"your\"), in relation to your application to setup an affiliate account (and membership of the affiliate program if your application is deemed successful) to promote the website %1"
 msgstr "Niniejszy dokument („Umowa”) określa warunki współpracy pomiędzy „Firmą”, czyli Binary Services Ltd a użytkownikiem (osobą, która zgłosiła się do tego programu; „użytkownik”, „Ty”), w związku ze zgłoszeniem użytkownika o utworzenie konta partnerskiego (i członkostwa w programie partnerskim, jeśli zgłoszenie zostanie przyjęte) w celu promowania portalu %1"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:245
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:243
 msgid "This field is required."
 msgstr "To pole jest wymagane."
 
@@ -10083,15 +10044,7 @@ msgstr "Ten rynek zostanie dziś później otwarty; o godz."
 
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:10
 msgid "This notice does not explain all of the risks involved in investments or similar products or how such risks relate to your personal circumstances. It is important that you fully understand the risks involved before making a decision to enter into or sell an investment product or gambling product with us. If you are in any doubt about the risks involved with Investment Products or Gambling Products, you should seek professional advice."
-msgstr ""
-"Niniejsza informacja nie wyjaśnia wszystkich ryzyk związanych z "
-"inwestowaniem lub z podobnymi produktami, ani jak takie ryzyka są powiązane "
-"z Twoimi indywidualnymi warunkami. Istotną kwestię stanowi zrozumienie "
-"ryzyka związanego z oferowanym przez nas produktem inwestycyjnym lub "
-"produktem hazardowym przed podjęciem decyzji o jego zakupie lub sprzedaży. W "
-"przypadku jakichkolwiek wątpliwości dotyczących ryzyka związanego z "
-"produktami inwestycyjnymi lub produktami hazardowymi, należy zasięgnąć "
-"porady eksperta."
+msgstr "Niniejsza informacja nie wyjaśnia wszystkich ryzyk związanych z inwestowaniem lub z podobnymi produktami, ani jak takie ryzyka są powiązane z Twoimi indywidualnymi warunkami. Istotną kwestię stanowi zrozumienie ryzyka związanego z oferowanym przez nas produktem inwestycyjnym lub produktem hazardowym przed podjęciem decyzji o jego zakupie lub sprzedaży. W przypadku jakichkolwiek wątpliwości dotyczących ryzyka związanego z produktami inwestycyjnymi lub produktami hazardowymi, należy zasięgnąć porady eksperta."
 
 #. (website)
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/risk_disclaimer.html.tt:4
@@ -10404,6 +10357,7 @@ msgstr "Zasady handlowania"
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Contract.pm:2716
 #: /home/git/translations/binary-static/src/templates/haml/resources/index.html.haml:1
 #: /home/git/translations/binary-static/src/templates/toolkit/legal/datafeed.html.tt:29
+#: /home/git/translations/binary-static/src/templates/toolkit/resources/trading_timesws.html.tt:2
 msgid "Trading Times"
 msgstr "Godziny handlu"
 
@@ -10647,7 +10601,7 @@ msgstr "Będziemy Cię traktować jako Klienta detalicznego, chyba że postanowi
 msgid "Unlock Cashier"
 msgstr "Odblokuj sekcję Kasjer"
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:296
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:400
 msgid "Unrecognised request."
 msgstr "Nie rozpoznano żądania."
 
@@ -10738,7 +10692,7 @@ msgstr "Weryfikacja powiodła się"
 msgid "Verification of identity"
 msgstr "Weryfikacja tożsamości"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:262
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:260
 msgid "Verification token is missing. Click on the verification link sent to your Email and make sure you are not already logged in."
 msgstr "Brak tokenu weryfikującego. Kliknij na link weryfikujący wysłany na Twój adres e-mail i upewnij się, czy nie jesteś już zalogowany/a."
 
@@ -11503,7 +11457,7 @@ msgstr "Wskaźniki światowe"
 msgid "Written limits and self-exclusion"
 msgstr "Zapisane limity i samodzielne wyłączenie"
 
-#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:346
+#: /home/git/regentmarkets/bom-websocket-api/lib/BOM/WebSocketAPI/Websocket_v3.pm:454
 msgid "Wrong response."
 msgstr "Błędna odpowiedź."
 
@@ -11634,9 +11588,11 @@ msgstr "Już próbowałeś/aś uwierzytelnić swój identyfikator użytkownika z
 msgid "You have already claimed a bonus in the past."
 msgstr "Wniosek o bonus został już wcześniej zgłoszony."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:234
-msgid "You have already withdrawn the equivalent of EUR"
-msgstr "Już wypłaciłeś ekwiwalent EUR"
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:233
+#, fuzzy
+#| msgid "You have already withdrawn the equivalent of EUR %1."
+msgid "You have already withdrawn the equivalent of EUR %1"
+msgstr "Już wypłaciłeś ekwiwalent %1 EUR."
 
 #. (withdrawal_for_x_days_monetary, num_of_days)
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:45
@@ -11778,7 +11734,7 @@ msgstr "Użytkownik powinien zabezpieczać Firmę na żądanie i nie pociągać 
 msgid "You shall not hold or pool client funds or third party funds into your own account held with %1."
 msgstr "Użytkownik nie ma prawa przetrzymywać na swoim koncie na %1 środków należących do klientów czy osób trzecich, ani pobierać ich na swoje konto."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:246
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:244
 msgid "You should enter between %1 characters."
 msgstr "Proszę wprowadzić następującą liczbę znaków: %1."
 
@@ -11843,13 +11799,15 @@ msgstr "Jesteś obecnie zalogowany/a do konta z wirtualnymi pieniędzmi"
 msgid "You're using a Virtual Account."
 msgstr "Korzystasz z konta z wirtualnymi pieniędzmi."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:235
-msgid "Your"
-msgstr "Twój"
-
 #. (num_of_days, num_of_days_limit_monetary, num_of_days_limit_equivalent)
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:35
 msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 in other currency)."
+msgstr "Twój %1-dniowy limit wypłat wynosi obecnie <strong>%2 EUR</strong> (lub %3 w innej walucie)."
+
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:234
+#, fuzzy
+#| msgid "Your %1 day withdrawal limit is currently <strong>EUR %2</strong> (or %3 in other currency)."
+msgid "Your %1 day withdrawal limit is currently EUR %2. (or equivalent in other currency)."
 msgstr "Twój %1-dniowy limit wypłat wynosi obecnie <strong>%2 EUR</strong> (lub %3 w innej walucie)."
 
 #. ($currency_label, $min_deposit)
@@ -11896,7 +11854,7 @@ msgstr "Do Twojego rachunku nie został przypisany żaden kraj zamieszkania."
 msgid "Your account is disabled"
 msgstr "Twoje konto jest wyłączone."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:237
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:235
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:11
 msgid "Your account is fully authenticated and your withdrawal limits have been lifted."
 msgstr "Twoje konto jest w pełni zweryfikowane, a Twój limit wypłat został zwiększony."
@@ -12101,7 +12059,7 @@ msgstr "Twoje dane osobowe są wykorzystywane przede wszystkim w celu weryfikacj
 msgid "Your phone number"
 msgstr "Twój nr telefonu"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:264
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:262
 msgid "Your provided email address is already in use by another Login ID"
 msgstr "Podany adres e-mail jest już przypisany do innego loginu"
 
@@ -12173,9 +12131,11 @@ msgstr "Adres URL Twojej strony (jeśli takową posiadasz)"
 msgid "Your withdrawal limit for the entire duration of the account is currently: <b>EUR %1</b> (or %2 in other currency.)"
 msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: <b>%1 EUR</b> (lub %2 w innej walucie.)"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:239
-msgid "Your withdrawal limit for the entire duration of the account is currently: EUR"
-msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: EUR"
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:237
+#, fuzzy
+#| msgid "Your withdrawal limit for the entire duration of the account is currently: <b>EUR %1</b> (or %2 in other currency.)"
+msgid "Your withdrawal limit for the entire duration of the account is currently: EUR %1 (or equivalent in other currency)."
+msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: <b>%1 EUR</b> (lub %2 w innej walucie.)"
 
 #. (num_of_days_limit_monetary, num_of_days_limit_equivalent)
 #: /home/git/translations/binary-static/src/templates/toolkit/account/trading_withdrawal_limit.html.tt:17
@@ -12183,8 +12143,10 @@ msgid "Your withdrawal limit is <strong>EUR %1</strong> (or %2 in other currency
 msgstr "Twój limit wypłat to <strong>%1 EUR</strong> (lub %2 w innej walucie)."
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:232
-msgid "Your withdrawal limit is EUR"
-msgstr "Twój limit wypłat wynosi EUR"
+#, fuzzy
+#| msgid "Your withdrawal limit is <strong>EUR %1</strong> (or %2 in other currency)."
+msgid "Your withdrawal limit is EUR %1 (or equivalent in other currency)."
+msgstr "Twój limit wypłat to <strong>%1 EUR</strong> (lub %2 w innej walucie)."
 
 #: /home/git/translations/binary-static/src/templates/haml/get_started/benefits_of_trading_binaries.html.haml:1
 msgid "You’ll be surprised by the returns you can make."
@@ -12235,7 +12197,7 @@ msgstr "każdy, przypadek, gdy Firma poniesie straty finansowe, podatkowe lub pr
 msgid "any restriction to its Clients from purchasing any contracts during certain hours."
 msgstr "każde ograniczenie Klientom zakupu jakichkolwiek kontraktów w ciągu określonych godzin."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:270
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:268
 msgid "apostrophe"
 msgstr "apostrof"
 
@@ -12257,7 +12219,7 @@ msgstr "opcje binarne, forex, handel forex, handel online, obrót finansowy, han
 msgid "close on %1"
 msgstr "zamykany %1"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:252
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:250
 msgid "comma"
 msgstr "przecinek"
 
@@ -12269,21 +12231,17 @@ msgstr "Polityka dot. sporów"
 msgid "contract start time"
 msgstr "godzina rozpoczęcia kontraktu"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:260
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:258
 msgid "country of residence"
 msgstr "kraj zamieszkania"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:263
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:261
 msgid "create new account"
 msgstr "załóż nowe konto"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:107
 msgid "day"
 msgstr "dzień"
-
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:236
-msgid "day withdrawal limit is currently EUR"
-msgstr "dzienny limit wypłat wynosi obecnie EUR"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:167
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:471
@@ -12362,15 +12320,15 @@ msgstr "godzina"
 msgid "hours"
 msgstr "godziny"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:269
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:267
 msgid "hyphen"
 msgstr "myślnik"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:238
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:236
 msgid "in aggregate over the last"
 msgstr "ogółem przez ostatnie"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:240
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:238
 msgid "in aggregate over the lifetime of your account."
 msgstr "ogółem w okresie działania Twojego konta."
 
@@ -12386,7 +12344,7 @@ msgstr "jest dostępna na całym świecie i posiada interfejs w języku angielsk
 msgid "it is the leading binary option trading platform."
 msgstr "To wiodąca platforma handlu opcjami binarnymi."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:248
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:246
 msgid "letters"
 msgstr "litery"
 
@@ -12449,7 +12407,7 @@ msgstr "miesiące"
 msgid "not available"
 msgstr "niedostępne"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:249
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:247
 msgid "numbers"
 msgstr "liczby"
 
@@ -12470,10 +12428,6 @@ msgstr "lub"
 msgid "or Email us at"
 msgstr "lub napisz do nas na adres"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:233
-msgid "or equivalent in other currency"
-msgstr "lub ekwiwalent w innej walucie"
-
 #: /home/git/translations/binary-static/src/templates/haml/not_found.html.haml:1
 msgid "or please try the site map below"
 msgstr "lub skorzystaj z mapy strony poniżej"
@@ -12482,11 +12436,11 @@ msgstr "lub skorzystaj z mapy strony poniżej"
 msgid "page for the exact time of settlement for all contracts. Other websites may adopt a different convention (for example some websites choose 4 o'clock NY time, or 5 o'clock London time). As a result, the open, high, low and closing prices displayed on our website may differ to those on other websites, due to the market-closing time convention."
 msgstr ",gdzie opisane są dokładne pory rozliczania wszystkich kontraktów. Inne portale mogą stosować inną konwencję (np. niektóre portale wybierają godz. 4 czasu nowojorskiego lub 5 czasu londyńskiego). Tak więc, ze względu na konwencję godziny zamknięcia rynku, cena otwarcia, cena wysoka, cena niska i cena zamknięcia wyświetlone na naszym portalu mogą różnić się od tych na innych portalach."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:256
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:254
 msgid "password"
 msgstr "hasło"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:251
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:249
 msgid "period"
 msgstr "okres"
 
@@ -12500,7 +12454,7 @@ msgstr "plus"
 msgid "points"
 msgstr "punkty"
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:259
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:257
 msgid "re-enter password"
 msgstr "wpisz hasło ponownie"
 
@@ -12524,7 +12478,7 @@ msgstr "sek."
 msgid "seconds"
 msgstr "sek."
 
-#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:250
+#: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:248
 msgid "space"
 msgstr "spacja"
 
@@ -12537,7 +12491,6 @@ msgid "status"
 msgstr "status"
 
 #: /home/git/translations/binary-static/src/templates/toolkit/account/realws.html.tt:144
-#| msgid "Terms and conditions"
 msgid "terms and conditions"
 msgstr "regulamin"
 
@@ -12711,13 +12664,13 @@ msgstr "GBP/USD"
 msgid "USD/CNY"
 msgstr "USD/CNY"
 
-#: Underlying Symbol frxAUDAED
-msgid "AUD/AED"
-msgstr "AUD/AED"
-
 #: Underlying Symbol frxEURHUF
 msgid "EUR/HUF"
 msgstr "EUR/HUF"
+
+#: Underlying Symbol frxAUDAED
+msgid "AUD/AED"
+msgstr "AUD/AED"
 
 #: Underlying Symbol frxEURSGD
 msgid "EUR/SGD"
@@ -12735,25 +12688,25 @@ msgstr "AUD/SGD"
 msgid "EUR/INR"
 msgstr "EUR/INR"
 
-#: Underlying Symbol frxAUDBRL
-msgid "AUD/BRL"
-msgstr "AUD/BRL"
-
 #: Underlying Symbol frxGBPCNY
 msgid "GBP/CNY"
 msgstr "GBP/CNY"
+
+#: Underlying Symbol frxAUDBRL
+msgid "AUD/BRL"
+msgstr "AUD/BRL"
 
 #: Underlying Symbol frxUSDJPY
 msgid "USD/JPY"
 msgstr "USD/JPY"
 
-#: Underlying Symbol frxGBPBRL
-msgid "GBP/BRL"
-msgstr "GBP/BRL"
-
 #: Underlying Symbol frxUSDSGD
 msgid "USD/SGD"
 msgstr "USD/SGD"
+
+#: Underlying Symbol frxGBPBRL
+msgid "GBP/BRL"
+msgstr "GBP/BRL"
 
 #: Underlying Symbol frxAUDNOK
 msgid "AUD/NOK"
@@ -12827,13 +12780,13 @@ msgstr "EUR/CNY"
 msgid "EUR/BRL"
 msgstr "EUR/BRL"
 
-#: Underlying Symbol frxNZDUSD
-msgid "NZD/USD"
-msgstr "NZD/USD"
-
 #: Underlying Symbol frxUSDDKK
 msgid "USD/DKK"
 msgstr "USD/DKK"
+
+#: Underlying Symbol frxNZDUSD
+msgid "NZD/USD"
+msgstr "NZD/USD"
 
 #: Underlying Symbol WLDUSD
 msgid "USD Index"
@@ -12867,13 +12820,13 @@ msgstr "EUR/DKK"
 msgid "AUD/CHF"
 msgstr "AUD/CHF"
 
-#: Underlying Symbol frxGBPCAD
-msgid "GBP/CAD"
-msgstr "GBP/CAD"
-
 #: Underlying Symbol frxUSDCHF
 msgid "USD/CHF"
 msgstr "USD/CHF"
+
+#: Underlying Symbol frxGBPCAD
+msgid "GBP/CAD"
+msgstr "GBP/CAD"
 
 #: Underlying Symbol frxEURIDR
 msgid "EUR/IDR"
@@ -12951,13 +12904,13 @@ msgstr "Indeks brytyjski (GBP)"
 msgid "GBP/NZD"
 msgstr "GBP/NZD"
 
-#: Underlying Symbol frxNZDJPY
-msgid "NZD/JPY"
-msgstr "NZD/JPY"
-
 #: Underlying Symbol frxUSDPLN
 msgid "USD/PLN"
 msgstr "USD/PLN"
+
+#: Underlying Symbol frxNZDJPY
+msgid "NZD/JPY"
+msgstr "NZD/JPY"
 
 #: Underlying Symbol frxAUDSEK
 msgid "AUD/SEK"
@@ -12975,13 +12928,13 @@ msgstr "GBP/DKK"
 msgid "EUR/HKD"
 msgstr "EUR/HKD"
 
-#: Underlying Symbol frxGBPAUD
-msgid "GBP/AUD"
-msgstr "GBP/AUD"
-
 #: Underlying Symbol frxGBPPLN
 msgid "GBP/PLN"
 msgstr "GBP/PLN"
+
+#: Underlying Symbol frxGBPAUD
+msgid "GBP/AUD"
+msgstr "GBP/AUD"
 
 #: Underlying Symbol frxGBPIDR
 msgid "GBP/IDR"
@@ -13104,13 +13057,13 @@ msgstr "Indeks szwedzki"
 msgid "Euro 50 Smart Index"
 msgstr "Inteligentny indeks Euro 50"
 
-#: Underlying Symbol SYNDJI
-msgid "Wall Street Smart Index"
-msgstr "Inteligentny indeks Wall Street"
-
 #: Underlying Symbol STI
 msgid "Singapore Index"
 msgstr "Indeks singapurski"
+
+#: Underlying Symbol SYNDJI
+msgid "Wall Street Smart Index"
+msgstr "Inteligentny indeks Wall Street"
 
 #: Underlying Symbol SYNPSI20
 msgid "Portuguese Smart Index"
@@ -13218,13 +13171,13 @@ msgstr "ENEL"
 msgid "Reliance Industries Ltd"
 msgstr "Reliance Industries Ltd"
 
-#: Underlying Symbol AUBHP
-msgid "BHP Billiton Ltd"
-msgstr "BHP Billiton Ltd"
-
 #: Underlying Symbol JPTE
 msgid "Tokyo Electric Power Co. Inc"
 msgstr "Tokyo Electric Power Co. Inc"
+
+#: Underlying Symbol AUBHP
+msgid "BHP Billiton Ltd"
+msgstr "BHP Billiton Ltd"
 
 #: Underlying Symbol JPTM
 msgid "Toyota Motor"
@@ -13246,13 +13199,13 @@ msgstr "BG Group plc"
 msgid "Air Liquide"
 msgstr "Air Liquide"
 
-#: Underlying Symbol NOYAR
-msgid "Yara International"
-msgstr "Yara International"
-
 #: Underlying Symbol UKIAG
 msgid "ICAG (British Airways)"
 msgstr "ICAG (British Airways)"
+
+#: Underlying Symbol NOYAR
+msgid "Yara International"
+msgstr "Yara International"
 
 #: Underlying Symbol DEALV
 msgid "Allianz SE"
@@ -13310,25 +13263,25 @@ msgstr "DNB"
 msgid "SoftBank Co."
 msgstr "SoftBank Co."
 
-#: Underlying Symbol FPEDF
-msgid "Electricite de France"
-msgstr "Electricite de France"
-
 #: Underlying Symbol FPDG
 msgid "Vinci"
 msgstr "Vinci"
+
+#: Underlying Symbol FPEDF
+msgid "Electricite de France"
+msgstr "Electricite de France"
 
 #: Underlying Symbol NOSTL
 msgid "Statoil"
 msgstr "Statoil"
 
-#: Underlying Symbol FPBN
-msgid "Danone"
-msgstr "Danone"
-
 #: Underlying Symbol USQCOM
 msgid "QUALCOMM"
 msgstr "QUALCOMM"
+
+#: Underlying Symbol FPBN
+msgid "Danone"
+msgstr "Danone"
 
 #: Underlying Symbol JPHM
 msgid "Honda Motor Co. Ltd"
@@ -13426,13 +13379,13 @@ msgstr "ASML Holding"
 msgid "Oracle"
 msgstr "Oracle"
 
-#: Underlying Symbol KRSFG
-msgid "Shinhan Financial"
-msgstr "Shinhan Financial"
-
 #: Underlying Symbol FPKER
 msgid "Kering"
 msgstr "Kering"
+
+#: Underlying Symbol KRSFG
+msgid "Shinhan Financial"
+msgstr "Shinhan Financial"
 
 #: Underlying Symbol UKBARC
 msgid "Barclays plc"
@@ -13474,13 +13427,13 @@ msgstr "Schneider Electric"
 msgid "Vodafone"
 msgstr "Vodafone"
 
-#: Underlying Symbol KRSS
-msgid "Samsung Electronics"
-msgstr "Samsung Electronics"
-
 #: Underlying Symbol JPHT
 msgid "Hitachi Ltd"
 msgstr "Hitachi Ltd"
+
+#: Underlying Symbol KRSS
+msgid "Samsung Electronics"
+msgstr "Samsung Electronics"
 
 #: Underlying Symbol USXOM
 msgid "ExxonMobil"
@@ -13530,13 +13483,13 @@ msgstr "SUMA"
 msgid "AXA"
 msgstr "AXA"
 
-#: Underlying Symbol NOTEL
-msgid "Telenor"
-msgstr "Telenor"
-
 #: Underlying Symbol USKO
 msgid "The Coca-Cola Company"
 msgstr "The Coca-Cola Company"
+
+#: Underlying Symbol NOTEL
+msgid "Telenor"
+msgstr "Telenor"
 
 #: Underlying Symbol BBUCB
 msgid "UCB"
@@ -13558,13 +13511,13 @@ msgstr "Glencore Xstrat"
 msgid "Intesa Sanpaolo"
 msgstr "Intesa Sanpaolo"
 
-#: Underlying Symbol UKDGE
-msgid "Diageo plc"
-msgstr "Diageo plc"
-
 #: Underlying Symbol KRSKH
 msgid "SK Hynix Inc."
 msgstr "SK Hynix Inc."
+
+#: Underlying Symbol UKDGE
+msgid "Diageo plc"
+msgstr "Diageo plc"
 
 #: Underlying Symbol FPRI
 msgid "Pernod Ricard"
@@ -13586,13 +13539,13 @@ msgstr "Moet Hennessy Louis Vuitton"
 msgid "Societe Generale"
 msgstr "Societe Generale"
 
-#: Underlying Symbol USGE
-msgid "General Electric Company"
-msgstr "General Electric Company"
-
 #: Underlying Symbol USMSFT
 msgid "Microsoft"
 msgstr "Microsoft"
+
+#: Underlying Symbol USGE
+msgid "General Electric Company"
+msgstr "General Electric Company"
 
 #: Underlying Symbol UKRIO
 msgid "Rio Tinto plc"
@@ -14371,6 +14324,27 @@ msgstr "Wypłata %2 %1 nastąpi, pod warunkiem że %3 przekroczy %7 do %6 przez:
 #: Translation for contract type description (UPORDOWN - intraday)
 msgid "%1 %2 payout if %3 goes outside %7 and %6 through %5 after %4."
 msgstr "Wypłata %2 %1 nastąpi, pod warunkiem że %3 przekroczy %7 i %6 w przeciągu: %5 po %4."
+
+#~ msgid "Binary.com - Trading Times"
+#~ msgstr "Binary.com – godziny handlu"
+
+#~ msgid "You have already withdrawn the equivalent of EUR"
+#~ msgstr "Już wypłaciłeś ekwiwalent EUR"
+
+#~ msgid "Your"
+#~ msgstr "Twój"
+
+#~ msgid "Your withdrawal limit for the entire duration of the account is currently: EUR"
+#~ msgstr "Twój limit wypłat za cały okres działania konta wynosi obecnie: EUR"
+
+#~ msgid "Your withdrawal limit is EUR"
+#~ msgstr "Twój limit wypłat wynosi EUR"
+
+#~ msgid "day withdrawal limit is currently EUR"
+#~ msgstr "dzienny limit wypłat wynosi obecnie EUR"
+
+#~ msgid "or equivalent in other currency"
+#~ msgstr "lub ekwiwalent w innej walucie"
 
 #~ msgid "<span class='grd-grid-4 grd-no-gutter'>Email: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
 #~ msgstr "<span class='grd-grid-4 grd-no-gutter'>E-mail: </span><span id='cs_contact_eaddress' class='grd-grid-7 grd-no-gutter'></span>"
