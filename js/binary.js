@@ -62697,17 +62697,15 @@ function addComma(num){
             textMaxAggregateTooltip: text.localize('Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions.'),
             textTradingLimits: text.localize('Trading Limits'),
             textWithdrawalTitle: text.localize('Withdrawal Limits'),
-            textWithdrawalLimits: text.localize('Your withdrawal limit is EUR'),
-            textCurrencyEquivalent: text.localize('or equivalent in other currency'),
-            textWithrawalAmount: text.localize('You have already withdrawn the equivalent of EUR'),
-            textYour: text.localize('Your'),
-            textDayWithdrawalLimit: text.localize('day withdrawal limit is currently EUR'),
+            textWithdrawalLimits: text.localize('Your withdrawal limit is EUR %1 (or equivalent in other currency).'),
+            textWithrawalAmount: text.localize('You have already withdrawn the equivalent of EUR %1'),
+            textDayWithdrawalLimit: text.localize('Your %1 day withdrawal limit is currently EUR %2 (or equivalent in other currency).'),
             textAuthenticatedWithdrawal: text.localize('Your account is fully authenticated and your withdrawal limits have been lifted.'),
             textAggregateOverLast: text.localize('in aggregate over the last'),
-            textWithdrawalForEntireDuration: text.localize('Your withdrawal limit for the entire duration of the account is currently: EUR'),
+            textWithdrawalForEntireDuration: text.localize('Your withdrawal limit for the entire duration of the account is currently: EUR %1 (or equivalent in other currency).'),
             textInAggregateOverLifetime: text.localize('in aggregate over the lifetime of your account.'),
             textNotAllowedToWithdraw: text.localize('Therefore you may not withdraw any additional funds.'),
-            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR'),
+            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR %1 (or equivalent in other currency).'),
             textBuyPrice: text.localize('Buy price'),
             textFinalPrice: text.localize('Final price'),
             textLoss: text.localize('Loss'),
@@ -62891,7 +62889,7 @@ function addComma(num){
         var titleElement = document.getElementById("statement-title").firstElementChild;
         titleElement.textContent = localize.textStatement;
     };
-    
+
     var profitTableTranslation = function(){
         var titleElement = document.getElementById("profit-table-title").firstElementChild;
         titleElement.textContent = localize.textProfitTable;
@@ -62900,13 +62898,13 @@ function addComma(num){
     var limitsTranslation = function(){
         var titleElement = document.getElementById("limits-title").firstElementChild;
         titleElement.textContent = localize.textLimits;
-        
+
         if(TUser.get().loginid){
             var loginId = TUser.get().loginid;
 
             var tradingLimits = document.getElementById("trading-limits");
             tradingLimits.textContent = loginId + " - " + localize.textTradingLimits;
-            
+
             var withdrawalTitle = document.getElementById("withdrawal-title");
             withdrawalTitle.textContent = loginId + " - " + localize.textWithdrawalTitle;
         }
@@ -66522,8 +66520,6 @@ var Table = (function(){
         Content.limitsTranslation();
         LimitsUI.fillLimitsTable(limits);
 
-        var equivalent = " (" + Content.localize().textCurrencyEquivalent + ").";
-
         var withdrawal_limit = document.getElementById("withdrawal-limit");
         var already_withdraw = document.getElementById("already-withdraw");
         var withdrawal_limit_aggregate = document.getElementById("withdrawal-limit-aggregate");
@@ -66531,19 +66527,19 @@ var Table = (function(){
         if(limits['lifetime_limit'] === 99999999) {
             withdrawal_limit.textContent = Content.localize().textAuthenticatedWithdrawal;
         } else if(limits['num_of_days_limit'] === limits['lifetime_limit']) {
-            withdrawal_limit.textContent = Content.localize().textWithdrawalLimits + " " + addComma(limits['num_of_days_limit']) + equivalent;
-            already_withdraw.textContent = Content.localize().textWithrawalAmount + " " + addComma(limits["withdrawal_since_inception_monetary"]) + ".";
+            withdrawal_limit.textContent = Content.localize().textWithdrawalLimits.replace('%1', addComma(limits['num_of_days_limit']));
+            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', addComma(limits["withdrawal_since_inception_monetary"])) + '.';
         } else {
-            withdrawal_limit.textContent = Content.localize().textYour + " " + limits['num_of_days'] + " " + Content.localize().textDayWithdrawalLimit + " " + addComma(limits['num_of_days_limit']) + equivalent;
-            already_withdraw.textContent = Content.localize().textWithrawalAmount + " " + limits['withdrawal_for_x_days_monetary'] + " " + Content.localize().textAggregateOverLast + " " + limits['num_of_days'] + " " + Content.localize().textDurationDays;
+            withdrawal_limit.textContent = Content.localize().textDayWithdrawalLimit.replace('%1', limits['num_of_days']).replace('%2', addComma(limits['num_of_days_limit']));
+            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', limits['withdrawal_for_x_days_monetary']) + " " + Content.localize().textAggregateOverLast + " " + limits['num_of_days'] + " " + Content.localize().textDurationDays;
             if(limits["lifetime_limit"] < 99999999) {
-                withdrawal_limit_aggregate.textContent = Content.localize().textWithdrawalForEntireDuration + " " + addComma(limits["lifetime_limit"]) + equivalent;
-                document.getElementById("already-withdraw-aggregate").textContent = Content.localize().textWithrawalAmount + " " + addComma(limits["withdrawal_since_inception_monetary"]) + " " + Content.localize().textInAggregateOverLifetime;
+                withdrawal_limit_aggregate.textContent = Content.localize().textWithdrawalForEntireDuration.replace('%1', addComma(limits["lifetime_limit"]));
+                document.getElementById("already-withdraw-aggregate").textContent = Content.localize().textWithrawalAmount.replace('%1', addComma(limits["withdrawal_since_inception_monetary"])) + " " + Content.localize().textInAggregateOverLifetime;
             }
             if(limits['remainder'] === 0) {
                 withdrawal_limit_aggregate.textContent = Content.localize().textNotAllowedToWithdraw;
             } else if (limits['remainder'] !== 0) {
-                withdrawal_limit_aggregate.textContent = Content.localize().textCurrentMaxWithdrawal + " " + addComma(limits['remainder']) + equivalent;
+                withdrawal_limit_aggregate.textContent = Content.localize().textCurrentMaxWithdrawal.replace('%1', addComma(limits['remainder']));
             }
 
         }
