@@ -286,7 +286,7 @@ Menu.prototype = {
                     var link = $(this).find('a');
                     if(markets_array.indexOf(link.attr('id')) < 0) {
                         var link_text = link.text();
-                        link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text}))
+                        link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text}));
                     }
                 }
             });
