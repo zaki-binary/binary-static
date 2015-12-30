@@ -63680,6 +63680,10 @@ var TradingEvents = (function () {
                     BinarySocket.send({ ticks : underlying });
                 }
             });
+            underlyingElement.addEventListener('mousedown', function(e) {
+                Symbols.getSymbols(0);
+                while(t+300>Date.now()){var c=1;}
+            });
         }
 
         /*
@@ -64374,11 +64378,11 @@ function processActiveSymbols(data) {
 
     displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
-    setTimeout(function(){
-        if(document.getElementById('underlying')){
-            Symbols.getSymbols(0);
-        }
-    }, 60*1000);
+    // setTimeout(function(){
+        // if(document.getElementById('underlying')){
+        //     Symbols.getSymbols(0);
+        // }
+    // }, 60*1000);
 }
 
 
