@@ -18,7 +18,10 @@
       margin: 0 2em 0 0;
       display: inline-block;
       &#topMenuStartBetting {
-          float: right;
+          float: if($LANGUAGE_DIRECTION == ltr, right, left);
+          ul {
+            text-align: if($LANGUAGE_DIRECTION == ltr, right, left);
+          }
       }
       a {
         font-weight: normal;
