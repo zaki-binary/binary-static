@@ -285,8 +285,8 @@ Menu.prototype = {
                 if(markets_array.indexOf(link_id) < 0) {
                     var link = $(this).find('a');
                     if(markets_array.indexOf(link.attr('id')) < 0) {
-                        link.addClass('disabled-link');
-                        link.removeAttr('href');
+                        var link_text = link.text();
+                        link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text}))
                     }
                 }
             });
