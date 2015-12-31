@@ -47,7 +47,7 @@ var account_transferws = (function(){
 
         account_from = matches[0];
         account_to = matches[1];
-
+        
         $.each(availableCurr,function(index,value){
             if(value.account == account_from){
                 currType = value.currency;
@@ -126,9 +126,20 @@ var account_transferws = (function(){
         var resvalue ;
         if("error" in response) {
                 if("message" in response.error) {
-                    $form.find("#invalid_amount").text(text.localize(response.error.message));
+
+                    if($('#transfer_account_transfer option').length > 0 ){
+                        $form.find("#invalid_amount").text(text.localize(response.error.message));
+                    }
+                    else{
+                        $("#client_message").show();
+                        $("#client_message p").html(text.localize(response.error.message));
+                        $("#success_form").hide();
+                        $form.hide();
+
+                    }
                     return false;
                 }
+
                 return false;
         }
         else if("payout_currencies" in response){
@@ -160,54 +171,56 @@ var account_transferws = (function(){
                 var secondacct, firstacct,str,optionValue;
 
                 $.each(response.accounts, function(index,value){
-                   var currObj = {};
+                    var currObj = {};
 
-                    if(value.balance > 0){
+                    if($.isEmptyObject(firstacct))
+                    {
+                        firstacct = value.loginid;
+                        currObj.account = value.loginid;
+                        currObj.currency = value.currency;
+                        currObj.balance = value.balance;
 
-                        if($.isEmptyObject(firstacct))
-                        {
-                            firstacct = value.loginid;
-                            currObj.account = value.loginid;
-                            currObj.currency = value.currency;
-                            currObj.balance = value.balance;
+                        availableCurr.push(currObj);
+                    }
+                    else
+                    {
+                        secondacct = value.loginid;
+                        str = text.localize("from account (" + firstacct + ") to account (" + secondacct + ")");
+                        optionValue = firstacct + "_to_" + secondacct;
+                        $form.find("#transfer_account_transfer")
+                             .append($("<option></option>")
+                             .attr("value",optionValue)
+                             .text(str));
+                        str = text.localize("from account (" + secondacct + ") to account (" + firstacct + ")");
+                        optionValue = secondacct + "_to_" + firstacct;
+                        $form.find("#transfer_account_transfer")
+                             .append($("<option></option>")
+                             .attr("value",optionValue)
+                             .text(str));     
 
-                            availableCurr.push(currObj);
-                        }
-                        else
-                        {
-                            secondacct = value.loginid;
-                            str = text.localize("from account (" + firstacct + ") to account (" + secondacct + ")");
-                            optionValue = firstacct + "_to_" + secondacct;
-                            $form.find("#transfer_account_transfer")
-                                 .append($("<option></option>")
-                                 .attr("value",optionValue)
-                                 .text(str));
-                            str = text.localize("from account (" + secondacct + ") to account (" + firstacct + ")");
-                            optionValue = secondacct + "_to_" + firstacct;
-                            $form.find("#transfer_account_transfer")
+                        currObj.account = value.loginid;
+                        currObj.currency = value.currency;
+                        currObj.balance = value.balance;
+
+                        availableCurr.push(currObj);     
+
+                        firstacct = "";    
+                    }
+                    
+                    if(($.isEmptyObject(firstacct) === false) && ($.isEmptyObject(secondacct) === false))
+                    {
+                        str = text.localize("from account (" + secondacct + ") to account (" + firstacct + ")");
+                        optionValue = secondacct + "_to_" + firstacct;
+                        $form.find("#transfer_account_transfer")
                                  .append($("<option></option>")
                                  .attr("value",optionValue)
                                  .text(str));     
-
-                            currObj.account = value.loginid;
-                            currObj.currency = value.currency;
-                            currObj.balance = value.balance;
-
-                            availableCurr.push(currObj);     
-
-                            firstacct = "";    
-                        }
-                        
-                        if(($.isEmptyObject(firstacct) === false) && ($.isEmptyObject(secondacct) === false))
-                        {
-                            str = text.localize("from account (" + secondacct + ") to account (" + firstacct + ")");
-                            optionValue = secondacct + "_to_" + firstacct;
-                            $form.find("#transfer_account_transfer")
-                                     .append($("<option></option>")
-                                     .attr("value",optionValue)
-                                     .text(str));     
-                        }
                     }
+
+                    if(value.balance <= 0){
+                        $form.find("#transfer_account_transfer option:last").remove();
+                    }
+                
 
 
                 });
