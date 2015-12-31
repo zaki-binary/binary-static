@@ -16,11 +16,11 @@
       %p= l('View the full list of assets, contract types and durations.')
   .grd-grid-3.grd-grid-mobile-6.grd-parent
     .grd-grid-8.grd-with-padding
-      %a.pjaxload{:href => url_for('/resources/trading_timesws'),:id => 'trading-times'}
+      %a.pjaxload{:href => url_for('/resources/market_timesws'),:id => 'trading-times'}
         %img#charting_icon.responsive.charting-page-icon{:src => url_for('images/pages/resources/trading-times.svg')}
     .grd-grid-12
       %h4
-        %a.pjaxload{:href => url_for('/resources/trading_timesws')}= l('Trading Times')
+        %a.pjaxload{:href => url_for('/resources/market_timesws')}= l('Trading Times')
       %p= l('View the operating hours of the markets you can trade.')
   .grd-grid-3.grd-grid-mobile-6.grd-parent
     .grd-grid-8.grd-with-padding
