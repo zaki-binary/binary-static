@@ -12,8 +12,7 @@ var account_transferws = (function(){
         $("#client_message").hide();
         account_bal = 0;
 
-        BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "initValues"}});
-        BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "payout_currencies"}});
+        BinarySocket.send({"authorize": $.cookie('login'), "req_id" : 1 });
 
         $form.find("button").on("click", function(e){
             e.preventDefault();
@@ -23,13 +22,15 @@ var account_transferws = (function(){
                 return false;
             }
             
-            BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "transfer_between_accounts"}});
+            BinarySocket.send({"authorize": $.cookie('login'), "req_id" : 2 });
         });
 
         $form.find("#transfer_account_transfer").on("change",function(){
+
+           $form.find("#invalid_amount").text("");
            set_account_from_to();
 
-           BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "payout_currencies"}});
+           BinarySocket.send({"authorize": $.cookie('login'), "req_id" : 3});
 
         });
     };
@@ -92,18 +93,18 @@ var account_transferws = (function(){
     };
 
     var isAuthorized =  function(response){
-        if(response.echo_req.passthrough){
-            var option= response.echo_req.passthrough.value ;
+        if(response.req_id){
+            var option= response.req_id ;
             var amt = $form.find("#acc_transfer_amount").val();
 
             switch(option){
-                case   "initValues":
+                case    1:
                         BinarySocket.send({ 
                             "transfer_between_accounts": "1",
-                            "passthrough" : {"value" : "set_client"}
+                            "req_id" : 4
                         });
                         break;
-                case   "transfer_between_accounts" :
+                case    2 :
                         BinarySocket.send({ 
                             "transfer_between_accounts": "1",
                             "account_from": account_from,
@@ -111,12 +112,11 @@ var account_transferws = (function(){
                             "currency": currType,
                             "amount": amt
                         });
-                        break; 
-                case   "payout_currencies" :
-                        BinarySocket.send({ 
-                            "payout_currencies": "1"
-                        });
-                        break;              
+                        break;  
+                case    3:
+                        BinarySocket.send({"payout_currencies": "1"});
+                        break;
+                                   
             }
 
         }
@@ -126,7 +126,6 @@ var account_transferws = (function(){
         var resvalue ;
         if("error" in response) {
                 if("message" in response.error) {
-                    console.log("from server");
                     $form.find("#invalid_amount").text(text.localize(response.error.message));
                     return false;
                 }
@@ -138,7 +137,7 @@ var account_transferws = (function(){
         }
         else if ("transfer_between_accounts" in response){
 
-            if(response.echo_req.passthrough.value == "get_new_balance"){
+            if(response.req_id === 5){
         
                 $.each(response.accounts,function(key,value){
                     $form.hide();
@@ -156,7 +155,7 @@ var account_transferws = (function(){
                     }
                 });
             }
-            else if(response.echo_req.passthrough.value =="set_client"){
+            else if(response.req_id === 4){
 
                 var secondacct, firstacct,str,optionValue;
 
@@ -231,11 +230,13 @@ var account_transferws = (function(){
                     $form.hide();
                     return false;
                 }
+
+                BinarySocket.send({"payout_currencies": "1"});
             }
             else{
                 BinarySocket.send({ 
                     "transfer_between_accounts": "1",
-                    "passthrough" : {"value" : "get_new_balance"}
+                    "req_id" : 5
                 });
 
             }
