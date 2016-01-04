@@ -36665,7 +36665,7 @@ var EnjoyHint = function (_options) {
 (function ($) {
     var methods = {
         init: function (options) {
-            console.log(options,'-------------');
+            //console.log(options,'-------------');
             return this.each(function () {
                 var defaults = {
                     onNextClick: function () {
@@ -36732,7 +36732,7 @@ var EnjoyHint = function (_options) {
                     width: that.canvas_size.w,
                     height: that.canvas_size.h
                 });
-                console.log(that.enjoyhint);
+                //console.log(that.enjoyhint);
 
                 that.layer = new Kinetic.Layer();
                 that.rect = new Kinetic.Rect({
@@ -36762,11 +36762,11 @@ var EnjoyHint = function (_options) {
                 });
 
                 that.$canvas.mousedown(function (e) {
-                    console.log('cl')
+                    //console.log('cl')
                     $('canvas').css({left: '4000px'});
 
                     var BottomElement = document.elementFromPoint(e.clientX, e.clientY);
-                    console.log(BottomElement.tagName)
+                    //console.log(BottomElement.tagName)
                     $('canvas').css({left: '0px'});
 
                     $(BottomElement).click();
@@ -37194,7 +37194,7 @@ var EnjoyHint = function (_options) {
                         top: label_y + label_height + 15
                     });
                     var left_skip = label_x + that.$next_btn.width() + 10;
-                    console.log(that.nextBtn);
+                    //console.log(that.nextBtn);
                     if (that.nextBtn == "hide"){
                         left_skip = label_x;
                     }
@@ -37397,7 +37397,7 @@ var EnjoyHint = function (_options) {
     };
 
     $.fn.enjoyhint = function (method) {
-        console.log(method);
+        //console.log(method);
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         } else if (typeof method === 'object' || !method) {
@@ -58587,7 +58587,7 @@ pjax_config_page('user/assessment', function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test($(fieldID).val().trim())){
+        if(!(/.+/).test(($(fieldID).val() + '').trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
@@ -59043,22 +59043,28 @@ ClientForm.prototype = {
 ;var SettingsDetailsWS = (function() {
     "use strict";
 
-    var formID = '#frmPersonalDetails';
-    var frmBtn = formID + ' button',
-        RealAccElements = '.RealAcc',
-        errorClass = 'errorfield';
-    var fieldIDs = {
-        address1 : '#Address1',
-        address2 : '#Address2',
-        city     : '#City',
-        state    : '#State',
-        postcode : '#Postcode',
-        phone    : '#Phone'
-    };
+    var formID,
+        frmBtn,
+        RealAccElements,
+        errorClass;
+    var fieldIDs;
     var isValid;
 
 
     var init = function() {
+        formID = '#frmPersonalDetails';
+        frmBtn = formID + ' button';
+        RealAccElements = '.RealAcc';
+        errorClass = 'errorfield';
+        fieldIDs = {
+            address1 : '#Address1',
+            address2 : '#Address2',
+            city     : '#City',
+            state    : '#State',
+            postcode : '#Postcode',
+            phone    : '#Phone'
+        };
+
         BinarySocket.send({"get_settings": "1"});
     };
 
@@ -59127,7 +59133,7 @@ ClientForm.prototype = {
         var address1 = $(fieldIDs.address1).val().trim(),
             address2 = $(fieldIDs.address2).val().trim(),
             city     = $(fieldIDs.city).val().trim(),
-            state    = $(fieldIDs.state).val().trim(),
+            state    = $(fieldIDs.state).val(),
             postcode = $(fieldIDs.postcode).val().trim(),
             phone    = $(fieldIDs.phone).val().trim();
         
@@ -59183,7 +59189,7 @@ ClientForm.prototype = {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test($(fieldID).val().trim())){
+        if(!(/.+/).test(($(fieldID).val() + '').trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
@@ -63739,7 +63745,6 @@ var TradingEvents = (function () {
             });
             underlyingElement.addEventListener('mousedown', function(e) {
                 Symbols.getSymbols(0);
-                while(t+300>Date.now()){var c=1;}
             });
         }
 
@@ -66146,7 +66151,7 @@ pjax_config_page("cashier/account_transferws", function() {
         clearError();
         isValid = true;
 
-        var agent  = $(fieldIDs.ddlAgents).val().trim(),
+        var agent  = $(fieldIDs.ddlAgents).val(),
             amount = $(fieldIDs.txtAmount).val().trim(),
             desc   = $(fieldIDs.txtDesc).val().trim();
         
@@ -66192,7 +66197,7 @@ pjax_config_page("cashier/account_transferws", function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test($(fieldID).val().trim())){
+        if(!(/.+/).test(($(fieldID).val() + '').trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
