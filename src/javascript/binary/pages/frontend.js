@@ -380,11 +380,12 @@ function isValidDate(day, month, year){
 function handle_residence_state_ws(){
   BinarySocket.init({
     onmessage: function(msg){
-      var select = document.getElementById('address-state');
+      var select;
       var response = JSON.parse(msg.data);
       if (response) {
         var type = response.msg_type;
         if (type === 'states_list'){
+          select = document.getElementById('address-state');
           var states_list = response.states_list;
           if (states_list.length > 0){
             for (i = 0; i < states_list.length; i++) {
@@ -394,8 +395,8 @@ function handle_residence_state_ws(){
           }
         }
         if (type === 'residence_list'){
-          var select = document.getElementById('residence-disabled');
-              phoneElement = document.getElementById('tel'),
+          select = document.getElementById('residence-disabled');
+          var phoneElement = document.getElementById('tel'),
               residenceValue = $.cookie('residence'),
               residence_list = response.residence_list;
           if (residence_list.length > 0){
