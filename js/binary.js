@@ -64386,6 +64386,8 @@ var Price = (function () {
             purchase.hide();
             comment.hide();
             amount_wrapper.hide();
+            price_wrapper.hide();
+            description.innerHTML = "";
             price_wrapper.classList.add('small');
             error.show();
             error.textContent = details['error'].message;
@@ -64393,6 +64395,7 @@ var Price = (function () {
             purchase.show();
             comment.show();
             amount_wrapper.show();
+            price_wrapper.show();
             price_wrapper.classList.remove('small');
             error.hide();
             if (is_spread) {
