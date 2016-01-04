@@ -50408,8 +50408,8 @@ Menu.prototype = {
                 if(markets_array.indexOf(link_id) < 0) {
                     var link = $(this).find('a');
                     if(markets_array.indexOf(link.attr('id')) < 0) {
-                        link.addClass('disabled-link');
-                        link.removeAttr('href');
+                        var link_text = link.text();
+                        link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text}));
                     }
                 }
             });
@@ -50492,7 +50492,6 @@ Menu.prototype = {
             }
             start_trading.attr("href", trade_url);
 
-            $('#menu-top li:eq(3) a').attr('href', trade_url);
             $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
@@ -50500,12 +50499,6 @@ Menu.prototype = {
             event.preventDefault();
             load_with_pjax(trade_url);
         }).addClass('unbind_later');
-
-        $('#menu-top li:eq(3) a').on('click', function(event) {
-            event.preventDefault();
-            load_with_pjax(trade_url);
-        }).addClass('unbind_later');
-
     }
 };
 
@@ -64783,14 +64776,15 @@ var Purchase = (function () {
         var error = details['error'];
         var show_chart = !error && passthrough['duration']<=10 && passthrough['duration_unit']==='t' && (sessionStorage.formname === 'risefall' || sessionStorage.formname === 'higherlower' || sessionStorage.formname === 'asian');
 
-        container.style.display = 'table-row';
         contracts_list.style.display = 'none';
 
         if (error) {
+            container.style.display = 'block';
             message_container.hide();
             confirmation_error.show();
             confirmation_error.textContent = error['message'];
         } else {
+            container.style.display = 'table-row';
             message_container.show();
             confirmation_error.hide();
 
@@ -66847,9 +66841,13 @@ var Table = (function(){
         errorMessagePassword: errorMessagePassword
     };
 }());
-;pjax_config_page("limitws", function(){
+;pjax_config_page("limitsws", function(){
     return {
         onLoad: function() {
+            if (!$.cookie('login')) {
+                window.location.href = page.url.url_for('login');
+                return;
+            }
             Content.populate();
             document.getElementById('client_message').setAttribute('style', 'display:none');
 
@@ -66867,7 +66865,7 @@ var Table = (function(){
                             LimitsWS.limitsHandler(response);
                         } else if (error) {
                             LimitsWS.limitsError();
-                        } 
+                        }
                     }
                 }
             });
