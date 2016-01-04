@@ -58587,7 +58587,7 @@ pjax_config_page('user/assessment', function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test(($(fieldID).val() + '').trim())){
+        if(!$(fieldID).val() || !(/.+/).test($(fieldID).val().trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
@@ -59189,7 +59189,7 @@ ClientForm.prototype = {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test(($(fieldID).val() + '').trim())){
+        if(!$(fieldID).val() || !(/.+/).test($(fieldID).val().trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
@@ -66212,7 +66212,7 @@ pjax_config_page("cashier/account_transferws", function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test(($(fieldID).val() + '').trim())){
+        if(!$(fieldID).val() || !(/.+/).test($(fieldID).val().trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {

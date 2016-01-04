@@ -133,7 +133,7 @@ var PaymentAgentWithdrawWS = (function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test(($(fieldID).val() + '').trim())){
+        if(!$(fieldID).val() || !(/.+/).test($(fieldID).val().trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
