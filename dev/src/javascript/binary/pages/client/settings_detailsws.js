@@ -117,7 +117,7 @@ var SettingsDetailsWS = (function() {
         }
 
         // state
-        if(!isRequiredError(fieldIDs.state) && !(/^[a-zA-Z\s\-']+$/).test(state)) {
+        if(!isRequiredError(fieldIDs.state) && ($(fieldIDs.state).is('input') && !(/^[a-zA-Z\s\-']+$/).test(state))) {
             showError(fieldIDs.state, Content.errorMessage('reg', [letters, space, '- \'']));
         }
 
