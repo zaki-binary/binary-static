@@ -64369,7 +64369,7 @@ var Price = (function () {
             }
         }
 
-        if (proposal['display_value']) {
+        if (proposal && proposal['display_value']) {
             if (is_spread) {
                 amount.textContent = proposal['display_value'];
             } else {
@@ -64377,7 +64377,7 @@ var Price = (function () {
             }
         }
 
-        if (proposal['longcode']) {
+        if (proposal && proposal['longcode']) {
             proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
             description.innerHTML = '<div>'+proposal['longcode']+'</div>';
         }
