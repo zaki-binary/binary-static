@@ -1,4 +1,4 @@
-var TradingTimesWS = (function() {
+var MarketTimesWS = (function() {
     "use strict";
 
     var $date,
@@ -13,6 +13,8 @@ var TradingTimesWS = (function() {
         $date      = $('#trading-date');
         $container = $('#trading-times');
         columns    = ['Asset', 'Opens', 'Closes', 'Settles', 'UpcomingEvents'];
+        activeSymbols = null;
+        tradingTimes = null;
         showLoadingImage($container);
         BinarySocket.send({"active_symbols": "brief"});
         sendRequest('today');
@@ -146,7 +148,7 @@ var TradingTimesWS = (function() {
         for(var i = 0; i < events.length; i++) {
             result += (i > 0 ? '<br />' : '') + events[i].descrip + ': ' + events[i].dates;
         }
-        return result;
+        return result.length > 0 ? result : '--';
     };
 
     var createEmptyTable = function(tableID) {
@@ -176,7 +178,7 @@ var TradingTimesWS = (function() {
 
 
 
-pjax_config_page("trading_timesws", function() {
+pjax_config_page("market_timesws", function() {
     return {
         onLoad: function() {
             BinarySocket.init({
@@ -184,17 +186,17 @@ pjax_config_page("trading_timesws", function() {
                     var response = JSON.parse(msg.data);
                     if (response) {
                         if (response.msg_type === "trading_times") {
-                            TradingTimesWS.getTradingTimes(response);
+                            MarketTimesWS.getTradingTimes(response);
                         }
                         else if (response.msg_type === "active_symbols") {
-                            TradingTimesWS.getActiveSymbols(response);
+                            MarketTimesWS.getActiveSymbols(response);
                         }
                     }
                 }
             });
 
             Content.populate();
-            TradingTimesWS.init();
+            MarketTimesWS.init();
         }
     };
 });

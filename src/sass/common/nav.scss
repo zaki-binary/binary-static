@@ -17,8 +17,11 @@
     li {
       margin: 0 2em 0 0;
       display: inline-block;
-      &#topMenuBetaInterface {
-          float: right;
+      &#topMenuStartBetting {
+          float: if($LANGUAGE_DIRECTION == ltr, right, left);
+          ul {
+            text-align: if($LANGUAGE_DIRECTION == ltr, right, left);
+          }
       }
       a {
         font-weight: normal;
