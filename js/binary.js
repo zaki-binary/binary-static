@@ -59523,7 +59523,7 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
-var get_residence_list = function(residenceId) {
+var get_residence_list = function() {
     var url = page.url.url_for('residence_list');
     $.getJSON(url, function(data) {
         var countries = [];
@@ -59536,11 +59536,7 @@ var get_residence_list = function(residenceId) {
                 selected = ' selected="selected" ';
             }
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
-            if(residenceId){
-                $("#" + residenceId).html(countries.join(''));
-            } else {
-                $("#residence").html(countries.join(''));
-            }
+            $("#residence").html(countries.join(''));
 
             $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
@@ -59675,27 +59671,50 @@ function isValidDate(day, month, year){
     return day <= daysInMonth[--month];
 }
 
+function handle_residence_state_ws(){
+  BinarySocket.init({
+    onmessage: function(msg){
+      var select;
+      var response = JSON.parse(msg.data);
+      if (response) {
+        var type = response.msg_type;
+        if (type === 'states_list'){
+          select = document.getElementById('address-state');
+          var states_list = response.states_list;
+          if (states_list.length > 0){
+            for (i = 0; i < states_list.length; i++) {
+                appendTextValueChild(select, states_list[i].text, states_list[i].value);
+            }
+            select.parentNode.parentNode.setAttribute('style', 'display:block');
+          }
+        }
+        if (type === 'residence_list'){
+          select = document.getElementById('residence-disabled');
+          var phoneElement = document.getElementById('tel'),
+              residenceValue = $.cookie('residence'),
+              residence_list = response.residence_list;
+          if (residence_list.length > 0){
+            for (i = 0; i < residence_list.length; i++) {
+              appendTextValueChild(select, residence_list[i].text, residence_list[i].value);
+              if (phoneElement && residence_list[i].phone_idd && residenceValue === residence_list[i].value){
+                phoneElement.value = '+' + residence_list[i].phone_idd;
+              }
+            }
+            select.parentNode.parentNode.setAttribute('style', 'display:block');
+          }
+        }
+      }
+    }
+  });
+}
+
+function setResidenceWs(){
+  BinarySocket.send({ residence_list: 1 });
+}
+
 //pass select element to generate list of states
 function generateState(select) {
     appendTextValueChild(select, Content.localize().textSelect, '');
-
-    BinarySocket.init({
-        onmessage: function(msg){
-            var response = JSON.parse(msg.data);
-            if (response) {
-                var type = response.msg_type;
-                if (type === 'states_list'){
-                    var states_list = response.states_list;
-                    if (states_list.length > 0){
-                        for (i = 0; i < states_list.length; i++) {
-                            appendTextValueChild(select, states_list[i].text, states_list[i].value);
-                        }
-                        select.parentNode.parentNode.setAttribute('style', 'display:block');
-                    }
-                }
-            }
-        }
-    });
     BinarySocket.send({ states_list: $.cookie('residence') });
 }
 
@@ -59824,35 +59843,6 @@ pjax_config_page('/bulk-trader-facility', function() {
         },
         onUnload: function() {
             $(window).off('scroll');
-        }
-    };
-});
-pjax_config_page('user/my_account', function() {
-    return {
-        onLoad: function() {
-            gtm_data_layer_info();
-            if (window.location.search.indexOf('id=') > -1) {
-                var loginid = getUrlVars()["id"];
-                var id_obj = { 'id':loginid, 'real':true, 'disabled':false };
-                var counter = 0;
-                var regex = new RegExp(loginid);
-
-                for (i = 0; i < page.user.loginid_array.length; i++){
-                    if (regex.test(page.user.loginid_array[i].id)) {
-                        counter++;
-                    }
-                }
-                if (counter === 0){
-                    page.user.loginid_array.unshift(id_obj);
-                }
-                if (!(regex.test($.cookie('loginid_list')))) {
-                    var oldCookieValue = $.cookie('loginid_list');
-                    $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
-                    $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
-                    page.header.show_or_hide_login_form();
-                }
-
-            }
         }
     };
 });
@@ -67262,61 +67252,66 @@ var ProfitTableUI = (function(){
     };
 }());
 ;pjax_config_page("new_account/realws", function(){
-	
-	return {
-		onLoad: function() {
-			Content.populate();
-			get_residence_list('residence-disabled');
-			var residenceValue = $.cookie('residence');
 
-			$(window).load(function() {
-				var title     = document.getElementById('title'),
-					dobdd     = document.getElementById('dobdd'),
-				    dobmm     = document.getElementById('dobmm'),
-				    dobyy     = document.getElementById('dobyy'),
-				    residence = document.getElementById('residence-disabled'),
-				    state     = document.getElementById('address-state'),
-				    question  = document.getElementById('secret-question');
+  return {
+    onLoad: function() {
+      if (!$.cookie('login')) {
+          window.location.href = page.url.url_for('login');
+          return;
+      }
+      Content.populate();
+      var residenceValue = $.cookie('residence');
+      var title     = document.getElementById('title'),
+          dobdd     = document.getElementById('dobdd'),
+          dobmm     = document.getElementById('dobmm'),
+          dobyy     = document.getElementById('dobyy'),
+          residence = document.getElementById('residence-disabled'),
+          state     = document.getElementById('address-state'),
+          tel       = document.getElementById('tel'),
+          question  = document.getElementById('secret-question');
+      RealAccOpeningUI.setValues(dobdd, dobmm, dobyy, state, question, tel, residenceValue);
+      setTitles(title);
 
-				setTitles(title);
-				RealAccOpeningUI.setValues(dobdd, dobmm, dobyy, state, question);
-				residence.value = residenceValue;
+      $(window).load(function() {
+        residence.value = residenceValue;
 
-				$('#real-form').submit(function(evt) {
-					evt.preventDefault();
+        $('#real-form').submit(function(evt) {
+          evt.preventDefault();
+          if (residenceValue) {
+            if (RealAccOpeningUI.checkValidity()){
+              BinarySocket.init({
+                onmessage: function(msg){
+                  var response = JSON.parse(msg.data);
+                  if (response) {
+                    var type = response.msg_type;
+                    var error = response.error;
 
-					if (residenceValue) {
-						if (RealAccOpeningUI.checkValidity()){
-
-							BinarySocket.init({
-						        onmessage: function(msg){
-						            var response = JSON.parse(msg.data);
-						            if (response) {
-						                var type = response.msg_type;
-						                var error = response.error;
-
-						                if (type === 'new_account_real' && !error){
-						                    window.location.href = page.url.url_for('user/my_account') + '&newaccounttype=real&login=true&id=' + response.new_account_real.client_id;
-						                } else if (error) {
-						                	if (/multiple real money accounts/.test(error.message)){
-						                		var duplicate = 'duplicate';
-						                		RealAccOpeningUI.showError(duplicate);
-						                	} else {
-						                		RealAccOpeningUI.showError();
-						                	}
-						                }
-						            }
-						        }
-						    });
-						}
-
-					} else {
-						RealAccOpeningUI.showError();
-					}
-				});
-			});
-		}
-	};
+                    if (type === 'new_account_real' && !error){
+                      var loginid = response.new_account_real.client_id;
+                      var oldCookieValue = $.cookie('loginid_list');
+                      $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
+                      $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+                      page.header.show_or_hide_login_form();
+                      window.location.href = page.url.url_for('user/my_account') + '&newaccounttype=real&login=true&newrealaccount';
+                    } else if (error) {
+                      if (/multiple real money accounts/.test(error.message)){
+                        var duplicate = 'duplicate';
+                        RealAccOpeningUI.showError(duplicate);
+                      } else {
+                        RealAccOpeningUI.showError();
+                      }
+                    }
+                  }
+                }
+              });
+            }
+          } else {
+            RealAccOpeningUI.showError();
+          }
+        });
+      });
+    }
+  };
 });
 ;var RealAccOpeningData = (function(){
     function getRealAcc(arr){
@@ -67345,214 +67340,217 @@ var ProfitTableUI = (function(){
     };
 }());
 ;var RealAccOpeningUI = (function(){
-    "use strict";
+  "use strict";
 
-    function setValues(dobdd, dobmm, dobyy, state, question){
-        generateBirthDate(dobdd, dobmm, dobyy);
-        generateState(state);
+  function setValues(dobdd, dobmm, dobyy, state, question, tel, residenceValue){
+    handle_residence_state_ws();
+    generateBirthDate(dobdd, dobmm, dobyy);
+    setResidenceWs(tel, residenceValue);
+    generateState(state);
 
-        var secretQuestions = [
-            "Mother's maiden name",
-            "Name of your pet",
-            "Name of first love",
-            "Memorable town/city",
-            "Memorable date",
-            "Favourite dish",
-            "Brand of first car",
-            "Favourite artist"
-        ];
+    var secretQuestions = [
+        "Mother's maiden name",
+        "Name of your pet",
+        "Name of first love",
+        "Memorable town/city",
+        "Memorable date",
+        "Favourite dish",
+        "Brand of first car",
+        "Favourite artist"
+    ];
 
-        for (i = 0; i < secretQuestions.length; i++) {
-            appendTextValueChild(question, secretQuestions[i], secretQuestions[i]);
-        }
-
+    for (i = 0; i < secretQuestions.length; i++) {
+        appendTextValueChild(question, secretQuestions[i], secretQuestions[i]);
     }
 
-    function showError(opt){
-        $('#real-form').remove();
-        var error = document.getElementsByClassName('notice-msg')[0];
-        if (opt === 'duplicate') {
-            error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you don't remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>";
-        } else {
-            error.innerHTML = Content.localize().textUnavailableReal;
-        }
-        error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
+  }
+
+  function showError(opt){
+    $('#real-form').remove();
+    var error = document.getElementsByClassName('notice-msg')[0];
+    if (opt === 'duplicate') {
+      error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you don't remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>";
+    } else {
+      error.innerHTML = Content.localize().textUnavailableReal;
+    }
+    error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
+  }
+
+  function hideAllErrors(allErrors) {
+    for (i = 0; i < allErrors.length; i++) {
+      Validate.hideErrorMessage(allErrors[i]);
+    }
+  }
+
+  function checkValidity(){
+    var errorCounter = 0;
+
+    var letters = Content.localize().textLetters,
+        numbers = Content.localize().textNumbers,
+        space   = Content.localize().textSpace,
+        hyphen  = Content.localize().textHyphen,
+        period  = Content.localize().textPeriod,
+        apost   = Content.localize().textApost;
+
+    var title     = document.getElementById('title'),
+        fname     = document.getElementById('fname'),
+        lname     = document.getElementById('lname'),
+        dobdd     = document.getElementById('dobdd'),
+        dobmm     = document.getElementById('dobmm'),
+        dobyy     = document.getElementById('dobyy'),
+        residence = document.getElementById('residence-disabled'),
+        address1  = document.getElementById('address1'),
+        address2  = document.getElementById('address2'),
+        town      = document.getElementById('address-town'),
+        state     = document.getElementById('address-state'),
+        postcode  = document.getElementById('address-postcode'),
+        tel       = document.getElementById('tel'),
+        question  = document.getElementById('secret-question'),
+        answer    = document.getElementById('secret-answer'),
+        tnc       = document.getElementById('tnc');
+
+    var arr = [
+                title.value,
+                fname.value,
+                lname.value,
+                dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
+                $.cookie('residence'),
+                address1.value,
+                address2.value,
+                town.value,
+                state.value,
+                postcode.value,
+                tel.value,
+                question.value,
+                answer.value
+            ];
+
+    var errorTitle     = document.getElementById('error-title'),
+        errorFname     = document.getElementById('error-fname'),
+        errorLname     = document.getElementById('error-lname'),
+        errorBirthdate = document.getElementById('error-birthdate'),
+        errorResidence = document.getElementById('error-residence'),
+        errorAddress1  = document.getElementById('error-address1'),
+        errorAddress2  = document.getElementById('error-address2'),
+        errorTown      = document.getElementById('error-town'),
+        errorState     = document.getElementById('error-state'),
+        errorPostcode  = document.getElementById('error-postcode'),
+        errorTel       = document.getElementById('error-tel'),
+        errorQuestion  = document.getElementById('error-question'),
+        errorAnswer    = document.getElementById('error-answer'),
+        errorTnc       = document.getElementById('error-tnc');
+
+    var allErrors = [
+                        errorTitle,
+                        errorFname,
+                        errorLname,
+                        errorBirthdate,
+                        errorResidence,
+                        errorAddress1,
+                        errorAddress2,
+                        errorTown,
+                        errorState,
+                        errorPostcode,
+                        errorTel,
+                        errorQuestion,
+                        errorAnswer,
+                        errorTnc
+                    ];
+
+    hideAllErrors(allErrors);
+
+    if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(fname.value)){
+      errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
+      Validate.displayErrorMessage(errorFname);
+      errorCounter++;
     }
 
-    function hideAllErrors(allErrors) {
-        for (i = 0; i < allErrors.length; i++) {
-            Validate.hideErrorMessage(allErrors[i]);
-        }
+    if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(lname.value)){
+      errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
+      Validate.displayErrorMessage(errorLname);
+      errorCounter++;
     }
 
-    function checkValidity(){
-        var errorCounter = 0;
-
-        var letters = Content.localize().textLetters,
-            numbers = Content.localize().textNumbers,
-            space   = Content.localize().textSpace,
-            hyphen  = Content.localize().textHyphen,
-            period  = Content.localize().textPeriod,
-            apost   = Content.localize().textApost;
-
-        var title     = document.getElementById('title'),
-            fname     = document.getElementById('fname'),
-            lname     = document.getElementById('lname'),
-            dobdd     = document.getElementById('dobdd'),
-            dobmm     = document.getElementById('dobmm'),
-            dobyy     = document.getElementById('dobyy'),
-            residence = document.getElementById('residence-disabled'),
-            address1  = document.getElementById('address1'),
-            address2  = document.getElementById('address2'),
-            town      = document.getElementById('address-town'),
-            state     = document.getElementById('address-state'),
-            postcode  = document.getElementById('address-postcode'),
-            tel       = document.getElementById('tel'),
-            question  = document.getElementById('secret-question'),
-            answer    = document.getElementById('secret-answer'),
-            tnc       = document.getElementById('tnc');
-
-        var arr = [ 
-                    title.value,
-                    fname.value,
-                    lname.value,
-                    dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
-                    $.cookie('residence'),
-                    address1.value,
-                    address2.value,
-                    town.value,
-                    state.value,
-                    postcode.value,
-                    tel.value,
-                    question.value,
-                    answer.value
-                ];
-
-        var errorTitle     = document.getElementById('error-title'),
-            errorFname     = document.getElementById('error-fname'),
-            errorLname     = document.getElementById('error-lname'),
-            errorBirthdate = document.getElementById('error-birthdate'),
-            errorResidence = document.getElementById('error-residence'),
-            errorAddress1  = document.getElementById('error-address1'),
-            errorAddress2  = document.getElementById('error-address2'),
-            errorTown      = document.getElementById('error-town'),
-            errorState     = document.getElementById('error-state'),
-            errorPostcode  = document.getElementById('error-postcode'),
-            errorTel       = document.getElementById('error-tel'),
-            errorQuestion  = document.getElementById('error-question'),
-            errorAnswer    = document.getElementById('error-answer'),
-            errorTnc       = document.getElementById('error-tnc');
-        
-        var allErrors = [
-                            errorTitle, 
-                            errorFname, 
-                            errorLname, 
-                            errorBirthdate, 
-                            errorResidence, 
-                            errorAddress1, 
-                            errorAddress2, 
-                            errorTown, 
-                            errorState, 
-                            errorPostcode, 
-                            errorTel, 
-                            errorQuestion, 
-                            errorAnswer,
-                            errorTnc
-                        ];
-
-        hideAllErrors(allErrors);
-
-        if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(fname.value)){
-            errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
-            Validate.displayErrorMessage(errorFname);
-            errorCounter++;
-        }
-
-        if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(lname.value)){
-            errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
-            Validate.displayErrorMessage(errorLname);
-            errorCounter++;
-        }
-
-        if (!isValidDate(dobdd.value, dobmm.value, dobyy.value)) {   
-            errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
-            Validate.displayErrorMessage(errorBirthdate);
-            errorCounter++;
-        }
-
-        if (!/^[a-zA-Z|\d]+(\s|-|.|'[a-zA-Z]*)*$/.test(address1.value)){
-            errorAddress1.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
-            Validate.displayErrorMessage(errorAddress1);
-            errorCounter++;
-        }
-
-        if (!/^[a-zA-Z]+(\s|-|.[a-zA-Z]*)*$/.test(town.value)){
-            errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, ' ']);
-            Validate.displayErrorMessage(errorTown);
-            errorCounter++;
-        }
-
-        if(state.offsetParent !== null && state.value === '') {
-            errorState.innerHTML = Content.errorMessage('req');
-            Validate.displayErrorMessage(errorState);
-            errorCounter++;
-        }
-
-        if (!/^\d+(-|\d]*)*$/.test(postcode.value)){
-            errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
-            Validate.displayErrorMessage(errorPostcode);
-            errorCounter++;
-        }
-
-        if (tel.value.length < 6) {
-            errorTel.innerHTML = Content.errorMessage('min', 6);
-            Validate.displayErrorMessage(errorTel);
-            errorCounter++;
-        } else if (!/^\+?\d{6,35}$/.test(tel.value)){
-            errorTel.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
-            Validate.displayErrorMessage(errorTel);
-            errorCounter++;
-        }
-
-        if (answer.value.length < 4) {
-            errorAnswer.innerHTML = Content.errorMessage('min', 4);
-            Validate.displayErrorMessage(errorAnswer);
-            errorCounter++;
-        } else if (!/^[a-zA-Z0-9]*(\s|-|.[a-zA-Z0-9]*){4,60}$/.test(answer.value)){
-            errorAnswer.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
-            Validate.displayErrorMessage(errorAnswer);
-            errorCounter++;
-        }
-
-        if (!tnc.checked){
-            errorTnc.innerHTML = Content.errorMessage('req');
-            Validate.displayErrorMessage(errorTnc);
-            errorCounter++;
-        }
-
-        for (i = 0; i < arr.length; i++){
-            if (/^$/.test(arr[i]) && i !== 6 && i !== 8){
-                allErrors[i].innerHTML = Content.errorMessage('req');
-                Validate.displayErrorMessage(allErrors[i]);
-                errorCounter++;
-            }
-        }
-
-        if (errorCounter === 0) {
-            RealAccOpeningData.getRealAcc(arr);
-            hideAllErrors(allErrors);
-            return 1;
-        }
-        
-        return 0;
+    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value)) {
+      errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
+      Validate.displayErrorMessage(errorBirthdate);
+      errorCounter++;
     }
 
-    return {
-        setValues: setValues,
-        showError: showError,
-        checkValidity: checkValidity
-    };
-})();;pjax_config_page("user/statement", function(){
+    if (!/^[a-zA-Z|\d]+(\s|-|.|'[a-zA-Z]*)*$/.test(address1.value)){
+      errorAddress1.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
+      Validate.displayErrorMessage(errorAddress1);
+      errorCounter++;
+    }
+
+    if (!/^[a-zA-Z]+(\s|-|.[a-zA-Z]*)*$/.test(town.value)){
+      errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, ' ']);
+      Validate.displayErrorMessage(errorTown);
+      errorCounter++;
+    }
+
+    if(state.offsetParent !== null && state.value === '') {
+      errorState.innerHTML = Content.errorMessage('req');
+      Validate.displayErrorMessage(errorState);
+      errorCounter++;
+    }
+
+    if (!/^\d+(-|\d]*)*$/.test(postcode.value)){
+      errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+      Validate.displayErrorMessage(errorPostcode);
+      errorCounter++;
+    }
+
+    if (tel.value.length < 6) {
+      errorTel.innerHTML = Content.errorMessage('min', 6);
+      Validate.displayErrorMessage(errorTel);
+      errorCounter++;
+    } else if (!/^\+?\d{6,35}$/.test(tel.value)){
+      errorTel.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+      Validate.displayErrorMessage(errorTel);
+      errorCounter++;
+    }
+
+    if (answer.value.length < 4) {
+      errorAnswer.innerHTML = Content.errorMessage('min', 4);
+      Validate.displayErrorMessage(errorAnswer);
+      errorCounter++;
+    } else if (!/^[a-zA-Z0-9]*(\s|-|.[a-zA-Z0-9]*){4,60}$/.test(answer.value)){
+      errorAnswer.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+      Validate.displayErrorMessage(errorAnswer);
+      errorCounter++;
+    }
+
+    if (!tnc.checked){
+      errorTnc.innerHTML = Content.errorMessage('req');
+      Validate.displayErrorMessage(errorTnc);
+      errorCounter++;
+    }
+
+    for (i = 0; i < arr.length; i++){
+      if (/^$/.test(arr[i]) && i !== 6 && i !== 8){
+        allErrors[i].innerHTML = Content.errorMessage('req');
+        Validate.displayErrorMessage(allErrors[i]);
+        errorCounter++;
+      }
+    }
+
+    if (errorCounter === 0) {
+      RealAccOpeningData.getRealAcc(arr);
+      hideAllErrors(allErrors);
+      return 1;
+    }
+
+    return 0;
+  }
+
+  return {
+    setValues: setValues,
+    showError: showError,
+    checkValidity: checkValidity
+  };
+})();
+;pjax_config_page("user/statement", function(){
     return {
         onLoad: function() {
             if (!getCookieItem('login')) {
@@ -67888,67 +67886,67 @@ var ViewBalanceUI = (function(){
     };
 }());
 ;pjax_config_page("virtualws", function(){
-	
-	return {
-		onLoad: function() {
-        	get_residence_list();
-        	Content.populate();
 
-			var form = document.getElementById('virtual-form');
-			var errorEmail = document.getElementById('error-email');
+  return {
+    onLoad: function() {
+          get_residence_list();
+          Content.populate();
 
-		    VirtualAccOpeningUI.setLabel();
+      var form = document.getElementById('virtual-form');
+      var errorEmail = document.getElementById('error-email');
 
-			if (form) {
+        VirtualAccOpeningUI.setLabel();
 
-				$('#virtual-form').submit( function(evt) {
-					evt.preventDefault();
-					Validate.hideErrorMessage(errorEmail);
+      if (form) {
 
-					var email = document.getElementById('email').value,
-				    	residence = document.getElementById('residence').value,
-				    	password = document.getElementById('password').value,
-						rPassword = document.getElementById('r-password').value;
+        $('#virtual-form').submit( function(evt) {
+          evt.preventDefault();
+          Validate.hideErrorMessage(errorEmail);
 
-					if (VirtualAccOpeningUI.checkPassword(password, rPassword)) {
-						
-						BinarySocket.init({
-					        onmessage: function(msg){
-					            var response = JSON.parse(msg.data);
+          var email = document.getElementById('email').value,
+              residence = document.getElementById('residence').value,
+              password = document.getElementById('password').value,
+            rPassword = document.getElementById('r-password').value;
 
-					            if (response) {
-					                var type = response.msg_type;
-					                var error = response.error;
+          if (VirtualAccOpeningUI.checkPassword(password, rPassword)) {
 
-					                if (type === 'new_account_virtual' && !error){
+            BinarySocket.init({
+                  onmessage: function(msg){
+                      var response = JSON.parse(msg.data);
 
-					                    form.setAttribute('action', '/login');
-										form.setAttribute('method', 'POST');
+                      if (response) {
+                          var type = response.msg_type;
+                          var error = response.error;
 
-										$('#virtual-form').unbind('submit');
-										form.submit();
+                          if (type === 'new_account_virtual' && !error){
 
-					                } else if (type === 'error' || error){
-					                	if (/email address is already in use/.test(error.message)) {
-				                			errorEmail.textContent = Content.localize().textDuplicatedEmail;
-				                		} else if (/required/.test(error.message)) {
-				                			errorEmail.textContent = Content.localize().textTokenMissing;
-				                		} else { 
-				                			errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
-				                		}
-				                		Validate.displayErrorMessage(errorEmail);
-					                }
-					            }
-					        }
-					    });
+                              form.setAttribute('action', '/login');
+                    form.setAttribute('method', 'POST');
 
-					    VirtualAccOpeningData.getDetails(email, password, residence);
-					}
-					
-				});
-			}
-		}
-	};
+                    $('#virtual-form').unbind('submit');
+                    form.submit();
+
+                          } else if (type === 'error' || error){
+                            if (/email address is already in use/.test(error.message)) {
+                              errorEmail.textContent = Content.localize().textDuplicatedEmail;
+                            } else if (/required/.test(error.message)) {
+                              errorEmail.textContent = Content.localize().textTokenMissing;
+                            } else {
+                              errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+                            }
+                            Validate.displayErrorMessage(errorEmail);
+                          }
+                      }
+                  }
+              });
+
+              VirtualAccOpeningData.getDetails(email, password, residence);
+          }
+
+        });
+      }
+    }
+  };
 });
 ;var VirtualAccOpeningData = (function(){
     "use strict";
