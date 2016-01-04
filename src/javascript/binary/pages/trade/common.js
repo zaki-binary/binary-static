@@ -613,7 +613,7 @@ function getDefaultMarket() {
     if (!mkt || !markets[mkt]) {
         var sorted_markets = Object.keys(Symbols.markets()).sort(function(a, b) {
             return getMarketsOrder(a) - getMarketsOrder(b);
-        })
+        });
         mkt = sorted_markets[0];
     }
     return mkt;
