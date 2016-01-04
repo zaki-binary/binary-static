@@ -619,6 +619,7 @@ function getDefaultMarket() {
     return mkt;
 }
 
+// Order
 function getMarketsOrder(market) {
     var order = {
         'forex': 1,
