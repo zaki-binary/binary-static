@@ -1,22 +1,28 @@
 var SettingsDetailsWS = (function() {
     "use strict";
 
-    var formID = '#frmPersonalDetails';
-    var frmBtn = formID + ' button',
-        RealAccElements = '.RealAcc',
-        errorClass = 'errorfield';
-    var fieldIDs = {
-        address1 : '#Address1',
-        address2 : '#Address2',
-        city     : '#City',
-        state    : '#State',
-        postcode : '#Postcode',
-        phone    : '#Phone'
-    };
+    var formID,
+        frmBtn,
+        RealAccElements,
+        errorClass;
+    var fieldIDs;
     var isValid;
 
 
     var init = function() {
+        formID = '#frmPersonalDetails';
+        frmBtn = formID + ' button';
+        RealAccElements = '.RealAcc';
+        errorClass = 'errorfield';
+        fieldIDs = {
+            address1 : '#Address1',
+            address2 : '#Address2',
+            city     : '#City',
+            state    : '#State',
+            postcode : '#Postcode',
+            phone    : '#Phone'
+        };
+
         BinarySocket.send({"get_settings": "1"});
     };
 
@@ -85,7 +91,7 @@ var SettingsDetailsWS = (function() {
         var address1 = $(fieldIDs.address1).val().trim(),
             address2 = $(fieldIDs.address2).val().trim(),
             city     = $(fieldIDs.city).val().trim(),
-            state    = $(fieldIDs.state).val().trim(),
+            state    = $(fieldIDs.state).val(),
             postcode = $(fieldIDs.postcode).val().trim(),
             phone    = $(fieldIDs.phone).val().trim();
         
@@ -141,7 +147,7 @@ var SettingsDetailsWS = (function() {
     };
 
     var isRequiredError = function(fieldID) {
-        if(!(/.+/).test($(fieldID).val().trim())){
+        if(!(/.+/).test(($(fieldID).val() + '').trim())){
             showError(fieldID, Content.errorMessage('req'));
             return true;
         } else {
