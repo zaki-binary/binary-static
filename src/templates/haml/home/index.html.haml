@@ -16,12 +16,12 @@
           %h3
             %strong= l('Create Free Account')
           %form#verify-email-form
-            %span.grd-grid-3
-            %div#open-account.grd-parent.grd-grid-6
+            %span.grd-grid-3.grd-hide-mobile
+            %div#open-account.grd-parent.grd-grid-6.grd-grid-mobile-12
               %input.grd-grid-9{:id => 'email', :placeholder => stash('emailtext')}
               %input.grd-grid-3.button{:id => 'btn-verify-email', :type => 'submit', :value => stash('createacc')}
               %p.grd-grid-12.error-message#signup_error{:style => 'display:none'}
-            %span.grd-grid-3
+            %span.grd-grid-3.grd-hide-mobile
 .grd-container
   %hr.xtopseparator
   #xsection1

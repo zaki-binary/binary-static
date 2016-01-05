@@ -39,7 +39,7 @@
       white-space: normal;
       font-size: 18px;
       height: 2.4em;
-      width: 30%!important;
+      width: 30%;
       &:hover {
                 text-decoration: none;
                 background-color: $COLOR_DARK_GREEN;
@@ -246,6 +246,24 @@
         }
         .xlist1, .xlist2, .xlist3{
           text-align: center;
+        }
+        #verify-email-form {
+          input {
+            &#email{
+              width: 92%;
+            }
+            &[type=submit]{
+              width: 70%!important;
+              margin-left: 2.85em;
+              margin-top: 0;
+            }
+          }
+          #open-account {
+            margin-top: 0.5em;
+          }
+        }
+        .small-image {
+          width: 50%;
         }
     }
 }
