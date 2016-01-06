@@ -12,20 +12,31 @@ BetAnalysis.JapanInfo = function() {
     }
 
     var add_header = function() {
+        var names = Contract.contractType()[Contract.form()];
+        var ask,bid;
+        for(var i=0; i<Object.keys(names).length; i++){
+            var pos = contractTypeDisplayMapping(Object.keys(names)[i]);
+            if(pos === 'top'){
+                ask = names[Object.keys(names)[i]];
+            }
+            else if(pos === 'bottom'){
+                bid = names[Object.keys(names)[i]];
+            }
+        }
         var $header = $('<div />', {
             'class': 'grd-parent grd-grid-12 grd-centered table-header grd-row-padding'
         }).append(
             $('<div />', {
                 'class': 'grd-grid-4 center-aligned',
-                'text': 'Trading window'
+                'text': Content.localize().textExercisePeriod
             }),
             $('<div />', {
                 'class': 'grd-grid-4 center-aligned',
-                'text': 'Ask price'
+                'text': ask
             }),
             $('<div />', {
                 'class': 'grd-grid-4 center-aligned',
-                'text': 'Bid price'
+                'text': bid
             })
         );
         $container.append($header);
@@ -85,8 +96,7 @@ BetAnalysis.JapanInfo = function() {
             'basis': 'payout',
             'currency': $('#currency').val(),
             'symbol': $('#underlying').val(),
-            'date_expiry': p[1],
-            'subscribe': 0
+            'date_expiry': p[1]
         };
 
         var id = 0;

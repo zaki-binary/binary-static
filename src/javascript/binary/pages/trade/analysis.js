@@ -204,7 +204,8 @@ var TradingAnalysis = (function() {
         },
         japan_info: function() {
             return tab_japan_info;
-        }
+        },
+        getActiveTab: getActiveTab
     };
 
 })();
