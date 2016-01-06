@@ -64101,14 +64101,18 @@ var Message = (function () {
  * `socket.send(Price.createProposal())` to send price proposal to sever
  * `Price.display()` to display the price details returned from server
  */
-var Price = (function () {
+var Price = (function() {
     'use strict';
 
     var typeDisplayIdMapping = {},
         form_id = 0;
 
-    var createProposal = function (typeOfContract) {
-        var proposal = {proposal: 1}, underlying = document.getElementById('underlying'),
+    var createProposal = function(typeOfContract) {
+        var proposal = {
+                proposal: 1,
+                subscribe: 1
+            },
+            underlying = document.getElementById('underlying'),
             submarket = document.getElementById('submarket'),
             contractType = typeOfContract,
             amountType = document.getElementById('amount_type'),
@@ -64159,9 +64163,9 @@ var Price = (function () {
         } else if (expiryType && isVisible(expiryType) && expiryType.value === 'endtime') {
             var endDate2 = endDate.value;
             var endTime2 = Durations.getTime();
-            if(!endTime2){
+            if (!endTime2) {
                 var trading_times = Durations.trading_times();
-                if(trading_times.hasOwnProperty(endDate2) && typeof trading_times[endDate2][underlying.value] === 'object' && trading_times[endDate2][underlying.value].length  && trading_times[endDate2][underlying.value][0]!=='--'){
+                if (trading_times.hasOwnProperty(endDate2) && typeof trading_times[endDate2][underlying.value] === 'object' && trading_times[endDate2][underlying.value].length && trading_times[endDate2][underlying.value][0] !== '--') {
                     endTime2 = trading_times[endDate2][underlying.value];
                 }
             }
@@ -64181,7 +64185,7 @@ var Price = (function () {
             proposal['barrier2'] = lowBarrier.value;
         }
 
-        if(prediction && isVisible(prediction)){
+        if (prediction && isVisible(prediction)) {
             proposal['barrier'] = parseInt(prediction.value);
         }
 
@@ -64205,12 +64209,14 @@ var Price = (function () {
             proposal['contract_type'] = typeOfContract;
         }
 
-        proposal['passthrough'] = {form_id:form_id};
+        proposal['passthrough'] = {
+            form_id: form_id
+        };
 
         return proposal;
     };
 
-    var display = function (details, contractType) {
+    var display = function(details, contractType) {
         var proposal = details['proposal'];
         var id = proposal ? proposal['id'] : '';
         var params = details['echo_req'];
@@ -64231,12 +64237,12 @@ var Price = (function () {
 
         var position = contractTypeDisplayMapping(type);
 
-        if(!position){
+        if (!position) {
             return;
         }
 
-        var container = document.getElementById('price_container_'+position);
-        if(!$(container).is(":visible")){
+        var container = document.getElementById('price_container_' + position);
+        if (!$(container).is(":visible")) {
             $(container).fadeIn(200);
         }
 
@@ -64273,11 +64279,13 @@ var Price = (function () {
         }
 
         if (proposal && proposal['longcode']) {
-            proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/,function(x){return '<b>'+x+'</b>';});
-            description.innerHTML = '<div>'+proposal['longcode']+'</div>';
+            proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/, function(x) {
+                return '<b>' + x + '</b>';
+            });
+            description.innerHTML = '<div>' + proposal['longcode'] + '</div>';
         }
 
-        if (details['error']){
+        if (details['error']) {
             purchase.hide();
             comment.hide();
             amount_wrapper.hide();
@@ -64285,7 +64293,7 @@ var Price = (function () {
             price_wrapper.classList.add('small');
             error.show();
             error.textContent = details['error'].message;
-        } else{
+        } else {
             purchase.show();
             comment.show();
             amount_wrapper.show();
@@ -64304,19 +64312,19 @@ var Price = (function () {
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
             purchase.setAttribute('data-display_value', proposal['display_value']);
             purchase.setAttribute('data-symbol', id);
-            for(var key in params){
-                if(key && key !== 'proposal'){
-                    purchase.setAttribute('data-'+key, params[key]);
+            for (var key in params) {
+                if (key && key !== 'proposal') {
+                    purchase.setAttribute('data-' + key, params[key]);
                 }
             }
         }
     };
 
-    var clearMapping = function () {
+    var clearMapping = function() {
         typeDisplayIdMapping = {};
     };
 
-    var clearFormId = function () {
+    var clearFormId = function() {
         form_id = 0;
     };
 
@@ -64324,9 +64332,15 @@ var Price = (function () {
         proposal: createProposal,
         display: display,
         clearMapping: clearMapping,
-        idDisplayMapping: function () { return typeDisplayIdMapping; },
-        getFormId: function(){ return form_id; },
-        incrFormId: function(){ form_id++; },
+        idDisplayMapping: function() {
+            return typeDisplayIdMapping;
+        },
+        getFormId: function() {
+            return form_id;
+        },
+        incrFormId: function() {
+            form_id++;
+        },
         clearFormId: clearFormId
     };
 
