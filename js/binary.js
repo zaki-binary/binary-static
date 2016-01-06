@@ -50264,16 +50264,28 @@ URL.prototype = {
         return url;
     },
     url_for_static: function(path) {
-        var locationHost = $('script[src*="binary.min.js"]').attr('src');
-
-        if(locationHost && locationHost.length > 0) {
-            locationHost = locationHost.substr(0, locationHost.indexOf('/js/') + 1);
+        if(!path) {
+            path = '';
         }
-        else {
-            locationHost = 'https://static.binary.com/';
+        else if (path.length > 0 && path[0] === '/') {
+            path = path.substr(1);
         }
 
-        return locationHost + path;
+        var staticHost = window.staticHost;
+        if(!staticHost || staticHost.length === 0) {
+            staticHost = $('script[src*="binary.min.js"]').attr('src');
+
+            if(staticHost && staticHost.length > 0) {
+                staticHost = staticHost.substr(0, staticHost.indexOf('/js/') + 1);
+            }
+            else {
+                staticHost = 'https://static.binary.com/';
+            }
+
+            window.staticHost = staticHost;
+        }
+
+        return staticHost + path;
     },
     reset: function() {
         this.location = window.location;
@@ -51530,6 +51542,7 @@ if (!/backoffice/.test(document.URL)) { // exclude BO
 
         LocalStore.set('active_loginid', match);
         var start_time;
+        var time_now;
         var tabChanged = function() {
             if(clock_started === true){
                 if (document.hidden || document.webkitHidden) {
@@ -65976,6 +65989,76 @@ pjax_config_page("cashier/account_transferws", function() {
             account_transferws.init();
         }
     };
+});;var my_accountws = (function(){
+
+    "use strict";
+    var currType;
+
+    var init = function(){
+    	$("#VRT_topup_link").hide();
+    	BinarySocket.send({"authorize": $.cookie('login'), "req_id": 1 });
+    };
+
+    var isAuthorized = function(response){
+    	var str , bal ;
+    	if(response.echo_req.req_id){
+	    	if("error" in response) {
+	            if("message" in response.error) {
+	                console.log(message);
+	            }
+	            return false;
+	        }
+	    	else{
+	    		currType = response.authorize.currency;
+	    		bal =  response.authorize.balance;
+	    		if(parseInt(response.req_id) === 1 && bal < 1000){
+	    			str = "Deposit "+ currType + " 10000 virtual money into your account ";
+	    			$("#VRT_topup_link").show();
+	    			$("#VRT_topup_link a").text(text.localize(str));
+	    		}
+	    	}
+    	}
+
+    };
+
+    var apiResponse = function(response){
+    	var type = response.msg_type;
+    	if(type === "authorize" || (type === "error" && "authorize" in response.echo_req))
+        {
+            isAuthorized(response);
+        }
+    };
+
+    return {
+    	init : init,
+    	apiResponse : apiResponse
+
+    };
+
+})();
+
+
+
+pjax_config_page("user/my_account", function() {
+    return {
+        onLoad: function() {
+        	if (!getCookieItem('login')) {
+                window.location.href = page.url.url_for('login');
+                return;
+            }
+        	BinarySocket.init({
+                onmessage: function(msg){
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        my_accountws.apiResponse(response);
+                          
+                    }
+                }
+            });	
+
+            my_accountws.init();
+        }
+    };
 });;var PaymentAgentListWS = (function() {
     "use strict";
 
@@ -66613,7 +66696,102 @@ pjax_config_page("user/settings/securityws", function() {
             securityws.init();
         }
     };
-});;var Button = (function(){
+});;var top_up_virtualws = (function(){
+
+	"use strict";
+    var account;
+
+    var init = function(){
+    	$("#VRT_topup_message").hide();
+    	$("#VRT_title").hide();
+    	$("#VRT_topup_errorMessage").hide();
+    	BinarySocket.send({"authorize": $.cookie('login'), "req_id": 1 });
+    };
+    var isAuthorized = function(response){
+    	if(response.echo_req.req_id){
+	    	if("error" in response) {
+	            if("message" in response.error) {
+	                $("#VRT_topup_errorMessage").show();
+	                $("#VRT_topup_errorMessage").text(text.localize(response.error.message));
+	                $("#VRT_topup_message").hide();
+	                $("#VRT_title").hide();
+	            }
+	            return false;
+	        }
+	    	else{
+	    		if(parseInt(response.req_id) === 1){
+	    			account = response.authorize.loginid;
+	    			BinarySocket.send({"topup_virtual": 1 });
+	    		}
+	    
+	    	}
+    	}
+
+    };
+    var responseMessage = function(response){
+    	var str, amt , currType;
+	 	if("error" in response) {
+            if("message" in response.error) {
+                $("#VRT_topup_errorMessage").show();
+                $("#VRT_topup_errorMessage").text(text.localize(response.error.message));
+                $("#VRT_topup_message").hide();
+                $("#VRT_title").hide();
+
+            }
+            return false;
+        }
+        else{
+        	currType = response.topup_virtual.currency;
+        	amt = response.topup_virtual.amount;
+        	str = currType + " " + amt + " has been credited to your Virtual money account " + account ;
+        	$("#VRT_topup_message p:first-child").html(text.localize(str));
+            $("#VRT_topup_message").show();
+            $("#VRT_title").show();
+            $("#VRT_topup_errorMessage").hide();
+        }
+
+    };
+
+    var apiResponse = function(response){
+    	var type = response.msg_type;
+    	if (type === "topup_virtual" || (type === "error" && "topup_virtual" in response.echo_req)){
+           responseMessage(response);
+
+        }else if(type === "authorize" || (type === "error" && "authorize" in response.echo_req))
+        {
+            isAuthorized(response);
+        }
+    };
+
+    return {
+    	init : init,
+    	apiResponse : apiResponse
+    };
+})();
+
+
+pjax_config_page("cashier/top_up_virtualws", function() {
+    return {
+        onLoad: function() {
+        	if (!getCookieItem('login')) {
+                window.location.href = page.url.url_for('login');
+                return;
+            }
+        	BinarySocket.init({
+                onmessage: function(msg){
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        top_up_virtualws.apiResponse(response);
+                          
+                    }
+                }
+            });	
+           
+            top_up_virtualws.init();
+        }
+    };
+});
+;var Button = (function(){
     "use strict";
     function createBinaryStyledButton(){
         var span = $("<span></span>", {class: "button"});

@@ -141,16 +141,28 @@ URL.prototype = {
         return url;
     },
     url_for_static: function(path) {
-        var locationHost = $('script[src*="binary.min.js"]').attr('src');
-
-        if(locationHost && locationHost.length > 0) {
-            locationHost = locationHost.substr(0, locationHost.indexOf('/js/') + 1);
+        if(!path) {
+            path = '';
         }
-        else {
-            locationHost = 'https://static.binary.com/';
+        else if (path.length > 0 && path[0] === '/') {
+            path = path.substr(1);
         }
 
-        return locationHost + path;
+        var staticHost = window.staticHost;
+        if(!staticHost || staticHost.length === 0) {
+            staticHost = $('script[src*="binary.min.js"]').attr('src');
+
+            if(staticHost && staticHost.length > 0) {
+                staticHost = staticHost.substr(0, staticHost.indexOf('/js/') + 1);
+            }
+            else {
+                staticHost = 'https://static.binary.com/';
+            }
+
+            window.staticHost = staticHost;
+        }
+
+        return staticHost + path;
     },
     reset: function() {
         this.location = window.location;
