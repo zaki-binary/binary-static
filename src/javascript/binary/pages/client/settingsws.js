@@ -2,7 +2,7 @@ var SettingsWS = (function() {
     "use strict";
 
     var init = function() {
-        var classHidden = '.invisible',
+        var classHidden = 'invisible',
             classReal   = '.real';
 
         if(page.client.is_real) {
@@ -11,6 +11,8 @@ var SettingsWS = (function() {
         else {
             $(classReal).addClass(classHidden);
         }
+
+        $('#settingsContainer').removeClass(classHidden);
     };
 
     return {
