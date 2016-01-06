@@ -50648,6 +50648,7 @@ Header.prototype = {
     },
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
+            sessionStorage.setItem('currencies', '');
             var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
@@ -50947,6 +50948,7 @@ Page.prototype = {
     on_change_loginid: function() {
         var that = this;
         $('#client_loginid').on('change', function() {
+            sessionStorage.setItem('currencies', '');
             $('#loginid-switch-form').submit();
         });
     },
