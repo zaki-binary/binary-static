@@ -21,8 +21,6 @@ How to work with this project
 External tools
 ==============
 
-<a href="https://zenhub.io"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px"></a>
-
 **Continuous integration** with Travis-CI: [![Build Status](https://travis-ci.org/binary-com/binary-static.svg?branch=master)](https://travis-ci.org/binary-com/binary-static)
 
 **Discuss the project on IRC** with gitter: [![Gitter chat](https://badges.gitter.im/binary-com/binary-static.png)](https://gitter.im/binary-com/binary-static)

@@ -1,4 +1,12 @@
 #trading-times, #asset-index {
+    table {
+        margin-top: -2px;
+    }
+    tr:nth-child(1) {
+        th {
+            background-color: $COLOR_GRAY_SHADE;
+        }
+    }
     th {
         &.flex-tr-child {
             line-height: 30px;
@@ -26,8 +34,11 @@
 }
 
 #asset-index {
-    th, .asset {
+    th {
         width: 12%;
+    }
+    .asset {
+        width: 18%;
     }
     th.flex-tr-child {
         &:nth-child(2):nth-last-child(1) {

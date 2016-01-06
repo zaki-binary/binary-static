@@ -229,7 +229,7 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
-var get_residence_list = function(residenceId) {
+var get_residence_list = function() {
     var url = page.url.url_for('residence_list');
     $.getJSON(url, function(data) {
         var countries = [];
@@ -242,11 +242,7 @@ var get_residence_list = function(residenceId) {
                 selected = ' selected="selected" ';
             }
             countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
-            if(residenceId){
-                $("#" + residenceId).html(countries.join(''));
-            } else {
-                $("#residence").html(countries.join(''));
-            }
+            $("#residence").html(countries.join(''));
 
             $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
         });
@@ -381,27 +377,50 @@ function isValidDate(day, month, year){
     return day <= daysInMonth[--month];
 }
 
+function handle_residence_state_ws(){
+  BinarySocket.init({
+    onmessage: function(msg){
+      var select;
+      var response = JSON.parse(msg.data);
+      if (response) {
+        var type = response.msg_type;
+        if (type === 'states_list'){
+          select = document.getElementById('address-state');
+          var states_list = response.states_list;
+          if (states_list.length > 0){
+            for (i = 0; i < states_list.length; i++) {
+                appendTextValueChild(select, states_list[i].text, states_list[i].value);
+            }
+            select.parentNode.parentNode.setAttribute('style', 'display:block');
+          }
+        }
+        if (type === 'residence_list'){
+          select = document.getElementById('residence-disabled');
+          var phoneElement = document.getElementById('tel'),
+              residenceValue = $.cookie('residence'),
+              residence_list = response.residence_list;
+          if (residence_list.length > 0){
+            for (i = 0; i < residence_list.length; i++) {
+              appendTextValueChild(select, residence_list[i].text, residence_list[i].value);
+              if (phoneElement && residence_list[i].phone_idd && residenceValue === residence_list[i].value){
+                phoneElement.value = '+' + residence_list[i].phone_idd;
+              }
+            }
+            select.parentNode.parentNode.setAttribute('style', 'display:block');
+          }
+        }
+      }
+    }
+  });
+}
+
+function setResidenceWs(){
+  BinarySocket.send({ residence_list: 1 });
+}
+
 //pass select element to generate list of states
 function generateState(select) {
     appendTextValueChild(select, Content.localize().textSelect, '');
-
-    BinarySocket.init({
-        onmessage: function(msg){
-            var response = JSON.parse(msg.data);
-            if (response) {
-                var type = response.msg_type;
-                if (type === 'states_list'){
-                    var states_list = response.states_list;
-                    if (states_list.length > 0){
-                        for (i = 0; i < states_list.length; i++) {
-                            appendTextValueChild(select, states_list[i].text, states_list[i].value);
-                        }
-                        select.parentNode.parentNode.setAttribute('style', 'display:block');
-                    }
-                }
-            }
-        }
-    });
     BinarySocket.send({ states_list: $.cookie('residence') });
 }
 
@@ -424,6 +443,12 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   var str = window.location.search;
   str = replaceQueryParam('l', 'EN', str);
   window.location = window.location.pathname + str;
+}
+
+if ($('#appcache-reload-message').css('display') !== 'none'){
+  setTimeout(function() {
+    $('#appcache-refresh-link').trigger('click');
+  }, 30000);
 }
 
 pjax_config_page('/$|/home', function() {
@@ -522,6 +547,7 @@ pjax_config_page('/careers', function() {
         },
     };
 });
+
 pjax_config_page('/bulk-trader-facility', function() {
     return {
         onLoad: function() {
@@ -533,32 +559,14 @@ pjax_config_page('/bulk-trader-facility', function() {
         }
     };
 });
-pjax_config_page('user/my_account', function() {
+
+pjax_config_page('/terms-and-condition', function() {
     return {
         onLoad: function() {
-            gtm_data_layer_info();
-            if (window.location.search.indexOf('id=') > -1) {
-                var loginid = getUrlVars()["id"];
-                var id_obj = { 'id':loginid, 'real':true, 'disabled':false };
-                var counter = 0;
-                var regex = new RegExp(loginid);
-
-                for (i = 0; i < page.user.loginid_array.length; i++){
-                    if (regex.test(page.user.loginid_array[i].id)) {
-                        counter++;
-                    }
-                }
-                if (counter === 0){
-                    page.user.loginid_array.unshift(id_obj);
-                }
-                if (!(regex.test($.cookie('loginid_list')))) {
-                    var oldCookieValue = $.cookie('loginid_list');
-                    $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
-                    $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
-                    page.header.show_or_hide_login_form();
-                }
-
+            var year = document.getElementsByClassName('currentYear');
+            for (i = 0; i < year.length; i++){
+              year[i].innerHTML = new Date().getFullYear();
             }
-        }
+        },
     };
 });

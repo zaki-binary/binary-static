@@ -71,16 +71,7 @@
                     <h1 class="ja-hide">[% l('Trading') %]</h1>
                     <ul class="ja-hide">
                         <li class="ja-hide">
-                            <a class="pjaxload" href="[% request.url_for('/resources/pricing_table') %]"[% IF target %]
-                            target="[%
-                            target %]"[% END %]>[% l('Pricing Table') %]</a>
-                        </li>
-                        <li>
-                            <a class="ja-hide pjaxload" href="[% request.url_for('/resources/rise_fall_table') %]"[% IF target %]
-                            target="[% target %]"[% END %]>[% l('Rise/Fall Table') %]</a>
-                        </li>
-                        <li class="ja-hide">
-                            <a class="pjaxload" href="[% request.url_for('/resources/asset_index') %]"[% IF target %]
+                            <a class="pjaxload" href="[% request.url_for('/resources/asset_indexws') %]"[% IF target %]
                             target="[%
                             target %]"[% END %]>[% l('Asset Index') %]</a>
                         </li>
@@ -199,7 +190,7 @@
         </div>
         <div id="appcache-reload-message">
             <div class="message">
-                [% l('A new version of the interface is available. Please <a href="#" id="appcache-refresh-link">refresh</a> this page to try again.') %]
+                [% l('A new version of the interface is available. This page will <a href="#" id="appcache-refresh-link">refresh</a> in 30 seconds.') %]
             </div>
         </div>
     </div>

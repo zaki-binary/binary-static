@@ -140,6 +140,30 @@ URL.prototype = {
 
         return url;
     },
+    url_for_static: function(path) {
+        if(!path) {
+            path = '';
+        }
+        else if (path.length > 0 && path[0] === '/') {
+            path = path.substr(1);
+        }
+
+        var staticHost = window.staticHost;
+        if(!staticHost || staticHost.length === 0) {
+            staticHost = $('script[src*="binary.min.js"]').attr('src');
+
+            if(staticHost && staticHost.length > 0) {
+                staticHost = staticHost.substr(0, staticHost.indexOf('/js/') + 1);
+            }
+            else {
+                staticHost = 'https://static.binary.com/';
+            }
+
+            window.staticHost = staticHost;
+        }
+
+        return staticHost + path;
+    },
     reset: function() {
         this.location = window.location;
         this._param_hash = undefined;
@@ -243,7 +267,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/signup$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -285,8 +309,8 @@ Menu.prototype = {
                 if(markets_array.indexOf(link_id) < 0) {
                     var link = $(this).find('a');
                     if(markets_array.indexOf(link.attr('id')) < 0) {
-                        link.addClass('disabled-link');
-                        link.removeAttr('href');
+                        var link_text = link.text();
+                        link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text}));
                     }
                 }
             });
@@ -369,7 +393,6 @@ Menu.prototype = {
             }
             start_trading.attr("href", trade_url);
 
-            $('#menu-top li:eq(3) a').attr('href', trade_url);
             $('#mobile-menu #topMenuStartBetting a.trading_link').attr('href', trade_url);
         }
 
@@ -377,12 +400,6 @@ Menu.prototype = {
             event.preventDefault();
             load_with_pjax(trade_url);
         }).addClass('unbind_later');
-
-        $('#menu-top li:eq(3) a').on('click', function(event) {
-            event.preventDefault();
-            load_with_pjax(trade_url);
-        }).addClass('unbind_later');
-
     }
 };
 
@@ -513,7 +530,7 @@ Header.prototype = {
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});
             });
-            
+
             window.location.href = page.url.url_for(''); //redirect to homepage
         }
     },
