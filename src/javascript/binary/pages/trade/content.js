@@ -117,7 +117,7 @@ var Content = (function () {
             textEmailAddress: text.localize('email address'),
             textRepeatPassword: text.localize('re-enter password'),
             textResidence: text.localize('Country of residence'),
-            textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your email and make sure you are not already logged in.'),
+            textTokenMissing: text.localize('Verification token is missing. Please click on the verification link sent to your email.'),
             textDetails: text.localize('Details'),
             textCreateNewAccount: text.localize('create new account'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),

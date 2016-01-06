@@ -2,13 +2,18 @@ pjax_config_page("virtualws", function(){
 
   return {
     onLoad: function() {
-          get_residence_list();
-          Content.populate();
+      get_residence_list();
+      Content.populate();
 
       var form = document.getElementById('virtual-form');
       var errorEmail = document.getElementById('error-email');
 
-        VirtualAccOpeningUI.setLabel();
+      VirtualAccOpeningUI.setLabel();
+
+      if ($.cookie('login')) {
+          window.location.href = page.url.url_for('user/my_account');
+          return;
+      }
 
       if (form) {
 
@@ -42,7 +47,7 @@ pjax_config_page("virtualws", function(){
                           } else if (type === 'error' || error){
                             if (/email address is already in use/.test(error.message)) {
                               errorEmail.textContent = Content.localize().textDuplicatedEmail;
-                            } else if (/required/.test(error.message)) {
+                            } else if (error.details.verification_code && /required/.test(error.details.verification_code)) {
                               errorEmail.textContent = Content.localize().textTokenMissing;
                             } else {
                               errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
