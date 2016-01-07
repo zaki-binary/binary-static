@@ -445,12 +445,6 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   window.location = window.location.pathname + str;
 }
 
-if ($('#appcache-reload-message').css('display') !== 'none'){
-  setTimeout(function() {
-    $('#appcache-refresh-link').trigger('click');
-  }, 30000);
-}
-
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
