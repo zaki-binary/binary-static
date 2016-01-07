@@ -103,7 +103,7 @@ var BinarySocket = (function () {
 
         binarySocket.onopen = function (){
             var loginToken = getCookieItem('login');
-            if(loginToken) {
+            if(loginToken && !authorized) {
                 binarySocket.send(JSON.stringify({authorize: loginToken}));
             }
             else {
