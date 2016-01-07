@@ -25,12 +25,15 @@
                   <meter id="password-meter" value="" max="50" min="0" high="33" low="20" optimum="50"></meter>
                 </p>
                 <div class="hint">[% l('Requirements') %]:
-                  <ul class="bullet">
-                    <li>[% l('at least 6 characters') %]</li>
-                    <li>[% l('at least 1 lowercase letter') %]</li>
-                    <li>[% l('at least 1 uppercase letter') %]</li>
-                    <li>[% l('at least 1 number') %]</li>
-                    <li>[% l('at least 1 special character') %]</li>
+                  <ul class="disc">
+                    <li>[% l('At least 6 characters') %]</li>
+                  </ul>
+                </div>
+                <div class="hint" style="margin-top:15px;">[% l('Tips') %]:
+                  <ul class="disc">
+                    <li>[% l('Use both lowercase and uppercase letters') %]</li>
+                    <li>[% l('Use 1 or more numbers') %]</li>
+                    <li>[% l('Use 1 or more special characters') %]</li>
                   </ul>
                 </div>
                 <p class="errorfield" id="error-password" style="display:none">
