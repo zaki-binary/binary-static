@@ -58,11 +58,14 @@
     #eighteen_plus {
       max-width: 45px;
     }
-    .social-network-icon {
+    .social-icons {
+      @include BIDIR_VALUE(text-align, right, left);
+      .social-network-icon {
         width: 30px;
         height: 30px;
         padding-right: 5px;
         padding-top: 10px;
+      }
     }
     .fb-gplus-follow{
       margin-top:10px;

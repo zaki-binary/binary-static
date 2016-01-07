@@ -2,6 +2,11 @@
   background-color: $COLOR_LIGHT_GRAY;
   border-bottom: 1px solid $COLOR_GRAY;
   margin-bottom: 40px;
+  ul {
+    ul {
+      width: 100%;
+    }
+  }
   a.a-active, span.a-active {
     color: $COLOR_ORANGE;
   }
@@ -15,15 +20,15 @@
     position: relative;
     display: block;
     li {
-      margin: if($LANGUAGE_DIRECTION == ltr, 0 2em 0 0, 0 0 0 2em);
+      @include BIDIR_VALUE(margin, 0 2em 0 0, 0 0 0 2em);
       display: inline-block;
       &#topMenuStartBetting {
-          float: if($LANGUAGE_DIRECTION == ltr, right, left);
-          margin: if($LANGUAGE_DIRECTION == ltr, 0 0 0 2em, 0 2em 0 0);
+          @include BIDIR_VALUE(float, right, left);
+          @include BIDIR_VALUE(margin, 0 0 0 2em, 0 2em 0 0);
           ul {
-            text-align: if($LANGUAGE_DIRECTION == ltr, right, left);
+            @include BIDIR_VALUE(text-align, right, left);
             li {
-              margin: if($LANGUAGE_DIRECTION == ltr, 0 0 0 2em, 0 2em 0 0);
+              @include BIDIR_VALUE(margin, 0 0 0 2em, 0 2em 0 0);
             }
           }
       }
@@ -52,7 +57,7 @@
         display: none;
         li.tm-li-2 {
             font-size: 100%;
-            margin-right: 20px;
+            @include BIDIR_PROP(margin-right, margin-left, 20px);
         }
       }
     }
@@ -61,7 +66,7 @@
         display: block;
         position: absolute;
         left: 1px;
-        width: 100%;
+        width: 99%;
         z-index: 10;
         margin-top: 3px solid transparent;
         background: #fff;
@@ -112,7 +117,8 @@
     @include tab-list;
     font: inherit !important;
     li {
-      margin-right: 6px !important;
+      @include BIDIR_PROP(margin-right, margin-left, 6px !important);
+      @include BIDIR_VALUE(float, left, right);
     }
   }
 
