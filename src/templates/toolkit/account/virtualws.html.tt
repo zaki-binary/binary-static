@@ -22,8 +22,17 @@
               <div class="grd-grid-8">
                 <input type="password" id="password" name="password" required></input>
                 <p style="margin:0px;height:0.5em;">
-                  <meter id="password-meter" value="" max="50" min="0" high="45" low="30" optimum="50"></meter>
+                  <meter id="password-meter" value="" max="50" min="0" high="33" low="20" optimum="50"></meter>
                 </p>
+                <div class="hint">[% l('Requirements') %]:
+                  <ul class="bullet">
+                    <li>[% l('at least 6 characters') %]</li>
+                    <li>[% l('at least 1 lowercase letter') %]</li>
+                    <li>[% l('at least 1 uppercase letter') %]</li>
+                    <li>[% l('at least 1 number') %]</li>
+                    <li>[% l('at least 1 special character') %]</li>
+                  </ul>
+                </div>
                 <p class="errorfield" id="error-password" style="display:none">
                   <abbr rel="tooltip" title="" id="tooltip-password"></abbr>
                 </p>

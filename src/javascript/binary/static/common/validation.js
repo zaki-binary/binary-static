@@ -8,17 +8,29 @@ var Validate = (function(){
   //give DOM element or error to hide
   function hideErrorMessage(error){
     error.setAttribute('style', 'display:none');
-    var errorMessage = $('#error-message-password');
+    var errorMessage = $('.error-message-password');
     if (errorMessage){
       errorMessage.remove();
     }
   }
 
   function handleError(error, text){
-    var span = document.createElement('span');
-    span.id = 'error-message-password';
-    span.innerHTML = text;
-    error.appendChild(span);
+    var par = document.createElement('p'),
+        re = new RegExp(text),
+        allText = '';
+    par.className = 'error-message-password';
+    var parClass = $('.' + par.className);
+    if (parClass.length > 1) {
+      for (i = 0; i < parClass.length; i++){
+        allText = allText + parClass[i].textContent;
+      }
+      if (!re.test(allText)){
+        par.innerHTML = par.innerHTML + ' ' + text;
+      }
+    } else {
+      par.innerHTML = text;
+    }
+    error.appendChild(par);
     displayErrorMessage(error);
   }
 
@@ -53,16 +65,29 @@ var Validate = (function(){
     if (!/^.+$/.test(password)) {
       handleError(error, Content.errorMessage('req'));
       if (!/^.+$/.test(rPassword)) {
-        handleError(rError, Content.errorMessage('req'));
+        rError.textContent = Content.errorMessage('req');
+        displayErrorMessage(rError);
       }
       errorCounter++;
     }
     if (password !== rPassword) {
-      handleError(rError, Content.localize().textPasswordsNotMatching);
+      rError.textContent = Content.localize().textPasswordsNotMatching;
+      displayErrorMessage(rError);
       errorCounter++;
     }
     if (!/^[ -~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
+      errorCounter++;
+    }
+    if (password.length < 6) {
+      handleError(error, Content.errorMessage('min', 6));
+      errorCounter++;
+    }
+    if (testPassword(password)[0] < 30) {
+      var tooltipPassword = document.getElementById('tooltip-password');
+      tooltipPassword.innerHTML = testPassword(password)[1];
+      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters.'));
+      displayErrorMessage(error);
       errorCounter++;
     }
     if (errorCounter === 0){
