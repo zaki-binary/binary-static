@@ -77,7 +77,7 @@ var PortfolioWS =  (function() {
         $("#cost-of-open-positions").text(currency + ' ' + addComma(parseFloat(sumPurchase)));
 
         // request "proposal_open_contract"
-        BinarySocket.send({"proposal_open_contract":1});
+        BinarySocket.send({"proposal_open_contract":1, "subscribe":1});
 
         // ready to show portfolio table
         $("#portfolio-loading").remove();
