@@ -3,10 +3,10 @@ pjax_config_page("virtualws", function(){
     onLoad: function() {
       get_residence_list();
       Content.populate();
-      VirtualAccOpeningUI.setLabel();
       var form = document.getElementById('virtual-form');
       var errorEmail = document.getElementById('error-email'),
-          errorPassword = document.getElementById('error-password');
+          errorPassword = document.getElementById('error-password'),
+          errorRPassword = document.getElementById('error-r-password');
 
       $('#password').on('input', function() {
         $('#password-meter').attr('value', testPassword($('#password').val())[0]);
@@ -22,7 +22,7 @@ pjax_config_page("virtualws", function(){
               password = document.getElementById('password').value,
               rPassword = document.getElementById('r-password').value;
 
-          if (VirtualAccOpeningUI.checkPassword(password, rPassword)){
+          if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword)){
             BinarySocket.init({
               onmessage: function(msg){
                 var response = JSON.parse(msg.data);

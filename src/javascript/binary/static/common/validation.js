@@ -57,37 +57,48 @@ var Validate = (function(){
     return false;
   }
 
-  //give error message for invalid password, needs value of password, repeat of password, and DOM element of error
-  function errorMessagePassword(password, rPassword, error, rError) {
-    hideErrorMessage(error);
-    hideErrorMessage(rError);
-    var errorCounter = 0;
+  function passwordEmpty(password, error){
     if (!/^.+$/.test(password)) {
       handleError(error, Content.errorMessage('req'));
-      if (!/^.+$/.test(rPassword)) {
-        rError.textContent = Content.errorMessage('req');
-        displayErrorMessage(rError);
-      }
-      errorCounter++;
+      return true;
     }
+  }
+
+  function passwordNotMatching(password, rPassword, rError){
     if (password !== rPassword) {
       rError.textContent = Content.localize().textPasswordsNotMatching;
       displayErrorMessage(rError);
-      errorCounter++;
     }
+  }
+
+  function passwordLengthError(password, error){
+    if (password.length < 6 || password.length > 25) {
+      handleError(error, Content.errorMessage('range', '6-25'));
+    }
+  }
+
+  function passwordInvalid(password, error){
     if (!/^[ -~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
-      errorCounter++;
     }
-    if (password.length < 6) {
-      handleError(error, Content.errorMessage('min', 6));
-      errorCounter++;
-    }
+  }
+
+  function passwordWeak(password, error){
     if (testPassword(password)[0] < 30) {
       var tooltipPassword = document.getElementById('tooltip-password');
       tooltipPassword.innerHTML = testPassword(password)[1];
       tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters.'));
       displayErrorMessage(error);
+    }
+  }
+
+  //give error message for invalid password, needs value of password, repeat of password, and DOM element of error
+  function errorMessagePassword(password, rPassword, error, rError) {
+    hideErrorMessage(error);
+    hideErrorMessage(rError);
+    var errorCounter = 0;
+
+    if (passwordEmpty(password, error) || passwordEmpty(rPassword, rError) || passwordNotMatching(password, rPassword, rError) || passwordLengthError(password, error) || passwordInvalid(password, error) || passwordWeak(password, error)) {
       errorCounter++;
     }
     if (errorCounter === 0){

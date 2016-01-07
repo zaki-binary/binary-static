@@ -5,10 +5,10 @@
       <div class="rbox-wrap">
         <form id="virtual-form">
           <fieldset>
-            <legend id="details"></legend>
+            <legend id="details">[% l('Details') %]</legend>
             <div class="grd-row-padding row clear">
               <div class="grd-grid-4  form_label">
-                <label for="email"></label>
+                <label for="email">[% l('Email Address') %]</label>
               </div>
               <div class="grd-grid-8">
                 <input type="email" id="email" name="email" required></input>
@@ -17,7 +17,7 @@
             </div>
             <div class="grd-row-padding row clear">
               <div class="grd-grid-4  form_label">
-                <label for="password"></label>
+                <label for="password">[% l('Password') %]</label>
               </div>
               <div class="grd-grid-8">
                 <input type="password" id="password" name="password" required></input>
@@ -31,9 +31,7 @@
                 </div>
                 <div class="hint" style="margin-top:15px;">[% l('Tips') %]:
                   <ul class="disc">
-                    <li>[% l('Use both lowercase and uppercase letters') %]</li>
-                    <li>[% l('Use 1 or more numbers') %]</li>
-                    <li>[% l('Use 1 or more special characters') %]</li>
+                    <li>[% l('Use lower and upper case, numbers, and special characters.') %]</li>
                   </ul>
                 </div>
                 <p class="errorfield" id="error-password" style="display:none">
@@ -43,7 +41,7 @@
             </div>
             <div class="grd-row-padding row clear">
               <div class="grd-grid-4  form_label">
-                <label for="r-password"></label>
+                <label for="r-password">[% l('Re-enter Password') %]</label>
               </div>
               <div class="grd-grid-8">
                 <input type="password" id="r-password" name="r-password" required></input>
@@ -52,7 +50,7 @@
             </div>
             <div class="grd-row-padding row clear">
               <div class="grd-grid-4  form_label">
-                <label for="residence"></label>
+                <label for="residence">[% l('Country of Residence') %]</label>
               </div>
               <div class="grd-grid-8">
                 <select name="residence" id="residence" required></select>
@@ -63,7 +61,7 @@
           <fieldset class="center-aligned" id="formlayout">
             <span class="button button-focus">
               <input type="hidden" name="account" value="new virtual account"></input>
-              <button class="button button-focus" id="btn_submit" type="submit"></button>
+              <button class="button button-focus" id="btn_submit" type="submit">[% l('Create New Account') %]</button>
             </span>
           </fieldset>
         </form>
