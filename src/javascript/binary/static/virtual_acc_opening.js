@@ -15,14 +15,14 @@ pjax_config_page("virtualws", function(){
       if (form) {
         $('#virtual-form').submit( function(evt) {
           evt.preventDefault();
-          Validate.hideErrorMessage(errorEmail);
+          Validate.errorMessageEmail(email, errorEmail);
 
           var email = document.getElementById('email').value,
               residence = document.getElementById('residence').value,
               password = document.getElementById('password').value,
               rPassword = document.getElementById('r-password').value;
 
-          if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword)){
+          if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail)){
             BinarySocket.init({
               onmessage: function(msg){
                 var response = JSON.parse(msg.data);
