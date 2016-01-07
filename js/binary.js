@@ -60277,6 +60277,7 @@ $(function() {
         rowTemplate = $("#portfolio-dynamic tr:first")[0].outerHTML;
         $("#portfolio-dynamic tr:first").remove();
         BinarySocket.send({"balance":1});
+        BinarySocket.send({"portfolio":1});
     };
 
 
@@ -60288,7 +60289,6 @@ $(function() {
         if(parseFloat(data.balance.balance, 10) > 0) {
             $("#if-balance-zero").remove();
         }
-        BinarySocket.send({"portfolio":1});
     };
 
     /**
@@ -60340,7 +60340,7 @@ $(function() {
         $("#cost-of-open-positions").text(currency + ' ' + addComma(parseFloat(sumPurchase)));
 
         // request "proposal_open_contract"
-        BinarySocket.send({"proposal_open_contract":1});
+        BinarySocket.send({"proposal_open_contract":1, "subscribe":1});
 
         // ready to show portfolio table
         $("#portfolio-loading").remove();
