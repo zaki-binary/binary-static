@@ -49587,6 +49587,9 @@ texts_json['ZH_TW'] = {"Please_select":"請選擇","This_contract_won":"此合�
                         window.location.reload();
                         return false;
                     });
+                    setTimeout(function() {
+                      $('#appcache-refresh-link').trigger('click');
+                    }, 30000);
                 } catch (err) {}
             }
         }, false);
@@ -50390,7 +50393,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -59805,12 +59808,6 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   var str = window.location.search;
   str = replaceQueryParam('l', 'EN', str);
   window.location = window.location.pathname + str;
-}
-
-if ($('#appcache-reload-message').css('display') !== 'none'){
-  setTimeout(function() {
-    $('#appcache-refresh-link').trigger('click');
-  }, 30000);
 }
 
 pjax_config_page('/$|/home', function() {
