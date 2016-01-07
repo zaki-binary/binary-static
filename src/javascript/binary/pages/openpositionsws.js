@@ -196,6 +196,9 @@ pjax_config_page("user/openpositionsws", function() {
                 }
             });
             PortfolioWS.init();
+        },
+        onUnload: function(){
+            BinarySocket.send({"forget_all": "proposal_open_contract"});
         }
     };
 });
