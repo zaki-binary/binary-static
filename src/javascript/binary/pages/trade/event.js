@@ -20,7 +20,7 @@ var TradingEvents = (function () {
         var make_price_request = 1;
         if (value === 'now') {
             sessionStorage.removeItem('date_start');
-        } else {
+        } else if($('expiry_type').val() === 'endtime'){
             make_price_request = -1;
             var end_time = moment(value*1000).utc().add(15,'minutes');
             Durations.setTime(end_time.format("hh:mm"));
@@ -156,7 +156,7 @@ var TradingEvents = (function () {
                     // forget the old tick id i.e. close the old tick stream
                     processForgetTicks();
                     // get ticks for current underlying
-                    BinarySocket.send({ ticks : underlying });
+                    Tick.request(underlying);
                 }
             });
             underlyingElement.addEventListener('mousedown', function(e) {
