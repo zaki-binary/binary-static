@@ -61,7 +61,7 @@ var Validate = (function(){
   function passwordNotEmpty(password, error){
     if (!/^.+$/.test(password)) {
       handleError(error, Content.errorMessage('req'));
-      return errorCounter++;;
+      return errorCounter++;
     }
   }
 
@@ -69,21 +69,21 @@ var Validate = (function(){
     if (password !== rPassword) {
       rError.textContent = Content.localize().textPasswordsNotMatching;
       displayErrorMessage(rError);
-      return errorCounter++;;
+      return errorCounter++;
     }
   }
 
   function passwordLength(password, error){
     if (password.length < 6 || password.length > 25) {
       handleError(error, Content.errorMessage('range', '6-25'));
-      return errorCounter++;;
+      return errorCounter++;
     }
   }
 
   function passwordValid(password, error){
     if (!/^[ -~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
-      return errorCounter++;;
+      return errorCounter++;
     }
   }
 
@@ -93,7 +93,7 @@ var Validate = (function(){
       tooltipPassword.innerHTML = testPassword(password)[1];
       tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters.'));
       displayErrorMessage(error);
-      return errorCounter++;;
+      return errorCounter++;
     }
   }
 

@@ -103,7 +103,7 @@ var securityws = (function(){
                 $form.find("button").attr("value","Update");
                 $form.find("button").html(text.localize("Update"));
                 $('#password-meter-div').attr('style', 'display:block');
-                $('#cashierlockpassword1').attr('style', 'border-bottom:none;')
+                $('#cashierlockpassword1').attr('style', 'border-bottom:none;');
                 $('#cashierlockpassword1').on('input', function() {
                   $('#password-meter').attr('value', testPassword($('#cashierlockpassword1').val())[0]);
                 });
