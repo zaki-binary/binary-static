@@ -1,4 +1,5 @@
 var Validate = (function(){
+  var errorCounter = 0;
 
   //give DOM element of error to display
   function displayErrorMessage(error){
@@ -57,38 +58,42 @@ var Validate = (function(){
     return false;
   }
 
-  function passwordEmpty(password, error){
+  function passwordNotEmpty(password, error){
     if (!/^.+$/.test(password)) {
       handleError(error, Content.errorMessage('req'));
-      return true;
+      return errorCounter++;;
     }
   }
 
-  function passwordNotMatching(password, rPassword, rError){
+  function passwordMatching(password, rPassword, rError){
     if (password !== rPassword) {
       rError.textContent = Content.localize().textPasswordsNotMatching;
       displayErrorMessage(rError);
+      return errorCounter++;;
     }
   }
 
-  function passwordLengthError(password, error){
+  function passwordLength(password, error){
     if (password.length < 6 || password.length > 25) {
       handleError(error, Content.errorMessage('range', '6-25'));
+      return errorCounter++;;
     }
   }
 
-  function passwordInvalid(password, error){
+  function passwordValid(password, error){
     if (!/^[ -~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
+      return errorCounter++;;
     }
   }
 
-  function passwordWeak(password, error){
+  function passwordStrong(password, error){
     if (testPassword(password)[0] < 30) {
       var tooltipPassword = document.getElementById('tooltip-password');
       tooltipPassword.innerHTML = testPassword(password)[1];
       tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters.'));
       displayErrorMessage(error);
+      return errorCounter++;;
     }
   }
 
@@ -96,11 +101,15 @@ var Validate = (function(){
   function errorMessagePassword(password, rPassword, error, rError) {
     hideErrorMessage(error);
     hideErrorMessage(rError);
-    var errorCounter = 0;
+    errorCounter = 0;
 
-    if (passwordEmpty(password, error) || passwordEmpty(rPassword, rError) || passwordNotMatching(password, rPassword, rError) || passwordLengthError(password, error) || passwordInvalid(password, error) || passwordWeak(password, error)) {
-      errorCounter++;
-    }
+    passwordNotEmpty(password, error);
+    passwordNotEmpty(rPassword, rError);
+    passwordMatching(password, rPassword, rError);
+    passwordLength(password, error);
+    passwordValid(password, error);
+    passwordStrong(password, error);
+
     if (errorCounter === 0){
       return true;
     }

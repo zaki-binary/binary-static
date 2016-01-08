@@ -1,6 +1,10 @@
 pjax_config_page("virtualws", function(){
   return {
     onLoad: function() {
+      if (getCookieItem('login')) {
+          window.location.href = page.url.url_for('user/my_account');
+          return;
+      }
       get_residence_list();
       Content.populate();
       var form = document.getElementById('virtual-form');
@@ -15,12 +19,13 @@ pjax_config_page("virtualws", function(){
       if (form) {
         $('#virtual-form').submit( function(evt) {
           evt.preventDefault();
-          Validate.errorMessageEmail(email, errorEmail);
 
           var email = document.getElementById('email').value,
               residence = document.getElementById('residence').value,
               password = document.getElementById('password').value,
               rPassword = document.getElementById('r-password').value;
+
+          Validate.errorMessageEmail(email, errorEmail);
 
           if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail)){
             BinarySocket.init({
