@@ -135,13 +135,13 @@
                 <div class="grd-grid-4">
                     <h1>[% l('Market Data') %]</h1>
                     <ul>
-                        <li>
-                            <a class="pjaxload" href="[% request.url_for('/charting/livechart') %]"[% IF target %] target="[%
-                            target %]"[% END %]>[% l('Live Charts') %]</a>
-                        </li>
                         <li class="ja-hide">
                             <a class="pjaxload" href="//highcharts.binary.com"[% IF target %] target="[%
                             target %]"[% END %]>[% l('HighCharts') %]</a>
+                        </li>
+                        <li>
+                            <a class="pjaxload" href="//tradingview.binary.com"[% IF target %] target="[%
+                            target %]"[% END %]>[% l('TradingView') %]</a>
                         </li>
                     </ul>
                 </div>
@@ -191,6 +191,11 @@
         <div id="appcache-reload-message">
             <div class="message">
                 [% l('A new version of the interface is available. This page will <a href="#" id="appcache-refresh-link">refresh</a> in 30 seconds.') %]
+            </div>
+        </div>
+        <div id="ratelimit-error-message">
+            <div class="message">
+                [% l('You have reached the rate limit of requests per second. To continue, please <a href="javascript:;" id="ratelimit-refresh-link">refresh</a> the page.') %]
             </div>
         </div>
     </div>
