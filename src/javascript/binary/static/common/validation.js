@@ -50,7 +50,7 @@ var Validate = (function(){
       displayErrorMessage(error);
       return true;
     } else if (!validateEmail(email)) {
-      error.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+      error.textContent = Content.errorMessage('valid', text.localize('email address'));
       displayErrorMessage(error);
       return true;
     }
@@ -88,7 +88,7 @@ var Validate = (function(){
   }
 
   function passwordStrong(password, error){
-    if (testPassword(password)[0] < 30) {
+    if (testPassword(password)[0] < 33) {
       var tooltipPassword = document.getElementById('tooltip-password');
       tooltipPassword.innerHTML = testPassword(password)[1];
       tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters.'));
@@ -105,10 +105,12 @@ var Validate = (function(){
 
     passwordNotEmpty(password, error);
     passwordNotEmpty(rPassword, rError);
-    passwordMatching(password, rPassword, rError);
-    passwordLength(password, error);
-    passwordValid(password, error);
-    passwordStrong(password, error);
+    if (errorCounter === 0){
+      passwordMatching(password, rPassword, rError);
+      passwordLength(password, error);
+      passwordValid(password, error);
+      passwordStrong(password, error);
+    }
 
     if (errorCounter === 0){
       return true;
