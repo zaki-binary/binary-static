@@ -63,6 +63,16 @@ var Validate = (function(){
       handleError(error, Content.errorMessage('req'));
       return errorCounter++;
     }
+    return true;
+  }
+
+  function passwordRNotEmpty(rPassword, rError){
+    if (!/^.+$/.test(rPassword)) {
+      rError.textContent = Content.errorMessage('req');
+      displayErrorMessage(rError);
+      return errorCounter++;
+    }
+    return true;
   }
 
   function passwordMatching(password, rPassword, rError){
@@ -71,6 +81,7 @@ var Validate = (function(){
       displayErrorMessage(rError);
       return errorCounter++;
     }
+    return true;
   }
 
   function passwordLength(password, error){
@@ -78,6 +89,7 @@ var Validate = (function(){
       handleError(error, Content.errorMessage('range', '6-25'));
       return errorCounter++;
     }
+    return true;
   }
 
   function passwordValid(password, error){
@@ -85,6 +97,7 @@ var Validate = (function(){
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
       return errorCounter++;
     }
+    return true;
   }
 
   function passwordStrong(password, error){
@@ -95,6 +108,7 @@ var Validate = (function(){
       displayErrorMessage(error);
       return errorCounter++;
     }
+    return true;
   }
 
   //give error message for invalid password, needs value of password, repeat of password, and DOM element of error
@@ -103,13 +117,15 @@ var Validate = (function(){
     hideErrorMessage(rError);
     errorCounter = 0;
 
-    passwordNotEmpty(password, error);
-    passwordNotEmpty(rPassword, rError);
-    if (errorCounter === 0){
-      passwordMatching(password, rPassword, rError);
+    if (passwordNotEmpty(password, error) === true){
       passwordLength(password, error);
       passwordValid(password, error);
       passwordStrong(password, error);
+      if (passwordRNotEmpty(rPassword, rError) === true){
+        passwordMatching(password, rPassword, rError);
+      }
+    } else {
+      passwordRNotEmpty(rPassword, rError);
     }
 
     if (errorCounter === 0){
