@@ -52765,47 +52765,6 @@ $(function() { onLoad.fire(); });
 ;// json to hold all the events loaded on trading page
 var trade_event_bindings = {};
 
-var trading_times_init = function() {
-      var tabset_name = "#trading-tabs";
-
-     var trading_times = $(tabset_name);
-     trading_times.tabs();
-     var url = location.href;
-     $( "#tradingdate" ).datepicker({ minDate: 0, maxDate:'+1y', dateFormat: "yy-mm-dd", autoSize: true,
-     onSelect: function( dateText, picker ){
-         trading_times.tabs( "destroy" );
-         showLoadingImage(trading_times);
-         url = page.url.url_for('resources/trading_times', 'date=' + dateText, 'cached');
-         $.ajax({
-                  url: url,
-                  data:  { 'ajax_only': 1 },
-                  success: function(html){
-                            trading_times.replaceWith(html);
-                            trading_times = $("#trading-tabs");
-			                      
-                            if (page.language() === 'JA') {	
-                              trading_times.tabs("disable");
-			    } 
-			    else {
-			      trading_times.tabs();
-			    }
-                            
-                            page.url.update(url);
-                         },
-                  error: function(xhr, textStatus, errorThrown){
-                          trading_times.empty().append(textStatus);
-                       },
-                });
-         }
-     });
-};
-
-var asset_index_init = function() {
-    var tabset_name = "#asset-tabs";
-    // jQueryUI tabs
-    $(tabset_name).tabs();
-};
-
 function confirm_popup_action() {
 
     $('.bom_confirm_popup_link').on('click', function (e){
@@ -52843,8 +52802,6 @@ function get_login_page_url() {
     return 'https://' + page.settings.get('domains')['private'] + '/login' + params;
 }
 
-onLoad.queue_for_url(trading_times_init, 'trading_times');
-onLoad.queue_for_url(asset_index_init, 'asset_index');
 onLoad.queue_for_url(confirm_popup_action, 'my_account|confirm_popup');
 onLoad.queue_for_url(hide_payment_agents, 'cashier');
 
@@ -58966,59 +58923,6 @@ ClientForm.prototype = {
 
         return true;
     },
-    self_exclusion: function() {
-        return {
-            has_something_to_save: function(init) {
-                var el, i;
-                var names = ['MAXCASHBAL', 'MAXOPENPOS',
-                             'DAILYTURNOVERLIMIT', 'DAILYLOSSLIMIT',
-                             '7DAYTURNOVERLIMIT', '7DAYLOSSLIMIT',
-                             '30DAYTURNOVERLIMIT', '30DAYLOSSLIMIT',
-                             'SESSIONDURATION', 'EXCLUDEUNTIL'];
-                for (i=0; i<names.length; i++) {
-                    el = document.getElementById(names[i]);
-                    if (el) {
-                        el.value = el.value.replace(/^\s*/, '').replace(/\s*$/, '');
-                        if (el.value == (init[names[i]]===undefined ? '' : init[names[i]])) continue;
-                        return true;
-                    }
-                }
-                return false;
-            },
-            validate_exclusion_date: function() {
-                var exclusion_date = $('#EXCLUDEUNTIL').val();
-                var date_regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-                var error_element_errorEXCLUDEUNTIL = clearInputErrorField('errorEXCLUDEUNTIL');
-
-                if (exclusion_date) {
-
-                    if(date_regex.test($('#EXCLUDEUNTIL').val()) === false){
-                        error_element_errorEXCLUDEUNTIL.innerHTML = text.localize("Please select a valid date");
-                        return false;
-                    }
-            
-                    exclusion_date = new Date(exclusion_date);
-                    // self exclusion date must >= 6 month from now
-                    var six_month_date = new Date();
-                    six_month_date.setMonth(six_month_date.getMonth() + 6);
-
-                    if (exclusion_date < six_month_date) {
-                        error_element_errorEXCLUDEUNTIL.innerHTML = text.localize("Please enter a date that is at least 6 months from now.");
-                        return false ;
-                    }
-
-                    if (confirm(text.localize("When you click 'Ok' you will be excluded from trading on the site until the selected date.")) === true) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                }
-
-                return true;
-            },
-        };
-    }(),
     set_idd_for_residence: function(residence) {
         var tel = $('#Tel');
         if (!tel.val() || tel.val().length < 6) {
@@ -61047,45 +60951,6 @@ pjax_config_page("market_timesws", function() {
         }
     };
 });
-;var Exclusion = (function(){
-    var self_exclusion_date_picker = function () {
-        // 6 months from now
-        var start_date = new Date();
-        start_date.setMonth(start_date.getMonth() + 6);
-
-        // 5 years from now
-        var end_date = new Date();
-        end_date.setFullYear(end_date.getFullYear() + 5);
-
-        var id = $('#EXCLUDEUNTIL');
-
-        id.datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: start_date,
-            maxDate: end_date,
-            onSelect: function(dateText, inst) {
-                id.attr("value", dateText);
-            },
-        });
-    };
-
-    var self_exclusion_validate_date = function () {
-        $('#selfExclusion').on('click', '#self_exclusion_submit', function () {
-            return client_form.self_exclusion.validate_exclusion_date();
-        });
-    };
-
-    return{
-        self_exclusion_validate_date : self_exclusion_validate_date,
-        self_exclusion_date_picker :self_exclusion_date_picker
-    };
-
-})();
-onLoad.queue_for_url(function () {
-// date picker for self exclusion
-    Exclusion.self_exclusion_date_picker();
-    Exclusion.self_exclusion_validate_date();
-}, 'self_exclusion');
 ;var SelfExlusionWS = (function(){
     
     "use strict";
