@@ -63572,11 +63572,13 @@ var TradingEvents = (function () {
         var make_price_request = 1;
         if (value === 'now') {
             sessionStorage.removeItem('date_start');
-        } else if($('expiry_type').val() === 'endtime'){
-            make_price_request = -1;
-            var end_time = moment(value*1000).utc().add(15,'minutes');
-            Durations.setTime(end_time.format("hh:mm"));
-            Durations.selectEndDate(end_time.format("YYYY-MM-DD"));
+        } else {
+            if ($('expiry_type').val() === 'endtime'){
+                make_price_request = -1;
+                var end_time = moment(value*1000).utc().add(15,'minutes');
+                Durations.setTime(end_time.format("hh:mm"));
+                Durations.selectEndDate(end_time.format("YYYY-MM-DD"));
+            }
             sessionStorage.setItem('date_start', value);
         }
 
@@ -65002,6 +65004,7 @@ var StartDates = (function(){
 
             startDates.list.sort(compareStartDate);
 
+            var first;
             startDates.list.forEach(function (start_date) {
                 var a = moment.unix(start_date.open).utc();
                 var b = moment.unix(start_date.close).utc();
@@ -65019,6 +65022,9 @@ var StartDates = (function(){
                     if(a.unix()-start.unix()>5*60){
                         option = document.createElement('option');
                         option.setAttribute('value', a.utc().unix());
+                        if(typeof first === 'undefined' && !hasNow){
+                            first = a.utc().unix();
+                        }
                         content = document.createTextNode(a.format('HH:mm ddd'));
                         option.appendChild(content);
                         fragment.appendChild(option);
@@ -65028,6 +65034,9 @@ var StartDates = (function(){
             });
             target.appendChild(fragment);
             displayed = 1;
+            if(first){
+                TradingEvents.onStartDateChange(first);            
+            }
         } else {
             displayed = 0;
             document.getElementById('date_start_row').style.display = 'none';
