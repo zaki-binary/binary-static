@@ -43,8 +43,14 @@ pjax_config_page("virtualws", function(){
                   } else if (type === 'error' || error){
                     if (/email address is already in use/.test(error.message)) {
                       errorEmail.textContent = Content.localize().textDuplicatedEmail;
-                    } else if (error.details.verification_code && /required/.test(error.details.verification_code)) {
-                      errorEmail.textContent = Content.localize().textTokenMissing;
+                    } else if (/email address is unverified/.test(error.message)) {
+                      errorEmail.textContent = text.localize('Email address is unverified.');
+                    } else if (/not strong enough/.test(error.message)) {
+                      errorEmail.textContent = text.localize('Password is not strong enough.');
+                    } else if (error.details && error.details.verification_code) {
+                      if (/required/.test(error.details.verification_code)){
+                        errorEmail.textContent = Content.localize().textTokenMissing;
+                      }
                     } else {
                       errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
                     }
