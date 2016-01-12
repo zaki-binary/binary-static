@@ -462,6 +462,9 @@
     }
     #contract_form_content{
       margin-top: 0px;
+      #duration_amount {
+        margin-bottom: 5px;
+      }
     }
     #contract_form_content_wrapper {
       flex-direction: column;
@@ -506,11 +509,21 @@
       }
     }
   }
-  ul#contract_form_name_nav {
-    height: auto;
-    > li {
-      float: none;
-      width: 100%;
+  div#contract_market_form_container {
+    ul#contract_form_name_nav {
+      white-space: nowrap !important;
+      > li.tm-li {
+        /*float: none;
+        width: 100%; */
+        ul.tm-ul-2 {
+          position: absolute !important;
+          top: 28px !important;
+          display: none !important;
+        }
+        &.hover ul, &.active ul {
+          display: block !important;
+        }
+      }
     }
   }
   #trading_socket_container #contract_prices_container .price_container .price_wrapper {
