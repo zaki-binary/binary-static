@@ -13,14 +13,14 @@
   color: $COLOR_WHITE;
   line-height: 1;
   font-size: 70%;
-  text-align: right;
+  @include BIDIR_VALUE(text-align, right, left);
   padding: 3px 0;
 
   #virtual-text {
     font-weight: 700;
   }
   #topbar-info {
-    float: right;
+    @include BIDIR_VALUE(float, right, left);
   }
   #gmt-clock, #contact-us {
       padding-top: 3px;
@@ -33,7 +33,7 @@
       font-size: 90%;
       padding: 2px 4px 2px 4px;
       text-transform: none;
-      margin: 0 0 0 10px;
+      @include BIDIR_VALUE(margin, 0 0 0 10px, 0 10px 0 0);
     }
   }
 
@@ -91,7 +91,7 @@
       margin-top: 10px;
   }
   #login-form, #loginid-switch-form {
-    text-align: right;
+    @include BIDIR_VALUE(text-align, right, left);
     #login-links {
       margin: 5px 0 0 0;
       display: block;
@@ -140,7 +140,7 @@
         background-repeat: no-repeat;
         padding: 6px;
         font-weight: normal;
-        margin-left: 0.4em;
+        @include BIDIR_PROP(margin-left, margin-right, 0.4em);
         margin-top: 0.5em;
         text-transform: uppercase;
       }
