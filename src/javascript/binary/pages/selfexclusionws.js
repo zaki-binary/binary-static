@@ -7,9 +7,11 @@ var SelfExlusionWS = (function(){
 
     var init = function(){
         $form   = $("#selfExclusion");
+        clearErrors();
         $form.find("button").on("click", function(e){
             e.preventDefault();
             e.stopPropagation();
+            clearErrors();
             if(validateForm($form) === false){
                 return false;
             }
@@ -20,6 +22,16 @@ var SelfExlusionWS = (function(){
         BinarySocket.send({"get_self_exclusion": 1});
 
         self_exclusion_date_picker();
+    };
+
+    var clearErrors = function(){
+        $form.find("#exclusionMsg").hide();
+        $form.find("#exclusionMsg").text("");
+        $("#errorMsg").hide();
+        $form.show();
+        $("#exclusionText").show();
+        $("#exclusionTitle").show();
+        $("#errorMsg").text("");
     };
 
     var isNormalInteger= function(str) {
@@ -124,6 +136,11 @@ var SelfExlusionWS = (function(){
         if("error" in response) {
             if("message" in response.error) {
                 console.log(response.error.message);
+                $("#errorMsg").show();
+                $("#errorMsg").text(text.localize(response.error.message));
+                $form.hide();
+                $("#exclusionText").hide();
+                $("#exclusionTitle").hide();
             }
             return false;
         }else{
@@ -268,7 +285,10 @@ var SelfExlusionWS = (function(){
             }
             return false;
         }else{
-            window.location.href = window.location.href;
+            $form.find("#exclusionMsg").show();
+            $form.find("#exclusionMsg").text(text.localize('Your changes have been updated.'));
+            BinarySocket.send({"get_self_exclusion": 1});
+
         }
     };
 
@@ -328,10 +348,12 @@ pjax_config_page("user/self_exclusionws", function() {
                         SelfExlusionWS.apiResponse(response);
                           
                     }
+                },
+                onauth : function(){
+                    SelfExlusionWS.init();
                 }
             });	
         
-            SelfExlusionWS.init();
         }
     };
 });
