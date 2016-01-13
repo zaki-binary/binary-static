@@ -12,7 +12,7 @@ var account_transferws = (function(){
         $("#client_message").hide();
         account_bal = 0;
 
-        BinarySocket.send({"authorize": $.cookie('login'), "req_id" : 1 });
+        BinarySocket.send({ "transfer_between_accounts": "1","req_id" : 4 });
 
         $form.find("button").on("click", function(e){
             e.preventDefault();
@@ -21,8 +21,16 @@ var account_transferws = (function(){
             if(validateForm() === false){
                 return false;
             }
-            
-            BinarySocket.send({"authorize": $.cookie('login'), "req_id" : 2 });
+
+            var amt = $form.find("#acc_transfer_amount").val();
+            BinarySocket.send({ 
+                        "transfer_between_accounts": "1",
+                        "account_from": account_from,
+                        "account_to": account_to,
+                        "currency": currType,
+                        "amount": amt
+            });
+
         });
 
         $form.find("#transfer_account_transfer").on("change",function(){
@@ -30,7 +38,7 @@ var account_transferws = (function(){
            $form.find("#invalid_amount").text("");
            set_account_from_to();
 
-           BinarySocket.send({"authorize": $.cookie('login'), "req_id" : 3});
+           BinarySocket.send({"payout_currencies": "1"});
 
         });
     };
@@ -67,12 +75,6 @@ var account_transferws = (function(){
             isValid = false;
         }
 
-        if($.inArray(currType, payoutCurr) == -1)
-        {
-            $form.find("#invalid_amount").text(text.localize("Invalid currency."));
-            isValid = false;
-        }
-
         return isValid;
     };
 
@@ -85,40 +87,6 @@ var account_transferws = (function(){
         else if(type === "payout_currencies" || (type === "error" && "payout_currencies" in response.echo_req))
         {
             responseMessage(response);
-        }
-        else if(type === "authorize" || (type === "error" && "authorize" in response.echo_req))
-        {
-            isAuthorized(response);
-        }
-    };
-
-    var isAuthorized =  function(response){
-        if(response.req_id){
-            var option= response.req_id ;
-            var amt = $form.find("#acc_transfer_amount").val();
-
-            switch(option){
-                case    1:
-                        BinarySocket.send({ 
-                            "transfer_between_accounts": "1",
-                            "req_id" : 4
-                        });
-                        break;
-                case    2 :
-                        BinarySocket.send({ 
-                            "transfer_between_accounts": "1",
-                            "account_from": account_from,
-                            "account_to": account_to,
-                            "currency": currType,
-                            "amount": amt
-                        });
-                        break;  
-                case    3:
-                        BinarySocket.send({"payout_currencies": "1"});
-                        break;
-                                   
-            }
-
         }
     };
 
