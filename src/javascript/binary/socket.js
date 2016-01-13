@@ -115,6 +115,7 @@ var BinarySocket = (function () {
             }
 
             if(isReady()=== true){
+                page.header.validate_cookies();
                 if (clock_started === false) {
                     page.header.start_clock_ws();
                 }

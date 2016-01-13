@@ -523,6 +523,27 @@ Header.prototype = {
             BinarySocket.send({"logout": "1"});
         });
     },
+    
+    validate_cookies: function(){
+        function is_valid_id(id){
+            return /^(MX|MF|VRTC|MLT|CR|VRTJ|JP)[0-9]+$/i.test(id);
+        }
+        
+        if (getCookieItem('login') && getCookieItem('loginid_list')){
+            var accIds = $.cookie("loginid_list").split("+");
+            var loginid = $.cookie("loginid");
+                                    
+            if(!is_valid_id(loginid)){
+                BinarySocket.send({"logout": "1"});
+            }
+            
+            for(var i=0;i<accIds.length;i++){
+                if(!is_valid_id(accIds[i].split(":")[0])){
+                    BinarySocket.send({"logout": "1"});
+                }
+            }
+        }
+    },
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
