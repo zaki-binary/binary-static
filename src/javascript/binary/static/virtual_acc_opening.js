@@ -12,7 +12,7 @@ pjax_config_page("virtualws", function(){
           errorPassword = document.getElementById('error-password'),
           errorRPassword = document.getElementById('error-r-password');
 
-      if (detectIE() === false) {
+      if (isIE() === false) {
         $('#password').on('input', function() {
           $('#password-meter').attr('value', testPassword($('#password').val())[0]);
         });
