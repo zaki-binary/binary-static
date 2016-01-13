@@ -104,7 +104,7 @@ var Validate = (function(){
     if (testPassword(password)[0] < 33) {
       var tooltipPassword = document.getElementById('tooltip-password');
       tooltipPassword.innerHTML = testPassword(password)[1];
-      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters.'));
+      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters. Password score is: ' + testPassword(password)[0] + '. Passing score is: 33.'));
       displayErrorMessage(error);
       return errorCounter++;
     }

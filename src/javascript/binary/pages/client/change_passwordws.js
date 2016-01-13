@@ -112,9 +112,13 @@ pjax_config_page("user/change_password", function() {
     return {
         onLoad: function() {
           Content.populate();
-          $('#password').on('input', function() {
-            $('#password-meter').attr('value', testPassword($('#password').val())[0]);
-          });
+          if (/NT/.test(window.navigator.userAgent)) {
+            $('#password-meter').remove();
+          } else {
+            $('#password').on('input', function() {
+              $('#password-meter').attr('value', testPassword($('#password').val())[0]);
+            });
+          }
           if (!getCookieItem('login')) {
                 window.location.href = page.url.url_for('login');
                 return;
