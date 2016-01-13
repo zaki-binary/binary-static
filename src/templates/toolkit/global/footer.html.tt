@@ -98,12 +98,12 @@
                     <h1>[% l('Terms') %]</h1>
                     <ul>
                         <li class='ja-hide'>
-                            <a class="pjaxload" href="[% request.url_for('/terms-and-conditions', {filecode => 'legal'}) %]"[%
+                            <a class="pjaxload" href="[% request.url_for('/terms-and-conditions') %]"[%
                             IF
                             target %] target="[% target %]"[% END %]>[% l('Terms and Conditions') %]</a>
                         </li>
                         <li class='hidden ja-show-block'>
-                            <a class="pjaxload" href="[% request.url_for('/terms-and-conditions-jp', {filecode => 'legal_jp'}) %]"[%
+                            <a class="pjaxload" href="[% request.url_for('/terms-and-conditions-jp') %]"[%
                             IF
                             target %] target="[% target %]"[% END %]>[% l('Terms and Conditions') %]</a>
                         </li>
