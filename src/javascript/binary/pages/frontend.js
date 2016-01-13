@@ -287,8 +287,8 @@ var on_click_signup = function() {
 
 function check_login_hide_signup() {
     if (page.client.is_logged_in) {
-        $('#open-account').remove();
-        $('#stretch').removeClass('grd-grid-7 grd-grid-mobile-12 grd-grid-phablet-12');
+        $('#verify-email-form').remove();
+        $('.break').attr('style', 'margin-bottom:1em');
     }
 }
 
@@ -443,6 +443,27 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   var str = window.location.search;
   str = replaceQueryParam('l', 'EN', str);
   window.location = window.location.pathname + str;
+}
+
+function detectIE() {
+  var ua = window.navigator.userAgent;
+
+  var msie = ua.indexOf('MSIE ');
+  if (msie > 0) {
+    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+  }
+
+  var trident = ua.indexOf('Trident/');
+  if (trident > 0) {
+    var rv = ua.indexOf('rv:');
+    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+  }
+
+  var edge = ua.indexOf('Edge/');
+  if (edge > 0) {
+    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+  }
+  return false;
 }
 
 pjax_config_page('/$|/home', function() {
