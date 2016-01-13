@@ -19,17 +19,13 @@ BetAnalysis.tab_live_chart = function () {
             }
         },
         get_live_chart: function() {
-          if (document.getElementById('underlying')){
-            showHighchart();
-            setUnderlyingTime();
-          } else {
             var that = this;
             $.ajax(ajax_loggedin({
-                  url     : '/d/trade_livechart.cgi?l=' + page.language(),
-                  dataType: 'html',
-                  success : function (data) {
-                    that.set_live_chart(data);
-                  },
+              url     : '/d/trade_livechart.cgi?l=',
+              dataType: 'html',
+              success : function (data) {
+                        that.set_live_chart(data);
+                      },
             }));
           }
         },
