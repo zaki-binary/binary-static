@@ -1,5 +1,28 @@
 /* GLOBAL RULES */
 
+/* 
+ * To simplify usage of a property 
+ * with different values for LTR and RTL languages
+ * sample usage: @include BIDIR_VALUE(float, left, right);
+ */ 
+@mixin BIDIR_VALUE($prop, $ltr_value, $rtl_value) {
+  #{$prop}: if($IS_LTR, $ltr_value, $rtl_value);
+}
+
+/* 
+ * To simplify usage of different properties 
+ * with the same value for LTR and RTL languages
+ * sample usage: @include BIDIR_PROP(margin-left, margin-right, 5px);
+ */ 
+@mixin BIDIR_PROP($ltr_prop, $rtl_prop, $value) {
+  @if $IS_LTR {
+    #{$ltr_prop}: $value;
+  }
+  @else {
+    #{$rtl_prop}: $value;
+  }
+}
+
 @mixin topspace {
   margin-top:40px;
 }
@@ -145,7 +168,7 @@
       list-style-image: none;
       background: $COLOR_LIGHT_GRAY;
       border-radius: 4px 4px 0 0;
-      margin: 0 6px 0 0;
+      @include BIDIR_VALUE(margin, 0 6px 0 0, 0 0 0 6px);
       padding: 0 10px;
       a, a:visited {
         padding: 0;

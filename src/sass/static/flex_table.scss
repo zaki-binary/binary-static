@@ -2,13 +2,13 @@
   $md: 600px;
 
   th {
-    text-align: left !important;
+    @include BIDIR_VALUE(text-align, left !important, right !important);
     border-bottom: none !important;
     overflow:hidden;
   }
   td {
-    text-align: left !important;
-    padding-left: 10px;
+    @include BIDIR_VALUE(text-align, left !important, right !important);
+    @include BIDIR_PROP(padding-left, padding-right, 10px);
     overflow:hidden;
 
   }
