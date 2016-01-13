@@ -288,7 +288,7 @@ var on_click_signup = function() {
 function check_login_hide_signup() {
     if (page.client.is_logged_in) {
         $('#verify-email-form').remove();
-        $('.break').attr('style', 'margin-bottom:1em')
+        $('.break').attr('style', 'margin-bottom:1em');
     }
 }
 
