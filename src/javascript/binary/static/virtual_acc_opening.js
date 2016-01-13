@@ -12,9 +12,13 @@ pjax_config_page("virtualws", function(){
           errorPassword = document.getElementById('error-password'),
           errorRPassword = document.getElementById('error-r-password');
 
-      $('#password').on('input', function() {
-        $('#password-meter').attr('value', testPassword($('#password').val())[0]);
-      });
+      if (detectIE() === false) {
+        $('#password').on('input', function() {
+          $('#password-meter').attr('value', testPassword($('#password').val())[0]);
+        });
+      } else {
+        $('#password-meter').remove();
+      }
 
       if (form) {
         $('#virtual-form').submit( function(evt) {
