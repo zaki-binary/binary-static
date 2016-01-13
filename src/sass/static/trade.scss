@@ -149,7 +149,7 @@
     padding: 0px;
     #contract_markets_container {
       text-align: right;
-      margin-right: 1rem;
+      @include BIDIR_PROP(margin-right, margin-left, 1rem);
     }
     #spot_label {
       margin: 0 5px 0 15px;
@@ -160,7 +160,7 @@
     padding-top: 25px;
     position: relative;
     #contract_form_container .col {
-      margin-right: 1rem;
+      @include BIDIR_PROP(margin-right, margin-left, 1rem);
     }
     .overlay_container {
     width: 100%;
@@ -181,7 +181,7 @@
   }
   #contract_prices_container {
     position: relative;
-    margin-left: 1em;
+    @include BIDIR_PROP(margin-left, margin-right, 1em);
     margin-top: 28px;
     .price_container {
       border: 1px solid $COLOR_GRAY;
@@ -327,7 +327,7 @@
       }
     }
     .contract_amount, .contract_description {
-      padding: 10px 10px 10px 5px;
+      @include BIDIR_VALUE(padding, 10px 10px 10px 5px, 10px 5px 10px 10px);
       line-height: 1.5;
       font-size: 90%;
       flex: 1 0 auto;
@@ -436,11 +436,11 @@
     margin-top: -1px;
   }
   #underlying{
-    margin-right: 10px;
+    @include BIDIR_PROP(margin-right, margin-left, 10px);
     margin-bottom: 5px;
   }
   #symbol_tip{
-    padding-right: 8px;
+    @include BIDIR_PROP(padding-right, padding-left, 8px);
     padding-bottom: 5px;
     cursor: pointer;
   }
@@ -572,7 +572,7 @@
   white-space: nowrap;
   padding: 3px;
   border-radius: 5px;
-  margin-right: 8px;
+  @include BIDIR_PROP(margin-right, margin-left, 8px);
   &.error{
     font-style: italic;
   }
