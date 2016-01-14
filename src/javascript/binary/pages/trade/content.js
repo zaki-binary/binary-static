@@ -121,7 +121,7 @@ var Content = (function () {
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
-            textEmailSent: text.localize('Please check your email for the next step.'),
+            textEmailSent: text.localize('Thanks for signing up! Check your inbox now, to verify your email.'),
             textMr: text.localize('Mr'),
             textMrs: text.localize('Mrs'),
             textMs: text.localize('Ms'),
