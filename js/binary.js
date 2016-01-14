@@ -53609,7 +53609,8 @@ BetAnalysis.DigitInfo.prototype = {
 BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
 ;BetAnalysis.JapanInfo = function() {
 
-
+    this.show = this.hide = function(){};
+    
     if (typeof is_japan === 'function' && $('#all_prices').length) {
         $('#tab_japan_info').removeClass('invisible');
     } else {
