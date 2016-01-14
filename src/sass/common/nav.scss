@@ -2,6 +2,11 @@
   background-color: $COLOR_LIGHT_GRAY;
   border-bottom: 1px solid $COLOR_GRAY;
   margin-bottom: 40px;
+  ul {
+    ul {
+      width: 100%;
+    }
+  }
   a.a-active, span.a-active {
     color: $COLOR_ORANGE;
   }
@@ -15,12 +20,16 @@
     position: relative;
     display: block;
     li {
-      margin: 0 2em 0 0;
+      @include BIDIR_VALUE(margin, 0 2em 0 0, 0 0 0 2em);
       display: inline-block;
       &#topMenuStartBetting {
-          float: if($LANGUAGE_DIRECTION == ltr, right, left);
+          @include BIDIR_VALUE(float, right, left);
+          @include BIDIR_VALUE(margin, 0 0 0 2em, 0 2em 0 0);
           ul {
-            text-align: if($LANGUAGE_DIRECTION == ltr, right, left);
+            @include BIDIR_VALUE(text-align, right, left);
+            li {
+              @include BIDIR_VALUE(margin, 0 0 0 2em, 0 2em 0 0);
+            }
           }
       }
       a {
@@ -41,7 +50,6 @@
         display: none;
         li.sub_item {
             font-size: 100%;
-            margin-right: 20px;
         }
       }
       ul.tm-ul-2  {
@@ -49,7 +57,7 @@
         display: none;
         li.tm-li-2 {
             font-size: 100%;
-            margin-right: 20px;
+            @include BIDIR_PROP(margin-right, margin-left, 20px);
         }
       }
     }
@@ -63,7 +71,6 @@
         margin-top: 3px solid transparent;
         background: #fff;
         li {
-          margin-right: 2em;
           a, span {
             top:auto;
             border: 0;
@@ -110,7 +117,8 @@
     @include tab-list;
     font: inherit !important;
     li {
-      margin-right: 6px !important;
+      @include BIDIR_PROP(margin-right, margin-left, 6px !important);
+      @include BIDIR_VALUE(float, left, right);
     }
   }
 

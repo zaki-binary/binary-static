@@ -1,6 +1,6 @@
 #balance {
-  float: left;
-  padding-left: 8px;
+  @include BIDIR_VALUE(float, left, right);
+  @include BIDIR_PROP(padding-left, padding-right, 8px);
   margin-top: 1em;
 }
 
