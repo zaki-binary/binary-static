@@ -10,9 +10,7 @@ BetAnalysis.JapanInfo = function() {
     var $container = $('#tab_japan_info-content');
     var $rows = {};
     var socket;
-    this.rows = function() {
-        return $rows
-    };
+
     if (!$container.length) {
         return;
     }
@@ -185,5 +183,5 @@ BetAnalysis.JapanInfo = function() {
         if (typeof socket === 'object') {
             socket.close();
         }
-    }
+    };
 };
