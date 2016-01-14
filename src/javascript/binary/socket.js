@@ -10,7 +10,7 @@
  * `BinarySocket.init()` to initiate the connection
  * `BinarySocket.send({contracts_for : 1})` to send message to server
  */
-var BinarySocket = (function () {
+function BinarySocketClass() {
     'use strict';
 
     var binarySocket,
@@ -200,4 +200,6 @@ var BinarySocket = (function () {
         clearTimeouts: clearTimeouts
     };
 
-})();
+}
+
+var BinarySocket = new BinarySocketClass();
