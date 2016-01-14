@@ -299,11 +299,7 @@ function processTick(tick) {
 function processProposal(response) {
     'use strict';
     var form_id = Price.getFormId();
-    var japan_info = TradingAnalysis.japan_info();
-    if (response.echo_req.passthrough.form_id === 'japan_barriers' && japan_info) {
-        japan_info.process(response);
-    }
-    if (response.echo_req.passthrough.form_id === form_id) {
+    if(response.echo_req.passthrough.form_id===form_id){
         hideOverlayContainer();
         Price.display(response, Contract.contractType()[Contract.form()]);
         hidePriceOverlay();
