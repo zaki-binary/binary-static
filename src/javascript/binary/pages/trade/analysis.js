@@ -76,36 +76,41 @@ var TradingAnalysis = (function() {
 
         tab_japan_info = new BetAnalysis.JapanInfo();
 
-        if (currentTab === 'tab_graph') {
-            if (document.getElementById('underlying')) {
-                showHighchart();
-                setUnderlyingTime();
-            } else {
-                BetAnalysis.tab_live_chart.reset();
-                BetAnalysis.tab_live_chart.render(true);
-            }
-        } else if (currentTab === 'tab_japan_info') {
+        if (currentTab === 'tab_japan_info') {
             tab_japan_info.show();
-        } else {
-            var url = currentLink.getAttribute('href');
-            $.ajax({
-                    method: 'GET',
-                    url: url,
-                })
-                .done(function(data) {
-                    contentId.innerHTML = data;
-                    if (currentTab === 'tab_intradayprices') {
-                        bindSubmitForIntradayPrices();
-                    } else if (currentTab === 'tab_ohlc') {
-                        bindSubmitForDailyPrices();
-                    } else if (currentTab == 'tab_last_digit') {
-                        trading_digit_info = new BetAnalysis.DigitInfo();
-                        trading_digit_info.on_latest();
-                        trading_digit_info.show_chart(sessionStorage.getItem('underlying'));
-                    }
-
-                });
         }
+        else {
+            tab_japan_info.hide();
+            if (currentTab === 'tab_graph') {
+                if (document.getElementById('underlying')) {
+                    showHighchart();
+                    setUnderlyingTime();
+                } else {
+                    BetAnalysis.tab_live_chart.reset();
+                    BetAnalysis.tab_live_chart.render(true);
+                }
+            } else {
+                var url = currentLink.getAttribute('href');
+                $.ajax({
+                        method: 'GET',
+                        url: url,
+                    })
+                    .done(function(data) {
+                        contentId.innerHTML = data;
+                        if (currentTab === 'tab_intradayprices') {
+                            bindSubmitForIntradayPrices();
+                        } else if (currentTab === 'tab_ohlc') {
+                            bindSubmitForDailyPrices();
+                        } else if (currentTab == 'tab_last_digit') {
+                            trading_digit_info = new BetAnalysis.DigitInfo();
+                            trading_digit_info.on_latest();
+                            trading_digit_info.show_chart(sessionStorage.getItem('underlying'));
+                        }
+
+                    });
+            }
+        }
+        
     };
 
     /*

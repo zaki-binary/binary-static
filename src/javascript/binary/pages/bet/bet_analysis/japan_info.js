@@ -1,4 +1,6 @@
 BetAnalysis.JapanInfo = function() {
+
+
     if (typeof is_japan === 'function') {
         $('#tab_japan_info').removeClass('invisible');
     } else {
@@ -7,19 +9,22 @@ BetAnalysis.JapanInfo = function() {
 
     var $container = $('#tab_japan_info-content');
     var $rows = {};
+    var socket;
+    this.rows = function() {
+        return $rows
+    };
     if (!$container.length) {
         return;
     }
 
     var add_header = function() {
         var names = Contract.contractType()[Contract.form()];
-        var ask,bid;
-        for(var i=0; i<Object.keys(names).length; i++){
+        var ask, bid;
+        for (var i = 0; i < Object.keys(names).length; i++) {
             var pos = contractTypeDisplayMapping(Object.keys(names)[i]);
-            if(pos === 'top'){
+            if (pos === 'top') {
                 ask = names[Object.keys(names)[i]];
-            }
-            else if(pos === 'bottom'){
+            } else if (pos === 'bottom') {
                 bid = names[Object.keys(names)[i]];
             }
         }
@@ -116,7 +121,7 @@ BetAnalysis.JapanInfo = function() {
                                     'id': id
                                 }
                             });
-                            BinarySocket.send(req);
+                            socket.send(req);
                         }
                     }
                 }
@@ -135,23 +140,16 @@ BetAnalysis.JapanInfo = function() {
                                 'id': id
                             }
                         });
-                        BinarySocket.send(req2);
+                        socket.send(req2);
                     }
                 }
             }
         }
     };
 
-    this.show = function() {
-        clean();
-        add_header();
-        request_prices();
-    };
-
-    this.process = function(res) {
+    var processRes = function(res) {
         if (res.echo_req.passthrough.id && $rows[res.echo_req.passthrough.id]) {
             var position = contractTypeDisplayMapping(res.echo_req.contract_type);
-
             if (position === 'top') {
                 update_ask(res.echo_req.passthrough.id, res.proposal ? res.proposal.ask_price : '-');
             } else if (position === 'bottom') {
@@ -160,4 +158,32 @@ BetAnalysis.JapanInfo = function() {
         }
     };
 
+    this.show = function() {
+        clean();
+        add_header();
+        if (typeof socket !== 'object' || socket.readyState !== 1) {
+            socket = new BinarySocketClass();
+            socket.init({
+                onopen: function() {
+                    request_prices();
+                },
+                onmessage: function(msg) {
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        processRes(response);
+                    }
+                },
+
+            });
+        } else {
+            request_prices();
+        }
+
+    };
+
+    this.hide = function() {
+        if (typeof socket === 'object') {
+            socket.close();
+        }
+    }
 };
