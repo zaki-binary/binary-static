@@ -53113,8 +53113,8 @@ pjax_config_page('rise_fall_table', function() {
     };
 });
 
-pjax_config_page('openpositionsws|portfolio|trade.cgi|statement|f_manager_statement|f_manager_history|' +
-    'f_profit_table|profit_table|trading|legacy-statement|legacy-profittable', function() {
+pjax_config_page('openpositionsws|trade.cgi|statement|f_manager_statement|f_manager_history|' +
+    'f_profit_table|profit_table|trading', function() {
     return {
         onLoad: function() {
             BetSell.register();
@@ -61472,12 +61472,7 @@ pjax_config_page("user/self_exclusionws", function() {
         
         }
     };
-});;onLoad.queue_for_url(function() {
-    $('#statement-date').on('change', function() {
-        $('#submit-date').removeClass('invisible');
-    });
-}, 'legacy-statement');
-;/*
+});;/*
  * This file contains the code related to loading of trading page bottom analysis
  * content. It will contain jquery so as to compatible with old code and less rewrite
  *
