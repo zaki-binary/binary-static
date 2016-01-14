@@ -510,6 +510,10 @@ var TradingEvents = (function () {
             period.addEventListener('change', function (e) {
                 Periods.displayBarriers();
                 processPriceRequest();
+                var japan_info = TradingAnalysis.japan_info();
+                if(japan_info && TradingAnalysis.getActiveTab() === 'tab_japan_info'){
+                    japan_info.show();
+                }
             });
         }
 

@@ -53607,6 +53607,193 @@ BetAnalysis.DigitInfo.prototype = {
 };
 
 BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
+;BetAnalysis.JapanInfo = function() {
+
+
+    if (typeof is_japan === 'function' && $('#all_prices').length) {
+        $('#tab_japan_info').removeClass('invisible');
+    } else {
+        return;
+    }
+
+    var $container = $('#tab_japan_info-content');
+    var $rows = {};
+    var socket;
+
+    if (!$container.length) {
+        return;
+    }
+
+    var add_header = function() {
+        var names = Contract.contractType()[Contract.form()];
+        var ask, bid;
+        for (var i = 0; i < Object.keys(names).length; i++) {
+            var pos = contractTypeDisplayMapping(Object.keys(names)[i]);
+            if (pos === 'top') {
+                ask = names[Object.keys(names)[i]];
+            } else if (pos === 'bottom') {
+                bid = names[Object.keys(names)[i]];
+            }
+        }
+        var $header = $('<div />', {
+            'class': 'grd-parent grd-grid-12 grd-centered table-header grd-row-padding'
+        }).append(
+            $('<div />', {
+                'class': 'grd-grid-4 center-aligned',
+                'text': Content.localize().textExercisePeriod
+            }),
+            $('<div />', {
+                'class': 'grd-grid-4 center-aligned',
+                'text': ask
+            }),
+            $('<div />', {
+                'class': 'grd-grid-4 center-aligned',
+                'text': bid
+            })
+        );
+        $container.append($header);
+    };
+
+    var add_row = function(barrier, id, ask, bid) {
+        $rows[id] = $('<div />', {
+            'class': 'grd-parent grd-grid-12 grd-centered table-body table-body-lines grd-row-paddingd',
+        }).append(
+            $('<div />', {
+                'class': 'grd-grid-4 center-aligned',
+                'text': barrier
+            }),
+            $('<div />', {
+                'class': 'grd-grid-4 center-aligned ask',
+                'text': ask
+            }),
+            $('<div />', {
+                'class': 'grd-grid-4 center-aligned bid',
+                'text': bid
+            })
+        );
+        $container.append($rows[id]);
+    };
+
+    var update_ask = function(id, ask) {
+        if (!$rows[id]) {
+            return;
+        }
+        $rows[id].find('.ask').text(ask);
+    };
+
+    var update_bid = function(id, bid) {
+        if (!$rows[id]) {
+            return;
+        }
+        $rows[id].find('.bid').text(bid);
+    };
+
+    var clean = function() {
+        $container.text('');
+        $rows = {};
+    };
+
+    var request_prices = function() {
+        var barriers1 = Periods.barriers1();
+        var barriers2 = Periods.barriers2();
+
+        var types = Contract.contractType()[Contract.form()];
+
+        var period = $('#period').val();
+        var p = period.match(/^\d+_(\d+)$/);
+
+        var proposal = {
+            'proposal': 1,
+            'amount': 1000,
+            'basis': 'payout',
+            'currency': $('#currency').val(),
+            'symbol': $('#underlying').val(),
+            'date_expiry': p[1]
+        };
+
+        var id = 0;
+        if (barriers2.length) {
+            for (var i = 0; i < barriers2.length; i++) {
+                for (var j = 0; j < barriers1.length; j++) {
+                    id++;
+                    add_row(barriers2[i] + ' - ' + barriers1[j], id);
+                    for (var typeOfContract in types) {
+                        if (types.hasOwnProperty(typeOfContract)) {
+                            var req = $.extend({}, proposal, {
+                                'barrier': barriers1[j],
+                                'barrier2': barriers2[i],
+                                'contract_type': typeOfContract,
+                                'passthrough': {
+                                    'form_id': 'japan_barriers',
+                                    'id': id
+                                }
+                            });
+                            socket.send(req);
+                        }
+                    }
+                }
+            }
+        } else {
+            for (var d = 0; d < barriers1.length; d++) {
+                id++;
+                add_row(barriers1[d], id);
+                for (var typeOfContract2 in types) {
+                    if (types.hasOwnProperty(typeOfContract2)) {
+                        var req2 = $.extend({}, proposal, {
+                            'barrier': barriers1[d],
+                            'contract_type': typeOfContract2,
+                            'passthrough': {
+                                'form_id': 'japan_barriers',
+                                'id': id
+                            }
+                        });
+                        socket.send(req2);
+                    }
+                }
+            }
+        }
+    };
+
+    var processRes = function(res) {
+        if (res.echo_req.passthrough.id && $rows[res.echo_req.passthrough.id]) {
+            var position = contractTypeDisplayMapping(res.echo_req.contract_type);
+            if (position === 'top') {
+                update_ask(res.echo_req.passthrough.id, res.proposal ? res.proposal.ask_price : '-');
+            } else if (position === 'bottom') {
+                update_bid(res.echo_req.passthrough.id, res.proposal ? res.proposal.ask_price : '-');
+            }
+        }
+    };
+
+    this.show = function() {
+        clean();
+        add_header();
+        if (typeof socket !== 'object' || socket.readyState !== 1) {
+            socket = new BinarySocketClass();
+            socket.init({
+                onopen: function() {
+                    request_prices();
+                },
+                onmessage: function(msg) {
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        processRes(response);
+                    }
+                },
+
+            });
+        } else {
+            request_prices();
+        }
+
+    };
+
+    this.hide = function() {
+        if (typeof socket === 'object') {
+            socket.close();
+        }
+    };
+};
 ;BetAnalysis.tab_live_chart = function () {
     var live_chart_initialized = false;
     var invoked_for_websocket  = false;
@@ -61482,28 +61669,28 @@ pjax_config_page("user/self_exclusionws", function() {
  * or underlying to load bet analysis for that particular event
  */
 
-var TradingAnalysis = (function(){
-    var trading_digit_info;
+var TradingAnalysis = (function() {
+    var trading_digit_info, tab_japan_info;
 
     var requestTradeAnalysis = function() {
         'use strict';
         $.ajax({
-            method: 'POST',
-            url: page.url.url_for('trade/trading_analysis'),
-            data: {
-                underlying: sessionStorage.getItem('underlying'),
-                formname: sessionStorage.getItem('formname'),
-                contract_category: Contract.form(),
-                barrier: Contract.barrier()
-            }
-        })
-        .done(function(data) {
-            var contentId = document.getElementById('trading_bottom_content');
-            contentId.innerHTML = data;
-            sessionStorage.setItem('currentAnalysisTab', getActiveTab());
-            bindAnalysisTabEvent();
-            loadAnalysisTab();
-        });
+                method: 'POST',
+                url: page.url.url_for('trade/trading_analysis'),
+                data: {
+                    underlying: sessionStorage.getItem('underlying'),
+                    formname: sessionStorage.getItem('formname'),
+                    contract_category: Contract.form(),
+                    barrier: Contract.barrier()
+                }
+            })
+            .done(function(data) {
+                var contentId = document.getElementById('trading_bottom_content');
+                contentId.innerHTML = data;
+                sessionStorage.setItem('currentAnalysisTab', getActiveTab());
+                bindAnalysisTabEvent();
+                loadAnalysisTab();
+            });
     };
 
     /*
@@ -61546,29 +61733,37 @@ var TradingAnalysis = (function(){
         toggleActiveNavMenuElement(analysisNavElement, currentLink.parentElement);
         toggleActiveAnalysisTabs();
 
-        if (currentTab === 'tab_graph') {
-            BetAnalysis.tab_live_chart.reset();
-            BetAnalysis.tab_live_chart.render(true);
-        } else {
-            var url = currentLink.getAttribute('href');
-            $.ajax({
-                method: 'GET',
-                url: url,
-            })
-            .done(function(data) {
-                contentId.innerHTML = data;
-                if (currentTab === 'tab_intradayprices') {
-                    bindSubmitForIntradayPrices();
-                } else if (currentTab === 'tab_ohlc') {
-                    bindSubmitForDailyPrices();
-                } else if (currentTab == 'tab_last_digit') {
-                    trading_digit_info = new BetAnalysis.DigitInfo();
-                    trading_digit_info.on_latest();
-                    trading_digit_info.show_chart(sessionStorage.getItem('underlying'));
-                }
+        tab_japan_info = new BetAnalysis.JapanInfo();
 
-            });
+        if (currentTab === 'tab_japan_info') {
+            tab_japan_info.show();
+        } else {
+            tab_japan_info.hide();
+            if (currentTab === 'tab_graph') {
+                BetAnalysis.tab_live_chart.reset();
+                BetAnalysis.tab_live_chart.render(true);
+            } else {
+                var url = currentLink.getAttribute('href');
+                $.ajax({
+                        method: 'GET',
+                        url: url,
+                    })
+                    .done(function(data) {
+                        contentId.innerHTML = data;
+                        if (currentTab === 'tab_intradayprices') {
+                            bindSubmitForIntradayPrices();
+                        } else if (currentTab === 'tab_ohlc') {
+                            bindSubmitForDailyPrices();
+                        } else if (currentTab == 'tab_last_digit') {
+                            trading_digit_info = new BetAnalysis.DigitInfo();
+                            trading_digit_info.on_latest();
+                            trading_digit_info.show_chart(sessionStorage.getItem('underlying'));
+                        }
+
+                    });
+            }
         }
+
     };
 
     /*
@@ -61585,7 +61780,7 @@ var TradingAnalysis = (function(){
                 currentTabElement = document.getElementById(currentTab + '-content'),
                 classes = currentTabElement.classList;
 
-            for (var i = 0, len = childElements.length; i < len; i++){
+            for (var i = 0, len = childElements.length; i < len; i++) {
                 childElements[i].classList.remove('selectedTab');
                 childElements[i].classList.add('invisible');
             }
@@ -61616,21 +61811,21 @@ var TradingAnalysis = (function(){
     var bindSubmitForIntradayPrices = function() {
         var elm = document.getElementById('intraday_prices_submit');
         if (elm) {
-            elm.addEventListener('click', function (e) {
+            elm.addEventListener('click', function(e) {
                 e.preventDefault();
                 var formElement = document.getElementById('analysis_intraday_prices_form'),
-                   contentTab = document.querySelector('#tab_intradayprices-content'),
-                   underlyingSelected = contentTab.querySelector('select[name="underlying"]'),
-                   dateSelected = contentTab.querySelector('select[name="date"]');
+                    contentTab = document.querySelector('#tab_intradayprices-content'),
+                    underlyingSelected = contentTab.querySelector('select[name="underlying"]'),
+                    dateSelected = contentTab.querySelector('select[name="date"]');
 
                 $.ajax({
-                    method: 'GET',
-                    url: formElement.getAttribute('action') + '&underlying=' + underlyingSelected.value + '&date=' + dateSelected.value,
-                })
-                .done(function(data) {
-                    contentTab.innerHTML = data;
-                    bindSubmitForIntradayPrices();
-                });
+                        method: 'GET',
+                        url: formElement.getAttribute('action') + '&underlying=' + underlyingSelected.value + '&date=' + dateSelected.value,
+                    })
+                    .done(function(data) {
+                        contentTab.innerHTML = data;
+                        bindSubmitForIntradayPrices();
+                    });
             });
         }
     };
@@ -61641,28 +61836,34 @@ var TradingAnalysis = (function(){
     var bindSubmitForDailyPrices = function() {
         var elm = document.getElementById('daily_prices_submit');
         if (elm) {
-            elm.addEventListener('click', function (e) {
+            elm.addEventListener('click', function(e) {
                 e.preventDefault();
                 var formElement = document.getElementById('analysis_daily_prices_form'),
-                   contentTab = document.querySelector('#tab_ohlc-content'),
-                   underlyingSelected = sessionStorage.getItem('underlying'),
-                   daysSelected = contentTab.querySelector('input[name="days_to_display"]');
+                    contentTab = document.querySelector('#tab_ohlc-content'),
+                    underlyingSelected = sessionStorage.getItem('underlying'),
+                    daysSelected = contentTab.querySelector('input[name="days_to_display"]');
 
                 $.ajax({
-                    method: 'GET',
-                    url: formElement.getAttribute('action') + '&underlying_symbol=' + underlyingSelected + '&days_to_display=' + daysSelected.value,
-                })
-                .done(function(data) {
-                    contentTab.innerHTML = data;
-                    bindSubmitForDailyPrices();
-                });
+                        method: 'GET',
+                        url: formElement.getAttribute('action') + '&underlying_symbol=' + underlyingSelected + '&days_to_display=' + daysSelected.value,
+                    })
+                    .done(function(data) {
+                        contentTab.innerHTML = data;
+                        bindSubmitForDailyPrices();
+                    });
             });
         }
     };
 
     return {
-        request:requestTradeAnalysis,
-        digit_info: function(){return trading_digit_info;}
+        request: requestTradeAnalysis,
+        digit_info: function() {
+            return trading_digit_info;
+        },
+        japan_info: function() {
+            return tab_japan_info;
+        },
+        getActiveTab: getActiveTab
     };
 
 })();
@@ -64131,6 +64332,10 @@ var TradingEvents = (function () {
             period.addEventListener('change', function (e) {
                 Periods.displayBarriers();
                 processPriceRequest();
+                var japan_info = TradingAnalysis.japan_info();
+                if(japan_info && TradingAnalysis.getActiveTab() === 'tab_japan_info'){
+                    japan_info.show();
+                }
             });
         }
 
@@ -64504,9 +64709,9 @@ function processActiveSymbols(data) {
     displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
     // setTimeout(function(){
-        // if(document.getElementById('underlying')){
-        //     Symbols.getSymbols(0);
-        // }
+    // if(document.getElementById('underlying')){
+    //     Symbols.getSymbols(0);
+    // }
     // }, 60*1000);
 }
 
@@ -64523,12 +64728,12 @@ function processMarket(flag) {
     var symbol = sessionStorage.getItem('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
-    if(update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)){
+    if (update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)) {
         symbol = undefined;
     }
     displayUnderlyings('underlying', Symbols.underlyings()[market], symbol);
 
-    if(update_page){
+    if (update_page) {
         processMarketUnderlying();
     }
 }
@@ -64554,14 +64759,14 @@ function processMarketUnderlying() {
     Tick.request(underlying);
 
     Tick.clean();
-    
+
     updateWarmChart();
 
     BinarySocket.clearTimeouts();
-    
+
     Contract.getContracts(underlying);
 
-    displayTooltip(sessionStorage.getItem('market'),underlying);
+    displayTooltip(sessionStorage.getItem('market'), underlying);
 }
 
 /*
@@ -64575,23 +64780,21 @@ function processContract(contracts) {
 
     Contract.setContracts(contracts);
 
-    if(typeof contracts.contracts_for !== 'undefined'){
+    if (typeof contracts.contracts_for !== 'undefined') {
         Tick.setQuote(contracts.contracts_for.spot);
         Tick.display(contracts.contracts_for.spot);
     }
 
     var contract_categories = Contract.contractForms();
     var formname;
-    if(sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]){
+    if (sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]) {
         formname = sessionStorage.getItem('formname');
-    }
-    else{
+    } else {
         var tree = getContractCategoryTree(contract_categories);
-        if(tree[0]){
-            if(typeof tree[0] === 'object'){
+        if (tree[0]) {
+            if (typeof tree[0] === 'object') {
                 formname = tree[0][1][0];
-            }
-            else{
+            } else {
                 formname = tree[0];
             }
         }
@@ -64613,45 +64816,43 @@ function processContract(contracts) {
 }
 
 function processContractForm() {
-    
+
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
 
     displayPrediction();
 
-    displaySpreads(); 
+    displaySpreads();
 
     var r1;
-    if(StartDates.displayed() && sessionStorage.getItem('date_start')){
+    if (StartDates.displayed() && sessionStorage.getItem('date_start')) {
         r1 = TradingEvents.onStartDateChange(sessionStorage.getItem('date_start'));
-        if(!r1) Durations.display();
-    }
-    else{
+        if (!r1) Durations.display();
+    } else {
         Durations.display();
-    } 
+    }
 
     var expiry_type = sessionStorage.getItem('expiry_type') ? sessionStorage.getItem('expiry_type') : 'duration';
     var make_price_request = TradingEvents.onExpiryTypeChange(expiry_type);
 
-    if(sessionStorage.getItem('amount')) $('#amount').val(sessionStorage.getItem('amount'));
-    if(sessionStorage.getItem('amount_type')) selectOption(sessionStorage.getItem('amount_type'),document.getElementById('amount_type'));
-    if(sessionStorage.getItem('currency')) selectOption(sessionStorage.getItem('currency'),document.getElementById('currency'));
+    if (sessionStorage.getItem('amount')) $('#amount').val(sessionStorage.getItem('amount'));
+    if (sessionStorage.getItem('amount_type')) selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
+    if (sessionStorage.getItem('currency')) selectOption(sessionStorage.getItem('currency'), document.getElementById('currency'));
 
-    if(make_price_request >= 0){
+    if (make_price_request >= 0) {
         processPriceRequest();
     }
 }
 
 function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
-    if(Contract.form() === 'digits' && sessionStorage.getItem('formname')!=='evenodd'){
+    if (Contract.form() === 'digits' && sessionStorage.getItem('formname') !== 'evenodd') {
         predictionElement.show();
-        if(sessionStorage.getItem('prediction')){
-            selectOption(sessionStorage.getItem('prediction'),document.getElementById('prediction'));
+        if (sessionStorage.getItem('prediction')) {
+            selectOption(sessionStorage.getItem('prediction'), document.getElementById('prediction'));
         }
-    }
-    else{
+    } else {
         predictionElement.hide();
     }
 }
@@ -64665,7 +64866,7 @@ function displaySpreads() {
         stopTypeDollarLabel = document.getElementById('stop_type_dollar_label'),
         expiryTypeRow = document.getElementById('expiry_row');
 
-    if(sessionStorage.getItem('formname') === 'spreads'){
+    if (sessionStorage.getItem('formname') === 'spreads') {
         amountType.hide();
         amount.hide();
         expiryTypeRow.hide();
@@ -64681,25 +64882,25 @@ function displaySpreads() {
         amountType.show();
         amount.show();
     }
-    if(sessionStorage.getItem('stop_type')){
-       var el = document.querySelectorAll('input[name="stop_type"][value="'+sessionStorage.getItem('stop_type')+'"]');
-       if(el){
+    if (sessionStorage.getItem('stop_type')) {
+        var el = document.querySelectorAll('input[name="stop_type"][value="' + sessionStorage.getItem('stop_type') + '"]');
+        if (el) {
             console.log(el);
-            el[0].setAttribute('checked','checked');
-       }
+            el[0].setAttribute('checked', 'checked');
+        }
     }
-    if(sessionStorage.getItem('amount_per_point')){
+    if (sessionStorage.getItem('amount_per_point')) {
         document.getElementById('amount_per_point').value = sessionStorage.getItem('amount_per_point');
     }
-    if(sessionStorage.getItem('stop_loss')){
+    if (sessionStorage.getItem('stop_loss')) {
         document.getElementById('stop_loss').value = sessionStorage.getItem('stop_loss');
     }
-    if(sessionStorage.getItem('stop_profit')){
+    if (sessionStorage.getItem('stop_profit')) {
         document.getElementById('stop_profit').value = sessionStorage.getItem('stop_profit');
     }
 }
 
-function forgetTradingStreams(){
+function forgetTradingStreams() {
     processForgetProposals();
     processForgetTicks();
 }
@@ -64709,8 +64910,10 @@ function forgetTradingStreams(){
 function processForgetProposals() {
     'use strict';
     showPriceOverlay();
-    BinarySocket.send({forget_all: "proposal"});
-    Price.clearMapping(); 
+    BinarySocket.send({
+        forget_all: "proposal"
+    });
+    Price.clearMapping();
 }
 
 /*
@@ -64724,20 +64927,29 @@ function processPriceRequest() {
     processForgetProposals();
     showPriceOverlay();
     var types = Contract.contractType()[Contract.form()];
-    if(Contract.form()==='digits'){
-        switch(sessionStorage.getItem('formname')) {
+    if (Contract.form() === 'digits') {
+        switch (sessionStorage.getItem('formname')) {
             case 'matchdiff':
-                types = {'DIGITMATCH':1, 'DIGITDIFF':1};
+                types = {
+                    'DIGITMATCH': 1,
+                    'DIGITDIFF': 1
+                };
                 break;
             case 'evenodd':
-                types = {'DIGITEVEN':1, 'DIGITODD':1};
+                types = {
+                    'DIGITEVEN': 1,
+                    'DIGITODD': 1
+                };
                 break;
             case 'overunder':
-                types = {'DIGITOVER':1, 'DIGITUNDER':1};
+                types = {
+                    'DIGITOVER': 1,
+                    'DIGITUNDER': 1
+                };
         }
     }
     for (var typeOfContract in types) {
-        if(types.hasOwnProperty(typeOfContract)) {
+        if (types.hasOwnProperty(typeOfContract)) {
             BinarySocket.send(Price.proposal(typeOfContract));
         }
     }
@@ -64749,7 +64961,9 @@ function processPriceRequest() {
  */
 function processForgetTicks() {
     'use strict';
-    BinarySocket.send({ forget_all: 'ticks' });
+    BinarySocket.send({
+        forget_all: 'ticks'
+    });
 }
 
 /*
@@ -64762,8 +64976,8 @@ function processTick(tick) {
         Tick.details(tick);
         Tick.display();
         var digit_info = TradingAnalysis.digit_info();
-        if(digit_info && tick.tick){
-            digit_info.update(symbol,tick.tick.quote);
+        if (digit_info && tick.tick) {
+            digit_info.update(symbol, tick.tick.quote);
         }
         WSTickDisplay.updateChart(tick);
         Purchase.update_spot_list(tick);
@@ -64775,7 +64989,7 @@ function processTick(tick) {
     }
 }
 
-function processProposal(response){
+function processProposal(response) {
     'use strict';
     var form_id = Price.getFormId();
     if(response.echo_req.passthrough.form_id===form_id){
@@ -64785,18 +64999,19 @@ function processProposal(response){
     }
 }
 
-function processTradingTimesRequest(date){
+function processTradingTimesRequest(date) {
     var trading_times = Durations.trading_times();
-    if(trading_times.hasOwnProperty(date)){
+    if (trading_times.hasOwnProperty(date)) {
         processPriceRequest();
-    }
-    else{
+    } else {
         showPriceOverlay();
-        BinarySocket.send({ trading_times: date });
+        BinarySocket.send({
+            trading_times: date
+        });
     }
 }
 
-function processTradingTimes(response){
+function processTradingTimes(response) {
     Durations.processTradingTimesAnswer(response);
 
     processPriceRequest();
@@ -65730,7 +65945,7 @@ if (!/backoffice/.test(document.URL)) { // exclude BO
  * `BinarySocket.init()` to initiate the connection
  * `BinarySocket.send({contracts_for : 1})` to send message to server
  */
-var BinarySocket = (function () {
+function BinarySocketClass() {
     'use strict';
 
     var binarySocket,
@@ -65920,7 +66135,9 @@ var BinarySocket = (function () {
         clearTimeouts: clearTimeouts
     };
 
-})();
+}
+
+var BinarySocket = new BinarySocketClass();
 ;var account_transferws = (function(){
     "use strict";
     var $form ;
@@ -69154,7 +69371,9 @@ function attach_tabs(element) {
 ;if(typeof is_japan === 'function'){
 	var Periods = (function(){
 		var barrier = 0,
-			barrier2 = 0;
+			barrier2 = 0,
+			barriers1 = [],
+			barriers2 = [];
 
 		var displayPeriods = function(){
 
@@ -69277,6 +69496,8 @@ function attach_tabs(element) {
 				});
 				target1.appendChild(fragment);
 				barrier = target1.value = periods[formName][underlying][period].barrier;
+				barriers1 = periods[formName][underlying][period].available_barriers;
+				barriers2 = [];
 			}
 			else{
 				document.getElementById('jbarrier_row').style.display = 'none';
@@ -69308,12 +69529,16 @@ function attach_tabs(element) {
 				});
 				target3.appendChild(fragment);
 				barrier2 = target3.value = periods[formName][underlying][period].low_barrier;
+				barriers1 = periods[formName][underlying][period].available_barriers[1];
+				barriers2 = periods[formName][underlying][period].available_barriers[0];
 			}
 		};
 
 		return {
 			barrier: function(){return barrier;},
 			barrier2: function(){return barrier2;},
+			barriers1: function(){return barriers1;},
+			barriers2: function(){return barriers2;},
 			displayPeriods: displayPeriods,
 			displayBarriers: displayBarriers
 		};
