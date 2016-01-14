@@ -37,13 +37,13 @@ var SelfExlusionWS = (function(){
         return /^\+?\d+$/.test(str);
     };
 
-    var validateForm = function(frm){
+    var validateForm = function($frm){
         var isValid = true;
         $("p.errorfield").each(function(ind,element){
             $(element).text("");
         });
    
-        $(":text").each(function(ind,element){
+        $frm.find(":text").each(function(ind,element){
             var ele = $(element).val().replace(/ /g, "");
             var id = $(element).attr("id");
        
