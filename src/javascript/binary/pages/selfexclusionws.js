@@ -27,7 +27,6 @@ var SelfExlusionWS = (function(){
     var clearErrors = function(){
         $form.find("#exclusionMsg").hide();
         $form.find("#exclusionMsg").text("");
-        $("#errorMsg").hide();
         $form.show();
         $("#exclusionText").show();
         $("#exclusionTitle").show();
@@ -38,13 +37,13 @@ var SelfExlusionWS = (function(){
         return /^\+?\d+$/.test(str);
     };
 
-    var validateForm = function(frm){
+    var validateForm = function($frm){
         var isValid = true;
         $("p.errorfield").each(function(ind,element){
             $(element).text("");
         });
    
-        $(":text").each(function(ind,element){
+        $frm.find(":text").each(function(ind,element){
             var ele = $(element).val().replace(/ /g, "");
             var id = $(element).attr("id");
        
@@ -136,7 +135,7 @@ var SelfExlusionWS = (function(){
         if("error" in response) {
             if("message" in response.error) {
                 console.log(response.error.message);
-                $("#errorMsg").show();
+                $("#errorMsg").removeClass("hidden");
                 $("#errorMsg").text(text.localize(response.error.message));
                 $form.hide();
                 $("#exclusionText").hide();
@@ -348,11 +347,10 @@ pjax_config_page("user/self_exclusionws", function() {
                         SelfExlusionWS.apiResponse(response);
                           
                     }
-                },
-                onauth : function(){
-                    SelfExlusionWS.init();
                 }
             });	
+
+            SelfExlusionWS.init();
         
         }
     };
