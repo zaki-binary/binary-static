@@ -51181,23 +51181,23 @@ function testPassword(passwd)
 
     if(intScore < 16)
     {
-       strVerdict = text.localize("Very weak");
+       strVerdict = text.localize("Password is very weak");
     }
     else if (intScore > 15 && intScore < 25)
     {
-       strVerdict = text.localize("Weak");
+       strVerdict = text.localize("Password is weak");
     }
     else if (intScore > 24 && intScore < 35)
     {
-       strVerdict = text.localize("Mediocre");
+       strVerdict = text.localize("Password is moderate");
     }
     else if (intScore > 34 && intScore < 45)
     {
-       strVerdict = text.localize("Strong");
+       strVerdict = text.localize("Password is strong");
     }
     else
     {
-       strVerdict = text.localize("Stronger");
+       strVerdict = text.localize("Password is very strong");
     }
 
   var array = [intScore, strVerdict];
@@ -61153,13 +61153,13 @@ pjax_config_page("market_timesws", function() {
         return /^\+?\d+$/.test(str);
     };
 
-    var validateForm = function(frm){
+    var validateForm = function($frm){
         var isValid = true;
         $("p.errorfield").each(function(ind,element){
             $(element).text("");
         });
    
-        $(":text").each(function(ind,element){
+        $frm.find(":text").each(function(ind,element){
             var ele = $(element).val().replace(/ /g, "");
             var id = $(element).attr("id");
        
@@ -62830,7 +62830,7 @@ function chartFrameSource(underlying, highchart_time){
             textCloses: text.localize('Closes'),
             textSettles: text.localize('Settles'),
             textUpcomingEvents: text.localize('Upcoming Events'),
-            textEmailSent: text.localize('Please check your email for the next step.'),
+            textEmailSent: text.localize('Thanks for signing up! Check your inbox now, to verify your email.'),
             textMr: text.localize('Mr'),
             textMrs: text.localize('Mrs'),
             textMs: text.localize('Ms'),
@@ -68395,7 +68395,7 @@ var ProfitTableUI = (function(){
         var amount = Number(parseFloat(transaction["amount"])).toFixed(2);
         var balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
 
-        var creditDebitType = (parseInt(amount) >= 0) ? "profit" : "loss";
+        var creditDebitType = (parseFloat(amount) >= 0) ? "profit" : "loss";
 
         var $statementRow = Table.createFlexTableRow([date, ref, action, desc, amount, balance], columns, "data");
         $statementRow.children(".credit").addClass(creditDebitType);
@@ -68428,32 +68428,31 @@ var ProfitTableUI = (function(){
 ;if(document.getElementById('btn-verify-email')) {
 
     document.getElementById('btn-verify-email').addEventListener('click', function(evt){
-    	evt.preventDefault();
-    	var email = document.getElementById('email').value;
-    	var error = document.getElementsByClassName('error-message')[0];
-        Content.populate();
+      evt.preventDefault();
+      var email = document.getElementById('email').value;
+      var error = document.getElementById('signup_error');
+      Content.populate();
 
-    	if(!Validate.errorMessageEmail(email, error)) {
-    		error.textContent = "";
-    		error.setAttribute('style', 'display:none');
+      if(!Validate.errorMessageEmail(email, error)) {
+        error.textContent = "";
+        error.setAttribute('style', 'display:none');
 
-    		BinarySocket.init({
-		        onmessage: function(msg){
-		            var response = JSON.parse(msg.data);
+        BinarySocket.init({
+            onmessage: function(msg){
+                var response = JSON.parse(msg.data);
 
-		            if (response) {
-		                var type = response.msg_type;
-		                if (type === 'verify_email'){
-		                    VerifyEmailWS.emailHandler(error);
-		                }
-		            }
-		        }
-		    });
-		    VerifyEmailWS.init(email);
-    	}
+                if (response) {
+                    var type = response.msg_type;
+                    if (type === 'verify_email'){
+                        VerifyEmailWS.emailHandler(error);
+                    }
+                }
+            }
+        });
+        VerifyEmailWS.init(email);
+      }
     });
 }
-        
 ;var VerifyEmailData = (function(){
     "use strict";
 
@@ -68470,9 +68469,9 @@ var ProfitTableUI = (function(){
 ;var VerifyEmailWS = (function(){
     "use strict";
 
-    function emailHandler(error) {
-    	error.textContent = Content.localize().textEmailSent;
-    	error.setAttribute('style', 'display:block');
+    function emailHandler(msg) {
+      msg.textContent = Content.localize().textEmailSent;
+      msg.style.display = 'inline-block';
     }
 
     function initPage(email){
@@ -68480,7 +68479,7 @@ var ProfitTableUI = (function(){
     }
 
     return {
-    	emailHandler: emailHandler,
+      emailHandler: emailHandler,
         init: initPage
     };
 }());
