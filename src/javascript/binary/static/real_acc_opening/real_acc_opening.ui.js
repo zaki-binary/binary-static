@@ -1,27 +1,17 @@
 var RealAccOpeningUI = (function(){
   "use strict";
 
-  function setValues(dobdd, dobmm, dobyy, state, question, tel, residenceValue){
+  function setValues(residenceValue){
+    var dobdd    = document.getElementById('dobdd'),
+        dobmm    = document.getElementById('dobmm'),
+        dobyy    = document.getElementById('dobyy'),
+        tel      = document.getElementById('tel'),
+        state    = document.getElementById('address-state');
+
     handle_residence_state_ws();
     generateBirthDate(dobdd, dobmm, dobyy);
     setResidenceWs(tel, residenceValue);
     generateState(state);
-
-    var secretQuestions = [
-        "Mother's maiden name",
-        "Name of your pet",
-        "Name of first love",
-        "Memorable town/city",
-        "Memorable date",
-        "Favourite dish",
-        "Brand of first car",
-        "Favourite artist"
-    ];
-
-    for (i = 0; i < secretQuestions.length; i++) {
-        appendTextValueChild(question, secretQuestions[i], secretQuestions[i]);
-    }
-
   }
 
   function showError(opt){
@@ -37,7 +27,7 @@ var RealAccOpeningUI = (function(){
 
   function hideAllErrors(allErrors) {
     for (i = 0; i < allErrors.length; i++) {
-      Validate.hideErrorMessage(allErrors[i]);
+      allErrors[i].setAttribute('style', 'display:none');
     }
   }
 

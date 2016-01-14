@@ -308,16 +308,6 @@ function appendTextValueChild(element, text, value){
     element.appendChild(option);
 }
 
-// populate drop down list of Titles, pass in select element
-function setTitles(select){
-    appendTextValueChild(select, Content.localize().textMr, 'Mr');
-    appendTextValueChild(select, Content.localize().textMrs, 'Mrs');
-    appendTextValueChild(select, Content.localize().textMs, 'Ms');
-    appendTextValueChild(select, Content.localize().textMiss, 'Miss');
-    appendTextValueChild(select, Content.localize().textDr, 'Dr');
-    appendTextValueChild(select, Content.localize().textProf, 'Prof');
-}
-
 // append numbers to a drop down menu, eg 1-30
 function dropDownNumbers(select, startNum, endNum) {
     select.appendChild(document.createElement("option"));
@@ -396,7 +386,8 @@ function handle_residence_state_ws(){
         }
         if (type === 'residence_list'){
           select = document.getElementById('residence-disabled');
-          var phoneElement = document.getElementById('tel'),
+          var phoneElement   = document.getElementById('tel'),
+              residence      = document.getElementById('residence-disabled'),
               residenceValue = $.cookie('residence'),
               residence_list = response.residence_list;
           if (residence_list.length > 0){
@@ -406,6 +397,7 @@ function handle_residence_state_ws(){
                 phoneElement.value = '+' + residence_list[i].phone_idd;
               }
             }
+            residence.value = residenceValue;
             select.parentNode.parentNode.setAttribute('style', 'display:block');
           }
         }
@@ -566,6 +558,16 @@ pjax_config_page('/terms-and-condition', function() {
             var year = document.getElementsByClassName('currentYear');
             for (i = 0; i < year.length; i++){
               year[i].innerHTML = new Date().getFullYear();
+            }
+        },
+    };
+});
+
+pjax_config_page('/my_account', function() {
+    return {
+        onLoad: function() {
+            if ($('#client_loginid option[value="hidden"]')){
+              $('#client_loginid option[value="hidden"]').remove();
             }
         },
     };

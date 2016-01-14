@@ -66,10 +66,10 @@ var Validate = (function(){
     return true;
   }
 
-  function passwordRNotEmpty(rPassword, rError){
-    if (!/^.+$/.test(rPassword)) {
-      rError.textContent = Content.errorMessage('req');
-      displayErrorMessage(rError);
+  function fieldNotEmpty(field, error){
+    if (!/^.+$/.test(field)) {
+      error.textContent = Content.errorMessage('req');
+      displayErrorMessage(error);
       return errorCounter++;
     }
     return true;
@@ -121,11 +121,11 @@ var Validate = (function(){
       passwordLength(password, error);
       passwordValid(password, error);
       passwordStrong(password, error);
-      if (passwordRNotEmpty(rPassword, rError) === true){
+      if (fieldNotEmpty(rPassword, rError) === true){
         passwordMatching(password, rPassword, rError);
       }
     } else {
-      passwordRNotEmpty(rPassword, rError);
+      fieldNotEmpty(rPassword, rError);
     }
 
     if (errorCounter === 0){
@@ -138,6 +138,7 @@ var Validate = (function(){
     displayErrorMessage: displayErrorMessage,
     hideErrorMessage: hideErrorMessage,
     errorMessageEmail: errorMessageEmail,
-    errorMessagePassword: errorMessagePassword
+    errorMessagePassword: errorMessagePassword,
+    fieldNotEmpty: fieldNotEmpty
   };
 }());

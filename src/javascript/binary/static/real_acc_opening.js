@@ -2,60 +2,52 @@ pjax_config_page("new_account/realws", function(){
 
   return {
     onLoad: function() {
-      if (!$.cookie('login')) {
+      Content.populate();
+      var residenceValue = $.cookie('residence');
+      if (!$.cookie('login') || !residenceValue) {
           window.location.href = page.url.url_for('login');
           return;
       }
-      Content.populate();
-      var residenceValue = $.cookie('residence');
-      var title     = document.getElementById('title'),
-          dobdd     = document.getElementById('dobdd'),
-          dobmm     = document.getElementById('dobmm'),
-          dobyy     = document.getElementById('dobyy'),
-          residence = document.getElementById('residence-disabled'),
-          state     = document.getElementById('address-state'),
-          tel       = document.getElementById('tel'),
-          question  = document.getElementById('secret-question');
-      RealAccOpeningUI.setValues(dobdd, dobmm, dobyy, state, question, tel, residenceValue);
-      setTitles(title);
+      if (page.client.is_logged_in) {
+          client_form.set_virtual_email_id(page.client.email);
+      }
+      RealAccOpeningUI.setValues(residenceValue);
 
-      $(window).load(function() {
-        residence.value = residenceValue;
+      $('#real-form').submit(function(evt) {
+        evt.preventDefault();
+        if (RealAccOpeningUI.checkValidity()){
+          BinarySocket.init({
+            onmessage: function(msg){
+              var response = JSON.parse(msg.data);
+              if (response) {
+                var type = response.msg_type;
+                var error = response.error;
 
-        $('#real-form').submit(function(evt) {
-          evt.preventDefault();
-          if (residenceValue) {
-            if (RealAccOpeningUI.checkValidity()){
-              BinarySocket.init({
-                onmessage: function(msg){
-                  var response = JSON.parse(msg.data);
-                  if (response) {
-                    var type = response.msg_type;
-                    var error = response.error;
-
-                    if (type === 'new_account_real' && !error){
-                      var loginid = response.new_account_real.client_id;
-                      var oldCookieValue = $.cookie('loginid_list');
-                      $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
-                      $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
-                      page.header.show_or_hide_login_form();
-                      window.location.href = page.url.url_for('user/my_account') + '&newaccounttype=real&login=true&newrealaccount';
-                    } else if (error) {
-                      if (/multiple real money accounts/.test(error.message)){
-                        var duplicate = 'duplicate';
-                        RealAccOpeningUI.showError(duplicate);
-                      } else {
-                        RealAccOpeningUI.showError();
-                      }
-                    }
+                if (type === 'new_account_real' && !error){
+                  var loginid = response.new_account_real.client_id;
+                  var oldCookieValue = $.cookie('loginid_list');
+                  $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
+                  $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+                  var option = new Option('Real Account (' + loginid + ')', loginid);
+                  document.getElementById('client_loginid').appendChild(option);
+                  $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
+                  option.setAttribute('selected', 'selected');
+                  var hiddenOption = document.createElement('option');
+                  hiddenOption.value = 'hidden';
+                  hiddenOption.setAttribute('name', 'newrealaccount');
+                  document.getElementById('client_loginid').appendChild(hiddenOption);
+                  $('#loginid-switch-form').submit();
+                } else if (error) {
+                  if (/multiple real money accounts/.test(error.message)){
+                    RealAccOpeningUI.showError('duplicate');
+                  } else {
+                    RealAccOpeningUI.showError();
                   }
                 }
-              });
+              }
             }
-          } else {
-            RealAccOpeningUI.showError();
-          }
-        });
+          });
+        }
       });
     }
   };
