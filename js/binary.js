@@ -53816,14 +53816,19 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
             }
         },
         get_live_chart: function() {
-            var that = this;
-            $.ajax(ajax_loggedin({
-              url     : '/d/trade_livechart.cgi?l=' + page.language(),
-              dataType: 'html',
-              success : function (data) {
-                    that.set_live_chart(data);
-                  },
-            }));
+            if (document.getElementById('underlying')){
+                showHighchart();
+                setUnderlyingTime();
+            } else {
+                var that = this;
+                $.ajax(ajax_loggedin({
+                    url     : '/d/trade_livechart.cgi?l=' + page.language(),
+                    dataType: 'html',
+                    success : function (data) {
+                          that.set_live_chart(data);
+                        },
+                }));
+            }
         },
         set_live_chart: function (data) {
             $('#trade_live_chart').html(data);
@@ -54130,6 +54135,9 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                 },
                 on_underlying_change: function () {
                     var that = this;
+                    if (MenuContent.is_tab_selected($('#tab_graph')) && document.getElementById('underlying')) {
+                        setUnderlyingTime();
+                    }
                     $('#bet_underlying').on('change', function (event) {
                         BetForm.attributes.model.underlying($(this).val());
                         that.update_for_underlying($(this).val());
@@ -61741,8 +61749,13 @@ var TradingAnalysis = (function() {
         } else {
             tab_japan_info.hide();
             if (currentTab === 'tab_graph') {
-                BetAnalysis.tab_live_chart.reset();
-                BetAnalysis.tab_live_chart.render(true);
+                if (document.getElementById('underlying')){
+                    showHighchart();
+                    setUnderlyingTime();
+                } else {
+                    BetAnalysis.tab_live_chart.reset();
+                    BetAnalysis.tab_live_chart.render(true);
+                }
             } else {
                 var url = currentLink.getAttribute('href');
                 $.ajax({
@@ -62864,6 +62877,12 @@ function addComma(num){
 
 function showHighchart(){
   Content.populate();
+
+  // avoid rendering again if it already exists
+  if(document.getElementById('trade_live_chart').hasChildNodes()) {
+    return;
+  }
+
   var div = document.createElement('div');
   div.className = 'grd-grid-12 chart_div';
 

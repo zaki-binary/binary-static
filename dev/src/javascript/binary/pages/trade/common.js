@@ -862,6 +862,12 @@ function addComma(num){
 
 function showHighchart(){
   Content.populate();
+
+  // avoid rendering again if it already exists
+  if(document.getElementById('trade_live_chart').hasChildNodes()) {
+    return;
+  }
+
   var div = document.createElement('div');
   div.className = 'grd-grid-12 chart_div';
 
