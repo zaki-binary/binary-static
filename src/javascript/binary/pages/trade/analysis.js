@@ -81,8 +81,13 @@ var TradingAnalysis = (function() {
         } else {
             tab_japan_info.hide();
             if (currentTab === 'tab_graph') {
-                BetAnalysis.tab_live_chart.reset();
-                BetAnalysis.tab_live_chart.render(true);
+                if (document.getElementById('underlying')){
+                    showHighchart();
+                    setUnderlyingTime();
+                } else {
+                    BetAnalysis.tab_live_chart.reset();
+                    BetAnalysis.tab_live_chart.render(true);
+                }
             } else {
                 var url = currentLink.getAttribute('href');
                 $.ajax({
