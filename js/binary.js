@@ -60081,6 +60081,9 @@ pjax_config_page('/$|/home', function() {
             get_residence_list();
             get_ticker();
             check_login_hide_signup();
+            if (/affiliate/.test(getUrlVars().utm_medium)){
+              $.cookie('affiliate_tracking', getUrlVars().t, { expires: 365 });
+            }
         }
     };
 });
@@ -65078,6 +65081,7 @@ var Purchase = (function () {
             confirmation_error.show();
             confirmation_error.textContent = error['message'];
         } else {
+            document.getElementById('guideBtn').style.display = 'none';
             container.style.display = 'table-row';
             message_container.show();
             confirmation_error.hide();
