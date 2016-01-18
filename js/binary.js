@@ -64074,7 +64074,8 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                if (e.target.value % 1 !== 0 ) {
+                var amount_val = parseFloat(e.target.value);
+                if (e.target.value % 1 !== 0 && ((+amount_val).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount', e.target.value);
