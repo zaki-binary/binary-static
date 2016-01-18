@@ -134,10 +134,21 @@ var Validate = (function(){
     return false;
   }
 
+  function errorMessageResidence(residence, error) {
+    hideErrorMessage(error);
+    if (residence === ""){
+      error.textContent = Content.errorMessage('req');
+      displayErrorMessage(error);
+      return true;
+    }
+    return false;
+  }
+
   return {
     displayErrorMessage: displayErrorMessage,
     hideErrorMessage: hideErrorMessage,
     errorMessageEmail: errorMessageEmail,
-    errorMessagePassword: errorMessagePassword
+    errorMessagePassword: errorMessagePassword,
+    errorMessageResidence: errorMessageResidence
   };
 }());
