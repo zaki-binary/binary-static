@@ -59,8 +59,6 @@ function BinarySocketClass() {
     };
 
     var send = function(data) {
-        console.log(data, 'send');
-
         if (isClose()) {
             bufferedSends.push(data);
             init(1);
@@ -124,7 +122,6 @@ function BinarySocketClass() {
         };
 
         binarySocket.onmessage = function (msg){
-            console.log(msg, 'onmessage');
             var response = JSON.parse(msg.data);
             if (response) {
                 if(response.hasOwnProperty('echo_req') && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('req_number')){
