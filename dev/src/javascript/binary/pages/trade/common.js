@@ -745,13 +745,22 @@ function marketSort(a,b){
 function displayTooltip(market, symbol){
     'use strict';
     var tip = document.getElementById('symbol_tip');
-    if(market.match(/^random/)){
+    if (market.match(/^random_index/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-indices');
+    } else if (market.match(/^random_daily/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-quotidians');
+    } else if (market.match(/^random_nightly/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-nocturnes');
+    } else if (market.match(/^random/)){
         tip.show();
         tip.setAttribute('target','/get-started/random-markets');
     }
-    else if(symbol.match(/^SYN/)){
+    else if (market.match(/^smart_fx/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices');
+        tip.setAttribute('target','/smart-indices#world-fx-indices');
     }
     else{
         tip.hide();

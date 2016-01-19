@@ -50652,7 +50652,7 @@ Header.prototype = {
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});
@@ -59722,11 +59722,6 @@ var get_started_behaviour = function() {
         to_show = fragment ? $('a[name=' + fragment + '-section]').parent('.subsection') : $('.subsection.first');
         update_active_subsection(to_show);
     }
-
-    var random_market = $('.random-markets');
-    if (random_market.length > 0) {
-        sidebar_scroll(random_market);
-    }
 };
 
 
@@ -60082,7 +60077,8 @@ pjax_config_page('/$|/home', function() {
             get_ticker();
             check_login_hide_signup();
             if (/affiliate/.test(getUrlVars().utm_medium)){
-              $.cookie('affiliate_tracking', getUrlVars().t, { expires: 365 });
+              var current_domain = window.location.hostname.replace('www', '');
+              $.cookie('affiliate_token', getUrlVars().t, { expires: 365, domain: current_domain });
             }
         }
     };
@@ -60105,6 +60101,23 @@ pjax_config_page('/smart-indices', function() {
     return {
         onLoad: function() {
             sidebar_scroll($('.smart-indices'));
+            if (page.url.location.hash !== "") {
+              $('a[href="' + page.url.location.hash + '"]').click();
+            }
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
+
+pjax_config_page('/random-markets', function() {
+    return {
+        onLoad: function() {
+            sidebar_scroll($('.random-markets'));
+            if (page.url.location.hash !== "") {
+              $('a[href="' + page.url.location.hash + '"]').click();
+            }
         },
         onUnload: function() {
             $(window).off('scroll');
@@ -62763,13 +62776,22 @@ function marketSort(a,b){
 function displayTooltip(market, symbol){
     'use strict';
     var tip = document.getElementById('symbol_tip');
-    if(market.match(/^random/)){
+    if (market.match(/^random_index/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-indices');
+    } else if (market.match(/^random_daily/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-quotidians');
+    } else if (market.match(/^random_nightly/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-nocturnes');
+    } else if (market.match(/^random/)){
         tip.show();
         tip.setAttribute('target','/get-started/random-markets');
     }
-    else if(symbol.match(/^SYN/)){
+    else if (market.match(/^smart_fx/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices');
+        tip.setAttribute('target','/smart-indices#world-fx-indices');
     }
     else{
         tip.hide();
@@ -63881,7 +63903,7 @@ var TradingEvents = (function () {
     };
 
     var onExpiryTypeChange = function(value){
-        
+
         if(!value || !$('#expiry_type').find('option[value='+value+']').length){
             value = 'duration';
         }
@@ -63995,7 +64017,7 @@ var TradingEvents = (function () {
                     TradingAnalysis.request();
 
                     Tick.clean();
-                    
+
                     updateWarmChart();
 
                     Contract.getContracts(underlying);
@@ -64407,7 +64429,6 @@ var TradingEvents = (function () {
         onDurationUnitChange: onDurationUnitChange
     };
 })();
-
 ;/*
  * This Message object process the response from server and fire
  * events based on type of response
