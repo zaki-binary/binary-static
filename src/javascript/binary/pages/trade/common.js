@@ -758,13 +758,22 @@ function marketSort(a,b){
 function displayTooltip(market, symbol){
     'use strict';
     var tip = document.getElementById('symbol_tip');
-    if(market.match(/^random/)){
+    if (market.match(/^random_index/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-indices');
+    } else if (market.match(/^random_daily/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-quotidians');
+    } else if (market.match(/^random_nightly/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-nocturnes');
+    } else if (market.match(/^random/)){
         tip.show();
         tip.setAttribute('target','/get-started/random-markets');
     }
-    else if(symbol.match(/^SYN/)){
+    else if (market.match(/^smart_fx/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices');
+        tip.setAttribute('target','/smart-indices#world-fx-indices');
     }
     else{
         tip.hide();
@@ -886,7 +895,7 @@ function showHighchart(){
 
   div.innerHTML = '<table width="600px" align="center"><tr id="highchart_duration"><td width="25%">' +
                   Content.localize().textDuration + ':</td><td width="25%"><select id="time_period"><option value="1t">1 ' +
-                  Content.localize().textTickResultLabel.toLowerCase() + '</option><option value="1m">1 ' + text.localize("minute").toLowerCase() +
+                  Content.localize().textTickResultLabel.toLowerCase() + '</option><option value="1m" selected="selected">1 ' + text.localize("minute").toLowerCase() +
                   '</option><option value="2m">2 ' + Content.localize().textDurationMinutes.toLowerCase() + '</option><option value="3m">3 ' +
                   Content.localize().textDurationMinutes.toLowerCase() +'</option><option value="5m">5 ' + Content.localize().textDurationMinutes.toLowerCase() +
                   '</option><option value="10m">10 ' + Content.localize().textDurationMinutes.toLowerCase() + '</option><option value="15m">15 ' +
@@ -924,5 +933,5 @@ function setUnderlyingTime() {
 }
 
 function chartFrameSource(underlying, highchart_time){
-  document.getElementById('chart_frame').src = 'https://highcharts.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=false';
+  document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=false';
 }
