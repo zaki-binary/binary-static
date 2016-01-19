@@ -611,7 +611,7 @@ function getDefaultMarket() {
     var mkt = sessionStorage.getItem('market');
     var markets = Symbols.markets(1);
     if (!mkt || !markets[mkt] || !markets[mkt].is_active) {
-        var sorted_markets = Object.keys(Symbols.markets()).filter(function(v){return markets[v].is_active}).sort(function(a, b) {
+        var sorted_markets = Object.keys(Symbols.markets()).filter(function(v){return markets[v].is_active;}).sort(function(a, b) {
             return getMarketsOrder(a) - getMarketsOrder(b);
         });
         mkt = sorted_markets[0];
