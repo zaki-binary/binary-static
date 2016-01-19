@@ -459,6 +459,9 @@ pjax_config_page('/$|/home', function() {
             get_residence_list();
             get_ticker();
             check_login_hide_signup();
+            if (/affiliate/.test(getUrlVars().utm_medium)){
+              $.cookie('affiliate_tracking', getUrlVars().t, { expires: 365 });
+            }
         }
     };
 });
