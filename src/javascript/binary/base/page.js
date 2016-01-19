@@ -526,7 +526,7 @@ Header.prototype = {
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_tracking'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});
