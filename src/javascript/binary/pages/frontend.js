@@ -455,7 +455,8 @@ pjax_config_page('/$|/home', function() {
             get_ticker();
             check_login_hide_signup();
             if (/affiliate/.test(getUrlVars().utm_medium)){
-              $.cookie('affiliate_tracking', JSON.stringify(getUrlVars().t), { expires: 365 });
+              var current_domain = window.location.hostname.replace('www', '');
+              $.cookie('affiliate_token', getUrlVars().t, { expires: 365, domain: current_domain });
             }
         }
     };
