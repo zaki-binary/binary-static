@@ -525,20 +525,16 @@ Header.prototype = {
     },
     
     validate_cookies: function(){
-        function is_valid_id(id){
-            return /^(MX|MF|VRTC|MLT|CR|VRTJ|JP)[0-9]+$/i.test(id);
-        }
-        
         if (getCookieItem('login') && getCookieItem('loginid_list')){
             var accIds = $.cookie("loginid_list").split("+");
             var loginid = $.cookie("loginid");
                                     
-            if(!is_valid_id(loginid)){
+            if(!client_form.is_loginid_valid(loginid)){
                 BinarySocket.send({"logout": "1"});
             }
             
             for(var i=0;i<accIds.length;i++){
-                if(!is_valid_id(accIds[i].split(":")[0])){
+                if(!client_form.is_loginid_valid(accIds[i].split(":")[0])){
                     BinarySocket.send({"logout": "1"});
                 }
             }
@@ -547,7 +543,7 @@ Header.prototype = {
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});

@@ -102,8 +102,8 @@ var securityws = (function(){
                 $("#lockInfo").text(text.localize("An additional password can be used to restrict access to the cashier."));
                 $form.find("button").attr("value","Update");
                 $form.find("button").html(text.localize("Update"));
-                if (detectIE() === false) {
-                  $('#password-meter-div').attr('style', 'display:block');
+                $('#password-meter-div').attr('style', 'display:block');
+                if (isIE() === false) {
                   $('#cashierlockpassword1').on('input', function() {
                     $('#password-meter').attr('value', testPassword($('#cashierlockpassword1').val())[0]);
                   });

@@ -100,11 +100,6 @@ var get_started_behaviour = function() {
         to_show = fragment ? $('a[name=' + fragment + '-section]').parent('.subsection') : $('.subsection.first');
         update_active_subsection(to_show);
     }
-
-    var random_market = $('.random-markets');
-    if (random_market.length > 0) {
-        sidebar_scroll(random_market);
-    }
 };
 
 
@@ -445,25 +440,10 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   window.location = window.location.pathname + str;
 }
 
-function detectIE() {
-  var ua = window.navigator.userAgent;
 
-  var msie = ua.indexOf('MSIE ');
-  if (msie > 0) {
-    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-  }
-
-  var trident = ua.indexOf('Trident/');
-  if (trident > 0) {
-    var rv = ua.indexOf('rv:');
-    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-  }
-
-  var edge = ua.indexOf('Edge/');
-  if (edge > 0) {
-    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
-  }
-  return false;
+// returns true if internet explorer browser
+function isIE() {
+  return /(msie|trident|edge)/i.test(window.navigator.userAgent) && !window.opera;
 }
 
 pjax_config_page('/$|/home', function() {
@@ -474,6 +454,10 @@ pjax_config_page('/$|/home', function() {
             get_residence_list();
             get_ticker();
             check_login_hide_signup();
+            if (/affiliate/.test(getUrlVars().utm_medium)){
+              var current_domain = window.location.hostname.replace('www', '');
+              $.cookie('affiliate_token', getUrlVars().t, { expires: 365, domain: current_domain });
+            }
         }
     };
 });
@@ -495,6 +479,23 @@ pjax_config_page('/smart-indices', function() {
     return {
         onLoad: function() {
             sidebar_scroll($('.smart-indices'));
+            if (page.url.location.hash !== "") {
+              $('a[href="' + page.url.location.hash + '"]').click();
+            }
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
+
+pjax_config_page('/random-markets', function() {
+    return {
+        onLoad: function() {
+            sidebar_scroll($('.random-markets'));
+            if (page.url.location.hash !== "") {
+              $('a[href="' + page.url.location.hash + '"]').click();
+            }
         },
         onUnload: function() {
             $(window).off('scroll');

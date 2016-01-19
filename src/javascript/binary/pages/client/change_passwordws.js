@@ -112,7 +112,7 @@ pjax_config_page("user/change_password", function() {
     return {
         onLoad: function() {
           Content.populate();
-          if (detectIE() === false) {
+          if (isIE() === false) {
             $('#password').on('input', function() {
               $('#password-meter').attr('value', testPassword($('#password').val())[0]);
             });
