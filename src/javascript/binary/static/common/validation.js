@@ -92,6 +92,14 @@ var Validate = (function(){
     return true;
   }
 
+  function passwordChars(password, error){
+    if (!/^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/.test(password)) {
+      handleError(error, text.localize('Password should have letters and numbers.'));
+      return errorCounter++;
+    }
+    return true;
+  }
+
   function passwordValid(password, error){
     if (!/^[ -~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
@@ -101,10 +109,10 @@ var Validate = (function(){
   }
 
   function passwordStrong(password, error){
-    if (testPassword(password)[0] < 33) {
+    if (testPassword(password)[0] < 20) {
       var tooltipPassword = document.getElementById('tooltip-password');
       tooltipPassword.innerHTML = testPassword(password)[1];
-      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters. Password score is: ' + testPassword(password)[0] + '. Passing score is: 33.'));
+      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers. Password score is: ' + testPassword(password)[0] + '. Passing score is: 20.'));
       displayErrorMessage(error);
       return errorCounter++;
     }
@@ -119,6 +127,7 @@ var Validate = (function(){
 
     if (passwordNotEmpty(password, error) === true){
       passwordLength(password, error);
+      passwordChars(password, error);
       passwordValid(password, error);
       passwordStrong(password, error);
       if (passwordRNotEmpty(rPassword, rError) === true){
