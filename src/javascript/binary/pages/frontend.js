@@ -100,11 +100,6 @@ var get_started_behaviour = function() {
         to_show = fragment ? $('a[name=' + fragment + '-section]').parent('.subsection') : $('.subsection.first');
         update_active_subsection(to_show);
     }
-
-    var random_market = $('.random-markets');
-    if (random_market.length > 0) {
-        sidebar_scroll(random_market);
-    }
 };
 
 
@@ -460,7 +455,8 @@ pjax_config_page('/$|/home', function() {
             get_ticker();
             check_login_hide_signup();
             if (/affiliate/.test(getUrlVars().utm_medium)){
-              $.cookie('affiliate_tracking', getUrlVars().t, { expires: 365 });
+              var current_domain = window.location.hostname.replace('www', '');
+              $.cookie('affiliate_token', getUrlVars().t, { expires: 365, domain: current_domain });
             }
         }
     };
@@ -483,6 +479,23 @@ pjax_config_page('/smart-indices', function() {
     return {
         onLoad: function() {
             sidebar_scroll($('.smart-indices'));
+            if (page.url.location.hash !== "") {
+              $('a[href="' + page.url.location.hash + '"]').click();
+            }
+        },
+        onUnload: function() {
+            $(window).off('scroll');
+        }
+    };
+});
+
+pjax_config_page('/random-markets', function() {
+    return {
+        onLoad: function() {
+            sidebar_scroll($('.random-markets'));
+            if (page.url.location.hash !== "") {
+              $('a[href="' + page.url.location.hash + '"]').click();
+            }
         },
         onUnload: function() {
             $(window).off('scroll');
