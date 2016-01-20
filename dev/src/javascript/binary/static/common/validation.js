@@ -92,6 +92,14 @@ var Validate = (function(){
     return true;
   }
 
+  function passwordChars(password, error){
+    if (/[0-9]+/.test(password) && /[a-zA-Z]+/.test(password)) {
+      return true;
+    }
+    handleError(error, text.localize('Password should have letters and numbers.'));
+    return errorCounter++;
+  }
+
   function passwordValid(password, error){
     if (!/^[ -~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
@@ -101,13 +109,21 @@ var Validate = (function(){
   }
 
   function passwordStrong(password, error){
-    if (testPassword(password)[0] < 33) {
-      var tooltipPassword = document.getElementById('tooltip-password');
+    var tooltipPassword = document.getElementById('tooltip-password');
+    if (testPassword(password)[0] < 20) {
       tooltipPassword.innerHTML = testPassword(password)[1];
-      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers and 2 or more special characters. Password score is: ' + testPassword(password)[0] + '. Passing score is: 33.'));
+      if (/[0-9]+/.test(password) && !/[a-zA-Z]+/.test(password)){
+        tooltipPassword.setAttribute('title', text.localize('Try adding more letters.') + ' ' + Content.errorMessage('pass', testPassword(password)[0]));
+      } else if (!/[0-9]+/.test(password) && /[a-zA-Z]+/.test(password)) {
+        tooltipPassword.setAttribute('title', text.localize('Try adding more numbers.') + ' ' + Content.errorMessage('pass', testPassword(password)[0]));
+      } else {
+        tooltipPassword.setAttribute('title', text.localize('Try adding more letters or numbers.') + ' ' + Content.errorMessage('pass', testPassword(password)[0]));
+      }
+      tooltipPassword.setAttribute('style', 'display:inline-block');
       displayErrorMessage(error);
       return errorCounter++;
     }
+    tooltipPassword.setAttribute('style', 'display:none');
     return true;
   }
 
@@ -119,6 +135,7 @@ var Validate = (function(){
 
     if (passwordNotEmpty(password, error) === true){
       passwordLength(password, error);
+      passwordChars(password, error);
       passwordValid(password, error);
       passwordStrong(password, error);
       if (passwordRNotEmpty(rPassword, rError) === true){
@@ -134,10 +151,21 @@ var Validate = (function(){
     return false;
   }
 
+  function errorMessageResidence(residence, error) {
+    hideErrorMessage(error);
+    if (residence === ""){
+      error.textContent = Content.errorMessage('req');
+      displayErrorMessage(error);
+      return true;
+    }
+    return false;
+  }
+
   return {
     displayErrorMessage: displayErrorMessage,
     hideErrorMessage: hideErrorMessage,
     errorMessageEmail: errorMessageEmail,
-    errorMessagePassword: errorMessagePassword
+    errorMessagePassword: errorMessagePassword,
+    errorMessageResidence: errorMessageResidence
   };
 }());
