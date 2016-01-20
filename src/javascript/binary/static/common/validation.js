@@ -109,13 +109,21 @@ var Validate = (function(){
   }
 
   function passwordStrong(password, error){
+    var tooltipPassword = document.getElementById('tooltip-password');
     if (testPassword(password)[0] < 20) {
-      var tooltipPassword = document.getElementById('tooltip-password');
       tooltipPassword.innerHTML = testPassword(password)[1];
-      tooltipPassword.setAttribute('title', text.localize('Try adding 3 or more numbers. Password score is: ' + testPassword(password)[0] + '. Passing score is: 20.'));
+      if (/[0-9]+/.test(password) && !/[a-zA-Z]+/.test(password)){
+        tooltipPassword.setAttribute('title', text.localize('Try adding more letters.') + ' ' + Content.errorMessage('pass', testPassword(password)[0]));
+      } else if (!/[0-9]+/.test(password) && /[a-zA-Z]+/.test(password)) {
+        tooltipPassword.setAttribute('title', text.localize('Try adding more numbers.') + ' ' + Content.errorMessage('pass', testPassword(password)[0]));
+      } else {
+        tooltipPassword.setAttribute('title', text.localize('Try adding more letters or numbers.') + ' ' + Content.errorMessage('pass', testPassword(password)[0]));
+      }
+      tooltipPassword.setAttribute('style', 'display:inline-block');
       displayErrorMessage(error);
       return errorCounter++;
     }
+    tooltipPassword.setAttribute('style', 'display:none');
     return true;
   }
 
