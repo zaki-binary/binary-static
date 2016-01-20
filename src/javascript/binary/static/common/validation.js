@@ -93,11 +93,11 @@ var Validate = (function(){
   }
 
   function passwordChars(password, error){
-    if (!/^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/.test(password)) {
-      handleError(error, text.localize('Password should have letters and numbers.'));
-      return errorCounter++;
+    if (/[0-9]+/.test(password) && /[a-zA-Z]+/.test(password)) {
+      return true;
     }
-    return true;
+    handleError(error, text.localize('Password should have letters and numbers.'));
+    return errorCounter++;
   }
 
   function passwordValid(password, error){
