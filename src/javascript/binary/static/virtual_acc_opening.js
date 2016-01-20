@@ -1,4 +1,4 @@
-pjax_config_page("virtualws", function(){
+pjax_config_page("new_account/virtualws", function(){
   return {
     onLoad: function() {
       if (getCookieItem('login')) {
