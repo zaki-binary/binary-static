@@ -36,7 +36,7 @@ var TradingEvents = (function () {
     };
 
     var onExpiryTypeChange = function(value){
-        
+
         if(!value || !$('#expiry_type').find('option[value='+value+']').length){
             value = 'duration';
         }
@@ -155,7 +155,7 @@ var TradingEvents = (function () {
                     TradingAnalysis.request();
 
                     Tick.clean();
-                    
+
                     updateWarmChart();
 
                     Contract.getContracts(underlying);
@@ -567,4 +567,3 @@ var TradingEvents = (function () {
         onDurationUnitChange: onDurationUnitChange
     };
 })();
-
