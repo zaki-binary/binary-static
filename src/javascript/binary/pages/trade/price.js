@@ -79,7 +79,10 @@ var Price = (function() {
                     endTime2 = trading_times[endDate2][underlying.value];
                 }
             }
-
+            if(!endTime2){
+                alert('Market closed on that date!');
+                return false;
+            }
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
 
