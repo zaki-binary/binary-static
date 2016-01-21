@@ -432,10 +432,16 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   window.location = window.location.pathname + str;
 }
 
-
 // returns true if internet explorer browser
 function isIE() {
   return /(msie|trident|edge)/i.test(window.navigator.userAgent) && !window.opera;
+}
+
+// trim leading and trailing white space
+function Trim(str){
+  while(str.charAt(0) == (" ") ){str = str.substring(1);}
+  while(str.charAt(str.length-1) ==" " ){str = str.substring(0,str.length-1);}
+  return str;
 }
 
 pjax_config_page('/$|/home', function() {

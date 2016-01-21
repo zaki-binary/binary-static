@@ -60,18 +60,18 @@ var RealAccOpeningUI = (function(){
 
     var arr = [
                 title.value,
-                fname.value,
-                lname.value,
+                Trim(fname.value),
+                Trim(lname.value),
                 dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
                 $.cookie('residence'),
-                address1.value,
-                address2.value,
-                town.value,
-                state.value,
-                postcode.value,
-                tel.value,
+                Trim(address1.value),
+                Trim(address2.value),
+                Trim(town.value),
+                Trim(state.value),
+                Trim(postcode.value),
+                Trim(tel.value),
                 question.value,
-                answer.value
+                Trim(answer.value)
             ];
 
     var errorTitle     = document.getElementById('error-title'),
@@ -108,13 +108,13 @@ var RealAccOpeningUI = (function(){
 
     hideAllErrors(allErrors);
 
-    if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(fname.value)){
+    if (!/^[a-zA-Z\s-.']+$/.test(fname.value)){
       errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorFname);
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(lname.value)){
+    if (!/^[a-zA-Z\s-.']+$/.test(lname.value)){
       errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorLname);
       errorCounter++;
@@ -126,14 +126,22 @@ var RealAccOpeningUI = (function(){
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z|\d]+(\s|-|.|'[a-zA-Z]*)*$/.test(address1.value)){
+    if (!/^[a-zA-Z\d\s-.']+$/.test(address1.value)){
       errorAddress1.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorAddress1);
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z]+(\s|-|.[a-zA-Z]*)*$/.test(town.value)){
-      errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, ' ']);
+    if (address2.value !== ""){
+      if (!/^[a-zA-Z\d\s-.']+$/.test(address2.value)){
+        errorAddress2.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
+        Validate.displayErrorMessage(errorAddress2);
+        errorCounter++;
+      }
+    }
+
+    if (!/^[a-zA-Z\d\s-.']+$/.test(town.value)){
+      errorTown.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorTown);
       errorCounter++;
     }
@@ -144,7 +152,7 @@ var RealAccOpeningUI = (function(){
       errorCounter++;
     }
 
-    if (!/^\d+(-|\d]*)*$/.test(postcode.value)){
+    if (!/^[\d-]+$/.test(postcode.value)){
       errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorPostcode);
       errorCounter++;
@@ -154,7 +162,7 @@ var RealAccOpeningUI = (function(){
       errorTel.innerHTML = Content.errorMessage('min', 6);
       Validate.displayErrorMessage(errorTel);
       errorCounter++;
-    } else if (!/^\+?\d{6,35}$/.test(tel.value)){
+    } else if (!/^\+?[\d-]+$/.test(tel.value)){
       errorTel.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorTel);
       errorCounter++;
@@ -162,10 +170,6 @@ var RealAccOpeningUI = (function(){
 
     if (answer.value.length < 4) {
       errorAnswer.innerHTML = Content.errorMessage('min', 4);
-      Validate.displayErrorMessage(errorAnswer);
-      errorCounter++;
-    } else if (!/^[a-zA-Z0-9]*(\s|-|.[a-zA-Z0-9]*){4,60}$/.test(answer.value)){
-      errorAnswer.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorAnswer);
       errorCounter++;
     }
@@ -177,7 +181,7 @@ var RealAccOpeningUI = (function(){
     }
 
     for (i = 0; i < arr.length; i++){
-      if (/^$/.test(arr[i]) && i !== 6 && i !== 8){
+      if (/^$/.test(Trim(arr[i])) && i !== 6 && i !== 8){
         allErrors[i].innerHTML = Content.errorMessage('req');
         Validate.displayErrorMessage(allErrors[i]);
         errorCounter++;

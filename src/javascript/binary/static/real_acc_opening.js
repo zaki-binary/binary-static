@@ -8,6 +8,10 @@ pjax_config_page("new_account/realws", function(){
           window.location.href = page.url.url_for('login');
           return;
       }
+      if (page.client.type !== 'virtual') {
+        window.location.href = page.url.url_for('user/my_account');
+        return;
+      }
       if (page.client.is_logged_in) {
           client_form.set_virtual_email_id(page.client.email);
       }
@@ -38,29 +42,26 @@ pjax_config_page("new_account/realws", function(){
                   dataLayer.push({
                     'language': page.language(),
                     'event': 'new_account',
-                    'VisitorID': loginid,
+                    'visitorID': loginid,
                     'bom_age': age,
-                    'bom_country': residenceValue,
+                    'bom_country': $('#residence-disabled option[value="' + residenceValue + '"]').html(),
                     'bom_date_joined': Math.floor(Date.now() / 1000),
                     'bom_email': page.user.email,
                     'bom_firstname': document.getElementById('fname').value,
                     'bom_lastname': document.getElementById('lname').value,
                     'bom_phone': document.getElementById('tel').value
                   });
-                  var affiliateToken = $.cookie('affiliate_token');
-                  //var promo = ;
+                  var affiliateToken = $.cookie('affiliate_tracking');
                   if (affiliateToken) {
                     dataLayer.push({'bom_affiliate_token': affiliateToken});
                   }
-                  //if (promo) {
-                  //  dataLayer.push({'bom_promo': promo});
-                  //}
+
                   //generate dropdown list and switch
                   var option = new Option('Real Account (' + loginid + ')', loginid);
                   document.getElementById('client_loginid').appendChild(option);
                   $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
                   option.setAttribute('selected', 'selected');
-                  $('#loginid-switch-form').submit();
+                  //$('#loginid-switch-form').submit();
                 } else if (error) {
                   if (/multiple real money accounts/.test(error.message)){
                     RealAccOpeningUI.showError('duplicate');
