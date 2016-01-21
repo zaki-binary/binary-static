@@ -232,7 +232,7 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                if (e.target.value % 1 !== 0 && isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(parseFloat(e.target.value))) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount', e.target.value);
@@ -410,7 +410,7 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
-                if (e.target.value % 1 !== 0 && isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(parseFloat(e.target.value))) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount_per_point',e.target.value);
@@ -440,7 +440,7 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
-                if (e.target.value % 1 !== 0 && isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(parseFloat(e.target.value))) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('stop_loss',e.target.value);
@@ -455,7 +455,7 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
-                if (e.target.value % 1 !== 0 && isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(parseFloat(e.target.value))) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('stop_profit',e.target.value);
@@ -466,7 +466,7 @@ var TradingEvents = (function () {
         
         // For verifying there are 2 digits after decimal
         var isStandardFloat = (function(value){
-            return ((+value).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2;
+            return (value % 1 !== 0 && ((+value).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2);
         });
 
         var jhighBarrierElement = document.getElementById('jbarrier_high');
