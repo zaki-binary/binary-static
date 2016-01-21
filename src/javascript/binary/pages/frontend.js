@@ -446,6 +446,11 @@ function isIE() {
   return /(msie|trident|edge)/i.test(window.navigator.userAgent) && !window.opera;
 }
 
+//remove wrong json affiliate_tracking
+if ($.cookie('affiliate_tracking')) {
+  $.removeCookie('affiliate_tracking');
+}
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
