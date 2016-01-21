@@ -444,6 +444,11 @@ function Trim(str){
   return str;
 }
 
+//remove wrong json affiliate_tracking
+if ($.cookie('affiliate_tracking')) {
+  $.removeCookie('affiliate_tracking');
+}
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
@@ -452,10 +457,6 @@ pjax_config_page('/$|/home', function() {
             get_residence_list();
             get_ticker();
             check_login_hide_signup();
-            if (/affiliate/.test(getUrlVars().utm_medium)){
-              var current_domain = window.location.hostname.replace('www', '');
-              $.cookie('affiliate_token', getUrlVars().t, { expires: 365, domain: current_domain });
-            }
         }
     };
 });
