@@ -15,12 +15,11 @@ var TradingAnalysis = (function() {
 
     var requestTradeAnalysis = function() {
         'use strict';
-        var underlying = sessionStorage.getItem('underlying') || $('#underlying').val();
         $.ajax({
                 method: 'POST',
                 url: page.url.url_for('trade/trading_analysis'),
                 data: {
-                    underlying: sessionStorage.getItem('underlying'),
+                    underlying: sessionStorage.getItem('underlying') || $('#underlying').val(),
                     formname: sessionStorage.getItem('formname'),
                     contract_category: Contract.form(),
                     barrier: Contract.barrier()
