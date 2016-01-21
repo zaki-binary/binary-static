@@ -257,10 +257,7 @@ function processPriceRequest() {
     }
     for (var typeOfContract in types) {
         if (types.hasOwnProperty(typeOfContract)) {
-            var req = Price.proposal(typeOfContract);
-            if(req){
-                BinarySocket.send(req);
-            }      
+            BinarySocket.send(Price.proposal(typeOfContract));
         }
     }
 }
