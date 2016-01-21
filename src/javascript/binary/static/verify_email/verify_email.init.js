@@ -3,6 +3,8 @@ var VerifyEmailWS = (function(){
 
     function emailHandler(msg) {
       msg.textContent = Content.localize().textEmailSent;
+      $('#email').hide();
+      $('#btn-verify-email').hide();
       msg.style.display = 'inline-block';
     }
 
