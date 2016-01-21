@@ -137,11 +137,11 @@
          var key = keys1[i];
          var option = document.createElement('option'), content = document.createTextNode(elements[key].name);
          option.setAttribute('value', key);
-         if (selected && selected === key) {
-             option.setAttribute('selected', 'selected');
-         }
          if(!elements[key].is_active){
             option.setAttribute('disabled', '');
+         }
+         else if (selected && selected === key) {
+             option.setAttribute('selected', 'selected');
          }
          option.appendChild(content);
          fragment.appendChild(option);
@@ -152,11 +152,11 @@
                 var key2 = keys2[j];
                 option = document.createElement('option');
                 option.setAttribute('value', key2);
-                if (selected && selected === key2) {
-                    option.setAttribute('selected', 'selected');
-                }
                 if(!elements[key].submarkets[key2].is_active){
                    option.setAttribute('disabled', '');
+                }
+                else if (selected && selected === key2) {
+                    option.setAttribute('selected', 'selected');
                 }
                 option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2].name;
                 fragment.appendChild(option);
@@ -165,6 +165,19 @@
      }
      if (target) {
          target.appendChild(fragment);
+
+         if(target.selectedIndex < 0) {
+            target.selectedIndex = 0;
+         }
+         var current = target.options[target.selectedIndex];
+         if(selected !== current.value) {
+            sessionStorage.setItem('market', current.value);
+         }
+
+         if(current.disabled) { // there is no open market
+            document.getElementById('markets_closed_msg').classList.remove('hidden');
+            document.getElementById('trading_init_progress').style.display = 'none';
+         }
      }
  }
 /*
@@ -610,8 +623,8 @@ function getDefaultMarket() {
     'use strict';
     var mkt = sessionStorage.getItem('market');
     var markets = Symbols.markets(1);
-    if (!mkt || !markets[mkt]) {
-        var sorted_markets = Object.keys(Symbols.markets()).sort(function(a, b) {
+    if (!mkt || !markets[mkt] || !markets[mkt].is_active) {
+        var sorted_markets = Object.keys(Symbols.markets()).filter(function(v){return markets[v].is_active;}).sort(function(a, b) {
             return getMarketsOrder(a) - getMarketsOrder(b);
         });
         mkt = sorted_markets[0];
@@ -745,13 +758,22 @@ function marketSort(a,b){
 function displayTooltip(market, symbol){
     'use strict';
     var tip = document.getElementById('symbol_tip');
-    if(market.match(/^random/)){
+    if (market.match(/^random_index/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-indices');
+    } else if (market.match(/^random_daily/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-quotidians');
+    } else if (market.match(/^random_nightly/)){
+        tip.show();
+        tip.setAttribute('target','/get-started/random-markets#random-nocturnes');
+    } else if (market.match(/^random/)){
         tip.show();
         tip.setAttribute('target','/get-started/random-markets');
     }
-    else if(symbol.match(/^SYN/)){
+    else if (market.match(/^smart_fx/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices');
+        tip.setAttribute('target','/smart-indices#world-fx-indices');
     }
     else{
         tip.hide();
@@ -862,12 +884,18 @@ function addComma(num){
 
 function showHighchart(){
   Content.populate();
+
+  // avoid rendering again if it already exists
+  if(document.getElementById('trade_live_chart').hasChildNodes()) {
+    return;
+  }
+
   var div = document.createElement('div');
   div.className = 'grd-grid-12 chart_div';
 
   div.innerHTML = '<table width="600px" align="center"><tr id="highchart_duration"><td width="25%">' +
                   Content.localize().textDuration + ':</td><td width="25%"><select id="time_period"><option value="1t">1 ' +
-                  Content.localize().textTickResultLabel.toLowerCase() + '</option><option value="1m">1 ' + text.localize("minute").toLowerCase() +
+                  Content.localize().textTickResultLabel.toLowerCase() + '</option><option value="1m" selected="selected">1 ' + text.localize("minute").toLowerCase() +
                   '</option><option value="2m">2 ' + Content.localize().textDurationMinutes.toLowerCase() + '</option><option value="3m">3 ' +
                   Content.localize().textDurationMinutes.toLowerCase() +'</option><option value="5m">5 ' + Content.localize().textDurationMinutes.toLowerCase() +
                   '</option><option value="10m">10 ' + Content.localize().textDurationMinutes.toLowerCase() + '</option><option value="15m">15 ' +
@@ -905,5 +933,5 @@ function setUnderlyingTime() {
 }
 
 function chartFrameSource(underlying, highchart_time){
-  document.getElementById('chart_frame').src = 'https://highcharts.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=false';
+  document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=false';
 }

@@ -526,13 +526,20 @@ Header.prototype = {
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check'];
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});
             });
 
-            window.location.href = page.url.url_for(''); //redirect to homepage
+            var redirectPage;
+            if(response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('redirect')) {
+                redirectPage = response.echo_req.passthrough.redirect;
+            }
+            else {
+                redirectPage = ''; //redirect to homepage
+            }
+            window.location.href = page.url.url_for(redirectPage);
         }
     },
 };

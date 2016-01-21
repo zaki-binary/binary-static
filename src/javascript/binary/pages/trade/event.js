@@ -36,7 +36,7 @@ var TradingEvents = (function () {
     };
 
     var onExpiryTypeChange = function(value){
-        
+
         if(!value || !$('#expiry_type').find('option[value='+value+']').length){
             value = 'duration';
         }
@@ -47,8 +47,13 @@ var TradingEvents = (function () {
         var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
-            if(sessionStorage.getItem('end_date')){
-                Durations.selectEndDate(sessionStorage.getItem('end_date'));
+            var end_date = sessionStorage.getItem('end_date');
+            var duration_list = Durations.duration_list();
+            if(Object.keys(duration_list).length===1 && duration_list.hasOwnProperty('d') && (!end_date || moment().add(1,'day').isAfter(moment(end_date)))){
+                end_date = moment().add(1,'day').format('YYYY-MM-DD');
+            }
+            if(end_date){
+                Durations.selectEndDate(end_date);
                 make_price_request = -1;
             }
         }
@@ -150,7 +155,7 @@ var TradingEvents = (function () {
                     TradingAnalysis.request();
 
                     Tick.clean();
-                    
+
                     updateWarmChart();
 
                     Contract.getContracts(underlying);
@@ -232,7 +237,8 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                if (e.target.value % 1 !== 0 ) {
+                var amount_val = parseFloat(e.target.value);
+                if (e.target.value % 1 !== 0 && ((+amount_val).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount', e.target.value);
@@ -510,6 +516,10 @@ var TradingEvents = (function () {
             period.addEventListener('change', function (e) {
                 Periods.displayBarriers();
                 processPriceRequest();
+                var japan_info = TradingAnalysis.japan_info();
+                if(japan_info && TradingAnalysis.getActiveTab() === 'tab_japan_info'){
+                    japan_info.show();
+                }
             });
         }
 
@@ -557,4 +567,3 @@ var TradingEvents = (function () {
         onDurationUnitChange: onDurationUnitChange
     };
 })();
-
