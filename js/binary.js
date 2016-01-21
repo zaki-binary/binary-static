@@ -63544,7 +63544,6 @@ var Durations = (function(){
     var selected_duration = {};
     var expiry_time = '';
     var has_end_date = 0;
-    var duration_list = {};
 
     var displayDurations = function() {
 
@@ -63601,7 +63600,7 @@ var Durations = (function(){
             }
         }
 
-        duration_list = {};
+        var duration_list = {};
         for (var duration in durationContainer) {
             if(durationContainer.hasOwnProperty(duration)) {
                 var min = durationContainer[duration]['min_contract_duration'],
@@ -63854,8 +63853,8 @@ var Durations = (function(){
     };
 
     var selectEndDate = function(end_date){
-        $('#expiry_date').val(end_date);
         var expiry_time = document.getElementById('expiry_time');
+        $('#expiry_date').val(end_date);
         if(moment(end_date).isAfter(moment(),'day')){
             Durations.setTime('');
             StartDates.setNow();
@@ -63864,9 +63863,6 @@ var Durations = (function(){
             processTradingTimesRequest(end_date);
         }
         else{
-            if(!expiry_time.value){
-                displayEndTime();
-            }
             Durations.setTime(expiry_time.value);
             expiry_time.show();
             processPriceRequest();
@@ -63886,8 +63882,7 @@ var Durations = (function(){
         trading_times: function(){ return trading_times; },
         select_amount: function(a){ selected_duration.amount = a; },
         select_unit: function(u){ selected_duration.unit = u; } ,
-        selectEndDate: selectEndDate,
-        duration_list: function(){ return duration_list; }    
+        selectEndDate: selectEndDate       
     };
 })();
 
@@ -63940,13 +63935,8 @@ var TradingEvents = (function () {
         var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
-            var end_date = sessionStorage.getItem('end_date');
-            var duration_list = Durations.duration_list();
-            if(Object.keys(duration_list).length===1 && duration_list.hasOwnProperty('d') && (!end_date || moment().add(1,'day').isAfter(moment(end_date)))){
-                end_date = moment().add(1,'day').format('YYYY-MM-DD');
-            }
-            if(end_date){
-                Durations.selectEndDate(end_date);
+            if(sessionStorage.getItem('end_date')){
+                Durations.selectEndDate(sessionStorage.getItem('end_date'));
                 make_price_request = -1;
             }
         }
@@ -64591,10 +64581,7 @@ var Price = (function() {
                     endTime2 = trading_times[endDate2][underlying.value];
                 }
             }
-            if(!endTime2){
-                alert('Market closed on that date!');
-                return false;
-            }
+
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
         }
 
@@ -65029,10 +65016,7 @@ function processPriceRequest() {
     }
     for (var typeOfContract in types) {
         if (types.hasOwnProperty(typeOfContract)) {
-            var req = Price.proposal(typeOfContract);
-            if(req){
-                BinarySocket.send(req);
-            }      
+            BinarySocket.send(Price.proposal(typeOfContract));
         }
     }
 }
