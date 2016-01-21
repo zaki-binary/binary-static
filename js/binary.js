@@ -67708,7 +67708,7 @@ var Table = (function(){
   }
 
   function passwordValid(password, error){
-    if (!/^[ -~]+$/.test(password)) {
+    if (!/^[!-~]+$/.test(password)) {
       handleError(error, Content.errorMessage('valid', Content.localize().textPassword));
       return errorCounter++;
     }
