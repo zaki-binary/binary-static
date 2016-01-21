@@ -47,13 +47,8 @@ var TradingEvents = (function () {
         var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
-            var end_date = sessionStorage.getItem('end_date');
-            var duration_list = Durations.duration_list();
-            if(Object.keys(duration_list).length===1 && duration_list.hasOwnProperty('d') && (!end_date || moment().add(1,'day').isAfter(moment(end_date)))){
-                end_date = moment().add(1,'day').format('YYYY-MM-DD');
-            }
-            if(end_date){
-                Durations.selectEndDate(end_date);
+            if(sessionStorage.getItem('end_date')){
+                Durations.selectEndDate(sessionStorage.getItem('end_date'));
                 make_price_request = -1;
             }
         }
