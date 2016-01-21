@@ -50652,7 +50652,7 @@ Header.prototype = {
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token'];
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token', 'affiliate_tracking'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});
@@ -50998,12 +50998,11 @@ Page.prototype = {
     },
     record_affiliate_exposure: function() {
         var token = this.url.param('t');
-        var token_valid = /\w{32}/.test(token);
-        var is_subsidiary = /\w{1}/.test(this.url.param('s'));
-
-        if (!token_valid) {
+        if (!token || token.length !== 32) {
             return false;
         }
+        var token_length = token.length;
+        var is_subsidiary = /\w{1}/.test(this.url.param('s'));
 
         var cookie_value = $.cookie('affiliate_tracking');
         if(cookie_value) {
@@ -51017,7 +51016,7 @@ Page.prototype = {
 
         //Record the affiliate exposure. Overwrite existing cookie, if any.
         var cookie_hash = {};
-        if (token_valid) {
+        if (token_length === 32) {
             cookie_hash["t"] = token.toString();
         }
         if (is_subsidiary) {
@@ -60071,6 +60070,11 @@ function isIE() {
   return /(msie|trident|edge)/i.test(window.navigator.userAgent) && !window.opera;
 }
 
+//remove wrong json affiliate_tracking
+if ($.cookie('affiliate_tracking')) {
+  $.removeCookie('affiliate_tracking');
+}
+
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
@@ -60079,10 +60083,6 @@ pjax_config_page('/$|/home', function() {
             get_residence_list();
             get_ticker();
             check_login_hide_signup();
-            if (/affiliate/.test(getUrlVars().utm_medium)){
-              var current_domain = window.location.hostname.replace('www', '');
-              $.cookie('affiliate_token', getUrlVars().t, { expires: 365, domain: current_domain });
-            }
         }
     };
 });
@@ -68914,8 +68914,8 @@ var ViewBalanceUI = (function(){
                     verification_code: $.cookie('verify_token')
                 };
 
-        if ($.cookie('affiliate_token')) {
-            req.affiliate_token = $.cookie('affiliate_token');
+        if ($.cookie('affiliate_tracking')) {
+            req.affiliate_token = JSON.parse($.cookie('affiliate_tracking')).t;
         }
 
         BinarySocket.send(req);
