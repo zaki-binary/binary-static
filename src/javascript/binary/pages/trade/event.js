@@ -213,14 +213,14 @@ var TradingEvents = (function () {
         if (endDateElement) {
             // need to use jquery as datepicker is used, if we switch to some other
             // datepicker we can move back to javascript
-            $('#expiry_date').on('change', function () {
+            $('#expiry_date').on('change input', function () {
                 Durations.selectEndDate(this.value);
             });
         }
 
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
-            $('#expiry_time').on('change', function () {
+            $('#expiry_time').on('change input', function () {
                 Durations.setTime(endTimeElement.value);
                 processPriceRequest();
             });
