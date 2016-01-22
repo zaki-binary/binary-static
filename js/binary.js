@@ -50393,7 +50393,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -59329,7 +59329,282 @@ ClientForm.prototype = {
         $('#Email').disableSelection();
     }
 };
-;var SettingsDetailsWS = (function() {
+;var SelfExlusionWS = (function() {
+    "use strict";
+
+    var $form,
+        $loading,
+        dateID,
+        errorClass,
+        hiddenClass;
+
+    var fields,
+        submittedValues,
+        isValid;
+
+    var init = function() {
+        $form       = $('#frmSelfExclusion');
+        $loading    = $('#loading');
+        dateID      = 'exclude_until';
+        errorClass  = 'errorfield';
+        hiddenClass = 'hidden';
+
+        showLoadingImage($loading);
+
+        submittedValues = {};
+
+        fields = {};
+        $form.find('input').each(function() {
+            fields[$(this).attr('id')] = '';
+        });
+
+        initDatePicker();
+        $form.find('button').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if(formValidate()) {
+                setRequest();
+            }
+        });
+
+        getRequest();
+    };
+
+    // ----------------------
+    // ----- Get Values -----
+    // ----------------------
+    var getRequest = function() {
+        BinarySocket.send({"get_self_exclusion": "1"});
+    };
+
+    var getResponse = function(response) {
+        $loading.addClass(hiddenClass);
+        $form.removeClass(hiddenClass);
+
+        if('error' in response) {
+            if('message' in response.error) {
+                showPageError(response.error.message, true);
+            }
+            return false;
+        } else {
+            $.each(response.get_self_exclusion, function(key, value) {
+                fields[key] = value + '';
+                $form.find('#' + key).val(value);
+            });
+        }
+    };
+
+    var initDatePicker = function () {
+        // 6 months from now
+        var start_date = new Date();
+        start_date.setMonth(start_date.getMonth() + 6);
+        start_date.setDate(start_date.getDate() + 1);
+
+        // 5 years from now
+        var end_date = new Date();
+        end_date.setFullYear(end_date.getFullYear() + 5);
+
+        var $dateID = $('#' + dateID);
+        $dateID.datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate   : start_date,
+            maxDate   : end_date,
+            onSelect  : function(dateText, inst) {
+                $dateID.attr('value', dateText);
+            }
+        });
+    };
+
+    // ----------------------
+    // ----- Set Values -----
+    // ----------------------
+    var setRequest = function() {
+        submittedValues['set_self_exclusion'] = '1';
+        BinarySocket.send(submittedValues);
+    };
+
+    var setResponse = function(response) {
+        if('error' in response) {
+            var  errMsg = response.error.message;
+            if('field' in response.error) {
+                showError(response.error.field, text.localize(errMsg));
+            }
+            else {
+                showFormMessage(text.localize(errMsg), false);
+            }
+        }
+        else {
+            showFormMessage(text.localize('Your changes have been updated.'), true);
+            getRequest();
+        }
+    };
+
+    // ----------------------------
+    // ----- Form Validations -----
+    // ----------------------------
+    var formValidate = function() {
+        clearError();
+        isValid = true;
+        var isChanged = false;
+        submittedValues = {};
+
+        $.each(fields, function(key, currentValue) {
+            var newValue = $form.find('#' + key).val().trim();
+
+            if(newValue.length > 0) {
+                submittedValues[key] = newValue;
+            }
+
+            if(key === dateID) {
+                validateExclusionDate(newValue);
+            }
+            else {
+                if(newValue.length > 0 && !isNormalInteger(newValue)) {
+                    showError(key, text.localize('Please enter an integer value'));
+                }
+                else if(currentValue > 0 && (newValue.length === 0 || isLargerInt(newValue, currentValue))) {
+                    showError(key, text.localize('Please enter a number between 0 and %1').replace('%1', currentValue));
+                }
+                else if(key === 'session_duration_limit' && newValue > (6 * 7 * 24 * 60)) {
+                    showError(key, text.localize('Session duration limit cannot be more than 6 weeks.'));
+                }
+            }
+
+            if(newValue !== currentValue) {
+                isChanged = true;
+            }
+        });
+
+        if(isValid && !isChanged) {
+            showFormMessage('You did not change anything.', false);
+            isValid = false;
+        }
+
+        return isValid;
+    };
+
+    var isLargerInt = function(a, b) {
+        return a.length === b.length ? a > b : a.length > b.length;
+    };
+
+    var isNormalInteger = function(value) {
+        return /^\d+$/.test(value);
+    };
+
+    var validateExclusionDate = function(exclusion_date) {
+        var date_regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+        var errMsg = '';
+
+        if (exclusion_date) {
+            if(date_regex.test(exclusion_date) === false){
+                errMsg = 'Please select a valid date';
+            }
+            else {
+                exclusion_date = new Date(exclusion_date);
+                // self exclusion date must > 6 months from now
+                var six_month_date = new Date();
+                six_month_date.setMonth(six_month_date.getMonth() + 6);
+                // self exclusion date must < 5 years from now
+                var five_year_date = new Date();
+                five_year_date.setFullYear(five_year_date.getFullYear() + 5);
+
+                if (exclusion_date < new Date()) {
+                    errMsg = 'Exclude time must be after today.';
+                }
+                else if (exclusion_date < six_month_date) {
+                    errMsg = 'Exclude time cannot be less than 6 months.';
+                }
+                else if (exclusion_date > five_year_date) {
+                    errMsg = 'Exclude time cannot be for more than 5 years.';
+                }
+                else {
+                    var isConfirmed = confirm(text.localize('When you click "Ok" you will be excluded from trading on the site until the selected date.'));
+                    if(!isConfirmed) {
+                        isValid = false;
+                    }
+                }
+            }
+        }
+
+        if(errMsg.length > 0) {
+            showError(dateID, text.localize(errMsg));
+        }
+    };
+
+    // -----------------------------
+    // ----- Message Functions -----
+    // -----------------------------
+    var showPageError = function(errMsg, hideForm) {
+        $('#errorMsg').html(errMsg).removeClass(hiddenClass);
+        if(hideForm) {
+            $form.addClass(hiddenClass);
+        }
+    };
+
+    var showError = function(fieldID, errMsg) {
+        $('#' + fieldID).parent().append($('<p/>', {class: errorClass, text: errMsg}));
+        isValid = false;
+    };
+
+    var clearError = function(fieldID) {
+        $(fieldID ? fieldID : '#frmSelfExclusion p.' + errorClass).remove();
+        $('#errorMsg').html('').addClass(hiddenClass);
+        $('#formMessage').html('');
+    };
+
+    var showFormMessage = function(msg, isSuccess) {
+        var $elmID = $('#formMessage');
+        $elmID
+            .attr('class', isSuccess ? 'success-msg' : errorClass)
+            .html(isSuccess ? '<ul class="checked"><li>' + text.localize(msg) + '</li></ul>' : text.localize(msg))
+            .css('display', 'block')
+            .delay(5000)
+            .fadeOut(1000);
+    };
+
+
+    return {
+        init        : init,
+        getResponse : getResponse,
+        setResponse : setResponse
+    };
+}());
+
+
+pjax_config_page("user/self_exclusionws", function() {
+    return {
+        onLoad: function() {
+        	if (!getCookieItem('login')) {
+                window.location.href = page.url.url_for('login');
+                return;
+            }
+            if((/VRT/.test($.cookie('loginid')))){
+                window.location.href = page.url.url_for('user/settingsws');
+                return;
+            }
+
+        	BinarySocket.init({
+                onmessage: function(msg){
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        if (response.msg_type === "get_self_exclusion") {
+                            SelfExlusionWS.getResponse(response);
+                        }
+                        else if (response.msg_type === "set_self_exclusion") {
+                            SelfExlusionWS.setResponse(response);
+                        }
+                    }
+                    else {
+                        console.log('some error occured');
+                    }
+                }
+            });	
+
+            Content.populate();
+            SelfExlusionWS.init();
+        }
+    };
+});;var SettingsDetailsWS = (function() {
     "use strict";
 
     var formID,
@@ -59927,16 +60202,6 @@ function appendTextValueChild(element, text, value){
     element.appendChild(option);
 }
 
-// populate drop down list of Titles, pass in select element
-function setTitles(select){
-    appendTextValueChild(select, Content.localize().textMr, 'Mr');
-    appendTextValueChild(select, Content.localize().textMrs, 'Mrs');
-    appendTextValueChild(select, Content.localize().textMs, 'Ms');
-    appendTextValueChild(select, Content.localize().textMiss, 'Miss');
-    appendTextValueChild(select, Content.localize().textDr, 'Dr');
-    appendTextValueChild(select, Content.localize().textProf, 'Prof');
-}
-
 // append numbers to a drop down menu, eg 1-30
 function dropDownNumbers(select, startNum, endNum) {
     select.appendChild(document.createElement("option"));
@@ -60012,10 +60277,9 @@ function handle_residence_state_ws(){
             }
             select.parentNode.parentNode.setAttribute('style', 'display:block');
           }
-        }
-        if (type === 'residence_list'){
-          select = document.getElementById('residence-disabled');
-          var phoneElement = document.getElementById('tel'),
+        } else if (type === 'residence_list'){
+          select = document.getElementById('residence-disabled') || document.getElementById('residence');
+          var phoneElement   = document.getElementById('tel'),
               residenceValue = $.cookie('residence'),
               residence_list = response.residence_list;
           if (residence_list.length > 0){
@@ -60025,7 +60289,9 @@ function handle_residence_state_ws(){
                 phoneElement.value = '+' + residence_list[i].phone_idd;
               }
             }
-            select.parentNode.parentNode.setAttribute('style', 'display:block');
+            if (residenceValue){
+                select.value = residenceValue;
+            }
           }
         }
       }
@@ -60064,10 +60330,16 @@ if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
   window.location = window.location.pathname + str;
 }
 
-
 // returns true if internet explorer browser
 function isIE() {
   return /(msie|trident|edge)/i.test(window.navigator.userAgent) && !window.opera;
+}
+
+// trim leading and trailing white space
+function Trim(str){
+  while(str.charAt(0) == (" ") ){str = str.substring(1);}
+  while(str.charAt(str.length-1) ==" " ){str = str.substring(0,str.length-1);}
+  return str;
 }
 
 //remove wrong json affiliate_tracking
@@ -60663,7 +60935,7 @@ $(function() {
 
         indicative_sum = indicative_sum.toFixed(2);
 
-        $("#value-of-open-positions").text('USD ' + addComma(parseFloat(indicative_sum)));
+        $("#value-of-open-positions").text('USD ' + addComma(parseFloat(indicative_sum).toFixed(2)));
 
     };
 
@@ -61329,363 +61601,7 @@ pjax_config_page("market_timesws", function() {
         }
     };
 });
-;var SelfExlusionWS = (function(){
-    
-    "use strict";
-
-    var $form;
-    var data = {};
-
-    var init = function(){
-        $form   = $("#selfExclusion");
-        clearErrors();
-        $form.find("button").on("click", function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            clearErrors();
-            if(validateForm($form) === false){
-                return false;
-            }
-            sendRequest();
-
-        });
-
-        BinarySocket.send({"get_self_exclusion": 1});
-
-        self_exclusion_date_picker();
-    };
-
-    var clearErrors = function(){
-        $form.find("#exclusionMsg").hide();
-        $form.find("#exclusionMsg").text("");
-        $form.show();
-        $("#exclusionText").show();
-        $("#exclusionTitle").show();
-        $("#errorMsg").text("");
-    };
-
-    var isNormalInteger= function(str) {
-        return /^\+?\d+$/.test(str);
-    };
-
-    var validateForm = function($frm){
-        var isValid = true;
-        $("p.errorfield").each(function(ind,element){
-            $(element).text("");
-        });
-   
-        $frm.find(":text").each(function(ind,element){
-            var ele = $(element).val().replace(/ /g, "");
-            var id = $(element).attr("id");
-       
-            if(!isNormalInteger(ele) && (ele.length > 0))
-            {
-                if(!/EXCLUDEUNTIL/.test($(element).attr("id")))
-                {
-                    $("#error"+$(element).attr("id")).text(text.localize("Please enter an integer value"));
-                    isValid = false;
-                }
-            }else{
-                if(id ===("MAXCASHBAL") && ((ele > data.max_balance && data.max_balance > 0) || (ele.length < 1 && data.max_balance > 0) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_balance ));
-                    isValid = false;
-                } else if(id === ("DAILYTURNOVERLIMIT") && ((ele > data.max_turnover &&  data.max_turnover > 0) || (ele.length < 1 &&  data.max_turnover > 0) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_turnover ));
-                    isValid = false;
-                } else if(id === ("DAILYLOSSLIMIT") && ((ele > data.max_losses && data.max_losses > 0) || (ele.length < 1 && data.max_losses > 0) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_losses ));
-                    isValid = false;
-                } else if(id === ("7DAYTURNOVERLIMIT") && ((ele > data.max_7day_turnover && data.max_7day_turnover > 0 ) || (ele.length < 1 && data.max_7day_turnover > 0 ) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_7day_turnover ));
-                    isValid = false;
-                } else if(id === ("7DAYLOSSLIMIT") && ((ele > data.max_7day_losses && data.max_7day_losses > 0) || (ele.length < 1 && data.max_7day_losses > 0 ) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_7day_losses ));
-                    isValid = false;
-                }  else if(id === ("30DAYTURNOVERLIMIT") && ((ele > data.max_30day_turnover && data.max_30day_turnover > 0) || (ele.length < 1 && data.max_30day_turnover > 0 ) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_30day_turnover ));
-                    isValid = false;
-                } else if(id === ("30DAYLOSSLIMIT") && ((ele > data.max_30day_losses && data.max_30day_losses > 0) || (ele.length < 1 && data.max_30day_losses > 0 ) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_30day_losses ));
-                    isValid = false;
-                }  else if(id === ("MAXOPENPOS") && ((ele > data.max_open_bets && data.max_open_bets > 0 ) || (ele.length < 1 && data.max_open_bets > 0 ) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.max_open_bets ));
-                    isValid = false;
-                } else if(id === ("SESSIONDURATION") && ((ele > data.session_duration_limit && data.session_duration_limit > 0 ) || (ele.length < 1 && data.session_duration_limit > 0) ) ){
-                    $("#error"+id).text(text.localize("Please enter a number between 0 and " + data.session_duration_limit ));
-                    isValid = false;
-                } 
-            }
-        });
-
-        if(validate_exclusion_date() ===false){
-            isValid = false;
-        }
-
-        if(isValid === false){
-
-            return false;
-        }
-    };
-
-    var validate_exclusion_date = function() {
-        var exclusion_date = $('#EXCLUDEUNTIL').val();
-        var date_regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-        var error_element_errorEXCLUDEUNTIL = clearInputErrorField('errorEXCLUDEUNTIL');
-
-        if (exclusion_date) {
-
-            if(date_regex.test($('#EXCLUDEUNTIL').val()) === false){
-                error_element_errorEXCLUDEUNTIL.innerHTML = text.localize("Please select a valid date");
-                return false;
-            }
-    
-            exclusion_date = new Date(exclusion_date);
-            // self exclusion date must >= 6 month from now
-            var six_month_date = new Date();
-            six_month_date.setMonth(six_month_date.getMonth() + 6);
-
-            if (exclusion_date < six_month_date) {
-                error_element_errorEXCLUDEUNTIL.innerHTML = text.localize("Please enter a date that is at least 6 months from now.");
-                return false ;
-            }
-
-            if (confirm(text.localize("When you click 'Ok' you will be excluded from trading on the site until the selected date.")) === true) {
-                return true;
-            } else {
-                return false;
-            }
-
-        }
-
-        return true;
-    };
-
-    var populateForm = function(response){
-        var res = response.get_self_exclusion;
-
-        if("error" in response) {
-            if("message" in response.error) {
-                console.log(response.error.message);
-                $("#errorMsg").removeClass("hidden");
-                $("#errorMsg").text(text.localize(response.error.message));
-                $form.hide();
-                $("#exclusionText").hide();
-                $("#exclusionTitle").hide();
-            }
-            return false;
-        }else{
-            data.max_balance = $("#MAXCASHBAL").val();
-            data.max_turnover = $("#DAILYTURNOVERLIMIT").val();
-            data.max_losses = $("#DAILYLOSSLIMIT").val();
-            data.max_7day_turnover = $("#7DAYTURNOVERLIMIT").val();
-            data.max_7day_losses = $("#7DAYLOSSLIMIT").val();
-            data.max_30day_turnover = $("#30DAYTURNOVERLIMIT").val();
-            data.max_30day_losses = $("#30DAYLOSSLIMIT").val();
-            data.max_open_bets = $("#MAXOPENPOS").val();
-            data.session_duration_limit =  $("#SESSIONDURATION").val();
-            data.exclude_until = $("#EXCLUDEUNTIL").val();
-
-            if(res){
-                $.map(res,function(value,property){
-
-                    switch(property){
-                        case  "max_balance" :
-                               data.max_balance = parseInt(value);
-                               break;
-                        case  "max_turnover" :
-                               data.max_turnover = parseInt(value);
-                               break;
-                        case  "max_losses"   :
-                               data.max_losses = parseInt(value);
-                               break;
-                        case  "max_7day_turnover" :
-                               data.max_7day_turnover = parseInt(value);
-                               break;
-                        case  "max_7day_losses" :
-                               data.max_7day_losses = parseInt(value);
-                               break;
-                        case   "max_30day_turnover" :
-                                data.max_30day_turnover = parseInt(value);
-                                break;
-                        case   "max_30day_losses" :
-                                data.max_30day_losses = parseInt(value);
-                                break;
-                        case   "max_open_bets" :
-                                data.max_open_bets = parseInt(value);
-                                break; 
-                        case   "session_duration_limit"  :
-                                data.session_duration_limit = parseInt(value);
-                                break;
-                        case   "exclude_until"   :
-                                data.exclude_until = value;
-                                break;       
-
-                    }
-
-                });
-            }
-        }
-        $("#MAXCASHBAL").val(data.max_balance);
-        $("#DAILYTURNOVERLIMIT").val(data.max_turnover);
-        $("#DAILYLOSSLIMIT").val(data.max_losses);
-        $("#7DAYTURNOVERLIMIT").val(data.max_7day_turnover);
-        $("#7DAYLOSSLIMIT").val(data.max_7day_losses);
-        $("#30DAYTURNOVERLIMIT").val(data.max_30day_turnover);
-        $("#30DAYLOSSLIMIT").val(data.max_30day_losses);
-        $("#MAXOPENPOS").val(data.max_open_bets);
-        $("#SESSIONDURATION").val(data.session_duration_limit);
-        $("#EXCLUDEUNTIL").val(data.exclude_until);
-    };
-
-    var sendRequest = function(){
-        var hasChanges  = false;
-        var newData = {
-            "max_balance"  : parseInt($("#MAXCASHBAL").val()) || "",
-            "max_turnover" : parseInt($("#DAILYTURNOVERLIMIT").val()) || "",
-            "max_losses" : parseInt($("#DAILYLOSSLIMIT").val()) || "" ,
-            "max_7day_turnover" : parseInt($("#7DAYTURNOVERLIMIT").val()) || "",
-            "max_7day_losses" : parseInt($("#7DAYLOSSLIMIT").val()) || "",
-            "max_30day_turnover" : parseInt($("#30DAYTURNOVERLIMIT").val()) || "",
-            "max_30day_losses" : parseInt($("#30DAYLOSSLIMIT").val()) || "",
-            "max_open_bets": parseInt($("#MAXOPENPOS").val()) || "" ,
-            "session_duration_limit" :  parseInt($("#SESSIONDURATION").val()) || "",
-            "exclude_until" : $("#EXCLUDEUNTIL").val()
-        };
-        $.map(newData , function(value, property){
-            if(value !== data[property])
-                hasChanges = true ;
-        }); 
-        if(hasChanges === false){
-            $("#invalidinputfound").text(text.localize("Please provide at least one self-exclusion setting"));
-            return false;
-        }else{
-            BinarySocket.send(
-                {
-                  "set_self_exclusion": 1,
-                  "max_balance": parseInt(newData.max_balance),
-                  "max_turnover": parseInt(newData.max_turnover),
-                  "max_losses": parseInt(newData.max_losses),
-                  "max_7day_turnover": parseInt(newData.max_7day_turnover),
-                  "max_7day_losses": parseInt(newData.max_7day_losses),
-                  "max_30day_turnover": parseInt(newData.max_30day_turnover),
-                  "max_30day_losses": parseInt(newData.max_30day_losses),
-                  "max_open_bets": parseInt(newData.max_open_bets),
-                  "session_duration_limit": parseInt(newData.session_duration_limit),
-                  "exclude_until": newData.exclude_until ? newData.exclude_until : null
-                });
-            return true;
-        }
-    };
-
-    var responseMessage = function(response){
-        if("error" in response) {
-            var  error = response.error;
-            switch(error.field){
-                case  "max_balance" :
-                       $("#errorMAXCASHBAL").text(text.localize(error.message));
-                       break;
-                case  "max_turnover" :
-                       $("#errorDAILYTURNOVERLIMIT").text(text.localize(error.message));
-                       break;
-                case  "max_losses"   :
-                       $("#errorDAILYLOSSLIMIT").text(text.localize(error.message));
-                       break;
-                case  "max_7day_turnover" :
-                       $("#error7DAYTURNOVERLIMIT").text(text.localize(error.message));
-                       break;
-                case  "max_7day_losses" :
-                       $("#error7DAYLOSSLIMIT").text(text.localize(error.message));
-                       break;
-                case   "max_30day_turnover" :
-                        $("#error30DAYTURNOVERLIMIT").text(text.localize(error.message));
-                        break;
-                case   "max_30day_losses" :
-                        $("#error30DAYLOSSLIMIT").text(text.localize(error.message));
-                        break;
-                case   "max_open_bets" :
-                        $("#errorMAXOPENPOS").text(text.localize(error.message));
-                        break; 
-                case   "session_duration_limit"  :
-                        $("#errorSESSIONDURATION").text(text.localize(error.message));
-                        break;
-                case   "exclude_until"   :
-                        $("#errorEXCLUDEUNTIL").text(text.localize(error.message));
-                        break;       
-
-            }
-            return false;
-        }else{
-            $form.find("#exclusionMsg").show();
-            $form.find("#exclusionMsg").text(text.localize('Your changes have been updated.'));
-            BinarySocket.send({"get_self_exclusion": 1});
-
-        }
-    };
-
-    var self_exclusion_date_picker = function () {
-        // 6 months from now
-        var start_date = new Date();
-        start_date.setMonth(start_date.getMonth() + 6);
-
-        // 5 years from now
-        var end_date = new Date();
-        end_date.setFullYear(end_date.getFullYear() + 5);
-
-        var id = $('#EXCLUDEUNTIL');
-
-        id.datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: start_date,
-            maxDate: end_date,
-            onSelect: function(dateText, inst) {
-                id.attr("value", dateText);
-            },
-        });
-    };
-
-    var apiResponse = function(response){
-        var type = response.msg_type;
-    
-        if (type === "get_self_exclusion" || (type === "error" && "get_self_exclusion" in response.echo_req)){
-            populateForm(response);
-        }else if(type === "set_self_exclusion" || (type === "error" && "set_self_exclusion" in response.echo_req))
-        {
-            responseMessage(response);
-        }
-    };
-
-    return {
-        init: init,
-        apiResponse: apiResponse,
-        populateForm : populateForm
-    };
-})();
-pjax_config_page("user/self_exclusionws", function() {
-    return {
-        onLoad: function() {
-        	if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
-                return;
-            }
-            if((/VRT/.test($.cookie('loginid')))){
-                window.location.href = ("/");
-            }
-
-        	BinarySocket.init({
-                onmessage: function(msg){
-                    var response = JSON.parse(msg.data);
-                    if (response) {
-                        SelfExlusionWS.apiResponse(response);
-                          
-                    }
-                }
-            });	
-
-            SelfExlusionWS.init();
-        
-        }
-    };
-});;/*
+;/*
  * This file contains the code related to loading of trading page bottom analysis
  * content. It will contain jquery so as to compatible with old code and less rewrite
  *
@@ -64060,7 +63976,7 @@ var TradingEvents = (function () {
         var durationAmountElement = document.getElementById('duration_amount');
         if (durationAmountElement) {
             // jquery needed for datepicker
-            $('#duration_amount').on('input', debounce(function (e) {
+            $('#duration_amount').on('input change', debounce(function (e) {
                 if (e.target.value % 1 !== 0 ) {
                     e.target.value = Math.floor(e.target.value);
                 }
@@ -64101,14 +64017,14 @@ var TradingEvents = (function () {
         if (endDateElement) {
             // need to use jquery as datepicker is used, if we switch to some other
             // datepicker we can move back to javascript
-            $('#expiry_date').on('change', function () {
+            $('#expiry_date').on('change input', function () {
                 Durations.selectEndDate(this.value);
             });
         }
 
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
-            $('#expiry_time').on('change', function () {
+            $('#expiry_time').on('change input', function () {
                 Durations.setTime(endTimeElement.value);
                 processPriceRequest();
             });
@@ -64120,7 +64036,7 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                if (isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount', e.target.value);
@@ -64298,7 +64214,7 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
-                if (isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount_per_point',e.target.value);
@@ -64328,7 +64244,7 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
-                if (isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('stop_loss',e.target.value);
@@ -64343,7 +64259,7 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
-                if (isStandardFloat(parseFloat(e.target.value))) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('stop_profit',e.target.value);
@@ -64354,7 +64270,7 @@ var TradingEvents = (function () {
         
         // For verifying there are 2 digits after decimal
         var isStandardFloat = (function(value){
-            return (value % 1 !== 0 && ((+value).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2);
+            return (value % 1 !== 0 && ((+parseFloat(value)).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2);
         });
 
         var jhighBarrierElement = document.getElementById('jbarrier_high');
@@ -67661,10 +67577,10 @@ var Table = (function(){
     return true;
   }
 
-  function passwordRNotEmpty(rPassword, rError){
-    if (!/^.+$/.test(rPassword)) {
-      rError.textContent = Content.errorMessage('req');
-      displayErrorMessage(rError);
+  function fieldNotEmpty(field, error){
+    if (!/^.+$/.test(field)) {
+      error.textContent = Content.errorMessage('req');
+      displayErrorMessage(error);
       return errorCounter++;
     }
     return true;
@@ -67733,11 +67649,11 @@ var Table = (function(){
       passwordChars(password, error);
       passwordValid(password, error);
       passwordStrong(password, error);
-      if (passwordRNotEmpty(rPassword, rError) === true){
+      if (fieldNotEmpty(rPassword, rError) === true){
         passwordMatching(password, rPassword, rError);
       }
     } else {
-      passwordRNotEmpty(rPassword, rError);
+      fieldNotEmpty(rPassword, rError);
     }
 
     if (errorCounter === 0){
@@ -67761,6 +67677,7 @@ var Table = (function(){
     hideErrorMessage: hideErrorMessage,
     errorMessageEmail: errorMessageEmail,
     errorMessagePassword: errorMessagePassword,
+    fieldNotEmpty: fieldNotEmpty,
     errorMessageResidence: errorMessageResidence
   };
 }());
@@ -68180,60 +68097,83 @@ var ProfitTableUI = (function(){
 
   return {
     onLoad: function() {
-      if (!$.cookie('login')) {
+      Content.populate();
+      var residenceValue = $.cookie('residence');
+      if (!$.cookie('login') || !residenceValue) {
           window.location.href = page.url.url_for('login');
           return;
       }
-      Content.populate();
-      var residenceValue = $.cookie('residence');
-      var title     = document.getElementById('title'),
-          dobdd     = document.getElementById('dobdd'),
-          dobmm     = document.getElementById('dobmm'),
-          dobyy     = document.getElementById('dobyy'),
-          residence = document.getElementById('residence-disabled'),
-          state     = document.getElementById('address-state'),
-          tel       = document.getElementById('tel'),
-          question  = document.getElementById('secret-question');
-      RealAccOpeningUI.setValues(dobdd, dobmm, dobyy, state, question, tel, residenceValue);
-      setTitles(title);
+      if (page.client.type !== 'virtual') {
+        window.location.href = page.url.url_for('user/my_account');
+        return;
+      }
+      for (i = 0; i < page.user.loginid_array.length; i++){
+        if (page.user.loginid_array[i].real === true){
+          window.location.href = page.url.url_for('user/my_account');
+          return;
+        }
+      }
+      if (page.client.is_logged_in) {
+          client_form.set_virtual_email_id(page.client.email);
+      }
+      RealAccOpeningUI.setValues(residenceValue);
 
-      $(window).load(function() {
-        residence.value = residenceValue;
+      $('#real-form').submit(function(evt) {
+        evt.preventDefault();
+        if (RealAccOpeningUI.checkValidity()){
+          BinarySocket.init({
+            onmessage: function(msg){
+              var response = JSON.parse(msg.data);
+              if (response) {
+                var type = response.msg_type;
+                var error = response.error;
 
-        $('#real-form').submit(function(evt) {
-          evt.preventDefault();
-          if (residenceValue) {
-            if (RealAccOpeningUI.checkValidity()){
-              BinarySocket.init({
-                onmessage: function(msg){
-                  var response = JSON.parse(msg.data);
-                  if (response) {
-                    var type = response.msg_type;
-                    var error = response.error;
+                if (type === 'new_account_real' && !error){
+                  var loginid = response.new_account_real.client_id;
 
-                    if (type === 'new_account_real' && !error){
-                      var loginid = response.new_account_real.client_id;
-                      var oldCookieValue = $.cookie('loginid_list');
-                      $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
-                      $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
-                      page.header.show_or_hide_login_form();
-                      window.location.href = page.url.url_for('user/my_account') + '&newaccounttype=real&login=true&newrealaccount';
-                    } else if (error) {
-                      if (/multiple real money accounts/.test(error.message)){
-                        var duplicate = 'duplicate';
-                        RealAccOpeningUI.showError(duplicate);
-                      } else {
-                        RealAccOpeningUI.showError();
-                      }
-                    }
+                  //set cookies
+                  var oldCookieValue = $.cookie('loginid_list');
+                  $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: document.domain.substring(3), path:'/'});
+                  $.cookie('loginid', loginid, {domain: document.domain.substring(3), path:'/'});
+
+                  //push to gtm
+                  var gtmDataLayer = document.getElementsByClassName('gtm_data_layer')[0];
+                  var age = new Date().getFullYear() - document.getElementById('dobyy').value;
+                  document.getElementById('event').innerHTML = 'new_account';
+                  dataLayer.push({
+                    'language': page.language(),
+                    'event': 'new_account',
+                    'visitorID': loginid,
+                    'bom_age': age,
+                    'bom_country': $('#residence-disabled option[value="' + residenceValue + '"]').html(),
+                    'bom_date_joined': Math.floor(Date.now() / 1000),
+                    'bom_email': page.user.email,
+                    'bom_firstname': document.getElementById('fname').value,
+                    'bom_lastname': document.getElementById('lname').value,
+                    'bom_phone': document.getElementById('tel').value
+                  });
+                  var affiliateToken = $.cookie('affiliate_tracking');
+                  if (affiliateToken) {
+                    dataLayer.push({'bom_affiliate_token': affiliateToken});
+                  }
+
+                  //generate dropdown list and switch
+                  var option = new Option('Real Account (' + loginid + ')', loginid);
+                  document.getElementById('client_loginid').appendChild(option);
+                  $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
+                  option.setAttribute('selected', 'selected');
+                  $('#loginid-switch-form').submit();
+                } else if (error) {
+                  if (/multiple real money accounts/.test(error.message)){
+                    RealAccOpeningUI.showError('duplicate');
+                  } else {
+                    RealAccOpeningUI.showError();
                   }
                 }
-              });
+              }
             }
-          } else {
-            RealAccOpeningUI.showError();
-          }
-        });
+          });
+        }
       });
     }
   };
@@ -68257,6 +68197,10 @@ var ProfitTableUI = (function(){
             secret_answer: arr[12]
         };
 
+        if ($.cookie('affiliate_tracking')) {
+          req.affiliate_token = $.cookie('affiliate_tracking');
+        }
+
         BinarySocket.send(req);
     }
 
@@ -68267,27 +68211,17 @@ var ProfitTableUI = (function(){
 ;var RealAccOpeningUI = (function(){
   "use strict";
 
-  function setValues(dobdd, dobmm, dobyy, state, question, tel, residenceValue){
+  function setValues(residenceValue){
+    var dobdd    = document.getElementById('dobdd'),
+        dobmm    = document.getElementById('dobmm'),
+        dobyy    = document.getElementById('dobyy'),
+        tel      = document.getElementById('tel'),
+        state    = document.getElementById('address-state');
+
     handle_residence_state_ws();
     generateBirthDate(dobdd, dobmm, dobyy);
     setResidenceWs(tel, residenceValue);
     generateState(state);
-
-    var secretQuestions = [
-        "Mother's maiden name",
-        "Name of your pet",
-        "Name of first love",
-        "Memorable town/city",
-        "Memorable date",
-        "Favourite dish",
-        "Brand of first car",
-        "Favourite artist"
-    ];
-
-    for (i = 0; i < secretQuestions.length; i++) {
-        appendTextValueChild(question, secretQuestions[i], secretQuestions[i]);
-    }
-
   }
 
   function showError(opt){
@@ -68303,7 +68237,7 @@ var ProfitTableUI = (function(){
 
   function hideAllErrors(allErrors) {
     for (i = 0; i < allErrors.length; i++) {
-      Validate.hideErrorMessage(allErrors[i]);
+      allErrors[i].setAttribute('style', 'display:none');
     }
   }
 
@@ -68336,18 +68270,18 @@ var ProfitTableUI = (function(){
 
     var arr = [
                 title.value,
-                fname.value,
-                lname.value,
+                Trim(fname.value),
+                Trim(lname.value),
                 dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
                 $.cookie('residence'),
-                address1.value,
-                address2.value,
-                town.value,
-                state.value,
-                postcode.value,
-                tel.value,
+                Trim(address1.value),
+                Trim(address2.value),
+                Trim(town.value),
+                Trim(state.value),
+                Trim(postcode.value),
+                Trim(tel.value),
                 question.value,
-                answer.value
+                Trim(answer.value)
             ];
 
     var errorTitle     = document.getElementById('error-title'),
@@ -68384,13 +68318,21 @@ var ProfitTableUI = (function(){
 
     hideAllErrors(allErrors);
 
-    if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(fname.value)){
+    if (Trim(fname.value).length < 2) {
+      errorFname.innerHTML = Content.errorMessage('min', '2');
+      Validate.displayErrorMessage(errorFname);
+      errorCounter++;
+    } else if (!/^[a-zA-Z\s-.']+$/.test(fname.value)){
       errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorFname);
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z]+([\s\-|\.|\'|a-zA-Z]*)*$/.test(lname.value)){
+    if (Trim(lname.value).length < 2) {
+      errorLname.innerHTML = Content.errorMessage('min', '2');
+      Validate.displayErrorMessage(errorLname);
+      errorCounter++;
+    } else if (!/^[a-zA-Z\s-.']+$/.test(lname.value)){
       errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorLname);
       errorCounter++;
@@ -68402,14 +68344,22 @@ var ProfitTableUI = (function(){
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z|\d]+(\s|-|.|'[a-zA-Z]*)*$/.test(address1.value)){
+    if (!/^[a-zA-Z\d\s-.']+$/.test(address1.value)){
       errorAddress1.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorAddress1);
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z]+(\s|-|.[a-zA-Z]*)*$/.test(town.value)){
-      errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, ' ']);
+    if (address2.value !== ""){
+      if (!/^[a-zA-Z\d\s-.']+$/.test(address2.value)){
+        errorAddress2.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
+        Validate.displayErrorMessage(errorAddress2);
+        errorCounter++;
+      }
+    }
+
+    if (!/^[a-zA-Z\s-.']+$/.test(town.value)){
+      errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorTown);
       errorCounter++;
     }
@@ -68420,28 +68370,30 @@ var ProfitTableUI = (function(){
       errorCounter++;
     }
 
-    if (!/^\d+(-|\d]*)*$/.test(postcode.value)){
+    if (postcode.value !== '' && !/^[\d-]+$/.test(postcode.value)){
       errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorPostcode);
       errorCounter++;
     }
 
-    if (tel.value.length < 6) {
+    if (residence.value === 'gb' && /^$/.test(Trim(postcode.value))){
+      errorPostcode.innerHTML = Content.errorMessage('req');
+      Validate.displayErrorMessage(errorPostcode);
+      errorCounter++;
+    }
+
+    if (tel.value.replace(/\+| /g,'').length < 6) {
       errorTel.innerHTML = Content.errorMessage('min', 6);
       Validate.displayErrorMessage(errorTel);
       errorCounter++;
-    } else if (!/^\+?\d{6,35}$/.test(tel.value)){
-      errorTel.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+    } else if (!/^\+?[\d-\s]+$/.test(tel.value)){
+      errorTel.innerHTML = Content.errorMessage('reg', [numbers, space, hyphen, ' ']);
       Validate.displayErrorMessage(errorTel);
       errorCounter++;
     }
 
     if (answer.value.length < 4) {
       errorAnswer.innerHTML = Content.errorMessage('min', 4);
-      Validate.displayErrorMessage(errorAnswer);
-      errorCounter++;
-    } else if (!/^[a-zA-Z0-9]*(\s|-|.[a-zA-Z0-9]*){4,60}$/.test(answer.value)){
-      errorAnswer.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorAnswer);
       errorCounter++;
     }
@@ -68453,7 +68405,7 @@ var ProfitTableUI = (function(){
     }
 
     for (i = 0; i < arr.length; i++){
-      if (/^$/.test(arr[i]) && i !== 6 && i !== 8){
+      if (/^$/.test(Trim(arr[i])) && i !== 6 && i !== 8 && i !== 9){
         allErrors[i].innerHTML = Content.errorMessage('req');
         Validate.displayErrorMessage(allErrors[i]);
         errorCounter++;
@@ -68741,8 +68693,12 @@ var ProfitTableUI = (function(){
 
                 if (response) {
                     var type = response.msg_type;
-                    if (type === 'verify_email'){
+                    var wsError = response.error;
+                    if (type === 'verify_email' && !wsError){
                         VerifyEmailWS.emailHandler(error);
+                    } else if (wsError && wsError.message) {
+                      error.innerHTML = wsError.message;
+                      error.setAttribute('style', 'display:block');
                     }
                 }
             }
@@ -68823,7 +68779,8 @@ var ViewBalanceUI = (function(){
           window.location.href = page.url.url_for('user/my_account');
           return;
       }
-      get_residence_list();
+      handle_residence_state_ws();
+      setResidenceWs();
       Content.populate();
       var form = document.getElementById('virtual-form');
       var errorEmail = document.getElementById('error-email'),
@@ -68875,8 +68832,8 @@ var ViewBalanceUI = (function(){
                       if (/required/.test(error.details.verification_code)){
                         errorEmail.textContent = Content.localize().textTokenMissing;
                       }
-                    } else {
-                      errorEmail.textContent = Content.errorMessage('valid', Content.localize().textEmailAddress);
+                    } else if (error.message) {
+                      errorEmail.textContent = error.message;
                     }
                     Validate.displayErrorMessage(errorEmail);
                   }
