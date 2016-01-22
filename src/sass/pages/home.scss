@@ -55,6 +55,7 @@
         color: $COLOR_WHITE;
         font-size: 85%;
         margin-bottom: 1em;
+        margin-top: 1em;
     }
     .error-message {
         font-style: italic;
@@ -116,32 +117,28 @@
 .xhead {
     padding-bottom: 15px;
     border-bottom: 1px solid $COLOR_GRAY;
+    margin-bottom: 15px;
 }
 .inlined {
     display: inline-block;
 }
 .xlist1 {
     background: url(../images/pages/home/xicon-1.png) no-repeat;
-    padding-left: 40px;
-    min-height: 24px;
-    background-size: 30px;
 }
 .xlist2 {
     background: url(../images/pages/home/xicon-2.png) no-repeat;
-    padding-left: 40px;
-    min-height: 24px;
-    background-size: 30px;
 }
 .xlist3 {
     background: url(../images/pages/home/xicon-3.png) no-repeat;
-    padding-left: 40px;
-    min-height: 24px;
-    background-size: 30px;
 }
 .xlist1, .xlist2, .xlist3{
-  margin-left: 50px!important;
+  @include BIDIR_PROP(padding-left, padding-right, 40px);
+  min-height: 24px;
+  background-size: 30px;
+  @include BIDIR_PROP(margin-left, margin-right, 50px!important);
   padding-bottom: 1em;
-  text-align: left;
+  @include BIDIR_VALUE(text-align, left, right);
+  @include BIDIR_VALUE(background-position, left top, right top);
 }
 .small-image {
   width: 10%;
@@ -164,26 +161,26 @@
     width: 0px;
     height: 0px;
     border-style: solid;
-    border-width: 25px 5px 0 10px;
+    @include BIDIR_VALUE(border-width, 25px 5px 0 10px, 25px 10px 0 5px);
     border-color: $COLOR_LIGHT_GRAY  transparent transparent transparent;
     position: relative;
-    left: 80%;
+    @include BIDIR_PROP(left, right, 80%);
 }
 .xbubble-left {
     content: '';
     width: 0px;
     height: 0px;
     border-style: solid;
-    border-width: 25px 10px 0 5px;
+    @include BIDIR_VALUE(border-width, 25px 10px 0 5px, 25px 5px 0 10px);
     border-color: $COLOR_LIGHT_GRAY  transparent transparent transparent;
     position: relative;
-    left: 10%;
+    @include BIDIR_PROP(left, right, 10%);
 }
 .xquoter-left {
-    text-align: left;
+    @include BIDIR_VALUE(text-align, left, right);
 }
 .xquoter-right {
-    text-align: right;
+    @include BIDIR_VALUE(text-align, right, left);
 }
 #xacademy{
     .head-academy{
