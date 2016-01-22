@@ -47,13 +47,8 @@ var TradingEvents = (function () {
         var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
-            var end_date = sessionStorage.getItem('end_date');
-            var duration_list = Durations.duration_list();
-            if(Object.keys(duration_list).length===1 && duration_list.hasOwnProperty('d') && (!end_date || moment().add(1,'day').isAfter(moment(end_date)))){
-                end_date = moment().add(1,'day').format('YYYY-MM-DD');
-            }
-            if(end_date){
-                Durations.selectEndDate(end_date);
+            if(sessionStorage.getItem('end_date')){
+                Durations.selectEndDate(sessionStorage.getItem('end_date'));
                 make_price_request = -1;
             }
         }
@@ -177,7 +172,7 @@ var TradingEvents = (function () {
         var durationAmountElement = document.getElementById('duration_amount');
         if (durationAmountElement) {
             // jquery needed for datepicker
-            $('#duration_amount').on('input', debounce(function (e) {
+            $('#duration_amount').on('input change', debounce(function (e) {
                 if (e.target.value % 1 !== 0 ) {
                     e.target.value = Math.floor(e.target.value);
                 }
@@ -218,14 +213,14 @@ var TradingEvents = (function () {
         if (endDateElement) {
             // need to use jquery as datepicker is used, if we switch to some other
             // datepicker we can move back to javascript
-            $('#expiry_date').on('change', function () {
+            $('#expiry_date').on('change input', function () {
                 Durations.selectEndDate(this.value);
             });
         }
 
         var endTimeElement = document.getElementById('expiry_time');
         if (endTimeElement) {
-            $('#expiry_time').on('change', function () {
+            $('#expiry_time').on('change input', function () {
                 Durations.setTime(endTimeElement.value);
                 processPriceRequest();
             });
@@ -237,8 +232,7 @@ var TradingEvents = (function () {
         var amountElement = document.getElementById('amount');
         if (amountElement) {
             amountElement.addEventListener('input', debounce( function(e) {
-                var amount_val = parseFloat(e.target.value);
-                if (e.target.value % 1 !== 0 && ((+amount_val).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount', e.target.value);
@@ -416,7 +410,7 @@ var TradingEvents = (function () {
         var amountPerPointElement = document.getElementById('amount_per_point');
         if (amountPerPointElement) {
             amountPerPointElement.addEventListener('input', debounce( function (e) {
-                if (e.target.value % 1 !== 0 ) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('amount_per_point',e.target.value);
@@ -446,7 +440,7 @@ var TradingEvents = (function () {
         var stopLossElement = document.getElementById('stop_loss');
         if (stopLossElement) {
             stopLossElement.addEventListener('input', debounce( function (e) {
-                if (e.target.value % 1 !== 0 ) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('stop_loss',e.target.value);
@@ -461,7 +455,7 @@ var TradingEvents = (function () {
         var stopProfitElement = document.getElementById('stop_profit');
         if (stopProfitElement) {
             stopProfitElement.addEventListener('input', debounce( function (e) {
-                if (e.target.value % 1 !== 0 ) {
+                if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
                 sessionStorage.setItem('stop_profit',e.target.value);
@@ -469,6 +463,11 @@ var TradingEvents = (function () {
                 submitForm(document.getElementById('websocket_form'));
             }));
         }
+        
+        // For verifying there are 2 digits after decimal
+        var isStandardFloat = (function(value){
+            return (value % 1 !== 0 && ((+parseFloat(value)).toFixed(10)).replace(/^-?\d*\.?|0+$/g, '').length>2);
+        });
 
         var jhighBarrierElement = document.getElementById('jbarrier_high');
         if (jhighBarrierElement) {
