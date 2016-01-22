@@ -60935,7 +60935,7 @@ $(function() {
 
         indicative_sum = indicative_sum.toFixed(2);
 
-        $("#value-of-open-positions").text('USD ' + addComma(parseFloat(indicative_sum).toFixed(2)));
+        $("#value-of-open-positions").text('USD ' + parseFloat(indicative_sum).toFixed(2));
 
     };
 
