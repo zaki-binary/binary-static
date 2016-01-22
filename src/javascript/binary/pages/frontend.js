@@ -378,11 +378,9 @@ function handle_residence_state_ws(){
             }
             select.parentNode.parentNode.setAttribute('style', 'display:block');
           }
-        }
-        if (type === 'residence_list'){
-          select = document.getElementById('residence-disabled');
+        } else if (type === 'residence_list'){
+          select = document.getElementById('residence-disabled') || document.getElementById('residence');
           var phoneElement   = document.getElementById('tel'),
-              residence      = document.getElementById('residence-disabled'),
               residenceValue = $.cookie('residence'),
               residence_list = response.residence_list;
           if (residence_list.length > 0){
@@ -392,8 +390,9 @@ function handle_residence_state_ws(){
                 phoneElement.value = '+' + residence_list[i].phone_idd;
               }
             }
-            residence.value = residenceValue;
-            select.parentNode.parentNode.setAttribute('style', 'display:block');
+            if (residenceValue){
+                select.value = residenceValue;
+            }
           }
         }
       }

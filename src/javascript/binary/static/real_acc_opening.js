@@ -12,6 +12,12 @@ pjax_config_page("new_account/realws", function(){
         window.location.href = page.url.url_for('user/my_account');
         return;
       }
+      for (i = 0; i < page.user.loginid_array.length; i++){
+        if (page.user.loginid_array[i].real === true){
+          window.location.href = page.url.url_for('user/my_account');
+          return;
+        }
+      }
       if (page.client.is_logged_in) {
           client_form.set_virtual_email_id(page.client.email);
       }
@@ -61,7 +67,7 @@ pjax_config_page("new_account/realws", function(){
                   document.getElementById('client_loginid').appendChild(option);
                   $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
                   option.setAttribute('selected', 'selected');
-                  //$('#loginid-switch-form').submit();
+                  $('#loginid-switch-form').submit();
                 } else if (error) {
                   if (/multiple real money accounts/.test(error.message)){
                     RealAccOpeningUI.showError('duplicate');

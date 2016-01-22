@@ -108,13 +108,21 @@ var RealAccOpeningUI = (function(){
 
     hideAllErrors(allErrors);
 
-    if (!/^[a-zA-Z\s-.']+$/.test(fname.value)){
+    if (Trim(fname.value).length < 2) {
+      errorFname.innerHTML = Content.errorMessage('min', '2');
+      Validate.displayErrorMessage(errorFname);
+      errorCounter++;
+    } else if (!/^[a-zA-Z\s-.']+$/.test(fname.value)){
       errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorFname);
       errorCounter++;
     }
 
-    if (!/^[a-zA-Z\s-.']+$/.test(lname.value)){
+    if (Trim(lname.value).length < 2) {
+      errorLname.innerHTML = Content.errorMessage('min', '2');
+      Validate.displayErrorMessage(errorLname);
+      errorCounter++;
+    } else if (!/^[a-zA-Z\s-.']+$/.test(lname.value)){
       errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorLname);
       errorCounter++;
@@ -140,8 +148,8 @@ var RealAccOpeningUI = (function(){
       }
     }
 
-    if (!/^[a-zA-Z\d\s-.']+$/.test(town.value)){
-      errorTown.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
+    if (!/^[a-zA-Z\s-.']+$/.test(town.value)){
+      errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
       Validate.displayErrorMessage(errorTown);
       errorCounter++;
     }
@@ -152,18 +160,24 @@ var RealAccOpeningUI = (function(){
       errorCounter++;
     }
 
-    if (!/^[\d-]+$/.test(postcode.value)){
+    if (postcode.value !== '' && !/^[\d-]+$/.test(postcode.value)){
       errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorPostcode);
       errorCounter++;
     }
 
-    if (tel.value.length < 6) {
+    if (residence.value === 'gb' && /^$/.test(Trim(postcode.value))){
+      errorPostcode.innerHTML = Content.errorMessage('req');
+      Validate.displayErrorMessage(errorPostcode);
+      errorCounter++;
+    }
+
+    if (tel.value.replace(/\+| /g,'').length < 6) {
       errorTel.innerHTML = Content.errorMessage('min', 6);
       Validate.displayErrorMessage(errorTel);
       errorCounter++;
-    } else if (!/^\+?[\d-]+$/.test(tel.value)){
-      errorTel.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+    } else if (!/^\+?[\d-\s]+$/.test(tel.value)){
+      errorTel.innerHTML = Content.errorMessage('reg', [numbers, space, hyphen, ' ']);
       Validate.displayErrorMessage(errorTel);
       errorCounter++;
     }
@@ -181,7 +195,7 @@ var RealAccOpeningUI = (function(){
     }
 
     for (i = 0; i < arr.length; i++){
-      if (/^$/.test(Trim(arr[i])) && i !== 6 && i !== 8){
+      if (/^$/.test(Trim(arr[i])) && i !== 6 && i !== 8 && i !== 9){
         allErrors[i].innerHTML = Content.errorMessage('req');
         Validate.displayErrorMessage(allErrors[i]);
         errorCounter++;
