@@ -584,13 +584,3 @@ pjax_config_page('/terms-and-condition', function() {
         },
     };
 });
-
-pjax_config_page('/my_account', function() {
-    return {
-        onLoad: function() {
-            if ($('#client_loginid option[value="hidden"]')){
-              $('#client_loginid option[value="hidden"]').remove();
-            }
-        },
-    };
-});
