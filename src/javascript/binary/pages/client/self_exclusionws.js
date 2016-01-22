@@ -115,6 +115,7 @@ var SelfExlusionWS = (function() {
         clearError();
         isValid = true;
         var isChanged = false;
+        submittedValues = {};
 
         $.each(fields, function(key, currentValue) {
             var newValue = $form.find('#' + key).val().trim();
@@ -130,7 +131,7 @@ var SelfExlusionWS = (function() {
                 if(newValue.length > 0 && !isNormalInteger(newValue)) {
                     showError(key, text.localize('Please enter an integer value'));
                 }
-                else if(currentValue > 0 && (newValue.length === 0 || parseInt(newValue) > currentValue)) {
+                else if(currentValue > 0 && (newValue.length === 0 || isLargerInt(newValue, currentValue))) {
                     showError(key, text.localize('Please enter a number between 0 and %1').replace('%1', currentValue));
                 }
                 else if(key === 'session_duration_limit' && newValue > (6 * 7 * 24 * 60)) {
@@ -144,11 +145,19 @@ var SelfExlusionWS = (function() {
         });
 
         if(isValid && !isChanged) {
-            showFormMessage('Please provide at least one self-exclusion setting', false);
+            showFormMessage('You did not change anything.', false);
             isValid = false;
         }
 
         return isValid;
+    };
+
+    var isLargerInt = function(a, b) {
+        return a.length === b.length ? a > b : a.length > b.length;
+    };
+
+    var isNormalInteger = function(value) {
+        return /^\d+$/.test(value);
     };
 
     var validateExclusionDate = function(exclusion_date) {
@@ -175,7 +184,7 @@ var SelfExlusionWS = (function() {
                     errMsg = 'Exclude time cannot be less than 6 months.';
                 }
                 else if (exclusion_date > five_year_date) {
-                    errMsg = 'Exclude time cannot be for more than five years.';
+                    errMsg = 'Exclude time cannot be for more than 5 years.';
                 }
                 else {
                     var isConfirmed = confirm(text.localize('When you click "Ok" you will be excluded from trading on the site until the selected date.'));
@@ -189,10 +198,6 @@ var SelfExlusionWS = (function() {
         if(errMsg.length > 0) {
             showError(dateID, text.localize(errMsg));
         }
-    };
-
-    var isNormalInteger = function(value) {
-        return /^\d+$/.test(value);
     };
 
     // -----------------------------
