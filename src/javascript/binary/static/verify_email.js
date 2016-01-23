@@ -1,6 +1,6 @@
 if(document.getElementById('btn-verify-email')) {
 
-    document.getElementById('btn-verify-email').addEventListener('click', function(evt){
+    $('#verify-email-form').submit( function(evt){
       evt.preventDefault();
       var email = document.getElementById('email').value;
       var error = document.getElementById('signup_error');
@@ -26,7 +26,7 @@ if(document.getElementById('btn-verify-email')) {
                 }
             }
         });
-        VerifyEmailWS.init(email);
+        VerifyEmailData.getEmail(email);
       }
     });
 }
