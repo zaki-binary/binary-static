@@ -8,7 +8,7 @@ if(document.getElementById('btn-verify-email')) {
 
       if(!Validate.errorMessageEmail(email, error)) {
         error.textContent = "";
-        error.setAttribute('style', 'display:none');
+        error.styledisplay = 'none';
 
         BinarySocket.init({
             onmessage: function(msg){
@@ -18,15 +18,17 @@ if(document.getElementById('btn-verify-email')) {
                     var type = response.msg_type;
                     var wsError = response.error;
                     if (type === 'verify_email' && !wsError){
-                        VerifyEmailWS.emailHandler(error);
+                      error.textContent = Content.localize().textEmailSent;
+                      $('#email').hide();
+                      $('#btn-verify-email').hide();
                     } else if (wsError && wsError.message) {
-                      error.innerHTML = wsError.message;
-                      error.setAttribute('style', 'display:block');
+                      error.textContent = wsError.message;
                     }
+                    error.style.display = 'inline-block';
                 }
             }
         });
-        VerifyEmailData.getEmail(email);
+        BinarySocket.send({verify_email: email, type: 'account_opening'});
       }
     });
 }
