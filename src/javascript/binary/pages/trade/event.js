@@ -145,6 +145,9 @@ var TradingEvents = (function () {
                 if (e.target) {
                     showFormOverlay();
                     showPriceOverlay();
+                    if(e.target.selectedIndex < 0) {
+                        e.target.selectedIndex = 0;
+                    }
                     var underlying = e.target.value;
                     sessionStorage.setItem('underlying', underlying);
                     TradingAnalysis.request();
