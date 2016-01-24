@@ -137,11 +137,11 @@
          var key = keys1[i];
          var option = document.createElement('option'), content = document.createTextNode(elements[key].name);
          option.setAttribute('value', key);
-         if (selected && selected === key) {
-             option.setAttribute('selected', 'selected');
-         }
          if(!elements[key].is_active){
             option.setAttribute('disabled', '');
+         }
+         else if (selected && selected === key) {
+             option.setAttribute('selected', 'selected');
          }
          option.appendChild(content);
          fragment.appendChild(option);
@@ -152,11 +152,11 @@
                 var key2 = keys2[j];
                 option = document.createElement('option');
                 option.setAttribute('value', key2);
-                if (selected && selected === key2) {
-                    option.setAttribute('selected', 'selected');
-                }
                 if(!elements[key].submarkets[key2].is_active){
                    option.setAttribute('disabled', '');
+                }
+                else if (selected && selected === key2) {
+                    option.setAttribute('selected', 'selected');
                 }
                 option.textContent = '\xA0\xA0\xA0\xA0'+elements[key].submarkets[key2].name;
                 fragment.appendChild(option);
@@ -165,6 +165,19 @@
      }
      if (target) {
          target.appendChild(fragment);
+
+         if(target.selectedIndex < 0) {
+            target.selectedIndex = 0;
+         }
+         var current = target.options[target.selectedIndex];
+         if(selected !== current.value) {
+            sessionStorage.setItem('market', current.value);
+         }
+
+         if(current.disabled) { // there is no open market
+            document.getElementById('markets_closed_msg').classList.remove('hidden');
+            document.getElementById('trading_init_progress').style.display = 'none';
+         }
      }
  }
 /*
@@ -610,8 +623,8 @@ function getDefaultMarket() {
     'use strict';
     var mkt = sessionStorage.getItem('market');
     var markets = Symbols.markets(1);
-    if (!mkt || !markets[mkt]) {
-        var sorted_markets = Object.keys(Symbols.markets()).sort(function(a, b) {
+    if (!mkt || !markets[mkt] || !markets[mkt].is_active) {
+        var sorted_markets = Object.keys(Symbols.markets()).filter(function(v){return markets[v].is_active;}).sort(function(a, b) {
             return getMarketsOrder(a) - getMarketsOrder(b);
         });
         mkt = sorted_markets[0];
@@ -672,7 +685,8 @@ function displayIndicativeBarrier() {
     if (unit && unit.value !== 'd' && currentTick && !isNaN(currentTick)) {
         var decimalPlaces = countDecimalPlaces(currentTick);
         if (indicativeBarrierTooltip && isVisible(indicativeBarrierTooltip)) {
-            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrierElement.value)).toFixed(decimalPlaces);
+            var barrierValue = isNaN(parseFloat(barrierElement.value))?0:parseFloat(barrierElement.value);
+            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + barrierValue).toFixed(decimalPlaces);
         }
 
         if (indicativeHighBarrierTooltip && isVisible(indicativeHighBarrierTooltip)) {

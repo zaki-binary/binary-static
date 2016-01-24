@@ -131,15 +131,20 @@ function BinarySocketClass() {
                 }
                 var type = response.msg_type;
                 if (type === 'authorize') {
-                    authorized = true;
-                    TUser.set(response.authorize);
-                    if(typeof events.onauth === 'function'){
-                        events.onauth();
+                    if(response.hasOwnProperty('error')) {
+                        send({'logout': '1', passthrough: {'redirect': 'login'}});
                     }
-                    send({balance:1, subscribe: 1});
-                    sendBufferedSends();
+                    else {
+                        authorized = true;
+                        TUser.set(response.authorize);
+                        if(typeof events.onauth === 'function'){
+                            events.onauth();
+                        }
+                        send({balance:1, subscribe: 1});
+                        sendBufferedSends();
+                    }
                 } else if (type === 'balance') {
-                    ViewBalanceUI.updateBalances(response.balance);
+                    ViewBalanceUI.updateBalances(response);
                 } else if (type === 'time') {
                     page.header.time_counter(response);
                 } else if (type === 'logout') {

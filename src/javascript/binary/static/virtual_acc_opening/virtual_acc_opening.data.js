@@ -10,8 +10,8 @@ var VirtualAccOpeningData = (function(){
                     verification_code: $.cookie('verify_token')
                 };
 
-        if ($.cookie('affiliate_token')) {
-            req.affiliate_token = $.cookie('affiliate_token');
+        if ($.cookie('affiliate_tracking')) {
+            req.affiliate_token = JSON.parse($.cookie('affiliate_tracking')).t;
         }
 
         BinarySocket.send(req);
