@@ -267,7 +267,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -523,10 +523,27 @@ Header.prototype = {
             BinarySocket.send({"logout": "1"});
         });
     },
+    
+    validate_cookies: function(){
+        if (getCookieItem('login') && getCookieItem('loginid_list')){
+            var accIds = $.cookie("loginid_list").split("+");
+            var loginid = $.cookie("loginid");
+                                    
+            if(!client_form.is_loginid_valid(loginid)){
+                BinarySocket.send({"logout": "1"});
+            }
+            
+            for(var i=0;i<accIds.length;i++){
+                if(!client_form.is_loginid_valid(accIds[i].split(":")[0])){
+                    BinarySocket.send({"logout": "1"});
+                }
+            }
+        }
+    },
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token'];
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token', 'affiliate_tracking'];
             var current_domain = window.location.hostname.replace('www', '');
             cookies.map(function(c){
                 $.removeCookie(c, {path: '/', domain: current_domain});
@@ -872,12 +889,11 @@ Page.prototype = {
     },
     record_affiliate_exposure: function() {
         var token = this.url.param('t');
-        var token_valid = /\w{32}/.test(token);
-        var is_subsidiary = /\w{1}/.test(this.url.param('s'));
-
-        if (!token_valid) {
+        if (!token || token.length !== 32) {
             return false;
         }
+        var token_length = token.length;
+        var is_subsidiary = /\w{1}/.test(this.url.param('s'));
 
         var cookie_value = $.cookie('affiliate_tracking');
         if(cookie_value) {
@@ -891,7 +907,7 @@ Page.prototype = {
 
         //Record the affiliate exposure. Overwrite existing cookie, if any.
         var cookie_hash = {};
-        if (token_valid) {
+        if (token_length === 32) {
             cookie_hash["t"] = token.toString();
         }
         if (is_subsidiary) {

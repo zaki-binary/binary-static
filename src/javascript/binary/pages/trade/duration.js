@@ -15,7 +15,6 @@ var Durations = (function(){
     var selected_duration = {};
     var expiry_time = '';
     var has_end_date = 0;
-    var duration_list = {};
 
     var displayDurations = function() {
 
@@ -72,7 +71,7 @@ var Durations = (function(){
             }
         }
 
-        duration_list = {};
+        var duration_list = {};
         for (var duration in durationContainer) {
             if(durationContainer.hasOwnProperty(duration)) {
                 var min = durationContainer[duration]['min_contract_duration'],
@@ -325,8 +324,8 @@ var Durations = (function(){
     };
 
     var selectEndDate = function(end_date){
-        $('#expiry_date').val(end_date);
         var expiry_time = document.getElementById('expiry_time');
+        $('#expiry_date').val(end_date);
         if(moment(end_date).isAfter(moment(),'day')){
             Durations.setTime('');
             StartDates.setNow();
@@ -335,9 +334,6 @@ var Durations = (function(){
             processTradingTimesRequest(end_date);
         }
         else{
-            if(!expiry_time.value){
-                displayEndTime();
-            }
             Durations.setTime(expiry_time.value);
             expiry_time.show();
             processPriceRequest();
@@ -357,8 +353,7 @@ var Durations = (function(){
         trading_times: function(){ return trading_times; },
         select_amount: function(a){ selected_duration.amount = a; },
         select_unit: function(u){ selected_duration.unit = u; } ,
-        selectEndDate: selectEndDate,
-        duration_list: function(){ return duration_list; }    
+        selectEndDate: selectEndDate       
     };
 })();
 
