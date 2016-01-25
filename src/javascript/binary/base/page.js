@@ -523,6 +523,23 @@ Header.prototype = {
             BinarySocket.send({"logout": "1"});
         });
     },
+    
+    validate_cookies: function(){
+        if (getCookieItem('login') && getCookieItem('loginid_list')){
+            var accIds = $.cookie("loginid_list").split("+");
+            var loginid = $.cookie("loginid");
+                                    
+            if(!client_form.is_loginid_valid(loginid)){
+                BinarySocket.send({"logout": "1"});
+            }
+            
+            for(var i=0;i<accIds.length;i++){
+                if(!client_form.is_loginid_valid(accIds[i].split(":")[0])){
+                    BinarySocket.send({"logout": "1"});
+                }
+            }
+        }
+    },
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
