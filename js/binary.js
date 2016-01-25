@@ -50649,6 +50649,23 @@ Header.prototype = {
             BinarySocket.send({"logout": "1"});
         });
     },
+    
+    validate_cookies: function(){
+        if (getCookieItem('login') && getCookieItem('loginid_list')){
+            var accIds = $.cookie("loginid_list").split("+");
+            var loginid = $.cookie("loginid");
+                                    
+            if(!client_form.is_loginid_valid(loginid)){
+                BinarySocket.send({"logout": "1"});
+            }
+            
+            for(var i=0;i<accIds.length;i++){
+                if(!client_form.is_loginid_valid(accIds[i].split(":")[0])){
+                    BinarySocket.send({"logout": "1"});
+                }
+            }
+        }
+    },
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
@@ -63950,6 +63967,9 @@ var TradingEvents = (function () {
                 if (e.target) {
                     showFormOverlay();
                     showPriceOverlay();
+                    if(e.target.selectedIndex < 0) {
+                        e.target.selectedIndex = 0;
+                    }
                     var underlying = e.target.value;
                     sessionStorage.setItem('underlying', underlying);
                     TradingAnalysis.request();
@@ -64731,11 +64751,15 @@ function processMarket(flag) {
 function processMarketUnderlying() {
     'use strict';
 
-    if (!document.getElementById('underlying')) {
+    var underlyingElement = document.getElementById('underlying');
+    if (!underlyingElement) {
         return;
     }
 
-    var underlying = document.getElementById('underlying').value;
+    if(underlyingElement.selectedIndex < 0) {
+        underlyingElement.selectedIndex = 0;
+    }
+    var underlying = underlyingElement.value;
     sessionStorage.setItem('underlying', underlying);
 
     showFormOverlay();
@@ -66041,6 +66065,7 @@ function BinarySocketClass() {
             }
 
             if(isReady()=== true){
+                page.header.validate_cookies();
                 if (clock_started === false) {
                     page.header.start_clock_ws();
                 }
@@ -68678,7 +68703,7 @@ var ProfitTableUI = (function(){
 }());
 ;if(document.getElementById('btn-verify-email')) {
 
-    document.getElementById('btn-verify-email').addEventListener('click', function(evt){
+    $('#verify-email-form').submit( function(evt){
       evt.preventDefault();
       var email = document.getElementById('email').value;
       var error = document.getElementById('signup_error');
@@ -68686,7 +68711,7 @@ var ProfitTableUI = (function(){
 
       if(!Validate.errorMessageEmail(email, error)) {
         error.textContent = "";
-        error.setAttribute('style', 'display:none');
+        error.styledisplay = 'none';
 
         BinarySocket.init({
             onmessage: function(msg){
@@ -68696,50 +68721,20 @@ var ProfitTableUI = (function(){
                     var type = response.msg_type;
                     var wsError = response.error;
                     if (type === 'verify_email' && !wsError){
-                        VerifyEmailWS.emailHandler(error);
+                      error.textContent = Content.localize().textEmailSent;
+                      $('#email').hide();
+                      $('#btn-verify-email').hide();
                     } else if (wsError && wsError.message) {
-                      error.innerHTML = wsError.message;
-                      error.setAttribute('style', 'display:block');
+                      error.textContent = wsError.message;
                     }
+                    error.style.display = 'inline-block';
                 }
             }
         });
-        VerifyEmailWS.init(email);
+        BinarySocket.send({verify_email: email, type: 'account_opening'});
       }
     });
 }
-;var VerifyEmailData = (function(){
-    "use strict";
-
-    function getEmail(email){
-        var req = {verify_email: email, type: 'account_opening'};
-
-        BinarySocket.send(req);
-    }
-
-    return {
-        getEmail: getEmail
-    };
-}());
-;var VerifyEmailWS = (function(){
-    "use strict";
-
-    function emailHandler(msg) {
-      msg.textContent = Content.localize().textEmailSent;
-      $('#email').hide();
-      $('#btn-verify-email').hide();
-      msg.style.display = 'inline-block';
-    }
-
-    function initPage(email){
-        VerifyEmailData.getEmail(email);
-    }
-
-    return {
-      emailHandler: emailHandler,
-        init: initPage
-    };
-}());
 ;
 var ViewBalance = (function () {
     function init(){
