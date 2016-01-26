@@ -66082,25 +66082,26 @@ function BinarySocketClass() {
                 var type = response.msg_type;
                 if (type === 'authorize') {
                     if(response.hasOwnProperty('error')) {
-                        send({'logout': '1', passthrough: {'redirect': 'login'}});
+                       send({'logout': '1', passthrough: {'redirect': 'login'}});
                     }
-                    else {
-                        authorized = true;
-                        TUser.set(response.authorize);
-                        if(typeof events.onauth === 'function'){
-                            events.onauth();
-                        }
-                        send({balance:1, subscribe: 1});
-                        sendBufferedSends();
-                    }
+                   else {
+                       authorized = true;
+                       TUser.set(response.authorize);
+                       if(typeof events.onauth === 'function'){
+                           events.onauth();
+                       }
+                       send({balance:1, subscribe: 1});
+                       sendBufferedSends();
+                   }
                 } else if (type === 'balance') {
-                    ViewBalanceUI.updateBalances(response);
+                   ViewBalanceUI.updateBalances(response);
                 } else if (type === 'time') {
-                    page.header.time_counter(response);
+                   page.header.time_counter(response);
                 } else if (type === 'logout') {
-                    page.header.do_logout(response);
-                } else if (type === 'error') {
-                    if(response.error.code === 'RateLimit') {
+                   page.header.do_logout(response);
+                }
+                if (response.hasOwnProperty('error')) {
+                    if(response.error && response.error.code && response.error.code === 'RateLimit') {
                         $('#ratelimit-error-message')
                             .css('display', 'block')
                             .on('click', '#ratelimit-refresh-link', function () {
@@ -66108,7 +66109,6 @@ function BinarySocketClass() {
                             });
                     }
                 }
-
                 if(typeof events.onmessage === 'function'){
                     events.onmessage(msg);
                 }
@@ -66479,9 +66479,10 @@ pjax_config_page("cashier/account_transferws", function() {
     	    		    	$("#VRT_topup_link").show();
     	    		    	$("#VRT_topup_link a").text(text.localize(str).replace("%1",currType + " 10000 "));
 	    			    }
+	    			    BinarySocket.send({"get_settings": 1, "req_id":3});
 	    			}
 	    			else{
-	    			   BinarySocket.send({"get_settings": 1, "req_id":3});
+	    			   BinarySocket.send({"get_settings": 1, "req_id":4});
 	    			}
 	    			BinarySocket.send({"get_account_status": 1, "req_id":2});
 	    		}
@@ -66558,6 +66559,52 @@ pjax_config_page("cashier/account_transferws", function() {
             $("#investment_message").removeClass("invisible");
         }
     };
+    
+    var addGTMDataLayer = function(response){
+        if("error" in response){
+            if("message" in response.error) {
+	            console.log(response.error.message);
+	        }
+            return false;
+        }
+        else{
+            if(page.url.param('login') || page.url.param('newaccounttype')){
+                var oldUrl = window.location.href;
+                var newUrl = oldUrl.replace(/(login=true&|newaccounttype=real&|newaccounttype=virtual&)/gi, "");
+                var title = document.title;
+                var age = parseInt((moment(str).unix()-response.get_settings.date_of_birth)/31557600);
+                var name = TUser.get().fullname.split(' ');
+                var data = {};
+                data['bom_balance'] = TUser.get().balance;
+                data['bom_country'] = response.get_settings.country;
+                data['bom_email'] = TUser.get().email;
+                data['language'] = page.url.param("l");
+                data['pageTitle'] = title;
+                data['url'] = oldUrl;
+                data['visitorID'] = TUser.get().loginid;
+                
+                if(response.req_id === 4){
+                    data['bom_age'] = age;
+                    data['bom_firstname'] = name[1];
+                    data['bom_lastname'] = name[2];
+                    data['bom_phone'] = response.get_settings.phone;
+                    data['bom_pl'] = '';
+                    data['bom_withdrawals'] = '';
+                    data['bom_date_joined'] = '';
+                    data['bom_deposits'] = '';
+                    data['bom_gender'] = '';
+                }
+                
+                if(page.url.param('newaccounttype'))
+                    data['event'] = 'new_account';
+                else
+                    data['event'] = 'log_in';
+                
+                dataLayer.push(data);
+                window.history.replaceState("My Account", title, newUrl);
+            }
+        }
+    };
 
     var apiResponse = function(response){
     	var type = response.msg_type;
@@ -66568,14 +66615,18 @@ pjax_config_page("cashier/account_transferws", function() {
         if(type === "get_account_status" || (type === "error" && "get_account_status" in response.echo_req)){
             showAuthenticate(response);
         }
-        if(type === "get_settings" || (type === "error" && "get_settings" in response.echo_req)){
+        if(type === "get_settings" && response.req_id === 3 || (type === "error" && "get_settings" in response.echo_req)){
+            addGTMDataLayer(response);
+        }
+        if(type === "get_settings" && response.req_id === 4 || (type === "error" && "get_settings" in response.echo_req)){
             getLandingCompany(response);
+            addGTMDataLayer(response);
         }
         if(type === "landing_company" || (type === "error" && "landing_company" in response.echo_req)){
             showWelcomeText(response);
         }
     };
-
+    
     return {
     	init : init,
     	apiResponse : apiResponse
@@ -66586,7 +66637,7 @@ pjax_config_page("cashier/account_transferws", function() {
 
 
 
-pjax_config_page("user/my_accountws", function() {
+pjax_config_page("user/my_account", function() {
     return {
         onLoad: function() {
         	if (!getCookieItem('login')) {
@@ -68659,14 +68710,19 @@ var ProfitTableUI = (function(){
     }
 
     function createStatementRow(transaction){
+        var action = transaction["action_type"];
         var dateObj = new Date(transaction["transaction_time"] * 1000);
+        if (action === 'sell') {
+            dateObj = new Date(transaction["purchase_time"] * 1000);
+        }
+        action = StringUtil.toTitleCase(action);
+
         var momentObj = moment.utc(dateObj);
         var dateStr = momentObj.format("YYYY-MM-DD");
         var timeStr = momentObj.format("HH:mm:ss");
 
         var date = dateStr + "\n" + timeStr;
         var ref = transaction["transaction_id"];
-        var action = StringUtil.toTitleCase(transaction["action_type"]);
         var desc = transaction["longcode"];
         var amount = Number(parseFloat(transaction["amount"])).toFixed(2);
         var balance = Number(parseFloat(transaction["balance_after"])).toFixed(2);
