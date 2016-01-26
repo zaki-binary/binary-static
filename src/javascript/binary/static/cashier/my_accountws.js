@@ -142,6 +142,7 @@ var my_accountws = (function(){
                 data['pageTitle'] = title;
                 data['url'] = oldUrl;
                 data['visitorID'] = TUser.get().loginid;
+                data['bom_today'] = Math.floor(Date.now() / 1000);
                 
                 if(response.req_id === 4){
                     data['bom_age'] = age;
