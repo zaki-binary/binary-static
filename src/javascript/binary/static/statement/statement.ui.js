@@ -34,11 +34,13 @@ var StatementUI = (function(){
     }
 
     function createStatementRow(transaction){
-        var action = StringUtil.toTitleCase(transaction["action_type"]);
+        var action = transaction["action_type"];
         var dateObj = new Date(transaction["transaction_time"] * 1000);
         if (action === 'sell') {
             dateObj = new Date(transaction["purchase_time"] * 1000);
         }
+        action = StringUtil.toTitleCase(action);
+
         var momentObj = moment.utc(dateObj);
         var dateStr = momentObj.format("YYYY-MM-DD");
         var timeStr = momentObj.format("HH:mm:ss");
