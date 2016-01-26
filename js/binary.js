@@ -50600,7 +50600,7 @@ Header.prototype = {
     register_dynamic_links: function() {
         var logged_in_url = page.url.url_for('');
         if(this.client.is_logged_in) {
-            logged_in_url = page.url.url_for('user/my_account');
+            logged_in_url = page.url.url_for('user/myaccount');
         }
 
         $('#logo').attr('href', logged_in_url).on('click', function(event) {
@@ -50649,16 +50649,16 @@ Header.prototype = {
             BinarySocket.send({"logout": "1"});
         });
     },
-    
+
     validate_cookies: function(){
         if (getCookieItem('login') && getCookieItem('loginid_list')){
             var accIds = $.cookie("loginid_list").split("+");
             var loginid = $.cookie("loginid");
-                                    
+
             if(!client_form.is_loginid_valid(loginid)){
                 BinarySocket.send({"logout": "1"});
             }
-            
+
             for(var i=0;i<accIds.length;i++){
                 if(!client_form.is_loginid_valid(accIds[i].split(":")[0])){
                     BinarySocket.send({"logout": "1"});
@@ -51739,7 +51739,7 @@ if (!/backoffice/.test(document.URL)) { // exclude BO
                 location.href = page.url.url_for('home');
             } else {
                 // loginid switch
-                location.href = page.url.url_for('user/my_account?loginid=' + jq_event.originalEvent.newValue);
+                location.href = page.url.url_for('user/myaccount?loginid=' + jq_event.originalEvent.newValue);
             }
         });
 
@@ -66445,60 +66445,60 @@ pjax_config_page("cashier/account_transferws", function() {
 
     var init = function(){
         $("#welcome").hide();
-    	$("#VRT_topup_link").hide();
-    	$("#authenticate_button").hide();
-    	$("#welcome_text").hide();
-    	BinarySocket.send({"balance": 1, "req_id": 1 });
+      $("#VRT_topup_link").hide();
+      $("#authenticate_button").hide();
+      $("#welcome_text").hide();
+      BinarySocket.send({"balance": 1, "req_id": 1 });
     };
 
     var getBalance = function(response){
-    	var str , bal ;
-    	if(response.echo_req.req_id){
-	    	if("error" in response) {
-	            if("message" in response.error) {
-	                console.log(response.error.message);
-	            }
-	            return false;
-	        }
-	    	else{
-	    		currType = response.balance.currency;
-	    		bal =  response.balance.balance;
-	    		var isReal = !(/VRT/.test($.cookie('loginid')));
-	    		if(parseInt(response.req_id,10) === 1){
-	    			if(!isReal){
-	    			    str = "You're currently logged in to your virtual money account ";
-	    			    $("#welcome").show();
-	    			    $("#welcome").text(text.localize("Welcome!"));
-	    			    $("#welcome_text").show();
-	    			    $("#welcome_text .clientid").text("("+ $.cookie('loginid') +").");
-	    			    $("#welcome_text").html(text.localize(str)+$("#welcome_text").html());
-	    			    $("#cashier-portfolio").removeClass('invisible');
-    	                $("#profit-statement").removeClass('invisible');
-    	                if(bal<1000){
-	    		    	    str = "Deposit %1 virtual money into your account ";
-    	    		    	$("#VRT_topup_link").show();
-    	    		    	$("#VRT_topup_link a").text(text.localize(str).replace("%1",currType + " 10000 "));
-	    			    }
-	    			    BinarySocket.send({"get_settings": 1, "req_id":3});
-	    			}
-	    			else{
-	    			   BinarySocket.send({"get_settings": 1, "req_id":4});
-	    			}
-	    			BinarySocket.send({"get_account_status": 1, "req_id":2});
-	    		}
-	    		
-	    		
-	    	}
-    	}
+      var str , bal ;
+      if(response.echo_req.req_id){
+        if("error" in response) {
+              if("message" in response.error) {
+                  console.log(response.error.message);
+              }
+              return false;
+          }
+        else{
+          currType = response.balance.currency;
+          bal =  response.balance.balance;
+          var isReal = !(/VRT/.test($.cookie('loginid')));
+          if(parseInt(response.req_id,10) === 1){
+            if(!isReal){
+                str = "You're currently logged in to your virtual money account ";
+                $("#welcome").show();
+                $("#welcome").text(text.localize("Welcome!"));
+                $("#welcome_text").show();
+                $("#welcome_text .clientid").text("("+ $.cookie('loginid') +").");
+                $("#welcome_text").html(text.localize(str)+$("#welcome_text").html());
+                $("#cashier-portfolio").removeClass('invisible');
+                      $("#profit-statement").removeClass('invisible');
+                      if(bal<1000){
+                    str = "Deposit %1 virtual money into your account ";
+                    $("#VRT_topup_link").show();
+                    $("#VRT_topup_link a").text(text.localize(str).replace("%1",currType + " 10000 "));
+                }
+                BinarySocket.send({"get_settings": 1, "req_id":3});
+            }
+            else{
+               BinarySocket.send({"get_settings": 1, "req_id":4});
+            }
+            BinarySocket.send({"get_account_status": 1, "req_id":2});
+          }
+
+
+        }
+      }
 
     };
-    
+
     var showAuthenticate = function(response){
         var status;
         if("error" in response){
             if("message" in response.error) {
-	            console.log(response.error.message);
-	        }
+              console.log(response.error.message);
+          }
             return false;
         }
         else{
@@ -66510,13 +66510,13 @@ pjax_config_page("cashier/account_transferws", function() {
             }
         }
     };
-    
+
     var getLandingCompany = function(response){
         var country_code;
         if("error" in response){
             if("message" in response.error) {
-	            console.log(response.error.message);
-	        }
+              console.log(response.error.message);
+          }
             return false;
         }
         else{
@@ -66524,13 +66524,13 @@ pjax_config_page("cashier/account_transferws", function() {
             BinarySocket.send({"landing_company": country_code, "req_id":4});
         }
     };
-    
+
     var showWelcomeText = function(response){
         var landing_company, str;
         if("error" in response){
             if("message" in response.error) {
-	            console.log(response.error.message);
-	        }
+              console.log(response.error.message);
+          }
             return false;
         }
         else{
@@ -66542,16 +66542,16 @@ pjax_config_page("cashier/account_transferws", function() {
             }
             str = "You're currently logged in to your real money account with %1 ";
             $("#welcome").show();
-	    	$("#welcome").text(text.localize("Welcome!"));
-	    	$("#welcome_text").show();
-	    	$("#welcome_text .clientid").text(" ("+ $.cookie('loginid') +").");
-	    	$("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
-	    	$("#cashier-portfolio").removeClass('invisible');
-    	    $("#profit-statement").removeClass('invisible');
-    	    showNoticeMsg();
+        $("#welcome").text(text.localize("Welcome!"));
+        $("#welcome_text").show();
+        $("#welcome_text .clientid").text(" ("+ $.cookie('loginid') +").");
+        $("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
+        $("#cashier-portfolio").removeClass('invisible');
+          $("#profit-statement").removeClass('invisible');
+          showNoticeMsg();
         }
     };
-    
+
     var showNoticeMsg = function(){
         var loginid_list = $.cookie('loginid_list');
         var res = loginid_list.split("+");
@@ -66559,12 +66559,12 @@ pjax_config_page("cashier/account_transferws", function() {
             $("#investment_message").removeClass("invisible");
         }
     };
-    
+
     var addGTMDataLayer = function(response){
         if("error" in response){
             if("message" in response.error) {
-	            console.log(response.error.message);
-	        }
+              console.log(response.error.message);
+          }
             return false;
         }
         else{
@@ -66586,19 +66586,19 @@ pjax_config_page("cashier/account_transferws", function() {
                 data['url'] = oldUrl;
                 data['visitorID'] = TUser.get().loginid;
                 data['bom_today'] = Math.floor(Date.now() / 1000);
-                
+
                 if(response.req_id === 4){
                     data['bom_age'] = age;
                     data['bom_firstname'] = name[1];
                     data['bom_lastname'] = name[2];
                     data['bom_phone'] = response.get_settings.phone;
                 }
-                
+
                 if(page.url.param('newaccounttype'))
                     data['event'] = 'new_account';
                 else
                     data['event'] = 'log_in';
-                
+
                 dataLayer.push(data);
                 window.history.replaceState("My Account", title, newUrl);
             }
@@ -66606,8 +66606,8 @@ pjax_config_page("cashier/account_transferws", function() {
     };
 
     var apiResponse = function(response){
-    	var type = response.msg_type;
-    	if(type === "balance" || (type === "error" && "balance" in response.echo_req))
+      var type = response.msg_type;
+      if(type === "balance" || (type === "error" && "balance" in response.echo_req))
         {
             getBalance(response);
         }
@@ -66625,10 +66625,10 @@ pjax_config_page("cashier/account_transferws", function() {
             showWelcomeText(response);
         }
     };
-    
+
     return {
-    	init : init,
-    	apiResponse : apiResponse
+      init : init,
+      apiResponse : apiResponse
 
     };
 
@@ -66636,19 +66636,19 @@ pjax_config_page("cashier/account_transferws", function() {
 
 
 
-pjax_config_page("user/my_account", function() {
+pjax_config_page("user/my_accountws", function() {
     return {
         onLoad: function() {
-        	if (!getCookieItem('login')) {
+          if (!getCookieItem('login')) {
                 window.location.href = page.url.url_for('login');
                 return;
             }
-        	BinarySocket.init({
+          BinarySocket.init({
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
                     if (response) {
                         my_accountws.apiResponse(response);
-                          
+
                     }
                 }
             });
@@ -68180,12 +68180,12 @@ var ProfitTableUI = (function(){
           return;
       }
       if (page.client.type !== 'virtual') {
-        window.location.href = page.url.url_for('user/my_account');
+        window.location.href = page.url.url_for('user/myaccount');
         return;
       }
       for (i = 0; i < page.user.loginid_array.length; i++){
         if (page.user.loginid_array[i].real === true){
-          window.location.href = page.url.url_for('user/my_account');
+          window.location.href = page.url.url_for('user/myaccount');
           return;
         }
       }
@@ -68827,7 +68827,7 @@ var ViewBalanceUI = (function(){
   return {
     onLoad: function() {
       if (getCookieItem('login')) {
-          window.location.href = page.url.url_for('user/my_account');
+          window.location.href = page.url.url_for('user/myaccount');
           return;
       }
       handle_residence_state_ws();
