@@ -61634,24 +61634,50 @@ var TradingAnalysis = (function() {
     var trading_digit_info, tab_japan_info;
 
     var requestTradeAnalysis = function() {
-        'use strict';
-        $.ajax({
-                method: 'POST',
-                url: page.url.url_for('trade/trading_analysis'),
-                data: {
-                    underlying: sessionStorage.getItem('underlying') || $('#underlying').val(),
-                    formname: sessionStorage.getItem('formname'),
-                    contract_category: Contract.form(),
-                    barrier: Contract.barrier()
-                }
-            })
-            .done(function(data) {
-                var contentId = document.getElementById('trading_bottom_content');
-                contentId.innerHTML = data;
-                sessionStorage.setItem('currentAnalysisTab', getActiveTab());
-                bindAnalysisTabEvent();
-                loadAnalysisTab();
-            });
+        var contentId = document.getElementById('trading_bottom_content');
+        contentId.innerHTML =
+          '<div class="content-tab-container page-section">' +
+            '<div class="tab-menu">' +
+              '<div class="tab-menu-wrap grd-container">' +
+                '<ul id="betsBottomPage" class="tm-ul">' +
+                  '<li id="tab_graph" class="tm-li first">' +
+                    '<a href="#tab_graph" class="tm-a first">' + text.localize('Chart') + '</a>' +
+                  '</li>' +
+                  '<li id="tab_explanation" class="tm-li active">' +
+                    '<a href="' + page.url.url_for('trade/bet_explanation?underlying_symbol=' + $('#underlying').val() +
+                    '&form_name=' + $('#contract_form_name_nav').find('.a-active').attr('id')) +
+                    '" class="tm-a">' + text.localize('Explanation') + '</a>' +
+                  '</li>' +
+                  '<li id="tab_pricing_table" class="invisible tm-li">' +
+                    '<a href="' + page.url.url_for('d/pricing_table_ajax.cgi') + '" class="tm-a">' +
+                    text.localize('Pricing Table') + '</a>' +
+                  '</li>' +
+                  '<li id="tab_last_digit" class="invisible tm-li">' +
+                    '<a href="' + page.url.url_for('trade/last_digit_info?underlying=' + $('#underlying').val() +
+                    '&ajax_only=1') + '" class="tm-a">' +
+                    text.localize('Last Digit Stats') + '</a>' +
+                  '</li>' +
+                  '<li id="tab_japan_info" class="invisible tm-li last">' +
+                    '<a href="#" class="tm-a">' + text.localize('Prices') + '</a>' +
+                  '</li>' +
+                '</ul>' +
+              '</div>' +
+            '</div>' +
+            '<div class="tab-content grd-container">' +
+              '<div class="tab-content-wrapper" id="bet_bottom_content">' +
+                '<div id="tab_graph-content" class="toggle-content invisible">' +
+                  '<div id="trade_live_chart"></div>' +
+                '</div>' +
+                '<div id="tab_explanation-content" class="toggle-content selectedTab"></div>' +
+                '<div id="tab_pricing_table-content" class="toggle-content invisible "></div>' +
+                '<div id="tab_last_digit-content" class="toggle-content invisible "></div>' +
+                '<div id="tab_japan_info-content" class="toggle-content invisible "></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        sessionStorage.setItem('currentAnalysisTab', getActiveTab());
+        bindAnalysisTabEvent();
+        loadAnalysisTab();
     };
 
     /*
@@ -64524,6 +64550,8 @@ var Price = (function() {
             }
 
             proposal['date_expiry'] = moment.utc(endDate2 + " " + endTime2).unix();
+            // For stopping tick trade behaviour
+            proposal['duration_unit'] = "m";
         }
 
         if (barrier && isVisible(barrier) && barrier.value) {
