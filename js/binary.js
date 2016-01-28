@@ -59663,7 +59663,8 @@ pjax_config_page("user/self_exclusionws", function() {
         } 
         else { // Real Account
             BinarySocket.send({"authorize": $.cookie('login')});
-            $('#lblBirthDate').text(moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD"));
+            var birthDate = data.date_of_birth?moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD"):'';
+            $('#lblBirthDate').text(birthDate);
             $(fieldIDs.address1).val(data.address_line_1);
             $(fieldIDs.address2).val(data.address_line_2);
             $(fieldIDs.city).val(data.address_city);
