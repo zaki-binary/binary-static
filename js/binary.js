@@ -62405,7 +62405,7 @@ function getContractCategoryTree(elements){
             ['endsinout',
             'staysinout']
         ],
-        // 'asian',
+        'asian',
         ['digits',
             ['matchdiff',
             'evenodd',
