@@ -59662,8 +59662,8 @@ pjax_config_page("user/self_exclusionws", function() {
             $(RealAccElements).remove();
         } 
         else { // Real Account
-            BinarySocket.send({"authorize": $.cookie('login')});
-            var birthDate = data.date_of_birth?moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD"):'';
+            $('#lblName').text((data.salutation || '') + ' ' + (data.first_name || '') + ' ' + (data.last_name || ''));
+            var birthDate = data.date_of_birth ? moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD") : '';
             $('#lblBirthDate').text(birthDate);
             $(fieldIDs.address1).val(data.address_line_1);
             $(fieldIDs.address2).val(data.address_line_2);
@@ -59686,10 +59686,6 @@ pjax_config_page("user/self_exclusionws", function() {
         }
 
         $(formID).removeClass('hidden');
-    };
-
-    var setFullName = function(response) {
-        $('#lblName').text(response.authorize.fullname);
     };
 
     var populateStates = function(response) {
@@ -59829,7 +59825,6 @@ pjax_config_page("user/self_exclusionws", function() {
         getDetails: getDetails,
         setDetails: setDetails,
         setDetailsResponse: setDetailsResponse,
-        setFullName: setFullName,
         populateStates: populateStates
     };
 }());
@@ -59855,9 +59850,6 @@ pjax_config_page("settings/detailsws", function() {
                                 break;
                             case "set_settings":
                                 SettingsDetailsWS.setDetailsResponse(response);
-                                break;
-                            case "authorize":
-                                SettingsDetailsWS.setFullName(response);
                                 break;
                             case "states_list":
                                 SettingsDetailsWS.populateStates(response);
@@ -60212,11 +60204,13 @@ function hide_if_logged_in() {
 
 // use function to generate elements and append them
 // e.g. element is select and element to append is option
-function appendTextValueChild(element, text, value){
+function appendTextValueChild(element, text, value, disabled){
     var option = document.createElement("option");
-
     option.text = text;
     option.value = value;
+    if (disabled === 'disabled') {
+      option.setAttribute('disabled', disabled);
+    }
     element.appendChild(option);
 }
 
@@ -60302,7 +60296,11 @@ function handle_residence_state_ws(){
               residence_list = response.residence_list;
           if (residence_list.length > 0){
             for (i = 0; i < residence_list.length; i++) {
-              appendTextValueChild(select, residence_list[i].text, residence_list[i].value);
+              if (residence_list[i].disabled) {
+                appendTextValueChild(select, residence_list[i].text, residence_list[i].value, 'disabled');
+              } else {
+                appendTextValueChild(select, residence_list[i].text, residence_list[i].value);
+              }
               if (phoneElement && residence_list[i].phone_idd && residenceValue === residence_list[i].value){
                 phoneElement.value = '+' + residence_list[i].phone_idd;
               }
