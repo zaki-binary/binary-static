@@ -47,7 +47,7 @@ pjax_config_page("new_account/realws", function(){
                     'event': 'new_account',
                     'visitorID': loginid,
                     'bom_age': age,
-                    'bom_country': $('#residence-disabled option[value="' + residenceValue + '"]').html(),
+                    'bom_country': $('#residence-disabled option[value="' + page.client.residence + '"]').html(),
                     'bom_today': Math.floor(Date.now() / 1000),
                     'bom_email': page.user.email,
                     'bom_firstname': document.getElementById('fname').value,
