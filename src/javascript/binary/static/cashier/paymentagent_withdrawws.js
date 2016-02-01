@@ -90,13 +90,13 @@ var PaymentAgentWithdrawWS = (function() {
         var agent  = $(fieldIDs.ddlAgents).val(),
             amount = $(fieldIDs.txtAmount).val().trim(),
             desc   = $(fieldIDs.txtDesc).val().trim();
-        
+
         var letters = Content.localize().textLetters,
             numbers = Content.localize().textNumbers,
             space   = Content.localize().textSpace,
             period  = Content.localize().textPeriod,
             comma   = Content.localize().textComma;
-        
+
         // Payment Agent
         isRequiredError(fieldIDs.ddlAgents);
 
@@ -254,30 +254,37 @@ pjax_config_page("paymentagent/withdrawws", function() {
                 return;
             }
 
-            BinarySocket.init({
-                onmessage: function(msg) {
-                    var response = JSON.parse(msg.data);
-                    if (response) {
-                        var type = response.msg_type;
-                        switch(type){
-                            case "paymentagent_list":
-                                PaymentAgentWithdrawWS.populateAgentsList(response);
-                                break;
-                            case "paymentagent_withdraw":
-                                PaymentAgentWithdrawWS.withdrawResponse(response);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    else {
-                        console.log('some error occured');
-                    }
-                }
-            });
+            if (!$.cookie('verify_token')) {
+              $('#viewForm').remove();
+              $('#viewError').removeClass('hidden');
+              $('#viewError .error-msg').html(text.localize('Verification token is missing.'));
+            } else {
+              $.removeCookie('verify_token', {path: '/', domain: window.location.hostname.replace('www', '')});
+              BinarySocket.init({
+                  onmessage: function(msg) {
+                      var response = JSON.parse(msg.data);
+                      if (response) {
+                          var type = response.msg_type;
+                          switch(type){
+                              case "paymentagent_list":
+                                  PaymentAgentWithdrawWS.populateAgentsList(response);
+                                  break;
+                              case "paymentagent_withdraw":
+                                  PaymentAgentWithdrawWS.withdrawResponse(response);
+                                  break;
+                              default:
+                                  break;
+                          }
+                      }
+                      else {
+                          console.log('some error occured');
+                      }
+                  }
+              });
 
-            Content.populate();
-            PaymentAgentWithdrawWS.init();
+              Content.populate();
+              PaymentAgentWithdrawWS.init();
+            }
         }
     };
 });
