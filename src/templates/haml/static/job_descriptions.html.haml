@@ -1,0 +1,177 @@
+- stash(
+-   title => l('Job descriptions'),
+- );
+
+.job-descriptions.grd-container
+  .grd-grid-12.grd-parent.static_full
+    .grd-grid-12.grd-row-padding
+      %h1= stash->{title}
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('IT')
+          %img.responsive{:src => url_for('images/pages/careers/IT.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-one'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-two'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-three'), :class => "pjaxload"}= l('Learn more')
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-four'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-five'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Quants')
+          %img.responsive{:src => url_for('images/pages/careers/Quants.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Quants#section-one'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Quants#section-two'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Marketing')
+          %img.responsive{:src => url_for('images/pages/careers/Marketing.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-one'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-two'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-three'), :class => "pjaxload"}= l('Learn more')
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-four'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-five'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Accounts')
+          %img.responsive{:src => url_for('images/pages/careers/Accounts.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Accounts#section-one'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Compliance')
+          %img.responsive{:src => url_for('images/pages/careers/Compliance.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Compliance#section-one'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Customer Support')
+          %img.responsive{:src => url_for('images/pages/careers/Customer_Support.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Customer_Support#section-one'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Human Resources')
+          %img.responsive{:src => url_for('images/pages/careers/Human_Resources.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Human_Resources#section-one'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Admin')
+          %img.responsive{:src => url_for('images/pages/careers/Admin.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Admin#section-one'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Internal Audit')
+          %img.responsive{:src => url_for('images/pages/careers/Internal_Audit.svg')}
+      .grd-grid-9.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Lorem ipsum')
+            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Internal_Audit#section-one'), :class => "pjaxload"}= l('Learn more')
