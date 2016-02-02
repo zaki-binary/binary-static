@@ -41,18 +41,18 @@
     .grd-grid-12.grd-row-padding
       .grd-grid-3.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
-          %h2= l('Quants')
-          %img.responsive{:src => url_for('images/pages/careers/Quants.svg')}
+          %h2= l('Quantitative Analysis')
+          %img.responsive{:src => url_for('images/pages/careers/Quantitative_Analysis.svg')}
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=Quants#section-one'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Quantitative Analyst')
+            %p= l('Responsible for the pricing of binary options offered on the [_1] website, as well as the risk management and profitability of its options book.', stash->{website_name})
+            %a{:href => url_for('/job-descriptions/job-details?dept=Quantitative_Analysis#section-one'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=Quants#section-two'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Quantitative Developer')
+            %p= l("Responsible for the implementation and maintenance of the company's risk management and derivatives pricing software.")
+            %a{:href => url_for('/job-descriptions/job-details?dept=Quantitative_Analysis#section-two'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
       .separator-line
@@ -65,26 +65,39 @@
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Graphic Designers')
+            %p= l("Responsible for the design and creative direction of the company's website content and the production of its marketing materials.")
             %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-one'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Marketing Executives')
+            %p= l("Contribute your ideas, energy and creativity to further the company’s dynamic branding efforts.")
             %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-two'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Copywriter')
+            %p= l("Create clear, concise and engaging content for display on the company’s website.")
             %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-three'), :class => "pjaxload"}= l('Learn more')
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Marketing Project Manager')
+            %p= l('Work with members of the marketing team to prepare detailed project requirements.')
             %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-four'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Social Media Executive')
+            %p= l('Develop content that promotes the company through social media outlets and campaigns.')
             %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-five'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Country Manager')
+            %p= l('Overall operational responsibility for directing the growth and ongoing development of the local market.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-six'), :class => "pjaxload"}= l('Learn more')
+        .grd-grid-12.grd-row-padding
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Translator')
+            %p= l('work with colleagues in IT, Customer Support and Marketing to provide localized text and document translation services on our global website [_1].', stash->{website_name})
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-seven'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Proofreader')
+            %p= l("Proofread and correct the content appearing on the company’s website, blogs and social media outlets.")
+            %a{:href => url_for('/job-descriptions/job-details?dept=Marketing#section-eight'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
       .separator-line
