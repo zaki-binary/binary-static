@@ -3,26 +3,23 @@ pjax_config_page("new_account/realws", function(){
   return {
     onLoad: function() {
       Content.populate();
-      var residenceValue = $.cookie('residence');
-      if (!$.cookie('login') || !residenceValue) {
+      if (!$.cookie('login')) {
           window.location.href = page.url.url_for('login');
           return;
       }
       if (page.client.type !== 'virtual') {
-        window.location.href = page.url.url_for('user/my_account');
+        window.location.href = page.url.url_for('user/my_accountws');
         return;
       }
       for (i = 0; i < page.user.loginid_array.length; i++){
         if (page.user.loginid_array[i].real === true){
-          window.location.href = page.url.url_for('user/my_account');
+          window.location.href = page.url.url_for('user/myaccount');
           return;
         }
       }
-      if (page.client.is_logged_in) {
-          client_form.set_virtual_email_id(page.client.email);
-      }
-      RealAccOpeningUI.setValues(residenceValue);
-
+      handle_residence_state_ws();
+      getSettings();
+      setResidenceWs();
       $('#real-form').submit(function(evt) {
         evt.preventDefault();
         if (RealAccOpeningUI.checkValidity()){
@@ -50,8 +47,8 @@ pjax_config_page("new_account/realws", function(){
                     'event': 'new_account',
                     'visitorID': loginid,
                     'bom_age': age,
-                    'bom_country': $('#residence-disabled option[value="' + residenceValue + '"]').html(),
-                    'bom_date_joined': Math.floor(Date.now() / 1000),
+                    'bom_country': $('#residence-disabled option[value="' + page.client.residence + '"]').html(),
+                    'bom_today': Math.floor(Date.now() / 1000),
                     'bom_email': page.user.email,
                     'bom_firstname': document.getElementById('fname').value,
                     'bom_lastname': document.getElementById('lname').value,
