@@ -50600,7 +50600,7 @@ Header.prototype = {
     register_dynamic_links: function() {
         var logged_in_url = page.url.url_for('');
         if(this.client.is_logged_in) {
-            logged_in_url = page.url.url_for('user/myaccount');
+            logged_in_url = page.url.url_for('user/my_accountws');
         }
 
         $('#logo').attr('href', logged_in_url).on('click', function(event) {
@@ -51739,7 +51739,7 @@ if (!/backoffice/.test(document.URL)) { // exclude BO
                 location.href = page.url.url_for('home');
             } else {
                 // loginid switch
-                location.href = page.url.url_for('user/myaccount?loginid=' + jq_event.originalEvent.newValue);
+                location.href = page.url.url_for('user/my_accountws?loginid=' + jq_event.originalEvent.newValue);
             }
         });
 
@@ -53000,7 +53000,7 @@ function get_login_page_url() {
     return 'https://' + page.settings.get('domains')['private'] + '/login' + params;
 }
 
-onLoad.queue_for_url(confirm_popup_action, 'myaccount|confirm_popup');
+onLoad.queue_for_url(confirm_popup_action, 'my_accountws|confirm_popup');
 onLoad.queue_for_url(hide_payment_agents, 'cashier');
 
 onLoad.queue_for_url(function() {
@@ -58663,7 +58663,7 @@ var enable_residence_form_submit = function () {
     });
 };
 
-pjax_config_page('new_account/real', function() {
+/*pjax_config_page('new_account/real', function() {
     return {
         onLoad: function() {
             client_form.on_residence_change();
@@ -58675,7 +58675,7 @@ pjax_config_page('new_account/real', function() {
             }
         }
     };
-});
+});*/
 
 var upgrade_investment_disabled_field = function () {
     if (page.client.is_real) {
@@ -60280,7 +60280,42 @@ function handle_residence_state_ws(){
       var response = JSON.parse(msg.data);
       if (response) {
         var type = response.msg_type;
-        if (type === 'states_list'){
+        if (response.msg_type === 'get_settings') {
+          var country = response.get_settings.country_code;
+          if (country && country !== null) {
+            page.client.residence = country;
+            RealAccOpeningUI.setValues();
+          } else {
+            $('#real-form').hide();
+            $('#residence-disabled').insertAfter('#move-residence-here');
+            $('#error-residence').insertAfter('#residence-disabled');
+            $('#residence-disabled').removeAttr('disabled');
+            $('#residence-form').show();
+            $('#residence-form').submit(function(evt) {
+              evt.preventDefault();
+              if (Validate.fieldNotEmpty($('#residence-disabled').val(), document.getElementById('error-residence'))) {
+                page.client.residence = $('#residence-disabled').val();
+                BinarySocket.send({set_settings:1, residence:page.client.residence});
+              }
+            });
+          }
+        } else if (type === 'set_settings') {
+          var errorElement = document.getElementById('error-residence');
+          if (response.hasOwnProperty('error')) {
+            if (response.error.message) {
+              errorElement.innerHTML = response.error.message;
+              errorElement.setAttribute('style', 'display:block');
+            }
+          } else {
+            errorElement.setAttribute('style', 'display:none');
+            $('#residence-form').hide();
+            $('#residence-disabled').insertAfter('#move-residence-back');
+            $('#error-residence').insertAfter('#residence-disabled');
+            $('#residence-disabled').attr('disabled', 'disabled');
+            $('#real-form').show();
+            RealAccOpeningUI.setValues();
+          }
+        } else if (type === 'states_list'){
           select = document.getElementById('address-state');
           var states_list = response.states_list;
           if (states_list.length > 0){
@@ -60292,7 +60327,7 @@ function handle_residence_state_ws(){
         } else if (type === 'residence_list'){
           select = document.getElementById('residence-disabled') || document.getElementById('residence');
           var phoneElement   = document.getElementById('tel'),
-              residenceValue = $.cookie('residence'),
+              residenceValue = page.client.residence,
               residence_list = response.residence_list;
           if (residence_list.length > 0){
             for (i = 0; i < residence_list.length; i++) {
@@ -60315,6 +60350,10 @@ function handle_residence_state_ws(){
   });
 }
 
+function getSettings() {
+  BinarySocket.send({get_settings:1});
+}
+
 function setResidenceWs(){
   BinarySocket.send({ residence_list: 1 });
 }
@@ -60322,7 +60361,9 @@ function setResidenceWs(){
 //pass select element to generate list of states
 function generateState(select) {
     appendTextValueChild(select, Content.localize().textSelect, '');
-    BinarySocket.send({ states_list: $.cookie('residence') });
+    if (page.client.residence !== "") {
+      BinarySocket.send({ states_list: page.client.residence });
+    }
 }
 
 function getUrlVars() {
@@ -60495,6 +60536,27 @@ pjax_config_page('/terms-and-condition', function() {
             var year = document.getElementsByClassName('currentYear');
             for (i = 0; i < year.length; i++){
               year[i].innerHTML = new Date().getFullYear();
+            }
+        },
+    };
+});
+
+pjax_config_page('/user/myaccount', function() {
+    return {
+        onLoad: function() {
+            var divOne = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 account is unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact')),
+                divTwo = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 accounts are unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact'));
+            var loginidArry = page.user.loginid_array,
+                disabledAccount = [];
+            for (i = 0; i < loginidArry.length; i++) {
+              if (loginidArry[i].disabled === true) {
+                disabledAccount.push(loginidArry[i].id);
+              }
+            }
+            if (disabledAccount.length === 1) {
+                $(divOne.replace('%1', disabledAccount.toString())).insertAfter('.clientid');
+            } else if (disabledAccount.length > 1) {
+                $(divTwo.replace('%1', disabledAccount.join(', '))).insertAfter('.clientid');
             }
         },
     };
@@ -66478,7 +66540,7 @@ pjax_config_page("cashier/account_transferws", function() {
 });;var my_accountws = (function(){
 
     "use strict";
-    var currType;
+    var currType, isPaymentAgent;
 
     var init = function(){
         $("#welcome").hide();
@@ -66561,7 +66623,7 @@ pjax_config_page("cashier/account_transferws", function() {
             BinarySocket.send({"landing_company": country_code, "req_id":4});
         }
     };
-
+    
     var showWelcomeText = function(response){
         var landing_company, str;
         if("error" in response){
@@ -66579,13 +66641,15 @@ pjax_config_page("cashier/account_transferws", function() {
             }
             str = "You're currently logged in to your real money account with %1 ";
             $("#welcome").show();
-        $("#welcome").text(text.localize("Welcome!"));
-        $("#welcome_text").show();
-        $("#welcome_text .clientid").text(" ("+ $.cookie('loginid') +").");
-        $("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
-        $("#cashier-portfolio").removeClass('invisible');
-          $("#profit-statement").removeClass('invisible');
-          showNoticeMsg();
+            $("#welcome").text(text.localize("Welcome!"));
+            $("#welcome_text").show();
+            $("#welcome_text .clientid").text(" ("+ $.cookie('loginid') +").");
+            $("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
+            $("#cashier-portfolio").removeClass('invisible');
+            $("#profit-statement").removeClass('invisible');
+            if(isPaymentAgent) 
+                $("#payment_agent").removeClass('invisible');
+            showNoticeMsg();
         }
     };
 
@@ -66641,6 +66705,18 @@ pjax_config_page("cashier/account_transferws", function() {
             }
         }
     };
+    
+    var checkPaymentAgent = function(response){
+        if("error" in response){
+            if("message" in response.error) {
+              console.log(response.error.message);
+          }
+            return false;
+        }
+        else{
+            isPaymentAgent = response.get_settings.is_authenticated_payment_agent;
+        }
+    };
 
     var apiResponse = function(response){
       var type = response.msg_type;
@@ -66656,15 +66732,34 @@ pjax_config_page("cashier/account_transferws", function() {
         }
         if(type === "get_settings" && response.req_id === 4 || (type === "error" && "get_settings" in response.echo_req)){
             getLandingCompany(response);
+            checkPaymentAgent(response);
             addGTMDataLayer(response);
         }
         if(type === "landing_company" || (type === "error" && "landing_company" in response.echo_req)){
             showWelcomeText(response);
         }
     };
-
+    
+    var checkDisabledAccount = function(){
+        var divOne = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 account is unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact')),
+            divTwo = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 accounts are unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact'));
+        var loginidArry = page.user.loginid_array,
+            disabledAccount = [];
+        for (var i = 0; i < loginidArry.length; i++) {
+            if (loginidArry[i].disabled === true) {
+                disabledAccount.push(loginidArry[i].id);
+            }
+        }
+        if (disabledAccount.length === 1) {
+            $(divOne.replace('%1', disabledAccount.toString())).insertAfter('.clientid');
+        } else if (disabledAccount.length > 1) {
+            $(divTwo.replace('%1', disabledAccount.join(', '))).insertAfter('.clientid');
+        }
+    };
+    
     return {
       init : init,
+      checkDisabledAccount : checkDisabledAccount,
       apiResponse : apiResponse
 
     };
@@ -66691,6 +66786,7 @@ pjax_config_page("user/my_accountws", function() {
             });
             Content.populate();
             my_accountws.init();
+            my_accountws.checkDisabledAccount();
         }
     };
 });
@@ -68211,13 +68307,12 @@ var ProfitTableUI = (function(){
   return {
     onLoad: function() {
       Content.populate();
-      var residenceValue = $.cookie('residence');
-      if (!$.cookie('login') || !residenceValue) {
+      if (!$.cookie('login')) {
           window.location.href = page.url.url_for('login');
           return;
       }
       if (page.client.type !== 'virtual') {
-        window.location.href = page.url.url_for('user/myaccount');
+        window.location.href = page.url.url_for('user/my_accountws');
         return;
       }
       for (i = 0; i < page.user.loginid_array.length; i++){
@@ -68226,11 +68321,9 @@ var ProfitTableUI = (function(){
           return;
         }
       }
-      if (page.client.is_logged_in) {
-          client_form.set_virtual_email_id(page.client.email);
-      }
-      RealAccOpeningUI.setValues(residenceValue);
-
+      handle_residence_state_ws();
+      getSettings();
+      setResidenceWs();
       $('#real-form').submit(function(evt) {
         evt.preventDefault();
         if (RealAccOpeningUI.checkValidity()){
@@ -68258,8 +68351,8 @@ var ProfitTableUI = (function(){
                     'event': 'new_account',
                     'visitorID': loginid,
                     'bom_age': age,
-                    'bom_country': $('#residence-disabled option[value="' + residenceValue + '"]').html(),
-                    'bom_date_joined': Math.floor(Date.now() / 1000),
+                    'bom_country': $('#residence-disabled option[value="' + page.client.residence + '"]').html(),
+                    'bom_today': Math.floor(Date.now() / 1000),
                     'bom_email': page.user.email,
                     'bom_firstname': document.getElementById('fname').value,
                     'bom_lastname': document.getElementById('lname').value,
@@ -68324,16 +68417,13 @@ var ProfitTableUI = (function(){
 ;var RealAccOpeningUI = (function(){
   "use strict";
 
-  function setValues(residenceValue){
+  function setValues(){
     var dobdd    = document.getElementById('dobdd'),
         dobmm    = document.getElementById('dobmm'),
         dobyy    = document.getElementById('dobyy'),
-        tel      = document.getElementById('tel'),
         state    = document.getElementById('address-state');
 
-    handle_residence_state_ws();
     generateBirthDate(dobdd, dobmm, dobyy);
-    setResidenceWs(tel, residenceValue);
     generateState(state);
   }
 
@@ -68386,7 +68476,7 @@ var ProfitTableUI = (function(){
                 Trim(fname.value),
                 Trim(lname.value),
                 dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
-                $.cookie('residence'),
+                page.client.residence,
                 Trim(address1.value),
                 Trim(address2.value),
                 Trim(town.value),
@@ -68451,7 +68541,7 @@ var ProfitTableUI = (function(){
       errorCounter++;
     }
 
-    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value)) {
+    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value) || dobdd.value === '' || dobmm.value === '' || dobyy.value === '') {
       errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
       Validate.displayErrorMessage(errorBirthdate);
       errorCounter++;
@@ -68483,8 +68573,8 @@ var ProfitTableUI = (function(){
       errorCounter++;
     }
 
-    if (postcode.value !== '' && !/^[\d-]+$/.test(postcode.value)){
-      errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+    if (postcode.value !== '' && !/^[a-zA-Z\d-]+$/.test(postcode.value)){
+      errorPostcode.innerHTML = Content.errorMessage('reg', [letters, numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorPostcode);
       errorCounter++;
     }
@@ -68864,7 +68954,7 @@ var ViewBalanceUI = (function(){
   return {
     onLoad: function() {
       if (getCookieItem('login')) {
-          window.location.href = page.url.url_for('user/myaccount');
+          window.location.href = page.url.url_for('user/my_accountws');
           return;
       }
       handle_residence_state_ws();
