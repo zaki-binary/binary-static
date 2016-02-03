@@ -474,7 +474,7 @@ Header.prototype = {
     register_dynamic_links: function() {
         var logged_in_url = page.url.url_for('');
         if(this.client.is_logged_in) {
-            logged_in_url = page.url.url_for('user/myaccount');
+            logged_in_url = page.url.url_for('user/my_accountws');
         }
 
         $('#logo').attr('href', logged_in_url).on('click', function(event) {
