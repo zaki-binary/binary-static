@@ -8,7 +8,7 @@ pjax_config_page("new_account/realws", function(){
           return;
       }
       if (page.client.type !== 'virtual') {
-        window.location.href = page.url.url_for('user/myaccount');
+        window.location.href = page.url.url_for('user/my_accountws');
         return;
       }
       for (i = 0; i < page.user.loginid_array.length; i++){
