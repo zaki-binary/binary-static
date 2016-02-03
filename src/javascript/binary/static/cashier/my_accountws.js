@@ -175,7 +175,7 @@ var my_accountws = (function(){
             return false;
         }
         else{
-            isPaymentAgent = response.is_authenticated_payment_agent;
+            isPaymentAgent = response.get_settings.is_authenticated_payment_agent;
         }
     };
 
@@ -200,9 +200,27 @@ var my_accountws = (function(){
             showWelcomeText(response);
         }
     };
-
+    
+    var checkDisabledAccount = function(){
+        var divOne = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 account is unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact')),
+            divTwo = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 accounts are unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact'));
+        var loginidArry = page.user.loginid_array,
+            disabledAccount = [];
+        for (var i = 0; i < loginidArry.length; i++) {
+            if (loginidArry[i].disabled === true) {
+                disabledAccount.push(loginidArry[i].id);
+            }
+        }
+        if (disabledAccount.length === 1) {
+            $(divOne.replace('%1', disabledAccount.toString())).insertAfter('.clientid');
+        } else if (disabledAccount.length > 1) {
+            $(divTwo.replace('%1', disabledAccount.join(', '))).insertAfter('.clientid');
+        }
+    };
+    
     return {
       init : init,
+      checkDisabledAccount : checkDisabledAccount,
       apiResponse : apiResponse
 
     };
@@ -229,6 +247,7 @@ pjax_config_page("user/my_accountws", function() {
             });
             Content.populate();
             my_accountws.init();
+            my_accountws.checkDisabledAccount();
         }
     };
 });
