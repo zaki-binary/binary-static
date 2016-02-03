@@ -125,7 +125,7 @@ var RealAccOpeningUI = (function(){
       errorCounter++;
     }
 
-    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value)) {
+    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value) || dobdd.value === '' || dobmm.value === '' || dobyy.value === '') {
       errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
       Validate.displayErrorMessage(errorBirthdate);
       errorCounter++;
@@ -157,8 +157,8 @@ var RealAccOpeningUI = (function(){
       errorCounter++;
     }
 
-    if (postcode.value !== '' && !/^[\d-]+$/.test(postcode.value)){
-      errorPostcode.innerHTML = Content.errorMessage('reg', [numbers, hyphen, ' ']);
+    if (postcode.value !== '' && !/^[a-zA-Z\d-]+$/.test(postcode.value)){
+      errorPostcode.innerHTML = Content.errorMessage('reg', [letters, numbers, hyphen, ' ']);
       Validate.displayErrorMessage(errorPostcode);
       errorCounter++;
     }
