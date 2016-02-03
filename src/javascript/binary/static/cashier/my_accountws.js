@@ -1,7 +1,7 @@
 var my_accountws = (function(){
 
     "use strict";
-    var currType;
+    var currType, isPaymentAgent;
 
     var init = function(){
         $("#welcome").hide();
@@ -84,7 +84,7 @@ var my_accountws = (function(){
             BinarySocket.send({"landing_company": country_code, "req_id":4});
         }
     };
-
+    
     var showWelcomeText = function(response){
         var landing_company, str;
         if("error" in response){
@@ -102,13 +102,15 @@ var my_accountws = (function(){
             }
             str = "You're currently logged in to your real money account with %1 ";
             $("#welcome").show();
-        $("#welcome").text(text.localize("Welcome!"));
-        $("#welcome_text").show();
-        $("#welcome_text .clientid").text(" ("+ $.cookie('loginid') +").");
-        $("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
-        $("#cashier-portfolio").removeClass('invisible');
-          $("#profit-statement").removeClass('invisible');
-          showNoticeMsg();
+            $("#welcome").text(text.localize("Welcome!"));
+            $("#welcome_text").show();
+            $("#welcome_text .clientid").text(" ("+ $.cookie('loginid') +").");
+            $("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
+            $("#cashier-portfolio").removeClass('invisible');
+            $("#profit-statement").removeClass('invisible');
+            if(isPaymentAgent) 
+                $("#payment_agent").removeClass('invisible');
+            showNoticeMsg();
         }
     };
 
@@ -164,6 +166,18 @@ var my_accountws = (function(){
             }
         }
     };
+    
+    var checkPaymentAgent = function(response){
+        if("error" in response){
+            if("message" in response.error) {
+              console.log(response.error.message);
+          }
+            return false;
+        }
+        else{
+            isPaymentAgent = response.is_authenticated_payment_agent;
+        }
+    };
 
     var apiResponse = function(response){
       var type = response.msg_type;
@@ -179,6 +193,7 @@ var my_accountws = (function(){
         }
         if(type === "get_settings" && response.req_id === 4 || (type === "error" && "get_settings" in response.echo_req)){
             getLandingCompany(response);
+            checkPaymentAgent(response);
             addGTMDataLayer(response);
         }
         if(type === "landing_company" || (type === "error" && "landing_company" in response.echo_req)){
