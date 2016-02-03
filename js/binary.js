@@ -54919,7 +54919,7 @@ BetAnalysis.tab_last_digit = new BetAnalysis.DigitInfo();
                     currency: function() {
                         if(page.client.is_logged_in) {
                             var client_currencies = Settings.get('client.currencies');
-                            if(typeof client_currencies !== 'undefined'  && client_currencies.length > 0) {
+                            if(client_currencies !== 'undefined'  && client_currencies.length > 0) {
                                 $('#bet_currency option').each(function() {
                                     if($.inArray($(this).val(), client_currencies) < 0) {
                                         $(this).remove();
