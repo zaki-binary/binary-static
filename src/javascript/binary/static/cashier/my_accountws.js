@@ -93,7 +93,7 @@ var my_accountws = (function(){
         }
         else{
             var allowed_markets = [];
-            if(response.landing_company.hasOwnProperty('gaming_company')){
+            if(/MLT/.test($.cookie('loginid')) && response.landing_company.hasOwnProperty('gaming_company')){
                 landing_company = response.landing_company.gaming_company.name;
                 allowed_markets = response.landing_company.gaming_company.legal_allowed_markets;
             }
@@ -101,9 +101,8 @@ var my_accountws = (function(){
                 landing_company = response.landing_company.financial_company.name;
                 allowed_markets = response.landing_company.financial_company.legal_allowed_markets;
             }
-            if(allowed_markets.length > 0) {
-                setCookie('allowed_markets', allowed_markets.join(','));
-            }
+            setCookie('allowed_markets', (/VRT/.test($.cookie('loginid')) || allowed_markets.length === 0 ? '' : allowed_markets.join(',')));
+            page.header.menu.disable_not_allowed_markets();
 
             str = "You're currently logged in to your real money account with %1 ";
             $("#welcome").show();
