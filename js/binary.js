@@ -60549,7 +60549,7 @@ pjax_config_page('/user/myaccount', function() {
             var loginidArry = page.user.loginid_array,
                 disabledAccount = [];
             for (i = 0; i < loginidArry.length; i++) {
-              if (loginidArry[i].disabled === true) {
+              if (loginidArry[i].disabled === true && loginidArry[i].real === true) {
                 disabledAccount.push(loginidArry[i].id);
               }
             }
@@ -66623,7 +66623,7 @@ pjax_config_page("cashier/account_transferws", function() {
             BinarySocket.send({"landing_company": country_code, "req_id":4});
         }
     };
-    
+
     var showWelcomeText = function(response){
         var landing_company, str;
         if("error" in response){
@@ -66647,7 +66647,7 @@ pjax_config_page("cashier/account_transferws", function() {
             $("#welcome_text").html(text.localize(str).replace("%1", landing_company) + $("#welcome_text").html());
             $("#cashier-portfolio").removeClass('invisible');
             $("#profit-statement").removeClass('invisible');
-            if(isPaymentAgent) 
+            if(isPaymentAgent)
                 $("#payment_agent").removeClass('invisible');
             showNoticeMsg();
         }
@@ -66705,7 +66705,7 @@ pjax_config_page("cashier/account_transferws", function() {
             }
         }
     };
-    
+
     var checkPaymentAgent = function(response){
         if("error" in response){
             if("message" in response.error) {
@@ -66739,14 +66739,14 @@ pjax_config_page("cashier/account_transferws", function() {
             showWelcomeText(response);
         }
     };
-    
+
     var checkDisabledAccount = function(){
         var divOne = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 account is unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact')),
             divTwo = text.localize('<div class="notice-msg" style="margin-top: 10px;">Your %1 accounts are unavailable. For any questions please contact <a href="%2">Customer Support</a>.</div>').replace('%2', page.url.url_for('contact'));
         var loginidArry = page.user.loginid_array,
             disabledAccount = [];
         for (var i = 0; i < loginidArry.length; i++) {
-            if (loginidArry[i].disabled === true) {
+            if (loginidArry[i].disabled === true && loginidArry[i].real === true) {
                 disabledAccount.push(loginidArry[i].id);
             }
         }
@@ -66756,7 +66756,7 @@ pjax_config_page("cashier/account_transferws", function() {
             $(divTwo.replace('%1', disabledAccount.join(', '))).insertAfter('.clientid');
         }
     };
-    
+
     return {
       init : init,
       checkDisabledAccount : checkDisabledAccount,
