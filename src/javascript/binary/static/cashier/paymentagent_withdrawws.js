@@ -254,37 +254,30 @@ pjax_config_page("paymentagent/withdrawws", function() {
                 return;
             }
 
-            if (!$.cookie('verify_token')) {
-              $('#viewForm').remove();
-              $('#viewError').removeClass('hidden');
-              $('#viewError .error-msg').html(text.localize('Verification token is missing.'));
-            } else {
-              $.removeCookie('verify_token', {path: '/', domain: window.location.hostname.replace('www', '')});
-              BinarySocket.init({
-                  onmessage: function(msg) {
-                      var response = JSON.parse(msg.data);
-                      if (response) {
-                          var type = response.msg_type;
-                          switch(type){
-                              case "paymentagent_list":
-                                  PaymentAgentWithdrawWS.populateAgentsList(response);
-                                  break;
-                              case "paymentagent_withdraw":
-                                  PaymentAgentWithdrawWS.withdrawResponse(response);
-                                  break;
-                              default:
-                                  break;
-                          }
-                      }
-                      else {
-                          console.log('some error occured');
-                      }
-                  }
-              });
+            BinarySocket.init({
+                onmessage: function(msg) {
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        var type = response.msg_type;
+                        switch(type){
+                            case "paymentagent_list":
+                                PaymentAgentWithdrawWS.populateAgentsList(response);
+                                break;
+                            case "paymentagent_withdraw":
+                                PaymentAgentWithdrawWS.withdrawResponse(response);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+                        console.log('some error occured');
+                    }
+                }
+            });
 
-              Content.populate();
-              PaymentAgentWithdrawWS.init();
-            }
+            Content.populate();
+            PaymentAgentWithdrawWS.init();
         }
     };
 });
