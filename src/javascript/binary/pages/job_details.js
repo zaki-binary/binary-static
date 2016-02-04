@@ -10,11 +10,15 @@ pjax_config_page('/job-descriptions/job-details', function() {
           });
           $('.job-details').find('#title').html(page.url.params_hash().dept.replace(/_/g, ' '));
           var source = $('.dept-image').attr('src');
-          $('.dept-image').attr('src', source.replace('IT', page.url.params_hash().dept));
+          if (page.url.params_hash().dept !== 'Quality_Assurance') {
+              $('.dept-image').attr('src', source.replace('Information_Technology', page.url.params_hash().dept));
+          } else {
+            $('.dept-image').attr('src', source.replace('careers/Information_Technology.svg', 'binary-symbol-logo.png'));
+          }
           $('.dept-image').show();
           var deptContent = $('#content-' + page.url.params_hash().dept + ' div');
           var section,
-              sections = ['section-one', 'section-two', 'section-three', 'section-four', 'section-five'];
+              sections = ['section-one', 'section-two', 'section-three', 'section-four', 'section-five', 'section-six', 'section-seven', 'section-eight'];
           $('#sidebar-nav li').slice(deptContent.length).hide();
           for (i = 0; i < deptContent.length; i++) {
               section = $('#' + page.url.params_hash().dept + '-' + sections[i]);

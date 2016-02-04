@@ -9,31 +9,37 @@
     .grd-grid-12.grd-row-padding
       .grd-grid-3.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
-          %h2= l('IT')
-          %img.responsive{:src => url_for('images/pages/careers/IT.svg')}
+          %h2= l('Information Technology')
+          %img.responsive{:src => url_for('images/pages/careers/Information_Technology.svg')}
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-one'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('DevOps Manager/Team Lead (IT Systems Administration)')
+            %p= l('Responsibilities include hardware and software deployment, up-time and reliability testing, incident response reporting, network security, intrusion detection, and load balancing.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Information_Technology#section-one'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-two'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Senior Front-End Developer')
+            %p= l('Tasked with writing robust, high-quality, production-ready code; re-factoring and optimizing a large and complex legacy code base.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Information_Technology#section-two'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-three'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Senior Perl Developer')
+            %p= l('Tasked with writing robust, high-quality, production-ready code and contributing to the architecture that drives our high-traffic global website.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Information_Technology#section-three'), :class => "pjaxload"}= l('Learn more')
+
+    .grd-grid-12.grd-hide-mobile
+      .separator-line
+
+    .grd-grid-12.grd-row-padding
+      .grd-grid-3.grd-grid-mobile-12
+        .grd-grid-12.grd-row-padding
+          %h2= l('Quality Assurance')
+          %img.responsive{:src => url_for('images/pages/binary-symbol-logo.png')}
+      .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-four'), :class => "pjaxload"}= l('Learn more')
-          .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=IT#section-five'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Quality Assurance Engineer')
+            %p= l('Execute and update manual and automated test plans as well as investigate and reproduce client-reported issues.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Quality_Assurance#section-one'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
       .separator-line
@@ -50,7 +56,7 @@
             %p= l('Responsible for the pricing of binary options offered on the [_1] website, as well as the risk management and profitability of its options book.', stash->{website_name})
             %a{:href => url_for('/job-descriptions/job-details?dept=Quantitative_Analysis#section-one'), :class => "pjaxload"}= l('Learn more')
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Quantitative Developer')
+            %h3{:style => 'white-space:nowrap'}= l('Quantitative Developer')
             %p= l("Responsible for the implementation and maintenance of the company's risk management and derivatives pricing software.")
             %a{:href => url_for('/job-descriptions/job-details?dept=Quantitative_Analysis#section-two'), :class => "pjaxload"}= l('Learn more')
 
@@ -105,14 +111,14 @@
     .grd-grid-12.grd-row-padding
       .grd-grid-3.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
-          %h2= l('Accounts')
-          %img.responsive{:src => url_for('images/pages/careers/Accounts.svg')}
+          %h2= l('Accounting')
+          %img.responsive{:src => url_for('images/pages/careers/Accounting.svg')}
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=Accounts#section-one'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Accounts And Payments Executive')
+            %p= l('Responsible for the processing of client payments, handling and resolving client payment queries, assisting with the management accounts of the companies within our group, and more.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Accounting#section-one'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
       .separator-line
@@ -125,9 +131,13 @@
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Compliance Executive')
+            %p= l('Ensuring that the Binary Group of companies are in full compliance with the gaming and regulatory regimes to which they are subject.')
             %a{:href => url_for('/job-descriptions/job-details?dept=Compliance#section-one'), :class => "pjaxload"}= l('Learn more')
+          .grd-grid-4.grd-grid-mobile-12
+            %h3= l('Anti-Fraud Officer')
+            %p= l('Responsible for the exercise of exceptional client relationship management skills applied to the prevention of fraudulent activities in payments processing and business transactions.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Compliance#section-two'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
       .separator-line
@@ -140,8 +150,8 @@
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Global Customer Service Representatives')
+            %p= l('Resolve complex customer care issues in the best interest of our global clients and the company.')
             %a{:href => url_for('/job-descriptions/job-details?dept=Customer_Support#section-one'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
@@ -155,8 +165,8 @@
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Human Resource Executive')
+            %p= l('Responsible for supporting the Group’s global recruiting and talent management needs as well as a broad array of HR-related administrative tasks.')
             %a{:href => url_for('/job-descriptions/job-details?dept=Human_Resources#section-one'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
@@ -165,14 +175,14 @@
     .grd-grid-12.grd-row-padding
       .grd-grid-3.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
-          %h2= l('Admin')
-          %img.responsive{:src => url_for('images/pages/careers/Admin.svg')}
+          %h2= l('Administrator')
+          %img.responsive{:src => url_for('images/pages/careers/Administrator.svg')}
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
-            %a{:href => url_for('/job-descriptions/job-details?dept=Admin#section-one'), :class => "pjaxload"}= l('Learn more')
+            %h3= l('Administrative Executive')
+            %p= l('Provide administrative support to several departments in areas related to vendor management, event planning, accounting, and human resources administration.')
+            %a{:href => url_for('/job-descriptions/job-details?dept=Administrator#section-one'), :class => "pjaxload"}= l('Learn more')
 
     .grd-grid-12.grd-hide-mobile
       .separator-line
@@ -185,6 +195,6 @@
       .grd-grid-9.grd-grid-mobile-12
         .grd-grid-12.grd-row-padding
           .grd-grid-4.grd-grid-mobile-12
-            %h3= l('Lorem ipsum')
-            %p= l('Lorem ipsum dolor sit amet, has senserit temporibus ne. Vel ferri omnium animal id, ad unum velit sanctus mel.')
+            %h3= l('Internal Auditor')
+            %p= l('Perform unique, risk-based internal audits on the Binary Ltd. Group of companies.')
             %a{:href => url_for('/job-descriptions/job-details?dept=Internal_Audit#section-one'), :class => "pjaxload"}= l('Learn more')
