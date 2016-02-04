@@ -299,6 +299,9 @@ Menu.prototype = {
 
         this.on_mouse_hover(active.item);
 
+        this.disable_not_allowed_markets();
+    },
+    disable_not_allowed_markets: function() {
         // enable only allowed markets
         var allowed_markets = $.cookie('allowed_markets');
         if(allowed_markets) {
@@ -308,10 +311,15 @@ Menu.prototype = {
                 var link_id = $(this).attr('id').split('_')[1];
                 if(markets_array.indexOf(link_id) < 0) {
                     var link = $(this).find('a');
-                    if(markets_array.indexOf(link.attr('id')) < 0) {
-                        var link_text = link.text();
-                        link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text}));
-                    }
+                    var link_text = link.text();
+                    var link_href = link.attr('href');
+                    link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text, link_url: link_href}));
+                }
+                else {
+                    var span = $(this).find('span');
+                    var span_text = span.text();
+                    var span_href = span.attr('link_url');
+                    span.replaceWith($('<a/>', {class: 'link pjaxload', text: span_text, href: span_href}));
                 }
             });
         }
