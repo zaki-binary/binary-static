@@ -640,7 +640,7 @@ pjax_config_page('/user/myaccount', function() {
             var loginidArry = page.user.loginid_array,
                 disabledAccount = [];
             for (i = 0; i < loginidArry.length; i++) {
-              if (loginidArry[i].disabled === true) {
+              if (loginidArry[i].disabled === true && loginidArry[i].real === true) {
                 disabledAccount.push(loginidArry[i].id);
               }
             }
