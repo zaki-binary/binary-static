@@ -253,7 +253,9 @@ pjax_config_page("paymentagent/withdrawws", function() {
                 window.location.href = page.url.url_for('login');
                 return;
             }
-
+            if ($.cookie('verify_token')) {
+              $.removeCookie('verify_token', {path: '/', domain: window.location.hostname.replace('www', '')});
+            }
             BinarySocket.init({
                 onmessage: function(msg) {
                     var response = JSON.parse(msg.data);
