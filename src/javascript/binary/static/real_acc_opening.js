@@ -56,7 +56,7 @@ pjax_config_page("new_account/realws", function(){
                   });
                   var affiliateToken = $.cookie('affiliate_tracking');
                   if (affiliateToken) {
-                    dataLayer.push({'bom_affiliate_token': affiliateToken});
+                    dataLayer.push({'bom_affiliate_token': JSON.parse($.cookie('affiliate_tracking')).t});
                   }
 
                   //generate dropdown list and switch
@@ -65,11 +65,11 @@ pjax_config_page("new_account/realws", function(){
                   $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
                   option.setAttribute('selected', 'selected');
                   $('#loginid-switch-form').submit();
-                } else if (error) {
+                } else if (error && error.message) {
                   if (/multiple real money accounts/.test(error.message)){
                     RealAccOpeningUI.showError('duplicate');
                   } else {
-                    RealAccOpeningUI.showError();
+                    RealAccOpeningUI.showError(error.message);
                   }
                 }
               }
