@@ -41,6 +41,10 @@ var PaymentAgentWithdrawWS = (function() {
             return false;
         }
 
+        if ($.cookie('verify_token')) {
+          $.removeCookie($.cookie('verify_token'), {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        }
+
         var residence = $.cookie('residence');
         BinarySocket.send({"paymentagent_list": residence});
 
