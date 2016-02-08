@@ -10,11 +10,7 @@ pjax_config_page('/job-descriptions/job-details', function() {
           });
           $('.job-details').find('#title').html(page.url.params_hash().dept.replace(/_/g, ' '));
           var source = $('.dept-image').attr('src');
-          if (page.url.params_hash().dept !== 'Quality_Assurance') {
-              $('.dept-image').attr('src', source.replace('Information_Technology', page.url.params_hash().dept));
-          } else {
-            $('.dept-image').attr('src', source.replace('careers/Information_Technology.svg', 'binary-symbol-logo.png'));
-          }
+          $('.dept-image').attr('src', source.replace('Information_Technology', page.url.params_hash().dept));
           $('.dept-image').show();
           var deptContent = $('#content-' + page.url.params_hash().dept + ' div');
           var section,
