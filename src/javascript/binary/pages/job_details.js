@@ -7,6 +7,7 @@ pjax_config_page('/job-descriptions/job-details', function() {
           }
           $(window).on('hashchange', function(){
             showSelectedDiv();
+            $('.title-sections').html($('.sidebar li[class="selected"]').text());
           });
           $('.job-details').find('#title').html(page.url.params_hash().dept.replace(/_/g, ' '));
           var source = $('.dept-image').attr('src');
@@ -24,7 +25,11 @@ pjax_config_page('/job-descriptions/job-details', function() {
               }
           }
           $('.sidebar').show();
+          if ($('.sidebar li:visible').length === 1) {
+            $('.sidebar').hide();
+          }
           $('#' + page.url.location.hash.substring(9)).addClass('selected');
+          $('.title-sections').html($('.sidebar li[class="selected"]').text());
           showSelectedDiv();
           $('#sidebar-nav li').click(function(e) {
             $('#sidebar-nav li').removeClass('selected');
