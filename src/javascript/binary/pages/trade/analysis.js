@@ -118,7 +118,7 @@ var TradingAnalysis = (function() {
                 }
             } else {
                 if (currentTab == 'tab_last_digit') {
-                    trading_digit_info = new BetAnalysis.DigitInfoWS();
+                    trading_digit_info = BetAnalysis.tab_last_digitws;
                     var request = JSON.parse('{"ticks_history":"'+ $('#underlying option:selected').val() +'",'+
                                               '"end": "latest",'+
                                               '"count": 100,'+
