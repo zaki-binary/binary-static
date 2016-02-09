@@ -31,5 +31,5 @@ pjax_config_page('/job-descriptions/job-details', function() {
             $(this).addClass('selected');
           });
         }
-    }
+    };
 });
