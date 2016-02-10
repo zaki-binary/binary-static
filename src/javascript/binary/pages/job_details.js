@@ -1,4 +1,4 @@
-pjax_config_page('/job-descriptions', function() {
+pjax_config_page('/open-positions', function() {
   return {
       onLoad: function() {
         if (document.getElementById('Information_Technology')) {
@@ -9,7 +9,7 @@ pjax_config_page('/job-descriptions', function() {
       }
   };
 });
-pjax_config_page('/job-descriptions/job-details', function() {
+pjax_config_page('/open-positions/job-details', function() {
     return {
         onLoad: function() {
           var dept = page.url.params_hash().dept,
@@ -44,7 +44,7 @@ pjax_config_page('/job-descriptions/job-details', function() {
           }
           $('#' + page.url.location.hash.substring(9)).addClass('selected');
           showSelectedDiv();
-          $('#back-button').attr('href', page.url.url_for('job-descriptions') + '#' + dept);
+          $('#back-button').attr('href', page.url.url_for('open-positions') + '#' + dept);
           sidebarListItem.click(function(e) {
             sidebarListItem.removeClass('selected');
             $(this).addClass('selected');
