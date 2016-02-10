@@ -39,7 +39,7 @@
           %a.button.button-focus.pjaxload{:href => 'mailto:hr@binary.com'}
             %span= l('Submit your CV and Cover Letter')
         .grd-grid-12.grd-row-padding
-          %a.pjaxload{:href => url_for('/job-descriptions'), :style => 'margin-top:1.4em; float:left;'}= l('<< Back to Job Descriptions')
+          %a#back-button.pjaxload{:style => 'margin-top:1.4em; float:left;'}= l('<< Back to Job Descriptions')
 
 .contents{:style => "display:none"}
   #content-Information_Technology
