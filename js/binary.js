@@ -57823,7 +57823,7 @@ BetForm.Time.EndTime.prototype = {
             $self.contract_start_ms = parseInt(data.contract_start * 1000);
             $self.contract_category = data.contract_category;
             $self.set_barrier = ($self.contract_category.match('digits')) ? false : true;
-            $self.display_decimals = data.display_decimals;
+            $self.display_decimals = data.display_decimals || 2;
             var tick_frequency = 5;
 
             if (data.show_contract_result) {
@@ -60742,11 +60742,7 @@ $(function() {
 
     'use strict';
 
-    var pageLanguage = page.language();
-    if(!pageLanguage) pageLanguage = "EN";
-
     var rowTemplate;
-    var retry;
 
     var init = function() {
         showLoadingImage($("#portfolio-loading"));
@@ -60826,26 +60822,28 @@ $(function() {
     };
 
     var updateIndicative = function(data) {
-
-        var $td = $("tr[data-contract_id='"+data.proposal_open_contract.contract_id+"'] td.indicative");
+        var proposal = data.proposal_open_contract;
+        var $td = $("tr[data-contract_id='" + proposal.contract_id + "'] td.indicative");
         var old_indicative = $td.find('strong').text();
         old_indicative = parseFloat(old_indicative, 2);
         if(isNaN(old_indicative)) old_indicative = 0.0;
 
-        var new_indicative = parseFloat(data.proposal_open_contract.bid_price, 2);
+        var new_indicative = parseFloat(proposal.bid_price, 2);
         if(isNaN(new_indicative)) new_indicative = 0.0;
 
-        if(data.proposal_open_contract.is_valid_to_sell != 1) {
-            $td.html(data.proposal_open_contract.currency+' <strong class="indicative_price">'+data.proposal_open_contract.bid_price+'</strong><span>'+text.localize('Resale not offered')+'</span>').addClass("no_resale");
-        } else {
-            $td.removeClass("no_resale");
+        var bid_price = parseFloat(proposal.bid_price || 0).toFixed(2);
 
-            if(old_indicative > new_indicative) {
-                $td.html(data.proposal_open_contract.currency+' <strong class="indicative_price price_moved_down">'+data.proposal_open_contract.bid_price+'</strong>');
-            } else if(old_indicative < new_indicative) {
-                $td.html(data.proposal_open_contract.currency+' <strong class="indicative_price price_moved_up">'+data.proposal_open_contract.bid_price+'</strong>');
-            }
+        var status_class = '';
+        var no_resale_html = '';
+        if(proposal.is_valid_to_sell != 1) {
+            no_resale_html = '<span>' + text.localize('Resale not offered') + '</span>';
+            $td.addClass("no_resale");
         }
+        else {
+            status_class = new_indicative < old_indicative ? ' price_moved_down' : (new_indicative > old_indicative ? ' price_moved_up' : '');
+            $td.removeClass("no_resale");
+        }
+        $td.html(proposal.currency + ' <strong class="indicative_price' + status_class + '"">' + bid_price + '</strong>' + no_resale_html);
 
         var indicative_sum = 0, indicative_price = 0, up_down;
         $("strong.indicative_price").each(function() {
@@ -64977,8 +64975,7 @@ var Purchase = (function () {
             }
             else{
                 cost_value = passthrough['amount'];
-                var match = receipt['longcode'].match(/[\d\,]+\.\d\d/);
-                payout_value = match[0].replace(',','');
+                payout_value = receipt['payout'];
             }
             profit_value = Math.round((payout_value - cost_value)*100)/100;
 
@@ -65039,7 +65036,7 @@ var Purchase = (function () {
                 decimal:3,
                 contract_sentiment:contract_sentiment,
                 price:passthrough['ask-price'],
-                payout:passthrough['amount'],
+                payout:receipt['payout'],
                 show_contract_result:1,
                 width: $('#confirmation_message').width(),
             });
@@ -65048,7 +65045,7 @@ var Purchase = (function () {
     };
 
     var update_spot_list = function(data){
-       
+
         if($('#contract_purchase_spots:hidden').length){
             return;
         }
@@ -65127,7 +65124,7 @@ var Purchase = (function () {
             }
 
         }
-        
+
     };
 
     return {
@@ -67815,7 +67812,7 @@ var Table = (function(){
 
   return {
     onLoad: function() {
-      $('#client_email').html(page.client.email);
+      $('#client_email').html(page.user.email);
       BinarySocket.send({verify_email:page.user.email, type:'payment_agent_withdrawal'});
     }
   };
@@ -68230,7 +68227,7 @@ var ProfitTableUI = (function(){
     if (opt === 'duplicate') {
       error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you do not remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>";
     } else {
-      error.innerHTML = Content.localize().opt;
+      error.innerHTML = opt;
     }
     error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
   }
@@ -68761,7 +68758,8 @@ var ViewBalanceUI = (function(){
       var errorEmail = document.getElementById('error-email'),
           errorPassword = document.getElementById('error-password'),
           errorRPassword = document.getElementById('error-r-password'),
-          errorResidence = document.getElementById('error-residence');
+          errorResidence = document.getElementById('error-residence'),
+          errorAccount = document.getElementById('error-account-opening');
 
       if (isIE() === false) {
         $('#password').on('input', function() {
@@ -68782,6 +68780,7 @@ var ViewBalanceUI = (function(){
 
           Validate.errorMessageResidence(residence, errorResidence);
           Validate.errorMessageEmail(email, errorEmail);
+          Validate.hideErrorMessage(errorAccount);
 
           if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail) && !Validate.errorMessageResidence(residence, errorResidence)){
             BinarySocket.init({
@@ -68797,7 +68796,11 @@ var ViewBalanceUI = (function(){
                     $('#virtual-form').unbind('submit');
                     form.submit();
                   } else if (type === 'error' || error){
-                    if (/email address is already in use/.test(error.message)) {
+                    if (/account opening is unavailable/.test(error.message)) {
+                      errorAccount.textContent = error.message;
+                      Validate.displayErrorMessage(errorAccount);
+                      return;
+                    } else if (/email address is already in use/.test(error.message)) {
                       errorEmail.textContent = Content.localize().textDuplicatedEmail;
                     } else if (/email address is unverified/.test(error.message)) {
                       errorEmail.textContent = text.localize('The re-entered email address is incorrect.');
