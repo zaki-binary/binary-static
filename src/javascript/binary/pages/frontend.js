@@ -272,9 +272,9 @@ function dropDownMonths(select, startNum, endNum) {
 }
 
 function generateBirthDate(){
-    var dobdd    = document.getElementById('dobdd'),
-        dobmm    = document.getElementById('dobmm'),
-        dobyy    = document.getElementById('dobyy');
+    var days    = document.getElementById('dobdd'),
+        months    = document.getElementById('dobmm'),
+        year    = document.getElementById('dobyy');
     //days
     dropDownNumbers(days, 1, 31);
     //months
