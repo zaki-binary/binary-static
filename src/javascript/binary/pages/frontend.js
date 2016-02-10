@@ -308,6 +308,7 @@ function handle_residence_state_ws(){
       var response = JSON.parse(msg.data);
       if (response) {
         var type = response.msg_type;
+        var residenceDisabled = $('#residence-disabled');
         if (response.msg_type === 'get_settings') {
           var country = response.get_settings.country_code;
           if (country && country !== null) {
@@ -316,8 +317,7 @@ function handle_residence_state_ws(){
             generateState();
             return;
           } else {
-            var residenceDisabled = $('#residence-disabled'),
-                residenceForm     = $('#residence-form');
+            var residenceForm = $('#residence-form');
             $('#real-form').hide();
             residenceDisabled.insertAfter('#move-residence-here');
             $('#error-residence').insertAfter('#residence-disabled');
@@ -343,7 +343,6 @@ function handle_residence_state_ws(){
             return;
           } else {
             errorElement.setAttribute('style', 'display:none');
-            var residenceDisabled = $('#residence-disabled');
             $('#residence-form').hide();
             residenceDisabled.insertAfter('#move-residence-back');
             $('#error-residence').insertAfter('#residence-disabled');
@@ -402,7 +401,7 @@ function setResidenceWs(){
 
 //pass select element to generate list of states
 function generateState() {
-    var state = document.getElementById('address-state')
+    var state = document.getElementById('address-state');
     appendTextValueChild(state, Content.localize().textSelect, '');
     if (page.client.residence !== "") {
       BinarySocket.send({ states_list: page.client.residence });
