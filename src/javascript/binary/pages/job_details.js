@@ -2,7 +2,9 @@ pjax_config_page('/job-descriptions', function() {
   return {
       onLoad: function() {
         if (document.getElementById('Information_Technology')) {
-          $.scrollTo($(page.url.location.hash));
+          if (page.url.location.hash) {
+              $.scrollTo($(page.url.location.hash));
+          }
         }
       }
   };
