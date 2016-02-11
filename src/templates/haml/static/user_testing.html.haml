@@ -13,8 +13,16 @@
       .grd-grid-12
         .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-6
           %div.xquote
-            %a.pjaxload{:href => 'https://mycrowd.com/', :target => '_blank'}= l('Search for errors as a Binary.com trader')
+            %div
+              %div.picture
+                %img.responsive{:src => url_for('images/pages/user_testing/mycrowd.svg')}
+              %div.text
+                %a.pjaxload{:href => 'https://mycrowd.com/', :target => '_blank'}= l('Search for errors as a Binary.com trader')
         .grd-grid-6.grd-grid-mobile-12.grd-grid-phablet-6
           %div.xquote
-            %a.pjaxload{:href => 'https://hackerone.com/', :target => '_blank'}= l('Test our site as an IT security professional')
+            %div
+              %div.picture
+                %img.responsive{:src => url_for('images/pages/user_testing/hackerone.svg')}
+              %div.text
+                %a.pjaxload{:href => 'https://hackerone.com/', :target => '_blank'}= l('Test as an IT security professional')
       %p= l('Earn money for any verifiable errors that you find.')
