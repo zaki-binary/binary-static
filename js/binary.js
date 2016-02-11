@@ -50432,9 +50432,10 @@ Menu.prototype = {
         var allowed_markets = $.cookie('allowed_markets');
         var markets_array = allowed_markets ? allowed_markets.split(',') : [];
         var sub_items = $('li#topMenuStartBetting ul.sub_items');
+        var isReal = $.cookie('loginid') && !(/VRT/.test($.cookie('loginid')));
         sub_items.find('li').each(function () {
             var link_id = $(this).attr('id').split('_')[1];
-            if(markets_array.indexOf(link_id) < 0 && !(/VRT/.test($.cookie('loginid')))) {
+            if(markets_array.indexOf(link_id) < 0 && isReal) {
                 var link = $(this).find('a');
                 var link_text = link.text();
                 var link_href = link.attr('href');
@@ -56480,8 +56481,8 @@ BetForm.Time.EndTime.prototype = {
                                 var desc = elm.text();
                                 if (desc) {
                                     desc = desc.trim();
-                                    if(/^([A-Z]{3}) \d+\.\d+/.test(desc)) {
-                                        desc = desc.replace(/\d+\.\d+/, payout.value);
+                                    if(/^([A-Z]{3}) [\d+,]*\d+\.\d+/.test(desc)) {
+                                        desc = desc.replace(/[\d+,]*\d+\.\d+/, payout.value);
                                         elm.text(desc);
                                     }
                                 }
@@ -63561,17 +63562,13 @@ var Durations = (function(){
 
     var durationPopulate = function() {
         var unit = document.getElementById('duration_units');
-        if (isVisible(unit)) {
-            var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-            document.getElementById('duration_minimum').textContent = unitValue;
-            if(selected_duration.amount && selected_duration.unit > unitValue){
-                unitValue = selected_duration.amount;
-            }
-            document.getElementById('duration_amount').value = unitValue;
-            displayExpiryType(unit.value);
-        } else {
-            displayExpiryType();
+        var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
+        document.getElementById('duration_minimum').textContent = unitValue;
+        if(selected_duration.amount && selected_duration.unit > unitValue){
+            unitValue = selected_duration.amount;
         }
+        document.getElementById('duration_amount').value = unitValue;
+        displayExpiryType(unit.value);
 
         // jquery for datepicker
         var amountElement = $('#duration_amount');
@@ -66340,7 +66337,7 @@ pjax_config_page("cashier/account_transferws", function() {
         virtualTopupID = '#VRT_topup_link';
         authButtonID   = '#authenticate_button';
 
-        loginid = $.cookie('loginid');
+        loginid = page.client.loginid || $.cookie('loginid');
         isReal = !(/VRT/.test(loginid));
 
         BinarySocket.send({"get_settings": 1});
@@ -66368,6 +66365,7 @@ pjax_config_page("cashier/account_transferws", function() {
             if(get_settings.is_authenticated_payment_agent) {
                 $('#payment_agent').removeClass(hiddenClass);
             }
+            showNoticeMsg();
         }
 
         addGTMDataLayer(get_settings);
@@ -66384,6 +66382,7 @@ pjax_config_page("cashier/account_transferws", function() {
                     (text.localize('Deposit %1 virtual money into your account ') + loginid)
                     .replace('%1', response.balance.currency + ' 10000')
                 );
+            $(virtualTopupID).removeClass(hiddenClass);
         }
     };
 
@@ -66409,13 +66408,10 @@ pjax_config_page("cashier/account_transferws", function() {
 
         setCookie('allowed_markets', allowed_markets.length === 0 ? '' : allowed_markets.join(','));
         recheckLegacyTradeMenu();
-
-        showNoticeMsg();
     };
 
     var responsePayoutCurrencies = function (response) {
-        var currencies = {'client.currencies': response.payout_currencies};
-        setCookie('settings', JSON.stringify(currencies));
+        Settings.set('client.currencies', response.hasOwnProperty('payout_currencies') ? response.payout_currencies : '');
     };
 
     var shoWelcomeMessage = function(landing_company) {
@@ -66429,9 +66425,6 @@ pjax_config_page("cashier/account_transferws", function() {
                 ' (' + loginid + ').'
             )
             .removeClass(hiddenClass);
-
-        $('#cashier-portfolio').removeClass(hiddenClass);
-        $('#profit-statement').removeClass(hiddenClass);
     };
 
     var showNoticeMsg = function() {
@@ -66478,7 +66471,7 @@ pjax_config_page("cashier/account_transferws", function() {
                     'new_account' : 
                     page.url.param('login') ?
                         'log_in' :
-                        'page_load'; //TODO: pjax?
+                        'page_load';
 
             dataLayer.push(data);
             window.history.replaceState('My Account', title, newUrl);
@@ -66778,7 +66771,7 @@ pjax_config_page("payment_agent_listws", function() {
         }
 
         if ($.cookie('verify_token')) {
-          $.removeCookie($.cookie('verify_token'), {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+          $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
         }
 
         var residence = $.cookie('residence');
