@@ -4535,26 +4535,22 @@ table .loss, table .lower {
     font-size: 80% !important;
   }
 }
-.career .xquote {
+.career .xquote, .user_testing .xquote {
   background-color: #F2F2F2;
   padding: 20px 20px;
   margin: 30px 0;
 }
-.career .xquote div {
+.career .xquote div, .user_testing .xquote div {
   overflow: hidden;
+  display: table;
 }
-.career .xquote div .picture {
+.career .xquote div .picture, .user_testing .xquote div .picture {
   float: left;
   padding-right: 20px;
-  width: 15%;
 }
-.career .xquote div .text {
-  margin-top: 5%;
-}
-@media screen and (max-width: 767px) {
-  .career .xquote .text {
-    margin-top: 2% !important;
-  }
+.career .xquote div .text, .user_testing .xquote div .text {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .empty-space {
@@ -5010,6 +5006,90 @@ div.kineticjs-content {
   }
 }
 
+.open-positions .grd-grid-4:not(:first-child) {
+  border: 1px dashed #d9d9d9;
+  border-width: 0 0 0 1px;
+}
+.open-positions .grd-grid-4:nth-child(3n+1) {
+  border-width: 0;
+}
+.open-positions .grd-grid-3 {
+  text-align: center;
+}
+.open-positions .grd-grid-9, .open-positions .grd-grid-3, .open-positions .grd-row-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+.open-positions img.responsive {
+  margin-top: 1.1em;
+  width: 50%;
+}
+.open-positions h2 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.open-positions .title-section {
+  height: 2.5em;
+}
+.open-positions .paragraph-section {
+  height: 10em;
+  overflow: visible;
+}
+.open-positions .top-margin {
+  margin-top: 40px;
+}
+
+.job-details .grd-grid-3 .grd-grid-12 {
+  padding-left: 0;
+}
+.job-details .grd-grid-3 .grd-grid-12:first-child {
+  margin-bottom: .3em;
+}
+.job-details .sidebar {
+  position: relative;
+}
+.job-details .dept-image {
+  width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+  .open-positions .grd-grid-phablet-6 {
+    border-width: 0 !important;
+  }
+  .open-positions .grd-grid-phablet-6:nth-child(even) {
+    border-width: 0 0 0 1px !important;
+  }
+  .open-positions .grd-grid-phablet-6.first, .open-positions .top-margin {
+    margin-top: 20px;
+  }
+  .open-positions .grd-grid-phablet-6.first .title-section {
+    height: 1.4em;
+  }
+  .open-positions .paragraph-section {
+    height: 9em;
+  }
+}
+@media screen and (max-width: 480px) {
+  .open-positions .grd-grid-mobile-12:not(:first-child) {
+    padding-top: 20px;
+    margin-top: auto !important;
+  }
+  .open-positions h1 {
+    text-align: center;
+  }
+  .open-positions img.responsive {
+    width: 40%;
+  }
+  .open-positions .title-section {
+    height: 1em;
+  }
+  .open-positions .paragraph-section {
+    height: auto;
+  }
+  .open-positions .top-margin {
+    margin-top: auto;
+  }
+}
 /* static pages */
 @keyframes spinning {
   from {
