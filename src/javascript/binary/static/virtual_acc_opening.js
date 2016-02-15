@@ -80,9 +80,9 @@ pjax_config_page("new_account/virtualws", function(){
         }
       } else {
         virtualForm.empty();
-        var text = '<p class="errorfield">' + Content.localize().textTokenMissing + '</p>';
-        text = text.replace('%1', page.url.url_for(''));
-        virtualForm.html(text);
+        var errorText = '<p class="errorfield">' + Content.localize().textTokenMissing + '</p>',
+            noticeText = '<p>' + Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('')) + '</p>';
+        virtualForm.html(errorText + noticeText);
       }
     }
   };
