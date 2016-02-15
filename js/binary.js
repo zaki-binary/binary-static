@@ -68802,7 +68802,11 @@ var ViewBalanceUI = (function(){
                       } else if (/email address is already in use/.test(error.message)) {
                         errorEmail.textContent = Content.localize().textDuplicatedEmail;
                       } else if (/email address is unverified/.test(error.message)) {
-                        errorEmail.textContent = text.localize('The re-entered email address is incorrect.');
+                        virtualForm.empty();
+                        var errorText = '<p class="errorfield">' + text.localize('The re-entered email address is incorrect.') + '</p>',
+                            noticeText = '<p>' + text.localize('Your token has been invalidated. Please click <a class="pjaxload" href="%1">here</a> to restart the verification process.').replace('%1', page.url.url_for('')) + '</p>';
+                        virtualForm.html(errorText + noticeText);
+                        return;
                       } else if (/not strong enough/.test(error.message)) {
                         errorEmail.textContent = text.localize('Password is not strong enough.');
                       } else if (error.details && error.details.verification_code) {
@@ -68834,12 +68838,13 @@ var ViewBalanceUI = (function(){
     "use strict";
 
     function getDetails(email, password, residence){
+        var verificationCookie = $.cookie('verify_token');
         var req = {
                     new_account_virtual: 1,
                     email: email,
                     client_password: password,
                     residence: residence,
-                    verification_code: $.cookie('verify_token')
+                    verification_code: verificationCookie
                 };
 
         if ($.cookie('affiliate_tracking')) {
@@ -68847,6 +68852,9 @@ var ViewBalanceUI = (function(){
         }
 
         BinarySocket.send(req);
+        if (verificationCookie) {
+          $.removeCookie(verificationCookie, {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        }
     }
 
     return {
