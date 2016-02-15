@@ -62906,7 +62906,8 @@ function chartFrameSource(underlying, highchart_time){
             textApost: text.localize('apostrophe'),
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
-            textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your email and make sure you are not already logged in.'),
+            textTokenMissing: text.localize('Verification token is missing.'),
+            textClickHereToRestart: text.localize('Please click on the verification link sent to your email, or click <a class="pjaxload" href="%1">here</a> to restart the verification process.'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
             textOpens: text.localize('Opens'),
@@ -66748,6 +66749,7 @@ pjax_config_page("payment_agent_listws", function() {
         minAmount,
         maxAmount;
 
+    var verificationCode;
 
     var init = function() {
         containerID = '#paymentagent_withdrawal';
@@ -66776,7 +66778,11 @@ pjax_config_page("payment_agent_listws", function() {
         }
 
         if ($.cookie('verify_token')) {
+          verificationCode = $.cookie('verify_token');
           $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        } else {
+          showPageError(Content.localize().textTokenMissing, Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('paymentagent/request_withdrawws')));
+          return false;
         }
 
         var residence = $.cookie('residence');
@@ -66894,14 +66900,14 @@ pjax_config_page("payment_agent_listws", function() {
     // ----------------------------
     var withdrawRequest = function(isDryRun) {
         var dry_run = isDryRun ? 1 : 0;
-
         BinarySocket.send({
             "paymentagent_withdraw" : 1,
             "paymentagent_loginid"  : formData.agent,
             "currency"    : formData.currency,
             "amount"      : formData.amount,
             "description" : formData.desc,
-            "dry_run"     : dry_run
+            "dry_run"     : dry_run,
+            "verification_code": verificationCode
         });
     };
 
@@ -66954,9 +66960,12 @@ pjax_config_page("payment_agent_listws", function() {
     // -----------------------------
     // ----- Message Functions -----
     // -----------------------------
-    var showPageError = function(errMsg) {
+    var showPageError = function(errMsg, noticeMsg) {
         setActiveView(viewIDs.error);
         $(viewIDs.error + ' > p').html(errMsg);
+        if (noticeMsg) {
+          $(viewIDs.error).append($('<p/>', {html: noticeMsg}));
+        }
     };
 
     var showError = function(fieldID, errMsg) {
@@ -67811,7 +67820,7 @@ var Table = (function(){
   return {
     onLoad: function() {
       $('#client_email').html(page.user.email);
-      BinarySocket.send({verify_email:page.user.email, type:'payment_agent_withdrawal'});
+      BinarySocket.send({verify_email:page.user.email, type:'paymentagent_withdraw'});
     }
   };
 });
@@ -68739,76 +68748,84 @@ var ViewBalanceUI = (function(){
           window.location.href = page.url.url_for('user/my_accountws');
           return;
       }
-      handle_residence_state_ws();
-      setResidenceWs();
       Content.populate();
-      var form = document.getElementById('virtual-form');
-      var errorEmail = document.getElementById('error-email'),
-          errorPassword = document.getElementById('error-password'),
-          errorRPassword = document.getElementById('error-r-password'),
-          errorResidence = document.getElementById('error-residence'),
-          errorAccount = document.getElementById('error-account-opening');
+      var virtualForm = $('#virtual-form');
+      if ($.cookie('verify_token')) {
+        handle_residence_state_ws();
+        setResidenceWs();
+        var form = document.getElementById('virtual-form');
+        var errorEmail = document.getElementById('error-email'),
+            errorPassword = document.getElementById('error-password'),
+            errorRPassword = document.getElementById('error-r-password'),
+            errorResidence = document.getElementById('error-residence'),
+            errorAccount = document.getElementById('error-account-opening');
 
-      if (isIE() === false) {
-        $('#password').on('input', function() {
-          $('#password-meter').attr('value', testPassword($('#password').val())[0]);
-        });
-      } else {
-        $('#password-meter').remove();
-      }
+        if (isIE() === false) {
+          $('#password').on('input', function() {
+            $('#password-meter').attr('value', testPassword($('#password').val())[0]);
+          });
+        } else {
+          $('#password-meter').remove();
+        }
 
-      if (form) {
-        $('#virtual-form').submit( function(evt) {
-          evt.preventDefault();
+        if (form) {
+          virtualForm.submit( function(evt) {
+            evt.preventDefault();
 
-          var email = document.getElementById('email').value,
-              residence = document.getElementById('residence').value,
-              password = document.getElementById('password').value,
-              rPassword = document.getElementById('r-password').value;
+            var email = document.getElementById('email').value,
+                residence = document.getElementById('residence').value,
+                password = document.getElementById('password').value,
+                rPassword = document.getElementById('r-password').value;
 
-          Validate.errorMessageResidence(residence, errorResidence);
-          Validate.errorMessageEmail(email, errorEmail);
-          Validate.hideErrorMessage(errorAccount);
+            Validate.errorMessageResidence(residence, errorResidence);
+            Validate.errorMessageEmail(email, errorEmail);
+            Validate.hideErrorMessage(errorAccount);
 
-          if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail) && !Validate.errorMessageResidence(residence, errorResidence)){
-            BinarySocket.init({
-              onmessage: function(msg){
-                var response = JSON.parse(msg.data);
-                if (response) {
-                  var type = response.msg_type;
-                  var error = response.error;
+            if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail) && !Validate.errorMessageResidence(residence, errorResidence)){
+              BinarySocket.init({
+                onmessage: function(msg){
+                  var response = JSON.parse(msg.data);
+                  if (response) {
+                    var type = response.msg_type;
+                    var error = response.error;
 
-                  if (type === 'new_account_virtual' && !error){
-                    form.setAttribute('action', '/login');
-                    form.setAttribute('method', 'POST');
-                    $('#virtual-form').unbind('submit');
-                    form.submit();
-                  } else if (type === 'error' || error){
-                    if (/account opening is unavailable/.test(error.message)) {
-                      errorAccount.textContent = error.message;
-                      Validate.displayErrorMessage(errorAccount);
-                      return;
-                    } else if (/email address is already in use/.test(error.message)) {
-                      errorEmail.textContent = Content.localize().textDuplicatedEmail;
-                    } else if (/email address is unverified/.test(error.message)) {
-                      errorEmail.textContent = text.localize('The re-entered email address is incorrect.');
-                    } else if (/not strong enough/.test(error.message)) {
-                      errorEmail.textContent = text.localize('Password is not strong enough.');
-                    } else if (error.details && error.details.verification_code) {
-                      if (/required/.test(error.details.verification_code)){
-                        errorEmail.textContent = Content.localize().textTokenMissing;
+                    if (type === 'new_account_virtual' && !error){
+                      form.setAttribute('action', '/login');
+                      form.setAttribute('method', 'POST');
+                      virtualForm.unbind('submit');
+                      form.submit();
+                    } else if (type === 'error' || error){
+                      if (/account opening is unavailable/.test(error.message)) {
+                        errorAccount.textContent = error.message;
+                        Validate.displayErrorMessage(errorAccount);
+                        return;
+                      } else if (/email address is already in use/.test(error.message)) {
+                        errorEmail.textContent = Content.localize().textDuplicatedEmail;
+                      } else if (/email address is unverified/.test(error.message)) {
+                        errorEmail.textContent = text.localize('The re-entered email address is incorrect.');
+                      } else if (/not strong enough/.test(error.message)) {
+                        errorEmail.textContent = text.localize('Password is not strong enough.');
+                      } else if (error.details && error.details.verification_code) {
+                        if (/required/.test(error.details.verification_code)){
+                          errorEmail.textContent = Content.localize().textTokenMissing;
+                        }
+                      } else if (error.message) {
+                        errorEmail.textContent = error.message;
                       }
-                    } else if (error.message) {
-                      errorEmail.textContent = error.message;
+                      Validate.displayErrorMessage(errorEmail);
                     }
-                    Validate.displayErrorMessage(errorEmail);
                   }
                 }
-              }
-            });
-            VirtualAccOpeningData.getDetails(email, password, residence);
-          }
-        });
+              });
+              VirtualAccOpeningData.getDetails(email, password, residence);
+            }
+          });
+        }
+      } else {
+        virtualForm.empty();
+        var errorText = '<p class="errorfield">' + Content.localize().textTokenMissing + '</p>',
+            noticeText = '<p>' + Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('')) + '</p>';
+        virtualForm.html(errorText + noticeText);
       }
     }
   };
