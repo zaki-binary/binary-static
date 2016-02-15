@@ -571,7 +571,7 @@ Header.prototype = {
             if(response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('redirect')) {
                 redirectPage = response.echo_req.passthrough.redirect;
                 regex = new RegExp(redirectPage);
-                if (!regex.test(window.location.pathname)) {
+                if (regex.test(window.location.pathname)) {
                   redirectCheck = 0;
                 }
             }
