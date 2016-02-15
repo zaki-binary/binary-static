@@ -856,6 +856,7 @@ Page.prototype = {
         this.on_click_acc_transfer();
         if(getCookieItem('login')){
             ViewBalance.init();
+            RealityCheck.init();
         }
         $('#current_width').val(get_container_width());//This should probably not be here.
     },

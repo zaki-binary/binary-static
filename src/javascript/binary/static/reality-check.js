@@ -6,6 +6,11 @@ var RealityCheck = (function() {
     var updateFrequencyRef;
     var baseTime = Date.now();
 
+    var isInit = false;
+    var shouldRealityCheck = page.user.loginid_array.some(function (acc) {
+        return acc.id.slice(0, 1) === 'M';
+    });
+
     function currentFrequencyInMS() {
         if (!LocalStore.get('reality_check.interval')) {
             LocalStore.set('reality_check.interval', defaultFrequencyInMin * 60 * 1000);
@@ -53,7 +58,7 @@ var RealityCheck = (function() {
     }
 
     function popUpFrequency() {
-        if (LocalStore.get('active_loginid').slice(0, 1) !== 'M') {
+        if(!shouldRealityCheck) {
             return;
         }
 
@@ -100,17 +105,20 @@ var RealityCheck = (function() {
 
     function popUpWhenIntervalHit() {
         window.setInterval(function() {
-            if (
-                (currentTimeInMS() - baseTime) >= currentFrequencyInMS() &&
-                    LocalStore.get('active_loginid').slice(0, 1) === 'M'
-            ) {
+            if ((currentTimeInMS() - baseTime) >= currentFrequencyInMS() && shouldRealityCheck) {
                 baseTime = Date.now();
                 popUpRealityCheck();
             }
-        }, 30000);
+        }, 10000);
     }
 
     function init() {
+        // prevent accident reinitialization
+        if (isInit) {
+            return;
+        }
+
+        isInit = true;
         popUpFrequency();
         popUpWhenIntervalHit();
     }
@@ -120,7 +128,7 @@ var RealityCheck = (function() {
     };
 }());
 
-pjax_config_page(/user\/my_accountws\?loginid=M/, function() {
+pjax_config_page(/user\/my_accountws\?loginid=/, function() {
     return {
         onLoad: function() {
             RealityCheck.init();
