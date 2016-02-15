@@ -119,3 +119,11 @@ var RealityCheck = (function() {
         init: init
     };
 }());
+
+pjax_config_page(/user\/my_accountws\?loginid=M/, function() {
+    return {
+        onLoad: function() {
+            RealityCheck.init();
+        }
+    };
+});
