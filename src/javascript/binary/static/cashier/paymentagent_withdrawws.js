@@ -14,8 +14,13 @@ var PaymentAgentWithdrawWS = (function() {
         minAmount,
         maxAmount;
 
+    var verificationCode;
 
     var init = function() {
+        if ($.cookie('verify_token')) {
+          verificationCode = $.cookie('verify_token');
+          $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        }
         containerID = '#paymentagent_withdrawal';
         $views      = $(containerID + ' .viewItem');
         errorClass  = 'errorfield';
@@ -39,10 +44,6 @@ var PaymentAgentWithdrawWS = (function() {
         if((/VRT/).test($.cookie('loginid'))) { // Virtual Account
             showPageError(text.localize('You are not authorized for withdrawal via payment agent.'));
             return false;
-        }
-
-        if ($.cookie('verify_token')) {
-          $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
         }
 
         var residence = $.cookie('residence');
@@ -160,14 +161,14 @@ var PaymentAgentWithdrawWS = (function() {
     // ----------------------------
     var withdrawRequest = function(isDryRun) {
         var dry_run = isDryRun ? 1 : 0;
-
         BinarySocket.send({
             "paymentagent_withdraw" : 1,
             "paymentagent_loginid"  : formData.agent,
             "currency"    : formData.currency,
             "amount"      : formData.amount,
             "description" : formData.desc,
-            "dry_run"     : dry_run
+            "dry_run"     : dry_run,
+            "verification_code": verificationCode
         });
     };
 
