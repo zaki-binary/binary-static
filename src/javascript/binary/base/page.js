@@ -267,7 +267,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -306,9 +306,10 @@ Menu.prototype = {
         var allowed_markets = $.cookie('allowed_markets');
         var markets_array = allowed_markets ? allowed_markets.split(',') : [];
         var sub_items = $('li#topMenuStartBetting ul.sub_items');
+        var isReal = $.cookie('loginid') && !(/VRT/.test($.cookie('loginid')));
         sub_items.find('li').each(function () {
             var link_id = $(this).attr('id').split('_')[1];
-            if(markets_array.indexOf(link_id) < 0 && !(/VRT/.test($.cookie('loginid')))) {
+            if(markets_array.indexOf(link_id) < 0 && isReal) {
                 var link = $(this).find('a');
                 var link_text = link.text();
                 var link_href = link.attr('href');
