@@ -43,6 +43,9 @@ var PaymentAgentWithdrawWS = (function() {
 
         if ($.cookie('verify_token')) {
           $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        } else {
+          showPageError(Content.localize().textTokenMissing.replace('%1', page.url.url_for('paymentagent/request_withdrawws')));
+          return false;
         }
 
         var residence = $.cookie('residence');
