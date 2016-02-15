@@ -50393,7 +50393,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -50432,9 +50432,10 @@ Menu.prototype = {
         var allowed_markets = $.cookie('allowed_markets');
         var markets_array = allowed_markets ? allowed_markets.split(',') : [];
         var sub_items = $('li#topMenuStartBetting ul.sub_items');
+        var isReal = $.cookie('loginid') && !(/VRT/.test($.cookie('loginid')));
         sub_items.find('li').each(function () {
             var link_id = $(this).attr('id').split('_')[1];
-            if(markets_array.indexOf(link_id) < 0 && !(/VRT/.test($.cookie('loginid')))) {
+            if(markets_array.indexOf(link_id) < 0 && isReal) {
                 var link = $(this).find('a');
                 var link_text = link.text();
                 var link_href = link.attr('href');
@@ -56480,8 +56481,8 @@ BetForm.Time.EndTime.prototype = {
                                 var desc = elm.text();
                                 if (desc) {
                                     desc = desc.trim();
-                                    if(/^([A-Z]{3}) \d+\.\d+/.test(desc)) {
-                                        desc = desc.replace(/\d+\.\d+/, payout.value);
+                                    if(/^([A-Z]{3}) [\d+,]*\d+\.\d+/.test(desc)) {
+                                        desc = desc.replace(/[\d+,]*\d+\.\d+/, payout.value);
                                         elm.text(desc);
                                     }
                                 }
@@ -59856,17 +59857,6 @@ var get_started_behaviour = function() {
     }
 };
 
-
-var get_ticker = function() {
-    var ticker = $('#hometicker');
-    if (ticker.size()) {
-        $.ajax({ crossDomain: true, url: page.url.url_for('ticker'), async: true, dataType: "html" }).done(function(ticks) {
-            ticker.html(ticks);
-            ticker.find('ul').simplyScroll();
-        });
-    }
-};
-
 var Charts = function(charts) {
     window.open(charts, 'DetWin', 'width=580,height=710,scrollbars=yes,location=no,status=no,menubar=no');
 };
@@ -59978,62 +59968,6 @@ var display_career_email = function() {
     $("#hr_contact_eaddress").html(email_rot13("<n uers=\"znvygb:ue@ovanel.pbz\" ery=\"absbyybj\">ue@ovanel.pbz</n>"));
 };
 
-var get_residence_list = function() {
-    var url = page.url.url_for('residence_list');
-    $.getJSON(url, function(data) {
-        var countries = [];
-        $.each(data.residence, function(i, country) {
-            var disabled = '';
-            var selected = '';
-            if (country.disabled) {
-                disabled = ' disabled ';
-            } else if (country.selected) {
-                selected = ' selected="selected" ';
-            }
-            countries.push('<option value="' + country.value + '"' + disabled + selected + '>' + country.text + '</option>');
-            $("#residence").html(countries.join(''));
-
-            $('form#virtual-acc-form #btn_registration').removeAttr('disabled');
-        });
-    });
-};
-
-var on_input_password = function() {
-    $('#chooseapassword').on('input', function() {
-        $("#chooseapassword_2").css("visibility", "visible");
-    });
-};
-
-var on_click_signup = function() {
-    $('form#virtual-acc-form #btn_registration').on('click', function() {
-        var pwd = $('#chooseapassword').val();
-        var pwd_2 = $('#chooseapassword_2').val();
-        var email = $('#Email').val();
-        var residence = $('#residence').val();
-
-        var error_msg = '';
-        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
-            error_msg = text.localize('Invalid email address');
-        } else if (pwd.length < 6 || pwd.length > 25 || pwd_2.length < 6 || pwd_2.length > 25) {
-            error_msg = text.localize('Password length should be between 6 and 25 characters');
-        } else if (pwd.length === 0 || pwd_2.length === 0 || !client_form.compare_new_password(pwd, pwd_2)) {
-            error_msg = text.localize('The two passwords that you entered do not match.');
-        } else if (email == pwd) {
-            error_msg = text.localize('Your password cannot be the same as your email');
-        } else if (residence.length === 0) {
-            error_msg = text.localize('Please specify your country.');
-        }
-
-        if (error_msg.length > 0) {
-            $('#signup_error').text(error_msg);
-            $('#signup_error').removeClass('invisible');
-            $('#signup_error').show();
-            return false;
-        }
-        $('#virtual-acc-form').submit();
-    });
-};
-
 function check_login_hide_signup() {
     if (page.client.is_logged_in) {
         $('#verify-email-form').remove();
@@ -60057,6 +59991,7 @@ function appendTextValueChild(element, text, value, disabled){
       option.setAttribute('disabled', disabled);
     }
     element.appendChild(option);
+    return;
 }
 
 // append numbers to a drop down menu, eg 1-30
@@ -60069,12 +60004,12 @@ function dropDownNumbers(select, startNum, endNum) {
         option.value = i;
         select.appendChild(option);
     }
+    return;
 
 }
 
 function dropDownMonths(select, startNum, endNum) {
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
     select.appendChild(document.createElement("option"));
     for (i = startNum; i <= endNum; i++){
         var option = document.createElement("option");
@@ -60083,16 +60018,18 @@ function dropDownMonths(select, startNum, endNum) {
         } else {
             option.value = i;
         }
-
         for (j = i; j <= i; j++) {
             option.text = months[j-1];
         }
-
         select.appendChild(option);
     }
+    return;
 }
 
-function generateBirthDate(days, months, year){
+function generateBirthDate(){
+    var days    = document.getElementById('dobdd'),
+        months    = document.getElementById('dobmm'),
+        year    = document.getElementById('dobyy');
     //days
     dropDownNumbers(days, 1, 31);
     //months
@@ -60104,6 +60041,7 @@ function generateBirthDate(days, months, year){
 
     //years
     dropDownNumbers(year, startYear, endYear);
+    return;
 }
 
 function isValidDate(day, month, year){
@@ -60125,24 +60063,30 @@ function handle_residence_state_ws(){
       var response = JSON.parse(msg.data);
       if (response) {
         var type = response.msg_type;
+        var residenceDisabled = $('#residence-disabled');
         if (response.msg_type === 'get_settings') {
           var country = response.get_settings.country_code;
           if (country && country !== null) {
             page.client.residence = country;
-            RealAccOpeningUI.setValues();
+            generateBirthDate();
+            generateState();
+            return;
           } else {
+            var residenceForm = $('#residence-form');
             $('#real-form').hide();
-            $('#residence-disabled').insertAfter('#move-residence-here');
+            residenceDisabled.insertAfter('#move-residence-here');
             $('#error-residence').insertAfter('#residence-disabled');
-            $('#residence-disabled').removeAttr('disabled');
-            $('#residence-form').show();
-            $('#residence-form').submit(function(evt) {
+            residenceDisabled.removeAttr('disabled');
+            residenceForm.show();
+            residenceForm.submit(function(evt) {
               evt.preventDefault();
-              if (Validate.fieldNotEmpty($('#residence-disabled').val(), document.getElementById('error-residence'))) {
-                page.client.residence = $('#residence-disabled').val();
+              if (Validate.fieldNotEmpty(residenceDisabled.val(), document.getElementById('error-residence'))) {
+                page.client.residence = residenceDisabled.val();
                 BinarySocket.send({set_settings:1, residence:page.client.residence});
               }
+              return;
             });
+            return;
           }
         } else if (type === 'set_settings') {
           var errorElement = document.getElementById('error-residence');
@@ -60151,14 +60095,17 @@ function handle_residence_state_ws(){
               errorElement.innerHTML = response.error.message;
               errorElement.setAttribute('style', 'display:block');
             }
+            return;
           } else {
             errorElement.setAttribute('style', 'display:none');
             $('#residence-form').hide();
-            $('#residence-disabled').insertAfter('#move-residence-back');
+            residenceDisabled.insertAfter('#move-residence-back');
             $('#error-residence').insertAfter('#residence-disabled');
-            $('#residence-disabled').attr('disabled', 'disabled');
+            residenceDisabled.attr('disabled', 'disabled');
             $('#real-form').show();
-            RealAccOpeningUI.setValues();
+            generateBirthDate();
+            generateState();
+            return;
           }
         } else if (type === 'states_list'){
           select = document.getElementById('address-state');
@@ -60169,6 +60116,7 @@ function handle_residence_state_ws(){
             }
             select.parentNode.parentNode.setAttribute('style', 'display:block');
           }
+          return;
         } else if (type === 'residence_list'){
           select = document.getElementById('residence-disabled') || document.getElementById('residence');
           var phoneElement   = document.getElementById('tel'),
@@ -60189,6 +60137,7 @@ function handle_residence_state_ws(){
                 select.value = residenceValue;
             }
           }
+          return;
         }
       }
     }
@@ -60197,18 +60146,22 @@ function handle_residence_state_ws(){
 
 function getSettings() {
   BinarySocket.send({get_settings:1});
+  return;
 }
 
 function setResidenceWs(){
-  BinarySocket.send({ residence_list: 1 });
+  BinarySocket.send({residence_list:1});
+  return;
 }
 
 //pass select element to generate list of states
-function generateState(select) {
-    appendTextValueChild(select, Content.localize().textSelect, '');
+function generateState() {
+    var state = document.getElementById('address-state');
+    appendTextValueChild(state, Content.localize().textSelect, '');
     if (page.client.residence !== "") {
       BinarySocket.send({ states_list: page.client.residence });
     }
+    return;
 }
 
 function getUrlVars() {
@@ -60252,10 +60205,6 @@ if ($.cookie('affiliate_tracking')) {
 pjax_config_page('/$|/home', function() {
     return {
         onLoad: function() {
-            on_input_password();
-            on_click_signup();
-            get_residence_list();
-            get_ticker();
             check_login_hide_signup();
         }
     };
@@ -60564,6 +60513,60 @@ var Guide = (function() {
 		init: init
 	};
 })();
+;pjax_config_page('/open-positions', function() {
+  return {
+      onLoad: function() {
+        if (document.getElementById('Information_Technology')) {
+          if (page.url.location.hash) {
+              $.scrollTo($(page.url.location.hash));
+          }
+        }
+      }
+  };
+});
+pjax_config_page('/open-positions/job-details', function() {
+    return {
+        onLoad: function() {
+          var dept = page.url.params_hash().dept,
+              sidebarListItem = $('#sidebar-nav li');
+          function showSelectedDiv() {
+            $('.sections div').hide();
+            $('.sections div[id=' + dept + '-' + page.url.location.hash.substring(1) + ']').show();
+            $('.title-sections').html($('.sidebar li[class="selected"]').text());
+          }
+          $(window).on('hashchange', function(){
+            showSelectedDiv();
+          });
+          $('.job-details').find('#title').html(dept.replace(/_/g, ' '));
+          var deptImage = $('.dept-image'),
+              sourceImage = deptImage.attr('src').replace('Information_Technology', dept);
+          deptImage.attr('src', sourceImage)
+                   .show();
+          var deptContent = $('#content-' + dept + ' div');
+          var section,
+              sections = ['section-one', 'section-two', 'section-three', 'section-four', 'section-five', 'section-six', 'section-seven', 'section-eight'];
+          sidebarListItem.slice(deptContent.length).hide();
+          for (i = 0; i < deptContent.length; i++) {
+              section = $('#' + dept + '-' + sections[i]);
+              section.insertAfter('.sections div:last-child');
+              if (section.attr('class')) {
+                $('#sidebar-nav a[href="#' + sections[i] + '"]').html(section.attr('class').replace(/_/g, ' '));
+              }
+          }
+          $('.sidebar').show();
+          if ($('.sidebar li:visible').length === 1) {
+            $('.sidebar').hide();
+          }
+          $('#' + page.url.location.hash.substring(9)).addClass('selected');
+          showSelectedDiv();
+          $('#back-button').attr('href', page.url.url_for('open-positions') + '#' + dept);
+          sidebarListItem.click(function(e) {
+            sidebarListItem.removeClass('selected');
+            $(this).addClass('selected');
+          });
+        }
+    };
+});
 ;var minDT = new Date();
 minDT.setUTCFullYear(minDT.getUTCFullYear - 3);
 var liveChartsFromDT, liveChartsToDT, liveChartConfig;
@@ -62903,7 +62906,8 @@ function chartFrameSource(underlying, highchart_time){
             textApost: text.localize('apostrophe'),
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
-            textTokenMissing: text.localize('Verification token is missing. Click on the verification link sent to your email and make sure you are not already logged in.'),
+            textTokenMissing: text.localize('Verification token is missing.'),
+            textClickHereToRestart: text.localize('Please click on the verification link sent to your email, or click <a class="pjaxload" href="%1">here</a> to restart the verification process.'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
             textOpens: text.localize('Opens'),
@@ -63561,17 +63565,13 @@ var Durations = (function(){
 
     var durationPopulate = function() {
         var unit = document.getElementById('duration_units');
-        if (isVisible(unit)) {
-            var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-            document.getElementById('duration_minimum').textContent = unitValue;
-            if(selected_duration.amount && selected_duration.unit > unitValue){
-                unitValue = selected_duration.amount;
-            }
-            document.getElementById('duration_amount').value = unitValue;
-            displayExpiryType(unit.value);
-        } else {
-            displayExpiryType();
+        var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
+        document.getElementById('duration_minimum').textContent = unitValue;
+        if(selected_duration.amount && selected_duration.unit > unitValue){
+            unitValue = selected_duration.amount;
         }
+        document.getElementById('duration_amount').value = unitValue;
+        displayExpiryType(unit.value);
 
         // jquery for datepicker
         var amountElement = $('#duration_amount');
@@ -64404,7 +64404,10 @@ var Price = (function() {
             if (!endTime2) {
                 var trading_times = Durations.trading_times();
                 if (trading_times.hasOwnProperty(endDate2) && typeof trading_times[endDate2][underlying.value] === 'object' && trading_times[endDate2][underlying.value].length && trading_times[endDate2][underlying.value][0] !== '--') {
-                    endTime2 = trading_times[endDate2][underlying.value];
+                    if( trading_times[endDate2][underlying.value].length>1)
+                        endTime2 = trading_times[endDate2][underlying.value][1];
+                    else
+                         endTime2=trading_times[endDate2][underlying.value];
                 }
             }
 
@@ -66340,7 +66343,7 @@ pjax_config_page("cashier/account_transferws", function() {
         virtualTopupID = '#VRT_topup_link';
         authButtonID   = '#authenticate_button';
 
-        loginid = $.cookie('loginid');
+        loginid = page.client.loginid || $.cookie('loginid');
         isReal = !(/VRT/.test(loginid));
 
         BinarySocket.send({"get_settings": 1});
@@ -66368,6 +66371,7 @@ pjax_config_page("cashier/account_transferws", function() {
             if(get_settings.is_authenticated_payment_agent) {
                 $('#payment_agent').removeClass(hiddenClass);
             }
+            showNoticeMsg();
         }
 
         addGTMDataLayer(get_settings);
@@ -66384,6 +66388,7 @@ pjax_config_page("cashier/account_transferws", function() {
                     (text.localize('Deposit %1 virtual money into your account ') + loginid)
                     .replace('%1', response.balance.currency + ' 10000')
                 );
+            $(virtualTopupID).removeClass(hiddenClass);
         }
     };
 
@@ -66409,13 +66414,10 @@ pjax_config_page("cashier/account_transferws", function() {
 
         setCookie('allowed_markets', allowed_markets.length === 0 ? '' : allowed_markets.join(','));
         recheckLegacyTradeMenu();
-
-        showNoticeMsg();
     };
 
     var responsePayoutCurrencies = function (response) {
-        var currencies = {'client.currencies': response.payout_currencies};
-        setCookie('settings', JSON.stringify(currencies));
+        Settings.set('client.currencies', response.hasOwnProperty('payout_currencies') ? response.payout_currencies : '');
     };
 
     var shoWelcomeMessage = function(landing_company) {
@@ -66429,9 +66431,6 @@ pjax_config_page("cashier/account_transferws", function() {
                 ' (' + loginid + ').'
             )
             .removeClass(hiddenClass);
-
-        $('#cashier-portfolio').removeClass(hiddenClass);
-        $('#profit-statement').removeClass(hiddenClass);
     };
 
     var showNoticeMsg = function() {
@@ -66478,7 +66477,7 @@ pjax_config_page("cashier/account_transferws", function() {
                     'new_account' : 
                     page.url.param('login') ?
                         'log_in' :
-                        'page_load'; //TODO: pjax?
+                        'page_load';
 
             dataLayer.push(data);
             window.history.replaceState('My Account', title, newUrl);
@@ -66750,6 +66749,7 @@ pjax_config_page("payment_agent_listws", function() {
         minAmount,
         maxAmount;
 
+    var verificationCode;
 
     var init = function() {
         containerID = '#paymentagent_withdrawal';
@@ -66778,7 +66778,11 @@ pjax_config_page("payment_agent_listws", function() {
         }
 
         if ($.cookie('verify_token')) {
-          $.removeCookie($.cookie('verify_token'), {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+          verificationCode = $.cookie('verify_token');
+          $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        } else {
+          showPageError(Content.localize().textTokenMissing, Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('paymentagent/request_withdrawws')));
+          return false;
         }
 
         var residence = $.cookie('residence');
@@ -66896,14 +66900,14 @@ pjax_config_page("payment_agent_listws", function() {
     // ----------------------------
     var withdrawRequest = function(isDryRun) {
         var dry_run = isDryRun ? 1 : 0;
-
         BinarySocket.send({
             "paymentagent_withdraw" : 1,
             "paymentagent_loginid"  : formData.agent,
             "currency"    : formData.currency,
             "amount"      : formData.amount,
             "description" : formData.desc,
-            "dry_run"     : dry_run
+            "dry_run"     : dry_run,
+            "verification_code": verificationCode
         });
     };
 
@@ -66956,9 +66960,12 @@ pjax_config_page("payment_agent_listws", function() {
     // -----------------------------
     // ----- Message Functions -----
     // -----------------------------
-    var showPageError = function(errMsg) {
+    var showPageError = function(errMsg, noticeMsg) {
         setActiveView(viewIDs.error);
         $(viewIDs.error + ' > p').html(errMsg);
+        if (noticeMsg) {
+          $(viewIDs.error).append($('<p/>', {html: noticeMsg}));
+        }
     };
 
     var showError = function(fieldID, errMsg) {
@@ -67813,7 +67820,7 @@ var Table = (function(){
   return {
     onLoad: function() {
       $('#client_email').html(page.user.email);
-      BinarySocket.send({verify_email:page.user.email, type:'payment_agent_withdrawal'});
+      BinarySocket.send({verify_email:page.user.email, type:'paymentagent_withdraw'});
     }
   };
 });
@@ -68111,7 +68118,7 @@ var ProfitTableUI = (function(){
       }
       for (i = 0; i < page.user.loginid_array.length; i++){
         if (page.user.loginid_array[i].real === true){
-          window.location.href = page.url.url_for('user/myaccount');
+          window.location.href = page.url.url_for('user/myaccountws');
           return;
         }
       }
@@ -68211,31 +68218,23 @@ var ProfitTableUI = (function(){
 ;var RealAccOpeningUI = (function(){
   "use strict";
 
-  function setValues(){
-    var dobdd    = document.getElementById('dobdd'),
-        dobmm    = document.getElementById('dobmm'),
-        dobyy    = document.getElementById('dobyy'),
-        state    = document.getElementById('address-state');
-
-    generateBirthDate(dobdd, dobmm, dobyy);
-    generateState(state);
-  }
-
   function showError(opt){
     $('#real-form').remove();
     var error = document.getElementsByClassName('notice-msg')[0];
     if (opt === 'duplicate') {
-      error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you do not remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>";
+      error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you do not remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>" + ".";
     } else {
       error.innerHTML = opt;
     }
     error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
+    return;
   }
 
   function hideAllErrors(allErrors) {
     for (i = 0; i < allErrors.length; i++) {
       allErrors[i].setAttribute('style', 'display:none');
     }
+    return;
   }
 
   function checkValidity(){
@@ -68414,12 +68413,10 @@ var ProfitTableUI = (function(){
       hideAllErrors(allErrors);
       return 1;
     }
-
     return 0;
   }
 
   return {
-    setValues: setValues,
     showError: showError,
     checkValidity: checkValidity
   };
@@ -68751,76 +68748,88 @@ var ViewBalanceUI = (function(){
           window.location.href = page.url.url_for('user/my_accountws');
           return;
       }
-      handle_residence_state_ws();
-      setResidenceWs();
       Content.populate();
-      var form = document.getElementById('virtual-form');
-      var errorEmail = document.getElementById('error-email'),
-          errorPassword = document.getElementById('error-password'),
-          errorRPassword = document.getElementById('error-r-password'),
-          errorResidence = document.getElementById('error-residence'),
-          errorAccount = document.getElementById('error-account-opening');
+      var virtualForm = $('#virtual-form');
+      if ($.cookie('verify_token')) {
+        handle_residence_state_ws();
+        setResidenceWs();
+        var form = document.getElementById('virtual-form');
+        var errorEmail = document.getElementById('error-email'),
+            errorPassword = document.getElementById('error-password'),
+            errorRPassword = document.getElementById('error-r-password'),
+            errorResidence = document.getElementById('error-residence'),
+            errorAccount = document.getElementById('error-account-opening');
 
-      if (isIE() === false) {
-        $('#password').on('input', function() {
-          $('#password-meter').attr('value', testPassword($('#password').val())[0]);
-        });
-      } else {
-        $('#password-meter').remove();
-      }
+        if (isIE() === false) {
+          $('#password').on('input', function() {
+            $('#password-meter').attr('value', testPassword($('#password').val())[0]);
+          });
+        } else {
+          $('#password-meter').remove();
+        }
 
-      if (form) {
-        $('#virtual-form').submit( function(evt) {
-          evt.preventDefault();
+        if (form) {
+          virtualForm.submit( function(evt) {
+            evt.preventDefault();
 
-          var email = document.getElementById('email').value,
-              residence = document.getElementById('residence').value,
-              password = document.getElementById('password').value,
-              rPassword = document.getElementById('r-password').value;
+            var email = document.getElementById('email').value,
+                residence = document.getElementById('residence').value,
+                password = document.getElementById('password').value,
+                rPassword = document.getElementById('r-password').value;
 
-          Validate.errorMessageResidence(residence, errorResidence);
-          Validate.errorMessageEmail(email, errorEmail);
-          Validate.hideErrorMessage(errorAccount);
+            Validate.errorMessageResidence(residence, errorResidence);
+            Validate.errorMessageEmail(email, errorEmail);
+            Validate.hideErrorMessage(errorAccount);
 
-          if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail) && !Validate.errorMessageResidence(residence, errorResidence)){
-            BinarySocket.init({
-              onmessage: function(msg){
-                var response = JSON.parse(msg.data);
-                if (response) {
-                  var type = response.msg_type;
-                  var error = response.error;
+            if (Validate.errorMessagePassword(password, rPassword, errorPassword, errorRPassword) && !Validate.errorMessageEmail(email, errorEmail) && !Validate.errorMessageResidence(residence, errorResidence)){
+              BinarySocket.init({
+                onmessage: function(msg){
+                  var response = JSON.parse(msg.data);
+                  if (response) {
+                    var type = response.msg_type;
+                    var error = response.error;
 
-                  if (type === 'new_account_virtual' && !error){
-                    form.setAttribute('action', '/login');
-                    form.setAttribute('method', 'POST');
-                    $('#virtual-form').unbind('submit');
-                    form.submit();
-                  } else if (type === 'error' || error){
-                    if (/account opening is unavailable/.test(error.message)) {
-                      errorAccount.textContent = error.message;
-                      Validate.displayErrorMessage(errorAccount);
-                      return;
-                    } else if (/email address is already in use/.test(error.message)) {
-                      errorEmail.textContent = Content.localize().textDuplicatedEmail;
-                    } else if (/email address is unverified/.test(error.message)) {
-                      errorEmail.textContent = text.localize('The re-entered email address is incorrect.');
-                    } else if (/not strong enough/.test(error.message)) {
-                      errorEmail.textContent = text.localize('Password is not strong enough.');
-                    } else if (error.details && error.details.verification_code) {
-                      if (/required/.test(error.details.verification_code)){
-                        errorEmail.textContent = Content.localize().textTokenMissing;
+                    if (type === 'new_account_virtual' && !error){
+                      form.setAttribute('action', '/login');
+                      form.setAttribute('method', 'POST');
+                      virtualForm.unbind('submit');
+                      form.submit();
+                    } else if (type === 'error' || error){
+                      if (/account opening is unavailable/.test(error.message)) {
+                        errorAccount.textContent = error.message;
+                        Validate.displayErrorMessage(errorAccount);
+                        return;
+                      } else if (/email address is already in use/.test(error.message)) {
+                        errorEmail.textContent = Content.localize().textDuplicatedEmail;
+                      } else if (/email address is unverified/.test(error.message)) {
+                        virtualForm.empty();
+                        var errorText = '<p class="errorfield">' + text.localize('The re-entered email address is incorrect.') + '</p>',
+                            noticeText = '<p>' + text.localize('Your token has been invalidated. Please click <a class="pjaxload" href="%1">here</a> to restart the verification process.').replace('%1', page.url.url_for('')) + '</p>';
+                        virtualForm.html(errorText + noticeText);
+                        return;
+                      } else if (/not strong enough/.test(error.message)) {
+                        errorEmail.textContent = text.localize('Password is not strong enough.');
+                      } else if (error.details && error.details.verification_code) {
+                        if (/required/.test(error.details.verification_code)){
+                          errorEmail.textContent = Content.localize().textTokenMissing;
+                        }
+                      } else if (error.message) {
+                        errorEmail.textContent = error.message;
                       }
-                    } else if (error.message) {
-                      errorEmail.textContent = error.message;
+                      Validate.displayErrorMessage(errorEmail);
                     }
-                    Validate.displayErrorMessage(errorEmail);
                   }
                 }
-              }
-            });
-            VirtualAccOpeningData.getDetails(email, password, residence);
-          }
-        });
+              });
+              VirtualAccOpeningData.getDetails(email, password, residence);
+            }
+          });
+        }
+      } else {
+        virtualForm.empty();
+        var errorText = '<p class="errorfield">' + Content.localize().textTokenMissing + '</p>',
+            noticeText = '<p>' + Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('')) + '</p>';
+        virtualForm.html(errorText + noticeText);
       }
     }
   };
@@ -68829,12 +68838,13 @@ var ViewBalanceUI = (function(){
     "use strict";
 
     function getDetails(email, password, residence){
+        var verificationCookie = $.cookie('verify_token');
         var req = {
                     new_account_virtual: 1,
                     email: email,
                     client_password: password,
                     residence: residence,
-                    verification_code: $.cookie('verify_token')
+                    verification_code: verificationCookie
                 };
 
         if ($.cookie('affiliate_tracking')) {
@@ -68842,6 +68852,9 @@ var ViewBalanceUI = (function(){
         }
 
         BinarySocket.send(req);
+        if (verificationCookie) {
+          $.removeCookie(verificationCookie, {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
+        }
     }
 
     return {
