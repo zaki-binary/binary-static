@@ -5,7 +5,6 @@ var RealityCheck = (function() {
     var defaultFrequencyInMin = 60;
     var baseTime = Date.now();
 
-    var isInit = false;
     var shouldRealityCheck = function() {
         return page.user.loginid_array.some(function (acc) {
             return acc.id.slice(0, 1) === 'M';
@@ -47,8 +46,12 @@ var RealityCheck = (function() {
             updateFrequency(e.target.value);
         });
 
-        lightboxDiv.find('#continue').click(closePopUp);
+        lightboxDiv.find('#continue').click(function() {
+            LocalStore.set('reality_check.ack', 1);
+            closePopUp();
+        });
         lightboxDiv.find('#btn_logout').click(function(){
+            LocalStore.set('reality_check.ack', 0);
             BinarySocket.send({"logout": "1"});
         });
     }
@@ -58,7 +61,7 @@ var RealityCheck = (function() {
     }
 
     function popUpFrequency() {
-        if(!shouldRealityCheck()) {
+        if(!shouldRealityCheck() || LocalStore.get('reality_check.ack') === '1') {
             return;
         }
 
@@ -103,12 +106,10 @@ var RealityCheck = (function() {
     }
 
     function init() {
-        // prevent accident reinitialization
-        if (isInit) {
-            return;
+        if (LocalStore.get('reality_check.ack') > 1) {
+            LocalStore.set('reality_check.ack', 0);
         }
 
-        isInit = true;
         popUpFrequency();
         popUpWhenIntervalHit();
     }
