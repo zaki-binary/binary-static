@@ -3,24 +3,21 @@ var RealityCheck = (function() {
     var reality_check_url = page.url.url_for('user/reality_check');
     var reality_freq_url  = page.url.url_for('user/reality_check_frequency');
     var defaultFrequencyInMin = 60;
-    var baseTime = Date.now();
+    var loginTime;
 
-    var shouldRealityCheck = function() {
-        return page.user.loginid_array.some(function (acc) {
-            return acc.id.slice(0, 1) === 'M';
-        });
-    };
+    function computeIntervalForNextPopup(loginTime, interval) {
+        var currentTime = Date.now();
+        var timeLeft = interval - ((currentTime - loginTime) % interval);
+        return timeLeft;
+    }
 
     function currentFrequencyInMS() {
-        if (!LocalStore.get('reality_check.interval')) {
+        var currentInterval = LocalStore.get('reality_check.interval');
+        if (!currentInterval) {
             LocalStore.set('reality_check.interval', defaultFrequencyInMin * 60 * 1000);
             return defaultFrequencyInMin * 60 * 1000;
         }
-        return LocalStore.get('reality_check.interval');
-    }
-
-    function currentTimeInMS() {
-        return Date.now();
+        return currentInterval;
     }
 
     function updateFrequency(min) {
@@ -58,10 +55,12 @@ var RealityCheck = (function() {
 
     function closePopUp() {
         $('#reality-check').remove();
+        LocalStore.set('reality_check.close', 'true');
+        popUpWhenIntervalHit();         // start timer only after user click continue trading
     }
 
     function popUpFrequency() {
-        if(!shouldRealityCheck() || LocalStore.get('reality_check.ack') === '1') {
+        if(LocalStore.get('reality_check.ack') === '1') {
             return;
         }
 
@@ -71,9 +70,6 @@ var RealityCheck = (function() {
             dataType: 'html',
             success: function(realityFreqText) {
                 displayPopUp($(realityFreqText));
-            },
-            error: function (xhr) {
-                if (xhr.status === 404) return;
             }
         });
     }
@@ -83,32 +79,37 @@ var RealityCheck = (function() {
             url: reality_check_url,
             dataType: 'html',
             success: function(realityCheckText) {
-                var realityCheckDiv = $(realityCheckText);
-                var loginDate = new Date(realityCheckDiv.find('#login-time > p').text());
-
-                // should update session duration too
-
-                displayPopUp(realityCheckDiv);
-            },
-            error: function (xhr) {
-                if (xhr.status === 404) return;
+                displayPopUp($(realityCheckText));
+                LocalStore.set('reality_check.close', 'false');
             }
         });
     }
 
     function popUpWhenIntervalHit() {
-        window.setInterval(function() {
-            if ((currentTimeInMS() - baseTime) >= currentFrequencyInMS() && shouldRealityCheck()) {
-                baseTime = Date.now();
-                popUpRealityCheck();
-            }
-        }, 10000);
+        var interval = LocalStore.get('reality_check.interval');
+
+        window.setTimeout(function() {
+            popUpRealityCheck();
+        }, computeIntervalForNextPopup(loginTime, interval));
+    }
+
+    function popUpCloseHandler(ev) {
+        console.log('st', ev);
+        if (ev.key === 'reality_check.close' && ev.newValue === 'true') {
+            closePopUp();
+        } else if (ev.key === 'reality_check.interval') {
+            $('#realityDuration').val(currentFrequencyInMS() / 60 / 1000);
+        }
     }
 
     function init() {
+        // to change old interpretation of reality_check
         if (LocalStore.get('reality_check.ack') > 1) {
             LocalStore.set('reality_check.ack', 0);
         }
+
+        loginTime = getCookieItem('reality_check').split(',')[1] * 1000;
+        window.addEventListener('storage', popUpCloseHandler, true);
 
         popUpFrequency();
         popUpWhenIntervalHit();
@@ -118,11 +119,3 @@ var RealityCheck = (function() {
         init: init
     };
 }());
-
-pjax_config_page(/user\/my_accountws\?loginid=/, function() {
-    return {
-        onLoad: function() {
-            RealityCheck.init();
-        }
-    };
-});
