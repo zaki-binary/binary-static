@@ -21,12 +21,13 @@ var RealityCheck = (function() {
     }
 
     function updateFrequency(mins) {
+        var ms;
         if (mins > 9999) {
             $('#realityDuration').val(9999);
-            var ms = 9999 * 60 * 1000;
+            ms = 9999 * 60 * 1000;
             LocalStore.set('reality_check.interval', ms);
         } else {
-            var ms = mins * 60 * 1000;
+            ms = mins * 60 * 1000;
             LocalStore.set('reality_check.interval', ms);
         }
     }
