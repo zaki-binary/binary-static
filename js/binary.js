@@ -61676,10 +61676,12 @@ var TradingAnalysis = (function() {
                 }
             } else {
                 if (currentTab == 'tab_last_digit') {
+                    var underlying = $('[name=underlying] option:selected').val() || $('#underlying option:selected').val();
+                    var tick = $('[name=tick_count]').val() || 100;
                     trading_digit_info = BetAnalysis.tab_last_digitws;
-                    var request = JSON.parse('{"ticks_history":"'+ $('#underlying option:selected').val() +'",'+
+                    var request = JSON.parse('{"ticks_history":"'+ underlying +'",'+
                                               '"end": "latest",'+
-                                              '"count": 100,'+
+                                              '"count": '+ tick +','+
                                               '"req_id": 1}');
                     BinarySocket.send(request);
                 } else{
@@ -62041,22 +62043,26 @@ BetAnalysis.DigitInfoWS.prototype = {
             console.log("Unexpected error occured in the charts.");
             return;
         }
-        this.chart_config.xAxis.title = {
-            text: $('#last_digit_title').html().replace('%2', $('[name=underlying] option:selected').text()).replace('%1',spots.length),
-        };
+        
         var dec = spots[0].split('.')[1].length;
         for(i=0;i<spots.length;i++){
             var val = parseFloat(spots[i]).toFixed(dec);
             spots[i]=val.substr(val.length-1);
         }
         this.spots = spots;
-        if(this.chart){
+        if(this.chart &&  $('#last_digit_histo').html()){
             this.chart.xAxis[0].setTitle(this.chart_config.xAxis.title);
             this.chart.series[0].name = underlying;
         }
         else{
+            this.add_content();
+            this.chart_config.xAxis.title = {
+                text: $('#last_digit_title').html().replace('%2', $('[name=underlying] option:selected').text()).replace('%1',spots.length),
+            };
             this.chart = new Highcharts.Chart(this.chart_config);
             this.chart.addSeries({name : underlying, data: []});
+            this.on_latest();
+            this.stream_id = null;
         }
         this.update();
     },
@@ -64621,11 +64627,7 @@ var Message = (function () {
                 processTick(response);
             } else if (type === 'history') {
                 var digit_info = TradingAnalysis.digit_info();
-                if(response.req_id === 1){
-                    digit_info.add_content();
-                    digit_info.on_latest();
-                    digit_info.show_chart(sessionStorage.getItem('underlying'), response.history.prices);
-                } else if(response.req_id === 2){
+                if(response.req_id === 1 || response.req_id === 2){
                     digit_info.show_chart(response.echo_req.ticks_history, response.history.prices);
                 } else
                     Tick.processHistory(response);
