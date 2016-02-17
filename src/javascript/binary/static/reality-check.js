@@ -20,9 +20,15 @@ var RealityCheck = (function() {
         return currentInterval;
     }
 
-    function updateFrequency(min) {
-        var ms = min * 60 * 1000;
-        LocalStore.set('reality_check.interval', ms);
+    function updateFrequency(mins) {
+        if (mins > 9999) {
+            $('#realityDuration').val(9999);
+            var ms = 9999 * 60 * 1000;
+            LocalStore.set('reality_check.interval', ms);
+        } else {
+            var ms = mins * 60 * 1000;
+            LocalStore.set('reality_check.interval', ms);
+        }
     }
 
     function displayPopUp(div) {
