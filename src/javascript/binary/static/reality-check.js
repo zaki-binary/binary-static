@@ -68,8 +68,12 @@ var RealityCheck = (function() {
         $.ajax({
             url: reality_freq_url,
             dataType: 'html',
+            method: 'POST',
             success: function(realityFreqText) {
                 displayPopUp($(realityFreqText));
+            },
+            error: function(xhr) {
+                return;
             }
         });
     }
@@ -78,9 +82,13 @@ var RealityCheck = (function() {
         $.ajax({
             url: reality_check_url,
             dataType: 'html',
+            method: 'POST',
             success: function(realityCheckText) {
                 displayPopUp($(realityCheckText));
                 LocalStore.set('reality_check.close', 'false');
+            },
+            error: function(xhr) {
+                return;
             }
         });
     }
@@ -94,7 +102,6 @@ var RealityCheck = (function() {
     }
 
     function popUpCloseHandler(ev) {
-        console.log('st', ev);
         if (ev.key === 'reality_check.close' && ev.newValue === 'true') {
             closePopUp();
         } else if (ev.key === 'reality_check.interval') {
@@ -108,7 +115,8 @@ var RealityCheck = (function() {
             LocalStore.set('reality_check.ack', 0);
         }
 
-        loginTime = getCookieItem('reality_check').split(',')[1] * 1000;
+        var rcCookie = getCookieItem('reality_check');
+        loginTime = rcCookie && rcCookie.split(',')[1] * 1000;
         window.addEventListener('storage', popUpCloseHandler, true);
 
         popUpFrequency();
