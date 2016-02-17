@@ -50676,20 +50676,37 @@ Header.prototype = {
     do_logout : function(response){
         if("logout" in response && response.logout === 1){
             sessionStorage.setItem('currencies', '');
-            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token', 'affiliate_tracking'];
-            var current_domain = '.' + document.domain.split('.').slice(-2).join('.');
+            var cookies = ['login', 'loginid', 'loginid_list', 'email', 'settings', 'reality_check', 'affiliate_token', 'affiliate_tracking', 'residence', 'allowed_markets'];
+            var current_domain = ['.' + document.domain.split('.').slice(-2).join('.'), document.domain];
+            var cookie_path = ['/'];
+            if (window.location.pathname.split('/')[1] !== '') {
+              cookie_path.push('/' + window.location.pathname.split('/')[1]);
+            }
+            var regex;
             cookies.map(function(c){
-                $.removeCookie(c, {path: '/', domain: current_domain});
+              regex = new RegExp(c);
+              $.removeCookie(c, {path: cookie_path[0], domain: current_domain[0]});
+              $.removeCookie(c);
+              if (regex.test(document.cookie) && cookie_path[1]) {
+                  $.removeCookie(c, {path: cookie_path[1], domain: current_domain[0]});
+                  $.removeCookie(c, {path: cookie_path[1]});
+              }
             });
-
             var redirectPage;
+                redirectCheck = 1;
             if(response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.hasOwnProperty('redirect')) {
                 redirectPage = response.echo_req.passthrough.redirect;
+                regex = new RegExp(redirectPage);
+                if (regex.test(window.location.pathname)) {
+                  redirectCheck = 0;
+                }
             }
             else {
                 redirectPage = ''; //redirect to homepage
             }
-            window.location.href = page.url.url_for(redirectPage);
+            if (redirectCheck) {
+              window.location.href = page.url.url_for(redirectPage);
+            }
         }
     },
 };
@@ -57891,6 +57908,7 @@ BetForm.Time.EndTime.prototype = {
                     height: config.minimize ? 143 : null,
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
+                    marginLeft: 20,
                 },
                 credits: {enabled: false},
                 tooltip: {
@@ -58019,6 +58037,7 @@ BetForm.Time.EndTime.prototype = {
                     label: {text: 'Barrier ('+barrier_tick.quote+')', align: 'center'},
                     color: 'green',
                     width: 2,
+                    zIndex: 2,
                 });
                 $self.contract_barrier = barrier_tick.quote;
                 $self.set_barrier = false;
@@ -58042,6 +58061,7 @@ BetForm.Time.EndTime.prototype = {
                         align: 'center'
                     },
                     width: 2,
+                    zIndex: 2,
                 });
                 $self.contract_barrier = calc_barrier;
             }
@@ -58052,9 +58072,10 @@ BetForm.Time.EndTime.prototype = {
             $self.chart.xAxis[0].addPlotLine({
                value: indicator.index,
                id: indicator.id,
-               label: {text: indicator.label},
+               label: {text: indicator.label, x: /start_tick|entry_tick/.test(indicator.id) ? -15 : 5},
                color: '#e98024',
                width: 2,
+               zIndex: 2,
             });
         },
         evaluate_contract_outcome: function() {
@@ -60355,6 +60376,16 @@ pjax_config_page('/user/myaccount', function() {
         },
     };
 });
+
+pjax_config_page('/login', function() {
+    return {
+        onLoad: function() {
+            if (page.user.is_logged_in) {
+              window.location.href = page.url.url_for('user/my_accountws');
+            }
+        }
+    };
+});
 ;/*
  *  This is developed to simplify the usage of enjoyhint (https://github.com/xbsoftware/enjoyhint) 
  *
@@ -61383,7 +61414,7 @@ pjax_config_page("asset_indexws", function() {
         var $contents = $('<div/>');
 
         for(var m = 0; m < markets.length; m++) {
-            var tabID = 'tradingtimes-' + markets[m].name.toLowerCase();
+            var tabID = 'market_' + (m + 1);
 
             // tabs
             if(!isJapan) {
