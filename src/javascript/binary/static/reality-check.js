@@ -35,6 +35,7 @@ var RealityCheck = (function() {
         if ($('#reality-check').length > 0) {
             return;
         }
+        LocalStore.set('reality_check.close', 'false');
         var lightboxDiv = $("<div id='reality-check' class='lightbox'></div>");
 
         var wrapper = $('<div></div>');
@@ -91,7 +92,6 @@ var RealityCheck = (function() {
             method: 'POST',
             success: function(realityCheckText) {
                 displayPopUp($(realityCheckText));
-                LocalStore.set('reality_check.close', 'false');
             },
             error: function(xhr) {
                 return;
@@ -111,7 +111,7 @@ var RealityCheck = (function() {
         if (ev.key === 'reality_check.close' && ev.newValue === 'true') {
             closePopUp();
         } else if (ev.key === 'reality_check.interval') {
-            $('#realityDuration').val(currentFrequencyInMS() / 60 / 1000);
+            $('#realityDuration').val(ev.newValue / 60 / 1000);
         }
     }
 
@@ -123,7 +123,7 @@ var RealityCheck = (function() {
 
         var rcCookie = getCookieItem('reality_check');
         loginTime = rcCookie && rcCookie.split(',')[1] * 1000;
-        window.addEventListener('storage', popUpCloseHandler, true);
+        window.addEventListener('storage', popUpCloseHandler, false);
 
         popUpFrequency();
         popUpWhenIntervalHit();
