@@ -46,7 +46,7 @@ var RealityCheck = (function() {
 
         var inputBox = lightboxDiv.find('#realityDuration');
         inputBox.val(currentFrequencyInMS() / 60 / 1000);
-        inputBox.change(function(e) {
+        inputBox.keyup(function(e) {
             updateFrequency(e.target.value);
         });
 
