@@ -236,7 +236,7 @@ var TradingEvents = (function () {
         if (amountElement) {
             amountElement.addEventListener('keypress', function(e) {
                 var key = e.keyCode || e.which;
-                if( !/[0-9]|\./.test(String.fromCharCode(key)) && [37,39,8].indexOf(key) < 0 ) {
+                if(!/[0-9\.]/.test(String.fromCharCode(key))) {
                     e.returnValue = false;
                     e.preventDefault();
                 }
