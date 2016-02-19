@@ -234,6 +234,14 @@ var TradingEvents = (function () {
          */
         var amountElement = document.getElementById('amount');
         if (amountElement) {
+            amountElement.addEventListener('keypress', function(e) {
+                var key = e.keyCode || e.which;
+                if( !/[0-9]|\./.test(String.fromCharCode(key)) && [37,39,8].indexOf(key) < 0 ) {
+                    e.returnValue = false;
+                    e.preventDefault();
+                }
+            });
+
             amountElement.addEventListener('input', debounce( function(e) {
                 e.target.value = e.target.value.replace(/[^0-9.]/g, '');
                 if (isStandardFloat(e.target.value)) {
