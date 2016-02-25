@@ -58792,7 +58792,7 @@ pjax_config_page('user/assessment', function() {
         // Hide form if tokens count reached the maximum limit
         if(api_token.tokens.length >= maxTokens) { 
             $('#token_form').addClass(hideClass);
-            showMessage(text.localize('The maximum number of tokens (%1) has been reached.').replace('%1', maxTokens), false);
+            showMessage(text.localize('The maximum number of tokens ([_1]) has been reached.').replace('[_1]', maxTokens), false);
         }
         else {
             $('#token_form').removeClass(hideClass);
@@ -59417,7 +59417,7 @@ ClientForm.prototype = {
                     showError(key, text.localize('Please enter an integer value'));
                 }
                 else if(currentValue > 0 && (newValue.length === 0 || isLargerInt(newValue, currentValue))) {
-                    showError(key, text.localize('Please enter a number between 0 and %1').replace('%1', currentValue));
+                    showError(key, text.localize('Please enter a number between 0 and [_1]').replace('[_1]', currentValue));
                 }
                 else if(key === 'session_duration_limit' && newValue > (6 * 7 * 24 * 60)) {
                     showError(key, text.localize('Session duration limit cannot be more than 6 weeks.'));
@@ -62048,11 +62048,11 @@ BetAnalysis.DigitInfoWS.prototype = {
                         '<div id="last_digit_histo_form" class="grd-grid-8 grd-grid-mobile-12 grd-centered">'+
                         '<form class=smallfont action="'+ page.url.url_for('trade/last_digit_info') +'" method="post">'+
                         '<div class="grd-grid-mobile-12">'+ text.localize('Select market')+' : ' + elem +' </div>'+
-                        '<div class="grd-grid-mobile-12">'+ text.localize('Number of ticks ')+': <select class="smallfont" name="tick_count"><option value="25">25</option><option value="50">50</option><option selected="selected" value="100">100</option><option value="500">500</option><option value="1000">1000</option></select></div>'+
+                        '<div class="grd-grid-mobile-12">'+ text.localize('Number of ticks')+' : <select class="smallfont" name="tick_count"><option value="25">25</option><option value="50">50</option><option selected="selected" value="100">100</option><option value="500">500</option><option value="1000">1000</option></select></div>'+
                         '</form>'+
                         '</div>'+
                         '<div id="last_digit_histo" class="grd-grid-8 grd-grid-mobile-12 grd-centered"></div>'+
-                        '<div id="last_digit_title" class="grd-hide">'+ text.localize(domain.replace(domain[0],domain[0].toUpperCase()) +' - Last digit stats for the latest %1 ticks on %2') +'</div>'+
+                        '<div id="last_digit_title" class="grd-hide">'+ (domain.charAt(0).toUpperCase() + domain.slice(1)) + ' - ' + text.localize('Last digit stats for the latest [_1] ticks on [_2]') +'</div>'+
                         '</div>';
         contentId.innerHTML = content;
         $('[name=underlying]').val($('#underlying option:selected').val());
@@ -62106,7 +62106,7 @@ BetAnalysis.DigitInfoWS.prototype = {
         else{
             this.add_content();
             this.chart_config.xAxis.title = {
-                text: $('#last_digit_title').html().replace('%2', $('[name=underlying] option:selected').text()).replace('%1',spots.length),
+                text: $('#last_digit_title').html().replace('[_2]', $('[name=underlying] option:selected').text()).replace('[_1]',spots.length),
             };
             this.chart = new Highcharts.Chart(this.chart_config);
             this.chart.addSeries({name : underlying, data: []});
@@ -63246,15 +63246,15 @@ function chartFrameSource(underlying, highchart_time){
             textMaxAggregateTooltip: text.localize('Presents the maximum aggregate payouts on outstanding contracts in your portfolio. If the maximum is attained, you may not purchase additional contracts without first closing out existing positions.'),
             textTradingLimits: text.localize('Trading Limits'),
             textWithdrawalTitle: text.localize('Withdrawal Limits'),
-            textWithdrawalLimits: text.localize('Your withdrawal limit is EUR %1 (or equivalent in other currency).'),
-            textWithrawalAmount: text.localize('You have already withdrawn the equivalent of EUR %1'),
-            textDayWithdrawalLimit: text.localize('Your %1 day withdrawal limit is currently EUR %2 (or equivalent in other currency).'),
+            textWithdrawalLimits: text.localize('Your withdrawal limit is EUR [_1] (or equivalent in other currency).'),
+            textWithrawalAmount: text.localize('You have already withdrawn the equivalent of EUR [_1]'),
+            textDayWithdrawalLimit: text.localize('Your [_1] day withdrawal limit is currently EUR [_2] (or equivalent in other currency).'),
             textAuthenticatedWithdrawal: text.localize('Your account is fully authenticated and your withdrawal limits have been lifted.'),
             textAggregateOverLast: text.localize('in aggregate over the last'),
-            textWithdrawalForEntireDuration: text.localize('Your withdrawal limit for the entire duration of the account is currently: EUR %1 (or equivalent in other currency).'),
+            textWithdrawalForEntireDuration: text.localize('Your withdrawal limit for the entire duration of the account is currently: EUR [_1] (or equivalent in other currency).'),
             textInAggregateOverLifetime: text.localize('in aggregate over the lifetime of your account.'),
             textNotAllowedToWithdraw: text.localize('Therefore you may not withdraw any additional funds.'),
-            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR %1 (or equivalent in other currency).'),
+            textCurrentMaxWithdrawal: text.localize('Therefore your current immediate maximum withdrawal (subject to your account having sufficient funds) is EUR [_1] (or equivalent in other currency).'),
             textBuyPrice: text.localize('Buy price'),
             textFinalPrice: text.localize('Final price'),
             textLoss: text.localize('Loss'),
@@ -63263,9 +63263,9 @@ function chartFrameSource(underlying, highchart_time){
             textFormEvenOdd: text.localize('Even/Odd'),
             textFormOverUnder: text.localize('Over/Under'),
             textMessageRequired: text.localize('This field is required.'),
-            textMessageCountLimit: text.localize('You should enter between %1 characters.'), // %LIMIT% should be replaced by a range. sample: (6-20)
-            textMessageJustAllowed: text.localize('Only %1 are allowed.'), // %ALLOWED% should be replaced by values including: letters, numbers, space, period, ...
-            textMessageValid: text.localize('Please submit a valid %1.'), // %FIELD% should be replaced by values such as email address
+            textMessageCountLimit: text.localize('You should enter between [_1] characters.'), // [_1] should be replaced by a range. sample: (6-20)
+            textMessageJustAllowed: text.localize('Only [_1] are allowed.'), // [_1] should be replaced by values including: letters, numbers, space, period, ...
+            textMessageValid: text.localize('Please submit a valid [_1].'), // [_1] should be replaced by values such as email address
             textLetters: text.localize('letters'),
             textNumbers: text.localize('numbers'),
             textSpace: text.localize('space'),
@@ -63276,7 +63276,7 @@ function chartFrameSource(underlying, highchart_time){
             textPassword: text.localize('password'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
             textTokenMissing: text.localize('Verification token is missing.'),
-            textClickHereToRestart: text.localize('Please click on the verification link sent to your email, or click <a class="pjaxload" href="%1">here</a> to restart the verification process.'),
+            textClickHereToRestart: text.localize('Please click on the verification link sent to your email, or click <a class="pjaxload" href="[_1]">here</a> to restart the verification process.'),
             textDuplicatedEmail: text.localize('Your provided email address is already in use by another Login ID'),
             textAsset: text.localize('Asset'),
             textOpens: text.localize('Opens'),
@@ -63293,9 +63293,9 @@ function chartFrameSource(underlying, highchart_time){
             textErrorBirthdate: text.localize('Please input a valid date'),
             textSelect: text.localize('Please select'),
             textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
-            textMessageMinRequired: text.localize('Minimum of %1 characters required.'),
+            textMessageMinRequired: text.localize('Minimum of [_1] characters required.'),
             textFeatureUnavailable: text.localize('Sorry, this feature is not available.'),
-            textMessagePasswordScore: text.localize( 'Password score is: %1. Passing score is: 20.')
+            textMessagePasswordScore: text.localize( 'Password score is: [_1]. Passing score is: 20.')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -63465,23 +63465,23 @@ function chartFrameSource(underlying, highchart_time){
                 break;
             case 'reg':
                 if(param)
-                    msg = localize.textMessageJustAllowed.replace('%1', param.join(separator));
+                    msg = localize.textMessageJustAllowed.replace('[_1]', param.join(separator));
                 break;
             case 'range':
                 if(param)
-                    msg = localize.textMessageCountLimit.replace('%1', param);
+                    msg = localize.textMessageCountLimit.replace('[_1]', param);
                 break;
             case 'valid':
                 if(param)
-                    msg = localize.textMessageValid.replace('%1', param);
+                    msg = localize.textMessageValid.replace('[_1]', param);
                 break;
             case 'min':
                 if(param)
-                    msg = localize.textMessageMinRequired.replace('%1', param);
+                    msg = localize.textMessageMinRequired.replace('[_1]', param);
                 break;
             case 'pass':
                 if(param)
-                    msg = localize.textMessagePasswordScore.replace('%1', param);
+                    msg = localize.textMessagePasswordScore.replace('[_1]', param);
                 break;
             default:
                 break;
@@ -66504,12 +66504,13 @@ pjax_config_page("cashier/account_transferws", function() {
         var landing_company = page.client.get_storage_value('landing_company_name');
         $(welcomeTextID)
             .text(
-                (text.localize(
+                text.localize(
                     isReal ? 
-                        "You're currently logged in to your real money account with %1" : 
-                        "You're currently logged in to your virtual money account"
-                ).replace('%1', landing_company || '') + 
-                ' (' + loginid + ').').replace(/\s\s+/g, ' ')
+                        'You are currently logged in to your real money account with [_1] ([_2]).' : 
+                        'You are currently logged in to your virtual money account ([_2]).'
+                )
+                    .replace('[_1]', landing_company || '')
+                    .replace('[_2]', loginid)
             )
             .removeClass(hiddenClass);
     };
@@ -66518,8 +66519,10 @@ pjax_config_page("cashier/account_transferws", function() {
         if(TUser.get().balance < 1000) {
             $(virtualTopupID + ' a')
                 .text(
-                    (text.localize('Deposit %1 virtual money into your account ') + loginid)
-                    .replace('%1', TUser.get().currency + ' 10000')
+                    text.localize('Deposit [_1] [_2] virtual money into your account [_3]')
+                        .replace('[_1]', TUser.get().currency)
+                        .replace('[_2]', ' 10000')
+                        .replace('[_3]', loginid)
                 );
             $(virtualTopupID).removeClass(hiddenClass);
         }
@@ -66580,13 +66583,13 @@ pjax_config_page("cashier/account_transferws", function() {
         });
 
         if(disabledAccount.length > 0) {
-            var msgSingular = text.localize('Your %1 account is unavailable. For any questions please contact <a href="%2">Customer Support</a>.'),
-                msgPlural   = text.localize('Your %1 accounts are unavailable. For any questions please contact <a href="%2">Customer Support</a>.');
+            var msgSingular = text.localize('Your [_1] account is unavailable. For any questions please contact <a href="[_2]">Customer Support</a>.'),
+                msgPlural   = text.localize('Your [_1] accounts are unavailable. For any questions please contact <a href="[_2]">Customer Support</a>.');
             $('<p/>', {class: 'notice-msg'})
                 .html(
                     (disabledAccount.length === 1 ? msgSingular : msgPlural)
-                        .replace('%1', disabledAccount.join(', '))
-                        .replace('%2', page.url.url_for('contact'))
+                        .replace('[_1]', disabledAccount.join(', '))
+                        .replace('[_2]', page.url.url_for('contact'))
                 )
                 .insertAfter($(welcomeTextID));
         }
@@ -66862,7 +66865,7 @@ pjax_config_page("payment_agent_listws", function() {
           verificationCode = $.cookie('verify_token');
           $.removeCookie('verify_token', {path: '/', domain: '.' + document.domain.split('.').slice(-2).join('.')});
         } else {
-          showPageError(Content.localize().textTokenMissing, Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('paymentagent/request_withdrawws')));
+          showPageError(Content.localize().textTokenMissing, Content.localize().textClickHereToRestart.replace('[_1]', page.url.url_for('paymentagent/request_withdrawws')));
           return false;
         }
 
@@ -67331,10 +67334,10 @@ pjax_config_page("user/settings/securityws", function() {
         }
         else{
             showMessage(
-                text.localize('%1 %2 has been credited to your Virtual money account %3')
-                    .replace('%1', response.topup_virtual.currency)
-                    .replace('%2', response.topup_virtual.amount)
-                    .replace('%3', loginID),
+                text.localize('[_1] [_2] has been credited to your Virtual money account [_3]')
+                    .replace('[_1]', response.topup_virtual.currency)
+                    .replace('[_2]', response.topup_virtual.amount)
+                    .replace('[_3]', loginID),
                 true);
         }
     };
@@ -67814,19 +67817,19 @@ var Table = (function(){
         if(limits['lifetime_limit'] === 99999999) {
             withdrawal_limit.textContent = Content.localize().textAuthenticatedWithdrawal;
         } else if(limits['num_of_days_limit'] === limits['lifetime_limit']) {
-            withdrawal_limit.textContent = Content.localize().textWithdrawalLimits.replace('%1', addComma(limits['num_of_days_limit']));
-            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', addComma(limits["withdrawal_since_inception_monetary"])) + '.';
+            withdrawal_limit.textContent = Content.localize().textWithdrawalLimits.replace('[_1]', addComma(limits['num_of_days_limit']));
+            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('[_1]', addComma(limits["withdrawal_since_inception_monetary"])) + '.';
         } else {
-            withdrawal_limit.textContent = Content.localize().textDayWithdrawalLimit.replace('%1', limits['num_of_days']).replace('%2', addComma(limits['num_of_days_limit']));
-            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('%1', limits['withdrawal_for_x_days_monetary']) + " " + Content.localize().textAggregateOverLast + " " + limits['num_of_days'] + " " + Content.localize().textDurationDays;
+            withdrawal_limit.textContent = Content.localize().textDayWithdrawalLimit.replace('[_1]', limits['num_of_days']).replace('[_2]', addComma(limits['num_of_days_limit']));
+            already_withdraw.textContent = Content.localize().textWithrawalAmount.replace('[_1]', limits['withdrawal_for_x_days_monetary']) + " " + Content.localize().textAggregateOverLast + " " + limits['num_of_days'] + " " + Content.localize().textDurationDays;
             if(limits["lifetime_limit"] < 99999999) {
-                withdrawal_limit_aggregate.textContent = Content.localize().textWithdrawalForEntireDuration.replace('%1', addComma(limits["lifetime_limit"]));
-                document.getElementById("already-withdraw-aggregate").textContent = Content.localize().textWithrawalAmount.replace('%1', addComma(limits["withdrawal_since_inception_monetary"])) + " " + Content.localize().textInAggregateOverLifetime;
+                withdrawal_limit_aggregate.textContent = Content.localize().textWithdrawalForEntireDuration.replace('[_1]', addComma(limits["lifetime_limit"]));
+                document.getElementById("already-withdraw-aggregate").textContent = Content.localize().textWithrawalAmount.replace('[_1]', addComma(limits["withdrawal_since_inception_monetary"])) + " " + Content.localize().textInAggregateOverLifetime;
             }
             if(limits['remainder'] === 0) {
                 withdrawal_limit_aggregate.textContent = Content.localize().textNotAllowedToWithdraw;
             } else if (limits['remainder'] !== 0) {
-                withdrawal_limit_aggregate.textContent = Content.localize().textCurrentMaxWithdrawal.replace('%1', addComma(limits['remainder']));
+                withdrawal_limit_aggregate.textContent = Content.localize().textCurrentMaxWithdrawal.replace('[_1]', addComma(limits['remainder']));
             }
 
         }
@@ -68953,6 +68956,7 @@ var ViewBalanceUI = (function(){
             return;
         }
 
+        TUser.get().balance = balance.balance;
         $("#balance").text(view);
     }
 
@@ -69023,7 +69027,7 @@ var ViewBalanceUI = (function(){
                       } else if (/email address is unverified/.test(error.message)) {
                         virtualForm.empty();
                         var errorText = '<p class="errorfield">' + text.localize('The re-entered email address is incorrect.') + '</p>',
-                            noticeText = '<p>' + text.localize('Your token has been invalidated. Please click <a class="pjaxload" href="%1">here</a> to restart the verification process.').replace('%1', page.url.url_for('')) + '</p>';
+                            noticeText = '<p>' + text.localize('Your token has been invalidated. Please click <a class="pjaxload" href="[_1]">here</a> to restart the verification process.').replace('[_1]', page.url.url_for('')) + '</p>';
                         virtualForm.html(errorText + noticeText);
                         return;
                       } else if (/not strong enough/.test(error.message)) {
@@ -69047,7 +69051,7 @@ var ViewBalanceUI = (function(){
       } else {
         virtualForm.empty();
         var errorText = '<p class="errorfield">' + Content.localize().textTokenMissing + '</p>',
-            noticeText = '<p>' + Content.localize().textClickHereToRestart.replace('%1', page.url.url_for('')) + '</p>';
+            noticeText = '<p>' + Content.localize().textClickHereToRestart.replace('[_1]', page.url.url_for('')) + '</p>';
         virtualForm.html(errorText + noticeText);
       }
     }
