@@ -53151,7 +53151,35 @@ pjax_config_page('/trade.cgi', function() {
                     document.addEventListener("visibilitychange", toggleStreaming);
                 }
             }
-
+            BinarySocket.init({
+                onmessage: function(msg) {
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        if (response.msg_type === "history") {
+                            TradingAnalysis.digit_info().show_chart(response.echo_req.ticks_history, response.history.prices);
+                            $('[name=underlying_symbol]').on('change', function(e){
+                                $('[name=underlying]').val($('[name=underlying_symbol] option:selected').val());
+                            });
+                        } else if (response.msg_type === "active_symbols") {
+                            Symbols.details(response);
+                            var underlying = $('[name=underlying_symbol] option:selected').val() || $('#underlying option:selected').val();
+                            var tick = $('[name=tick_count]').val() || 100;
+                            TradingAnalysis.set_digit_info(BetAnalysis.tab_last_digitws);
+                            var request = JSON.parse('{"ticks_history":"'+ underlying +'",'+
+                                                      '"end": "latest",'+
+                                                      '"count": '+ tick +','+
+                                                      '"subscribe": 1,'+
+                                                      '"req_id": 2}');
+                            BinarySocket.send(request);
+                        } else if(response.msg_type === "tick"){
+                            TradingAnalysis.digit_info().update_chart(response);
+                        }
+                    }
+                    else {
+                        console.log('some error occured');
+                    }
+                }
+            });
         },
         onUnload: function() {
             BetForm.unregister_actions();
@@ -53288,7 +53316,7 @@ pjax_config_page('trading', function () {
                         that.tab_explanation.render(tab);
                         shown_some_tab = true;
                     } else if(id == 'tab_last_digit') {
-                        that.tab_last_digit.render(tab);
+                        Symbols.getSymbols();
                         shown_some_tab = true;
                     } else if(id == 'tab_graph') {
                         that.tab_live_chart.render();
@@ -61798,6 +61826,10 @@ var TradingAnalysis = (function() {
         digit_info: function() {
             return trading_digit_info;
         },
+        // Should be removed with legacy trading.
+        set_digit_info: function(obj) {
+            trading_digit_info = obj;
+        },
         japan_info: function() {
             return tab_japan_info;
         },
@@ -62027,7 +62059,7 @@ var Barriers = (function () {
 };
 
 BetAnalysis.DigitInfoWS.prototype = {
-    add_content: function(){
+    add_content: function(underlying){
         var domain = document.domain.split('.').slice(-2).join('.'),
             underlyings =[];
         var symbols = Symbols.getAllSymbols();
@@ -62055,7 +62087,7 @@ BetAnalysis.DigitInfoWS.prototype = {
                         '<div id="last_digit_title" class="grd-hide">'+ (domain.charAt(0).toUpperCase() + domain.slice(1)) + ' - ' + text.localize('Last digit stats for the latest [_1] ticks on [_2]') +'</div>'+
                         '</div>';
         contentId.innerHTML = content;
-        $('[name=underlying]').val($('#underlying option:selected').val());
+        $('[name=underlying]').val(underlying);
         
     },
     on_latest: function() {
@@ -62075,7 +62107,8 @@ BetAnalysis.DigitInfoWS.prototype = {
                                         '"req_id": 2}');
             if(that.chart.series[0].name !== symbol){
                 if($('#underlying option:selected').val() != $('[name=underlying]', form).val()){
-                    request['subscribe']=1;
+                    request['subscribe'] = 1;
+                    request['style'] = "ticks";
                 }
                 if(that.stream_id !== null ){
                     BinarySocket.send(JSON.parse('{"forget": "'+ that.stream_id +'"}'));
@@ -62088,11 +62121,10 @@ BetAnalysis.DigitInfoWS.prototype = {
         $('[name=tick_count]', form).on('change',  get_latest ).addClass('unbind_later');
     },
     show_chart: function(underlying, spots) {
-        if(typeof spots === 'undefined'){
+        if(typeof spots === 'undefined' || spots.length <= 0){
             console.log("Unexpected error occured in the charts.");
             return;
         }
-        
         var dec = spots[0].split('.')[1].length;
         for(i=0;i<spots.length;i++){
             var val = parseFloat(spots[i]).toFixed(dec);
@@ -62100,11 +62132,15 @@ BetAnalysis.DigitInfoWS.prototype = {
         }
         this.spots = spots;
         if(this.chart &&  $('#last_digit_histo').html()){
-            this.chart.xAxis[0].setTitle(this.chart_config.xAxis.title);
+            this.chart.xAxis[0].update({
+                title:{
+                    text: $('#last_digit_title').html().replace('%2', $('[name=underlying] option:selected').text()).replace('%1',spots.length),
+                }
+            }, true);
             this.chart.series[0].name = underlying;
         }
         else{
-            this.add_content();
+            this.add_content(underlying);
             this.chart_config.xAxis.title = {
                 text: $('#last_digit_title').html().replace('[_2]', $('[name=underlying] option:selected').text()).replace('[_1]',spots.length),
             };
@@ -64139,7 +64175,7 @@ var TradingEvents = (function () {
             return 0;
         }
         $('#duration_units').val(value);
-
+        
         sessionStorage.setItem('duration_units',value);
         Durations.select_unit(value);
         Durations.populate();
@@ -64239,17 +64275,28 @@ var TradingEvents = (function () {
         /*
          * bind event to change in duration amount, request new price
          */
-        var durationAmountElement = document.getElementById('duration_amount');
+        function triggerOnDurationChange(e){
+            if (e.target.value % 1 !== 0 ) {
+                e.target.value = Math.floor(e.target.value);
+            }
+            sessionStorage.setItem('duration_amount',e.target.value);
+            Durations.select_amount(e.target.value);
+            processPriceRequest();
+            submitForm(document.getElementById('websocket_form'));
+        }
+        var durationAmountElement = document.getElementById('duration_amount'),
+            inputEventTriggered = false;          // For triggering one of the two events.
         if (durationAmountElement) {
             // jquery needed for datepicker
-            $('#duration_amount').on('input change', debounce(function (e) {
-                if (e.target.value % 1 !== 0 ) {
-                    e.target.value = Math.floor(e.target.value);
-                }
-                sessionStorage.setItem('duration_amount',e.target.value);
-                Durations.select_amount(e.target.value);
-                processPriceRequest();
-                submitForm(document.getElementById('websocket_form'));
+            $('#duration_amount').on('input', debounce(function (e) {
+                triggerOnDurationChange(e);
+                inputEventTriggered = true;
+            }));
+            $('#duration_amount').on('change', debounce(function (e) {
+                if(inputEventTriggered === false)
+                    triggerOnDurationChange(e);
+                else
+                    inputEventTriggered = false;
             }));
         }
 
