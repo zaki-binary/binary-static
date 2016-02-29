@@ -50467,7 +50467,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -58760,7 +58760,7 @@ pjax_config_page('user/assessment', function() {
 
 
     var init = function() {
-        columns = ['Name', 'Token', 'Last Used', 'Action'];
+        columns = ['Name', 'Token', 'Scopes', 'Last Used', 'Action'];
         errorClass  = 'errorfield';
         hideClass   = 'dynamic';
         tableContainer = '#tokens_list';
@@ -58818,7 +58818,7 @@ pjax_config_page('user/assessment', function() {
         }
 
         // Hide form if tokens count reached the maximum limit
-        if(api_token.tokens.length >= maxTokens) { 
+        if(api_token.tokens.length >= maxTokens) {
             $('#token_form').addClass(hideClass);
             showMessage(text.localize('The maximum number of tokens ([_1]) has been reached.').replace('[_1]', maxTokens), false);
         }
@@ -58857,23 +58857,36 @@ pjax_config_page('user/assessment', function() {
             e.preventDefault();
             e.stopPropagation();
             if(window.confirm(
-                text.localize('Are you sure that you want to permanently delete token') + 
+                text.localize('Are you sure that you want to permanently delete token') +
                 ': "' + $(this).parents('tr').find('td.name').text() + '"?')) {
                     deleteToken($(this).attr('id'));
             }
         });
     };
 
+    String.prototype.capitalizeFirstLetter = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    };
+
     var createTableRow = function(token) {
         var lastUsed = token.last_used ? token.last_used : text.localize('Never Used');
+        var scopes = token.scopes.map(function (v) {
+            return v.capitalizeFirstLetter();
+        });
+        // sort with Read, Trade, Payments, Admin
+        var scopes_i = {'Read': 0, 'Trade': 1, 'Payments': 2, 'Admin': 3};
+        scopes.sort(function(a, b) {
+            return scopes_i[a] > scopes_i[b];
+        });
         var $tableRow = Table.createFlexTableRow(
             [
                 token.display_name,
                 token.token,
+                scopes.join(', '),
                 lastUsed,
                 ''  // btnDelete
-            ], 
-            columns, 
+            ],
+            columns,
             "data"
         );
 
@@ -58909,16 +58922,23 @@ pjax_config_page('user/assessment', function() {
 
         var nameID  = '#txtName';
         var newName = $(nameID).val().trim();
-        
+
         var letters = Content.localize().textLetters,
             numbers = Content.localize().textNumbers,
             space   = Content.localize().textSpace;
-        
+
         // Token Name
         if(!isRequiredError(nameID) && !isCountError(nameID, 2, 32)){
             if(!(/^[a-zA-Z0-9\s\-]*$/).test(newName)) {
                 showError(nameID, Content.errorMessage('reg', [letters, numbers, space, '-']));
             }
+        }
+
+        var scopes = $('input:checkbox[name="scopes[]"]:checked').map(function () {
+            return this.value;
+        }).get();
+        if (scopes.length === 0) {
+            showError('#scopes', text.localize('Please select at least one scope.'));
         }
 
         return isValid ? newName : false;
@@ -58947,11 +58967,17 @@ pjax_config_page('user/assessment', function() {
     // ----- Actions Process -----
     // ---------------------------
     var createToken = function() {
-        var newName = formValidate();
-        if(newName !== false) {
+        var is_valid = formValidate();
+        if(is_valid !== false) {
+            var newName = $('#txtName').val().trim();
+            var scopes = $('input:checkbox[name="scopes[]"]:checked').map(function () {
+                return this.value;
+            }).get();
+
             BinarySocket.send({
                 "api_token" : 1,
-                "new_token" : newName
+                "new_token" : newName,
+                "new_token_scopes": scopes
             });
         }
     };
@@ -60128,7 +60154,20 @@ function dropDownNumbers(select, startNum, endNum) {
 }
 
 function dropDownMonths(select, startNum, endNum) {
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var months = [
+        text.localize("Jan"),
+        text.localize("Feb"),
+        text.localize("Mar"),
+        text.localize("Apr"),
+        text.localize("May"),
+        text.localize("Jun"),
+        text.localize("Jul"),
+        text.localize("Aug"),
+        text.localize("Sep"),
+        text.localize("Oct"),
+        text.localize("Nov"),
+        text.localize("Dec")
+    ];
     select.appendChild(document.createElement("option"));
     for (i = startNum; i <= endNum; i++){
         var option = document.createElement("option");
@@ -60147,17 +60186,15 @@ function dropDownMonths(select, startNum, endNum) {
 
 function generateBirthDate(){
     var days    = document.getElementById('dobdd'),
-        months    = document.getElementById('dobmm'),
+        months  = document.getElementById('dobmm'),
         year    = document.getElementById('dobyy');
     //days
     dropDownNumbers(days, 1, 31);
     //months
     dropDownMonths(months, 1, 12);
-
     var currentYear = new Date().getFullYear();
     var startYear = currentYear - 100;
     var endYear = currentYear - 17;
-
     //years
     dropDownNumbers(year, startYear, endYear);
     return;
@@ -60183,14 +60220,14 @@ function handle_residence_state_ws(){
       if (response) {
         var type = response.msg_type;
         var residenceDisabled = $('#residence-disabled');
-        if (response.msg_type === 'get_settings') {
+        if (type === 'get_settings') {
           var country = response.get_settings.country_code;
           if (country && country !== null) {
             page.client.residence = country;
             generateBirthDate();
             generateState();
             return;
-          } else {
+          } else if (document.getElementById('move-residence-here')) {
             var residenceForm = $('#residence-form');
             $('#real-form').hide();
             residenceDisabled.insertAfter('#move-residence-here');
@@ -60217,6 +60254,18 @@ function handle_residence_state_ws(){
             return;
           } else {
             errorElement.setAttribute('style', 'display:none');
+            BinarySocket.send({landing_company: page.client.residence});
+            return;
+          }
+        } else if (type === 'landing_company') {
+          $.cookie('residence', page.client.residence, {domain: '.' + document.domain.split('.').slice(-2).join('.'), path: '/'});
+          if (response.landing_company.hasOwnProperty('financial_company') && !response.landing_company.hasOwnProperty('gaming_company') && response.landing_company.financial_company.shortcode === 'maltainvest') {
+            window.location.href = page.url.url_for('new_account/maltainvest');
+            return;
+          } else if (response.landing_company.hasOwnProperty('financial_company') && !response.landing_company.hasOwnProperty('gaming_company') && response.landing_company.financial_company.shortcode === 'japan') {
+            window.location.href = page.url.url_for('new_account/japanws');
+            return;
+          } else if (!$('#real-form').is(':visible')) {
             $('#residence-form').hide();
             residenceDisabled.insertAfter('#move-residence-back');
             $('#error-residence').insertAfter('#residence-disabled');
@@ -60243,16 +60292,16 @@ function handle_residence_state_ws(){
               residence_list = response.residence_list;
           if (residence_list.length > 0){
             for (i = 0; i < residence_list.length; i++) {
-              if (residence_list[i].disabled) {
+              if (residence_list[i].disabled  && select) {
                 appendTextValueChild(select, residence_list[i].text, residence_list[i].value, 'disabled');
-              } else {
+              } else if (select) {
                 appendTextValueChild(select, residence_list[i].text, residence_list[i].value);
               }
               if (phoneElement && residence_list[i].phone_idd && residenceValue === residence_list[i].value){
                 phoneElement.value = '+' + residence_list[i].phone_idd;
               }
             }
-            if (residenceValue){
+            if (residenceValue && select){
                 select.value = residenceValue;
             }
           }
@@ -60263,17 +60312,6 @@ function handle_residence_state_ws(){
   });
 }
 
-function getSettings() {
-  BinarySocket.send({get_settings:1});
-  return;
-}
-
-function setResidenceWs(){
-  BinarySocket.send({residence_list:1});
-  return;
-}
-
-//pass select element to generate list of states
 function generateState() {
     var state = document.getElementById('address-state');
     appendTextValueChild(state, Content.localize().textSelect, '');
@@ -60314,11 +60352,6 @@ function Trim(str){
   while(str.charAt(0) == (" ") ){str = str.substring(1);}
   while(str.charAt(str.length-1) ==" " ){str = str.substring(0,str.length-1);}
   return str;
-}
-
-//remove wrong json affiliate_tracking
-if ($.cookie('affiliate_tracking')) {
-  $.removeCookie('affiliate_tracking');
 }
 
 pjax_config_page('/$|/home', function() {
@@ -60443,9 +60476,14 @@ pjax_config_page('/bulk-trader-facility', function() {
     };
 });
 
-pjax_config_page('/terms-and-condition', function() {
+pjax_config_page('/terms-and-conditions', function() {
     return {
         onLoad: function() {
+            if (page.language() === 'JA' && /^jp/.test(window.location.pathname)) {
+              window.location.href = page.url.url_for('terms-and-conditions-jp');
+            } else if (page.language() === 'EN' && /jp/.test(window.location.pathname)) {
+              window.location.href = page.url.url_for('terms-and-conditions');
+            }
             var year = document.getElementsByClassName('currentYear');
             for (i = 0; i < year.length; i++){
               year[i].innerHTML = new Date().getFullYear();
@@ -67644,6 +67682,157 @@ var Table = (function(){
         appendTableBody: appendTableBody
     };
 }());
+;var ValidAccountOpening = (function(){
+  var redirectCookie = function() {
+    if (!$.cookie('login')) {
+        window.location.href = page.url.url_for('login');
+        return;
+    }
+    if (page.client.type !== 'virtual') {
+      window.location.href = page.url.url_for('user/my_accountws');
+      return;
+    }
+    for (i = 0; i < page.user.loginid_array.length; i++){
+      if (page.user.loginid_array[i].real === true){
+        window.location.href = page.url.url_for('user/my_accountws');
+        return;
+      }
+    }
+  };
+  var handler = function(response, message) {
+    if (response.error) {
+      var errorMessage = response.error.message;
+      if (document.getElementById('real-form')) {
+        $('#real-form').remove();
+      } else if (document.getElementById('japan-form')) {
+        $('#japan-form').remove();
+      }
+      var error = document.getElementsByClassName('notice-msg')[0];
+      error.innerHTML = (response.msg_type === 'sanity_check') ? text.localize('There was some invalid character in an input field.') : errorMessage;
+      error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
+      return;
+    } else {
+      var loginid = message.client_id;
+      //set cookies
+      var oldCookieValue = $.cookie('loginid_list');
+      var cookie_domain = '.' + document.domain.split('.').slice(-2).join('.');
+      $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: cookie_domain, path:'/'});
+      $.cookie('loginid', loginid, {domain: cookie_domain, path:'/'});
+      //push to gtm
+      var gtmDataLayer = document.getElementsByClassName('gtm_data_layer')[0];
+      var age = new Date().getFullYear() - document.getElementById('dobyy').value;
+      document.getElementById('event').innerHTML = 'new_account';
+      dataLayer.push({
+        'language': page.language(),
+        'event': 'new_account',
+        'visitorID': loginid,
+        'bom_age': age,
+        'bom_country': $('#residence-disabled option[value="' + page.client.residence + '"]').html(),
+        'bom_today': Math.floor(Date.now() / 1000),
+        'bom_email': page.user.email,
+        'bom_firstname': document.getElementById('fname').value,
+        'bom_lastname': document.getElementById('lname').value,
+        'bom_phone': document.getElementById('tel').value
+      });
+      var affiliateToken = $.cookie('affiliate_tracking');
+      if (affiliateToken) {
+        dataLayer.push({'bom_affiliate_token': JSON.parse($.cookie('affiliate_tracking')).t});
+      }
+      //generate dropdown list and switch
+      page.client.clear_storage_values();
+      var option = new Option('Real Account (' + loginid + ')', loginid);
+      document.getElementById('client_loginid').appendChild(option);
+      $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
+      option.setAttribute('selected', 'selected');
+      $('#loginid-switch-form').submit();
+    }
+  };
+  var letter, numbers, space, hyphen, period, apost;
+
+  var initializeValues = function() {
+    letters = Content.localize().textLetters;
+    numbers = Content.localize().textNumbers;
+    space   = Content.localize().textSpace;
+    hyphen  = Content.localize().textHyphen;
+    period  = Content.localize().textPeriod;
+    apost   = Content.localize().textApost;
+  };
+
+  var checkFname = function(fname, errorFname) {
+    if (Trim(fname.value).length < 2) {
+      errorFname.innerHTML = Content.errorMessage('min', '2');
+      Validate.displayErrorMessage(errorFname);
+      window.accountErrorCounter++;
+    } else if (!/^[a-zA-Z\s-.']+$/.test(fname.value)){
+      initializeValues();
+      errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost]);
+      Validate.displayErrorMessage(errorFname);
+      window.accountErrorCounter++;
+    }
+    return;
+  };
+  var checkLname = function(lname, errorLname) {
+    if (Trim(lname.value).length < 2) {
+      errorLname.innerHTML = Content.errorMessage('min', '2');
+      Validate.displayErrorMessage(errorLname);
+      window.accountErrorCounter++;
+    } else if (!/^[a-zA-Z\s-.']+$/.test(lname.value)){
+      initializeValues();
+      errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost]);
+      Validate.displayErrorMessage(errorLname);
+      window.accountErrorCounter++;
+    }
+    return;
+  };
+  var checkDate = function(dobdd, dobmm, dobyy, errorDob) {
+    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value) || dobdd.value === '' || dobmm.value === '' || dobyy.value === '') {
+      errorDob.innerHTML = Content.localize().textErrorBirthdate;
+      Validate.displayErrorMessage(errorDob);
+      window.accountErrorCounter++;
+    }
+    return;
+  };
+  var checkPostcode = function(postcode, errorPostcode) {
+    if (postcode.value !== '' && !/^[a-zA-Z\d-]+$/.test(postcode.value)){
+      initializeValues();
+      errorPostcode.innerHTML = Content.errorMessage('reg', [letters, numbers, hyphen]);
+      Validate.displayErrorMessage(errorPostcode);
+      window.accountErrorCounter++;
+    }
+    return;
+  };
+  var checkTel = function(tel, errorTel) {
+    if (tel.value.replace(/\+| /g,'').length < 6) {
+      errorTel.innerHTML = Content.errorMessage('min', 6);
+      Validate.displayErrorMessage(errorTel);
+      window.accountErrorCounter++;
+    } else if (!/^\+?[\d-\s]+$/.test(tel.value)){
+      initializeValues();
+      errorTel.innerHTML = Content.errorMessage('reg', [numbers, space, hyphen]);
+      Validate.displayErrorMessage(errorTel);
+      window.accountErrorCounter++;
+    }
+    return;
+  };
+  var checkAnswer = function(answer, errorAnswer) {
+    if (answer.value.length < 4) {
+      errorAnswer.innerHTML = Content.errorMessage('min', 4);
+      Validate.displayErrorMessage(errorAnswer);
+      window.accountErrorCounter++;
+    }
+    return;
+  };
+  return {
+    redirectCookie: redirectCookie,
+    handler: handler,
+    checkFname: checkFname,
+    checkLname: checkLname,
+    checkDate: checkDate,
+    checkPostcode: checkPostcode,
+    checkTel: checkTel,
+    checkAnswer: checkAnswer
+  };
+}());
 ;var Validate = (function(){
   var errorCounter = 0;
 
@@ -67816,6 +68005,271 @@ var Table = (function(){
     errorMessageResidence: errorMessageResidence
   };
 }());
+;pjax_config_page("new_account/japanws", function(){
+  return {
+    onLoad: function() {
+      Content.populate();
+      ValidAccountOpening.redirectCookie();
+      if (page.client.residence !== 'jp') {
+        window.location.href = page.url.url_for('user/my_accountws');
+        return;
+      }
+      handle_residence_state_ws();
+      BinarySocket.send({get_settings:1});
+      var purpose = $('#trading-purpose'),
+          hedging = $('.hedging-assets');
+      purpose.change(function(evt) {
+        if (purpose.val() === 'Hedging') {
+          hedging.show();
+        }
+        else if (hedging.is(":visible")) {
+          hedging.hide();
+        }
+        return;
+      });
+      $('#japan-form').submit(function(evt) {
+        evt.preventDefault();
+        if (JapanAccOpeningUI.checkValidity()){
+          BinarySocket.init({
+            onmessage: function(msg){
+              var response = JSON.parse(msg.data);
+              if (response) {
+                var type = response.msg_type;
+                if (type === 'new_account_japan'){
+                  ValidAccountOpening.handler(response, response.new_account_japan);
+                } else if (type === 'sanity_check') {
+                  ValidAccountOpening.handler(response);
+                }
+              }
+            }
+          });
+        }
+      });
+    }
+  };
+});
+;var JapanAccOpeningData = (function(){
+    function getJapanAcc(elementObj){
+        var req = {
+          new_account_japan: 1,
+          gender : elementObj['gender'].value,
+          first_name: elementObj['fname'].value,
+          last_name: elementObj['lname'].value,
+          date_of_birth : elementObj['dobyy'].value + '-' + elementObj['dobmm'].value + '-' + elementObj['dobdd'].value,
+          occupation: elementObj['occupation'].value,
+          residence : page.client.residence,
+          address_line_1: elementObj['address1'].value,
+          address_line_2: elementObj['address2'].value,
+          address_city: elementObj['town'].value,
+          address_postcode: elementObj['postcode'].value,
+          address_state : elementObj['state'].value,
+          phone: elementObj['tel'].value,
+          secret_question: elementObj['question'].value,
+          secret_answer: elementObj['answer'].value,
+          annual_income: elementObj['income'].value,
+          financial_asset: elementObj['asset'].value,
+          daily_loss_limit: elementObj['limit'].value,
+          trading_experience_equities: elementObj['equities'].value,
+          trading_experience_commodities: elementObj['commodities'].value,
+          trading_experience_foreign_currency_deposit: elementObj['deposit'].value,
+          trading_experience_margin_fx: elementObj['margin'].value,
+          trading_experience_investment_trust: elementObj['trust'].value,
+          trading_experience_public_bond: elementObj['bond'].value,
+          trading_experience_option_trading: elementObj['otc'].value,
+          trading_purpose : elementObj['purpose'].value,
+          agree_use_electronic_doc                : 1,
+          agree_warnings_and_policies             : 1,
+          confirm_understand_own_judgment         : 1,
+          confirm_understand_trading_mechanism    : 1,
+          confirm_understand_judgment_time        : 1,
+          confirm_understand_total_loss           : 1,
+          confirm_understand_sellback_loss        : 1,
+          confirm_understand_shortsell_loss       : 1,
+          confirm_understand_company_profit       : 1,
+          confirm_understand_expert_knowledge     : 1,
+          declare_not_fatca                       : 1
+        };
+
+        if (elementObj['purpose'].value === 'Hedging') {
+          req.hedge_asset = elementObj['hedge'].value;
+          req.hedge_asset_amount = elementObj['amount'].value;
+        }
+
+        BinarySocket.send(req);
+    }
+
+    return {
+        getJapanAcc: getJapanAcc
+    };
+}());
+;var JapanAccOpeningUI = function () {
+  "use strict";
+
+  function checkValidity() {
+    window.accountErrorCounter = 0;
+    var letters = Content.localize().textLetters,
+        numbers = Content.localize().textNumbers,
+        space = Content.localize().textSpace,
+        hyphen = Content.localize().textHyphen,
+        period = Content.localize().textPeriod,
+        apost = Content.localize().textApost;
+
+    var elementObj = {
+        gender: document.getElementById('gender'),
+        fname: document.getElementById('fname'),
+        lname: document.getElementById('lname'),
+        dobdd: document.getElementById('dobdd'),
+        dobmm: document.getElementById('dobmm'),
+        dobyy: document.getElementById('dobyy'),
+        occupation: document.getElementById('occupation'),
+        address1: document.getElementById('address1'),
+        address2: document.getElementById('address2'),
+        town: document.getElementById('address-town'),
+        state: document.getElementById('address-state'),
+        postcode: document.getElementById('address-postcode'),
+        tel: document.getElementById('tel'),
+        question: document.getElementById('secret-question'),
+        answer: document.getElementById('secret-answer'),
+        fatca: document.getElementById('fatca'),
+        income: document.getElementById('annual-income'),
+        asset: document.getElementById('financial-asset'),
+        limit: document.getElementById('daily-loss-limit'),
+        equities: document.getElementById('equities'),
+        commodities: document.getElementById('commodities'),
+        deposit: document.getElementById('foreign-currency-deposit'),
+        margin: document.getElementById('margin-fx'),
+        trust: document.getElementById('investment-trust'),
+        bond: document.getElementById('public-and-corporation-bond'),
+        otc: document.getElementById('otc-derivative-trading'),
+        purpose: document.getElementById('trading-purpose'),
+        hedge: document.getElementById('hedge-asset'),
+        amount: document.getElementById('hedge-asset-amount'),
+        electronic: document.getElementById('use-electronic-doc'),
+        policies: document.getElementById('warnings-and-policies'),
+        judgement: document.getElementById('own-judgment'),
+        mechanism: document.getElementById('trading-mechanism'),
+        time: document.getElementById('judgment-time'),
+        total: document.getElementById('total-loss'),
+        sellback: document.getElementById('sellback-loss'),
+        shortsell: document.getElementById('shortsell-loss'),
+        profit: document.getElementById('company-profit'),
+        knowledge: document.getElementById('expert-knowledge')
+    };
+
+    var errorObj = {
+        gender: document.getElementById('error-gender'),
+        fname: document.getElementById('error-fname'),
+        lname: document.getElementById('error-lname'),
+        dobdd: document.getElementById('error-birthdate'),
+        dobmm: document.getElementById('error-birthdate'),
+        dobyy: document.getElementById('error-birthdate'),
+        occupation: document.getElementById('error-occupation'),
+        address1: document.getElementById('error-address1'),
+        address2: document.getElementById('error-address2'),
+        town: document.getElementById('error-town'),
+        state: document.getElementById('error-state'),
+        postcode: document.getElementById('error-postcode'),
+        tel: document.getElementById('error-tel'),
+        question: document.getElementById('error-question'),
+        answer: document.getElementById('error-answer'),
+        fatca: document.getElementById('error-fatca'),
+        income: document.getElementById('error-annual-income'),
+        asset: document.getElementById('error-financial-asset'),
+        limit: document.getElementById('error-daily-loss-limit'),
+        equities: document.getElementById('error-equities'),
+        commodities: document.getElementById('error-commodities'),
+        deposit: document.getElementById('error-foreign-currency-deposit'),
+        margin: document.getElementById('error-margin-fx'),
+        trust: document.getElementById('error-investment-trust'),
+        bond: document.getElementById('error-public-and-corporation-bond'),
+        otc: document.getElementById('error-otc-derivative-trading'),
+        purpose: document.getElementById('error-trading-purpose'),
+        hedge: document.getElementById('error-hedge-asset'),
+        amount: document.getElementById('error-hedge-asset-amount'),
+        electronic: document.getElementById('error-use-electronic-doc'),
+        policies: document.getElementById('error-warnings-and-policies'),
+        judgement: document.getElementById('error-own-judgment'),
+        mechanism: document.getElementById('error-trading-mechanism'),
+        time: document.getElementById('error-judgment-time'),
+        total: document.getElementById('error-total-loss'),
+        sellback: document.getElementById('error-sellback-loss'),
+        shortsell: document.getElementById('error-shortsell-loss'),
+        profit: document.getElementById('error-company-profit'),
+        knowledge: document.getElementById('error-expert-knowledge')
+    };
+    var key;
+    for (key in errorObj) {
+      if (errorObj[key].offsetParent !== null) {
+        errorObj[key].setAttribute('style', 'display:none');
+      }
+    }
+
+    if (/[`~!@#$%^&*)(_=+\[}{\]\\\/";:\?><,|\d]+/.test(Trim(elementObj['fname'].value))) {
+      errorObj['fname'].innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost]);
+      Validate.displayErrorMessage(errorObj['fname']);
+      window.accountErrorCounter++;
+    }
+
+    if (/[`~!@#$%^&*)(_=+\[}{\]\\\/";:\?><,|\d]+/.test(Trim(elementObj['lname'].value))) {
+      errorObj['lname'].innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost]);
+      Validate.displayErrorMessage(errorObj['lname']);
+      window.accountErrorCounter++;
+    }
+
+    ValidAccountOpening.checkDate(elementObj['dobdd'], elementObj['dobmm'], elementObj['dobyy'], errorObj['dobdd']);
+
+    if (!/^\d{3}-\d{4}$/.test(elementObj['postcode'].value)) {
+      errorObj['postcode'].innerHTML = text.localize('Please follow the pattern 3 numbers, a dash, followed by 4 numbers.');
+      Validate.displayErrorMessage(errorObj['postcode']);
+      window.accountErrorCounter++;
+    }
+
+    ValidAccountOpening.checkTel(elementObj['tel'], errorObj['tel']);
+    ValidAccountOpening.checkAnswer(elementObj['answer'], errorObj['answer']);
+
+    if (!/^\d+$/.test(elementObj['limit'].value)) {
+      errorObj['limit'].innerHTML = Content.errorMessage('reg', [numbers]);
+      Validate.displayErrorMessage(errorObj['limit']);
+      window.accountErrorCounter++;
+    }
+
+    if (elementObj['amount'].offsetParent !== null && !/^\d+$/.test(elementObj['amount'].value)) {
+      errorObj['amount'].innerHTML = Content.errorMessage('reg', [numbers]);
+      Validate.displayErrorMessage(errorObj['amount']);
+      window.accountErrorCounter++;
+    }
+
+    for (key in elementObj) {
+      if (elementObj[key].offsetParent !== null && key !== 'address2') {
+        if (/^$/.test(Trim(elementObj[key].value)) && elementObj[key].type !== 'checkbox') {
+          errorObj[key].innerHTML = Content.errorMessage('req');
+          Validate.displayErrorMessage(errorObj[key]);
+          window.accountErrorCounter++;
+        }
+        if (elementObj[key].type === 'checkbox' && !elementObj[key].checked) {
+          errorObj[key].innerHTML = Content.errorMessage('req');
+          Validate.displayErrorMessage(errorObj[key]);
+          window.accountErrorCounter++;
+        }
+      }
+    }
+
+    if (window.accountErrorCounter === 0) {
+      JapanAccOpeningData.getJapanAcc(elementObj);
+      for (key in errorObj) {
+        if (errorObj[key].offsetParent !== null) {
+          errorObj[key].setAttribute('style', 'display:none');
+        }
+      }
+      return 1;
+    }
+    return 0;
+  }
+
+  return {
+    checkValidity: checkValidity
+  };
+}();
 ;pjax_config_page("limitsws", function(){
     return {
         onLoad: function() {
@@ -68238,27 +68692,16 @@ var ProfitTableUI = (function(){
     };
 }());
 ;pjax_config_page("new_account/realws", function(){
-
   return {
     onLoad: function() {
       Content.populate();
-      if (!$.cookie('login')) {
-          window.location.href = page.url.url_for('login');
-          return;
-      }
-      if (page.client.type !== 'virtual') {
-        window.location.href = page.url.url_for('user/my_accountws');
-        return;
-      }
-      for (i = 0; i < page.user.loginid_array.length; i++){
-        if (page.user.loginid_array[i].real === true){
-          window.location.href = page.url.url_for('user/my_accountws');
-          return;
-        }
-      }
+      ValidAccountOpening.redirectCookie();
       handle_residence_state_ws();
-      getSettings();
-      setResidenceWs();
+      if (page.client.residence) {
+        BinarySocket.send({landing_company: page.client.residence});
+      }
+      BinarySocket.send({get_settings:1});
+      BinarySocket.send({residence_list:1});
       $('#real-form').submit(function(evt) {
         evt.preventDefault();
         if (RealAccOpeningUI.checkValidity()){
@@ -68266,52 +68709,8 @@ var ProfitTableUI = (function(){
             onmessage: function(msg){
               var response = JSON.parse(msg.data);
               if (response) {
-                var type = response.msg_type;
-                var error = response.error;
-
-                if (type === 'new_account_real' && !error){
-                  var loginid = response.new_account_real.client_id;
-
-                  //set cookies
-                  var oldCookieValue = $.cookie('loginid_list');
-                  var cookie_domain = '.' + document.domain.split('.').slice(-2).join('.');
-                  $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: cookie_domain, path:'/'});
-                  $.cookie('loginid', loginid, {domain: cookie_domain, path:'/'});
-
-                  //push to gtm
-                  var gtmDataLayer = document.getElementsByClassName('gtm_data_layer')[0];
-                  var age = new Date().getFullYear() - document.getElementById('dobyy').value;
-                  document.getElementById('event').innerHTML = 'new_account';
-                  dataLayer.push({
-                    'language': page.language(),
-                    'event': 'new_account',
-                    'visitorID': loginid,
-                    'bom_age': age,
-                    'bom_country': $('#residence-disabled option[value="' + page.client.residence + '"]').html(),
-                    'bom_today': Math.floor(Date.now() / 1000),
-                    'bom_email': page.user.email,
-                    'bom_firstname': document.getElementById('fname').value,
-                    'bom_lastname': document.getElementById('lname').value,
-                    'bom_phone': document.getElementById('tel').value
-                  });
-                  var affiliateToken = $.cookie('affiliate_tracking');
-                  if (affiliateToken) {
-                    dataLayer.push({'bom_affiliate_token': JSON.parse($.cookie('affiliate_tracking')).t});
-                  }
-
-                  //generate dropdown list and switch
-                  page.client.clear_storage_values();
-                  var option = new Option('Real Account (' + loginid + ')', loginid);
-                  document.getElementById('client_loginid').appendChild(option);
-                  $('#client_loginid option[value="' + page.client.loginid + '"]').removeAttr('selected');
-                  option.setAttribute('selected', 'selected');
-                  $('#loginid-switch-form').submit();
-                } else if (error && error.message) {
-                  if (/multiple real money accounts/.test(error.message)){
-                    RealAccOpeningUI.showError('duplicate');
-                  } else {
-                    RealAccOpeningUI.showError(error.message);
-                  }
+                if (response.msg_type === 'new_account_real'){
+                  ValidAccountOpening.handler(response, response.new_account_real);
                 }
               }
             }
@@ -68322,22 +68721,22 @@ var ProfitTableUI = (function(){
   };
 });
 ;var RealAccOpeningData = (function(){
-    function getRealAcc(arr){
+    function getRealAcc(elementObj){
         var req = {
             new_account_real: 1,
-            salutation: arr[0],
-            first_name: arr[1],
-            last_name: arr[2],
-            date_of_birth: arr[3],
-            residence: arr[4],
-            address_line_1: arr[5],
-            address_line_2: arr[6],
-            address_city: arr[7],
-            address_state: arr[8],
-            address_postcode: arr[9],
-            phone: arr[10],
-            secret_question: arr[11],
-            secret_answer: arr[12]
+            salutation: elementObj['title'].value,
+            first_name: elementObj['fname'].value,
+            last_name: elementObj['lname'].value,
+            date_of_birth: elementObj['dobyy'].value + '-' + elementObj['dobmm'].value + '-' + elementObj['dobdd'].value,
+            residence: elementObj['residence'].value,
+            address_line_1: elementObj['address1'].value,
+            address_line_2: elementObj['address2'].value,
+            address_city: elementObj['town'].value,
+            address_state: elementObj['state'].value,
+            address_postcode: elementObj['postcode'].value,
+            phone: elementObj['tel'].value,
+            secret_question: elementObj['question'].value,
+            secret_answer: elementObj['answer'].value
         };
 
         if ($.cookie('affiliate_tracking')) {
@@ -68354,27 +68753,8 @@ var ProfitTableUI = (function(){
 ;var RealAccOpeningUI = (function(){
   "use strict";
 
-  function showError(opt){
-    $('#real-form').remove();
-    var error = document.getElementsByClassName('notice-msg')[0];
-    if (opt === 'duplicate') {
-      error.innerHTML = text.localize("Sorry, you seem to already have a real money account with us. Perhaps you have used a different email address when you registered it. For legal reasons we are not allowed to open multiple real money accounts per person. If you do not remember your account with us, please") + " " + "<a href='" + page.url.url_for('contact') + "'>" + text.localize("contact us") + "</a>" + ".";
-    } else {
-      error.innerHTML = opt;
-    }
-    error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
-    return;
-  }
-
-  function hideAllErrors(allErrors) {
-    for (i = 0; i < allErrors.length; i++) {
-      allErrors[i].setAttribute('style', 'display:none');
-    }
-    return;
-  }
-
   function checkValidity(){
-    var errorCounter = 0;
+    window.accountErrorCounter = 0;
 
     var letters = Content.localize().textLetters,
         numbers = Content.localize().textNumbers,
@@ -68383,177 +68763,91 @@ var ProfitTableUI = (function(){
         period  = Content.localize().textPeriod,
         apost   = Content.localize().textApost;
 
-    var title     = document.getElementById('title'),
-        fname     = document.getElementById('fname'),
-        lname     = document.getElementById('lname'),
-        dobdd     = document.getElementById('dobdd'),
-        dobmm     = document.getElementById('dobmm'),
-        dobyy     = document.getElementById('dobyy'),
-        residence = document.getElementById('residence-disabled'),
-        address1  = document.getElementById('address1'),
-        address2  = document.getElementById('address2'),
-        town      = document.getElementById('address-town'),
-        state     = document.getElementById('address-state'),
-        postcode  = document.getElementById('address-postcode'),
-        tel       = document.getElementById('tel'),
-        question  = document.getElementById('secret-question'),
-        answer    = document.getElementById('secret-answer'),
-        tnc       = document.getElementById('tnc');
+    var elementObj = {
+        title     : document.getElementById('title'),
+        fname     : document.getElementById('fname'),
+        lname     : document.getElementById('lname'),
+        dobdd     : document.getElementById('dobdd'),
+        dobmm     : document.getElementById('dobmm'),
+        dobyy     : document.getElementById('dobyy'),
+        residence : document.getElementById('residence-disabled'),
+        address1  : document.getElementById('address1'),
+        address2  : document.getElementById('address2'),
+        town      : document.getElementById('address-town'),
+        state     : document.getElementById('address-state'),
+        postcode  : document.getElementById('address-postcode'),
+        tel       : document.getElementById('tel'),
+        question  : document.getElementById('secret-question'),
+        answer    : document.getElementById('secret-answer'),
+        tnc       : document.getElementById('tnc')
+    };
 
-    var arr = [
-                title.value,
-                Trim(fname.value),
-                Trim(lname.value),
-                dobyy.value + '-' + dobmm.value + '-' + dobdd.value,
-                page.client.residence,
-                Trim(address1.value),
-                Trim(address2.value),
-                Trim(town.value),
-                Trim(state.value),
-                Trim(postcode.value),
-                Trim(tel.value),
-                question.value,
-                Trim(answer.value)
-            ];
+    var errorObj = {
+        title     : document.getElementById('error-title'),
+        fname     : document.getElementById('error-fname'),
+        lname     : document.getElementById('error-lname'),
+        birthdate : document.getElementById('error-birthdate'),
+        residence : document.getElementById('error-residence'),
+        address1  : document.getElementById('error-address1'),
+        address2  : document.getElementById('error-address2'),
+        town      : document.getElementById('error-town'),
+        state     : document.getElementById('error-state'),
+        postcode  : document.getElementById('error-postcode'),
+        tel       : document.getElementById('error-tel'),
+        question  : document.getElementById('error-question'),
+        answer    : document.getElementById('error-answer'),
+        tnc       : document.getElementById('error-tnc')
+    };
 
-    var errorTitle     = document.getElementById('error-title'),
-        errorFname     = document.getElementById('error-fname'),
-        errorLname     = document.getElementById('error-lname'),
-        errorBirthdate = document.getElementById('error-birthdate'),
-        errorResidence = document.getElementById('error-residence'),
-        errorAddress1  = document.getElementById('error-address1'),
-        errorAddress2  = document.getElementById('error-address2'),
-        errorTown      = document.getElementById('error-town'),
-        errorState     = document.getElementById('error-state'),
-        errorPostcode  = document.getElementById('error-postcode'),
-        errorTel       = document.getElementById('error-tel'),
-        errorQuestion  = document.getElementById('error-question'),
-        errorAnswer    = document.getElementById('error-answer'),
-        errorTnc       = document.getElementById('error-tnc');
-
-    var allErrors = [
-                        errorTitle,
-                        errorFname,
-                        errorLname,
-                        errorBirthdate,
-                        errorResidence,
-                        errorAddress1,
-                        errorAddress2,
-                        errorTown,
-                        errorState,
-                        errorPostcode,
-                        errorTel,
-                        errorQuestion,
-                        errorAnswer,
-                        errorTnc
-                    ];
-
-    hideAllErrors(allErrors);
-
-    if (Trim(fname.value).length < 2) {
-      errorFname.innerHTML = Content.errorMessage('min', '2');
-      Validate.displayErrorMessage(errorFname);
-      errorCounter++;
-    } else if (!/^[a-zA-Z\s-.']+$/.test(fname.value)){
-      errorFname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
-      Validate.displayErrorMessage(errorFname);
-      errorCounter++;
-    }
-
-    if (Trim(lname.value).length < 2) {
-      errorLname.innerHTML = Content.errorMessage('min', '2');
-      Validate.displayErrorMessage(errorLname);
-      errorCounter++;
-    } else if (!/^[a-zA-Z\s-.']+$/.test(lname.value)){
-      errorLname.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
-      Validate.displayErrorMessage(errorLname);
-      errorCounter++;
-    }
-
-    if (!isValidDate(dobdd.value, dobmm.value, dobyy.value) || dobdd.value === '' || dobmm.value === '' || dobyy.value === '') {
-      errorBirthdate.innerHTML = Content.localize().textErrorBirthdate;
-      Validate.displayErrorMessage(errorBirthdate);
-      errorCounter++;
-    }
-
-    if (!/^[a-zA-Z\d\s-.']+$/.test(address1.value)){
-      errorAddress1.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
-      Validate.displayErrorMessage(errorAddress1);
-      errorCounter++;
-    }
-
-    if (address2.value !== ""){
-      if (!/^[a-zA-Z\d\s-.']+$/.test(address2.value)){
-        errorAddress2.innerHTML = Content.errorMessage('reg', [letters, numbers, space, hyphen, period, apost, ' ']);
-        Validate.displayErrorMessage(errorAddress2);
-        errorCounter++;
+    var key;
+    for (key in errorObj) {
+      if (errorObj[key].offsetParent !== null) {
+        errorObj[key].setAttribute('style', 'display:none');
       }
     }
 
-    if (!/^[a-zA-Z\s-.']+$/.test(town.value)){
-      errorTown.innerHTML = Content.errorMessage('reg', [letters, space, hyphen, period, apost, ' ']);
-      Validate.displayErrorMessage(errorTown);
-      errorCounter++;
-    }
+    ValidAccountOpening.checkFname(elementObj['fname'], errorObj['fname']);
+    ValidAccountOpening.checkLname(elementObj['lname'], errorObj['lname']);
+    ValidAccountOpening.checkDate(elementObj['dobdd'], elementObj['dobmm'], elementObj['dobyy'], errorObj['dobdd']);
+    ValidAccountOpening.checkPostcode(elementObj['postcode'], errorObj['postcode']);
 
-    if(state.offsetParent !== null && state.value === '') {
-      errorState.innerHTML = Content.errorMessage('req');
-      Validate.displayErrorMessage(errorState);
-      errorCounter++;
-    }
-
-    if (postcode.value !== '' && !/^[a-zA-Z\d-]+$/.test(postcode.value)){
-      errorPostcode.innerHTML = Content.errorMessage('reg', [letters, numbers, hyphen, ' ']);
-      Validate.displayErrorMessage(errorPostcode);
-      errorCounter++;
-    }
-
-    if (residence.value === 'gb' && /^$/.test(Trim(postcode.value))){
+    if (elementObj['residence'].value === 'gb' && /^$/.test(Trim(elementObj['postcode'].value))){
       errorPostcode.innerHTML = Content.errorMessage('req');
       Validate.displayErrorMessage(errorPostcode);
-      errorCounter++;
+      window.accountErrorCounter++;
     }
 
-    if (tel.value.replace(/\+| /g,'').length < 6) {
-      errorTel.innerHTML = Content.errorMessage('min', 6);
-      Validate.displayErrorMessage(errorTel);
-      errorCounter++;
-    } else if (!/^\+?[\d-\s]+$/.test(tel.value)){
-      errorTel.innerHTML = Content.errorMessage('reg', [numbers, space, hyphen, ' ']);
-      Validate.displayErrorMessage(errorTel);
-      errorCounter++;
-    }
+    ValidAccountOpening.checkTel(elementObj['tel'], errorObj['tel']);
+    ValidAccountOpening.checkAnswer(elementObj['answer'], errorObj['answer']);
 
-    if (answer.value.length < 4) {
-      errorAnswer.innerHTML = Content.errorMessage('min', 4);
-      Validate.displayErrorMessage(errorAnswer);
-      errorCounter++;
-    }
-
-    if (!tnc.checked){
-      errorTnc.innerHTML = Content.errorMessage('req');
-      Validate.displayErrorMessage(errorTnc);
-      errorCounter++;
-    }
-
-    for (i = 0; i < arr.length; i++){
-      if (/^$/.test(Trim(arr[i])) && i !== 6 && i !== 8 && i !== 9){
-        allErrors[i].innerHTML = Content.errorMessage('req');
-        Validate.displayErrorMessage(allErrors[i]);
-        errorCounter++;
+    for (key in elementObj){
+      if (elementObj[key].offsetParent !== null && key !== 'address2' && key !== 'postcode' && key !== 'state') {
+        if (/^$/.test(Trim(elementObj[key].value)) && elementObj[key].type !== 'checkbox'){
+          errorObj[key].innerHTML = Content.errorMessage('req');
+          Validate.displayErrorMessage(errorObj[key]);
+          window.accountErrorCounter++;
+        }
+        if (elementObj[key].type === 'checkbox' && !elementObj[key].checked){
+          errorObj[key].innerHTML = Content.errorMessage('req');
+          Validate.displayErrorMessage(errorObj[key]);
+          window.accountErrorCounter++;
+        }
       }
     }
 
-    if (errorCounter === 0) {
-      RealAccOpeningData.getRealAcc(arr);
-      hideAllErrors(allErrors);
+    if (window.accountErrorCounter === 0) {
+      RealAccOpeningData.getRealAcc(elementObj);
+      for (key in errorObj) {
+        if (errorObj[key].offsetParent !== null) {
+          errorObj[key].setAttribute('style', 'display:none');
+        }
+      }
       return 1;
     }
     return 0;
   }
 
   return {
-    showError: showError,
     checkValidity: checkValidity
   };
 })();
@@ -69026,7 +69320,7 @@ var ViewBalanceUI = (function(){
       var virtualForm = $('#virtual-form');
       if ($.cookie('verify_token')) {
         handle_residence_state_ws();
-        setResidenceWs();
+        BinarySocket.send({residence_list:1});
         var form = document.getElementById('virtual-form');
         var errorEmail = document.getElementById('error-email'),
             errorPassword = document.getElementById('error-password'),
