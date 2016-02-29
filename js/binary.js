@@ -59651,29 +59651,39 @@ pjax_config_page("user/self_exclusionws", function() {
 
         if(!isReal){ // Virtual Account
             $(RealAccElements).remove();
-        } 
+        }
         else { // Real Account
             $('#lblName').text((data.salutation || '') + ' ' + (data.first_name || '') + ' ' + (data.last_name || ''));
             var birthDate = data.date_of_birth ? moment.utc(new Date(data.date_of_birth * 1000)).format("YYYY-MM-DD") : '';
             $('#lblBirthDate').text(birthDate);
-            $(fieldIDs.address1).val(data.address_line_1);
-            $(fieldIDs.address2).val(data.address_line_2);
-            $(fieldIDs.city).val(data.address_city);
+            if (page.client.residence === 'jp') {
+                $('#lblAddress1').text(data.address_line_1);
+                $('#lblAddress2').text(data.address_line_2);
+                $('#lblCity').text(data.address_city);
+                $('#lblState').text(data.address_state);
+                $('#lblPostcode').text(data.address_postcode);
+                $('#lblPhone').text(data.phone);
+                $('.JpAcc').css('display', 'block');
+            } else {
+                $(fieldIDs.address1).val(data.address_line_1);
+                $(fieldIDs.address2).val(data.address_line_2);
+                $(fieldIDs.city).val(data.address_city);
 
-            // Generate states list
-            var residence = $.cookie('residence');
-            BinarySocket.send({"states_list": residence, "passthrough": {"value": data.address_state}});
-            
-            $(fieldIDs.postcode).val(data.address_postcode);
-            $(fieldIDs.phone).val(data.phone);
+                // Generate states list
+                var residence = $.cookie('residence');
+                BinarySocket.send({"states_list": residence, "passthrough": {"value": data.address_state}});
 
-            $(RealAccElements).removeClass('hidden');
+                $(fieldIDs.postcode).val(data.address_postcode);
+                $(fieldIDs.phone).val(data.phone);
 
-            $(frmBtn).click(function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                return setDetails();
-            });
+                $(RealAccElements).removeClass('hidden');
+
+                $(frmBtn).click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return setDetails();
+                });
+            }
         }
 
         $(formID).removeClass('hidden');
@@ -59705,13 +59715,13 @@ pjax_config_page("user/self_exclusionws", function() {
             state    = $(fieldIDs.state).val(),
             postcode = $(fieldIDs.postcode).val().trim(),
             phone    = $(fieldIDs.phone).val().trim();
-        
+
         var letters = Content.localize().textLetters,
             numbers = Content.localize().textNumbers,
             space   = Content.localize().textSpace,
             period  = Content.localize().textPeriod,
             comma   = Content.localize().textComma;
-        
+
         // address 1
         if(!isRequiredError(fieldIDs.address1) && !(/^[a-zA-Z0-9\s\,\.\-\/\(\)#']+$/).test(address1)) {
             showError(fieldIDs.address1, Content.errorMessage('reg', [letters, numbers, space, period, comma, '- / ( ) # \'']));
@@ -59809,7 +59819,7 @@ pjax_config_page("user/self_exclusionws", function() {
             .delay(3000)
             .fadeOut(1000);
     };
-   
+
 
     return {
         init: init,
@@ -62172,7 +62182,7 @@ BetAnalysis.DigitInfoWS.prototype = {
         if(this.chart &&  $('#last_digit_histo').html()){
             this.chart.xAxis[0].update({
                 title:{
-                    text: $('#last_digit_title').html().replace('%2', $('[name=underlying] option:selected').text()).replace('%1',spots.length),
+                    text: $('#last_digit_title').html().replace('[_2]', $('[name=underlying] option:selected').text()).replace('[_1]',spots.length),
                 }
             }, true);
             this.chart.series[0].name = underlying;
