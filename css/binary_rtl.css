@@ -607,6 +607,10 @@ ul.checked li {
   white-space: nowrap;
 }
 
+#japan-form .hint {
+  margin-bottom: 0;
+}
+
 *,
 *:after,
 *:before {
@@ -3273,33 +3277,9 @@ input#duration_amount {
   background-image: url("../images/pages/logintrouble/chromelogo-icon_1.png");
 }
 
-#risefall {
-  background-image: url("../images/pages/contract_guide/rise-fall.svg");
-}
-
-#higherlower {
-  background-image: url("../images/pages/contract_guide/higher-lower.svg");
-}
-
-#touchnotouch {
-  background-image: url("../images/pages/contract_guide/touch-notouch.svg");
-}
-
-#inout {
-  background-image: url("../images/pages/contract_guide/in-out.svg");
-}
-
 /* Fixed width to match datepicker */
 #duration_amount {
   width: 95px;
-}
-
-/* Content of boxes is longer on Bet Guide page */
-#content #bet_guide_content {
-  background: none;
-}
-#content #bet_guide_content .li-2-boxes-content {
-  height: 10em;
 }
 
 #account_balance {
@@ -3309,12 +3289,10 @@ input#duration_amount {
   font-size: 100%;
   display: none;
 }
-
 #account_balance td {
   text-align: right;
   padding: 0;
 }
-
 #account_balance .currency {
   padding: 0 2px;
 }
@@ -3341,7 +3319,6 @@ input#duration_amount {
 #tradingform input[type="checkbox"] {
   border: none;
 }
-
 #tradingform select {
   width: 6.5em;
 }
@@ -4271,6 +4248,10 @@ table .loss, table .lower {
 }
 .payment-agent h1 {
   margin-bottom: 40px;
+}
+
+#frmPersonalDetails .JpAcc {
+  display: none;
 }
 
 .live_chart_wrapper {
@@ -5808,6 +5789,7 @@ div.kineticjs-content {
 #statement-ws-container .desc {
   flex: 2 1 100px;
   padding-right: 20px;
+  word-break: break-word;
 }
 #statement-ws-container .act {
   flex: 0.8 1 35px;
