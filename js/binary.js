@@ -63329,7 +63329,8 @@ function chartFrameSource(underlying, highchart_time){
             textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
             textMessageMinRequired: text.localize('Minimum of [_1] characters required.'),
             textFeatureUnavailable: text.localize('Sorry, this feature is not available.'),
-            textMessagePasswordScore: text.localize( 'Password score is: [_1]. Passing score is: 20.')
+            textMessagePasswordScore: text.localize( 'Password score is: [_1]. Passing score is: 20.'),
+            textShouldNotLessThan: text.localize('Please enter a number greater or equal to [_1].')
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -63516,6 +63517,9 @@ function chartFrameSource(underlying, highchart_time){
             case 'pass':
                 if(param)
                     msg = localize.textMessagePasswordScore.replace('[_1]', param);
+                break;
+            case 'number_not_less_than':
+                msg = localize.textShouldNotLessThan.replace('[_1]', param);
                 break;
             default:
                 break;
@@ -64357,16 +64361,7 @@ var TradingEvents = (function () {
          */
         var amountElement = document.getElementById('amount');
         if (amountElement) {
-            amountElement.addEventListener('keypress', function(e) {
-                var key = e.keyCode;
-                var char = String.fromCharCode(e.which);
-                if((char === '.' && e.target.value.indexOf(char) >= 0) ||
-                    (!/[0-9\.]/.test(char) && [8, 37, 39, 46].indexOf(key) < 0) || // delete, backspace, arrow keys
-                    /['%]/.test(char)) { // similarity to arrows key code in some browsers
-                        e.returnValue = false;
-                        e.preventDefault();
-                }
-            });
+            amountElement.addEventListener('keypress', onlyNumericOnKeypress);
 
             amountElement.addEventListener('input', debounce( function(e) {
                 e.target.value = e.target.value.replace(/[^0-9.]/g, '');
@@ -67506,7 +67501,19 @@ pjax_config_page("top_up_virtualws", function() {
         getCookieItem: getCookieItem,
         getApiToken: getApiToken
     };
-}());;
+}());;function onlyNumericOnKeypress(ev) {
+    var key = ev.keyCode;
+    var char = String.fromCharCode(ev.which);
+    if(
+        (char === '.' && ev.target.value.indexOf(char) >= 0) ||
+        (!/[0-9\.]/.test(char) && [8, 37, 39, 46].indexOf(key) < 0) || // delete, backspace, arrow keys
+        /['%]/.test(char)) { // similarity to arrows key code in some browsers
+
+        ev.returnValue = false;
+        ev.preventDefault();
+    }
+}
+;
 var StringUtil = (function(){
     function toTitleCase(str){
         return str.replace(/\w[^\s\/\\]*/g, function(txt){
@@ -68842,6 +68849,7 @@ var ProfitTableUI = (function(){
     var reality_freq_url  = page.url.url_for('user/reality_check_frequency');
     var defaultFrequencyInMin = 60;
     var loginTime;
+    var hiddenClass = 'invisible';
 
     function computeIntervalForNextPopup(loginTime, interval) {
         var currentTime = Date.now();
@@ -68860,14 +68868,14 @@ var ProfitTableUI = (function(){
 
     function updateFrequency(mins) {
         var ms;
-        if (mins > 9999) {
-            $('#realityDuration').val(9999);
-            ms = 9999 * 60 * 1000;
-            LocalStore.set('reality_check.interval', ms);
+        if (mins > 120) {
+            $('#realityDuration').val(120);
+            ms = 120 * 60 * 1000;
         } else {
             ms = mins * 60 * 1000;
-            LocalStore.set('reality_check.interval', ms);
         }
+
+        LocalStore.set('reality_check.interval', ms);
     }
 
     function displayPopUp(div) {
@@ -68883,13 +68891,23 @@ var ProfitTableUI = (function(){
         wrapper.appendTo(lightboxDiv);
         lightboxDiv.appendTo('body');
 
+        var $msg = lightboxDiv.find('p.error-msg');
+
         var inputBox = lightboxDiv.find('#realityDuration');
         inputBox.val(currentFrequencyInMS() / 60 / 1000);
         inputBox.keyup(function(e) {
+            $msg.addClass(hiddenClass);
             updateFrequency(e.target.value);
         });
 
         lightboxDiv.find('#continue').click(function() {
+            if (inputBox.val() < 10) {
+                var minimumValueMsg = Content.errorMessage('number_not_less_than', 10);
+                $msg.text(minimumValueMsg);
+                $msg.removeClass(hiddenClass);
+                return;
+            }
+
             LocalStore.set('reality_check.ack', 1);
             closePopUp();
         });
@@ -68897,6 +68915,8 @@ var ProfitTableUI = (function(){
             LocalStore.set('reality_check.ack', 0);
             BinarySocket.send({"logout": "1"});
         });
+
+        inputBox.keypress(onlyNumericOnKeypress);
     }
 
     function closePopUp() {
