@@ -50262,23 +50262,28 @@ var User = function() {
 };
 
 var Client = function() {
-    this.loginid =  $.cookie('loginid');
-    this.residence =  $.cookie('residence');
-    this.is_logged_in = false;
-    this.is_real = false;
-    if(this.loginid === null || typeof this.loginid === "undefined") {
-        this.type = 'logged_out';
-    } else if(/VRT/.test(this.loginid)) {
-        this.type = 'virtual';
-        this.is_logged_in = true;
-    } else {
-        this.type = 'real';
-        this.is_logged_in = true;
-        this.is_real = true;
-    }
+    this.loginid      =  $.cookie('loginid');
+    this.residence    =  $.cookie('residence');
+    this.is_logged_in = this.loginid && this.loginid.length > 0;
 };
 
 Client.prototype = {
+    redirect_if_logout: function() {
+        if(!this.is_logged_in) {
+            window.location.href = page.url.url_for('login');
+        }
+        return !this.is_logged_in;
+    },
+    redirect_if_is_virtual: function(redirectPage) {
+        var is_virtual = this.is_virtual();
+        if(is_virtual) {
+            window.location.href = page.url.url_for(redirectPage || '');
+        }
+        return is_virtual;
+    },
+    is_virtual: function() {
+        return this.get_storage_value('is_virtual') === '1';
+    },
     get_storage_value: function(key) {
         return LocalStore.get('client.' + key) || '';
     },
@@ -50287,6 +50292,10 @@ Client.prototype = {
     },
     check_storage_values: function(origin) {
         var is_ok = true;
+
+        if(!this.get_storage_value('is_virtual') && TUser.get().hasOwnProperty('is_virtual')) {
+            this.set_storage_value('is_virtual', TUser.get().is_virtual);
+        }
 
         // currencies
         if(!this.get_storage_value('currencies')) {
@@ -50302,7 +50311,7 @@ Client.prototype = {
 
         // allowed markets
         if(this.is_logged_in) {
-            if(this.is_real && !this.get_storage_value('allowed_markets') && TUser.get().landing_company_name) {
+            if(!TUser.get().is_virtual && !this.get_storage_value('allowed_markets') && TUser.get().landing_company_name) {
                 $('#topMenuStartBetting').addClass('invisible');
                 BinarySocket.send({
                     'landing_company_details': TUser.get().landing_company_name,
@@ -50338,9 +50347,16 @@ Client.prototype = {
             $('#topMenuStartBetting').removeClass('invisible');
         }
     },
+    response_authorize: function(response) {
+        TUser.set(response.authorize);
+        this.set_storage_value('is_virtual', TUser.get().is_virtual);
+        this.check_storage_values();
+        page.contents.activate_by_client_type();
+        page.contents.topbar_message_visibility();
+    },
     clear_storage_values: function() {
         var that  = this;
-        var items = ['currencies', 'allowed_markets', 'landing_company_name'];
+        var items = ['currencies', 'allowed_markets', 'landing_company_name', 'is_virtual'];
         items.forEach(function(item) {
             that.set_storage_value(item, '');
         });
@@ -50548,17 +50564,17 @@ Menu.prototype = {
         // enable only allowed markets
         var allowed_markets = page.client.get_storage_value('allowed_markets');
         if(!allowed_markets && page.client.is_logged_in) {
-            if(page.client.is_real) {
+            if(TUser.get().hasOwnProperty('is_virtual') && !TUser.get().is_virtual) {
                 $('#topMenuStartBetting').addClass('invisible');
             }
             return;
         }
+
         var markets_array = allowed_markets ? allowed_markets.split(',') : [];
         var sub_items = $('li#topMenuStartBetting ul.sub_items');
-        var isReal = $.cookie('loginid') && !(/VRT/.test($.cookie('loginid')));
         sub_items.find('li').each(function () {
             var link_id = $(this).attr('id').split('_')[1];
-            if(markets_array.indexOf(link_id) < 0 && isReal) {
+            if(markets_array.indexOf(link_id) < 0 && !page.client.is_virtual()) {
                 var link = $(this).find('a');
                 var link_text = link.text();
                 var link_href = link.attr('href');
@@ -50571,6 +50587,7 @@ Menu.prototype = {
                 span.replaceWith($('<a/>', {class: 'link', text: span_text, href: span_href}));
             }
         });
+        $('#topMenuStartBetting').removeClass('invisible');
     },
     reset: function() {
         $("#main-menu .item").unbind();
@@ -50632,12 +50649,12 @@ Menu.prototype = {
     register_dynamic_links: function() {
         var stored_market = page.url.param('market') || LocalStore.get('bet_page.market') || 'forex';
         var allowed_markets = page.client.get_storage_value('allowed_markets');
-        if(!allowed_markets && page.client.is_logged_in && page.client.is_real) {
+        if(!allowed_markets && page.client.is_logged_in && !TUser.get().is_virtual) {
             return;
         }
 
         var markets_array = allowed_markets ? allowed_markets.split(',') : [];
-        if(page.client.is_real && markets_array.indexOf(stored_market) < 0) {
+        if(!TUser.get().is_virtual && markets_array.indexOf(stored_market) < 0) {
             stored_market = markets_array[0];
             LocalStore.set('bet_page.market', stored_market);
         }
@@ -50961,7 +50978,10 @@ Contents.prototype = {
     activate_by_client_type: function() {
         $('.by_client_type').addClass('invisible');
         if(this.client.is_logged_in) {
-            if(this.client.is_real) {
+            if(page.client.get_storage_value('is_virtual').length === 0) {
+                return;
+            }
+            if(!page.client.is_virtual()) {
                 $('.by_client_type.client_real').removeClass('invisible');
                 $('.by_client_type.client_real').show();
 
@@ -51013,10 +51033,13 @@ Contents.prototype = {
     },
     topbar_message_visibility: function() {
         if(this.client.is_logged_in) {
+            if(page.client.get_storage_value('is_virtual').length === 0) {
+                return;
+            }
             var loginid_array = this.user.loginid_array;
             var c_config = page.settings.get('countries_list')[this.client.residence];
 
-            if (!this.client.is_real) {
+            if (page.client.is_virtual()) {
                 var show_upgrade = true;
                 for (var i=0;i<loginid_array.length;i++) {
                     if (loginid_array[i].real) {
@@ -58474,7 +58497,7 @@ var enable_residence_form_submit = function () {
 };
 
 var upgrade_investment_disabled_field = function () {
-    if (page.client.is_real) {
+    if (!page.client.is_virtual()) {
         var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
         fields.forEach(function (element, index, array) {
             var obj = $('#'+element);
@@ -58500,7 +58523,7 @@ var financial_enable_fields_form_submit = function () {
             return;
         }
 
-        if (page.client.is_real) {
+        if (!page.client.is_virtual()) {
             var fields = ['mrms', 'fname', 'lname', 'dobdd', 'dobmm', 'dobyy', 'residence', 'secretquestion', 'secretanswer'];
             fields.forEach(function (element, index, array) {
                 var obj = $('#'+element);
@@ -58548,7 +58571,7 @@ var validate_hedging_fields_form_submit = function () {
 pjax_config_page('new_account/maltainvest', function() {
     return {
         onLoad: function() {
-            if (!page.client.is_real) {
+            if (page.client.is_virtual()) {
                 client_form.on_residence_change();
                 select_user_country();
             }
@@ -58865,8 +58888,7 @@ pjax_config_page('user/assessment', function() {
 pjax_config_page("api_tokenws", function() {
     return {
         onLoad: function() {
-            if (!$.cookie('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
@@ -59002,6 +59024,10 @@ pjax_config_page("api_tokenws", function() {
 pjax_config_page("user/change_password", function() {
     return {
         onLoad: function() {
+          if (page.client.redirect_if_logout()) {
+              return;
+          }
+
           Content.populate();
           if (isIE() === false) {
             $('#password').on('input', function() {
@@ -59010,10 +59036,7 @@ pjax_config_page("user/change_password", function() {
           } else {
             $('#password-meter').remove();
           }
-          if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
-                return;
-            }
+
           BinarySocket.init({
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
@@ -59182,6 +59205,10 @@ ClientForm.prototype = {
         isValid;
 
     var init = function() {
+        if(page.client.redirect_if_is_virtual('user/settingsws')) {
+            return;
+        }
+
         $form       = $('#frmSelfExclusion');
         $loading    = $('#loading');
         dateID      = 'exclude_until';
@@ -59413,12 +59440,7 @@ ClientForm.prototype = {
 pjax_config_page("user/self_exclusionws", function() {
     return {
         onLoad: function() {
-        	if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
-                return;
-            }
-            if((/VRT/.test($.cookie('loginid')))){
-                window.location.href = page.url.url_for('user/settingsws');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
@@ -59426,7 +59448,10 @@ pjax_config_page("user/self_exclusionws", function() {
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
                     if (response) {
-                        if (response.msg_type === "get_self_exclusion") {
+                        if (response.msg_type === "authorize") {
+                            SelfExlusionWS.init();
+                        }
+                        else if (response.msg_type === "get_self_exclusion") {
                             SelfExlusionWS.getResponse(response);
                         }
                         else if (response.msg_type === "set_self_exclusion") {
@@ -59440,7 +59465,9 @@ pjax_config_page("user/self_exclusionws", function() {
             });	
 
             Content.populate();
-            SelfExlusionWS.init();
+            if(TUser.get().hasOwnProperty('is_virtual')) {
+                SelfExlusionWS.init();
+            }
         }
     };
 });;var SettingsDetailsWS = (function() {
@@ -59474,13 +59501,10 @@ pjax_config_page("user/self_exclusionws", function() {
     var getDetails = function(response) {
         var data = response.get_settings;
 
-        // Check if it is a real account or not
-        var isReal = !(/VRT/.test($.cookie('loginid')));
-
         $('#lblCountry').text(data.country);
         $('#lblEmail').text(data.email);
 
-        if(!isReal){ // Virtual Account
+        if(page.client.is_virtual()){ // Virtual Account
             $(RealAccElements).remove();
         }
         else { // Real Account
@@ -59666,8 +59690,7 @@ pjax_config_page("user/self_exclusionws", function() {
 pjax_config_page("settings/detailsws", function() {
     return {
         onLoad: function() {
-            if (!$.cookie('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
@@ -59711,7 +59734,7 @@ pjax_config_page("settings/detailsws", function() {
         var classHidden = 'invisible',
             classReal   = '.real';
 
-        if(page.client.is_real) {
+        if(!page.client.is_virtual()) {
             $(classReal).removeClass(classHidden);
         }
         else {
@@ -59730,12 +59753,23 @@ pjax_config_page("settings/detailsws", function() {
 pjax_config_page("settingsws", function() {
     return {
         onLoad: function() {
-            if (!page.client.is_logged_in) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
-            SettingsWS.init();
+            if(page.client.get_storage_value('is_virtual').length === 0) {
+                BinarySocket.init({
+                    onmessage: function(msg) {
+                        var response = JSON.parse(msg.data);
+                        if (response && response.msg_type === 'authorize') {
+                            SettingsWS.init();
+                        }
+                    }
+                });
+            }
+            else {
+                SettingsWS.init();
+            }
         }
     };
 });
@@ -60993,8 +61027,7 @@ $(function() {
 pjax_config_page("user/openpositionsws", function() {
     return {
         onLoad: function() {
-            if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
             BinarySocket.init({
@@ -61101,8 +61134,7 @@ var Portfolio = function () {
     var elements = $('button.open_contract_details');
     return {
         update_indicative_prices: function() {
-            if(!page.client.is_logged_in) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
@@ -66145,8 +66177,7 @@ function BinarySocketClass() {
                     }
                     else {
                         authorized = true;
-                        TUser.set(response.authorize);
-                        page.client.check_storage_values();
+                        page.client.response_authorize(response);
                         if(typeof events.onauth === 'function'){
                             events.onauth();
                         }
@@ -66232,6 +66263,10 @@ var BinarySocket = new BinarySocketClass();
     var payoutCurr = [];
     
     var init = function(){
+        if(page.client.redirect_if_is_virtual()) {
+            return;
+        }
+
         $form = $('#account_transfer');
         $("#success_form").hide();
         $("#client_message").hide();
@@ -66305,12 +66340,13 @@ var BinarySocket = new BinarySocketClass();
 
     var apiResponse = function(response){
         var type = response.msg_type;
-        if (type === "transfer_between_accounts" || (type === "error" && "transfer_between_accounts" in response.echo_req)){
-           responseMessage(response);
-
+        if (type === "authorize") {
+            init();
         }
-        else if(type === "payout_currencies" || (type === "error" && "payout_currencies" in response.echo_req))
-        {
+        else if (type === "transfer_between_accounts" || (type === "error" && "transfer_between_accounts" in response.echo_req)) {
+           responseMessage(response);
+        }
+        else if(type === "payout_currencies" || (type === "error" && "payout_currencies" in response.echo_req)) {
             responseMessage(response);
         }
     };
@@ -66482,12 +66518,8 @@ var BinarySocket = new BinarySocketClass();
 pjax_config_page("cashier/account_transferws", function() {
     return {
         onLoad: function() {
-        	if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
-            }
-            if((/VRT/.test($.cookie('loginid')))){
-                window.location.href = ("/");
             }
 
         	BinarySocket.init({
@@ -66499,7 +66531,9 @@ pjax_config_page("cashier/account_transferws", function() {
                 }
             });	
 
-            account_transferws.init();
+            if(TUser.get().hasOwnProperty('is_virtual')) {
+                account_transferws.init();
+            }
         }
     };
 });;var MyAccountWS = (function() {
@@ -66680,7 +66714,7 @@ pjax_config_page("cashier/account_transferws", function() {
             return false;
         }
 
-        isReal = !TUser.get().is_virtual;
+        isReal = !page.client.is_virtual();
 
         switch(response.msg_type) {
             case 'get_account_status':
@@ -66711,8 +66745,7 @@ pjax_config_page("cashier/account_transferws", function() {
 pjax_config_page("user/my_accountws", function() {
     return {
         onLoad: function() {
-            if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
@@ -66937,7 +66970,7 @@ pjax_config_page("payment_agent_listws", function() {
 
         $views.addClass('hidden');
 
-        if((/VRT/).test($.cookie('loginid'))) { // Virtual Account
+        if(page.client.is_virtual()) { // Virtual Account
             showPageError(text.localize('You are not authorized for withdrawal via payment agent.'));
             return false;
         }
@@ -67164,8 +67197,7 @@ pjax_config_page("payment_agent_listws", function() {
 pjax_config_page("paymentagent/withdrawws", function() {
     return {
         onLoad: function() {
-            if (!$.cookie('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
             BinarySocket.init({
@@ -67174,6 +67206,9 @@ pjax_config_page("paymentagent/withdrawws", function() {
                     if (response) {
                         var type = response.msg_type;
                         switch(type){
+                            case "authorize":
+                                PaymentAgentWithdrawWS.init();
+                                break;
                             case "paymentagent_list":
                                 PaymentAgentWithdrawWS.populateAgentsList(response);
                                 break;
@@ -67191,14 +67226,17 @@ pjax_config_page("paymentagent/withdrawws", function() {
             });
 
             Content.populate();
-            PaymentAgentWithdrawWS.init();
+            if(TUser.get().hasOwnProperty('is_virtual')) {
+                PaymentAgentWithdrawWS.init();
+            }
         }
     };
 });
 ;var securityws = (function(){
 
     "use strict";
-    var $form ;
+    var $form,
+        init_done;
 
     var clearErrors = function(){
         $("#SecuritySuccessMsg").text('');
@@ -67208,27 +67246,29 @@ pjax_config_page("paymentagent/withdrawws", function() {
     };
 
     var init = function(){
+        init_done = true;
+        if(page.client.redirect_if_is_virtual('user/settingsws')) {
+            return;
+        }
+
         $form   = $("#changeCashierLock");
         $("#repasswordrow").show();
         $("#changeCashierLock").show();
 
         clearErrors();
+
         $form.find("button").attr("value","Update");
 
+        var loginToken = CommonData.getApiToken();
         $form.find("button").on("click", function(e){
             e.preventDefault();
             e.stopPropagation();
             if(validateForm() === false){
                 return false;
             }
-            if($(this).attr("value") === "Update"){
-                BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "lock_password"}});
-            }
-            else{
-                BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "unlock_password"}});
-            }
+            BinarySocket.send({"authorize": loginToken, "passthrough": {"value": $(this).attr("value") === "Update" ? "lock_password" : "unlock_password"}});
         });
-        BinarySocket.send({"authorize": $.cookie('login'), "passthrough": {"value": "is_locked"}});
+        BinarySocket.send({"authorize": loginToken, "passthrough": {"value": "is_locked"}});
     };
 
     var validateForm = function(){
@@ -67275,6 +67315,11 @@ pjax_config_page("paymentagent/withdrawws", function() {
                             "passthrough" : {"value" : "lock_status"}
                         });
                         break ;
+                default:
+                        if(!init_done) {
+                            init();
+                        }
+                        break;
             }
         }
     };
@@ -67308,7 +67353,6 @@ pjax_config_page("paymentagent/withdrawws", function() {
                   $('#password-meter').remove();
                 }
             }
-
         }
         else{
             if("error" in response) {
@@ -67356,27 +67400,24 @@ pjax_config_page("paymentagent/withdrawws", function() {
 pjax_config_page("user/settings/securityws", function() {
     return {
         onLoad: function() {
-          if (!getCookieItem('login')) {
-              window.location.href = page.url.url_for('login');
-              return;
-          }
-          if((/VRT/.test($.cookie('loginid')))){
-              window.location.href = ("/");
-          }
-
-          Content.populate();
-
-          BinarySocket.init({
+            if (page.client.redirect_if_logout()) {
+                return;
+            }
+  
+            Content.populate();
+  
+            BinarySocket.init({
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
                     if (response) {
                         securityws.SecurityApiResponse(response);
-
                     }
                 }
             });
 
-            securityws.init();
+            if(page.client.get_storage_value('is_virtual').length > 0) {
+                securityws.init();
+            }
         }
     };
 });
@@ -67386,8 +67427,7 @@ pjax_config_page("user/settings/securityws", function() {
     var containerID,
         viewIDs,
         hiddenClass,
-        $views,
-        loginID;
+        $views;
 
     var init = function() {
         containerID = '#topup_virtual';
@@ -67397,11 +67437,10 @@ pjax_config_page("user/settings/securityws", function() {
             error   : '#viewError',
             success : '#viewSuccess'
         };
-        loginID = getCookieItem('loginid');
 
         $views.addClass('hidden');
 
-        if(!(/VRT/).test(loginID)) {
+        if(!page.client.is_virtual()) {
             showMessage(text.localize('Sorry, this feature is available to virtual accounts only.'), false);
         }
         else {
@@ -67421,7 +67460,7 @@ pjax_config_page("user/settings/securityws", function() {
                 text.localize('[_1] [_2] has been credited to your Virtual money account [_3]')
                     .replace('[_1]', response.topup_virtual.currency)
                     .replace('[_2]', response.topup_virtual.amount)
-                    .replace('[_3]', loginID),
+                    .replace('[_3]', page.client.loginid),
                 true);
         }
     };
@@ -67448,8 +67487,7 @@ pjax_config_page("user/settings/securityws", function() {
 pjax_config_page("top_up_virtualws", function() {
     return {
         onLoad: function() {
-        	if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
 
@@ -67457,7 +67495,10 @@ pjax_config_page("top_up_virtualws", function() {
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
                     if (response) {
-                        if (response.msg_type === "topup_virtual") {
+                        if (response.msg_type === "authorize") {
+                            TopUpVirtualWS.init();
+                        }
+                        else if (response.msg_type === "topup_virtual") {
                             TopUpVirtualWS.responseHandler(response);
                         }
                     }
@@ -67468,7 +67509,9 @@ pjax_config_page("top_up_virtualws", function() {
             });
 
             Content.populate();
-            TopUpVirtualWS.init();
+            if(TUser.get().hasOwnProperty('is_virtual')) {
+                TopUpVirtualWS.init();
+            }
         }
     };
 });
@@ -67692,11 +67735,10 @@ var Table = (function(){
 }());
 ;var ValidAccountOpening = (function(){
   var redirectCookie = function() {
-    if (!$.cookie('login')) {
-        window.location.href = page.url.url_for('login');
+    if (page.client.redirect_if_logout()) {
         return;
     }
-    if (page.client.type !== 'virtual') {
+    if (!page.client.is_virtual()) {
       window.location.href = page.url.url_for('user/my_accountws');
       return;
     }
@@ -68263,8 +68305,7 @@ var Table = (function(){
 ;pjax_config_page("limitsws", function(){
     return {
         onLoad: function() {
-            if (!$.cookie('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
             Content.populate();
@@ -68274,13 +68315,15 @@ var Table = (function(){
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
 
-                    if (/^VRT/.test(TUser.get().loginid)) {
+                    if (TUser.get().is_virtual) {
                         LimitsWS.limitsError();
-                    } else if (response && !/^VRT/.test(TUser.get().loginid)) {
+                    } else if (response) {
                         var type = response.msg_type;
                         var error = response.error;
 
-                        if (type === 'get_limits' && !error){
+                        if (type === 'authorize' && TUser.get().is_virtual){
+                            LimitsWS.limitsError(response);
+                        } else if (type === 'get_limits' && !error){
                             LimitsWS.limitsHandler(response);
                         } else if (error) {
                             LimitsWS.limitsError();
@@ -68407,8 +68450,7 @@ var Table = (function(){
 pjax_config_page("user/profit_table", function(){
     return {
         onLoad: function() {
-            if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
             BinarySocket.init({
@@ -68699,7 +68741,11 @@ var ProfitTableUI = (function(){
             onmessage: function(msg){
               var response = JSON.parse(msg.data);
               if (response) {
-                if (response.msg_type === 'new_account_real'){
+                if(response.msg_type === 'authorize' && !page.client.is_virtual()) {
+                    window.location.href = page.url.url_for('user/my_accountws');
+                    return;
+                }
+                else if (response.msg_type === 'new_account_real'){
                   ValidAccountOpening.handler(response, response.new_account_real);
                 }
               }
@@ -68995,8 +69041,7 @@ var ProfitTableUI = (function(){
 ;pjax_config_page("user/statement", function(){
     return {
         onLoad: function() {
-            if (!getCookieItem('login')) {
-                window.location.href = page.url.url_for('login');
+            if (page.client.redirect_if_logout()) {
                 return;
             }
             BinarySocket.init({
