@@ -57834,7 +57834,7 @@ BetForm.Time.EndTime.prototype = {
             if ($self.contract_category.match('asian')) {
                 $self.ticks_needed = $self.number_of_ticks;
                 $self.x_indicators = {
-                    '_0': { label: 'Tick 1', id: 'start_tick'},
+                    '_0': { label: 'Entry Spot', id: 'start_tick'},
                 };
                 $self.x_indicators['_' + exit_tick_index] = {
                     label: 'Exit Spot',
@@ -57874,7 +57874,7 @@ BetForm.Time.EndTime.prototype = {
                     height: config.minimize ? 143 : null,
                     backgroundColor: null,
                     events: { load: $self.plot(config.plot_from, config.plot_to) },
-                    marginLeft: 20,
+                    marginLeft: 45,
                 },
                 credits: {enabled: false},
                 tooltip: {
@@ -59248,6 +59248,9 @@ ClientForm.prototype = {
         $form.removeClass(hiddenClass);
 
         if('error' in response) {
+            if (response.error.code === 'ClientSelfExclusion') {
+              BinarySocket.send({logout: 1});
+            }
             if('message' in response.error) {
                 showPageError(response.error.message, true);
             }
@@ -59444,7 +59447,7 @@ pjax_config_page("user/self_exclusionws", function() {
                 return;
             }
 
-        	BinarySocket.init({
+          BinarySocket.init({
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
                     if (response) {
@@ -59462,7 +59465,7 @@ pjax_config_page("user/self_exclusionws", function() {
                         console.log('some error occured');
                     }
                 }
-            });	
+            });
 
             Content.populate();
             if(TUser.get().hasOwnProperty('is_virtual')) {
@@ -59470,7 +59473,8 @@ pjax_config_page("user/self_exclusionws", function() {
             }
         }
     };
-});;var SettingsDetailsWS = (function() {
+});
+;var SettingsDetailsWS = (function() {
     "use strict";
 
     var formID,
