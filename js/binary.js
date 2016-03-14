@@ -50574,7 +50574,7 @@ Menu.prototype = {
         var sub_items = $('li#topMenuStartBetting ul.sub_items');
         sub_items.find('li').each(function () {
             var link_id = $(this).attr('id').split('_')[1];
-            if(markets_array.indexOf(link_id) < 0 && !page.client.is_virtual()) {
+            if(markets_array.indexOf(link_id) < 0 && page.client.is_logged_in && !page.client.is_virtual()) {
                 var link = $(this).find('a');
                 var link_text = link.text();
                 var link_href = link.attr('href');
