@@ -50579,8 +50579,7 @@ Menu.prototype = {
                 var link_text = link.text();
                 var link_href = link.attr('href');
                 link.replaceWith($('<span/>', {class: 'link disabled-link', text: link_text, link_url: link_href}));
-            }
-            else {
+            } else {
                 var span = $(this).find('span');
                 var span_text = span.text();
                 var span_href = span.attr('link_url');
