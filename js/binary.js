@@ -50284,6 +50284,9 @@ Client.prototype = {
     is_virtual: function() {
         return this.get_storage_value('is_virtual') === '1';
     },
+    require_reality_check: function() {
+        return this.get_storage_value('has_reality_check') === '1';
+    },
     get_storage_value: function(key) {
         return LocalStore.get('client.' + key) || '';
     },
@@ -50311,7 +50314,12 @@ Client.prototype = {
 
         // allowed markets
         if(this.is_logged_in) {
-            if(!TUser.get().is_virtual && !this.get_storage_value('allowed_markets') && TUser.get().landing_company_name) {
+            if(
+                !this.get_storage_value('is_virtual') &&
+                !this.get_storage_value('allowed_markets') &&
+                TUser.get().landing_company_name &&
+                !this.get_storage_value('has_reality_check')
+            ) {
                 $('#topMenuStartBetting').addClass('invisible');
                 BinarySocket.send({
                     'landing_company_details': TUser.get().landing_company_name,
@@ -50338,9 +50346,11 @@ Client.prototype = {
         if (!response.hasOwnProperty('error')) {
             var allowed_markets = response.landing_company_details.legal_allowed_markets;
             var company = response.landing_company_details.name;
+            var has_reality_check = response.landing_company_details.has_reality_check;
 
             this.set_storage_value('allowed_markets', allowed_markets.length === 0 ? '' : allowed_markets.join(','));
             this.set_storage_value('landing_company_name', company);
+            this.set_storage_value('has_reality_check', has_reality_check);
 
             page.header.menu.disable_not_allowed_markets();
             page.header.menu.register_dynamic_links();
@@ -50356,7 +50366,7 @@ Client.prototype = {
     },
     clear_storage_values: function() {
         var that  = this;
-        var items = ['currencies', 'allowed_markets', 'landing_company_name', 'is_virtual'];
+        var items = ['currencies', 'allowed_markets', 'landing_company_name', 'is_virtual', 'has_reality_check'];
         items.forEach(function(item) {
             that.set_storage_value(item, '');
         });
@@ -51128,7 +51138,6 @@ Page.prototype = {
         this.on_click_acc_transfer();
         if(getCookieItem('login')){
             ViewBalance.init();
-            RealityCheck.init();
         }
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
@@ -60285,19 +60294,6 @@ function getUrlVars() {
     return vars;
 }
 
-function replaceQueryParam(param, newval, search) {
-    var regex = new RegExp("([?;&])" + param + "[^&;]*[;&]?");
-    var query = search.replace(regex, "$1").replace(/&$/, '');
-
-    return (query.length > 2 ? query + "&" : "?") + (newval ? param + "=" + newval : '');
-}
-
-if (page.language() === 'JA' && !$.cookie('MyJACookie')) {
-  var str = window.location.search;
-  str = replaceQueryParam('l', 'EN', str);
-  window.location = window.location.pathname + str;
-}
-
 // returns true if internet explorer browser
 function isIE() {
   return /(msie|trident|edge)/i.test(window.navigator.userAgent) && !window.opera;
@@ -60885,6 +60881,7 @@ $(function() {
          * no open contracts
         **/
         if(0 === data.portfolio.contracts.length) {
+            $("#portfolio-no-contract").show();
             $("#portfolio-table").addClass("dynamic");
             $("#portfolio-content").removeClass("dynamic");
             $("#portfolio-loading").hide();
@@ -60895,7 +60892,7 @@ $(function() {
          * User has at least one contract
         **/
 
-        $("#portfolio-no-contract").remove();
+        $("#portfolio-no-contract").hide();
         var contracts = '';
         var sumPurchase = 0.0;
         var currency;
@@ -60911,7 +60908,7 @@ $(function() {
         });
 
         // contracts is ready to be added to the dom
-        $("#portfolio-dynamic").replaceWith(trans(contracts));
+        $("#portfolio-dynamic").append(trans(contracts));
 
         // update footer area data
         sumPurchase = sumPurchase.toFixed(2);
@@ -60940,15 +60937,23 @@ $(function() {
 
         var status_class = '';
         var no_resale_html = '';
-        if(proposal.is_valid_to_sell != 1) {
-            no_resale_html = '<span>' + text.localize('Resale not offered') + '</span>';
-            $td.addClass("no_resale");
+        if(proposal.is_expired == 1 || proposal.is_sold == 1) {
+            $td.parent('tr').remove();
+            if($('#portfolio-dynamic tr').length === 0) {
+                BinarySocket.send({"portfolio":1});
+            }
         }
         else {
-            status_class = new_indicative < old_indicative ? ' price_moved_down' : (new_indicative > old_indicative ? ' price_moved_up' : '');
-            $td.removeClass("no_resale");
+            if(proposal.is_valid_to_sell != 1) {
+                no_resale_html = '<span>' + text.localize('Resale not offered') + '</span>';
+                $td.addClass("no_resale");
+            }
+            else {
+                status_class = new_indicative < old_indicative ? ' price_moved_down' : (new_indicative > old_indicative ? ' price_moved_up' : '');
+                $td.removeClass("no_resale");
+            }
+            $td.html(proposal.currency + ' <strong class="indicative_price' + status_class + '"">' + bid_price + '</strong>' + no_resale_html);
         }
-        $td.html(proposal.currency + ' <strong class="indicative_price' + status_class + '"">' + bid_price + '</strong>' + no_resale_html);
 
         var indicative_sum = 0, indicative_price = 0, up_down;
         $("strong.indicative_price").each(function() {
@@ -66153,18 +66158,20 @@ function BinarySocketClass() {
                             events.onauth();
                         }
                         send({balance:1, subscribe: 1});
+                        send({landing_company_details: TUser.get().landing_company_name});
                         sendBufferedSends();
                     }
                 } else if (type === 'balance') {
-                   ViewBalanceUI.updateBalances(response);
+                    ViewBalanceUI.updateBalances(response);
                 } else if (type === 'time') {
-                   page.header.time_counter(response);
+                    page.header.time_counter(response);
                 } else if (type === 'logout') {
-                   page.header.do_logout(response);
-                } else if (type === 'landing_company_details' && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.handler === 'page.client') {
-                   page.client.response_landing_company_details(response);
+                    page.header.do_logout(response);
+                } else if (type === 'landing_company_details') {
+                    page.client.response_landing_company_details(response);
+                    RealityCheck.init();
                 } else if (type === 'payout_currencies' && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.handler === 'page.client') {
-                   page.client.response_payout_currencies(response);
+                    page.client.response_payout_currencies(response);
                 }
                 if (response.hasOwnProperty('error')) {
                     if(response.error && response.error.code && response.error.code === 'RateLimit') {
@@ -69150,6 +69157,7 @@ var ProfitTableUI = (function(){
         if ($('#reality-check').length > 0) {
             return;
         }
+
         LocalStore.set('reality_check.close', 'false');
         var lightboxDiv = $("<div id='reality-check' class='lightbox'></div>");
 
@@ -69204,7 +69212,9 @@ var ProfitTableUI = (function(){
             dataType: 'html',
             method: 'POST',
             success: function(realityFreqText) {
-                displayPopUp($(realityFreqText));
+                if (realityFreqText.includes('reality-check-content')) {
+                    displayPopUp($(realityFreqText));
+                }
             },
             error: function(xhr) {
                 return;
@@ -69218,7 +69228,9 @@ var ProfitTableUI = (function(){
             dataType: 'html',
             method: 'POST',
             success: function(realityCheckText) {
-                displayPopUp($(realityCheckText));
+                if (realityCheckText.includes('reality-check-content')) {
+                    displayPopUp($(realityCheckText));
+                }
             },
             error: function(xhr) {
                 return;
@@ -69243,6 +69255,10 @@ var ProfitTableUI = (function(){
     }
 
     function init() {
+        if (!page.client.require_reality_check()) {
+            return;
+        }
+        
         // to change old interpretation of reality_check
         if (LocalStore.get('reality_check.ack') > 1) {
             LocalStore.set('reality_check.ack', 0);
