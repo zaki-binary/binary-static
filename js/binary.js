@@ -61239,7 +61239,14 @@ pjax_config_page('portfolio', function() {
             values : 4
         };
 
-        BinarySocket.send({"active_symbols": "brief"});
+        var $args = {
+            active_symbols: "brief"
+        };
+        if (typeof is_japan === 'function') {
+            $args['landing_company'] = "japan";
+        }
+
+        BinarySocket.send($args);
         BinarySocket.send({"asset_index": 1});
     };
 
@@ -62555,6 +62562,8 @@ function contractTypeDisplayMapping(type) {
         DIGITODD: "bottom",
         DIGITOVER: "top",
         DIGITUNDER: "bottom",
+        EXPIRYRANGEE: "top",
+        EXPIRYMISSE: "bottom",
         EXPIRYRANGE: "top",
         EXPIRYMISS: "bottom",
         RANGE: "top",
@@ -65761,9 +65770,13 @@ var Symbols = (function () {
     };
 
     var getSymbols = function (update) {
-        BinarySocket.send({
+        var $args = {
             active_symbols: "brief"
-        });
+        };
+        if (typeof is_japan === 'function') {
+            $args['landing_company'] = "japan";
+        }
+        BinarySocket.send($args);
         need_page_update = update;
     };
 
@@ -70527,24 +70540,4 @@ function attach_tabs(element) {
         processPriceRequest();
 
     };
-}
-;if(typeof is_japan === 'function'){
-	Symbols._details = Symbols.details.bind({});
-
-	Object.defineProperties(Symbols,{
-		details:{
-			value:function(data){
-				var active_symbols = [];
-
-				data.active_symbols.forEach(function(symbol){
-					if(symbol.market==='forex' && symbol.submarket==='major_pairs'){
-						active_symbols.push(symbol);
-					}
-				});
-
-				data.active_symbols = active_symbols;
-				return Symbols._details(data);
-			}
-		}
-	});
 }
