@@ -51050,6 +51050,12 @@ Contents.prototype = {
 
             if (page.client.is_virtual()) {
                 var show_upgrade = true;
+                if (localStorage.getItem('jp_test_allowed')) {
+                    $('#virtual-upgrade-link').addClass('invisible');
+                    $('#vr-japan-upgrade-link').addClass('invisible');
+                    $('#vr-financial-upgrade-link').addClass('invisible');
+                    show_upgrade = false;           // do not show upgrade for user that filled up form
+                }
                 for (var i=0;i<loginid_array.length;i++) {
                     if (loginid_array[i].real) {
                         $('#virtual-upgrade-link').addClass('invisible');
@@ -51548,6 +51554,30 @@ var load_with_pjax = function(url) {
         config.update_url = url;
         config.history = true;
         pjax.invoke(config);
+};
+
+// Reduce duplication as required Auth is a common pattern
+var pjax_config_page_require_auth = function(url, exec) {
+    var redirect = function() {
+        window.location.href = page.url.url_for('login');
+    };
+
+    var oldOnLoad = exec().onLoad;
+    var newOnLoad = function() {
+        if (!getCookieItem('login')) {
+            redirect();
+        } else {
+            oldOnLoad();
+        }
+    };
+
+    var newExecFn = function(){
+        return {
+            onLoad: newOnLoad,
+            onUnload: exec().onUnload
+        };
+    };
+    pjax_config_page(url, newExecFn);
 };
 ;var SpotLight = function (){
     var that = {};
@@ -66178,6 +66208,7 @@ function BinarySocketClass() {
                         }
                         send({balance:1, subscribe: 1});
                         send({landing_company_details: TUser.get().landing_company_name});
+                        send({get_settings: 1});
                         sendBufferedSends();
                     }
                 } else if (type === 'balance') {
@@ -66186,11 +66217,33 @@ function BinarySocketClass() {
                     page.header.time_counter(response);
                 } else if (type === 'logout') {
                     page.header.do_logout(response);
+                    localStorage.removeItem('jp_test_allowed');
                 } else if (type === 'landing_company_details') {
                     page.client.response_landing_company_details(response);
                     RealityCheck.init();
                 } else if (type === 'payout_currencies' && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.handler === 'page.client') {
                     page.client.response_payout_currencies(response);
+                } else if (type === 'get_settings') {
+                    var jpStatus = response.get_settings.jp_account_status;
+
+                    if (jpStatus) {
+                        switch (jpStatus.status) {
+                            case 'jp_knowledge_test_pending': localStorage.setItem('jp_test_allowed', 1);
+                                break;
+                            case 'jp_knowledge_test_fail':
+                                if (Date.now() >= (jpStatus.next_test_epoch * 1000)) {
+                                    localStorage.setItem('jp_test_allowed', 1);
+                                } else {
+                                    localStorage.setItem('jp_test_allowed', 0);
+                                }
+                                break;
+                            default: localStorage.setItem('jp_test_allowed', 0);
+                        }
+
+                        KnowledgeTest.showKnowledgeTestTopBarIfValid(jpStatus);
+                    } else {
+                        localStorage.removeItem('jp_test_allowed');
+                    }
                 }
                 if (response.hasOwnProperty('error')) {
                     if(response.error && response.error.code) {
@@ -66440,7 +66493,7 @@ var BinarySocket = new BinarySocketClass();
 
                         availableCurr.push(currObj);     
 
-                        firstacct = "";    
+                        firstacct = {};    
 
                         if(selectedIndex < 0 && value.balance){
                             selectedIndex =  index;
@@ -66456,7 +66509,7 @@ var BinarySocket = new BinarySocketClass();
                                  .attr("value",optionValue)
                                  .text(str));     
                     }
-                    secondacct = "";
+                    secondacct = {};
 
                     if(value.balance <= 0){
                         $form.find("#transfer_account_transfer option:last").remove();
@@ -66719,7 +66772,7 @@ pjax_config_page("cashier/account_transferws", function() {
     var apiResponse = function(response) {
         if('error' in response){
             if('message' in response.error) {
-                console.log(response.error.message);
+                console.warn(response.error.message);
             }
             return false;
         }
@@ -67770,7 +67823,10 @@ var Table = (function(){
       error.innerHTML = (response.msg_type === 'sanity_check') ? text.localize('There was some invalid character in an input field.') : errorMessage;
       error.parentNode.parentNode.parentNode.setAttribute('style', 'display:block');
       return;
-    } else {
+    } else if (getCookieItem('residence') === 'jp') {
+      window.location.href = page.url.url_for('new_account/knowledge_testws');
+      $('#topbar-msg').children('a').addClass('invisible');
+    } else {     // jp account require more steps to have real account
       var loginid = message.client_id;
       //set cookies
       var oldCookieValue = $.cookie('loginid_list');
@@ -67788,7 +67844,7 @@ var Table = (function(){
       $('#loginid-switch-form').submit();
     }
   };
-  var letter, numbers, space, hyphen, period, apost;
+  var letters, numbers, space, hyphen, period, apost;
 
   var initializeValues = function() {
     letters = Content.localize().textLetters;
@@ -68046,6 +68102,150 @@ var Table = (function(){
     errorMessageResidence: errorMessageResidence
   };
 }());
+;var FinancialAssessmentws = (function(){
+   "use strict";
+   
+    var init = function(){
+        LocalizeText();
+        $("#assessment_form").on("submit",function(event) {
+            event.preventDefault();
+            submitForm();
+            return false;
+        });
+        BinarySocket.send(JSON.parse("{\"get_financial_assessment\" : 1}"));
+    };
+   
+    // For translating strings
+    var LocalizeText = function(){
+        $("#heading").text(text.localize($("#heading").text())); 
+        $("legend").text(text.localize($("legend").text()));
+        $("#assessment_form label").each(function(){
+            var ele = $(this);
+            ele.text(text.localize(ele.text()));
+        });
+        $("#assessment_form option").each(function(){
+            var ele = $(this);
+            ele.text(text.localize(ele.text()));
+        });
+        $("#warning").text(text.localize($("#warning").text()));
+        $("#submit").text(text.localize($("#submit").text()));
+    };
+    
+    var submitForm = function(){
+        if(!validateForm()){
+            return;
+        }
+        var data = {'set_financial_assessment' : 1};
+        showLoadingImg();
+        $('#assessment_form select').each(function(){
+            data[$(this).attr("id")] = $(this).val();
+        });
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        BinarySocket.send(data);
+        
+    };
+    
+    var validateForm = function(){
+        var isValid = true,
+            errors = {};
+        $('#assessment_form select').each(function(){
+            if($(this).val() === ''){
+                isValid = false;
+                errors[$(this).attr("id")] = text.localize('Please select a value.');
+            }
+        });
+        if(!isValid){
+            displayErrors(errors);
+        }
+        
+        return isValid;
+    };
+    
+    var showLoadingImg = function(){
+        showLoadingImage($('<div/>', {id: 'loading'}).insertAfter('#heading')); 
+        $("#assessment_form").addClass('invisible');
+    };
+    
+    var hideLoadingImg = function(show_form){
+        $("#loading").remove();
+        if(typeof show_form === 'undefined'){
+            show_form = true;
+        }
+        if(show_form)
+            $("#assessment_form").removeClass('invisible');
+    };
+    
+    var responseGetAssessment = function(response){
+        hideLoadingImg();
+        for(var key in response.get_financial_assessment){
+            if(key){
+                var val = response.get_financial_assessment[key];
+                $("#"+key).val(val);
+            }
+        }
+    };
+    
+    var displayErrors = function(errors){
+        var id;
+        $(".errorfield").each(function(){$(this).text('');});
+        for(var key in errors){
+            if(key){
+                var error = errors[key];
+                $("#error"+key).text(text.localize(error));
+                id = key;
+            }
+        }  
+        hideLoadingImg();
+        $('html, body').animate({
+            scrollTop: $("#"+id).offset().top
+        }, 'fast');
+    };
+    
+    var responseOnSuccess = function(){
+        $("#heading").hide();
+        hideLoadingImg(false);
+        $("#response_on_success").text(text.localize("Your details have been updated."))
+            .removeClass("invisible");
+    };
+    
+    var apiResponse = function(response){
+        if(response.msg_type === 'get_financial_assessment'){
+            responseGetAssessment(response);
+        }
+        else if(response.msg_type === 'set_financial_assessment' && 'error' in response){
+            displayErrors(response.error.details);
+        }
+        else if(response.msg_type === 'set_financial_assessment'){
+            responseOnSuccess();
+        }
+    };
+    return {
+        init : init,
+        apiResponse : apiResponse
+    };
+}());
+
+
+pjax_config_page("user/assessmentws", function() {
+    return {
+        onLoad: function() {
+            if (page.client.redirect_if_logout() || page.client.redirect_if_is_virtual('user/my_accountws')) {
+                return;
+            }
+
+            BinarySocket.init({
+                onmessage: function(msg) {
+                    var response = JSON.parse(msg.data);
+                    if (response) {
+                        FinancialAssessmentws.apiResponse(response);
+                    }
+                }
+            });
+            showLoadingImage($('<div/>', {id: 'loading'}).insertAfter('#heading'));
+            FinancialAssessmentws.init();
+        }
+    };
+});
 ;pjax_config_page("user/iphistoryws", function(){
     return {
         onLoad: function() {
@@ -68327,6 +68527,7 @@ var Table = (function(){
               }
             }
           });
+          JapanAccOpeningUI.fireRequest();
         }
       });
     }
@@ -68389,6 +68590,8 @@ var Table = (function(){
 ;var JapanAccOpeningUI = function () {
   "use strict";
 
+    var elementObj;
+
   function checkValidity() {
     window.accountErrorCounter = 0;
     var letters = Content.localize().textLetters,
@@ -68398,7 +68601,7 @@ var Table = (function(){
         period = Content.localize().textPeriod,
         apost = Content.localize().textApost;
 
-    var elementObj = {
+    elementObj = {
         gender: document.getElementById('gender'),
         fname: document.getElementById('fname'),
         lname: document.getElementById('lname'),
@@ -68547,7 +68750,6 @@ var Table = (function(){
     }
 
     if (window.accountErrorCounter === 0) {
-      JapanAccOpeningData.getJapanAcc(elementObj);
       for (key in errorObj) {
         if (errorObj[key].offsetParent !== null) {
           errorObj[key].setAttribute('style', 'display:none');
@@ -68558,8 +68760,13 @@ var Table = (function(){
     return 0;
   }
 
+    function fireRequest() {
+        JapanAccOpeningData.getJapanAcc(elementObj);
+    }
+
   return {
-    checkValidity: checkValidity
+    checkValidity: checkValidity,
+      fireRequest: fireRequest,
   };
 }();
 ;pjax_config_page("limitsws", function(){
@@ -71278,6 +71485,852 @@ function attach_tabs(element) {
 
     })();
 }
+;pjax_config_page_require_auth("new_account/knowledge_testws", function(){
+    return {
+        onLoad: function() {
+            KnowledgeTest.init();
+        }
+    };
+});
+;var KnowledgeTestData = (function() {
+    "use strict";
+    var questions = {
+        section1:[
+            {
+                question: "An option holder must buy ( or sell ) the underlying asset at a predetermined price within a specified period ( or at a specific time ).",
+                answer: false,
+                id: 1,
+            },
+            {
+                question: "A Currency Option confers the right to sell one currency in exchange for another currency as the underlying asset. For example, the right to sell Yen and buy Dollars is known as a Yen Put / Dollar Call Option, or just Yen Put for short; and the opposite right to buy Yen and sell Dollar is called a Yen Call / Dollar Put Option, or just Yen Call for short.",
+                answer: true,
+                id: 2
+            },
+            {
+                question: "There are two types of option delivery: One requires exchanging the underlying asset, and the other requires a payment which depends on the difference between the fair market price and the exercise price. A Binary Option is the second type where if the fair market price meets certain conditions with respect to the exercise price, then an agreed fixed amount will be paid to the option buyer.",
+                answer: true,
+                id: 3
+            },
+            {
+                question: "A  Net Settlement type of option is one where the underlying asset does not include yen, but the option fee and settlement are paid in yen; it therefore requires some definition of how the settlement amounts will be calculated and converted to yen.",
+                answer: true,
+                id: 4
+            },
+            {
+                question: "A Binary Option contains the right for the buyer to receive a certain fixed amount if the market price reaches the exercise price by the exercise time, but it does not contain any rights to sell or buy the underlying asset.",
+                answer: true,
+                id: 5
+            },
+            {
+                question: "There are some types of Binary Option, such as Range Binary Options, Touch or No-Touch Binary Options, that are exceptions to the general rule where payment is made at a known exercise time. For these types of option a payment is made automatically at Exit Time when certain conditions have been met.",
+                answer: true,
+                id: 6
+            },
+            {
+                question: "There are many types of Binary Option, including some such as Range Binary Options and Touch or No-Touch Binary Options which do not always require automatic payment at Exercise Time and which will be settled earlier if certain conditions have been met. However, in all cases, for a payment to be required, the option must end In The Money.",
+                answer: true,
+                id: 7
+            },
+            {
+                question: "A Currency Binary Option is one where there is a target for a particular currency pair, so a strike price for the exchange rate is agreed, and a payout will be due if the judgment price meets the conditions of being over or under the target strike price, depending on the option type, by the exercise time.",
+                answer: true,
+                id: 8
+            },
+            {
+                question: "For a currency binary option which has the underlying exchange rate of dollars against yen, the right to receive a payout if the yen becomes weaker is known as a dollar-put binary option.",
+                answer: false,
+                id: 9
+            },
+            {
+                question: "For a currency binary option with the underlying exchange rate of dollars against yen, the right to receive a payout if the yen becomes stronger is known as a dollar-put binary option",
+                answer: true,
+                id: 10
+            },
+            {
+                question: "If you sell a currency binary call option at a price of 500 yen, with an underlying of dollar against yen, the payout is 1,000 yen, and the strike price is 100, then if the judgment price at exercise time is 99, you will need to payout 1,000 yen to the buyer of the option.",
+                answer: false,
+                id: 11
+            },
+            {
+                question: "If you sell a currency binary put option at a price of 500 yen, with an underlying of dollar against yen, the payout is 1,000 yen, and the strike price is 100, then if the judgment price at exercise time is 99, you will need to payout 1,000 yen to the buyer of the option.",
+                answer: true,
+                id: 12
+            },
+            {
+                question: "If you buy a currency binary call option at a price of 500 yen, with an underlying of dollar against yen, the payout is 1,000 yen, and the strike price is 100, then if the judgment price at exercise time is 99, you will receive a payout 1,000 yen from the seller of the option.",
+                answer: false,
+                id: 13
+            },
+            {
+                question: "If you buy a currency binary put option at a price of 500 yen, with an underlying of dollar against yen, the payout is 1,000 yen, and the strike price is 100, then if the judgment price at exercise time is 99, you will receive a payout 1,000 yen from the seller of the option.",
+                answer: true,
+                id: 14
+            },
+            {
+                question: "If you buy a currency binary option at a price of 500 yen, and the judgment price meets the conditions so you receive a payout of 1,000 yen, then your profit can be calculated 500 yen after subtracting the 500 yen that was paid as a fee to the option seller.",
+                answer: true,
+                id: 15
+            },
+            {
+                question: "If you sell a currency binary option at a price of 500 yen, and the judgment price meets the conditions so you need to payout 1,000 yen, then your profit will be minus 500 yen after subtracting the 500 yen that was received as a fee from the option buyer.",
+                answer: true,
+                id: 16
+            }
+        ],
+        section2:[
+            {
+                question: "To avoid or hedge the future price of an underlying asset which you hold, you should buy a call option",
+                answer: false,
+                id: 17
+            },
+            {
+                question: "To compensate for any rise in the price of an underlying asset that you intend to buy in future, you should buy a call option",
+                answer: true, id: 18
+            },
+            {
+                question: "Predicted that the underlying asset price is largely up-dean and in order to obtain the benefit also moving in either direction of rising send falling, obtained both options of the call options that exercise price is higher than the underlying asset price and tie put option that exercise prize is lower than underlying asset price.",
+                answer: true, id: 19
+            },
+            {
+                question: "Predicts that width of up-down of underlying asset is small and  in order to obtain the benefit also moving in either direction of rising and falling, granted together both of the call option that exercise price is higher than underlying asset and the put option that exercise price is lower than underlying asset price.",
+                answer: true, id: 20
+            },
+            {
+                question: "Covered option is holding the underlying assets which like covering sell position of options and sell the it.",
+                answer: true,
+                id: 21,
+            },
+            {
+                question: "Predicted the underlying asset price will decline than strike price at exit time and bought binary call options. ?",
+                answer: false,
+                id: 22
+            },
+            {
+                question: "Predicted the underlying asset price will decline than strike price at exit time and bought binary put options. ?",
+                answer: false,
+                id: 23
+            },
+            {
+                question: "Predicted the underlying asset price will raise than strike price at exit time and bought binary put options. ?",
+                answer: false,
+                id: 24
+            },
+            {
+                question: "Predicted the underlying asset price will decline than strike price at exit time and bought binary call options. ?",
+                answer: true,
+                id: 25
+            },
+            {
+                question: " At buying call option, break-even point is the price added option fee of a unit of the underlying asset to exercise price.?",
+                answer: true,
+                id: 26
+            },
+            {
+                question: " At buying put option, break-even point is the price minuses option fee of a unit of the underlying asset to exercise price.?",
+                answer: true,
+                id: 27
+            },
+            {
+                question: "Hedge you used for binary option is needed to be conducted as compensation part of loss of  the hedged asset because payout is fixed.?",
+                answer: true,
+                id: 28
+            },
+            {
+                question: "Using two options, if obtain  binary put option which exercise price is higher and binary call option which exercise price is lower, its possible to obtain profit in case that exit price is between the exercise prices of two options and its possible to invest range binary options which will be payout in case that exit price is in side of the predetermined price.?",
+                answer: true,
+                id: 29
+            },
+            {
+                question: "Using two options, if get  binary call option which exercise price is higher and binary put option which exercise price is lower, its possible to obtain profit in case that exit price is out side of the price range made by exercise prices of two options and its possible to invest range binary options which will be payout in case that exit price is out side of the predetermined price.?",
+                answer: true,
+                id: 30
+            },
+
+        ],
+        section3:[
+            {
+                question: "Trading period (expiration) of binary option is 2 hours and more. All of the transactions are established at the start of the trading period and the established position will be settled only by judge.?",
+                answer: false,
+                id: 31
+            },
+            {
+                question: "A bought or sold binary option may be closed-out before exercise time by selling or buying-back the option, or alternatively by cancelling.?",
+                answer: true,
+                id: 32
+            },
+            {
+                question: "Short positions of currency-related binary options, unlike the short positions of the other currency-related option, will not be loss cut because it is not a financial instruments subjected to loss cut regulation.?",
+                answer: false,
+                id: 33
+            },
+            {
+                question: "Short positions of currency-related binary option is conducted transactions by depositing necessary margin requirement to trader in advance. If the margin shortage after the transaction established, it is necessary to deposit the additional margin to the trader?",
+                answer: true,
+                id: 34
+            },
+            {
+                question: "Although each traders determined the limit amount to deal with the customer, even if customer's transaction amount, loss with a certain period and open interest a customer held exceeds the reference, the transaction with the customer will not be discontinued or cancelled.?",
+                answer: false,
+                id: 35
+            },
+            {
+                question: "Options may be either European or American style of exercise, and the one which can be exercised at only one expiry time is the European style option.?",
+                answer: true,
+                id: 36
+            },
+            {
+                question: "For a call option, if the price of the underlying asset is higher than the option exercise price, it is know as an in-the-money option.?",
+                answer: true,
+                id: 37
+            },
+            {
+                question: "For a call option, if the price of the underlying asset is higher than the option exercise price, it is know as an out-of-the-money option.?",
+                answer: false,
+                id: 38
+            },
+            {
+                question: "For both call and put options, if the underlying asset price is the same as the exercise price, it is known as an at-the-money option.?",
+                answer: true,
+                id: 39
+            },
+            {
+                question: "For a put option, if the underlying asset price is lower than the option exercise price, it is known as an out-of-the-money option.?",
+                answer: false,
+                id: 40
+            },
+            {
+                question: "For a put option, if the underlying asset price is higher than the option exercise price, it is known as an in-the-money option.?",
+                answer: false,
+                id: 41,
+            },
+            {
+                question: "Exercise price is the price which buy and sell underlying asset by exercise the right and in case of binary option, it is basic price to judge the presence (exist) of payout.?",
+                answer: true,
+                id: 42
+            },
+            {
+                question: "Exit price is the underlying asset price at exercise time and it's the price to judge the presence (exist) of payout by comparing with exercise price.?",
+                answer: true,
+                id: 43
+            },
+            {
+                question: "The payout is the amount that seller of the option paid to the buyer as a result of exercising the right, when the predetermined exercise conditions meet and the amount paid like that called payout amount.?",
+                answer: true,
+                id: 44
+            },
+            {
+                question: "In the OTC currency binary options trading, if the exchange rate during the trading period move to one direction more than expected, that there is no exercise price which can continue appropriate trading around at-the-money, there is possible to add the exercise price on the way. However, even if the exercise price has been added, do the exercise price will continue trading using up to it, also the transaction price will not be affected by the additional impact of the exercise price.?",
+                answer: true,
+                id: 45
+            },
+            {
+                question: "The exit price is important in binary options. In case of handling the OTC currency-related binary options trading for personal, company inspects if mistakes and intentional operation has not been performed inspection for exit price the company determined and also checking whether there is an error in the data in case that the company use the rate data provided by third company.?",
+                answer: true,
+                id: 46
+            },
+            {
+                question: "About OTC currency for binary options trading, summarizes the profit and loss result of all transactions that have been made between the customer, to publish the information in the company's home page, at any time while the customer is doing the transaction before the start, or the transaction, the information Make sure, for that you're willing to trade under the calm judgment, we are committed to a variety of environmental improvement.?",
+                answer: true,
+                id: 47
+            },
+            {
+                question: "For an individual investor, all profits from OTC currency options trading are tax-free?",
+                answer: false,
+                id: 48
+            },
+            {
+                question: "For an individual investor, profits and losses from OTC currency options traing cannot be combined with profits and losses from margin FX and securities-related OTC options.?",
+                answer: false,
+                id: 49
+            },
+            {
+                question: "Unless special arrangements are made, cooling-off will not be available after OTC binary options trading contract has been made.?",
+                answer: true,
+                id: 50
+            }
+        ],
+        section4:[
+            {
+                question: "If the buyer of an option does not exercise the option rights, there will be no fee payable to the option seller.?",
+                answer: false,
+                id: 51
+            },
+            {
+                question: "If the buyer of an option waives his right to exercise, a transaction in the underlying asset will not be dealt between the seller and the buyer.?",
+                answer: true, id: 52
+            },
+            {
+                question: "The seller of an option should receive the option premium from the buyer, even if the buyer waives the right to exercise the option.?",
+                answer: true, id: 53
+            },
+            {
+                question: "If an option buyer wishes to exercise the option rights, the seller may still reject the deal.?",
+                answer: false, id: 54
+            },
+            {
+                question: "The option of the leverage effect, the buyer is likely to be obtained several times profit compared to the option fee, but the loss is limited to the option fee, when it comes to seller, profit is limited to the option fee, but loss will be likely to be doubled of option fee.?",
+                answer: true, id: 55
+            },
+            {
+                question: "The buyer of the plane option can waiver when incriminating, so the maximum loss of buyer is option fee and maximum earning is the amount subtracted by the difference of underlying asset price and exercise price from option fee. Therefore, when the underlying asset price is infinite, the profit will be infinite.?",
+                answer: true, id: 56
+            },
+            {
+                question: "While seller of plan options is limited the earnings is the option fee, the difference of the underlying asset price and the strike price is a loss, if the underlying asset price is infinite, the loss will be infinite.?",
+                answer: true, id: 57
+            },
+            {
+                question: "Exercise deadline is coming, but the option to exercise is not carried out and disappear, option premium the seller received will be as it is that of the seller.?",
+                answer: true, id: 58
+            },
+            {
+                question: "Although the options which is not be exercised will disappear at the exercise period, the option fee which seller received will remain for sellers.?",
+                answer: true, id: 59
+            },
+            {
+                question: "Maximum loss of buyer at binary options is an optional fee, maximum loss of the seller will be the amount subtracted the option fee from the payout amount.?",
+                answer: true, id: 60
+            },
+            {
+                question: "Based on the probability of profit is obtained by the exercise, it can not be said that cheaper options is advantageous unconditionally.?",
+                answer: true,
+                id: 61,
+            },
+            {
+                question: "Binary options is lower risks and higher returns than plan options because loss of sellers is limited at binary options.?",
+                answer: false,
+                id: 62
+            },
+            {
+                question: "Although binary option loss is limited, based on the assets of the investors, so as not to become excessive speculative trading, it is necessary to bear in mind the moderation in transactions.?",
+                answer: true,
+                id: 63
+            },
+            {
+                question: "In case probability to receive the payout is 50% and magnification of payout for the investment is less than a 2-fold lower, than the expected rate will be  1 times lower and forecast recovery amount is less than the investment.?",
+                answer: true,
+                id: 64
+            },
+            {
+                question: "It can not be said that binary option is unconditionally advantageous because the reason why investors will lose the full amount of investment at binary option, on the other hand part of investment will remain at FX.?",
+                answer: true,
+                id: 65
+            },
+            {
+                question: "The contents of the financial instruments of the OTC binary options are the same even transactions dealers handling financial instruments business are different.?",
+                answer: false,
+                id: 66
+            },
+            {
+                question: "The price of OTC binary options of the same conditions, (sometimes) the price varies depending on transactions dealers handling financial instruments business.?",
+                answer: true,
+                id: 67
+            },
+            {
+                question: "Price of OTC currency option is the calculated value based on multiple elements and is determined by relative trading basically.?",
+                answer: true,
+                id: 68
+            },
+            {
+                question: "Regarding to the OTC price of financial instruments, in case that financial instruments business operator suggests both of  bid and ask price (or trading price and cancellation price), generally there is a difference of them. This option will be wider as the expiration approaches.?",
+                answer: true,
+                id: 69
+            },
+            {
+                question: "Price of the option, the price of the underlying asset, price fluctuation rate of the underlying assets, the time until the exercise date, subject to any of the impact of interest rates.?",
+                answer: true, id: 70
+            },
+
+        ],
+        section5:[
+            {
+                question: "The price of an option can be affected by the underlying asset price, by the volatility rate of the underlying asset, or by the time remaining to the exercise time.?",
+                answer: true, id: 71
+            },
+            {
+                question: "Price of call option will be lower interest rates of the underlying assets is low, but the price of the put option, go up when the interest rates of the underlying assets is low.?",
+                answer: true, id: 72
+            },
+            {
+                question: "If the exercise prices and exercise times are the same for an American style and European style option, then the American style option will have a higher price.?",
+                answer: true, id: 73
+            },
+            {
+                question: "In case of the right to buy the underlying asset (call option), when the underlying asset price falls, the option price will increase.?",
+                answer: false, id: 74
+            },
+            {
+                question: "In case of the right to sell the underlying asset (put option), when the underlying asset price rises, the option price will increase.?",
+                answer: false, id: 75
+            },
+            {
+                question: "For an out-of-the-money option, the further away from the underlying asset price that the option exercise price is, the lower the price of the option will be.?",
+                answer: true, id: 76
+            },
+            {
+                question: "For an in-the-money option, the further away from the underlying asset price that the option exercise price is, the lower the price of the option will be.?",
+                answer: false, id: 77
+            },
+            {
+                question: "If implied volatility increases then the prices of both call and put types of plain vanilla options will increase.?",
+                answer: true, id: 78
+            },
+            {
+                question: "As the expected volatility of the underlying asset increases, a plain vanilla option price will move higher.?",
+                answer: true, id: 79
+            },
+            {
+                question: "For a plain vanilla option, as the time to the exercise point shortens, the price of the option will decrease.?",
+                answer: true, id: 80
+            },
+            {
+                question: "An option price is the sum of the intrinsic-value and the time-value.?",
+                answer: true,
+                id: 81,
+            },
+            {
+                question: "If the underlying asset price is 100 yen, the exercise price is 80 yen, and the call option price is 45 yen, then it can be said that the option's intrinsic-value is 20 yen, and its time-value is 25 yen.?",
+                answer: true,
+                id: 82
+            },
+            {
+                question: "The time-value of an option represents the expected value of the option at the exercise point, and may be positive, even when the intrinsic-value is zero.?",
+                answer: true,
+                id: 83
+            },
+            {
+                question: "As the time to the exercise point shortens, the time-value of a plain vanilla option decreases.?",
+                answer: true,
+                id: 84
+            },
+            {
+                question: "A binary option price cannot exceed the payout amount.?",
+                answer: true,
+                id: 85
+            },
+            {
+                question: "In general a binary option price will not exceed the payout amount.?",
+                answer: true,
+                id: 86
+            },
+            {
+                question: "Unlike a plain vanilla option, an in-the-money binary option will have a lower price, the further away it is from the exercise point.?",
+                answer: true,
+                id: 87
+            },
+            {
+                question: "In general the price of a binary option will be lower than the price of a plain vanilla option because the payout amount is fixed.?",
+                answer: false,
+                id: 88
+            },
+            {
+                question: "A binary option which is out-of-the-money will have a lower price than an option which is in-the-money because the probability of receiving the payout amount is lower.?",
+                answer: true,
+                id: 89
+            },
+            {
+                question: "A binary option which is in-the-money will have a higher value than an option that is out-of-the-money because there will be a higher probability of receiving the payout amount.?",
+                answer: true, id: 90
+            },
+            {
+                question: "As the exercise deadline approaches, the price of an in-the-money binary option will move towards the payout amount.?",
+                answer: true, id: 91
+            },
+            {
+                question: "As the exercise deadline approaches, the price of an out-of-the-money binary option will move towards zero.?",
+                answer: true, id: 92
+            },
+            {
+                question: "The price of a binary option is affected by not only the change in the underlying asset price, but also the change in remaining time to the exercise point.?",
+                answer: true, id: 93
+            },
+            {
+                question: "Implied volatility is a prediction of the future rate of change in the underlying asset?",
+                answer: true, id: 94
+            },
+            {
+                question: "Historical volatility is a prediction of the future rate of change in the underlying asset?",
+                answer: false, id: 95
+            },
+            {
+                question: "Delta refers to  a percentage change of the option price with respect to the change in the underlying asset price.?",
+                answer: true, id: 96
+            },
+            {
+                question: "Option prices are normally dependant on elements such as the underlying asset price, the exercise price, the length of time until the exercise point, volatility, and interest rates. Apart from the fixed exercise price, all other elements are changing constantly, so an understanding of the relationships between each element and changes in the options price is necessary for the management of options trading risk.?",
+                answer: true, id: 97
+            },
+            {
+                question: "Option prices are normally dependant on elements such as the underlying asset price, the exercise price, the length of time until the exercise point, volatility, and interest rates. However, when the remaining time to the exercise point is very short, there is no need to consider these when managing option trading risk, as all these elements are constant.?",
+                answer: false, id: 98
+            },
+            {
+                question: "The Black-Scholes model is widely used to calculate theoretical option prices.?",
+                answer: true, id: 99
+            },
+            {
+                question: "A modified version of the Black-Scholes model is widely used to calculate the theoretical prices of binary options.?",
+                answer: true, id: 100
+            },
+        ],
+    };
+
+    function randomPick4(questions) {
+        var availables = Object.keys(questions);
+
+        var randomPicks = [];
+        for (var i = 0 ; i < 4 ; i ++) {
+            var randomIndex = Math.floor(Math.random() * 100) % availables.length;
+            var randomQid = availables[randomIndex];
+            var randomPick = questions[randomQid];
+            randomPicks.push(randomPick);
+            availables.splice(randomIndex, 1);
+        }
+
+        return randomPicks;
+    }
+
+    function randomPick20() {
+        var qFromSection1 = randomPick4(questions.section1);
+        var qFromSection2 = randomPick4(questions.section2);
+        var qFromSection3 = randomPick4(questions.section3);
+        var qFromSection4 = randomPick4(questions.section4);
+        var qFromSection5 = randomPick4(questions.section5);
+
+        return [
+            qFromSection1,
+            qFromSection2,
+            qFromSection3,
+            qFromSection4,
+            qFromSection5
+        ];
+    }
+
+    function sendResult(results) {
+        var status = results >= 14 ? 'pass' : 'fail';
+        BinarySocket.send({jp_knowledge_test: 1, score: results, status: status});
+    }
+
+    return {
+        questions: questions,
+        randomPick20: randomPick20,
+        sendResult: sendResult
+    };
+}());
+
+;var KnowledgeTest = (function() {
+    "use strict";
+
+    var hiddenClass = 'invisible';
+
+    var submitted = {};
+    var randomPicks = [];
+    var randomPicksAnswer = {};
+    var resultScore = 0;
+
+    var passMsg = 'Congratulations, you have pass the test, our Customer Support will contact you shortly';
+    var failMsg = 'Sorry, you have failed the test, please try again after 24 hours.';
+
+    function questionAnswerHandler(ev) {
+        var selected = ev.target.value;
+        var qid = ev.target.name;
+        submitted[qid] = selected === '1';
+    }
+
+    function submitHandler() {
+        var answeredQid = Object.keys(submitted).map(function(k) {return +k;});
+        if (answeredQid.length !== 20) {
+            $('#knowledge-test-msg')
+                .addClass('notice-msg')
+                .text(text.localize('You need to finish all 20 questions.'));
+
+            // $("html, body").animate({ scrollTop: 0 }, "slow");
+
+            var allQid = [].concat.apply([], randomPicks).map(function(q) {
+                return q.id;
+            });
+            var unAnswered = allQid.find(function(q){
+                return answeredQid.indexOf(q) === -1;
+            });
+            window.location.href = '#' + unAnswered;
+            return;
+        }
+
+        // compute score
+        for (var k in submitted) {
+            if (submitted.hasOwnProperty(k)) {
+                resultScore += submitted[k] === randomPicksAnswer[k] ? 1 : 0;
+            }
+        }
+        KnowledgeTestData.sendResult(resultScore);
+    }
+
+    function showQuestionsTable() {
+        for (var j = 0 ; j < randomPicks.length ; j ++) {
+            var table = KnowledgeTestUI.createQuestionTable(randomPicks[j]);
+            $('#section' + (j + 1) + '-question').append(table);
+        }
+
+        $('#knowledge-test-questions input[type=radio]').click(questionAnswerHandler);
+        $('#knowledge-test-submit').click(submitHandler);
+        $('#knowledge-test-questions').removeClass(hiddenClass);
+        $('#knowledge-test-msg').text(text.localize('Please complete the following questions.'));
+    }
+
+    function showResult(score, time) {
+        $('#knowledge-test-header').text(text.localize('Knowledge Test Result'));
+        if (score >= 14) {
+            $('#knowledge-test-msg').text(text.localize(passMsg));
+        } else {
+            $('#knowledge-test-msg').text(text.localize(failMsg));
+        }
+
+        var $resultTable = KnowledgeTestUI.createResultUI(score, time);
+
+        $('#knowledge-test-container').append($resultTable);
+        $('#knowledge-test-questions').addClass(hiddenClass);
+    }
+
+    function showMsgOnly(msg) {
+        $('#knowledge-test-questions').addClass(hiddenClass);
+        $('#knowledge-test-msg').text(text.localize(msg));
+    }
+
+    function showDisallowedMsg(jpStatus) {
+        var nextTestEpoch = jpStatus.next_test_epoch;
+        var lastTestEpoch = jpStatus.last_test_epoch;
+
+        var nextTestDate = new Date(nextTestEpoch * 1000);
+        var lastTestDate = new Date(lastTestEpoch * 1000);
+
+        var msgTemplate =
+            'Dear customer, you are not allowed to take knowledge test until [_1].\nLast test taken at [_2].';
+
+        var msg = text.localize(msgTemplate)
+            .replace('[_1]', nextTestDate.toUTCString())
+            .replace('[_2]', lastTestDate.toUTCString());
+
+        showMsgOnly(msg);
+    }
+
+    function showCompletedMsg() {
+        var msg = "Dear customer, you've already completed the knowledge test, please proceed to next step.";
+        showMsgOnly(msg);
+    }
+
+    function populateQuestions() {
+        randomPicks = KnowledgeTestData.randomPick20();
+        for (var i = 0 ; i < 5 ; i ++) {
+            for ( var k = 0 ; k < 4 ; k++) {
+                var qid = randomPicks[i][k].id;
+                var ans = randomPicks[i][k].answer;
+
+                randomPicksAnswer[qid] = ans;
+            }
+        }
+
+        showQuestionsTable();
+    }
+
+    function init() {
+        BinarySocket.init({
+            onmessage: function(msg) {
+                var response = JSON.parse(msg.data);
+                var type = response.msg_type;
+
+                var passthrough = response.echo_req.passthrough && response.echo_req.passthrough.key;
+
+                if (type === 'get_settings' && passthrough === 'knowledgetest') {
+                    var jpStatus = response.get_settings.jp_account_status;
+
+                    if (!jpStatus) {
+                        window.location.href = page.url.url_for('/');
+                        return;
+                    }
+
+                    switch(jpStatus.status) {
+                        case 'jp_knowledge_test_pending': populateQuestions();
+                            break;
+                        case 'jp_knowledge_test_fail': if (Date.now() >= (jpStatus.next_test_epoch * 1000)) {
+                            // show Knowledge Test cannot be taken
+                            populateQuestions();
+                        } else {
+                            showDisallowedMsg(jpStatus);
+                        }
+                            break;
+                        case 'jp_activation_pending': showCompletedMsg();
+                            break;
+                        default: {
+                            console.warn('Unexpected jp status');
+                            window.location.href = page.url.url_for('/');
+                        }
+                    }
+                } else if (type === 'jp_knowledge_test') {
+                    if (!response.error) {
+                        showResult(resultScore, response.jp_knowledge_test.test_taken_epoch * 1000);
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                        $('#knowledgetest-link').addClass(hiddenClass);     // hide it anyway
+                        localStorage.setItem('jp_test_allowed', 0);
+                    } else if (response.error.code === 'TestUnavailableNow') {
+                        showMsgOnly('The test is unavailable now, test can only be taken again on next business day with respect of most recent test.');
+                    }
+                }
+            }
+        });
+
+        BinarySocket.send({get_settings: 1, passthrough: {key: 'knowledgetest'}});
+    }
+
+    function showKnowledgeTestTopBarIfValid(jpStatus) {
+        if (!jpStatus) {
+            return;
+        }
+        switch (jpStatus.status) {
+            case 'jp_knowledge_test_pending': KnowledgeTestUI.createKnowledgeTestLink();
+                break;
+            case 'jp_knowledge_test_fail': if (Date.now() >= (jpStatus.next_test_epoch * 1000)) {
+                KnowledgeTestUI.createKnowledgeTestLink();
+            }
+                break;
+            case 'jp_activation_pending': $('#topbar-msg').children('a').addClass(hiddenClass);
+                break;
+            default: return;
+        }
+    }
+
+    return {
+        init: init,
+        showKnowledgeTestTopBarIfValid: showKnowledgeTestTopBarIfValid
+    };
+}());
+;var KnowledgeTestUI = (function () {
+    "use strict";
+
+    function createTrueFalseBox(question, showAnswer) {
+        var qid = question.id;
+        var trueId = qid + 'true';
+        var falseId = qid + 'false';
+
+        var $trueButton = $('<input />', {
+            type: 'radio',
+            name: qid,
+            id: trueId,
+            value: '1'
+        });
+        var $trueLabel = $('<label></label>', {class: 'img-holder true', for: trueId, value: '1'});
+        var $trueTd = $('<td></td>').append($trueButton);
+
+        var $falseButton = $('<input />', {
+            type: 'radio',
+            name: qid,
+            id: falseId,
+            value: '0'
+        });
+        var $falseLabel = $('<label></label>', {class: 'img-holder false', for: falseId, value: '0'});
+        var $falseTd = $('<td></td>').append($falseButton);
+
+        if (showAnswer) {
+            if (question.answer) {
+                $trueButton.prop('checked', true);
+            } else {
+                $falseButton.prop('checked', true);
+            }
+            $trueButton.attr('disabled', true);
+            $falseButton.attr('disabled', true);
+        }
+
+        return [$trueTd, $falseTd];
+    }
+
+    function createQuestionRow(questionNo, question, showAnswer) {
+        var $questionRow = $('<tr></tr>', {id: questionNo, class: 'question'});
+        var $questionData = $('<td></td>').text(text.localize(question.question));
+        var $questionLink = $('<a></a>', {name: question.id});
+        $questionData.append($questionLink);
+
+        var trueFalse = createTrueFalseBox(question, showAnswer);
+
+        return $questionRow
+            .append($questionData)
+            .append(trueFalse[0])
+            .append(trueFalse[1]);
+    }
+
+    function createQuestionTable(questions, showAnswer) {
+        var $header = $('<tr></tr>');
+        var $questionColHeader = $('<th></th>', {id: 'question-header', class: 'question-col'})
+            .text(text.localize('Questions'));
+
+        var $trueColHeader = $('<th></th>', {id: 'true-header', class: 'true-col'})
+            .text(text.localize('True'));
+
+        var $falseColHeader = $('<th></th>', {id: 'fasle-header', class: 'false-col'})
+            .text(text.localize('False'));
+
+        $header
+            .append($questionColHeader)
+            .append($trueColHeader)
+            .append($falseColHeader);
+
+        var $tableContainer = $('<table></table>', {id: 'knowledge-test'});
+
+        $tableContainer.append($header);
+        questions.forEach(function(question, questionNo) {
+            var qr = createQuestionRow(questionNo, question, showAnswer);
+            $tableContainer.append(qr);
+        });
+
+        return $tableContainer;
+    }
+
+    function createResultUI(score, time) {
+
+        var $resultTable = $('<table></table>', { class: 'kv-pairs'});
+        var $scoreRow = $('<tr></tr>').append($('<td>Score</td>')).append($('<td>'+ score + '</td>'));
+
+        var submitDate = (new Date(time)).toUTCString();
+
+        var $dateRow = $('<tr></tr>').append($('<td>Date</td>')).append($('<td>'+ submitDate + '</td>'));
+
+        $resultTable.append($scoreRow).append($dateRow);
+
+        return $resultTable;
+    }
+
+    function createAlreadyCompleteDiv() {
+        var msg = "Dear customer, you've already completed the knowledge test, please proceed to next step.";
+        var $completeDiv = $('<div></div>').text(text.localize(msg));
+        return $completeDiv;
+    }
+
+    function createKnowledgeTestLink() {
+        // change topbar to knowledge test link
+        var $topbarmsg = $('#topbar-msg');
+        if ($topbarmsg.length <= 0) {
+            return;         // topbar not exist, do nothing
+        }
+
+        var $knowledgeTestLink = $('<a></a>', {
+            class: 'pjaxload',
+            id: 'knowledgetest-link',
+            href: '/new_account/knowledge_testws'
+        }).text(text.localize('Take knowledge test'));
+
+        $topbarmsg.children('a').addClass('invisible');
+        $topbarmsg.append($knowledgeTestLink);
+    }
+
+    return {
+        createTrueFalseBox: createTrueFalseBox,
+        createQuestionRow: createQuestionRow,
+        createQuestionTable: createQuestionTable,
+        createResultUI: createResultUI,
+        createAlreadyCompleteDiv: createAlreadyCompleteDiv,
+        createKnowledgeTestLink: createKnowledgeTestLink,
+    };
+}());
+
 ;if(typeof is_japan === 'function'){
 	var Periods = (function(){
 		var barrier = 0,
