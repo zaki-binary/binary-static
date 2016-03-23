@@ -50700,7 +50700,9 @@ Header.prototype = {
         this.register_dynamic_links();
         this.simulate_input_placeholder_for_ie();
         this.logout_handler();
-        checkClientsCountry();
+        if (isNotBackoffice()) {
+          checkClientsCountry();
+        }
     },
     on_unload: function() {
         this.menu.reset();
@@ -60367,17 +60369,23 @@ function limitLanguage(lang) {
 
 function checkClientsCountry() {
   var clients_country = localStorage.getItem('clients_country');
-  if (clients_country || page.language() === 'ID' || page.language() === 'JA') {
+  if (clients_country) {
     var str;
-    if (clients_country === 'jp' || page.language() === 'JA') {
+    if (clients_country === 'jp') {
       limitLanguage('JA');
-    } else if (clients_country === 'id' || page.language() === 'ID') {
+    } else if (clients_country === 'id') {
       limitLanguage('ID');
+    } else {
+      $('#language_select').show();
     }
   } else {
     BinarySocket.init();
     BinarySocket.send({"website_status" : "1"});
   }
+}
+
+function isNotBackoffice() {
+  return /backoffice/.test(window.location.pathname);
 }
 
 pjax_config_page('/$|/home', function() {
@@ -66288,7 +66296,9 @@ function BinarySocketClass() {
                 } else if (type === 'website_status') {
                   if (response.website_status.clients_country) {
                     localStorage.setItem('clients_country', response.website_status.clients_country);
-                    checkClientsCountry();
+                    if (isNotBackoffice()) {
+                      checkClientsCountry();
+                    }
                   }
                 }
                 if (response.hasOwnProperty('error')) {
