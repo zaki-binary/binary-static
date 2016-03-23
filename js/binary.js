@@ -50702,6 +50702,7 @@ Header.prototype = {
         this.logout_handler();
         if (isNotBackoffice()) {
           checkClientsCountry();
+          change_blog_link('id');
         }
     },
     on_unload: function() {
@@ -60384,6 +60385,14 @@ function checkClientsCountry() {
   }
 }
 
+
+function change_blog_link(lang) {
+  var regex = new RegExp(lang);
+  if (!regex.test($('.blog a').attr('href'))) {
+    $('.blog a').attr('href', $('.blog a').attr('href') + '/' + lang + '/');
+  }
+}
+
 function isNotBackoffice() {
   return /backoffice/.test(window.location.pathname);
 }
@@ -63777,8 +63786,10 @@ var Contract = (function() {
                     tradeContractForms[contractCategory] = text.localize(currentObj['contract_category_display']);
                     if (contractCategory === 'digits') {
                         tradeContractForms['matchdiff'] = Content.localize().textFormMatchesDiffers;
-                        tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
-                        tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
+                        if (page.language() !== 'ID') {
+                          tradeContractForms['evenodd'] = Content.localize().textFormEvenOdd;
+                          tradeContractForms['overunder'] = Content.localize().textFormOverUnder;
+                        }
                     }
                 }
             }
