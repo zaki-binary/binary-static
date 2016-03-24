@@ -50541,7 +50541,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -60234,6 +60234,38 @@ function handle_residence_state_ws(){
             page.client.residence = country;
             generateBirthDate();
             generateState();
+            if (/maltainvestws/.test(window.location.pathname)) {
+              var settings = response.get_settings;
+              var title = document.getElementById('title'),
+                  fname = document.getElementById('fname'),
+                  lname = document.getElementById('lname'),
+                  dobdd = document.getElementById('dobdd'),
+                  dobmm = document.getElementById('dobmm'),
+                  dobyy = document.getElementById('dobyy');
+              var inputs = document.getElementsByClassName('input-disabled');
+              if (settings.salutation) {
+                title.value = settings.salutation;
+                fname.value = settings.first_name;
+                lname.value = settings.last_name;
+                var day = moment.utc(settings.date_of_birth * 1000).format('DD');
+                dobdd.value = /^0/.test(day) ? day.replace('0','') : day;
+                dobmm.value = moment.utc(settings.date_of_birth * 1000).format('MM');
+                dobyy.value = moment.utc(settings.date_of_birth * 1000).format('YYYY');
+                for (i = 0; i < inputs.length; i++) {
+                    inputs[i].disabled = true;
+                }
+                document.getElementById('address1').value = settings.address_line_1;
+                document.getElementById('address2').value = settings.address_line_2;
+                document.getElementById('address-town').value = settings.address_city;
+                window.state = settings.address_state;
+                document.getElementById('address-postcode').value = settings.address_postcode;
+                document.getElementById('tel').value = settings.phone;
+              } else {
+                for (i = 0; i < inputs.length; i++) {
+                    inputs[i].disabled = false;
+                }
+              }
+            }
             return;
           } else if (document.getElementById('move-residence-here')) {
             var residenceForm = $('#residence-form');
@@ -60268,7 +60300,7 @@ function handle_residence_state_ws(){
         } else if (type === 'landing_company') {
           $.cookie('residence', page.client.residence, {domain: '.' + document.domain.split('.').slice(-2).join('.'), path: '/'});
           if (response.landing_company.hasOwnProperty('financial_company') && !response.landing_company.hasOwnProperty('gaming_company') && response.landing_company.financial_company.shortcode === 'maltainvest') {
-            window.location.href = page.url.url_for('new_account/maltainvest');
+            window.location.href = page.url.url_for('new_account/maltainvestws');
             return;
           } else if (response.landing_company.hasOwnProperty('financial_company') && !response.landing_company.hasOwnProperty('gaming_company') && response.landing_company.financial_company.shortcode === 'japan') {
             window.location.href = page.url.url_for('new_account/japanws');
@@ -60291,6 +60323,9 @@ function handle_residence_state_ws(){
                 appendTextValueChild(select, states_list[i].text, states_list[i].value);
             }
             select.parentNode.parentNode.setAttribute('style', 'display:block');
+            if (window.state) {
+              select.value = window.state;
+            }
           }
           return;
         } else if (type === 'residence_list'){
@@ -60305,7 +60340,7 @@ function handle_residence_state_ws(){
               } else if (select) {
                 appendTextValueChild(select, residence_list[i].text, residence_list[i].value);
               }
-              if (phoneElement && residence_list[i].phone_idd && residenceValue === residence_list[i].value){
+              if (phoneElement && phoneElement.value === '' && residence_list[i].phone_idd && residenceValue === residence_list[i].value){
                 phoneElement.value = '+' + residence_list[i].phone_idd;
               }
             }
@@ -67881,10 +67916,18 @@ var Table = (function(){
   var handler = function(response, message) {
     if (response.error) {
       var errorMessage = response.error.message;
+      if (response.error.code === 'show risk disclaimer' && document.getElementById('financial-form')) {
+        $('#financial-form').addClass('hidden');
+        $('#financial-risk').removeClass('hidden');
+        return;
+      }
       if (document.getElementById('real-form')) {
         $('#real-form').remove();
       } else if (document.getElementById('japan-form')) {
         $('#japan-form').remove();
+      } else if (document.getElementById('financial-form')) {
+        $('#financial-form').remove();
+        $('#financial-risk').remove();
       }
       var error = document.getElementsByClassName('notice-msg')[0];
       error.innerHTML = (response.msg_type === 'sanity_check') ? text.localize('There was some invalid character in an input field.') : errorMessage;
@@ -67895,11 +67938,6 @@ var Table = (function(){
       $('#topbar-msg').children('a').addClass('invisible');
     } else {     // jp account require more steps to have real account
       var loginid = message.client_id;
-      //set cookies
-      var oldCookieValue = $.cookie('loginid_list');
-      var cookie_domain = '.' + document.domain.split('.').slice(-2).join('.');
-      $.cookie('loginid_list', loginid + ':R:E+' + oldCookieValue, {domain: cookie_domain, path:'/'});
-      $.cookie('loginid', loginid, {domain: cookie_domain, path:'/'});
       // set a flag to push to gtm in my_account
       localStorage.setItem('new_account', '1');
       //generate dropdown list and switch
@@ -68169,6 +68207,254 @@ var Table = (function(){
     errorMessageResidence: errorMessageResidence
   };
 }());
+;pjax_config_page("new_account/maltainvestws", function(){
+  return {
+    onLoad: function() {
+      Content.populate();
+      if (page.client.redirect_if_logout()) {
+          return;
+      }
+      for (i = 0; i < page.user.loginid_array.length; i++){
+        if (page.user.loginid_array[i].financial){
+          window.location.href = page.url.url_for('user/my_accountws');
+          return;
+        } else if (page.user.loginid_array[i].non_financial){
+          $('.security').hide();
+        }
+      }
+      handle_residence_state_ws();
+      BinarySocket.send({residence_list:1});
+      BinarySocket.send({get_settings:1});
+      $('#financial-form').submit(function(evt) {
+        evt.preventDefault();
+        if (FinancialAccOpeningUI.checkValidity()){
+          BinarySocket.init({
+            onmessage: function(msg){
+              var response = JSON.parse(msg.data);
+              if (response) {
+                var error = response.error;
+                if (response.msg_type === 'new_account_maltainvest'){
+                  ValidAccountOpening.handler(response, response.new_account_maltainvest);
+                }
+              }
+            }
+          });
+        }
+      });
+      $('#financial-risk').submit(function(evt) {
+        evt.preventDefault();
+        window.acceptRisk = true;
+        if (FinancialAccOpeningUI.checkValidity()){
+          BinarySocket.init({
+            onmessage: function(msg){
+              var response = JSON.parse(msg.data);
+              if (response) {
+                if (response.msg_type === 'new_account_maltainvest'){
+                  ValidAccountOpening.handler(response, response.new_account_maltainvest);
+                }
+              }
+            }
+          });
+        }
+      });
+    }
+  };
+});
+;var FinancialAccOpeningData = (function(){
+    function getRealAcc(elementObj){
+        var req = {
+            new_account_maltainvest: 1,
+            salutation: elementObj['title'].value,
+            first_name: elementObj['fname'].value,
+            last_name: elementObj['lname'].value,
+            date_of_birth: elementObj['dobyy'].value + '-' + elementObj['dobmm'].value + '-' + elementObj['dobdd'].value,
+            residence: elementObj['residence'].value,
+            address_line_1: elementObj['address1'].value,
+            address_line_2: elementObj['address2'].value,
+            address_city: elementObj['town'].value,
+            address_state: elementObj['state'].value,
+            address_postcode: elementObj['postcode'].value,
+            phone: elementObj['tel'].value,
+            forex_trading_experience: elementObj['forexExperience'].value,
+            forex_trading_frequency: elementObj['forexFrequency'].value,
+            indices_trading_experience: elementObj['indicesExperience'].value,
+            indices_trading_frequency: elementObj['indicesFrequency'].value,
+            commodities_trading_experience: elementObj['commoditiesExperience'].value,
+            commodities_trading_frequency: elementObj['commoditiesFrequency'].value,
+            stocks_trading_experience: elementObj['stocksExperience'].value,
+            stocks_trading_frequency: elementObj['stocksFrequency'].value,
+            other_derivatives_trading_experience: elementObj['binaryExperience'].value,
+            other_derivatives_trading_frequency: elementObj['binaryFrequency'].value,
+            other_instruments_trading_experience: elementObj['otherExperience'].value,
+            other_instruments_trading_frequency: elementObj['otherFrequency'].value,
+            employment_industry: elementObj['employment'].value,
+            education_level: elementObj['education'].value,
+            income_source: elementObj['incomeSource'].value,
+            net_income: elementObj['income'].value,
+            estimated_worth: elementObj['netWorth'].value
+        };
+
+        if ($.cookie('affiliate_tracking')) {
+          req.affiliate_token = JSON.parse($.cookie('affiliate_tracking')).t;
+        }
+
+        if (elementObj['answer'].value !== '') {
+          req.secret_question = elementObj['question'].value;
+          req.secret_answer = elementObj['answer'].value;
+        }
+
+        if (window.acceptRisk) {
+          req.accept_risk = 1;
+        } else {
+          req.accept_risk = 0;
+        }
+
+        BinarySocket.send(req);
+    }
+
+    return {
+        getRealAcc: getRealAcc
+    };
+}());
+;var FinancialAccOpeningUI = (function(){
+  "use strict";
+
+  function checkValidity(){
+    window.accountErrorCounter = 0;
+
+    var letters = Content.localize().textLetters,
+        numbers = Content.localize().textNumbers,
+        space   = Content.localize().textSpace,
+        hyphen  = Content.localize().textHyphen,
+        period  = Content.localize().textPeriod,
+        apost   = Content.localize().textApost;
+
+    var elementObj = {
+        title                    : document.getElementById('title'),
+        fname                    : document.getElementById('fname'),
+        lname                    : document.getElementById('lname'),
+        dobdd                    : document.getElementById('dobdd'),
+        dobmm                    : document.getElementById('dobmm'),
+        dobyy                    : document.getElementById('dobyy'),
+        residence                : document.getElementById('residence-disabled'),
+        address1                 : document.getElementById('address1'),
+        address2                 : document.getElementById('address2'),
+        town                     : document.getElementById('address-town'),
+        state                    : document.getElementById('address-state'),
+        postcode                 : document.getElementById('address-postcode'),
+        tel                      : document.getElementById('tel'),
+        question                 : document.getElementById('secret-question'),
+        answer                   : document.getElementById('secret-answer'),
+        tnc                      : document.getElementById('tnc'),
+        forexExperience          : document.getElementById('forex-trading-experience'),
+        forexFrequency           : document.getElementById('forex-trading-frequency'),
+        indicesExperience        : document.getElementById('indices-trading-experience'),
+        indicesFrequency         : document.getElementById('indices-trading-frequency'),
+        commoditiesExperience    : document.getElementById('commodities-trading-experience'),
+        commoditiesFrequency     : document.getElementById('commodities-trading-frequency'),
+        stocksExperience         : document.getElementById('stocks-trading-experience'),
+        stocksFrequency          : document.getElementById('stocks-trading-frequency'),
+        binaryExperience         : document.getElementById('other-derivatives-trading-experience'),
+        binaryFrequency          : document.getElementById('other-derivatives-trading-frequency'),
+        otherExperience          : document.getElementById('other-instruments-trading-experience'),
+        otherFrequency           : document.getElementById('other-instruments-trading-frequency'),
+        employment               : document.getElementById('employment-industry'),
+        education                : document.getElementById('education-level'),
+        incomeSource             : document.getElementById('income-source'),
+        income                   : document.getElementById('net-income'),
+        netWorth                 : document.getElementById('estimated-worth')
+    };
+
+    var errorObj = {
+        title                    : document.getElementById('error-title'),
+        fname                    : document.getElementById('error-fname'),
+        lname                    : document.getElementById('error-lname'),
+        dobdd                    : document.getElementById('error-birthdate'),
+        dobmm                    : document.getElementById('error-birthdate'),
+        dobyy                    : document.getElementById('error-birthdate'),
+        residence                : document.getElementById('error-residence'),
+        address1                 : document.getElementById('error-address1'),
+        address2                 : document.getElementById('error-address2'),
+        town                     : document.getElementById('error-town'),
+        state                    : document.getElementById('error-state'),
+        postcode                 : document.getElementById('error-postcode'),
+        tel                      : document.getElementById('error-tel'),
+        question                 : document.getElementById('error-question'),
+        answer                   : document.getElementById('error-answer'),
+        tnc                      : document.getElementById('error-tnc'),
+        forexExperience          : document.getElementById('error-forex-trading-experience'),
+        forexFrequency           : document.getElementById('error-forex-trading-frequency'),
+        indicesExperience        : document.getElementById('error-indices-trading-experience'),
+        indicesFrequency         : document.getElementById('error-indices-trading-frequency'),
+        commoditiesExperience    : document.getElementById('error-commodities-trading-experience'),
+        commoditiesFrequency     : document.getElementById('error-commodities-trading-frequency'),
+        stocksExperience         : document.getElementById('error-stocks-trading-experience'),
+        stocksFrequency          : document.getElementById('error-stocks-trading-frequency'),
+        binaryExperience         : document.getElementById('error-other-derivatives-trading-experience'),
+        binaryFrequency          : document.getElementById('error-other-derivatives-trading-frequency'),
+        otherExperience          : document.getElementById('error-other-instruments-trading-experience'),
+        otherFrequency           : document.getElementById('error-other-instruments-trading-frequency'),
+        employment               : document.getElementById('error-employment-industry'),
+        education                : document.getElementById('error-education-level'),
+        incomeSource             : document.getElementById('error-income-source'),
+        income                   : document.getElementById('error-net-income'),
+        netWorth                 : document.getElementById('error-estimated-worth')
+    };
+
+    var key;
+    for (key in errorObj) {
+      if (errorObj[key].offsetParent !== null) {
+        errorObj[key].setAttribute('style', 'display:none');
+      }
+    }
+
+    ValidAccountOpening.checkFname(elementObj['fname'], errorObj['fname']);
+    ValidAccountOpening.checkLname(elementObj['lname'], errorObj['lname']);
+    ValidAccountOpening.checkDate(elementObj['dobdd'], elementObj['dobmm'], elementObj['dobyy'], errorObj['dobdd']);
+    ValidAccountOpening.checkPostcode(elementObj['postcode'], errorObj['postcode']);
+
+    if (elementObj['residence'].value === 'gb' && /^$/.test(Trim(elementObj['postcode'].value))){
+      errorPostcode.innerHTML = Content.errorMessage('req');
+      Validate.displayErrorMessage(errorPostcode);
+      window.accountErrorCounter++;
+    }
+
+    ValidAccountOpening.checkTel(elementObj['tel'], errorObj['tel']);
+    if (elementObj['answer'].offsetParent !== null) {
+      ValidAccountOpening.checkAnswer(elementObj['answer'], errorObj['answer']);
+    }
+
+    for (key in elementObj){
+      if (elementObj[key].offsetParent !== null && key !== 'address2' && key !== 'postcode' && key !== 'state') {
+        if (/^$/.test(Trim(elementObj[key].value)) && elementObj[key].type !== 'checkbox'){
+          errorObj[key].innerHTML = Content.errorMessage('req');
+          Validate.displayErrorMessage(errorObj[key]);
+          window.accountErrorCounter++;
+        }
+        if (elementObj[key].type === 'checkbox' && !elementObj[key].checked){
+          errorObj[key].innerHTML = Content.errorMessage('req');
+          Validate.displayErrorMessage(errorObj[key]);
+          window.accountErrorCounter++;
+        }
+      }
+    }
+
+    if (window.accountErrorCounter === 0) {
+      FinancialAccOpeningData.getRealAcc(elementObj);
+      for (key in errorObj) {
+        if (errorObj[key].offsetParent !== null) {
+          errorObj[key].setAttribute('style', 'display:none');
+        }
+      }
+      return 1;
+    }
+    return 0;
+  }
+
+  return {
+    checkValidity: checkValidity
+  };
+})();
 ;var FinancialAssessmentws = (function(){
    "use strict";
    
