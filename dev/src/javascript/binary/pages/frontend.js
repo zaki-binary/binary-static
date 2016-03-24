@@ -453,6 +453,10 @@ function limitLanguage(lang) {
   }
   if (document.getElementById('language_select')) {
     $('#language_select').remove();
+    $('#gmt-clock').removeClass();
+    $('#gmt-clock').addClass('grd-grid-6 grd-grid-mobile-12');
+    $('#contact-us').removeClass();
+    $('#contact-us').addClass('grd-grid-6 grd-hide-mobile');
   }
 }
 
@@ -464,11 +468,25 @@ function checkClientsCountry() {
       limitLanguage('JA');
     } else if (clients_country === 'id') {
       limitLanguage('ID');
+    } else {
+      $('#language_select').show();
     }
   } else {
     BinarySocket.init();
     BinarySocket.send({"website_status" : "1"});
   }
+}
+
+
+function change_blog_link(lang) {
+  var regex = new RegExp(lang);
+  if (!regex.test($('.blog a').attr('href'))) {
+    $('.blog a').attr('href', $('.blog a').attr('href') + '/' + lang + '/');
+  }
+}
+
+function isNotBackoffice() {
+  return !/backoffice/.test(window.location.pathname);
 }
 
 pjax_config_page('/$|/home', function() {
