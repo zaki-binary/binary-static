@@ -63098,7 +63098,7 @@ function setUnderlyingTime() {
 }
 
 function chartFrameSource(underlying, highchart_time){
-  document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=false';
+  document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=true';
 }
 ;var Content = (function () {
     'use strict';
@@ -63227,8 +63227,6 @@ function chartFrameSource(underlying, highchart_time){
             textMrs: text.localize('Mrs'),
             textMs: text.localize('Ms'),
             textMiss: text.localize('Miss'),
-            textDr: text.localize('Dr'),
-            textProf: text.localize('Prof'),
             textErrorBirthdate: text.localize('Please input a valid date'),
             textSelect: text.localize('Please select'),
             textUnavailableReal: text.localize('Sorry, account opening is unavailable.'),
@@ -70150,6 +70148,7 @@ var ProfitTableUI = (function(){
             }
             if (this._container) {
                 this._container.hide().remove();
+                $('.popup_page_overlay').hide().remove();
                 this._container = null;
             }
         },
@@ -70192,6 +70191,8 @@ var ProfitTableUI = (function(){
             con.css('position', 'fixed').css('z-index', get_highest_zindex() + 100);
             body.append(con);
             con.show();
+            $(document.body).append($('<div/>', {class: 'popup_page_overlay'}));
+            $('.popup_page_overlay').click(function(){that.cleanup();});
             con.draggable({
                 stop: function() {
                     that.reposition_confirmation_ondrag();
