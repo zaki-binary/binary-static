@@ -895,10 +895,7 @@ function reloadPage(){
 }
 
 function addComma(num){
-    if (num % 1 !== 0) {
-        num = num.toFixed(2);
-    }
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function showHighchart(){
@@ -956,5 +953,5 @@ function setUnderlyingTime() {
 }
 
 function chartFrameSource(underlying, highchart_time){
-  document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=false';
+  document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=true';
 }
