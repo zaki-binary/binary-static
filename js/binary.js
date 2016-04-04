@@ -50788,6 +50788,10 @@ Header.prototype = {
         return;
     },
     time_counter : function(response){
+        if(isNaN(response.echo_req.passthrough.client_time) || response.error){
+            page.header.start_clock_ws();
+            return;
+        }
         var that = this;
         var clock_handle;
         var clock = $('#gmt-clock');
@@ -51146,6 +51150,8 @@ Page.prototype = {
         this.on_click_acc_transfer();
         if(getCookieItem('login')){
             ViewBalance.init();
+        } else {
+            LocalStore.set('reality_check.ack', 0);
         }
         $('#current_width').val(get_container_width());//This should probably not be here.
     },
@@ -59365,9 +59371,7 @@ pjax_config_page("user/self_exclusionws", function() {
         }
 
         // town/city
-        if(!isRequiredError(fieldIDs.city) && !(/^[a-zA-Z\s\-']+$/).test(city)) {
-            showError(fieldIDs.city, Content.errorMessage('reg', [letters, space, '- \'']));
-        }
+        isRequiredError(fieldIDs.city);
 
         // state
         if(!isRequiredError(fieldIDs.state) && ($(fieldIDs.state).is('input') && !(/^[a-zA-Z\s\-']+$/).test(state))) {
@@ -62922,14 +62926,8 @@ function displayTooltip(market, symbol){
     if (market.match(/^random/)){
         tip.show();
         tip.setAttribute('target','/get-started/random-markets');
-        if (guide) {
-          guide.hide();
-        }
         app.show();
     } else {
-      if (guide) {
-        guide.show();
-      }
       app.hide();
       tip.hide();
     }
@@ -66070,6 +66068,7 @@ function BinarySocketClass() {
                 var type = response.msg_type;
                 if (type === 'authorize') {
                     if(response.hasOwnProperty('error')) {
+                        LocalStore.set('reality_check.ack', 0);
                        send({'logout': '1', passthrough: {'redirect': 'login'}});
                     }
                     else {
