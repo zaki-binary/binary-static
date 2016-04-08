@@ -69307,7 +69307,7 @@ var ProfitTableData = (function(){
     };
 }());;
 var ProfitTableWS = (function () {
-    var batchSize = 50;
+    var batchSize = 100;
     var chunkSize = batchSize/2;
 
     var transactionsReceived = 0;
@@ -69918,7 +69918,7 @@ var ProfitTableUI = (function(){
     //receive means receive from ws service
     //consume means consume by UI and displayed to page
 
-    var batchSize = 50;
+    var batchSize = 100;
     var chunkSize = batchSize/2;
 
     var noMoreData = false;
