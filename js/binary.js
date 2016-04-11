@@ -60773,6 +60773,8 @@ $(function() {
         $("#portfolio-dynamic tr:first").remove();
         BinarySocket.send({"balance":1});
         BinarySocket.send({"portfolio":1});
+        // Subscribe transactions to auto update new purchases
+        BinarySocket.send({'transaction': 1, 'subscribe': 1});
     };
 
 
@@ -60830,6 +60832,9 @@ $(function() {
 
         // contracts is ready to be added to the dom
         $("#portfolio-dynamic").append(trans(contracts));
+        if(contracts.length > 0) {
+            $("#portfolio-table").removeClass("dynamic");
+        }
 
         // update footer area data
         sumPurchase = sumPurchase.toFixed(2);
@@ -60841,7 +60846,23 @@ $(function() {
         // ready to show portfolio table
         $("#portfolio-loading").remove();
         $("#portfolio-content").removeClass("dynamic");
+    };
 
+    var transactionResponseHandler = function(response) {
+        if(response.hasOwnProperty('error')) {
+            return;
+        }
+
+        if(response.transaction.action === 'buy') {
+            $('#portfolio-dynamic').empty();
+            BinarySocket.send({'portfolio': 1});
+        }
+        else if(response.transaction.action === 'sell') {
+            $("tr[data-contract_id='" + response.transaction.contract_id + "']").remove();
+            if($('#portfolio-dynamic tr').length === 0) {
+                BinarySocket.send({"portfolio":1});
+            }
+        }
     };
 
     var updateIndicative = function(data) {
@@ -60888,7 +60909,6 @@ $(function() {
         indicative_sum = indicative_sum.toFixed(2);
 
         $("#value-of-open-positions").text('USD ' + parseFloat(indicative_sum).toFixed(2));
-
     };
 
 
@@ -60916,7 +60936,8 @@ $(function() {
         init: init,
         updateBalance: updateBalance,
         updatePortfolio: updatePortfolio,
-        updateIndicative: updateIndicative
+        updateIndicative: updateIndicative,
+        transactionResponseHandler: transactionResponseHandler
     };
 
 })();
@@ -60941,24 +60962,21 @@ pjax_config_page("user/openpositionsws", function() {
                     }
 
                     var msg_type = response.msg_type;
-
                     switch(msg_type) {
-
                         case "balance":
                             PortfolioWS.updateBalance(response);
                             break;
-
                         case "portfolio":
                             PortfolioWS.updatePortfolio(response);
                             break;
-
+                        case "transaction":
+                            PortfolioWS.transactionResponseHandler(response);
+                            break;
                         case "proposal_open_contract":
                             PortfolioWS.updateIndicative(response);
                             break;
-
                         default:
                             // msg_type is not what PortfolioWS handles, so ignore it.
-
                     }
 
                 }
@@ -60967,6 +60985,7 @@ pjax_config_page("user/openpositionsws", function() {
         },
         onUnload: function(){
             BinarySocket.send({"forget_all": "proposal_open_contract"});
+            BinarySocket.send({"forget_all": "transaction"});
         }
     };
 });
@@ -71300,7 +71319,7 @@ var ProfitTableUI = (function(){
 
         var currentSpot = user_sold ? contract.sell_spot : (is_ended ? contract.exit_tick : contract.current_spot);
 
-        containerSetText('trade_details_current_date'    , epochToDateTime(!is_ended ? contract.current_spot_time : (user_sold ? contract.sell_spot_time || contract.sell_time : contract.date_expiry))); // user_sold ? contract.sell_spot_time || contract.sell_time : (is_ended ? contract.date_expiry : contract.current_spot_time)));
+        containerSetText('trade_details_current_date'    , epochToDateTime(!is_ended ? contract.current_spot_time : (user_sold ? contract.sell_spot_time : contract.exit_tick_time)));
         containerSetText('trade_details_current_spot'    , currentSpot || text.localize('not available'));
         containerSetText('trade_details_indicative_price', contract.currency + ' ' + parseFloat(is_ended ? (contract.sell_price || contract.bid_price) : contract.bid_price).toFixed(2));
         containerSetText('trade_details_now_date'        , '' , {'epoch_time': contract.current_spot_time});
