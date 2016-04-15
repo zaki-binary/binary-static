@@ -63674,13 +63674,13 @@ function updatePurchaseStatus(final_price, pnl, contract_status){
     $cost = $('#contract_purchase_cost');
     $profit = $('#contract_purchase_profit');
 
-    $payout.html(Content.localize().textBuyPrice + '<p>'+Math.abs(pnl)+'</p>');
-    $cost.html(Content.localize().textFinalPrice + '<p>'+final_price+'</p>');
+    $payout.html(Content.localize().textBuyPrice + '<p>'+addComma(Math.abs(pnl))+'</p>');
+    $cost.html(Content.localize().textFinalPrice + '<p>'+addComma(final_price)+'</p>');
     if(!final_price){
-        $profit.html(Content.localize().textLoss + '<p>'+pnl+'</p>');
+        $profit.html(Content.localize().textLoss + '<p>'+addComma(pnl)+'</p>');
     }
     else{
-        $profit.html(Content.localize().textProfit + '<p>'+(Math.round((final_price-pnl)*100)/100)+'</p>');
+        $profit.html(Content.localize().textProfit + '<p>'+addComma(Math.round((final_price-pnl)*100)/100)+'</p>');
     }
 }
 
@@ -63731,6 +63731,7 @@ function reloadPage(){
 }
 
 function addComma(num){
+    num = (num || 0) * 1;
     return num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -63923,7 +63924,8 @@ function chartFrameSource(underlying, highchart_time){
             textMessageMinRequired: text.localize('Minimum of [_1] characters required.'),
             textFeatureUnavailable: text.localize('Sorry, this feature is not available.'),
             textMessagePasswordScore: text.localize( 'Password score is: [_1]. Passing score is: 20.'),
-            textShouldNotLessThan: text.localize('Please enter a number greater or equal to [_1].')
+            textShouldNotLessThan: text.localize('Please enter a number greater or equal to [_1].'),
+            textNumberLimit: text.localize('Please enter a number between [_1].')       // [_1] should be a range
         };
 
         var starTime = document.getElementById('start_time_label');
@@ -64113,6 +64115,9 @@ function chartFrameSource(underlying, highchart_time){
                 break;
             case 'number_not_less_than':
                 msg = localize.textShouldNotLessThan.replace('[_1]', param);
+                break;
+            case 'number_should_between':
+                msg = localize.textNumberLimit.replace('[_1]', param);
                 break;
             default:
                 break;
@@ -66799,8 +66804,9 @@ function BinarySocketClass() {
                     page.header.time_counter(response);
                     ViewPopupWS.dispatch(response);
                 } else if (type === 'logout') {
-                    page.header.do_logout(response);
                     localStorage.removeItem('jp_test_allowed');
+                    RealityCheckData.clear();
+                    page.header.do_logout(response);
                 } else if (type === 'landing_company_details') {
                     page.client.response_landing_company_details(response);
                     RealityCheck.init();
@@ -66834,6 +66840,8 @@ function BinarySocketClass() {
                       checkClientsCountry();
                     }
                   }
+                } else if (type === 'reality_check') {
+                    RealityCheck.realityCheckWSHandler(response);
                 }
                 if (response.hasOwnProperty('error')) {
                     if(response.error && response.error.code) {
@@ -68903,7 +68911,7 @@ var Table = (function(){
 }());
 
 function validateEmail(mail) {
-  if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)){
+  if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/.test(mail)){
     return true;
   }
   return false;
@@ -68913,7 +68921,7 @@ function passwordValid(password) {
   if (password.length > 25) {
     return false;
   }
-  
+
   var r = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,25}$/;
   return r.test(password);
 }
@@ -70769,13 +70777,138 @@ var ProfitTableUI = (function(){
     checkValidity: checkValidity
   };
 })();
-;var RealityCheck = (function() {
-    "use strict";
-    var reality_check_url = page.url.url_for('user/reality_check');
-    var reality_freq_url  = page.url.url_for('user/reality_check_frequency');
-    var defaultFrequencyInMin = 60;
-    var loginTime;
+;var RealityCheckData = (function () {
+    'use strict';
+
+    var defaultInterval = 600000;
+    var durationTemplateString = '[_1] days [_2] hours [_3] minutes';
+    var tradingTimeTemplate = 'Your trading statistics since [_1].';
+
+    function getSummaryAsync() {
+        BinarySocket.send({reality_check: 1});
+    }
+
+    function getAck() {
+        return LocalStore.get('reality_check.ack');
+    }
+
+    function setOpenSummaryFlag() {
+        LocalStore.set('reality_check.keep_open', 1);
+    }
+
+    function getOpenSummaryFlag() {
+        return LocalStore.get('reality_check.keep_open');
+    }
+
+    function triggerCloseEvent() {
+        LocalStore.set('reality_check.keep_open', 0);
+    }
+    
+    function updateAck() {
+        LocalStore.set('reality_check.ack', 1);
+    }
+
+    function getInterval() {
+        return LocalStore.get('reality_check.interval');
+    }
+
+    function getPreviousLoadLoginId() {
+        return LocalStore.get('reality_check.loginid');
+    }
+
+    function setPreviousLoadLoginId() {
+        var id = TUser.get().loginid;
+        LocalStore.set('reality_check.loginid', id);
+    }
+
+    function updateInterval(ms) {
+        LocalStore.set('reality_check.interval', ms);
+    }
+
+    function clear() {
+        LocalStore.remove('reality_check.ack');
+        LocalStore.remove('reality_check.interval');
+        LocalStore.remove('reality_check.keep_open');
+        LocalStore.remove('reality_check.close');
+        LocalStore.remove('reality_check.svrtime');
+        LocalStore.remove('reality_check.basetime');
+    }
+
+    function resetInvalid() {
+        var ack = LocalStore.get('reality_check.ack');
+        var interval = +(LocalStore.get('reality_check.interval'));
+        if (ack !== '0' && ack !== '1') {
+            LocalStore.set('reality_check.ack', 0);
+        }
+
+        if (!interval) {
+            LocalStore.set('reality_check.interval', defaultInterval);
+        }
+    }
+
+    function summaryData(wsData) {
+        var startTime = moment.utc(new Date(wsData.start_time * 1000));
+        var currentTime = moment.utc();
+
+        var sessionDuration = moment.duration(currentTime.diff(startTime));
+        var durationD = sessionDuration.get('days');
+        var durationH = sessionDuration.get('hours');
+        var durationM = sessionDuration.get('minutes');
+
+        var durationString = durationTemplateString
+            .replace('[_1]', durationD)
+            .replace('[_2]', durationH)
+            .replace('[_3]', durationM);
+
+        var turnover = +(wsData.buy_amount) + (+(wsData.sell_amount));
+        var profitLoss = +(wsData.sell_amount) - (+(wsData.buy_amount));
+
+        var startTimeString = tradingTimeTemplate.replace('[_1]', startTime.format('YYYY-MM-DD HH:mm:ss') + ' GMT');
+        return {
+            startTimeString: startTimeString,
+            loginTime: startTime.format('YYYY-MM-DD HH:mm:ss') + ' GMT',
+            currentTime: currentTime.format('YYYY-MM-DD HH:mm:ss') + ' GMT',
+            sessionDuration: durationString,
+            loginId: wsData.loginid,
+            currency: wsData.currency,
+            turnover: (+turnover).toFixed(2),
+            profitLoss: (+profitLoss).toFixed(2),
+            contractsBought: wsData.buy_count,
+            contractsSold: wsData.sell_count,
+            openContracts: wsData.open_contract_count,
+            potentialProfit: (+(wsData.potential_profit)).toFixed(2)
+        };
+    }
+
+    return {
+        getSummaryAsync: getSummaryAsync,
+        getAck: getAck,
+        setOpenSummaryFlag: setOpenSummaryFlag,
+        getOpenSummaryFlag: getOpenSummaryFlag,
+        getPreviousLoadLoginId: getPreviousLoadLoginId,
+        setPreviousLoadLoginId: setPreviousLoadLoginId,
+        updateAck: updateAck,
+        getInterval: getInterval,
+        updateInterval: updateInterval,
+        clear: clear,
+        resetInvalid: resetInvalid,
+        summaryData: summaryData,
+        triggerCloseEvent: triggerCloseEvent
+    };
+}());
+;var RealityCheck = (function () {
+    'use strict';
     var hiddenClass = 'invisible';
+    var loginTime;
+
+    function realityCheckWSHandler(response) {
+        if ($.isEmptyObject(response.reality_check)) {
+            // not required for reality check
+            return;
+        }
+        var summary = RealityCheckData.summaryData(response.reality_check);
+        RealityCheckUI.renderSummaryPopUp(summary);
+    }
 
     function computeIntervalForNextPopup(loginTime, interval) {
         var currentTime = Date.now();
@@ -70783,148 +70916,205 @@ var ProfitTableUI = (function(){
         return timeLeft;
     }
 
-    function currentFrequencyInMS() {
-        var currentInterval = LocalStore.get('reality_check.interval');
-        if (!currentInterval) {
-            LocalStore.set('reality_check.interval', defaultFrequencyInMin * 60 * 1000);
-            return defaultFrequencyInMin * 60 * 1000;
-        }
-        return currentInterval;
+    function startSummaryTimer() {
+        var interval = RealityCheckData.getInterval();
+        var toWait = computeIntervalForNextPopup(loginTime, interval);
+        
+        window.setTimeout(function () {
+            RealityCheckData.setOpenSummaryFlag();
+            RealityCheckData.getSummaryAsync();
+        }, toWait);
     }
 
-    function updateFrequency(mins) {
-        var ms;
-        if (mins > 120) {
-            $('#realityDuration').val(120);
-            ms = 120 * 60 * 1000;
-        } else {
-            ms = mins * 60 * 1000;
+    function realityStorageEventHandler(ev) {
+        if (ev.key === 'reality_check.ack' && ev.newValue === '1') {
+            RealityCheckUI.closePopUp();
+            startSummaryTimer();
+        } else if (ev.key === 'reality_check.keep_open' && ev.newValue === '0') {
+            RealityCheckUI.closePopUp();
+            startSummaryTimer();
         }
-
-        LocalStore.set('reality_check.interval', ms);
     }
 
-    function displayPopUp(div) {
-        if ($('#reality-check').length > 0) {
+    function onContinueClick() {
+        var intervalMinute = +($('#realityDuration').val());
+
+        if (!(Math.floor(intervalMinute) == intervalMinute && $.isNumeric(intervalMinute))) {
+            var shouldBeInteger = text.localize('Interval should be integer.');
+            $('p.error-msg').text(shouldBeInteger);
+            $('p.error-msg').removeClass(hiddenClass);
             return;
         }
 
-        LocalStore.set('reality_check.close', 'false');
-        var lightboxDiv = $("<div id='reality-check' class='lightbox'></div>");
-
-        var wrapper = $('<div></div>');
-        wrapper = wrapper.append(div);
-        wrapper = $('<div></div>').append(wrapper);
-        wrapper.appendTo(lightboxDiv);
-        lightboxDiv.appendTo('body');
-
-        var $msg = lightboxDiv.find('p.error-msg');
-
-        var inputBox = lightboxDiv.find('#realityDuration');
-        inputBox.val(currentFrequencyInMS() / 60 / 1000);
-        inputBox.keyup(function(e) {
-            $msg.addClass(hiddenClass);
-            updateFrequency(e.target.value);
-        });
-
-        lightboxDiv.find('#continue').click(function() {
-            if (inputBox.val() < 10) {
-                var minimumValueMsg = Content.errorMessage('number_not_less_than', 10);
-                $msg.text(minimumValueMsg);
-                $msg.removeClass(hiddenClass);
-                return;
-            }
-
-            LocalStore.set('reality_check.ack', 1);
-            closePopUp();
-        });
-        lightboxDiv.find('#btn_logout').click(function(){
-            LocalStore.set('reality_check.ack', 0);
-            BinarySocket.send({"logout": "1"});
-        });
-
-        inputBox.keypress(onlyNumericOnKeypress);
-    }
-
-    function closePopUp() {
-        $('#reality-check').remove();
-        LocalStore.set('reality_check.close', 'true');
-        popUpWhenIntervalHit();         // start timer only after user click continue trading
-    }
-
-    function popUpFrequency() {
-        if(LocalStore.get('reality_check.ack') === '1') {
+        if (intervalMinute < 10 || intervalMinute > 120) {
+            var minimumValueMsg = Content.errorMessage('number_should_between', '10 to 120');
+            $('p.error-msg').text(minimumValueMsg);
+            $('p.error-msg').removeClass(hiddenClass);
             return;
         }
-
-        // show pop up to get user approval
-        $.ajax({
-            url: reality_freq_url,
-            dataType: 'html',
-            method: 'POST',
-            success: function(realityFreqText) {
-                if (realityFreqText.includes('reality-check-content')) {
-                    displayPopUp($(realityFreqText));
-                }
-            },
-            error: function(xhr) {
-                return;
-            }
-        });
+        
+        var intervalMs = intervalMinute * 60 * 1000;
+        RealityCheckData.updateInterval(intervalMs);
+        RealityCheckData.triggerCloseEvent();
+        RealityCheckData.updateAck();
+        RealityCheckUI.closePopUp();
+        startSummaryTimer();
     }
 
-    function popUpRealityCheck() {
-        $.ajax({
-            url: reality_check_url,
-            dataType: 'html',
-            method: 'POST',
-            success: function(realityCheckText) {
-                if (realityCheckText.includes('reality-check-content')) {
-                    displayPopUp($(realityCheckText));
-                }
-            },
-            error: function(xhr) {
-                return;
-            }
-        });
+    function onLogoutClick() {
+        logout();
     }
 
-    function popUpWhenIntervalHit() {
-        var interval = LocalStore.get('reality_check.interval');
-
-        window.setTimeout(function() {
-            popUpRealityCheck();
-        }, computeIntervalForNextPopup(loginTime, interval));
-    }
-
-    function popUpCloseHandler(ev) {
-        if (ev.key === 'reality_check.close' && ev.newValue === 'true') {
-            closePopUp();
-        } else if (ev.key === 'reality_check.interval') {
-            $('#realityDuration').val(ev.newValue / 60 / 1000);
-        }
+    function logout() {
+        BinarySocket.send({"logout": "1"});
     }
 
     function init() {
         if (!page.client.require_reality_check()) {
+            RealityCheckData.setPreviousLoadLoginId();
             return;
-        }
-        
-        // to change old interpretation of reality_check
-        if (LocalStore.get('reality_check.ack') > 1) {
-            LocalStore.set('reality_check.ack', 0);
         }
 
         var rcCookie = getCookieItem('reality_check');
         loginTime = rcCookie && rcCookie.split(',')[1] * 1000;
-        window.addEventListener('storage', popUpCloseHandler, false);
 
-        popUpFrequency();
-        popUpWhenIntervalHit();
+        window.addEventListener('storage', realityStorageEventHandler, false);
+
+        if (TUser.get().loginid !== RealityCheckData.getPreviousLoadLoginId()) {
+            RealityCheckData.clear();
+        }
+
+        RealityCheckData.resetInvalid();            // need to reset after clear
+
+        if (RealityCheckData.getAck() !== '1') {
+            RealityCheckUI.renderFrequencyPopUp();
+        } else if (RealityCheckData.getOpenSummaryFlag() === '1') {
+            RealityCheckData.getSummaryAsync();
+        } else {
+            startSummaryTimer();
+        }
+
+        RealityCheckData.setPreviousLoadLoginId();
+    }
+    
+    return {
+        init: init,
+        onContinueClick: onContinueClick,
+        onLogoutClick: onLogoutClick,
+        realityCheckWSHandler: realityCheckWSHandler
+    };
+}());
+;var RealityCheckUI = (function () {
+    'use strict';
+
+    var frequency_url = page.url.url_for('user/reality_check_frequencyws');
+    var summary_url  = page.url.url_for('user/reality_check_summaryws');
+
+    function showPopUp(content) {
+        if ($('#reality-check').length > 0) {
+            return;
+        }
+
+        var lightboxDiv = $("<div id='reality-check' class='lightbox'></div>");
+
+        var wrapper = $('<div></div>');
+        wrapper = wrapper.append(content);
+        wrapper = $('<div></div>').append(wrapper);
+        wrapper.appendTo(lightboxDiv);
+        lightboxDiv.appendTo('body');
+
+        $('#realityDuration').val(RealityCheckData.getInterval());
+        $('#realityDuration').keypress(onlyNumericOnKeypress);
+    }
+
+    function showIntervalOnPopUp() {
+        var intervalMinutes = Math.floor(RealityCheckData.getInterval() / 60 / 1000);
+        $('#realityDuration').val(intervalMinutes);
+    }
+
+    function renderFrequencyPopUp() {
+        $.ajax({
+            url: frequency_url,
+            dataType: 'html',
+            method: 'GET',
+            success: function(realityCheckText) {
+                if (realityCheckText.includes('reality-check-content')) {
+                    var payload = $(realityCheckText);
+                    showPopUp(payload.find('#reality-check-content'));
+                    showIntervalOnPopUp();
+                    $('#continue').click(RealityCheck.onContinueClick);
+                }
+            },
+            error: function(xhr) {
+                return;
+            }
+        });
+        $('#continue').click(RealityCheck.onContinueClick);
+    }
+
+    function updateSummary(summary) {
+        $('#start-time').text(summary.startTimeString);
+        $('#login-time').append(summary.loginTime);
+        $('#current-time').append(summary.currentTime);
+        $('#session-duration').append(summary.sessionDuration);
+        
+        $('#login-id').text(summary.loginId);
+        $('#currency').text(summary.currency);
+        $('#turnover').text(summary.turnover);
+        $('#profitloss').text(summary.profitLoss);
+        $('#bought').text(summary.contractsBought);
+        $('#sold').text(summary.contractsSold);
+        $('#open').text(summary.openContracts);
+        $('#potential').text(summary.potentialProfit);
+    }
+
+    function renderSummaryPopUp(summary) {
+        $.ajax({
+            url: summary_url,
+            dataType: 'html',
+            method: 'GET',
+            success: function(realityCheckText) {
+                if (realityCheckText.includes('reality-check-content')) {
+                    var payload = $(realityCheckText);
+                    showPopUp(payload.find('#reality-check-content'));
+                    updateSummary(summary);
+                    showIntervalOnPopUp();
+                    $('#continue').click(RealityCheck.onContinueClick);
+                    $('button#btn_logout').click(RealityCheck.onLogoutClick);
+                }
+            },
+            error: function(xhr) {
+                return;
+            }
+        });
+    }
+
+    function frequencyEventHandler() {
+        $('button#continue').click(function() {
+            RealityCheckData.updateAck();
+        });
+    }
+    
+    function summaryEventHandler() {
+        $('button#continue').click(function() {
+            RealityCheckData.updateAck();
+        });
+        
+        $('button#btn_logout').click(function() {
+            BinarySocket.send({logout: 1});
+        });
+    }
+
+    function closePopUp() {
+        $('#reality-check').remove();
     }
 
     return {
-        init: init
+        frequencyEventHandler: frequencyEventHandler,
+        summaryEventHandler: summaryEventHandler,
+        renderFrequencyPopUp: renderFrequencyPopUp,
+        renderSummaryPopUp: renderSummaryPopUp,
+        closePopUp: closePopUp
     };
 }());
 ;pjax_config_page('user/reset_passwordws', function() {
@@ -71757,7 +71947,6 @@ var ProfitTableUI = (function(){
         }
 
         containerSetText('trade_details_contract_id'   , contract.contract_id);
-        containerSetText('trade_details_ref_id'        , contract.transaction_ids.buy + (contract.transaction_ids.sell ? ' - ' + contract.transaction_ids.sell : ''));
         containerSetText('trade_details_start_date'    , epochToDateTime(contract.date_start));
         containerSetText('trade_details_end_date'      , epochToDateTime(contract.date_expiry));
         containerSetText('trade_details_purchase_price', contract.currency + ' ' + parseFloat(contract.buy_price).toFixed(2));
@@ -71770,11 +71959,11 @@ var ProfitTableUI = (function(){
             }
         }
 
-        normalUpdateTimers(contract.current_spot_time, moment().valueOf());
         normalUpdate();
     };
 
     var normalUpdate = function() {
+        normalUpdateTimers(contract.current_spot_time, moment().valueOf());
         var finalPrice = contract.sell_price || contract.bid_price,
             is_started = !contract.is_forward_starting || contract.current_spot_time > contract.date_start,
             user_sold  = contract.sell_spot_time && contract.sell_spot_time < contract.date_expiry,
@@ -71782,6 +71971,7 @@ var ProfitTableUI = (function(){
 
         var currentSpot = user_sold ? contract.sell_spot : (is_ended ? contract.exit_tick : contract.current_spot);
 
+        containerSetText('trade_details_ref_id'          , contract.transaction_ids.buy + (contract.transaction_ids.sell ? ' - ' + contract.transaction_ids.sell : ''));
         containerSetText('trade_details_current_date'    , epochToDateTime(!is_ended ? contract.current_spot_time : (user_sold ? contract.sell_spot_time : contract.exit_tick_time)));
         containerSetText('trade_details_current_spot'    , currentSpot || text.localize('not available'));
         containerSetText('trade_details_indicative_price', contract.currency + ' ' + parseFloat(is_ended ? (contract.sell_price || contract.bid_price) : contract.bid_price).toFixed(2));
