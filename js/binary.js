@@ -69351,7 +69351,9 @@ URL.prototype = {
             var params = this.params();
             var param = params.length;
             while(param--) {
-                this._param_hash[params[param][0]] = params[param][1];
+                if(params[param][0]) {
+                    this._param_hash[params[param][0]] = params[param][1];
+                }
             }
         }
         return this._param_hash;
@@ -81395,10 +81397,10 @@ var Barriers = (function () {
     var isBarrierUpdated = false;
 
     var display = function (barrierCategory) {
-        var barriers = Contract.barriers()[sessionStorage.getItem('underlying')],
+        var barriers = Contract.barriers()[Defaults.get('underlying')],
             formName = Contract.form();
 
-        if (barriers && formName && sessionStorage.getItem('formname')!=='risefall') {
+        if (barriers && formName && Defaults.get('formname')!=='risefall') {
             var barrier = barriers[formName];
             if(barrier) {
                 var unit = document.getElementById('duration_units'),
@@ -81414,32 +81416,35 @@ var Barriers = (function () {
                     document.getElementById('low_barrier_row').style.display = 'none';
                     document.getElementById('barrier_row').setAttribute('style', '');
 
+                    var barrier_def = Defaults.get('barrier') || barrier['barrier'];
                     var elm = document.getElementById('barrier'),
                         tooltip = document.getElementById('barrier_tooltip'),
                         span = document.getElementById('barrier_span');
                     if ((unit && unit.value === 'd') || (end_time && moment(end_time.value).isAfter(moment(),'day'))) {
-                        if (currentTick && !isNaN(currentTick) && barrier['barrier'].match(/^[+-]/)) {
-                            elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
-                            elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                        if (currentTick && !isNaN(currentTick) && barrier_def.match(/^[+-]/)) {
+                            elm.value = (parseFloat(currentTick) + parseFloat(barrier_def)).toFixed(decimalPlaces);
+                            elm.textContent = (parseFloat(currentTick) + parseFloat(barrier_def)).toFixed(decimalPlaces);
                         } else {
-                            elm.value = parseFloat(barrier['barrier']);
-                            elm.textContent = parseFloat(barrier['barrier']);
+                            elm.value = parseFloat(barrier_def);
+                            elm.textContent = parseFloat(barrier_def);
                         }
                         tooltip.style.display = 'none';
                         span.style.display = 'inherit';
                         // no need to display indicative barrier in case of absolute barrier
                         indicativeBarrierTooltip.textContent = '';
                     } else {
-                        elm.value = barrier['barrier'];
-                        elm.textContent = barrier['barrier'];
+                        elm.value = barrier_def;
+                        elm.textContent = barrier_def;
                         span.style.display = 'none';
                         tooltip.style.display = 'inherit';
                         if (currentTick && !isNaN(currentTick)) {
-                            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                            indicativeBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier_def)).toFixed(decimalPlaces);
                         } else {
                             indicativeBarrierTooltip.textContent = '';
                         }
                     }
+                    Defaults.set('barrier', elm.value);
+                    Defaults.remove('barrier_high', 'barrier_low');
                     return;
                 } else if (barrier.count === 2) {
                     document.getElementById('barrier_row').style.display = 'none';
@@ -81453,19 +81458,21 @@ var Barriers = (function () {
                         low_tooltip = document.getElementById('barrier_low_tooltip'),
                         low_span = document.getElementById('barrier_low_span');
 
+                    var barrier_high = Defaults.get('barrier_high') || barrier['barrier'],
+                        barrier_low  = Defaults.get('barrier_low')  || barrier['barrier1'];
                     if (unit && unit.value === 'd') {
-                        if (currentTick && !isNaN(currentTick) && barrier['barrier'].match(/^[+-]/)) {
-                            high_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
-                            high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
+                        if (currentTick && !isNaN(currentTick) && barrier_high.match(/^[+-]/)) {
+                            high_elm.value = (parseFloat(currentTick) + parseFloat(barrier_high)).toFixed(decimalPlaces);
+                            high_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier_high)).toFixed(decimalPlaces);
 
-                            low_elm.value = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(decimalPlaces);
-                            low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(decimalPlaces);
+                            low_elm.value = (parseFloat(currentTick) + parseFloat(barrier_low)).toFixed(decimalPlaces);
+                            low_elm.textContent = (parseFloat(currentTick) + parseFloat(barrier_low)).toFixed(decimalPlaces);
                         } else {
-                            high_elm.value = parseFloat(barrier['barrier']);
-                            high_elm.textContent = parseFloat(barrier['barrier']);
+                            high_elm.value = parseFloat(barrier_high);
+                            high_elm.textContent = parseFloat(barrier_high);
 
-                            low_elm.value = parseFloat(barrier['barrier1']);
-                            low_elm.textContent = parseFloat(barrier['barrier1']);
+                            low_elm.value = parseFloat(barrier_low);
+                            low_elm.textContent = parseFloat(barrier_low);
                         }
 
                         high_tooltip.style.display = 'none';
@@ -81476,11 +81483,11 @@ var Barriers = (function () {
                         indicativeHighBarrierTooltip.textContent = '';
                         indicativeLowBarrierTooltip.textContent = '';
                     } else {
-                        high_elm.value = barrier['barrier'];
-                        high_elm.textContent = barrier['barrier'];
+                        high_elm.value = barrier_high;
+                        high_elm.textContent = barrier_high;
 
-                        low_elm.value = barrier['barrier1'];
-                        low_elm.textContent = barrier['barrier1'];
+                        low_elm.value = barrier_low;
+                        low_elm.textContent = barrier_low;
 
                         high_span.style.display = 'none';
                         high_tooltip.style.display = 'inherit';
@@ -81488,13 +81495,16 @@ var Barriers = (function () {
                         low_tooltip.style.display = 'inherit';
 
                         if (currentTick && !isNaN(currentTick)) {
-                            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier'])).toFixed(decimalPlaces);
-                            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier['barrier1'])).toFixed(decimalPlaces);
+                            indicativeHighBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier_high)).toFixed(decimalPlaces);
+                            indicativeLowBarrierTooltip.textContent = (parseFloat(currentTick) + parseFloat(barrier_low)).toFixed(decimalPlaces);
                         } else {
                             indicativeHighBarrierTooltip.textContent = '';
                             indicativeLowBarrierTooltip.textContent = '';
                         }
                     }
+                    Defaults.set('barrier_high', high_elm.value);
+                    Defaults.set('barrier_low', low_elm.value);
+                    Defaults.remove('barrier');
                     return;
                 }
             }
@@ -81504,6 +81514,7 @@ var Barriers = (function () {
         for (var i = 0; i < elements.length; i++){
             elements[i].style.display = 'none';
         }
+        Defaults.remove('barrier', 'barrier_high', 'barrier_low');
     };
 
     return {
@@ -81966,7 +81977,7 @@ TradingAnalysis.tab_last_digitws = new TradingAnalysis.DigitInfoWS();
          }
          var current = target.options[target.selectedIndex];
          if(selected !== current.value) {
-            sessionStorage.setItem('market', current.value);
+            Defaults.set('market', current.value);
          }
 
          if(current.disabled) { // there is no open market
@@ -82339,7 +82350,7 @@ function setFormPlaceholderContent(name) {
     'use strict';
     var formPlaceholder = document.getElementById('contract_form_nav_placeholder');
     if (formPlaceholder) {
-        name = name || sessionStorage.getItem('formname');
+        name = name || Defaults.get('formname');
         formPlaceholder.textContent = Contract.contractForms()[name];
     }
 }
@@ -82420,7 +82431,7 @@ function debounce(func, wait, immediate) {
  */
 function getDefaultMarket() {
     'use strict';
-    var mkt = sessionStorage.getItem('market');
+    var mkt = Defaults.get('market');
     var markets = Symbols.markets(1);
     if (!mkt || !markets[mkt] || !markets[mkt].is_active) {
         var sorted_markets = Object.keys(Symbols.markets()).filter(function(v){return markets[v].is_active;}).sort(function(a, b) {
@@ -82658,23 +82669,9 @@ function updateWarmChart(){
 }
 
 function reloadPage(){
-    sessionStorage.removeItem('market');
-    sessionStorage.removeItem('formname');
-    sessionStorage.removeItem('underlying');
-
-    sessionStorage.removeItem('expiry_type');
-    sessionStorage.removeItem('stop_loss');
-    sessionStorage.removeItem('stop_type');
-    sessionStorage.removeItem('stop_profit');
-    sessionStorage.removeItem('amount_per_point');
-    sessionStorage.removeItem('prediction');
-    sessionStorage.removeItem('amount');
-    sessionStorage.removeItem('amount_type');
-    sessionStorage.removeItem('currency');
-    sessionStorage.removeItem('duration_units');
-    sessionStorage.removeItem('diration_value');
-    sessionStorage.removeItem('date_start');
-
+    Defaults.remove('market', 'underlying', 'formname',
+        'date_start','expiry_type', 'expiry_date', 'expirt_time', 'duration_units', 'diration_value',
+        'amount', 'amount_type', 'currency', 'stop_loss', 'stop_type', 'stop_profit', 'amount_per_point', 'prediction');
     location.reload();
 }
 
@@ -83334,7 +83331,58 @@ function displayCurrencies(selected) {
     });
 
     target.appendChild(fragment);
+    Defaults.set('currency', target.value);
 }
+;/*
+ * Handles trading page default values
+ * 
+ * Priorities:
+ * 1. Client's input: on each change to form, it will reflect to both query string & session storage
+ * 2. Query string parameters: will change session storage values
+ * 3. Session storage values: if none of the above, it will be the source
+ *
+ */
+
+var Defaults = (function(){
+    'use strict';
+
+    var getDefault = function(key) {
+        var pValue = page.url.param(key),
+            sValue = sessionStorage.getItem(key);
+        if(pValue && !sValue) {
+            sessionStorage.setItem(key, pValue);
+        }
+        if(!pValue && sValue) {
+            setDefault(key, sValue);
+        }
+        return pValue || sValue;
+    };
+
+    var setDefault = function(key, value) {
+        if(key) {
+            value = value || '';
+            sessionStorage.setItem(key, value);
+            var params = page.url.params_hash();
+            params[key] = value;
+            window.history.replaceState(null, null, window.location.pathname + '?' + page.url.params_hash_to_string(params));
+        }
+    };
+
+    var removeDefault = function() {
+        var params = page.url.params_hash();
+        for (var i = 0; i < arguments.length; i++) {
+            sessionStorage.removeItem(arguments[i]);
+            delete(params[arguments[i]]);
+        }
+        window.history.replaceState(null, null, window.location.pathname + '?' + page.url.params_hash_to_string(params));
+    };
+
+    return {
+        get   : getDefault,
+        set   : setDefault,
+        remove: removeDefault,
+    };
+})();
 ;/*
  * Handles duration processing display
  *
@@ -83354,9 +83402,8 @@ var Durations = (function(){
     var has_end_date = 0;
 
     var displayDurations = function() {
-
         var startType;
-        if(sessionStorage.getItem('date_start') && StartDates.displayed() && moment(sessionStorage.getItem('date_start')*1000).isAfter(moment()) ){
+        if(Defaults.get('date_start') !== 'now' && StartDates.displayed() && moment(Defaults.get('date_start')*1000).isAfter(moment())) {
             startType = 'forward';
         }
         else {
@@ -83366,6 +83413,7 @@ var Durations = (function(){
         var durations = Contract.durations();
         if (durations === false) {
             document.getElementById('expiry_row').style.display = 'none';
+            Defaults.remove('expiry_type', 'duration_amount', 'duration_units', 'expiry_date', 'expiry_time');
             return false;
         }
 
@@ -83517,9 +83565,13 @@ var Durations = (function(){
 
     var displayEndTime = function(){
         var current_moment = moment().add(5, 'minutes').utc();
-        document.getElementById('expiry_date').value = current_moment.format('YYYY-MM-DD');
-        document.getElementById('expiry_time').value = current_moment.format('HH:mm');
-        Durations.setTime(current_moment.format('HH:mm'));
+        var expiry_date = Defaults.get('expiry_date') || current_moment.format('YYYY-MM-DD'),
+            expiry_time = Defaults.get('expiry_time') || current_moment.format('HH:mm');
+        document.getElementById('expiry_date').value = expiry_date;
+        document.getElementById('expiry_time').value = expiry_time;
+        Defaults.set('expiry_date', expiry_date);
+        Defaults.set('expiry_time', expiry_time);
+        Durations.setTime(expiry_time);
 
         durationPopulate();
     };
@@ -83551,13 +83603,19 @@ var Durations = (function(){
 
     var durationPopulate = function() {
         var unit = document.getElementById('duration_units');
-        var unitValue = unit.options[unit.selectedIndex].getAttribute('data-minimum');
-        document.getElementById('duration_minimum').textContent = unitValue;
+        var unitMinValue = unit.options[unit.selectedIndex].getAttribute('data-minimum'),
+            unitValue = Defaults.get('duration_amount') || unitMinValue;
+        unit.value = Defaults.get('duration_units') &&
+            document.querySelectorAll('select[id="duration_units"] [value="' + Defaults.get('duration_units') + '"]').length ?
+                Defaults.get('duration_units') : unit.value;
+        document.getElementById('duration_minimum').textContent = unitMinValue;
         if(selected_duration.amount && selected_duration.unit > unitValue){
             unitValue = selected_duration.amount;
         }
         document.getElementById('duration_amount').value = unitValue;
+        Defaults.set('duration_amount', unitValue);
         displayExpiryType(unit.value);
+        Defaults.set('duration_units', unit.value);
 
         // jquery for datepicker
         var amountElement = $('#duration_amount');
@@ -83593,7 +83651,13 @@ var Durations = (function(){
         var target = document.getElementById('expiry_type'),
             fragment = document.createDocumentFragment();
 
-        var current_selected = target.value || 'duration',
+        // in case of having endtime as expiry_type and change the form to contract types
+        // which only have duration and do not support endtime, it should change the Default value
+        // to get corrected based on contract situations
+        if($('#expiry_type').find('option[value=' + Defaults.get('expiry_type') + ']').length === 0 && target.value) {
+                Defaults.set('expiry_type', target.value);
+        }
+        var current_selected = Defaults.get('expiry_type') || target.value || 'duration',
             id = current_selected,
             hideId = (current_selected === 'duration') ? 'endtime' : 'duration';
 
@@ -83659,8 +83723,10 @@ var Durations = (function(){
     var selectEndDate = function(end_date){
         var expiry_time = document.getElementById('expiry_time');
         $('#expiry_date').val(end_date);
+        Defaults.set('expiry_date', end_date);
         if(moment(end_date).isAfter(moment(),'day')){
             Durations.setTime('');
+            Defaults.remove('expiry_time');
             StartDates.setNow();
             expiry_time.hide();
             var date_start = StartDates.node();
@@ -83668,11 +83734,11 @@ var Durations = (function(){
         }
         else{
             Durations.setTime(expiry_time.value);
+            Defaults.set('expiry_time', Defaults.get('expiry_time') || expiry_time.value);
             expiry_time.show();
             processPriceRequest();
         }
 
-        sessionStorage.setItem('end_date',end_date);
         Barriers.display();
     };
 
@@ -83680,7 +83746,7 @@ var Durations = (function(){
         display: displayDurations,
         displayEndTime: displayEndTime,
         populate: durationPopulate,
-        setTime: function(time){ $('#expiry_time').val(time); expiry_time = time; },
+        setTime: function(time){ $('#expiry_time').val(time); Defaults.set('expiry_time', time); expiry_time = time; },
         getTime: function(){ return expiry_time; },
         processTradingTimesAnswer: processTradingTimesAnswer,
         trading_times: function(){ return trading_times; },
@@ -83701,69 +83767,62 @@ var Durations = (function(){
 var TradingEvents = (function () {
     'use strict';
 
-
     var onStartDateChange = function(value){
-
         if(!value || !$('#date_start').find('option[value='+value+']').length){
             return 0;
         }
         $('#date_start').val(value);
 
         var make_price_request = 1;
-        if (value === 'now') {
-            sessionStorage.removeItem('date_start');
-        } else {
-            if ($('expiry_type').val() === 'endtime'){
-                make_price_request = -1;
-                var end_time = moment(value*1000).utc().add(15,'minutes');
-                Durations.setTime(end_time.format("hh:mm"));
-                Durations.selectEndDate(end_time.format("YYYY-MM-DD"));
-            }
-            sessionStorage.setItem('date_start', value);
+        if (value !== 'now' && $('expiry_type').val() === 'endtime') {
+            make_price_request = -1;
+            var end_time = moment(value*1000).utc().add(15,'minutes');
+            Durations.setTime(Defaults.get('expiry_time') || end_time.format("hh:mm"));
+            Durations.selectEndDate(Defaults.get('expiry_date') || end_time.format("YYYY-MM-DD"));
         }
-
+        Durations.display();
         return make_price_request;
     };
 
     var onExpiryTypeChange = function(value){
-
         if(!value || !$('#expiry_type').find('option[value='+value+']').length){
             value = 'duration';
         }
-
         $('#expiry_type').val(value);
 
-        sessionStorage.setItem('expiry_type',value);
         var make_price_request = 0;
         if(value === 'endtime'){
             Durations.displayEndTime();
-            if(sessionStorage.getItem('end_date')){
-                Durations.selectEndDate(sessionStorage.getItem('end_date'));
+            if(Defaults.get('expiry_date')){
+                Durations.selectEndDate(Defaults.get('expiry_date'));
                 make_price_request = -1;
             }
+            Defaults.remove('duration_units', 'duration_amount');
         }
         else{
             Durations.display();
-            if(sessionStorage.getItem('duration_units')){
-                TradingEvents.onDurationUnitChange(sessionStorage.getItem('duration_units'));
+            if(Defaults.get('duration_units')){
+                TradingEvents.onDurationUnitChange(Defaults.get('duration_units'));
             }
-            if(sessionStorage.getItem('duration_amount') && sessionStorage.getItem('duration_amount') > $('#duration_minimum').text()){
-                $('#duration_amount').val(sessionStorage.getItem('duration_amount'));
+            var duration_amount = Defaults.get('duration_amount');
+            if(duration_amount && duration_amount > $('#duration_minimum').text()){
+                $('#duration_amount').val(duration_amount);
             }
             make_price_request = 1;
+            Defaults.remove('expiry_date', 'expiry_time', 'end_date');
         }
 
         return make_price_request;
     };
 
     var onDurationUnitChange = function(value){
-
         if(!value || !$('#duration_units').find('option[value='+value+']').length){
             return 0;
         }
-        $('#duration_units').val(value);
 
-        sessionStorage.setItem('duration_units',value);
+        $('#duration_units').val(value);
+        Defaults.set('duration_units', value);
+
         Durations.select_unit(value);
         Durations.populate();
 
@@ -83778,12 +83837,12 @@ var TradingEvents = (function () {
         var marketNavElement = document.getElementById('contract_markets');
         var onMarketChange = function(market){
             showPriceOverlay();
-            sessionStorage.setItem('market', market);
+            Defaults.set('market', market);
 
             // as different markets have different forms so remove from sessionStorage
             // it will default to proper one
-            sessionStorage.removeItem('formname');
-            sessionStorage.removeItem('underlying');
+            Defaults.remove('formname');
+            Defaults.remove('underlying');
             processMarket(1);
         };
 
@@ -83809,7 +83868,7 @@ var TradingEvents = (function () {
                 if (e.target && e.target.getAttribute('menuitem')) {
                     var clickedForm = e.target;
                     var isFormActive = clickedForm.classList.contains('active');
-                    sessionStorage.setItem('formname', clickedForm.getAttribute('menuitem'));
+                    Defaults.set('formname', clickedForm.getAttribute('menuitem'));
 
                     setFormPlaceholderContent();
                     // if form is already active then no need to send same request again
@@ -83839,7 +83898,8 @@ var TradingEvents = (function () {
                         e.target.selectedIndex = 0;
                     }
                     var underlying = e.target.value;
-                    sessionStorage.setItem('underlying', underlying);
+                    Defaults.remove('barrier', 'barrier_high', 'barrier_low');
+                    Defaults.set('underlying', underlying);
                     TradingAnalysis.request();
 
                     Tick.clean();
@@ -83866,7 +83926,7 @@ var TradingEvents = (function () {
             if (e.target.value % 1 !== 0 ) {
                 e.target.value = Math.floor(e.target.value);
             }
-            sessionStorage.setItem('duration_amount',e.target.value);
+            Defaults.set('duration_amount', e.target.value);
             Durations.select_amount(e.target.value);
             processPriceRequest();
             submitForm(document.getElementById('websocket_form'));
@@ -83894,6 +83954,7 @@ var TradingEvents = (function () {
         var expiryTypeElement = document.getElementById('expiry_type');
         if (expiryTypeElement) {
             expiryTypeElement.addEventListener('change', function(e) {
+                Defaults.set('expiry_type', e.target.value);
                 onExpiryTypeChange(e.target.value);
                 processPriceRequest();
             });
@@ -83905,6 +83966,7 @@ var TradingEvents = (function () {
         var durationUnitElement = document.getElementById('duration_units');
         if (durationUnitElement) {
             durationUnitElement.addEventListener('change', function (e) {
+                Defaults.remove('barrier', 'barrier_high', 'barrier_low');
                 onDurationUnitChange(e.target.value);
                 processPriceRequest();
             });
@@ -83942,7 +84004,7 @@ var TradingEvents = (function () {
                 if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
-                sessionStorage.setItem('amount', e.target.value);
+                Defaults.set('amount', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -83956,6 +84018,7 @@ var TradingEvents = (function () {
         var dateStartElement = StartDates.node();
         if (dateStartElement) {
             dateStartElement.addEventListener('change', function (e) {
+                Defaults.set('date_start', e.target.value);
                 var r = onStartDateChange(e.target.value);
                 if(r>=0){
                     processPriceRequest();
@@ -83970,7 +84033,7 @@ var TradingEvents = (function () {
         var amountTypeElement = document.getElementById('amount_type');
         if (amountTypeElement) {
             amountTypeElement.addEventListener('change', function (e) {
-                sessionStorage.setItem('amount_type', e.target.value);
+                Defaults.set('amount_type', e.target.value);
                 processPriceRequest();
             });
         }
@@ -84009,7 +84072,7 @@ var TradingEvents = (function () {
         var currencyElement = document.getElementById('currency');
         if (currencyElement) {
             currencyElement.addEventListener('change', function (e) {
-                sessionStorage.setItem('currency', e.target.value);
+                Defaults.set('currency', e.target.value);
                 var stopTypeDollarLabel = document.getElementById('stop_type_dollar_label');
                 if (stopTypeDollarLabel && isVisible(stopTypeDollarLabel)) {
                     stopTypeDollarLabel.textContent = e.target.value;
@@ -84071,6 +84134,7 @@ var TradingEvents = (function () {
         var barrierElement = document.getElementById('barrier');
         if (barrierElement) {
             barrierElement.addEventListener('input', debounce( function (e) {
+                Defaults.set('barrier', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84082,6 +84146,7 @@ var TradingEvents = (function () {
         var lowBarrierElement = document.getElementById('barrier_low');
         if (lowBarrierElement) {
             lowBarrierElement.addEventListener('input', debounce( function (e) {
+                Defaults.set('barrier_low', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84093,6 +84158,7 @@ var TradingEvents = (function () {
         var highBarrierElement = document.getElementById('barrier_high');
         if (highBarrierElement) {
             highBarrierElement.addEventListener('input', debounce( function (e) {
+                Defaults.set('barrier_high', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84105,7 +84171,7 @@ var TradingEvents = (function () {
         if (predictionElement) {
 
             predictionElement.addEventListener('change', debounce( function (e) {
-                sessionStorage.setItem('prediction',e.target.value);
+                Defaults.set('prediction', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84120,7 +84186,7 @@ var TradingEvents = (function () {
                 if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
-                sessionStorage.setItem('amount_per_point',e.target.value);
+                Defaults.set('amount_per_point', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84130,7 +84196,7 @@ var TradingEvents = (function () {
          * attach an event to change in stop type for spreads
          */
         var stopTypeEvent = function (e) {
-            sessionStorage.setItem('stop_type',e.target.value);
+            Defaults.set('stop_type', e.target.value);
             processPriceRequest();
         };
 
@@ -84150,7 +84216,7 @@ var TradingEvents = (function () {
                 if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
-                sessionStorage.setItem('stop_loss',e.target.value);
+                Defaults.set('stop_loss', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84165,7 +84231,7 @@ var TradingEvents = (function () {
                 if (isStandardFloat(e.target.value)) {
                     e.target.value = parseFloat(e.target.value).toFixed(2);
                 }
-                sessionStorage.setItem('stop_profit',e.target.value);
+                Defaults.set('stop_profit', e.target.value);
                 processPriceRequest();
                 submitForm(document.getElementById('websocket_form'));
             }));
@@ -84626,7 +84692,7 @@ function processActiveSymbols(data) {
     var market = getDefaultMarket();
 
     // store the market
-    sessionStorage.setItem('market', market);
+    Defaults.set('market', market);
 
     displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
@@ -84646,10 +84712,15 @@ function processMarket(flag) {
 
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
-    var market = sessionStorage.getItem('market');
-    var symbol = sessionStorage.getItem('underlying');
+    var market = Defaults.get('market');
+    var symbol = Defaults.get('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
+    // change to default market if query string contains an invalid market
+    if(!market || !Symbols.underlyings()[market]) {
+        market = getDefaultMarket();
+        Defaults.set('market', market);
+    }
     if (update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)) {
         symbol = undefined;
     }
@@ -84675,7 +84746,7 @@ function processMarketUnderlying() {
         underlyingElement.selectedIndex = 0;
     }
     var underlying = underlyingElement.value;
-    sessionStorage.setItem('underlying', underlying);
+    Defaults.set('underlying', underlying);
 
     showFormOverlay();
 
@@ -84692,7 +84763,7 @@ function processMarketUnderlying() {
 
     Contract.getContracts(underlying);
 
-    displayTooltip(sessionStorage.getItem('market'), underlying);
+    displayTooltip(Defaults.get('market'), underlying);
 }
 
 /*
@@ -84726,8 +84797,8 @@ function processContract(contracts) {
 
     var contract_categories = Contract.contractForms();
     var formname;
-    if (sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]) {
-        formname = sessionStorage.getItem('formname');
+    if (Defaults.get('formname') && contract_categories[Defaults.get('formname')]) {
+        formname = Defaults.get('formname');
     } else {
         var tree = getContractCategoryTree(contract_categories);
         if (tree[0]) {
@@ -84740,7 +84811,7 @@ function processContract(contracts) {
     }
 
     // set form to session storage
-    sessionStorage.setItem('formname', formname);
+    Defaults.set('formname', formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
@@ -84755,7 +84826,6 @@ function processContract(contracts) {
 }
 
 function processContractForm() {
-
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
@@ -84765,22 +84835,30 @@ function processContractForm() {
     displaySpreads();
 
     var r1;
-    if (StartDates.displayed() && sessionStorage.getItem('date_start')) {
-        r1 = TradingEvents.onStartDateChange(sessionStorage.getItem('date_start'));
-        if (!r1) Durations.display();
+    if (StartDates.displayed() && Defaults.get('date_start') && Defaults.get('date_start') !== 'now') {
+        r1 = TradingEvents.onStartDateChange(Defaults.get('date_start'));
+        if (!r1 || Defaults.get('expiry_type') === 'endtime') Durations.display();
     } else {
         Durations.display();
     }
 
-    var expiry_type = sessionStorage.getItem('expiry_type') ? sessionStorage.getItem('expiry_type') : 'duration';
+    var expiry_type = Defaults.get('expiry_type') || 'duration';
     var make_price_request = TradingEvents.onExpiryTypeChange(expiry_type);
 
-    if (sessionStorage.getItem('amount')) $('#amount').val(sessionStorage.getItem('amount'));
-    if (sessionStorage.getItem('amount_type')) selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
-    if (sessionStorage.getItem('currency')) selectOption(sessionStorage.getItem('currency'), document.getElementById('currency'));
+    if (Defaults.get('amount')) $('#amount').val(Defaults.get('amount'));
+        else Defaults.set('amount', document.getElementById('amount').value);
+    if (Defaults.get('amount_type')) selectOption(Defaults.get('amount_type'), document.getElementById('amount_type'));
+        else Defaults.set('amount_type', document.getElementById('amount_type').value);
+    if (Defaults.get('currency')) selectOption(Defaults.get('currency'), document.getElementById('currency'));
 
     if (make_price_request >= 0) {
         processPriceRequest();
+    }
+
+    if(Defaults.get('formname') === 'spreads') {
+        Defaults.remove('expiry_type', 'duration_amount', 'duration_units', 'expiry_date', 'expiry_time', 'amount', 'amount_type');
+    } else {
+        Defaults.remove('amount_per_point', 'stop_type', 'stop_loss', 'stop_profit');
     }
 }
 
@@ -84788,11 +84866,15 @@ function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if (Contract.form() === 'digits' && sessionStorage.getItem('formname') !== 'evenodd') {
         predictionElement.show();
-        if (sessionStorage.getItem('prediction')) {
-            selectOption(sessionStorage.getItem('prediction'), document.getElementById('prediction'));
+        if (Defaults.get('prediction')) {
+            selectOption(Defaults.get('prediction'), document.getElementById('prediction'));
+        }
+        else {
+            Defaults.set('prediction', document.getElementById('prediction').value);
         }
     } else {
         predictionElement.hide();
+        Defaults.remove('prediction');
     }
 }
 
@@ -84813,6 +84895,20 @@ function displaySpreads() {
         amountPerPoint.show();
         spreadContainer.show();
         stopTypeDollarLabel.textContent = document.getElementById('currency').value;
+        if (Defaults.get('stop_type')) {
+            var el = document.querySelectorAll('input[name="stop_type"][value="' + Defaults.get('stop_type') + '"]');
+            if (el) {
+                el[0].setAttribute('checked', 'checked');
+            }
+        } else {
+            Defaults.set('stop_type', document.getElementById('stop_type_points').checked ? 'point' : 'dollar');
+        }
+        if (Defaults.get('amount_per_point')) amountPerPoint.value = Defaults.get('amount_per_point');
+            else Defaults.set('amount_per_point', amountPerPoint.value);
+        if (Defaults.get('stop_loss')) document.getElementById('stop_loss').value = Defaults.get('stop_loss');
+            else Defaults.set('stop_loss', document.getElementById('stop_loss').value);
+        if (Defaults.get('stop_profit')) document.getElementById('stop_profit').value = Defaults.get('stop_profit');
+            else Defaults.set('stop_profit', document.getElementById('stop_profit').value);
     } else {
         amountPerPointLabel.hide();
         amountPerPoint.hide();
@@ -84820,22 +84916,6 @@ function displaySpreads() {
         expiryTypeRow.show();
         amountType.show();
         amount.show();
-    }
-    if (sessionStorage.getItem('stop_type')) {
-        var el = document.querySelectorAll('input[name="stop_type"][value="' + sessionStorage.getItem('stop_type') + '"]');
-        if (el) {
-            console.log(el);
-            el[0].setAttribute('checked', 'checked');
-        }
-    }
-    if (sessionStorage.getItem('amount_per_point')) {
-        document.getElementById('amount_per_point').value = sessionStorage.getItem('amount_per_point');
-    }
-    if (sessionStorage.getItem('stop_loss')) {
-        document.getElementById('stop_loss').value = sessionStorage.getItem('stop_loss');
-    }
-    if (sessionStorage.getItem('stop_profit')) {
-        document.getElementById('stop_profit').value = sessionStorage.getItem('stop_profit');
     }
 }
 
@@ -85271,6 +85351,9 @@ var StartDates = (function(){
                             first = a.utc().unix();
                         }
                         content = document.createTextNode(a.format('HH:mm ddd'));
+                        if(option.value === Defaults.get('date_start')) {
+                            option.setAttribute('selected', 'selected');
+                        }
                         option.appendChild(content);
                         fragment.appendChild(option);
                     } 
@@ -85278,6 +85361,7 @@ var StartDates = (function(){
                 }
             });
             target.appendChild(fragment);
+            Defaults.set('date_start', target.value);
             displayed = 1;
             if(first){
                 TradingEvents.onStartDateChange(first);            
@@ -85285,6 +85369,7 @@ var StartDates = (function(){
         } else {
             displayed = 0;
             document.getElementById('date_start_row').style.display = 'none';
+            Defaults.remove('date_start');
         }
     };
 
@@ -85292,6 +85377,7 @@ var StartDates = (function(){
         if(hasNow){
             var element = getElement();
             element.value = 'now';
+            Defaults.set('date_start', 'now');
         }
     } ;
 
