@@ -73046,7 +73046,7 @@ pjax_config_page('trading', function () {
   function init() {
     var user = new User();
 
-    if (user.email) {
+    if (user.email && typeof is_japan === 'function') {
       $('#tab_portfolio').removeClass('invisible');
     }
 
