@@ -6169,6 +6169,9 @@ div.kineticjs-content {
     padding-right: 5px !important;
   }
 }
+.flex-table-container #statement-table .flex-tr > th:last-child, .flex-table-container #statement-table .flex-tr > td:last-child {
+  display: none !important;
+}
 @media (max-width: 600px) {
   .flex-table-container #statement-table .flex-tr > th:nth-child(4) {
     display: none !important;
@@ -6176,9 +6179,18 @@ div.kineticjs-content {
   .flex-table-container #statement-table .flex-tr > td:nth-child(4) {
     display: none !important;
   }
+  .flex-table-container #statement-table .flex-tr > th:last-child, .flex-table-container #statement-table .flex-tr > td:last-child {
+    display: table-cell !important;
+  }
+  .flex-table-container #statement-table .flex-tr > th:last-child .button, .flex-table-container #statement-table .flex-tr > td:last-child .button {
+    padding: 8px 15px;
+  }
   .flex-table-container #statement-table .flex-tr .flex-tr-child {
     font-size: 12px;
   }
+}
+.flex-table-container #profit-table .flex-tr > th:last-child, .flex-table-container #profit-table .flex-tr > td:last-child {
+  display: none !important;
 }
 @media (max-width: 600px) {
   .flex-table-container #profit-table .flex-tr > th:nth-child(3) {
@@ -6187,11 +6199,22 @@ div.kineticjs-content {
   .flex-table-container #profit-table .flex-tr > td:nth-child(3) {
     display: none !important;
   }
+  .flex-table-container #profit-table .flex-tr > th:last-child, .flex-table-container #profit-table .flex-tr > td:last-child {
+    display: table-cell !important;
+  }
+  .flex-table-container #profit-table .flex-tr > th:last-child .button, .flex-table-container #profit-table .flex-tr > td:last-child .button {
+    padding: 8px 15px;
+  }
   .flex-table-container #profit-table .flex-tr .flex-tr-child {
     font-size: 12px;
   }
 }
 
+@media (max-width: 600px) {
+  #profit-table-ws-container .flex-table-container, #statement-ws-container .flex-table-container {
+    overflow: auto;
+  }
+}
 .time_amount {
   width: 80%;
 }
@@ -6214,9 +6237,6 @@ tr#highchart_duration td:nth-child(2) {
 
 #profit-table-ws-container th {
   padding-right: 8px;
-}
-#profit-table-ws-container th.buy-date {
-  white-space: pre;
 }
 #profit-table-ws-container td {
   padding-right: 8px;
