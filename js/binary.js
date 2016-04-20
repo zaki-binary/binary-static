@@ -69392,7 +69392,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/white-labels|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -71339,6 +71339,7 @@ function swithTabIfError(IsErrorFound)
         };
       }
 
+      if(!el) return;
       var chart = new Highcharts.Chart(chartOptions);
       initialized = true;
 
@@ -71403,6 +71404,7 @@ function swithTabIfError(IsErrorFound)
 
   // use this instead of BinarySocket.send to avoid overriding the on-message function of trading page
   var socketSend = function(req) {
+      if(!req) return;
       if(!req.hasOwnProperty('passthrough')) {
           req.passthrough = {};
       }
@@ -71494,6 +71496,7 @@ function swithTabIfError(IsErrorFound)
             // only initialize chart if it hasn't already been initialized
             if (!window.chart && !initialized) {
               window.chart = init_chart(options);
+              if(!window.chart) return;
 
               if (purchase_time !== start_time) draw_line_x(purchase_time, 'Purchase Time', '', '', '#7cb5ec');
 
@@ -71581,7 +71584,7 @@ function swithTabIfError(IsErrorFound)
             end_contract(contract);
           }
       } else if (type === 'ticks_history' && error) {
-          show_error();
+          show_error('', error.message);
       }
     }
   };
@@ -71592,11 +71595,13 @@ function swithTabIfError(IsErrorFound)
       request_data(contract);
   }
 
-  function show_error(type) {
+  function show_error(type, message) {
+    var el = document.getElementById('analysis_live_chart');
+    if(!el) return;
     if (type === 'missing') {
-      document.getElementById('analysis_live_chart').innerHTML = '<p class="error-msg">' + text.localize('ticks history returned an empty array') + '</p>';
+      el.innerHTML = '<p class="error-msg">' + text.localize('ticks history returned an empty array') + '</p>';
     } else {
-      document.getElementById('analysis_live_chart').innerHTML = '<p class="error-msg">' + error.message + '</p>';
+      el.innerHTML = '<p class="error-msg">' + message + '</p>';
     }
   }
 
@@ -71776,6 +71781,7 @@ function swithTabIfError(IsErrorFound)
   }
 
   function draw_line_x(valueTime, labelName, textLeft, dash, color) {
+    if(!window.chart) return;
     var req = {
       value : valueTime*1000
     };
@@ -79833,17 +79839,6 @@ pjax_config_page('/open-source-projects', function() {
     };
 });
 
-pjax_config_page('/white-labels', function() {
-    return {
-        onLoad: function() {
-            sidebar_scroll($('.white-labels'));
-        },
-        onUnload: function() {
-            $(window).off('scroll');
-        }
-    };
-});
-
 pjax_config_page('/payment-agent', function() {
     return {
         onLoad: function() {
@@ -84564,7 +84559,7 @@ var Price = (function() {
             type = typeDisplayIdMapping[id];
         }
 
-        var is_spread = false; 
+        var is_spread = false;
         if (params.contract_type && (params.contract_type === 'SPREADU' || params.contract_type === 'SPREADD')) {
             is_spread = true;
         }
@@ -84608,30 +84603,47 @@ var Price = (function() {
             }
         }
 
-        if (proposal && proposal['display_value']) {
-            if (is_spread) {
-                amount.textContent = proposal['display_value'];
-            } else {
-                amount.textContent = currency.value + ' ' + proposal['display_value'];
-            }
-        }
-
-        if (proposal && proposal['longcode']) {
-            proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/, function(x) {
-                return '<b>' + x + '</b>';
-            });
-            description.innerHTML = '<div>' + proposal['longcode'] + '</div>';
-        }
-
         if (details['error']) {
             purchase.hide();
             comment.hide();
-            amount_wrapper.hide();
-            description.innerHTML = "";
-            price_wrapper.classList.add('small');
+            if (details['error']['details']) {
+                var extraInfo = details['error']['details'];
+                if (is_spread) {
+                    amount.textContent = extraInfo['display_value'];
+                } else {
+                    amount.textContent = currency.value + ' ' + extraInfo['display_value'];
+                }
+
+                extraInfo['longcode'] = extraInfo['longcode'].replace(/[\d\,]+\.\d\d/, function(x) {
+                    return '<b>' + x + '</b>';
+                });
+
+                description.innerHTML = '<div>' + extraInfo['longcode'] + '</div>';
+                price_wrapper.classList.remove('small');
+            } else {
+                description.innerHTML = "";
+                amount_wrapper.hide();
+                price_wrapper.classList.add('small');
+            }
+
             error.show();
-            error.textContent = details['error'].message;
+            error.textContent = details['error']['message'];
         } else {
+            if (proposal && proposal['display_value']) {
+                if (is_spread) {
+                    amount.textContent = proposal['display_value'];
+                } else {
+                    amount.textContent = currency.value + ' ' + proposal['display_value'];
+                }
+            }
+
+            if (proposal && proposal['longcode']) {
+                proposal['longcode'] = proposal['longcode'].replace(/[\d\,]+\.\d\d/, function(x) {
+                    return '<b>' + x + '</b>';
+                });
+                description.innerHTML = '<div>' + proposal['longcode'] + '</div>';
+            }
+
             purchase.show();
             comment.show();
             amount_wrapper.show();
@@ -85625,45 +85637,127 @@ WSTickDisplay.update_ui = function(final_price, pnl, contract_status) {
     var $self = this;
     updatePurchaseStatus(final_price, final_price - pnl, contract_status);
 };
-
-WSTickDisplay.updateChart = function(data) {
-    var $self = this;
-
-    var chart = document.getElementById('tick_chart');
-    if (!chart || !isVisible(chart) || !data || !data.tick) {
-        return;
+WSTickDisplay.socketSend = function(req) {
+    if(!req.hasOwnProperty('passthrough')) {
+        req.passthrough = {};
     }
+    req.passthrough['dispatch_to'] = 'ViewTickDisplayWS';
+    BinarySocket.send(req);
+};
+WSTickDisplay.dispatch = function(data) {
+  var $self = this;
+  var chart = document.getElementById('tick_chart');
 
-    var spots2 = Tick.spots();
-    var epoches = Object.keys(spots2).sort(function(a, b) {
+  if (window.subscribe && data.tick && document.getElementById('sell_content_wrapper')) {
+      window.responseID = data.tick.id;
+      ViewPopupWS.storeSubscriptionID(window.responseID);
+  }
+
+  if (!chart || !isVisible(chart) || !data || (!data.tick && !data.history)) {
+      return;
+  }
+
+  var epoches, spots2, display_decimals;
+  if (document.getElementById('sell_content_wrapper')) {
+    if (data.tick && document.getElementById('sell_content_wrapper')) {
+      Tick.details(data);
+      if (!display_decimals) {
+        display_decimals = data.tick.quote.split('.')[1].length || 2;
+      }
+    } else if (data.history && document.getElementById('sell_content_wrapper')) {
+      if (!display_decimals) {
+        display_decimals = data.history.prices[0].split('.')[1].length || 2;
+      }
+    }
+    if (!window.tick_init || window.tick_init === '') {
+      WSTickDisplay.initialize({
+          "symbol"              : window.tick_underlying,
+          "number_of_ticks"     : window.tick_count,
+          "contract_category"   : ((/asian/i).test(window.tick_shortcode) ? 'asian' : (/digit/i).test(window.tick_shortcode) ? 'digits' : 'callput'),
+          "longcode"            : window.tick_longcode,
+          "display_symbol"      : window.tick_display_name,
+          "contract_start"      : window.tick_date_start,
+          "display_decimals"    : display_decimals,
+          "show_contract_result": 0
+      });
+      WSTickDisplay.spots_list = {};
+      window.tick_init = 'initialized';
+    }
+  }
+  if (data.tick) {
+    spots2 = Tick.spots();
+    epoches = Object.keys(spots2).sort(function(a, b) {
         return a - b;
     });
-    if ($self.applicable_ticks.length >= $self.ticks_needed) {
-        $self.evaluate_contract_outcome();
-        return;
-    } else {
-        for (var d = 0; d < epoches.length; d++) {
-            var tick = {
+  } else if (data.history) {
+    epoches = data.history.times;
+  }
+
+  if ($self.applicable_ticks.length >= $self.ticks_needed) {
+      $self.evaluate_contract_outcome();
+      if (window.responseID) {
+        BinarySocket.send({'forget':window.responseID});
+      }
+      return;
+  } else {
+      for (var d = 0; d < epoches.length; d++) {
+          var tick;
+          if (data.tick) {
+            tick = {
                 epoch: parseInt(epoches[d]),
                 quote: parseFloat(spots2[epoches[d]])
             };
-            if (tick.epoch > $self.contract_start_moment.unix() && !$self.spots_list[tick.epoch]) {
-                if (!$self.chart) return;
-                if (!$self.chart.series) return;
-                $self.chart.series[0].addPoint([$self.counter, tick.quote], true, false);
-                $self.applicable_ticks.push(tick);
-                $self.spots_list[tick.epoch] = tick.quote;
-                var indicator_key = '_' + $self.counter;
-                if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
-                    $self.x_indicators[indicator_key]['index'] = $self.counter;
-                    $self.add($self.x_indicators[indicator_key]);
-                }
+          } else if (data.history) {
+            tick = {
+                epoch: parseInt(data.history.times[d]),
+                quote: parseFloat(data.history.prices[d])
+            };
+          }
 
-                $self.add_barrier();
-                $self.apply_chart_background_color(tick);
-                $self.counter++;
-            }
-        }
+          if (tick.epoch > $self.contract_start_moment.unix() && !$self.spots_list[tick.epoch]) {
+              if (!$self.chart) return;
+              if (!$self.chart.series) return;
+              $self.chart.series[0].addPoint([$self.counter, tick.quote], true, false);
+              $self.applicable_ticks.push(tick);
+              $self.spots_list[tick.epoch] = tick.quote;
+              var indicator_key = '_' + $self.counter;
+              if (typeof $self.x_indicators[indicator_key] !== 'undefined') {
+                  $self.x_indicators[indicator_key]['index'] = $self.counter;
+                  $self.add($self.x_indicators[indicator_key]);
+              }
+
+              $self.add_barrier();
+              $self.apply_chart_background_color(tick);
+              $self.counter++;
+          }
+      }
+  }
+};
+WSTickDisplay.updateChart = function(data, contract) {
+    window.subscribe = 'false';
+    if (contract) {
+      window.tick_underlying = contract.underlying;
+      window.tick_count = contract.tick_count;
+      window.tick_longcode = contract.longcode;
+      window.tick_display_name = contract.display_name;
+      window.tick_date_start = contract.date_start;
+      window.tick_shortcode = contract.shortcode;
+      window.tick_init = '';
+      var request = {
+        ticks_history: contract.underlying,
+        start: contract.date_start,
+        end: 'latest'
+      };
+      if (contract.current_spot_time < contract.date_expiry) {
+        request.subscribe = 1;
+        window.subscribe = 'true';
+      } else {
+        request.end = contract.date_expiry;
+      }
+      WSTickDisplay.socketSend(request);
+      return;
+    } else {
+      WSTickDisplay.dispatch(data);
     }
 };
 ;var TradePage = (function(){
@@ -85866,6 +85960,8 @@ function BinarySocketClass() {
                         ViewPopupWS.dispatch(response);
                       } else if (passthrough.dispatch_to === 'ViewChartWS') {
                         Highchart.dispatch(response);
+                      } else if (passthrough.dispatch_to === 'ViewTickDisplayWS') {
+                        WSTickDisplay.dispatch(response);
                       }
                     }
                 }
@@ -85939,9 +86035,9 @@ function BinarySocketClass() {
                             .on('click', '#ratelimit-refresh-link', function () {
                                 window.location.reload();
                             });
-                      } else if (response.error.code === 'InvalidToken' && 
-                          type !== 'reset_password' && 
-                          type !== 'new_account_virtual' && 
+                      } else if (response.error.code === 'InvalidToken' &&
+                          type !== 'reset_password' &&
+                          type !== 'new_account_virtual' &&
                           type !== 'paymentagent_withdraw') {
                         BinarySocket.send({'logout': '1'});
                       }
@@ -90686,6 +90782,7 @@ var ProfitTableUI = (function(){
                 con.hide();
                 var _on_close = function () {
                     that.cleanup(true);
+                    window.updateChart = 'false';
                     if(TradePage.is_trading_page()) {
                         // Re-subscribe the trading page's tick stream which was unsubscribed by popup's chart
                         BinarySocket.send({'ticks_history':$('#underlying').val(),'style':'ticks','end':'latest','count':20,'subscribe':1});
@@ -90859,7 +90956,7 @@ var ProfitTableUI = (function(){
         // ----- Tick -----
         if(contract.hasOwnProperty('tick_count')) {
             contractType = 'tick';
-            getTickHistory(contract.underlying, contract.date_start - 60, contract.date_start - 1, 1);
+            tickShowContract();
         }
         // ----- Spread -----
         else if(contract.shortcode.toUpperCase().indexOf('SPREAD') === 0) {
@@ -90903,24 +91000,16 @@ var ProfitTableUI = (function(){
             'tick_popup'
         );
 
-        TickDisplay.initialize({
-            "symbol"              : contract.underlying,
-            "number_of_ticks"     : contract.tick_count,
-            "previous_tick_epoch" : history.times[0],
-            "contract_category"   : ((/asian/i).test(contract.shortcode) ? 'asian' : (/digit/i).test(contract.shortcode) ? 'digits' : 'callput'),
-            "longcode"            : contract.longcode,
-            "display_decimals"    : history.prices[0].split('.')[1].length || 2,
-            "display_symbol"      : contract.display_name,
-            "contract_start"      : contract.date_start,
-            "show_contract_result": 0
-        });
-
         tickUpdate();
     };
 
     var tickUpdate = function() {
         if(contract.is_expired) {
             showWinLossStatus((contract.sell_price || contract.bid_price) > 0);
+        }
+        if (!window.updateChart || window.updateChart === 'false') {
+            WSTickDisplay.updateChart('', contract);
+            window.updateChart = 'true';
         }
     };
 
@@ -91362,10 +91451,6 @@ var ProfitTableUI = (function(){
         }
 
         switch(contractType) {
-            case 'tick':
-                history = response.history;
-                tickShowContract();
-                break;
             case 'spread':
                 history = response.history;
                 spreadShowContract();
