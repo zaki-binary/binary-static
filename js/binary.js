@@ -78236,8 +78236,8 @@ onLoad.queue(function() {
 
         // Token Name
         if(!isRequiredError(nameID) && !isCountError(nameID, 2, 32)){
-            if(!(/^[a-zA-Z0-9\s\-]*$/).test(newName)) {
-                showError(nameID, Content.errorMessage('reg', [letters, numbers, space, '-']));
+            if(!(/^\w+$/).test(newName)) {
+                showError(nameID, Content.errorMessage('reg', [letters, numbers, '_']));
             }
         }
 
@@ -82566,7 +82566,7 @@ function displayTooltip(market, symbol){
     var tip = document.getElementById('symbol_tip'),
         guide = document.getElementById('guideBtn'),
         app = document.getElementById('androidApp');
-    if (market.match(/^random/)){
+    if (market.match(/^random/) || symbol.match(/^R/)){
         tip.show();
         tip.setAttribute('target','/get-started/random-markets');
         app.show();
@@ -82574,16 +82574,16 @@ function displayTooltip(market, symbol){
       app.hide();
       tip.hide();
     }
-    if (market.match(/^random_index/)){
+    if (market.match(/^random_index/) || symbol.match(/^R_/)){
         tip.setAttribute('target','/get-started/random-markets#random-indices');
     }
-    if (market.match(/^random_daily/)){
+    if (market.match(/^random_daily/) || symbol.match(/^RDB/) || symbol.match(/^RDMO/) || symbol.match(/^RDS/)){
         tip.setAttribute('target','/get-started/random-markets#random-quotidians');
     }
-    if (market.match(/^random_nightly/)){
+    if (market.match(/^random_nightly/) || symbol.match(/^RDMA/) || symbol.match(/^RDY/) || symbol.match(/^RDV/)){
         tip.setAttribute('target','/get-started/random-markets#random-nocturnes');
     }
-    if (market.match(/^smart_fx/)){
+    if (market.match(/^smart_fx/) || symbol.match(/^WLD/)){
         tip.show();
         tip.setAttribute('target','/smart-indices#world-fx-indices');
     }
@@ -82799,7 +82799,7 @@ function chartFrameSource(underlying, highchart_time){
             textBalance: text.localize('Balance'),
             textDetails: text.localize('Details'),
             textProfitTable: text.localize('Profit Table'),
-            textPurchaseDate: text.localize('Purchase Date (GMT)'),
+            textPurchaseDate: text.localize('Date (GMT)'),
             textContract: text.localize('Contract'),
             textPurchasePrice: text.localize('Purchase Price'),
             textSaleDate: text.localize('Sale Date'),
@@ -83103,7 +83103,6 @@ function chartFrameSource(underlying, highchart_time){
     };
 
 })();
-
 ;/*
  * Contract object mocks the trading form we have on our website
  * It parses the contracts json we get from socket.send({contracts_for: 'R_50'})
@@ -83380,6 +83379,7 @@ var Defaults = (function(){
         get   : getDefault,
         set   : setDefault,
         remove: removeDefault,
+        clear : function(){params = {};}
     };
 })();
 ;/*
@@ -83911,6 +83911,7 @@ var TradingEvents = (function () {
                     processForgetTicks();
                     // get ticks for current underlying
                     Tick.request(underlying);
+                    displayTooltip('', underlying);
                 }
             });
             underlyingElement.addEventListener('mousedown', function(e) {
@@ -83933,6 +83934,7 @@ var TradingEvents = (function () {
         var durationAmountElement = document.getElementById('duration_amount'),
             inputEventTriggered = false;          // For triggering one of the two events.
         if (durationAmountElement) {
+            durationAmountElement.addEventListener('keypress', onlyNumericOnKeypress);
             // jquery needed for datepicker
             $('#duration_amount').on('input', debounce(function (e) {
                 triggerOnDurationChange(e);
@@ -85808,6 +85810,7 @@ WSTickDisplay.updateChart = function(data, contract) {
 		trading_page = 0;
 		forgetTradingStreams();
 		BinarySocket.clear();
+		Defaults.clear();
 	};
 
 	return {
@@ -90235,9 +90238,9 @@ var ProfitTableUI = (function(){
 
     function updateSummary(summary) {
         $('#start-time').text(summary.startTimeString);
-        $('#login-time').append(summary.loginTime);
-        $('#current-time').append(summary.currentTime);
-        $('#session-duration').append(summary.sessionDuration);
+        $('#login-time').text(summary.loginTime);
+        $('#current-time').text(summary.currentTime);
+        $('#session-duration').text(summary.sessionDuration);
         
         $('#login-id').text(summary.loginId);
         $('#currency').text(summary.currency);
