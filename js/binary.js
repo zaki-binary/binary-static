@@ -69652,7 +69652,8 @@ Header.prototype = {
         that.client_time_at_response = moment().valueOf();
         that.server_time_at_response = ((start_timestamp * 1000) + (that.client_time_at_response - pass));
         var update_time = function() {
-            clock.html(moment(that.server_time_at_response + moment().valueOf() - that.client_time_at_response).utc().format("YYYY-MM-DD HH:mm") + " GMT");
+            window.time = moment(that.server_time_at_response + moment().valueOf() - that.client_time_at_response).utc();
+            clock.html(window.time.format("YYYY-MM-DD HH:mm") + " GMT");
         };
         update_time();
 
@@ -69665,7 +69666,6 @@ Header.prototype = {
             BinarySocket.send({"logout": "1"});
         });
     },
-
     validate_cookies: function(){
         if (getCookieItem('login') && getCookieItem('loginid_list')){
             var accIds = $.cookie("loginid_list").split("+");
@@ -73052,7 +73052,7 @@ pjax_config_page('trading', function () {
   function init() {
     var user = new User();
 
-    if (user.email && typeof is_japan === 'function') {
+    if (user.email && isJapanTrading()) {
       $('#tab_portfolio').removeClass('invisible');
     }
 
@@ -73068,7 +73068,7 @@ pjax_config_page('trading', function () {
   }
 
   function show() {
-    if (typeof is_japan === 'function') {
+    if (isJapanTrading()) {
       PortfolioWS.init();
     }
 
@@ -73076,7 +73076,7 @@ pjax_config_page('trading', function () {
   }
 
   function hide() {
-    if (typeof is_japan === 'function') {
+    if (isJapanTrading()) {
       PortfolioWS.onUnload();
     }
 
@@ -73094,7 +73094,7 @@ pjax_config_page('trading', function () {
 
     this.show = this.hide = function(){};
     
-    if (typeof is_japan === 'function' && $('#all_prices').length) {
+    if (isJapanTrading() && $('#all_prices').length) {
         $('#tab_japan_info').removeClass('invisible');
     } else {
         return;
@@ -80771,7 +80771,7 @@ pjax_config_page('portfolio', function() {
         var $args = {
             active_symbols: "brief"
         };
-        if (typeof is_japan === 'function') {
+        if (isJapanTrading()) {
             $args['landing_company'] = "japan";
         }
 
@@ -81016,24 +81016,24 @@ pjax_config_page("asset_indexws", function() {
     var populateTable = function() {
         $('#errorMsg').addClass('hidden');
 
-        var isJapan = page.language().toLowerCase() === 'ja';
+        var isJapanTrading = page.language().toLowerCase() === 'ja';
 
         var markets = tradingTimes.markets;
 
-        var $ul = $('<ul/>', {class: isJapan ? 'hidden' : ''});
+        var $ul = $('<ul/>', {class: isJapanTrading ? 'hidden' : ''});
         var $contents = $('<div/>');
 
         for(var m = 0; m < markets.length; m++) {
             var tabID = 'market_' + (m + 1);
 
             // tabs
-            if(!isJapan) {
+            if(!isJapanTrading) {
                 $ul.append($('<li/>').append($('<a/>', {href: '#' + tabID, text: markets[m].name, id: 'outline'})));
             }
 
             // contents
             var $market = $('<div/>', {id: tabID});
-            $market.append(createMarketTables(markets[m], isJapan));
+            $market.append(createMarketTables(markets[m], isJapanTrading));
             $contents.append($market);
         }
 
@@ -81046,14 +81046,14 @@ pjax_config_page("asset_indexws", function() {
         $container.tabs('destroy').tabs();
     };
 
-    var createMarketTables = function(market, isJapan) {
+    var createMarketTables = function(market, isJapanTrading) {
         var $marketTables = $('<div/>');
 
         // submarkets of this market
         var submarkets = market.submarkets;
         for(var s = 0; s < submarkets.length; s++) {
             // just show "Major Pairs" when the language is JA
-            if(isJapan) {
+            if(isJapanTrading) {
                 var symbolInfo = symbolSearch(submarkets[s].name);
                 if(symbolInfo.length > 0 && symbolInfo[0].submarket !== 'major_pairs') {
                     continue;
@@ -81349,7 +81349,7 @@ var TradingAnalysis = (function() {
      * get the current active tab if its visible i.e allowed for current parameters
      */
     var getActiveTab = function() {
-        var selectedTab = sessionStorage.getItem('currentAnalysisTab') || 'tab_explanation',
+        var selectedTab = sessionStorage.getItem('currentAnalysisTab') || (isJapanTrading() ? 'tab_portfolio' : 'tab_explanation'),
             selectedElement = document.getElementById(selectedTab);
 
         if (selectedElement && selectedElement.classList.contains('invisible')) {
@@ -82732,6 +82732,10 @@ function setUnderlyingTime() {
 function chartFrameSource(underlying, highchart_time){
   document.getElementById('chart_frame').src = 'https://webtrader.binary.com?affiliates=true&instrument=' + underlying + '&timePeriod=' + highchart_time.value + '&gtm=true';
 }
+
+function isJapanTrading(){
+    return $('#trading_socket_container.japan').length;
+}
 ;var Content = (function() {
     'use strict';
 
@@ -82770,7 +82774,7 @@ function chartFrameSource(underlying, highchart_time){
             textFormHigherLower: text.localize('Higher/Lower'),
             textFormUpDown: text.localize('Up/Down'),
             textFormInOut: text.localize('In/Out'),
-            textContractPeriod: text.localize('Contract period'),
+            textContractPeriod: text.localize('Period'),
             predictionLabel: text.localize('Last Digit Prediction'),
             textContractConfirmationPayout: text.localize('Potential Payout'),
             textContractConfirmationCost: text.localize('Total Cost'),
@@ -82868,14 +82872,14 @@ function chartFrameSource(underlying, highchart_time){
             textLots: text.localize('Lots'),
             textBuy: text.localize('Buy'),
             textSell: text.localize('Sell'),
-            textCALLE: text.localize('{currency} {sum} payout if {symbol} is strictly higher or equal than Exercise price at close  on {close}.'),
-            textPUT: text.localize('{currency} {sum} payout if {symbol} is strictly lower than Exercise price at close on {close}.'),
-            textNOTOUCH: text.localize('{currency} {sum} payout if {symbol} does not touch Exercise price through close on {close}.'),
-            textONETOUCH: text.localize('{currency} {sum} payout if {symbol} touches Exercise price through close on {close}.'),
-            textEXPIRYRANGEE: text.localize('{currency} {sum} payout if {symbol} ends on or between low and high values of Exercise price at close on {close}.'),
-            textEXPIRYMISS: text.localize('{currency} {sum} payout if {symbol} ends otside low and high values of Exercise price at close on {close}.'),
-            textRANGE: text.localize('{currency} {sum} payout if {symbol} stays between low and high values of Exercise price through close on {close}.'),
-            textUPORDOWN: text.localize('{currency} {sum} payout if {symbol} goes ouside of low and high values of Exercise price through close on {close}.'),
+            textCALLE: text.localize('[_1] [_2] payout if [_3] is strictly higher or equal than Exercise price at close  on [_4].'),
+            textPUT: text.localize('[_1] [_2] payout if [_3] is strictly lower than Exercise price at close on [_4].'),
+            textNOTOUCH: text.localize('[_1] [_2] payout if [_3] does not touch Exercise price through close on [_4].'),
+            textONETOUCH: text.localize('[_1] [_2] payout if [_3] touches Exercise price through close on [_4].'),
+            textEXPIRYRANGEE: text.localize('[_1] [_2] payout if [_3] ends on or between low and high values of Exercise price at close on [_4].'),
+            textEXPIRYMISS: text.localize('[_1] [_2] payout if [_3] ends otside low and high values of Exercise price at close on [_4].'),
+            textRANGE: text.localize('[_1] [_2] payout if [_3] stays between low and high values of Exercise price through close on [_4].'),
+            textUPORDOWN: text.localize('[_1] [_2] payout if [_3] goes ouside of low and high values of Exercise price through close on [_4].'),
             textBuyPriceUnit: text.localize('BUY price per unit'),
             textSellPriceUnit: text.localize('SELL price  per unit'),
             textUnits: text.localize('Units'),
@@ -84297,7 +84301,7 @@ var TradingEvents = (function () {
             });
         }
 
-        if(typeof is_japan === 'function'){
+        if(isJapanTrading()){
             var amount_type = document.getElementById('amount_type');
             var options = amount_type.getElementsByTagName('option');
             for(var d=0; d<options.length; d++){
@@ -84376,7 +84380,7 @@ var Message = (function () {
             } else if (type === 'proposal') {
                 processProposal(response);
             } else if (type === 'buy') {
-                if(typeof is_japan === 'function'){
+                if(isJapanTrading()){
                     PricingTable.processBuy(response);
                 }
                 Purchase.display(response);
@@ -84608,8 +84612,8 @@ var Price = (function() {
         if (details['error']) {
             purchase.hide();
             comment.hide();
-            if (details['error']['details']) {
-                var extraInfo = details['error']['details'];
+            var extraInfo = details['error']['details'];
+            if (extraInfo && extraInfo['display_value']) {
                 if (is_spread) {
                     amount.textContent = extraInfo['display_value'];
                 } else {
@@ -85487,7 +85491,7 @@ var Symbols = (function () {
         var $args = {
             active_symbols: "brief"
         };
-        if (typeof is_japan === 'function') {
+        if (isJapanTrading()) {
             $args['landing_company'] = "japan";
         }
         BinarySocket.send($args);
@@ -85989,7 +85993,6 @@ function BinarySocketClass() {
                     ViewBalanceUI.updateBalances(response);
                 } else if (type === 'time') {
                     page.header.time_counter(response);
-                    ViewPopupWS.dispatch(response);
                 } else if (type === 'logout') {
                     localStorage.removeItem('jp_test_allowed');
                     RealityCheckData.clear();
@@ -91137,7 +91140,7 @@ var ProfitTableUI = (function(){
     };
 
     var normalUpdate = function() {
-        normalUpdateTimers(contract.current_spot_time, moment().valueOf());
+        normalUpdateTimers();
         var finalPrice = contract.sell_price || contract.bid_price,
             is_started = !contract.is_forward_starting || contract.current_spot_time > contract.date_start,
             user_sold  = contract.sell_spot_time && contract.sell_spot_time < contract.date_expiry,
@@ -91183,12 +91186,10 @@ var ProfitTableUI = (function(){
         contract.validation_error = '';
     };
 
-    var normalUpdateTimers = function(serverTime, clientTime) {
-        window.client_time_at_response = moment().valueOf();
-        window.server_time_at_response = serverTime * 1000 + (window.client_time_at_response - clientTime);
+    var normalUpdateTimers = function() {
         var update_time = function() {
-            var now = Math.floor((window.server_time_at_response + moment().valueOf() - window.client_time_at_response) / 1000);
-            containerSetText('trade_details_live_date' , epochToDateTime(Math.max(now, contract.current_spot_time || 0)));
+            var now = Math.max(Math.ceil((window.time || 0) / 1000), contract.current_spot_time || 0);
+            containerSetText('trade_details_live_date' , epochToDateTime(now));
 
             var is_started = !contract.is_forward_starting || contract.current_spot_time > contract.date_start,
                 is_ended   = contract.is_expired || contract.is_sold;
@@ -91524,9 +91525,6 @@ var ProfitTableUI = (function(){
                 default:
                     break;
             }
-        }
-        else if(contractType === 'normal' && response.msg_type === 'time' && !isNaN(response.echo_req.passthrough.client_time) && !response.error) {
-            normalUpdateTimers(response.time, response.echo_req.passthrough.client_time);
         }
     };
 
@@ -92122,7 +92120,7 @@ function attach_tabs(element) {
     });
     return targets;
 }
-;if (typeof is_japan === 'function') {
+;if (isJapanTrading()) {
     var Contract = (function() {
         'use strict';
 
@@ -93095,7 +93093,7 @@ function attach_tabs(element) {
     };
 }());
 
-;if(typeof is_japan === 'function'){
+;if(isJapanTrading()){
 	var Periods = (function(){
 		var barrier = 0,
 			barrier2 = 0,
@@ -93219,7 +93217,7 @@ function attach_tabs(element) {
 		};
 	})();
 }
-;if(typeof is_japan === 'function'){
+;if(isJapanTrading()){
 	var Price = Object.create(Price);
 	Object.defineProperties(Price,{
 		proposal:{
@@ -93274,6 +93272,12 @@ function attach_tabs(element) {
       Object.keys(values).forEach(function(key) {
         longCode = longCode.replace('{' + key + '}', values[key]);
       });
+
+      longCode = longCode.replace(/\[_1\]/, values.currency)
+        .replace(/\[_2\]/, values.sum)
+        .replace(/\[_3\]/, values.symbol)
+        .replace(/\[_4\]/, values.close);
+
 
       return React.createElement(
         'div', { className: 'contract_description' },
@@ -93557,7 +93561,7 @@ function attach_tabs(element) {
             var longCode = {
               mask: mask,
               values: {
-                currency: 'JPY',
+                currency: '¥',
                 sum: 1000,
                 symbol: state.symbol,
                 close: close,
@@ -93610,7 +93614,7 @@ function attach_tabs(element) {
   };
 })();
 
-;if (typeof is_japan === 'function') {
+;if (isJapanTrading()) {
 
   var processForgetTables = function() {
     BinarySocket.send({
