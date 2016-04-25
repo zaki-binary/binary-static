@@ -1,5 +1,4 @@
 var PortfolioWS =  (function() {
-
     'use strict';
 
     var rowTemplate;
@@ -7,8 +6,11 @@ var PortfolioWS =  (function() {
     var init = function() {
         showLoadingImage($("#portfolio-loading"));
         // get the row template and then discard the node as it has served its purpose
-        rowTemplate = $("#portfolio-dynamic tr:first")[0].outerHTML;
-        $("#portfolio-dynamic tr:first").remove();
+        var $tempRow = $("#portfolio-dynamic tr[data-contract_id='!contract_id!']");
+        if($tempRow) {
+            rowTemplate = $tempRow[0].outerHTML;
+            $tempRow.remove();
+        }
         BinarySocket.send({"balance":1});
         BinarySocket.send({"portfolio":1});
         // Subscribe transactions to auto update new purchases
@@ -30,7 +32,6 @@ var PortfolioWS =  (function() {
      * Updates portfolio table
     **/
     var updatePortfolio = function(data) {
-
         /**
          * Check for error
         **/
@@ -52,7 +53,7 @@ var PortfolioWS =  (function() {
         /**
          * User has at least one contract
         **/
-
+        if(!rowTemplate) init();
         $("#portfolio-no-contract").hide();
         var contracts = '';
         var sumPurchase = 0.0;
@@ -170,60 +171,64 @@ var PortfolioWS =  (function() {
         return str;
     };
 
+    var onLoad = function() {
+        if (page.client.redirect_if_logout()) {
+            return;
+        }
+        BinarySocket.init({
+            onmessage: function(msg){
+                var response;
+                try {
+                    response  = JSON.parse(msg.data);
+                    if("object" !== typeof response || !("msg_type" in response)) {
+                        throw new Error("Response from WS API is not well formatted.");
+                    }
+                } catch(e) {
+                    throw new Error("Response from WS API is not well formatted."+ e);
+                }
+
+                var msg_type = response.msg_type;
+                switch(msg_type) {
+                    case "balance":
+                        updateBalance(response);
+                        break;
+                    case "portfolio":
+                        updatePortfolio(response);
+                        break;
+                    case "transaction":
+                        transactionResponseHandler(response);
+                        break;
+                    case "proposal_open_contract":
+                        updateIndicative(response);
+                        break;
+                    default:
+                        // msg_type is not what PortfolioWS handles, so ignore it.
+                }
+            }
+        });
+        init();
+    };
+
+    var onUnload = function(){
+        BinarySocket.send({"forget_all": "proposal_open_contract"});
+        BinarySocket.send({"forget_all": "transaction"});
+    };
+
     return {
         init: init,
         updateBalance: updateBalance,
         updatePortfolio: updatePortfolio,
         updateIndicative: updateIndicative,
-        transactionResponseHandler: transactionResponseHandler
+        transactionResponseHandler: transactionResponseHandler,
+        onLoad: onLoad,
+        onUnload: onUnload,
     };
 
 })();
 
 pjax_config_page("user/openpositionsws", function() {
     return {
-        onLoad: function() {
-            if (page.client.redirect_if_logout()) {
-                return;
-            }
-            BinarySocket.init({
-
-                onmessage: function(msg){
-
-                    try {
-                        response  = JSON.parse(msg.data);
-                        if("object" !== typeof response || !("msg_type" in response)) {
-                            throw new Error("Response from WS API is not well formatted.");
-                        }
-                    } catch(e) {
-                        throw new Error("Response from WS API is not well formatted.");
-                    }
-
-                    var msg_type = response.msg_type;
-                    switch(msg_type) {
-                        case "balance":
-                            PortfolioWS.updateBalance(response);
-                            break;
-                        case "portfolio":
-                            PortfolioWS.updatePortfolio(response);
-                            break;
-                        case "transaction":
-                            PortfolioWS.transactionResponseHandler(response);
-                            break;
-                        case "proposal_open_contract":
-                            PortfolioWS.updateIndicative(response);
-                            break;
-                        default:
-                            // msg_type is not what PortfolioWS handles, so ignore it.
-                    }
-
-                }
-            });
-            PortfolioWS.init();
-        },
-        onUnload: function(){
-            BinarySocket.send({"forget_all": "proposal_open_contract"});
-            BinarySocket.send({"forget_all": "transaction"});
-        }
+        onLoad: PortfolioWS.onLoad,
+        onUnload: PortfolioWS.onUnload,
     };
 });
