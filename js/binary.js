@@ -71424,10 +71424,8 @@ function swithTabIfError(IsErrorFound)
       initialize_values(contract);
       if (type === 'contracts_for' && (!error || (error && error.code && error.code === 'InvalidSymbol'))) {
           if (response.contracts_for && response.contracts_for.feed_license && response.contracts_for.feed_license === 'delayed') {
-            if (parseInt((window.time._i/1000) < parseInt(window.contract.date_expiry))) {
-                window.request.end = 'latest';
-            }
-            window.request.adjust_start_time = 1;
+            window.request.end = 'latest';
+            delete window.request.start;
             delete window.request.subscribe;
             window.delayed = true;
           } else {
@@ -71669,10 +71667,8 @@ function swithTabIfError(IsErrorFound)
 
     if (contracts_response && contracts_response.echo_req.contracts_for === contract.underlying) {
       if (contracts_response.contracts_for.feed_license === 'delayed') {
-        if (parseInt((window.time._i/1000) < parseInt(window.contract.date_expiry))) {
-            window.request.end = 'latest';
-        }
-        window.request.adjust_start_time = 1;
+        window.request.end = 'latest';
+        delete window.request.start;
         delete window.request.subscribe;
         window.delayed = true;
       } else {
