@@ -33,5 +33,4 @@ function displayCurrencies(selected) {
     });
 
     target.appendChild(fragment);
-    Defaults.set('currency', target.value);
 }

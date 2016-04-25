@@ -1,7 +1,7 @@
 var StatementUI = (function(){
     "use strict";
     var tableID = "statement-table";
-    var columns = ["date", "ref", "act", "desc", "credit", "bal", "details"];
+    var columns = ["date", "ref", "act", "desc", "credit", "bal"];
 
     function createEmptyStatementTable(){
         var header = [
@@ -10,8 +10,7 @@ var StatementUI = (function(){
             Content.localize().textAction,
             Content.localize().textDescription,
             Content.localize().textCreditDebit,
-            Content.localize().textBalance,
-            Content.localize().textDetails
+            Content.localize().textBalance
         ];
 
         header[5] = header[5] + (TUser.get().currency ? " (" + TUser.get().currency + ")" : "");
@@ -54,10 +53,10 @@ var StatementUI = (function(){
 
         var creditDebitType = (parseFloat(amount) >= 0) ? "profit" : "loss";
 
-        var $statementRow = Table.createFlexTableRow([date, ref, action, '', amount, balance, ''], columns, "data");
+        var $statementRow = Table.createFlexTableRow([date, ref, action, '', amount, balance], columns, "data");
         $statementRow.children(".credit").addClass(creditDebitType);
         $statementRow.children(".date").addClass("pre");
-        $statementRow.children(".desc").html(desc + "<br>");
+        $statementRow.children(".desc").html(desc);
 
         //create view button and append
         if (action === "Sell" || action === "Buy") {
@@ -67,7 +66,11 @@ var StatementUI = (function(){
             $viewButton.addClass("open_contract_detailsws");
             $viewButton.attr("contract_id", transaction["contract_id"]);
 
-            $statementRow.children(".desc,.details").append($viewButtonSpan);
+            $statementRow.
+                children(".desc").
+                first().
+                append("<br>").
+                append($viewButtonSpan);
         }
 
         return $statementRow[0];        //return DOM instead of jquery object

@@ -76,9 +76,6 @@ var StartDates = (function(){
                             first = a.utc().unix();
                         }
                         content = document.createTextNode(a.format('HH:mm ddd'));
-                        if(option.value === Defaults.get('date_start')) {
-                            option.setAttribute('selected', 'selected');
-                        }
                         option.appendChild(content);
                         fragment.appendChild(option);
                     } 
@@ -86,7 +83,6 @@ var StartDates = (function(){
                 }
             });
             target.appendChild(fragment);
-            Defaults.set('date_start', target.value);
             displayed = 1;
             if(first){
                 TradingEvents.onStartDateChange(first);            
@@ -94,7 +90,6 @@ var StartDates = (function(){
         } else {
             displayed = 0;
             document.getElementById('date_start_row').style.display = 'none';
-            Defaults.remove('date_start');
         }
     };
 
@@ -102,7 +97,6 @@ var StartDates = (function(){
         if(hasNow){
             var element = getElement();
             element.value = 'now';
-            Defaults.set('date_start', 'now');
         }
     } ;
 
