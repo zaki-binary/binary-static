@@ -216,9 +216,8 @@ var Highchart = (function() {
           if (response.contracts_for && response.contracts_for.feed_license && response.contracts_for.feed_license === 'delayed') {
             if (parseInt((window.time._i/1000) < parseInt(window.contract.date_expiry))) {
                 window.request.end = 'latest';
-                window.request.adjust_start_time = 1;
             }
-            delete window.request.start;
+            window.request.adjust_start_time = 1;
             delete window.request.subscribe;
             window.delayed = true;
           } else {
@@ -462,9 +461,8 @@ var Highchart = (function() {
       if (contracts_response.contracts_for.feed_license === 'delayed') {
         if (parseInt((window.time._i/1000) < parseInt(window.contract.date_expiry))) {
             window.request.end = 'latest';
-            window.request.adjust_start_time = 1;
         }
-        delete window.request.start;
+        window.request.adjust_start_time = 1;
         delete window.request.subscribe;
         window.delayed = true;
       } else {
