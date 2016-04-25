@@ -11,7 +11,7 @@ function processActiveSymbols(data) {
     var market = getDefaultMarket();
 
     // store the market
-    Defaults.set('market', market);
+    sessionStorage.setItem('market', market);
 
     displayMarkets('contract_markets', Symbols.markets(), market);
     processMarket();
@@ -31,15 +31,10 @@ function processMarket(flag) {
 
     // we can get market from sessionStorage as allowed market
     // is already set when this function is called
-    var market = Defaults.get('market');
-    var symbol = Defaults.get('underlying');
+    var market = sessionStorage.getItem('market');
+    var symbol = sessionStorage.getItem('underlying');
     var update_page = Symbols.need_page_update() || flag;
 
-    // change to default market if query string contains an invalid market
-    if(!market || !Symbols.underlyings()[market]) {
-        market = getDefaultMarket();
-        Defaults.set('market', market);
-    }
     if (update_page && (!symbol || !Symbols.underlyings()[market][symbol] || !Symbols.underlyings()[market][symbol].is_active)) {
         symbol = undefined;
     }
@@ -65,7 +60,7 @@ function processMarketUnderlying() {
         underlyingElement.selectedIndex = 0;
     }
     var underlying = underlyingElement.value;
-    Defaults.set('underlying', underlying);
+    sessionStorage.setItem('underlying', underlying);
 
     showFormOverlay();
 
@@ -82,7 +77,7 @@ function processMarketUnderlying() {
 
     Contract.getContracts(underlying);
 
-    displayTooltip(Defaults.get('market'), underlying);
+    displayTooltip(sessionStorage.getItem('market'), underlying);
 }
 
 /*
@@ -116,8 +111,8 @@ function processContract(contracts) {
 
     var contract_categories = Contract.contractForms();
     var formname;
-    if (Defaults.get('formname') && contract_categories[Defaults.get('formname')]) {
-        formname = Defaults.get('formname');
+    if (sessionStorage.getItem('formname') && contract_categories[sessionStorage.getItem('formname')]) {
+        formname = sessionStorage.getItem('formname');
     } else {
         var tree = getContractCategoryTree(contract_categories);
         if (tree[0]) {
@@ -130,7 +125,7 @@ function processContract(contracts) {
     }
 
     // set form to session storage
-    Defaults.set('formname', formname);
+    sessionStorage.setItem('formname', formname);
 
     // change the form placeholder content as per current form (used for mobile menu)
     setFormPlaceholderContent(formname);
@@ -145,6 +140,7 @@ function processContract(contracts) {
 }
 
 function processContractForm() {
+
     Contract.details(sessionStorage.getItem('formname'));
 
     StartDates.display();
@@ -154,30 +150,22 @@ function processContractForm() {
     displaySpreads();
 
     var r1;
-    if (StartDates.displayed() && Defaults.get('date_start') && Defaults.get('date_start') !== 'now') {
-        r1 = TradingEvents.onStartDateChange(Defaults.get('date_start'));
-        if (!r1 || Defaults.get('expiry_type') === 'endtime') Durations.display();
+    if (StartDates.displayed() && sessionStorage.getItem('date_start')) {
+        r1 = TradingEvents.onStartDateChange(sessionStorage.getItem('date_start'));
+        if (!r1) Durations.display();
     } else {
         Durations.display();
     }
 
-    var expiry_type = Defaults.get('expiry_type') || 'duration';
+    var expiry_type = sessionStorage.getItem('expiry_type') ? sessionStorage.getItem('expiry_type') : 'duration';
     var make_price_request = TradingEvents.onExpiryTypeChange(expiry_type);
 
-    if (Defaults.get('amount')) $('#amount').val(Defaults.get('amount'));
-        else Defaults.set('amount', document.getElementById('amount').value);
-    if (Defaults.get('amount_type')) selectOption(Defaults.get('amount_type'), document.getElementById('amount_type'));
-        else Defaults.set('amount_type', document.getElementById('amount_type').value);
-    if (Defaults.get('currency')) selectOption(Defaults.get('currency'), document.getElementById('currency'));
+    if (sessionStorage.getItem('amount')) $('#amount').val(sessionStorage.getItem('amount'));
+    if (sessionStorage.getItem('amount_type')) selectOption(sessionStorage.getItem('amount_type'), document.getElementById('amount_type'));
+    if (sessionStorage.getItem('currency')) selectOption(sessionStorage.getItem('currency'), document.getElementById('currency'));
 
     if (make_price_request >= 0) {
         processPriceRequest();
-    }
-
-    if(Defaults.get('formname') === 'spreads') {
-        Defaults.remove('expiry_type', 'duration_amount', 'duration_units', 'expiry_date', 'expiry_time', 'amount', 'amount_type');
-    } else {
-        Defaults.remove('amount_per_point', 'stop_type', 'stop_loss', 'stop_profit');
     }
 }
 
@@ -185,15 +173,11 @@ function displayPrediction() {
     var predictionElement = document.getElementById('prediction_row');
     if (Contract.form() === 'digits' && sessionStorage.getItem('formname') !== 'evenodd') {
         predictionElement.show();
-        if (Defaults.get('prediction')) {
-            selectOption(Defaults.get('prediction'), document.getElementById('prediction'));
-        }
-        else {
-            Defaults.set('prediction', document.getElementById('prediction').value);
+        if (sessionStorage.getItem('prediction')) {
+            selectOption(sessionStorage.getItem('prediction'), document.getElementById('prediction'));
         }
     } else {
         predictionElement.hide();
-        Defaults.remove('prediction');
     }
 }
 
@@ -214,20 +198,6 @@ function displaySpreads() {
         amountPerPoint.show();
         spreadContainer.show();
         stopTypeDollarLabel.textContent = document.getElementById('currency').value;
-        if (Defaults.get('stop_type')) {
-            var el = document.querySelectorAll('input[name="stop_type"][value="' + Defaults.get('stop_type') + '"]');
-            if (el) {
-                el[0].setAttribute('checked', 'checked');
-            }
-        } else {
-            Defaults.set('stop_type', document.getElementById('stop_type_points').checked ? 'point' : 'dollar');
-        }
-        if (Defaults.get('amount_per_point')) amountPerPoint.value = Defaults.get('amount_per_point');
-            else Defaults.set('amount_per_point', amountPerPoint.value);
-        if (Defaults.get('stop_loss')) document.getElementById('stop_loss').value = Defaults.get('stop_loss');
-            else Defaults.set('stop_loss', document.getElementById('stop_loss').value);
-        if (Defaults.get('stop_profit')) document.getElementById('stop_profit').value = Defaults.get('stop_profit');
-            else Defaults.set('stop_profit', document.getElementById('stop_profit').value);
     } else {
         amountPerPointLabel.hide();
         amountPerPoint.hide();
@@ -235,6 +205,22 @@ function displaySpreads() {
         expiryTypeRow.show();
         amountType.show();
         amount.show();
+    }
+    if (sessionStorage.getItem('stop_type')) {
+        var el = document.querySelectorAll('input[name="stop_type"][value="' + sessionStorage.getItem('stop_type') + '"]');
+        if (el) {
+            console.log(el);
+            el[0].setAttribute('checked', 'checked');
+        }
+    }
+    if (sessionStorage.getItem('amount_per_point')) {
+        document.getElementById('amount_per_point').value = sessionStorage.getItem('amount_per_point');
+    }
+    if (sessionStorage.getItem('stop_loss')) {
+        document.getElementById('stop_loss').value = sessionStorage.getItem('stop_loss');
+    }
+    if (sessionStorage.getItem('stop_profit')) {
+        document.getElementById('stop_profit').value = sessionStorage.getItem('stop_profit');
     }
 }
 

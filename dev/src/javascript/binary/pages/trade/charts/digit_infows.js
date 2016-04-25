@@ -94,7 +94,7 @@ TradingAnalysis.DigitInfoWS.prototype = {
         var symbols = Symbols.getAllSymbols();
         i=0;
         for(var key in symbols){
-            if(/^(R_|RD)/.test(key)){
+            if(symbols[key].split(" ")[0] === 'Random'){
                 underlyings[i++] = key;
             }
         }

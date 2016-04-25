@@ -1,13 +1,12 @@
 #main-navigation
   %ul#menu-top
-    - my @nav = ({route => '/why-us',         text => l('Why us?')    , class => ''},
-    -            {route => '/get-started',    text => l('Get started'), class => 'ja-hide'},
-    -            {route => '/get-started-jp', text => l('Get started'), class => 'all-hide ja-show-block'},
-    -            {route => '/tour',           text => l('Tour')       , class => ''});
+    - my @nav = ({route => '/why-us',      text => l('Why us?')},
+    -            {route => '/get-started', text => l('Get started')},
+    -            {route => '/tour',        text => l('Tour')});
     - foreach my $item (@nav) {
-      - my ($route, $text, $jaClass) = ($item->{route}, $item->{text}, $item->{class});
+      - my ($route, $text) = ($item->{route}, $item->{text});
       - my $class = (index(url_for, $route) != -1) ? 'active' : '';
-      %li.$class.$jaClass
+      %li.$class
         %a.smaller-font{:href=>url_for($route), :class => 'pjaxload'}= $text
     - }
     %li
