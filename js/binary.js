@@ -83364,25 +83364,47 @@ var Defaults = (function(){
             value = value || '';
             if(Object.keys(params).length === 0) params = page.url.params_hash();
             if(params[key] != value) {
-                sessionStorage.setItem(key, value);
                 params[key] = value;
-                window.history.replaceState(null, null, window.location.pathname + '?' + page.url.params_hash_to_string(params));
+                // to increase speed, do not set values when form is still loading
+                if(!isVisible(document.getElementById('trading_init_progress'))) {
+                    sessionStorage.setItem(key, value);
+                    updateURL();
+                }
             }
         }
     };
 
     var removeDefault = function() {
         if(Object.keys(params).length === 0) params = page.url.params_hash();
+        var isUpdated = false;
         for (var i = 0; i < arguments.length; i++) {
-            sessionStorage.removeItem(arguments[i]);
-            delete(params[arguments[i]]);
+            if(params.hasOwnProperty(arguments[i])) {
+                sessionStorage.removeItem(arguments[i]);
+                delete(params[arguments[i]]);
+                isUpdated = true;
+            }
         }
+        if(isUpdated) {
+            updateURL();
+        }
+    };
+
+    var updateAll = function() {
+        for(var key in params)
+            if (params.hasOwnProperty(key)) {
+                sessionStorage.setItem(key, params[key]);
+            }
+        updateURL();
+    };
+
+    var updateURL = function() {
         window.history.replaceState(null, null, window.location.pathname + '?' + page.url.params_hash_to_string(params));
     };
 
     return {
         get   : getDefault,
         set   : setDefault,
+        update: updateAll,
         remove: removeDefault,
         clear : function(){params = {};}
     };
@@ -83772,10 +83794,19 @@ var TradingEvents = (function () {
     'use strict';
 
     var onStartDateChange = function(value){
-        if(!value || !$('#date_start').find('option[value='+value+']').length){
+        var $dateStartSelect = $('#date_start');
+        if(!value || !$dateStartSelect.find('option[value='+value+']').length){
             return 0;
         }
-        $('#date_start').val(value);
+
+        var yellowBorder = 'light-yellow-background';
+        if (value !== 'now') {
+            $dateStartSelect.addClass(yellowBorder);
+        } else {
+            $dateStartSelect.removeClass(yellowBorder);
+        }
+
+        $dateStartSelect.val(value);
 
         var make_price_request = 1;
         if (value !== 'now' && $('expiry_type').val() === 'endtime') {
@@ -84815,7 +84846,11 @@ function processContract(contracts) {
     }
 
     document.getElementById('trading_socket_container').classList.add('show');
-    document.getElementById('trading_init_progress').style.display = 'none';
+    var init_logo = document.getElementById('trading_init_progress');
+    if(init_logo.style.display !== 'none') {
+        init_logo.style.display = 'none';
+        Defaults.update();
+    }
 
     Contract.setContracts(contracts);
 
@@ -85343,6 +85378,7 @@ var StartDates = (function(){
                 var option = document.createElement('option');
                 var content = document.createTextNode(Content.localize().textNow);
                 option.setAttribute('value', 'now');
+                $('#date_start').removeClass('light-yellow-background');
                 option.appendChild(content);
                 fragment.appendChild(option);
                 hasNow = 1;
@@ -85401,6 +85437,7 @@ var StartDates = (function(){
         if(hasNow){
             var element = getElement();
             element.value = 'now';
+            $('#date_start').removeClass('light-yellow-background');
             Defaults.set('date_start', 'now');
         }
     } ;
@@ -89862,6 +89899,10 @@ var ProfitTableUI = (function(){
 pjax_config_page('trading', function(){
     return {
         onLoad: function() {
+            if(page.language().toLowerCase() === 'id') {
+                $('#temp_notice_msg a').attr('href', 'https://blog.binary.com/indeks-random-berganti-nama-menjadi-indeks-volatilitas/');
+            }
+
             var tempMsgKey = 'hide_temp_msg';
             if (SessionStore.get(tempMsgKey)) {
                 $('#temp_notice_msg').addClass('invisible');
