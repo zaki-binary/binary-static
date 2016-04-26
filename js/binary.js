@@ -82301,6 +82301,17 @@ function displayPriceMovement(element, oldValue, currentValue) {
 }
 
 /*
+ * resets price movement color changing, to prevent coloring on some changes
+ * coloring will continue on the next proposal responses
+ */
+function resetPriceMovement() {
+    var btns = document.getElementsByClassName('purchase_button');
+    for(var i = 0; i < btns.length; i++) {
+        btns[i].setAttribute('data-display_value', '');
+    }
+}
+
+/*
  * function to toggle active class of menu
  */
 function toggleActiveNavMenuElement(nav, eventElement) {
@@ -84585,6 +84596,8 @@ var Price = (function() {
             form_id: form_id
         };
 
+        resetPriceMovement();
+
         return proposal;
     };
 
@@ -84694,9 +84707,7 @@ var Price = (function() {
                 displayCommentPrice(comment, currency.value, proposal['ask_price'], proposal['payout']);
             }
             var oldprice = purchase.getAttribute('data-display_value');
-            if (oldprice) {
-                displayPriceMovement(amount, oldprice, proposal['display_value']);
-            }
+            displayPriceMovement(amount, oldprice, proposal['display_value']);
             purchase.setAttribute('data-purchase-id', id);
             purchase.setAttribute('data-ask-price', proposal['ask_price']);
             purchase.setAttribute('data-display_value', proposal['display_value']);
@@ -85659,7 +85670,10 @@ var Tick = (function() {
         clean: function() {
             spots = {};
             quote = '';
-            $('#spot').fadeOut(200);
+            $('#spot').fadeOut(200, function(){
+                // resets spot movement coloring, will continue on the next tick responses
+                $(this).removeClass('price_moved_down price_moved_up').text('');
+            });
         },
         spots: function() {
             return spots;
@@ -92476,7 +92490,7 @@ function attach_tabs(element) {
                 id: 9
             },
             {
-                question: "{JAPAN ONLY}For a currency binary option with the underlying exchange rate of dollars against yen, the right to receive a payout if the yen becomes stronger is known as a dollar-put binary option",
+                question: "{JAPAN ONLY}For a currency binary option with the underlying exchange rate of dollars against yen, the right to receive a payout if the yen becomes stronger is known as a dollar-put binary option.",
                 answer: true,
                 id: 10
             },
