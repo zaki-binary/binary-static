@@ -79265,6 +79265,7 @@ pjax_config_page("tnc_approvalws", function() {
     init: init,
     getCashierType: getCashierType,
     getCashierURL: getCashierURL,
+    hideAll: hideAll,
     showError: showError
   };
 })();
