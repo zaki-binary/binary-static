@@ -78805,7 +78805,8 @@ pjax_config_page_require_auth("user/self_exclusionws", function() {
         RealAccElements,
         errorClass;
     var fieldIDs;
-    var isValid;
+    var isValid,
+        changed;
 
 
     var init = function() {
@@ -78813,6 +78814,7 @@ pjax_config_page_require_auth("user/self_exclusionws", function() {
         frmBtn = formID + ' button';
         RealAccElements = '.RealAcc';
         errorClass = 'errorfield';
+        changed = false;
         fieldIDs = {
             address1 : '#Address1',
             address2 : '#Address2',
@@ -78879,6 +78881,22 @@ pjax_config_page_require_auth("user/self_exclusionws", function() {
                 $(fieldIDs.postcode).val(data.address_postcode);
                 $(fieldIDs.phone).val(data.phone);
 
+                $(fieldIDs.address1).on('change', function() {
+                  changed = true;
+                });
+                $(fieldIDs.address2).on('change', function() {
+                  changed = true;
+                });
+                $(fieldIDs.city).on('change', function() {
+                  changed = true;
+                });
+                $(fieldIDs.postcode).on('change', function() {
+                  changed = true;
+                });
+                $(fieldIDs.phone).on('change', function() {
+                  changed = true;
+                });
+
                 $(RealAccElements).removeClass('hidden');
 
                 $(frmBtn).click(function(e){
@@ -78907,6 +78925,9 @@ pjax_config_page_require_auth("user/self_exclusionws", function() {
             $(fieldIDs.state).replaceWith($('<input/>', {id: 'State', type: 'text', maxlength: '35', value: defaultValue}));
         }
         $('#lblState').text($('#State option:selected').text());
+        $(fieldIDs.state).on('change', function() {
+          changed = true;
+        });
     };
 
     var formValidate = function() {
@@ -78953,6 +78974,11 @@ pjax_config_page_require_auth("user/self_exclusionws", function() {
         if(!isCountError(fieldIDs.phone, 6, 35) && !(/^(|\+?[0-9\s\-]+)$/).test(phone)) {
             showError(fieldIDs.phone, Content.errorMessage('reg', [numbers, space, '-']));
         }
+
+        if (!changed) {
+          isValid = false;
+        }
+        changed = false;
 
         if(isValid) {
             return {
@@ -80042,12 +80068,10 @@ pjax_config_page('/terms-and-conditions', function() {
     };
 });
 
-pjax_config_page('/login', function() {
+pjax_config_page('login|loginid_switch', function() {
     return {
         onLoad: function() {
-            if (page.user.is_logged_in) {
-              window.location.href = page.url.url_for('user/my_accountws');
-            }
+            window.location.href = page.url.url_for('oauth2/authorize', 'app_id=binarycom');
         }
     };
 });
@@ -86045,7 +86069,7 @@ function BinarySocketClass() {
                     page.header.do_logout(response);
                 } else if (type === 'landing_company_details') {
                     page.client.response_landing_company_details(response);
-                    RealityCheck.init();
+                    BinarySocket.send({reality_check: 1, passthrough: { for: 'init_rc' }});
                 } else if (type === 'payout_currencies' && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.handler === 'page.client') {
                     page.client.response_payout_currencies(response);
                 } else if (type === 'get_settings') {
@@ -86083,7 +86107,14 @@ function BinarySocketClass() {
                     }
                   }
                 } else if (type === 'reality_check') {
-                    RealityCheck.realityCheckWSHandler(response);
+                    if (response.echo_req.passthrough.for === 'init_rc') {
+                        var currentData = TUser.get();
+                        var addedLoginTime = Object.assign({logintime: response.reality_check.start_time}, currentData);
+                        TUser.set(addedLoginTime);
+                        RealityCheck.init();
+                    } else {
+                        RealityCheck.realityCheckWSHandler(response);
+                    }
                 }
                 if (response.hasOwnProperty('error')) {
                     if(response.error && response.error.code) {
@@ -90175,13 +90206,14 @@ function showRandomRenamedMsg(msg) {
 ;var RealityCheck = (function () {
     'use strict';
     var hiddenClass = 'invisible';
-    var loginTime;
+    var loginTime;      // milliseconds
 
     function realityCheckWSHandler(response) {
         if ($.isEmptyObject(response.reality_check)) {
             // not required for reality check
             return;
         }
+
         var summary = RealityCheckData.summaryData(response.reality_check);
         RealityCheckUI.renderSummaryPopUp(summary);
     }
@@ -90251,8 +90283,7 @@ function showRandomRenamedMsg(msg) {
             return;
         }
 
-        var rcCookie = getCookieItem('reality_check');
-        loginTime = rcCookie && rcCookie.split(',')[1] * 1000;
+        loginTime = TUser.get().logintime * 1000;
 
         window.addEventListener('storage', realityStorageEventHandler, false);
 
