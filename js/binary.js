@@ -71246,50 +71246,6 @@ TimePicker.prototype = {
 
 // if Track:js is already loaded, we need to initialize it
 if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
-;//
-//
-//
-// This script contains various functions used by our forms.
-// NOTE: Since you might not find reference to these functions within our javascripts you might delete some stuff from here without cleaning up forms.
-//
-function clearInputErrorField(id) {
-    var errorfield = document.getElementById(id);
-    if (errorfield) {
-        // we need to create a brand new passage element and replace to the existing one.
-        // IE6 does not treat null/empty string as empty innerHTML (which means it will appear at the IE browswer)
-        var parentNode = errorfield.parentNode;
-        if (parentNode) {
-            var passage = document.createElement('p');
-            passage.id = errorfield.id;
-            passage.className = errorfield.className;
-            parentNode.replaceChild(passage, errorfield);
-            return passage;
-        }
-        return errorfield;
-    }
-}
-
-function swithTabIfError(IsErrorFound)
-{
-    if (IsErrorFound)
-    {
-        $('.errorfield').each(function ()
-        {
-            if (this.innerHTML.length > 0)
-            {
-                MenuContent.trigger({
-                    'content_id': $(this).parents('[id*=-content]').attr('id')
-                });
-            }
-        });
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
 ;var Highchart = (function() {
   var chart, options, chart_forget, responseID, contract, contract_ended, contracts_for_send, history_send, entry_tick_barrier_drawn, initialized, chart_delayed, chart_subscribed, request, min_point, max_point, start_time, purchase_time, now_time, end_time, entry_tick_time, is_sold, sell_time, sell_spot_time, is_expired, exit_tick_time, exit_time;
   function init_once() {
@@ -72743,20 +72699,6 @@ var hide_payment_agents = function() {
         $('.payment_agent_methods').addClass('invisible');
     }
 };
-
-function get_login_page_url() {
-    var params = '';
-    try {
-        var lang = page.language();
-        if (!lang) {
-            throw new Error("failed to detect page language");
-        }
-        params += '?l=' + lang;
-    } catch (e) {
-        console.log("error while getting page language. " + e);
-    }
-    return 'https://' + page.settings.get('domains')['private'] + '/login' + params;
-}
 
 onLoad.queue_for_url(confirm_popup_action, 'my_accountws|confirm_popup');
 onLoad.queue_for_url(hide_payment_agents, 'cashier');
@@ -79628,7 +79570,7 @@ function generateBirthDate(country){
         year    = document.getElementById('dobyy');
 
     if (document.getElementById('dobdd').length > 1) return;
-    
+
     //days
     dropDownNumbers(days, 1, 31);
     //months
@@ -79813,14 +79755,6 @@ function generateState() {
       BinarySocket.send({ states_list: page.client.residence });
     }
     return;
-}
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
 }
 
 // returns true if internet explorer browser
@@ -92106,26 +92040,6 @@ function element_data_attrs(element) {
 }
 
 /**
- * Gets a DOM or jQuery element and reads its data attributes
- * and returns a URL encoded string (like a form data)
- * This is used where we store some data as element attributes.
- *
- * @param element: DOM or jQuery element
- * @return string
- */
-function element_data_attrs_as_form_params(element) {
-    var data =  element_data_attrs(element);
-    var params = [];
-    var key;
-    for (key in data) if (data.hasOwnProperty(key)) {
-        var val = data[key];
-        if (val === undefined) continue;
-        params.push( key + '=' + encodeURIComponent(val) );
-    }
-    return params.join('&');
-}
-
-/**
  * Converts a snake_cased string to a camelCased string.
  * The first character case not changed unless requested.
  *
@@ -92252,7 +92166,7 @@ function attach_inpage_popup(element) {
     return popups;
 }
 
-/** 
+/**
  * Calculate container width for chart as of now but can
  * be used to get current container width
  */
