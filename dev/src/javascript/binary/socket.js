@@ -167,6 +167,9 @@ function BinarySocketClass() {
                             send({balance:1, subscribe: 1});
                             send({landing_company_details: TUser.get().landing_company_name});
                             send({get_settings: 1});
+                            if(!page.client.is_virtual()) {
+                                send({get_self_exclusion: 1});
+                            }
                         }
                         sendBufferedSends();
                     }
@@ -181,6 +184,8 @@ function BinarySocketClass() {
                 } else if (type === 'landing_company_details') {
                     page.client.response_landing_company_details(response);
                     BinarySocket.send({reality_check: 1, passthrough: { for: 'init_rc' }});
+                } else if (type === 'get_self_exclusion') {
+                    SessionDurationLimit.exclusionResponseHandler(response);
                 } else if (type === 'payout_currencies' && response.echo_req.hasOwnProperty('passthrough') && response.echo_req.passthrough.handler === 'page.client') {
                     page.client.response_payout_currencies(response);
                 } else if (type === 'get_settings') {
