@@ -851,8 +851,7 @@ ul.checked li {
   border: 0;
   text-transform: uppercase;
   padding: 0px 10px;
-  word-break: break-all;
-  white-space: pre-wrap;
+  white-space: nowrap;
   font-weight: normal;
   font-size: .8em;
   line-height: 2em;
@@ -6114,6 +6113,11 @@ div.kineticjs-content {
   display: none;
 }
 
+.error-field {
+  border-color: #cc0033;
+  color: #cc0033;
+}
+
 /*
  * these styles are for trade analysis and will be removed
  *
@@ -6250,40 +6254,34 @@ div.kineticjs-content {
     padding-right: 5px !important;
   }
 }
-.flex-table-container #statement-table .flex-tr > th:last-child, .flex-table-container #statement-table .flex-tr > td:last-child {
+.flex-table-container #statement-table .flex-tr > th.details, .flex-table-container #statement-table .flex-tr > td.details {
   display: none !important;
 }
 @media (max-width: 600px) {
-  .flex-table-container #statement-table .flex-tr > th:nth-child(4) {
+  .flex-table-container #statement-table .flex-tr > th.desc, .flex-table-container #statement-table .flex-tr > td.desc {
     display: none !important;
   }
-  .flex-table-container #statement-table .flex-tr > td:nth-child(4) {
-    display: none !important;
-  }
-  .flex-table-container #statement-table .flex-tr > th:last-child, .flex-table-container #statement-table .flex-tr > td:last-child {
+  .flex-table-container #statement-table .flex-tr > th.details, .flex-table-container #statement-table .flex-tr > td.details {
     display: table-cell !important;
   }
-  .flex-table-container #statement-table .flex-tr > th:last-child .button, .flex-table-container #statement-table .flex-tr > td:last-child .button {
+  .flex-table-container #statement-table .flex-tr > th.details .button, .flex-table-container #statement-table .flex-tr > td.details .button {
     padding: 8px 15px;
   }
   .flex-table-container #statement-table .flex-tr .flex-tr-child {
     font-size: 12px;
   }
 }
-.flex-table-container #profit-table .flex-tr > th:last-child, .flex-table-container #profit-table .flex-tr > td:last-child {
+.flex-table-container #profit-table .flex-tr > th.details, .flex-table-container #profit-table .flex-tr > td.details {
   display: none !important;
 }
 @media (max-width: 600px) {
-  .flex-table-container #profit-table .flex-tr > th:nth-child(3) {
+  .flex-table-container #profit-table .flex-tr > th.contract, .flex-table-container #profit-table .flex-tr > td.contract {
     display: none !important;
   }
-  .flex-table-container #profit-table .flex-tr > td:nth-child(3) {
-    display: none !important;
-  }
-  .flex-table-container #profit-table .flex-tr > th:last-child, .flex-table-container #profit-table .flex-tr > td:last-child {
+  .flex-table-container #profit-table .flex-tr > th.details, .flex-table-container #profit-table .flex-tr > td.details {
     display: table-cell !important;
   }
-  .flex-table-container #profit-table .flex-tr > th:last-child .button, .flex-table-container #profit-table .flex-tr > td:last-child .button {
+  .flex-table-container #profit-table .flex-tr > th.details .button, .flex-table-container #profit-table .flex-tr > td.details .button {
     padding: 8px 15px;
   }
   .flex-table-container #profit-table .flex-tr .flex-tr-child {
@@ -6399,18 +6397,6 @@ button:disabled {
 }
 .kv-pairs td {
   border: none;
-}
-
-#temp_notice_msg {
-  margin: 0 0 10px 0;
-}
-#temp_notice_msg #close_temp_msg {
-  position: absolute;
-  color: red;
-  font-size: .8em;
-  cursor: pointer;
-  top: 2px;
-  right: 2px;
 }
 
 /* Language based rules */

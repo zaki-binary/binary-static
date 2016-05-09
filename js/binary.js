@@ -68962,7 +68962,6 @@ var GTM = (function() {
             pjax      : page.is_loaded_by_pjax,
             url       : document.URL,
             event     : 'page_load',
-            is_legacy : 'false',
         };
         if(page.client.is_logged_in) {
             data_layer_info['visitorID'] = page.client.loginid;
@@ -68980,15 +68979,6 @@ var GTM = (function() {
     };
 
     var push_data_layer = function(data) {
-        // follow the legacy method for not converted pages
-        var legacy_pages = ['affiliate_signup', 'cashier', 'payment'];
-        var regex = new RegExp(legacy_pages.join('|'), 'i');
-        if(regex.test(location.pathname)) {
-            push_data_layer_legacy();
-            return;
-        }
-
-        // new implementation (all pages except the above list)
         if(!(/logged_inws/i).test(window.location.pathname)) {
             var info = gtm_data_layer_info(data && typeof(data) === 'object' ? data : null);
             dataLayer[0] = info.data;
@@ -69000,48 +68990,6 @@ var GTM = (function() {
     var page_title = function() {
         var t = /^.+[:-]\s*(.+)$/.exec(document.title);
         return t && t[1] ? t[1] : document.title;
-    };
-
-    // Legacy functions (To be removed once all pages use new implementation above)
-    var gtm_data_layer_info_legacy = function() {
-        var gtm_data_layer_info = [];
-        $('.gtm_data_layer').each(function() {
-            var gtm_params = {};
-            var event_name = '';
-            $(this).children().each(function() {
-                var tag = $(this).attr("id");
-                var value = $(this).html();
-
-                if ($(this).attr("data-type") == "json") {
-                    value = JSON.parse($(this).html());
-                }
-
-                if (tag == "event") {
-                    event_name = value;
-                } else {
-                    gtm_params[tag] = value;
-                }
-            });
-            gtm_params['url'] = document.URL;
-            gtm_params['is_legacy'] = 'true';
-
-            var entry = {};
-            entry['params'] = gtm_params;
-            entry['event'] = event_name;
-            gtm_data_layer_info.push(entry);
-        });
-
-        return gtm_data_layer_info;
-    };
-
-    var push_data_layer_legacy = function() {
-        var info = gtm_data_layer_info_legacy();
-        for (var i=0;i<info.length;i++) {
-            dataLayer[0] = info[i].params;
-
-            dataLayer.push(info[i].params);
-            dataLayer.push({"event": info[i].event});
-        }
     };
 
     var event_handler = function(get_settings) {
@@ -80068,10 +80016,12 @@ pjax_config_page('/terms-and-conditions', function() {
     };
 });
 
-pjax_config_page('login|loginid_switch', function() {
+pjax_config_page('\/login|\/loginid_switch', function() {
     return {
         onLoad: function() {
-            window.location.href = page.url.url_for('oauth2/authorize', 'app_id=binarycom');
+            if(isNotBackoffice()) {
+                window.location.href = page.url.url_for('oauth2/authorize', 'app_id=binarycom');
+            }
         }
     };
 });
@@ -83684,6 +83634,7 @@ var Durations = (function(){
             dateFormat: 'yy-mm-dd'
         });
 
+        validateMinDurationAmount();
         // we need to call it here as for days we need to show absolute barriers
         Barriers.display();
     };
@@ -83783,6 +83734,17 @@ var Durations = (function(){
         Barriers.display();
     };
 
+    var validateMinDurationAmount = function(){
+        var durationAmountElement = document.getElementById('duration_amount'),
+            durationMinElement    = document.getElementById('duration_minimum');
+        if(!isVisible(durationAmountElement) || !isVisible(durationMinElement)) return;
+        if(durationAmountElement.value * 1 < durationMinElement.textContent * 1) {
+            durationAmountElement.classList.add('error-field');
+        } else {
+            durationAmountElement.classList.remove('error-field');
+        }
+    };
+
     return {
         display: displayDurations,
         displayEndTime: displayEndTime,
@@ -83793,10 +83755,10 @@ var Durations = (function(){
         trading_times: function(){ return trading_times; },
         select_amount: function(a){ selected_duration.amount = a; },
         select_unit: function(u){ selected_duration.unit = u; } ,
-        selectEndDate: selectEndDate       
+        selectEndDate: selectEndDate,
+        validateMinDurationAmount: validateMinDurationAmount
     };
 })();
-
 ;/*
  * TradingEvents object contains all the event handler function required for
  * websocket trading page
@@ -83860,6 +83822,7 @@ var TradingEvents = (function () {
             }
             make_price_request = 1;
             Defaults.remove('expiry_date', 'expiry_time', 'end_date');
+            Durations.validateMinDurationAmount();
         }
 
         return make_price_request;
@@ -83991,10 +83954,12 @@ var TradingEvents = (function () {
             // jquery needed for datepicker
             $('#duration_amount').on('input', debounce(function (e) {
                 triggerOnDurationChange(e);
+                Durations.validateMinDurationAmount();
                 inputEventTriggered = true;
             }));
             $('#duration_amount').on('change', debounce(function (e) {
                 // using Defaults, to update the value by datepicker if it was emptied by keyboard (delete)
+                Durations.validateMinDurationAmount();
                 if(inputEventTriggered === false || !Defaults.get('duration_amount'))
                     triggerOnDurationChange(e);
                 else
@@ -85838,7 +85803,6 @@ WSTickDisplay.updateChart = function(data, contract) {
 		BinarySocket.init({
 			onmessage: function(msg){
 				Message.process(msg);
-				showRandomRenamedMsg(msg);				// temporary,
 			},
 			onclose: function(){
 				processMarketUnderlying();
@@ -85913,10 +85877,13 @@ function BinarySocketClass() {
         timeouts = {},
         req_number = 0,
         socketUrl;
-        if(window.location.host == 'www.binary.com'){
-          socketUrl = "wss://ws.binaryws.com/websockets/v3";
-        } else{
-          socketUrl = "wss://"+window.location.host+"/websockets/v3";
+        var host = window.location.host;
+        if((/www\.binary\.com/i).test(host)) {
+            socketUrl = 'wss://ws.binaryws.com/websockets/v3';
+        } else if((/binaryqa/i).test(host)) {
+            socketUrl = 'wss://' + host + '/websockets/v3';
+        } else {
+            socketUrl = 'wss://www2.binary.com/websockets/v3';
         }
 
     if (page.language()) {
@@ -89889,34 +89856,6 @@ var ProfitTableUI = (function(){
         cleanTableContent: clearTableContent
     };
 }());
-;// temporary script to show message about Random renamed to Volatile on trading page
-
-function showRandomRenamedMsg(msg) {
-    if (JSON.parse(msg.data).msg_type !== 'active_symbols') {
-        return;
-    }
-    var hasRandom = false;
-    Object.keys(Symbols.markets())
-        .forEach(function(s) {
-            if (s === 'volidx') {
-                hasRandom = true;
-            }
-        });
-
-    if(page.language().toLowerCase() === 'id') {
-        $('#temp_notice_msg a').attr('href', 'https://blog.binary.com/indeks-random-berganti-nama-menjadi-indeks-volatilitas/');
-    }
-
-    var tempMsgKey = 'hide_temp_msg';
-    if (SessionStore.get(tempMsgKey) || !hasRandom) {
-        $('#temp_notice_msg').addClass('invisible');
-    }
-
-    $('#close_temp_msg').click(function() {
-        SessionStore.set(tempMsgKey, '1');
-        $('#temp_notice_msg').addClass('invisible');
-    });
-}
 ;pjax_config_page("new_account/realws", function(){
   return {
     onLoad: function() {
