@@ -1,5 +1,5 @@
 !!! 5
-%html
+%html{:manifest => url_for('empty.appcache')}
   = include('layouts/default/head')
   - my $lang3 = stash->{language};
   %body.$lang3

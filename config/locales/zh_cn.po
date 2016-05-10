@@ -3,9 +3,10 @@ msgstr ""
 "Project-Id-Version: Chinese (China) (Binary)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2016-05-04 08:55+0000\n"
-"Last-Translator: Freddy Hew <hewfreddy@gmail.com>\n"
-"Language-Team: Chinese (China) <https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
+"PO-Revision-Date: 2016-05-09 21:46+0000\n"
+"Last-Translator: Sittie Hadjirah Sevilla <sittiebaser@gmail.com>\n"
+"Language-Team: Chinese (China) "
+"<https://hosted.weblate.org/projects/binary/static/zh_CN/>\n"
 "Language: zh_cn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1766,7 +1767,7 @@ msgstr "一旦您点击\"买入\"，交易将会显示在您的账户中。该�
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/asian.html.tt:10
 msgid "Asian contracts will be refunded at the purchase price if the contract doesn't end within 5 minutes."
-msgstr ""
+msgstr "亚洲合约如果没在 5 分钟内结束，购入价格将退还。"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/winning/asian.html.tt:1
 msgid "Asian options settle by comparing the <strong>last tick</strong> with the average spot over the period."
@@ -3579,16 +3580,18 @@ msgid "Demonstrate the ability to think / act quickly and multi-task as needed t
 msgstr "按需迅速展示并同时运行思想/行动能力，执行有效的活动"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/legal/datafeed.html.tt:10
-#, fuzzy
 #| msgid "Our servers apply a tick filtering algorithm. The purpose of this filtering algorithm is to strip the feed of stray ticks. Stray ticks are ticks that manifestly fall outside of the current trading range of the market; such ticks are often due to communication delays with the exchanges or banks that provide quotes, human error, or database problems at any point between the originator of the quote and our servers."
 msgid "Depending on the quality of the data feeds received from our feed providers, our servers might apply a tick filtering algorithm. The purpose of this filtering algorithm is to strip the feed of stray ticks. Stray ticks are ticks that manifestly fall outside of the current trading range of the market; such ticks are often due to communication delays with the exchanges or banks that provide quotes, human error, or database problems at any point between the originator of the quote and our servers."
-msgstr "我们的服务器使用跳动点过滤算法。过滤算法的目标是去除离散价格。离散跳动点是明显超出市场现有交易区间的跳动点。造成这类跳动点的主要原因包括：提供报价的交易所或者银行通信延迟、报价源头与我们服务器之间的人为因素或数据库问题。"
+msgstr ""
+"我们的服务器可能会根据数据提供者所提供的数据品质决定使用跳动点过滤算法。过滤算法的目标是去除离散价格。离散跳动点是明显超出市场现有交易区间的跳动点。造成这"
+"类跳动点的主要原因包括：提供报价的交易所或者银行通信延迟、报价源头与我们服务器之间的人为因素或数据库问题。"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/legal/datafeed.html.tt:17
-#, fuzzy
 #| msgid "Once stray ticks have been removed, a very short-term smoothing algorithm is applied to the data feed. This smoothing algorithm removes a little of the \"random noise\" surrounding the data feed, and ensures that clients who buy path-dependent contracts (such as the one-touch or barrier-range contracts) will not have their contracts knocked-in or knocked-out by random short-term market noise that does not reflect the true market price."
 msgid "Depending on the quality of the feeds received from our feed providers, our servers might also apply a very short-term smoothing algorithm to the data feed. This smoothing algorithm removes a little of the \"random noise\" surrounding the data feed, and ensures that clients who buy path-dependent contracts (such as the one-touch or barrier-range contracts) will not have their contracts knocked-in or knocked-out by random short-term market noise that does not reflect the true market price."
-msgstr "一旦偏离价位被清除，极短期的平滑算法就会应用至数据源。平滑算法去掉了数据源的少量“随机噪声”并确保购买固定路径合约（比如一触即付或价格范围合同）的客户不会让未反应真实市场价格的随机短期市场噪声启动或取消其合约。"
+msgstr ""
+"我们的服务器也可能会根据数据提供者所提供的数据品质决定对数据源使用极短期的平滑算法。平滑算法去掉了数据源的少量“随机噪声”并确保购买固定路径合约（比如一触"
+"即付或价格范围合同）的客户不会让未反应真实市场价格的随机短期市场噪声启动或取消其合约。"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:562
 #: /home/git/regentmarkets/bom-backoffice/f_manager_confodeposit.cgi:273
@@ -3724,7 +3727,7 @@ msgstr "与其他数据源的差异"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/digits.html.tt:7
 msgid "Digit contracts will be refunded at the purchase price if the contract doesn't end within 5 minutes."
-msgstr ""
+msgstr "数字合约如果没在 5 分钟内结束，将退还购入价格。"
 
 #. (@range)
 #: /home/git/regentmarkets/bom/lib/BOM/Product/Pricing/Engine/Digits.pm:57
@@ -4046,10 +4049,9 @@ msgid "Ends Between/Ends Outside trades"
 msgstr "“收于范围之内/之外”的交易"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/endsinout.html.tt:14
-#, fuzzy
 #| msgid "Contracts will be refunded at the purchase price if the following conditions occur: (1) there are less than 2 ticks between the start and end times, or (2) for contracts of tick duration, if the contract doesn't end within 5 minutes."
 msgid "Ends In/Out contracts will be refunded at the purchase price if there are less than 2 ticks between the start and end times."
-msgstr "如果出现以下情况，合约购入价将全额退还：（1）开始和结束期间价格跳动次数少于2，或（2）价格跳动期类型合约，如果合约没在5分钟内结束。"
+msgstr "如果开始和结束期间价格跳动次数少于2，收于范围之内/之外合约购入价将全额退还。"
 
 #: /home/git/translations/binary-static-www2/src/templates/haml/static/job_details.html.haml:1
 msgid "Engage in data mining using SQL databases, R/S-Plus, OLAP and other analytical tools"
@@ -4137,7 +4139,7 @@ msgstr "偶/奇"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/evenodd.html.tt:6
 msgid "Even/Odd contracts will be refunded at the purchase price if the contract doesn't end within 5 minutes."
-msgstr ""
+msgstr "奇/偶合约如果没在 5 分钟内结束，将退还购入价格。"
 
 #: /home/git/translations/binary-static-www2/src/templates/haml/get_started/spread_bets.html.haml:1
 msgid "Example:"
@@ -4942,10 +4944,9 @@ msgid "Higher/Lower"
 msgstr "“高于/低于”"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/higherlower.html.tt:6
-#, fuzzy
 #| msgid "Contracts will be refunded at the purchase price if the following conditions occur: (1) there are less than 2 ticks between the start and end times, or (2) for contracts of tick duration, if the contract doesn't end within 5 minutes."
 msgid "Higher/Lower contracts will be refunded at the purchase price if there are less than 2 ticks between the start and end times."
-msgstr "如果出现以下情况，合约购入价将全额退还：（1）开始和结束期间价格跳动次数少于2，或（2）价格跳动期类型合约，如果合约没在5分钟内结束。"
+msgstr "如果开始和结束期间价格跳动次数少于2，高于/低于合约购入价将全额退还。"
 
 #: /home/git/translations/binary-static-www2/src/templates/haml/get_started/glossary.html.haml:1
 msgid "Higher/Lower trades"
@@ -7756,7 +7757,7 @@ msgstr "大于/小于"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/overunder.html.tt:6
 msgid "Over/Under contracts will be refunded at the purchase price if the contract doesn't end within 5 minutes."
-msgstr ""
+msgstr "大于/小于合约如果没在 5 分钟内结束，将退还购入价格。"
 
 #: /home/git/regentmarkets/bom-app/lib/BOM/View/Charting.pm:427
 msgid "Overlay"
@@ -8980,10 +8981,11 @@ msgid "Rise/Fall contracts of less than 5 minutes duration are only available wh
 msgstr "只有您将开始时间选择为“现在”时，才可交易期限短于5分钟的“上涨/下跌”合约。"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/risefall.html.tt:18
-#, fuzzy
 #| msgid "Contracts will be refunded at the purchase price if the following conditions occur: (1) there are less than 2 ticks between the start and end times, or (2) for contracts of tick duration, if the contract doesn't end within 5 minutes."
 msgid "Rise/Fall contracts will be refunded at the purchase price if the following conditions occur: (1) there are less than 2 ticks between the start and end times, or (2) for contracts of tick duration, if the contract doesn't end within 5 minutes, or (3) for contracts starting in the future, if there are no ticks in the 5 minutes before the contract's start time."
-msgstr "如果出现以下情况，合约购入价将全额退还：（1）开始和结束期间价格跳动次数少于2，或（2）价格跳动期类型合约，如果合约没在5分钟内结束。"
+msgstr ""
+"如果出现以下情况，上涨/下跌合约购入价将全额退还：（1）开始和结束期间价格跳动次数少于2，或（2）价格跳动期类型合约，如果合约没在5分钟内结束，或（3）未"
+"来开始类型合约，如果合约开始时间前5分钟内价格没跳动。"
 
 #: /home/git/translations/binary-static-www2/src/templates/haml/get_started/glossary.html.haml:1
 msgid "Rise/Fall trades"
@@ -9742,10 +9744,9 @@ msgid "Stays Between/Goes Outside trades"
 msgstr "“保持在范围内/超出范围”的交易"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/staysinout.html.tt:10
-#, fuzzy
 #| msgid "Contracts will be refunded at the purchase price if the following conditions occur: (1) there are less than 2 ticks between the start and end times, or (2) for contracts of tick duration, if the contract doesn't end within 5 minutes."
 msgid "Stays In/Goes Out Contracts will be refunded at the purchase price if there are less than 2 ticks between the start and end times."
-msgstr "如果出现以下情况，合约购入价将全额退还：（1）开始和结束期间价格跳动次数少于2，或（2）价格跳动期类型合约，如果合约没在5分钟内结束。"
+msgstr "如果开始和结束期间价格跳动次数少于2，“保持在范围内/超出范围”合约购入价将全额退还。"
 
 #: /home/git/regentmarkets/bom-app/bin/GenerateStaticData.pm:358
 msgid "Step"
@@ -10630,10 +10631,9 @@ msgid "The expiry price is the price of the underlying when the contract expires
 msgstr "到期价格为合约到期时标的产品的价格。"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/legal/datafeed.html.tt:13
-#, fuzzy
 #| msgid "The filtering algorithm is based on a mathematical formula similar to the \"Bollinger Bands\" volatility system - i.e., short-term volatility bands are determined around the present market value, and ticks that are manifestly outside of such bands are removed."
 msgid "The filtering algorithm may for example be similar to the \"Bollinger Bands\" volatility system - i.e., short-term volatility bands are determined around the present market value, and ticks that are manifestly outside of such bands are removed."
-msgstr "滤波算法根据一个类似于“布林带”波动性系统的数学公式得出，即短期波动区间位于当前的市场价值附近，且不考虑明显位于该区间之外的价格。"
+msgstr "例如滤波算法可能类似于“布林带”波动率系统，即短期波动区间位于当前的市场价值附近，且不考虑明显位于该区间之外的价格。"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/legal/terms_and_conditions.html.tt:18
 msgid "The financial trading services contained within this site are only suitable for Clients who are able to bear the loss of all the money they invest and who understand and have experience of the risks involved in the acquisition of financial contracts."
@@ -11296,10 +11296,9 @@ msgid "Touch/No Touch"
 msgstr "触及/未触及"
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/bet/explanation/details/touchnotouch.html.tt:11
-#, fuzzy
 #| msgid "Contracts will be refunded at the purchase price if the following conditions occur: (1) there are less than 2 ticks between the start and end times, or (2) for contracts of tick duration, if the contract doesn't end within 5 minutes."
 msgid "Touch/No Touch contracts will be refunded at the purchase price if there are less than 2 ticks between the start and end times."
-msgstr "如果出现以下情况，合约购入价将全额退还：（1）开始和结束期间价格跳动次数少于2，或（2）价格跳动期类型合约，如果合约没在5分钟内结束。"
+msgstr "如果开始和结束期间价格跳动次数少于2，触及/未触及合约购入价将全额退还。"
 
 #: /home/git/translations/binary-static-www2/src/templates/haml/get_started/types_of_trades.html.haml:1
 msgid "Touch/No touch trades"
@@ -12344,7 +12343,9 @@ msgstr "我们鼓励新创意，不鼓励保守、老套的想法。您可以按
 
 #: /home/git/translations/binary-static-www2/src/templates/toolkit/legal/conflicts_policy.html.tt:22
 msgid "Where our arrangements to manage conflicts are not or cannot be sufficient to be reasonably confident that risks of damage to a client’s interest will be prevented we aim to disclose the general nature or sources of conflicts. This is aimed at allowing the client the opportunity to consider whether to ask for more information by sending an email to compliance<b></b>@<i></i>binary.com, or to continue with the service; we do not aim to provide detailed, highly specific or comprehensive information."
-msgstr "我们致力于提供完善的管理措施以尽力防止客户利益亏损，其中若有不到之处，我们会将冲突起源的一般性质揭露。目的是要让客户有机会考虑是否需要通过发送电子邮件到compliance<b> 1</b> 2@<i> 3</i> 4binary.com索取更详细的信息或继续使用该项服务。我们并不旨在提供详尽、高度具体或全面性信息。"
+msgstr ""
+"我们致力于提供完善的管理措施以尽力防止客户利益亏损，其中若有不到之处，我们会将冲突起源的一般性质揭露。目的是要让客户有机会考虑是否需要通过发送电子邮件到c"
+"ompliance<b></b>@<i></i>binary.com索取更详细的信息或继续使用该项服务。我们并不旨在提供详尽、高度具体或全面性信息。"
 
 #: /home/git/translations/binary-static-www2/src/templates/haml/static/careers.html.haml:1
 msgid "Where supportive colleagues are like a second family."
