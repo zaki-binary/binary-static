@@ -5,7 +5,7 @@ var StatementUI = (function(){
 
     function createEmptyStatementTable(){
         var header = [
-            Content.localize().textPurchaseDate,
+            Content.localize().textDate,
             Content.localize().textRef,
             Content.localize().textAction,
             Content.localize().textDescription,
@@ -37,14 +37,11 @@ var StatementUI = (function(){
     function createStatementRow(transaction){
         var action = transaction["action_type"];
         var dateObj = new Date(transaction["transaction_time"] * 1000);
-        if (action === 'sell') {
-            dateObj = new Date(transaction["purchase_time"] * 1000);
-        }
         action = StringUtil.toTitleCase(action);
 
         var momentObj = moment.utc(dateObj);
         var dateStr = momentObj.format("YYYY-MM-DD");
-        var timeStr = momentObj.format("HH:mm:ss");
+        var timeStr = momentObj.format("HH:mm:ss") + ' GMT';
 
         var date = dateStr + "\n" + timeStr;
         var ref = transaction["transaction_id"];

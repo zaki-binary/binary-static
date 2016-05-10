@@ -179,7 +179,7 @@ var Durations = (function(){
     };
 
     var displayEndTime = function(){
-        var current_moment = moment().add(5, 'minutes').utc();
+        var current_moment = moment(window.time).add(5, 'minutes').utc();
         var expiry_date = Defaults.get('expiry_date') || current_moment.format('YYYY-MM-DD'),
             expiry_time = Defaults.get('expiry_time') || current_moment.format('HH:mm');
         document.getElementById('expiry_date').value = expiry_date;
@@ -235,7 +235,7 @@ var Durations = (function(){
         // jquery for datepicker
         var amountElement = $('#duration_amount');
         if (unit.value === 'd') {
-            var tomorrow = new Date();
+            var tomorrow = window.time ? new Date(window.time) : new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
 
             amountElement.datepicker({
@@ -247,7 +247,7 @@ var Durations = (function(){
                     }
                     else{
                         var date = new Date(value);
-                        var today = new Date();
+                        var today = window.time ? new Date(window.time) : new Date();
                         dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
                     }                    
                     amountElement.val(dayDiff);
@@ -258,6 +258,13 @@ var Durations = (function(){
             amountElement.datepicker("destroy");
         }
 
+        $('.pickadate').datepicker('destroy');
+        $('.pickadate').datepicker({
+            minDate: window.time ? new Date(window.time) : new Date(),
+            dateFormat: 'yy-mm-dd'
+        });
+
+        validateMinDurationAmount();
         // we need to call it here as for days we need to show absolute barriers
         Barriers.display();
     };
@@ -339,7 +346,7 @@ var Durations = (function(){
         var expiry_time = document.getElementById('expiry_time');
         $('#expiry_date').val(end_date);
         Defaults.set('expiry_date', end_date);
-        if(moment(end_date).isAfter(moment(),'day')){
+        if(moment(end_date).isAfter(moment(window.time),'day')){
             Durations.setTime('');
             Defaults.remove('expiry_time');
             StartDates.setNow();
@@ -357,6 +364,17 @@ var Durations = (function(){
         Barriers.display();
     };
 
+    var validateMinDurationAmount = function(){
+        var durationAmountElement = document.getElementById('duration_amount'),
+            durationMinElement    = document.getElementById('duration_minimum');
+        if(!isVisible(durationAmountElement) || !isVisible(durationMinElement)) return;
+        if(durationAmountElement.value * 1 < durationMinElement.textContent * 1) {
+            durationAmountElement.classList.add('error-field');
+        } else {
+            durationAmountElement.classList.remove('error-field');
+        }
+    };
+
     return {
         display: displayDurations,
         displayEndTime: displayEndTime,
@@ -367,7 +385,7 @@ var Durations = (function(){
         trading_times: function(){ return trading_times; },
         select_amount: function(a){ selected_duration.amount = a; },
         select_unit: function(u){ selected_duration.unit = u; } ,
-        selectEndDate: selectEndDate       
+        selectEndDate: selectEndDate,
+        validateMinDurationAmount: validateMinDurationAmount
     };
 })();
-

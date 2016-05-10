@@ -58,7 +58,7 @@ var SelfExlusionWS = (function() {
 
         if('error' in response) {
             if (response.error.code === 'ClientSelfExclusion') {
-              BinarySocket.send({logout: 1});
+                page.client.send_logout_request();
             }
             if('message' in response.error) {
                 showPageError(response.error.message, true);
@@ -113,6 +113,7 @@ var SelfExlusionWS = (function() {
         }
         else {
             showFormMessage(text.localize('Your changes have been updated.'), true);
+            page.client.set_storage_value('session_start', parseInt(moment().valueOf() / 1000)); // used to handle session duration limit
             getRequest();
         }
     };
@@ -249,14 +250,10 @@ var SelfExlusionWS = (function() {
 }());
 
 
-pjax_config_page("user/self_exclusionws", function() {
+pjax_config_page_require_auth("user/self_exclusionws", function() {
     return {
         onLoad: function() {
-            if (page.client.redirect_if_logout()) {
-                return;
-            }
-
-          BinarySocket.init({
+            BinarySocket.init({
                 onmessage: function(msg){
                     var response = JSON.parse(msg.data);
                     if (response) {

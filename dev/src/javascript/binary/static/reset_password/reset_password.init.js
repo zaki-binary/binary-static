@@ -93,9 +93,9 @@ var ResetPassword = (function () {
                 // special handling as backend return inconsistent format
                 var errMsg;
                 if (response.error.code === 'InputValidationFailed') {
-                    errMsg = resetErrorTemplate.replace('[_1]', text.localize('Token has expired.'));
+                    errMsg = text.localize(resetErrorTemplate).replace('[_1]', text.localize('Token has expired.'));
                 } else {
-                    errMsg = resetErrorTemplate.replace('[_1]', text.localize(response.error.message));
+                    errMsg = text.localize(resetErrorTemplate).replace('[_1]', text.localize(response.error.message));
                 }
 
                 $('#reset-error-msg').text(errMsg);
@@ -104,7 +104,7 @@ var ResetPassword = (function () {
                     .text(text.localize('Your password has been successfully reset. ' +
                         'Please log into your account using your new password.'));
                 window.setTimeout(function () {
-                    window.location.href = page.url.url_for('login');
+                    Login.redirect_to_login();
                 }, 5000);
             }
         }
@@ -141,6 +141,7 @@ var ResetPassword = (function () {
     }
 
     function init() {
+        $('#reset_passwordws').removeClass('invisible');
         Content.populate();
         generateBirthDate();
         var $pmContainer = $('#password-meter-container');

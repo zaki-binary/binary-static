@@ -7,7 +7,7 @@ var ProfitTableUI = (function(){
 
     function createEmptyTable(){
         var header = [
-            Content.localize().textPurchaseDate,
+            Content.localize().textDate,
             Content.localize().textRef,
             Content.localize().textContract,
             Content.localize().textPurchasePrice,
@@ -44,21 +44,21 @@ var ProfitTableUI = (function(){
 
     function updateFooter(transactions){
         var accTotal = document.querySelector("#pl-day-total > .pl").textContent;
-        accTotal = parseFloat(accTotal);
+        accTotal = parseFloat(accTotal.replace(/,/g, ''));
         if (isNaN(accTotal)) {
             accTotal = 0;
         }
 
         var currentTotal = transactions.reduce(function(previous, current){
-            var buyPrice = addComma(Number(parseFloat(current["buy_price"])));
-            var sellPrice = addComma(Number(parseFloat(current["sell_price"])));
+            var buyPrice = Number(parseFloat(current["buy_price"]));
+            var sellPrice = Number(parseFloat(current["sell_price"]));
             var pl = sellPrice - buyPrice;
             return previous + pl;
         }, 0);
 
         var total = accTotal + currentTotal;
 
-        $("#pl-day-total > .pl").text(Number(total).toFixed(2));
+        $("#pl-day-total > .pl").text(addComma(Number(total).toFixed(2)));
 
         var subTotalType = (total >= 0 ) ? "profit" : "loss";
         $("#pl-day-total > .pl").removeClass("profit").removeClass("loss");
@@ -69,8 +69,8 @@ var ProfitTableUI = (function(){
         var buyMoment = moment.utc(transaction["purchase_time"] * 1000);
         var sellMoment = moment.utc(transaction["sell_time"] * 1000);
 
-        var buyDate = buyMoment.format("YYYY-MM-DD") + "\n" + buyMoment.format("HH:mm:ss");
-        var sellDate = sellMoment.format("YYYY-MM-DD") + "\n" + sellMoment.format("HH:mm:ss");
+        var buyDate = buyMoment.format("YYYY-MM-DD") + "\n" + buyMoment.format("HH:mm:ss") + ' GMT';
+        var sellDate = sellMoment.format("YYYY-MM-DD") + "\n" + sellMoment.format("HH:mm:ss") + ' GMT';
 
         var ref = transaction["transaction_id"];
         var buyPrice = Number(parseFloat(transaction["buy_price"])).toFixed(2);

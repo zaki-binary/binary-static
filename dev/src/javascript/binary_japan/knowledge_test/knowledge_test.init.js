@@ -39,7 +39,7 @@ var KnowledgeTest = (function() {
         // compute score
         for (var k in submitted) {
             if (submitted.hasOwnProperty(k)) {
-                resultScore += submitted[k] === randomPicksAnswer[k] ? 1 : 0;
+                resultScore += (submitted[k] === randomPicksAnswer[k] ? 1 : 0);
             }
         }
         KnowledgeTestData.sendResult(resultScore);
@@ -84,7 +84,7 @@ var KnowledgeTest = (function() {
         var lastTestDate = new Date(lastTestEpoch * 1000);
 
         var msgTemplate =
-            '{JAPAN ONLY}Dear customer, you are not allowed to take knowledge test until [_1].\nLast test taken at [_2].';
+            '{JAPAN ONLY}Dear customer, you are not allowed to take knowledge test until [_1]. Last test taken at [_2].';
 
         var msg = text.localize(msgTemplate)
             .replace('[_1]', nextTestDate.toUTCString())

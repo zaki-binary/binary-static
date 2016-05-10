@@ -636,6 +636,26 @@ ul.checked li {
   background-color: lightyellow;
 }
 
+.tooltip-content {
+  display: none;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+
+*:hover > .tooltip-content {
+  display: inline;
+}
+
+#session_limit .limit_message {
+  margin: 30px auto;
+}
+
 *,
 *:after,
 *:before {
@@ -821,27 +841,7 @@ ul.checked li {
 #header #binary-logo-text {
   margin-top: 10px;
 }
-#header #login-form, #header #loginid-switch-form {
-  text-align: left;
-}
-#header #login-form #login-links, #header #loginid-switch-form #login-links {
-  margin: 5px 0 0 0;
-  display: block;
-}
-#header #login-form input, #header #loginid-switch-form input {
-  display: inline;
-  border-radius: 4px;
-  font-size: 11px;
-  margin: 0 0 0 5px;
-}
-#header #login-form input[type=text], #header #login-form input[type=password], #header #loginid-switch-form input[type=text], #header #loginid-switch-form input[type=password] {
-  background: #FEFEFE;
-  border: 0;
-  width: 50px;
-  color: #000000;
-  padding: 4px;
-}
-#header #login-form input[type=submit], #header #loginid-switch-form input[type=submit] {
+#header #client-logged-out #btn_login {
   color: white;
   text-decoration: none;
   text-align: center;
@@ -854,18 +854,22 @@ ul.checked li {
   letter-spacing: 0.75px;
   border: 0;
   text-transform: uppercase;
-  padding: 5px 3px;
-  word-break: break-all;
+  padding: 0px 10px;
   white-space: nowrap;
-  max-width: 100px;
-  letter-spacing: 0;
+  font-weight: normal;
+  font-size: .8em;
+  line-height: 2em;
+  margin: 0.8em 0;
 }
-#header #login-form input[type=submit]:visited, #header #loginid-switch-form input[type=submit]:visited {
+#header #client-logged-out #btn_login:visited {
   color: white;
 }
-#header #login-form input[type=submit]:hover, #header #login-form input[type=submit]:active, #header #loginid-switch-form input[type=submit]:hover, #header #loginid-switch-form input[type=submit]:active {
+#header #client-logged-out #btn_login:hover, #header #client-logged-out #btn_login:active {
   text-decoration: none;
   background-color: #14602B;
+}
+#header #client-logged-out, #header #loginid-switch-form {
+  text-align: left;
 }
 #header a#lost-password, #header a#register {
   display: inline-block;
@@ -1020,7 +1024,7 @@ ul.checked li {
   display: inline-block;
   top: 3px;
 }
-#footer #footer-regulatory #appcache-reload-message, #footer #footer-regulatory #ratelimit-error-message {
+#footer #footer-regulatory #ratelimit-error-message {
   display: none;
   position: fixed;
   top: 0;
@@ -1029,12 +1033,12 @@ ul.checked li {
   z-index: 999;
   text-align: center;
 }
-#footer #footer-regulatory #appcache-reload-message .message, #footer #footer-regulatory #ratelimit-error-message .message {
+#footer #footer-regulatory #ratelimit-error-message .message {
   margin: 12px;
   font-style: italic;
   color: #cc0033;
 }
-#footer #footer-regulatory #appcache-reload-message .message a, #footer #footer-regulatory #ratelimit-error-message .message a {
+#footer #footer-regulatory #ratelimit-error-message .message a {
   color: #2e8836;
 }
 #footer #footer-last {
@@ -1670,6 +1674,10 @@ abbr {
   width: 10%;
   margin: 0 1em;
 }
+.home-content .mena {
+  width: 10%;
+  margin: 0 1em;
+}
 .home-content .xcta {
   position: relative;
   bottom: 30px;
@@ -1766,6 +1774,9 @@ abbr {
 @media screen and (max-width: 480px) {
   .home-content .small-image {
     width: 30%;
+  }
+  .home-content .mena {
+    width: 32%;
   }
 }
 #login #content {
@@ -1918,31 +1929,31 @@ abbr {
 }
 .get-started dl div#what-is-binary-trading, .get-started-jp dl div#what-is-binary-trading {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 0 0;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 0 0;
 }
 .get-started dl div#binary-options-basics, .get-started-jp dl div#binary-options-basics {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 100% 0;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 100% 0;
 }
 .get-started dl div#how-to-trade-binaries, .get-started-jp dl div#how-to-trade-binaries {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 100% 24%;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 100% 24%;
 }
 .get-started dl div#types-of-trades, .get-started-jp dl div#types-of-trades {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 0 47%;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 0 47%;
 }
 .get-started dl div#benefits-of-trading-binaries, .get-started-jp dl div#benefits-of-trading-binaries {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 0 24%;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 0 24%;
 }
 .get-started dl div#beginners-faq, .get-started-jp dl div#beginners-faq {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 0 71%;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 0 71%;
 }
 .get-started dl div#glossary, .get-started-jp dl div#glossary {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 100% 71%;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 100% 71%;
 }
 .get-started dl div#spread, .get-started-jp dl div#spread {
   height: 80px;
@@ -1950,7 +1961,7 @@ abbr {
 }
 .get-started dl div#random-trades, .get-started-jp dl div#random-trades {
   height: 80px;
-  background: url("../images/pages/get-started/intro_1.png") no-repeat 100% 93%;
+  background: url("../images/pages/get-started/intro_2.png") no-repeat 100% 93%;
 }
 .get-started dl div#smart-indices, .get-started-jp dl div#smart-indices {
   height: 80px;
@@ -2989,7 +3000,6 @@ a.close:hover {
   margin-bottom: 15px;
 }
 
-/* special notice (f_trade.cgi), currently align center */
 .centerText,
 .notice-1 {
   text-align: center;
@@ -5790,6 +5800,23 @@ div.kineticjs-content {
   display: none;
 }
 
+#trading_socket_container.japan {
+  min-width: 960px;
+}
+#trading_socket_container.japan .big-col {
+  flex: 3;
+}
+#trading_socket_container.japan #market_menu {
+  background: #FFF;
+  margin-left: 20px;
+}
+#trading_socket_container.japan #market_menu input {
+  margin-right: 5px;
+}
+#trading_socket_container.japan #contract_markets_container,
+#trading_socket_container.japan #contract_market_form_container {
+  display: none;
+}
 #trading_socket_container.japan #guideBtn {
   display: none;
 }
@@ -5817,7 +5844,7 @@ div.kineticjs-content {
   width: 301px;
   border: 1px solid #dedede;
   display: none;
-  height: 100px;
+  height: 120px;
   padding: 10px;
   margin-left: 2px;
 }
@@ -5935,7 +5962,7 @@ div.kineticjs-content {
   background: #f2f2f2;
 }
 #trading_socket_container.japan #period {
-  width: 155px;
+  width: 200px;
 }
 #trading_socket_container.japan #payout_row {
   display: none;
@@ -6097,6 +6124,11 @@ div.kineticjs-content {
   display: none;
 }
 
+.error-field {
+  border-color: #cc0033;
+  color: #cc0033;
+}
+
 /*
  * these styles are for trade analysis and will be removed
  *
@@ -6233,40 +6265,34 @@ div.kineticjs-content {
     padding-right: 5px !important;
   }
 }
-.flex-table-container #statement-table .flex-tr > th:last-child, .flex-table-container #statement-table .flex-tr > td:last-child {
+.flex-table-container #statement-table .flex-tr > th.details, .flex-table-container #statement-table .flex-tr > td.details {
   display: none !important;
 }
 @media (max-width: 600px) {
-  .flex-table-container #statement-table .flex-tr > th:nth-child(4) {
+  .flex-table-container #statement-table .flex-tr > th.desc, .flex-table-container #statement-table .flex-tr > td.desc {
     display: none !important;
   }
-  .flex-table-container #statement-table .flex-tr > td:nth-child(4) {
-    display: none !important;
-  }
-  .flex-table-container #statement-table .flex-tr > th:last-child, .flex-table-container #statement-table .flex-tr > td:last-child {
+  .flex-table-container #statement-table .flex-tr > th.details, .flex-table-container #statement-table .flex-tr > td.details {
     display: table-cell !important;
   }
-  .flex-table-container #statement-table .flex-tr > th:last-child .button, .flex-table-container #statement-table .flex-tr > td:last-child .button {
+  .flex-table-container #statement-table .flex-tr > th.details .button, .flex-table-container #statement-table .flex-tr > td.details .button {
     padding: 8px 15px;
   }
   .flex-table-container #statement-table .flex-tr .flex-tr-child {
     font-size: 12px;
   }
 }
-.flex-table-container #profit-table .flex-tr > th:last-child, .flex-table-container #profit-table .flex-tr > td:last-child {
+.flex-table-container #profit-table .flex-tr > th.details, .flex-table-container #profit-table .flex-tr > td.details {
   display: none !important;
 }
 @media (max-width: 600px) {
-  .flex-table-container #profit-table .flex-tr > th:nth-child(3) {
+  .flex-table-container #profit-table .flex-tr > th.contract, .flex-table-container #profit-table .flex-tr > td.contract {
     display: none !important;
   }
-  .flex-table-container #profit-table .flex-tr > td:nth-child(3) {
-    display: none !important;
-  }
-  .flex-table-container #profit-table .flex-tr > th:last-child, .flex-table-container #profit-table .flex-tr > td:last-child {
+  .flex-table-container #profit-table .flex-tr > th.details, .flex-table-container #profit-table .flex-tr > td.details {
     display: table-cell !important;
   }
-  .flex-table-container #profit-table .flex-tr > th:last-child .button, .flex-table-container #profit-table .flex-tr > td:last-child .button {
+  .flex-table-container #profit-table .flex-tr > th.details .button, .flex-table-container #profit-table .flex-tr > td.details .button {
     padding: 8px 15px;
   }
   .flex-table-container #profit-table .flex-tr .flex-tr-child {
@@ -6297,6 +6323,10 @@ tr#highchart_duration td:nth-child(1) {
 }
 tr#highchart_duration td:nth-child(2) {
   text-align: right;
+}
+
+#knowledge-test-msg {
+  white-space: pre-line;
 }
 
 #profit-table-ws-container th {
@@ -6369,18 +6399,6 @@ button:disabled {
 }
 .kv-pairs td {
   border: none;
-}
-
-#temp_notice_msg {
-  margin: 0 0 10px 0;
-}
-#temp_notice_msg #close_temp_msg {
-  position: absolute;
-  color: red;
-  font-size: .8em;
-  cursor: pointer;
-  top: 2px;
-  right: 2px;
 }
 
 /* Language based rules */
@@ -6541,10 +6559,10 @@ body.RU .calls_recording {
   display: inline !important;
 }
 
-body.PT a, body.PT button, body.PT .button, body.PT span, body.PT input {
+body.PT a, body.PT button, body.PT .button, body.PT span, body.PT input, body.RU a, body.RU button, body.RU .button, body.RU span, body.RU input {
   text-transform: initial !important;
 }
-body.PT h1, body.PT h2, body.PT h3, body.PT h4, body.PT h5, body.PT h6 {
+body.PT h1, body.PT h2, body.PT h3, body.PT h4, body.PT h5, body.PT h6, body.RU h1, body.RU h2, body.RU h3, body.RU h4, body.RU h5, body.RU h6 {
   text-transform: initial !important;
 }
 
