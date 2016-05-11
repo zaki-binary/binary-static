@@ -8,7 +8,7 @@ var KnowledgeTest = (function() {
     var randomPicksAnswer = {};
     var resultScore = 0;
 
-    var passMsg = '{JAPAN ONLY}Congratulations, you have pass the test, our Customer Support will contact you shortly';
+    var passMsg = '{JAPAN ONLY}Congratulations, you have pass the test, our Customer Support will contact you shortly.';
     var failMsg = '{JAPAN ONLY}Sorry, you have failed the test, please try again after 24 hours.';
 
     function questionAnswerHandler(ev) {
