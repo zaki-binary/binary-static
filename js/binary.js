@@ -69447,7 +69447,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/smart-indices|\/ad|\/open-source-projects|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/ad|\/open-source-projects|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -71268,7 +71268,7 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
       var lbl_entry_spot = '<div style="margin-left:10px;display:inline-block;border:3px solid orange;border-radius:6px;width:4px;height:4px;"></div> Entry spot ';
       var lbl_exit_spot = '<div style="margin-left:10px;display:inline-block;background-color:orange;border-radius:6px;width:10px;height:10px;"></div> Exit spot ';
       var lbl_end_time = '<div style="margin-bottom: 3px;margin-left:10px;height:0;width:20px;border:0;border-bottom:2px;border-style:dashed;border-color:#E98024;display:inline-block"></div> End time ';
-      var lbl_delay = '<span style="color:red">Charting for this underlying is delayed </span>';
+      var lbl_delay = '<span style="display:block;text-align:center;margin-bottom:0.2em;color:red">Charting for this underlying is delayed </span>';
       // options.history indicates line chart
       if(options.history){
         type = 'line';
@@ -71379,14 +71379,14 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
       if (options.history) {
         chartOptions.subtitle = {
           text: chart_delayed ? lbl_delay + lbl_start_time + lbl_entry_spot + lbl_exit_spot + lbl_end_time : lbl_start_time + lbl_entry_spot + lbl_exit_spot + lbl_end_time,
-          align: 'right',
+          align: 'center',
           useHTML: true
         };
         chartOptions.tooltip.valueDecimals = options.history.prices[0].split('.')[1].length || 3;
       } else if (options.candles) {
         chartOptions.subtitle = {
           text: chart_delayed ? lbl_delay + lbl_start_time + lbl_end_time : lbl_start_time + lbl_end_time,
-          align: 'right',
+          align: 'center',
           useHTML: true
         };
         chartOptions.tooltip.valueDecimals = options.candles[0].open.split('.')[1].length || 3;
@@ -71409,7 +71409,7 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
         });
         var subtitle = chart.subtitle.element;
         var subtitle_length = chart.subtitle.element.childNodes.length;
-        if (sell_spot_time) {
+        if (sell_time && sell_time < end_time) {
           var textnode = document.createTextNode(" Sell time ");
           for (i = 0; i < chart.subtitle.element.childNodes.length; i++) {
             if (/End time/.test(chart.subtitle.element.childNodes[i].nodeValue)) {
@@ -79360,6 +79360,7 @@ var get_started_behaviour = function() {
 
         return false;
     };
+
     var to_show;
     var nav = $('.get-started').find('.subsection-navigation');
     var fragment;
@@ -79380,6 +79381,20 @@ var get_started_behaviour = function() {
         to_show = fragment ? $('a[name=' + fragment + '-section]').parent('.subsection') : $('.subsection.first');
         update_active_subsection(to_show);
     }
+    select_nav_element();
+};
+
+var select_nav_element = function() {
+  var $navLink = $('.nav li a');
+  var $navList = $('.nav li');
+  $navList.removeClass('selected');
+  for (i = 0; i < $navLink.length; i++) {
+    if ($navLink[i].href.match(window.location.pathname)) {
+      document.getElementsByClassName('nav')[0].getElementsByTagName('li')[i].setAttribute('class', 'selected');
+      break;
+    }
+  }
+  return;
 };
 
 var Charts = function(charts) {
@@ -79839,20 +79854,6 @@ pjax_config_page('/why-us', function() {
             var whyus = $('.why-us');
             sidebar_scroll(whyus);
             hide_if_logged_in();
-        },
-        onUnload: function() {
-            $(window).off('scroll');
-        }
-    };
-});
-
-pjax_config_page('/smart-indices', function() {
-    return {
-        onLoad: function() {
-            sidebar_scroll($('.smart-indices'));
-            if (page.url.location.hash !== "") {
-              $('a[href="' + page.url.location.hash + '"]').click();
-            }
         },
         onUnload: function() {
             $(window).off('scroll');
@@ -82483,7 +82484,7 @@ function displayTooltip(market, symbol){
     }
     if (market.match(/^smart_fx/) || symbol.match(/^WLD/)){
         tip.show();
-        tip.setAttribute('target','/smart-indices#world-fx-indices');
+        tip.setAttribute('target','/get-started/smart-indices#world-fx-indices');
     }
 }
 
@@ -90849,7 +90850,7 @@ var ProfitTableUI = (function(){
                 con.hide();
                 var _on_close = function () {
                     that.cleanup(true);
-                    window.updateChart = 'false';
+                    chartUpdated = false;
                     if(TradePage.is_trading_page()) {
                         // Re-subscribe the trading page's tick stream which was unsubscribed by popup's chart
                         BinarySocket.send({'ticks_history':$('#underlying').val(),'style':'ticks','end':'latest','count':20,'subscribe':1});
@@ -90975,7 +90976,8 @@ var ProfitTableUI = (function(){
         isSold,
         isSellClicked,
         chartStarted,
-        tickForgotten;
+        tickForgotten,
+        chartUpdated;
     var $Container,
         $loading,
         btnView,
@@ -90995,6 +90997,7 @@ var ProfitTableUI = (function(){
         isSellClicked = false;
         chartStarted  = false;
         tickForgotten = false;
+        chartUpdated  = false;
         $Container    = '';
         popupboxID    = 'inpage_popup_content_box';
         wrapperID     = 'sell_content_wrapper';
@@ -91034,7 +91037,7 @@ var ProfitTableUI = (function(){
         // ----- Tick -----
         if(contract.hasOwnProperty('tick_count')) {
             contractType = 'tick';
-            getTickHistory(contract.underlying, contract.date_start - 60, contract.date_start - 1, 1);
+            tickShowContract();
         }
         // ----- Spread -----
         else if(contract.shortcode.toUpperCase().indexOf('SPREAD') === 0) {
@@ -91078,18 +91081,6 @@ var ProfitTableUI = (function(){
             'tick_popup'
         );
 
-        TickDisplay.initialize({
-             "symbol"              : contract.underlying,
-             "number_of_ticks"     : contract.tick_count,
-             "previous_tick_epoch" : history.times[0],
-             "contract_category"   : ((/asian/i).test(contract.shortcode) ? 'asian' : (/digit/i).test(contract.shortcode) ? 'digits' : 'callput'),
-             "longcode"            : contract.longcode,
-             "display_decimals"    : history.prices[0].split('.')[1].length || 2,
-             "display_symbol"      : contract.display_name,
-             "contract_start"      : contract.date_start,
-             "show_contract_result": 0
-         });
-
         tickUpdate();
     };
 
@@ -91097,6 +91088,10 @@ var ProfitTableUI = (function(){
         if(contract.is_expired) {
             showWinLossStatus((contract.sell_price || contract.bid_price) > 0);
         }
+        if (!chartUpdated) {
+             WSTickDisplay.updateChart('', contract);
+             chartUpdated = true;
+         }
     };
 
     // ===== Contract: Spread =====
@@ -91564,10 +91559,6 @@ var ProfitTableUI = (function(){
         }
 
         switch(contractType) {
-            case 'tick':
-                 history = response.history;
-                 tickShowContract();
-                 break;
             case 'spread':
                 history = response.history;
                 spreadShowContract();
