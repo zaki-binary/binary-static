@@ -260,6 +260,10 @@ Client.prototype = {
                 if(client_tnc_status !== website_tnc_version) {
                     sessionStorage.setItem('tnc_redirect', window.location.href);
                     window.location.href = page.url.url_for('user/tnc_approvalws');
+                } else if (sessionStorage.getItem('risk_redirect')) {
+                  var redirectUrl = sessionStorage.getItem('risk_redirect');
+                  sessionStorage.removeItem('risk_redirect');
+                  window.location.href = redirectUrl;
                 }
             }
         }
@@ -655,6 +659,7 @@ Header.prototype = {
         this.register_dynamic_links();
         this.simulate_input_placeholder_for_ie();
         this.logout_handler();
+        this.check_risk_classification();
         if (isNotBackoffice()) {
           checkClientsCountry();
         }
@@ -768,6 +773,12 @@ Header.prototype = {
             page.client.send_logout_request();
         });
     },
+    check_risk_classification: function() {
+      if (page.client.is_logged_in && !page.client.is_virtual() && page.client.residence !== 'jp' &&
+          sessionStorage.getItem('risk_classification') === 'high' && window.location.pathname !== '/user/assessmentws') {
+            window.location.href = page.url.url_for('user/assessmentws');
+      }
+    },
     validate_cookies: function(){
         if (getCookieItem('login') && getCookieItem('loginid_list')){
             var accIds = $.cookie("loginid_list").split("+");
@@ -806,6 +817,8 @@ Header.prototype = {
                   $.removeCookie(c, {path: cookie_path[1]});
               }
             });
+            sessionStorage.removeItem('risk_classification');
+            sessionStorage.removeItem('risk_redirect');
             page.reload();
         }
     },
