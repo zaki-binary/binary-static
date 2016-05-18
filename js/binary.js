@@ -69447,7 +69447,7 @@ Menu.prototype = {
                 this.show_main_menu();
             }
         } else {
-            var is_mojo_page = /^\/$|\/login|\/home|\/ad|\/open-source-projects|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws|\/reset_passwordws$/.test(window.location.pathname);
+            var is_mojo_page = /^\/$|\/login|\/home|\/ad|\/open-source-projects|\/bulk-trader-facility|\/partners|\/payment-agent|\/about-us|\/group-information|\/group-history|\/careers|\/contact|\/terms-and-conditions|\/terms-and-conditions-jp|\/responsible-trading|\/us_patents|\/lost_password|\/realws|\/virtualws|\/open-positions|\/job-details|\/user-testing|\/japanws|\/maltainvestws|\/reset_passwordws|\/supported-browsers$/.test(window.location.pathname);
             if(!is_mojo_page) {
                 trading.addClass('active');
                 this.show_main_menu();
@@ -71633,6 +71633,7 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
     }
 
     if(!is_expired && !sell_spot_time && parseInt(window.time._i)/1000 < end_time && !chart_subscribed) {
+        chart_subscribed = true;
         request.subscribe = 1;
     }
 
@@ -71653,9 +71654,8 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
     if (!entry_tick_time && chart_delayed === false && start_time && parseInt((window.time._i/1000)) >= parseInt(start_time)) {
       show_error('', text.localize('Waiting for entry tick.'));
     } else if (!history_send){
-      if (request.subscribe === 1) chart_subscribed = true;
-      socketSend(request);
       history_send = true;
+      socketSend(request);
     }
     return;
   }
@@ -79976,6 +79976,22 @@ pjax_config_page('\/login|\/loginid_switch', function() {
         }
     };
 });
+
+var $buoop = {
+  vs: {i:10, f:39, o:30, s:5, c:39},
+  l: page.language().toLowerCase(),
+  url: 'https://whatbrowser.org/'
+};
+function $buo_f(){
+ var e = document.createElement("script");
+ e.src = "//browser-update.org/update.min.js";
+ document.body.appendChild(e);
+}
+try {
+  document.addEventListener("DOMContentLoaded", $buo_f,false);
+} catch(e) {
+  window.attachEvent("onload", $buo_f);
+}
 ;pjax_config_page('/get-started-jp', function() {
     return {
         onLoad: function() {
@@ -91134,6 +91150,7 @@ var ProfitTableUI = (function(){
         isSellClicked,
         chartStarted,
         tickForgotten,
+        candleForgotten,
         chartUpdated;
     var $Container,
         $loading,
@@ -91144,22 +91161,23 @@ var ProfitTableUI = (function(){
         hiddenClass;
 
     var init = function(button) {
-        btnView       = button;
-        contractID    = $(btnView).attr('contract_id');
-        contractType  = '';
-        contract      = {};
-        history       = {};
-        proposal      = {};
-        isSold        = false;
-        isSellClicked = false;
-        chartStarted  = false;
-        tickForgotten = false;
-        chartUpdated  = false;
-        $Container    = '';
-        popupboxID    = 'inpage_popup_content_box';
-        wrapperID     = 'sell_content_wrapper';
-        winStatusID   = 'contract_win_status';
-        hiddenClass   = 'hidden';
+        btnView         = button;
+        contractID      = $(btnView).attr('contract_id');
+        contractType    = '';
+        contract        = {};
+        history         = {};
+        proposal        = {};
+        isSold          = false;
+        isSellClicked   = false;
+        chartStarted    = false;
+        tickForgotten   = false;
+        candleForgotten = false;
+        chartUpdated    = false;
+        $Container      = '';
+        popupboxID      = 'inpage_popup_content_box';
+        wrapperID       = 'sell_content_wrapper';
+        winStatusID     = 'contract_win_status';
+        hiddenClass     = 'hidden';
 
         if (btnView) {
             ViewPopupUI.disable_button($(btnView));
@@ -91401,8 +91419,8 @@ var ProfitTableUI = (function(){
 
         if(!chartStarted) {
             if (!tickForgotten) {
-              socketSend({"forget_all":"ticks"});
               tickForgotten = true;
+              socketSend({"forget_all":"ticks"});
             } else {
               Highchart.show_chart(contract, 'update');
               if (contract.entry_tick_time) {
@@ -91785,9 +91803,14 @@ var ProfitTableUI = (function(){
                     responseSellExpired(response);
                     break;
                 case 'forget_all':
-                    Highchart.show_chart(contract);
-                    if (contract.entry_tick_time) {
-                      chartStarted = true;
+                    if (response.echo_req.forget_all === 'ticks' && !candleForgotten) {
+                      candleForgotten = true;
+                      socketSend({"forget_all":"candles"});
+                    } else if (response.echo_req.forget_all === 'candles') {
+                      Highchart.show_chart(contract);
+                      if (contract.entry_tick_time) {
+                        chartStarted = true;
+                      }
                     }
                     break;
                 default:
