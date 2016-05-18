@@ -91151,6 +91151,7 @@ var ProfitTableUI = (function(){
         chartStarted,
         tickForgotten,
         candleForgotten,
+        candleForgottenSent,
         chartUpdated;
     var $Container,
         $loading,
@@ -91161,23 +91162,24 @@ var ProfitTableUI = (function(){
         hiddenClass;
 
     var init = function(button) {
-        btnView         = button;
-        contractID      = $(btnView).attr('contract_id');
-        contractType    = '';
-        contract        = {};
-        history         = {};
-        proposal        = {};
-        isSold          = false;
-        isSellClicked   = false;
-        chartStarted    = false;
-        tickForgotten   = false;
-        candleForgotten = false;
-        chartUpdated    = false;
-        $Container      = '';
-        popupboxID      = 'inpage_popup_content_box';
-        wrapperID       = 'sell_content_wrapper';
-        winStatusID     = 'contract_win_status';
-        hiddenClass     = 'hidden';
+        btnView             = button;
+        contractID          = $(btnView).attr('contract_id');
+        contractType        = '';
+        contract            = {};
+        history             = {};
+        proposal            = {};
+        isSold              = false;
+        isSellClicked       = false;
+        chartStarted        = false;
+        tickForgotten       = false;
+        candleForgotten     = false;
+        candleForgottenSent = false;
+        chartUpdated        = false;
+        $Container          = '';
+        popupboxID          = 'inpage_popup_content_box';
+        wrapperID           = 'sell_content_wrapper';
+        winStatusID         = 'contract_win_status';
+        hiddenClass         = 'hidden';
 
         if (btnView) {
             ViewPopupUI.disable_button($(btnView));
@@ -91421,7 +91423,7 @@ var ProfitTableUI = (function(){
             if (!tickForgotten) {
               tickForgotten = true;
               socketSend({"forget_all":"ticks"});
-            } else {
+            } else if (candleForgotten) {
               Highchart.show_chart(contract, 'update');
               if (contract.entry_tick_time) {
                 chartStarted = true;
@@ -91803,10 +91805,11 @@ var ProfitTableUI = (function(){
                     responseSellExpired(response);
                     break;
                 case 'forget_all':
-                    if (response.echo_req.forget_all === 'ticks' && !candleForgotten) {
-                      candleForgotten = true;
+                    if (response.echo_req.forget_all === 'ticks' && !candleForgottenSent) {
+                      candleForgottenSent = true;
                       socketSend({"forget_all":"candles"});
                     } else if (response.echo_req.forget_all === 'candles') {
+                      candleForgotten = true;
                       Highchart.show_chart(contract);
                       if (contract.entry_tick_time) {
                         chartStarted = true;
