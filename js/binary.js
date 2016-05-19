@@ -69721,11 +69721,17 @@ Header.prototype = {
         });
     },
     check_risk_classification: function() {
-      if (page.client.is_logged_in && !page.client.is_virtual() && page.client.residence !== 'jp' && isNotBackoffice() &&
-          localStorage.getItem('risk_classification.response') === 'high' && localStorage.getItem('risk_classification') === 'high' &&
-          (localStorage.getItem('reality_check.ack') === '1' || !localStorage.getItem('reality_check.interval'))) {
+      if (localStorage.getItem('risk_classification.response') === 'high' && localStorage.getItem('risk_classification') === 'high' &&
+          this.qualify_for_risk_classification()) {
             RiskClassification.renderRiskClassificationPopUp();
       }
+    },
+    qualify_for_risk_classification: function() {
+      if (page.client.is_logged_in && !page.client.is_virtual() && page.client.residence !== 'jp' && isNotBackoffice() &&
+          (localStorage.getItem('reality_check.ack') === '1' || !localStorage.getItem('reality_check.interval'))) {
+              return true;
+      }
+      return false;
     },
     validate_cookies: function(){
         if (getCookieItem('login') && getCookieItem('loginid_list')){
@@ -71481,8 +71487,8 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
       var type = response.msg_type,
           error = response.error;
       if (type === 'contracts_for' && (!error || (error && error.code && error.code === 'InvalidSymbol'))) {
-          if (response.contracts_for && response.contracts_for.feed_license && response.contracts_for.feed_license === 'delayed') {
-            handle_delay();
+          if (response.contracts_for && response.contracts_for.feed_license) {
+            handle_delay(response.contracts_for.feed_license);
           }
           show_entry_error();
       } else if ((type === 'history' || type === 'candles' || type === 'tick' || type === 'ohlc') && !error){
@@ -71640,8 +71646,8 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
     var contracts_response = window.contracts_for;
 
     if (contracts_response && contracts_response.echo_req.contracts_for === underlying) {
-      if (contracts_response.contracts_for.feed_license === 'delayed') {
-        handle_delay();
+      if (contracts_response.contracts_for.feed_license) {
+        handle_delay(contracts_response.contracts_for.feed_license);
       }
       show_entry_error();
     } else if(!contracts_for_send && update === '') {
@@ -71660,12 +71666,15 @@ if (typeof trackJs !== 'undefined') trackJs.configure(window._trackJs);
     return;
   }
 
-  function handle_delay() {
-    if (!is_expired) {
-      request.end = 'latest';
+  function handle_delay(feed_license) {
+    if (feed_license !== 'realtime') {
+      if (!is_expired) {
+        request.end = 'latest';
+      }
+      delete request.subscribe;
+      chart_delayed = true;
     }
-    delete request.subscribe;
-    chart_delayed = true;
+    return;
   }
 
   // we have to update the color zones with the correct entry_tick_time
@@ -73800,12 +73809,9 @@ pjax_config_page('/trading', function () {
         }(),
         amount: function() {
             return {
-                payout_min:    1,
                 payout_max:    100000,
-                payout_err:    undefined,
                 stake_min:    0.5,
-                stake_max:    100000,
-                stake_err:    undefined,
+                error:    undefined,
                 calculation_value: undefined,
                 keyup: function(event) {
                     var me = BetForm.amount;
@@ -73839,11 +73845,8 @@ pjax_config_page('/trading', function () {
                 },
                 update_settings: function() {
                     this.stake_min = parseFloat($('#staking_context #stake_min').html());
-                    this.stake_max = parseFloat($('#staking_context #stake_max').html());
-                    this.stake_err = $('#staking_context #stake_err').html();
-                    this.payout_min = parseFloat($('#staking_context #payout_min').html());
                     this.payout_max = parseFloat($('#staking_context #payout_max').html());
-                    this.payout_err = $('#staking_context #payout_err').html();
+                    this.error = $('#staking_context #error').html();
                 },
             };
         }(),
@@ -75870,15 +75873,12 @@ BetForm.Time.EndTime.prototype = {
                         // We're intentionally making payout errors have highest priority
                         // it's something they can fix immediately on this web interface.
 
+                        // just a minimum stake and a maximum payout check will do.
                         if (prices[i].payout.raw/100  - epsilon > bf_amount.payout_max ||
-                            prices[i].payout.raw/100 + epsilon < bf_amount.payout_min) {
-                            err = bf_amount.payout_err;
-                        } else if (prices[i].price.raw/100 - epsilon > bf_amount.stake_max ||
                             prices[i].price.raw/100 + epsilon < bf_amount.stake_min) {
-                            // You probably think there should be two conditions above, but too high stake just
-                            // makes for "too high payout" or "no return" errors.
-                            err = bf_amount.stake_err;
+                            err = bf_amount.error;
                         }
+
                         this.show_error(form, err);
                         this.update_price(prices[i].id, prices[i].price, prices[i].prev_price);
                         this.update_description(prices[i].id, prices[i].payout, prices[i].prev_payout);
@@ -79972,7 +79972,7 @@ pjax_config_page('\/login|\/loginid_switch', function() {
     return {
         onLoad: function() {
             if(isNotBackoffice()) {
-                window.location.href = page.url.url_for('oauth2/authorize', 'app_id=binarycom');
+                window.location.href = page.url.url_for('oauth2/authorize', 'app_id=1');
             }
         }
     };
@@ -82354,7 +82354,7 @@ function displayCommentPrice(node, currency, type, payout) {
     if (node && type && payout) {
         var profit = payout - type,
             return_percent = (profit/type)*100,
-            comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(0) + '%';
+            comment = Content.localize().textNetProfit + ': ' + currency + ' ' + profit.toFixed(2) + ' | ' + Content.localize().textReturn + ' ' + return_percent.toFixed(1) + '%';
 
         if (isNaN(profit) || isNaN(return_percent)) {
             node.hide();
@@ -85923,15 +85923,15 @@ function BinarySocketClass() {
         socketUrl;
         var host = window.location.host;
         if((/www\.binary\.com/i).test(host)) {
-            socketUrl = 'wss://ws.binaryws.com/websockets/v3';
+            socketUrl = 'wss://ws.binaryws.com/websockets/v3?app_id=1';
         } else if((/binaryqa/i).test(host)) {
-            socketUrl = 'wss://' + host + '/websockets/v3';
+            socketUrl = 'wss://' + host + '/websockets/v3?app_id=1';
         } else {
-            socketUrl = 'wss://www2.binary.com/websockets/v3';
+            socketUrl = 'wss://www2.binary.com/websockets/v3?app_id=1';
         }
 
     if (page.language()) {
-        socketUrl += '?l=' + page.language();
+        socketUrl += '&l=' + page.language();
     }
 
     var clearTimeouts = function(){
@@ -86132,7 +86132,7 @@ function BinarySocketClass() {
                         RealityCheck.realityCheckWSHandler(response);
                     }
                 } else if (type === 'get_account_status') {
-                  if (response.get_account_status.risk_classification === 'high' && isNotBackoffice() && (localStorage.getItem('reality_check.ack') === '1' || !localStorage.getItem('reality_check.interval'))) {
+                  if (response.get_account_status.risk_classification === 'high' && page.header.qualify_for_risk_classification()) {
                     send({get_financial_assessment: 1});
                   } else {
                     localStorage.removeItem('risk_classification');
@@ -86140,7 +86140,7 @@ function BinarySocketClass() {
                   localStorage.setItem('risk_classification.response', response.get_account_status.risk_classification);
                 } else if (type === 'get_financial_assessment' && !response.hasOwnProperty('error')) {
                   if (Object.keys(response.get_financial_assessment).length === 0) {
-                    if (localStorage.getItem('reality_check.ack') === '1' || !localStorage.getItem('reality_check.interval') && localStorage.getItem('risk_classification.response') === 'high') {
+                    if (page.header.qualify_for_risk_classification() && localStorage.getItem('risk_classification.response') === 'high') {
                       localStorage.setItem('risk_classification', 'high');
                       page.header.check_risk_classification();
                     }
@@ -88540,6 +88540,7 @@ function showPasswordError(password) {
     };
 
     var submitForm = function(){
+        $('#submit').attr('disabled', 'disabled');
         if(!validateForm()){
             return;
         }
@@ -89336,7 +89337,7 @@ pjax_config_page_require_auth("user/assessmentws", function() {
             } catch(e) {
                 alert('The website needs features which are not enabled on private mode browsing. Please use normal mode.');
             }
-            window.location.href = page.url.url_for('oauth2/authorize', 'app_id=binarycom');
+            window.location.href = page.url.url_for('oauth2/authorize', 'app_id=1');
         }
     };
 
@@ -90688,6 +90689,10 @@ var ProfitTableUI = (function(){
   var financial_assessment_url = page.url.url_for('user/assessmentws');
 
   var renderRiskClassificationPopUp = function () {
+      if (window.location.pathname === '/user/assessmentws') {
+        window.location.href = page.url.url_for('user/my_accountws');
+        return;
+      }
       $.ajax({
           url: financial_assessment_url,
           dataType: 'html',
