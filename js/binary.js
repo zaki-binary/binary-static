@@ -69607,7 +69607,7 @@ Header.prototype = {
         this.simulate_input_placeholder_for_ie();
         this.logout_handler();
         this.check_risk_classification();
-        if (isNotBackoffice()) {
+        if (!$('body').hasClass('BlueTopBack')) {
           checkClientsCountry();
         }
     },
@@ -69727,7 +69727,7 @@ Header.prototype = {
       }
     },
     qualify_for_risk_classification: function() {
-      if (page.client.is_logged_in && !page.client.is_virtual() && page.client.residence !== 'jp' && isNotBackoffice() &&
+      if (page.client.is_logged_in && !page.client.is_virtual() && page.client.residence !== 'jp' && !$('body').hasClass('BlueTopBack') &&
           (localStorage.getItem('reality_check.ack') === '1' || !localStorage.getItem('reality_check.interval'))) {
               return true;
       }
@@ -70490,7 +70490,7 @@ var pjax_config = function() {
 
 var init_pjax = function () {
     var document_location = document.URL;
-    if(!/backoffice/.test(document_location)) { //No Pjax for backoffice.
+    if(!$('body').hasClass('BlueTopBack')) { //No Pjax for BO.
         pjax.connect(pjax_config());
     }
 };
@@ -70737,8 +70737,6 @@ onUnload.queue(function () {
     page.on_unload();
 });
 
-var bo_url;
-
 //////////////////////////////////////////////////////////////
 //Purpose: To solve cross domain logged out server problem.
 //Return: Hostname for this page
@@ -70891,53 +70889,53 @@ onLoad.queue(function () {
 
 // onLoad.queue does not work on the home page.
 // jQuery's ready function works always.
-if (!/backoffice/.test(document.URL)) { // exclude BO
-    $(document).ready(function () {
-        // $.cookie is not always available.
-        // So, fall back to a more basic solution.
-        var match = document.cookie.match(/\bloginid=(\w+)/);
-        match = match ? match[1] : '';
-        $(window).on('storage', function (jq_event) {
-            if (jq_event.originalEvent.key !== 'active_loginid') return;
-            if (jq_event.originalEvent.newValue === match) return;
-            if (jq_event.originalEvent.newValue === '') {
-                // logged out
+
+$(document).ready(function () {
+  if (!$('body').hasClass('BlueTopBack')) { // exclude BO
+    // $.cookie is not always available.
+    // So, fall back to a more basic solution.
+    var match = document.cookie.match(/\bloginid=(\w+)/);
+    match = match ? match[1] : '';
+    $(window).on('storage', function (jq_event) {
+        if (jq_event.originalEvent.key !== 'active_loginid') return;
+        if (jq_event.originalEvent.newValue === match) return;
+        if (jq_event.originalEvent.newValue === '') {
+            // logged out
+            page.reload();
+        } else {
+            // loginid switch
+            if(!window['is_logging_in']) {
                 page.reload();
-            } else {
-                // loginid switch
-                if(!window['is_logging_in']) {
-                    page.reload();
-                }
-            }
-        });
-
-        LocalStore.set('active_loginid', match);
-        var start_time;
-        var time_now;
-        var tabChanged = function() {
-            if(clock_started === true){
-                if (document.hidden || document.webkitHidden) {
-                    start_time = moment().valueOf();
-                    time_now = page.header.time_now;
-                }else {
-                    time_now = (time_now + (moment().valueOf() - start_time));
-                    page.header.time_now = time_now;
-                }
-            }
-        };
-
-        if (typeof document.webkitHidden !== 'undefined') {
-            if (document.addEventListener) {
-                document.addEventListener("webkitvisibilitychange", tabChanged);
-            }
-        } else if (typeof document.hidden !== 'undefined') {
-            if (document.addEventListener) {
-                document.addEventListener("visibilitychange", tabChanged);
             }
         }
-
     });
-}
+
+    LocalStore.set('active_loginid', match);
+    var start_time;
+    var time_now;
+    var tabChanged = function() {
+        if(clock_started === true){
+            if (document.hidden || document.webkitHidden) {
+                start_time = moment().valueOf();
+                time_now = page.header.time_now;
+            }else {
+                time_now = (time_now + (moment().valueOf() - start_time));
+                page.header.time_now = time_now;
+            }
+        }
+    };
+
+    if (typeof document.webkitHidden !== 'undefined') {
+        if (document.addEventListener) {
+            document.addEventListener("webkitvisibilitychange", tabChanged);
+        }
+    } else if (typeof document.hidden !== 'undefined') {
+        if (document.addEventListener) {
+            document.addEventListener("visibilitychange", tabChanged);
+        }
+    }
+  }
+});
 ;DatePicker = function(component_id, select_type) {
     this.component_id = component_id;
     this.select_type = (typeof select_type === "undefined") ? "date" : select_type;
@@ -78373,7 +78371,7 @@ ClientForm.prototype = {
             storeTokens();
             page.client.set_cookie('login', page.client.get_token(page.client.loginid));
             sessionStorage.setItem('check_tnc', '1');
-            if (isNotBackoffice()) localStorage.setItem('risk_classification', 'check');
+            if (!$('body').hasClass('BlueTopBack')) localStorage.setItem('risk_classification', 'check');
             GTM.set_login_flag();
             // redirect url
             redirect_url = sessionStorage.getItem('redirect_url');
@@ -79845,10 +79843,6 @@ function change_blog_link(lang) {
   }
 }
 
-function isNotBackoffice() {
-  return !/backoffice/.test(window.location.pathname);
-}
-
 pjax_config_page('/\?.+|/home', function() {
     return {
         onLoad: function() {
@@ -79971,7 +79965,7 @@ pjax_config_page('/terms-and-conditions', function() {
 pjax_config_page('\/login|\/loginid_switch', function() {
     return {
         onLoad: function() {
-            if(isNotBackoffice()) {
+            if(!$('body').hasClass('BlueTopBack')) {
                 window.location.href = page.url.url_for('oauth2/authorize', 'app_id=1');
             }
         }
@@ -86118,7 +86112,7 @@ function BinarySocketClass() {
                     }
                   if (response.website_status.clients_country) {
                     localStorage.setItem('clients_country', response.website_status.clients_country);
-                    if (isNotBackoffice()) {
+                    if (!$('body').hasClass('BlueTopBack')) {
                       checkClientsCountry();
                     }
                   }
