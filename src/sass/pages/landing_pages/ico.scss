@@ -349,7 +349,6 @@ input[type='text']:focus, input[type='submit']:focus {
         }
     }
     .navbar-fixed-top {
-        position: relative;
         background: $COLOR_BLUE !important;
         margin-bottom: 0;
         padding: 15px;
@@ -364,7 +363,6 @@ input[type='text']:focus, input[type='submit']:focus {
 
         &.expand {
             max-height: 440px;
-            height: 100%;
             padding-bottom: 0;
         }
         .navbar-header {
@@ -429,6 +427,9 @@ input[type='text']:focus, input[type='submit']:focus {
         .intro {
             padding-top: 0;
         }
+    }
+    #address {
+        padding-bottom: 60px;
     }
 }
 
@@ -742,6 +743,46 @@ input[type='text']:focus, input[type='submit']:focus {
     background-image: url('../images/ico/icons/ico1_logo.svg');
 }
 
+.portal-do-branco {
+    background-image: url('../images/ico/icons/portal_do_branco_logo.svg');
+}
+
+.coinstaker {
+    background-image: url('../images/ico/icons/coinstaker_logo.svg');
+}
+
+.cripto {
+    background-image: url('../images/ico/icons/criptomoedas_facil_logo.svg');
+}
+
+.enews {
+    background-image: url('../images/ico/icons/enews_logo.svg');
+}
+
+.bitcoin-com {
+    background-image: url('../images/ico/icons/bitcoin_com_logo.svg');
+}
+
+.the-merkle {
+    background-image: url('../images/ico/icons/merkle_logo.svg');
+}
+
+.ituber {
+    background-image: url('../images/ico/icons/ituber_logo.svg');
+}
+
+.ico-panic {
+    background-image: url('../images/ico/icons/ico_panic_logo.svg');
+}
+
+.coinspeaker {
+    background-image: url('../images/ico/icons/coinspeaker_logo.svg');
+}
+
+.cryptoreader {
+    background-image: url('../images/ico/icons/crypto_reader_logo.svg');
+}
+
 #coming-soon {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -835,6 +876,7 @@ input[type='text']:focus, input[type='submit']:focus {
             border-color: transparent $COLOR_ORANGE transparent transparent;
             -webkit-transform: rotate(-90deg);
             transform: rotate(-90deg);
+            transition: transform 0.95s;
         }
         .arc_cover {
             border-color: transparent $cd_border_bg transparent transparent;
@@ -885,7 +927,7 @@ input[type='text']:focus, input[type='submit']:focus {
             transition: none;
         }
         &.show {
-            height: 380px;
+            height: auto;
             padding-bottom: 25px;
             background: $COLOR_LIGHT_GRAY;
             border: 1px solid $COLOR_GRAY;
@@ -915,7 +957,11 @@ input[type='text']:focus, input[type='submit']:focus {
             a.selected {
                 padding: 0;
                 color: $COLOR_WHITE;
+                width: 100%;
 
+                #selected-lang {
+                    width: 100%;
+                }
                 .world {
                     background-image: url('../images/ico/icons/grid-world.svg');
                 }
@@ -941,7 +987,7 @@ input[type='text']:focus, input[type='submit']:focus {
                         background-image: url('../images/ico/icons/grid-world.svg') !important;
                     }
                     .nav-caret {
-                        display: none;
+                        transform: rotateX(180deg);
                     }
                 }
             }
@@ -1055,12 +1101,8 @@ input[type='text']:focus, input[type='submit']:focus {
     }
 }
 
-.lykke-mask, .token-mask {
+.lykke-mask, .token-mask, .nishant-mask {
     background-color: $COLOR_WHITE;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     border: 1px solid $COLOR_GRAY;
     padding: 50px 30px !important;
     min-height: 340px;
@@ -1069,8 +1111,18 @@ input[type='text']:focus, input[type='submit']:focus {
 
     &.lykke-mask {
         background: url('../images/ico/images/lykke-mask.svg') no-repeat bottom left scroll;
+        background-size: 35%;
     }
     &.token-mask {
-        background: url('../images/ico/images/token-mask.svg') no-repeat bottom right scroll;
+        background: url('../images/ico/images/token-mask-left.svg') no-repeat bottom left scroll;
+        background-size: 20%;
     }
+    &.nishant-mask {
+        background: url('../images/ico/images/nishant-mask.svg') no-repeat bottom left scroll;
+        background-size: 25%;
+    }
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden;
 }

@@ -5,29 +5,26 @@ window.onload = function() {
     var frm_accept_second_notice = document.getElementById('frm_accept_second_notice');
     el_residence_list            = document.getElementById('residence_list');
 
-    // Get and then Populate residence list
-    getResidenceList();
+    getWebsocketData([
+        { msg_type: 'residence_list', req: { residence_list: 1 } },
+        { msg_type: 'ico_status', req: { ico_status: 1 } },
+    ], function() {
+        var residence_list = JSON.parse(sessionStorage.getItem('residence_list') || null);
+        populateResidenceList(residence_list);
+    });
 
     function isRestrictedCountry(val) {
-        // restricted countries code
-        var regex = new RegExp(['^(',
-            'as|af|at|au|be|bg|ca|ch|cy|cz|de|dk|ee|es|fi|fr|gg|gb|gr|gu|hk|hr|hu|ie|il|im|it|',
-            'iq|ir|je|jp|kp|lt|lu|lv|mp|mt|my|nl|nz|pl|pt|pr|ro|se|sg|si|sk|sy|sz|us|vi|vg|vu',
-            ')$'].join(''));
-        if (regex.test(val)) {
-            return true;
-        }
-        return false;
+        var ico_status = JSON.parse(sessionStorage.getItem('ico_status') || null);
+        const restricted_countries = ico_status.ico_countries_config.restricted;
+
+        return restricted_countries.indexOf(val) !== -1;
     }
 
     var country_names = [
-        { code: 'ca', name: 'Canada' },
         { code: 'gb', name: 'the United Kingdom' },
         { code: 'eu', name: 'the European Economic Area' },
         { code: 'hk', name: 'Hong Kong' },
         { code: 'jp', name: 'Japan' },
-        { code: 'sg', name: 'Singapore' },
-        { code: 'ch', name: 'Switzerland' },
     ]
 
     function showSecondNotice(val) {
@@ -68,7 +65,7 @@ window.onload = function() {
         var val = document.getElementById('checkbox').checked; // true or false
         var url = 'https://ico_documents.binary.com/im.pdf';
         if (val) {
-            window.open(url, '_self');
+            window.location.href = url;
         } else {
             document.getElementById('frm_accept_disclaimer_error').classList.remove('invisible');
         }
@@ -117,28 +114,38 @@ function validateResidence(el) {
     return true;
 }
 
-function getResidenceList() {
-    var residence_list = JSON.parse(sessionStorage.getItem('residence_list') || null);
-    if (residence_list) {
-        populateResidenceList(residence_list);
+function getWebsocketData(requests, done) {
+    requests = requests.filter(r => !sessionStorage.getItem(r.msg_type));
+
+    if(!requests.length) {
+        setTimeout(done, 0);
+        return;
+    }
+
+    function sendRequests() {
+        requests.forEach(function(r) {
+            wsSend(ws, r.req);
+        })
+    }
+
+    var ws = wsConnect();
+    if (ws.readyState === 1) {
+        sendRequests();
     } else {
-        var ws = wsConnect();
-        function sendResidenceList() {
-            wsSend(ws, { residence_list: 1 });
-        }
+        ws.onopen = sendRequests;
+    }
 
-        if (ws.readyState === 1) {
-            sendResidenceList();
-        } else {
-            ws.onopen = sendResidenceList;
-        }
+    ws.onmessage = function (msg) {
+        var response = JSON.parse(msg.data);
 
-        ws.onmessage = function(msg) {
-            var response = JSON.parse(msg.data);
-            if (response.residence_list) {
-                populateResidenceList(response.residence_list);
-                setSession('residence_list', JSON.stringify(response.residence_list));
-            }
+        var msg_type = response.msg_type;
+        setSession(msg_type, JSON.stringify(response[msg_type]));
+        requests = requests.filter(function(r) { return r.msg_type !== msg_type; });
+
+        if (!requests.length) {
+            setTimeout(done, 0);
+            ws.close();
+            return;
         }
     }
 }

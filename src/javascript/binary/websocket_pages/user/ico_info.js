@@ -5,6 +5,7 @@ const localize         = require('../../base/localize').localize;
 
 const COLOR_ORANGE = '#E98024';
 const COLOR_GRAY = '#C2C2C2';
+const BAR_HAS_VALUE = 'bar-has-value';
 const MAX_BID_PRICE = 10;
 
 function createGradient(svg, id, stops) {
@@ -116,45 +117,44 @@ const ICOInfo = (() => {
         $root,
         chart;
 
-    const init = (website_status) => {
+    const init = (ico_status) => {
         if (is_initialized) return;
 
-        const ico_info = website_status.ico_info;
-        const ico_status = website_status.ico_status;
+        const final_price = ico_status.ico_status !== 'open' ? +ico_status.final_price : 0;
 
-        const final_price = ico_status !== 'open' ? +ico_info.final_price : 0;
+        const bucket_size = +ico_status.histogram_bucket_size;
 
-        const bucket_size = +ico_info.histogram_bucket_size;
-
-        const keys = Object.keys(ico_info.histogram)
-                           .map(key => +key)
-                           .sort((a,b) => a - b);
+        const keys = Object.keys(ico_status.histogram)
+            .map(key => +key)
+            .sort((a,b) => a - b);
         const allValues = [];
         if (keys.length > 0) {
             const max = Math.min(keys[keys.length - 1] + 1, MAX_BID_PRICE);
             const min = final_price ? Math.max(Math.min(keys[0], final_price) - 1, 1) : Math.max(keys[0] - 1, 1);
             for(let key = max - bucket_size; key >= min; key -= bucket_size ) {
                 key = +key.toFixed(2);
-                const value = keys.indexOf(key) !== -1 ? ico_info.histogram[`${key}`] : 0;
+                const value = keys.indexOf(key) !== -1 ? ico_status.histogram[`${key}`] : 0;
                 const color = key >= final_price ? COLOR_ORANGE : COLOR_GRAY;
                 allValues.unshift({
-                    y   : value,
-                    x   : key,
-                    band: [key, key + bucket_size - 0.01],
+                    y        : value,
+                    x        : key,
+                    band     : [key, key + bucket_size - 0.01],
+                    className: value ? BAR_HAS_VALUE : '',
                     color,
                 });
             }
 
             const aboveMaxPrice = keys.filter(key => key >= MAX_BID_PRICE)
-                    .map(key => ico_info.histogram[`${key}`])
-                    .reduce((a,b) => a + b, 0);
+                .map(key => ico_status.histogram[`${key}`])
+                .reduce((a,b) => a + b, 0);
             if (aboveMaxPrice !== 0) {
                 const maxKey = keys[keys.length - 1];
                 const color = MAX_BID_PRICE >= final_price ? 'url(#gradient-0)' : 'url(#gradient-1)';
                 allValues.push({
-                    y   : aboveMaxPrice,
-                    x   : MAX_BID_PRICE,
-                    band: [MAX_BID_PRICE, maxKey],
+                    y        : aboveMaxPrice,
+                    x        : MAX_BID_PRICE,
+                    band     : [MAX_BID_PRICE, maxKey],
+                    className: BAR_HAS_VALUE,
                     color,
                 });
             }
@@ -165,6 +165,20 @@ const ICOInfo = (() => {
                 values         : allValues,
                 finalPriceLabel: `${localize('Final Price')} ($${final_price})`,
                 callback       : () => {
+                    const $bars = $root.find('.barChart svg .highcharts-column-series > rect');
+                    $bars.each((inx, bar) => {
+                        const $bar = $(bar);
+                        if ($bar.hasClass(BAR_HAS_VALUE)) {
+                            const dy = +$bar.attr('height') ? 1 : 2;
+
+                            if(dy === 2) {
+                                $bar.attr('height', '1');
+                            }
+
+                            const y = +$bar.attr('y');
+                            $bar.attr('y', `${+y - dy}`);
+                        }
+                    });
                     $loading.hide();
                     $labels.setVisibility(1);
                 },
@@ -175,22 +189,28 @@ const ICOInfo = (() => {
             is_initialized = true;
         } else {
             $('#no_bids_to_show').setVisibility(1);
+            $loading.hide();
             $root.hide();
         }
     };
 
     const onLoad = () => {
         $root = $('#ico_info');
-        $loading = $root.find('> .loading');
+        $loading = $('#ico_info_loading');
         $labels = $root.find('.x-label,.y-label');
-        $root.setVisibility(1);
-        $loading.show();
         showLoadingImage($loading[0]);
 
         getHighstock((Highstock) => {
             Highcharts = Highstock;
-            BinarySocket.send({website_status: 1}, {forced: true}).then((response) => {
-                init(response.website_status);
+            BinarySocket.send({ico_status: 1}).then((response) => {
+                if(response.error) {
+                    $('#ico_status_error').setVisibility(1).text(response.error.message);
+                    $loading.hide();
+                    $root.setVisibility(0);
+                } else {
+                    $root.setVisibility(1);
+                    init(response.ico_status);
+                }
             });
         });
     };
