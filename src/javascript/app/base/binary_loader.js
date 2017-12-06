@@ -36,6 +36,7 @@ const BinaryLoader = (() => {
             container.addEventListener('binarypjax:after',  afterContentChange);
             BinaryPjax.init(container, '#content');
         }
+        loadHandler(pages_config.trade);
     };
 
     const beforeContentChange = () => {

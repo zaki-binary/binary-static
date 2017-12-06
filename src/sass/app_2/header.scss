@@ -1,3 +1,63 @@
 header {
     background-color: $COLOR_WHITE !important;
+
+    .navbar-icons {
+        cursor: pointer;
+
+        img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+    .menu-tab {
+        display: table;
+        position: relative;
+        margin: 0 auto;
+        align-self: center;
+
+        a {
+            padding: 0 15px;
+            text-decoration: none;
+
+            span {
+                font-size: 0.8rem;
+                text-transform: capitalize;
+                color: $COLOR_BLACK;
+            }
+        }
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+    .menu-toggle {
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .menu-toolbar {
+        background-color: $COLOR_WHITE;
+
+        a {
+            align-self: center;
+            text-decoration: none;
+        }
+    }
+}
+
+.border-right {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.border-left {
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.mdc-temporary-drawer.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
+    -webkit-transform: translateX(107%);
+    transform: translateX(107%);
+    left: auto;
+    right: 0;
+}
+
+.mdc-temporary-drawer--open.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
+    -webkit-transform: none;
+    transform: none;
 }

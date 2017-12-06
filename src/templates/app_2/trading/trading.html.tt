@@ -1,1 +1,69 @@
-<div id="trading_2"></div>
+<div id="trading_2" class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+            <h1>Header 1</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+            <div class="mdc-elevation--z4 btn sm-down hide">
+                <span>Start Time</span>
+            </div>
+            <div class="mdc-elevation--z4 btn sm-down hide">
+                <span>Duration</span>
+            </div>
+            <div class="mdc-elevation--z4 btn small sm-down hide">
+                <span>Amount</span>
+            </div>
+            <div id="modal-popup" class="mdc-elevation--z4 btn modal sm-up hide">
+                <p><span>Modal Popup</span></p>
+            </div>
+            <div class="mdc-elevation--z4 btn big">
+                <span>Rise/Fall</span>
+            </div>
+        </div>
+    </div>
+    <aside id="mdc-dialog-with-list"
+        class="mdc-dialog"
+        role="alertdialog"
+        aria-labelledby="mdc-dialog-with-list-label"
+        aria-describedby="mdc-dialog-with-list-description">
+        <div class="mdc-dialog__surface set-height full set-width full">
+            <header class="mdc-dialog__header">
+                <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">Select Ipsum/Lorem</h2>
+            </header>
+            <section id="mdc-dialog-with-list-description" class="mdc-dialog__body mdc-dialog__body--scrollable set-height max-eighty">
+                <ul class="mdc-list">
+                    <li class="mdc-list-item">
+                        <select class="mdc-select full-width">
+                            <option value="" selected>Select Lorem</option>
+                            <option value="lorem">lorem</option>
+                            <option value="ipsum">ipsum</option>
+                            <option value="lorem">lorem</option>
+                            <option value="ipsum">ipsum</option>
+                            <option value="lorem">lorem</option>
+                            <option value="ipsum">ipsum</option>
+                        </select>
+                    </li>
+                    <li class="mdc-list-item">
+                      <label class="mdc-text-field text full-width">
+                      <input type="text" class="mdc-text-field__input">
+                      <span class="mdc-text-field__label">Hint Text</span>
+                      <div class="mdc-text-field__bottom-line"></div>
+                      </label>
+                    </li>
+                    <li class="mdc-list-item">
+                      <label class="mdc-text-field amount full-width">
+                      <input type="date" class="mdc-text-field__input">
+                      <div class="mdc-text-field__bottom-line"></div>
+                      </label>
+                    </li>
+                </ul>
+            </section>
+            <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Discard</button>
+                <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Confirm</button>
+            </footer>
+        </div>
+        <div class="mdc-dialog__backdrop"></div>
+    </aside>
+</div>

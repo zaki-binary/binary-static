@@ -1,3 +1,79 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.sm-down {
+    &.hide {
+        @media (max-width: 841px) {
+            display: none;
+        }
+    }
+}
+
+.sm-up {
+    &.hide {
+        @media (min-width: 840px) {
+            display: none;
+        }
+    }
+}
+
+.invisible {
+    display: none !important;
+    visibility: hidden;
+}
+
 #trading_2 {
-    // new trading css
+    .logo {
+        margin: auto;
+        display: block;
+    }
+    h1 {
+        font-weight: 300;
+        color: $COLOR_ORANGE;
+        text-align: center;
+    }
+    .btn {
+        padding: 40px 0;
+        margin-bottom: 1rem;
+        text-align: center;
+
+        &.small {
+            padding: 20px 0;
+        }
+        &.big {
+            padding: 60px 0;
+
+            @media (max-width: 841px) {
+                padding: 40px 0;
+            }
+        }
+        &.modal {
+            padding: 10px 0;
+        }
+    }
+    .set-height {
+        &.full {
+            height: 100%;
+        }
+        &.max-eighty {
+            max-height: 80%;
+        }
+    }
+    .set-width {
+        &.full {
+            width: 100%;
+        }
+    }
+    select {
+        &.full-width {
+            width: 100%;
+        }
+    }
+    label {
+        &.full-width {
+            width: calc(100% - 24px);
+        }
+    }
 }
