@@ -1,3 +1,31 @@
-<header>
-    <nav></nav>
+<header class="mdc-toolbar menu-toolbar mdc-elevation--z4">
+    <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <a href="#" class="material-icons mdc-toolbar__menu-icon navbar-icons menu-toggle">menu</a>
+            <a class="mdc-toolbar__menu-icon navbar-icons" href="#"><img src="" /></a>
+            <nav id="main-menu-tab" class="mdc-tab-bar menu-tab">
+                <a id="trading"   class="mdc-tab mdc-tab--active" href=""><span>Trade</span></a>
+                <a id="portfolio" class="mdc-tab" href=""><span>Portfolio</span></a>
+                <a id="statement" class="mdc-tab" href="#"><span>Statement</span></a>
+                <a id="cashier"   class="mdc-tab" href="#"><span>Cashier</span></a>
+                <span class="mdc-tab-bar__indicator"></span>
+            </nav>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-center">
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+            <a href="#" class="material-icons mdc-toolbar__menu-icon navbar-icons border-left">notifications_none</a>
+        </section>
+    </div>
 </header>
+
+<aside class="mdc-temporary-drawer mdc-typography">
+    <nav class="mdc-temporary-drawer__drawer">
+        <nav id="icon-with-text-demo" class="mdc-temporary-drawer__content mdc-list">
+            <a class="mdc-list-item mdc-temporary-drawer--selected" href=""><i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Trade</a>
+            <a class="mdc-list-item" href=""><i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Portfolio</a>
+            <a class="mdc-list-item" href="#"><i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Statement</a>
+            <a class="mdc-list-item" href="#"><i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Cashier</a>
+        </nav>
+    </nav>
+</aside>

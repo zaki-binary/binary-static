@@ -30,7 +30,7 @@ const BinaryLoader = (() => {
         Client.init();
         BinarySocket.init(BinarySocketGeneral.initOptions());
 
-        container = document.getElementById('content-holder');
+        container = document.getElementById('content');
         if (container) {
             container.addEventListener('binarypjax:before', beforeContentChange);
             container.addEventListener('binarypjax:after',  afterContentChange);
