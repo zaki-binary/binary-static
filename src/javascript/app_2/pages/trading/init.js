@@ -9,6 +9,7 @@ const mdcTextField = require('@material/textfield');
 
 const Trading = (() => {
     const onLoad = () => {
+        console.log('hello_word');
         State.set('is_trading_2', true);
 
         const MDCTemporaryDrawer = mdcDrawer.MDCTemporaryDrawer;

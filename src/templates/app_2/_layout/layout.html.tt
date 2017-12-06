@@ -12,22 +12,24 @@
 [%= END %]
 
 [% IF layout =%]
-    <div id="content"[% IF current_route +%] class="[% current_route %]-content"[% END %]>
-        <div id="page_info" class="invisible">
-            [% PROCESS _common/components/title.html.tt %]
-            <div id="content_class">[% current_route %]-content</div>
-        </div>
-        [% IF layout != 'full_width' =%]
-        <div class="container">
-        [%= END %]
+    <div id="content-holder">
+        <div id="content"[% IF current_route +%] class="[% current_route %]-content"[% END %]>
+            <div id="page_info" class="invisible">
+                [% PROCESS _common/components/title.html.tt %]
+                <div id="content_class">[% current_route %]-content</div>
+            </div>
+            [% IF layout != 'full_width' =%]
+            <div class="container">
+            [%= END %]
 [%= END %]
 
 [% content %]
 
 [% IF layout =%]
-    [% IF layout != 'full_width' =%]
+        [% IF layout != 'full_width' =%]
+            </div>
+        [%= END %]
         </div>
-    [%= END %]
     </div>
 [%= END %]
 
