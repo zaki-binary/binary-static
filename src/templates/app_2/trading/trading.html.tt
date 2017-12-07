@@ -1,23 +1,43 @@
 <div id="trading_2" class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-            <h1>Header 1</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-            <div class="mdc-elevation--z4 btn small sm-down hide">
-                <span>Start Time</span>
+            <div class="mdc-elevation--z2 btn small sm-down hide">
+                <select class="mdc-select full-width">
+                    <option value="" selected>Now</option>
+                    <option value="tomrrow">Tomorrow</option>
+                </select>
             </div>
-            <div class="mdc-elevation--z4 btn sm-down hide">
-                <span>Duration</span>
+            <div class="mdc-elevation--z2 btn sm-down hide">
+                <select class="mdc-select full-width">
+                    <option value="duration" selected>Duration</option>
+                    <option value="end-time">End Time</option>
+                </select>
+                <div class="duration-selector">
+                    <div class="duration-input">
+                        <div class="mdc-text-field text full-width">
+                            <input type="text" id="text-field-no-js" class="mdc-text-field__input" placeholder="1">
+                            <div class="mdc-text-field__bottom-line"></div>
+                        </div>
+                    </div>
+                    <div class="duration-type">
+                        <select class="mdc-select full-width">
+                            <option value="day" selected>Day</option>
+                            <option value="ticks">Ticks</option>
+                            <option value="minutes">Minutes</option>
+                            <option value="hours">Hours</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="mdc-elevation--z4 btn small sm-down hide">
+            <div class="mdc-elevation--z2 btn small sm-down hide">
                 <span>Amount</span>
             </div>
             <div id="modal-popup" class="mdc-elevation--z4 btn modal sm-up hide">
                 <p><span>Modal Popup</span></p>
             </div>
-            <div class="mdc-elevation--z4 btn big">
+            <div class="mdc-elevation--z2 btn big">
                 <span>Rise/Fall</span>
             </div>
         </div>

@@ -1,53 +1,128 @@
 header {
     background-color: $COLOR_WHITE !important;
+    width: 100%;
 
-    .navbar-icons {
-        cursor: pointer;
-
-        img {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-    }
-    .menu-tab {
-        display: table;
+    .menu-items {
+        display: flex;
         position: relative;
-        margin: 0 auto;
-        align-self: center;
+        box-sizing: border-box;
+        width: 100%;
 
-        a {
-            padding: 0 15px;
-            text-decoration: none;
+        .navbar-icons {
+            cursor: pointer;
+            padding: 5px 15px;
 
-            span {
-                font-size: 0.8rem;
-                text-transform: capitalize;
-                color: $COLOR_BLACK;
+            img {
+                width: 1.5rem;
+                height: auto;
             }
         }
-        @media (max-width: 768px) {
-            display: none;
-        }
-    }
-    .menu-toggle {
-        border-right: 1px solid rgba(0, 0, 0, 0.2);
-    }
-    .menu-toolbar {
-        background-color: $COLOR_WHITE;
+        .menu-left {
+            justify-content: flex-start;
+            order: -1;
+            display: inline-flex;
+            flex: 1;
 
-        a {
-            align-self: center;
-            text-decoration: none;
+            .menu-toggle {
+                border-right: 1px solid rgba(0, 0, 0, 0.2);
+            }
+            .menu-links {
+                align-self: center;
+                padding-bottom: 5px;
+
+                a {
+                    padding: 0 30px;
+                    text-decoration: none;
+
+                    span {
+                        font-size: 0.7rem;
+                        text-transform: capitalize;
+                        color: $COLOR_DARK_BLUE;
+                    }
+                }
+                @media (max-width: 768px) {
+                    display: none;
+                }
+            }
+        }
+        .notifications-toggle {
+            justify-content: flex-end;
+            border-left: 1px solid rgba(0, 0, 0, 0.2);
         }
     }
 }
 
-.border-right {
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
-}
+#material-drawer {
+    .drawer-container {
+        @media (min-width: 600px) {
+            max-width: 260px;
+        }
+    }
+    .drawer-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-.border-left {
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
+        .drawer-icons {
+            cursor: pointer;
+            padding: 4px 8px;
+
+            &.menu-close {
+                display: inline-flex;
+
+                img {
+                    width: 1.5rem;
+                    height: auto;
+                    align-self: center;
+                }
+            }
+            &.binary-logo {
+                display: inline-flex;
+                padding: 4px 20px;
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+                img {
+                    width: 7rem;
+                    height: auto;
+                    align-self: center;
+                }
+            }
+            &.notification {
+                display: inline-flex;
+                justify-content: flex-start;
+                order: -1;
+                flex: 1;
+
+                span {
+                    font-size: 0.8rem;
+                    padding-left: 6px;
+                }
+            }
+            &.notifications-close {
+                display: inline-flex;
+                justify-content: flex-end;
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                padding: 6px;
+
+                img {
+                    width: 1.5rem;
+                    height: auto;
+                    align-self: center;
+                }
+            }
+        }
+    }
+    .drawer-items {
+        font-size: 0.7rem;
+    }
+    .notification-items {
+        justify-content: space-evenly;
+
+        span {
+            font-size: 0.6rem;
+            text-align: center;
+        }
+    }
 }
 
 .mdc-temporary-drawer.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
@@ -60,4 +135,12 @@ header {
 .mdc-temporary-drawer--open.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
     -webkit-transform: none;
     transform: none;
+}
+
+.border-right {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.border-left {
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
 }

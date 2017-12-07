@@ -1,44 +1,45 @@
-<header class="mdc-toolbar menu-toolbar mdc-elevation--z4">
-  <div class="mdc-toolbar__row">
-    <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <div class="mdc-toolbar__menu-icon navbar-icons menu-toggle"><img src="[% request.url_for('images/pages/new-ui/header/menu.svg') %]" alt="Menu"></img></div>
-        <a class="mdc-toolbar__menu-icon navbar-icons" href="#"><img src="[% request.url_for('images/pages/binary-symbol-logo.svg') %]" alt="Home"></img></a>
-        <nav class="mdc-tab-bar menu-tab">
-            <a class="mdc-tab mdc-tab--active" href="[% request.url_for('app_2/trade') %]"><span>Trade</span></a>
-            <a class="mdc-tab" href="[% request.url_for('app_2/portfolio') %]"><span>Portfolio</span></a>
-            <a class="mdc-tab" href="#"><span>Statement</span></a>
-            <a class="mdc-tab" href="#"><span>Cashier</span></a>
-            <span class="mdc-tab-bar__indicator"></span>
-        </nav>
-    </section>
-    <section class="mdc-toolbar__section mdc-toolbar__section--align-center">
-    </section>
-    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-        <div class="mdc-toolbar__menu-icon navbar-icons border-left notifications-toggle"><img src="[% request.url_for('images/pages/new-ui/header/notify_none.svg') %]" alt="Alert"></img></div>
-    </section>
-  </div>
+<header class="mdc-elevation--z2">
+    <div class="menu-items">
+        <div class="menu-left">
+            <div class="navbar-icons menu-toggle"><img src="[% request.url_for('images/pages/new-ui/header/menu.svg') %]" alt="Menu"></img></div>
+            <div class="navbar-icons"><img src="[% request.url_for('images/pages/binary-symbol-logo.svg') %]" alt="Binary.com"></img></div>
+            <div class="menu-links">
+                <a href="[% request.url_for('app_2/trade') %]"><span>Trade</span></a>
+                <a href="#"><span>Portfolio</span></a>
+                <a href="#"><span>Statement</span></a>
+                <a href="#"><span>Cashier</span></a>
+            </div>
+        </div>
+        <div class="navbar-icons notifications-toggle"><img src="[% request.url_for('images/pages/new-ui/header/notify_none.svg') %]" alt="Alert"></img></div>
+    </div>
 </header>
 
-<aside class="mdc-temporary-drawer mdc-typography menu-list">
-  <nav class="mdc-temporary-drawer__drawer">
-
-    <nav id="icon-with-text-demo" class="mdc-temporary-drawer__content mdc-list">
-      <a class="mdc-list-item mdc-temporary-drawer--selected" href="[% request.url_for('app_2/trade') %]">Trade</a>
-      <a class="mdc-list-item" href="#">Portfolio</a>
-      <a class="mdc-list-item" href="#">Statement</a>
-      <a class="mdc-list-item" href="#">Cashier</a>
-    </nav>
-  </nav>
+<aside id="material-drawer" class="mdc-temporary-drawer mdc-typography menu-list">
+    <nav class="mdc-temporary-drawer__drawer drawer-container">
+          <div class="drawer-header">
+              <div class="drawer-icons menu-close"><img src="[% request.url_for('images/pages/new-ui/header/close.svg') %]" alt="Close"></img></div>
+              <div class="drawer-icons binary-logo"><img src="[% request.url_for('images/pages/new-ui/header/binary_logo_dark.svg') %]" alt="Binary.com"></img></div>
+            </div>
+          <nav class="mdc-temporary-drawer__content mdc-list">
+              <a class="mdc-list-item drawer-items mdc-temporary-drawer--selected" href="[% request.url_for('app_2/trade') %]"><span>Trade</span></a>
+              <a class="mdc-list-item drawer-items" href="#"><span>Portfolio</span></a>
+              <a class="mdc-list-item drawer-items" href="#"><span>Statement</span></a>
+              <a class="mdc-list-item drawer-items" href="#"><span>Cashier</span></a>
+          </nav>
+      </nav>
 </aside>
 
-<aside class="mdc-temporary-drawer mdc-temporary-drawer--right mdc-typography notifications-list">
-  <nav class="mdc-temporary-drawer__drawer">
-
-    <nav id="icon-with-text-demo" class="mdc-temporary-drawer__content mdc-list">
-        <a class="mdc-list-item mdc-temporary-drawer--selected" href="#">Alert</a>
-        <a class="mdc-list-item" href="#">Alert</a>
-        <a class="mdc-list-item" href="#">Alert</a>
-        <a class="mdc-list-item" href="#">Alert</a>
+<aside id="material-drawer" class="mdc-temporary-drawer mdc-temporary-drawer--right mdc-typography notifications-list">
+    <nav class="mdc-temporary-drawer__drawer drawer-container">
+        <div class="drawer-header">
+            <div class="drawer-icons notification"><span>Notifications</span></div>
+            <div class="drawer-icons notifications-close"><img src="[% request.url_for('images/pages/new-ui/header/close.svg') %]" alt="Close"></img></div>
+        </div>
+        <nav class="mdc-temporary-drawer__content mdc-list">
+            <a class="mdc-list-item notification-items mdc-temporary-drawer--selected" href="#"><span>Alert</span></a>
+            <a class="mdc-list-item notification-items" href="#"><span>Alert</span></a>
+            <a class="mdc-list-item notification-items" href="#"><span>Alert</span></a>
+            <a class="mdc-list-item notification-items" href="#"><span>Alert</span></a>
+        </nav>
     </nav>
-  </nav>
 </aside>
