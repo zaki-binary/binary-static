@@ -1,1 +1,31 @@
-<div id="menu"></div>
+<div id="menu">
+    <aside id="material-drawer" class="mdc-temporary-drawer mdc-typography menu-list">
+        <nav class="mdc-temporary-drawer__drawer drawer-container">
+            <div class="drawer-header">
+                <div class="drawer-icons menu-close"><img src="[% request.url_for('images/pages/new-ui/header/close.svg') %]" alt="Close"></img></div>
+                <div class="drawer-icons binary-logo"><img src="[% request.url_for('images/pages/new-ui/header/binary_logo_dark.svg') %]" alt="Binary.com"></img></div>
+              </div>
+              <nav class="mdc-temporary-drawer__content mdc-list">
+                  <a class="mdc-list-item drawer-items mdc-temporary-drawer--selected" href="[% request.url_for('app_2/trade') %]"><span>Trade</span></a>
+                  <a class="mdc-list-item drawer-items" href="#"><span>Portfolio</span></a>
+                  <a class="mdc-list-item drawer-items" href="#"><span>Statement</span></a>
+                  <a class="mdc-list-item drawer-items" href="#"><span>Cashier</span></a>
+              </nav>
+          </nav>
+    </aside>
+
+    <aside id="material-drawer" class="mdc-temporary-drawer mdc-temporary-drawer--right mdc-typography notifications-list">
+        <nav class="mdc-temporary-drawer__drawer drawer-container">
+            <div class="drawer-header">
+                <div class="drawer-icons notification"><span>Notifications</span></div>
+                <div class="drawer-icons notifications-close"><img src="[% request.url_for('images/pages/new-ui/header/close.svg') %]" alt="Close"></img></div>
+            </div>
+            <nav class="mdc-temporary-drawer__content mdc-list">
+                <a class="mdc-list-item notification-items mdc-temporary-drawer--selected" href="#"><span>Alert</span></a>
+                <a class="mdc-list-item notification-items" href="#"><span>Alert</span></a>
+                <a class="mdc-list-item notification-items" href="#"><span>Alert</span></a>
+                <a class="mdc-list-item notification-items" href="#"><span>Alert</span></a>
+            </nav>
+        </nav>
+    </aside>
+</div>

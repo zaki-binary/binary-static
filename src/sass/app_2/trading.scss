@@ -13,6 +13,14 @@ body {
         font-weight: 300;
         line-height: 1.4em;
     }
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid $COLOR_LIGHT_GRAY;
+        margin: 1em 0;
+        padding: 0;
+    }
 }
 
 .sm-down {
@@ -81,6 +89,72 @@ body {
     label {
         &.full-width {
             width: calc(100% - 24px);
+        }
+    }
+    .contract-market-container {
+        padding: 0 10px;
+
+        .price-container {
+            display: flex;
+            position: relative;
+            box-sizing: border-box;
+
+            .first-column {
+                display: inline-flex;
+                justify-content: flex-start;
+                flex: 1;
+                order: -1;
+            }
+            .second-column {
+                display: inline-flex;
+                justify-content: center;
+                flex: 1;
+                order: 0;
+            }
+            .third-column {
+                display: inline-flex;
+                justify-content: flex-end;
+                order: 1;
+
+                button {
+                    background: $COLOR_GREEN !important;
+                    text-align: center;
+                    line-height: 1;
+                    padding: 0px 25px;
+
+                    .btn-icon {
+                        font-size: 2em;
+                        padding: 10px 5px 0px;
+                    }
+                    p {
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+    }
+    .duration-selector {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 8px;
+
+        input {
+            border-radius: 0;
+        }
+        .duration-input {
+            flex-grow: 1;
+
+            .text {
+                width: 7rem;
+                margin-bottom: 0;
+            }
+        }
+        .duration-type {
+            flex-grow: 1;
         }
     }
 }

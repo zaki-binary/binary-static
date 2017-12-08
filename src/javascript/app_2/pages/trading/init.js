@@ -29,22 +29,34 @@ const Trading = (() => {
         });
         // const amountField = new mdcTextField.MDCTextField(document.querySelector('.amount'));
         // const textField = new mdcTextField.MDCTextField(document.querySelector('.text'));
-        const dialog = new mdcDialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
+        const dialog_1 = new mdcDialog.MDCDialog(document.querySelector('#modal-1'));
 
-        // console.log(amountField);
-        // console.log(textField);
-
-        dialog.listen('MDCDialog:accept', () => {
+        dialog_1.listen('MDCDialog:accept', () => {
             // console.log('confirm');
         });
 
-        dialog.listen('MDCDialog:cancel', () => {
+        dialog_1.listen('MDCDialog:cancel', () => {
             // console.log('discard');
         });
 
-        document.querySelector('#modal-popup').addEventListener('click', (evt) => {
-            dialog.lastFocusedTarget = evt.target;
-            dialog.show();
+        document.querySelector('#modal-popup-1').addEventListener('click', (evt) => {
+            dialog_1.lastFocusedTarget = evt.target;
+            dialog_1.show();
+        });
+
+        const dialog_2 = new mdcDialog.MDCDialog(document.querySelector('#modal-2'));
+
+        dialog_2.listen('MDCDialog:accept', () => {
+            // console.log('confirm');
+        });
+
+        dialog_2.listen('MDCDialog:cancel', () => {
+            // console.log('discard');
+        });
+
+        document.querySelector('#modal-popup-2').addEventListener('click', (evt) => {
+            dialog_2.lastFocusedTarget = evt.target;
+            dialog_2.show();
         });
     };
 
