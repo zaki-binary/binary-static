@@ -1,5 +1,6 @@
 header {
     background-color: $COLOR_WHITE !important;
+    position: relative;
     border: 0;
     width: 100%;
 
@@ -13,9 +14,16 @@ header {
             cursor: pointer;
             padding: 5px 15px;
 
+            &.binary-logo {
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+            }
             img {
                 width: 1.5rem;
                 height: auto;
+
+                &.logo-img {
+                    width: 2rem;
+                }
             }
         }
         .menu-left {
@@ -23,9 +31,10 @@ header {
             order: -1;
             display: inline-flex;
             flex: 1;
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
 
             .menu-toggle {
-                border-right: 1px solid rgba(0, 0, 0, 0.2);
+                align-self: center;
             }
             .menu-links {
                 align-self: center;
@@ -48,7 +57,7 @@ header {
         }
         .notifications-toggle {
             justify-content: flex-end;
-            border-left: 1px solid rgba(0, 0, 0, 0.2);
+            align-self: center;
         }
     }
 }
@@ -83,7 +92,7 @@ header {
                 border-left: 1px solid rgba(0, 0, 0, 0.2);
 
                 img {
-                    width: 7rem;
+                    width: 9.5rem;
                     height: auto;
                     align-self: center;
                 }
@@ -103,7 +112,7 @@ header {
                 display: inline-flex;
                 justify-content: flex-end;
                 border-left: 1px solid rgba(0, 0, 0, 0.2);
-                padding: 6px;
+                padding: 9px;
 
                 img {
                     width: 1.5rem;
