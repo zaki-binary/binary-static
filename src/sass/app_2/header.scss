@@ -49,6 +49,34 @@ header {
                         text-transform: capitalize;
                         color: $COLOR_DARK_BLUE;
                     }
+                    &:last-child {
+                        &:after {
+                            display: block;
+                            content: '';
+                            height: 3px;
+                            width: 26vh;
+                            background-color: $primaryBrandColor;
+                            right: 0;
+                            left: 34vh;
+                            position: absolute;
+                            margin-top: 10px;
+                            transition: 0.4s ease-in-out;
+                        }
+                    }
+                    &:hover {
+                        &:first-child ~ a:last-child:after {
+                            margin-left: 0;
+                        }
+                        &:nth-child(2) ~ a:last-child:after {
+                            margin-left: 31vh;
+                        }
+                        &:nth-child(3) ~ a:last-child:after {
+                            margin-left: 66vh;
+                        }
+                        &:last-child:after {
+                            margin-left: 100vh;
+                        }
+                    }
                 }
                 @media (max-width: 768px) {
                     display: none;
@@ -136,14 +164,12 @@ header {
 }
 
 .mdc-temporary-drawer.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
-    -webkit-transform: translateX(107%);
     transform: translateX(107%);
     left: auto;
     right: 0;
 }
 
 .mdc-temporary-drawer--open.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
-    -webkit-transform: none;
     transform: none;
 }
 
