@@ -4,16 +4,34 @@
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
             <div class="mdc-elevation--z2 btn small sm-down hide">
-                <select class="mdc-select full-width">
-                    <option value="" selected>Now</option>
-                    <option value="tomrrow">Tomorrow</option>
-                </select>
+                <div class="mdc-select full-width date-start" role="listbox" tabindex="0">
+                    <span class="mdc-select__selected-text">Now</span>
+                    <div class="mdc-simple-menu mdc-select__menu">
+                        <ul class="mdc-list mdc-simple-menu__items">
+                            <li class="mdc-list-item" role="option" aria-selected id="now" tabindex="0">
+                              Now
+                            </li>
+                            <li class="mdc-list-item" role="option" id="tomorrow" tabindex="0">
+                              Tomorrow
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="mdc-elevation--z2 btn small sm-down hide">
-                <select class="mdc-select full-width">
-                    <option value="duration" selected>Duration</option>
-                    <option value="end-time">End Time</option>
-                </select>
+                <div class="mdc-select full-width expiry" role="listbox" tabindex="0">
+                    <span class="mdc-select__selected-text">Duration</span>
+                    <div class="mdc-simple-menu mdc-select__menu">
+                        <ul class="mdc-list mdc-simple-menu__items">
+                            <li class="mdc-list-item" role="option" aria-selected id="duration" tabindex="0">
+                              Duration
+                            </li>
+                            <li class="mdc-list-item" role="option" id="end-time" tabindex="0">
+                              End Time
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="duration-selector">
                     <div class="duration-input">
                         <div class="mdc-text-field text">
@@ -21,23 +39,45 @@
                             <div class="mdc-text-field__bottom-line"></div>
                         </div>
                     </div>
-                    <div class="duration-type">
-                        <select class="mdc-select full-width">
-                            <option value="day" selected>Day</option>
-                            <option value="ticks">Ticks</option>
-                            <option value="minutes">Minutes</option>
-                            <option value="hours">Hours</option>
-                        </select>
+                    <div class="duration-type right">
+                        <div class="mdc-select duration-unit" role="listbox" tabindex="0">
+                            <span class="mdc-select__selected-text">Day</span>
+                            <div class="mdc-simple-menu mdc-select__menu">
+                                <ul class="mdc-list mdc-simple-menu__items">
+                                    <li class="mdc-list-item" role="option" aria-selected id="day" tabindex="0">
+                                      Day
+                                    </li>
+                                    <li class="mdc-list-item" role="option" id="ticks" tabindex="0">
+                                      Ticks
+                                    </li>
+                                    <li class="mdc-list-item" role="option" id="minutes" tabindex="0">
+                                      Minutes
+                                    </li>
+                                    <li class="mdc-list-item" role="option" id="hours" tabindex="0">
+                                      Hours
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="mdc-elevation--z2 btn small sm-down hide">
                 <div class="duration-selector">
-                    <div class="duration-type">
-                        <select class="mdc-select full-width">
-                            <option value="payout" selected>Payout</option>
-                            <option value="stake">Stake</option>
-                        </select>
+                    <div class="duration-type left">
+                        <div class="mdc-select amount-type" role="listbox" tabindex="0">
+                            <span class="mdc-select__selected-text">Payout</span>
+                            <div class="mdc-simple-menu mdc-select__menu">
+                                <ul class="mdc-list mdc-simple-menu__items">
+                                    <li class="mdc-list-item" role="option" aria-selected id="payout" tabindex="0">
+                                      Payout
+                                    </li>
+                                    <li class="mdc-list-item" role="option" id="stake" tabindex="0">
+                                      Stake
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="duration-input">
                         <div class="mdc-text-field text">

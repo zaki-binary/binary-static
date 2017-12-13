@@ -93,6 +93,13 @@ body {
             width: 100%;
         }
     }
+    .mdc-select {
+        width: 100% !important;
+
+        &.full-width {
+            max-width: calc(100% - 40px);
+        }
+    }
     label {
         &.full-width {
             width: calc(100% - 24px);
@@ -150,19 +157,19 @@ body {
         align-self: center;
         justify-content: center;
         text-align: center;
+        padding: 0 8px;
         margin-top: 8px;
 
         .duration-input {
-            flex-grow: 1;
-
             .text {
                 margin-bottom: 0;
 
                 input {
-                    width: 85%;
+                    width: 100%;
                     border-radius: 0;
                     box-sizing: border-box;
                     min-height: 32px;
+                    font-size: 1rem;
                 }
                 input::placeholder {
                     font-size: 1rem;
@@ -172,6 +179,12 @@ body {
         .duration-type {
             flex-grow: 1;
 
+            &.right {
+                padding-left: 20px;
+            }
+            &.left {
+                padding-right: 20px;
+            }
             select {
                 width: 110px;
             }

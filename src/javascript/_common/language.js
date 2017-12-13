@@ -65,15 +65,18 @@ const Language = (() => {
     const onChangeLanguage = () => {
         applyToAllElements('li', (el) => {
             el.addEventListener('click', (e) => {
-                if (e.target.nodeName !== 'LI') return;
-                const lang = e.target.getAttribute('class');
-                if (getLanguage() === lang) return;
-                const display_language = document.getElementById('display_language');
-                if (display_language) {
-                    elementTextContent(display_language.getElementsByClassName('language'), e.target.textContent);
+                const languages = document.getElementsByClassName('languages');
+                if(languages.length) {
+                    if (e.target.nodeName !== 'LI') return;
+                    const lang = e.target.getAttribute('class');
+                    if (getLanguage() === lang) return;
+                    const display_language = document.getElementById('display_language');
+                    if (display_language) {
+                        elementTextContent(display_language.getElementsByClassName('language'), e.target.textContent);
+                    }
+                    setCookieLanguage(lang);
+                    document.location = urlForLanguage(lang);
                 }
-                setCookieLanguage(lang);
-                document.location = urlForLanguage(lang);
             });
         }, '', document.getElementById('select_language'));
     };

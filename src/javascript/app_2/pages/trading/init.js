@@ -2,12 +2,33 @@ const State        = require('../../../_common/storage').State;
 const mdcDrawer    = require('@material/drawer');
 const mdcDialog    = require('@material/dialog');
 // const mdcTextField = require('@material/textfield');
-// const mdcSelect = require('@material/select');
+const mdcSelect = require('@material/select');
 // const mdcRadio = require('@material/radio');
 
 const Trading = (() => {
     const onLoad = () => {
         State.set('is_trading_2', true);
+        const MDCSelect = mdcSelect.MDCSelect;
+        const select_date_start = new MDCSelect(document.querySelector('.date-start'));
+        select_date_start.listen('MDCSelect:change', () => {
+            console.log(select_date_start.value);
+        });
+
+        const select_expiry = new MDCSelect(document.querySelector('.expiry'));
+        select_expiry.listen('MDCSelect:change', () => {
+            console.log(select_expiry.value);
+        });
+
+        const select_duration_unit = new MDCSelect(document.querySelector('.duration-unit'));
+        select_duration_unit.listen('MDCSelect:change', () => {
+            console.log(select_duration_unit.value);
+        });
+
+        const select_amount_type = new MDCSelect(document.querySelector('.amount-type'));
+        select_amount_type .listen('MDCSelect:change', () => {
+            console.log(select_amount_type .value);
+        });
+
         const MDCTemporaryDrawer = mdcDrawer.MDCTemporaryDrawer;
         const drawer = new MDCTemporaryDrawer(document.querySelector('.mdc-temporary-drawer'));
         const notify_drawer = new MDCTemporaryDrawer(document.querySelector('.notifications-list'));
