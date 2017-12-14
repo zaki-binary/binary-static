@@ -15,7 +15,7 @@ header {
             padding: 5px 15px;
 
             &.binary-logo {
-                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
             }
             img {
                 width: 1.5rem;
@@ -31,7 +31,7 @@ header {
             order: -1;
             display: inline-flex;
             flex: 1;
-            border-right: 1px solid rgba(0, 0, 0, 0.2);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
 
             .menu-toggle {
                 align-self: center;
@@ -99,7 +99,7 @@ header {
     .drawer-header {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
         .drawer-icons {
             cursor: pointer;
@@ -117,7 +117,7 @@ header {
             &.binary-logo {
                 display: inline-flex;
                 padding: 4px 20px;
-                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
 
                 img {
                     width: 9.5rem;
@@ -139,7 +139,7 @@ header {
             &.notifications-close {
                 display: inline-flex;
                 justify-content: flex-end;
-                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
                 padding: 9px;
 
                 img {
@@ -151,18 +151,24 @@ header {
         }
     }
     .drawer-items {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
     .notification-items {
         justify-content: space-evenly;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
         span {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             text-align: center;
         }
     }
 }
 
+.notifications-list .mdc-list {
+    padding: unset;
+}
+
+//Fix for material-drawer for right-sided opening
 .mdc-temporary-drawer.mdc-temporary-drawer--right .mdc-temporary-drawer__drawer {
     transform: translateX(107%);
     left: auto;
@@ -174,9 +180,9 @@ header {
 }
 
 .border-right {
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .border-left {
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
