@@ -1,13 +1,20 @@
-const State        = require('../../../_common/storage').State;
-const mdcDrawer    = require('@material/drawer');
-const mdcDialog    = require('@material/dialog');
-// const mdcTextField = require('@material/textfield');
-const mdcSelect = require('@material/select');
-// const mdcRadio = require('@material/radio');
+const State               = require('../../../_common/storage').State;
+const applyToAllElements  = require('../../../_common/utility').applyToAllElements;
+const mdcDrawer           = require('@material/drawer');
+const mdcDialog           = require('@material/dialog');
+const mdcSelect           = require('@material/select');
+const mdcRipple           = require('@material/ripple');
+// const mdcTextField     = require('@material/textfield');
+// const mdcRadio         = require('@material/radio');
 
 const Trading = (() => {
     const onLoad = () => {
         State.set('is_trading_2', true);
+
+        applyToAllElements('button', (el) => {
+            mdcRipple.MDCRipple.attachTo(el);
+        });
+
         const MDCSelect = mdcSelect.MDCSelect;
         const select_date_start = new MDCSelect(document.querySelector('.date-start'));
         select_date_start.listen('MDCSelect:change', () => {
