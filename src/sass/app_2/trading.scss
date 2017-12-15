@@ -146,7 +146,7 @@ body {
     .duration-selector {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         align-self: center;
         justify-content: center;
         text-align: center;
@@ -155,17 +155,25 @@ body {
 
         .duration-input {
             .text {
-                margin-bottom: 0;
+                margin-top: 5px !important;
+                height: unset !important;
 
                 input {
                     width: 100%;
                     border-radius: 0;
                     box-sizing: border-box;
-                    min-height: 32px;
                     font-size: 1rem;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
                 }
                 input::placeholder {
                     font-size: 1rem;
+                }
+                i {
+                    font-size: 1em;
+                    align-self: flex-start;
+                }
+                .line {
+                    background-color: $primaryBrandColor !important;
                 }
             }
         }
@@ -177,9 +185,6 @@ body {
             }
             &.left {
                 padding-right: 20px;
-            }
-            select {
-                width: 110px;
             }
         }
     }

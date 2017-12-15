@@ -34,10 +34,13 @@
                 </div>
                 <div class="duration-selector">
                     <div class="duration-input">
-                        <div class="mdc-text-field text">
-                            <input type="text" id="text-field-no-js" class="mdc-text-field__input" placeholder="1">
-                            <div class="mdc-text-field__bottom-line"></div>
-                        </div>
+                        <div class="mdc-text-field text duration-value">
+                            <input type="text" id="duration_value" class="mdc-text-field__input" placeholder="1" value="1">
+                            <div class="mdc-text-field__bottom-line line"></div>
+                      </div>
+                      <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+                          The minimum duration is 1 day
+                      </p>
                     </div>
                     <div class="duration-type right">
                         <div id="duration_unit" class="mdc-select duration-unit" role="listbox" tabindex="0">
@@ -80,9 +83,10 @@
                         </div>
                     </div>
                     <div class="duration-input">
-                        <div class="mdc-text-field text">
-                            <input type="text" id="text-field-no-js" class="mdc-text-field__input" placeholder="5000">
-                            <div class="mdc-text-field__bottom-line"></div>
+                        <div class="mdc-text-field text amount-value">
+                            <i class="material-icons mdc-text-field__icon" tabindex="0">attach_money</i>
+                            <input type="text" id="amount_value" class="mdc-text-field__input" placeholder="5000" value="5000">
+                            <div class="mdc-text-field__bottom-line line"></div>
                         </div>
                     </div>
                 </div>

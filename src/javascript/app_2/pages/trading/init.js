@@ -4,12 +4,19 @@ const mdcDrawer           = require('@material/drawer');
 const mdcDialog           = require('@material/dialog');
 const mdcSelect           = require('@material/select');
 const mdcRipple           = require('@material/ripple');
-// const mdcTextField     = require('@material/textfield');
+const mdcTextField        = require('@material/textfield');
 // const mdcRadio         = require('@material/radio');
 
 const Trading = (() => {
     const onLoad = () => {
         State.set('is_trading_2', true);
+
+        let duration_input = '';
+        let amount_input = '';
+        duration_input = new mdcTextField.MDCTextField(document.querySelector('.duration-value'));
+        amount_input = new mdcTextField.MDCTextField(document.querySelector('.amount-value'));
+        console.log(duration_input);
+        console.log(amount_input);
 
         applyToAllElements('button', (el) => {
             mdcRipple.MDCRipple.attachTo(el);
@@ -55,8 +62,6 @@ const Trading = (() => {
             evt.preventDefault();
             if(notify_drawer.open) notify_drawer.open = false;
         });
-        // const amountField = new mdcTextField.MDCTextField(document.querySelector('.amount'));
-        // const textField = new mdcTextField.MDCTextField(document.querySelector('.text'));
         const dialog_1 = new mdcDialog.MDCDialog(document.querySelector('#modal-1'));
 
         dialog_1.listen('MDCDialog:accept', () => {
