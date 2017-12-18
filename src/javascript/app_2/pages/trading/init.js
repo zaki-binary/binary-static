@@ -11,12 +11,9 @@ const Trading = (() => {
     const onLoad = () => {
         State.set('is_trading_2', true);
 
-        let duration_input = '';
-        let amount_input = '';
-        duration_input = new mdcTextField.MDCTextField(document.querySelector('.duration-value'));
-        amount_input = new mdcTextField.MDCTextField(document.querySelector('.amount-value'));
-        console.log(duration_input);
-        console.log(amount_input);
+        applyToAllElements('div.mdc-text-field', (el) => {
+            mdcTextField.MDCTextField.attachTo(el);
+        });
 
         applyToAllElements('button', (el) => {
             mdcRipple.MDCRipple.attachTo(el);

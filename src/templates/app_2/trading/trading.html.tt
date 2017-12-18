@@ -35,7 +35,7 @@
                 <div class="duration-selector">
                     <div class="duration-input">
                         <div class="mdc-text-field text duration-value">
-                            <input type="text" id="duration_value" class="mdc-text-field__input" placeholder="1" value="1">
+                            <input type="number" id="duration_value" class="mdc-text-field__input" min=1 placeholder="1" value="1">
                             <div class="mdc-text-field__bottom-line line"></div>
                       </div>
                       <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
@@ -85,7 +85,7 @@
                     <div class="duration-input">
                         <div class="mdc-text-field text amount-value">
                             <i class="material-icons mdc-text-field__icon" tabindex="0">attach_money</i>
-                            <input type="text" id="amount_value" class="mdc-text-field__input" placeholder="5000" value="5000">
+                            <input type="number" id="amount_value" class="mdc-text-field__input" placeholder="5000" value="5000">
                             <div class="mdc-text-field__bottom-line line"></div>
                         </div>
                     </div>
@@ -101,10 +101,28 @@
                 <div class="contract-market-container">
                   <div class="price-container">
                       <div class="first-column">
-                        <p>Return</p>
+                          <div class="box">
+                              <div>
+                                  <p>Return:</p>
+                                  <p class="return-text">78.8%</p>
+                              </div>
+                              <div class="box-end">
+                                  <p>Net Profit:</p>
+                                  <p class="profit-text">$220.39</p>
+                              </div>
+                          </div>
                       </div>
                       <div class="second-column">
-                        <p>Stake</p>
+                          <div class="box">
+                              <div>
+                                  <p>Stake:</p>
+                                  <p class="negative-text">279.61</p>
+                              </div>
+                              <div class="box-end">
+                                  <p>Payout:</p>
+                                  <p class="payout-text">500.00</p>
+                              </div>
+                          </div>
                       </div>
                       <div class="third-column">
                           <button class="mdc-button mdc-button--unelevated">
@@ -116,10 +134,28 @@
                   <hr>
                   <div class="price-container">
                       <div class="first-column">
-                          <p>Return</p>
+                          <div class="box">
+                              <div>
+                                  <p>Return:</p>
+                                  <p class="return-text">78.8%</p>
+                              </div>
+                              <div class="box-end">
+                                  <p>Net Profit:</p>
+                                  <p class="profit-text">220.39</p>
+                              </div>
+                          </div>
                       </div>
                       <div class="second-column">
-                          <p>Stake</p>
+                          <div class="box">
+                              <div>
+                                  <p>Stake:</p>
+                                  <p class="positive-text">260.36</p>
+                              </div>
+                              <div class="box-end">
+                                  <p>Payout:</p>
+                                  <p class="payout-text">500.00</p>
+                              </div>
+                          </div>
                       </div>
                       <div class="third-column">
                           <button class="mdc-button mdc-button--unelevated">

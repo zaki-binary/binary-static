@@ -106,17 +106,66 @@ body {
             p {
                 font-size: 0.7rem;
             }
+            .box {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                .box-end {
+                    margin-top: auto;
+                }
+            }
             .first-column {
                 display: inline-flex;
                 justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
                 flex: 1;
                 order: -1;
+
+                p {
+                    line-height: 0;
+
+                    &.return-text {
+                        color: $COLOR_ORANGE;
+                        font-size: 1.2rem;
+                        margin-top: 8px;
+                    }
+                    &.profit-text {
+                        color: $primaryBrandColor;
+                        margin-top: 8px;
+                    }
+                }
             }
             .second-column {
                 display: inline-flex;
                 justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
                 flex: 1;
                 order: 0;
+
+                p {
+                    line-height: 0;
+
+                    &.negative-text {
+                        color: $COLOR_RED;
+                        margin-top: 8px;
+                    }
+                    &.positive-text {
+                        color: $COLOR_LIGHT_BLUE;
+                        margin-top: 8px;
+                    }
+                    &.payout-text {
+                        color: $primaryBrandColor;
+                        margin-top: 8px;
+                    }
+                }
             }
             .third-column {
                 display: inline-flex;
@@ -132,8 +181,9 @@ body {
                     text-align: center;
                     text-transform: capitalize;
                     font-size: 1.2rem;
-                    min-height: 70px;
+                    min-height: 100%;
                     min-width: 72px;
+                    max-width: 100%;
 
                     .btn-icon {
                         font-size: 2rem;
@@ -159,11 +209,10 @@ body {
                 height: unset !important;
 
                 input {
-                    width: 100%;
                     border-radius: 0;
                     box-sizing: border-box;
                     font-size: 1rem;
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
                 }
                 input::placeholder {
                     font-size: 1rem;
@@ -171,6 +220,7 @@ body {
                 i {
                     font-size: 1em;
                     align-self: flex-start;
+                    color: $COLOR_GRAY;
                 }
                 .line {
                     background-color: $primaryBrandColor !important;
@@ -180,6 +230,9 @@ body {
         .duration-type {
             flex-grow: 1;
 
+            .duration-unit .mdc-select__menu {
+                min-width: 90px;
+            }
             &.right {
                 padding-left: 20px;
             }
