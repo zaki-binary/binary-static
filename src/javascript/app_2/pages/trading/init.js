@@ -49,7 +49,7 @@ const Trading = (() => {
         });
         document.querySelector('.menu-close').addEventListener('click', (evt) => {
             evt.preventDefault();
-            if(drawer.open) drawer.open = false;
+            if (drawer.open) drawer.open = false;
         });
         document.querySelector('.notifications-toggle').addEventListener('click', (evt) => {
             evt.preventDefault();
@@ -57,7 +57,7 @@ const Trading = (() => {
         });
         document.querySelector('.notifications-close').addEventListener('click', (evt) => {
             evt.preventDefault();
-            if(notify_drawer.open) notify_drawer.open = false;
+            if (notify_drawer.open) notify_drawer.open = false;
         });
         const dialog_1 = new mdcDialog.MDCDialog(document.querySelector('#modal-1'));
 
