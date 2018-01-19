@@ -69,7 +69,7 @@ const getConfig = () => (
         languages       : program.branch === 'translations' ? ['ACH'] : common.languages,
         root_path       : common.root_path,
         root_url        : `/${program.dev ? 'binary-static/' : ''}${program.branch ? `${program.branch}/` : ''}`,
-        sections        : ['app', 'static', 'app_2'],
+        sections        : ['app', 'app_2', 'static'],
     }
 );
 
