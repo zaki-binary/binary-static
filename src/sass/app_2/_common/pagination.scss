@@ -1,0 +1,61 @@
+/* Ant style */
+/* stylelint-disable color-no-hex */
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    & li {
+        margin: 0;
+
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+    }
+    &-prev, &-next, &-item {
+        text-decoration: none;
+        background-color: $COLOR_WHITE;
+        border-radius: 4px;
+        color: #333333;
+        border: 1px solid #e9e9ed;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+    }
+    &-prev:hover, &-next:hover, &-item:hover, &-item-active {
+        cursor: pointer;
+        border-color: #4c5794;
+
+        & a {
+            color: #4c5794;
+        }
+    }
+    &-item-active:hover {
+        cursor: default;
+    }
+    &-disabled, &-disabled:hover {
+        cursor: not-allowed;
+        border-color: #e9e9ed;
+        background-color: $COLOR_WHITE;
+
+        & a {
+            color: #e9e9ed;
+        }
+    }
+    &-ellipsis {
+        & a {
+            color: #e9e9ed;
+        }
+        border: none;
+    }
+    & a {
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 16px;
+
+        &::selection {
+            background-color: rgba(0, 0, 0, 0);
+        }
+    }
+}
