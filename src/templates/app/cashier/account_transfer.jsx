@@ -3,7 +3,7 @@ import { FormRow, SubmitButton, Fieldset } from '../../_common/components/forms.
 import SeparatorLine from '../../_common/components/separator_line.jsx';
 
 const Row = ({ id }) => (
-    <div className='gr-padding-10 gr-row'>
+    <div className='gr-padding-10 gr-push-2 gr-row'>
         <div className='gr-2 gr-4-m align-end'>
             <span id={`${id}_loginid`} />
         </div>
