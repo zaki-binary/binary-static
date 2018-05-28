@@ -3,6 +3,7 @@ const Client             = require('../../base/client');
 const BinarySocket       = require('../../base/socket');
 const isCryptocurrency   = require('../../common/currency').isCryptocurrency;
 const getMinWithdrawal   = require('../../common/currency').getMinWithdrawal;
+const getDecimalPlaces   = require('../../common/currency').getDecimalPlaces;
 const FormManager        = require('../../common/form_manager');
 const elementTextContent = require('../../../_common/common_functions').elementTextContent;
 const getElementById     = require('../../../_common/common_functions').getElementById;
@@ -63,7 +64,12 @@ const AccountTransfer = (() => {
             label.appendChild(document.createTextNode(fragment_transfer_to.innerText));
             label.id = 'transfer_to';
 
-            el_transfer_to.parentNode.replaceChild(label, el_transfer_to);
+            // fix for dropdown select not removed when switching from fiat to BCH
+            if (/select/.test(el_transfer_to.parentNode.classList)) {
+                el_transfer_to.parentNode.replaceWith(label);
+            } else {
+                el_transfer_to.parentNode.replaceChild(label, el_transfer_to);
+            }
             el_transfer_to = getElementById('transfer_to');
         }
 
@@ -160,8 +166,9 @@ const AccountTransfer = (() => {
         const el_amount    = getElementById('amount');
         const el_amount_to = getElementById('amount_to');
         const exchange_rate = getPropertyValue(exchange_rates, curr_account_to);
-        const transferred_amount = (value * exchange_rate).toFixed(8);
-        if (transferred_amount && !isNaN(transferred_amount)) {
+        const decimal_places = getDecimalPlaces(client_currency);
+        const transferred_amount = (value * exchange_rate).toFixed(decimal_places);
+        if (!isNaN(transferred_amount)) {
             el_amount_to.value = transferred_amount;
         }
         else {
@@ -170,8 +177,8 @@ const AccountTransfer = (() => {
         const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
         const transfer_total_value = (parseFloat(el_amount.value) * 1.01);
 
-        elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${isCryptocurrency(client_currency) ? transfer_fee_value.toFixed(8) : transfer_fee_value.toFixed(2)}`);
-        elementTextContent(getElementById('total_lbl'), `${client_currency} ${isCryptocurrency(client_currency) ? transfer_total_value.toFixed(8) : transfer_total_value.toFixed(2)}`);
+        elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
+        elementTextContent(getElementById('total_lbl'), `${client_currency} ${transfer_total_value.toFixed(decimal_places)}`);
     };
 
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
