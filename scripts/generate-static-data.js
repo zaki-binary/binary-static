@@ -562,6 +562,8 @@ const texts = [
     'Current balance',
     'Withdrawal limit',
     'Exchange rate',
+    'Successfully transferred',
+    'Transfer Between Accounts',
 
     // header notification
     '[_1]Authenticate your account[_2] now to take full advantage of all payment methods available.',
