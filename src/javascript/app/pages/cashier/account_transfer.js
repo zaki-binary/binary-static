@@ -36,9 +36,9 @@ const AccountTransfer = (() => {
         withdrawal_limit;
 
     const populateAccounts = (accounts) => {
-        client_loginid   = Client.get('loginid');
-        el_transfer_from = getElementById('lbl_transfer_from');
-        el_transfer_to   = getElementById('transfer_to');
+        client_loginid      = Client.get('loginid');
+        el_transfer_from    = getElementById('lbl_transfer_from');
+        el_transfer_to      = getElementById('transfer_to');
 
         elementTextContent(el_transfer_from, `${client_loginid} ${client_currency ? `(${client_currency})` : ''}`);
 
@@ -155,7 +155,9 @@ const AccountTransfer = (() => {
     };
 
     const calculateAmount = (value) => {
-        const el_amount_to = getElementById('amount_to');
+        const el_amount_to        = getElementById('amount_to');
+        const el_transfer_fee_lbl = getElementById('transfer_fee_lbl');
+        const el_total            = getElementById('total_lbl');
         const exchange_rate = getPropertyValue(exchange_rates, curr_account_to);
         const transferred_amount = (value * exchange_rate).toFixed(8);
         if (transferred_amount && !isNaN(transferred_amount)) {
@@ -164,6 +166,8 @@ const AccountTransfer = (() => {
         else {
             el_amount_to.value = '';
         }
+        elementTextContent(el_transfer_fee_lbl, `${curr_account_to} ${(parseFloat(el_amount_to.value) * 0.01).toFixed(8)}`);
+        elementTextContent(el_total, `${curr_account_to} ${(parseFloat(el_amount_to.value) * 1.01).toFixed(8)}`);
     };
 
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);

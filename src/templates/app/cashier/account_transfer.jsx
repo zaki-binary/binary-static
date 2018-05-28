@@ -51,16 +51,20 @@ const AccountTransfer = () => (
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
                 <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
                     <label id='currency' />
-                    <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' placeholder={it.L('Please key in amount')} />
+                    <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' />
                     <div className='hint' id='range_hint' />
                 </FormRow>
             </Fieldset>
             <Fieldset legend={it.L('To')}>
                 <FormRow label={it.L('Transfer to')}   type='select' id='transfer_to' />
                 <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
-                    <input id='amount_to' name='amount_to' type='text' maxLength='20' autoComplete='off' disabled='disabled' placeholder='0' />
+                    <input id='amount_to' name='amount_to' type='text' maxLength='20' autoComplete='off' disabled='disabled' />
                     <div className='hint' id='exchange_rate' />
                 </FormRow>
+            </Fieldset>
+            <Fieldset legend={it.L('Fees')}>
+                <FormRow label={it.L('Transfer fees')} type='label' id='transfer_fee_lbl' />
+                <FormRow label={it.L('Total')}         type='label' id='total_lbl' />
             </Fieldset>
 
             <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} />
