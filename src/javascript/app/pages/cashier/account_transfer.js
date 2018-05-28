@@ -36,9 +36,9 @@ const AccountTransfer = (() => {
         withdrawal_limit;
 
     const populateAccounts = (accounts) => {
-        client_loginid      = Client.get('loginid');
-        el_transfer_from    = getElementById('lbl_transfer_from');
-        el_transfer_to      = getElementById('transfer_to');
+        client_loginid   = Client.get('loginid');
+        el_transfer_from = getElementById('lbl_transfer_from');
+        el_transfer_to   = getElementById('transfer_to');
 
         elementTextContent(el_transfer_from, `${client_loginid} ${client_currency ? `(${client_currency})` : ''}`);
 
