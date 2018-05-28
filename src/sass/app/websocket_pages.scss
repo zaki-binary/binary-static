@@ -85,13 +85,28 @@
     }
 }
 
-#frm_account_transfer {
-    div.select {
-        select.select-hidden {
-            min-width: 200px;
+.account_transfer-content {
+    #acc_transfer_header_icon.transfer {
+        margin-bottom: 1.5rem;
+
+        &:before {
+            content: url('../images/pages/cashier/transfer.svg');
         }
-        @media screen and (max-width: 480px) {
-            width: calc(100% - 1rem);
+        &.success:before {
+            content: url('../images/pages/cashier/success.svg');
+        }
+    }
+    #frm_account_transfer {
+        div.select {
+            select.select-hidden {
+                min-width: 200px;
+            }
+            @media screen and (max-width: 480px) {
+                width: calc(100% - 1rem);
+            }
+        }
+        .separator-line.border-bottom {
+            border-bottom: 1px solid $COLOR_LIGHT_GRAY;
         }
     }
 }

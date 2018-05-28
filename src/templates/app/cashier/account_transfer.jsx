@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormRow, SubmitButton, Fieldset } from '../../_common/components/forms.jsx';
+import SeparatorLine from '../../_common/components/separator_line.jsx';
 
 const Row = ({ id }) => (
     <div className='gr-padding-10 gr-row'>
@@ -14,7 +15,11 @@ const Row = ({ id }) => (
 
 const AccountTransfer = () => (
     <React.Fragment>
-        <h1>{it.L('Transfer Between Accounts')}</h1>
+        <div className='center-text'>
+            <span id='acc_transfer_header_icon' className='transfer' />
+        </div>
+
+        <h1 id='acc_transfer_header_text' className='center-text'>{it.L('Transfer Between Accounts')}</h1>
 
         <div className='invisible' id='client_message'>
             <p className='center-text notice-msg'>
@@ -36,16 +41,23 @@ const AccountTransfer = () => (
         </div>
 
         <div className='invisible' id='success_form'>
-            <p>{it.L('Your fund transfer is successful. Your new balances are:')}</p>
-            <Row id='from' />
-            <Row id='to' />
-            <p>
-                <a href='javascript:;' id='reset_transfer'>{it.L('Make another transfer')}</a>
+            <p className='gr-padding-10 center-text'>{it.L('Your fund transfer is successful. Your new balances are:')}</p>
+            <Fieldset legend={it.L('Details')} className='gr-padding-20'>
+                <Row id='from' />
+                <Row id='to' />
+            </Fieldset>
+            <p className='gr-padding-10 center-text'>
+                {it.L('If you need further details about transactions, please go to the [_1]statement page[_2].', `<a href='${it.url_for('user/statementws')}'>`, '</a>')}
             </p>
+            <p className='center-text'>
+                <a className='button' href='javascript:;' id='reset_transfer'><span>{it.L('Make another transfer')}</span></a>
+            </p>
+
+            <SeparatorLine className='gr-padding-10' invisible />
         </div>
 
         <form className='invisible' id='frm_account_transfer'>
-            <p>{it.L('Transfer funds between your real money accounts.')}</p>
+            <p className='center-text'>{it.L('Transfer funds between your real money accounts.')}</p>
 
             <Fieldset legend={it.L('From')}>
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
@@ -67,7 +79,9 @@ const AccountTransfer = () => (
                 <FormRow label={it.L('Total')}         type='label' id='total_lbl' />
             </Fieldset>
 
-            <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} />
+            <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} is_centered />
+
+            <SeparatorLine />
         </form>
 
         <div className='hint invisible' id='transfer_info'>

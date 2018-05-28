@@ -147,6 +147,8 @@ const AccountTransfer = (() => {
         el_transfer_fee.setVisibility(0);
         el_success_form.setVisibility(1);
         getElementById('transfer_info').setVisibility(0);
+        getElementById('acc_transfer_header_icon').classList.add('success');
+        getElementById('acc_transfer_header_text').textContent = localize('Successfully transferred');
     };
 
     const onAmountInput = (e) => {
@@ -155,9 +157,8 @@ const AccountTransfer = (() => {
     };
 
     const calculateAmount = (value) => {
-        const el_amount_to        = getElementById('amount_to');
-        const el_transfer_fee_lbl = getElementById('transfer_fee_lbl');
-        const el_total            = getElementById('total_lbl');
+        const el_amount    = getElementById('amount');
+        const el_amount_to = getElementById('amount_to');
         const exchange_rate = getPropertyValue(exchange_rates, curr_account_to);
         const transferred_amount = (value * exchange_rate).toFixed(8);
         if (transferred_amount && !isNaN(transferred_amount)) {
@@ -166,8 +167,11 @@ const AccountTransfer = (() => {
         else {
             el_amount_to.value = '';
         }
-        elementTextContent(el_transfer_fee_lbl, `${curr_account_to} ${(parseFloat(el_amount_to.value) * 0.01).toFixed(8)}`);
-        elementTextContent(el_total, `${curr_account_to} ${(parseFloat(el_amount_to.value) * 1.01).toFixed(8)}`);
+        const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
+        const transfer_total_value = (parseFloat(el_amount.value) * 1.01);
+
+        elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${isCryptocurrency(client_currency) ? transfer_fee_value.toFixed(8) : transfer_fee_value.toFixed(2)}`);
+        elementTextContent(getElementById('total_lbl'), `${client_currency} ${isCryptocurrency(client_currency) ? transfer_total_value.toFixed(8) : transfer_total_value.toFixed(2)}`);
     };
 
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
@@ -192,7 +196,12 @@ const AccountTransfer = (() => {
 
     const onClickReset = () => {
         el_success_form.setVisibility(0);
-        getElementById('amount').value = '';
+        getElementById('amount').value    = '';
+        getElementById('amount_to').value = '';
+        elementTextContent(getElementById('transfer_fee_lbl'), '');
+        elementTextContent(getElementById('total_lbl'),        '');
+        getElementById('acc_transfer_header_text').textContent = localize('Transfer Between Accounts');
+        getElementById('acc_transfer_header_icon').classList.remove('success');
         onLoad();
     };
 
