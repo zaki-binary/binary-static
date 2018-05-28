@@ -47,19 +47,25 @@ const AccountTransfer = () => (
         <form className='invisible' id='frm_account_transfer'>
             <p>{it.L('Transfer funds between your real money accounts.')}</p>
 
-            <Fieldset legend={it.L('Details')}>
+            <Fieldset legend={it.L('From')}>
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
-                <FormRow label={it.L('Transfer to')}   type='select' id='transfer_to' />
                 <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
                     <label id='currency' />
-                    <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' />
+                    <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' placeholder={it.L('Please key in amount')} />
                     <div className='hint' id='range_hint' />
+                </FormRow>
+            </Fieldset>
+            <Fieldset legend={it.L('To')}>
+                <FormRow label={it.L('Transfer to')}   type='select' id='transfer_to' />
+                <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
+                    <input id='amount_to' name='amount_to' type='text' maxLength='20' autoComplete='off' disabled='disabled' placeholder='0' />
+                    <div className='hint' id='exchange_rate' />
                 </FormRow>
             </Fieldset>
 
             <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} />
         </form>
-        
+
         <div className='hint invisible' id='transfer_info'>
             <p>{it.L('Note: Transfer between accounts is not available on weekends.')}</p>
         </div>

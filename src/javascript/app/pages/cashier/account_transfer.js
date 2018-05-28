@@ -28,6 +28,8 @@ const AccountTransfer = (() => {
         el_reset_transfer,
         el_transfer_fee,
         el_success_form,
+        exchange_rates,
+        curr_account_to,
         client_balance,
         client_currency,
         client_loginid,
@@ -146,6 +148,43 @@ const AccountTransfer = (() => {
         el_success_form.setVisibility(1);
     };
 
+    const onAmountInput = (e) => {
+        const input_val = parseFloat(e.target.value);
+        calculateAmount(input_val);
+    };
+
+    const calculateAmount = (value) => {
+        const el_amount_to = getElementById('amount_to');
+        const exchange_rate = getPropertyValue(exchange_rates, curr_account_to);
+        const transferred_amount = (value * exchange_rate).toFixed(8);
+        if (transferred_amount && !isNaN(transferred_amount)) {
+            el_amount_to.value = transferred_amount;
+        }
+        else {
+            el_amount_to.value = '';
+        }
+    };
+
+    const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
+
+    const updateExchangeMessage = () => {
+        getElementById('exchange_rate').textContent = `${localize('Exchange rate')}: ${client_currency} 1 = ${getExchangeRates()} ${curr_account_to}`;
+    };
+
+    const onAccountToChange = (e) => {
+        const el_amount = getElementById('amount');
+        curr_account_to = (e.target.value || e.target.getAttribute('data-value') || '').split(' (')[1].replace(')','');
+        calculateAmount(parseFloat(el_amount.value));
+        updateExchangeMessage();
+    };
+
+    const populateExchangeRate = () => {
+        curr_account_to = (el_transfer_to.value || el_transfer_to.getAttribute('data-value') || '').split(' (')[1].replace(')','');
+        updateExchangeMessage();
+        getElementById('amount').addEventListener('input', onAmountInput);
+        getElementById('transfer_to').addEventListener('change', onAccountToChange);
+    };
+
     const onClickReset = () => {
         el_success_form.setVisibility(0);
         getElementById('amount').value = '';
@@ -166,6 +205,11 @@ const AccountTransfer = (() => {
         BinarySocket.wait('balance').then((response) => {
             client_balance   = +getPropertyValue(response, ['balance', 'balance']);
             client_currency  = Client.get('currency');
+
+            BinarySocket.send({ exchange_rates: 1, base_currency: client_currency }).then((data) => {
+                exchange_rates = data.exchange_rates.rates;
+            });
+
             const min_amount = getMinWithdrawal(client_currency);
             if (!client_balance || client_balance < min_amount) {
                 getElementById(messages.parent).setVisibility(1);
@@ -199,8 +243,9 @@ const AccountTransfer = (() => {
                         getElementById(messages.parent).setVisibility(1);
                         return;
                     }
-                    getElementById('range_hint').textContent = `${localize('Min')}: ${min_amount} ${localize('Max')}: ${localize(client_balance <= withdrawal_limit ? 'Current balance' : 'Withdrawal limit')}`;
+                    getElementById('range_hint').textContent = `${localize('Min')}: ${min_amount} ${localize('Max')}: ${localize(client_balance <= withdrawal_limit ? `${client_balance}` : 'Withdrawal limit')}`;
                     populateAccounts(accounts);
+                    populateExchangeRate();
                 });
             }
         });
@@ -208,6 +253,8 @@ const AccountTransfer = (() => {
 
     const onUnload = () => {
         if (el_reset_transfer) el_reset_transfer.removeEventListener('click', onClickReset);
+        getElementById('amount').removeEventListener('input', onAmountInput);
+        getElementById('transfer_to').removeEventListener('change', onAccountToChange);
     };
 
     return {
