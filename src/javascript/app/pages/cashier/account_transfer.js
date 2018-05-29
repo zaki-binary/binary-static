@@ -199,13 +199,13 @@ const AccountTransfer = (() => {
 
     const onAccountToChange = (e) => {
         const el_amount = getElementById('amount');
-        curr_account_to = (e.target.value || e.target.getAttribute('data-value') || '').match(/\(([^)]*)\)[^(]*$/)[1];
+        curr_account_to = (e.target.value || e.target.getAttribute('data-value') || '').match(/\((.*)\)/)[1];
         calculateAmount(parseFloat(el_amount.value));
         updateExchangeMessage();
     };
 
     const populateExchangeRate = () => {
-        curr_account_to = (el_transfer_to.value || el_transfer_to.getAttribute('data-value') || '').match(/\(([^)]*)\)[^(]*$/)[1];
+        curr_account_to = (el_transfer_to.value || el_transfer_to.getAttribute('data-value') || '').match(/\((.*)\)/)[1];
         updateExchangeMessage();
         getElementById('amount').addEventListener('input', onAmountInput);
         getElementById('transfer_to').addEventListener('change', onAccountToChange);
