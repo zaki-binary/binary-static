@@ -154,7 +154,7 @@ const AccountTransfer = (() => {
         el_success_form.setVisibility(1);
         getElementById('transfer_info').setVisibility(0);
         getElementById('acc_transfer_header_icon').classList.add('success');
-        getElementById('acc_transfer_header_text').textContent = localize('Successfully transferred');
+        elementTextContent(getElementById('acc_transfer_header_text'), localize('Successfully transferred'));
         window.scrollTo(0, 0);
     };
 
@@ -194,12 +194,12 @@ const AccountTransfer = (() => {
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
 
     const updateExchangeMessage = () => {
-        getElementById('exchange_rate').textContent = `${localize('Exchange rate')}: ${client_currency} 1 = ${getExchangeRates()} ${curr_account_to}`;
+        elementTextContent(getElementById('exchange_rate'), `${localize('Exchange rate')}: ${client_currency} 1 = ${getExchangeRates()} ${curr_account_to}`);
     };
 
     const onAccountToChange = (e) => {
         const el_amount = getElementById('amount');
-        curr_account_to = (e.target.value || e.target.getAttribute('data-value') || '').split(' (')[1].replace(')','');
+        curr_account_to = (e.target.value || e.target.getAttribute('data-value') || '').match(/\(([^)]*)\)[^(]*$/)[1];
         calculateAmount(parseFloat(el_amount.value));
         updateExchangeMessage();
     };
@@ -216,8 +216,8 @@ const AccountTransfer = (() => {
         getElementById('amount').value    = '';
         getElementById('amount_to').value = '';
         elementTextContent(getElementById('transfer_fee_lbl'), '');
-        elementTextContent(getElementById('total_lbl'),        '');
-        getElementById('acc_transfer_header_text').textContent = localize('Transfer Between Accounts');
+        elementTextContent(getElementById('total_lbl'), '');
+        elementTextContent(getElementById('acc_transfer_header_text'), localize('Transfer Between Accounts'));
         getElementById('acc_transfer_header_icon').classList.remove('success');
         onLoad();
     };
@@ -274,7 +274,7 @@ const AccountTransfer = (() => {
                         getElementById(messages.parent).setVisibility(1);
                         return;
                     }
-                    getElementById('range_hint').textContent = `${localize('Min')}: ${min_amount} ${localize('Max')}: ${localize(client_balance <= withdrawal_limit ? `${client_balance}` : 'Withdrawal limit')}`;
+                    elementTextContent(getElementById('range_hint'), `${localize('Min')}: ${min_amount} ${localize('Max')}: ${localize(client_balance <= withdrawal_limit ? `${client_balance}` : 'Withdrawal limit')}`);
                     populateAccounts(accounts);
                     populateExchangeRate();
                 });
