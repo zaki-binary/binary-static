@@ -205,7 +205,7 @@ const AccountTransfer = (() => {
     };
 
     const populateExchangeRate = () => {
-        curr_account_to = (el_transfer_to.value || el_transfer_to.getAttribute('data-value') || '').split(' (')[1].replace(')','');
+        curr_account_to = (el_transfer_to.value || el_transfer_to.getAttribute('data-value') || '').match(/\(([^)]*)\)[^(]*$/)[1];
         updateExchangeMessage();
         getElementById('amount').addEventListener('input', onAmountInput);
         getElementById('transfer_to').addEventListener('change', onAccountToChange);
