@@ -15,11 +15,14 @@ const Row = ({ id }) => (
 
 const AccountTransfer = () => (
     <React.Fragment>
-        <div className='center-text'>
-            <span id='acc_transfer_header_icon' className='transfer' />
+        <div id='success_header' className='invisible'>
+            <div className='center-text'>
+                <span id='success_header_icon' />
+            </div>
+            <h1 id='success_transfer_header_text' className='center-text'>{it.L('Successfully transferred')}</h1>
         </div>
 
-        <h1 id='acc_transfer_header_text' className='center-text'>{it.L('Transfer Between Accounts')}</h1>
+        <h1 id='transfer_header'>{it.L('Transfer Between Accounts')}</h1>
 
         <div className='invisible' id='client_message'>
             <p className='center-text notice-msg'>
@@ -57,7 +60,7 @@ const AccountTransfer = () => (
         </div>
 
         <form className='invisible' id='frm_account_transfer'>
-            <p className='center-text'>{it.L('Transfer funds between your real money accounts.')}</p>
+            <p>{it.L('Transfer funds between your real money accounts.')}</p>
 
             <Fieldset legend={it.L('From')}>
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
@@ -70,7 +73,7 @@ const AccountTransfer = () => (
             <Fieldset legend={it.L('To')}>
                 <FormRow label={it.L('Transfer to')}   type='select' id='transfer_to' />
                 <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
-                    <input id='amount_to' name='amount_to' type='text' maxLength='20' autoComplete='off' disabled='disabled' />
+                    <span id='amount_to' />
                     <div className='hint' id='exchange_rate' />
                 </FormRow>
             </Fieldset>

@@ -86,16 +86,11 @@
 }
 
 .account_transfer-content {
-    #acc_transfer_header_text {
+    #success_transfer_header_text {
         margin-top: 1rem;
     }
-    #acc_transfer_header_icon.transfer {
-        &:before {
-            content: url('../images/pages/cashier/transfer.svg');
-        }
-        &.success:before {
-            content: url('../images/pages/cashier/success.svg');
-        }
+    #success_header_icon:before {
+        content: url('../images/pages/cashier/success.svg');
     }
     #frm_account_transfer {
         div.select {
@@ -108,6 +103,11 @@
         }
         .separator-line.border-bottom {
             border-bottom: 1px solid $COLOR_LIGHT_GRAY;
+        }
+        #amount_to {
+            display: block;
+            line-height: 25px;
+            height: 25px;
         }
     }
 }

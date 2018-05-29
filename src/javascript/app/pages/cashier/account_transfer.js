@@ -153,8 +153,8 @@ const AccountTransfer = (() => {
         el_transfer_fee.setVisibility(0);
         el_success_form.setVisibility(1);
         getElementById('transfer_info').setVisibility(0);
-        getElementById('acc_transfer_header_icon').classList.add('success');
-        elementTextContent(getElementById('acc_transfer_header_text'), localize('Successfully transferred'));
+        getElementById('transfer_header').setVisibility(0);
+        getElementById('success_header').setVisibility(1);
         window.scrollTo(0, 0);
     };
 
@@ -173,10 +173,10 @@ const AccountTransfer = (() => {
         const transferred_amount = (value * exchange_rate).toFixed(getDecimalPlaces(curr_account_to));
 
         if (!isNaN(transferred_amount)) {
-            el_amount_to.value = transferred_amount;
+            elementTextContent(el_amount_to, `${transferred_amount} 0`);
         }
         else {
-            el_amount_to.value = '';
+            elementTextContent(el_amount_to, `${curr_account_to} 0`);
         }
         const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
         const transfer_total_value = (parseFloat(el_amount.value) * 1.01);
@@ -186,8 +186,8 @@ const AccountTransfer = (() => {
             elementTextContent(getElementById('total_lbl'), `${client_currency} ${transfer_total_value.toFixed(decimal_places)}`);
         }
         else {
-            elementTextContent(getElementById('transfer_fee_lbl'), '');
-            elementTextContent(getElementById('total_lbl'), '');
+            elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
+            elementTextContent(getElementById('total_lbl'), `${client_currency} 0`);
         }
     };
 
@@ -209,16 +209,19 @@ const AccountTransfer = (() => {
         updateExchangeMessage();
         getElementById('amount').addEventListener('input', onAmountInput);
         getElementById('transfer_to').addEventListener('change', onAccountToChange);
+        elementTextContent(getElementById('amount_to'), `${curr_account_to} 0`);
+        elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
+        elementTextContent(getElementById('total_lbl'), `${client_currency} 0`);
     };
 
     const onClickReset = () => {
         el_success_form.setVisibility(0);
-        getElementById('amount').value    = '';
-        getElementById('amount_to').value = '';
+        getElementById('amount').value = '';
+        elementTextContent(getElementById('amount_to'), `${curr_account_to} 0`);
         elementTextContent(getElementById('transfer_fee_lbl'), '');
         elementTextContent(getElementById('total_lbl'), '');
-        elementTextContent(getElementById('acc_transfer_header_text'), localize('Transfer Between Accounts'));
-        getElementById('acc_transfer_header_icon').classList.remove('success');
+        getElementById('success_header').setVisibility(0);
+        getElementById('transfer_header').setVisibility(1);
         onLoad();
     };
 
