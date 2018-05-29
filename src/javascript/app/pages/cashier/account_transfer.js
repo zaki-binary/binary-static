@@ -155,6 +155,7 @@ const AccountTransfer = (() => {
         getElementById('transfer_info').setVisibility(0);
         getElementById('acc_transfer_header_icon').classList.add('success');
         getElementById('acc_transfer_header_text').textContent = localize('Successfully transferred');
+        window.scrollTo(0, 0);
     };
 
     const onAmountInput = (e) => {
@@ -165,9 +166,12 @@ const AccountTransfer = (() => {
     const calculateAmount = (value) => {
         const el_amount    = getElementById('amount');
         const el_amount_to = getElementById('amount_to');
-        const exchange_rate = getPropertyValue(exchange_rates, curr_account_to);
+
+        const exchange_rate  = getPropertyValue(exchange_rates, curr_account_to);
         const decimal_places = getDecimalPlaces(client_currency);
-        const transferred_amount = (value * exchange_rate).toFixed(decimal_places);
+
+        const transferred_amount = (value * exchange_rate).toFixed(getDecimalPlaces(curr_account_to));
+
         if (!isNaN(transferred_amount)) {
             el_amount_to.value = transferred_amount;
         }
@@ -177,8 +181,14 @@ const AccountTransfer = (() => {
         const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
         const transfer_total_value = (parseFloat(el_amount.value) * 1.01);
 
-        elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
-        elementTextContent(getElementById('total_lbl'), `${client_currency} ${transfer_total_value.toFixed(decimal_places)}`);
+        if (!isNaN(transfer_fee_value)) {
+            elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
+            elementTextContent(getElementById('total_lbl'), `${client_currency} ${transfer_total_value.toFixed(decimal_places)}`);
+        }
+        else {
+            elementTextContent(getElementById('transfer_fee_lbl'), '');
+            elementTextContent(getElementById('total_lbl'), '');
+        }
     };
 
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
