@@ -274,7 +274,8 @@ const AccountTransfer = (() => {
                         getElementById(messages.parent).setVisibility(1);
                         return;
                     }
-                    elementTextContent(getElementById('range_hint'), `${localize('Min')}: ${min_amount} ${localize('Max')}: ${localize(client_balance <= withdrawal_limit ? `${client_balance}` : 'Withdrawal limit')}`);
+                    const range_hint_msg = `${localize('Min')}: ${min_amount} ${localize('Max')}: ${localize(client_balance <= withdrawal_limit ? `${client_balance}` : 'Withdrawal limit')}`;
+                    elementTextContent(getElementById('range_hint'), range_hint_msg);
                     populateAccounts(accounts);
                     populateExchangeRate();
                 });
