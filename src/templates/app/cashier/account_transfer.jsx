@@ -79,7 +79,7 @@ const AccountTransfer = () => (
             </Fieldset>
             <Fieldset legend={it.L('Details')}>
                 <FormRow label={it.L('Transfer fee')} type='label' id='transfer_fee_lbl' />
-                <FormRow label={it.L('Total amount transferred')} type='label' id='total_lbl' />
+                <FormRow label={it.L('Total amount received')} type='label' id='total_lbl' />
             </Fieldset>
 
             <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} is_centered />
