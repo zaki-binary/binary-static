@@ -167,27 +167,27 @@ const AccountTransfer = (() => {
         const el_amount    = getElementById('amount');
         const el_amount_to = getElementById('amount_to');
 
-        const exchange_rate  = getPropertyValue(exchange_rates, curr_account_to);
+        const exchange_rate  = getExchangeRates();
         const decimal_places = getDecimalPlaces(client_currency);
 
         const transferred_amount = (value * exchange_rate).toFixed(getDecimalPlaces(curr_account_to));
 
         if (!isNaN(transferred_amount)) {
-            elementTextContent(el_amount_to, `${transferred_amount} 0`);
+            elementTextContent(el_amount_to, `${curr_account_to} ${transferred_amount}`);
         }
         else {
             elementTextContent(el_amount_to, `${curr_account_to} 0`);
         }
         const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
-        const transfer_total_value = (parseFloat(el_amount.value) * 1.01);
+        const transfer_total_value = ((parseFloat(el_amount.value) - transfer_fee_value) * exchange_rate);
 
         if (!isNaN(transfer_fee_value)) {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
-            elementTextContent(getElementById('total_lbl'), `${client_currency} ${transfer_total_value.toFixed(decimal_places)}`);
+            elementTextContent(getElementById('total_lbl'), `${curr_account_to} ${transfer_total_value.toFixed(getDecimalPlaces(curr_account_to))}`);
         }
         else {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
-            elementTextContent(getElementById('total_lbl'), `${client_currency} 0`);
+            elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
         }
     };
 
@@ -211,15 +211,15 @@ const AccountTransfer = (() => {
         getElementById('transfer_to').addEventListener('change', onAccountToChange);
         elementTextContent(getElementById('amount_to'), `${curr_account_to} 0`);
         elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
-        elementTextContent(getElementById('total_lbl'), `${client_currency} 0`);
+        elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
     };
 
     const onClickReset = () => {
         el_success_form.setVisibility(0);
         getElementById('amount').value = '';
         elementTextContent(getElementById('amount_to'), `${curr_account_to} 0`);
-        elementTextContent(getElementById('transfer_fee_lbl'), '');
-        elementTextContent(getElementById('total_lbl'), '');
+        elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
+        elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
         getElementById('success_header').setVisibility(0);
         getElementById('transfer_header').setVisibility(1);
         onLoad();

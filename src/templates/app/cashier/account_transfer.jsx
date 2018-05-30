@@ -19,7 +19,7 @@ const AccountTransfer = () => (
             <div className='center-text'>
                 <span id='success_header_icon' />
             </div>
-            <h1 id='success_transfer_header_text' className='center-text'>{it.L('Successfully transferred')}</h1>
+            <h1 id='success_transfer_header_text' className='center-text'>{it.L('Transfer successful')}</h1>
         </div>
 
         <h1 id='transfer_header'>{it.L('Transfer Between Accounts')}</h1>
@@ -44,13 +44,13 @@ const AccountTransfer = () => (
         </div>
 
         <div className='invisible' id='success_form'>
-            <p className='gr-padding-10 center-text'>{it.L('Your fund transfer is successful. Your new balances are:')}</p>
+            <p className='gr-padding-10 center-text'>{it.L('Your account balances have been updated:')}</p>
             <Fieldset legend={it.L('Details')} className='gr-padding-20'>
                 <Row id='from' />
                 <Row id='to' />
             </Fieldset>
             <p className='gr-padding-10 center-text'>
-                {it.L('If you need further details about transactions, please go to the [_1]statement page[_2].', `<a href='${it.url_for('user/statementws')}'>`, '</a>')}
+                {it.L('Please see [_1]your statement page[_2] for further details of each transfer.', `<a href='${it.url_for('user/statementws')}'>`, '</a>')}
             </p>
             <p className='center-text'>
                 <a className='button' href='javascript:;' id='reset_transfer'><span>{it.L('Make another transfer')}</span></a>
@@ -60,7 +60,7 @@ const AccountTransfer = () => (
         </div>
 
         <form className='invisible' id='frm_account_transfer'>
-            <p>{it.L('Transfer funds between your real money accounts.')}</p>
+            <p>{it.L('Transfer fund between your real money accounts.')}</p>
 
             <Fieldset legend={it.L('From')}>
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
@@ -77,9 +77,9 @@ const AccountTransfer = () => (
                     <div className='hint' id='exchange_rate' />
                 </FormRow>
             </Fieldset>
-            <Fieldset legend={it.L('Fees')}>
-                <FormRow label={it.L('Transfer fees')} type='label' id='transfer_fee_lbl' />
-                <FormRow label={it.L('Total')}         type='label' id='total_lbl' />
+            <Fieldset legend={it.L('Details')}>
+                <FormRow label={it.L('Transfer fee')} type='label' id='transfer_fee_lbl' />
+                <FormRow label={it.L('Total amount transferred')} type='label' id='total_lbl' />
             </Fieldset>
 
             <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} is_centered />
@@ -88,15 +88,13 @@ const AccountTransfer = () => (
         </form>
 
         <div className='hint invisible' id='transfer_info'>
-            <p>{it.L('Note: Transfer between accounts is not available on weekends.')}</p>
-        </div>
-
-        <div className='hint invisible' id='transfer_fee'>
-            <p>{it.L('Note: You may only transfer funds between a fiat account and a cryptocurrency account.')}</p>
-            <p>{it.L('Transfer funds between your fiat and cryptocurrency accounts for a fee:')}</p>
-            <ul className='bullet'>
-                <li>{it.L('From fiat to cryptocurrency: [_1] transfer fee', '1%')}</li>
-                <li>{it.L('From cryptocurrency to fiat: [_1] transfer fee', '1%')}</li>
+            <strong>{it.L('Important')}</strong>
+            <ul className='bullet hint-info'>
+                <li>{it.L('This facility is not available on weekends')}</li>
+            </ul>
+            <ul className='bullet hint-info' id='tranfer_fee'>
+                <li>{it.L('Transfers can only be performed between a fiat account and a cryptocurrency account')}</li>
+                <li>{it.L('Each transfer is subject to a [_1] transfer fee', '1%')}</li>
             </ul>
         </div>
     </React.Fragment>
