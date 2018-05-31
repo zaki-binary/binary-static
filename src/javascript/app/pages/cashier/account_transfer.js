@@ -1,9 +1,8 @@
 const BinaryPjax         = require('../../base/binary_pjax');
 const Client             = require('../../base/client');
 const BinarySocket       = require('../../base/socket');
-const isCryptocurrency   = require('../../common/currency').isCryptocurrency;
-const getMinWithdrawal   = require('../../common/currency').getMinWithdrawal;
 const getDecimalPlaces   = require('../../common/currency').getDecimalPlaces;
+const getMinWithdrawal   = require('../../common/currency').getMinWithdrawal;
 const FormManager        = require('../../common/form_manager');
 const elementTextContent = require('../../../_common/common_functions').elementTextContent;
 const getElementById     = require('../../../_common/common_functions').getElementById;
@@ -99,15 +98,13 @@ const AccountTransfer = (() => {
         getElementById(messages.error).setVisibility(1);
     };
 
-    const getDecimals = () => (isCryptocurrency(client_currency) ? 8 : 2);
-
     const showForm = () => {
         elementTextContent(document.querySelector(`${form_id_hash} #currency`), client_currency);
 
         getElementById(form_id).setVisibility(1);
 
         FormManager.init(form_id_hash, [
-            { selector: '#amount', validations: [['req', { hide_asterisk: true }], ['number', { type: 'float', decimals: getDecimals(), min: getMinWithdrawal(client_currency), max: Math.min(+withdrawal_limit, +client_balance), format_money: true }]] },
+            { selector: '#amount', validations: [['req', { hide_asterisk: true }], ['number', { type: 'float', decimals: getDecimalPlaces(client_currency), min: getMinWithdrawal(client_currency), max: Math.min(+withdrawal_limit, +client_balance), format_money: true }]] },
 
             { request_field: 'transfer_between_accounts', value: 1 },
             { request_field: 'account_from',              value: client_loginid },

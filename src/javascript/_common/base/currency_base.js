@@ -65,7 +65,7 @@ const crypto_config = {
     ETH: { name: 'Ether',         min_withdrawal: 0.002 },
     ETC: { name: 'Ether Classic', min_withdrawal: 0.002 },
     LTC: { name: 'Litecoin',      min_withdrawal: 0.002 },
-    DAI: { name: 'Dai',           min_withdrawal: 0.002 },
+    DAI: { name: 'Dai',           min_withdrawal: 1 },
 };
 
 const getMinWithdrawal = currency => (isCryptocurrency(currency) ? getPropertyValue(crypto_config, [currency, 'min_withdrawal']) || 0.002 : 1);
