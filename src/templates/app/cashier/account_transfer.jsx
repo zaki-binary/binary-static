@@ -72,9 +72,8 @@ const AccountTransfer = () => (
             </Fieldset>
             <Fieldset legend={it.L('To')}>
                 <FormRow label={it.L('Transfer to')}   type='select' id='transfer_to' />
-                <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
-                    <span id='amount_to' />
-                    <div className='hint' id='exchange_rate' />
+                <FormRow label={it.L('Exchange Rate')}        type='custom' id='transfer_amount'>
+                    <span id='exchange_rate' />
                 </FormRow>
             </Fieldset>
             <Fieldset legend={it.L('Details')}>

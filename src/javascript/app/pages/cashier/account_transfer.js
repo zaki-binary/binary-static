@@ -160,21 +160,12 @@ const AccountTransfer = (() => {
         calculateAmount(input_val);
     };
 
-    const calculateAmount = (value) => {
+    const calculateAmount = () => {
         const el_amount    = getElementById('amount');
-        const el_amount_to = getElementById('amount_to');
 
         const exchange_rate  = getExchangeRates();
         const decimal_places = getDecimalPlaces(client_currency);
 
-        const transferred_amount = (value * exchange_rate).toFixed(getDecimalPlaces(curr_account_to));
-
-        if (!isNaN(transferred_amount)) {
-            elementTextContent(el_amount_to, `${curr_account_to} ${transferred_amount}`);
-        }
-        else {
-            elementTextContent(el_amount_to, `${curr_account_to} 0`);
-        }
         const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
         const transfer_total_value = ((parseFloat(el_amount.value) - transfer_fee_value) * exchange_rate);
 
@@ -191,7 +182,7 @@ const AccountTransfer = (() => {
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
 
     const updateExchangeMessage = () => {
-        elementTextContent(getElementById('exchange_rate'), `${localize('Exchange rate')}: ${client_currency} 1 = ${getExchangeRates()} ${curr_account_to}`);
+        elementTextContent(getElementById('exchange_rate'), `${client_currency} 1 = ${getExchangeRates()} ${curr_account_to}`);
     };
 
     const onAccountToChange = (e) => {
@@ -206,7 +197,6 @@ const AccountTransfer = (() => {
         updateExchangeMessage();
         getElementById('amount').addEventListener('input', onAmountInput);
         getElementById('transfer_to').addEventListener('change', onAccountToChange);
-        elementTextContent(getElementById('amount_to'), `${curr_account_to} 0`);
         elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
         elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
     };
@@ -214,7 +204,6 @@ const AccountTransfer = (() => {
     const onClickReset = () => {
         el_success_form.setVisibility(0);
         getElementById('amount').value = '';
-        elementTextContent(getElementById('amount_to'), `${curr_account_to} 0`);
         elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
         elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
         getElementById('success_header').setVisibility(0);
