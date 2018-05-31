@@ -50,7 +50,7 @@ const AccountTransfer = () => (
                 <Row id='to' />
             </Fieldset>
             <p className='gr-padding-10 center-text'>
-                {it.L('Please see [_1]your statement page[_2] for further details of each transfer.', `<a href='${it.url_for('user/statementws')}'>`, '</a>')}
+                {it.L('Please see [_1]your account statement page[_2] for further details of each transfer.', `<a href='${it.url_for('user/statementws')}'>`, '</a>')}
             </p>
             <p className='center-text'>
                 <a className='button' href='javascript:;' id='reset_transfer'><span>{it.L('Make another transfer')}</span></a>
