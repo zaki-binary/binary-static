@@ -60,7 +60,7 @@ const AccountTransfer = () => (
         </div>
 
         <form className='invisible' id='frm_account_transfer'>
-            <p>{it.L('Transfer fund between your real money accounts.')}</p>
+            <p>{it.L('Transfer funds between your real money accounts.')}</p>
 
             <Fieldset legend={it.L('From')}>
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
