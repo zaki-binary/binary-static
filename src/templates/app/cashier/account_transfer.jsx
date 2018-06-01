@@ -64,15 +64,15 @@ const AccountTransfer = () => (
 
             <Fieldset legend={it.L('From')}>
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
-                <FormRow label={it.L('Amount')}        type='custom' id='transfer_amount'>
+                <FormRow label={it.L('Amount')} type='custom' id='transfer_amount'>
                     <label id='currency' />
                     <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' />
                     <div className='hint' id='range_hint' />
                 </FormRow>
             </Fieldset>
             <Fieldset legend={it.L('To')}>
-                <FormRow label={it.L('Transfer to')}   type='select' id='transfer_to' />
-                <FormRow label={it.L('Exchange Rate')}        type='custom' id='transfer_amount'>
+                <FormRow label={it.L('Transfer to')} type='select' id='transfer_to' />
+                <FormRow label={it.L('Exchange Rate')} type='custom' id='transfer_amount'>
                     <span id='exchange_rate' />
                 </FormRow>
             </Fieldset>
