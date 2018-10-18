@@ -1,5 +1,4 @@
 const getFormNameBarrierCategory = require('./common').getFormNameBarrierCategory;
-const getLanguage                = require('../../../_common/language').get;
 const localize                   = require('../../../_common/localize').localize;
 const getPropertyValue           = require('../../../_common/utility').getPropertyValue;
 const isEmptyObject              = require('../../../_common/utility').isEmptyObject;
@@ -64,7 +63,6 @@ const Contract = (() => {
 
     const details = (form_name) => {
         const contracts = Contract.contracts().contracts_for;
-        let barrier_category;
 
         if (!contracts) return;
 
@@ -75,20 +73,24 @@ const Contract = (() => {
 
         const form_barrier = getFormNameBarrierCategory(form_name);
         form               = form_barrier.form_name;
-        barrier            = barrier_category = form_barrier.barrier_category;
+        if (!form) {
+            return;
+        }
+        barrier = form_barrier.barrier_category;
 
         contracts.available.forEach((current_obj) => {
             const contract_category = current_obj.contract_category;
-
-            if (form && form === contract_category) {
-                if (barrier_category) {
-                    if (barrier_category === current_obj.barrier_category) {
+            // for callput and callputequals, populate duration for both
+            if (form === contract_category || (/callput/.test(form) && /callput/.test(contract_category))) {
+                if (barrier) {
+                    if (barrier === current_obj.barrier_category) {
                         populateDurations(current_obj);
                     }
                 } else {
                     populateDurations(current_obj);
                 }
-
+            }
+            if (form === contract_category) {
                 if (current_obj.forward_starting_options && current_obj.start_type === 'forward' && sessionStorage.formname !== 'higherlower') {
                     start_dates.list = current_obj.forward_starting_options;
                 } else if (current_obj.start_type === 'spot') {
@@ -100,14 +102,20 @@ const Contract = (() => {
                     if (!getPropertyValue(barriers, symbol)) {
                         barriers[symbol] = {};
                     }
+                    if (!getPropertyValue(barriers[symbol], contract_category)) {
+                        barriers[symbol][contract_category] = {};
+                    }
+                    if (!getPropertyValue(barriers[symbol][contract_category], current_obj.expiry_type)) {
+                        barriers[symbol][contract_category][current_obj.expiry_type] = {};
+                    }
                     if (current_obj.barriers === 1) {
-                        barriers[symbol][contract_category] = {
+                        barriers[symbol][contract_category][current_obj.expiry_type] = {
                             count           : 1,
                             barrier         : current_obj.barrier,
                             barrier_category: current_obj.barrier_category,
                         };
                     } else if (current_obj.barriers === 2) {
-                        barriers[symbol][contract_category] = {
+                        barriers[symbol][contract_category][current_obj.expiry_type] = {
                             count           : 2,
                             barrier         : current_obj.high_barrier,
                             barrier1        : current_obj.low_barrier,
@@ -127,8 +135,8 @@ const Contract = (() => {
             }
         });
 
-        if (form && barrier_category) {
-            if (barriers && barriers[form] && barriers[form].barrier_category !== barrier_category) {
+        if (barrier) {
+            if (barriers && barriers[form] && barriers[form].barrier_category !== barrier) {
                 barriers = {};
             }
         }
@@ -153,14 +161,15 @@ const Contract = (() => {
                     trade_contract_forms[contract_category] = localize(current_obj.contract_category_display);
                     if (contract_category === 'digits') {
                         trade_contract_forms.matchdiff = localize('Matches/Differs');
-                        if (getLanguage() !== 'ID') {
-                            trade_contract_forms.evenodd   = localize('Even/Odd');
-                            trade_contract_forms.overunder = localize('Over/Under');
-                        }
+                        trade_contract_forms.evenodd   = localize('Even/Odd');
+                        trade_contract_forms.overunder = localize('Over/Under');
                     } else if (contract_category === 'lookback') {
                         trade_contract_forms.lookbackhigh    = localize('High-Close');
                         trade_contract_forms.lookbacklow     = localize('Close-Low');
                         trade_contract_forms.lookbackhighlow = localize('High-Low');
+                    } else if (contract_category === 'reset') {
+                        trade_contract_forms.resetcall = localize('Reset Call');
+                        trade_contract_forms.resetput  = localize('Reset Put');
                     }
                 }
             }

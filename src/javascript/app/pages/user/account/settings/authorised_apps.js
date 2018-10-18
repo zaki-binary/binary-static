@@ -1,5 +1,4 @@
 const moment               = require('moment');
-const BinaryPjax           = require('../../../../base/binary_pjax');
 const Client               = require('../../../../base/client');
 const showLocalTimeOnHover = require('../../../../base/clock').showLocalTimeOnHover;
 const BinarySocket         = require('../../../../base/socket');
@@ -29,10 +28,6 @@ const AuthorisedApps = (() => {
     const elements = {};
 
     const onLoad = () => {
-        if (Client.isJPClient()) {
-            BinaryPjax.loadPreviousUrl();
-            return;
-        }
         Object.keys(element_ids).forEach((id) => {
             elements[id] = document.getElementById(element_ids[id]);
         });
@@ -97,7 +92,7 @@ const AuthorisedApps = (() => {
         if (elements.table) {
             return FlexTableUI.replace(data);
         }
-        const headers = ['Name', 'Permissions', 'Last Used'];
+        const headers = ['Name', 'Permissions', 'Last Login'];
         can_revoke    = /admin/.test((State.getResponse('authorize') || {}).scopes);
         if (can_revoke) {
             headers.push('Action');

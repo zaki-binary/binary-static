@@ -1,6 +1,5 @@
 const getLanguage      = require('../language').get;
 const localize         = require('../localize').localize;
-const State            = require('../storage').State;
 const getPropertyValue = require('../utility').getPropertyValue;
 
 let currencies_config = {};
@@ -41,11 +40,7 @@ const addComma = (num, decimal_points, is_crypto) => {
     ));
 };
 
-const isJPClient = () => !!State.get('is_jp_client');
-
-const getFiatDecimalPlaces = () => isJPClient() ? 0 : 2;
-
-const calcDecimalPlaces = (currency) => isCryptocurrency(currency) ? 8 : getFiatDecimalPlaces();
+const calcDecimalPlaces = (currency) => isCryptocurrency(currency) ? 8 : 2;
 
 const getDecimalPlaces = (currency) => (
     // need to check currencies_config[currency] exists instead of || in case of 0 value
@@ -60,23 +55,28 @@ const setCurrencies = (website_status) => {
 const isCryptocurrency = currency => /crypto/i.test(getPropertyValue(currencies_config, [currency, 'type'])) || (currency in crypto_config);
 
 const crypto_config = {
-    BTC: { name: 'Bitcoin',       min_withdrawal: 0.002 },
-    BCH: { name: 'Bitcoin Cash',  min_withdrawal: 0.002 },
-    ETH: { name: 'Ether',         min_withdrawal: 0.002 },
-    ETC: { name: 'Ether Classic', min_withdrawal: 0.002 },
-    LTC: { name: 'Litecoin',      min_withdrawal: 0.002 },
-    DAI: { name: 'Dai',           min_withdrawal: 1 },
+    BTC: { name: 'Bitcoin',       min_withdrawal: 0.002, pa_max_withdrawal: 5,    pa_min_withdrawal: 0.002 },
+    BCH: { name: 'Bitcoin Cash',  min_withdrawal: 0.002, pa_max_withdrawal: 5,    pa_min_withdrawal: 0.002 },
+    ETH: { name: 'Ether',         min_withdrawal: 0.002, pa_max_withdrawal: 5,    pa_min_withdrawal: 0.002 },
+    ETC: { name: 'Ether Classic', min_withdrawal: 0.002, pa_max_withdrawal: 5,    pa_min_withdrawal: 0.002 },
+    LTC: { name: 'Litecoin',      min_withdrawal: 0.002, pa_max_withdrawal: 5,    pa_min_withdrawal: 0.002 },
+    DAI: { name: 'Dai',           min_withdrawal: 0.002, pa_max_withdrawal: 2000, pa_min_withdrawal: 10 },
+    UST: { name: 'Tether',        min_withdrawal: 0.002, pa_max_withdrawal: 2000, pa_min_withdrawal: 10 },
 };
 
 const getMinWithdrawal = currency => (isCryptocurrency(currency) ? getPropertyValue(crypto_config, [currency, 'min_withdrawal']) || 0.002 : 1);
 
+// @param {String} limit = max|min
+const getPaWithdrawalLimit = (currency, limit) => {
+    if (isCryptocurrency(currency)) {
+        return getPropertyValue(crypto_config, [currency, `pa_${limit}_withdrawal`]);
+    }
+    return limit === 'max' ? 2000 : 10;
+};
+
 const getCurrencyName = currency => localize(getPropertyValue(crypto_config, [currency, 'name']) || '');
 
-const getFiatPayout = () => isJPClient() ? 1 : 10;
-
-const getMinPayout = currency => (
-    isCryptocurrency(currency) ? getPropertyValue(currencies_config, [currency, 'stake_default']) : getFiatPayout()
-);
+const getMinPayout = currency => getPropertyValue(currencies_config, [currency, 'stake_default']);
 
 module.exports = {
     formatMoney,
@@ -88,5 +88,6 @@ module.exports = {
     getCurrencyName,
     getMinWithdrawal,
     getMinPayout,
+    getPaWithdrawalLimit,
     getCurrencies: () => currencies_config,
 };

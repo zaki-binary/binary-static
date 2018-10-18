@@ -20,7 +20,7 @@ const Account = () => (
     <a href='javascript:;'>
         <div className='main-account'>
             <div className='account-type nowrap' />
-            <div className='account-id' />
+            <span className='account-id' />
             <div className='topMenuBalance'>0</div>
         </div>
         <div className='nav-caret' />
@@ -74,7 +74,8 @@ const Header = () => (
                                         <div />
                                     </div>
                                     <div className='gr-9 gr-hide-m gr-hide-p binary-logo-text'>
-                                        <div />
+                                        <div data-show='-maltainvest' />
+                                        <div data-show='maltainvest' className='binary-type-logo-old' />
                                     </div>
                                 </div>
                             </a>
@@ -86,34 +87,27 @@ const Header = () => (
                                     className='center-text nowrap'
                                     items={[
                                         // Logged out
-                                        // General
-                                        { text: it.L('Why Us?'),     href: it.url_for('why-us'),      className: 'ja-hide client_logged_out invisible' },
-                                        { text: it.L('Get Started'), href: it.url_for('get-started'), className: 'ja-hide client_logged_out invisible' },
-                                        { text: it.L('Tour'),        href: it.url_for('tour'),        className: 'ja-hide client_logged_out invisible' },
-                                        { text: it.L('Platforms'),   href: it.url_for('platforms'),   className: 'ja-hide client_logged_out invisible' },
-                                        // Japan
-                                        { text: it.L('Why Us?'),     href: it.url_for('why-us-jp'),              className: 'invisible ja-show client_logged_out' },
-                                        { text: it.L('Get Started'), href: it.url_for('get-started-jp'),         className: 'invisible ja-show client_logged_out' },
-                                        { text: it.L('Tour'),        href: it.url_for('tour-jp'),                className: 'invisible ja-show client_logged_out' },
-                                        { text: it.L('Trade'),       href: it.url_for('multi_barriers_trading'), className: 'invisible ja-show' },
+                                        { text: it.L('Why Us?'),     href: it.url_for('why-us'),      className: 'client_logged_out invisible' },
+                                        { text: it.L('Get Started'), href: it.url_for('get-started'), className: 'client_logged_out invisible' },
+                                        { text: it.L('Tour'),        href: it.url_for('tour'),        className: 'client_logged_out invisible' },
+                                        { text: it.L('Platforms'),   href: it.url_for('platforms'),   className: 'client_logged_out invisible' },
 
                                         // Logged in
-                                        // General
                                         {
                                             type     : 'nested',
                                             text     : it.L('Trade'),
                                             href     : 'javascript:;',
-                                            className: 'ja-hide ico-only-hide client_logged_in nav-dropdown-toggle invisible',
+                                            className: 'ico-only-hide client_logged_in nav-dropdown-toggle invisible',
                                             subitems : [
                                                 { text: it.L('SmartTrader'),  href: it.url_for('trading'),          className: 'no-capitalize' },
                                                 { text: it.L('WebTrader'),    href: 'https://webtrader.binary.com', target: '_blank' },
                                                 { text: it.L('Binary Bot'),   href: 'https://bot.binary.com',       target: '_blank' },
-                                                { text: it.L('MetaTrader 5'), href: it.url_for('user/metatrader') },
+                                                { text: it.L('MetaTrader 5'), href: it.url_for('user/metatrader'),  className: 'invisible mt_visibility' },
                                                 { text: it.L('Ladders'),      href: it.url_for('multi_barriers_trading'), className: 'financial-only' },
                                             ],
                                         },
                                         { text: it.L('Portfolio'),    href: it.url_for('user/portfoliows'),    className: 'ico-only-hide client_logged_in invisible' },
-                                        { text: it.L('Profit Table'), href: it.url_for('user/profit_tablews'), className: 'ico-only-hide client_logged_in invisible' },
+                                        { text: it.L('Profit Table'), href: it.url_for('user/profit_tablews'), className: 'ico-only-hide client_logged_in invisible wordwrap' },
                                         { text: it.L('Statement'),    href: it.url_for('user/statementws'),    className: 'client_logged_in invisible' },
                                         { text: it.L('Cashier'),      href: it.url_for('cashier'),             className: 'client_logged_in invisible', id: 'topMenuCashier' },
                                         {
@@ -122,11 +116,11 @@ const Header = () => (
                                             href     : 'javascript:;',
                                             className: 'ico-only-hide client_logged_in nav-dropdown-toggle invisible',
                                             subitems : [
-                                                { text: it.L('Asset Index'),       href: it.url_for('resources/asset_indexws'), className: 'ja-hide' },
+                                                { text: it.L('Asset Index'),       href: it.url_for('resources/asset_indexws') },
                                                 { text: it.L('Trading Times'),     href: it.url_for('resources/market_timesws') },
-                                                { text: it.L('Economic Calendar'), href: it.url_for('resources/economic_calendar'), className: 'ja-hide' },
-                                                { text: it.L('TradingView'),       href: 'https://tradingview.binary.com',      className: 'ja-hide', target: '_blank' },
-                                                { text: it.L('SmartCharts'),       href: 'https://charts.binary.com/',          className: 'ja-hide', target: '_blank' },
+                                                { text: it.L('Economic Calendar'), href: it.url_for('resources/economic_calendar') },
+                                                { text: it.L('TradingView'),       href: 'https://tradingview.binary.com',         target: '_blank' },
+                                                { text: it.L('SmartCharts'),       href: 'https://charts.binary.com/',             target: '_blank' },
                                             ],
                                         },
                                         {
@@ -156,10 +150,10 @@ const Header = () => (
                                         <Account />
                                         <ul>
                                             <div className='login-id-list' />
-                                            <a className='link ja-hide invisible' id='user_menu_metatrader' href={it.url_for('user/metatrader')}>
+                                            <a className='link invisible mt_visibility' href={it.url_for('user/metatrader')}>
                                                 <li className='topMenuMetaTrader'>{it.L('MetaTrader')}</li>
                                             </a>
-                                            <a className='link ja-hide' id='user_accounts' href={it.url_for('user/accounts')}>
+                                            <a className='link' id='user_accounts' href={it.url_for('user/accounts')}>
                                                 <li className='topMenuAccounts'>{it.L('Accounts List')}</li>
                                             </a>
                                             <a className='link invisible' id='user_menu_account_transfer' href={it.url_for('cashier/account_transfer')}>

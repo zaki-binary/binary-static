@@ -33,10 +33,10 @@ const PaymentAgent = () => (
                     <p>{it.L('[_1] would like to team up with potential payment agents worldwide so we can offer local payment processing services to our clients in their respective regions.', it.website_name)}</p>
                     <div className='gr-row'>
                         <div className='gr-8 gr-12-m'>
-                            <p>{it.L('A Payment Agent acts like an exchange between the Client (that is, our customer) and [_1]. The Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-cash method or local currency that is not offered by [_1]. The transfer fees are borne by the Client.', it.website_name)}</p>
+                            <p>{it.L('A Payment Agent acts like an exchange between the Client (that is, our customer) and [_1]. The Payment Agent processes deposits and withdrawals for Clients who wish to use a specific e-wallet method or local currency that is not offered by [_1]. The transfer fees are borne by the Client.', it.website_name)}</p>
                         </div>
                         <div className='gr-4 gr-8-m gr-centered'>
-                            <img className='responsive' src={it.url_for('images/pages/payment_agent/payment_agents.svg')}/>
+                            <img className='responsive' src={it.url_for('images/pages/payment_agent/payment_agents.svg')} />
                         </div>
                     </div>
                     <p className='faded'>{it.L('Note: Payment Agent transfers are only available for accounts registered with Binary (CR) SA. Transactions are accepted only in US dollars.')}</p>
@@ -54,7 +54,7 @@ const PaymentAgent = () => (
                 <Section id='who-can-apply-payment-agent' header={it.L('Who can apply to be a Payment Agent?')}>
                     <div className='gr-row'>
                         <div className='gr-4 gr-8-m gr-centered'>
-                            <img className='responsive' src={it.url_for('images/pages/payment_agent/who_payment_agents.svg')}/>
+                            <img className='responsive' src={it.url_for('images/pages/payment_agent/who_payment_agents.svg')} />
                         </div>
                         <div className='gr-8 gr-12-m'>
                             <ul className='checked'>
@@ -76,7 +76,7 @@ const PaymentAgent = () => (
                 </Section>
 
                 <Section id='next-steps' header={it.L('How does it work?')}>
-                    <p>{it.L('Interested, so what\'s next? If you can offer our Clients a specific e-cash method or a local payment option that is not already provided by [_1], and you have a good track record in the market, then we would love to <a href=\'mailto:[_2]\'>hear from you!</a>', it.website_name, it.affiliate_email)}</p>
+                    <p>{it.L('Interested, so what\'s next? If you can offer our Clients a specific e-wallet method or a local payment option that is not already provided by [_1], and you have a good track record in the market, then we would love to <a href=\'mailto:[_2]\'>hear from you!</a>', it.website_name, it.affiliate_email)}</p>
                     <p>{it.L('As a first step, please send us an application with:')}</p>
                     <ul className='checked'>
                         <li>{it.L('Your name, email address and contact number')}</li>

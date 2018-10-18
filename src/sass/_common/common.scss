@@ -15,6 +15,9 @@ body {
     .ui-widget {
         font-size: $FONT_SIZE_N;
     }
+    .mm-page {
+        overflow-x: hidden;
+    }
 }
 
 h1, h2, h3 {
@@ -173,8 +176,9 @@ label {
         text-align: left;
         margin-bottom: 5px;
     }
-    input, select {
-        width: calc(100% - 6px);
+    input:not([type='radio']), select {
+        width: 100%;
+        box-sizing: border-box;
     }
 }
 
@@ -302,11 +306,15 @@ _:-ms-fullscreen, :root #content-holder {
 }
 
 input[type=checkbox] {
-    margin-top: -5px;
-    margin-right: 5px;
+    margin: 5px 5px 5px 0;
+    padding: 7px;
+    cursor: pointer;
 
-    &#email_consent {
-        margin-top: 5px;
+    & ~ label {
+        pointer-events: auto; // enable pointer events on label for checkbox
+    }
+    &#email_consent, &#chk_accept {
+        margin-left: 5px;
     }
 }
 
@@ -508,6 +516,7 @@ ul.bullet.gr-row > li {
                         position: absolute;
                         margin-left: 0;
                         top: 37px;
+                        left: 0;
                         border-radius: $BORDER_RADIUS;
                         transition: margin-left 0.4s ease-in-out, width 0.2s 0.1s ease-in-out;
                     }
@@ -604,7 +613,7 @@ li strong.margin-right {
     }
 }
 
-.no-capitalize > a {
+.no-capitalize, .no-capitalize > a {
     text-transform: none !important;
 }
 

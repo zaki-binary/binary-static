@@ -3,7 +3,7 @@ const Defaults       = require('./defaults');
 const getActiveTab   = require('./get_active_tab').getActiveTab;
 const GetTicks       = require('./get_ticks');
 const MBDefaults     = require('../mb_trade/mb_defaults');
-const JapanPortfolio = require('../../japan/portfolio');
+const MBPortfolio    = require('../mb_trade/mb_portfolio');
 const getElementById = require('../../../_common/common_functions').getElementById;
 const getLanguage    = require('../../../_common/language').get;
 const State          = require('../../../_common/storage').State;
@@ -32,9 +32,8 @@ const TradingAnalysis = (() => {
     const requestTradeAnalysis = () => {
         form_name = (State.get('is_mb_trading') ? MBDefaults.get('category') : Defaults.get('formname')) || 'risefall';
 
-        const map_obj = { matchdiff: 'digits', callput: 'higherlower' };
-        const regex   = new RegExp(Object.keys(map_obj).join('|'), 'gi');
-        form_name     = form_name.replace(regex, matched => map_obj[matched]);
+        const map_obj = { matchdiff: 'digits', callputequal: 'risefall', callput: 'higherlower' };
+        form_name     = map_obj[form_name] || form_name;
 
         $('#tab_last_digit').setVisibility(/digits|overunder|evenodd/.test(form_name));
         sessionStorage.setItem('currentAnalysisTab', getActiveTab());
@@ -68,14 +67,14 @@ const TradingAnalysis = (() => {
         $('#trade_analysis').find('li').removeClass('active');
         $(`#${current_tab}`).addClass('active');
         toggleActiveAnalysisTabs();
-        JapanPortfolio.init();
+        MBPortfolio.init();
         if (State.get('is_mb_trading')) {
             showChart();
         }
         if (current_tab === 'tab_portfolio') {
-            JapanPortfolio.show();
+            MBPortfolio.show();
         } else {
-            JapanPortfolio.hide();
+            MBPortfolio.hide();
             if (current_tab === 'tab_graph') {
                 showChart();
             } else if (current_tab === 'tab_last_digit') {
@@ -85,7 +84,7 @@ const TradingAnalysis = (() => {
                 const underlying_text   = $underlying.attr('data-text');
                 const tick              = $('#tick_count').val() || 100;
 
-                if (underlying !== $digit_underlying.val() && $digit_underlying.val() !== null ) {
+                if (underlying !== $digit_underlying.val() && $digit_underlying.val() !== null) {
                     $digit_underlying.find(`option[value="${underlying}"]`).prop('selected', true).trigger('change');
                     const $digit_underlying_dropdown = $digit_underlying.next('div.select-dropdown');
 
@@ -98,8 +97,7 @@ const TradingAnalysis = (() => {
                         });
                         $digit_underlying_list.filter(`[value='${underlying}']`).addClass('selected');
                     }
-                }
-                else {
+                } else {
                     GetTicks.request('', {
                         ticks_history: underlying,
                         count        : tick.toString(),
@@ -183,50 +181,58 @@ const TradingAnalysis = (() => {
 
         const images = {
             risefall: {
-                image1: 'rise-fall-1.svg',
-                image2: 'rise-fall-2.svg',
+                image1: 'rises.svg',
+                image2: 'falls.svg',
             },
             higherlower: {
-                image1: 'higher-lower-1.svg',
-                image2: 'higher-lower-2.svg',
+                image1: 'higher.svg',
+                image2: 'lower.svg',
             },
             touchnotouch: {
-                image1: 'touch-notouch-1.svg',
-                image2: 'touch-notouch-2.svg',
+                image1: 'touch.svg',
+                image2: 'no-touch.svg',
             },
             endsinout: {
-                image1: 'in-out-1.svg',
-                image2: 'in-out-2.svg',
+                image1: 'ends-between.svg',
+                image2: 'ends-outside.svg',
             },
             staysinout: {
-                image1: 'in-out-3.svg',
-                image2: 'in-out-4.svg',
-            },
-            updown: {
-                image1: 'up-down-1.svg',
-                image2: 'up-down-2.svg',
+                image1: 'stays-between.svg',
+                image2: 'goes-outside.svg',
             },
             evenodd: {
-                image1: 'evenodd-1.svg',
-                image2: 'evenodd-2.svg',
+                image1: 'even.svg',
+                image2: 'odd.svg',
             },
             overunder: {
-                image1: 'overunder-1.svg',
-                image2: 'overunder-2.svg',
+                image1: 'over.svg',
+                image2: 'under.svg',
             },
             lookbackhigh: {
-                image1: 'close-high-image.svg',
+                image1: 'high-close.svg',
             },
             lookbacklow: {
-                image1: 'close-low-image.svg',
+                image1: 'close-low.svg',
             },
             lookbackhighlow: {
-                image1: 'high-low-image.svg',
+                image1: 'high-low.svg',
+            },
+            reset: {
+                image1: 'reset-call.svg',
+                image2: 'reset-put.svg',
+            },
+            callputspread: {
+                image1: 'call-spread.svg',
+                image2: 'put-spread.svg',
+            },
+            highlowticks: {
+                image1: 'high-tick.svg',
+                image2: 'low-tick.svg',
             },
         };
 
         if (images[form_name]) {
-            const image_path = Url.urlForStatic(`images/pages/trade-explanation/${(getLanguage() === 'JA' ? 'ja/' : '')}`);
+            const image_path = Url.urlForStatic(`images/pages/trade-explanation/${getLanguage().toLowerCase()}/`);
             $container.find('#explanation_image_1').attr('src', image_path + images[form_name].image1);
             if (images[form_name].image2) {
                 $container

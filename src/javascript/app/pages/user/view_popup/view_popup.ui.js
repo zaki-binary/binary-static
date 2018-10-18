@@ -1,4 +1,4 @@
-const setViewPopupTimer = require('../../../base/clock').setViewPopupTimer;
+const setExternalTimer  = require('../../../base/clock').setExternalTimer;
 const BinarySocket      = require('../../../base/socket');
 const getHighestZIndex  = require('../../../../_common/utility').getHighestZIndex;
 
@@ -40,7 +40,7 @@ const ViewPopupUI = (() => {
     const cleanup = (is_close) => {
         forgetStreams();
         forgetChartStreams();
-        setViewPopupTimer(null);
+        setExternalTimer(null);
         closeContainer();
         init();
         if (typeof triggerOnClose === 'function') {
@@ -101,7 +101,7 @@ const ViewPopupUI = (() => {
             $('.inpage_popup_content', con).html(data);
         }
         const body = $(document.body);
-        con.css('position', 'fixed').css('z-index', getHighestZIndex() + 100);
+        con.css('position', 'absolute').css('z-index', getHighestZIndex() + 100);
         body.append(con);
         con.show();
         // $('html').addClass('no-scroll');

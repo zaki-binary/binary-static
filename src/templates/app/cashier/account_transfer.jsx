@@ -87,13 +87,16 @@ const AccountTransfer = () => (
         </form>
 
         <div className='hint invisible' id='transfer_info'>
-            <strong>{it.L('Important')}</strong>
-            <ul className='bullet hint-info'>
-                <li>{it.L('This facility is not available on weekends')}</li>
-            </ul>
-            <ul className='bullet hint-info' id='tranfer_fee'>
-                <li>{it.L('Transfers can only be performed between a fiat account and a cryptocurrency account')}</li>
+            <p>{it.L('Note: Transfer between accounts is not available on weekends.')}</p>
+        </div>
+
+        <div className='hint invisible' id='transfer_fee'>
+            {it.L('Note:')}
+            <ul className='bullet'>
+                <li>{it.L('Transfer between accounts is not available on weekends')}</li>
+                <li>{it.L('You may only transfer funds between a fiat account and a cryptocurrency account')}</li>
                 <li>{it.L('Each transfer is subject to a [_1] transfer fee', '1%')}</li>
+                <li>{it.L('Authorised payment agents are exempted from paying any transfer fees')}</li>
             </ul>
         </div>
     </React.Fragment>

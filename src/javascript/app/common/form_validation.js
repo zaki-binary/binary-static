@@ -21,11 +21,10 @@ const Validation = (() => {
     };
 
     const getFieldType = ($field) => {
-        let type = null;
-        if ($field.length) {
-            type = $field.attr('type') === 'checkbox' ? 'checkbox' : $field.get(0).localName;
-        }
-        return type;
+        if (!$field.length) return null;
+        if ($field.find('input[type=radio]').length) return 'radio';
+        if ($field.attr('type') === 'checkbox') return 'checkbox';
+        return $field.get(0).localName;
     };
 
     const isChecked = field => field.$.is(':checked') ? '1' : '';
@@ -34,8 +33,12 @@ const Validation = (() => {
         let value;
         if (typeof options.value === 'function') {
             value = options.value();
+        } else if (field.type === 'checkbox') {
+            value = isChecked(field);
+        } else if (field.type === 'radio') {
+            value = field.$.find(`input[name=${field.selector.slice(1)}]:checked`).val();
         } else {
-            value = field.type === 'checkbox' ? isChecked(field) : field.$.val();
+            value = field.$.val();
         }
         return value || '';
     };
@@ -44,7 +47,7 @@ const Validation = (() => {
         const $form = $(`${form_selector}:visible`);
 
         if (needs_token) {
-            const token = getHashValue('token');
+            const token = getHashValue('token') || $('#txt_verification_code').val();
             if (!validEmailToken(token)) {
                 $form.replaceWith($('<div/>', { class: error_class, text: localize('Verification code is wrong. Please use the link sent to your email.') }));
                 return;
@@ -55,6 +58,9 @@ const Validation = (() => {
             forms[form_selector] = { $form };
             if (Array.isArray(fields) && fields.length) {
                 forms[form_selector].fields = fields;
+                const $btn_submit           = $form.find('button[type="submit"]');
+
+                let has_required = false;
                 fields.forEach((field) => {
                     field.$ = $form.find(field.selector);
                     if (!field.$.length || !field.validations) return;
@@ -71,6 +77,7 @@ const Validation = (() => {
                             if (!$label.length) $label = $parent.find('label');
                             if ($label.length && $label.find('span.required_field_asterisk').length === 0) {
                                 $($label[0]).append($('<span/>', { class: 'required_field_asterisk', text: '*' }));
+                                has_required = true;
                             }
                         }
                         if ($parent.find(`p.${error_class}`).length === 0) {
@@ -78,6 +85,7 @@ const Validation = (() => {
                         }
                         field.$error = $parent.find(`.${error_class}`);
                     }
+                    field.$submit_btn_error = $form.find('#msg_form');
 
                     const event = events_map[field.type];
 
@@ -92,14 +100,21 @@ const Validation = (() => {
                         });
                     }
                 });
+                if (has_required && $form.find('.indicates-required').length === 0) {
+                    $btn_submit.parent().append($('<p/>', { class: 'hint' })
+                        .append($('<span/>', { class: 'required_field_asterisk no-margin indicates-required', text: '*' })).append($('<span/>', { text: ` ${localize('Indicates required field')}` })));
+                }
             }
         }
 
         // need to init Dropdown after we have responses from ws
         const el_all_select = document.querySelectorAll('select:not([multiple]):not([single])');
         el_all_select.forEach((el) => {
-            if (el.id) {
-                Dropdown(`#${el.id}`);
+            if (el.id && el.length) {
+                Dropdown(
+                    `#${el.id}`,
+                    !!el.getElementsByTagName('optgroup').length // have to explicitly pass true to enable option groups
+                );
             }
         });
     };
@@ -164,13 +179,13 @@ const Validation = (() => {
             message = localize('Up to [_1] decimal places are allowed.', [options.decimals]);
         } else if ('min' in options && 'max' in options && +options.min === +options.max && +value !== +options.min) {
             is_ok   = false;
-            message = localize('Should be [_1]', [addComma(options.min, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined )]);
+            message = localize('Should be [_1]', [addComma(options.min, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined)]);
         } else if ('min' in options && 'max' in options && (+value < +options.min || isMoreThanMax(value, options))) {
             is_ok   = false;
-            message = localize('Should be between [_1] and [_2]', [addComma(options.min, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined ), addComma(options.max, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined )]);
+            message = localize('Should be between [_1] and [_2]', [addComma(options.min, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined), addComma(options.max, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined)]);
         } else if ('min' in options && +value < +options.min) {
             is_ok   = false;
-            message = localize('Should be more than [_1]', [addComma(options.min, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined )]);
+            message = localize('Should be more than [_1]', [addComma(options.min, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined)]);
         } else if ('max' in options && isMoreThanMax(value, options)) {
             is_ok   = false;
             message = localize('Should be less than [_1]', [addComma(options.max, options.format_money ? getDecimalPlaces(Client.get('currency')) : undefined)]);
@@ -199,6 +214,7 @@ const Validation = (() => {
         number       : { func: validNumber,       message: '' },
         regular      : { func: validRegular,      message: '' },
         tax_id       : { func: validTaxID,        message: 'Should start with letter or number, and may contain hyphen and underscore.' },
+        token        : { func: validEmailToken,   message: 'Invalid verification code.' },
     };
 
     const pass_length = type => ({ min: (/^mt$/.test(type) ? 8 : 6), max: 25 });
@@ -208,6 +224,10 @@ const Validation = (() => {
     // --------------------
     const checkField = (field) => {
         if (!field.$.is(':visible') || !field.validations) return true;
+        if (field.clear_form_error_on_input) {
+            $(`${field.form}_error`).text('');
+        }
+
         let all_is_ok = true;
         let message   = '';
         const field_type = field.$.attr('type');
@@ -266,6 +286,9 @@ const Validation = (() => {
     const clearError = (field) => {
         if (field.$error && field.$error.length) {
             field.$error.setVisibility(0);
+            if (field.$submit_btn_error && field.$submit_btn_error.length) {
+                field.$submit_btn_error.setVisibility(0);
+            }
         }
     };
 

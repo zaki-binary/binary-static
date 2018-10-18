@@ -27,6 +27,7 @@ const AccountTransfer = (() => {
         el_transfer_to,
         el_reset_transfer,
         el_transfer_fee,
+        el_transfer_info,
         el_success_form,
         exchange_rates,
         curr_account_to,
@@ -73,10 +74,11 @@ const AccountTransfer = (() => {
         }
 
         showForm();
-        getElementById('transfer_info').setVisibility(1);
 
         if (Client.hasCurrencyType('crypto') && Client.hasCurrencyType('fiat')) {
-            getElementById('transfer_fee').setVisibility(1);
+            el_transfer_fee.setVisibility(1);
+        } else {
+            el_transfer_info.setVisibility(1);
         }
     };
 
@@ -148,10 +150,8 @@ const AccountTransfer = (() => {
         });
 
         el_transfer_fee.setVisibility(0);
+        el_transfer_info.setVisibility(0);
         el_success_form.setVisibility(1);
-        getElementById('transfer_info').setVisibility(0);
-        getElementById('transfer_header').setVisibility(0);
-        getElementById('success_header').setVisibility(1);
         window.scrollTo(0, 0);
     };
 
@@ -172,8 +172,7 @@ const AccountTransfer = (() => {
         if (!isNaN(transfer_fee_value)) {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
             elementTextContent(getElementById('total_lbl'), `${curr_account_to} ${transfer_total_value.toFixed(getDecimalPlaces(curr_account_to))}`);
-        }
-        else {
+        } else {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
             elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
         }
@@ -218,6 +217,7 @@ const AccountTransfer = (() => {
         }
 
         el_transfer_fee   = getElementById('transfer_fee');
+        el_transfer_info  = getElementById('transfer_info');
         el_success_form   = getElementById('success_form');
         el_reset_transfer = getElementById('reset_transfer');
         el_reset_transfer.addEventListener('click', onClickReset);

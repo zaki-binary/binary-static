@@ -10,11 +10,7 @@ const Contact = () => (
                 <h1 className='center-text'>{it.L('Contact us')}</h1>
                 <div className='gr-row'>
                     <div className='gr-8 gr-8-t gr-7-p gr-12-m'>
-                        <div className='gr-padding-10 invisible ja-show gr-parent'>
-                            {it.L('JAPAN ONLY CONTACT TEXT')}
-                            <p><a href={(`mailto:${support_email}`)} rel='nofollow'>{support_email}</a></p>
-                        </div>
-                        <div className='gr-padding-10 ja-hide gr-parent'>
+                        <div className='gr-padding-10 gr-parent'>
                             <div className='gr-row'>
                                 <div className='gr-3 gr-4-p gr-4-m'>
                                     <img className='responsive' src={it.url_for('images/pages/contact/contact-icon.svg')} />
@@ -30,7 +26,6 @@ const Contact = () => (
                                                 options={[
                                                     { text: it.L('Australia'),      value: it.L('[_1] (Toll Free)', '+61 (02) 8294 5448, 1800 093570') },
                                                     { text: it.L('Canada'),         value: '+1 (450) 823 1002' },
-                                                    { text: it.L('Indonesia'),      value: it.L('[_1] (Toll Free)', '0018030113641') },
                                                     { text: it.L('Ireland'),        value: it.L('[_1] (Toll Free)', '+353 (0) 76 888 7500, 1800931084') },
                                                     { text: it.L('Poland'),         value: '+48 58 881 00 02' },
                                                     { text: it.L('Russia'),         value: it.L('[_1] (Toll Free)', '8 10 8002 8553011') },
@@ -41,9 +36,11 @@ const Contact = () => (
                                     </div>
                                     <div className='gr-row'>
                                         <div className='gr-12' id='display_cs_telephone'>
-                                            {('+44 (0) 1666 800042')}
+                                            <a href='tel: +44 (0) 1666 800042'>
+                                                {('+44 (0) 1666 800042')}
+                                            </a>
                                             <br />
-                                            {it.L('[_1] (Toll Free)', '0800 011 9847')}
+                                            {it.L('[_1] (Toll Free)', '<a href="tel:0800 011 9847">0800 011 9847</a>')}
                                         </div>
                                     </div>
                                 </div>
@@ -51,22 +48,17 @@ const Contact = () => (
                         </div>
                         <div className='gr-row'>
                             <div className='gr-11 gr-10-t gr-12-p gr-12-m'>
-                                <p className='ja-hide'>{it.L('If you are not located in the above-mentioned countries, simply dial any of our contact numbers for help.')}</p>
+                                <p>{it.L('If you are not located in the above-mentioned countries, simply dial any of our contact numbers for help.')}</p>
                             </div>
                         </div>
                         <div className='hint calls_recording'>
                             * {it.L('All calls are recorded for training and monitoring purposes')}
                         </div>
-                        <div className='gr-parent ja-hide'>
+                        <div className='gr-parent'>
                             <div className='chat'>
                                 <div className='chat-container'>
                                     <img className='chat-icon' src={it.url_for('images/pages/contact/chat-icon.svg')} />
-                                    <a
-                                        className='button-secondary'
-                                        href='https://binary.desk.com/customer/widget/chats/new'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
+                                    <a className='button-secondary' rel='noopener noreferrer' id='chat_button'>
                                         <span>{it.L('Live Chat')}</span>
                                     </a>
                                 </div>
@@ -77,8 +69,13 @@ const Contact = () => (
                                 </div>
                             </div>
                         </div>
+                        <div className='gr-parent invisible' id='live_chat_unavailable'>
+                            <p className='notice-msg center-text'>
+                                {it.L('Sorry, live chat is currently unavailable. Please email us at [_1].', '<a href=\'mailto:support@binary.com\'>support@binary.com</a>')}
+                            </p>
+                        </div>
                     </div>
-                    <div className='gr-4 gr-4-t gr-5-p gr-12-m ja-hide'>
+                    <div className='gr-4 gr-4-t gr-5-p gr-12-m'>
                         <div className='gr-padding-10 gr-parent'>
                             <p className='no-margin'><strong>{it.L('Email:')}</strong></p>
                         </div>
@@ -109,15 +106,15 @@ const Contact = () => (
                 <h1>{it.L('Company addresses')}</h1>
             </div>
             <div className='gr-row'>
-                <InfoBox padding='6' header={it.L('Malta')} text={it.L('Binary (Europe) Limited & Binary Investments (Europe) Ltd, Mompalao Building, Suite 2, Tower Road, Msida MSD1825')} />
-                <InfoBox padding='6' header={it.L('Isle of Man')} text={it.L('Binary (IOM) Limited, First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW')} />
+                <InfoBox padding='6' header={it.L('Malta')} text={it.L('Binary (Europe) Ltd & Binary Investments (Europe) Ltd, Mompalao Building, Suite 2, Tower Road, Msida MSD1825')} />
+                <InfoBox padding='6' header={it.L('Isle of Man')} text={it.L('Binary (IOM) Ltd, First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW')} />
             </div>
 
             <div className='gr-hide-p gr-hide-m gr-padding-20' />
 
             <div className='gr-row'>
-                <InfoBox padding='6' header={it.L('Malaysia')} sub_header={it.L('Cyberjaya Office')}    text={it.L('Binary Group Services Sdn. Bhd., C-13-02, iTech Tower, Jalan Impact, Cyber 6, 63000 Cyberjaya, Selangor Darul Ehsan')} />
-                <InfoBox padding='6' header={it.L('Malaysia')} sub_header={it.L('Kuala Lumpur Office')} text={it.L('Binary Group Services Sdn. Bhd., 30-10, Q Sentral, Jalan Stesen Sentral 2, 50470 Kuala Lumpur')} />
+                <InfoBox padding='6' header={it.L('Malaysia')} sub_header={it.L('Cyberjaya Office')} text={it.L('Binary Group Services Sdn. Bhd., C-13, iTech Tower, Jalan Impact, Cyber 6, 63000 Cyberjaya, Selangor Darul Ehsan')} />
+                <InfoBox padding='6' header={it.L('Malaysia')} sub_header={it.L('Labuan')} text={it.L('Binary (FX) Ltd, Lot No. F16, First Floor, Paragon Labuan, Jalan Tun Mustapha, 87000 Federal Territory of Labuan')} />
             </div>
         </div>
     </div>

@@ -182,7 +182,9 @@ const ClientBase = (() => {
 
     const shouldCompleteTax = () => isAccountOfType('financial') && !/crs_tin_information/.test((State.getResponse('get_account_status') || {}).status);
 
-    const getMT5AccountType = group => (group ? group.replace('\\', '_').replace(/_(\d+|master)/, '') : ''); // remove manager id or master distinction from group
+    // remove manager id or master distinction from group
+    // remove EUR or GBP distinction from group
+    const getMT5AccountType = group => (group ? group.replace('\\', '_').replace(/_(\d+|master|EUR|GBP)/, '') : '');
 
     const getBasicUpgradeInfo = () => {
         const upgradeable_landing_companies = State.getResponse('authorize.upgradeable_landing_companies');
@@ -202,7 +204,7 @@ const ClientBase = (() => {
                 upgradeable_landing_companies.indexOf(landing_company) !== -1
             ));
 
-            can_upgrade_to = canUpgrade('costarica', 'iom', 'malta', 'maltainvest', 'japan');
+            can_upgrade_to = canUpgrade('costarica', 'iom', 'malta', 'maltainvest');
             if (can_upgrade_to) {
                 type = can_upgrade_to === 'maltainvest' ? 'financial' : 'real';
             }

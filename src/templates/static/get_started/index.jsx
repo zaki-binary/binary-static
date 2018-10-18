@@ -37,7 +37,7 @@ const CTA = () => (
         <SeparatorLine show_mobile className='gr-padding-20 gr-child' />
         <div className='center-text'>
             <p>{it.L('Don\'t have an account?')}</p>
-            <a className='button' href={it.url_for('home')}><span>{it.L('Create Free Account')}</span></a>
+            <a className='button' href={it.url_for('new-account')}><span>{it.L('Create Free Account')}</span></a>
         </div>
     </div>
 );
@@ -81,7 +81,7 @@ const Index = () => (
                                 hash='types-of-trades'
                                 image='binary-options/types-of-trades'
                                 header={it.L('Types of trades')}
-                                text={it.L('Learn about the five types of trades that can help you execute your trading strategy on rising, falling, and even sideways markets.')}
+                                text={it.L('Learn about the types of trades that can help you execute your trading strategy on rising, falling, and even sideways markets.')}
                             />
                             <GetStartedSection
                                 link='get-started/binary-options'
@@ -102,7 +102,7 @@ const Index = () => (
                     </TabContent>
                     <TabContent id='mt5'>
                         <h2>{it.L('MetaTrader 5')}</h2>
-                        <p>{it.L('Trade Forex and Contracts for Difference (CFDs) with highly-competitive leverage. MetaTrader 5 is a multi-asset platform offering outstanding trading possibilities and technical analysis tools.')}</p>
+                        <p>{it.L('Trade Forex, Contracts for Difference (CFDs), and binary options on MetaTrader 5 - a multi-asset platform that offers outstanding trading possibilities and technical analysis tools.')}</p>
 
                         <SeparatorLine invisible className='gr-padding-30' />
 
@@ -250,6 +250,28 @@ const Index = () => (
                                 />
                             </div>
                         </GetStartedSectionWrapper>
+                        <GetStartedSectionWrapper
+                            section_id='binary-options-mt5'
+                            section_header={it.L('Binary Options on MT5')}
+                            section_description={it.L('Explore a whole new world of binary options trading with the world\'s leading multi-asset platform. [_1]Create an MT5 account now[_2] to start trading.', `<a href=${it.url_for('user/metatrader')}>`, '</a>')}
+                        >
+                            <div className='gr-row'>
+                                <GetStartedSection
+                                    link='get-started/binary-options-mt5'
+                                    hash='what-are-binary-options'
+                                    image='mt5/what-binary-trading'
+                                    header={it.L('Introduction to binary options on MT5')}
+                                    text={it.L('Binary options trading is now available on our MT5 platform. Learn more about its benefits and available markets.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/binary-options-mt5'
+                                    hash='how-to-trade-binary'
+                                    image='mt5/how-trade-binary'
+                                    header={it.L('How to trade binary options on MT5')}
+                                    text={it.L('Follow our step-by-step guide to start trading binary options on MT5.')}
+                                />
+                            </div>
+                        </GetStartedSectionWrapper>
                         <CTA />
                     </TabContent>
                     <TabContent id='lookback'>
@@ -261,33 +283,34 @@ const Index = () => (
                         <p>{it.L('We offer three types of lookbacks:')}</p>
                         <div className='gr-row'>
                             <div className='gr-4 gr-12-m gr-padding-10 gr-child'>
-                                <img className='responsive' src={it.url_for('images/pages/trade-explanation/close-high-image.svg')} />
+                                <img className='responsive' src={it.url_for(`images/pages/trade-explanation/${it.language.toLowerCase()}/high-close.svg`)} />
                                 <ul className='checked'>
                                     <li>{it.L('High-Close')}</li>
                                 </ul>
                                 <p>{it.L('Win the multiplier times the high minus close.')}</p>
                             </div>
                             <div className='gr-4 gr-12-m gr-padding-10 gr-child'>
-                                <img className='responsive' src={it.url_for('images/pages/trade-explanation/close-low-image.svg')} />
+                                <img className='responsive' src={it.url_for(`images/pages/trade-explanation/${it.language.toLowerCase()}/close-low.svg`)} />
                                 <ul className='checked'>
                                     <li>{it.L('Close-Low')}</li>
                                 </ul>
                                 <p>{it.L('Win the multiplier times the close minus low.')}</p>
                             </div>
                             <div className='gr-4 gr-12-m gr-padding-10 gr-child'>
-                                <img className='responsive' src={it.url_for('images/pages/trade-explanation/high-low-image.svg')} />
+                                <img className='responsive' src={it.url_for(`images/pages/trade-explanation/${it.language.toLowerCase()}/high-low.svg`)} />
                                 <ul className='checked'>
                                     <li>{it.L('High-Low')}</li>
                                 </ul>
                                 <p>{it.L('Win the multiplier times the high minus low.')}</p>
                             </div>
                         </div>
-                        <SeparatorLine invisible/>
+                        <SeparatorLine invisible />
                         <p>{it.L('For example, let’s say the market has a low of 5,200 and a close of 6,000 over the contract duration, then a ‘Close-Low’ lookback with a multiplier of $2 would have a payout of:')}</p>
                         <div className='formula center-text'>
                             <span>{it.L('2 * (6,000 – 5,200) = $1600')}</span>
                         </div>
-                        <p>{it.L('Lookbacks options are currently only available for [_1]Volatility Indices[_2].', `<a href=${it.url_for('get-started/binary-options')}#range-of-markets>`, '</a>')}</p>
+                        <p>{it.L('Lookbacks options are currently only available for [_1]Volatility Indices[_2].', `<a href=${it.url_for('get-started/binary-options')}?anchor=volatility-indices#range-of-markets>`, '</a>')}</p>
+                        <p>{it.L('Return to player (RTP) % for lookbacks for a multiplier of 1 and 1m duration is around 87% on average.')}</p>
                         <CTA />
                     </TabContent>
                 </TabContentContainer>

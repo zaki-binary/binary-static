@@ -1,27 +1,21 @@
-const BinaryPjax       = require('../../../../base/binary_pjax');
-const Client           = require('../../../../base/client');
-const BinarySocket     = require('../../../../base/socket');
-const localize         = require('../../../../../_common/localize').localize;
-const State            = require('../../../../../_common/storage').State;
-const getPropertyValue = require('../../../../../_common/utility').getPropertyValue;
-
+const BinaryPjax   = require('../../../../base/binary_pjax');
+const Client       = require('../../../../base/client');
+const BinarySocket = require('../../../../base/socket');
+const FormManager  = require('../../../../common/form_manager');
+const State        = require('../../../../../_common/storage').State;
 
 const professionalClient = (() => {
     let is_in_page = false;
 
     const onLoad = () => {
-        BinarySocket.wait('get_account_status').then((response) => {
-            if (/professional_requested|professional/.test(getPropertyValue(response, ['get_account_status', 'status']))) {
-                BinaryPjax.loadPreviousUrl();
-                return;
-            }
+        BinarySocket.wait('get_settings', 'get_account_status', 'landing_company').then(() => {
             init(Client.isAccountOfType('financial'), true);
         });
     };
 
     const init = (is_financial, is_page) => {
         is_in_page = !!is_page;
-        BinarySocket.wait('landing_company').then(() => { populateProfessionalClient(is_financial); });
+        populateProfessionalClient(is_financial);
     };
 
     const populateProfessionalClient = (is_financial) => {
@@ -32,6 +26,15 @@ const professionalClient = (() => {
             }
             return;
         }
+
+        const status = State.getResponse('get_account_status.status') || [];
+        if (is_in_page && /professional/.test(status)) {
+            $('#loading').remove();
+            $('#frm_professional').setVisibility(0);
+            $(`#${/professional_requested/.test(status) ? 'processing' : 'professional'}`).setVisibility(1);
+            return;
+        }
+
         const $container        = $('#fs_professional');
         const $chk_professional = $container.find('#chk_professional');
         const $info             = $container.find('#professional_info');
@@ -46,48 +49,34 @@ const professionalClient = (() => {
         });
 
         $chk_professional.on('change', () => {
-            if ($chk_professional.is(':checked') && !$(popup_selector).length) {
-                $('body').append($('<div/>', { id: 'professional_popup', class: 'lightbox' }).append($popup_contents.clone().setVisibility(1)));
+            if ($chk_professional.is(':checked')) {
+                $error.text('').setVisibility(0);
 
-                const $popup = $(popup_selector);
-                $popup.find('#btn_accept, #btn_decline').off('click').on('click dblclick', function() {
-                    if ($(this).attr('data-value') === 'decline') {
-                        $chk_professional.prop('checked', false);
-                    }
-                    $popup.remove();
-                });
+                if (!$(popup_selector).length) {
+                    $('body').append($('<div/>', { id: 'professional_popup', class: 'lightbox' }).append($popup_contents.clone().setVisibility(1)));
+
+                    const $popup = $(popup_selector);
+                    $popup.find('#btn_accept, #btn_decline').off('click').on('click dblclick', function () {
+                        if ($(this).attr('data-value') === 'decline') {
+                            $chk_professional.prop('checked', false);
+                        }
+                        $popup.remove();
+                    });
+                }
             }
         });
-
-        if (has_maltainvest) {
-            $container.find('#show_financial').setVisibility(1);
-        }
 
         $container.setVisibility(1);
 
         if (is_in_page) {
             $('#loading').remove();
-            $('#frm_professional')
-                .off('submit')
-                .on('submit', (e) => {
-                    e.preventDefault();
-                    if ($chk_professional.is(':checked')) {
-                        BinarySocket.wait('get_settings').then((res) => {
-                            BinarySocket.send(populateReq(res.get_settings)).then((response) => {
-                                if (response.error) {
-                                    $error.text(response.error.message).removeClass('invisible');
-                                } else {
-                                    BinarySocket.send({get_account_status: 1}).then(() => {
-                                        BinaryPjax.loadPreviousUrl();
-                                    });
-                                }
-                            });
-                        });
-                    } else {
-                        $error.text(localize('This field is required.')).removeClass('invisible');
-                    }
-                })
-                .setVisibility(1);
+            $('#frm_professional').setVisibility(1);
+            FormManager.init('#frm_professional', [{ selector: '#chk_professional', exclude_request: 1, validations: [['req', { hide_asterisk: true }]] }]);
+            FormManager.handleSubmit({
+                form_selector       : '#frm_professional',
+                obj_request         : populateReq(State.getResponse('get_settings')),
+                fnc_response_handler: handleResponse,
+            });
         }
 
         $(document).on('keydown click', (e) => {
@@ -113,6 +102,16 @@ const professionalClient = (() => {
         }
 
         return req;
+    };
+
+    const handleResponse = (response) => {
+        if (response.error) {
+            $('#form_message').text(response.error.message).setVisibility(1);
+        } else {
+            BinarySocket.send({ get_account_status: 1 }).then(() => {
+                populateProfessionalClient(true);
+            });
+        }
     };
 
     return {

@@ -2,7 +2,6 @@ const BinaryPjax          = require('./binary_pjax');
 const Client              = require('./client');
 const BinarySocket        = require('./socket');
 const showHidePulser      = require('../common/account_opening').showHidePulser;
-const checkClientsCountry = require('../common/country_base').checkClientsCountry;
 const MetaTrader          = require('../pages/user/metatrader/metatrader');
 const GTM                 = require('../../_common/base/gtm');
 const Login               = require('../../_common/base/login');
@@ -22,10 +21,8 @@ const Header = (() => {
     const onLoad = () => {
         populateAccountsList();
         bindClick();
-        if (!Login.isLoginPages()) {
-            checkClientsCountry();
-        }
         if (Client.isLoggedIn()) {
+            getElementById('menu-top').classList.add('smaller-font', 'top-nav-menu');
             displayAccountStatus();
             if (!Client.get('is_virtual')) {
                 BinarySocket.wait('website_status', 'authorize', 'balance').then(() => {
@@ -110,8 +107,11 @@ const Header = (() => {
 
     const metatraderMenuItemVisibility = () => {
         BinarySocket.wait('landing_company', 'get_account_status').then(() => {
-            if (MetaTrader.isEligible() && !Client.isJPClient()) {
-                getElementById('user_menu_metatrader').setVisibility(1);
+            if (MetaTrader.isEligible()) {
+                const mt_visibility = document.getElementsByClassName('mt_visibility');
+                applyToAllElements(mt_visibility, (el) => {
+                    el.setVisibility(1);
+                });
             }
         });
     };
@@ -160,10 +160,8 @@ const Header = (() => {
                 });
             };
 
-            const jp_account_status = State.getResponse('get_settings.jp_account_status.status');
-            const upgrade_info      = Client.getUpgradeInfo();
-            const show_upgrade_msg  = upgrade_info.can_upgrade;
-            const virtual_text      = getElementById('virtual-text');
+            const upgrade_info     = Client.getUpgradeInfo();
+            const show_upgrade_msg = upgrade_info.can_upgrade;
 
             if (Client.get('is_virtual')) {
                 applyToAllElements(upgrade_msg, (el) => {
@@ -175,19 +173,7 @@ const Header = (() => {
                     applyToAllElements('a', (ele) => { ele.setVisibility(0); }, '', el);
                 });
 
-                if (jp_account_status) {
-                    const has_disabled_jp = Client.isJPClient() && Client.getAccountOfType('real').is_disabled;
-                    if (/jp_knowledge_test_(pending|fail)/.test(jp_account_status)) { // do not returns the correct timeshow upgrade for user that filled up form
-                        showUpgrade('/new_account/knowledge_testws', '{JAPAN ONLY}Take knowledge test');
-                    } else if (show_upgrade_msg || (has_disabled_jp && jp_account_status !== 'disabled')) {
-                        applyToAllElements(upgrade_msg, (el) => { el.setVisibility(1); });
-                        if (jp_account_status === 'jp_activation_pending' && !document.getElementsByClassName('activation-message')) {
-                            virtual_text.appendChild(createElement('div', { class: 'activation-message', text: ` ${localize('{JAPAN ONLY}Your Application is Being Processed.')}` }));
-                        } else if (jp_account_status === 'activated' && !document.getElementsByClassName('activated-message')) {
-                            virtual_text.appendChild(createElement('div', { class: 'activated-message', text: ` ${localize('{JAPAN ONLY}Your Application has Been Processed. Please Re-Login to Access Your Real-Money Account.')}` }));
-                        }
-                    }
-                } else if (show_upgrade_msg) {
+                if (show_upgrade_msg) {
                     showUpgrade(upgrade_info.upgrade_link, `Click here to open a ${toTitleCase(upgrade_info.type)} Account`);
                     showUpgradeBtn(upgrade_info.upgrade_link, `Open a ${toTitleCase(upgrade_info.type)} Account`);
                 } else {
@@ -244,7 +230,7 @@ const Header = (() => {
 
     const hideNotification = (msg_code) => {
         const msg_notification = getElementById('msg_notification');
-        if (msg_notification.getAttribute('data-code') === 'STORAGE_NOT_SUPPORTED' ||
+        if (/^(STORAGE_NOT_SUPPORTED|MFSA_MESSAGE)$/.test(msg_notification.getAttribute('data-code')) ||
             msg_code && msg_notification.getAttribute('data-code') !== msg_code) {
             return;
         }
@@ -263,9 +249,24 @@ const Header = (() => {
             let get_account_status,
                 status;
 
-            const riskAssessment = () => (Client.getRiskAssessment() && !Client.isJPClient());
+            const hasMissingRequiredField = () => {
+                const required_fields = [
+                    'account_opening_reason',
+                    'address_line_1',
+                    'address_city',
+                    'phone',
+                    'tax_identification_number',
+                    'tax_residence',
+                    ...(Client.get('residence') === 'gb' ? ['address_postcode'] : []),
+                ];
+                const get_settings = State.getResponse('get_settings');
+                return required_fields.some(field => !get_settings[field]);
+            };
 
             const buildMessage = (string, path, hash = '') => localize(string, [`<a href="${Url.urlFor(path)}${hash}">`, '</a>']);
+            const hasStatus = (string) => status.findIndex(s => s === string) < 0 ? Boolean(false) : Boolean(true);
+
+            const has_no_tnc_limit = Client.get('landing_company_shortcode') === 'costarica';
 
             const messages = {
                 authenticate         : () => buildMessage('[_1]Authenticate your account[_2] now to take full advantage of all payment methods available.',                                      'user/authenticate'),
@@ -275,34 +276,41 @@ const Header = (() => {
                 document_review      : () => buildMessage('We are reviewing your documents. For more details [_1]contact us[_2].',                                                               'contact'),
                 excluded_until       : () => buildMessage('Your account is restricted. Kindly [_1]contact customer support[_2] for assistance.',                                                 'contact'),
                 financial_limit      : () => buildMessage('Please set your [_1]30-day turnover limit[_2] to remove deposit limits.',                                                             'user/security/self_exclusionws'),
+                mf_retail            : () => buildMessage('Binary Options Trading has been disabled on your account. Kindly [_1]contact customer support[_2] for assistance.',                   'contact'),
+                mt5_withdrawal_locked: () => localize('MT5 withdrawals have been disabled on your account. Please check your email for more details.'),
+                required_fields      : () => buildMessage('Please complete your [_1]personal details[_2] before you proceed.', 'user/settings/detailsws'),
                 residence            : () => buildMessage('Please set [_1]country of residence[_2] before upgrading to a real-money account.',                                                   'user/settings/detailsws'),
                 risk                 : () => buildMessage('Please complete the [_1]financial assessment form[_2] to lift your withdrawal and trading limits.',                                   'user/settings/assessmentws'),
                 tax                  : () => buildMessage('Please [_1]complete your account profile[_2] to lift your withdrawal and trading limits.',                                            'user/settings/detailsws'),
-                tnc                  : () => buildMessage('Please [_1]accept the updated Terms and Conditions[_2] to lift your withdrawal and trading limits.',                                  'user/tnc_approvalws'),
+                tnc                  : () => buildMessage(`Please [_1]accept the updated Terms and Conditions[_2]${has_no_tnc_limit ? '' : ' to lift your deposit and trading limits'}.`,        'user/tnc_approvalws'),
                 unwelcome            : () => buildMessage('Trading and deposits have been disabled on your account. Kindly [_1]contact customer support[_2] for assistance.',                    'contact'),
                 withdrawal_locked    : () => localize('Withdrawals have been disabled on your account. Please check your email for more details.'),
             };
 
             const validations = {
                 authenticate         : () => +get_account_status.prompt_client_to_authenticate,
-                cashier_locked       : () => /cashier_locked/.test(status),
+                cashier_locked       : () => hasStatus('cashier_locked'),
                 currency             : () => !Client.get('currency'),
-                document_needs_action: () => /document_needs_action/.test(status),
-                document_review      : () => /document_under_review/.test(status),
+                document_needs_action: () => hasStatus('document_needs_action'),
+                document_review      : () => hasStatus('document_under_review'),
                 excluded_until       : () => Client.get('excluded_until'),
-                financial_limit      : () => /ukrts_max_turnover_limit_not_set/.test(status),
+                financial_limit      : () => hasStatus('ukrts_max_turnover_limit_not_set'),
+                mf_retail            : () => Client.get('landing_company_shortcode') === 'maltainvest' && !hasStatus('professional'),
+                mt5_withdrawal_locked: () => hasStatus('mt5_withdrawal_locked'),
+                required_fields      : () => Client.isAccountOfType('financial') && hasMissingRequiredField(),
                 residence            : () => !Client.get('residence'),
-                risk                 : () => riskAssessment(),
+                risk                 : () => Client.getRiskAssessment(),
                 tax                  : () => Client.shouldCompleteTax(),
                 tnc                  : () => Client.shouldAcceptTnc(),
-                unwelcome            : () => /unwelcome/.test(status),
-                withdrawal_locked    : () => /withdrawal_locked/.test(status),
+                unwelcome            : () => hasStatus('unwelcome'),
+                withdrawal_locked    : () => hasStatus('withdrawal_locked'),
             };
 
             // real account checks in order
             const check_statuses_real = [
                 'excluded_until',
                 'tnc',
+                'required_fields',
                 'financial_limit',
                 'risk',
                 'tax',
@@ -312,7 +320,9 @@ const Header = (() => {
                 'authenticate',
                 'cashier_locked',
                 'withdrawal_locked',
+                'mt5_withdrawal_locked',
                 'unwelcome',
+                'mf_retail',
             ];
 
             // virtual checks
@@ -323,7 +333,11 @@ const Header = (() => {
             const checkStatus = (check_statuses) => {
                 const notified = check_statuses.some((check_type) => {
                     if (validations[check_type]()) {
-                        displayNotification(messages[check_type]());
+                        // show MF retail message on Trading pages only
+                        if (check_type === 'mf_retail' && !(State.get('is_trading') || State.get('is_mb_trading'))) {
+                            return false;
+                        }
+                        displayNotification(messages[check_type](), false, check_type === 'mf_retail' ? 'MF_RETAIL_MESSAGE' : '');
                         return true;
                     }
                     return false;
@@ -334,10 +348,14 @@ const Header = (() => {
             if (Client.get('is_virtual')) {
                 checkStatus(check_statuses_virtual);
             } else {
+                const el_account_status = createElement('span', { class: 'authenticated', 'data-balloon': localize('Account Authenticated'), 'data-balloon-pos': 'down' });
+
                 BinarySocket.wait('website_status', 'get_account_status', 'get_settings', 'balance').then(() => {
                     get_account_status = State.getResponse('get_account_status') || {};
                     status             = get_account_status.status;
                     checkStatus(check_statuses_real);
+                    const is_fully_authenticated = hasStatus('authenticated') && !+get_account_status.prompt_client_to_authenticate;
+                    $('.account-id')[is_fully_authenticated ? 'append' : 'remove'](el_account_status);
                 });
             }
         });

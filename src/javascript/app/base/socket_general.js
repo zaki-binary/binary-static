@@ -1,21 +1,21 @@
-const BinaryPjax           = require('./binary_pjax');
-const Client               = require('./client');
-const Clock                = require('./clock');
-const Footer               = require('./footer');
-const Header               = require('./header');
-const BinarySocket         = require('./socket');
-const Dialog               = require('../common/attach_dom/dialog');
-const showPopup            = require('../common/attach_dom/popup');
-const setCurrencies        = require('../common/currency').setCurrencies;
-const SessionDurationLimit = require('../common/session_duration_limit');
-const updateBalance        = require('../pages/user/update_balance');
-const GTM                  = require('../../_common/base/gtm');
-const Login                = require('../../_common/base/login');
-const localize             = require('../../_common/localize').localize;
-const getElementById       = require('../../_common/common_functions').getElementById;
-const State                = require('../../_common/storage').State;
-const urlFor               = require('../../_common/url').urlFor;
-const getPropertyValue     = require('../../_common/utility').getPropertyValue;
+const Client                 = require('./client');
+const Clock                  = require('./clock');
+const Footer                 = require('./footer');
+const Header                 = require('./header');
+const BinarySocket           = require('./socket');
+const createLanguageDropDown = require('../common/attach_dom/language_dropdown');
+const Dialog                 = require('../common/attach_dom/dialog');
+const showPopup              = require('../common/attach_dom/popup');
+const setCurrencies          = require('../common/currency').setCurrencies;
+const SessionDurationLimit   = require('../common/session_duration_limit');
+const updateBalance          = require('../pages/user/update_balance');
+const Crowdin                = require('../../_common/crowdin');
+const GTM                    = require('../../_common/base/gtm');
+const Login                  = require('../../_common/base/login');
+const localize               = require('../../_common/localize').localize;
+const State                  = require('../../_common/storage').State;
+const urlFor                 = require('../../_common/url').urlFor;
+const getPropertyValue       = require('../../_common/utility').getPropertyValue;
 
 const BinarySocketGeneral = (() => {
     const onOpen = (is_ready) => {
@@ -27,12 +27,6 @@ const BinarySocketGeneral = (() => {
                     return;
                 }
                 BinarySocket.send({ website_status: 1, subscribe: 1 });
-                if (Client.isLoggedIn()) {
-                    BinarySocket.wait('authorize').then(() => {
-                        Client.setJPFlag();
-                        BinaryPjax.init(getElementById('content-holder'), '#content');
-                    });
-                }
             }
             Clock.startClock();
         }
@@ -50,6 +44,9 @@ const BinarySocketGeneral = (() => {
                         window.location.reload();
                         return;
                     }
+                    if (!Crowdin.isInContext()) {
+                        createLanguageDropDown(response.website_status);
+                    }
                     if (response.website_status.message) {
                         Footer.displayNotification(response.website_status.message);
                     } else {
@@ -57,6 +54,10 @@ const BinarySocketGeneral = (() => {
                     }
                     BinarySocket.availability(is_available);
                     setCurrencies(response.website_status);
+                    // for logged out clients send landing company with IP address as residence
+                    if (!Client.isLoggedIn() && !State.getResponse('landing_company')) {
+                        BinarySocket.send({ landing_company: response.website_status.clients_country });
+                    }
                 }
                 break;
             case 'authorize':
@@ -77,7 +78,12 @@ const BinarySocketGeneral = (() => {
                         BinarySocket.send({ get_account_status: 1 });
                         BinarySocket.send({ payout_currencies: 1 });
                         BinarySocket.send({ mt5_login_list: 1 });
-                        setResidence(response.authorize.country || Client.get('residence'));
+                        const clients_country = response.authorize.country || Client.get('residence');
+                        setResidence(clients_country);
+                        // for logged in clients send landing company with IP address as residence
+                        if (!clients_country) {
+                            BinarySocket.send({ landing_company: State.getResponse('website_status.clients_country') });
+                        }
                         if (!Client.get('is_virtual')) {
                             BinarySocket.send({ get_self_exclusion: 1 });
                         }

@@ -2,9 +2,9 @@ const Cookies          = require('js-cookie');
 const Client           = require('./client');
 const Contents         = require('./contents');
 const Header           = require('./header');
+const Footer           = require('./footer');
 const Menu             = require('./menu');
 const BinarySocket     = require('./socket');
-const checkLanguage    = require('../common/country_base').checkLanguage;
 const TrafficSource    = require('../common/traffic_source');
 const RealityCheck     = require('../pages/user/reality_check/reality_check');
 const Login            = require('../../_common/base/login');
@@ -19,7 +19,6 @@ const State            = require('../../_common/storage').State;
 const scrollToTop      = require('../../_common/scroll').scrollToTop;
 const Url              = require('../../_common/url');
 const createElement    = require('../../_common/utility').createElement;
-const AffiliatePopup   = require('../../static/japan/affiliate_popup');
 require('../../_common/lib/polyfills/array.includes');
 require('../../_common/lib/polyfills/string.includes');
 
@@ -75,6 +74,7 @@ const Page = (() => {
             }
             Localize.forLang(Language.urlLang());
             Header.onLoad();
+            Footer.onLoad();
             Language.setCookie();
             Menu.makeMobileMenu();
             recordAffiliateExposure();
@@ -88,12 +88,10 @@ const Page = (() => {
         }
         if (Client.isLoggedIn()) {
             BinarySocket.wait('authorize', 'website_status', 'get_account_status').then(() => {
-                checkLanguage();
                 RealityCheck.onLoad();
                 Menu.init();
             });
         } else {
-            checkLanguage();
             Menu.init();
         }
         TrafficSource.setData();
@@ -104,8 +102,6 @@ const Page = (() => {
         if (!token || token.length !== 32) {
             return false;
         }
-
-        AffiliatePopup.show();
 
         const token_length  = token.length;
         const is_subsidiary = /\w{1}/.test(Url.param('s'));

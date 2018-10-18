@@ -23,8 +23,8 @@ const Tac = () => (
                         id     : 'legal',
                         text   : it.L('Terms and Conditions'),
                         submenu: [
-                      { id: 'legal-binary', text: it.L('Binary Options') },
-                      { id: 'legal-mt',     text: it.L('MetaTrader') },
+                            { id: 'legal-binary', text: it.L('Binary Options') },
+                            { id: 'legal-mt',     text: it.L('MetaTrader') },
                         ],
                     },
                     { id: 'mam',              text: it.L('MAM'), className: 'invisible' }, // toEnableMAM: remove className
@@ -48,7 +48,7 @@ const Tac = () => (
                             { id: 'order-execution-mt',     text: it.L('MetaTrader') },
                         ],
                     },
-                    { id: 'payment-agents', text: it.L('Payment Agents') },
+                    { id: 'payment-agents', text: it.L('Payment Agents'), className: 'eu-hide' },
                 ]}
             />
         </div>

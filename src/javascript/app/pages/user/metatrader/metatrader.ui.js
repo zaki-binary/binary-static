@@ -21,7 +21,8 @@ const MetaTraderUI = (() => {
         $main_msg,
         validations,
         submit,
-        token;
+        token,
+        current_action_ui;
 
     const accounts_info = MetaTraderConfig.accounts_info;
     const actions_info  = MetaTraderConfig.actions_info;
@@ -119,6 +120,7 @@ const MetaTraderUI = (() => {
     const updateAccount = (acc_type) => {
         updateListItem(acc_type);
         setCurrentAccount(acc_type);
+        showHideFinancialAuthenticate(acc_type);
     };
 
     const setMTAccountText = () => {
@@ -167,7 +169,9 @@ const MetaTraderUI = (() => {
     const setCurrentAccount = (acc_type) => {
         if (Client.get('mt5_account') && Client.get('mt5_account') !== acc_type) return;
 
-        displayAccountDescription(acc_type);
+        if (current_action_ui !== 'new_account') {
+            displayAccountDescription(acc_type);
+        }
 
         if (accounts_info[acc_type].info) {
             // Update account info
@@ -182,7 +186,9 @@ const MetaTraderUI = (() => {
                 $(this).html(typeof mapping[key] === 'function' ? mapping[key]() : info);
             });
             // $container.find('.act_cashier').setVisibility(!types_info[acc_type].is_demo);
-            $container.find('.has-account').setVisibility(1);
+            if (current_action_ui !== 'new_account') {
+                $container.find('.has-account').setVisibility(1);
+            }
         } else {
             $detail.find('.acc-info, .acc-actions').setVisibility(0);
         }
@@ -267,6 +273,7 @@ const MetaTraderUI = (() => {
             $form.find('.binary-balance').html(`${formatMoney(client_currency, Client.get('balance'))}`);
             $form.find('.mt5-account').text(`${localize('[_1] Account [_2]', [accounts_info[acc_type].title, accounts_info[acc_type].info.login])}`);
             $form.find('.mt5-balance').html(`${formatMoney(mt_currency, accounts_info[acc_type].info.balance)}`);
+            $form.find('.symbols.mt-currency').addClass(mt_currency.toLowerCase());
             $form.find('label[for="txt_amount_deposit"]').append(` ${client_currency}`);
             $form.find('label[for="txt_amount_withdrawal"]').append(` ${mt_currency}`);
 
@@ -287,6 +294,8 @@ const MetaTraderUI = (() => {
                     msg = MetaTraderConfig.needsRealMessage();
                 } else if (!Client.get('currency')) { // client should set currency before accessing fund management section
                     msg = $templates.find('#msg_set_currency').html();
+                } else if (Client.get('landing_company_shortcode') === 'iom') {
+                    msg = MetaTraderConfig.needsFinancialMessage();
                 }
                 if (msg) {
                     displayMainMessage(msg, false);
@@ -317,6 +326,8 @@ const MetaTraderUI = (() => {
     // ----- New Account -----
     // -----------------------
     const handleNewAccountUI = (action, acc_type, $target) => {
+        current_action_ui = action;
+
         const is_new_account = /new_account/.test(action);
         const $acc_actions = $container.find('.acc-actions');
         $acc_actions.find('.new-account').setVisibility(is_new_account);
@@ -391,6 +402,7 @@ const MetaTraderUI = (() => {
         if (/\b(disabled|selected|existed)\b/.test($item.attr('class'))) return;
         $item.parents('.type-group').find(`.${box_class}.selected`).removeClass('selected');
         $item.addClass('selected');
+        $('#new_account_financial_authenticate_msg').setVisibility(0);
         const selected_acc_type = $item.attr('data-acc-type');
         const action            = `new_account${/mamm/.test(selected_acc_type) ? '_mam' : ''}`;
         if (/(demo|real)/.test(selected_acc_type)) {
@@ -399,6 +411,7 @@ const MetaTraderUI = (() => {
             $form.find('#view_1 #btn_next').addClass('button-disabled');
             $form.find('#view_1 .step-2').setVisibility(1);
             displayMessage('#new_account_msg', (selected_acc_type === 'real' && Client.get('is_virtual')) ? MetaTraderConfig.needsRealMessage() : '', true);
+            $form.find('#new_account_no_deposit_bonus_msg').setVisibility(0);
         } else {
             const new_acc_type = newAccountGetType();
             displayAccountDescription(new_acc_type);
@@ -407,6 +420,8 @@ const MetaTraderUI = (() => {
                 $form.find('#view_1 #btn_next')[error_msg ? 'addClass' : 'removeClass']('button-disabled');
                 $form.find('#view_1 #btn_cancel').removeClass('invisible');
             });
+            // uncomment to show No Deposit Bonus note
+            // $form.find('#new_account_no_deposit_bonus_msg').setVisibility(/real_vanuatu_standard/.test(new_acc_type));
         }
     };
 
@@ -432,7 +447,7 @@ const MetaTraderUI = (() => {
 
         let count = 0;
         Object.keys(accounts_info)
-            .filter(acc_type => !accounts_info[acc_type].is_demo)
+            .filter(acc_type => !accounts_info[acc_type].is_demo && accounts_info[acc_type].mt5_account_type !== 'mamm') // toEnableMAM: remove second check
             .forEach((acc_type) => {
                 count++;
                 const $acc  = $acc_template.clone();
@@ -440,7 +455,7 @@ const MetaTraderUI = (() => {
                 const title = accounts_info[acc_type].short_title;
                 $acc.find('.mt5_type_box').attr({ id: `rbtn_${type}`, 'data-acc-type': type })
                     .find('img').attr('src', urlForStatic(`/images/pages/metatrader/icons/acc_${title.toLowerCase().replace(/\s/g, '_').replace('mam_', '')}.svg`));
-                $acc.find('p').text(title);
+                $acc.find('p').text(localize(title));
                 (/mam/.test(acc_type) ? $acc_template_mam : $acc_template_mt).append($acc);
             });
         $templates.find('.hl-types-of-accounts').setVisibility(count > 1);
@@ -528,6 +543,12 @@ const MetaTraderUI = (() => {
         }
     };
 
+    const showHideFinancialAuthenticate = (acc_type) => {
+        if (MetaTraderConfig.hasAccount(acc_type) && accounts_info[acc_type].account_type === 'financial') {
+            $('#financial_authenticate_msg').setVisibility(!MetaTraderConfig.isAuthenticated());
+        }
+    };
+
     return {
         init,
         setAccountType,
@@ -545,6 +566,7 @@ const MetaTraderUI = (() => {
 
         $form   : () => $form,
         getToken: () => token,
+        setToken: (verification_code) => { token = verification_code; },
     };
 })();
 

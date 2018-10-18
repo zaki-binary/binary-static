@@ -9,7 +9,7 @@ const texts = [
     'Month',
     'Year',
     'Sorry, an error occurred while processing your request.',
-    'Please [_1]log in[_2] or [_3]sign up[_2] to view this page.',
+    'Please [_1]log in[_2] or [_3]sign up[_4] to view this page.',
 
     // top bar
     'Click here to open a Real Account',
@@ -76,13 +76,14 @@ const texts = [
     'Time is in the wrong format.',
 
     // highchart localization text
-    'Start time',
-    'Entry spot',
     'Purchase Time',
-    'Exit spot',
-    'End time',
-    'Sell time',
     'Charting for this underlying is delayed',
+    'Reset Time',
+    'Payout Range',
+    'Tick [_1]',
+    'Ticks history returned an empty array.',
+    'Chart is not available for this underlying.',
+    'Start/End Time',
 
     // trading page
     'year',
@@ -122,9 +123,15 @@ const texts = [
     'Ends Between/Ends Outside',
     'Touch/No Touch',
     'Stays Between/Goes Outside',
+    'Asians',
+    'Reset Call/Reset Put',
+    'High/Low Ticks',
+    'Call Spread/Put Spread',
     'Potential Payout',
+    'Maximum Payout',
     'Total Cost',
     'Potential Profit',
+    'Maximum Profit',
     'View',
     'Tick',
     'Buy price',
@@ -152,10 +159,17 @@ const texts = [
     'High-Close',
     'Close-Low',
     'High-Low',
+    'Reset Call',
+    'Reset Put',
     'Search...',
     'Select Asset',
+    'The reset time is [_1]',
     'Purchase',
     'Purchase request sent',
+    'Add +/– to define a barrier offset. For example, +0.005 means a barrier that\'s 0.005 higher than the entry spot.',
+    'Please reload the page',
+    'Trading is unavailable at this time.',
+    'Maximum multiplier of 1000.',
 
     // limits
     'Your account is fully authenticated and your withdrawal limits have been lifted.',
@@ -193,6 +207,9 @@ const texts = [
     'Male',
     'Please select a country',
     'Please confirm that all the information above is true and complete.',
+    'Your application to be treated as a professional client is being processed.',
+    'You are categorised as a retail client. Apply to be treated as a professional trader.',
+    'You are categorised as a professional client.',
 
     // home and virtual account opening page
     'Your token has expired or is invalid. Please click <a href="[_1]">here</a> to restart the verification process.',
@@ -236,6 +253,7 @@ const texts = [
     'Your request to withdraw [_1] [_2] from your account [_3] to Payment Agent [_4] account has been successfully processed.',
     'Up to [_1] decimal places are allowed.',
     'Your token has expired or is invalid. Please click [_1]here[_2] to restart the verification process.',
+    'Please [_1]deposit[_2] to your account.',
 
     // api_token
     'New token created.',
@@ -306,30 +324,6 @@ const texts = [
     // authenticate
     'This feature is not relevant to virtual-money accounts.',
 
-    // japan account opening
-    'Japan',
-    'Questions',
-    'True',
-    'False',
-    'There was some invalid character in an input field.',
-    'Please follow the pattern 3 numbers, a dash, followed by 4 numbers.',
-    'Score',
-    '{JAPAN ONLY}Take knowledge test',
-    '{JAPAN ONLY}Knowledge Test Result',
-    '{JAPAN ONLY}Knowledge Test',
-    '{JAPAN ONLY}Congratulations, you have pass the test, our Customer Support will contact you shortly.',
-    '{JAPAN ONLY}Sorry, you have failed the test, please try again after 24 hours.',
-    '{JAPAN ONLY}Dear customer, you are not allowed to take knowledge test until [_1]. Last test taken at [_2].',
-    '{JAPAN ONLY}Dear customer, you\'ve already completed the knowledge test, please proceed to next step.',
-    '{JAPAN ONLY}Please complete the following questions.',
-    '{JAPAN ONLY}The test is unavailable now, test can only be taken again on next business day with respect of most recent test.',
-    '{JAPAN ONLY}You need to finish all 20 questions.',
-    'Weekday',
-    '{JAPAN ONLY}Your Application is Being Processed.',
-    '{JAPAN ONLY}Your Application has Been Processed. Please Re-Login to Access Your Real-Money Account.',
-    'Processing your request...',
-    'Please check the above form for pending errors.',
-
     // contract types display names
     'Asian Up',
     'Asian Down',
@@ -339,6 +333,10 @@ const texts = [
     'Digit Even',
     'Digit Over',
     'Digit Under',
+    'Call Spread',
+    'Put Spread',
+    'High Tick',
+    'Low Tick',
 
     // multi_barriers_trading
     '[_1] [_2] payout if [_3] is strictly higher than or equal to Barrier at close on [_4].',
@@ -354,6 +352,7 @@ const texts = [
     'Higher',
     'Higher or equal',
     'Lower',
+    'Lower or equal',
     'Touches',
     'Does Not Touch',
     'Ends Between',
@@ -408,10 +407,9 @@ const texts = [
     'Start Time',
     'Entry Spot',
     'Low Barrier',
-    'Low Barrier ([_1])',
     'High Barrier',
-    'High Barrier ([_1])',
-    'Barrier ([_1])',
+    'Reset Barrier',
+    'Average',
     'This contract won',
     'This contract lost',
     'Spot',
@@ -425,13 +423,11 @@ const texts = [
     'Purchase Price',
     'Profit/Loss',
     'Contract Information',
-    'Contract Expiry',
-    'Contract Sold',
+    'Contract Result',
     'Current',
     'Open',
     'Closed',
     'Contract has not started yet',
-    'Price',
     'Spot Time',
     'Spot Time (GMT)',
     'Current Time',
@@ -442,9 +438,12 @@ const texts = [
     'Sell at market',
     'You have sold this contract at [_1] [_2]',
     'Your transaction reference number is [_1]',
+    'Tick [_1] is the highest tick',
+    'Tick [_1] is not the highest tick',
+    'Tick [_1] is the lowest tick',
+    'Tick [_1] is not the lowest tick',
     'Note',
     'Contract will be sold at the prevailing market price when the request is received by our servers. This price may differ from the indicated price.',
-    'Contract ID',
     'Contract Type',
     'Transaction ID',
     'Remaining Time',
@@ -457,6 +456,12 @@ const texts = [
     'Start Time and Entry Spot',
     'Exit Time and Exit Spot',
     'You can close this window without interrupting your trade.',
+    'Selected Tick',
+    'Highest Tick',
+    'Highest Tick Time',
+    'Lowest Tick',
+    'Lowest Tick Time',
+    'Close Time',
 
     // financial assessment
     'Please select a value',
@@ -464,6 +469,7 @@ const texts = [
     // authorised_apps
     'You have not granted access to any applications.',
     'Permissions',
+    'Last Login',
     'Never',
     'Revoke access',
     'Are you sure that you want to permanently revoke access to the application',
@@ -497,11 +503,11 @@ const texts = [
     'Should be a valid number.',
     'Should be more than [_1]',
     'Should be less than [_1]',
+    'Should be [_1]',
     'Should be between [_1] and [_2]',
     'Only letters, numbers, space, hyphen, period, and apostrophe are allowed.',
     'Only letters, space, hyphen, period, and apostrophe are allowed.',
     'Only letters, numbers, and hyphen are allowed.',
-    'Only numbers, space, and hyphen are allowed.',
     'Only numbers and spaces are allowed.',
     'Only letters, numbers, space, and these special characters are allowed: - . \' # ; : ( ) , @ /',
     'The two passwords that you entered do not match.',
@@ -509,6 +515,7 @@ const texts = [
     'You should enter [_1] characters.',
     'Indicates required field',
     'Verification code is wrong. Please use the link sent to your email.',
+    'Invalid verification code.',
     'The password you entered is one of the world\'s most commonly used passwords. You should not be using this password.',
     'Hint: it would take approximately [_1][_2] to crack this password.',
     'thousand',
@@ -516,6 +523,7 @@ const texts = [
     'Should start with letter or number, and may contain hyphen and underscore.',
     'Your address could not be verified by our automated system. You may proceed but please ensure that your address is complete.',
     'Validate address',
+    'There was some invalid character in an input field.',
 
     // metatrader
     'Congratulations! Your [_1] Account has been created.',
@@ -543,7 +551,9 @@ const texts = [
     'MAM Volatility Indices',
     'Change Password',
     'Demo Accounts',
+    'Demo Account',
     'Real-Money Accounts',
+    'Real-Money Account',
     'MAM Accounts',
     'Our MT5 service is currently unavailable to EU residents due to pending regulatory approval.',
     '[_1] Account [_2]',
@@ -555,6 +565,9 @@ const texts = [
     'Please check your email for further instructions.',
     'Revoke MAM',
     'Manager successfully revoked',
+    '{SPAIN ONLY}You are about to purchase a product that is not simple and may be difficult to understand: Contracts for Difference and Forex. As a general rule, the CNMV considers that such products are not appropriate for retail clients, due to their complexity.',
+    '{SPAIN ONLY}However, Binary Investments (Europe) Ltd has assessed your knowledge and experience and deems the product appropriate for you.',
+    '{SPAIN ONLY}This is a product with leverage. You should be aware that losses may be higher than the amount initially paid to purchase the product.',
 
     // account_transfer
     'Min',
@@ -570,7 +583,8 @@ const texts = [
     'Please set [_1]country of residence[_2] before upgrading to a real-money account.',
     'Please complete the [_1]financial assessment form[_2] to lift your withdrawal and trading limits.',
     'Please [_1]complete your account profile[_2] to lift your withdrawal and trading limits.',
-    'Please [_1]accept the updated Terms and Conditions[_2] to lift your withdrawal and trading limits.',
+    'Please [_1]accept the updated Terms and Conditions[_2].',
+    'Please [_1]accept the updated Terms and Conditions[_2] to lift your deposit and trading limits.',
     'Your account is restricted. Kindly [_1]contact customer support[_2] for assistance.',
     'Connection error: Please check your internet connection.',
     'You have reached the rate limit of requests per second. Please try later.',
@@ -578,7 +592,12 @@ const texts = [
     'We are reviewing your documents. For more details [_1]contact us[_2].',
     'Deposits and withdrawals have been disabled on your account. Please check your email for more details.',
     'Trading and deposits have been disabled on your account. Kindly [_1]contact customer support[_2] for assistance.',
+    'Binary Options Trading has been disabled on your account. Kindly [_1]contact customer support[_2] for assistance.',
     'Withdrawals have been disabled on your account. Please check your email for more details.',
+    'MT5 withdrawals have been disabled on your account. Please check your email for more details.',
+    'Please complete your [_1]personal details[_2] before you proceed.',
+    'Account Authenticated',
+    'In the EU, financial binary options are only available to professional investors.',
 
     // browser-update message
     'Your web browser ([_1]) is out of date and may affect your trading experience. Proceed at your own risk. [_2]Update browser[_3]',
@@ -604,6 +623,7 @@ const texts = [
     'Virtual',
     'Real',
     'Counterparty',
+    'Jurisdiction',
     'This account is disabled',
     'This account is excluded until [_1]',
 
@@ -614,12 +634,13 @@ const texts = [
     'Ether Classic',
     'Litecoin',
     'Dai',
+    'Tether',
 
     // Authentication errors
-    'Invalid document format: "[_1]"',
-    'File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB',
+    'Invalid document format.',
+    'File ([_1]) size exceeds the permitted limit. Maximum allowed file size: [_2]',
     'ID number is required for [_1].',
-    'Only letters, numbers, space, underscore, and hyphen are allowed for ID number.',
+    'Only letters, numbers, space, underscore, and hyphen are allowed for ID number ([_1]).',
     'Expiry date is required for [_1].',
     'Passport',
     'ID card',
@@ -629,10 +650,27 @@ const texts = [
     'Front and reverse side photos of [_1] are required.',
     '[_1]Your Proof of Identity or Proof of Address[_2] did not meet our requirements. Please check your email for further instructions.',
     'Following file(s) were already uploaded: [_1]',
+    'Checking',
+    'Checked',
+    'Pending',
+    'Submitting',
+    'Submitted',
 
     // third party link confirmation dialog/popup
     'You will be redirected to a third-party website which is not owned by Binary.com.',
     'Click OK to proceed.',
+
+    // two factor authentication
+    'You have successfully enabled two-factor authentication for your account.',
+    'You have successfully disabled two-factor authentication for your account.',
+    'Enable',
+    'Disable',
+
+    // Download page
+    'Linux',
+    'Mac',
+    'Windows',
+    'Unknown OS',
 ];
 
 /* eslint-disable no-console */

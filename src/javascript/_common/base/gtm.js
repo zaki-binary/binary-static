@@ -10,37 +10,22 @@ const State          = require('../storage').State;
 const getAppId       = require('../../config').getAppId;
 
 const GTM = (() => {
-    const isGtmApplicable = () => (/^(1|1098)$/.test(getAppId()));
+    const isGtmApplicable = () => (/^(1|1098|14473)$/.test(getAppId()));
 
-    const gtmDataLayerInfo = (data) => {
-        const data_layer_info = {
-            language : getLanguage(),
-            pageTitle: pageTitle(),
-            pjax     : State.get('is_loaded_by_pjax'),
-            url      : document.URL,
-            event    : 'page_load',
-        };
-        if (ClientBase.isLoggedIn()) {
-            data_layer_info.visitorId = ClientBase.get('loginid');
-        }
-
-        $.extend(true, data_layer_info, data);
-
-        const event = data_layer_info.event;
-        delete data_layer_info.event;
-
-        return {
-            event,
-            data: data_layer_info,
-        };
-    };
+    const getCommonVariables = () => ({
+        language : getLanguage(),
+        pageTitle: pageTitle(),
+        pjax     : State.get('is_loaded_by_pjax'),
+        url      : document.URL,
+        ...ClientBase.isLoggedIn() && { visitorId: ClientBase.get('loginid') },
+    });
 
     const pushDataLayer = (data) => {
         if (isGtmApplicable() && !Login.isLoginPages()) {
-            const info   = gtmDataLayerInfo(data && typeof data === 'object' ? data : null);
-            dataLayer[0] = info.data;
-            dataLayer.push(info.data);
-            dataLayer.push({ event: info.event });
+            dataLayer.push({
+                ...getCommonVariables(),
+                ...data,
+            });
         }
     };
 
@@ -53,7 +38,6 @@ const GTM = (() => {
         if (!isGtmApplicable()) return;
         const is_login       = localStorage.getItem('GTM_login')       === '1';
         const is_new_account = localStorage.getItem('GTM_new_account') === '1';
-        if (!is_login && !is_new_account) return;
 
         localStorage.removeItem('GTM_login');
         localStorage.removeItem('GTM_new_account');
@@ -71,9 +55,9 @@ const GTM = (() => {
             bom_email         : get_settings.email,
             url               : window.location.href,
             bom_today         : Math.floor(Date.now() / 1000),
-            event             : is_new_account ? 'new_account' : 'log_in',
         };
         if (is_new_account) {
+            data.event = 'new_account';
             data.bom_date_joined = data.bom_today;
         }
         if (!ClientBase.get('is_virtual')) {
@@ -84,6 +68,7 @@ const GTM = (() => {
         }
 
         if (is_login) {
+            data.event = 'log_in';
             BinarySocket.wait('mt5_login_list').then((response) => {
                 (response.mt5_login_list || []).forEach((obj) => {
                     const acc_type = (ClientBase.getMT5AccountType(obj.group) || '')
@@ -106,7 +91,6 @@ const GTM = (() => {
         const req  = response.echo_req.passthrough;
         const data = {
             event             : 'buy_contract',
-            visitorId         : ClientBase.get('loginid'),
             bom_symbol        : req.symbol,
             bom_market        : getElementById('contract_markets').value,
             bom_currency      : req.currency,
@@ -116,13 +100,13 @@ const GTM = (() => {
             bom_buy_price     : buy.buy_price,
             bom_payout        : buy.payout,
         };
-        $.extend(data, {
+        Object.assign(data, {
             bom_amount     : req.amount,
             bom_basis      : req.basis,
             bom_expiry_type: getElementById('expiry_type').value,
         });
         if (data.bom_expiry_type === 'duration') {
-            $.extend(data, {
+            Object.assign(data, {
                 bom_duration     : req.duration,
                 bom_duration_unit: req.duration_unit,
             });

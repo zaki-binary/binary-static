@@ -1,12 +1,10 @@
 const StatementUI          = require('./statement.ui');
 const ViewPopup            = require('../../view_popup/view_popup');
-const Client               = require('../../../../base/client');
 const showLocalTimeOnHover = require('../../../../base/clock').showLocalTimeOnHover;
 const BinarySocket         = require('../../../../base/socket');
 const DateTo               = require('../../../../common/attach_dom/date_to');
 const addTooltip           = require('../../../../common/get_app_details').addTooltip;
 const buildOauthApps       = require('../../../../common/get_app_details').buildOauthApps;
-const getLanguage          = require('../../../../../_common/language').get;
 const localize             = require('../../../../../_common/localize').localize;
 
 const StatementInit = (() => {
@@ -37,6 +35,7 @@ const StatementInit = (() => {
 
         BinarySocket.send(req).then((response) => {
             statementHandler(response);
+            $('.barspinner').setVisibility(0);
         });
     };
 
@@ -81,13 +80,12 @@ const StatementInit = (() => {
                             .append($('<p/>', { class: 'notice-msg center-text', text: localize('Your account has no trading activity.') }))));
             } else {
                 $('#util_row').setVisibility(1);
-                if (getLanguage() === 'JA' && Client.get('residence') === 'jp') {
-                    $('#download_csv')
-                        .setVisibility(1)
-                        .find('a')
-                        .unbind('click')
-                        .click(() => { StatementUI.exportCSV(); });
-                }
+                // uncomment to enable export to CSV
+                // $('#download_csv')
+                //     .setVisibility(1)
+                //     .find('a')
+                //     .off('click')
+                //     .on('click', () => { StatementUI.exportCSV(); });
             }
         }
         showLocalTimeOnHover('td.date');
@@ -137,7 +135,6 @@ const StatementInit = (() => {
 
         BinarySocket.send({ oauth_apps: 1 }).then((response) => {
             addTooltip(StatementUI.setOauthApps(buildOauthApps(response)));
-            $('.barspinner').setVisibility(0);
         });
         getNextBatchStatement();
         loadStatementChunkWhenScroll();
@@ -147,6 +144,7 @@ const StatementInit = (() => {
         initPage();
         DateTo.attachDateToPicker(() => {
             StatementUI.clearTableContent();
+            $('.barspinner').setVisibility(1);
             initPage();
         });
         ViewPopup.viewButtonOnClick('#statement-container');

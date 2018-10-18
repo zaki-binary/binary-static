@@ -1,9 +1,9 @@
-const BinaryPjax       = require('../../base/binary_pjax');
 const Client           = require('../../base/client');
 const Header           = require('../../base/header');
 const BinarySocket     = require('../../base/socket');
 const isCryptocurrency = require('../../common/currency').isCryptocurrency;
 const getElementById   = require('../../../_common/common_functions').getElementById;
+const paramsHash       = require('../../../_common/url').paramsHash;
 const urlFor           = require('../../../_common/url').urlFor;
 const getPropertyValue = require('../../../_common/utility').getPropertyValue;
 
@@ -13,13 +13,27 @@ const Cashier = (() => {
     const showContent = () => {
         Client.activateByClientType();
         Header.upgradeMessageVisibility(); // To handle the upgrade buttons visibility
+        const anchor = paramsHash().anchor;
+        let $toggler;
+        if (anchor) {
+            $toggler = $(`[data-anchor='${anchor}']`);
+            $toggler.find('.td-description').addClass('active'); // toggle open description
+            $toggler.find('.td-list').removeClass('active');
+            $toggler.find('.toggler').addClass('open');
+        }
+        $('.toggler').on('click', (e) => {
+            if ($(e.target)[0].nodeName === 'A') return;
+            e.preventDefault();
+            $toggler = $(e.target).closest('.toggler');
+            $toggler.children().toggleClass('active');
+            $toggler.toggleClass('open');
+        });
     };
 
     const displayTopUpButton = () => {
         BinarySocket.wait('balance').then((response) => {
-            const currency  = response.balance.currency;
             const balance   = +response.balance.balance;
-            const can_topup = (currency !== 'JPY' && balance <= 1000) || (currency === 'JPY' && balance <= 100000);
+            const can_topup = balance <= 1000;
             const top_up_id = '#VRT_topup_link';
             const $a        = $(top_up_id);
             if (!$a) {
@@ -37,32 +51,26 @@ const Cashier = (() => {
     };
 
     const onLoad = () => {
-        if (Client.isJPClient()) {
-            if (Client.get('residence') !== 'jp') {
-                BinaryPjax.loadPreviousUrl();
-            } else {
-                $('.deposit').parent().addClass('button-disabled').attr('href', 'javascript:;');
-            }
-        }
         if (Client.isLoggedIn()) {
             BinarySocket.wait('authorize').then(() => {
-                const is_virtual = Client.get('is_virtual');
-                const client_cur = Client.get('currency');
-                const is_crypto  = isCryptocurrency(client_cur);
-                if (is_virtual) {
+                if (Client.get('is_virtual')) {
                     displayTopUpButton();
                 }
                 const residence = Client.get('residence');
+                const currency  = Client.get('currency');
                 if (residence) {
                     BinarySocket.send({ paymentagent_list: residence }).then((response) => {
                         const list = getPropertyValue(response, ['paymentagent_list', 'list']);
-                        if (client_cur && (list || []).find(pa => new RegExp(client_cur).test(pa.currencies))) {
-                            $('#payment-agent-section').setVisibility(1);
+                        if (list && list.length) {
+                            const regex_currency = new RegExp(currency);
+                            if (!/^(UST|DAI)$/.test(currency) || list.find(pa => regex_currency.test(pa.currencies))) {
+                                $('#payment-agent-section').setVisibility(1);
+                            }
                         }
                     });
                 }
-                $(is_crypto ? '.crypto_currency' : '.normal_currency').setVisibility(1);
-                if (/^BCH/.test(Client.get('currency'))) {
+                $(isCryptocurrency(currency) ? '.crypto_currency' : '.normal_currency').setVisibility(1);
+                if (/^BCH/.test(currency)) {
                     getElementById('message_bitcoin_cash').setVisibility(1);
                 }
             });
@@ -72,7 +80,11 @@ const Cashier = (() => {
 
     return {
         onLoad,
-        PaymentMethods: { onLoad: () => { showContent(); } },
+        PaymentMethods: {
+            onLoad: () => {
+                showContent();
+            },
+        },
     };
 })();
 

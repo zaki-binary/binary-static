@@ -70,6 +70,13 @@ const TradingEvents = (() => {
             TradingAnalysis.request();
         });
 
+        const el_equal = getElementById('callputequal');
+        el_equal.addEventListener('change', (e) => {
+            Defaults.set('is_equal', +e.target.checked);
+            Process.processContractForm();
+            TradingAnalysis.request();
+        });
+
         /*
          * attach event to underlying change, event need to request new contract details and price
          */
@@ -150,7 +157,7 @@ const TradingEvents = (() => {
         getElementById('duration_units').addEventListener('change', (e) => {
             Defaults.remove('barrier', 'barrier_high', 'barrier_low');
             Process.onDurationUnitChange(e.target.value);
-            Price.processPriceRequest();
+            Process.processContractForm();
         });
 
         /*
@@ -244,6 +251,7 @@ const TradingEvents = (() => {
                 CommonIndependent.showAssetOpenHours(e.target.value === 'now' ? '' : $(e.target));
                 initTimePicker();
                 const r = Durations.onStartDateChange(e.target.value);
+                Process.displayEquals();
                 if (r >= 0) {
                     Price.processPriceRequest();
                 }
@@ -360,6 +368,7 @@ const TradingEvents = (() => {
          */
         const low_barrier_element = getElementById('barrier_low');
         low_barrier_element.addEventListener('input', CommonTrading.debounce((e) => {
+            Barriers.validateBarrier();
             Defaults.set('barrier_low', e.target.value);
             Price.processPriceRequest();
             CommonTrading.submitForm(getElementById('websocket_form'));
@@ -373,6 +382,7 @@ const TradingEvents = (() => {
          */
         const high_barrier_element = getElementById('barrier_high');
         high_barrier_element.addEventListener('input', CommonTrading.debounce((e) => {
+            Barriers.validateBarrier();
             Defaults.set('barrier_high', e.target.value);
             Price.processPriceRequest();
             CommonTrading.submitForm(getElementById('websocket_form'));
@@ -386,6 +396,12 @@ const TradingEvents = (() => {
          */
         getElementById('prediction').addEventListener('change', CommonTrading.debounce((e) => {
             Defaults.set('prediction', e.target.value);
+            Price.processPriceRequest();
+            CommonTrading.submitForm(getElementById('websocket_form'));
+        }));
+
+        getElementById('selected_tick').addEventListener('change', CommonTrading.debounce((e) => {
+            Defaults.set('selected_tick', e.target.value);
             Price.processPriceRequest();
             CommonTrading.submitForm(getElementById('websocket_form'));
         }));
