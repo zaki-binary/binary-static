@@ -1,8 +1,7 @@
 const BinaryPjax         = require('../../base/binary_pjax');
 const Client             = require('../../base/client');
 const BinarySocket       = require('../../base/socket');
-const getDecimalPlaces   = require('../../common/currency').getDecimalPlaces;
-const getMinWithdrawal   = require('../../common/currency').getMinWithdrawal;
+const Currency           = require('../../common/currency');
 const FormManager        = require('../../common/form_manager');
 const elementTextContent = require('../../../_common/common_functions').elementTextContent;
 const getElementById     = require('../../../_common/common_functions').getElementById;
@@ -106,7 +105,7 @@ const AccountTransfer = (() => {
         getElementById(form_id).setVisibility(1);
 
         FormManager.init(form_id_hash, [
-            { selector: '#amount', validations: [['req', { hide_asterisk: true }], ['number', { type: 'float', decimals: getDecimalPlaces(client_currency), min: getMinWithdrawal(client_currency), max: Math.min(+withdrawal_limit, +client_balance), format_money: true }]] },
+            { selector: '#amount', validations: [['req', { hide_asterisk: true }], ['number', { type: 'float', decimals: Currency.getDecimalPlaces(client_currency), min: Currency.getMinTransfer(client_currency), max: Math.min(+withdrawal_limit, +client_balance), format_money: true }]] },
 
             { request_field: 'transfer_between_accounts', value: 1 },
             { request_field: 'account_from',              value: client_loginid },
@@ -164,14 +163,14 @@ const AccountTransfer = (() => {
         const el_amount    = getElementById('amount');
 
         const exchange_rate  = getExchangeRates();
-        const decimal_places = getDecimalPlaces(client_currency);
+        const decimal_places = Currency.getDecimalPlaces(client_currency);
 
         const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
         const transfer_total_value = ((parseFloat(el_amount.value) - transfer_fee_value) * exchange_rate);
 
         if (!isNaN(transfer_fee_value)) {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
-            elementTextContent(getElementById('total_lbl'), `${curr_account_to} ${transfer_total_value.toFixed(getDecimalPlaces(curr_account_to))}`);
+            elementTextContent(getElementById('total_lbl'), `${curr_account_to} ${transfer_total_value.toFixed(Currency.getDecimalPlaces(curr_account_to))}`);
         } else {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
             elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
@@ -230,7 +229,7 @@ const AccountTransfer = (() => {
                 exchange_rates = data.exchange_rates.rates;
             });
 
-            const min_amount = getMinWithdrawal(client_currency);
+            const min_amount = Currency.getMinTransfer(client_currency);
             if (!client_balance || client_balance < min_amount) {
                 getElementById(messages.parent).setVisibility(1);
                 if (client_currency) {
