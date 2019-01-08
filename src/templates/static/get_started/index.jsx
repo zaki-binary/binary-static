@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../../_common/components/elements.jsx';
 import SeparatorLine from '../../_common/components/separator_line.jsx';
 import { TabContainer, TabContent, TabContentContainer, TabsSubtabs } from '../../_common/components/tabs.jsx';
 
@@ -21,11 +22,24 @@ const GetStartedSection = ({ link, hash, image, header, text }) => {
     );
 };
 
-const GetStartedSectionWrapper = ({ section_id, section_header, section_description, children }) => (
+const GetStartedSectionWrapper = ({
+    section_id,
+    section_header,
+    section_description,
+    section_button_url  = '',
+    section_button_text = '',
+    children,
+}) => (
     <React.Fragment>
         <div className='gr-padding-30 gr-parent' id={section_id}>
             <h2>{section_header}</h2>
             <p>{section_description}</p>
+            { section_button_url &&
+                <div className='gr-row'>
+                    <div className='gr-12'>
+                        <a className='button' href={it.url_for(section_button_url)}><span>{section_button_text}</span></a>
+                    </div>
+                </div> }
             {children}
         </div>
         <SeparatorLine invisible className='gr-padding-30' />
@@ -37,7 +51,7 @@ const CTA = () => (
         <SeparatorLine show_mobile className='gr-padding-20 gr-child' />
         <div className='center-text'>
             <p>{it.L('Don\'t have an account?')}</p>
-            <a className='button' href={it.url_for('new-account')}><span>{it.L('Create Free Account')}</span></a>
+            <a className='button' href={it.url_for('new-account')}><span>{it.L('Create free account')}</span></a>
         </div>
     </div>
 );
@@ -173,7 +187,7 @@ const Index = () => (
                                     link='get-started/cryptocurrencies'
                                     hash='contract-specification'
                                     image='mt5/contract-specification'
-                                    header={it.L('Cryptocurrency contract specifications')}
+                                    header={it.L('Cryptocurrency contract specifications and commission scheme')}
                                     text={it.L('Find out more about the costs and details of every cryptocurrency pair we offer.')}
                                 />
                             </div>
@@ -253,7 +267,7 @@ const Index = () => (
                         <GetStartedSectionWrapper
                             section_id='binary-options-mt5'
                             section_header={it.L('Binary Options on MT5')}
-                            section_description={it.L('Explore a whole new world of binary options trading with the world\'s leading multi-asset platform. [_1]Create an MT5 account now[_2] to start trading.', `<a href=${it.url_for('user/metatrader')}>`, '</a>')}
+                            section_description={it.L('Explore a whole new world of binary options trading with the world\'s leading multi-asset platform.')}
                         >
                             <div className='gr-row'>
                                 <GetStartedSection
@@ -269,6 +283,13 @@ const Index = () => (
                                     image='mt5/how-trade-binary'
                                     header={it.L('How to trade binary options on MT5')}
                                     text={it.L('Follow our step-by-step guide to start trading binary options on MT5.')}
+                                />
+                            </div>
+                            <div className='center-text gr-padding-20'>
+                                <Button
+                                    className='button'
+                                    href={it.url_for('user/metatrader')}
+                                    text={it.L('Create an MT5 account now')}
                                 />
                             </div>
                         </GetStartedSectionWrapper>

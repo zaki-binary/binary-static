@@ -3,6 +3,7 @@ import Head from './head.jsx';
 import Header from './header.jsx';
 import MobileMenu from './mobile_menu.jsx';
 import Footer from './footer.jsx';
+import Elevio from '../../_common/includes/elevio.jsx';
 import Gtm from '../../_common/includes/gtm.jsx';
 import InterviewPopup from '../../_common/components/interview_popup.jsx';
 import Title from '../../_common/components/title.jsx';
@@ -41,18 +42,19 @@ const Layout = () => {
         <html>
             <Head />
             <body className={it.language}>
+                <Gtm />
                 <div id='msg_notification' className='notice-msg center-text' />
                 <div id='page-wrapper'>
                     <Header />
                     <div id='content-holder'>
                         <MobileMenu />
-                        <Gtm />
                         <a href='javascript:;' id='scrollup' />
                         <InnerContent />
                     </div>
                     <Footer />
                 </div>
                 <InterviewPopup /> {/* TODO: remove when UX research is finished */}
+                <Elevio />
             </body>
         </html>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ConflictsPolicy = () => (
     <div>
-        <h2 data-anchor='conflicts-policy'>{it.L('Conflicts Policy')}</h2>
+        <h2 data-anchor='conflicts-policy'>{it.L('Summary of the Conflicts Policy')}</h2>
         <p>{it.L('We provide here a summary of the policy we maintain in order to manage conflicts of interest in respect of the duties we owe to our clients.')}</p>
 
         <h2 data-anchor='general'>{it.L('General')}</h2>
@@ -14,7 +14,7 @@ const ConflictsPolicy = () => (
 
         <h2 data-anchor='disclosure-general'>{it.L('Disclosure: general')}</h2>
         <p>{it.L('The organisational and administrative arrangements established by the Company to prevent or manage the conflict are not sufficient to ensure, with reasonable confidence, that the risk of damage to the interest of the Client will be prevented. However, we aim to disclose the general nature or sources of conflicts of interest.')}</p>
-        <p className='invisible eu-show'>{it.L('Clients have the opportunity to consider whether to ask for more information by sending an email to compliance@binary.com, in which case further details of the conflicts of interest policy will be made available.')}</p>
+        <p data-show='eucountry'>{it.L('Clients have the opportunity to consider whether to ask for more information by sending an email to compliance@binary.com, in which case further details of the conflicts of interest policy will be made available.')}</p>
     </div>
 );
 

@@ -9,10 +9,10 @@ const NewAccount = () => (
             <div>
                 <div className='gr-4 gr-5-t gr-8-p gr-10-m gr-no-gutter gr-centered gr-padding-30 gr-parent'>
                     <div className='gr-padding-20'>
-                        <input autoComplete='off' name='email' id='email' maxLength='50' placeholder={it.L('Email')} />
+                        <input autoComplete='off' name='email' id='email' maxLength='50' placeholder={it.L('Email')}  data-lpignore='true' />
                     </div>
                     <div>
-                        <button type='submit'>{it.L('Create Free Account')}</button>
+                        <button type='submit'>{it.L('Create free account')}</button>
                     </div>
                     <div className='section-divider gr-padding-20'>
                         <div className='align-self-center border-bottom-light-gray' />

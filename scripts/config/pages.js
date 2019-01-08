@@ -1,5 +1,5 @@
 module.exports = [
-    // url pathname,                           template file path,                             layout,       title,                               exclude languages
+    // url pathname,                           template file path,                             layout,       title,                               exclude languages, section (if differs from default)
     // ==================== Section: "app" ====================
     ['cashier',                                 'app/cashier/index',                           'default',    'Cashier'],
     ['cashier/account_transfer',                'app/cashier/account_transfer',                'default',    'Transfer Between Accounts'],
@@ -8,6 +8,7 @@ module.exports = [
     ['cashier/forwardws',                       'app/cashier/deposit_withdraw',                'default',    'Cashier'],
     ['cashier/payment_agent_listws',            'app/cashier/payment_agent_list',              'default',    'Payment Agent Deposit'],
     ['cashier/payment_methods',                 'app/cashier/payment_methods',                 'default',    'Payment Methods'],
+    ['cashier/session_expired',                 'app/cashier/session_expired',                 null,         'Cashier session expired'],
     ['cashier/top_up_virtualws',                'app/user/top_up_virtual',                     'default',    'Top Up Virtual Account'],
 
     ['paymentagent/transferws',                 'app/cashier/paymentagent_transfer',           'default',    'Payment Agent Transfer'],
@@ -45,6 +46,7 @@ module.exports = [
     ['user/security/self_exclusionws',          'app/user/security/self_exclusion',            'default',    'Self Exclusion'],
     ['user/security/two_factor_authentication', 'app/user/security/two_factor_authentication', 'default',    'Two-Factor Authentication'],
     ['user/security/cloudflare_dns',            'app/user/security/cloudflare_dns',            'default',    'Binary.com recommends 1.1.1.1'],
+    ['user/security/vpn_app',                   'app/user/security/vpn_app',                   'default',    'VPN app'],
     ['user/set-currency',                       'app/user/set_currency',                       'default',    'Set Currency'],
     ['user/settingsws',                         'app/user/settings',                           'default',    'Settings'],
     ['user/settings/assessmentws',              'app/user/settings/financial_assessment',      'default',    'Financial Assessment'],
@@ -64,6 +66,10 @@ module.exports = [
     ['logged_inws',                             'app/logged_in',                               null],
     ['redirect',                                'app/logged_in',                               null,         'Redirecting...'],
 
+    // ==================== Section: "app_2" ====================
+    // According to its section path ('app') would be saved to: /app/{lang}/index.html
+    ['index',                                   'app_2/app',                                   null,         'Trusted by traders since 2000',     null, 'app_2'],
+
     // ==================== Section: "static" ====================
     ['404',                                     'static/404',                                  'full_width', '404'],
     ['home',                                    'static/home',                                 'full_width', 'Online Trading platform for binary options on Forex, Indices, Commodities and Smart Indices'],
@@ -75,17 +81,19 @@ module.exports = [
     ['about-us',                                'static/about/index',                          'full_width', 'About Us'],
     ['binary-in-numbers',                       'static/about/binary_in_numbers',              'default',    'Binary in Numbers'],
     ['careers',                                 'static/about/careers',                        'full_width', 'Careers'],
+    ['careers/privacy-policy',                  'static/about/job_applicant_policy',           'full_width', 'Job Applicant Privacy Policy'],
     ['contact',                                 'static/about/contact',                        'full_width', 'Contact Us'],
-    ['cyberjaya',                               'static/about/cyberjaya',                      'full_width', 'Careers - Cyberjaya',                'ja'],
-    ['labuan',                                  'static/about/labuan',                         'full_width', 'Careers - Labuan',                   'ja'],
-    ['malta',                                   'static/about/malta',                          'full_width', 'Careers - Malta',                    'ja'],
+    ['contact-2',                               'static/about/contact_2',                      'full_width', 'Contact Us'],
+    ['cyberjaya',                               'static/about/cyberjaya',                      'full_width', 'Careers - Cyberjaya'],
+    ['labuan',                                  'static/about/labuan',                         'full_width', 'Careers - Labuan'],
+    ['malta',                                   'static/about/malta',                          'full_width', 'Careers - Malta'],
     ['group-history',                           'static/about/group_history',                  'full_width', 'Group History'],
     ['open-positions',                          'static/about/job_descriptions',               'full_width', 'Open Positions'],
     ['open-positions/job-details',              'static/about/job_details',                    'full_width', 'Job Details'],
 
     ['affiliate/signup',                        'static/affiliates/signup',                    'full_width', 'Affiliate'],
     ['affiliate/faq',                           'static/affiliates/faq',                       'default',    'Affiliate FAQ'],
-    ['charity',                                 'static/charity',                              'default',    'Charity'],
+    // ['charity',                                 'static/charity',                              'default',    'Charity'],
     ['ib-programme/ib-signup',                  'static/ib_programme/ib_signup',               'full_width', 'IB programme'],
     ['ib-programme/ib-faq',                     'static/ib_programme/ib_faq',                  'default',    'IB programme FAQ'],
     ['legal/us_patents',                        'static/legal/us_patents',                     'default',    'US Patents'],
@@ -112,8 +120,11 @@ module.exports = [
     ['metatrader/how-to-trade-mt5',             'static/metatrader/how_to_trade_mt5',          'default',     'How to Trade in MetaTrader 5'],
     ['metatrader/types-of-accounts',            'static/metatrader/types_of_accounts',         'default',     'Types of MetaTrader 5 accounts'],
 
+    ['style-guide',                             'static/new_layout/style_guide',               'full_width',  'Style guide'],
+
     // ==================== Section: "landing_pages" ====================
     // ['graduates',                               'landing_pages/graduate_program',              null,        'Binary.com Graduate Program',        'NOT-en'],
     // ['hackathon',                               'landing_pages/hackathon',                     null,        'Hackathon Competition',              'NOT-en'],
-    ['landing/signup-frame',                    'landing_pages/signup_frame',                  null,        'Sign up'],
+    ['introducing-usb',                            'landing_pages/usb',                           null,        'Introducing USB',                    'NOT-en'],
+    ['landing/signup-frame',                       'landing_pages/signup_frame',                  null,        'Sign up'],
 ];

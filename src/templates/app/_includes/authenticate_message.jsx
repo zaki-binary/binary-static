@@ -10,7 +10,7 @@ const FileSelector = ({
     accepted_documents,
     type,
 }) => (
-    <div className='gr-row gr-12' data-show={data_show}>
+    <div className='gr-12 gr-no-gutter' data-show={data_show}>
         <fieldset>
             <div className='gr-padding-30 gr-gutter-left gr-gutter-right'>
                 <h2>{heading}</h2>
@@ -32,9 +32,6 @@ const FileSelector = ({
                                 <li key={i}>{instruction}</li>
                             ))}
                         </ul>
-                        <p className='learn_more'>
-                            <a href='#' target='_blank'>{it.L('Learn more')}</a>
-                        </p>
                     </div>
                     <div className='gr-5 gr-12-m'>
                         <p className='font-s'>
@@ -65,17 +62,17 @@ const FileSelector = ({
                                                             <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
                                                         </div>
                                                         <div className='gr-8 gr-12-m'>
-                                                            <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
+                                                            <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='readonly' />
                                                         </div>
                                                     </div>
                                                     <div className='gr-row form-row center-text-m'>
                                                         <div className='gr-12'>
                                                             <input id={`front_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} data-name={document.name} data-page-type='front' />
-                                                            <label htmlFor={`front_file${j}`} className='button'>{it.L('Front Side')} <span className='add' /></label>
+                                                            <label htmlFor={`front_file${j}`} className='button'>{it.L('Front side')} <span className='add' /></label>
                                                         </div>
                                                         <div className='gr-12'>
                                                             <input id={`back_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} data-name={document.name} data-page-type='back' />
-                                                            <label htmlFor={`back_file${j}`} className='button'>{it.L('Reverse Side')} <span className='add' /></label>
+                                                            <label htmlFor={`back_file${j}`} className='button'>{it.L('Reverse side')} <span className='add' /></label>
                                                         </div>
                                                     </div>
                                                 </React.Fragment>
@@ -112,12 +109,18 @@ const AuthenticateMessage = () => (
     <React.Fragment>
         <p>{it.L('Authenticate your account by verifying your identity and address.')}</p>
 
+        <p>{it.L('Learn more about submitting essential documents with our handy infographic:')}</p>
+
+        <p className='learn_more'>
+            <a className='button' href='#' target='_blank'><span>{it.L('View guide')}</span></a>
+        </p>
+
         <FileSelector
             heading={it.L('1. Proof of identity')}
             allowed_documents={[
                 it.L('Passport'),
                 it.L('Driving licence'),
-                it.L('National ID card or any government issued document which contains a photo, your name, and date of birth'),
+                it.L('National ID card, ID book or any government-issued document which contains a photo, your name, and date of birth'),
             ]}
             instructions={[
                 it.L('Must be a clear, colour photo or scanned image'),
@@ -155,7 +158,7 @@ const AuthenticateMessage = () => (
 
         <FileSelector
             heading={it.L('3. Selfie or self-portrait photo')}
-            data_show='mt5fin:vanuatu'
+            data_show='mt5fin:vanuatu, labuan'
             instructions={[
                 it.L('Must be a clear, colour photo'),
                 it.L('Proof of identity in your selfie must be clear, identifiable, and same as the one you submitted previously'),
