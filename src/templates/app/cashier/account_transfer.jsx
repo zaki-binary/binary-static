@@ -66,7 +66,7 @@ const AccountTransfer = () => (
                 <FormRow label={it.L('Transfer from')} type='label'  id='lbl_transfer_from' />
                 <FormRow label={it.L('Amount')} type='custom' id='transfer_amount'>
                     <label id='currency' />
-                    <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' />
+                    <input id='amount' name='amount' type='text' maxLength='20' autoComplete='off' data-lpignore />
                     <div className='hint' id='range_hint' />
                 </FormRow>
             </Fieldset>

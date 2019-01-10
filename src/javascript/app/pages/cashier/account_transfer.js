@@ -178,16 +178,16 @@ const AccountTransfer = (() => {
     };
 
     const calculateAmount = () => {
-        const el_amount    = getElementById('amount');
+        const el_amount_value         = parseFloat(getElementById('amount').value);
+        const exchange_rate           = getExchangeRates();
+        const min_transfer_fee        = parseFloat((Currency.getMinimumTransferFee(client_currency).substring(4))) * el_amount_value;
+        const transfer_fee_percentage = (parseFloat(Currency.getTransferFee(client_currency, curr_account_to)) / 100) * el_amount_value;
+        const transfer_fee_value      = (transfer_fee_percentage > min_transfer_fee) ? transfer_fee_percentage : min_transfer_fee;
 
-        const exchange_rate  = getExchangeRates();
-        const decimal_places = Currency.getDecimalPlaces(client_currency);
-
-        const transfer_fee_value   = (parseFloat(el_amount.value) * 0.01);
-        const transfer_total_value = ((parseFloat(el_amount.value) - transfer_fee_value) * exchange_rate);
+        const transfer_total_value = (el_amount_value - transfer_fee_value) * exchange_rate;
 
         if (!isNaN(transfer_fee_value)) {
-            elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(decimal_places)}`);
+            elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(Currency.getDecimalPlaces(client_currency))}`);
             elementTextContent(getElementById('total_lbl'), `${curr_account_to} ${transfer_total_value.toFixed(Currency.getDecimalPlaces(curr_account_to))}`);
         } else {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
