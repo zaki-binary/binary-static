@@ -86,10 +86,6 @@ const AccountTransfer = () => (
             <SeparatorLine />
         </form>
 
-        <div className='hint invisible' id='transfer_info'>
-            <p>{it.L('Note: Transfer between accounts is not available on weekends.')}</p>
-        </div>
-
         <div className='hint invisible' id='transfer_fee'>
             {it.L('Notes:')}
             <ul className='bullet'>

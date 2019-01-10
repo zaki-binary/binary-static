@@ -178,16 +178,22 @@ const AccountTransfer = (() => {
     };
 
     const calculateAmount = () => {
-        const el_amount_value         = parseFloat(getElementById('amount').value);
-        const exchange_rate           = getExchangeRates();
-        const min_transfer_fee        = parseFloat((Currency.getMinimumTransferFee(client_currency).substring(4))) * el_amount_value;
-        const transfer_fee_percentage = (parseFloat(Currency.getTransferFee(client_currency, curr_account_to)) / 100) * el_amount_value;
-        const transfer_fee_value      = (transfer_fee_percentage > min_transfer_fee) ? transfer_fee_percentage : min_transfer_fee;
+        const el_amount_value    = parseFloat(getElementById('amount').value);
+        const exchange_rate      = getExchangeRates();
+        const min_transfer_fee   = parseFloat((Currency.getMinimumTransferFee(client_currency).substring(4)));
+        const transfer_fee       = parseFloat(Currency.getTransferFee(client_currency, curr_account_to).slice(0, -1));
+        const transfer_fee_value = () => {
+            const percentage_transfer_fee = ((transfer_fee / 100) * el_amount_value);
+            if (percentage_transfer_fee > min_transfer_fee) {
+                return percentage_transfer_fee;
+            }
+            return min_transfer_fee;
+        };
 
-        const transfer_total_value = (el_amount_value - transfer_fee_value) * exchange_rate;
+        const transfer_total_value = (el_amount_value - transfer_fee_value()) * exchange_rate;
 
-        if (!isNaN(transfer_fee_value)) {
-            elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value.toFixed(Currency.getDecimalPlaces(client_currency))}`);
+        if (!isNaN(transfer_total_value)) {
+            elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} ${transfer_fee_value().toFixed(Currency.getDecimalPlaces(client_currency))}`);
             elementTextContent(getElementById('total_lbl'), `${curr_account_to} ${transfer_total_value.toFixed(Currency.getDecimalPlaces(curr_account_to))}`);
         } else {
             elementTextContent(getElementById('transfer_fee_lbl'), `${client_currency} 0`);
