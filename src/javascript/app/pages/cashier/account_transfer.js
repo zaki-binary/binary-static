@@ -31,6 +31,7 @@ const AccountTransfer = (() => {
         el_transfer_info,
         el_success_form,
         exchange_rates,
+        reqExchangeRates,
         curr_account_to,
         client_balance,
         client_currency,
@@ -258,13 +259,13 @@ const AccountTransfer = (() => {
             BinarySocket.send({ exchange_rates: 1, base_currency: client_currency }).then((data) => {
                 exchange_rates = data.exchange_rates.rates;
 
-                setInterval(() => {
+                reqExchangeRates = setInterval(() => {
                     BinarySocket.send({ exchange_rates: 1, base_currency: client_currency }).then((reply) => {
                         exchange_rates = reply.exchange_rates.rates;
                         updateExchangeMessage();
                         calculateAmount();
                     });
-                }, 500);
+                }, 1000);
             });
 
             const min_amount = Currency.getMinTransfer(client_currency);
@@ -312,6 +313,7 @@ const AccountTransfer = (() => {
         if (el_reset_transfer) el_reset_transfer.removeEventListener('click', onClickReset);
         getElementById('amount').removeEventListener('input', onAmountInput);
         getElementById('transfer_to').removeEventListener('change', onAccountToChange);
+        if (reqExchangeRates) clearInterval(reqExchangeRates);
     };
 
     return {
