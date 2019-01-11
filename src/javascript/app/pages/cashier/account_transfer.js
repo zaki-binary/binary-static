@@ -180,10 +180,10 @@ const AccountTransfer = (() => {
     const calculateAmount = () => {
         const el_amount_value    = parseFloat(getElementById('amount').value);
         const exchange_rate      = getExchangeRates();
-        const min_transfer_fee   = parseFloat((Currency.getMinimumTransferFee(client_currency).substring(4)));
-        const transfer_fee       = parseFloat(Currency.getTransferFee(client_currency, curr_account_to).slice(0, -1));
         const transfer_fee_value = () => {
-            const percentage_transfer_fee = ((transfer_fee / 100) * el_amount_value);
+            const min_transfer_fee = getMinimumTransferFee();
+            const transfer_fee = getTransferFee() / 100;
+            const percentage_transfer_fee = (transfer_fee * el_amount_value);
             if (percentage_transfer_fee > min_transfer_fee) {
                 return percentage_transfer_fee;
             }
@@ -200,6 +200,10 @@ const AccountTransfer = (() => {
             elementTextContent(getElementById('total_lbl'), `${curr_account_to} 0`);
         }
     };
+
+    const getMinimumTransferFee = () => parseFloat((Currency.getMinimumTransferFee(client_currency).substring(4)));
+
+    const getTransferFee = () => parseFloat(Currency.getTransferFee(client_currency, curr_account_to).slice(0, -1));
 
     const getExchangeRates = () => getPropertyValue(exchange_rates, curr_account_to);
 
@@ -253,6 +257,14 @@ const AccountTransfer = (() => {
 
             BinarySocket.send({ exchange_rates: 1, base_currency: client_currency }).then((data) => {
                 exchange_rates = data.exchange_rates.rates;
+
+                setInterval(() => {
+                    BinarySocket.send({ exchange_rates: 1, base_currency: client_currency }).then((reply) => {
+                        exchange_rates = reply.exchange_rates.rates;
+                        updateExchangeMessage();
+                        calculateAmount();
+                    });
+                }, 500);
             });
 
             const min_amount = Currency.getMinTransfer(client_currency);

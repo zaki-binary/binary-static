@@ -82,8 +82,6 @@ const AccountTransfer = () => (
             </Fieldset>
 
             <SubmitButton msg_id='form_error' type='submit' text={it.L('Transfer')} is_centered />
-
-            <SeparatorLine />
         </form>
 
         <div className='hint invisible' id='transfer_fee'>
