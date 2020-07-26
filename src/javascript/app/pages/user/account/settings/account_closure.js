@@ -302,10 +302,17 @@ const AccountClosure = (() => {
             collapsible: true,
             active     : true,
         });
+        $('#back').on('click', () => $('#account-closure-dialog').css('display', 'none'));
+
+        $('#deativate').on('click', () => {
+            $('#account-closure-dialog').css('display', 'none');
+            submitForm();
+        });
 
         $(form_selector).on('submit', (event) => {
             event.preventDefault();
-            submitForm();
+            // console.log('here')
+            $('#account-closure-dialog').css('display', 'flex');
         });
 
         $txt_other_reason.setVisibility(0);

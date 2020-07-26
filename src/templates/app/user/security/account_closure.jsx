@@ -32,7 +32,29 @@ const ClosureDescription = ({
         </div>
     </React.Fragment>
 );
-    
+ 
+const AccountClosureDialog = () => (
+    <div id='account-closure-dialog' className='lightbox'>
+        <div id='account-closure-dialog-content' className='gr-padding-10 gr-gutter'>
+            <div className='center-text gr-padding-10'>
+                <img
+                    id='ic-emergency'
+                    className='responsive'
+                    src={it.url_for('images/pages/account_closure/ic-emergency.svg')}
+                />
+                <p id='warning'>{it.L('Warning')}</p>
+                <p className='warning-msg'>{it.L('If you deactivate:')}</p>
+                <p className='warning-msg'>{it.L('You’ll be logged out automatically.')}</p>
+                <p className='warning-msg'>{it.L('You will NOT be able to log in again.')}</p>
+            </div>
+            <div className='center-text gr-centered gr-padding-20 gr-child'>
+                <a id='back' className='button button-secondary' href='javascript:;'><span>{it.L('Back')}</span></a>
+                <button id='deativate' className='button' type='submit'>{it.L('Deactivate')}</button>
+            </div>
+        </div>
+    </div>
+);
+
 const AccountClosure = () => (
     <React.Fragment>
         <div className='invisible' id='closure_loading'>
@@ -172,6 +194,7 @@ const AccountClosure = () => (
                     type='submit'
                 />
             </form>
+            <AccountClosureDialog />
         </div>
     </React.Fragment>
 );
