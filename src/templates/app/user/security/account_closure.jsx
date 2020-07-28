@@ -42,14 +42,14 @@ const AccountClosureDialog = () => (
                     className='responsive'
                     src={it.url_for('images/pages/account_closure/ic-emergency.svg')}
                 />
-                <h1 id='warning'>{it.L('Warning!')}</h1>
+                <h1 className='gr-padding-10'>{it.L('Warning!')}</h1>
                 <p className='warning-msg'>{it.L('If you deactivate:')}</p>
                 <p className='warning-msg'>{it.L('You’ll be logged out automatically.')}</p>
-                <p className='warning-msg'>{it.L('You will <span style="color:$COLOR_RED">NOT</span> be able to log in again.')}</p>
+                <p className='warning-msg'>{it.L('You will ')}<span id='red-msg'>{it.L('NOT')}</span>{it.L(' be able to log in again.')}</p>
             </div>
-            <div className='center-text gr-centered gr-padding-20 gr-child'>
-                <a id='back' className='button button-secondary' href='javascript:;'><span>{it.L('Back')}</span></a>
-                <button id='deativate' className='button' type='submit'>{it.L('Deactivate')}</button>
+            <div className='center-text gr-centered gr-padding-10 gr-child'>
+                <a id='back' className='button button-secondary' href='javascript:;'><span id='span-btn'>{it.L('Back')}</span></a>
+                <button id='deativate' className='button btn-size' type='submit'>{it.L('Deactivate')}</button>
             </div>
         </div>
     </div>

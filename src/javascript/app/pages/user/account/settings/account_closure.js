@@ -311,7 +311,6 @@ const AccountClosure = (() => {
 
         $(form_selector).on('submit', (event) => {
             event.preventDefault();
-            // console.log('here')
             $('#account-closure-dialog').css('display', 'flex');
         });
 
