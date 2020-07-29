@@ -45,7 +45,7 @@ const AccountClosureDialog = () => (
                 <h1 className='gr-padding-10'>{it.L('Warning!')}</h1>
                 <p className='warning-msg'>{it.L('If you deactivate:')}</p>
                 <p className='warning-msg'>{it.L('You’ll be logged out automatically.')}</p>
-                <p className='warning-msg'>{it.L('You will ')}<span id='red-msg'>{it.L('NOT')}</span>{it.L(' be able to log in again.')}</p>
+                <p className='warning-msg'>{it.L('You will [_1]NOT[_2] be able to log in again.', '<span id="red-msg">', '</span>')}</p>
             </div>
             <div className='center-text gr-centered gr-padding-10 gr-child'>
                 <a id='back' className='button button-secondary' href='javascript:;'><span id='span-btn'>{it.L('Back')}</span></a>
