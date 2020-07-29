@@ -1613,18 +1613,17 @@ body #not_authenticated_financial ul.checked > li {
         padding-right: 1.2em;
     }
     #account-closure-dialog {
-        display: none;
         left: 0;
 
         #account-closure-dialog-content {
-            width: 31rem;
-            height: 23.87rem;
+            width: 29rem;
+            height: 22.7rem;
             border-radius: 4px;
             background-color: $COLOR_WHITE;
         }
         #ic-emergency {
-            width: 96px;
-            height: 96px;
+            width: 6rem;
+            height: 6rem;
             object-fit: contain;
             margin: 0.5em 0em;
         }
@@ -1632,12 +1631,16 @@ body #not_authenticated_financial ul.checked > li {
             line-height: 0.7em;
         }
         .btn-size {
-            width: 204px;
-            height: 38px;
+            width: 12.7rem;
+            height: 2.3rem;
         }
         #span-btn {
-            padding-right: 83px;
-            padding-left: 83px;
+            padding-right: 5rem;
+            padding-left: 5rem;
+            @media (max-width: 500px) {
+                margin-bottom: 10px;
+                margin-left: 10px;
+            }
         }
         #red-msg {
             color: $COLOR_RED;
