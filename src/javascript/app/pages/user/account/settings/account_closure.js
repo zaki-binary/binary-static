@@ -302,18 +302,18 @@ const AccountClosure = (() => {
             collapsible: true,
             active     : true,
         });
-        const accountclose_dialog = $('#account-closure-dialog');
-        accountclose_dialog.setVisibility(0);
-        $('#back').on('click', () => accountclose_dialog.setVisibility(0));
+        const $account_closure_dialog = $('#account-closure-dialog');
+        $account_closure_dialog.setVisibility(0);
+        $('#back').on('click', () => $account_closure_dialog.setVisibility(0));
 
         $('#deativate').on('click', () => {
-            accountclose_dialog.setVisibility(0);
+            $account_closure_dialog.setVisibility(0);
             submitForm();
         });
 
         $(form_selector).on('submit', (event) => {
             event.preventDefault();
-            accountclose_dialog.setVisibility(1);
+            $account_closure_dialog.setVisibility(1);
         });
 
         $txt_other_reason.setVisibility(0);
