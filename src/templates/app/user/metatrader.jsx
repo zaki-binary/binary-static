@@ -181,7 +181,7 @@ const Metatrader = () => (
                 <div className='mt-panel'>
                     <div className='mt-sidebar-button mt5-web'>
                         <div className='small-icon'>
-                            <a href='https://trade.mql5.com/trade?servers=Deriv-Server&trade_server=Deriv-Server' target='_blank' rel='noopener noreferrer'>
+                            <a href={it.url_for('user/metatrader/metatrader_terminal')}>
                                 <img src={it.url_for('images/pages/metatrader/dashboard/img-app-mac@2x.png')} />
                             </a>
                         </div>
@@ -190,12 +190,12 @@ const Metatrader = () => (
                         </div>
                         <div className='mt-link-web'>
                             <div className='mt5-web-link'>
-                                <a href='https://trade.mql5.com/trade?servers=Deriv-Demo&trade_server=Deriv-Demo' target='_blank' rel='noopener noreferrer'>
+                                <a id='mt5_web_link_demo' href={`${it.url_for('user/metatrader/metatrader_terminal')}?trade_server=Deriv-Demo&servers=Deriv-Demo`}>
                                     {it.L('Demo')}
                                 </a>
                             </div>
                             <div className='mt5-web-link'>
-                                <a href='https://trade.mql5.com/trade?servers=Deriv-Server&trade_server=Deriv-Server' target='_blank' rel='noopener noreferrer'>
+                                <a id='mt5_web_link_real' href={`${it.url_for('user/metatrader/metatrader_terminal')}?trade_server=Deriv-Server&servers=Deriv-Server`}>
                                     {it.L('Real')}
                                 </a>
                             </div>

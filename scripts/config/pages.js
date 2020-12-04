@@ -16,6 +16,7 @@ module.exports = [
 
     ['trading',                                 'app/trade/trading',                           'default',    'SmartTrader'],
 
+
     ['new_account/maltainvestws',               'app/new_account/financial',                   'default',    'Financial Account Opening'],
     ['new_account/realws',                      'app/new_account/real',                        'default',    'Real Money Account Opening'],
     ['new_account/virtualws',                   'app/new_account/virtual',                     'default',    'Create New Virtual-money Account'],
@@ -30,6 +31,7 @@ module.exports = [
     ['user/authenticate',                       'app/user/authenticate',                       'default',    'Authenticate'],
     ['user/lost_passwordws',                    'app/user/lost_password',                      'default',    'Password Reset'],
     ['user/metatrader',                         'app/user/metatrader',                         'default',    'MetaTrader account management'],
+    ['user/metatrader/metatrader_terminal',     'app/user/metatrader_terminal',                'default',    'MetaTrader Web Terminal'],
     ['user/portfoliows',                        'app/user/portfolio',                          'default',    'Portfolio'],
     ['user/profit_tablews',                     'app/user/profit_table',                       'default',    'Profit Table'],
     ['user/reality_check_frequency',            'app/user/reality_check/frequency',            'default',    'Reality Check'],

@@ -38,6 +38,7 @@ const TopUpVirtual            = require('../pages/user/account/top_up_virtual/to
 const Accounts                = require('../pages/user/accounts');
 const LostPassword            = require('../pages/user/lost_password');
 const MetaTrader              = require('../pages/user/metatrader/metatrader');
+const MetaTraderTerminal      = require('../pages/user/metatrader/metatrader_terminal');
 const TypesOfAccounts         = require('../pages/user/metatrader/types_of_accounts');
 const FinancialAccOpening     = require('../pages/user/new_account/financial_acc_opening');
 const RealAccOpening          = require('../pages/user/new_account/real_acc_opening');
@@ -106,6 +107,7 @@ const pages_config = {
     market_timesws           : { module: TradingTimesUI,             no_mf: true },
     metals                   : { module: GetStarted.Metals },
     metatrader               : { module: MetaTrader,                 is_authenticated: true, needs_currency: true },
+    metatrader_terminal      : { module: MetaTraderTerminal,         is_authenticated: true },
     payment_agent_listws     : { module: PaymentAgentList,           is_authenticated: true },
     payment_methods          : { module: Cashier.PaymentMethods },
     platforms                : { module: Platforms },
