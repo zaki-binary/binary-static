@@ -19,7 +19,7 @@ const MetaTraderTerminal = (() => {
                 is_loaded = true;
             });
         } else {
-            loadTerminal('en', login, servers, trade_server);
+            loadTerminal(curr_language, login, servers, trade_server);
         }
     };
 
@@ -35,8 +35,8 @@ const MetaTraderTerminal = (() => {
             language   : lang,
             colorScheme: 'black_on_white',
         });
-        const loader = $('#metatrader_webterminal').find('.barspinner');
-        if (loader) loader.remove();
+        const $loader = $('#metatrader_webterminal').find('.barspinner');
+        $loader.remove();
     };
 
     const onUnload = () => {

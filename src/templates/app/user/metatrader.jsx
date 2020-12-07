@@ -190,12 +190,12 @@ const Metatrader = () => (
                         </div>
                         <div className='mt-link-web'>
                             <div className='mt5-web-link'>
-                                <a id='mt5_web_link_demo' href={`${it.url_for('user/metatrader/metatrader_terminal')}?trade_server=Deriv-Demo&servers=Deriv-Demo`}>
+                                <a href={`${it.url_for('user/metatrader/metatrader_terminal')}?trade_server=Deriv-Demo&servers=Deriv-Demo`}>
                                     {it.L('Demo')}
                                 </a>
                             </div>
                             <div className='mt5-web-link'>
-                                <a id='mt5_web_link_real' href={`${it.url_for('user/metatrader/metatrader_terminal')}?trade_server=Deriv-Server&servers=Deriv-Server`}>
+                                <a href={`${it.url_for('user/metatrader/metatrader_terminal')}?trade_server=Deriv-Server&servers=Deriv-Server`}>
                                     {it.L('Real')}
                                 </a>
                             </div>
