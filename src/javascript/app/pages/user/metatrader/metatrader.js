@@ -50,6 +50,9 @@ const MetaTrader = (() => {
             addAccount('gaming', mt_gaming_company);
             addAccount('financial', mt_financial_company);
 
+            // TODO: Remove once details in inaccessible error provides necessary accounts info
+            addAccount('unknown', null);
+
             getAllAccountsInfo(response);
         });
     };
@@ -65,30 +68,46 @@ const MetaTrader = (() => {
     // * we should map them to landing_company:
     // mt_financial_company: { financial: {}, financial_stp: {}, swap_free: {} }
     // mt_gaming_company: { financial: {}, swap_free: {} }
+
     const addAccount = (market_type, company = {}) => {
-        Object.keys(company)
-            .filter(sub_account_type => sub_account_type !== 'swap_free') // TODO: remove this when releasing swap_free
-            .forEach((sub_account_type) => {
-                const landing_company_short = company[sub_account_type].shortcode;
+        // TODO: Update once market_types are available in inaccessible account details
+        if (market_type === 'unknown' && !company) {
+            const addUnknownAccount = (acc_type) => accounts_info[`${acc_type}_unknown`] = {
+                is_demo              : acc_type === 'demo',
+                landing_company_short: '',
+                leverage             : '',
+                market_type          : '',
+                sub_account_type     : '',
+                short_title          : localize('Unavailable'),
+                title                : '',
+            };
+            addUnknownAccount('demo');
+            addUnknownAccount('real');
+        } else {
+            Object.keys(company)
+                .filter(sub_account_type => sub_account_type !== 'swap_free') // TODO: remove this when releasing swap_free
+                .forEach((sub_account_type) => {
+                    const landing_company_short = company[sub_account_type].shortcode;
 
-                ['demo', 'real'].forEach((account_type) => {
-                    const is_demo = account_type === 'demo';
-                    const display_name =
-                        Client.getMT5AccountDisplays(market_type, sub_account_type, is_demo);
-                    const leverage = getLeverage(market_type, sub_account_type, landing_company_short);
+                    ['demo', 'real'].forEach((account_type) => {
+                        const is_demo = account_type === 'demo';
+                        const display_name =
+                            Client.getMT5AccountDisplays(market_type, sub_account_type, is_demo);
+                        const leverage = getLeverage(market_type, sub_account_type, landing_company_short);
 
-                    // e.g. real_gaming_financial
-                    accounts_info[`${account_type}_${market_type}_${sub_account_type}`] = {
-                        is_demo,
-                        landing_company_short,
-                        leverage,
-                        market_type,
-                        sub_account_type,
-                        short_title: display_name.short,
-                        title      : display_name.full,
-                    };
+                        // e.g. real_gaming_financial
+                        accounts_info[`${account_type}_${market_type}_${sub_account_type}`] = {
+                            is_demo,
+                            landing_company_short,
+                            leverage,
+                            market_type,
+                            sub_account_type,
+                            short_title: display_name.short,
+                            title      : display_name.full,
+                        };
+                    });
                 });
-            });
+        }
     };
 
     // synthetic is 500
@@ -250,23 +269,63 @@ const MetaTrader = (() => {
             return;
         }
 
+        const { mt5_login_list } = response;
+
+        const has_multi_mt5_accounts = (mt5_login_list.length > 1);
+
         // Update account info
-        response.mt5_login_list.forEach((account) => {
+        mt5_login_list.forEach((account) => {
             const acc_type = `${account.account_type}_${account.market_type}_${account.sub_account_type}`;
-            accounts_info[acc_type].info = {
-                display_login: MetaTraderConfig.getDisplayLogin(account.login),
-                login        : account.login,
-            };
-            setAccountDetails(account.login, acc_type, response);
+            const login_id = account.error ? account.error.details.login : account.login;
+            if (account.error) {
+                let message = account.error.message_to_client;
+                switch (account.error.code) {
+                    case 'MT5AccountInaccessible': {
+                        message = localize('Due to an issue on our server, some of your MT5 accounts are unavailable at the moment. [_1]Please bear with us and thank you for your patience.', '<br />');
+                        break;
+                    }
+                    default:
+                        break;
+                }
+
+                MetaTraderUI.displayPageError(message);
+
+                MetaTraderUI.disableButtonLink('.act_new_account');
+                // TODO: remove exception handlers for unknown_acc_type when details include market_types and sub market types
+                const unknown_acc_type = /^MTR/.test(login_id) ? 'real_unknown' : 'demo_unknown';
+                accounts_info[unknown_acc_type].info = {
+                    display_login: MetaTraderConfig.getDisplayLogin(login_id),
+                    login        : login_id,
+                };
+                MetaTraderUI.updateAccount(unknown_acc_type, false);
+            } else {
+                accounts_info[acc_type].info = {
+                    display_login: MetaTraderConfig.getDisplayLogin(login_id),
+                    login        : login_id,
+                };
+                setAccountDetails(login_id, acc_type, response);
+            }
         });
 
-        const current_acc_type = getDefaultAccount();
+        const has_error_in_accounts_list = Object.values(mt5_login_list).some((account) => !!account.error);
+        const valid_account = Object.values(mt5_login_list).filter(account => !account.error);
+
+        let current_acc_type = getDefaultAccount();
+
+        if (has_multi_mt5_accounts && has_error_in_accounts_list) {
+            const { account_type, market_type, sub_account_type } = valid_account[0];
+            current_acc_type = `${account_type}_${market_type}_${sub_account_type}`;
+        }
         Client.set('mt5_account', current_acc_type);
 
         // Update types with no account
         Object.keys(accounts_info)
             .filter(acc_type => !MetaTraderConfig.hasAccount(acc_type))
             .forEach((acc_type) => { MetaTraderUI.updateAccount(acc_type); });
+
+        if (!has_multi_mt5_accounts && has_error_in_accounts_list) {
+            MetaTraderUI.hideDashboard();
+        }
     };
 
     const sendTopupDemo = () => {

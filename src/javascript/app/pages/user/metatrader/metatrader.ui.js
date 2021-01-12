@@ -54,6 +54,10 @@ const MetaTraderUI = (() => {
         populateAccountList();
     };
 
+    const hideDashboard = () => {
+        $container.hide();
+    };
+
     const populateAccountList = () => {
         const $acc_name = $templates.find('> .acc-name');
         let acc_group_demo_set = false;
@@ -116,10 +120,12 @@ const MetaTraderUI = (() => {
         }
     };
 
-    const updateAccount = (acc_type) => {
+    const updateAccount = (acc_type, should_set_account = true) => {
         updateListItem(acc_type);
-        setCurrentAccount(acc_type);
-        showHideFinancialAuthenticate(acc_type);
+        if (should_set_account) {
+            setCurrentAccount(acc_type);
+            showHideFinancialAuthenticate(acc_type);
+        }
     };
 
     const setMTAccountText = () => {
@@ -131,6 +137,12 @@ const MetaTraderUI = (() => {
                 $mt5_account.html(title);
             }
         }
+    };
+
+    const disableButtonLink = (selector) => {
+        const button_link_el = $container.find(selector);
+        button_link_el.addClass('button-disabled');
+        button_link_el.children('span').addClass('disabled');
     };
 
     const updateListItem = (acc_type) => {
@@ -158,7 +170,12 @@ const MetaTraderUI = (() => {
         } else {
             $acc_item.setVisibility(0);
         }
+        // TODO: Remove once market subtype and market types are provided by error details for inaccessible accounts
+        if (acc_type.split('_')[1] === 'unknown') {
+            $acc_item.addClass('disabled');
+        }
     };
+
     const displayAccountDescription = (acc_type) => {
         const $account_desc = $templates.find('.account-desc');
         let $account_type_desc = '';
@@ -238,6 +255,11 @@ const MetaTraderUI = (() => {
 
     const populateForm = (e) => {
         let $target = $(e.target);
+
+        if ($target.hasClass('button-disabled')) {
+            return;
+        }
+
         if ($target.prop('tagName').toLowerCase() !== 'a') {
             $target = $target.parents('a');
         }
@@ -706,12 +728,14 @@ const MetaTraderUI = (() => {
         loadAction,
         updateAccount,
         postValidate,
+        hideDashboard,
         hideFormMessage,
         displayFormMessage,
         displayMainMessage,
         displayMessage,
         displayPageError,
         disableButton,
+        disableButtonLink,
         enableButton,
         refreshAction,
         setTopupLoading,
