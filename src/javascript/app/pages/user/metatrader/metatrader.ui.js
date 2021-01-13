@@ -531,6 +531,7 @@ const MetaTraderUI = (() => {
         Object.keys(accounts_info)
             .sort(sortMt5Accounts)
             .forEach((acc_type) => {
+                if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') return;
                 const $acc  = accounts_info[acc_type].is_demo ? $acc_template_demo.clone() : $acc_template_real.clone();
                 const type  = acc_type.split('_').slice(1).join('_');
                 const image = accounts_info[acc_type].market_type === 'gaming' ? 'synthetic' : accounts_info[acc_type].sub_account_type; // image name can be (financial_stp|financial|synthetic)
