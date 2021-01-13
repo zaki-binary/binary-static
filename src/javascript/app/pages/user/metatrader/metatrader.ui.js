@@ -32,6 +32,15 @@ const MetaTraderUI = (() => {
     const accounts_info = MetaTraderConfig.accounts_info;
     const actions_info  = MetaTraderConfig.actions_info;
 
+    let disabled_signup_types = {
+        'real': false,
+        'demo': false,
+    };
+
+    const setDisabledAccountTypes = (disabled_types_obj) => {
+        disabled_signup_types = { disabled_signup_types, ...disabled_types_obj };
+    };
+
     const init = (submit_func, topup_demo_func) => {
         token        = getHashValue('token');
         topup_demo   = topup_demo_func;
@@ -52,10 +61,6 @@ const MetaTraderUI = (() => {
 
         populateAccountTypes();
         populateAccountList();
-    };
-
-    const hideDashboard = () => {
-        $container.hide();
     };
 
     const populateAccountList = () => {
@@ -249,8 +254,11 @@ const MetaTraderUI = (() => {
         current_action_ui = null;
     };
 
-    const loadAction = (action, acc_type) => {
+    const loadAction = (action, acc_type, should_hide_cancel) => {
         $container.find(`[class~=act_${action || defaultAction(acc_type)}]`).click();
+        if (should_hide_cancel) {
+            $form.find('#view_1 #btn_cancel').addClass('invisible');
+        }
     };
 
     const populateForm = (e) => {
@@ -443,6 +451,13 @@ const MetaTraderUI = (() => {
 
         // Account type selection
         $form.find('.mt5_type_box').click(selectAccountTypeUI);
+
+        if (disabled_signup_types.demo) {
+            $('#rbtn_demo').addClass('disabled').next('p').css('color', '#DEDEDE');
+        } else if (disabled_signup_types.real) {
+            $('#rbtn_real').addClass('disabled').next('p').css('color', '#DEDEDE');
+        }
+
     };
 
     const newAccountGetType = () => `${$form.find('.step-1 .selected').attr('data-acc-type') || 'real'}_${$form.find('.step-2 .selected').attr('data-acc-type')}`;
@@ -477,6 +492,7 @@ const MetaTraderUI = (() => {
     };
 
     const switchAcccountTypesUI = (type, form) => {
+
         const demo_btn = form.find('#view_1 .step-2 .type-group .template_demo');
         const real_btn = form.find('#view_1 .step-2 .type-group .template_real');
 
@@ -531,6 +547,7 @@ const MetaTraderUI = (() => {
         Object.keys(accounts_info)
             .sort(sortMt5Accounts)
             .forEach((acc_type) => {
+                // TODO: remove once we have market type and sub type data from error response details
                 if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') return;
                 const $acc  = accounts_info[acc_type].is_demo ? $acc_template_demo.clone() : $acc_template_real.clone();
                 const type  = acc_type.split('_').slice(1).join('_');
@@ -630,6 +647,10 @@ const MetaTraderUI = (() => {
     };
 
     const setCounterpartyAndJurisdictionTooltip = ($el, acc_type) => {
+        // TODO: Remove once we have market type and sub type in error details
+        if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') {
+            return;
+        }
         /*
             The details for vanuatu landing company was changed to
             those of the svg landing company, thus it will show
@@ -726,10 +747,10 @@ const MetaTraderUI = (() => {
     return {
         init,
         setAccountType,
+        setDisabledAccountTypes,
         loadAction,
         updateAccount,
         postValidate,
-        hideDashboard,
         hideFormMessage,
         displayFormMessage,
         displayMainMessage,
@@ -742,9 +763,10 @@ const MetaTraderUI = (() => {
         setTopupLoading,
         showNewAccountConfirmationPopup,
 
-        $form   : () => $form,
-        getToken: () => token,
-        setToken: (verification_code) => { token = verification_code; },
+        $form                  : () => $form,
+        getDisabledAccountTypes: () => disabled_signup_types,
+        getToken               : () => token,
+        setToken               : (verification_code) => { token = verification_code; },
     };
 })();
 

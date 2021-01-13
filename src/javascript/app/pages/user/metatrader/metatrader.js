@@ -74,12 +74,12 @@ const MetaTrader = (() => {
         if (market_type === 'unknown' && !company) {
             const addUnknownAccount = (acc_type) => accounts_info[`${acc_type}_unknown`] = {
                 is_demo              : acc_type === 'demo',
-                landing_company_short: '',
-                leverage             : '',
-                market_type          : '',
-                sub_account_type     : '',
+                landing_company_short: localize('Unavailable'),
+                leverage             : localize('Unavailable'),
+                market_type          : localize('Unavailable'),
+                sub_account_type     : localize('Unavailable'),
                 short_title          : localize('Unavailable'),
-                title                : '',
+                title                : localize('Unavailable'),
             };
             addUnknownAccount('demo');
             addUnknownAccount('real');
@@ -142,14 +142,25 @@ const MetaTrader = (() => {
         return default_account;
     };
 
-    const setAccountDetails = (login, acc_type, data) => {
+    const setAccountDetails = (login, acc_type, data, has_error) => {
         if (data.mt5_login_list) {
-            const info = data.mt5_login_list.find(mt5_account => mt5_account.login === login);
-            if (info) {
-                accounts_info[acc_type].info = info;
-                accounts_info[acc_type].info.display_login = MetaTraderConfig.getDisplayLogin(info.login);
-                MetaTraderUI.updateAccount(acc_type);
+            if (has_error) {
+                const info = (data.mt5_login_list.find(
+                    mt5_account => mt5_account.error.details.login === login)).error.details;
+                if (info) {
+                    accounts_info[acc_type].info = info;
+                    accounts_info[acc_type].info.display_login = MetaTraderConfig.getDisplayLogin(info.login);
+                    MetaTraderUI.updateAccount(acc_type);
+                }
+            } else {
+                const info = data.mt5_login_list.find(mt5_account => mt5_account.login === login);
+                if (info) {
+                    accounts_info[acc_type].info = info;
+                    accounts_info[acc_type].info.display_login = MetaTraderConfig.getDisplayLogin(info.login);
+                    MetaTraderUI.updateAccount(acc_type);
+                }
             }
+
         }
     };
 
@@ -272,15 +283,25 @@ const MetaTrader = (() => {
         const { mt5_login_list } = response;
 
         const has_multi_mt5_accounts = (mt5_login_list.length > 1);
+        const checkAccountTypeErrors = (type) => Object.values(mt5_login_list).filter(account => {
+            if (account.error) {
+                return account.error.details.account_type === type;
+            }
+            return null;
+        });
+        const has_demo_error = checkAccountTypeErrors('demo').length > 0;
+        const has_real_error = checkAccountTypeErrors('real').length > 0;
 
         // Update account info
         mt5_login_list.forEach((account) => {
             const acc_type = `${account.account_type}_${account.market_type}_${account.sub_account_type}`;
             const login_id = account.error ? account.error.details.login : account.login;
             if (account.error) {
+                const { account_type } = account.error.details;
                 let message = account.error.message_to_client;
                 switch (account.error.code) {
                     case 'MT5AccountInaccessible': {
+                        MetaTraderUI.setDisabledAccountTypes({ 'real': account_type === 'real', 'demo': account_type === 'demo' });
                         message = localize('Due to an issue on our server, some of your MT5 accounts are unavailable at the moment. [_1]Please bear with us and thank you for your patience.', '<br />');
                         break;
                     }
@@ -290,42 +311,45 @@ const MetaTrader = (() => {
 
                 MetaTraderUI.displayPageError(message);
 
-                MetaTraderUI.disableButtonLink('.act_new_account');
                 // TODO: remove exception handlers for unknown_acc_type when details include market_types and sub market types
-                const unknown_acc_type = /^MTR/.test(login_id) ? 'real_unknown' : 'demo_unknown';
+                const unknown_acc_type = account_type === 'real' ? 'real_unknown' : 'demo_unknown';
                 accounts_info[unknown_acc_type].info = {
                     display_login: MetaTraderConfig.getDisplayLogin(login_id),
                     login        : login_id,
                 };
                 MetaTraderUI.updateAccount(unknown_acc_type, false);
+
+                if (!has_multi_mt5_accounts && (has_demo_error || has_real_error)) {
+                    setAccountDetails(login_id, unknown_acc_type, response, true);
+                    MetaTraderUI.loadAction('new_account', null, true);
+                } else if (has_real_error && has_demo_error) {
+                    MetaTraderUI.disableButtonLink('.act_new_account');
+                }
             } else {
                 accounts_info[acc_type].info = {
                     display_login: MetaTraderConfig.getDisplayLogin(login_id),
                     login        : login_id,
                 };
                 setAccountDetails(login_id, acc_type, response);
+
             }
         });
 
-        const has_error_in_accounts_list = Object.values(mt5_login_list).some((account) => !!account.error);
         const valid_account = Object.values(mt5_login_list).filter(account => !account.error);
 
         let current_acc_type = getDefaultAccount();
 
-        if (has_multi_mt5_accounts && has_error_in_accounts_list) {
+        if (has_multi_mt5_accounts && (has_demo_error || has_real_error)) {
             const { account_type, market_type, sub_account_type } = valid_account[0];
             current_acc_type = `${account_type}_${market_type}_${sub_account_type}`;
         }
+
         Client.set('mt5_account', current_acc_type);
 
         // Update types with no account
         Object.keys(accounts_info)
             .filter(acc_type => !MetaTraderConfig.hasAccount(acc_type))
             .forEach((acc_type) => { MetaTraderUI.updateAccount(acc_type); });
-
-        if (!has_multi_mt5_accounts && has_error_in_accounts_list) {
-            MetaTraderUI.hideDashboard();
-        }
     };
 
     const sendTopupDemo = () => {

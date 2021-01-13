@@ -312,6 +312,16 @@
                             background: rgba(0, 0, 0, 0.05);
                         }
                     }
+                    &.disabled {
+                        cursor: not-allowed;
+
+                        &:before {
+                            background: url('../images/pages/metatrader/dashboard/tick_disabled.svg');
+                        }
+                        &:after {
+                            background: transparent;
+                        }
+                    }
                     &.existed:before {
                         background: url('../images/pages/metatrader/dashboard/tick_gray.svg');
                         border: none;
