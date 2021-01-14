@@ -355,7 +355,7 @@ const MetaTraderConfig = (() => {
                     account_type: is_demo ? 'demo' : sample_account.market_type,
                     email       : Client.get('email'),
                     leverage    : sample_account.leverage,
-                    ...(!is_demo && {
+                    ...(!is_demo && hasMultipleTradeServers(acc_type, accounts_info) && {
                         server: $('#frm_new_account').find('#ddl_trade_server input[checked]').val(),
                     }),
                     ...(sample_account.market_type === 'financial' && {
@@ -438,23 +438,44 @@ const MetaTraderConfig = (() => {
                 selector   : fields.deposit.txt_amount.id,
                 validations: [
                     ['req', { hide_asterisk: true }],
+                    // check if entered amount is less than the available balance
+                    // e.g. transfer amount is 10 but client balance is 5
+                    ['custom', {
+                        func: () => {
+                            const balance = Client.get('balance');
+
+                            const is_balance_more_than_entered = +balance >= +$(fields.deposit.txt_amount.id).val();
+
+                            return balance && is_balance_more_than_entered;
+                        },
+                        message: localize('You have insufficient funds in your Binary account, please <a href="[_1]">add funds</a>.', urlFor('cashier')),
+                    }],
+                    // check if balance is less than the minimum limit for transfer
+                    // e.g. client balance could be 0.45 but min limit could be 1
+                    ['custom', {
+                        func: () => {
+                            const balance         = Client.get('balance');
+                            const min_req_balance = Currency.getTransferLimits(Client.get('currency'), 'min', 'mt5');
+
+                            const is_balance_more_than_min_req = +balance >= +min_req_balance;
+
+                            return balance && is_balance_more_than_min_req;
+                        },
+                        message: localize('Should be more than [_1]', Currency.getTransferLimits(Client.get('currency'), 'min', 'mt5')),
+                    }],
+                    // check if amount is between min and max
                     ['number', {
                         type: 'float',
                         min : () => Currency.getTransferLimits(Client.get('currency'), 'min', 'mt5'),
                         max : () => {
-                            const mt5_limit     = Currency.getTransferLimits(Client.get('currency'), 'max', 'mt5');
-                            const balance       = Client.get('balance');
+                            const mt5_limit = Currency.getTransferLimits(Client.get('currency'), 'max', 'mt5');
+                            const balance   = Client.get('balance');
+
                             // if balance is 0, pass this validation so we can show insufficient funds in the next custom validation
                             return Math.min(mt5_limit, balance || mt5_limit).toFixed(Currency.getDecimalPlaces(Client.get('currency')));
                         },
-                        decimals: Currency.getDecimalPlaces(Client.get('currency')),
-                    }],
-                    ['custom', {
-                        func: () => {
-                            const balance = Client.get('balance');
-                            return balance && (+balance >= +$(fields.deposit.txt_amount.id).val());
-                        },
-                        message: localize('You have insufficient funds in your Binary account, please <a href="[_1]">add funds</a>.', urlFor('cashier')),
+                        decimals    : Currency.getDecimalPlaces(Client.get('currency')),
+                        format_money: true,
                     }],
                 ],
             },
@@ -464,23 +485,43 @@ const MetaTraderConfig = (() => {
                 selector   : fields.withdrawal.txt_amount.id,
                 validations: [
                     ['req', { hide_asterisk: true }],
+                    // check if entered amount is less than the available balance
+                    // e.g. transfer amount is 10 but client balance is 5
+                    ['custom', {
+                        func: () => {
+                            const balance = accounts_info[Client.get('mt5_account')].info.balance;
+                            const is_balance_more_than_entered = +balance >= +$(fields.withdrawal.txt_amount.id).val();
+
+                            return balance && is_balance_more_than_entered;
+                        },
+                        message: localize('You have insufficient funds in your MT5 account.'),
+                    }],
+                    // check if balance is less than the minimum limit for transfer
+                    // e.g. client balance could be 0.45 but min limit could be 1
+                    ['custom', {
+                        func: () => {
+                            const balance         = accounts_info[Client.get('mt5_account')].info.balance;
+                            const min_req_balance = Currency.getTransferLimits(getCurrency(Client.get('mt5_account')), 'min', 'mt5');
+
+                            const is_balance_more_than_min_req = +balance >= +min_req_balance;
+
+                            return balance && is_balance_more_than_min_req;
+                        },
+                        message: () => localize('Should be more than [_1]', Currency.getTransferLimits(getCurrency(Client.get('mt5_account')), 'min', 'mt5')),
+                    }],
+                    // check if amount is between min and max
                     ['number', {
                         type: 'float',
                         min : () => Currency.getTransferLimits(getCurrency(Client.get('mt5_account')), 'min', 'mt5'),
                         max : () => {
                             const mt5_limit = Currency.getTransferLimits(getCurrency(Client.get('mt5_account')), 'max', 'mt5');
                             const balance   = accounts_info[Client.get('mt5_account')].info.balance;
+
                             // if balance is 0, pass this validation so we can show insufficient funds in the next custom validation
                             return Math.min(mt5_limit, balance || mt5_limit);
                         },
-                        decimals: 2,
-                    }],
-                    ['custom', {
-                        func: () => {
-                            const balance = accounts_info[Client.get('mt5_account')].info.balance;
-                            return balance && (+balance >= +$(fields.withdrawal.txt_amount.id).val());
-                        },
-                        message: localize('You have insufficient funds in your MT5 account.'),
+                        decimals    : 2,
+                        format_money: true,
                     }],
                 ],
             },
@@ -526,6 +567,11 @@ const MetaTraderConfig = (() => {
         return accounts_info[Object.keys(accounts_info).find(account => regex.test(account))];
     };
 
+    const hasMultipleTradeServers = (acc_type, accounts) => {
+        const clean_acc_type_a = getCleanAccType(acc_type);
+        return Object.keys(accounts).filter(acc_type_b => clean_acc_type_a === getCleanAccType(acc_type_b)).length > 1;
+    };
+
     return {
         accounts_info,
         actions_info,
@@ -533,6 +579,7 @@ const MetaTraderConfig = (() => {
         validations,
         needsRealMessage,
         hasAccount,
+        hasMultipleTradeServers,
         getCleanAccType,
         getCurrency,
         getDisplayLogin,
