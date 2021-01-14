@@ -408,7 +408,9 @@ const MetaTrader = (() => {
         const current_acc_type = getDefaultAccount();
         Client.set('mt5_account', current_acc_type);
 
-        MetaTraderUI.updateAccount(current_acc_type);
+        if (current_acc_type) {
+            MetaTraderUI.updateAccount(current_acc_type);
+        }
 
         // Update types with no account
         Object.keys(accounts_info)
