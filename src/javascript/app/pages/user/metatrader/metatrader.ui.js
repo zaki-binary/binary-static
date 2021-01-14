@@ -425,43 +425,43 @@ const MetaTraderUI = (() => {
         });
     };
 
-    const getAvailableServers = (should_ignore_used = false, acc_type) =>
-        State.getResponse('trading_servers').filter(trading_server => {
-            let account_type = acc_type || newAccountGetType();
-            // if server is not added to account type, and in accounts_info we are storing it without server
-            if (!/\d$/.test(account_type) && !accounts_info[account_type]) {
-                account_type += `_${trading_server.id}`;
-            }
-            const new_account_info = accounts_info[account_type];
-            const { supported_accounts } = trading_server;
+    const getAvailableServers = (should_ignore_used = false, acc_type) => State.getResponse('trading_servers').filter(trading_server => {
+        if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') return false;
+        let account_type = acc_type || newAccountGetType();
+        // if server is not added to account type, and in accounts_info we are storing it without server
+        if (!/\d$/.test(account_type) && !accounts_info[account_type]) {
+            account_type += `_${trading_server.id}`;
+        }
+        const new_account_info = accounts_info[account_type];
+        const { supported_accounts } = trading_server;
 
-            if (!new_account_info || !supported_accounts) {
-                return false;
-            }
+        if (!new_account_info || !supported_accounts) {
+            return false;
+        }
 
-            const { market_type, sub_account_type } = new_account_info;
+        const { market_type, sub_account_type } = new_account_info;
 
-            const is_synthetic     = market_type === 'gaming'    && sub_account_type === 'financial';
-            const is_financial     = market_type === 'financial' && sub_account_type === 'financial';
-            const is_financial_stp = market_type === 'financial' && sub_account_type === 'financial_stp';
+        const is_synthetic     = market_type === 'gaming'    && sub_account_type === 'financial';
+        const is_financial     = market_type === 'financial' && sub_account_type === 'financial';
+        const is_financial_stp = market_type === 'financial' && sub_account_type === 'financial_stp';
 
-            const is_server_supported =
+        const is_server_supported =
                 (is_synthetic && supported_accounts.includes('gaming')) ||
                 (is_financial && supported_accounts.includes('financial')) ||
                 (is_financial_stp && supported_accounts.includes('financial_stp'));
 
-            if (should_ignore_used) {
-                return is_server_supported;
-            }
+        if (should_ignore_used) {
+            return is_server_supported;
+        }
 
-            const is_used_server = new_account_info.info && new_account_info.info.server &&
+        const is_used_server = new_account_info.info && new_account_info.info.server &&
                 is_server_supported &&
                 Object.keys(accounts_info).find(account =>
                     accounts_info[account].info && trading_server.id === accounts_info[account].info.server
                 );
 
-            return is_server_supported && !is_used_server;
-        });
+        return is_server_supported && !is_used_server;
+    });
 
     const displayStep = (step) => {
         const new_account_type = newAccountGetType();
