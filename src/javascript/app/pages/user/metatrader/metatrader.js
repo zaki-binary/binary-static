@@ -380,6 +380,15 @@ const MetaTrader = (() => {
                 acc_type = acc_type_server;
             }
 
+            const getDisplayServer = (trade_servers, server_name) => {
+                const geolocation = trade_servers ? (trade_servers.find(
+                    server => server.id === server_name) || {}).geolocation : null;
+                if (geolocation) {
+                    return geolocation.sequence > 1 ? `${geolocation.region} ${geolocation.sequence}` : geolocation.region;
+                }
+                return null;
+            };
+
             // in case trading_server API response is corrupted, acc_type will not exist in accounts_info due to missing supported_accounts prop
             if (acc_type in accounts_info && !/unknown+$/.test(acc_type)) {
                 accounts_info[acc_type].info = account;
@@ -388,18 +397,18 @@ const MetaTrader = (() => {
                 accounts_info[acc_type].info.login         = account.login;
                 accounts_info[acc_type].info.server        = account.server;
 
-                const geolocation = trading_servers ? (trading_servers.find(
-                    server => server.id === account.server) || {}).geolocation : null;
-                if (geolocation) {
-                    accounts_info[acc_type].info.display_server = geolocation.sequence > 1 ? `${geolocation.region} ${geolocation.sequence}` : geolocation.region;
+                if (getDisplayServer(trading_servers, account.server)) {
+                    accounts_info[acc_type].info.display_server = getDisplayServer(trading_servers, acc_type);
                 }
                 MetaTraderUI.updateAccount(acc_type);
             } else if (account.error) {
-                const { login, account_type } = account.error.details;
+                const { login, account_type, server } = account.error.details;
+
                 // TODO: remove exception handlers for unknown_acc_type when details include market_types and sub market types
                 const unknown_acc_type = account_type === 'real' ? 'real_unknown' : 'demo_unknown';
                 accounts_info[unknown_acc_type].info = {
-                    display_login: MetaTraderConfig.getDisplayLogin(login),
+                    display_login : MetaTraderConfig.getDisplayLogin(login),
+                    display_server: getDisplayServer(trading_servers, server),
                     login,
                 };
                 MetaTraderUI.updateAccount(unknown_acc_type, false);
@@ -423,6 +432,10 @@ const MetaTrader = (() => {
         Object.keys(accounts_info)
             .filter(acc_type => !MetaTraderConfig.hasAccount(acc_type))
             .forEach((acc_type) => { MetaTraderUI.updateAccount(acc_type); });
+
+        if (/unknown+$/.test(current_acc_type)) {
+            MetaTraderUI.loadAction('new_account', null, true);
+        }
     };
 
     const sendTopupDemo = () => {

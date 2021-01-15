@@ -159,9 +159,18 @@ const MetaTraderUI = (() => {
             $acc_item.find('.mt-login').text(`(${accounts_info[acc_type].info.display_login})`);
             if (
                 accounts_info[acc_type].info.display_server &&
-                MetaTraderConfig.hasMultipleTradeServers(acc_type, accounts_info)
+                MetaTraderConfig.hasMultipleTradeServers(acc_type, accounts_info) ||
+                /unknown+$/.test(acc_type)
             ) {
                 $acc_item.find('.mt-server').text(`${accounts_info[acc_type].info.display_server}`);
+
+                // add disabled style to unknown or unavailable accounts
+                if (/unknown+$/.test(acc_type)) {
+                    $acc_item.find('.mt-server').css({
+                        'color'           : '#fff',
+                        'background-color': '#dedede',
+                    });
+                }
             } else {
                 $acc_item.find('.mt-server').remove();
             }
@@ -294,7 +303,8 @@ const MetaTraderUI = (() => {
     const loadAction = (action, acc_type, should_hide_cancel) => {
         $container.find(`[class~=act_${action || defaultAction(acc_type)}]`).click();
         if (should_hide_cancel) {
-            $form.find('#view_1 #btn_cancel').addClass('invisible');
+            $form.find('#view_1 .btn-cancel').hide();
+            $form.find('#view_2 .btn-cancel').hide();
         }
     };
 
