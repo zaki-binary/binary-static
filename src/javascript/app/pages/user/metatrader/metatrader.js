@@ -219,7 +219,7 @@ const MetaTrader = (() => {
         if (MetaTraderConfig.hasAccount(Client.get('mt5_account'))) {
             default_account = Client.get('mt5_account');
 
-            if (!/unknown+$/.test(default_account)) {
+            if (/unknown+$/.test(default_account)) {
                 const available_accounts = MetaTraderConfig.getAllAccounts().filter(account => !/unknown+$/.test(account));
                 if (available_accounts.length > 0) {
                     default_account = available_accounts[0];
@@ -381,7 +381,7 @@ const MetaTrader = (() => {
             }
 
             // in case trading_server API response is corrupted, acc_type will not exist in accounts_info due to missing supported_accounts prop
-            if (acc_type in accounts_info && (acc_type !== 'real_unknown' || acc_type !== 'demo_unknown')) {
+            if (acc_type in accounts_info && !/unknown+$/.test(acc_type)) {
                 accounts_info[acc_type].info = account;
 
                 accounts_info[acc_type].info.display_login = MetaTraderConfig.getDisplayLogin(account.login);

@@ -432,7 +432,7 @@ const MetaTraderUI = (() => {
 
     const getAvailableServers = (should_ignore_used = false, acc_type) =>
         State.getResponse('trading_servers').filter(trading_server => {
-            if (!/unknown+$/.test(acc_type)) return false;
+            if (/unknown+$/.test(acc_type)) return false;
             let account_type = acc_type || newAccountGetType();
             // if server is not added to account type, and in accounts_info we are storing it without server
             if (!/\d$/.test(account_type) && !accounts_info[account_type]) {
@@ -671,6 +671,7 @@ const MetaTraderUI = (() => {
         // Account type selection
         $form.find('.mt5_type_box').click(selectAccountTypeUI);
 
+        // disable signups by types that have errors
         if (disabled_signup_types.demo) {
             $('#rbtn_demo').addClass('disabled').next('p').css('color', '#DEDEDE');
         } else if (disabled_signup_types.real) {
@@ -780,7 +781,7 @@ const MetaTraderUI = (() => {
 
         Object.keys(filtered_accounts).forEach((acc_type) => {
             // TODO: remove once we have market type and sub type data from error response details
-            if (!/unknown+$/.test(acc_type)) return;
+            if (/unknown+$/.test(acc_type)) return;
             const $acc  = filtered_accounts[acc_type].is_demo ? $acc_template_demo.clone() : $acc_template_real.clone();
             const type  = acc_type.split('_').slice(1).join('_');
             const image = filtered_accounts[acc_type].market_type === 'gaming' ? 'synthetic' : filtered_accounts[acc_type].sub_account_type; // image name can be (financial_stp|financial|synthetic)
@@ -880,7 +881,7 @@ const MetaTraderUI = (() => {
 
     const setCounterpartyAndJurisdictionTooltip = ($el, acc_type) => {
         // TODO: Remove once we have market type and sub type in error details
-        if (!/unknown+$/.test(acc_type)) {
+        if (/unknown+$/.test(acc_type)) {
             return;
         }
 
