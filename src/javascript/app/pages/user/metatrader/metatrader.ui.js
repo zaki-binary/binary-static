@@ -159,8 +159,7 @@ const MetaTraderUI = (() => {
             $acc_item.find('.mt-login').text(`(${accounts_info[acc_type].info.display_login})`);
             if (
                 accounts_info[acc_type].info.display_server &&
-                MetaTraderConfig.hasMultipleTradeServers(acc_type, accounts_info) ||
-                /unknown+$/.test(acc_type)
+                MetaTraderConfig.hasMultipleTradeServers(acc_type, accounts_info)
             ) {
                 $acc_item.find('.mt-server').text(`${accounts_info[acc_type].info.display_server}`);
 

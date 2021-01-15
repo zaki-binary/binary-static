@@ -71,7 +71,10 @@ const MetaTrader = (() => {
                     let message = mt5_login.error.message_to_client;
                     switch (mt5_login.error.code) {
                         case 'MT5AccountInaccessible': {
-                            MetaTraderUI.setDisabledAccountTypes({ 'real': account_type === 'real', 'demo': account_type === 'demo' });
+                            MetaTraderUI.setDisabledAccountTypes({
+                                'real': account_type === 'real',
+                                'demo': account_type === 'demo',
+                            });
                             message = localize('Due to an issue on our server, some of your MT5 accounts are unavailable at the moment. [_1]Please bear with us and thank you for your patience.', '<br />');
                             break;
                         }
@@ -80,12 +83,6 @@ const MetaTrader = (() => {
                     }
 
                     MetaTraderUI.displayPageError(message);
-
-                    // if (!has_multi_mt5_accounts && (has_demo_error || has_real_error)) {
-                    //     MetaTraderUI.loadAction('new_account', null, true);
-                    // } else if (has_real_error && has_demo_error) {
-                    //     MetaTraderUI.disableButtonLink('.act_new_account');
-                    // }
 
                 } else {
                     const is_server_offered =
@@ -372,6 +369,15 @@ const MetaTrader = (() => {
 
         const trading_servers = State.getResponse('trading_servers');
 
+        const getDisplayServer = (trade_servers, server_name) => {
+            const geolocation = trade_servers ? (trade_servers.find(
+                server => server.id === server_name) || {}).geolocation : null;
+            if (geolocation) {
+                return geolocation.sequence > 1 ? `${geolocation.region} ${geolocation.sequence}` : geolocation.region;
+            }
+            return null;
+        };
+
         // Update account info
         response.mt5_login_list.forEach((account) => {
             let acc_type = `${account.account_type}_${account.market_type}_${account.sub_account_type}`;
@@ -379,15 +385,6 @@ const MetaTrader = (() => {
             if (!(acc_type in accounts_info) || acc_type_server in accounts_info) {
                 acc_type = acc_type_server;
             }
-
-            const getDisplayServer = (trade_servers, server_name) => {
-                const geolocation = trade_servers ? (trade_servers.find(
-                    server => server.id === server_name) || {}).geolocation : null;
-                if (geolocation) {
-                    return geolocation.sequence > 1 ? `${geolocation.region} ${geolocation.sequence}` : geolocation.region;
-                }
-                return null;
-            };
 
             // in case trading_server API response is corrupted, acc_type will not exist in accounts_info due to missing supported_accounts prop
             if (acc_type in accounts_info && !/unknown+$/.test(acc_type)) {
@@ -398,7 +395,7 @@ const MetaTrader = (() => {
                 accounts_info[acc_type].info.server        = account.server;
 
                 if (getDisplayServer(trading_servers, account.server)) {
-                    accounts_info[acc_type].info.display_server = getDisplayServer(trading_servers, acc_type);
+                    accounts_info[acc_type].info.display_server = getDisplayServer(trading_servers, account.server);
                 }
                 MetaTraderUI.updateAccount(acc_type);
             } else if (account.error) {
@@ -424,16 +421,13 @@ const MetaTrader = (() => {
         const current_acc_type = getDefaultAccount();
         Client.set('mt5_account', current_acc_type);
 
-        if (current_acc_type) {
-            MetaTraderUI.updateAccount(current_acc_type);
-        }
-
         // Update types with no account
         Object.keys(accounts_info)
             .filter(acc_type => !MetaTraderConfig.hasAccount(acc_type))
             .forEach((acc_type) => { MetaTraderUI.updateAccount(acc_type); });
 
         if (/unknown+$/.test(current_acc_type)) {
+            MetaTraderUI.updateAccount(current_acc_type);
             MetaTraderUI.loadAction('new_account', null, true);
         }
     };
