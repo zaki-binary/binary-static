@@ -218,6 +218,13 @@ const MetaTrader = (() => {
         let default_account = '';
         if (MetaTraderConfig.hasAccount(Client.get('mt5_account'))) {
             default_account = Client.get('mt5_account');
+
+            if (!/unknown+$/.test(default_account)) {
+                const available_accounts = MetaTraderConfig.getAllAccounts().filter(account => !/unknown+$/.test(account));
+                if (available_accounts.length > 0) {
+                    default_account = available_accounts[0];
+                }
+            }
         } else {
             default_account = MetaTraderConfig.getAllAccounts()[0] || '';
         }

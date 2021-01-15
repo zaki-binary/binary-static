@@ -432,7 +432,7 @@ const MetaTraderUI = (() => {
 
     const getAvailableServers = (should_ignore_used = false, acc_type) =>
         State.getResponse('trading_servers').filter(trading_server => {
-            if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') return false;
+            if (!/unknown+$/.test(acc_type)) return false;
             let account_type = acc_type || newAccountGetType();
             // if server is not added to account type, and in accounts_info we are storing it without server
             if (!/\d$/.test(account_type) && !accounts_info[account_type]) {
@@ -780,7 +780,7 @@ const MetaTraderUI = (() => {
 
         Object.keys(filtered_accounts).forEach((acc_type) => {
             // TODO: remove once we have market type and sub type data from error response details
-            if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') return;
+            if (!/unknown+$/.test(acc_type)) return;
             const $acc  = filtered_accounts[acc_type].is_demo ? $acc_template_demo.clone() : $acc_template_real.clone();
             const type  = acc_type.split('_').slice(1).join('_');
             const image = filtered_accounts[acc_type].market_type === 'gaming' ? 'synthetic' : filtered_accounts[acc_type].sub_account_type; // image name can be (financial_stp|financial|synthetic)
@@ -880,7 +880,7 @@ const MetaTraderUI = (() => {
 
     const setCounterpartyAndJurisdictionTooltip = ($el, acc_type) => {
         // TODO: Remove once we have market type and sub type in error details
-        if (acc_type === 'real_unknown' || acc_type === 'demo_unknown') {
+        if (!/unknown+$/.test(acc_type)) {
             return;
         }
 
