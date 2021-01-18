@@ -185,7 +185,13 @@ const MetaTraderUI = (() => {
                     +accounts_info[acc_type].info.balance);
                 $acc_item.find('.mt-balance').html(mt_balance);
                 $action.find('.mt5-balance').html(mt_balance);
-                $container.find('#btn_add_more_servers').setVisibility(getAvailableServers(false, acc_type).length > 0 && !accounts_info[acc_type].is_demo);
+                const $add_server_btn = $container.find('#btn_add_more_servers');
+                $add_server_btn.setVisibility(
+                    getAvailableServers(false, acc_type).length > 0 && !accounts_info[acc_type].is_demo,
+                );
+                if (disabled_signup_types.real) {
+                    $add_server_btn.addClass('button-disabled');
+                }
             }
             // disable MT5 account opening if created all available accounts
             if (Object.keys(accounts_info).every(type => accounts_info[type].info)) {
@@ -194,6 +200,9 @@ const MetaTraderUI = (() => {
 
             // Add more trade servers button.
             $container.find('#btn_add_more_servers').click(() => {
+                if (disabled_signup_types.real) {
+                    return;
+                }
                 const $back_button = $form.find('#view_2 .btn-back');
                 const $cancel_button = $form.find('#view_2 .btn-cancel');
                 const account_type = Client.get('mt5_account');
