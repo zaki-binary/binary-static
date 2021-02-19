@@ -33,6 +33,7 @@ module.exports = [
 
     ['user/accounts',                           'app/user/accounts',                           'default',    'Accounts'],
     ['user/authenticate',                       'app/user/authenticate',                       'default',    'Authenticate'],
+    ['user/dxtrade',                            'app/user/dxtrade',                            'default',    'DXTrade account management'],
     ['user/lost_passwordws',                    'app/user/lost_password',                      'default',    'Password Reset'],
     ['user/metatrader',                         'app/user/metatrader',                         'default',    'MetaTrader account management'],
     ['user/portfoliows',                        'app/user/portfolio',                          'default',    'Portfolio'],
@@ -113,6 +114,10 @@ module.exports = [
     ['get-started/cryptocurrencies',            'static/get_started/cryptocurrencies',         'default',     'Cryptocurrencies'],
     ['get-started/forex',                       'static/get_started/forex',                    'default',     'Forex'],
     ['get-started/metals',                      'static/get_started/metals',                   'default',     'Metals'],
+
+    ['dxtrade/download',                        'static/dxtrade/download',                     'default',     'Start Trading with DXTrade'],
+    ['dxtrade/how-to-trade-dxtrade',            'static/dxtrade/how_to_trade_dxtrade',         'default',     'How to Trade in DXTrade'],
+    ['dxtrade/types-of-accounts',               'static/dxtrade/types_of_accounts',            'default',     'Types of DXTrade accounts'],
 
     ['metatrader/download',                     'static/metatrader/download',                  'default',     'Start Trading with MetaTrader 5'],
     ['metatrader/how-to-trade-mt5',             'static/metatrader/how_to_trade_mt5',          'default',     'How to Trade in MetaTrader 5'],
