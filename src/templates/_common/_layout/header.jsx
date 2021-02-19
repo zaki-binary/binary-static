@@ -103,6 +103,7 @@ const Header = () => (
                                                 { text: it.L('WebTrader'),    href: 'https://webtrader.binary.com', target: '_blank' },
                                                 { text: it.L('Binary Bot'),   href: 'https://bot.binary.com',       target: '_blank' },
                                                 { text: it.L('MetaTrader 5'), href: it.url_for('user/metatrader'),  className: 'invisible mt_visibility' },
+                                                { text: it.L('DXTrade'),      href: it.url_for('user/dxtrade'),  className: 'invisible dxtrade_visibility' },
                                                 { text: it.L('Deriv'),        href: 'https://app.deriv.com/?utm_source=binary&utm_medium=referral', target: '_blank', dataShow: '-eucountry' },
                                             ],
                                         },
@@ -154,6 +155,9 @@ const Header = () => (
                                             <div className='login-id-list' />
                                             <a className='link invisible mt_visibility' href={it.url_for('user/metatrader')}>
                                                 <li className='topMenuMetaTrader'>{it.L('MetaTrader')}</li>
+                                            </a>
+                                            <a className='link invisible dxtrade_visibility' href={it.url_for('user/dxtrade')}>
+                                                <li className='topMenuMetaTrader'>{it.L('DXTrade')}</li>
                                             </a>
                                             <a className='link' id='user_accounts' href={it.url_for('user/accounts')}>
                                                 <li className='topMenuAccounts'>{it.L('Accounts List')}</li>

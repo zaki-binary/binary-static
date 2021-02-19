@@ -2,53 +2,55 @@
 const TabSelector = require('../../_common/tab_selector'); // eslint-disable-line import/order
 
 // ==================== app ====================
-const LoggedInHandler         = require('./logged_in');
-const Redirect                = require('./redirect');
-const AccountTransfer         = require('../pages/cashier/account_transfer');
-const Cashier                 = require('../pages/cashier/cashier');
-const Dashboard               = require('../pages/dashboard/dashboard');
-const DepositWithdraw         = require('../pages/cashier/deposit_withdraw');
-const DP2P                    = require('../pages/cashier/dp2p');
-const PaymentAgentList        = require('../pages/cashier/payment_agent_list');
-const PaymentAgentWithdraw    = require('../pages/cashier/payment_agent_withdraw');
-const Endpoint                = require('../pages/endpoint');
-const EconomicCalendar        = require('../pages/resources/economic_calendar/economic_calendar');
-const AssetIndexUI            = require('../pages/resources/asset_index/asset_index.ui');
-const MetatraderDownloadUI    = require('../pages/resources/metatrader/download.ui');
-const TradingTimesUI          = require('../pages/resources/trading_times/trading_times.ui');
-const NewAccount              = require('../pages/new_account');
-const TradePage               = require('../pages/trade/tradepage');
-const Authenticate            = require('../pages/user/account/authenticate');
-const ChangePassword          = require('../pages/user/account/change_password');
-const PaymentAgentTransfer    = require('../pages/user/account/payment_agent_transfer/payment_agent_transfer');
-const Portfolio               = require('../pages/user/account/portfolio/portfolio.init');
-const ProfitTable             = require('../pages/user/account/profit_table/profit_table.init');
-const Settings                = require('../pages/user/account/settings');
-const AccountClosure          = require('../pages/user/account/settings/account_closure');
-const APIToken                = require('../pages/user/account/settings/api_token');
-const AuthorisedApps          = require('../pages/user/account/settings/authorised_apps');
-const FinancialAssessment     = require('../pages/user/account/settings/financial_assessment');
-const IPHistory               = require('../pages/user/account/settings/iphistory/iphistory');
-const Limits                  = require('../pages/user/account/settings/limits/limits');
-const SelfExclusion           = require('../pages/user/account/settings/self_exclusion');
-const TwoFactorAuthentication = require('../pages/user/account/settings/two_factor_authentication');
-const PersonalDetails         = require('../pages/user/account/settings/personal_details');
-const professionalClient      = require('../pages/user/account/settings/professional_client');
-const Statement               = require('../pages/user/account/statement/statement.init');
-const TopUpVirtual            = require('../pages/user/account/top_up_virtual/top_up_virtual');
-const Accounts                = require('../pages/user/accounts');
-const LostPassword            = require('../pages/user/lost_password');
-const MetaTrader              = require('../pages/user/metatrader/metatrader');
-const TypesOfAccounts         = require('../pages/user/metatrader/types_of_accounts');
-const FinancialAccOpening     = require('../pages/user/new_account/financial_acc_opening');
-const RealAccOpening          = require('../pages/user/new_account/real_acc_opening');
-const VirtualAccOpening       = require('../pages/user/new_account/virtual_acc_opening');
-const WelcomePage             = require('../pages/user/new_account/welcome_page');
-const ResetPassword           = require('../pages/user/reset_password');
-const SetCurrency             = require('../pages/user/set_currency');
-const TelegramBot             = require('../pages/user/telegram_bot');
-const TNCApproval             = require('../pages/user/tnc_approval');
-const VideoFacility           = require('../pages/user/video_facility');
+const LoggedInHandler           = require('./logged_in');
+const Redirect                  = require('./redirect');
+const AccountTransfer           = require('../pages/cashier/account_transfer');
+const Cashier                   = require('../pages/cashier/cashier');
+const Dashboard                 = require('../pages/dashboard/dashboard');
+const DepositWithdraw           = require('../pages/cashier/deposit_withdraw');
+const DP2P                      = require('../pages/cashier/dp2p');
+const PaymentAgentList          = require('../pages/cashier/payment_agent_list');
+const PaymentAgentWithdraw      = require('../pages/cashier/payment_agent_withdraw');
+const Endpoint                  = require('../pages/endpoint');
+const EconomicCalendar          = require('../pages/resources/economic_calendar/economic_calendar');
+const AssetIndexUI              = require('../pages/resources/asset_index/asset_index.ui');
+const MetatraderDownloadUI      = require('../pages/resources/metatrader/download.ui');
+const TradingTimesUI            = require('../pages/resources/trading_times/trading_times.ui');
+const NewAccount                = require('../pages/new_account');
+const TradePage                 = require('../pages/trade/tradepage');
+const Authenticate              = require('../pages/user/account/authenticate');
+const ChangePassword            = require('../pages/user/account/change_password');
+const PaymentAgentTransfer      = require('../pages/user/account/payment_agent_transfer/payment_agent_transfer');
+const Portfolio                 = require('../pages/user/account/portfolio/portfolio.init');
+const ProfitTable               = require('../pages/user/account/profit_table/profit_table.init');
+const Settings                  = require('../pages/user/account/settings');
+const AccountClosure            = require('../pages/user/account/settings/account_closure');
+const APIToken                  = require('../pages/user/account/settings/api_token');
+const AuthorisedApps            = require('../pages/user/account/settings/authorised_apps');
+const FinancialAssessment       = require('../pages/user/account/settings/financial_assessment');
+const IPHistory                 = require('../pages/user/account/settings/iphistory/iphistory');
+const Limits                    = require('../pages/user/account/settings/limits/limits');
+const SelfExclusion             = require('../pages/user/account/settings/self_exclusion');
+const TwoFactorAuthentication   = require('../pages/user/account/settings/two_factor_authentication');
+const PersonalDetails           = require('../pages/user/account/settings/personal_details');
+const professionalClient        = require('../pages/user/account/settings/professional_client');
+const Statement                 = require('../pages/user/account/statement/statement.init');
+const TopUpVirtual              = require('../pages/user/account/top_up_virtual/top_up_virtual');
+const Accounts                  = require('../pages/user/accounts');
+const LostPassword              = require('../pages/user/lost_password');
+const MetaTrader                = require('../pages/user/metatrader/metatrader');
+const MetaTraderTypesOfAccounts = require('../pages/user/metatrader/types_of_accounts');
+const DXTrade                   = require('../pages/user/dxtrade/dxtrade');
+const DXTradeTypesOfAccounts    = require('../pages/user/dxtrade/types_of_accounts');
+const FinancialAccOpening       = require('../pages/user/new_account/financial_acc_opening');
+const RealAccOpening            = require('../pages/user/new_account/real_acc_opening');
+const VirtualAccOpening         = require('../pages/user/new_account/virtual_acc_opening');
+const WelcomePage               = require('../pages/user/new_account/welcome_page');
+const ResetPassword             = require('../pages/user/reset_password');
+const SetCurrency               = require('../pages/user/set_currency');
+const TelegramBot               = require('../pages/user/telegram_bot');
+const TNCApproval               = require('../pages/user/tnc_approval');
+const VideoFacility             = require('../pages/user/video_facility');
 
 // ==================== static ====================
 // const Charity            = require('../../static/pages/charity');
@@ -90,6 +92,7 @@ const pages_config = {
     download                 : { module: MetatraderDownloadUI },
     dp2p                     : { module: DP2P,                       is_authenticated: true },
     dubai                    : { module: StaticPages.Locations },
+    dxtrade                  : { module: DXTrade,                 is_authenticated: true, needs_currency: true },
     economic_calendar        : { module: EconomicCalendar },
     endpoint                 : { module: Endpoint },
     epg_forwardws            : { module: DepositWithdraw,            is_authenticated: true, only_real: true },
@@ -134,27 +137,28 @@ const pages_config = {
     welcome                  : { module: WelcomePage,                is_authenticated: true, only_virtual: true },
     withdrawws               : { module: PaymentAgentWithdraw,       is_authenticated: true, only_real: true },
 
-    'affiliate-ib'           : { module: AffiliatesIBLanding },
-    'binary-in-numbers'      : { module: StaticPages.BinaryInNumbers },
-    'binary-options'         : { module: GetStarted.BinaryOptions },
+    'affiliate-ib'             : { module: AffiliatesIBLanding },
+    'binary-in-numbers'        : { module: StaticPages.BinaryInNumbers },
+    'binary-options'           : { module: GetStarted.BinaryOptions },
     // 'contact-2'              : { module: Contact2 },
-    'contract-specifications': { module: TabSelector },
-    'get-started'            : { module: TabSelector },
-    'how-to-trade-mt5'       : { module: TabSelector },
-    'ib-faq'                 : { module: StaticPages.IBProgrammeFAQ },
-    'job-details'            : { module: JobDetails },
-    'keep-safe'              : { module: KeepSafe },
-    'new-account'            : { module: NewAccount,                     not_authenticated: true },
-    'open-positions'         : { module: StaticPages.OpenPositions },
-    'open-source-projects'   : { module: StaticPages.OpenSourceProjects },
-    'payment-agent'          : { module: StaticPages.PaymentAgent },
-    'responsible-trading'    : { module: ResponsibleTrading },
-    'set-currency'           : { module: SetCurrency,                is_authenticated: true, only_real: true, needs_currency: true },
-    'telegram-bot'           : { module: TelegramBot,                is_authenticated: true },
-    'terms-and-conditions'   : { module: TermsAndConditions },
-    'types-of-accounts'      : { module: TypesOfAccounts },
-    'video-facility'         : { module: VideoFacility,              is_authenticated: true, only_real: true },
-    'why-us'                 : { module: WhyUs },
+    'contract-specifications'  : { module: TabSelector },
+    'dxtrade-types-of-accounts': { module: DXTradeTypesOfAccounts },
+    'get-started'              : { module: TabSelector },
+    'how-to-trade-mt5'         : { module: TabSelector },
+    'ib-faq'                   : { module: StaticPages.IBProgrammeFAQ },
+    'job-details'              : { module: JobDetails },
+    'keep-safe'                : { module: KeepSafe },
+    'new-account'              : { module: NewAccount,                     not_authenticated: true },
+    'open-positions'           : { module: StaticPages.OpenPositions },
+    'open-source-projects'     : { module: StaticPages.OpenSourceProjects },
+    'payment-agent'            : { module: StaticPages.PaymentAgent },
+    'responsible-trading'      : { module: ResponsibleTrading },
+    'set-currency'             : { module: SetCurrency,                is_authenticated: true, only_real: true, needs_currency: true },
+    'telegram-bot'             : { module: TelegramBot,                is_authenticated: true },
+    'terms-and-conditions'     : { module: TermsAndConditions },
+    'types-of-accounts'        : { module: MetaTraderTypesOfAccounts },
+    'video-facility'           : { module: VideoFacility,              is_authenticated: true, only_real: true },
+    'why-us'                   : { module: WhyUs },
 };
 /* eslint-enable max-len */
 
