@@ -4,6 +4,7 @@ const Clock                  = require('./clock');
 const Footer                 = require('./footer');
 const Header                 = require('./header');
 const BinarySocket           = require('./socket');
+const DXTrade                = require('../pages/user/dxtrade/dxtrade');
 const MetaTrader             = require('../pages/user/metatrader/metatrader');
 const Dialog                 = require('../common/attach_dom/dialog');
 const createLanguageDropDown = require('../common/attach_dom/language_dropdown');
@@ -121,6 +122,7 @@ const BinarySocketGeneral = (() => {
                 Header.upgradeMessageVisibility();
                 if (!response.error) {
                     MetaTrader.metatraderMenuItemVisibility();
+                    DXTrade.dxtradeMenuItemVisibility();
                 }
                 break;
             case 'get_self_exclusion':
