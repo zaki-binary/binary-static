@@ -18,8 +18,6 @@ const DXTrade = (() => {
     const onLoad = () => {
         BinarySocket.send({ statement: 1, limit: 1 });
         BinarySocket.wait('landing_company', 'get_account_status', 'statement').then(async () => {
-            await BinarySocket.send({ trading_servers: 1, platform: 'mt5' });
-
             if (isEligible()) {
                 if (Client.get('is_virtual')) {
                     addAllAccounts();
@@ -61,9 +59,6 @@ const DXTrade = (() => {
             // TODO: Remove once details in inaccessible error provides necessary accounts info
             addAccount('unknown', null);
 
-            const trading_servers = State.getResponse('trading_servers');
-            // for legacy clients on the real01 server, real01 server is not going to be offered in trading servers
-            // but we need to build their object in accounts_info or they can't view their legacy account
             response.mt5_login_list.forEach((mt5_login) => {
 
                 if (mt5_login.error) {
@@ -85,14 +80,8 @@ const DXTrade = (() => {
                     DXTrade.displayPageError(message);
 
                 } else {
-                    const is_server_offered =
-                        trading_servers.find((trading_server => trading_server.id === mt5_login.server));
-
-                    if (!is_server_offered && !/demo/.test(mt5_login.server)) {
-                        const landing_company = mt5_login.market_type === 'gaming' ? mt_gaming_company : mt_financial_company;
-
-                        addAccount(mt5_login.market_type, landing_company, mt5_login.server);
-                    }
+                    const landing_company = mt5_login.market_type === 'gaming' ? mt_gaming_company : mt_financial_company;
+                    addAccount(mt5_login.market_type, landing_company);
                 }
             });
 
@@ -111,7 +100,7 @@ const DXTrade = (() => {
     // * we should map them to landing_company:
     // mt_financial_company: { financial: {}, financial_stp: {}, swap_free: {} }
     // mt_gaming_company: { financial: {}, swap_free: {} }
-    const addAccount = (market_type, company = {}, server) => {
+    const addAccount = (market_type, company = {}) => {
         // TODO: Update once market_types are available in inaccessible account details
         if (market_type === 'unknown' && !company) {
             const addUnknownAccount = (acc_type) => accounts_info[`${acc_type}_unknown`] = {
@@ -157,36 +146,11 @@ const DXTrade = (() => {
                             };
                         };
 
-                        if (server && !is_demo) {
-                            addAccountsInfo({ id: server });
-                        } else {
-                            const available_servers = getAvailableServers(market_type, sub_account_type);
-
-                            // demo only has one server, no need to create for each trade server
-                            if (available_servers.length > 1 && !is_demo) {
-                                available_servers.forEach(trading_server => addAccountsInfo(trading_server));
-                            } else {
-                                addAccountsInfo();
-                            }
-
-                        }
+                        addAccountsInfo();
 
                     });
                 });
         }
-    };
-
-    const getAvailableServers = (market_type, sub_account_type) => {
-        const is_synthetic     = market_type === 'gaming'    && sub_account_type === 'financial';
-        const is_financial     = market_type === 'financial' && sub_account_type === 'financial';
-        const is_financial_stp = market_type === 'financial' && sub_account_type === 'financial_stp';
-
-        return State.getResponse('trading_servers').filter(trading_server => {
-            const { supported_accounts = [] } = trading_server;
-            return (is_synthetic && supported_accounts.includes('gaming')) ||
-                (is_financial && supported_accounts.includes('financial')) ||
-                (is_financial_stp && supported_accounts.includes('financial_stp'));
-        });
     };
 
     // synthetic is 500
@@ -330,17 +294,7 @@ const DXTrade = (() => {
                             DXTradeUI.refreshAction();
                             allAccountsResponseHandler(response_login_list);
 
-                            let account_type = acc_type;
-                            if (action === 'new_account' && !/\d$/.test(account_type) && !accounts_info[account_type]) {
-                                const server = $('#frm_new_account').find('#ddl_trade_server input[checked]').val();
-                                if (server) {
-                                    account_type += `_${server}`;
-
-                                    if (!accounts_info[account_type]) {
-                                        account_type = acc_type;
-                                    }
-                                }
-                            }
+                            const account_type = acc_type;
 
                             DXTradeUI.setAccountType(account_type, true);
                             DXTradeUI.loadAction(null, account_type);
@@ -367,17 +321,6 @@ const DXTrade = (() => {
         const has_demo_error = checkAccountTypeErrors('demo').length > 0;
         const has_real_error = checkAccountTypeErrors('real').length > 0;
 
-        const trading_servers = State.getResponse('trading_servers');
-
-        const getDisplayServer = (trade_servers, server_name) => {
-            const geolocation = trade_servers ? (trade_servers.find(
-                server => server.id === server_name) || {}).geolocation : null;
-            if (geolocation) {
-                return geolocation.sequence > 1 ? `${geolocation.region} ${geolocation.sequence}` : geolocation.region;
-            }
-            return null;
-        };
-
         // Update account info
         response.mt5_login_list.forEach((account) => {
             let acc_type = `${account.account_type}_${account.market_type}_${account.sub_account_type}`;
@@ -392,20 +335,15 @@ const DXTrade = (() => {
 
                 accounts_info[acc_type].info.display_login = DXTradeConfig.getDisplayLogin(account.login);
                 accounts_info[acc_type].info.login         = account.login;
-                accounts_info[acc_type].info.server        = account.server;
 
-                if (getDisplayServer(trading_servers, account.server)) {
-                    accounts_info[acc_type].info.display_server = getDisplayServer(trading_servers, account.server);
-                }
                 DXTradeUI.updateAccount(acc_type);
             } else if (account.error) {
-                const { login, account_type, server } = account.error.details;
+                const { login, account_type } = account.error.details;
 
                 // TODO: remove exception handlers for unknown_acc_type when details include market_types and sub market types
                 const unknown_acc_type = account_type === 'real' ? 'real_unknown' : 'demo_unknown';
                 accounts_info[unknown_acc_type].info = {
-                    display_login : DXTradeConfig.getDisplayLogin(login),
-                    display_server: getDisplayServer(trading_servers, server),
+                    display_login: DXTradeConfig.getDisplayLogin(login),
                     login,
                 };
                 DXTradeUI.updateAccount(unknown_acc_type, false);

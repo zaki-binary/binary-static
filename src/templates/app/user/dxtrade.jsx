@@ -131,14 +131,8 @@ const DXTrade = () => (
                                 <div className='balance gr-padding-10' data='balance' />
                             </div>
                         </div>
-                        <div className='add_more_servers'>
-                            <a id='btn_add_more_servers' className='button' href='javascript:;'>
-                                <span>{it.L('Add more trade servers')}</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
-
                 <div className='hint gr-padding-20 gr-parent no-margin'>
                     <p className='no-margin'>
                         {it.L('Server maintenance starting 03:00 GMT every Sunday. This process may take up to 2 hours to complete. Service may be disrupted during this time.')}
@@ -319,20 +313,6 @@ const DXTrade = () => (
                                         </a>
                                         <a className='button btn-next invisible' href='javascript:;'>
                                             <span>{it.L('Next')}</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id='view_3' className='gr-row invisible'>
-                                <div id='server_unavailable_notice' className='notice-msg center-text invisible'>
-                                    {it.L('Due to an issue on our server, some DXTrade accounts are unavailable at the moment. Please bear with us and thank you for your patience.')}
-                                </div>
-                                <div className='container gr-8 gr-12-m'>
-                                    <p>{it.L('Choose a server for your DXTrade [_1] account:', '<span id="dxtrade_account_type"></span>')}</p>
-                                    <div id='ddl_trade_server' type='radio' />
-                                    <div id='view_3-buttons' className='gr-padding-10 center-text'>
-                                        <a className='button button-secondary btn-back' href='javascript:;'>
-                                            <span>{it.L('Back')}</span>
                                         </a>
                                     </div>
                                 </div>
