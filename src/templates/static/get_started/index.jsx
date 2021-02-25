@@ -71,6 +71,7 @@ const Index = () => (
                     { id: 'binary',   text: it.L('Binary Options') },
                     { id: 'lookback', text: it.L('Lookbacks') },
                     { id: 'mt5',      text: it.L('MetaTrader 5') },
+                    { id: 'dxtrade',      text: it.L('DXTrade') },
                     { id: 'get_started_tabs_selector', className: 'tab-selector' },
                 ]}
             />
@@ -116,6 +117,159 @@ const Index = () => (
                                 text={it.L('Check out some technical terms before you start.')}
                             />
                         </div>
+                        <CTA />
+                    </TabContent>
+                    <TabContent id='dxtrade'>
+                        <h2>{it.L('DXTrade')}</h2>
+                        <p>{it.L('Trade forex and contracts for difference (CFDs) on DXTrade – a multi-asset platform that offers outstanding trading possibilities and technical analysis tools.')}</p>
+
+                        <SeparatorLine invisible className='gr-padding-30' />
+
+                        <GetStartedSectionWrapper
+                            section_id='forex'
+                            section_header={it.L('Forex')}
+                            section_description={it.L('The Foreign Exchange Market (forex) is the world\'s largest and most liquid market – where anyone can buy, sell, and exchange currencies.')}
+                        >
+                            <div className='gr-row'>
+                                <GetStartedSection
+                                    link='get-started/forex'
+                                    hash='what-forex-trading'
+                                    image='mt5/what-forex-trading'
+                                    header={it.L('What is forex trading')}
+                                    text={it.L('New to forex? We explain the basics of the world\'s largest and most liquid market.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/forex'
+                                    hash='how-to-trade-forex'
+                                    image='mt5/how-to-trade-forex'
+                                    header={it.L('How to trade forex')}
+                                    text={it.L('Learn how to read currency pairs, when to go long or short, and how to buy your first currency pair.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/forex'
+                                    hash='margin-policy'
+                                    image='mt5/margin-policy'
+                                    header={it.L('Forex margin policy')}
+                                    text={it.L('Not sure how margin works? Read our margin policy and learn how to calculate the margin for our currency pairs.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/forex'
+                                    hash='contract-specification'
+                                    image='mt5/contract-specification'
+                                    header={it.L('Forex contract specifications')}
+                                    text={it.L('Find out more about the costs and details of every currency pair we offer.')}
+                                />
+                            </div>
+                        </GetStartedSectionWrapper>
+                        <GetStartedSectionWrapper
+                            dataShow='-default'
+                            section_id='cryptocurrencies'
+                            section_header={it.L('Cryptocurrencies')}
+                            section_description={it.L('Cryptocurrencies such as Bitcoin and Ethereum are decentralised digital assets that enable instant payments to anywhere in the world.')}
+                        >
+                            <div className='gr-row'>
+                                <GetStartedSection
+                                    link='get-started/cryptocurrencies'
+                                    hash='what-crypto-trading'
+                                    image='mt5/what-crypto-trading'
+                                    header={it.L('What is cryptocurrency trading')}
+                                    text={it.L('Speculate on the price movement of cryptocurrencies such as Bitcoin, Ethereum, and Litecoin without owning them.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/cryptocurrencies'
+                                    hash='how-trade-crypto'
+                                    image='mt5/how-trade-crypto'
+                                    header={it.L('How to trade cryptocurrencies')}
+                                    text={it.L('Trade popular cryptocurrencies on our MT5 platform with leverage and variable spreads. No wallets are required to start trading.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/cryptocurrencies'
+                                    hash='margin-policy'
+                                    image='mt5/margin-policy'
+                                    header={it.L('Cryptocurrency margin policy')}
+                                    text={it.L('Not sure how margin works? Read our margin policy and learn how to calculate the margin for our cryptocurrency pairs.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/cryptocurrencies'
+                                    hash='contract-specification'
+                                    image='mt5/contract-specification'
+                                    header={it.L('Cryptocurrency contract specifications')}
+                                    text={it.L('Find out more about the costs and details of every cryptocurrency pair we offer.')}
+                                />
+                            </div>
+                        </GetStartedSectionWrapper>
+                        <GetStartedSectionWrapper
+                            section_id='cfds'
+                            section_header={it.L('CFDs')}
+                            section_description={it.L('Contracts for difference (CFDs) are financial derivatives that allow you to trade on the movement of underlying assets without owning them.')}
+                        >
+                            <div className='gr-row'>
+                                <GetStartedSection
+                                    link='get-started/cfds'
+                                    hash='what-cfds-trading'
+                                    image='mt5/what-cfds-trading'
+                                    header={it.L('What is CFD trading')}
+                                    text={it.L('Read our simple introduction to this popular derivative instrument to find out what you can trade with CFDs and their advantages.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/cfds'
+                                    hash='how-trade-cfds'
+                                    image='mt5/how-trade-cfds'
+                                    header={it.L('How to trade CFDs')}
+                                    text={it.L('Plan to start trading CFDs? Learn when to buy and sell, how to calculate your profits and losses, and how to close a position.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/cfds'
+                                    hash='margin-policy'
+                                    image='mt5/margin-policy'
+                                    header={it.L('CFD margin policy')}
+                                    text={it.L('Not sure how margin works? Read our margin policy and learn how to calculate the margin for our CFDs.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/cfds'
+                                    hash='contract-specification'
+                                    image='mt5/contract-specification'
+                                    header={it.L('CFD contract specifications')}
+                                    text={it.L('Find out more about the costs and details of each CFD asset we offer.')}
+                                />
+                            </div>
+                        </GetStartedSectionWrapper>
+                        <GetStartedSectionWrapper
+                            section_id='metals'
+                            section_header={it.L('Metals')}
+                            section_description={it.L('Diversify your portfolio with all four types of precious metals that are widely known as "safe haven" investments: gold, silver, platinum, and palladium.')}
+                        >
+                            <div className='gr-row'>
+                                <GetStartedSection
+                                    link='get-started/metals'
+                                    hash='what-metals-trading'
+                                    image='mt5/what-metals-trading'
+                                    header={it.L('What is metals trading')}
+                                    text={it.L('Learn the basics of metals trading and the categories of metals available.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/metals'
+                                    hash='how-trade-metals'
+                                    image='mt5/how-trade-metals'
+                                    header={it.L('How to trade metals')}
+                                    text={it.L('Buy or sell all four available precious metals – depending on your market view. Also, learn what factors affect prices.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/metals'
+                                    hash='margin-policy'
+                                    image='mt5/margin-policy'
+                                    header={it.L('Metals margin policy')}
+                                    text={it.L('Not sure how margin works? Read our margin policy and learn how to calculate the margin for our metal pairs.')}
+                                />
+                                <GetStartedSection
+                                    link='get-started/metals'
+                                    hash='contract-specification'
+                                    image='mt5/contract-specification'
+                                    header={it.L('Metals contract specifications')}
+                                    text={it.L('Find out more about the costs and details of every metal pair we offer.')}
+                                />
+                            </div>
+                        </GetStartedSectionWrapper>
                         <CTA />
                     </TabContent>
                     <TabContent id='mt5'>

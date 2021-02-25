@@ -627,7 +627,7 @@ const DXTradeUI = (() => {
             if (/unknown+$/.test(acc_type)) return;
             const $acc  = filtered_accounts[acc_type].is_demo ? $acc_template_demo.clone() : $acc_template_real.clone();
             const type  = acc_type.split('_').slice(1).join('_');
-            const image = filtered_accounts[acc_type].market_type === 'gaming' ? 'synthetic' : filtered_accounts[acc_type].sub_account_type; // image name can be (financial_stp|financial|synthetic)
+            const image = filtered_accounts[acc_type].market_type === 'gaming' ? 'synthetic' : filtered_accounts[acc_type].sub_account_type; // image name can be (financial|synthetic)
             $acc.find('.dxtrade_type_box').attr({ id: `rbtn_${type}`, 'data-acc-type': type })
                 .find('img').attr('src', urlForStatic(`/images/pages/dxtrade/icons/acc_${image}.svg`));
             $acc.find('p').text(filtered_accounts[acc_type].short_title);

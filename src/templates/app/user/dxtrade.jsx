@@ -159,7 +159,7 @@ const DXTrade = () => (
                 </div>
             </div>
             <div id='dxtrade_right_panel' className='gr-3 gr-12-t gr-12-p gr-12-m gr-no-gutter gr-gutter-left gr-no-gutter-p gr-no-gutter-m'>
-                <a href={`${it.url_for('get-started')}?get_started_tabs=mt5`} className='get-started-link'>{it.L('Get started with DXTrade')}</a>
+                <a href={`${it.url_for('get-started')}?get_started_tabs=dxtrade`} className='get-started-link'>{it.L('Get started with DXTrade')}</a>
                 <div className='dxtrade-panel'>
                     <div id='account_desc' className='dxtrade-container border-bottom' />
                 </div>
