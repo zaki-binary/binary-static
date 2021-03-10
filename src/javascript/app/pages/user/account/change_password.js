@@ -10,8 +10,8 @@ const ChangePassword = (() => {
 
     const init = () => {
         FormManager.init(form_id, [
-            { selector: '#old_password',    validations: ['req', ['length', { min: 6, max: 25 }]], clear_form_error_on_input: true },
-            { selector: '#new_password',    validations: ['req', 'password', ['not_equal', { to: '#old_password', name1: localize('Current password'), name2: localize('New password') }], 'compare_to_email'] },
+            { selector: '#old_password', validations: ['req', ['length', { min: 6, max: 25 }]], clear_form_error_on_input: true },
+            { selector: '#new_password', validations: ['req', 'password', ['not_equal', { to: '#old_password', name1: localize('Current password'), name2: localize('New password') }], 'compare_to_email'] },
 
             { request_field: 'change_password', value: 1 },
         ]);

@@ -73,7 +73,8 @@ const Validation = (() => {
                     if (field.msg_element) {
                         field.$error = $form.find(field.msg_element);
                     } else {
-                        const $parent = field.$.parent();
+                        // for password we need to go up one parent due to the password-field wrapper
+                        const $parent = field.$.attr('type') === 'password' ? field.$.parent().parent() : field.$.parent();
                         // Add indicator to required fields
                         if (field.validations.find(v => /^req$/.test(v) && (isEmptyObject(v[1]) || !v[1].hide_asterisk))) {
                             let $label = $parent.parent().find('label');
