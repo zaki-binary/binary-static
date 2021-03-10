@@ -84,7 +84,13 @@ const Validation = (() => {
                             }
                         }
                         if ($parent.find(`p.${error_class}`).length === 0) {
-                            $parent.append($('<p/>', { class: `${error_class} ${hidden_class} no-margin` }));
+                            // input with password meter data attribute should have default margins
+                            const has_password_meter = $parent.children('input').attr('data-password');
+                            $parent.append($('<p/>',
+                                {
+                                    class: `${error_class} ${hidden_class} ${!has_password_meter ? 'no-margin' : ''}`,
+                                })
+                            );
                         }
                         field.$error = $parent.find(`.${error_class}`);
                     }

@@ -483,16 +483,57 @@ button .barspinner.white {
     }
 }
 
-.days_to_crack {
-    width: fit-content;
-    padding: 5px;
-    margin-top: 5px;
-
-    &.red {
-        color: $COLOR_RED;
+.password {
+    &--field-wrapper {
+        position: relative;
+        max-width: 207px;
     }
-    &.green {
-        color: $COLOR_GREEN;
+    &--meter {
+        position: absolute;
+        pointer-events: none;
+        height: 3px;
+        top: 23px;
+        left: 1px;
+        border-radius: 0 0 3px 3px;
+        width: calc(100% - 3px);
+
+        &-bg {
+            background: $COLOR_LIGHT_GRAY;
+            z-index: 1;
+        }
+        &-fill {
+            transition: transform 0.25s linear;
+            transform-origin: left top;
+            z-index: 2;
+
+            &.red {
+                background-color: $COLOR_RED;
+            }
+            &.orange {
+                background-color: $COLOR_ORANGE;
+            }
+            &.green {
+                background-color: $COLOR_GREEN;
+            }
+        }
+    }
+    &--message {
+        color: $COLOR_ORANGE;
+        font-size: 13px;
+        font-style: italic;
+        white-space: nowrap;
+        margin-top: 0.4em;
+
+        @media screen and (max-width: 480px) {
+            white-space: unset;
+        }
+    }
+    &--toggle {
+        display: flex;
+        position: absolute;
+        top: 0.4rem;
+        right: 0.4rem;
+        cursor: pointer;
     }
 }
 
