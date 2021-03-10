@@ -12,12 +12,13 @@ const Virtual = () => (
             <Fieldset legend={it.L('Details')}>
                 <FormRow
                     type='password'
+                    has_password_meter
                     id='client_password'
                     label={it.L('Choose a password')}
                     hint={it.L('Minimum of eight lower and uppercase English letters with numbers')}
                 />
 
-                <FormRow type='password' id='repeat_password' label={it.L('Re-enter password')} />
+                <FormRow has_password_meter type='password' id='repeat_password' label={it.L('Re-enter password')} />
 
                 <FormRow type='select' id='residence' className='invisible' label={it.L('Country of residence')} attributes={{ single: 'single' }}  />
 
