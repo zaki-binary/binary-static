@@ -2806,7 +2806,10 @@ var password_score = 0;
 
 var checkPassword = function checkPassword(password_selector) {
     var el_password = document.querySelector(password_selector);
-    if (!el_password) {
+    if (!el_password || el_password.value.trim().length < 1) {
+        password_score = 0;
+        feedback_message = '';
+        el_feedback_message.style.display = 'none';
         return;
     }
 
