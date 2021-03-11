@@ -10,6 +10,7 @@ const getHashValue             = require('../../_common/url').getHashValue;
 const cloneObject              = require('../../_common/utility').cloneObject;
 const isEmptyObject            = require('../../_common/utility').isEmptyObject;
 const template                 = require('../../_common/utility').template;
+const urlFor                   = require('../../_common/url').urlForStatic;
 
 const Validation = (() => {
     const forms        = {};
@@ -108,6 +109,16 @@ const Validation = (() => {
                                 )));
                             }
                         });
+
+                        if (field.$.attr('type') === 'password') {
+                            field.$.next('#password_toggle')[0].onclick = () => togglePasswordVisibility(field);
+                            if (field.$.attr('data-password')) {
+                                field.$.after(
+                                    '<div class="password--meter password--meter-bg"></div>' +
+                                    '<div class="password--meter password--meter-fill"></div>' +
+                                    '<p class="password--message"></p>');
+                            }
+                        }
                     }
                 });
                 if (has_required && $form.find('.indicates-required').length === 0) {
@@ -116,6 +127,18 @@ const Validation = (() => {
                 }
             }
         }
+
+        const togglePasswordVisibility = (field) => {
+            const el_password_icon = field.$.siblings('#password_toggle').find('#password_toggle_icon');
+
+            if (field.$.attr('type') === 'text') {
+                field.$.attr('type', 'password');
+                el_password_icon.attr('src', urlFor('images/common/password_hide.svg'));
+            } else if (field.$.attr('type') === 'password') {
+                field.$.attr('type', 'text');
+                el_password_icon.attr('src', urlFor('images/common/password_show.svg'));
+            }
+        };
 
         // need to init Dropdown after we have responses from ws
         const el_all_select = document.querySelectorAll('select:not([multiple]):not([single])');

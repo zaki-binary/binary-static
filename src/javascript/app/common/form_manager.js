@@ -3,7 +3,6 @@ const BinarySocket     = require('../base/socket');
 const getHashValue     = require('../../_common/url').getHashValue;
 const isEmptyObject    = require('../../_common/utility').isEmptyObject;
 const showLoadingImage = require('../../_common/utility').showLoadingImage;
-const urlFor           = require('../../_common/url').urlForStatic;
 
 const FormManager = (() => {
     const forms = {};
@@ -27,16 +26,6 @@ const FormManager = (() => {
                     if (field.selector) {
                         field.$ = $form.find(field.selector);
 
-                        if (field.$.attr('type') === 'password') {
-                            field.$.next('#password_toggle')[0].onclick = () => togglePasswordVisibility(field);
-
-                            if (field.$.attr('data-password')) {
-                                field.$.after(
-                                    '<div class="password--meter password--meter-bg"></div>' +
-                                    '<div class="password--meter password--meter-fill"></div>' +
-                                    '<p class="password--message"></p>');
-                            }
-                        }
                         if (!field.$.length) return;
                     }
 
@@ -95,18 +84,6 @@ const FormManager = (() => {
             }
         });
         return data;
-    };
-
-    const togglePasswordVisibility = (field) => {
-        const el_password_icon = field.$.siblings('#password_toggle').find('#password_toggle_icon');
-
-        if (field.$.attr('type') === 'text') {
-            field.$.attr('type', 'password');
-            el_password_icon.attr('src', urlFor('images/common/password_hide.svg'));
-        } else if (field.$.attr('type') === 'password') {
-            field.$.attr('type', 'text');
-            el_password_icon.attr('src', urlFor('images/common/password_show.svg'));
-        }
     };
 
     const disableButton = ($btn) => {
