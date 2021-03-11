@@ -505,6 +505,7 @@ button .barspinner.white {
             transition: transform 0.25s linear;
             transform-origin: left top;
             z-index: 2;
+            transform: scale(0, 1);
 
             &.red {
                 background-color: $COLOR_RED;
@@ -516,6 +517,10 @@ button .barspinner.white {
                 background-color: $COLOR_GREEN;
             }
         }
+    }
+    &--hint {
+        margin-top: 16px;
+        max-width: 380px;
     }
     &--message {
         color: $COLOR_ORANGE;

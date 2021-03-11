@@ -164,7 +164,7 @@ const Validation = (() => {
     const validEmail        = value => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/.test(value);
     const validPassword     = (value, options, field) => {
         if (/^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]*$/.test(value)) {
-            Password.checkPassword(field.selector);
+            Password.checkPassword(field.selector, true);
             return true;
         }
         // else
@@ -320,6 +320,7 @@ const Validation = (() => {
                 field.is_ok = false;
                 type        = 'length';
                 options     = pass_length;
+                Password.checkPassword(field.selector, false);
             } else {
                 const validator = (type === 'custom' ? options.func : ValidatorsMap.get(type).func);
 

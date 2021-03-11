@@ -7,7 +7,12 @@ const ChangePassword = () => (
         <form className='gr-padding-10' id='frm_change_password'>
             <Fieldset legend={it.L('Details')}>
                 <FormRow type='password' id='old_password' label={it.L('Current password')} />
-                <FormRow has_password_meter type='password' id='new_password' label={it.L('New password')} />
+                <FormRow
+                    has_password_meter
+                    type='password'
+                    id='new_password'
+                    label={it.L('New password')}
+                />
                 <SubmitButton type='submit' msg_id='frm_change_password_error' text={it.L('Change password')} />
             </Fieldset>
         </form>

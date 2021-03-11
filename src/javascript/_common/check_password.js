@@ -38,18 +38,20 @@ const feedback_messages = {
 let feedback_message = '';
 let password_score = 0;
 
-const checkPassword = (password_selector) => {
+const checkPassword = (password_selector, should_show_error) => {
     const el_password = document.querySelector(password_selector);
-    if (!el_password || el_password.value.trim().length < 1) {
-        password_score = 0;
-        feedback_message = '';
-        el_feedback_message.style.display = 'none';
-        return;
-    }
 
     const el_meter_bar = el_password.parentNode.querySelector('.password--meter-fill');
     const el_feedback_message = el_password.parentNode.querySelector('.password--message');
     const password_value = el_password.value.trim();
+
+    if (!el_password || password_value.length < 1) {
+        password_score = 0;
+        el_meter_bar.style.transform = 'scale(0, 1)';
+        feedback_message = '';
+        el_feedback_message.style.display = 'none';
+        return;
+    }
 
     if (password_value.length > 0) {
         const { score: updated_score, feedback: updated_feedback } =
@@ -75,7 +77,7 @@ const checkPassword = (password_selector) => {
             el_meter_bar.classList.add('green');
         }
     }
-    if (el_feedback_message) {
+    if (el_feedback_message && should_show_error) {
         el_feedback_message.style.display = 'block';
         el_feedback_message.innerHTML = feedback_message;
     }
@@ -84,8 +86,9 @@ const checkPassword = (password_selector) => {
 const removeCheck = (password_selector) => {
     const el_password = document.querySelector(password_selector);
     const el_meter_bar = el_password.parentNode.querySelector('.password--meter-fill');
+    const password_value = el_password.value.trim();
     const el_feedback_message = el_password.parentNode.querySelector('.password--message');
-    if (el_meter_bar) {
+    if (el_meter_bar && password_value.length < 1) {
         el_meter_bar.style.transform = 'scale(0, 1)';
     }
     if (el_feedback_message) {
