@@ -483,10 +483,30 @@ button .barspinner.white {
     }
 }
 
+#virtual-form {
+    .select2-container {
+        max-width: 220px;
+    }
+}
+
 .password {
     &--field-wrapper {
         position: relative;
-        max-width: 207px;
+        max-width: 220px;
+
+        input {
+            width: 202px;
+        }
+        @media screen and (max-width: 480px) {
+            margin: 0 auto;
+
+            input {
+                width: 202px !important;
+            }
+            & + .error-msg {
+                text-align: center;
+            }
+        }
     }
     &--meter {
         position: absolute;
@@ -517,6 +537,9 @@ button .barspinner.white {
                 background-color: $COLOR_GREEN;
             }
         }
+        @media screen and (max-width: 480px) {
+            top: 28px;
+        }
     }
     &--hint {
         margin-top: 16px;
@@ -536,9 +559,13 @@ button .barspinner.white {
     &--toggle {
         display: flex;
         position: absolute;
-        top: 0.4rem;
-        right: 0.4rem;
+        top: 4px;
+        right: 4px;
         cursor: pointer;
+
+        @media screen and (max-width: 480px) {
+            top: 8px;
+        }
     }
 }
 

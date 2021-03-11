@@ -17,9 +17,28 @@
         & .password {
             &--field-wrapper {
                 max-width: unset;
+
+                input {
+                    max-width: unset;
+                }
             }
             &--message {
                 white-space: unset;
+            }
+            @media screen and (max-width: 480px) {
+                &--field-wrapper {
+                    max-width: unset;
+
+                    input {
+                        width: 100% !important;
+                    }
+                }
+                &--meter {
+                    top: 22px;
+                }
+                &--toggle {
+                    top: 5px;
+                }
             }
         }
     }
