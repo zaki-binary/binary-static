@@ -553,13 +553,19 @@ button .barspinner.white {
     transition: transform 0.25s linear, -webkit-transform 0.25s linear;
     -webkit-transform-origin: left top;
             transform-origin: left top;
-    z-index: 2; }
+    z-index: 2;
+    -webkit-transform: scale(0, 1);
+            transform: scale(0, 1); }
     .password--meter-fill.red {
       background-color: #c03; }
     .password--meter-fill.orange {
       background-color: #e98024; }
     .password--meter-fill.green {
       background-color: #2e8836; }
+
+.password--hint {
+  margin-top: 16px;
+  max-width: 380px; }
 
 .password--message {
   color: #e98024;

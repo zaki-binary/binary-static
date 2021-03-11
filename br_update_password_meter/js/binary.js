@@ -2804,18 +2804,20 @@ var feedback_messages = {
 var feedback_message = '';
 var password_score = 0;
 
-var checkPassword = function checkPassword(password_selector) {
+var checkPassword = function checkPassword(password_selector, should_show_error) {
     var el_password = document.querySelector(password_selector);
-    if (!el_password || el_password.value.trim().length < 1) {
-        password_score = 0;
-        feedback_message = '';
-        el_feedback_message.style.display = 'none';
-        return;
-    }
 
     var el_meter_bar = el_password.parentNode.querySelector('.password--meter-fill');
     var el_feedback_message = el_password.parentNode.querySelector('.password--message');
     var password_value = el_password.value.trim();
+
+    if (!el_password || password_value.length < 1) {
+        password_score = 0;
+        el_meter_bar.style.transform = 'scale(0, 1)';
+        feedback_message = '';
+        el_feedback_message.style.display = 'none';
+        return;
+    }
 
     if (password_value.length > 0) {
         var _zxcvbn = zxcvbn(password_value, { feedback_messages: feedback_messages }),
@@ -2843,7 +2845,7 @@ var checkPassword = function checkPassword(password_selector) {
             el_meter_bar.classList.add('green');
         }
     }
-    if (el_feedback_message) {
+    if (el_feedback_message && should_show_error) {
         el_feedback_message.style.display = 'block';
         el_feedback_message.innerHTML = feedback_message;
     }
@@ -2852,8 +2854,9 @@ var checkPassword = function checkPassword(password_selector) {
 var removeCheck = function removeCheck(password_selector) {
     var el_password = document.querySelector(password_selector);
     var el_meter_bar = el_password.parentNode.querySelector('.password--meter-fill');
+    var password_value = el_password.value.trim();
     var el_feedback_message = el_password.parentNode.querySelector('.password--message');
-    if (el_meter_bar) {
+    if (el_meter_bar && password_value.length < 1) {
         el_meter_bar.style.transform = 'scale(0, 1)';
     }
     if (el_feedback_message) {
@@ -14390,7 +14393,7 @@ var Validation = function () {
     };
     var validPassword = function validPassword(value, options, field) {
         if (/^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]*$/.test(value)) {
-            Password.checkPassword(field.selector);
+            Password.checkPassword(field.selector, true);
             return true;
         }
         // else
@@ -14574,6 +14577,7 @@ var Validation = function () {
                 field.is_ok = false;
                 type = 'length';
                 options = pass_length;
+                Password.checkPassword(field.selector, false);
             } else {
                 var validator = type === 'custom' ? options.func : ValidatorsMap.get(type).func;
 
@@ -35933,7 +35937,7 @@ var VirtualAccOpening = function () {
         var signup_device = LocalStore.get('signup_device') || (isMobile() ? 'mobile' : 'desktop');
         var date_first_contact = LocalStore.get('date_first_contact');
 
-        var req = [{ selector: '#client_password', validations: ['req', 'password'], re_check_field: '#repeat_password' }, { selector: '#repeat_password', validations: ['req', ['compare', { to: '#client_password' }]], exclude_request: 1 }, { selector: '#residence' }, { selector: '#email_consent' }, { request_field: 'utm_source', value: TrafficSource.getSource(utm_data) }, { request_field: 'new_account_virtual', value: 1 }, { request_field: 'signup_device', value: signup_device }];
+        var req = [{ selector: '#client_password', validations: ['req', 'password'] }, { selector: '#residence' }, { selector: '#email_consent' }, { request_field: 'utm_source', value: TrafficSource.getSource(utm_data) }, { request_field: 'new_account_virtual', value: 1 }, { request_field: 'signup_device', value: signup_device }];
 
         if (utm_data.utm_medium) req.push({ request_field: 'utm_medium', value: utm_data.utm_medium });
         if (utm_data.utm_campaign) req.push({ request_field: 'utm_campaign', value: utm_data.utm_campaign });
@@ -36440,7 +36444,7 @@ var ResetPassword = function () {
     var onLoad = function onLoad() {
         var form_id = '#frm_reset_password';
 
-        FormManager.init(form_id, [{ selector: '#have_real_account', validations: ['req'], exclude_request: 1 }, { selector: '#new_password', validations: ['req', 'password'], re_check_field: '#repeat_password' }, { selector: '#repeat_password', validations: ['req', ['compare', { to: '#new_password' }]], exclude_request: 1 }, { request_field: 'reset_password', value: 1 }], true);
+        FormManager.init(form_id, [{ selector: '#have_real_account', validations: ['req'], exclude_request: 1 }, { selector: '#new_password', validations: ['req', 'password'] }, { request_field: 'reset_password', value: 1 }], true);
 
         FormManager.handleSubmit({
             form_selector: form_id,
