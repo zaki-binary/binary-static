@@ -40,7 +40,10 @@ let password_score = 0;
 
 const checkPassword = (password_selector) => {
     const el_password = document.querySelector(password_selector);
-    if (!el_password) {
+    if (!el_password || el_password.value.trim().length < 1) {
+        password_score = 0;
+        feedback_message = '';
+        el_feedback_message.style.display = 'none';
         return;
     }
 
