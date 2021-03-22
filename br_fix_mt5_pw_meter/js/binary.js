@@ -35248,13 +35248,13 @@ var MetaTraderUI = function () {
         });
 
         _$form.find('#view_3 .btn-back').click(function () {
-            displayStep(2);
-        });
-        _$form.find('#view_2 .btn-back').click(function () {
             var password_selector = _$form.find('.password--input-field').attr('id');
             if (password_selector) {
                 Password.removeCheck('#' + password_selector, true);
             }
+            displayStep(2);
+        });
+        _$form.find('#view_2 .btn-back').click(function () {
             displayStep(1);
         });
 
